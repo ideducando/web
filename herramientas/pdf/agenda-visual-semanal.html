@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Agenda visual: semana, día y «primero y después» · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Hojas apaisadas para la semana y el tablero; vertical para el día y la guía */
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      .vertical {
+        break-after: page;
+      }
+
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 4mm;
+      }
+
+      .encabezado h1 {
+        font-size: 26pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 40mm;
+        height: auto;
+      }
+
+      .rellenar {
+        font-size: 13pt;
+        margin: 0;
+      }
+
+      .rellenar span {
+        display: inline-block;
+        width: 60mm;
+        border-bottom: 0.4mm solid var(--marino);
+        margin-left: 2mm;
+      }
+
+      /* ---------- Semana ---------- */
+      .semana {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 3.5mm;
+      }
+
+      .dia {
+        border-radius: 3mm;
+        overflow: hidden;
+        border: 0.6mm solid var(--marino);
+      }
+
+      .dia h2 {
+        margin: 0;
+        padding: 2.5mm 2mm;
+        text-align: center;
+        font-family: var(--texto);
+        font-size: 17pt;
+        color: var(--marino);
+      }
+
+      .dia--azul h2 {
+        background: var(--azul-tinte);
+      }
+      .dia--verde h2 {
+        background: var(--verde-tinte);
+      }
+      .dia--amarillo h2 {
+        background: var(--amarillo-tinte);
+      }
+      .dia--coral h2 {
+        background: var(--coral-tinte);
+      }
+      .dia--morado h2 {
+        background: var(--morado-tinte);
+      }
+
+      .dia--azul {
+        border-top: 2.5mm solid var(--azul);
+      }
+      .dia--verde {
+        border-top: 2.5mm solid var(--verde);
+      }
+      .dia--amarillo {
+        border-top: 2.5mm solid var(--amarillo);
+      }
+      .dia--coral {
+        border-top: 2.5mm solid var(--coral);
+      }
+      .dia--morado {
+        border-top: 2.5mm solid var(--morado);
+      }
+
+      .huecos {
+        display: grid;
+        gap: 2.5mm;
+        padding: 2.5mm;
+      }
+
+      .hueco {
+        position: relative;
+        height: 23mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .hueco::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 5mm;
+        height: 5mm;
+        margin: -2.5mm 0 0 -2.5mm;
+        border-radius: 50%;
+        background: var(--linea);
+      }
+
+      .pista {
+        margin: 3mm 0 0;
+        font-size: 9.5pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Día ---------- */
+      .tiras {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10mm;
+      }
+
+      .tira {
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+        padding: 3mm;
+      }
+
+      .tira h2 {
+        margin: 0 0 3mm;
+        text-align: center;
+        font-family: var(--texto);
+        font-size: 18pt;
+      }
+
+      .paso {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin-bottom: 2.5mm;
+      }
+
+      .paso b {
+        flex: none;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-family: var(--titulos);
+        font-size: 13pt;
+        color: var(--marino);
+        background: var(--amarillo-tinte);
+      }
+
+      .paso .hueco {
+        flex: 1;
+        height: 25mm;
+      }
+
+      .terminado {
+        margin-top: 3mm;
+        height: 34mm;
+        border-radius: 3mm;
+        border: 0.6mm solid var(--verde);
+        background: var(--verde-tinte);
+        display: grid;
+        place-items: center;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 16pt;
+      }
+
+      /* ---------- Primero y después ---------- */
+      .tablero {
+        display: grid;
+        grid-template-columns: 1fr 18mm 1fr;
+        align-items: center;
+        gap: 4mm;
+        margin-top: 4mm;
+      }
+
+      .casilla-grande {
+        border-radius: 4mm;
+        overflow: hidden;
+        border: 0.8mm solid var(--marino);
+      }
+
+      .casilla-grande h2 {
+        margin: 0;
+        padding: 3.5mm;
+        text-align: center;
+        font-family: var(--texto);
+        font-size: 26pt;
+      }
+
+      .casilla-grande .hueco {
+        height: 105mm;
+        margin: 5mm;
+      }
+
+      .primero h2 {
+        background: var(--verde-tinte);
+      }
+
+      .despues h2 {
+        background: var(--azul-tinte);
+      }
+
+      .flecha-grande {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .creditos {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="apaisada" data-miniatura>
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <div class="encabezado">
+        <h1>Mi semana</h1>
+        <p class="rellenar">Nombre:<span></span></p>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="semana">
+        <div class="dia dia--azul">
+          <h2>Lunes</h2>
+          <div class="huecos"><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div></div>
+        </div>
+        <div class="dia dia--verde">
+          <h2>Martes</h2>
+          <div class="huecos"><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div></div>
+        </div>
+        <div class="dia dia--amarillo">
+          <h2>Miércoles</h2>
+          <div class="huecos"><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div></div>
+        </div>
+        <div class="dia dia--coral">
+          <h2>Jueves</h2>
+          <div class="huecos"><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div></div>
+        </div>
+        <div class="dia dia--morado">
+          <h2>Viernes</h2>
+          <div class="huecos"><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div><div class="hueco"></div></div>
+        </div>
+      </div>
+      <p class="pista">
+        Pega un trozo de velcro en cada círculo gris y coloca encima el pictograma de cada actividad. Si en tu centro ya
+        hay un color para cada día, úsalo.
+      </p>
+    </section>
+
+    <section class="vertical">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <div class="encabezado">
+        <h1>Mi día</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista" style="margin: 0 0 4mm">
+        Dos tiras por hoja: recórtalas por la mitad. Cuando termina una actividad, su pictograma pasa a «Terminado».
+      </p>
+      <div class="tiras">
+        <div class="tira">
+          <h2>Hoy</h2>
+          <div class="paso"><b>1</b><div class="hueco"></div></div>
+          <div class="paso"><b>2</b><div class="hueco"></div></div>
+          <div class="paso"><b>3</b><div class="hueco"></div></div>
+          <div class="paso"><b>4</b><div class="hueco"></div></div>
+          <div class="paso"><b>5</b><div class="hueco"></div></div>
+          <div class="paso"><b>6</b><div class="hueco"></div></div>
+          <div class="terminado">Terminado</div>
+        </div>
+        <div class="tira">
+          <h2>Hoy</h2>
+          <div class="paso"><b>1</b><div class="hueco"></div></div>
+          <div class="paso"><b>2</b><div class="hueco"></div></div>
+          <div class="paso"><b>3</b><div class="hueco"></div></div>
+          <div class="paso"><b>4</b><div class="hueco"></div></div>
+          <div class="paso"><b>5</b><div class="hueco"></div></div>
+          <div class="paso"><b>6</b><div class="hueco"></div></div>
+          <div class="terminado">Terminado</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <div class="encabezado">
+        <h1>Primero y después</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="tablero">
+        <div class="casilla-grande primero">
+          <h2>Primero</h2>
+          <div class="hueco"></div>
+        </div>
+        <svg class="flecha-grande" viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Después">
+          <path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+        </svg>
+        <div class="casilla-grande despues">
+          <h2>Después</h2>
+          <div class="hueco"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente <span class="borrador">[BORRADOR]</span></p>
+      <h1>Cómo usar la agenda visual</h1>
+      <p>
+        Saber qué va a pasar da tranquilidad. La agenda visual convierte el tiempo, que no se ve, en algo que se puede
+        mirar y tocar. Es un apoyo clásico para el alumnado con trastorno del espectro del autismo (TEA) y también ayuda a
+        quien tiene dificultades de lenguaje o acaba de llegar al centro. En realidad, le viene bien a toda la clase.
+      </p>
+
+      <h2>Antes de empezar</h2>
+      <ol>
+        <li>Imprime en color si puedes y plastifica las hojas. Pega velcro en los círculos grises.</li>
+        <li>
+          Prepara un pictograma para cada actividad de vuestra rutina. Usa siempre el mismo dibujo para la misma
+          actividad.
+        </li>
+        <li>Decide dónde vive la agenda: a la altura de los ojos del alumno o la alumna, y siempre en el mismo sitio.</li>
+      </ol>
+
+      <h2>En el día a día</h2>
+      <ol>
+        <li>Repasad la agenda al empezar el día. Señala cada pictograma mientras lo nombras.</li>
+        <li>Antes de cada cambio de actividad, volved a la agenda: «¿Qué toca ahora?».</li>
+        <li>Al terminar una actividad, el alumno o la alumna retira el pictograma y lo deja en «Terminado».</li>
+        <li>
+          Avisa de los cambios con antelación: cambia el pictograma delante de él o de ella y explica qué pasa. Un
+          pictograma de «cambio» o «sorpresa» ayuda a anticipar lo imprevisto.
+        </li>
+      </ol>
+
+      <h2>El tablero de «primero y después»</h2>
+      <p>
+        Sirve para una sola transición, sobre todo cuando cuesta empezar una tarea. Pon en «Primero» lo que toca y en
+        «Después» algo que le motive. Cumple siempre lo que pones en «Después».
+      </p>
+
+      <h2>Ideas para adaptarla</h2>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>Menos pasos:</strong> empieza con dos o tres y añade más cuando la rutina esté aprendida.</li>
+          <li><strong>Objetos reales:</strong> si el pictograma aún no tiene sentido, pega un objeto pequeño.</li>
+        </ul>
+        <ul>
+          <li><strong>Fotos:</strong> las fotos del propio aula funcionan mejor con algunos alumnos.</li>
+          <li><strong>Para toda la clase:</strong> una agenda grande en la pizarra no señala a nadie.</li>
+        </ul>
+      </div>
+
+      <h2>Retirar el apoyo poco a poco</h2>
+      <p>
+        Cuando la rutina esté aprendida, prueba a mostrar solo la mañana, luego solo la siguiente actividad. Si aparece
+        ansiedad, vuelve al paso anterior: el objetivo es la autonomía, a su ritmo.
+      </p>
+
+      <div class="dos-columnas" style="align-items: start">
+      <div class="caja caja--azul">
+        <h3>Si usas pictogramas de ARASAAC</h3>
+        <p>Su licencia pide incluir este texto en el material:</p>
+        <p>
+          «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao
+          para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+        </p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Agenda visual: semana, día y «primero y después».</strong> IdEducando, octubre de 2026. Ficha y
+          novedades: ideducando.github.io/web/material-gratuito/agenda-visual-semanal
+        </p>
+        <p>
+          Fuentes: Mesibov, Shea y Schopler (2005), <em>The TEACCH approach to autism spectrum disorders</em>; CAST
+          (2024), <em>Universal Design for Learning Guidelines 3.0</em>.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarla y adaptarla citando a IdEducando, sin fines comerciales.</p>
+      </div>
+      </div>
+    </section>
+  </body>
+</html>

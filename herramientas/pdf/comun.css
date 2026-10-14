@@ -1,0 +1,402 @@
+/* ==========================================================================
+   IdEducando · estilos de los PDF
+   Se imprimen con Chromium (ver ../generar.mjs). A4, letras de la marca,
+   pie con licencia y número de página en todas las hojas menos la portada.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 600;
+  src: url('../../node_modules/@fontsource/outfit/files/outfit-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Outfit';
+  font-weight: 700;
+  src: url('../../node_modules/@fontsource/outfit/files/outfit-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Young Serif';
+  font-weight: 400;
+  src: url('../../node_modules/@fontsource/young-serif/files/young-serif-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-weight: 400;
+  src: url('../../node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-normal.woff2')
+    format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-weight: 400;
+  font-style: italic;
+  src: url('../../node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-400-italic.woff2')
+    format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-weight: 700;
+  src: url('../../node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-700-normal.woff2')
+    format('woff2');
+}
+
+:root {
+  --azul: #2f6fd6;
+  --verde: #1fa67a;
+  --coral: #e8553e;
+  --morado: #8c4fb8;
+  --amarillo: #f6c12e;
+  --naranja: #f5961f;
+  --marino: #1e2b55;
+  --crema: #fff6e6;
+  --suave: #46578c;
+  --enlace: #2b6cd5;
+  --verde-texto: #127055;
+  --morado-texto: #7a3fa5;
+  --coral-texto: #b63a26;
+  --azul-tinte: #e4edfb;
+  --verde-tinte: #dcf3ea;
+  --coral-tinte: #fde5e0;
+  --morado-tinte: #efe5f7;
+  --amarillo-tinte: #fdf0c7;
+  --naranja-tinte: #fde8cf;
+  --linea: #ead9bb;
+  --titulos: 'Outfit', sans-serif;
+  --lema: 'Young Serif', serif;
+  --texto: 'Atkinson Hyperlegible', sans-serif;
+}
+
+@page {
+  size: A4;
+  margin: 17mm 16mm 20mm 16mm;
+
+  @bottom-left {
+    content: 'IdEducando · Licencia CC BY-NC-SA 4.0 · ideducando.github.io/web';
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 8pt;
+    color: #46578c;
+    vertical-align: top;
+    padding-top: 5mm;
+  }
+
+  @bottom-right {
+    content: counter(page) ' de ' counter(pages);
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 8pt;
+    color: #46578c;
+    vertical-align: top;
+    padding-top: 5mm;
+  }
+}
+
+@page portada {
+  margin: 0;
+
+  @bottom-left {
+    content: none;
+  }
+
+  @bottom-right {
+    content: none;
+  }
+}
+
+@page apaisada {
+  size: A4 landscape;
+  margin: 12mm 12mm 16mm 12mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  font-family: var(--texto);
+  font-size: 11pt;
+  line-height: 1.5;
+  color: var(--marino);
+  background: #fff;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--titulos);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  break-after: avoid-page;
+}
+
+h1 {
+  font-size: 26pt;
+}
+
+h2 {
+  font-size: 17pt;
+  margin-top: 1.1em;
+}
+
+h3 {
+  font-size: 12.5pt;
+  margin-top: 1em;
+}
+
+p,
+ul,
+ol,
+table {
+  margin: 0 0 0.7em;
+}
+
+ul,
+ol {
+  padding-left: 1.2em;
+}
+
+li {
+  margin-bottom: 0.25em;
+}
+
+li::marker {
+  color: var(--morado-texto);
+  font-weight: 700;
+}
+
+a {
+  color: var(--enlace);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  overflow-wrap: anywhere;
+}
+
+strong {
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10pt;
+  break-inside: auto;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  break-inside: avoid;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1.6mm 2.2mm;
+  border-bottom: 0.3mm solid var(--linea);
+}
+
+thead th {
+  background: var(--marino);
+  color: #fff;
+  font-family: var(--titulos);
+  font-weight: 600;
+}
+
+tbody th {
+  font-family: var(--titulos);
+  font-weight: 600;
+}
+
+.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- Bloques reutilizables ---------- */
+
+.rayos {
+  height: 2.2mm;
+  background: linear-gradient(
+    90deg,
+    var(--azul) 0 20%,
+    var(--verde) 20% 40%,
+    var(--amarillo) 40% 60%,
+    var(--coral) 60% 80%,
+    var(--morado) 80% 100%
+  );
+}
+
+.antetitulo {
+  margin: 0 0 2mm;
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 9.5pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--morado-texto);
+}
+
+.caja {
+  padding: 4mm 5mm;
+  border-radius: 3mm;
+  margin: 0 0 4mm;
+  break-inside: avoid;
+}
+
+.caja > :last-child {
+  margin-bottom: 0;
+}
+
+.caja--amarilla {
+  background: var(--amarillo-tinte);
+  border-left: 1.6mm solid var(--amarillo);
+}
+
+.caja--azul {
+  background: var(--azul-tinte);
+  border-left: 1.6mm solid var(--azul);
+}
+
+.caja--verde {
+  background: var(--verde-tinte);
+  border-left: 1.6mm solid var(--verde);
+}
+
+.caja--coral {
+  background: var(--coral-tinte);
+  border-left: 1.6mm solid var(--coral);
+}
+
+.caja--morada {
+  background: var(--morado-tinte);
+  border-left: 1.6mm solid var(--morado);
+}
+
+.caja h3:first-child,
+.caja h4:first-child {
+  margin-top: 0;
+}
+
+.fuente {
+  font-size: 8.5pt;
+  color: var(--suave);
+}
+
+.borrador {
+  display: inline-block;
+  padding: 0 1.6mm;
+  border: 0.5mm dashed var(--coral-texto);
+  border-radius: 1.2mm;
+  color: var(--coral-texto);
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0.04em;
+}
+
+.salto {
+  break-before: page;
+}
+
+.sin-romper {
+  break-inside: avoid;
+}
+
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+  break-inside: avoid;
+}
+
+/* ---------- Portada ---------- */
+
+.portada {
+  page: portada;
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: var(--crema);
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+}
+
+.portada__rayos {
+  height: 4mm;
+}
+
+.portada__cuerpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 22mm 20mm 18mm;
+}
+
+.portada__logo {
+  width: 62mm;
+  height: auto;
+  margin-bottom: 26mm;
+}
+
+.portada__antetitulo {
+  font-size: 11pt;
+}
+
+.portada__titulo {
+  font-size: 34pt;
+  line-height: 1.08;
+  margin-bottom: 7mm;
+}
+
+.portada__subtitulo {
+  font-family: var(--lema);
+  font-size: 15pt;
+  line-height: 1.35;
+  max-width: 150mm;
+}
+
+.portada__pie {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10mm;
+  font-size: 9.5pt;
+  color: var(--suave);
+}
+
+.portada__circulo {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.portada__cuerpo > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Créditos finales ---------- */
+
+.creditos {
+  font-size: 9pt;
+  color: var(--suave);
+  border-top: 0.4mm solid var(--linea);
+  padding-top: 3mm;
+  margin-top: 6mm;
+  break-inside: avoid;
+}
+
+.creditos p {
+  margin-bottom: 1.5mm;
+}

@@ -1,0 +1,3 @@
+# Archivos que se generan al crear los PDF
+.temporal/
+pdf/*.generado.html
