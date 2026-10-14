@@ -1,0 +1,86 @@
+{
+  "revisado": "2026-10-14",
+  "eventos": [
+    {
+      "orden": "2026-01-23",
+      "cuando": "23 de enero de 2026",
+      "titulo": "Convocatoria de Maestros con 1.607 plazas",
+      "detalle": "288 plazas de Pedagogía Terapéutica y 398 de Educación Infantil. Acumula las ofertas de empleo de 2023, 2024 y 2025.",
+      "estado": "confirmado",
+      "fuente_nombre": "BORM nº 18, de 23/01/2026",
+      "fuente_url": "https://www.borm.es/services/boletin/ano/2026/numero/18/pdf"
+    },
+    {
+      "orden": "2026-06-20",
+      "cuando": "20 de junio de 2026",
+      "titulo": "Primera prueba de Maestros",
+      "detalle": "Se presentaron 9.451 aspirantes y superaron la primera prueba 3.528 (el 37,3 %).",
+      "estado": "confirmado",
+      "fuente_nombre": "Consejería de Educación (CARM), 03/07/2026",
+      "fuente_url": "https://www.carm.es/web/pagina?IDCONTENIDO=125503&IDTIPO=10&RASTRO=c77%24s3%24m"
+    },
+    {
+      "orden": "2026-06-25",
+      "cuando": "25 de junio de 2026",
+      "titulo": "Anuncio de oposiciones de Secundaria para 2027",
+      "detalle": "El Gobierno regional anuncia al menos 2.000 plazas para Secundaria, Formación Profesional y otros cuerpos docentes en 2027. El anuncio no nombra Maestros.",
+      "estado": "confirmado",
+      "fuente_nombre": "Comunidad Autónoma de la Región de Murcia (CARM)",
+      "fuente_url": "https://www.carm.es/web/pagina?IDCONTENIDO=125429&IDTIPO=10&RASTRO=c%24m122%2C70"
+    },
+    {
+      "orden": "2026-07-27",
+      "cuando": "Julio de 2026",
+      "titulo": "Adjudicación de plazas de 2026",
+      "detalle": "Según la prensa, se adjudicaron 1.496 plazas (el 93 %) y quedaron 111 desiertas. Pendiente de confirmar con una fuente oficial.",
+      "estado": "sin-confirmar",
+      "fuente_nombre": "Murcia Diario",
+      "fuente_url": "https://www.murciadiario.com/actualidad-economica/actualidad-murcia/empleo/oposiciones-maestros-saldan-adjudicacion-93-plazas-convocadas/20260727114441147885.html"
+    },
+    {
+      "orden": "2026-07-30",
+      "cuando": "30 de julio de 2026",
+      "titulo": "El Ministerio abre la reforma de las oposiciones docentes",
+      "detalle": "Entrega a los sindicatos un borrador para modificar el Reglamento de ingreso (Real Decreto 276/2007). Todavía no hay texto articulado ni fecha de aplicación.",
+      "estado": "confirmado",
+      "fuente_nombre": "Informe de ANPE sobre la mesa de negociación",
+      "fuente_url": "https://anpeceutaymelilla.es/notices/205114/CEUTA---INFORME-Grupo-de-trabajo-4.-MESA-NEGOCIACI%C3%93N-MINISTERIO-EDUCACI%C3%93N,-FP-Y-DEPORTE-(30-07-2026)"
+    },
+    {
+      "orden": "2026-12-15",
+      "cuando": "Diciembre de 2026",
+      "titulo": "Oferta de empleo público docente de 2026",
+      "detalle": "Las ofertas de 2023, 2024 y 2025 se aprobaron en diciembre. Esta oferta y la de 2027 alimentarían la próxima convocatoria de Maestros.",
+      "estado": "previsto",
+      "fuente_nombre": "Patrón de años anteriores (BORM nº 18/2026, artículo 3)",
+      "fuente_url": "https://www.borm.es/services/boletin/ano/2026/numero/18/pdf"
+    },
+    {
+      "orden": "2027-06-01",
+      "cuando": "2027",
+      "titulo": "Oposiciones de Secundaria, FP y otros cuerpos",
+      "detalle": "Año sin oposiciones de Maestros si se mantiene la alternancia de los últimos años.",
+      "estado": "previsto",
+      "fuente_nombre": "Anuncio de la CARM de 25/06/2026",
+      "fuente_url": "https://www.carm.es/web/pagina?IDCONTENIDO=125429&IDTIPO=10&RASTRO=c%24m122%2C70"
+    },
+    {
+      "orden": "2028-01-31",
+      "cuando": "Enero o febrero de 2028",
+      "titulo": "Próxima convocatoria de Maestros",
+      "detalle": "Maestros se convocó en 2019, 2022, 2024 y 2026. Si se repite la alternancia, tocaría en 2028. Aún no hay anuncio oficial.",
+      "estado": "sin-confirmar",
+      "fuente_nombre": "Cálculo propio a partir de las convocatorias de 2019 a 2026",
+      "fuente_url": ""
+    },
+    {
+      "orden": "2028-06-15",
+      "cuando": "Junio de 2028",
+      "titulo": "Primera prueba de Maestros",
+      "detalle": "Desde 2022 la primera prueba se ha celebrado en junio: el 13/06/2022, el 10/06/2024 y el 20/06/2026.",
+      "estado": "sin-confirmar",
+      "fuente_nombre": "Cálculo propio a partir de las convocatorias de 2022, 2024 y 2026",
+      "fuente_url": ""
+    }
+  ]
+}

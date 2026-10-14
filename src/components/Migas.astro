@@ -1,0 +1,27 @@
+---
+// Migas de pan: el camino desde el inicio hasta la página actual.
+import { ruta } from '../lib/rutas';
+
+interface Props {
+  camino: { texto: string; enlace?: string }[];
+}
+
+const { camino } = Astro.props;
+const completo = [{ texto: 'Inicio', enlace: '/' }, ...camino];
+---
+
+<nav class="migas" aria-label="Estás aquí">
+  <ol>
+    {
+      completo.map((paso, i) =>
+        i === completo.length - 1 || !paso.enlace ? (
+          <li aria-current="page">{paso.texto}</li>
+        ) : (
+          <li>
+            <a href={ruta(paso.enlace)}>{paso.texto}</a>
+          </li>
+        ),
+      )
+    }
+  </ol>
+</nav>

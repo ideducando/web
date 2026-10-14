@@ -1,0 +1,13 @@
+# Dependencias y resultados de la construcción: se generan solos
+node_modules/
+dist/
+.astro/
+
+# Archivos del sistema y registros
+.DS_Store
+Thumbs.db
+*.log
+
+# Nunca subir claves ni contraseñas
+.env
+.env.*

@@ -1,0 +1,97 @@
+---
+// Buscador con Pagefind (Component UI). El índice se genera al construir la web
+// y la búsqueda ocurre en el navegador de quien busca: no hay servidor ni registro de búsquedas.
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import { ruta } from '../lib/rutas';
+
+const base = import.meta.env.BASE_URL.replace(/\/+$/, '') + '/';
+---
+
+<Base titulo="Buscar" descripcion="Busca entre el material gratuito, las guías de oposiciones y los consejos de IdEducando." indexable={false}>
+  <link slot="cabeza" rel="stylesheet" href={ruta('/pagefind/pagefind-component-ui.css')} />
+  <Intro
+    titulo="Buscar"
+    entradilla="Escribe lo que necesitas: «agenda visual», «TEA», «programación»… La búsqueda ocurre en tu navegador."
+    camino={[{ texto: 'Buscar' }]}
+  />
+
+  <div class="contenedor buscar">
+    <pagefind-config base-url={base} bundle-path={`${base}pagefind/`} lang="es-es"></pagefind-config>
+    <div class="buscar__caja">
+      <pagefind-input placeholder="Busca un material, una necesidad o un tema" autofocus></pagefind-input>
+      <pagefind-summary></pagefind-summary>
+    </div>
+    <div class="buscar__rejilla">
+      <aside class="buscar__filtros" aria-label="Filtrar resultados">
+        <pagefind-filter-pane expanded></pagefind-filter-pane>
+      </aside>
+      <pagefind-results show-images></pagefind-results>
+    </div>
+    <noscript>
+      <p class="aviso">
+        El buscador necesita JavaScript. Mientras tanto, puedes recorrer el
+        <a href={ruta('/material-gratuito/')}>catálogo de material gratuito</a>.
+      </p>
+    </noscript>
+  </div>
+
+  <script is:inline type="module" src={ruta('/pagefind/pagefind-component-ui.js')}></script>
+  <script is:inline>
+    // Permite enlazar búsquedas hechas: /buscar/?q=agenda
+    window.addEventListener('load', () => {
+      const q = new URLSearchParams(window.location.search).get('q');
+      const caja = document.querySelector('pagefind-input input');
+      if (q && caja) {
+        caja.value = q;
+        caja.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+  </script>
+</Base>
+
+<style is:global>
+  :root {
+    --pf-text: #1e2b55;
+    --pf-text-secondary: #46578c;
+    --pf-text-muted: #46578c;
+    --pf-background: #ffffff;
+    --pf-border: #1e2b55;
+    --pf-border-focus: #1e2b55;
+    --pf-outline-focus: #1e2b55;
+    --pf-hover: #fdf0c7;
+    --pf-mark: #1e2b55;
+    --pf-border-radius: 12px;
+    --pf-font: 'Atkinson Hyperlegible', Verdana, sans-serif;
+  }
+
+  .buscar {
+    padding-block: 2rem 4rem;
+  }
+
+  .buscar__caja {
+    max-width: 46rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .buscar__rejilla {
+    display: grid;
+    gap: 1.5rem 2.5rem;
+  }
+
+  @media (min-width: 60em) {
+    .buscar__rejilla {
+      grid-template-columns: 16rem 1fr;
+      align-items: start;
+    }
+  }
+
+  .buscar pagefind-results a {
+    color: var(--enlace);
+  }
+
+  .buscar mark {
+    background: var(--amarillo-tinte);
+    color: var(--marino);
+  }
+</style>

@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import Icono from '../components/Icono.astro';
+import Borrador from '../components/Borrador.astro';
+import sitio from '../data/sitio.json';
+import { ruta } from '../lib/rutas';
+
+const asuntos = [
+  { titulo: 'Echo en falta un material', texto: 'Cuéntanos la necesidad, la edad y para qué lo usarías.' },
+  { titulo: 'He encontrado un error', texto: 'Dinos la página o la ficha y qué falla. Lo corregimos y actualizamos la fecha.' },
+  { titulo: 'Tengo una duda de oposiciones', texto: 'Si es sobre Murcia, mira antes la guía y el calendario; si no está ahí, pregúntanos.' },
+  { titulo: 'Quiero contar cómo lo he usado', texto: 'Nos encanta saber qué funciona en un aula real y qué cambiarías.' },
+];
+---
+
+<Base titulo="Contacto" descripcion="Escribe a IdEducando: dudas, errores, ideas de material o tu experiencia en el aula.">
+  <Intro
+    titulo="Contacto"
+    entradilla="Nos lees y te leemos. Escríbenos y te contestamos en cuanto podamos."
+    camino={[{ texto: 'Contacto' }]}
+  />
+
+  <div class="contenedor contacto">
+    <div class="contacto__correo">
+      <Icono nombre="correo" clase="contacto__icono" />
+      <h2>Nuestro correo</h2>
+      <p><a class="contacto__enlace" href={`mailto:${sitio.correo}`}>{sitio.correo}</a></p>
+      <p class="texto-suave">
+        No tenemos formulario: así no guardamos tus datos en ningún sitio más que en nuestro correo. Lo explicamos en
+        <a href={ruta('/privacidad/')}>privacidad</a>.
+      </p>
+    </div>
+
+    <section aria-labelledby="titulo-asuntos">
+      <h2 id="titulo-asuntos">¿Sobre qué nos escribes?</h2>
+      <ul class="rejilla rejilla--anchas">
+        {
+          asuntos.map((a, i) => (
+            <li class={`posit ${['posit--verde', 'posit--coral', 'posit--morado', 'posit--amarillo'][i]}`}>
+              <h3>{a.titulo}</h3>
+              <p>{a.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="contacto__redes" aria-labelledby="titulo-redes">
+      <h2 id="titulo-redes">Redes sociales</h2>
+      {
+        sitio.instagram || sitio.pinterest ? (
+          <ul>
+            {sitio.instagram && (
+              <li>
+                <a href={sitio.instagram}>Instagram</a>
+              </li>
+            )}
+            {sitio.pinterest && (
+              <li>
+                <a href={sitio.pinterest}>Pinterest</a>
+              </li>
+            )}
+          </ul>
+        ) : (
+          <p>
+            <Borrador />
+            Pronto estaremos en Instagram y Pinterest. Mientras tanto, el correo es la forma más rápida de hablar con
+            el equipo.
+          </p>
+        )
+      }
+    </section>
+  </div>
+</Base>
+
+<style>
+  .contacto {
+    display: grid;
+    gap: 2.5rem;
+    padding-block: 2rem 4rem;
+  }
+
+  .contacto__correo {
+    padding: 1.6rem 1.5rem;
+    border-radius: var(--radio);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-top: 6px solid var(--azul);
+    box-shadow: var(--sombra-suave);
+    max-width: 40rem;
+  }
+
+  .contacto__correo :global(.contacto__icono) {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  .contacto__enlace {
+    font: 700 clamp(1.4rem, 1.1rem + 1.5vw, 2rem) / 1.2 var(--letra-titulos);
+    overflow-wrap: anywhere;
+  }
+
+  .contacto__redes ul {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+    font-weight: 700;
+  }
+</style>

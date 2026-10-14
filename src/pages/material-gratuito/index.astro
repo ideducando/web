@@ -1,0 +1,124 @@
+---
+import Base from '../../layouts/Base.astro';
+import Intro from '../../components/Intro.astro';
+import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
+import FiltrosCatalogo from '../../components/FiltrosCatalogo.astro';
+import { DIMENSIONES } from '../../data/taxonomias';
+import { materialesOrdenados, recuento } from '../../lib/materiales';
+import { ruta } from '../../lib/rutas';
+
+const materiales = await materialesOrdenados();
+
+const recuentos = {
+  seccion: recuento(materiales, 'seccion'),
+  etapa: recuento(materiales, 'etapas'),
+  necesidad: recuento(materiales, 'necesidades'),
+  tipo: recuento(materiales, 'tipo'),
+};
+
+// Atajos a las páginas de cada categoría con material.
+const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((dimension) => {
+  const cuenta = recuentos[dimension];
+  return {
+    dimension,
+    nombre: DIMENSIONES[dimension].plural,
+    opciones: Object.entries(DIMENSIONES[dimension].opciones)
+      .filter(([clave]) => (cuenta.get(clave) ?? 0) > 0)
+      .map(([clave, op]) => ({ clave, nombre: op.nombre, color: op.color })),
+  };
+});
+---
+
+<Base
+  titulo="Material gratuito"
+  descripcion="Catálogo de material gratuito de Pedagogía Terapéutica e Infantil para el aula y para opositar. Todo a 0 € y sin registro."
+>
+  <Intro
+    titulo="Material gratuito"
+    entradilla="Todo a 0 € y sin registro: pulsas y se descarga. Cada ficha dice para qué etapa y para qué necesidades sirve, y cómo adaptarla a tu clase."
+    camino={[{ texto: 'Material gratuito' }]}
+  />
+
+  <section class="contenedor atajos" aria-labelledby="titulo-atajos">
+    <h2 id="titulo-atajos" class="solo-lectores">Explorar por categoría</h2>
+    {
+      atajos.map((a) => (
+        <div class="atajos__fila">
+          <h3 class="atajos__titulo">{a.nombre}</h3>
+          <ul class="etiquetas">
+            {a.opciones.map((op) => (
+              <li>
+                <a class={`etiqueta etiqueta--${op.color}`} href={ruta(`/material-gratuito/${a.dimension}/${op.clave}/`)}>
+                  {op.nombre}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="contenedor catalogo" aria-labelledby="titulo-catalogo">
+    <h2 id="titulo-catalogo" class="solo-lectores">Todos los materiales</h2>
+    <div class="catalogo__filtros">
+      <FiltrosCatalogo recuentos={recuentos} total={materiales.length} />
+    </div>
+    <div class="catalogo__resultados">
+      <ul class="rejilla">
+        {materiales.map((m) => <TarjetaMaterial material={m} />)}
+      </ul>
+      <div class="aviso aviso--info" data-sin-resultados hidden>
+        <p>
+          No hay materiales con esa combinación todavía. Prueba a quitar algún filtro o
+          <a href={ruta('/contacto/')}>cuéntanos qué te haría falta</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .atajos {
+    display: grid;
+    gap: 0.9rem;
+    padding-block: 1.75rem 0.5rem;
+  }
+
+  .atajos__fila {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  @media (min-width: 48em) {
+    .atajos__fila {
+      grid-template-columns: 11rem 1fr;
+      align-items: baseline;
+    }
+  }
+
+  .atajos__titulo {
+    margin: 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .catalogo {
+    display: grid;
+    gap: 1rem 2rem;
+    padding-block: 1rem 4rem;
+  }
+
+  @media (min-width: 60em) {
+    .catalogo {
+      grid-template-columns: 17rem 1fr;
+      align-items: start;
+    }
+  }
+
+  .aviso a {
+    color: var(--marino);
+  }
+</style>

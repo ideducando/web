@@ -1,0 +1,25 @@
+---
+// Cabecera de las páginas interiores: migas, título y entradilla.
+import Migas from './Migas.astro';
+
+interface Props {
+  titulo: string;
+  entradilla?: string;
+  camino?: { texto: string; enlace?: string }[];
+  borrador?: boolean;
+}
+
+const { titulo, entradilla, camino = [], borrador = false } = Astro.props;
+---
+
+<section class="intro intro--color">
+  <div class="contenedor">
+    {camino.length > 0 && <Migas camino={camino} />}
+    <h1>
+      {borrador && <span class="borrador">[BORRADOR]</span>}
+      {titulo}
+    </h1>
+    {entradilla && <p class="entradilla">{entradilla}</p>}
+    <slot />
+  </div>
+</section>

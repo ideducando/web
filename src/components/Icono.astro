@@ -1,0 +1,73 @@
+---
+// Iconos de trazo sencillo dibujados para la web. Son decorativos:
+// el texto de al lado ya dice qué hace cada botón, así que van ocultos a los lectores de pantalla.
+interface Props {
+  nombre:
+    | 'menu'
+    | 'cerrar'
+    | 'buscar'
+    | 'descarga'
+    | 'flecha'
+    | 'calendario'
+    | 'lista'
+    | 'libro'
+    | 'info'
+    | 'atencion'
+    | 'ok'
+    | 'correo'
+    | 'imprimir'
+    | 'reloj'
+    | 'documento'
+    | 'corazon'
+    | 'bombilla'
+    | 'manos';
+  clase?: string;
+}
+
+const { nombre, clase = '' } = Astro.props;
+
+const trazos: Record<Props['nombre'], string> = {
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  cerrar: '<path d="M6 6l12 12M18 6L6 18"/>',
+  buscar: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+  descarga: '<path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/>',
+  flecha: '<path d="M5 12h13M13 6.5l5.5 5.5-5.5 5.5"/>',
+  calendario:
+    '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M12 14h2M16 14h.5M8 17h2M12 17h2"/>',
+  lista:
+    '<path d="M9.5 7h10M9.5 12h10M9.5 17h10"/><path d="M4 7l1.2 1.2L7 6.3M4 12l1.2 1.2L7 11.3M4 17l1.2 1.2L7 16.3"/>',
+  libro:
+    '<path d="M12 6.5c-2-1.7-5-2.2-8-1.6v13c3-.6 6-.1 8 1.6 2-1.7 5-2.2 8-1.6v-13c-3-.6-6-.1-8 1.6z"/><path d="M12 6.5v13"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.4"/>',
+  atencion: '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.5M12 17.2v.3"/>',
+  ok: '<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/>',
+  correo: '<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.8 7l8.2 6 8.2-6"/>',
+  imprimir:
+    '<path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14.5h10v6H7z"/>',
+  reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.5 2"/>',
+  documento:
+    '<path d="M6.5 3h7.5l4.5 4.5V21h-12z"/><path d="M14 3v4.5h4.5M9 12.5h6M9 16h6"/>',
+  corazon:
+    '<path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/>',
+  bombilla:
+    '<path d="M9 17.5h6M9.8 20.5h4.4"/><path d="M8.2 14.5a6 6 0 1 1 7.6 0c-.8.7-1.3 1.6-1.3 3H9.5c0-1.4-.5-2.3-1.3-3z"/>',
+  manos:
+    '<path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11M10 10V5a1.5 1.5 0 0 1 3 0v5M13 10.5V6.5a1.5 1.5 0 0 1 3 0V13"/><path d="M16 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1.2a6 6 0 0 1-4.6-2.2L4.6 15.6a1.6 1.6 0 0 1 2.4-2.1L7 13.5V11"/>',
+};
+---
+
+<svg
+  class={clase}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width="24"
+  height="24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={trazos[nombre]}
+/>
