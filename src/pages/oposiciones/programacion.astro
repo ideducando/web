@@ -53,7 +53,7 @@ const etiquetaPara = (para: string[]) =>
       </fieldset>
 
       <div class="revisa__progreso" data-solo-js hidden>
-        <p aria-live="polite" data-progreso-texto>0 de 0 puntos revisados</p>
+        <p aria-live="polite" data-progreso-texto>0 de 0 comprobaciones hechas</p>
         <div class="revisa__barra" aria-hidden="true"><span data-progreso-barra></span></div>
       </div>
 
@@ -169,7 +169,7 @@ const etiquetaPara = (para: string[]) =>
         total += casillas.length;
         hechos += Array.from(casillas).filter((c) => c.checked).length;
       }
-      if (texto) texto.textContent = `${hechos} de ${total} puntos revisados`;
+      if (texto) texto.textContent = `${hechos} de ${total} comprobaciones hechas`;
       if (barra) barra.style.width = total ? `${Math.round((hechos / total) * 100)}%` : '0';
 
       guardar({

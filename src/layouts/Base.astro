@@ -18,9 +18,11 @@ interface Props {
   descripcion?: string;
   /** Imagen para compartir en redes, ruta dentro de public/ */
   imagen?: string;
-  /** false en páginas que no deben salir en el buscador interno (404, buscar) */
+  /** false en páginas que no deben salir en el buscador interno: inicio, listados, 404 y buscar */
   indexable?: boolean;
   tipo?: 'website' | 'article';
+  /** Imagen por defecto para los resultados del buscador. Las fichas usan su portada. */
+  imagenBuscador?: boolean;
 }
 
 const {
@@ -29,6 +31,7 @@ const {
   imagen = '/og-imagen.png',
   indexable = true,
   tipo = 'website',
+  imagenBuscador = true,
 } = Astro.props;
 
 const esInicio = Astro.url.pathname === ruta('/');
@@ -71,7 +74,7 @@ const imagenAbsoluta = new URL(ruta(imagen), Astro.site);
       sitio.borrador && (
         <div class="aviso-borrador" role="note">
           <div class="contenedor">
-            <span class="borrador">[BORRADOR]</span>
+            <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>
             {sitio.aviso_borrador}
           </div>
         </div>
@@ -80,6 +83,8 @@ const imagenAbsoluta = new URL(ruta(imagen), Astro.site);
     <Cabecera />
     <main id="contenido" tabindex="-1" data-pagefind-body={indexable ? '' : undefined}>
       <slot />
+      {indexable && <span hidden data-pagefind-meta="title">{titulo}</span>}
+      {indexable && imagenBuscador && <span hidden data-pagefind-meta={`image:${ruta('/apple-touch-icon.png')}`} />}
     </main>
     <Pie />
   </body>

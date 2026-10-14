@@ -34,7 +34,7 @@ const seccion = SECCIONES[d.seccion];
           {d.lectura && <span>· {d.lectura} de lectura</span>}
         </p>
         <h1 class="articulo__titulo">
-          {d.borrador && <span class="borrador">[BORRADOR]</span>}
+          {d.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
           {d.titulo}
         </h1>
         <p class="entradilla">{d.resumen}</p>
@@ -60,7 +60,7 @@ const seccion = SECCIONES[d.seccion];
     </div>
   </article>
   <div hidden>
-    <span data-pagefind-filter="Para">{seccion.nombre}</span>
+    <span data-pagefind-filter={`Para:${seccion.nombre}`}></span>
   </div>
 </Base>
 

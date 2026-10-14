@@ -32,7 +32,7 @@ const enlacePublico = new URL(ruta(`/material-gratuito/${material.id}/`), Astro.
 const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando' : `${d.autoria} para IdEducando`} (${anio}). Licencia ${d.licencia}. ${enlacePublico}`;
 ---
 
-<Base titulo={d.titulo} descripcion={d.resumen} imagen={d.portada} tipo="article">
+<Base titulo={d.titulo} descripcion={d.resumen} imagen={d.portada} tipo="article" imagenBuscador={!d.portada}>
   <section class="ficha-cabecera">
     <div class="contenedor">
       <div data-pagefind-ignore>
@@ -63,7 +63,7 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
             {TIPOS[d.tipo].nombre} · {SECCIONES[d.seccion].nombre}
           </p>
           <h1>
-            {d.borrador && <span class="borrador">[BORRADOR]</span>}
+            {d.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
             {d.titulo}
           </h1>
           <p class="entradilla">{d.resumen}</p>
@@ -269,10 +269,10 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
   }
 
   <div hidden>
-    <span data-pagefind-filter="Para">{SECCIONES[d.seccion].nombre}</span>
-    <span data-pagefind-filter="Tipo">{TIPOS[d.tipo].nombre}</span>
-    {d.etapas.map((e) => <span data-pagefind-filter="Etapa">{ETAPAS[e].nombre}</span>)}
-    {d.necesidades.map((n) => <span data-pagefind-filter="Necesidad">{NECESIDADES[n].nombre}</span>)}
+    <span data-pagefind-filter={`Para:${SECCIONES[d.seccion].nombre}`}></span>
+    <span data-pagefind-filter={`Tipo:${TIPOS[d.tipo].nombre}`}></span>
+    {d.etapas.map((e) => <span data-pagefind-filter={`Etapa:${ETAPAS[e].nombre}`} />)}
+    {d.necesidades.map((n) => <span data-pagefind-filter={`Necesidad:${NECESIDADES[n].nombre}`} />)}
   </div>
 </Base>
 

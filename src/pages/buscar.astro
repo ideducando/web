@@ -81,9 +81,13 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, '') + '/';
 
   @media (min-width: 60em) {
     .buscar__rejilla {
-      grid-template-columns: 16rem 1fr;
+      grid-template-columns: 16rem minmax(0, 1fr);
       align-items: start;
     }
+  }
+
+  .buscar__rejilla > * {
+    min-width: 0;
   }
 
   .buscar pagefind-results a {

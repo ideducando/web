@@ -23,7 +23,7 @@ const consejos = (await getCollection('consejos'))
   .slice(0, 3);
 ---
 
-<Base titulo="Inicio">
+<Base titulo="Inicio" indexable={false}>
   <section class="portada">
     <div class="contenedor portada__rejilla">
       <div class="portada__texto">

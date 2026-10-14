@@ -38,7 +38,11 @@ const hermanas = Object.entries(opciones)
 const titulo = `Material gratuito: ${opcion.nombre}`;
 ---
 
-<Base titulo={titulo} descripcion={`${opcion.descripcion} Material gratuito, sin registro y con descarga directa.`}>
+<Base
+  titulo={titulo}
+  descripcion={`${opcion.descripcion} Material gratuito, sin registro y con descarga directa.`}
+  indexable={false}
+>
   <Intro
     titulo={titulo}
     entradilla={opcion.descripcion}

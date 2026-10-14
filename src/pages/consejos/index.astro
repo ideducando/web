@@ -29,7 +29,7 @@ const consejos = (await getCollection('consejos')).sort((a, b) => b.data.fecha.g
               <time datetime={fechaISO(c.data.fecha)}>{fecha(c.data.fecha)}</time>
             </p>
             <h2 class="consejos__titulo">
-              {c.data.borrador && <span class="borrador">[BORRADOR]</span>}
+              {c.data.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
               <a class="enlace-tarjeta" href={ruta(`/consejos/${c.id}/`)}>
                 {c.data.titulo}
               </a>
