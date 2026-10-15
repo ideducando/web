@@ -70,6 +70,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: 1rem;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -88,7 +89,17 @@ body {
   font-family: var(--letra-texto);
   font-size: 1.0625rem;
   line-height: 1.65;
-  overflow-x: hidden;
+  /* Red de seguridad: si algo fuera más ancho que la pantalla, se recorta en lugar de
+     ensanchar la página, que Safari alejaría en el iPhone. Con «clip» también en html,
+     el recorte se aplica aquí, a la propia página. */
+  overflow-x: clip;
+}
+
+/* Navegadores antiguos que no conocen «clip» (por ejemplo, Safari de iOS 15). */
+@supports not (overflow-x: clip) {
+  body {
+    overflow-x: hidden;
+  }
 }
 
 @media (min-width: 48em) {
@@ -645,6 +656,12 @@ h3 .borrador {
 
 .rejilla--anchas {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr));
+}
+
+/* En todas las rejillas, las columnas se escriben con minmax(0, 1fr) y los hijos pueden
+   encoger: así un título largo o una imagen nunca ensanchan la página en el móvil. */
+.rejilla > * {
+  min-width: 0;
 }
 
 /* Tarjeta genérica (pósit) */

@@ -30,7 +30,7 @@ jobs:
         working-directory: herramientas
         run: |
           npm ci
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Revisar enlaces y accesibilidad
         working-directory: herramientas
         run: npm run comprobar

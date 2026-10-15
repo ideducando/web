@@ -285,6 +285,7 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
 
   .ficha {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem 2.5rem;
   }
 
@@ -379,6 +380,7 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
 
   .ficha-cuerpo {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem 3rem;
     padding-block: 2.5rem 3.5rem;
   }
@@ -419,7 +421,7 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
 
   .ficha-tecnica dl > div {
     display: grid;
-    grid-template-columns: 7.5rem 1fr;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
     gap: 0.5rem;
     padding-block: 0.5rem;
     border-bottom: 1px solid var(--linea);

@@ -83,7 +83,7 @@ const eventos = (calendario.eventos as Evento[]).slice().sort((a, b) => a.orden.
       <h2 id="titulo-vigilar">Qué vigilamos cada mes</h2>
       <ul>
         <li>
-          El Boletín Oficial de la Región de Murcia (BORM) y la web de
+          El Boletín Oficial de la Región de Murcia (BORM) y la web de{' '}
           <a href="https://rrhheducacion.carm.es">Recursos Humanos de Educación</a>: la oferta de empleo de 2026 y
           cuántas plazas trae para Maestros.
         </li>
@@ -96,7 +96,7 @@ const eventos = (calendario.eventos as Evento[]).slice().sort((a, b) => a.orden.
       </ul>
       <p>
         <Borrador />
-        ¿Has visto una fecha que no está aquí? Escríbenos a <a href="mailto:hola@ideducando.es">hola@ideducando.es</a>
+        ¿Has visto una fecha que no está aquí? Escríbenos a <a href="mailto:hola@ideducando.es">hola@ideducando.es</a>{' '}
         con el enlace y la revisamos.
       </p>
       <p><a href={ruta('/oposiciones/')}>Volver a Oposiciones</a></p>
@@ -158,6 +158,7 @@ const eventos = (calendario.eventos as Evento[]).slice().sort((a, b) => a.orden.
     margin: 0;
     padding: 0;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.4rem;
     font-size: 0.97rem;
   }

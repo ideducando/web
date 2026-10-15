@@ -61,7 +61,7 @@ const etiquetaPara = (para: string[]) =>
         grupos.map((g) => (
           <fieldset class="grupo" data-grupo data-para={g.para.join(' ')}>
             <legend class="grupo__titulo">
-              {g.titulo}
+              {g.titulo}{' '}
               <span class="grupo__para">{etiquetaPara(g.para)}</span>
             </legend>
             {g.nota && <p class="grupo__nota">{g.nota}</p>}
@@ -270,7 +270,7 @@ const etiquetaPara = (para: string[]) =>
 
   .grupo__para {
     display: inline-block;
-    margin-left: 0.5rem;
+    margin-left: 0.25rem;
     padding: 0.05rem 0.55rem;
     border-radius: 99px;
     background: var(--morado-tinte);
@@ -311,6 +311,7 @@ const etiquetaPara = (para: string[]) =>
 
   .punto label {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.2rem;
     cursor: pointer;
   }

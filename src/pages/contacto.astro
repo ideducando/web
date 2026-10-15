@@ -27,7 +27,7 @@ const asuntos = [
       <h2>Nuestro correo</h2>
       <p><a class="contacto__enlace" href={`mailto:${sitio.correo}`}>{sitio.correo}</a></p>
       <p class="texto-suave">
-        No tenemos formulario: así no guardamos tus datos en ningún sitio más que en nuestro correo. Lo explicamos en
+        No tenemos formulario: así no guardamos tus datos en ningún sitio más que en nuestro correo. Lo explicamos en{' '}
         <a href={ruta('/privacidad/')}>privacidad</a>.
       </p>
     </div>
@@ -77,6 +77,7 @@ const asuntos = [
 <style>
   .contacto {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
     padding-block: 2rem 4rem;
   }

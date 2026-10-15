@@ -1,9 +1,9 @@
-// Ayudas para construir enlaces que funcionen tanto en
-// https://ideducando.github.io/web/ como, más adelante, en https://ideducando.es/.
+// Ayudas para construir enlaces que funcionen en cualquier dirección: en la raíz
+// (Netlify: ideducando.netlify.app y después ideducando.es) o bajo /web (GitHub Pages).
 
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 
-/** Enlace interno: ruta('/contacto/') → '/web/contacto/'. */
+/** Enlace interno: ruta('/contacto/') → '/contacto/' en Netlify y '/web/contacto/' en GitHub Pages. */
 export function ruta(camino = '/'): string {
   if (/^(https?:|mailto:|tel:|#)/.test(camino)) return camino;
   const limpio = camino.startsWith('/') ? camino : `/${camino}`;

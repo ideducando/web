@@ -230,13 +230,14 @@ const consejos = (await getCollection('consejos'))
 
   .portada__rejilla {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
     align-items: center;
   }
 
   @media (min-width: 56em) {
     .portada__rejilla {
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
     }
   }
 
@@ -329,13 +330,14 @@ const consejos = (await getCollection('consejos'))
 
   .oposiciones-bloque__rejilla {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2rem 3rem;
     align-items: center;
   }
 
   @media (min-width: 56em) {
     .oposiciones-bloque__rejilla {
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     }
   }
 
@@ -393,6 +395,7 @@ const consejos = (await getCollection('consejos'))
   .nosotras {
     text-align: center;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     justify-items: center;
   }
 

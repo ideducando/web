@@ -1,0 +1,18 @@
+# Publicación en Netlify.
+# Netlify construye la web en cada merge a main y crea una vista previa de cada PR,
+# que se puede abrir en el móvil antes de aceptar el cambio.
+# Cada publicación en main gasta 15 créditos del plan; las vistas previas no gastan.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Los archivos de _astro llevan su huella en el nombre: si cambian, cambia el nombre.
+# El navegador puede guardarlos un año y así cada visita pide menos al servidor.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

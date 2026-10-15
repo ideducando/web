@@ -3,11 +3,17 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { unified } from '@astrojs/markdown-remark';
 
-// Dirección pública de la web.
-// Hoy: https://ideducando.github.io/web/
-// Cuando ideducando.es apunte a GitHub Pages: SITE = 'https://ideducando.es' y BASE = '/'.
-const SITE = 'https://ideducando.github.io';
-const BASE = '/web';
+// Dirección pública de la web. La web se publica en Netlify (decisión de José, 15/10/2026).
+// Al construir, Netlify avisa (NETLIFY=true) y da la dirección: URL es la principal (la de
+// netlify.app o, cuando se conecte, ideducando.es) y DEPLOY_PRIME_URL la de cada vista previa de un PR.
+// Fuera de Netlify (GitHub Pages, mientras siga activo, y la revisión automática) se mantiene
+// ideducando.github.io/web.
+const EN_NETLIFY = process.env.NETLIFY === 'true';
+const SITE = EN_NETLIFY
+  ? ((process.env.CONTEXT === 'production' ? process.env.URL : process.env.DEPLOY_PRIME_URL) ??
+    'https://ideducando.netlify.app')
+  : 'https://ideducando.github.io';
+const BASE = EN_NETLIFY ? '/' : '/web';
 
 // En los textos de Markdown se escriben los enlaces internos sin la base: /oposiciones/.
 // Esta pieza les añade /web delante al construir, para que funcionen en cualquier dirección.
