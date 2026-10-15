@@ -124,7 +124,7 @@ export function generarChecklist(raiz, carpetaPdf) {
   </section>
 
   <div class="creditos">
-    <p><strong>Revisa tu programación.</strong> IdEducando, octubre de 2026. Versión interactiva: ideducando.netlify.app/oposiciones/programacion</p>
+    <p><strong>Revisa tu programación.</strong> IdEducando, octubre de 2026. Versión interactiva: <span class="url">ideducando.es/oposiciones/programacion</span></p>
     <p>Licencia CC BY-NC-SA 4.0. Los criterios reproducidos son textos oficiales de la convocatoria (artículo 13 de la Ley de Propiedad Intelectual). Lo que vale es lo publicado en el BORM. Errores: hola@ideducando.es</p>
   </div>
 </body>

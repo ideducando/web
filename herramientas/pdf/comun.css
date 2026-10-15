@@ -70,7 +70,7 @@
   margin: 17mm 16mm 20mm 16mm;
 
   @bottom-left {
-    content: 'IdEducando · Licencia CC BY-NC-SA 4.0 · ideducando.netlify.app';
+    content: 'IdEducando · Licencia CC BY-NC-SA 4.0 · ideducando.es';
     font-family: 'Atkinson Hyperlegible', sans-serif;
     font-size: 8pt;
     color: #46578c;
@@ -399,4 +399,10 @@ tbody th {
 
 .creditos p {
   margin-bottom: 1.5mm;
+}
+
+/* Las direcciones impresas no se parten al final de la línea: así se copian a mano sin dudas
+   (un guion partido parecería un guion de separación de sílabas). */
+.url {
+  white-space: nowrap;
 }

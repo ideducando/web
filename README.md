@@ -4,7 +4,7 @@
 
 Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España, y guías para opositar a Maestros en la Región de Murcia. Todo a 0 €, sin registro y sin seguimiento.
 
-- **Dirección:** [ideducando.netlify.app](https://ideducando.netlify.app/). Más adelante, ideducando.es.
+- **Dirección:** [www.ideducando.es](https://www.ideducando.es/). Quien entra por ideducando.es o por ideducando.netlify.app llega ahí solo.
 - **Estado:** borrador. Los textos marcados con `[BORRADOR]` son de prueba y los tiene que revisar el equipo.
 - **Instrucciones del proyecto:** [CLAUDE.md](CLAUDE.md).
 
@@ -23,7 +23,7 @@ Netlify es el alojamiento: el sitio donde vive la web para que cualquiera la vea
 5. Elige **ideducando/web**. En el nombre del proyecto escribe `ideducando`, para que la dirección sea ideducando.netlify.app. La rama es **main**. El resto de ajustes los lee solo del archivo `netlify.toml` del repositorio.
 6. Pulsa el botón final (**Deploy ideducando** o **Publish**, según la versión). Si Netlify avisa de que el proyecto es privado, sigue su aviso para hacerlo público.
 
-En un par de minutos la web estará en [ideducando.netlify.app](https://ideducando.netlify.app/).
+En un par de minutos la web estará en [ideducando.netlify.app](https://ideducando.netlify.app/). Si hubiera que repetirlo, después hay que volver a conectar el dominio, como se explica en «El dominio ideducando.es».
 
 Cada publicación en `main` gasta 15 de los créditos mensuales del plan de Netlify, los mismos que usa Viable. Las vistas previas de los PR no gastan.
 
@@ -37,13 +37,6 @@ Un PR (*pull request*, «solicitud de cambios») es como una orden de trabajo en
 4. Pulsa **Merge pull request** y después **Confirm merge**.
 
 A los dos o tres minutos el cambio estará publicado. Lo puedes seguir en Netlify, en el proyecto **ideducando** > **Deploys**.
-
-### 3. Retirar GitHub Pages (una vez, después del PR que lo quita)
-
-La web ya no se publica en GitHub Pages. Para que no quede la copia antigua en ideducando.github.io/web:
-
-1. En [github.com/ideducando/web](https://github.com/ideducando/web), entra en **Settings** > **Pages**.
-2. Junto a **Your site is live at**, pulsa los tres puntos (**⋯**) y elige **Unpublish site**.
 
 ---
 
@@ -106,7 +99,7 @@ Antes de publicar un material, repasa el [manual de estilo de materiales](docs/m
 | `public/portadas/` | Las portadas del catálogo |
 | `herramientas/` | Programas para generar los PDF y revisar la accesibilidad. No se publican |
 | `docs/` | Documentación del equipo, como el manual de estilo |
-| `.github/workflows/` | Los robots que publican y comprueban la web |
+| `.github/workflows/` | El robot que revisa cada PR |
 | `.pages.yml` | La configuración del editor visual |
 
 ---
@@ -138,11 +131,18 @@ npm run pdf          # genera los PDF de public/descargas y las portadas
 npm run comprobar    # enlaces rotos y accesibilidad WCAG 2.2 AA (necesita npm run build antes)
 ```
 
-### Cambiar a ideducando.es
+### El dominio ideducando.es
 
-1. En Netlify, proyecto **ideducando** > **Domain management** > **Add a domain** > **Add a domain you already own** > `ideducando.es`.
-2. En DonDominio, cambia solo los registros que indique Netlify para la web (A y CNAME). Los registros MX, SPF y DKIM son del correo de Zoho y no se tocan.
-3. La dirección de la web se ajusta sola, porque Netlify la da al construir. Hay que volver a generar los PDF para que lleven la dirección nueva.
+Conectado el 15/10/2026. La dirección principal es **www.ideducando.es**. Netlify lleva ahí a quien entra por ideducando.es, y una regla de `netlify.toml` hace lo mismo con ideducando.netlify.app. El certificado de HTTPS (el candado del navegador) lo crea y lo renueva Netlify, gratis, con Let's Encrypt.
+
+En DonDominio, en la zona DNS de ideducando.es, la web usa solo dos registros:
+
+| Registro | Tipo | Apunta a |
+|---|---|---|
+| ideducando.es | ANAME | apex-loadbalancer.netlify.com |
+| www.ideducando.es | CNAME | ideducando.netlify.app |
+
+Los registros MX, SPF y DKIM son del correo de Zoho y no se tocan. La dirección de cada página la da Netlify al construir la web; los PDF la llevan escrita, así que si algún día cambia hay que volver a generarlos.
 
 ---
 
@@ -161,3 +161,5 @@ npm run comprobar    # enlaces rotos y accesibilidad WCAG 2.2 AA (necesita npm r
 | PDF | Formato de documento que se ve igual en cualquier aparato |
 | PR | *Pull request*, solicitud de cambios |
 | CMS | *Content management system*, editor de contenidos |
+| DNS | Sistema de nombres de dominio: la guía que traduce ideducando.es a la dirección del servidor donde está la web |
+| HTTPS | Conexión cifrada entre el navegador y la web: el candado de la barra de direcciones |
