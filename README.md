@@ -4,7 +4,7 @@
 
 Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España, y guías para opositar a Maestros en la Región de Murcia. Todo a 0 €, sin registro y sin seguimiento.
 
-- **Dirección:** [ideducando.netlify.app](https://ideducando.netlify.app/) en cuanto José cree el proyecto en Netlify. Hasta entonces sigue en [ideducando.github.io/web](https://ideducando.github.io/web/).
+- **Dirección:** [ideducando.netlify.app](https://ideducando.netlify.app/). Más adelante, ideducando.es.
 - **Estado:** borrador. Los textos marcados con `[BORRADOR]` son de prueba y los tiene que revisar el equipo.
 - **Instrucciones del proyecto:** [CLAUDE.md](CLAUDE.md).
 
@@ -12,7 +12,7 @@ Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de to
 
 ## Lo que tiene que hacer José una sola vez
 
-### 1. Crear el proyecto en Netlify (5 minutos, mejor desde el ordenador)
+### 1. Crear el proyecto en Netlify (hecho el 15/10/2026; sirve si hubiera que repetirlo)
 
 Netlify es el alojamiento: el sitio donde vive la web para que cualquiera la vea. IdEducando va en el mismo equipo de Netlify que Viable («IA Control»), para tenerlo todo en un solo sitio.
 
@@ -38,9 +38,9 @@ Un PR (*pull request*, «solicitud de cambios») es como una orden de trabajo en
 
 A los dos o tres minutos el cambio estará publicado. Lo puedes seguir en Netlify, en el proyecto **ideducando** > **Deploys**.
 
-### 3. Retirar GitHub Pages (cuando Netlify ya funcione)
+### 3. Retirar GitHub Pages (una vez, después del PR que lo quita)
 
-Para que no queden dos copias de la web:
+La web ya no se publica en GitHub Pages. Para que no quede la copia antigua en ideducando.github.io/web:
 
 1. En [github.com/ideducando/web](https://github.com/ideducando/web), entra en **Settings** > **Pages**.
 2. Junto a **Your site is live at**, pulsa los tres puntos (**⋯**) y elige **Unpublish site**.
@@ -125,7 +125,7 @@ Hace falta Node.js 22.12 o más reciente.
 
 ```bash
 npm install          # instala las dependencias
-npm run dev          # web de prueba en http://localhost:4321/web/ que se recarga sola
+npm run dev          # web de prueba en http://localhost:4321/ que se recarga sola
 npm run build        # construye la web en dist/ y su índice de búsqueda
 ```
 
