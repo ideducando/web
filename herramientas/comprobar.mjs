@@ -19,13 +19,16 @@ import { fileURLToPath } from 'node:url';
 const aqui = dirname(fileURLToPath(import.meta.url));
 const raiz = resolve(aqui, '..');
 const dist = join(raiz, 'dist');
-const BASE = '/web';
 const PUERTO = 4329;
 
 if (!existsSync(dist)) {
   console.error('No existe dist/. Ejecuta antes «npm run build» en la raíz del proyecto.');
   process.exit(1);
 }
+
+// La base de las direcciones (/web en GitHub Pages, ninguna en Netlify) se lee de la propia web construida.
+const canonica = readFileSync(join(dist, 'index.html'), 'utf8').match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+const BASE = canonica ? new URL(canonica).pathname.replace(/\/+$/, '') : '/web';
 
 // ---------------------------------------------------------------------------
 // 1. Enlaces internos

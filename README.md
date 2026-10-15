@@ -4,7 +4,7 @@
 
 Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España, y guías para opositar a Maestros en la Región de Murcia. Todo a 0 €, sin registro y sin seguimiento.
 
-- **Dirección:** [ideducando.github.io/web](https://ideducando.github.io/web/) (cuando se publique por primera vez).
+- **Dirección:** [ideducando.netlify.app](https://ideducando.netlify.app/) en cuanto José cree el proyecto en Netlify. Hasta entonces sigue en [ideducando.github.io/web](https://ideducando.github.io/web/).
 - **Estado:** borrador. Los textos marcados con `[BORRADOR]` son de prueba y los tiene que revisar el equipo.
 - **Instrucciones del proyecto:** [CLAUDE.md](CLAUDE.md).
 
@@ -12,27 +12,38 @@ Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de to
 
 ## Lo que tiene que hacer José una sola vez
 
-### 1. Activar GitHub Pages (1 minuto)
+### 1. Crear el proyecto en Netlify (5 minutos, mejor desde el ordenador)
 
-GitHub Pages es el «alojamiento» gratuito de GitHub: el sitio donde vive la web para que cualquiera la vea.
+Netlify es el alojamiento: el sitio donde vive la web para que cualquiera la vea. IdEducando va en el mismo equipo de Netlify que Viable («IA Control»), para tenerlo todo en un solo sitio.
 
-1. Entra en [github.com/ideducando/web](https://github.com/ideducando/web).
-2. Pulsa la pestaña **Settings** (la última de la barra del repositorio).
-3. En el menú de la izquierda, pulsa **Pages**.
-4. En **Build and deployment**, abre el desplegable **Source** y elige **GitHub Actions**.
+1. Entra en [app.netlify.com](https://app.netlify.com) con tu cuenta de siempre y comprueba que arriba a la izquierda pone el equipo **IA Control**.
+2. Pulsa **Add new project** > **Import an existing project** > **GitHub**.
+3. Si te pide permiso, autoriza a Netlify. En la lista de repositorios busca **ideducando/web**.
+4. Si no aparece, pulsa **Configure the Netlify app on GitHub**, elige la organización **ideducando**, marca **Only select repositories**, elige **web** y guarda. Vuelve a Netlify y ya saldrá.
+5. Elige **ideducando/web**. En el nombre del proyecto escribe `ideducando`, para que la dirección sea ideducando.netlify.app. La rama es **main**. El resto de ajustes los lee solo del archivo `netlify.toml` del repositorio.
+6. Pulsa el botón final (**Deploy ideducando** o **Publish**, según la versión). Si Netlify avisa de que el proyecto es privado, sigue su aviso para hacerlo público.
 
-No hay que guardar nada más: el cambio se aplica solo.
+En un par de minutos la web estará en [ideducando.netlify.app](https://ideducando.netlify.app/).
 
-### 2. Revisar y aceptar el primer PR
+Cada publicación en `main` gasta 15 de los créditos mensuales del plan de Netlify, los mismos que usa Viable. Las vistas previas de los PR no gastan.
+
+### 2. Revisar y aceptar un PR
 
 Un PR (*pull request*, «solicitud de cambios») es como una orden de trabajo en planta: alguien propone un cambio, otra persona lo revisa y, si está bien, lo firma. Hasta que no se firma, no se ejecuta.
 
-1. Entra en la pestaña **Pull requests** del repositorio y abre el PR de la web.
-2. Mira la pestaña **Files changed** si quieres ver los cambios, o el resumen del principio.
-3. Abajo verás la comprobación automática **Comprobar la web**. Si sale en verde, la web se construye bien, no tiene enlaces rotos, pasa la revisión de accesibilidad y nada se sale de la pantalla en el móvil, ni en Chrome ni en Safari.
+1. Entra en la pestaña **Pull requests** del repositorio y abre el PR.
+2. Lee el resumen del principio. Si quieres ver el código, está en la pestaña **Files changed**.
+3. Abajo verás las comprobaciones. **Comprobar la web** en verde significa que la web se construye bien, no tiene enlaces rotos, pasa la revisión de accesibilidad y nada se sale de la pantalla en el móvil, ni en Chrome ni en Safari. La de Netlify (**Deploy Preview**) trae un enlace a una copia de prueba de la web con el cambio: ábrela en el móvil antes de aceptar.
 4. Pulsa **Merge pull request** y después **Confirm merge**.
 
-A los dos o tres minutos la web estará publicada. Lo puedes seguir en la pestaña **Actions**.
+A los dos o tres minutos el cambio estará publicado. Lo puedes seguir en Netlify, en el proyecto **ideducando** > **Deploys**.
+
+### 3. Retirar GitHub Pages (cuando Netlify ya funcione)
+
+Para que no queden dos copias de la web:
+
+1. En [github.com/ideducando/web](https://github.com/ideducando/web), entra en **Settings** > **Pages**.
+2. Junto a **Your site is live at**, pulsa los tres puntos (**⋯**) y elige **Unpublish site**.
 
 ---
 
@@ -103,7 +114,8 @@ Antes de publicar un material, repasa el [manual de estilo de materiales](docs/m
 ## Cómo funciona por dentro
 
 - **Astro** es el programa que construye la web. Funciona como una línea de envasado: le entran los textos y las plantillas, y sale la web terminada en páginas HTML listas para servir. Por eso la web es rápida y no necesita servidor ni base de datos.
-- **GitHub Actions** son los robots de GitHub. Cada vez que se hace merge en `main`, uno construye la web y la publica en GitHub Pages. Con cada PR, otro la construye y la revisa.
+- **Netlify** construye la web y la publica cada vez que se hace merge en `main`. Con cada PR prepara además una vista previa, una copia de prueba con el cambio. Su configuración está en `netlify.toml`.
+- **GitHub Actions** son los robots de GitHub. Con cada PR, uno construye la web y la revisa: enlaces, accesibilidad y que nada se salga de la pantalla.
 - **Pagefind** es el buscador. Crea un índice al construir la web y la búsqueda ocurre en el navegador de quien busca: no se envía nada a ningún servidor.
 - **Las letras** (Outfit, Young Serif y Atkinson Hyperlegible) se sirven desde la propia web. Así no se manda la dirección IP de nadie a Google. En 2022, un tribunal alemán condenó a una web a indemnizar a un visitante por cargar las letras desde Google (LG München I, sentencia de 20/01/2022, 3 O 17493/20).
 
@@ -128,7 +140,9 @@ npm run comprobar    # enlaces rotos y accesibilidad WCAG 2.2 AA (necesita npm r
 
 ### Cambiar a ideducando.es
 
-Cuando el dominio apunte a GitHub Pages, hay que cambiar dos líneas de `astro.config.mjs`: `SITE = 'https://ideducando.es'` y `BASE = '/'`. El resto de enlaces se ajusta solo.
+1. En Netlify, proyecto **ideducando** > **Domain management** > **Add a domain** > **Add a domain you already own** > `ideducando.es`.
+2. En DonDominio, cambia solo los registros que indique Netlify para la web (A y CNAME). Los registros MX, SPF y DKIM son del correo de Zoho y no se tocan.
+3. La dirección de la web se ajusta sola, porque Netlify la da al construir. Hay que volver a generar los PDF para que lleven la dirección nueva.
 
 ---
 
