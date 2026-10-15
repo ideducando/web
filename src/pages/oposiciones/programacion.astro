@@ -1,0 +1,380 @@
+---
+// Lista interactiva para revisar la programación. Las marcas se guardan solo en el navegador
+// de quien la usa (localStorage): no viajan a ningún servidor.
+import Base from '../../layouts/Base.astro';
+import Intro from '../../components/Intro.astro';
+import Icono from '../../components/Icono.astro';
+import Borrador from '../../components/Borrador.astro';
+import datos from '../../data/programacion.json';
+import { fecha } from '../../lib/formatos';
+import { ruta } from '../../lib/rutas';
+
+type Item = { id: string; texto: string; detalle?: string; ref?: string; puntos?: number; cero?: boolean };
+type Grupo = { id: string; titulo: string; nota?: string; para: string[]; items: Item[]; ref?: string };
+
+const grupos = datos.grupos as Grupo[];
+const total = (g: Grupo) => g.items.reduce((s, i) => s + (i.puntos ?? 0), 0);
+const coma = (n: number) => n.toLocaleString('es-ES', { maximumFractionDigits: 2 });
+const etiquetaPara = (para: string[]) =>
+  para.length === 2 ? 'Infantil y PT' : para[0] === 'pt' ? 'Solo PT' : 'Solo Infantil';
+---
+
+<Base
+  titulo="Revisa tu programación"
+  descripcion="Lista de comprobación interactiva de la programación y del programa de intervención según la convocatoria de Maestros de la Región de Murcia: requisitos formales e indicadores del tribunal."
+>
+  <Intro
+    titulo="Revisa tu programación"
+    entradilla="Marca cada punto solo cuando puedas señalar en qué página de tu programación está. Tus marcas se guardan en este navegador y no salen de él."
+    camino={[{ texto: 'Oposiciones', enlace: '/oposiciones/' }, { texto: 'Revisa tu programación' }]}
+    borrador
+  />
+
+  <div class="contenedor revisa">
+    <div class="aviso aviso--atencion">
+      <Icono nombre="atencion" clase="aviso__icono" />
+      <p>
+        Basada en la convocatoria de 2026, la última publicada. La próxima puede cambiar algún requisito: cuando
+        salga, revisaremos esta lista con el texto nuevo.
+      </p>
+    </div>
+
+    <form class="revisa__formulario" data-revisa>
+      <fieldset class="revisa__especialidad" data-solo-js hidden>
+        <legend>¿Por qué especialidad te presentas?</legend>
+        <label>
+          <input type="radio" name="especialidad" value="infantil" checked />
+          Educación Infantil
+        </label>
+        <label>
+          <input type="radio" name="especialidad" value="pt" />
+          Pedagogía Terapéutica (PT)
+        </label>
+      </fieldset>
+
+      <div class="revisa__progreso" data-solo-js hidden>
+        <p aria-live="polite" data-progreso-texto>0 de 0 comprobaciones hechas</p>
+        <div class="revisa__barra" aria-hidden="true"><span data-progreso-barra></span></div>
+      </div>
+
+      {
+        grupos.map((g) => (
+          <fieldset class="grupo" data-grupo data-para={g.para.join(' ')}>
+            <legend class="grupo__titulo">
+              {g.titulo}
+              <span class="grupo__para">{etiquetaPara(g.para)}</span>
+            </legend>
+            {g.nota && <p class="grupo__nota">{g.nota}</p>}
+            <ul class="grupo__lista">
+              {g.items.map((item) => (
+                <li class="punto">
+                  <input type="checkbox" id={item.id} name="punto" value={item.id} />
+                  <label for={item.id}>
+                    <span class="punto__texto">{item.texto}</span>
+                    {item.detalle && <span class="punto__detalle">{item.detalle}</span>}
+                    <span class="punto__meta">
+                      {item.cero && <span class="punto__cero">Cero si falla</span>}
+                      {item.puntos !== undefined && (
+                        <span class="punto__puntos">
+                          {coma(item.puntos)} {item.puntos === 1 ? 'punto' : 'puntos'}
+                        </span>
+                      )}
+                      {item.ref && <span class="punto__ref">{item.ref}</span>}
+                    </span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+            {g.ref && (
+              <p class="grupo__ref">
+                {g.ref}. Suma: {coma(total(g))} puntos.
+              </p>
+            )}
+          </fieldset>
+        ))
+      }
+
+      <div class="botones revisa__acciones no-imprimir">
+        <button type="button" class="boton boton--secundario" data-imprimir data-solo-js hidden>
+          <Icono nombre="imprimir" />
+          Imprimir
+        </button>
+        <button type="button" class="boton boton--secundario" data-borrar data-solo-js hidden>
+          Borrar mis marcas
+        </button>
+        <a class="boton boton--descarga" href={ruta('/material-gratuito/checklist-programacion-murcia/')}>
+          <Icono nombre="descarga" />
+          Versión en PDF
+        </a>
+      </div>
+    </form>
+
+    <p class="revisa__fuente">
+      <Borrador />
+      Fuente: <a href={datos.fuente.url}>{datos.fuente.nombre}</a>. Revisado el {fecha(new Date(datos.revisado))}.
+    </p>
+  </div>
+</Base>
+
+<script>
+  const CLAVE = 'ideducando:programacion:v1';
+  const formulario = document.querySelector<HTMLFormElement>('[data-revisa]');
+
+  type Guardado = { especialidad?: string; marcados?: string[] };
+
+  const leer = (): Guardado => {
+    try {
+      return JSON.parse(window.localStorage.getItem(CLAVE) ?? '{}') as Guardado;
+    } catch {
+      return {};
+    }
+  };
+
+  const guardar = (valor: Guardado) => {
+    try {
+      window.localStorage.setItem(CLAVE, JSON.stringify(valor));
+    } catch {
+      // Navegación privada o almacenamiento bloqueado: la lista funciona igual, sin recordar.
+    }
+  };
+
+  if (formulario) {
+    for (const el of document.querySelectorAll<HTMLElement>('[data-solo-js]')) el.hidden = false;
+
+    const guardado = leer();
+    if (guardado.especialidad) {
+      const radio = formulario.querySelector<HTMLInputElement>(
+        `input[name="especialidad"][value="${guardado.especialidad}"]`,
+      );
+      if (radio) radio.checked = true;
+    }
+    for (const id of guardado.marcados ?? []) {
+      const casilla = formulario.querySelector<HTMLInputElement>(`input[name="punto"][value="${CSS.escape(id)}"]`);
+      if (casilla) casilla.checked = true;
+    }
+
+    const texto = document.querySelector<HTMLElement>('[data-progreso-texto]');
+    const barra = document.querySelector<HTMLElement>('[data-progreso-barra]');
+
+    const actualizar = () => {
+      const especialidad =
+        formulario.querySelector<HTMLInputElement>('input[name="especialidad"]:checked')?.value ?? 'infantil';
+      let total = 0;
+      let hechos = 0;
+      for (const grupo of formulario.querySelectorAll<HTMLElement>('[data-grupo]')) {
+        const visible = (grupo.dataset.para ?? '').split(' ').includes(especialidad);
+        grupo.hidden = !visible;
+        if (!visible) continue;
+        const casillas = grupo.querySelectorAll<HTMLInputElement>('input[name="punto"]');
+        total += casillas.length;
+        hechos += Array.from(casillas).filter((c) => c.checked).length;
+      }
+      if (texto) texto.textContent = `${hechos} de ${total} comprobaciones hechas`;
+      if (barra) barra.style.width = total ? `${Math.round((hechos / total) * 100)}%` : '0';
+
+      guardar({
+        especialidad,
+        marcados: Array.from(formulario.querySelectorAll<HTMLInputElement>('input[name="punto"]:checked')).map(
+          (c) => c.value,
+        ),
+      });
+    };
+
+    formulario.addEventListener('change', actualizar);
+    document.querySelector('[data-imprimir]')?.addEventListener('click', () => window.print());
+    document.querySelector('[data-borrar]')?.addEventListener('click', () => {
+      for (const c of formulario.querySelectorAll<HTMLInputElement>('input[name="punto"]')) c.checked = false;
+      actualizar();
+    });
+    actualizar();
+  }
+</script>
+
+<style>
+  .revisa {
+    padding-block: 1.5rem 4rem;
+    max-width: 52rem;
+  }
+
+  .revisa__especialidad,
+  .grupo {
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: var(--blanco);
+    padding: 1.1rem 1.2rem 1.2rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .revisa__especialidad legend,
+  .grupo__titulo {
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0.75rem;
+    font: 700 1.2rem/1.25 var(--letra-titulos);
+  }
+
+  .revisa__especialidad legend + * {
+    clear: left;
+  }
+
+  .revisa__especialidad label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.6rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .revisa__especialidad input {
+    width: 1.3rem;
+    height: 1.3rem;
+    accent-color: var(--azul);
+  }
+
+  .revisa__progreso {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 0.7rem 1rem 0.8rem;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radio);
+    background: var(--marino);
+    color: var(--crema);
+  }
+
+  .revisa__progreso p {
+    margin: 0 0 0.4rem;
+    font-weight: 700;
+  }
+
+  .revisa__barra {
+    height: 0.6rem;
+    border-radius: 99px;
+    background: rgb(255 246 230 / 0.25);
+    overflow: hidden;
+  }
+
+  .revisa__barra span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: var(--amarillo);
+    transition: width 0.3s ease;
+  }
+
+  .grupo[hidden] {
+    display: none;
+  }
+
+  .grupo__para {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.05rem 0.55rem;
+    border-radius: 99px;
+    background: var(--morado-tinte);
+    font-size: 0.8rem;
+    vertical-align: 0.15em;
+  }
+
+  .grupo__nota {
+    clear: left;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--coral-tinte);
+    font-size: 0.98rem;
+  }
+
+  .grupo__lista {
+    clear: left;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .punto {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.7rem 0.2rem;
+    border-top: 1px solid var(--linea);
+  }
+
+  .punto input {
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-top: 0.2rem;
+    accent-color: var(--verde-texto);
+    cursor: pointer;
+  }
+
+  .punto label {
+    display: grid;
+    gap: 0.2rem;
+    cursor: pointer;
+  }
+
+  .punto input:checked + label .punto__texto {
+    text-decoration: line-through;
+    text-decoration-color: var(--verde);
+    text-decoration-thickness: 2px;
+  }
+
+  .punto__detalle {
+    font-size: 0.95rem;
+    color: var(--texto-suave);
+  }
+
+  .punto__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .punto__cero {
+    padding: 0 0.5rem;
+    border-radius: 99px;
+    background: var(--coral-texto);
+    color: var(--blanco);
+    font-weight: 700;
+  }
+
+  .punto__puntos {
+    padding: 0 0.5rem;
+    border-radius: 99px;
+    background: var(--verde-tinte);
+    font-weight: 700;
+  }
+
+  .punto__ref {
+    color: var(--texto-suave);
+  }
+
+  .grupo__ref {
+    margin: 0.6rem 0 0;
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+  }
+
+  .revisa__acciones {
+    margin-top: 1.5rem;
+  }
+
+  .revisa__fuente {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+  }
+
+  @media print {
+    .revisa__progreso,
+    .revisa__especialidad {
+      display: none !important;
+    }
+
+    .grupo {
+      break-inside: avoid-page;
+    }
+  }
+</style>

@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import { ruta } from '../lib/rutas';
+---
+
+<Base titulo="Página no encontrada" indexable={false}>
+  <section class="contenedor no-encontrada">
+    <p class="no-encontrada__numero" aria-hidden="true">404</p>
+    <h1>Esta página no está</h1>
+    <p class="entradilla">
+      Puede que el enlace esté mal escrito o que hayamos movido la página. No pasa nada: desde aquí puedes seguir.
+    </p>
+    <div class="botones">
+      <a class="boton boton--principal" href={ruta('/material-gratuito/')}>Ver el material gratuito</a>
+      <a class="boton boton--secundario" href={ruta('/buscar/')}>Buscar</a>
+      <a class="boton boton--secundario" href={ruta('/')}>Ir al inicio</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .no-encontrada {
+    padding-block: 3rem 5rem;
+    text-align: center;
+    display: grid;
+    justify-items: center;
+  }
+
+  .no-encontrada__numero {
+    margin: 0;
+    font: 700 clamp(4.5rem, 3rem + 8vw, 8rem) / 1 var(--letra-titulos);
+    background: linear-gradient(
+      90deg,
+      var(--azul) 0 20%,
+      var(--verde) 20% 40%,
+      var(--naranja) 40% 60%,
+      var(--coral) 60% 80%,
+      var(--morado) 80% 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .no-encontrada .botones {
+    justify-content: center;
+  }
+</style>

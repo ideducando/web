@@ -1,0 +1,14 @@
+{
+  "name": "ideducando-herramientas",
+  "private": true,
+  "type": "module",
+  "description": "Herramientas para generar los PDF y las portadas del material gratuito. No forman parte de la web.",
+  "scripts": {
+    "pdf": "node generar.mjs",
+    "comprobar": "node comprobar.mjs"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "playwright": "1.56.1"
+  }
+}

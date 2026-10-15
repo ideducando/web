@@ -1,0 +1,182 @@
+---
+// Tarjeta de un material del catálogo, como el producto de una tienda donde todo cuesta 0 €.
+import type { CollectionEntry } from 'astro:content';
+import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../data/taxonomias';
+import { existeArchivo } from '../lib/formatos';
+import { ruta } from '../lib/rutas';
+
+interface Props {
+  material: CollectionEntry<'materiales'>;
+  nivel?: 'h2' | 'h3';
+}
+
+const { material, nivel = 'h3' } = Astro.props;
+const d = material.data;
+const disponible = existeArchivo(d.archivo);
+const enlace = ruta(`/material-gratuito/${material.id}/`);
+const Titulo = nivel;
+
+// Como mucho tres etiquetas en la tarjeta para que se lea de un vistazo.
+const etiquetas = [
+  ...d.etapas.map((e) => ({ texto: ETAPAS[e].nombre, color: ETAPAS[e].color })),
+  ...d.necesidades.map((n) => ({ texto: NECESIDADES[n].nombre, color: NECESIDADES[n].color })),
+];
+const visibles = etiquetas.slice(0, 3);
+const resto = etiquetas.length - visibles.length;
+---
+
+<li
+  class={`material material--${SECCIONES[d.seccion].color}`}
+  data-material
+  data-seccion={d.seccion}
+  data-etapa={d.etapas.join(' ')}
+  data-necesidad={d.necesidades.join(' ')}
+  data-tipo={d.tipo}
+>
+  <article class="material__tarjeta">
+    <div class="material__portada">
+      {
+        d.portada ? (
+          <img src={ruta(d.portada)} alt="" width="1200" height="900" loading="lazy" decoding="async" />
+        ) : (
+          <div class="material__sin-portada" aria-hidden="true" />
+        )
+      }
+      <span
+        class:list={[
+          'material__precio',
+          { 'material__precio--pronto': !disponible, 'solo-lectores': Boolean(d.portada) },
+        ]}
+      >
+        {disponible ? 'Gratis' : 'Próximamente'}
+      </span>
+    </div>
+    <div class="material__cuerpo">
+      <p class="material__tipo">
+        {d.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
+        {TIPOS[d.tipo].nombre}
+      </p>
+      <Titulo class="material__titulo">
+        <a class="enlace-tarjeta" href={enlace}>{d.titulo}</a>
+      </Titulo>
+      <p class="material__resumen">{d.resumen}</p>
+      <ul class="etiquetas" aria-label="Para quién">
+        {visibles.map((e) => <li class={`etiqueta etiqueta--${e.color}`}>{e.texto}</li>)}
+        {resto > 0 && <li class="etiqueta etiqueta--amarillo">+{resto}</li>}
+      </ul>
+    </div>
+  </article>
+</li>
+
+<style>
+  .material {
+    display: flex;
+  }
+
+  .material[hidden] {
+    display: none;
+  }
+
+  .material__tarjeta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: var(--radio);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .material__tarjeta:hover {
+    box-shadow: var(--sombra);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .material__tarjeta:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  .material__portada {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--amarillo-tinte);
+    border-bottom: 6px solid var(--verde);
+  }
+
+  .material--morado .material__portada {
+    border-bottom-color: var(--morado);
+  }
+
+  .material__portada img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .material__sin-portada {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, var(--amarillo-tinte) 0 18%, transparent 19%),
+      radial-gradient(circle at 75% 65%, var(--azul-tinte) 0 22%, transparent 23%),
+      var(--crema);
+  }
+
+  .material__precio {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--amarillo);
+    color: var(--marino);
+    font: 700 0.95rem/1.2 var(--letra-titulos);
+    box-shadow: 0 2px 0 rgb(30 43 85 / 0.25);
+    transform: rotate(-3deg);
+  }
+
+  .material__precio--pronto {
+    background: var(--blanco);
+    border: 2px solid var(--marino);
+  }
+
+  .material__cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    padding: 1rem 1.15rem 1.25rem;
+  }
+
+  .material__cuerpo > * {
+    margin: 0;
+  }
+
+  .material__tipo {
+    font: 700 0.85rem/1.3 var(--letra-titulos);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .material__titulo {
+    font-size: 1.25rem;
+  }
+
+  .material__resumen {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .material .etiquetas {
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+</style>

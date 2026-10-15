@@ -1,0 +1,116 @@
+---
+// Una página por categoría: /material-gratuito/etapa/infantil/, /material-gratuito/necesidad/tea/…
+// Solo se crean las categorías que ya tienen algún material.
+import Base from '../../../layouts/Base.astro';
+import Intro from '../../../components/Intro.astro';
+import TarjetaMaterial from '../../../components/TarjetaMaterial.astro';
+import { DIMENSIONES, type Dimension } from '../../../data/taxonomias';
+import { encajaEn, materialesOrdenados, type Material } from '../../../lib/materiales';
+import { ruta } from '../../../lib/rutas';
+
+export async function getStaticPaths() {
+  const materiales = await materialesOrdenados();
+  return (Object.keys(DIMENSIONES) as Dimension[]).flatMap((dimension) =>
+    Object.keys(DIMENSIONES[dimension].opciones)
+      .map((valor) => ({ valor, lista: materiales.filter((m) => encajaEn(m, dimension, valor)) }))
+      .filter(({ lista }) => lista.length > 0)
+      .map(({ valor, lista }) => ({
+        params: { dimension, valor },
+        props: { dimension, valor, lista, materiales },
+      })),
+  );
+}
+
+interface Props {
+  dimension: Dimension;
+  valor: string;
+  lista: Material[];
+  materiales: Material[];
+}
+
+const { dimension, valor, lista, materiales } = Astro.props;
+const grupo = DIMENSIONES[dimension];
+const opciones = grupo.opciones as Record<string, { nombre: string; descripcion: string; color: string }>;
+const opcion = opciones[valor];
+const hermanas = Object.entries(opciones)
+  .filter(([clave]) => materiales.some((m) => encajaEn(m, dimension, clave)))
+  .map(([clave, op]) => ({ clave, nombre: op.nombre, color: op.color }));
+const titulo = `Material gratuito: ${opcion.nombre}`;
+---
+
+<Base
+  titulo={titulo}
+  descripcion={`${opcion.descripcion} Material gratuito, sin registro y con descarga directa.`}
+  indexable={false}
+>
+  <Intro
+    titulo={titulo}
+    entradilla={opcion.descripcion}
+    camino={[{ texto: 'Material gratuito', enlace: '/material-gratuito/' }, { texto: opcion.nombre }]}
+  />
+
+  <section class="contenedor categoria" aria-labelledby="titulo-lista">
+    <nav class="categoria__otras" aria-label={`Otras opciones de ${grupo.nombre.toLowerCase()}`} data-pagefind-ignore>
+      <p class="categoria__etiqueta">{grupo.plural}</p>
+      <ul class="etiquetas">
+        {
+          hermanas.map((h) => (
+            <li>
+              <a
+                class={`etiqueta etiqueta--${h.color}`}
+                href={ruta(`/material-gratuito/${dimension}/${h.clave}/`)}
+                aria-current={h.clave === valor ? 'page' : undefined}
+              >
+                {h.nombre}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <h2 id="titulo-lista" class="categoria__cuenta">
+      {lista.length === 1 ? '1 material' : `${lista.length} materiales`}
+    </h2>
+    <ul class="rejilla">
+      {lista.map((m) => <TarjetaMaterial material={m} />)}
+    </ul>
+
+    <p class="categoria__volver">
+      <a href={ruta('/material-gratuito/')}>Ver todo el catálogo y filtrar por varias categorías</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .categoria {
+    padding-block: 1.75rem 4rem;
+  }
+
+  .categoria__otras {
+    margin-bottom: 1.5rem;
+  }
+
+  .categoria__etiqueta {
+    margin-bottom: 0.4rem;
+    font: 700 0.85rem/1.3 var(--letra-titulos);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .categoria__otras a[aria-current='page'] {
+    outline: 3px solid var(--marino);
+    outline-offset: 1px;
+  }
+
+  .categoria__cuenta {
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+  }
+
+  .categoria__volver {
+    margin-top: 2rem;
+    font-weight: 700;
+  }
+</style>

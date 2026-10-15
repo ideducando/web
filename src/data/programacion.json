@@ -1,0 +1,272 @@
+{
+  "revisado": "2026-10-14",
+  "fuente": {
+    "nombre": "Orden de 21 de enero de 2026, convocatoria de Maestros de la Región de Murcia (BORM nº 18, de 23/01/2026)",
+    "url": "https://www.borm.es/services/boletin/ano/2026/numero/18/pdf"
+  },
+  "grupos": [
+    {
+      "id": "formales",
+      "titulo": "Requisitos formales",
+      "nota": "Si fallas uno de los cuatro marcados con «Cero», la programación vale 0 en todos sus indicadores y la unidad tendrás que hacerla a partir del temario (anexo VI, apartado 2).",
+      "para": ["infantil", "pt"],
+      "items": [
+        {
+          "id": "f-paginas",
+          "texto": "No pasa de 70 páginas, contando índice, anexos, bibliografía y material de apoyo.",
+          "detalle": "Cada cara impresa cuenta como una página. La portada no cuenta.",
+          "ref": "Anexo VI, apartado 1",
+          "cero": true
+        },
+        {
+          "id": "f-letra",
+          "texto": "Toda la letra es Arial de 11 puntos o más, sin comprimir.",
+          "detalle": "También en números de página, tablas, cuadros, diagramas, imágenes, enmarcados, notas al pie y títulos.",
+          "ref": "Anexo VI, apartado 1",
+          "cero": true
+        },
+        {
+          "id": "f-interlineado",
+          "texto": "El interlineado es sencillo o mayor en todas las páginas.",
+          "ref": "Anexo VI, apartado 1",
+          "cero": true
+        },
+        {
+          "id": "f-formato",
+          "texto": "Todas las páginas tienen formato UNE-A4.",
+          "ref": "Anexo VI, apartado 1",
+          "cero": true
+        },
+        {
+          "id": "f-portada",
+          "texto": "La portada lleva nombre, apellidos, DNI, cuerpo, especialidad y número de tribunal.",
+          "detalle": "El diseño de la portada es libre.",
+          "ref": "Anexo VI, apartado 1"
+        },
+        {
+          "id": "f-etapa",
+          "texto": "Indica la etapa educativa y el curso al que va dirigida.",
+          "ref": "Anexo VI, apartado 1"
+        },
+        {
+          "id": "f-indice",
+          "texto": "El índice recoge la secuencia numerada y el título de al menos 12 unidades didácticas o, en un programa de intervención, 12 unidades de actuación.",
+          "detalle": "Si no están las 12 en el índice, la programación no vale 0, pero la unidad tendrás que hacerla a partir del temario.",
+          "ref": "Anexo VI, apartado 1; artículo 51.6 y 51.11"
+        },
+        {
+          "id": "f-curriculo",
+          "texto": "Se basa en los currículos vigentes en la Región de Murcia a 1 de septiembre de 2025.",
+          "detalle": "Infantil: Decreto 196/2022. Primaria: Decreto 209/2022. Secundaria: Decreto 235/2022.",
+          "ref": "Artículo 50.1 y anexo V"
+        },
+        {
+          "id": "f-terminologia",
+          "texto": "Usa la terminología de la normativa de Murcia sobre currículo y evaluación.",
+          "detalle": "La convocatoria aclara que «contenidos» y «saberes básicos» son equivalentes y que las situaciones de aprendizaje van dentro de la unidad didáctica.",
+          "ref": "Artículo 51.3 y notas del anexo VI"
+        },
+        {
+          "id": "f-original",
+          "texto": "Es original y la has escrito tú.",
+          "ref": "Artículo 51.3 y anexo VI"
+        }
+      ]
+    },
+    {
+      "id": "entrega",
+      "titulo": "Entrega y día de la prueba",
+      "para": ["infantil", "pt"],
+      "items": [
+        {
+          "id": "e-ejemplares",
+          "texto": "Tienes dos ejemplares en papel dentro de un sobre cerrado.",
+          "detalle": "Por fuera: nombre, apellidos, DNI, cuerpo, especialidad y tribunal.",
+          "ref": "Anexo VI, apartado 1"
+        },
+        {
+          "id": "e-plazo",
+          "texto": "Sabes el plazo: hasta el día hábil siguiente a la publicación de las puntuaciones definitivas de la primera prueba.",
+          "detalle": "Se entrega en persona o por medio de alguien autorizado. Si no la presentas, se entiende que renuncias.",
+          "ref": "Artículo 50"
+        },
+        {
+          "id": "e-copia",
+          "texto": "Llevas tu propio ejemplar, idéntico a los entregados, para la defensa.",
+          "ref": "Artículo 51.17"
+        },
+        {
+          "id": "e-guion",
+          "texto": "Tu guion cabe en un folio por una cara.",
+          "detalle": "Se entrega al tribunal al terminar la exposición.",
+          "ref": "Artículo 51.18"
+        },
+        {
+          "id": "e-tiempos",
+          "texto": "Has ensayado con los tiempos reales: defensa de 30 minutos como máximo, exposición de la unidad y 15 minutos de debate, en 1 hora y 30 minutos en total.",
+          "detalle": "Antes tendrás 1 hora para preparar la unidad, con material en papel y sin aparatos electrónicos.",
+          "ref": "Artículo 51.13 y 51.14"
+        }
+      ]
+    },
+    {
+      "id": "especificos-infantil",
+      "titulo": "Lo que pide la convocatoria en Infantil",
+      "para": ["infantil"],
+      "items": [
+        {
+          "id": "ei-globalizado",
+          "texto": "Tiene en cuenta el carácter globalizado de la etapa.",
+          "ref": "Anexo VI, aspectos específicos"
+        },
+        {
+          "id": "ei-objetivos",
+          "texto": "Relaciona las áreas y el curso elegido con los objetivos de la etapa.",
+          "ref": "Anexo VI, aspectos específicos"
+        },
+        {
+          "id": "ei-elementos",
+          "texto": "Planifica todos los elementos del currículo vigente en la Región de Murcia.",
+          "ref": "Anexo VI, aspectos específicos"
+        },
+        {
+          "id": "ei-curso",
+          "texto": "Desarrolla un año académico completo de un curso.",
+          "ref": "Artículo 51.2"
+        },
+        {
+          "id": "ei-neae",
+          "texto": "Especifica objetivos, contenidos, criterios de evaluación, metodología y la atención al alumnado con necesidades específicas de apoyo educativo (NEAE).",
+          "ref": "Artículo 51.2"
+        }
+      ]
+    },
+    {
+      "id": "especificos-pt",
+      "titulo": "Lo que pide la convocatoria en PT",
+      "para": ["pt"],
+      "items": [
+        {
+          "id": "ep-modalidad",
+          "texto": "Has elegido modalidad: programa de intervención para alumnado con NEAE en un curso de Infantil, Primaria o Secundaria, o programación didáctica de un ciclo o etapa, o de un Programa Formativo para el Desarrollo de Proyectos de Vida Inclusivos.",
+          "detalle": "En cualquier caso, para un supuesto en un centro concreto.",
+          "ref": "Artículo 51.4 y anexo VI"
+        },
+        {
+          "id": "ep-unidades",
+          "texto": "Si es un programa de intervención, tiene al menos 12 unidades de actuación adaptadas de los currículos de Murcia.",
+          "detalle": "En Infantil, de sus áreas; en Primaria y Secundaria, preferentemente de las áreas instrumentales. Si es una programación didáctica, 12 unidades didácticas numeradas.",
+          "ref": "Anexo VI, aspectos específicos"
+        },
+        {
+          "id": "ep-evaluacion",
+          "texto": "Parte de la evaluación psicopedagógica del alumno o la alumna a quien va dirigido.",
+          "detalle": "Es el indicador con más peso de la contextualización: 0,5 puntos.",
+          "ref": "Anexo XXII"
+        },
+        {
+          "id": "ep-elementos",
+          "texto": "Especifica objetivos, contenidos, criterios de evaluación, metodología y la atención al alumnado con NEAE.",
+          "ref": "Artículo 51.2"
+        }
+      ]
+    },
+    {
+      "id": "defensa-infantil",
+      "titulo": "Lo que puntúa el tribunal en la defensa (Infantil, 4 puntos)",
+      "para": ["infantil"],
+      "items": [
+        { "id": "di-1", "texto": "Estructura la exposición en apartados bien relacionados entre sí.", "puntos": 0.1 },
+        { "id": "di-2", "texto": "Muestra creatividad e innovación.", "puntos": 0.1 },
+        { "id": "di-3", "texto": "Vincula la programación con la normativa vigente.", "puntos": 0.1 },
+        { "id": "di-4", "texto": "La contextualiza con los documentos institucionales del centro.", "puntos": 0.1 },
+        { "id": "di-5", "texto": "La contextualiza en el entorno y en las características del alumnado.", "puntos": 0.1 },
+        { "id": "di-6", "texto": "La relaciona con los objetivos generales de la etapa.", "puntos": 0.3 },
+        { "id": "di-7", "texto": "Relaciona las competencias específicas, los criterios de evaluación y los saberes básicos.", "puntos": 0.2 },
+        { "id": "di-8", "texto": "Secuencia los saberes básicos del curso y los relaciona con los criterios a través de las unidades.", "puntos": 0.2 },
+        { "id": "di-9", "texto": "Temporaliza las unidades de forma coherente con el currículo y con el alumnado.", "puntos": 0.2 },
+        { "id": "di-10", "texto": "Contribuye a los planes y programas del centro.", "puntos": 0.1 },
+        { "id": "di-11", "texto": "Incorpora y concreta los principios pedagógicos y las orientaciones metodológicas de la etapa.", "puntos": 0.3 },
+        { "id": "di-12", "texto": "Propone medidas para incorporar las tecnologías de la información y la comunicación.", "puntos": 0.2 },
+        { "id": "di-13", "texto": "Plantea materiales y recursos variados y motivadores, con distintos agrupamientos y espacios.", "puntos": 0.2 },
+        { "id": "di-14", "texto": "Establece criterios de evaluación coherentes y adaptados al nivel.", "puntos": 0.2 },
+        { "id": "di-15", "texto": "Identifica qué aprendizajes hacen falta para una evaluación positiva.", "puntos": 0.2 },
+        { "id": "di-16", "texto": "Concreta procedimientos e instrumentos variados para evaluar el aprendizaje, la enseñanza y tu práctica docente.", "puntos": 0.2 },
+        { "id": "di-17", "texto": "Establece cómo informar a las familias.", "puntos": 0.1 },
+        { "id": "di-18", "texto": "Incluye actividades complementarias ligadas a saberes y criterios, repartidas en el tiempo.", "puntos": 0.1 },
+        { "id": "di-19", "texto": "Describe las características del alumnado con NEAE del grupo.", "puntos": 0.5 },
+        { "id": "di-20", "texto": "Presenta medidas adecuadas y suficientes para atender la diversidad del aula.", "puntos": 0.5 }
+      ],
+      "ref": "Anexo XVII, segunda prueba"
+    },
+    {
+      "id": "defensa-pt",
+      "titulo": "Lo que puntúa el tribunal en la defensa (PT, 4 puntos)",
+      "para": ["pt"],
+      "items": [
+        { "id": "dp-1", "texto": "Presenta y justifica el programa con fundamentos psicopedagógicos, normativa estatal y autonómica vigente y bibliografía actualizada.", "puntos": 0.3 },
+        { "id": "dp-2", "texto": "Contextualiza con referencias al centro, al aula, a las familias y a las necesidades detectadas.", "puntos": 0.3 },
+        { "id": "dp-3", "texto": "Contextualiza al alumno o alumna destinataria a partir de su evaluación psicopedagógica.", "puntos": 0.5 },
+        { "id": "dp-4", "texto": "Incluye todos los apartados y los relaciona entre sí.", "puntos": 0.1 },
+        { "id": "dp-5", "texto": "Selecciona objetivos y contenidos coherentes con el análisis previo de necesidades.", "puntos": 1 },
+        { "id": "dp-6", "texto": "Establece principios y orientaciones metodológicas adecuados a la etapa y al alumnado.", "puntos": 0.4 },
+        { "id": "dp-7", "texto": "Diseña métodos, actividades y recursos según las características del alumno o del grupo.", "puntos": 0.6 },
+        { "id": "dp-8", "texto": "Especifica momentos, procedimientos, técnicas e instrumentos de evaluación del aprendizaje.", "puntos": 0.3 },
+        { "id": "dp-9", "texto": "Establece cómo evaluar el propio programa y usar esa evaluación para mejorarlo.", "puntos": 0.3 },
+        { "id": "dp-10", "texto": "Propone cómo trasladar los resultados de la evaluación a las personas implicadas.", "puntos": 0.2 }
+      ],
+      "ref": "Anexo XXII, segunda prueba"
+    },
+    {
+      "id": "unidad-infantil",
+      "titulo": "Lo que puntúa en la exposición de la unidad didáctica (Infantil, 5 puntos)",
+      "para": ["infantil"],
+      "items": [
+        { "id": "ui-1", "texto": "Contextualiza la unidad en la realidad escolar y en el nivel.", "puntos": 0.1 },
+        { "id": "ui-2", "texto": "Es coherente con la programación y con el currículo.", "puntos": 0.1 },
+        { "id": "ui-3", "texto": "Sus elementos son coherentes entre sí.", "puntos": 0.1 },
+        { "id": "ui-4", "texto": "Contribuye a los objetivos de etapa y los relaciona con las competencias específicas.", "puntos": 0.3 },
+        { "id": "ui-5", "texto": "Define los objetivos de aprendizaje de la unidad.", "puntos": 0.2 },
+        { "id": "ui-6", "texto": "Justifica cómo contribuye a las competencias específicas.", "puntos": 0.3 },
+        { "id": "ui-7", "texto": "Secuencia los saberes básicos de forma adecuada.", "puntos": 0.2 },
+        { "id": "ui-8", "texto": "Los saberes están equilibrados y permiten adquirir las competencias.", "puntos": 0.2 },
+        { "id": "ui-9", "texto": "Los saberes encajan con la unidad y con sus situaciones de aprendizaje.", "puntos": 0.2 },
+        { "id": "ui-10", "texto": "La metodología es variada y adecuada a la edad, necesidades e intereses.", "puntos": 0.3 },
+        { "id": "ui-11", "texto": "La secuencia temporal de actividades es coherente y realista.", "puntos": 0.3 },
+        { "id": "ui-12", "texto": "Usa agrupamientos distintos según la actividad.", "puntos": 0.2 },
+        { "id": "ui-13", "texto": "Las actividades son creativas y favorecen la motivación, la exploración y la transferencia.", "puntos": 0.2 },
+        { "id": "ui-14", "texto": "Incluye medidas para detectar dificultades.", "puntos": 0.3 },
+        { "id": "ui-15", "texto": "Plantea pautas del Diseño Universal para el Aprendizaje (DUA) y medidas de atención a la diversidad.", "puntos": 0.4 },
+        { "id": "ui-16", "texto": "Usa recursos personales, materiales y tecnológicos variados.", "puntos": 0.1 },
+        { "id": "ui-17", "texto": "Organiza bien espacios y tiempos.", "puntos": 0.1 },
+        { "id": "ui-18", "texto": "Enumera los criterios de evaluación y los relaciona con competencias y saberes.", "puntos": 0.3 },
+        { "id": "ui-19", "texto": "Concreta los momentos, las técnicas y los instrumentos de evaluación.", "puntos": 0.3 },
+        { "id": "ui-20", "texto": "Evalúa también el proceso de enseñanza y tu práctica docente.", "puntos": 0.3 },
+        { "id": "ui-21", "texto": "Te expresas con corrección y vocabulario técnico.", "puntos": 0.3 },
+        { "id": "ui-22", "texto": "Expones con fluidez y de forma motivadora.", "puntos": 0.2 }
+      ],
+      "ref": "Anexo XVII, segunda prueba"
+    },
+    {
+      "id": "unidad-pt",
+      "titulo": "Lo que puntúa en la exposición de la unidad de actuación (PT, 5,5 puntos)",
+      "para": ["pt"],
+      "items": [
+        { "id": "up-1", "texto": "Contextualiza la unidad en la realidad escolar y en las necesidades del alumno o del grupo.", "puntos": 0.5 },
+        { "id": "up-2", "texto": "Determina habilidades específicas u objetivos adecuados a esas necesidades.", "puntos": 0.75 },
+        { "id": "up-3", "texto": "Justifica cómo contribuye a las competencias.", "puntos": 0.25 },
+        { "id": "up-4", "texto": "Selecciona contenidos de intervención o saberes básicos ligados a las necesidades.", "puntos": 0.5 },
+        { "id": "up-5", "texto": "Detalla y justifica estrategias y técnicas metodológicas.", "puntos": 0.4 },
+        { "id": "up-6", "texto": "Diseña actividades realistas, o situaciones de aprendizaje, siguiendo el DUA.", "puntos": 0.8 },
+        { "id": "up-7", "texto": "Ajusta los recursos personales, materiales, espaciales y temporales a las actividades.", "puntos": 0.4 },
+        { "id": "up-8", "texto": "Usa las tecnologías aplicadas a la educación con coherencia.", "puntos": 0.4 },
+        { "id": "up-9", "texto": "Refiere criterios de evaluación ligados a las habilidades o saberes.", "puntos": 0.4 },
+        { "id": "up-10", "texto": "Especifica momentos, procedimientos e instrumentos de evaluación, y evalúa también la enseñanza.", "puntos": 0.4 },
+        { "id": "up-11", "texto": "Establece cómo trasladar la información a los agentes implicados.", "puntos": 0.2 },
+        { "id": "up-12", "texto": "Usa vocabulario técnico y los conceptos propios de la especialidad.", "puntos": 0.25 },
+        { "id": "up-13", "texto": "Expones con fluidez y de forma motivadora y didáctica.", "puntos": 0.25 }
+      ],
+      "ref": "Anexo XXII, segunda prueba"
+    }
+  ]
+}

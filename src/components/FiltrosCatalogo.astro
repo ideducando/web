@@ -1,0 +1,239 @@
+---
+// Filtros del catálogo. Funcionan en el navegador, sin cookies ni servidor.
+// Sin JavaScript, el formulario no aparece y se ven todos los materiales.
+import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../data/taxonomias';
+
+interface Props {
+  recuentos: {
+    seccion: Map<string, number>;
+    etapa: Map<string, number>;
+    necesidad: Map<string, number>;
+    tipo: Map<string, number>;
+  };
+  total: number;
+}
+
+const { recuentos, total } = Astro.props;
+
+const grupos = [
+  { nombre: 'seccion', leyenda: 'Para', opciones: SECCIONES, cuenta: recuentos.seccion },
+  { nombre: 'etapa', leyenda: 'Etapa', opciones: ETAPAS, cuenta: recuentos.etapa },
+  { nombre: 'necesidad', leyenda: 'Necesidad', opciones: NECESIDADES, cuenta: recuentos.necesidad },
+  { nombre: 'tipo', leyenda: 'Tipo de material', opciones: TIPOS, cuenta: recuentos.tipo },
+].map((g) => ({
+  ...g,
+  // Solo se ofrecen las opciones que tienen algún material.
+  lista: Object.entries(g.opciones)
+    .filter(([clave]) => (g.cuenta.get(clave) ?? 0) > 0)
+    .map(([clave, op]) => ({ clave, nombre: op.nombre, n: g.cuenta.get(clave) ?? 0 })),
+}));
+---
+
+<details class="filtros" data-filtros-caja hidden>
+  <summary class="filtros__resumen">
+    <span>Filtrar materiales</span>
+    <span class="filtros__activos" data-filtros-activos></span>
+  </summary>
+  <form class="filtros__formulario" data-filtros aria-describedby="filtros-ayuda">
+    <p id="filtros-ayuda" class="filtros__ayuda">
+      Marca una o varias opciones. La lista se actualiza sola.
+    </p>
+    {
+      grupos.map((g) => (
+        <fieldset class="filtros__grupo">
+          <legend>{g.leyenda}</legend>
+          {g.lista.map((op) => (
+            <label class="filtros__opcion">
+              <input type="checkbox" name={g.nombre} value={op.clave} />
+              <span>{op.nombre}</span>
+              <span class="filtros__n" aria-hidden="true">
+                {op.n}
+              </span>
+            </label>
+          ))}
+        </fieldset>
+      ))
+    }
+    <button type="reset" class="boton boton--secundario filtros__quitar">Quitar filtros</button>
+  </form>
+</details>
+
+<p class="filtros__contador" aria-live="polite" data-contador>
+  {total} materiales
+</p>
+
+<script>
+  const caja = document.querySelector<HTMLDetailsElement>('[data-filtros-caja]');
+  const formulario = document.querySelector<HTMLFormElement>('[data-filtros]');
+  const contador = document.querySelector<HTMLElement>('[data-contador]');
+  const activos = document.querySelector<HTMLElement>('[data-filtros-activos]');
+  const vacio = document.querySelector<HTMLElement>('[data-sin-resultados]');
+  const materiales = Array.from(document.querySelectorAll<HTMLElement>('[data-material]'));
+  const grupos = ['seccion', 'etapa', 'necesidad', 'tipo'] as const;
+
+  if (caja && formulario && contador) {
+    caja.hidden = false;
+    const escritorio = window.matchMedia('(min-width: 60em)');
+    if (escritorio.matches) caja.open = true;
+
+    // Marca las casillas que vengan en la dirección (?necesidad=tea&etapa=infantil).
+    const parametros = new URLSearchParams(window.location.search);
+    for (const grupo of grupos) {
+      for (const valor of parametros.getAll(grupo)) {
+        const casilla = formulario.querySelector<HTMLInputElement>(
+          `input[name="${grupo}"][value="${CSS.escape(valor)}"]`,
+        );
+        if (casilla) casilla.checked = true;
+      }
+    }
+
+    const aplicar = () => {
+      const elegidos = Object.fromEntries(
+        grupos.map((g) => [
+          g,
+          Array.from(formulario.querySelectorAll<HTMLInputElement>(`input[name="${g}"]:checked`)).map(
+            (c) => c.value,
+          ),
+        ]),
+      ) as Record<(typeof grupos)[number], string[]>;
+
+      let visibles = 0;
+      for (const m of materiales) {
+        const encaja = grupos.every((g) => {
+          if (elegidos[g].length === 0) return true;
+          const valores = (m.dataset[g] ?? '').split(' ');
+          return elegidos[g].some((v) => valores.includes(v));
+        });
+        m.hidden = !encaja;
+        if (encaja) visibles++;
+      }
+
+      const marcados = grupos.reduce((n, g) => n + elegidos[g].length, 0);
+      contador.textContent =
+        visibles === 1 ? '1 material' : `${visibles} materiales`;
+      if (marcados > 0) contador.textContent += ' con los filtros elegidos';
+      if (activos) activos.textContent = marcados > 0 ? `(${marcados})` : '';
+      if (vacio) vacio.hidden = visibles > 0;
+
+      const nuevos = new URLSearchParams();
+      for (const g of grupos) for (const v of elegidos[g]) nuevos.append(g, v);
+      const consulta = nuevos.toString();
+      history.replaceState(null, '', consulta ? `?${consulta}` : window.location.pathname);
+    };
+
+    formulario.addEventListener('change', aplicar);
+    formulario.addEventListener('reset', () => window.setTimeout(aplicar, 0));
+    aplicar();
+  }
+</script>
+
+<style>
+  .filtros {
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    background: var(--blanco);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .filtros__resumen {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.9rem 1.1rem;
+    font: 700 1.1rem/1.2 var(--letra-titulos);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .filtros__resumen::-webkit-details-marker {
+    display: none;
+  }
+
+  .filtros__resumen::after {
+    content: '';
+    width: 0.65rem;
+    height: 0.65rem;
+    margin-left: auto;
+    border-right: 3px solid currentColor;
+    border-bottom: 3px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+  }
+
+  .filtros[open] .filtros__resumen::after {
+    transform: rotate(-135deg) translateY(-2px);
+  }
+
+  .filtros__activos {
+    color: var(--morado-texto);
+  }
+
+  .filtros__formulario {
+    padding: 0 1.1rem 1.1rem;
+  }
+
+  .filtros__ayuda {
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+    margin-bottom: 0.75rem;
+  }
+
+  .filtros__grupo {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1.1rem;
+  }
+
+  .filtros__grupo legend {
+    padding: 0;
+    margin-bottom: 0.4rem;
+    font: 700 0.85rem/1.3 var(--letra-titulos);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .filtros__opcion {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.5rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: var(--radio-pequeno);
+    cursor: pointer;
+    line-height: 1.3;
+  }
+
+  .filtros__opcion:hover {
+    background: var(--amarillo-tinte);
+  }
+
+  .filtros__opcion input {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin: 0;
+    accent-color: var(--azul);
+  }
+
+  .filtros__n {
+    margin-left: auto;
+    min-width: 1.8rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background: var(--crema);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .filtros__quitar {
+    width: 100%;
+    min-height: 2.6rem;
+    font-size: 1rem;
+  }
+
+  .filtros__contador {
+    margin: 1rem 0 0.75rem;
+    font-weight: 700;
+  }
+</style>

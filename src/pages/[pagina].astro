@@ -1,0 +1,47 @@
+---
+// Páginas de texto que se editan como Markdown en src/content/paginas/.
+// El nombre del archivo es la dirección: privacidad.md → /privacidad/.
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import { fecha, fechaISO } from '../lib/formatos';
+
+export async function getStaticPaths() {
+  const paginas = await getCollection('paginas');
+  return paginas.map((pagina) => ({ params: { pagina: pagina.id }, props: { pagina } }));
+}
+
+interface Props {
+  pagina: CollectionEntry<'paginas'>;
+}
+
+const { pagina } = Astro.props;
+const d = pagina.data;
+const { Content } = await render(pagina);
+---
+
+<Base titulo={d.titulo} descripcion={d.descripcion ?? d.entradilla}>
+  <Intro titulo={d.titulo} entradilla={d.entradilla} camino={[{ texto: d.titulo }]} borrador={d.borrador} />
+  <div class="contenedor pagina">
+    <article class="prosa">
+      <Content />
+      <p class="pagina__fecha">
+        Última revisión: <time datetime={fechaISO(d.actualizado)}>{fecha(d.actualizado)}</time>.
+      </p>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .pagina {
+    padding-block: 2rem 4rem;
+  }
+
+  .pagina__fecha {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--linea);
+    font-size: 0.95rem;
+    color: var(--texto-suave);
+  }
+</style>

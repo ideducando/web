@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Registro de observación ABC: antes, conducta y después · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      .encabezado {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 3mm;
+      }
+
+      .encabezado h1 {
+        font-size: 21pt;
+        margin: 0 0 1mm;
+      }
+
+      .encabezado img {
+        width: 38mm;
+        height: auto;
+      }
+
+      .datos {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1.6fr 1.6fr;
+        gap: 2mm 5mm;
+        margin: 0 0 3mm;
+        font-size: 10pt;
+      }
+
+      .dato {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+      }
+
+      .dato span {
+        flex: 1;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 5.5mm;
+      }
+
+      .conducta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        font-size: 10pt;
+        margin-bottom: 3mm;
+      }
+
+      .conducta span {
+        flex: 1;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 5.5mm;
+      }
+
+      table.registro {
+        table-layout: fixed;
+        font-size: 9pt;
+      }
+
+      table.registro th {
+        font-size: 9.5pt;
+        line-height: 1.25;
+        padding: 1.8mm 2mm;
+      }
+
+      table.registro th small {
+        display: block;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 8pt;
+        opacity: 0.95;
+      }
+
+      table.registro td {
+        height: 16.5mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      th.col-a {
+        background: var(--azul-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      th.col-b {
+        background: var(--coral-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      th.col-c {
+        background: var(--verde-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      .pie-hoja {
+        margin: 2mm 0 0;
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      /* Tabla de patrones */
+      .patrones {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 6mm;
+      }
+
+      table.recuento td,
+      table.recuento th {
+        border: 0.3mm solid var(--linea);
+        font-size: 9.5pt;
+      }
+
+      table.recuento td {
+        height: 9.5mm;
+      }
+
+      .funciones {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .funciones li {
+        display: flex;
+        gap: 3mm;
+        align-items: flex-start;
+        padding: 2mm 0;
+        border-bottom: 0.3mm solid var(--linea);
+        font-size: 10pt;
+      }
+
+      .casilla {
+        flex: none;
+        width: 5mm;
+        height: 5mm;
+        margin-top: 0.5mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .lineas div {
+        height: 8mm;
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      /* Guía */
+      table.ejemplos td,
+      table.ejemplos th {
+        font-size: 10pt;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="apaisada" data-miniatura>
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo" style="margin-bottom: 1mm">Registro de observación</p>
+          <h1>Antes, conducta y después</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos">
+        <p class="dato">Iniciales:<span></span></p>
+        <p class="dato">Curso:<span></span></p>
+        <p class="dato">Quién observa:<span></span></p>
+        <p class="dato">Semana del:<span></span></p>
+      </div>
+      <p class="conducta">Conducta que observamos (como la vería cualquiera):<span></span></p>
+      <table class="registro">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 11%">Fecha y hora</th>
+            <th scope="col" style="width: 15%">Actividad y lugar</th>
+            <th scope="col" class="col-a" style="width: 21%">A · Antes<small>¿Qué pasó justo antes?</small></th>
+            <th scope="col" class="col-b" style="width: 21%">B · Conducta<small>¿Qué hizo? ¿Cuánto duró?</small></th>
+            <th scope="col" class="col-c" style="width: 21%">C · Después<small>¿Qué pasó justo después?</small></th>
+            <th scope="col" style="width: 11%">Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <p class="pie-hoja">
+        Solo iniciales, nunca el nombre completo. Guarda esta hoja en el centro y no la fotografíes con tu móvil personal.
+      </p>
+    </section>
+
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo" style="margin-bottom: 1mm">Después de 10 o 12 anotaciones</p>
+          <h1>Busca los patrones</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="patrones">
+        <div>
+          <h3 style="margin-top: 0">¿Cuándo pasa? Marca una raya por anotación</h3>
+          <table class="recuento">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 34%">Momento del día</th>
+                <th scope="col">Lunes</th>
+                <th scope="col">Martes</th>
+                <th scope="col">Miércoles</th>
+                <th scope="col">Jueves</th>
+                <th scope="col">Viernes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Entrada</th><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><th scope="row">Primeras sesiones</th><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><th scope="row">Antes del recreo</th><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><th scope="row">Recreo</th><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><th scope="row">Después del recreo</th><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><th scope="row">Comedor</th><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><th scope="row">Salida</th><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <h3>¿Qué se repite antes (A) y después (C)?</h3>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+        <div>
+          <h3 style="margin-top: 0">¿Para qué le puede servir la conducta?</h3>
+          <p style="font-size: 10pt">
+            Una hipótesis de trabajo para hablar con el equipo de orientación, no un diagnóstico. Marca la que encaje mejor
+            con lo que pasa después (C):
+          </p>
+          <ul class="funciones">
+            <li><span class="casilla"></span><span><strong>Conseguir atención</strong> de un adulto o de los compañeros.</span></li>
+            <li><span class="casilla"></span><span><strong>Conseguir algo</strong>: un objeto, una actividad, un sitio.</span></li>
+            <li><span class="casilla"></span><span><strong>Evitar o salir de algo</strong>: una tarea, un ruido, una demanda.</span></li>
+            <li><span class="casilla"></span><span><strong>Una sensación</strong> que le regula o le gusta, pase lo que pase alrededor.</span></li>
+          </ul>
+          <h3>Próximo paso</h3>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía de uso <span class="borrador">[BORRADOR]</span></p>
+      <h1 style="font-size: 22pt">Cómo usar el registro ABC</h1>
+      <p>
+        Cuando una conducta se repite y no sabemos por qué, lo primero es observar con calma. Este registro recoge, cada
+        vez que ocurre, qué pasó <strong>antes</strong> (A, el antecedente), qué hizo exactamente el alumno o la alumna
+        (B, la conducta, del inglés <em>behavior</em>) y qué pasó <strong>después</strong> (C, la consecuencia). Con diez
+        o doce anotaciones suelen aparecer patrones.
+      </p>
+      <p>No diagnostica nada: sirve para llevar datos concretos a la reunión con orientación y con la familia.</p>
+
+      <h2>Describe lo que se ve</h2>
+      <p>Escribe como si fueras una cámara: lo que cualquiera vería y oiría, sin interpretar.</p>
+      <table class="ejemplos">
+        <thead>
+          <tr>
+            <th scope="col">En lugar de…</th>
+            <th scope="col">Escribe…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Se enfada.</td>
+            <td>Tira el estuche al suelo y grita «no» durante unos dos minutos.</td>
+          </tr>
+          <tr>
+            <td>Está inquieto.</td>
+            <td>Se levanta de la silla cinco veces en diez minutos.</td>
+          </tr>
+          <tr>
+            <td>Provoca a los compañeros.</td>
+            <td>Quita el lápiz al compañero de mesa y se ríe.</td>
+          </tr>
+          <tr>
+            <td>No quiere trabajar.</td>
+            <td>Aparta la ficha y apoya la cabeza en la mesa al recibir la tarea.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Paso a paso</h2>
+      <ol>
+        <li>Elige <strong>una sola conducta</strong> y descríbela arriba de la hoja para que cualquiera la reconozca.</li>
+        <li>Anota en el momento o lo antes posible, con la hora y la actividad.</li>
+        <li>En A y en C, apunta también lo que hicieron otras personas: qué se le pidió y cómo respondió cada una.</li>
+        <li>
+          Tras una o dos semanas, pasa los datos a la hoja de patrones. Busca qué se repite, como un momento del día o
+          una respuesta del entorno.
+        </li>
+      </ol>
+
+      <div class="caja caja--coral">
+        <h3>Protección de datos</h3>
+        <p>
+          Escribe solo las iniciales y guarda el registro en el centro. No hagas fotos ni lo guardes en tu móvil personal.
+          Sigue las normas de tu centro y la Ley Orgánica 3/2018 de protección de datos personales.
+        </p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Registro de observación ABC.</strong> IdEducando, octubre de 2026. Ficha:
+          ideducando.github.io/web/material-gratuito/registro-observacion-abc
+        </p>
+        <p>
+          Fuente: O'Neill, R. E. y otros (2015). <em>Functional Assessment and Program Development for Problem Behavior:
+          A Practical Handbook</em> (3.ª ed.). Cengage.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarla y adaptarla citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+  </body>
+</html>

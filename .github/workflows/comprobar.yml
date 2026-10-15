@@ -1,0 +1,36 @@
+# Comprueba cada propuesta de cambio (PR) antes de que José haga el merge:
+# que la web se construye, que no hay enlaces rotos y que cumple las pautas de accesibilidad AA.
+name: Comprobar la web
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprobar:
+    name: Construir y revisar accesibilidad
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            herramientas/package-lock.json
+      - name: Instalar dependencias de la web
+        run: npm ci
+      - name: Construir la web y el buscador
+        run: npm run build
+      - name: Instalar herramientas de revisión
+        working-directory: herramientas
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Revisar enlaces y accesibilidad
+        working-directory: herramientas
+        run: npm run comprobar

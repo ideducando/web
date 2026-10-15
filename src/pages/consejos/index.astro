@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Intro from '../../components/Intro.astro';
+import { SECCIONES } from '../../data/taxonomias';
+import { fecha, fechaISO } from '../../lib/formatos';
+import { ruta } from '../../lib/rutas';
+
+const consejos = (await getCollection('consejos')).sort((a, b) => b.data.fecha.getTime() - a.data.fecha.getTime());
+---
+
+<Base
+  titulo="Consejos"
+  descripcion="Consejos prácticos para el aula de PT e Infantil y para preparar las oposiciones de Maestros en la Región de Murcia."
+>
+  <Intro
+    titulo="Consejos"
+    entradilla="Artículos cortos y prácticos para el aula y para opositar. Con fuentes, sin relleno."
+    camino={[{ texto: 'Consejos' }]}
+  />
+
+  <div class="contenedor consejos">
+    <ul class="rejilla rejilla--anchas">
+      {
+        consejos.map((c) => (
+          <li class={`posit posit--${SECCIONES[c.data.seccion].color}`}>
+            <p class="consejos__meta">
+              <span class="etiqueta">{SECCIONES[c.data.seccion].nombre}</span>
+              <time datetime={fechaISO(c.data.fecha)}>{fecha(c.data.fecha)}</time>
+            </p>
+            <h2 class="consejos__titulo">
+              {c.data.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
+              <a class="enlace-tarjeta" href={ruta(`/consejos/${c.id}/`)}>
+                {c.data.titulo}
+              </a>
+            </h2>
+            <p>{c.data.resumen}</p>
+            {c.data.lectura && <p class="consejos__lectura">{c.data.lectura} de lectura</p>}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .consejos {
+    padding-block: 2rem 4rem;
+  }
+
+  .consejos__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .consejos__titulo {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+
+  .consejos__lectura {
+    margin-top: auto !important;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+</style>

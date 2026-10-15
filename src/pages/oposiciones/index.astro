@@ -1,0 +1,332 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Intro from '../../components/Intro.astro';
+import Icono from '../../components/Icono.astro';
+import Borrador from '../../components/Borrador.astro';
+import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
+import { materialesOrdenados } from '../../lib/materiales';
+import { fecha, fechaISO } from '../../lib/formatos';
+import { ruta } from '../../lib/rutas';
+
+const materiales = (await materialesOrdenados()).filter((m) => m.data.seccion === 'oposiciones');
+const consejos = (await getCollection('consejos'))
+  .filter((c) => c.data.seccion === 'oposiciones')
+  .sort((a, b) => b.data.fecha.getTime() - a.data.fecha.getTime());
+
+const BORM = 'https://www.borm.es/services/boletin/ano/2026/numero/18/pdf';
+---
+
+<Base
+  titulo="Oposiciones de Maestros en la Región de Murcia"
+  descripcion="Guía gratuita para opositar a Pedagogía Terapéutica e Infantil en la Región de Murcia: pruebas, puntuación, programación, plazas y calendario, con cada dato enlazado al BORM."
+>
+  <Intro
+    titulo="Oposiciones de Maestros en la Región de Murcia"
+    entradilla="Todo lo que necesitas para preparar Pedagogía Terapéutica (PT) o Educación Infantil, con cada dato enlazado a su fuente oficial. Gratis y sin registro."
+    camino={[{ texto: 'Oposiciones' }]}
+  />
+
+  <div class="contenedor">
+    <div class="aviso">
+      <Icono nombre="info" clase="aviso__icono" />
+      <p>
+        <strong>La próxima convocatoria de Maestros todavía no está publicada.</strong> Aquí explicamos el modelo de
+        2026, el último que existe. Si se repite la alternancia de los últimos años, Maestros tocaría en 2028: lo
+        seguimos en el <a href={ruta('/oposiciones/calendario/')}>calendario</a>.
+      </p>
+    </div>
+  </div>
+
+  <section class="seccion empieza" aria-labelledby="titulo-empieza">
+    <div class="contenedor">
+      <h2 id="titulo-empieza"><span class="subrayado">Empieza por aquí</span></h2>
+      <ul class="rejilla rejilla--anchas">
+        <li class="posit posit--morado">
+          <Icono nombre="libro" clase="empieza__icono" />
+          <h3>
+            <a class="enlace-tarjeta" href={ruta('/material-gratuito/guia-oposiciones-murcia-pt-infantil/')}>
+              Guía de las oposiciones
+            </a>
+          </h3>
+          <p>Plazas, pruebas, puntuación y programación de PT e Infantil, en un PDF con índice.</p>
+          <span class="flecha">Descargar gratis</span>
+        </li>
+        <li class="posit posit--verde">
+          <Icono nombre="lista" clase="empieza__icono" />
+          <h3>
+            <a class="enlace-tarjeta" href={ruta('/oposiciones/programacion/')}>Revisa tu programación</a>
+          </h3>
+          <p>Los requisitos que la dejan con un cero y lo que puntúa el tribunal, para marcar uno a uno.</p>
+          <span class="flecha">Abrir la lista</span>
+        </li>
+        <li class="posit posit--amarillo">
+          <Icono nombre="calendario" clase="empieza__icono" />
+          <h3>
+            <a class="enlace-tarjeta" href={ruta('/oposiciones/calendario/')}>Calendario</a>
+          </h3>
+          <p>Las fechas de convocatorias y pruebas, con su fuente y lo seguras que son.</p>
+          <span class="flecha">Ver fechas</span>
+        </li>
+        <li class="posit posit--coral">
+          <Icono nombre="bombilla" clase="empieza__icono" />
+          <h3>
+            <a class="enlace-tarjeta" href={ruta('/consejos/')}>Consejos</a>
+          </h3>
+          <p>Artículos cortos sobre la programación, los supuestos prácticos y la organización del estudio.</p>
+          <span class="flecha">Leer consejos</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion seccion--blanca" aria-labelledby="titulo-modelo">
+    <div class="contenedor prosa prosa--ancha">
+      <h2 id="titulo-modelo">El modelo de 2026 en un vistazo</h2>
+      <p>
+        La oposición tiene dos pruebas y las dos son eliminatorias. Después se suman los méritos de la fase de
+        concurso. Lo que sigue sale de la <a href={BORM}>Orden de 21 de enero de 2026</a> (BORM nº 18).
+      </p>
+
+      <h3>Primera prueba: conocimientos específicos</h3>
+      <div class="tabla" tabindex="0" role="region" aria-label="Primera prueba por especialidad (desplázala en horizontal en el móvil)">
+        <table>
+          <caption class="solo-lectores">Primera prueba por especialidad</caption>
+          <thead>
+            <tr>
+              <th scope="col">Parte</th>
+              <th scope="col">Educación Infantil</th>
+              <th scope="col">Pedagogía Terapéutica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">A. Práctica (2 h 30 min)</th>
+              <td>Una situación didáctica completa, a elegir entre dos.</td>
+              <td>
+                Dos ejercicios, con opción A o B en cada uno: un supuesto de centro y uno a partir de una evaluación
+                psicopedagógica o un dictamen. Cada uno vale la mitad.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">B. Tema por escrito (2 h)</th>
+              <td colspan="2">Un tema a elegir entre dos sacados al azar.</td>
+            </tr>
+            <tr>
+              <th scope="row">Nota</th>
+              <td colspan="2">
+                Cada parte vale hasta 5 puntos. Hace falta un mínimo de 1,25 en cada parte y 5 en total.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fuente">Artículos 48 y 49 y anexos XVII (Infantil) y XXII (PT).</p>
+
+      <h3>Segunda prueba: aptitud pedagógica</h3>
+      <div class="tabla" tabindex="0" role="region" aria-label="Segunda prueba por especialidad (desplázala en horizontal en el móvil)">
+        <table>
+          <caption class="solo-lectores">Segunda prueba por especialidad</caption>
+          <thead>
+            <tr>
+              <th scope="col">Qué</th>
+              <th scope="col">Educación Infantil</th>
+              <th scope="col">Pedagogía Terapéutica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Documento</th>
+              <td>Programación didáctica de un curso completo.</td>
+              <td>
+                Programa de intervención para alumnado con necesidades específicas de apoyo educativo (o programación
+                didáctica de ciclo o etapa).
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Defensa</th>
+              <td>Hasta 30 minutos. Vale 4 puntos.</td>
+              <td>Hasta 30 minutos. Vale 4 puntos.</td>
+            </tr>
+            <tr>
+              <th scope="row">Unidad</th>
+              <td>Unidad didáctica: 5 puntos.</td>
+              <td>Unidad de actuación: 5,5 puntos.</td>
+            </tr>
+            <tr>
+              <th scope="row">Debate</th>
+              <td>15 minutos: 1 punto.</td>
+              <td>15 minutos: 0,5 puntos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Tienes 1 hora para preparar la unidad con material en papel y 1 hora y 30 minutos para toda la exposición.
+        Se aprueba con un 5. La nota de la fase de oposición es la media de las dos pruebas.
+      </p>
+      <p class="fuente">Artículos 51, 52 y 53 y anexos XVII y XXII.</p>
+
+      <h3>La programación, en cuatro reglas que no perdonan</h3>
+      <p>
+        Más de <strong>70 páginas</strong>, letra menor que <strong>Arial 11</strong>, interlineado menor que
+        <strong>sencillo</strong> o páginas que no sean <strong>UNE-A4</strong>: con uno solo de estos fallos, la
+        programación vale 0 y la unidad tendrás que hacerla a partir del temario. Repásalo todo con la
+        <a href={ruta('/oposiciones/programacion/')}>lista de comprobación</a>.
+      </p>
+      <p class="fuente">Anexo VI, apartados 1 y 2.</p>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="titulo-plazas">
+    <div class="contenedor prosa prosa--ancha">
+      <h2 id="titulo-plazas">Plazas de las últimas convocatorias</h2>
+      <div class="tabla" tabindex="0" role="region" aria-label="Plazas por año (desplázala en horizontal en el móvil)">
+        <table>
+          <caption class="solo-lectores">Plazas de Maestros por año en la Región de Murcia</caption>
+          <thead>
+            <tr>
+              <th scope="col">Año</th>
+              <th scope="col">Total Maestros</th>
+              <th scope="col">PT</th>
+              <th scope="col">Infantil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">2019</th>
+              <td>1.300</td>
+              <td>218</td>
+              <td>249</td>
+            </tr>
+            <tr>
+              <th scope="row">2022</th>
+              <td>905</td>
+              <td>142</td>
+              <td>201</td>
+            </tr>
+            <tr>
+              <th scope="row">2024</th>
+              <td>798</td>
+              <td>115</td>
+              <td>139</td>
+            </tr>
+            <tr>
+              <th scope="row">2026</th>
+              <td>1.607</td>
+              <td>288</td>
+              <td>398</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        En 2026 se presentaron 1.343 personas en PT y 3.000 en Infantil a la primera prueba: unas 4,7 por plaza en PT
+        y 7,5 en Infantil (cálculo propio con los datos de la Consejería).
+      </p>
+      <p class="fuente">
+        BORM nº 41 de 2019, nº 48 de 2022, nº 299 de 2022 (convocatoria de 2024) y <a href={BORM}>nº 18 de 2026</a>;
+        <a href="https://www.carm.es/web/pagina?IDCONTENIDO=125503&IDTIPO=10&RASTRO=c77%24s3%24m"
+          >nota de la Consejería de 03/07/2026</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  {
+    materiales.length > 0 && (
+      <section class="seccion seccion--blanca" aria-labelledby="titulo-materiales-opos">
+        <div class="contenedor">
+          <h2 id="titulo-materiales-opos">Material gratuito para opositar</h2>
+          <ul class="rejilla">
+            {materiales.map((m) => (
+              <TarjetaMaterial material={m} />
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    consejos.length > 0 && (
+      <section class="seccion" aria-labelledby="titulo-consejos-opos">
+        <div class="contenedor">
+          <h2 id="titulo-consejos-opos">Consejos para opositar</h2>
+          <ul class="rejilla rejilla--anchas">
+            {consejos.map((c) => (
+              <li class="posit posit--morado">
+                <p class="consejo__fecha">
+                  <time datetime={fechaISO(c.data.fecha)}>{fecha(c.data.fecha)}</time>
+                </p>
+                <h3>
+                  <a class="enlace-tarjeta" href={ruta(`/consejos/${c.id}/`)}>
+                    {c.data.titulo}
+                  </a>
+                </h3>
+                <p>{c.data.resumen}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="seccion seccion--blanca" aria-labelledby="titulo-pronto">
+    <div class="contenedor prosa">
+      <h2 id="titulo-pronto">Próximamente</h2>
+      <p>
+        <Borrador />
+        Estamos preparando un programa de intervención de PT comentado y simulacros de supuestos prácticos. Si hay
+        algo que te haría falta, cuéntanoslo en
+        <a href="mailto:hola@ideducando.es">hola@ideducando.es</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .empieza :global(.empieza__icono) {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .prosa--ancha {
+    max-width: 56rem;
+  }
+
+  .tabla {
+    overflow-x: auto;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radio-pequeno);
+  }
+
+  .tabla:focus-visible {
+    outline: 3px solid var(--marino);
+    outline-offset: 3px;
+  }
+
+  .tabla table {
+    display: table;
+    min-width: 34rem;
+    margin: 0;
+    background: var(--blanco);
+  }
+
+  .tabla tbody th {
+    font-family: var(--letra-titulos);
+    white-space: nowrap;
+  }
+
+  .fuente {
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .consejo__fecha {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+</style>

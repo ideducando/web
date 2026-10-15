@@ -1,0 +1,93 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Migas from '../../components/Migas.astro';
+import { SECCIONES } from '../../data/taxonomias';
+import { fecha, fechaISO } from '../../lib/formatos';
+import { ruta } from '../../lib/rutas';
+
+export async function getStaticPaths() {
+  const consejos = await getCollection('consejos');
+  return consejos.map((consejo) => ({ params: { id: consejo.id }, props: { consejo } }));
+}
+
+interface Props {
+  consejo: CollectionEntry<'consejos'>;
+}
+
+const { consejo } = Astro.props;
+const d = consejo.data;
+const { Content } = await render(consejo);
+const seccion = SECCIONES[d.seccion];
+---
+
+<Base titulo={d.titulo} descripcion={d.resumen} tipo="article">
+  <article>
+    <header class="intro intro--color">
+      <div class="contenedor">
+        <div data-pagefind-ignore>
+          <Migas camino={[{ texto: 'Consejos', enlace: '/consejos/' }, { texto: d.titulo }]} />
+        </div>
+        <p class="articulo__meta">
+          <span class={`etiqueta etiqueta--${seccion.color}`}>{seccion.nombre}</span>
+          <time datetime={fechaISO(d.fecha)}>{fecha(d.fecha)}</time>
+          {d.lectura && <span>· {d.lectura} de lectura</span>}
+        </p>
+        <h1 class="articulo__titulo">
+          {d.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
+          {d.titulo}
+        </h1>
+        <p class="entradilla">{d.resumen}</p>
+      </div>
+    </header>
+
+    <div class="contenedor articulo">
+      <div class="prosa">
+        <Content />
+        <p class="articulo__firma">
+          Escrito por {d.autoria}.
+          {
+            d.actualizado && (
+              <>
+                {' '}
+                Revisado el <time datetime={fechaISO(d.actualizado)}>{fecha(d.actualizado)}</time>.
+              </>
+            )
+          }
+        </p>
+        <p><a href={ruta('/consejos/')}>Ver todos los consejos</a></p>
+      </div>
+    </div>
+  </article>
+  <div hidden>
+    <span data-pagefind-filter={`Para:${seccion.nombre}`}></span>
+  </div>
+</Base>
+
+<style>
+  .articulo__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--texto-suave);
+    font-size: 0.95rem;
+  }
+
+  .articulo__titulo {
+    max-width: 50rem;
+  }
+
+  .articulo {
+    padding-block: 2rem 4rem;
+  }
+
+  .articulo__firma {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--linea);
+    font-size: 0.95rem;
+    color: var(--texto-suave);
+  }
+</style>

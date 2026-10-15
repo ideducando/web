@@ -1,0 +1,382 @@
+# Editor visual de la web con Pages CMS (https://pagescms.org): gratis y sin servidor propio.
+# Cómo entrar: https://app.pagescms.org > «Sign in with GitHub» > repositorio ideducando/web.
+# Cada cambio que guardes es un commit en la rama que tengas elegida arriba a la izquierda.
+#
+# Si añades una opción a las listas de etapa, necesidad o tipo, añádela también en
+# src/data/taxonomias.ts: si no coinciden, la web no se construye y avisa del error.
+
+media:
+  - name: portadas
+    label: Portadas (imágenes de 1200 × 900)
+    input: public/portadas
+    output: /portadas
+    extensions: [webp, jpg, jpeg, png]
+    rename: safe
+  - name: descargas
+    label: Archivos para descargar (PDF)
+    input: public/descargas
+    output: /descargas
+    extensions: [pdf, zip]
+    rename: safe
+
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      create: "Crea {path} desde el editor"
+      update: "Actualiza {path} desde el editor"
+      delete: "Borra {path} desde el editor"
+      rename: "Renombra {oldPath} a {newPath} desde el editor"
+
+components:
+  borrador:
+    type: boolean
+    label: Borrador
+    description: "Mientras esté marcado, la ficha muestra la etiqueta [BORRADOR]. Desmárcalo cuando el equipo la haya revisado."
+    default: true
+
+content:
+  - name: materiales
+    label: Material gratuito
+    type: collection
+    path: src/content/materiales
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: titulo
+      fields: [titulo, seccion, tipo, borrador]
+      sort: [fecha, titulo]
+      default:
+        sort: fecha
+        order: desc
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+        options:
+          maxlength: 90
+      - name: resumen
+        label: Resumen
+        type: text
+        required: true
+        description: "Una o dos frases, entre 20 y 220 caracteres. Sale en la tarjeta del catálogo y en Google."
+        options:
+          minlength: 20
+          maxlength: 220
+      - name: seccion
+        label: Para
+        type: select
+        required: true
+        options:
+          values:
+            - { name: aula, label: Para el aula }
+            - { name: oposiciones, label: Para opositar }
+      - name: tipo
+        label: Tipo de material
+        type: select
+        required: true
+        options:
+          values:
+            - { name: plantilla, label: Plantilla }
+            - { name: apoyo-visual, label: Apoyo visual }
+            - { name: fichas, label: Fichas de trabajo }
+            - { name: juego, label: Juego }
+            - { name: cuento, label: Cuento adaptado }
+            - { name: guia, label: Guía }
+            - { name: lista, label: Lista de comprobación }
+            - { name: programacion, label: Programación }
+      - name: etapas
+        label: Etapas
+        type: select
+        options:
+          multiple: true
+          values:
+            - { name: infantil, label: Infantil (3 a 6 años) }
+            - { name: primaria, label: Primaria (6 a 12 años) }
+      - name: necesidades
+        label: Necesidades
+        type: select
+        options:
+          multiple: true
+          values:
+            - { name: toda-la-clase, label: Toda la clase (DUA) }
+            - { name: tea, label: TEA }
+            - { name: tdah, label: TDAH }
+            - { name: tdl, label: TDL }
+            - { name: dificultades-aprendizaje, label: Dificultades de aprendizaje }
+            - { name: discapacidad-intelectual, label: Discapacidad intelectual }
+            - { name: discapacidad-motora, label: Discapacidad motora }
+            - { name: discapacidad-auditiva, label: Discapacidad auditiva }
+            - { name: discapacidad-visual, label: Discapacidad visual }
+            - { name: conducta, label: Regulación y conducta }
+            - { name: altas-capacidades, label: Altas capacidades }
+      - name: edades
+        label: Edades
+        type: string
+        description: "Por ejemplo: De 3 a 10 años."
+      - name: formato
+        label: Formato
+        type: string
+        default: "PDF imprimible (A4)"
+      - name: paginas
+        label: Páginas
+        type: number
+        options:
+          min: 1
+      - name: archivo
+        label: Archivo para descargar
+        type: file
+        description: "Si lo dejas vacío, la ficha sale como «Próximamente»."
+        options:
+          media: descargas
+      - name: portada
+        label: Portada
+        type: image
+        options:
+          media: portadas
+      - name: portada_alt
+        label: Descripción de la portada
+        type: string
+        description: "Describe la imagen para quien no la ve, en una frase. Ejemplo: Plantilla con los cinco días de la semana en columnas de colores."
+      - name: tiempo
+        label: Tiempo de preparación
+        type: string
+      - name: necesitas
+        label: Qué necesitas
+        type: string
+        list: true
+      - name: fuentes
+        label: Fuentes
+        type: string
+        list: true
+        description: "Normativa, estudios o materiales en los que se apoya la ficha."
+      - name: autoria
+        label: Autoría
+        type: string
+        default: "Equipo IdEducando"
+      - name: licencia
+        label: Licencia
+        type: string
+        default: "CC BY-NC-SA 4.0"
+      - name: fecha
+        label: Fecha de publicación
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: actualizado
+        label: Fecha de la última revisión
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: destacado
+        label: Destacado en el escaparate
+        type: boolean
+        default: false
+      - name: borrador
+        component: borrador
+      - name: body
+        label: Texto de la ficha
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+
+  - name: consejos
+    label: Consejos
+    type: collection
+    path: src/content/consejos
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: titulo
+      fields: [titulo, seccion, fecha, borrador]
+      sort: [fecha, titulo]
+      default:
+        sort: fecha
+        order: desc
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+        options:
+          maxlength: 110
+      - name: resumen
+        label: Resumen
+        type: text
+        required: true
+        options:
+          minlength: 20
+          maxlength: 240
+      - name: seccion
+        label: Para
+        type: select
+        required: true
+        options:
+          values:
+            - { name: aula, label: Para el aula }
+            - { name: oposiciones, label: Para opositar }
+      - name: fecha
+        label: Fecha
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: actualizado
+        label: Revisado el
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: autoria
+        label: Autoría
+        type: string
+        default: "Equipo IdEducando"
+      - name: lectura
+        label: Tiempo de lectura
+        type: string
+        description: "Por ejemplo: 4 minutos."
+      - name: borrador
+        component: borrador
+      - name: body
+        label: Texto
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+
+  - name: paginas
+    label: Páginas de texto
+    type: collection
+    path: src/content/paginas
+    format: yaml-frontmatter
+    view:
+      primary: titulo
+      fields: [titulo, actualizado, borrador]
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+      - name: entradilla
+        label: Entradilla
+        type: text
+      - name: descripcion
+        label: Descripción para buscadores
+        type: text
+        options:
+          maxlength: 200
+      - name: actualizado
+        label: Última revisión
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: borrador
+        component: borrador
+      - name: body
+        label: Texto
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+
+  - name: calendario
+    label: Calendario de oposiciones
+    type: file
+    path: src/data/calendario.json
+    format: json
+    fields:
+      - name: revisado
+        label: Revisado el
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: eventos
+        label: Fechas
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{cuando} · {titulo}"
+        fields:
+          - name: orden
+            label: Fecha para ordenar
+            type: date
+            required: true
+            description: "Aproximada si no se sabe el día. Sirve para ordenar y para marcar lo que ya pasó."
+            options:
+              format: yyyy-MM-dd
+          - name: cuando
+            label: Cuándo (como se lee)
+            type: string
+            required: true
+            description: "Por ejemplo: Diciembre de 2026."
+          - name: titulo
+            label: Qué pasa
+            type: string
+            required: true
+          - name: detalle
+            label: Detalle
+            type: text
+          - name: estado
+            label: Certeza
+            type: select
+            required: true
+            options:
+              values:
+                - { name: confirmado, label: Confirmado }
+                - { name: previsto, label: Previsto }
+                - { name: sin-confirmar, label: Sin confirmar }
+          - name: fuente_nombre
+            label: Fuente
+            type: string
+          - name: fuente_url
+            label: Enlace a la fuente
+            type: string
+
+  - name: sitio
+    label: Ajustes de la web
+    type: file
+    path: src/data/sitio.json
+    format: json
+    fields:
+      - name: nombre
+        label: Nombre
+        type: string
+        readonly: true
+      - name: subtitulo
+        label: Subtítulo
+        type: string
+      - name: lema
+        label: Lema
+        type: string
+      - name: descripcion
+        label: Descripción para buscadores
+        type: text
+      - name: correo
+        label: Correo de contacto
+        type: string
+      - name: borrador
+        label: Web en borrador
+        type: boolean
+        description: "Mientras esté marcado, la web muestra el aviso de construcción y pide a los buscadores que no la indexen."
+      - name: aviso_borrador
+        label: Texto del aviso de borrador
+        type: text
+      - name: instagram
+        label: Enlace de Instagram
+        type: string
+        description: "La dirección completa del perfil, cuando exista."
+      - name: pinterest
+        label: Enlace de Pinterest
+        type: string
