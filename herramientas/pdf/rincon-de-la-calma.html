@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rincón de la calma: termómetro de emociones y tarjetas de estrategias · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Colores de los cinco niveles ---------- */
+      .n1 {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .n2 {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .n3 {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .n4 {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .n5 {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .cara {
+        display: block;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__titulo {
+        font-size: 44pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 100mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 18mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .ilustracion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      /* Termómetro de la portada: tubo, depósito y caras que salen en abanico */
+      .ilustracion .tubo {
+        position: absolute;
+        left: 140mm;
+        top: 70mm;
+        width: 30mm;
+        height: 150mm;
+        border-radius: 15mm 15mm 0 0;
+        background: #fff;
+        border: 1.6mm solid var(--marino);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column-reverse;
+        box-shadow: 0 10mm 18mm -10mm rgb(30 43 85 / 0.45);
+      }
+
+      .ilustracion .tubo span {
+        flex: 1;
+        background: var(--c);
+        border-top: 0.8mm solid #fff;
+        display: grid;
+        place-items: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 17pt;
+        color: var(--marino);
+      }
+
+      .ilustracion .tubo span b {
+        display: grid;
+        place-items: center;
+        width: 10mm;
+        height: 10mm;
+        border-radius: 50%;
+        background: #fff;
+        font-size: 14pt;
+      }
+
+      .ilustracion .deposito {
+        position: absolute;
+        left: 132mm;
+        top: 208mm;
+        width: 46mm;
+        height: 46mm;
+        border-radius: 50%;
+        background: var(--azul);
+        border: 1.6mm solid var(--marino);
+        display: grid;
+        place-items: center;
+      }
+
+      .ilustracion .deposito::after {
+        content: '';
+        width: 16mm;
+        height: 16mm;
+        border-radius: 50%;
+        background: rgb(255 255 255 / 0.35);
+        transform: translate(-6mm, -6mm);
+      }
+
+      .ilustracion .burbuja {
+        position: absolute;
+        width: 27mm;
+        height: 27mm;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0.8mm 0 rgb(30 43 85 / 0.1),
+          0 6mm 12mm -6mm rgb(30 43 85 / 0.4);
+        display: grid;
+        place-items: center;
+      }
+
+      .ilustracion .burbuja svg {
+        width: 23mm;
+        height: 23mm;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 2mm;
+      }
+
+      .encabezado h1 {
+        font-size: 28pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 36mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 4mm;
+        font-size: 13pt;
+        line-height: 1.35;
+      }
+
+      .pista img {
+        width: 9mm;
+        height: 9mm;
+        vertical-align: middle;
+      }
+
+      .atribucion {
+        margin: 3mm 0 0;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Termómetro grande ---------- */
+      .termometro {
+        display: grid;
+        grid-template-columns: 34mm minmax(0, 1fr);
+        column-gap: 6mm;
+      }
+
+      .termometro__tubo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .termometro__niveles {
+        width: 26mm;
+        border: 1.4mm solid var(--marino);
+        border-bottom: 0;
+        border-radius: 13mm 13mm 0 0;
+        overflow: hidden;
+        background: #fff;
+        height: 190mm;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .termometro__niveles span {
+        flex: 1;
+        background: var(--c);
+        border-bottom: 0.8mm solid #fff;
+        display: grid;
+        place-items: center;
+      }
+
+      .termometro__niveles span b {
+        display: grid;
+        place-items: center;
+        width: 13mm;
+        height: 13mm;
+        border-radius: 50%;
+        background: #fff;
+        font-family: var(--titulos);
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .termometro__deposito {
+        width: 34mm;
+        height: 34mm;
+        margin-top: -3mm;
+        border-radius: 50%;
+        border: 1.4mm solid var(--marino);
+        background: var(--azul);
+        flex: none;
+      }
+
+      .niveles {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-rows: repeat(5, 38mm);
+      }
+
+      .nivel {
+        display: grid;
+        grid-template-columns: 31mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        margin: 0;
+        padding: 2mm 4mm 2mm 3mm;
+        border-radius: 4mm;
+        border-left: 2.2mm solid var(--c);
+      }
+
+      .nivel:nth-child(odd) {
+        background: var(--t);
+      }
+
+      .nivel svg {
+        width: 31mm;
+        height: 31mm;
+      }
+
+      .nivel h2 {
+        margin: 0 0 1mm;
+        font-size: 21pt;
+      }
+
+      .nivel h2 small {
+        font-family: var(--titulos);
+        font-size: 12pt;
+        color: var(--suave);
+        margin-right: 2mm;
+      }
+
+      .nivel p {
+        margin: 0;
+        font-size: 14pt;
+        line-height: 1.3;
+      }
+
+      /* ---------- Cartel del rincón ---------- */
+      .cartel h1 {
+        font-size: 40pt;
+        line-height: 1.02;
+        margin: 4mm 0 2mm;
+      }
+
+      .cartel .lema {
+        font-family: var(--lema);
+        font-size: 16pt;
+        margin: 0 0 6mm;
+        color: var(--suave);
+      }
+
+      .normas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 5mm;
+        counter-reset: norma;
+      }
+
+      .normas li {
+        counter-increment: norma;
+        display: grid;
+        grid-template-columns: 14mm 34mm minmax(0, 1fr);
+        align-items: center;
+        gap: 6mm;
+        margin: 0;
+        padding: 3mm 6mm;
+        border-radius: 5mm;
+        background: var(--crema);
+        border: 0.6mm solid var(--linea);
+      }
+
+      .normas li::before {
+        content: counter(norma);
+        display: grid;
+        place-items: center;
+        width: 14mm;
+        height: 14mm;
+        border-radius: 50%;
+        background: var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        color: var(--marino);
+      }
+
+      .normas img {
+        width: 34mm;
+        height: 34mm;
+        background: #fff;
+        border-radius: 3mm;
+      }
+
+      .normas p {
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1.2;
+      }
+
+      .normas p span {
+        display: block;
+        font-weight: 400;
+        font-size: 14pt;
+        color: var(--suave);
+        margin-top: 1mm;
+      }
+
+      /* ---------- Tarjetas de estrategias ---------- */
+      .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 72mm;
+        gap: 5mm 6mm;
+      }
+
+      .estrategia {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        padding: 4mm 5mm 4.5mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .estrategia::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.6mm;
+        background: var(--c);
+      }
+
+      .estrategia .numero {
+        position: absolute;
+        right: 4mm;
+        top: 5mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      .estrategia h2 {
+        margin: 1.5mm 0 0;
+        font-family: var(--texto);
+        font-size: 19pt;
+        line-height: 1.12;
+        padding-right: 8mm;
+      }
+
+      .estrategia .pictos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4mm;
+        min-height: 0;
+      }
+
+      .estrategia .pictos img {
+        width: 34mm;
+        height: 34mm;
+      }
+
+      .estrategia .pictos.dos img {
+        width: 30mm;
+        height: 30mm;
+      }
+
+      .estrategia p {
+        margin: 0;
+        font-size: 14pt;
+        line-height: 1.3;
+      }
+
+      /* ---------- Mi plan de calma ---------- */
+      .plan {
+        font-size: 12pt;
+      }
+
+      .plan .linea {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 4mm;
+        font-size: 13pt;
+      }
+
+      .plan .linea span {
+        flex: 1;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 7mm;
+      }
+
+      .plan h2 {
+        font-size: 15pt;
+        margin: 4mm 0 2mm;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .plan h2 .mini-cara {
+        width: 11mm;
+        height: 11mm;
+        flex: none;
+      }
+
+      .rodea {
+        list-style: none;
+        margin: 0 0 2mm;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2mm;
+      }
+
+      .rodea li {
+        margin: 0;
+        padding: 1.5mm 1mm 1.2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 2.4mm;
+        text-align: center;
+        font-size: 9.5pt;
+        line-height: 1.15;
+      }
+
+      .rodea img {
+        display: block;
+        width: 16mm;
+        height: 16mm;
+        margin: 0 auto 1mm;
+      }
+
+      .casillas-adulto {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5mm 6mm;
+        font-size: 12pt;
+      }
+
+      .casillas-adulto li {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .casillas-adulto li::before {
+        content: '';
+        flex: none;
+        width: 5mm;
+        height: 5mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .recuadro {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 3mm 4mm;
+        margin-top: 3mm;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .sesiones {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        counter-reset: sesion;
+      }
+
+      .sesiones li {
+        counter-increment: sesion;
+        margin: 0;
+        padding: 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 1.6mm solid var(--c);
+      }
+
+      .sesiones li::before {
+        content: 'Sesión ' counter(sesion);
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--suave);
+        margin-bottom: 1mm;
+      }
+
+      .sesiones strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11pt;
+        line-height: 1.15;
+        margin-bottom: 1mm;
+      }
+
+      .registro-uso td {
+        height: 10mm;
+      }
+
+      .guia .creditos {
+        margin-top: 2mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12.5pt;
+        line-height: 1.45;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.8em;
+      }
+
+      .familias ol {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1.5mm;
+      }
+
+      .escala-mini {
+        display: flex;
+        gap: 3mm;
+        margin: 2mm 0 3mm;
+      }
+
+      .escala-mini figure {
+        margin: 0;
+        flex: 1;
+        text-align: center;
+        font-size: 10pt;
+        line-height: 1.2;
+        padding: 2mm 1mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 1.4mm solid var(--c);
+      }
+
+      .escala-mini svg {
+        width: 16mm;
+        height: 16mm;
+        margin: 0 auto 1mm;
+      }
+
+      .familias .creditos {
+        font-size: 8pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 160mm; height: 160mm; right: -60mm; top: 64mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 64mm; height: 64mm; left: -24mm; top: 150mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 30mm; height: 30mm; left: 70mm; bottom: 40mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Regulación emocional</p>
+        <h1 class="portada__titulo">El rincón<br />de la calma</h1>
+        <p class="portada__subtitulo">
+          Un termómetro para ponerle nombre a lo que siento y 12 ideas para volver a la calma.
+        </p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="ilustracion" aria-hidden="true" id="ilustracion"></div>
+    </section>
+
+    <!-- ======================================================================
+         TERMÓMETRO GRANDE
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>¿Cómo estoy?</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Pon tu pinza <img src="pictogramas/8466.png" alt="" /> en el número que dice cómo estás ahora.
+      </p>
+      <div class="termometro">
+        <div class="termometro__tubo" aria-hidden="true">
+          <div class="termometro__niveles" id="tubo"></div>
+          <div class="termometro__deposito"></div>
+        </div>
+        <div>
+          <ol class="niveles" id="niveles" reversed></ol>
+          <p class="atribucion" style="margin-top: 8mm">
+            Las caras son de IdEducando. Pictograma de la pinza: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC
+            BY-NC-SA. Propiedad: Gobierno de Aragón.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL DEL RINCÓN
+         ====================================================================== -->
+    <section class="hoja cartel">
+      <div class="rayos"></div>
+      <div class="encabezado" style="margin-top: 4mm">
+        <h1>Nuestro rincón<br />de la calma</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="lema">Un sitio para cualquiera que lo necesite.</p>
+      <ol class="normas">
+        <li class="n1">
+          <img src="pictogramas/32826.png" alt="" />
+          <p>Vengo cuando lo necesito.<span>También puedo pedirlo.</span></p>
+        </li>
+        <li class="n2">
+          <img src="pictogramas/11359.png" alt="" />
+          <p>Me quedo un ratito.<span>Mientras cae la arena del reloj.</span></p>
+        </li>
+        <li class="n3">
+          <img src="pictogramas/8680.png" alt="" />
+          <p>Cuido el material.<span>Lo dejo en su sitio al irme.</span></p>
+        </li>
+        <li class="n4">
+          <img src="pictogramas/6630.png" alt="" />
+          <p>Vuelvo cuando estoy en el 1 o el 2.<span>Miro el termómetro antes de volver.</span></p>
+        </li>
+      </ol>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE ESTRATEGIAS (dos hojas)
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Ideas para volver a la calma</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista" style="font-size: 10pt; color: var(--suave)">
+        Recorta, plastifica y deja las tarjetas en el rincón, en una caja o en una anilla.
+      </p>
+      <div class="tarjetas" id="tarjetas-1"></div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Ideas para volver a la calma</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista" style="font-size: 10pt; color: var(--suave)">
+        Prueba cada idea en un momento tranquilo, antes de necesitarla: así será fácil usarla cuando cueste.
+      </p>
+      <div class="tarjetas" id="tarjetas-2"></div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI PLAN DE CALMA
+         ====================================================================== -->
+    <section class="hoja plan">
+      <div class="encabezado">
+        <h1>Mi plan de calma</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="linea">Me llamo<span></span></p>
+      <p class="pista" style="font-size: 11pt; color: var(--suave); margin-bottom: 1mm">
+        Rellenadlo juntos en un momento tranquilo. Rodea lo que te ayuda o señálalo y que lo rodee un adulto.
+      </p>
+
+      <h2 class="n3"><span class="mini-cara" data-cara="3"></span>Cuando estoy en el 3 o en el 4, me ayuda:</h2>
+      <ul class="rodea" id="rodea"></ul>
+
+      <h2 class="n5"><span class="mini-cara" data-cara="5"></span>Cuando estoy en el 5, necesito que el adulto:</h2>
+      <ul class="casillas-adulto">
+        <li>Me hable poco y despacio.</li>
+        <li>Me deje un poco de espacio.</li>
+        <li>Se quede cerca de mí.</li>
+        <li>Me ofrezca agua.</li>
+        <li>Me enseñe el termómetro.</li>
+        <li>Espere a que esté en calma para hablar.</li>
+      </ul>
+
+      <h2 class="n2"><span class="mini-cara" data-cara="2"></span>Me doy cuenta de que estoy subiendo porque:</h2>
+      <div class="recuadro">
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <h2 class="n1"><span class="mini-cara" data-cara="1"></span>Mis personas de confianza en el cole:</h2>
+      <div class="recuadro">
+        <div class="renglon"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes <span class="borrador">[BORRADOR]</span></p>
+      <h1>Un rincón para aprender a calmarse</h1>
+      <p id="intro-calma">
+        Calmarse se aprende, igual que leer: al principio con mucha ayuda de un adulto y poco a poco con más autonomía. Un
+        rincón de la calma es un lugar del aula donde cualquier alumno o alumna puede ir a recuperar la calma con apoyos
+        visuales y materiales sencillos. El rincón en sí apenas se ha estudiado. Lo que sí tiene respaldo es enseñar de
+        forma explícita a reconocer y regular las emociones (Blewitt y otros, 2018) y que un adulto cálido acompañe ese
+        aprendizaje (Murray y otros, 2015): el rincón es una herramienta para eso, y nunca sustituye al adulto.
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul>
+        <li><strong>Termómetro de cinco niveles</strong> para poner nombre a la emoción y a su intensidad.</li>
+        <li><strong>Cartel con cuatro normas</strong> para colgar en el rincón.</li>
+        <li><strong>Doce tarjetas de estrategias</strong> para elegir qué hacer.</li>
+        <li><strong>Plan de calma personal</strong> para quien necesite un apoyo más ajustado.</li>
+        <li><strong>Nota para las familias</strong> con el termómetro en pequeño.</li>
+      </ul>
+
+      <h2>Cómo presentarlo al grupo</h2>
+      <ol class="sesiones">
+        <li class="n1"><strong>Hablamos de emociones</strong>Leed un cuento y poned nombre a lo que sienten los personajes.</li>
+        <li class="n2"><strong>El termómetro</strong>Recorred los cinco niveles con ejemplos vuestros: «Ayer, en el atasco, yo estaba en el 4».</li>
+        <li class="n3"><strong>Probamos las ideas</strong>Practicad dos o tres tarjetas cada día, en calma y en grupo.</li>
+        <li class="n4"><strong>Las normas</strong>Montad el rincón entre todos y leed el cartel. El rincón es de toda la clase.</li>
+      </ol>
+
+      <h2>Cómo se usa en el día a día</h2>
+      <ol>
+        <li>El alumno o la alumna va al rincón cuando lo necesita, o el adulto se lo ofrece en voz baja: «¿Quieres ir al rincón?».</li>
+        <li>Allí señala en el termómetro cómo está y elige una tarjeta.</li>
+        <li>Se queda un rato breve. Un reloj de arena de 3 o 5 minutos ayuda a medirlo.</li>
+        <li>Antes de volver, mira de nuevo el termómetro. Vuelve en el 1 o en el 2.</li>
+        <li>Más tarde, si hace falta, habláis de lo que pasó. En el momento de más tensión no es buen momento para razonar.</li>
+      </ol>
+
+      <div class="caja caja--coral">
+        <h3>Lo que el rincón no es</h3>
+        <ul>
+          <li>Nadie va al rincón por portarse mal. Es voluntario, es para todos y cada uno decide cuándo vuelve.</li>
+          <li>Nunca se cierra con llave ni queda fuera de la vista de un adulto. Aislar o avergonzar es una forma de violencia (LOPIVI, artículo 1.2).</li>
+          <li>Tampoco es el aula de convivencia, que en Murcia es una medida correctora (Decreto 16/2016, artículo 26).</li>
+        </ul>
+      </div>
+
+      <h2 class="salto">Cuando alguien está en el 5</h2>
+      <p>
+        En el nivel más alto, lo primero es la seguridad de todos. Habla poco, con voz tranquila y frases cortas. Ofrece
+        espacio y agua. Quédate cerca sin agobiar. Retira lo que pueda ser peligroso y, si hace falta, acompaña al resto
+        del grupo a otra zona. Sigue el protocolo de tu centro y avisa al equipo directivo si la situación lo pide.
+      </p>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de participar:</p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>Menos niveles:</strong> en Infantil, empieza con tres (1, 3 y 5) y añade los demás después.</li>
+          <li><strong>Para quien no habla:</strong> puede señalar el número o la cara, o usar la tarjeta de «descanso».</li>
+          <li><strong>Más reto:</strong> en Primaria, que cada alumno o alumna escriba sus propias señales en el plan.</li>
+        </ul>
+        <ul>
+          <li><strong>Sensibilidad al ruido:</strong> unos cascos y una luz suave en el rincón ayudan mucho.</li>
+          <li><strong>Sin espacio en el aula:</strong> una caja de la calma con las tarjetas y dos objetos también sirve.</li>
+          <li><strong>En casa:</strong> la nota para las familias lleva el termómetro en pequeño.</li>
+          <li>
+            <strong>Si ya usáis otra escala</strong> en el centro, como la de cinco puntos o la de zonas, mantened la vuestra:
+            dos escalas a la vez confunden.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Qué necesitas</h2>
+      <p>
+        Un rincón tranquilo y visible desde tu mesa, un cojín o una alfombra, un reloj de arena, una pelota blanda, unos
+        cascos, papel y lápices de colores y dos o tres cuentos. Nada tiene que ser caro. Evita las mantas o los chalecos
+        con peso y nunca envuelvas a nadie: su eficacia no está demostrada y su mal uso ha causado accidentes graves (Zimmer
+        y Desch, 2012).
+      </p>
+
+      <h2>Coordinación</h2>
+      <p id="coordinacion">
+        Si un alumno o alumna está a menudo en el 4 o en el 5, habla con el equipo de orientación y con la familia: el plan
+        de calma es un buen punto de partida. Desde la Ley Orgánica 8/2021 (LOPIVI), cada centro tiene una persona
+        coordinadora de bienestar y protección a la que también puedes acudir (artículo 35). La educación emocional forma
+        parte del currículo: la Ley Orgánica de Educación pide atenderla en Infantil y en Primaria (artículos 14.3 y 19.2).
+      </p>
+
+      <h2>Dudas frecuentes</h2>
+      <div class="dos-columnas" style="align-items: start">
+        <div class="caja caja--amarilla">
+          <h3>¿Y si quiere estar en el rincón todo el rato?</h3>
+          <p>
+            Al principio puede ser la novedad. Mantén el reloj de arena y ofrece volver con algo sencillo. Si dura semanas,
+            observa qué tarea evita con el registro ABC de IdEducando.
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>¿Le damos un premio por ir?</h3>
+          <p>
+            No hace falta. Reconoce el esfuerzo con palabras: «Te has dado cuenta de que estabas en el 4 y has ido a
+            respirar». Así sabe qué ha hecho bien.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="salto">Anota cómo se usa</h2>
+      <p>
+        Durante unas semanas, apunta cada vez que alguien usa el rincón. Verás qué ideas funcionan, a qué horas se usa más
+        y si alguien necesita un apoyo más ajustado. Escribe solo iniciales y guarda la hoja en el centro.
+      </p>
+      <table class="registro-uso">
+        <thead>
+          <tr>
+            <th scope="col">Fecha y hora</th>
+            <th scope="col">Iniciales</th>
+            <th scope="col">Nivel al llegar</th>
+            <th scope="col">Idea que eligió</th>
+            <th scope="col">Nivel al volver</th>
+            <th scope="col">Minutos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="creditos">
+        <p>
+          <strong>El rincón de la calma: termómetro de emociones y tarjetas de estrategias.</strong> IdEducando, octubre de
+          2026. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/rincon-de-la-calma</span>
+        </p>
+        <p id="fuentes-calma">
+          Fuentes: Blewitt, C. y otros (2018), <em>JAMA Network Open</em>, 1(8), e185727; Murray, D. W. y otros (2015),
+          <em>Self-regulation and toxic stress</em> (OPRE Report 2015-21); Zimmer, M. y Desch, L. (2012), <em>Pediatrics</em>,
+          129(6), 1186-1189; Hume, K. y otros (2021), <em>Journal of Autism and Developmental Disorders</em>, 51(11),
+          4013-4032; Buron, K. D. y Curtis, M. (2012), <em>The Incredible 5-Point Scale</em> (2.ª ed.), AAPC, y Kuypers, L.
+          M. (2011), <em>The Zones of Regulation</em>, Think Social Publishing, como otras escalas de referencia; Ley Orgánica
+          2/2006 de Educación, artículos 14.3 y 19.2; Ley Orgánica 8/2021 (LOPIVI), artículos 1.2 y 35; Decreto 16/2016 de
+          la Región de Murcia, artículo 26; CAST (2024), <em>Universal Design for Learning Guidelines 3.0</em>.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. Las caras del
+          termómetro son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>El termómetro de la calma, también en casa</h1>
+      <p>
+        En clase tenemos un rincón de la calma. Allí aprendemos a ponerle nombre a lo que sentimos y a buscar formas de
+        volver a estar bien. Usamos este termómetro:
+      </p>
+      <div class="escala-mini" id="escala-mini"></div>
+
+      <h2>Cómo podéis usarlo en casa</h2>
+      <ol>
+        <li>Habladlo en momentos tranquilos: «¿En qué número estás ahora?».</li>
+        <li>Contad también cómo os sentís vosotros: «Hoy estoy en el 3, estoy algo cansado».</li>
+        <li>Cuando note que sube, recordadle una idea que le funcione: respirar, beber agua o un abrazo.</li>
+        <li>En el 5, hablad poco y con calma. Ya habrá tiempo de hablar de lo que pasó.</li>
+      </ol>
+
+      <h2>Algo importante</h2>
+      <p>
+        Todas las emociones están permitidas: enfadarse o estar triste es normal. Lo que aprendemos es qué hacer con
+        ellas. El rincón no es un castigo: es un sitio para cualquiera que lo necesite.
+      </p>
+
+      <div class="recuadro">
+        <h2 style="margin-top: 0">Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>El rincón de la calma.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // Los cinco niveles del termómetro, del 1 (abajo) al 5 (arriba).
+      const NIVELES = [
+        [1, 'Estoy en calma', 'Mi cuerpo está relajado. Respiro despacio.'],
+        [2, 'Estoy bien', 'Puedo jugar, trabajar y escuchar.'],
+        [3, 'Algo me molesta', 'Noto calor en la cara. Me cuesta estar en mi sitio.'],
+        [4, 'Me cuesta controlarme', 'Mi corazón va muy rápido. Aprieto los puños.'],
+        [5, 'Exploto', 'No puedo pensar. Necesito que un adulto me ayude.'],
+      ];
+
+      // Las 12 ideas: título, texto, pictogramas de ARASAAC y color.
+      const IDEAS = [
+        ['Huelo la flor y soplo la vela', 'Cojo aire por la nariz. Lo suelto por la boca, muy despacio.', [6574, 7258], 'n1'],
+        ['Cuento hasta 10', 'Cuento despacio: 1, 2, 3… Si hace falta, vuelvo a empezar.', [2714], 'n2'],
+        ['Aprieto y suelto', 'Aprieto la pelota fuerte. Cuento hasta 5 y la suelto.', [37858], 'n3'],
+        ['Bebo agua', 'Bebo agua a sorbos pequeños.', [6061], 'n4'],
+        ['Abrazo el cojín', 'Abrazo el cojín muy fuerte un ratito.', [3264], 'n5'],
+        ['Pido un descanso', 'Enseño la tarjeta o digo: «Necesito un descanso».', [24503], 'n1'],
+        ['Miro un cuento', 'Miro los dibujos de un cuento que me gusta.', [7141], 'n2'],
+        ['Dibujo lo que siento', 'Dibujo cómo me siento con los colores que quiero.', [8088], 'n3'],
+        ['Me pongo los cascos', 'Si hay mucho ruido, me pongo los cascos.', [37857], 'n4'],
+        ['Empujo la pared', 'Empujo la pared con las dos manos y cuento hasta 10.', [6485], 'n5'],
+        ['Me estiro', 'Estiro los brazos hacia el techo y luego toco el suelo.', [39053], 'n1'],
+        ['Pido ayuda', 'Busco a un adulto y le cuento qué pasa.', [7171], 'n2'],
+      ];
+
+      // Caras dibujadas para IdEducando (no son de ARASAAC): una por nivel.
+      function cara(nivel, titulo = '') {
+        const relleno = ['', '#e4edfb', '#dcf3ea', '#fdf0c7', '#fde8cf', '#fde5e0'][nivel];
+        const trazo = 'stroke="#1e2b55" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+        const ojos = '<circle cx="36" cy="44" r="5.5" fill="#1e2b55"/><circle cx="64" cy="44" r="5.5" fill="#1e2b55"/>';
+        const partes = {
+          1: `<path d="M27 44 q9 7 18 0 M55 44 q9 7 18 0" ${trazo}/><path d="M36 64 q14 10 28 0" ${trazo}/>`,
+          2: `${ojos}<path d="M31 60 q19 18 38 0" ${trazo}/>`,
+          3: `${ojos}<path d="M27 31 l14 -3 M59 28 l14 3" ${trazo}/><path d="M34 68 q8 -5 16 0 q8 5 16 0" ${trazo}/>`,
+          4: `${ojos}<path d="M26 29 l17 8 M74 29 l-17 8" ${trazo}/><path d="M33 72 q17 -13 34 0" ${trazo}/>`,
+          5: `${ojos}<path d="M24 27 l20 11 M76 27 l-20 11" ${trazo}/><path d="M35 63 q15 -6 30 0 q1 17 -15 17 q-16 0 -15 -17z" fill="#1e2b55"/>
+              <path d="M20 9 l4 7 M50 2 v8 M80 9 l-4 7" ${trazo}/>`,
+        }[nivel];
+        const etiqueta = titulo ? `role="img" aria-label="${titulo}"` : 'aria-hidden="true"';
+        return `<svg class="cara" viewBox="0 -4 100 108" ${etiqueta}><circle cx="50" cy="52" r="42" fill="${relleno}" stroke="#1e2b55" stroke-width="5"/><g transform="translate(0 6)">${partes}</g></svg>`;
+      }
+
+      // Termómetro grande
+      const tubo = document.getElementById('tubo');
+      const lista = document.getElementById('niveles');
+      for (const [n, nombre, cuerpo] of [...NIVELES].reverse()) {
+        tubo.insertAdjacentHTML('beforeend', `<span class="n${n}"><b>${n}</b></span>`);
+        lista.insertAdjacentHTML(
+          'beforeend',
+          `<li class="nivel n${n}">${cara(n)}<div><h2><small>${n}</small>${nombre}</h2><p>${cuerpo}</p></div></li>`,
+        );
+      }
+
+      // Tarjetas
+      IDEAS.forEach(([titulo, texto, pictos, color], i) => {
+        const imgs = pictos.map((id) => `<img src="pictogramas/${id}.png" alt="">`).join('');
+        const html = `<article class="estrategia ${color}"><span class="numero">${i + 1}</span><h2>${titulo}</h2>
+          <div class="pictos ${pictos.length > 1 ? 'dos' : ''}">${imgs}</div><p>${texto}</p></article>`;
+        document.getElementById(i < 6 ? 'tarjetas-1' : 'tarjetas-2').insertAdjacentHTML('beforeend', html);
+        document.getElementById('rodea').insertAdjacentHTML(
+          'beforeend',
+          `<li><img src="pictogramas/${pictos[pictos.length > 1 ? 1 : 0]}.png" alt="">${titulo}</li>`,
+        );
+      });
+
+      // Caras pequeñas del plan y de la nota para las familias
+      for (const el of document.querySelectorAll('[data-cara]')) el.innerHTML = cara(Number(el.dataset.cara));
+      for (const [n, nombre] of NIVELES) {
+        document
+          .getElementById('escala-mini')
+          .insertAdjacentHTML('beforeend', `<figure class="n${n}">${cara(n)}<figcaption><b>${n}</b> · ${nombre}</figcaption></figure>`);
+      }
+
+      // Ilustración de la portada: termómetro con las cinco caras alrededor
+      const ilu = document.getElementById('ilustracion');
+      ilu.insertAdjacentHTML(
+        'beforeend',
+        `<div class="tubo">${NIVELES.map(([n]) => `<span class="n${n}"><b>${n}</b></span>`).join('')}</div><div class="deposito"></div>`,
+      );
+      const posiciones = [
+        [1, 102, 196],
+        [2, 92, 162],
+        [3, 104, 130],
+        [4, 174, 112],
+        [5, 176, 76],
+      ];
+      for (const [n, x, y] of posiciones) {
+        ilu.insertAdjacentHTML('beforeend', `<div class="burbuja n${n}" style="left:${x}mm;top:${y}mm">${cara(n)}</div>`);
+      }
+    </script>
+  </body>
+</html>

@@ -20,6 +20,8 @@ npm run pdf -- agenda-visual-semanal # solo uno
 ```
 
 - Cada documento es un HTML de la carpeta `pdf/` con los estilos comunes de `pdf/comun.css`.
+- Los pictogramas de ARASAAC que usan los materiales están en `pdf/pictogramas/`, con su licencia y cómo añadir más en el `LEEME.md` de esa carpeta. Algunos materiales generan sus casillas a partir de una lista de palabras escrita al final del HTML: para cambiar una palabra, se cambia en esa lista.
+- Si un documento empieza con portada, su HTML lleva la regla `@page :first` con margen cero. Sin ella, Chromium descoloca la portada cuando lleva imágenes.
 - La lista de comprobación de la programación se construye a partir de `src/data/programacion.json`, el mismo archivo que usa la versión interactiva de la web.
 - Los PDF salen en `public/descargas/`, etiquetados para lectores de pantalla, con título, idioma, autoría y marcadores.
 - Las portadas (1200 × 900) salen en `public/portadas/`. Si una ficha no tiene PDF todavía, su portada lleva el aviso «Próximamente».

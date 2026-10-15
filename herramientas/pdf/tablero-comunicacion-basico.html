@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Comunicación en el bolsillo: tablero y llavero de comunicación · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Colores de cada tipo de palabra (clave de colores) ---------- */
+      .personas {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .acciones {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .descripciones {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .social {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .miscelanea {
+        --c: #8a93ad;
+        --t: #f2f3f7;
+      }
+      .necesidades {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .hueco-libre {
+        --c: var(--suave);
+        --t: #fff;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      /* Las hojas del llavero aprovechan un poco más el papel: caben 8 tarjetas de 85 × 54 mm */
+      @page llavero {
+        margin: 12mm 16mm 18mm 16mm;
+      }
+
+      .vertical {
+        page: llavero;
+        break-after: page;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__titulo {
+        font-size: 44pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 120mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 18mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .escena {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        pointer-events: none;
+      }
+
+      /* La anilla pasa por el agujero de las tarjetas (en 65,9 mm y 151,9 mm de la hoja) */
+      .anilla {
+        position: absolute;
+        left: 42.7mm;
+        top: 128.7mm;
+        width: 30mm;
+        height: 30mm;
+        z-index: 3;
+      }
+
+      .escena .tarjeta {
+        position: absolute;
+        left: 60mm;
+        top: 147mm;
+        transform-origin: 5.85mm 4.85mm;
+        border: 0.3mm solid #e2d3b5;
+        box-shadow:
+          0 0.6mm 0 rgb(30 43 85 / 0.1),
+          0 8mm 14mm -6mm rgb(30 43 85 / 0.35);
+      }
+
+      .pegatina {
+        position: absolute;
+        right: 22mm;
+        top: 100mm;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 3mm;
+      }
+
+      .encabezado h1 {
+        font-size: 22pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 36mm;
+        height: auto;
+      }
+
+      .rellenar {
+        font-size: 12pt;
+        margin: 0;
+        flex: 1;
+        text-align: right;
+      }
+
+      .rellenar span {
+        display: inline-block;
+        width: 55mm;
+        border-bottom: 0.4mm solid var(--marino);
+        margin-left: 2mm;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Casilla ---------- */
+      .casilla {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border: 0.9mm solid var(--c);
+        border-radius: 2.6mm;
+        background: #fff;
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .casilla .picto {
+        flex: 1;
+        display: grid;
+        place-items: center;
+        min-height: 0;
+        padding: 1.4mm 1.4mm 0.6mm;
+      }
+
+      .casilla .picto img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      .casilla .palabra {
+        background: var(--t);
+        text-align: center;
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--marino);
+        white-space: nowrap;
+      }
+
+      .casilla.hueco-libre {
+        border-style: dashed;
+        border-width: 0.5mm;
+      }
+
+      .casilla.hueco-libre .picto::after {
+        content: '';
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        background: var(--linea);
+      }
+
+      .casilla.hueco-libre .palabra {
+        color: var(--suave);
+        font-weight: 400;
+      }
+
+      /* ---------- Tablero de 45 ---------- */
+      .tablero {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(9, minmax(0, 1fr));
+        grid-template-rows: repeat(5, 28.2mm);
+        grid-auto-flow: column;
+        gap: 1.8mm;
+      }
+
+      .tablero .palabra {
+        font-size: 14pt;
+        padding: 0.9mm 0.5mm 1.1mm;
+        letter-spacing: -0.01em;
+      }
+
+      .tablero .picto img {
+        width: 17.5mm;
+        height: 17.5mm;
+      }
+
+      /* ---------- Primer tablero de 12 ---------- */
+      .tablero-grande {
+        list-style: none;
+        margin: 2mm 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: repeat(3, 47mm);
+        grid-auto-flow: column;
+        gap: 4mm 5mm;
+      }
+
+      .tablero-grande .casilla {
+        border-width: 1.4mm;
+        border-radius: 4mm;
+      }
+
+      .tablero-grande .picto img {
+        width: 31mm;
+        height: 31mm;
+      }
+
+      .tablero-grande .palabra {
+        font-size: 22pt;
+        padding: 1.4mm 1mm 1.8mm;
+      }
+
+      /* ---------- Leyenda de colores ---------- */
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5mm 4mm;
+        list-style: none;
+        margin: 3mm 0 0;
+        padding: 0;
+        font-size: 9.5pt;
+      }
+
+      .leyenda li {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+      }
+
+      .leyenda li::before {
+        content: '';
+        width: 6mm;
+        height: 4mm;
+        border-radius: 1.2mm;
+        border: 0.8mm solid var(--c);
+        background: var(--t);
+      }
+
+      .atribucion {
+        margin: 2mm 0 0;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Llavero ---------- */
+      .hoja-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 85mm);
+        grid-auto-rows: 54mm;
+        justify-content: center;
+        gap: 4mm 7mm;
+      }
+
+      .tarjeta {
+        width: 85mm;
+        height: 54mm;
+        border-radius: 3.2mm;
+        border: 0.35mm dashed var(--suave);
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .tarjeta__cabecera {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        height: 9mm;
+        padding: 0 3mm 0 11mm;
+        background: var(--crema);
+        border-bottom: 0.3mm solid var(--linea);
+        position: relative;
+        flex: none;
+      }
+
+      /* El círculo marca dónde se hace el agujero para la anilla */
+      .tarjeta__cabecera::before {
+        content: '';
+        position: absolute;
+        left: 3.4mm;
+        top: 2.4mm;
+        width: 4.2mm;
+        height: 4.2mm;
+        border-radius: 50%;
+        border: 0.35mm solid var(--suave);
+        background: #fff;
+      }
+
+      .tarjeta__cabecera h2,
+      .tarjeta__cabecera h3 {
+        margin: 0;
+        font-size: 11.5pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .tarjeta__cabecera .raya {
+        flex: 1;
+        height: 0;
+        border-bottom: 0.35mm solid var(--marino);
+        margin-top: 3mm;
+      }
+
+      .tarjeta__casillas {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 1.4mm;
+        padding: 1.6mm;
+        list-style: none;
+        margin: 0;
+      }
+
+      .tarjeta .casilla {
+        border-width: 0.6mm;
+        border-radius: 1.8mm;
+      }
+
+      .tarjeta .casilla .picto {
+        padding: 0.6mm 0.6mm 0;
+      }
+
+      .tarjeta .casilla .picto img {
+        width: 11.5mm;
+        height: 11.5mm;
+      }
+
+      .tarjeta .casilla .palabra {
+        font-size: 10.5pt;
+        padding: 0.3mm 0.3mm 0.5mm;
+        letter-spacing: -0.015em;
+      }
+
+      .tarjeta__texto {
+        flex: 1;
+        padding: 2.2mm 3.4mm 2mm;
+        font-size: 9.5pt;
+        line-height: 1.3;
+      }
+
+      .tarjeta__texto ol {
+        margin: 0;
+        padding-left: 4.6mm;
+        font-size: 10.5pt;
+        line-height: 1.35;
+      }
+
+      .tarjeta__texto .firma {
+        margin: 1.6mm 0 0;
+        font-size: 7.5pt;
+        color: var(--suave);
+        text-align: right;
+      }
+
+      .tarjeta__texto li {
+        margin-bottom: 0.6mm;
+      }
+
+      .tarjeta__texto .linea {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.6mm;
+        margin: 0 0 2.6mm;
+        font-size: 10.5pt;
+      }
+
+      .tarjeta__texto .linea span {
+        flex: 1;
+        border-bottom: 0.3mm solid var(--marino);
+        height: 4.6mm;
+      }
+
+      .tarjeta__texto .nota {
+        margin: 0;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .pasos {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        counter-reset: paso;
+      }
+
+      .pasos li {
+        counter-increment: paso;
+        margin: 0;
+        padding: 3mm 3mm 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 1.6mm solid var(--c);
+        break-inside: avoid;
+      }
+
+      .pasos li::before {
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        margin-bottom: 1.6mm;
+      }
+
+      .pasos strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11pt;
+        line-height: 1.15;
+        margin-bottom: 1mm;
+      }
+
+      .momentos th:first-child {
+        width: 22%;
+      }
+
+      .momentos td:last-child {
+        width: 30%;
+      }
+
+      .chip {
+        display: inline-block;
+        padding: 0 1.6mm;
+        margin: 0.3mm 0.4mm 0.3mm 0;
+        border-radius: 1.2mm;
+        border: 0.5mm solid var(--c);
+        background: var(--t);
+        font-weight: 700;
+        font-size: 9pt;
+        line-height: 1.35;
+        white-space: nowrap;
+      }
+
+      .seguimiento td {
+        height: 9mm;
+      }
+
+      .seguimiento th:first-child {
+        width: 15%;
+      }
+
+      .guia .creditos {
+        margin-top: 2mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Nota para las familias ---------- */
+      .familias {
+        font-size: 12.5pt;
+        line-height: 1.45;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.8em;
+      }
+
+      .familias ol {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1.5mm;
+      }
+
+      .mini {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.2mm;
+        padding: 0.4mm 2mm 0.4mm 0.8mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 1.6mm;
+        background: var(--t);
+        font-weight: 700;
+        vertical-align: middle;
+        line-height: 1.2;
+      }
+
+      .mini img {
+        width: 8mm;
+        height: 8mm;
+        background: #fff;
+        border-radius: 1mm;
+      }
+
+      .mensaje {
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 3mm 5mm 4mm;
+        margin-top: 4mm;
+        break-inside: avoid;
+      }
+
+      .mensaje h2 {
+        margin: 0 0 2mm;
+        font-size: 13pt;
+      }
+
+      .mensaje .renglon {
+        height: 9mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        font-size: 8pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -55mm; top: 70mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -26mm; top: 118mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; right: 30mm; bottom: 46mm; background: var(--morado-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Comunicación aumentativa</p>
+        <h1 class="portada__titulo">Comunicación<br />en el bolsillo</h1>
+        <p class="portada__subtitulo">Un tablero para la clase y un llavero para llevar a todas partes.</p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" aria-hidden="true" id="escena"></div>
+      <div class="pegatina" aria-hidden="true"><b>Gratis</b>tablero<br />y llavero</div>
+    </section>
+
+    <!-- ======================================================================
+         TABLERO DE 45 CASILLAS
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="encabezado">
+        <h1>Mi tablero</h1>
+        <p class="rellenar">Nombre:<span></span></p>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ul class="tablero" id="tablero" aria-label="Tablero de comunicación de 45 casillas, ordenado por columnas"></ul>
+      <ul class="leyenda" aria-label="Clave de colores">
+        <li class="personas">Personas</li>
+        <li class="acciones">Acciones</li>
+        <li class="descripciones">Cómo es y cuánto</li>
+        <li class="necesidades">Cosas y necesidades</li>
+        <li class="social">Social y expresiones</li>
+        <li class="miscelanea">Preguntas y otras</li>
+        <li class="hueco-libre">Hueco para una palabra tuya</li>
+      </ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón
+        (España). Tablero: IdEducando, CC BY-NC-SA 4.0.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PRIMER TABLERO DE 12 CASILLAS
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="encabezado">
+        <h1>Mi primer tablero</h1>
+        <p class="rellenar">Nombre:<span></span></p>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ul class="tablero-grande" id="tablero-grande" aria-label="Primer tablero de 12 casillas grandes"></ul>
+      <p class="atribucion">
+        Casillas grandes para empezar o para quien señala con la mano entera. Los colores son los mismos que en el tablero de
+        45. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         LLAVERO: HOJA 1
+         ====================================================================== -->
+    <section class="vertical">
+      <div class="encabezado">
+        <h1>Llavero de comunicación</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Recorta por la línea de puntos, plastifica y perfora el círculo. Une las tarjetas con una anilla de 25 mm.
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+      <div class="hoja-tarjetas" id="tarjetas-1"></div>
+    </section>
+
+    <!-- ======================================================================
+         LLAVERO: HOJA 2
+         ====================================================================== -->
+    <section class="vertical">
+      <div class="encabezado">
+        <h1>Tarjetas para completar</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        La tarjeta «Para hablar conmigo» va la primera de la anilla: es para monitores de comedor y de patio, conserjes y
+        cualquier adulto nuevo. En las tarjetas en blanco pega los pictogramas que tu alumno o alumna ya conoce.
+      </p>
+      <div class="hoja-tarjetas" id="tarjetas-2">
+        <article class="tarjeta">
+          <div class="tarjeta__cabecera"><h2>Para hablar conmigo</h2></div>
+          <div class="tarjeta__texto">
+            <ol>
+              <li>Ponte a mi altura y di mi nombre.</li>
+              <li>Señala los dibujos mientras hablas.</li>
+              <li>Espera. A veces tardo en responder.</li>
+              <li>Lo que señalo cuenta: respóndeme.</li>
+            </ol>
+            <p class="firma">Llavero de comunicación · ideducando.es</p>
+          </div>
+        </article>
+        <article class="tarjeta">
+          <div class="tarjeta__cabecera"><h2>Para hablar conmigo</h2></div>
+          <div class="tarjeta__texto">
+            <ol>
+              <li>Ponte a mi altura y di mi nombre.</li>
+              <li>Señala los dibujos mientras hablas.</li>
+              <li>Espera. A veces tardo en responder.</li>
+              <li>Lo que señalo cuenta: respóndeme.</li>
+            </ol>
+            <p class="firma">Llavero de comunicación · ideducando.es</p>
+          </div>
+        </article>
+        <article class="tarjeta">
+          <div class="tarjeta__cabecera"><h2>Me llamo</h2><span class="raya"></span></div>
+          <div class="tarjeta__texto">
+            <p class="linea">Mi cole:<span></span></p>
+            <p class="linea">Mi clase:<span></span></p>
+            <p class="linea">Teléfono del cole:<span></span></p>
+            <p class="nota">Escribe solo esto. Nunca la dirección de casa.</p>
+          </div>
+        </article>
+        <article class="tarjeta">
+          <div class="tarjeta__cabecera"><h2>Me llamo</h2><span class="raya"></span></div>
+          <div class="tarjeta__texto">
+            <p class="linea">Mi cole:<span></span></p>
+            <p class="linea">Mi clase:<span></span></p>
+            <p class="linea">Teléfono del cole:<span></span></p>
+            <p class="nota">Escribe solo esto. Nunca la dirección de casa.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES Y OTROS ADULTOS
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes y otros adultos <span class="borrador">[BORRADOR]</span></p>
+      <h1>Un tablero se aprende viéndolo usar</h1>
+      <p>
+        Un niño o una niña aprende a hablar después de oír hablar a su alrededor durante miles de horas. Con un tablero pasa
+        lo mismo: aprende a usarlo cuando ve a los adultos señalar en él mientras hablan. Esto se llama
+        <strong>modelar</strong>, y es la base de la intervención con sistemas aumentativos y alternativos de comunicación
+        (SAAC), las formas de comunicarse que se suman al habla o la sustituyen (Sennott, Light y McNaughton, 2016).
+      </p>
+
+      <h2>Por qué estas palabras</h2>
+      <p id="nucleo">
+        El tablero recoge <strong>vocabulario núcleo</strong>: las palabras que usamos a todas horas y en cualquier sitio,
+        como «quiero», «más», «eso», «no» u «otro». En escolares que hablan inglés, unas 200 palabras suman cerca del 80 %
+        de lo que dicen, y casi ninguna es un sustantivo (Boenisch y Soto, 2015). En español apenas hay estudios: Soto y
+        Cooper (2021) proponen un vocabulario inicial de 218 palabras. Las listas núcleo dejan fuera palabras muy
+        personales (Laubscher y Light, 2020): para ellas están el hueco en blanco y el llavero.
+      </p>
+
+      <h2>Cuatro pasos para modelar</h2>
+      <p>
+        Señalar, esperar y responder acompañaban al modelado en los estudios con mejores resultados (O'Neill, Light y Pope,
+        2018).
+      </p>
+      <ol class="pasos">
+        <li class="acciones">
+          <strong>Señala mientras hablas</strong>Toca una o dos palabras clave de cada frase. «¿Quieres más?»: quiero, más.
+        </li>
+        <li class="descripciones">
+          <strong>Espera</strong>Cuenta hasta diez en silencio, mirando con interés. El silencio también es una invitación.
+        </li>
+        <li class="social">
+          <strong>Responde a todo</strong>Si señala algo, aunque parezca por casualidad, respóndele como si lo hubiera dicho.
+        </li>
+        <li class="necesidades">
+          <strong>Añade una palabra</strong>Si señala «más», tú señalas y dices «quiero más». Su frase crece con la tuya.
+        </li>
+      </ol>
+
+      <h2>Lo que evitamos</h2>
+      <ul>
+        <li>Pedirle que señale para comprobar si sabe: «¿Dónde está comer?». Modelar es hablar, no examinar.</li>
+        <li>Exigir «por favor» o una frase completa antes de darle lo que pide.</li>
+        <li>Guardar el tablero en un cajón o retirarlo como castigo. Es su forma de hablar.</li>
+        <li>
+          Cambiar las casillas de sitio. Cuando cada palabra está siempre en el mismo lugar, la mano aprende el camino y
+          señala más rápido.
+        </li>
+      </ul>
+
+      <h2 class="salto">En el día a día</h2>
+      <table class="momentos">
+        <thead>
+          <tr>
+            <th scope="col">Momento</th>
+            <th scope="col">Lo que dices</th>
+            <th scope="col">Lo que señalas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Asamblea</th>
+            <td>«Hola a todos. ¿Quién falta hoy?»</td>
+            <td><span class="chip social">hola</span><span class="chip miscelanea">¿quién?</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Almuerzo</th>
+            <td>«¿Quieres más? ¿Más agua?»</td>
+            <td><span class="chip acciones">quiero</span><span class="chip descripciones">más</span><span class="chip necesidades">agua</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Juego</th>
+            <td>«Ahora juego yo. Tú, espera.»</td>
+            <td><span class="chip acciones">jugar</span><span class="chip personas">yo</span><span class="chip acciones">esperar</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Plástica</th>
+            <td>«Mira, es grande. ¿Quieres otro color?»</td>
+            <td><span class="chip acciones">mirar</span><span class="chip descripciones">grande</span><span class="chip descripciones">otro</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Al terminar</th>
+            <td>«¿Ya está? Lo has hecho muy bien.»</td>
+            <td><span class="chip acciones">ya está</span><span class="chip descripciones">bien</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Recoger</th>
+            <td>«Ponemos todo aquí.»</td>
+            <td><span class="chip acciones">poner</span><span class="chip descripciones">todo</span><span class="chip descripciones">aquí</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de participar:</p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>Si señalar con un dedo cuesta:</strong> vale el puño, un puntero o la mirada, con el tablero en un atril.</li>
+          <li>
+            <strong>Barrido con ayuda:</strong> el adulto recorre las columnas y el alumno o la alumna confirma con un gesto
+            acordado.
+          </li>
+          <li><strong>Para toda la clase:</strong> imprime el tablero en A3 y cuélgalo en la pared. Sirve a todo el grupo y no señala a nadie.</li>
+        </ul>
+        <ul>
+          <li>
+            <strong>Para empezar:</strong> el primer tablero de 12 casillas, o tapa casillas del grande y destápalas poco a
+            poco sin moverlas de sitio.
+          </li>
+          <li><strong>El hueco en blanco:</strong> pega la palabra del día, por ejemplo la actividad o algo que le encanta.</li>
+          <li>
+            <strong>Los colores:</strong> siguen la clave de ARASAAC y ayudan sobre todo al adulto a encontrar las palabras. Si
+            a alguien le distraen, imprime en blanco y negro (Light y otros, 2019).
+          </li>
+        </ul>
+      </div>
+
+      <h2>Dudas frecuentes</h2>
+      <div class="dos-columnas" style="align-items: start">
+        <div class="caja caja--amarilla">
+          <h3>¿Le quitará las ganas de hablar?</h3>
+          <p id="mito-habla">
+            No. Las revisiones de estudios no han encontrado que los SAAC frenen el habla, y en muchos casos el habla mejora
+            (Millar, Light y Schlosser, 2006; Schlosser y Wendt, 2008).
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>¿Tiene que saber algo antes de empezar?</h3>
+          <p>
+            No hay requisitos previos. No hace falta leer, ni reconocer todos los pictogramas, ni «estar preparado»: se
+            aprende usándolo (Romski y Sevcik, 2005).
+          </p>
+        </div>
+      </div>
+
+      <h2 class="salto">Un derecho, además de un recurso</h2>
+      <p>
+        La Convención sobre los derechos de las personas con discapacidad incluye los modos y formatos aumentativos y
+        alternativos en su definición de comunicación (artículo 2) y pide a los Estados facilitar su aprendizaje en la
+        escuela (artículo 24.3). España la ratificó en 2008 (BOE de 21 de abril de 2008). La Ley General de derechos de las
+        personas con discapacidad cita los sistemas aumentativos y alternativos y los pictogramas entre los medios de
+        accesibilidad cognitiva (Real Decreto Legislativo 1/2013, artículo 2.k). Y la Ley Orgánica de Educación encarga a
+        las administraciones educativas poner los recursos que necesita el alumnado con necesidades específicas de apoyo
+        educativo (artículos 71 y 72).
+      </p>
+
+      <h2>Anota sus avances</h2>
+      <p>
+        Cada semana o cada quincena, apunta qué palabras has modelado y cuáles ha señalado por su cuenta. Con estas notas
+        verás qué palabras ya son suyas y cuáles conviene modelar más.
+      </p>
+      <table class="seguimiento">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Palabras que he modelado</th>
+            <th scope="col">Palabras que ha señalado por su cuenta</th>
+            <th scope="col">Dónde y con quién</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="creditos">
+        <p>
+          <strong>Comunicación en el bolsillo: tablero y llavero de comunicación.</strong> IdEducando, octubre de 2026.
+          Ficha y novedades: <span class="url">ideducando.es/material-gratuito/tablero-comunicacion-basico</span>
+        </p>
+        <p id="fuentes">
+          Fuentes: Boenisch y Soto (2015), <em>AAC</em>, 31(1), 77-84; Soto y Cooper (2021), <em>AAC</em>, 37(1), 64-74;
+          Laubscher y Light (2020), <em>AAC</em>, 36(1), 43-53; Sennott, Light y McNaughton (2016), <em>Research and Practice
+          for Persons with Severe Disabilities</em>, 41(2), 101-115; O'Neill, Light y Pope (2018), <em>Journal of Speech,
+          Language, and Hearing Research</em>, 61(7), 1743-1765; Light y otros (2019), <em>AAC</em>, 35(1), 42-55; Millar,
+          Light y Schlosser (2006), <em>JSLHR</em>, 49(2), 248-264; Schlosser y Wendt (2008), <em>American Journal of
+          Speech-Language Pathology</em>, 17(3), 212-230; Romski y Sevcik (2005), <em>Infants &amp; Young Children</em>,
+          18(3), 174-185; Convención sobre los derechos de las personas con discapacidad (BOE de 21/04/2008); Real Decreto
+          Legislativo 1/2013. <em>AAC</em>: revista <em>Augmentative and Alternative Communication</em>.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Un tablero para hablar también en casa</h1>
+      <p>
+        En clase usamos un tablero de comunicación. Tiene dibujos, que se llaman pictogramas, con las palabras que más
+        usamos.
+      </p>
+      <p>
+        Sirve para que vuestro hijo o vuestra hija pueda decir lo que quiere, lo que no quiere y lo que siente. Cuanto más lo
+        vea usar en casa, antes lo hará suyo.
+      </p>
+
+      <h2>Cómo usarlo en casa</h2>
+      <ol>
+        <li>Dejadlo siempre a mano: en la nevera, en la mesa o en la mochila.</li>
+        <li>
+          Señalad los dibujos mientras habláis. Por ejemplo, decid «¿Quieres más?» y tocad
+          <span class="mini acciones"><img src="pictogramas/5441.png" alt="" />quiero</span> y
+          <span class="mini descripciones"><img src="pictogramas/3220.png" alt="" />más</span>.
+        </li>
+        <li>Esperad un poco después de preguntar. No hace falta que conteste con la voz.</li>
+        <li>Responded siempre a lo que señala, aunque no sea lo que esperabais.</li>
+      </ol>
+
+      <h2>Preguntas que nos hacen</h2>
+      <p><strong>¿Dejará de hablar?</strong> No. Usar el tablero no frena el habla. Muchas veces la ayuda.</p>
+      <p>
+        <strong>¿Y si señala cualquier cosa?</strong> Respondedle como si lo hubiera dicho con palabras. Así aprende que
+        señalar sirve para algo.
+      </p>
+      <p>
+        <strong>¿Lo tiene que usar siempre?</strong> Lo usa cuando lo necesita, igual que vosotros usáis el móvil para
+        escribir un mensaje. Lo importante es que esté a mano.
+      </p>
+
+      <div class="mensaje">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Comunicación en el bolsillo.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // Palabras del material: [palabra, número del pictograma en ARASAAC, tipo de palabra].
+      // Para cambiar una palabra, cambia aquí el texto y el número (búscalo en arasaac.org)
+      // y guarda el pictograma en la carpeta pictogramas/ con ese número.
+
+      // Tablero de 45, columna a columna (de arriba abajo).
+      const TABLERO = [
+        ['yo', 6632, 'personas'], ['tú', 6625, 'personas'], ['él', 6481, 'personas'], ['ella', 7029, 'personas'], ['eso', 7091, 'personas'],
+        ['quiero', 5441, 'acciones'], ['me gusta', 37721, 'acciones'], ['puedo', 35949, 'acciones'], ['ir', 8142, 'acciones'], ['hacer', 32751, 'acciones'],
+        ['poner', 32757, 'acciones'], ['mirar', 6564, 'acciones'], ['ayudar', 32648, 'acciones'], ['jugar', 6537, 'acciones'], ['dar', 17040, 'acciones'],
+        ['comer', 6456, 'acciones'], ['beber', 6061, 'acciones'], ['abrir', 24825, 'acciones'], ['esperar', 36914, 'acciones'], ['hablar', 6517, 'acciones'],
+        ['más', 3220, 'descripciones'], ['otro', 17054, 'descripciones'], ['todo', 5596, 'descripciones'], ['igual', 4667, 'descripciones'], ['diferente', 4628, 'descripciones'],
+        ['bien', 5397, 'descripciones'], ['mal', 5504, 'descripciones'], ['grande', 4658, 'descripciones'], ['pequeño', 4716, 'descripciones'], ['aquí', 5382, 'descripciones'],
+        ['¿qué?', 22620, 'miscelanea'], ['¿dónde?', 7764, 'miscelanea'], ['¿quién?', 9853, 'miscelanea'], ['hola', 6522, 'social'], ['adiós', 6028, 'social'],
+        ['sí', 5584, 'social'], ['gracias', 8129, 'social'], ['no', 5526, 'descripciones'], ['¡para!', 7196, 'acciones'], ['ya está', 28429, 'acciones'],
+        ['baño', 38603, 'necesidades'], ['agua', 32464, 'necesidades'], ['descanso', 24503, 'necesidades'], ['me duele', 30620, 'necesidades'], [null, null, 'hueco-libre'],
+      ];
+
+      // Primer tablero de 12, columna a columna.
+      const PRIMER_TABLERO = [
+        ['quiero', 5441, 'acciones'], ['me gusta', 37721, 'acciones'], ['ayudar', 32648, 'acciones'],
+        ['ir', 8142, 'acciones'], ['jugar', 6537, 'acciones'], ['mirar', 6564, 'acciones'],
+        ['más', 3220, 'descripciones'], ['otro', 17054, 'descripciones'], ['baño', 38603, 'necesidades'],
+        ['sí', 5584, 'social'], ['no', 5526, 'descripciones'], ['ya está', 28429, 'acciones'],
+      ];
+
+      // Tarjetas del llavero: seis palabras cada una, por filas.
+      const TARJETAS = [
+        ['Lo básico', [['quiero', 5441, 'acciones'], ['más', 3220, 'descripciones'], ['ayudar', 32648, 'acciones'], ['no', 5526, 'descripciones'], ['ya está', 28429, 'acciones'], ['sí', 5584, 'social']]],
+        ['Necesito', [['baño', 38603, 'necesidades'], ['agua', 32464, 'necesidades'], ['hambre', 7272, 'necesidades'], ['descanso', 24503, 'necesidades'], ['me duele', 30620, 'necesidades'], ['ruido', 7157, 'necesidades']]],
+        ['Emociones', [['feliz', 35547, 'descripciones'], ['triste', 35545, 'descripciones'], ['enfado', 35539, 'descripciones'], ['miedo', 39248, 'descripciones'], ['cansancio', 35537, 'descripciones'], ['nervios', 30391, 'descripciones']]],
+        ['En el patio', [['jugar', 6537, 'acciones'], ['columpio', 4608, 'necesidades'], ['tobogán', 4759, 'necesidades'], ['pelota', 3241, 'necesidades'], ['me toca', 7158, 'social'], ['esperar', 36914, 'acciones']]],
+        ['En el comedor', [['comer', 6456, 'acciones'], ['beber', 6061, 'acciones'], ['más', 3220, 'descripciones'], ['no me gusta', 7179, 'social'], ['ayudar', 32648, 'acciones'], ['ya está', 28429, 'acciones']]],
+        ['En el baño', [['váter', 38603, 'necesidades'], ['papel', 2862, 'necesidades'], ['lavar manos', 8975, 'acciones'], ['ayudar', 32648, 'acciones'], ['esperar', 36914, 'acciones'], ['ya está', 28429, 'acciones']]],
+        ['En clase', [['mirar', 6564, 'acciones'], ['escuchar', 6572, 'acciones'], ['lápiz', 2440, 'necesidades'], ['no entiendo', 37827, 'social'], ['otra vez', 37162, 'social'], ['descanso', 24503, 'necesidades']]],
+        ['Hablamos', [['hola', 6522, 'social'], ['adiós', 6028, 'social'], ['gracias', 8129, 'social'], ['me gusta', 37721, 'acciones'], ['¿qué?', 22620, 'miscelanea'], ['¿dónde?', 7764, 'miscelanea']]],
+      ];
+
+      function casilla([palabra, id, tipo]) {
+        const li = document.createElement('li');
+        li.className = `casilla ${tipo}`;
+        if (palabra) {
+          li.innerHTML = `<span class="picto"><img src="pictogramas/${id}.png" alt=""></span><span class="palabra">${palabra}</span>`;
+        } else {
+          li.innerHTML = '<span class="picto"></span><span class="palabra">tu palabra</span>';
+        }
+        return li;
+      }
+
+      function tarjeta(titulo, palabras, etiqueta = 'h3') {
+        const art = document.createElement('article');
+        art.className = 'tarjeta';
+        const cabecera = titulo
+          ? `<${etiqueta}>${titulo}</${etiqueta}>`
+          : '<span class="raya"></span>';
+        art.innerHTML = `<div class="tarjeta__cabecera">${cabecera}</div><ul class="tarjeta__casillas"></ul>`;
+        const lista = art.querySelector('ul');
+        for (const p of palabras) lista.append(casilla(p));
+        return art;
+      }
+
+      for (const p of TABLERO) document.getElementById('tablero').append(casilla(p));
+      for (const p of PRIMER_TABLERO) document.getElementById('tablero-grande').append(casilla(p));
+      for (const [titulo, palabras] of TARJETAS) document.getElementById('tarjetas-1').append(tarjeta(titulo, palabras, 'h2'));
+      const vacias = Array.from({ length: 6 }, () => [null, null, 'hueco-libre']);
+      for (let i = 0; i < 4; i++) document.getElementById('tarjetas-2').append(tarjeta('', vacias));
+
+      // Ilustración de la portada: cuatro tarjetas del llavero abiertas en abanico.
+      const escena = document.getElementById('escena');
+      const abanico = [
+        [TARJETAS[7], 56],
+        [TARJETAS[3], 40],
+        [TARJETAS[2], 24],
+        [TARJETAS[0], 8],
+      ];
+      for (const [[titulo, palabras], giro] of abanico) {
+        const t = tarjeta(titulo, palabras, 'p');
+        t.style.transform = `scale(1.26) rotate(${giro}deg)`;
+        escena.append(t);
+      }
+      escena.insertAdjacentHTML(
+        'beforeend',
+        `<svg class="anilla" viewBox="0 0 30 30"><defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#d9dde6"/><stop offset=".45" stop-color="#8a93a8"/><stop offset=".7" stop-color="#eef0f5"/><stop offset="1" stop-color="#6c7590"/>
+        </linearGradient></defs><circle cx="15" cy="15" r="11.5" fill="none" stroke="url(#metal)" stroke-width="3.2"/></svg>`,
+      );
+    </script>
+  </body>
+</html>
