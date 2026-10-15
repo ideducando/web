@@ -31,6 +31,7 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 - Letras con Fontsource, servidas desde la propia web: nada de Google Fonts ni de otros servidores externos.
 - Contraste: enlaces en #2B6CD5 (4,65:1 sobre crema); el verde y el coral no se usan para texto.
 - PDF y portadas: herramientas/generar.mjs. Revisión de enlaces y accesibilidad (axe-core, WCAG 2.2 AA): herramientas/comprobar.mjs, que también se ejecuta en cada PR.
+- Maquetación: las columnas de las rejillas van con minmax(0, 1fr) para que nada ensanche la página en el móvil, y html y body recortan en horizontal (overflow-x: clip). Si un enlace o una negrita empiezan en otra línea, se pone {' '} al final de la anterior: Astro quita ese espacio. La revisión lo comprueba todo, también con WebKit (Safari).
 - Publicación: .github/workflows/publicar.yml en cada merge a main.
 
 ## Reglas

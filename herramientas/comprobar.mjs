@@ -1,5 +1,5 @@
 // Revisa la web ya construida (carpeta dist/):
-//   1. Que todos los enlaces y archivos internos existen.
+//   1. Que todos los enlaces y archivos internos existen y que ningún texto queda pegado a un enlace.
 //   2. Que cada página pasa la revisión automática de accesibilidad de axe-core
 //      con las pautas WCAG 2.2 de nivel A y AA.
 //   3. Que nada se sale de la pantalla en el móvil, ni en Chromium (Chrome) ni en WebKit (Safari).
@@ -62,6 +62,21 @@ console.log(`Enlaces revisados en ${paginas.length} páginas.`);
 if (rotos.length) {
   console.error(`\n${rotos.length} enlaces internos rotos:`);
   for (const r of rotos) console.error(`  ${r}`);
+}
+
+// Palabras pegadas a un enlace o a una negrita, como «con la<a>lista</a>». Astro quita el salto de
+// línea que hay entre un texto y la etiqueta que empieza en la línea siguiente: hay que escribir {' '}.
+const pegadas = [];
+for (const archivo of paginas) {
+  const html = readFileSync(archivo, 'utf8');
+  const patron = /(.{0,25})([\p{L}\p{N},;:]<(?:a|strong|em)\b[^>]*>|<\/(?:a|strong|em)>[\p{L}\p{N}])(.{0,20})/gu;
+  for (const [, antes, pegado, despues] of html.matchAll(patron)) {
+    pegadas.push(`${archivo.replace(dist, '')} → …${(antes + pegado + despues).replace(/\s+/g, ' ')}…`);
+  }
+}
+if (pegadas.length) {
+  console.error(`\n${pegadas.length} palabras pegadas a un enlace o a una negrita (falta un espacio):`);
+  for (const p of pegadas) console.error(`  ${p}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -199,8 +214,10 @@ console.log(
   `\nRevisadas ${urls.length} páginas: accesibilidad en móvil (390 px) y en escritorio (1280 px), ` +
     'y que nada se salga de la pantalla también a 320 px y con WebKit, el motor de Safari.',
 );
-if (rotos.length || problemas) {
-  console.error(`\nResultado: ${rotos.length} enlaces rotos y ${problemas} problemas de accesibilidad.`);
+if (rotos.length || pegadas.length || problemas) {
+  console.error(
+    `\nResultado: ${rotos.length} enlaces rotos, ${pegadas.length} palabras pegadas y ${problemas} problemas de accesibilidad o de ancho.`,
+  );
   process.exit(1);
 }
 console.log('Resultado: todo correcto.');

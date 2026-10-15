@@ -30,7 +30,7 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, '') + '/';
     </div>
     <noscript>
       <p class="aviso">
-        El buscador necesita JavaScript. Mientras tanto, puedes recorrer el
+        El buscador necesita JavaScript. Mientras tanto, puedes recorrer el{' '}
         <a href={ruta('/material-gratuito/')}>catálogo de material gratuito</a>.
       </p>
     </noscript>
@@ -76,6 +76,7 @@ const base = import.meta.env.BASE_URL.replace(/\/+$/, '') + '/';
 
   .buscar__rejilla {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem 2.5rem;
   }
 

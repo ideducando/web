@@ -29,7 +29,7 @@ Un PR (*pull request*, «solicitud de cambios») es como una orden de trabajo en
 
 1. Entra en la pestaña **Pull requests** del repositorio y abre el PR de la web.
 2. Mira la pestaña **Files changed** si quieres ver los cambios, o el resumen del principio.
-3. Abajo verás la comprobación automática **Comprobar la web**. Si sale en verde, la web se construye bien, no tiene enlaces rotos y pasa la revisión de accesibilidad.
+3. Abajo verás la comprobación automática **Comprobar la web**. Si sale en verde, la web se construye bien, no tiene enlaces rotos, pasa la revisión de accesibilidad y nada se sale de la pantalla en el móvil, ni en Chrome ni en Safari.
 4. Pulsa **Merge pull request** y después **Confirm merge**.
 
 A los dos o tres minutos la web estará publicada. Lo puedes seguir en la pestaña **Actions**.

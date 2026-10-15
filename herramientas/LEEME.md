@@ -7,7 +7,7 @@ Programas de apoyo que **no se publican** en la web. Sirven para generar los PDF
 ```bash
 cd herramientas
 npm install
-npx playwright install chromium   # el navegador que imprime los PDF y revisa la web
+npx playwright install chromium webkit   # los navegadores que imprimen los PDF y revisan la web
 ```
 
 También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa.
@@ -32,6 +32,8 @@ Primero hay que construirla desde la raíz del proyecto con `npm run build`. Des
 npm run comprobar
 ```
 
-Revisa que no haya enlaces internos rotos y pasa axe-core (una herramienta de revisión automática de accesibilidad) por todas las páginas, en móvil y en escritorio, con las pautas WCAG 2.2 de nivel A y AA. Lo mismo se ejecuta solo en cada PR.
+Revisa que no haya enlaces internos rotos ni palabras pegadas a un enlace o a una negrita, y pasa axe-core (una herramienta de revisión automática de accesibilidad) por todas las páginas, en móvil y en escritorio, con las pautas WCAG 2.2 de nivel A y AA. También comprueba que nada se salga de la pantalla: imitando un iPhone a 390 px, en un móvil pequeño de 320 px y con WebKit, el motor de Safari. Lo mismo se ejecuta solo en cada PR.
+
+Si en tu equipo no está instalado WebKit, esa pasada se omite con un aviso; en GitHub Actions siempre se hace.
 
 La revisión automática no lo detecta todo: antes de quitar el borrador hay que probar también con teclado y con un lector de pantalla.

@@ -71,7 +71,7 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
       </ul>
       <div class="aviso aviso--info" data-sin-resultados hidden>
         <p>
-          No hay materiales con esa combinación todavía. Prueba a quitar algún filtro o
+          No hay materiales con esa combinación todavía. Prueba a quitar algún filtro o{' '}
           <a href={ruta('/contacto/')}>cuéntanos qué te haría falta</a>.
         </p>
       </div>
@@ -82,18 +82,20 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
 <style>
   .atajos {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.9rem;
     padding-block: 1.75rem 0.5rem;
   }
 
   .atajos__fila {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0.4rem;
   }
 
   @media (min-width: 48em) {
     .atajos__fila {
-      grid-template-columns: 11rem 1fr;
+      grid-template-columns: 11rem minmax(0, 1fr);
       align-items: baseline;
     }
   }
@@ -108,13 +110,14 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
 
   .catalogo {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem 2rem;
     padding-block: 1rem 4rem;
   }
 
   @media (min-width: 60em) {
     .catalogo {
-      grid-template-columns: 17rem 1fr;
+      grid-template-columns: 17rem minmax(0, 1fr);
       align-items: start;
     }
   }
