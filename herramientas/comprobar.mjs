@@ -26,9 +26,10 @@ if (!existsSync(dist)) {
   process.exit(1);
 }
 
-// La base de las direcciones (/web en GitHub Pages, ninguna en Netlify) se lee de la propia web construida.
+// La base de las direcciones se lee de la propia web construida. Hoy no hay ninguna:
+// la web va en la raíz. Si algún día se publicara bajo una carpeta, esto la detectaría solo.
 const canonica = readFileSync(join(dist, 'index.html'), 'utf8').match(/<link rel="canonical" href="([^"]+)"/)?.[1];
-const BASE = canonica ? new URL(canonica).pathname.replace(/\/+$/, '') : '/web';
+const BASE = canonica ? new URL(canonica).pathname.replace(/\/+$/, '') : '';
 
 // ---------------------------------------------------------------------------
 // 1. Enlaces internos

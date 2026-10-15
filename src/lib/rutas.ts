@@ -1,9 +1,9 @@
-// Ayudas para construir enlaces que funcionen en cualquier dirección: en la raíz
-// (Netlify: ideducando.netlify.app y después ideducando.es) o bajo /web (GitHub Pages).
+// Ayudas para construir enlaces internos. Hoy la web va en la raíz (Netlify: ideducando.netlify.app
+// y después ideducando.es); si algún día se publicara bajo una carpeta, ruta() se la añadiría sola.
 
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 
-/** Enlace interno: ruta('/contacto/') → '/contacto/' en Netlify y '/web/contacto/' en GitHub Pages. */
+/** Enlace interno: ruta('/contacto/') → '/contacto/'. */
 export function ruta(camino = '/'): string {
   if (/^(https?:|mailto:|tel:|#)/.test(camino)) return camino;
   const limpio = camino.startsWith('/') ? camino : `/${camino}`;
