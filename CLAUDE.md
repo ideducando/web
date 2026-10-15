@@ -24,7 +24,7 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 - En la web no salen nombres ni fotos del equipo hasta que cada persona lo autorice.
 
 ## Técnica
-- Astro genera la web estática. Se publica en la raíz de ideducando.netlify.app (después, ideducando.es); astro.config.mjs toma la dirección de las variables de Netlify y, fuera de Netlify, usa ideducando.netlify.app.
+- Astro genera la web estática. Se publica en la raíz de www.ideducando.es, la dirección principal desde el 15/10/2026 (ideducando.es e ideducando.netlify.app llevan ahí); astro.config.mjs toma la dirección de las variables de Netlify y, fuera de Netlify, usa www.ideducando.es.
 - Contenidos en Markdown: src/content/materiales, src/content/consejos y src/content/paginas. Datos en src/data (calendario, ajustes, lista de la programación). El esquema está en src/content.config.ts y las categorías en src/data/taxonomias.ts, que deben coincidir con .pages.yml.
 - Editor visual: Pages CMS (.pages.yml). Buscador: Pagefind, se genera con npm run build.
 - Enlaces internos con ruta() de src/lib/rutas.ts. En Markdown se escriben desde la raíz (/oposiciones/).

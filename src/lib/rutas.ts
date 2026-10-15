@@ -1,5 +1,5 @@
-// Ayudas para construir enlaces internos. Hoy la web va en la raíz (Netlify: ideducando.netlify.app
-// y después ideducando.es); si algún día se publicara bajo una carpeta, ruta() se la añadiría sola.
+// Ayudas para construir enlaces internos. La web va en la raíz de www.ideducando.es; si algún día
+// se publicara bajo una carpeta, ruta() se la añadiría sola.
 
 const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
 

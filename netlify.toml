@@ -16,3 +16,13 @@
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# La dirección principal es www.ideducando.es (15/10/2026). Netlify ya lleva ahí a quien
+# entra por ideducando.es; esta regla hace lo mismo con la dirección de Netlify, para que
+# los enlaces antiguos, como los de los PDF descargados antes, acaben en el dominio.
+# Las vistas previas de los PR tienen otra dirección y no les afecta.
+[[redirects]]
+  from = "https://ideducando.netlify.app/*"
+  to = "https://www.ideducando.es/:splat"
+  status = 301
+  force = true
