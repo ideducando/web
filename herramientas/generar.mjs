@@ -61,6 +61,28 @@ const DOCUMENTOS = [
     asunto: 'Hoja de registro de observación ABC: antecedente, conducta y consecuencia',
     palabras: 'registro ABC, observación, conducta, apoyo conductual positivo, Infantil, Primaria',
   },
+  {
+    id: 'tablero-comunicacion-basico',
+    asunto:
+      'Tablero de comunicación de vocabulario núcleo, primer tablero de 12 casillas y llavero de comunicación con pictogramas de ARASAAC, con guía de modelado y nota para las familias',
+    palabras: 'comunicación aumentativa, SAAC, CAA, vocabulario núcleo, tablero de comunicación, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
+  {
+    id: 'programa-intervencion-pt-ejemplo',
+    asunto:
+      'Programa de intervención de Pedagogía Terapéutica de ejemplo, modelo de la Región de Murcia, comentado con los indicadores del tribunal',
+    palabras: 'oposiciones, Pedagogía Terapéutica, programa de intervención, unidades de actuación, PAP, Región de Murcia, anexo XXII',
+  },
+  {
+    id: 'rincon-de-la-calma',
+    asunto: 'Rincón de la calma: termómetro de emociones de cinco niveles, cartel, tarjetas de estrategias y plan de calma personal',
+    palabras: 'rincón de la calma, regulación emocional, autorregulación, emociones, apoyo conductual positivo, Infantil, Primaria',
+  },
+  {
+    id: 'cuento-lectura-facil-cole-nuevo',
+    asunto: 'Cuento escrito con las pautas de lectura fácil para anticipar el primer día en un colegio nuevo, con versión para fotos del centro',
+    palabras: 'lectura fácil, cuento adaptado, anticipación, acogida, cambio de colegio, TEA, pictogramas, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
