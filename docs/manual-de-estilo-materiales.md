@@ -19,12 +19,12 @@ Cada material lleva una ficha con estos datos. Se rellenan en el editor visual (
 | Etapas | Infantil, Primaria |
 | Necesidades | TEA, TDL, discapacidad intelectual, toda la clase (DUA) |
 | Edades | De 3 a 10 años |
-| Formato y páginas | PDF imprimible (A4), 4 páginas |
-| Tiempo de preparación | 15 minutos la primera vez |
-| Qué necesitas | 20 círculos de velcro adhesivo de 1,5 cm: 10 rugosos y 10 suaves |
-| Qué imprimir | Páginas 3 y 4, en cartulina blanca A4 de 160 g y a color |
-| Cómo montarlo, paso a paso | Un paso por línea, hasta tener el material terminado |
-| Lo que tendrás al terminar | Una agenda plastificada con sus tarjetas |
+| Formato y páginas | PDF imprimible (A4), 5 páginas |
+| Tiempo de preparación | 1 hora para imprimir, plastificar, recortar y pegar el velcro |
+| Qué necesitas | 74 círculos de velcro adhesivo de 1,5 cm: 37 rugosos y 37 suaves |
+| Qué imprimir | Páginas 1, 3 y 4, en cartulina blanca A4 de 160 g y a color |
+| Cómo montarlo, paso a paso | Un paso por línea, hasta tener la agenda terminada y colgada |
+| Lo que tendrás al terminar | Una agenda semanal, dos tiras del día y un tablero de «primero y después», plastificados y con velcro |
 | Para que dure y sea seguro | Piezas pequeñas lejos de quien se las lleva a la boca |
 | Fuentes | Normativa, estudios o materiales en los que se apoya |
 | Fechas | Publicación y última revisión |

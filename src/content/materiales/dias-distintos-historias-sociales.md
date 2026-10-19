@@ -7,16 +7,38 @@ etapas: [infantil, primaria]
 necesidades: [tea, conducta, discapacidad-intelectual, tdl, toda-la-clase]
 edades: "De 3 a 10 años"
 formato: "PDF imprimible (A4)"
-paginas: 13
+paginas: 14
 archivo: /descargas/dias-distintos-historias-sociales.pdf
 portada: /portadas/dias-distintos-historias-sociales.webp
 portada_alt: "Portada del material: un calendario con seis días de colores marcados con una estrella y un dibujo cada uno: una alarma, una persona nueva, una fiesta, la lluvia, un autobús y un reloj"
-tiempo: "10 minutos para preparar cada historia y unos días de lectura antes del cambio"
+tiempo: "50 minutos para imprimir, plastificar, recortar y pegar el velcro (hacer las fotos, aparte)"
 necesitas:
-  - "Impresora, mejor en color"
-  - "Plastificadora y velcro para las tarjetas"
-  - "Fotos de los espacios del centro (opcional)"
-  - "Cascos para el ruido, si el alumno o la alumna ya los usa"
+  - "7 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina): 6 para historias y 1 para tarjetas"
+  - "7 fundas de plastificar A4 de 125 micras y una plastificadora"
+  - "25 círculos de velcro adhesivo de 1,5 cm, suaves, para las tarjetas"
+  - "6 fotos de los sitios de tu cole, de 4 × 4 cm y sin alumnado, y 1 barra de pegamento"
+  - "1 rotulador de pizarra blanca, para escribir y colorear sobre el plástico"
+  - "Tijeras o una guillotina"
+  - "Impresora, mejor a color: cada historia tiene su color y la estrella amarilla avisa del cambio"
+  - "1 par de cascos para el ruido, si el alumno o la alumna ya los usa"
+imprimir:
+  - "Páginas 3 a 8 (las seis historias) y 10 (las tarjetas): en cartulina, a color."
+  - "Imprime al 100 % («Tamaño real»), sin «Ajustar a la página», para que las tarjetas midan 44 × 21 mm y 60 × 23 mm y quepan en la agenda."
+  - "Página 9 (plantilla): en folio, para escribir las tuyas. Las páginas 11 a 14 se leen en pantalla; imprime la 13 para anotar cómo va y la 14 para casa."
+pasos:
+  - "Imprime las historias que vayas a usar y la hoja de tarjetas en cartulina, a color y al 100 %."
+  - "Antes de plastificar, pega en cada historia la foto del sitio. En las tarjetas en blanco, pega el pictograma y escribe la palabra que necesites."
+  - "Plastifica cada historia en su funda y la hoja de tarjetas entera en otra."
+  - "Recorta las 25 tarjetas por la línea de puntos, sin dejar margen: así caben en las casillas de la agenda. Redondea las esquinas."
+  - "Pega un círculo de velcro suave detrás de cada tarjeta. El rugoso ya está en las casillas de la agenda."
+  - "Escribe la fecha y los huecos de cada historia con el rotulador de pizarra: se borra con un paño y la historia sirve para la próxima vez."
+  - "Guarda las historias y las tarjetas en una carpeta, junto a la agenda."
+resultado: "seis historias plastificadas que puedes rellenar y borrar muchas veces, y 25 tarjetas «Hoy hay un cambio» con velcro, listas para la agenda"
+cuidados:
+  - "Redondea bien las esquinas de las tarjetas: como van sin margen, así el plástico no se levanta."
+  - "Los círculos de velcro son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
+  - "Haz las fotos sin alumnado y con permiso de los adultos que salgan."
+  - "El rotulador de pizarra se borra con un paño seco. Para limpiar el plástico, basta un paño con agua y jabón."
 fuentes:
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
   - "Gray, C. A. y Garand, J. D. (1993). Social Stories: Improving responses of students with autism with accurate social information. Focus on Autistic Behavior, 8(1), 1-10"
@@ -54,7 +76,7 @@ Cada historia cuenta el día en primera persona, con frases cortas y pictogramas
 
 ## Cómo usarlo
 
-1. Elige la historia, escribe la fecha y los huecos, y pega una foto del sitio.
+1. Elige la historia. Pega la foto del sitio antes de plastificarla y escribe la fecha y los huecos con rotulador de pizarra.
 2. Rodead juntos una o dos ideas de «Mi plan» que ya conozca.
 3. Leedla unos días antes, en un momento tranquilo, una o dos veces al día. Colorea una estrella cada vez.
 4. El día del cambio, repasadla por la mañana y pon la tarjeta «Hoy hay un cambio» en su agenda.
