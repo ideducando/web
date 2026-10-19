@@ -7,16 +7,38 @@ etapas: [infantil, primaria]
 necesidades: [tdl, dificultades-aprendizaje, toda-la-clase]
 edades: "De 4 a 7 años"
 formato: "PDF imprimible (A4)"
-paginas: 16
+paginas: 17
 archivo: /descargas/tren-de-las-silabas.pdf
 portada: /portadas/tren-de-las-silabas.webp
 portada_alt: "Portada del material: un tren con una mariposa en la locomotora y cuatro vagones cargados con las sílabas ma, ri, po y sa"
-tiempo: "30 minutos para recortar y plastificar; sesiones de 10 a 15 minutos"
+tiempo: "2 horas para imprimir, recortar y plastificar (menos con guillotina); luego, sesiones de 10 a 15 minutos"
 necesitas:
-  - "Impresora, mejor en color"
-  - "Plastificadora y tijeras"
-  - "Fichas, garbanzos o tapones para cargar los vagones (el material trae fichas para recortar)"
-  - "Pinzas de la ropa (opcional)"
+  - "10 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina)"
+  - "10 fundas de plastificar A4 de 125 micras y una plastificadora"
+  - "1 folio A4 de 80 g para la hoja de seguimiento (y uno por familia, si mandas la nota a casa)"
+  - "Tijeras o una guillotina"
+  - "Impresora, mejor a color: así los dibujos se reconocen mejor"
+  - "12 pinzas de la ropa de madera (opcional), una por tren de «¿Con qué sonido empieza?», para marcar el dibujo que se ha colado"
+  - "1 rotulador de pizarra, para escribir en el carné quién conduce hoy"
+  - "1 sobre grande de tamaño folio o una caja, para guardarlo todo"
+imprimir:
+  - "Páginas 3 a 12 (el tren, las piezas, las tarjetas y las tiras): en cartulina, a color. La 3 es apaisada; la impresora la gira sola."
+  - "Imprime al 100 % («Tamaño real»), sin «Ajustar a la página», para que cada tarjeta mida 56 × 54 mm y quepa en la locomotora."
+  - "Página 13 (seguimiento, apaisada): en folio, en blanco y negro vale. Una hoja por grupo de hasta 13 niños y niñas."
+  - "Las páginas 14 a 16 (guía) se pueden leer en pantalla. Imprime la 17 si vas a mandar la nota a casa."
+  - "Para la asamblea: la página 3 en A3, también a color, en una funda A3."
+pasos:
+  - "Imprime las páginas 3 a 12 en cartulina, a color y al 100 %."
+  - "Recorta las piezas de la página 4 por su borde, y las 72 tarjetas y las 12 tiras de las páginas 5 a 12 por la línea de puntos."
+  - "Antes de plastificar, escribe en las 8 tarjetas en blanco palabras vuestras, como los nombres de la clase, y haz un dibujo en cada una."
+  - "Plastifica el tren en una funda. En las otras 9, deja 5 mm entre pieza y pieza: las piezas de la página 4 en una, 12 tarjetas en cada una de las 6 siguientes y 6 tiras en cada una de las 2 últimas."
+  - "Recorta todo dejando 2 o 3 mm de plástico alrededor y redondea las esquinas con la tijera."
+  - "Guarda las tarjetas, las tiras y las piezas en el sobre o en la caja, junto al tren."
+resultado: "el tren plastificado y, en un sobre, 72 tarjetas, 12 tiras de trenes, 18 fichas de carga, 4 tarjetas de sí y no y 2 carnés de maquinista"
+cuidados:
+  - "El borde de plástico de 2 o 3 mm deja cada pieza sellada: así no se abre aunque la mojen o la doblen."
+  - "Las fichas de carga y las pinzas son piezas pequeñas: guárdalas lejos de quien todavía se lleva cosas a la boca. Si usas garbanzos o tapones, también."
+  - "Para limpiarlo, basta un paño con agua y jabón. El rotulador de pizarra se borra con un paño seco."
 fuentes:
   - "Ehri, L. C., Nunes, S. R., Willows, D. M., Schuster, B. V., Yaghoub-Zadeh, Z. y Shanahan, T. (2001). Phonemic awareness instruction helps children learn to read: Evidence from the National Reading Panel's meta-analysis. Reading Research Quarterly, 36(3), 250-287"
   - "National Early Literacy Panel (2008). Developing Early Literacy: Report of the National Early Literacy Panel. National Institute for Literacy"

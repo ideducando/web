@@ -7,16 +7,40 @@ etapas: [infantil, primaria]
 necesidades: [tdah, conducta, toda-la-clase]
 edades: "De 5 a 12 años"
 formato: "PDF imprimible (A4)"
-paginas: 13
+paginas: 14
 archivo: /descargas/tarjeta-cole-casa-tdah.pdf
 portada: /portadas/tarjeta-cole-casa-tdah.webp
 portada_alt: "Portada del material: una tarjeta con caras sonrientes entre un colegio y una casa, unidos por dos flechas de ida y vuelta"
-tiempo: "30 minutos para prepararla y un minuto al día"
+tiempo: "1 hora para imprimir, recortar, plastificar y preparar el modelo; después, un minuto al día"
 necesitas:
-  - "Impresora, mejor en color"
-  - "Tijeras y pegamento"
-  - "Plastificadora y rotulador de pizarra (opcional)"
-  - "Un reloj de arena o un temporizador y una pinza de ropa"
+  - "4 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina)"
+  - "10 folios A4 de 80 g al mes para las copias de la tarjeta: cada folio da dos, una por día de cole (3 a la semana)"
+  - "3 fundas de plastificar A4 de 125 micras y una plastificadora"
+  - "2 rotuladores de pizarra de punta fina: uno para clase y otro para casa"
+  - "2 pinzas de la ropa de madera, una para cada tira de tiempo"
+  - "1 reloj de arena o un temporizador de cocina, para la tira de tiempo"
+  - "Tijeras y una barra de pegamento"
+  - "Impresora, mejor a color para lo que se plastifica; las copias de la tarjeta pueden ir en blanco y negro"
+imprimir:
+  - "Página 3 (tarjeta de Infantil) o página 4 (de Primaria): una vez, en folio, para hacer el modelo."
+  - "Páginas 6, 7, 9 y 10 (pictogramas, menú, mochilas, tarea y tiras de tiempo): en cartulina, a color."
+  - "Imprime al 100 % («Tamaño real»), sin «Ajustar a la página», para que cada pictograma quepa en su hueco de 15 mm."
+  - "Página 8 (registro y gráfica): en folio, una cada 4 semanas. En blanco y negro vale."
+  - "Las páginas 5 y 11 a 13 (banco de objetivos y guía) se pueden leer en pantalla. Imprime la 14 para la familia."
+pasos:
+  - "Imprime las páginas 6, 7, 9 y 10 en cartulina, a color y al 100 %, y la tarjeta de tu etapa (página 3 o 4) en folio."
+  - "Elegid con la familia tres objetivos del banco (página 5) y recorta sus pictogramas de la página 6: hay tres de cada uno."
+  - "Rellena la tarjeta de arriba como modelo: su nombre, sus tres objetivos y, en Infantil, sus pictogramas pegados en los huecos."
+  - "Fotocopia el modelo, recorta de la copia la tarjeta rellena y pégala encima de la tarjeta en blanco del modelo. Desde ahí, cada fotocopia da dos tarjetas: 3 fotocopias para una semana o 10 para un mes."
+  - "Recorta los dos «Mis tres objetivos», las dos mochilas, la tarea y las dos tiras de tiempo. Pega en «Mis tres objetivos» sus pictogramas y escribe los objetivos."
+  - "Plastifica el menú en una funda, las dos mochilas en otra y lo demás en la tercera, con 5 mm entre pieza y pieza."
+  - "Recorta todo dejando 2 o 3 mm de plástico alrededor y redondea las esquinas con la tijera."
+  - "Coloca en casa el menú, la mochila «Para ir al cole» y un «Mis tres objetivos». Lo demás se queda en clase, con una pinza en cada tira de tiempo."
+resultado: "la tarjeta modelo lista para copiar y, plastificados, el menú, dos mochilas, la tarea en tres pasos, dos tiras de tiempo y dos «Mis tres objetivos»"
+cuidados:
+  - "La tarjeta del día va en papel, sin plastificar: viaja en la agenda con la firma de la familia, y el rotulador de pizarra se borraría por el camino."
+  - "El borde de plástico de 2 o 3 mm deja cada pieza sellada. El rotulador de pizarra se borra con un paño seco; si deja sombra, con un poco de alcohol."
+  - "Las pinzas son piezas pequeñas: guárdalas lejos de quien todavía se lleva cosas a la boca."
 fuentes:
   - "Pyle, K. y Fabiano, G. A. (2017). Daily report card intervention and attention deficit hyperactivity disorder: A meta-analysis of single-case studies. Exceptional Children, 83(4), 378-395"
   - "Fabiano, G. A. y otros (2010). Enhancing the effectiveness of special education programming for children with attention deficit hyperactivity disorder using a daily report card. School Psychology Review, 39(2), 219-239"
