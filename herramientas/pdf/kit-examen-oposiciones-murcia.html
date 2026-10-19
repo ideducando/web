@@ -1,0 +1,2648 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kit para el examen: plantillas para la oposición de Maestros en Murcia (PT e Infantil) · IdEducando</title>
+    <meta name="author" content="IdEducando" />
+    <meta
+      name="description"
+      content="Guion de un folio, reloj del oral, caja de material auxiliar, hoja de simulacro, plan del escrito y lista para el día del examen, con las reglas de la convocatoria de Maestros de la Región de Murcia de 2026."
+    />
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Colores de los tramos del examen ---------- */
+      .t-prog {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .t-unidad {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .t-debate {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .t-prep {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .t-caja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja--ultima {
+        break-after: auto;
+      }
+
+      /* ---------- Marcas: lo que dice la norma y lo que aconsejamos ---------- */
+      .ref,
+      .consejo {
+        display: inline-block;
+        padding: 0 1.8mm;
+        border-radius: 99px;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 8pt;
+        line-height: 1.55;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        vertical-align: 0.06em;
+      }
+
+      .ref {
+        background: var(--verde-tinte);
+        color: var(--verde-texto);
+      }
+
+      .consejo {
+        background: var(--amarillo-tinte);
+        color: var(--marino);
+      }
+
+      /* Sobre una caja del mismo color, la marca necesita fondo blanco para verse */
+      .caja--verde .ref,
+      .caja--amarilla .consejo {
+        background: #fff;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 11mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        margin-bottom: 6mm;
+        letter-spacing: -0.01em;
+      }
+
+      .portada__subtitulo {
+        max-width: 132mm;
+      }
+
+      .portada .chips {
+        list-style: none;
+        margin: 7mm 0 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm 2.2mm;
+        max-width: 150mm;
+      }
+
+      .portada .chips li {
+        margin: 0;
+        padding: 0.6mm 3.2mm;
+        border-radius: 99px;
+        background: #fff;
+        border: 0.6mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 10pt;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .ilustracion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        z-index: 0;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .cabecera {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .cabecera .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabecera h1 {
+        font-size: 25pt;
+        margin: 0;
+      }
+
+      .cabecera img {
+        width: 34mm;
+        height: auto;
+        flex: none;
+        margin-top: 1mm;
+      }
+
+      .entrada {
+        margin: 0 0 4mm;
+        font-size: 10.5pt;
+        line-height: 1.45;
+      }
+
+      .nota-pie {
+        margin: 2.5mm 0 0;
+        font-size: 8.5pt;
+        line-height: 1.4;
+        color: var(--suave);
+      }
+
+      /* ---------- Guía de uso ---------- */
+      .guia h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin: 5mm 0 2mm;
+      }
+
+      .leyenda {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 2mm;
+      }
+
+      .leyenda p {
+        margin: 0;
+        padding: 2.5mm 3.5mm;
+        border-radius: 2.5mm;
+        background: var(--crema);
+        font-size: 9.5pt;
+        line-height: 1.4;
+      }
+
+      .leyenda p > span:first-child {
+        margin-right: 1.5mm;
+      }
+
+      table.mapa {
+        font-size: 9.2pt;
+        line-height: 1.35;
+        table-layout: fixed;
+      }
+
+      table.mapa th,
+      table.mapa td {
+        padding: 1.5mm 2mm;
+      }
+
+      table.mapa td:first-child {
+        white-space: nowrap;
+        font-family: var(--titulos);
+        font-weight: 700;
+        color: var(--morado-texto);
+      }
+
+      table.mapa tbody th {
+        font-weight: 700;
+      }
+
+      .guia .dos-columnas {
+        margin-top: 5mm;
+        align-items: start;
+      }
+
+      .guia .caja {
+        font-size: 9.5pt;
+        line-height: 1.42;
+      }
+
+      .guia .caja ul {
+        margin-bottom: 2mm;
+      }
+
+      /* ---------- El reloj del oral ---------- */
+      .reloj-fila {
+        display: grid;
+        grid-template-columns: 61mm minmax(0, 1fr);
+        gap: 7mm;
+        align-items: center;
+        margin: 0 0 3.5mm;
+      }
+
+      .reloj-fila svg {
+        width: 61mm;
+        height: 63mm;
+        display: block;
+      }
+
+      .reparto {
+        display: grid;
+        gap: 2.4mm;
+      }
+
+      .reparto__tramo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: baseline;
+        column-gap: 3mm;
+        padding: 2.2mm 3.5mm;
+        border-radius: 2.5mm;
+        background: var(--t);
+        border-left: 2.2mm solid var(--c);
+      }
+
+      .reparto__tramo b {
+        font-family: var(--titulos);
+        font-size: 14pt;
+        line-height: 1.1;
+      }
+
+      .reparto__tramo .minutos {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        text-align: right;
+      }
+
+      .reparto__tramo .puntos {
+        grid-column: 1 / -1;
+        font-size: 9pt;
+        color: var(--marino);
+      }
+
+      .reparto .nota-pie {
+        margin: 0;
+      }
+
+      .preparacion {
+        padding: 2.6mm 4mm 2.8mm;
+        border-radius: 3mm;
+        border: 0.4mm solid var(--linea);
+        margin: 0 0 3.5mm;
+      }
+
+      .preparacion h2 {
+        font-size: 12pt;
+        margin: 0 0 1mm;
+      }
+
+      .preparacion p {
+        margin: 0 0 2mm;
+        font-size: 9.3pt;
+        line-height: 1.4;
+      }
+
+      /* Barras de tiempo: cada tramo ocupa lo que dura */
+      .barra {
+        display: flex;
+        gap: 0.8mm;
+        height: 8mm;
+      }
+
+      .barra > span {
+        display: grid;
+        place-items: center;
+        min-width: 0;
+        border-radius: 1.6mm;
+        background: var(--c);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .barra > span.claro {
+        background: var(--t);
+        color: var(--marino);
+        box-shadow: inset 0 0 0 0.4mm var(--c);
+      }
+
+      .barra > span.oscuro-texto {
+        color: var(--marino);
+      }
+
+      .bajo-barra {
+        display: flex;
+        gap: 0.8mm;
+        margin-top: 1.2mm;
+        font-size: 8.3pt;
+        line-height: 1.25;
+        color: var(--marino);
+      }
+
+      .bajo-barra > span {
+        min-width: 0;
+      }
+
+      .tramos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 3.5mm;
+      }
+
+      .tramo {
+        padding: 0 3mm 2.6mm;
+        border-radius: 3mm;
+        background: #fff;
+        border: 0.4mm solid var(--linea);
+        border-top: 2.4mm solid var(--c);
+        font-size: 8.7pt;
+        line-height: 1.36;
+      }
+
+      .tramo h3 {
+        margin: 2.2mm 0 0.3mm;
+        font-size: 12.5pt;
+      }
+
+      .tramo .cuando {
+        margin: 0 0 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 9.3pt;
+        color: var(--suave);
+      }
+
+      .tramo p {
+        margin: 0 0 1.5mm;
+      }
+
+      .tramo p:last-child {
+        margin-bottom: 0;
+      }
+
+      .tramo .rotulo {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--morado-texto);
+      }
+
+      .tramo .rotulo .consejo {
+        margin-left: 0.8mm;
+        font-size: 7.4pt;
+        letter-spacing: 0.01em;
+        text-transform: none;
+      }
+
+      .reloj-hoja .caja {
+        font-size: 9.3pt;
+        line-height: 1.42;
+        padding: 3mm 4mm;
+      }
+
+      /* ---------- Guion de un folio (plantilla y ejemplos) ---------- */
+      .aviso {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0 0 3mm;
+        padding: 1.6mm 3.5mm;
+        border-radius: 99px;
+        background: var(--coral-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10.5pt;
+      }
+
+      .aviso::before {
+        content: '!';
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 5.4mm;
+        height: 5.4mm;
+        border-radius: 50%;
+        background: var(--coral-texto);
+        color: #fff;
+        font-size: 10pt;
+      }
+
+      .datos {
+        display: grid;
+        gap: 1.4mm;
+        margin: 0 0 2.6mm;
+        font-size: 8.8pt;
+        color: var(--suave);
+      }
+
+      .datos__fila {
+        display: grid;
+        align-items: end;
+        gap: 2.4mm;
+      }
+
+      .datos__fila--1 {
+        grid-template-columns: auto 18mm auto minmax(0, 1fr);
+      }
+
+      .datos__fila--2 {
+        grid-template-columns: auto minmax(0, 0.9fr) auto minmax(0, 1.1fr);
+      }
+
+      .datos__fila > span:nth-child(even) {
+        min-height: 5.4mm;
+        padding: 0 1mm 0.3mm;
+        border-bottom: 0.35mm solid var(--marino);
+        font-size: 9pt;
+        line-height: 1.25;
+        color: var(--enlace);
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .guion {
+        --paso: 10.5mm; /* lo que ocupan 5 minutos en el folio */
+        --r: 5.2mm; /* altura de cada renglón */
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 37mm;
+        grid-template-rows: calc(var(--paso) * 5) calc(var(--paso) * 10) calc(var(--paso) * 3);
+        gap: 2.5mm;
+      }
+
+      /* Franja de minutos: cada tramo mide lo que dura */
+      .franja {
+        position: relative;
+        grid-column: 1;
+      }
+
+      .franja::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 3.4mm;
+        border-radius: 1.7mm;
+        background: var(--c);
+      }
+
+      .franja::after {
+        content: '';
+        position: absolute;
+        right: 4.2mm;
+        top: 0;
+        bottom: 0;
+        width: 1.6mm;
+        background: repeating-linear-gradient(to bottom, var(--marino) 0 0.3mm, transparent 0.3mm var(--paso));
+      }
+
+      .franja b,
+      .franja i {
+        position: absolute;
+        right: 6.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-style: normal;
+        font-size: 9pt;
+        line-height: 1;
+        transform: translateY(-50%);
+      }
+
+      .franja b {
+        top: 0.4mm;
+      }
+
+      .franja i {
+        top: 50%;
+        color: var(--suave);
+      }
+
+      .franja b.fin {
+        top: auto;
+        bottom: -0.4mm;
+        transform: translateY(50%);
+      }
+
+      .zona {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        padding: 1.2mm 2.2mm 1.4mm 2.4mm;
+        border: 0.35mm solid var(--linea);
+        border-left: 1.6mm solid var(--c);
+        border-radius: 2mm;
+        overflow: hidden;
+      }
+
+      .zona--prog {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+
+      .zona--unidad {
+        grid-area: 2 / 2 / 3 / 3;
+      }
+
+      .zona--debate {
+        grid-area: 3 / 2 / 4 / 4;
+      }
+
+      .zona--normas {
+        grid-area: 1 / 3 / 3 / 4;
+        border-left: 0.35mm solid var(--linea);
+        background: var(--crema);
+      }
+
+      .zona__titulo {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 2mm;
+        margin: 0 0 0.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1.2;
+      }
+
+      .zona__titulo small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 7.8pt;
+        color: var(--suave);
+        white-space: nowrap;
+      }
+
+      .columnas {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr) 26mm;
+        gap: 1.4mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 7.5pt;
+        color: var(--suave);
+        margin: 0 0 0.3mm;
+      }
+
+      .renglones {
+        flex: 1;
+        min-height: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0 calc(var(--r) - 0.28mm),
+          var(--linea) calc(var(--r) - 0.28mm) var(--r)
+        );
+        font-size: 8.4pt;
+        line-height: var(--r);
+      }
+
+      /* Separadores de las columnas «min» y «Material» */
+      .renglones--dos,
+      .renglones--tres {
+        position: relative;
+      }
+
+      .renglones--dos::before,
+      .renglones--tres::before,
+      .renglones--tres::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        border-left: 0.3mm solid var(--linea);
+      }
+
+      .renglones--dos::before,
+      .renglones--tres::before {
+        left: 8.55mm;
+      }
+
+      .renglones--tres::after {
+        right: 26.7mm;
+      }
+
+      .fila {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr) 26mm;
+        gap: 1.4mm;
+        color: var(--enlace);
+      }
+
+      .renglones--dos .fila {
+        grid-template-columns: 8mm minmax(0, 1fr);
+      }
+
+      .fila > span:first-child {
+        font-family: var(--titulos);
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .fila > span:nth-child(3) {
+        padding-left: 0.6mm;
+      }
+
+      .debate-temas .fila > span:first-child {
+        color: var(--marino);
+      }
+
+      .bloque-normas {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+
+      .bloque-normas + .bloque-normas {
+        margin-top: 1.2mm;
+      }
+
+      .bloque-normas h4 {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 7.8pt;
+        line-height: 1.3;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--morado-texto);
+      }
+
+      .bloque-normas .renglones {
+        color: var(--enlace);
+        font-size: 8pt;
+      }
+
+      .bloque-normas .renglones p {
+        margin: 0;
+      }
+
+      .cabecera__lado {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2.6mm;
+        flex: none;
+      }
+
+      .sello {
+        display: inline-block;
+        padding: 0.8mm 3mm;
+        border: 0.6mm dashed var(--coral-texto);
+        border-radius: 2mm;
+        background: #fff;
+        color: var(--coral-texto);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        transform: rotate(-3deg);
+      }
+
+      .ejemplo .entrada {
+        font-size: 9.6pt;
+        margin-bottom: 2.6mm;
+      }
+
+      .ejemplo .cabecera {
+        margin-bottom: 2mm;
+      }
+
+      .siglas {
+        margin: 2mm 0 0;
+        font-size: 7.8pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      /* ---------- Tablas para rellenar ---------- */
+      table.rellenar {
+        font-size: 9pt;
+        table-layout: fixed;
+      }
+
+      table.rellenar th,
+      table.rellenar td {
+        border: 0.3mm solid var(--linea);
+      }
+
+      table.rellenar thead th {
+        border-color: var(--marino);
+        font-size: 9pt;
+        line-height: 1.2;
+        vertical-align: bottom;
+      }
+
+      table.rellenar thead th small {
+        display: block;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 7.6pt;
+        opacity: 0.92;
+      }
+
+      table.rellenar tbody th {
+        font-size: 9pt;
+        line-height: 1.2;
+      }
+
+      table.rellenar tbody th small {
+        display: block;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 7.8pt;
+        color: var(--suave);
+        margin-top: 0.5mm;
+      }
+
+      .caja-tabla tbody td,
+      .caja-tabla tbody th {
+        height: 11.3mm;
+        vertical-align: middle;
+      }
+
+      .caja-tabla tbody th {
+        text-align: center;
+        font-size: 13pt;
+        color: var(--marino);
+        background: var(--naranja-tinte);
+      }
+
+      .rodea {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6mm;
+        font-size: 7.8pt;
+        line-height: 1.15;
+        color: var(--suave);
+      }
+
+      .casilla {
+        display: inline-block;
+        width: 5.2mm;
+        height: 5.2mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.2mm;
+        background: #fff;
+        vertical-align: middle;
+      }
+
+      .centrado {
+        text-align: center;
+      }
+
+      .dos-cajas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 4mm;
+        align-items: stretch;
+      }
+
+      .dos-cajas .caja {
+        margin: 0;
+        padding: 3mm 4mm;
+        font-size: 9pt;
+        line-height: 1.4;
+      }
+
+      .dos-cajas .caja h3 {
+        font-size: 11pt;
+        margin: 0 0 1.2mm;
+      }
+
+      .dos-cajas .caja ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .dos-cajas .caja li {
+        margin-bottom: 0.8mm;
+      }
+
+      .dos-cajas .caja p {
+        margin: 0 0 1.4mm;
+      }
+
+      /* Hoja de simulacro */
+      .simulacro tbody td {
+        height: 8.6mm;
+      }
+
+      .simulacro tbody tr.t-prog th,
+      .simulacro tbody tr.t-unidad th,
+      .simulacro tbody tr.t-debate th {
+        border-left: 1.8mm solid var(--c);
+        background: var(--t);
+      }
+
+      .simulacro .min {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        height: 100%;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      .simulacro tr.alta td {
+        height: 13mm;
+      }
+
+      .simulacro tr.preguntas td {
+        height: 19mm;
+        vertical-align: top;
+        padding: 1mm 2mm;
+      }
+
+      .simulacro .numeros {
+        display: grid;
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        height: 100%;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      .simulacro .numeros span {
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      .simulacro .numeros span:last-child {
+        border-bottom: 0;
+      }
+
+      .indicadores {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5mm;
+        margin-top: 3.5mm;
+      }
+
+      .indicadores h3 {
+        font-size: 11pt;
+        margin: 0 0 1mm;
+      }
+
+      .indicadores .fuente {
+        margin: 1mm 0 0;
+        font-size: 7.8pt;
+      }
+
+      .marcar {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 8.6pt;
+        line-height: 1.25;
+      }
+
+      .marcar li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0.75mm 0;
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      .marcar li > span:last-child {
+        display: flex;
+        gap: 1.1mm;
+      }
+
+      .marcar .casilla {
+        width: 4.4mm;
+        height: 4.4mm;
+        border-width: 0.4mm;
+        border-radius: 1mm;
+        display: grid;
+        place-items: center;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 6.4pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .marcar b {
+        font-family: var(--titulos);
+        color: var(--morado-texto);
+        white-space: nowrap;
+      }
+
+      .marcar-cabecera {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 7.6pt;
+        color: var(--suave);
+        border-bottom: 0.4mm solid var(--marino);
+        padding-bottom: 0.6mm;
+      }
+
+      /* ---------- Plan del escrito ---------- */
+      .parte {
+        margin: 0 0 4.2mm;
+        padding: 3mm 4mm 3.2mm;
+        border-radius: 3mm;
+        border: 0.4mm solid var(--linea);
+      }
+
+      .parte__cabeza {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 4mm;
+        margin: 0 0 1.4mm;
+      }
+
+      .parte__cabeza h2 {
+        margin: 0;
+        font-size: 13pt;
+      }
+
+      .parte__cabeza p {
+        margin: 0;
+        font-size: 9pt;
+        text-align: right;
+      }
+
+      .parte .barra {
+        height: 9mm;
+      }
+
+      .parte .grupos {
+        display: flex;
+        gap: 0.8mm;
+        margin: 0 0 0.8mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+      }
+
+      .parte .grupos > span {
+        min-width: 0;
+        border-bottom: 0.5mm solid var(--marino);
+        padding-bottom: 0.3mm;
+      }
+
+      .parte .grupos > span.hueco {
+        border-bottom-color: transparent;
+      }
+
+      .parte .consejo-texto {
+        margin: 1.8mm 0 0;
+        font-size: 9pt;
+        line-height: 1.38;
+      }
+
+      .mi-hora {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 1.4mm 4mm;
+        margin: 2.2mm 0 0;
+        font-size: 8.8pt;
+        color: var(--suave);
+      }
+
+      .mi-hora b {
+        font-family: var(--titulos);
+        color: var(--marino);
+      }
+
+      .mi-hora span {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 1.2mm;
+      }
+
+      .mi-hora i {
+        display: inline-block;
+        width: 13mm;
+        height: 5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .escrito .dos-cajas .caja {
+        font-size: 8.8pt;
+      }
+
+      .temas {
+        margin: 2.6mm 0 0;
+        padding-top: 2.2mm;
+        border-top: 0.3mm dashed var(--linea);
+      }
+
+      .temas p {
+        margin: 0 0 1.6mm;
+        font-size: 9pt;
+        line-height: 1.38;
+      }
+
+      .temas b {
+        font-family: var(--titulos);
+      }
+
+      .temas ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2mm;
+      }
+
+      .temas li {
+        margin: 0;
+        padding: 1.2mm 2mm;
+        border-radius: 2mm;
+        background: var(--morado-tinte);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.15;
+      }
+
+      .temas li b {
+        display: block;
+        font-weight: 600;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      /* ---------- PT: los 2,25 puntos ---------- */
+      .puntos-pt thead th {
+        font-size: 9pt;
+      }
+
+      .puntos-pt thead th b {
+        display: inline-block;
+        margin-left: 1mm;
+        padding: 0 1.6mm;
+        border-radius: 99px;
+        background: #fff;
+        color: var(--marino);
+        font-size: 8.5pt;
+      }
+
+      .puntos-pt tbody th,
+      .puntos-pt tbody td {
+        height: 16.2mm;
+      }
+
+      .puntos-pt tbody td {
+        font-size: 8.2pt;
+        line-height: 1.3;
+      }
+
+      .puntos-pt tbody tr.comun th,
+      .puntos-pt tbody tr.comun td {
+        background: var(--crema);
+      }
+
+      .puntos-pt tbody tr.comun td {
+        color: var(--enlace);
+      }
+
+      .puntos-pt .pista {
+        display: block;
+        color: var(--suave);
+        font-style: italic;
+      }
+
+      .tipos-ejercicio {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 3mm;
+      }
+
+      .tipos-ejercicio p {
+        margin: 0;
+        padding: 2mm 3mm;
+        border-radius: 2.5mm;
+        background: var(--morado-tinte);
+        font-size: 8.8pt;
+        line-height: 1.35;
+      }
+
+      .tipos-ejercicio b {
+        font-family: var(--titulos);
+      }
+
+      /* ---------- La mochila ---------- */
+      .mochila-columnas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5mm;
+        margin: 0 0 4mm;
+      }
+
+      .mochila-columnas section {
+        padding: 3mm 4mm 2mm;
+        border-radius: 3mm;
+        border: 0.4mm solid var(--linea);
+        border-top: 2.4mm solid var(--c);
+      }
+
+      .mochila-columnas h2 {
+        font-size: 13pt;
+        margin: 0 0 0.5mm;
+      }
+
+      .mochila-columnas .cuando {
+        margin: 0 0 1.6mm;
+        font-size: 8.8pt;
+        color: var(--suave);
+      }
+
+      .lista-casillas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 9.2pt;
+        line-height: 1.35;
+      }
+
+      .lista-casillas li {
+        display: grid;
+        grid-template-columns: 5.2mm minmax(0, 1fr);
+        gap: 2.4mm;
+        margin: 0;
+        padding: 1.1mm 0;
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      .lista-casillas li:last-child {
+        border-bottom: 0;
+      }
+
+      .lista-casillas li::before {
+        content: '';
+        width: 5.2mm;
+        height: 5.2mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.2mm;
+        margin-top: 0.2mm;
+      }
+
+      .preguntas {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: pregunta;
+      }
+
+      .preguntas li {
+        counter-increment: pregunta;
+        margin: 0 0 1mm;
+        font-size: 9.2pt;
+        line-height: 1.35;
+      }
+
+      .preguntas li::before {
+        content: counter(pregunta) '. ';
+        font-family: var(--titulos);
+        font-weight: 700;
+        color: var(--marino);
+      }
+
+      .preguntas .respuesta {
+        display: block;
+        height: 5.6mm;
+        border-bottom: 0.35mm solid var(--suave);
+      }
+
+      .mochila .caja {
+        padding: 3mm 4mm;
+        font-size: 9.2pt;
+        line-height: 1.4;
+      }
+
+      .mochila .caja h3 {
+        font-size: 11.5pt;
+        margin-bottom: 1.2mm;
+      }
+
+      /* ---------- Reglas y fuentes ---------- */
+      .reglas h1 {
+        font-size: 22pt;
+        margin-bottom: 2mm;
+      }
+
+      .reglas .entrada {
+        font-size: 9.4pt;
+        margin-bottom: 3mm;
+      }
+
+      .reglas__lista {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .reglas__lista h2 {
+        font-size: 10.5pt;
+        margin: 0 0 1.2mm;
+        padding: 0.8mm 2.5mm;
+        border-radius: 1.6mm;
+        background: var(--morado-texto);
+        color: #fff;
+        break-after: avoid;
+      }
+
+      .reglas__lista dl {
+        margin: 0 0 2mm;
+      }
+
+      .reglas__lista dt {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.8pt;
+        line-height: 1.2;
+        break-after: avoid;
+      }
+
+      .reglas__lista dd {
+        margin: 0 0 1.3mm;
+        font-size: 8pt;
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+
+      .reglas__lista .ref {
+        font-size: 7.2pt;
+        padding: 0 1.4mm;
+      }
+
+      .reglas .caja {
+        margin: 2mm 0 0;
+        padding: 2.4mm 3.5mm;
+        font-size: 8.6pt;
+        line-height: 1.38;
+      }
+
+      .reglas .caja h3 {
+        font-size: 10pt;
+        margin: 0 0 0.6mm;
+      }
+
+      .reglas .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 7.8pt;
+        line-height: 1.38;
+      }
+
+      .reglas .creditos p {
+        margin-bottom: 1mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <svg class="ilustracion" viewBox="0 0 210 297" aria-hidden="true" id="ilustracion"></svg>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Oposiciones de Maestros · Región de Murcia</p>
+        <h1 class="portada__titulo">Kit para<br />el examen</h1>
+        <p class="portada__subtitulo">Plantillas para ordenar el escrito y el oral de Pedagogía Terapéutica e Infantil.</p>
+        <ul class="chips">
+          <li class="t-prog">Guion de un folio</li>
+          <li class="t-unidad">Reloj del oral</li>
+          <li class="t-caja">Caja de material</li>
+          <li class="t-debate">Hoja de simulacro</li>
+          <li class="t-prep">Plan del escrito</li>
+          <li class="t-prog">Mochila del examen</li>
+        </ul>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Cada regla, con su página de la convocatoria de 2026.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA DE USO
+         ====================================================================== -->
+    <section class="hoja guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía de uso <span class="borrador">[BORRADOR]</span></p>
+      <h1>Cómo usar el kit</h1>
+      <p class="entrada">
+        Este kit convierte en hojas de trabajo las reglas de la última convocatoria de Maestros de la Región de Murcia: la
+        Orden de 21 de enero de 2026, publicada en el Boletín Oficial de la Región de Murcia (BORM) n.º 18. Sirve si te
+        presentas por Pedagogía Terapéutica (PT) o por Educación Infantil. Pega el reloj en la pared y rellena las
+        plantillas a lápiz, para poder repetirlas.
+      </p>
+      <div class="leyenda">
+        <p>
+          <span class="ref">art. 51.14 · p. 1657</span> Lo que dice la convocatoria, con su artículo o anexo y su página del
+          BORM.
+        </p>
+        <p>
+          <span class="consejo">Consejo</span> Lo que haríamos nosotros. Es una opinión fundamentada: puedes organizarte de
+          otra manera.
+        </p>
+      </div>
+
+      <h2>Qué hay y cuándo usarlo</h2>
+      <table class="mapa">
+        <colgroup>
+          <col style="width: 15mm" />
+          <col style="width: 51mm" />
+          <col />
+          <col style="width: 45mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Página</th>
+            <th scope="col">Hoja</th>
+            <th scope="col">Para qué</th>
+            <th scope="col">Cuándo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3</td>
+            <th scope="row">El reloj del oral</th>
+            <td>Repartir los 90 minutos del oral.</td>
+            <td>Desde el primer ensayo.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <th scope="row">Mi guion de un folio</th>
+            <td>Ensayar el guion; fotocopia la hoja.</td>
+            <td>En cada ensayo.</td>
+          </tr>
+          <tr>
+            <td>5 y 6</td>
+            <th scope="row">Dos guiones de ejemplo</th>
+            <td>Ver el estilo: palabras clave.</td>
+            <td>Antes de tu primer guion.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <th scope="row">Mi caja de material auxiliar</th>
+            <td>Preparar el material de las doce unidades.</td>
+            <td>Mientras programas.</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <th scope="row">Hoja de simulacro</th>
+            <td>Medir tres ensayos completos.</td>
+            <td>Con la programación lista.</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <th scope="row">Plan del escrito</th>
+            <td>Repartir el tiempo de la primera prueba.</td>
+            <td>En cada supuesto y tema.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <th scope="row">PT: los 2,25 puntos seguros</th>
+            <td>Normas, funciones y protocolos por caso.</td>
+            <td>Desde el primer supuesto.</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <th scope="row">La mochila del examen</th>
+            <td>No olvidar nada el día de cada prueba.</td>
+            <td>La víspera.</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <th scope="row">Las reglas y sus fuentes</th>
+            <td>Comprobar cada regla en el BORM.</td>
+            <td>Cuando dudes.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dos-columnas">
+        <div class="caja caja--azul">
+          <h3>Lo que la norma no dice</h3>
+          <ul>
+            <li>Si el guion del oral se trae hecho de casa o se escribe en la hora de preparación.</li>
+            <li>Cómo controlas tú el tiempo mientras expones.</li>
+          </ul>
+          <p>
+            Pregúntalo en el acto de presentación: allí el tribunal da «cumplida información e instrucciones» sobre las
+            pruebas. <span class="ref">art. 47.3 · p. 1654</span>
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>Ojo con la fecha y con el lugar</h3>
+          <p>
+            El kit describe la convocatoria de 2026. La próxima de Maestros en Murcia todavía no está publicada y puede
+            cambiar las bases: cuando salga, comprueba cada regla en su página.
+          </p>
+          <p>
+            Si opositas en otra comunidad, mira su convocatoria. El Real Decreto 276/2007, común a toda España, solo habla
+            de «material auxiliar» y de «un guión o equivalente» (artículo 21.2.B). El folio por una cara y la prohibición
+            de aparatos los añade Murcia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         EL RELOJ DEL ORAL
+         ====================================================================== -->
+    <section class="hoja reloj-hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Segunda prueba · Para la pared</p>
+          <h1>El reloj del oral</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        Tienes 90 minutos como máximo: la programación va primero y no puede pasar de 30, y el debate dura 15
+        <span class="ref">art. 51.14 · p. 1657</span>. El tiempo restante es para la unidad
+        <span class="ref">anexo XVI · p. 1718</span>. Nuestro reparto es 25, 50 y 15, porque cada minuto que ahorras en la
+        programación pasa a la unidad, que es lo que más puntúa. <span class="consejo">Consejo</span>
+      </p>
+
+      <div class="reloj-fila">
+        <div id="reloj-grande"></div>
+        <div class="reparto">
+          <div class="reparto__tramo t-prog">
+            <b>Programación</b><span class="minutos">del 0 al 25</span>
+            <span class="puntos">Vale 4 puntos en las dos especialidades.</span>
+          </div>
+          <div class="reparto__tramo t-unidad">
+            <b>Unidad</b><span class="minutos">del 25 al 75</span>
+            <span class="puntos">Vale 5 puntos en Infantil y 5,5 en PT.</span>
+          </div>
+          <div class="reparto__tramo t-debate">
+            <b>Debate</b><span class="minutos">del 75 al 90</span>
+            <span class="puntos">Vale 1 punto en Infantil y 0,5 en PT.</span>
+          </div>
+          <p class="nota-pie">
+            Puntos: anexo XVII, pp. 1722-1724 (Infantil), y anexo XXII, pp. 1752-1754 (PT). La prueba se aprueba con un 5
+            (art. 52.1, p. 1658).
+          </p>
+        </div>
+      </div>
+
+      <div class="preparacion t-prep">
+        <h2>Antes: la hora de preparación</h2>
+        <p>
+          Una hora, «sin posibilidad de conexión con el exterior», con el material que quieras en papel y sin aparatos
+          electrónicos <span class="ref">art. 51.13 · p. 1657</span>. Así la repartiríamos:
+          <span class="consejo">Consejo</span>
+        </p>
+        <div class="barra">
+          <span class="claro" style="flex: 10">10</span>
+          <span class="claro" style="flex: 30">30</span>
+          <span class="claro" style="flex: 15">15</span>
+          <span class="claro" style="flex: 5">5</span>
+        </div>
+        <div class="bajo-barra">
+          <span style="flex: 10">Relee la unidad que has elegido.</span>
+          <span style="flex: 30">Ajústala a 50 minutos: qué actividades desarrollas y cuáles solo nombras.</span>
+          <span style="flex: 15">Guion: minutos, material y normas.</span>
+          <span style="flex: 5">Ordena el material.</span>
+        </div>
+      </div>
+
+      <div class="tramos">
+        <div class="tramo t-prog">
+          <h3>Programación</h3>
+          <p class="cuando">Del 0 al 25 · tope: 30</p>
+          <p>Defiéndela sin leer, con tu ejemplar idéntico al lado. <span class="ref">art. 51.17 · p. 1657</span></p>
+          <p>
+            <span class="rotulo">Si vas tarde <span class="consejo">Consejo</span></span>En el 20, ve a lo que más
+            puntúa. En PT, los objetivos coherentes con las necesidades: 1 punto <span class="ref">p. 1753</span>. En
+            Infantil, el alumnado con necesidades específicas de apoyo educativo (NEAE) y sus medidas: 1 punto
+            <span class="ref">p. 1723</span>
+          </p>
+          <p><span class="rotulo">Si te sobra <span class="consejo">Consejo</span></span>Empieza antes la unidad.</p>
+        </div>
+        <div class="tramo t-unidad">
+          <h3>Unidad</h3>
+          <p class="cuando">Del 25 al 75 · en el 50, actividades</p>
+          <p>Entera y ajustada al tiempo. <span class="ref">art. 51.16 · p. 1657</span></p>
+          <p>
+            <span class="rotulo">Si vas tarde <span class="consejo">Consejo</span></span>Cuenta una actividad entera con
+            su material y resume las demás. Llega a la evaluación: vale 0,9 en Infantil y 1 en PT.
+            <span class="ref">pp. 1724 y 1754</span>
+          </p>
+          <p>
+            <span class="rotulo">Si te sobra <span class="consejo">Consejo</span></span>Amplía una actividad con su pauta
+            del Diseño Universal para el Aprendizaje (DUA): 0,4 en Infantil y 0,8 en PT.
+            <span class="ref">pp. 1723 y 1754</span>
+          </p>
+        </div>
+        <div class="tramo t-debate">
+          <h3>Debate</h3>
+          <p class="cuando">Del 75 al 90</p>
+          <p>
+            Puntúa responder con precisión, argumentar y ampliar lo que has expuesto.
+            <span class="ref">pp. 1724 y 1754</span>
+          </p>
+          <p>
+            <span class="rotulo">Si vas tarde <span class="consejo">Consejo</span></span>Si llegas al 75 sin acabar,
+            cierra la unidad en una frase: el debate tiene reservados sus 15 minutos.
+            <span class="ref">art. 51.14 · p. 1657</span>
+          </p>
+          <p>
+            <span class="rotulo">Si te atascas <span class="consejo">Consejo</span></span>Pide que te repitan la
+            pregunta y empieza por un ejemplo de tu unidad.
+          </p>
+        </div>
+      </div>
+
+      <div class="caja caja--azul">
+        <p>
+          <strong>¿Cómo miras la hora?</strong> La norma no lo dice: pregunta en el acto de presentación si el tribunal
+          avisa o si deja tener un reloj analógico en la mesa. <span class="consejo">Consejo</span> Un reloj inteligente
+          es un aparato prohibido: quien entre con uno en el aula «será apartado inmediatamente del procedimiento
+          selectivo» y tendrá un cero. <span class="ref">art. 44.4 y 44.5 · p. 1653</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MI GUION DE UN FOLIO (plantilla en blanco)
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Segunda prueba · Plantilla</p>
+          <h1>Mi guion de un folio</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="aviso">Para ensayar. En el examen, sigue las instrucciones del tribunal.</p>
+      <div class="datos" id="datos-blanco"></div>
+      <div id="guion-blanco"></div>
+      <p class="nota-pie">
+        Un folio por una cara, para la programación y la unidad, que entregas al tribunal al terminar
+        <span class="ref">art. 51.18 · p. 1657</span>. Las faltas también cuentan en este papel: 0,5 puntos por falta, y
+        tres abreviaturas indebidas son una falta <span class="ref">anexo XVI · p. 1717</span>. Palabras clave, nunca
+        frases. <span class="consejo">Consejo</span>
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         EJEMPLO DE PT
+         ====================================================================== -->
+    <section class="hoja ejemplo">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Segunda prueba · Ejemplo de Pedagogía Terapéutica</p>
+          <h1>Un guion de PT, relleno</h1>
+        </div>
+        <div class="cabecera__lado">
+          <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+          <span class="sello">Ejemplo ficticio</span>
+        </div>
+      </header>
+      <p class="entrada">
+        Es la unidad 8 del programa de intervención de ejemplo de IdEducando, con una alumna inventada. Fíjate en el
+        estilo y no lo copies: tu programación ha de ser «original» <span class="ref">art. 51.3 · p. 1656</span>, y tu
+        guion sale de ella.
+      </p>
+      <div class="datos" id="datos-pt"></div>
+      <div id="guion-pt"></div>
+      <p class="siglas">
+        Siglas: TEA, trastorno del espectro del autismo; NEE, necesidades educativas especiales; LOE, Ley Orgánica de
+        Educación, y LOMLOE, su reforma de 2020; EOEP, equipo de orientación educativa y psicopedagógica; AL, Audición y
+        Lenguaje; ATE, auxiliar técnico educativo; PAD, plan de atención a la diversidad; PAP, plan de actuación
+        personalizado. STEM1, STEM4, CCL1, CPSAA3 y CE2 son descriptores del perfil de salida.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         EJEMPLO DE INFANTIL
+         ====================================================================== -->
+    <section class="hoja ejemplo">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Segunda prueba · Ejemplo de Educación Infantil</p>
+          <h1>Un guion de Infantil, relleno</h1>
+        </div>
+        <div class="cabecera__lado">
+          <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+          <span class="sello">Ejemplo ficticio</span>
+        </div>
+      </header>
+      <p class="entrada">
+        Una unidad didáctica inventada para 5 años, en un colegio que no existe: todo en palabras clave, con su minuto y
+        su material. Tu guion saldrá de tu programación, que ha de ser «original». <span class="ref">art. 51.3 · p. 1656</span>
+      </p>
+      <div class="datos" id="datos-infantil"></div>
+      <div id="guion-infantil"></div>
+      <p class="siglas">
+        Siglas: PGA, programación general anual; PAD, plan de atención a la diversidad; TDL, trastorno del desarrollo del
+        lenguaje. Los artículos citados sin norma son del Decreto 196/2022, el currículo de Infantil de la Región de
+        Murcia.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI CAJA DE MATERIAL AUXILIAR
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Segunda prueba · Plantilla</p>
+          <h1>Mi caja de material auxiliar</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        Puedes elegir la unidad entre tres sacadas al azar de tu índice <span class="ref">art. 51.7 · p. 1656</span>, y en
+        PT, de tu programa <span class="ref">art. 51.11 · p. 1657</span>. Ten lista la caja de las doce: una caja o carpeta
+        por unidad, con el número y el título por fuera. <span class="consejo">Consejo</span>
+      </p>
+      <div class="dos-cajas">
+        <div class="caja caja--verde">
+          <h3>Lo que permite la norma</h3>
+          <p>
+            «El material que considere oportuno en formato papel y materiales manipulativos».
+            <span class="ref">art. 51.18 · p. 1657</span>
+          </p>
+          <p>
+            La comisión de selección puede ampliarlo con elementos concretos en sus criterios de actuación. Ningún aparato
+            electrónico. <span class="ref">art. 51.18 · p. 1658</span>
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>Cómo la llenaríamos <span class="consejo">Consejo</span></h3>
+          <ul>
+            <li>Solo lo que vas a enseñar: tres piezas que se ven bien.</li>
+            <li>Cada pieza, con su minuto en el guion.</li>
+            <li>
+              La tecnología, impresa en capturas o fichas. En PT vale 0,4 en la unidad
+              <span class="ref">p. 1754</span>; en Infantil, 0,2 en la programación <span class="ref">p. 1722</span>
+            </li>
+            <li>Nada que identifique a alumnos reales: ni fotos ni nombres.</li>
+          </ul>
+        </div>
+      </div>
+      <table class="rellenar caja-tabla">
+        <colgroup>
+          <col style="width: 11mm" />
+          <col style="width: 44mm" />
+          <col />
+          <col style="width: 17mm" />
+          <col style="width: 25mm" />
+          <col style="width: 13mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">N.º</th>
+            <th scope="col">Unidad<small>Título</small></th>
+            <th scope="col">Qué material<small>Cada pieza que vas a enseñar</small></th>
+            <th scope="col">Minuto<small>En el guion</small></th>
+            <th scope="col">Tipo<small>Rodea</small></th>
+            <th scope="col">¿Lista?</th>
+          </tr>
+        </thead>
+        <tbody id="filas-caja"></tbody>
+      </table>
+      <p class="nota-pie">
+        Si tu índice tiene más de doce unidades, añade filas: cualquiera puede salir en el sorteo.
+        <span class="ref">art. 51.6 y 51.7 · p. 1656</span>
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         HOJA DE SIMULACRO
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Segunda prueba · Plantilla</p>
+          <h1>Hoja de simulacro</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        Haz al menos tres ensayos completos, con cronómetro, de pie y delante de alguien. Apunta el tiempo real de cada
+        tramo y, al acabar, pide tres preguntas de debate a quien te escucha. <span class="consejo">Consejo</span>
+      </p>
+      <table class="rellenar simulacro">
+        <colgroup>
+          <col style="width: 43mm" />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Ensayo</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+          </tr>
+        </thead>
+        <tbody id="filas-simulacro"></tbody>
+      </table>
+
+      <div class="indicadores">
+        <div>
+          <h3>Infantil: ¿salió en el ensayo?</h3>
+          <ul class="marcar" id="marcar-infantil"></ul>
+          <p class="fuente">Anexo XVII, pp. 1722-1724.</p>
+        </div>
+        <div>
+          <h3>PT: ¿salió en el ensayo?</h3>
+          <ul class="marcar" id="marcar-pt"></ul>
+          <p class="fuente">Anexo XXII, pp. 1752-1754.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PLAN DEL ESCRITO
+         ====================================================================== -->
+    <section class="hoja escrito">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Primera prueba · El escrito</p>
+          <h1>Plan del escrito</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        Dos partes que se califican juntas, de hasta 5 puntos cada una. Para aprobar necesitas al menos 1,25 en cada parte
+        y 5 en total <span class="ref">art. 49 · p. 1655</span>. Así repartiríamos el tiempo; apunta debajo de cada barra
+        tus horas de cambio. <span class="consejo">Consejo</span>
+      </p>
+
+      <div class="parte">
+        <div class="parte__cabeza">
+          <h2>Parte A en Infantil</h2>
+          <p>2 h 30 min · un ejercicio a elegir entre dos <span class="ref">anexo XVII · p. 1720</span></p>
+        </div>
+        <div class="barra">
+          <span class="t-debate oscuro-texto" style="flex: 15">15</span>
+          <span class="t-unidad" style="flex: 120">Escribir · 120 minutos</span>
+          <span class="t-prep claro" style="flex: 15">15</span>
+        </div>
+        <div class="bajo-barra">
+          <span style="flex: 30">Leer y planificar</span>
+          <span style="flex: 90"></span>
+          <span style="flex: 30; text-align: right">Repasar</span>
+        </div>
+        <p class="consejo-texto">
+          Apartados fijos: contexto, documentos del centro, objetivos, secuencia de actividades, atención a la diversidad y
+          evaluación. <span class="consejo">Consejo</span>
+        </p>
+        <p class="mi-hora">
+          <b>Mi hora</b>
+          <span>Empiezo <i></i></span><span>Escribo desde <i></i></span><span>Repaso desde <i></i></span
+          ><span>Entrego <i></i></span>
+        </p>
+      </div>
+
+      <div class="parte">
+        <div class="parte__cabeza">
+          <h2>Parte A en PT</h2>
+          <p>
+            2 h 30 min · dos ejercicios, opción A o B en cada uno, 50 % cada uno
+            <span class="ref">anexo XXII · p. 1750</span>
+          </p>
+        </div>
+        <div class="grupos">
+          <span style="flex: 70">Ejercicio 1 · 70</span>
+          <span style="flex: 70">Ejercicio 2 · 70</span>
+          <span class="hueco" style="flex: 10"></span>
+        </div>
+        <div class="barra">
+          <span class="t-debate oscuro-texto" style="flex: 10">10</span>
+          <span class="t-unidad" style="flex: 55">55</span>
+          <span class="t-prep claro" style="flex: 5">5</span>
+          <span class="t-debate oscuro-texto" style="flex: 10">10</span>
+          <span class="t-prog" style="flex: 55">55</span>
+          <span class="t-prep claro" style="flex: 5">5</span>
+          <span class="t-prep claro" style="flex: 10">10</span>
+        </div>
+        <div class="bajo-barra">
+          <span style="flex: 100">En cada ejercicio: 10 de esquema, 55 de escritura y 5 de revisión.</span>
+          <span style="flex: 25"></span>
+          <span style="flex: 25; text-align: right">Repaso final</span>
+        </div>
+        <p class="mi-hora">
+          <b>Mi hora</b>
+          <span>Empiezo <i></i></span><span>Ejercicio 2 <i></i></span><span>Repaso final <i></i></span
+          ><span>Entrego <i></i></span>
+        </p>
+      </div>
+
+      <div class="parte">
+        <div class="parte__cabeza">
+          <h2>Parte B: el tema</h2>
+          <p>2 horas · un tema a elegir entre dos sacados al azar <span class="ref">art. 48.3 · p. 1654</span></p>
+        </div>
+        <div class="barra">
+          <span class="t-debate oscuro-texto" style="flex: 10">10</span>
+          <span class="t-unidad" style="flex: 95">Escribir · 95 minutos</span>
+          <span class="t-prep claro" style="flex: 15">15</span>
+        </div>
+        <div class="bajo-barra">
+          <span style="flex: 10">Esquema</span>
+          <span style="flex: 95"></span>
+          <span style="flex: 15; text-align: right">Repasar</span>
+        </div>
+        <p class="consejo-texto">
+          En el esquema: los apartados del título del tema, la introducción, la conclusión y las normas y autores que vas a
+          citar. <span class="consejo">Consejo</span>
+        </p>
+        <p class="mi-hora">
+          <b>Mi hora</b>
+          <span>Empiezo <i></i></span><span>Escribo desde <i></i></span><span>Repaso desde <i></i></span
+          ><span>Entrego <i></i></span>
+        </p>
+        <div class="temas">
+          <p>
+            <b>¿Cuántos temas preparo?</b> Los temarios de Infantil y de PT tienen 25 temas (Orden de 9 de septiembre de
+            1993) y salen dos. Probabilidad de que no salga ninguno de los tuyos: <span class="consejo">Cálculo propio</span>
+          </p>
+          <ul>
+            <li><b>10 temas</b> 35 %</li>
+            <li><b>15 temas</b> 15 %</li>
+            <li><b>18 temas</b> 7 %</li>
+            <li><b>20 temas</b> 3 %</li>
+            <li><b>22 temas</b> 1 %</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dos-cajas">
+        <div class="caja caja--coral">
+          <h3>Ortografía</h3>
+          <p>
+            0,5 puntos por falta, hasta 3 en cada parte. Un error de b/v, g/j o ll/y es una falta; tres tildes, también. La
+            misma palabra mal escrita cuenta una vez. <span class="ref">anexo XVI · p. 1717</span>
+          </p>
+          <p>Guarda el repaso para tildes y abreviaturas. <span class="consejo">Consejo</span></p>
+        </div>
+        <div class="caja caja--azul">
+          <h3>Anonimato y bolígrafo</h3>
+          <p>
+            Rellenas la cabecera del cuadernillo y el tribunal corrige con un número <span class="ref">anexo XV · p. 1716</span>.
+            Cero si hay «marcas o signos que permitan conocer la identidad» <span class="ref">art. 54.4 · p. 1659</span>
+          </p>
+          <p>
+            «Bolígrafo azul o negro indeleble» <span class="ref">pp. 1720 y 1750</span>. Lleva varios iguales y no firmes
+            ni dibujes. <span class="consejo">Consejo</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PT: LOS 2,25 PUNTOS SEGUROS
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Primera prueba · Solo PT · Plantilla</p>
+          <h1>PT: los 2,25 puntos seguros</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        En cada ejercicio de la parte A, tres indicadores suman 2,25 de 10: aplicar y nombrar bien la normativa (1),
+        adecuar las respuestas a las funciones del maestro de PT (0,75) y mencionar planes, programas, protocolos y
+        proyectos (0,5) <span class="ref">anexo XXII · pp. 1751-1752</span>. Son los que mejor se llevan aprendidos de casa.
+        Rellena una fila por tipo de caso, con nombres y números exactos, y repásala hasta decirla de memoria.
+        <span class="consejo">Consejo</span>
+      </p>
+      <div class="tipos-ejercicio">
+        <p>
+          <b>Ejercicio 1.</b> Una situación de centro: medidas y actuaciones del maestro de PT para prevenir, detectar y
+          atender al alumnado con NEAE. <span class="ref">p. 1750</span>
+        </p>
+        <p>
+          <b>Ejercicio 2.</b> Datos de la evaluación psicopedagógica o del dictamen de un alumno o alumna con necesidades
+          educativas especiales (NEE). <span class="ref">p. 1750</span>
+        </p>
+      </div>
+      <table class="rellenar puntos-pt">
+        <colgroup>
+          <col style="width: 38mm" />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Tipo de caso</th>
+            <th scope="col">Normativa <b>1</b><small>Nombre y número exactos</small></th>
+            <th scope="col">Funciones del maestro de PT <b>0,75</b><small>Qué haces tú y con quién</small></th>
+            <th scope="col">Planes, programas, protocolos y proyectos <b>0,5</b><small>Del centro y de la Consejería</small></th>
+          </tr>
+        </thead>
+        <tbody id="filas-pt"></tbody>
+      </table>
+      <p class="nota-pie">
+        La primera fila es un punto de partida con normas vigentes a 19/10/2026. El Plan Normativo de la Región de Murcia
+        prevé un decreto nuevo de atención a la diversidad que derogaría el Decreto 359/2009: compruébalo antes del
+        examen.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         LA MOCHILA DEL EXAMEN
+         ====================================================================== -->
+    <section class="hoja mochila">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">El día de cada prueba</p>
+          <h1>La mochila del examen</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">Prepárala la víspera y repásala antes de salir de casa. <span class="consejo">Consejo</span></p>
+
+      <div class="mochila-columnas">
+        <section class="t-prep">
+          <h2>Primera prueba</h2>
+          <p class="cuando">Con el acto de presentación, el mismo día.</p>
+          <ul class="lista-casillas">
+            <li>
+              <span>DNI (documento nacional de identidad), pasaporte en vigor o permiso de conducir.
+                <span class="ref">art. 37.4 · p. 1651</span></span>
+            </li>
+            <li><span>Bolígrafo azul o negro indeleble. <span class="ref">pp. 1720 y 1750</span></span></li>
+            <li><span>Varios bolígrafos iguales, con la misma tinta. <span class="consejo">Consejo</span></span></li>
+            <li>
+              <span>Llegar con tiempo: hay un único llamamiento y queda fuera quien no comparece.
+                <span class="ref">art. 37.2 · p. 1650</span></span>
+            </li>
+            <li>
+              <span>La sede, el aula y la hora apuntadas en papel, porque el móvil no entra.
+                <span class="consejo">Consejo</span></span>
+            </li>
+            <li><span>Agua y algo de comer para las esperas. <span class="consejo">Consejo</span></span></li>
+            <li><span>Tus preguntas para el acto de presentación (abajo). <span class="consejo">Consejo</span></span></li>
+          </ul>
+        </section>
+        <section class="t-unidad">
+          <h2>Segunda prueba</h2>
+          <p class="cuando">El día que te cite tu tribunal.</p>
+          <ul class="lista-casillas">
+            <li>
+              <span>DNI: el tribunal puede pedirlo en cualquier momento. <span class="ref">art. 37.4 · p. 1651</span></span>
+            </li>
+            <li>
+              <span>Tu ejemplar de la programación, idéntico al entregado y sin notas.
+                <span class="ref">art. 51.17 · p. 1657</span></span>
+            </li>
+            <li>
+              <span>Las doce unidades desarrolladas, en papel: para preparar solo vale el papel.
+                <span class="ref">art. 51.13 · p. 1657</span></span>
+            </li>
+            <li>
+              <span>Las doce cajas de material, numeradas: papel y manipulativos.
+                <span class="ref">art. 51.18 · p. 1657</span></span>
+            </li>
+            <li><span>Folios en blanco y bolígrafos para el guion. <span class="consejo">Consejo</span></span></li>
+            <li>
+              <span>Tu guion ensayado, si el tribunal deja traerlo hecho. <span class="consejo">Consejo</span></span>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="caja caja--coral">
+        <h3>Lo que no entra en el aula</h3>
+        <p>
+          Móvil, reloj inteligente y cualquier aparato que pueda conectarse. La norma prohíbe entrar con ellos en el aula
+          del examen y en la del acto de presentación. Quien lo haga «será apartado inmediatamente del procedimiento
+          selectivo» y tendrá un cero <span class="ref">art. 44.4 y 44.5 · p. 1653</span>. La norma no hace excepción con
+          los aparatos apagados: déjalos fuera. <span class="consejo">Consejo</span>
+        </p>
+      </div>
+
+      <div class="caja caja--azul">
+        <h3>Pregunta en el acto de presentación y apunta la respuesta</h3>
+        <p>
+          Es de «carácter personal y de asistencia obligada», y allí el tribunal da las instrucciones de las pruebas.
+          <span class="ref">art. 47.3 · p. 1654</span>
+        </p>
+        <ol class="preguntas">
+          <li>¿El guion del oral se trae hecho o se escribe en la hora de preparación?<span class="respuesta"></span></li>
+          <li>¿Avisa el tribunal del tiempo? ¿Se puede tener un reloj analógico sobre la mesa?<span class="respuesta"></span></li>
+          <li>¿Amplían los criterios de actuación el material permitido en el oral?<span class="respuesta"></span></li>
+          <li>Otra duda:<span class="respuesta"></span></li>
+        </ol>
+      </div>
+
+      <p class="nota-pie">
+        Antes de la segunda prueba: entrega dos ejemplares en papel de la programación, en persona o por medio de alguien
+        autorizado, hasta el día hábil posterior a las notas definitivas de la primera prueba. Si no la entregas, se
+        entiende que renuncias <span class="ref">art. 50 · p. 1655</span>. En el mismo plazo van los méritos.
+        <span class="ref">art. 57.1 · p. 1660</span>
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         LAS REGLAS Y SUS FUENTES · CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja hoja--ultima reglas">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para comprobarlo todo</p>
+      <h1>Las reglas y sus fuentes</h1>
+      <p class="entrada">
+        Salen de la Orden de 21 de enero de 2026, de convocatoria del Cuerpo de Maestros (BORM n.º 18, de 23/01/2026):
+        <span class="url">borm.es/services/boletin/ano/2026/numero/18/pdf</span>. La página es la del BORM.
+      </p>
+      <div class="reglas__lista">
+        <div>
+        <h2>El día de cada prueba</h2>
+        <dl>
+          <dt>Acto de presentación</dt>
+          <dd>
+            «Carácter personal y de asistencia obligada»; allí el tribunal da las instrucciones.
+            <span class="ref">art. 47.3 · p. 1654</span>
+          </dd>
+          <dt>Llamamiento</dt>
+          <dd>«Único llamamiento»: queda fuera quien no comparece, salvo fuerza mayor. <span class="ref">art. 37.2 · p. 1650</span></dd>
+          <dt>Identidad</dt>
+          <dd>DNI, «pasaporte en vigor» o «el permiso de conducir». <span class="ref">art. 37.4 · p. 1651</span></dd>
+          <dt>Aparatos</dt>
+          <dd>
+            Prohibido entrar en el aula con móviles, relojes inteligentes o aparatos con conexión; quien lo haga «será
+            apartado inmediatamente» y tendrá un cero. <span class="ref">art. 44.4 y 44.5 · p. 1653</span>
+          </dd>
+        </dl>
+        <h2>Primera prueba</h2>
+        <dl>
+          <dt>Calificación</dt>
+          <dd>Dos partes de hasta 5 puntos; mínimo 1,25 en cada una y 5 en total. <span class="ref">art. 49 · p. 1655</span></dd>
+          <dt>Parte A en Infantil</dt>
+          <dd>2 h 30 min; un ejercicio a elegir entre dos. <span class="ref">anexo XVII · p. 1720</span></dd>
+          <dt>Parte A en PT</dt>
+          <dd>2 h 30 min; dos ejercicios con opción A o B, 50 % cada uno. <span class="ref">anexo XXII · p. 1750</span></dd>
+          <dt>Parte B</dt>
+          <dd>2 horas; un tema a elegir entre dos sacados al azar. <span class="ref">art. 48.3 · p. 1654</span></dd>
+          <dt>Material</dt>
+          <dd>«Bolígrafo azul o negro indeleble». <span class="ref">pp. 1720 y 1750</span></dd>
+          <dt>PT, en cada ejercicio</dt>
+          <dd>
+            Normativa, 1; funciones del maestro de PT, 0,75; planes, programas, protocolos y proyectos, 0,5.
+            <span class="ref">anexo XXII · pp. 1751-1752</span>
+          </dd>
+          <dt>Anonimato</dt>
+          <dd>
+            Corrección con «un número de identificación» <span class="ref">anexo XV · p. 1716</span>; cero con «marcas o
+            signos que permitan conocer la identidad» <span class="ref">art. 54.4 · p. 1659</span>
+          </dd>
+        </dl>
+        </div>
+        <div>
+        <h2>Segunda prueba</h2>
+        <dl>
+          <dt>Entrega</dt>
+          <dd>
+            Dos ejemplares en papel hasta el día hábil posterior a las notas definitivas de la primera prueba
+            <span class="ref">art. 50.1 · p. 1655</span>; en el mismo plazo, los méritos
+            <span class="ref">art. 57.1 · p. 1660</span>
+          </dd>
+          <dt>Originalidad</dt>
+          <dd>
+            La programación «ha de ser original» y se elabora «de forma individual». <span class="ref">art. 51.3 · p. 1656</span>
+          </dd>
+          <dt>Unidad</dt>
+          <dd>
+            Puedes elegirla entre tres sacadas al azar de tu índice o hacerla a partir del temario
+            <span class="ref">art. 51.7 · p. 1656</span>; en PT, igual con tu programa
+            <span class="ref">art. 51.11 · p. 1657</span>
+          </dd>
+          <dt>Preparación</dt>
+          <dd>
+            «Una hora», «sin posibilidad de conexión con el exterior», con material «en formato papel».
+            <span class="ref">art. 51.13 · p. 1657</span>
+          </dd>
+          <dt>Duración</dt>
+          <dd>
+            «Una hora y treinta minutos» como máximo; la programación no puede pasar de 30; 15 de debate.
+            <span class="ref">art. 51.14 · p. 1657</span>
+          </dd>
+          <dt>Tiempo de la unidad</dt>
+          <dd>
+            «El tiempo restante» <span class="ref">anexo XVI · p. 1718</span>; «en su totalidad y ajustada a la duración de
+            la exposición» <span class="ref">art. 51.16 · p. 1657</span>
+          </dd>
+          <dt>Tu ejemplar</dt>
+          <dd>
+            «Idéntico» al entregado; la defensa «no podrá ser una mera lectura». <span class="ref">art. 51.17 · p. 1657</span>
+          </dd>
+          <dt>Guion</dt>
+          <dd>
+            «Un folio por una cara», para la programación y la unidad; se entrega al terminar.
+            <span class="ref">art. 51.18 · p. 1657</span>
+          </dd>
+          <dt>Material auxiliar</dt>
+          <dd>
+            Papel y materiales manipulativos, ampliables por la comisión; ningún aparato electrónico.
+            <span class="ref">art. 51.18 · pp. 1657-1658</span>
+          </dd>
+          <dt>Puntos</dt>
+          <dd>
+            Programación, 4; unidad, 5 en Infantil y 5,5 en PT; debate, 1 y 0,5. Se aprueba con un 5.
+            <span class="ref">anexo XVII · pp. 1722-1724</span> <span class="ref">anexo XXII · pp. 1752-1754</span>
+            <span class="ref">art. 52.1 · p. 1658</span>
+          </dd>
+        </dl>
+        <h2>En las dos pruebas</h2>
+        <dl>
+          <dt>Ortografía</dt>
+          <dd>
+            0,5 por falta, hasta 3 por parte, también en el material escrito de la segunda prueba; tres tildes, una falta.
+            <span class="ref">anexo XVI · p. 1717</span>
+          </dd>
+        </dl>
+        </div>
+      </div>
+
+      <div class="caja caja--azul">
+        <p>
+          <strong>Lo que la norma no dice:</strong> si el guion se trae hecho o se escribe en la hora de preparación, ni
+          cómo controlas tú el tiempo. Pregúntalo en el acto de presentación.
+        </p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Kit para el examen: plantillas para la oposición de Maestros en Murcia (PT e Infantil).</strong>
+          IdEducando, octubre de 2026. <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo
+          docente. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/kit-examen-oposiciones-murcia</span>
+        </p>
+        <p>
+          Ejemplos: Decreto n.º 196/2022, de 3 de noviembre (Infantil, BORM n.º 255), y Decreto n.º 209/2022, de 17 de
+          noviembre (Primaria, BORM n.º 267), de la Región de Murcia, y el programa de intervención de ejemplo de IdEducando.
+          También citamos el Real Decreto 276/2007, artículo 21.2.B.
+        </p>
+        <p>
+          Licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0): puedes copiarlo y
+          adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia. Las frases de la convocatoria son textos oficiales, excluidos de la propiedad intelectual por el
+          artículo 13 de la Ley de Propiedad Intelectual. El kit es orientativo: lo que vale es lo publicado en el BORM, y la
+          próxima convocatoria puede cambiar las bases. Si encuentras un error, escríbenos a hola@ideducando.es.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------
+      // Colores de la marca (los mismos que comun.css) para los dibujos SVG
+      // ------------------------------------------------------------------
+      const COLOR = {
+        azul: '#2f6fd6',
+        verde: '#1fa67a',
+        coral: '#e8553e',
+        morado: '#8c4fb8',
+        amarillo: '#f6c12e',
+        naranja: '#f5961f',
+        marino: '#1e2b55',
+        suave: '#46578c',
+        crema: '#fff6e6',
+        moradoTinte: '#efe5f7',
+        azulTinte: '#e4edfb',
+        amarilloTinte: '#fdf0c7',
+        verdeTinte: '#dcf3ea',
+        naranjaTinte: '#fde8cf',
+        linea: '#ead9bb',
+      };
+
+      // Los tres tramos del oral que proponemos: 25, 50 y 15 minutos.
+      const TRAMOS = [
+        { desde: 0, min: 25, color: COLOR.morado, texto: '#fff' },
+        { desde: 25, min: 50, color: COLOR.azul, texto: '#fff' },
+        { desde: 75, min: 15, color: COLOR.amarillo, texto: COLOR.marino },
+      ];
+
+      // Punto de una circunferencia en el minuto m de un reloj de 90 minutos (0 arriba).
+      function punto(cx, cy, r, m) {
+        const a = (2 * Math.PI * m) / 90;
+        return [cx + r * Math.sin(a), cy - r * Math.cos(a)];
+      }
+
+      // Arco de corona entre dos minutos, dibujado como trazo discontinuo de un círculo.
+      function arco(cx, cy, r, grosor, desde, hasta, color, hueco) {
+        const C = 2 * Math.PI * r;
+        const largo = (C * (hasta - desde)) / 90 - hueco;
+        const giro = -90 + (360 * desde) / 90 + (360 * hueco) / 2 / C;
+        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="${grosor}"
+          stroke-dasharray="${largo} ${C}" transform="rotate(${giro} ${cx} ${cy})"/>`;
+      }
+
+      // Cronómetro de 90 minutos con los tres tramos.
+      function cronometro(cx, cy, R, { etiquetas = false } = {}) {
+        let s = '';
+        s += `<circle cx="${cx}" cy="${cy + R * 0.07}" r="${R}" fill="${COLOR.marino}" opacity="0.16"/>`;
+        // Corona y botón del cronómetro
+        s += `<rect x="${cx - R * 0.17}" y="${cy - R * 1.25}" width="${R * 0.34}" height="${R * 0.15}" rx="${R * 0.05}" fill="${COLOR.marino}"/>`;
+        s += `<rect x="${cx - R * 0.07}" y="${cy - R * 1.12}" width="${R * 0.14}" height="${R * 0.16}" fill="${COLOR.marino}"/>`;
+        s += `<g transform="rotate(42 ${cx} ${cy})"><rect x="${cx - R * 0.08}" y="${cy - R * 1.15}" width="${R * 0.16}" height="${R * 0.18}" rx="${R * 0.04}" fill="${COLOR.marino}"/></g>`;
+        // Esfera
+        s += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#fff" stroke="${COLOR.marino}" stroke-width="${R * 0.055}"/>`;
+        const rc = R * 0.68;
+        const grosor = R * 0.3;
+        for (const t of TRAMOS) s += arco(cx, cy, rc, grosor, t.desde, t.desde + t.min, t.color, R * 0.035);
+        // Marcas cada 5 minutos; más largas en el 0, el 25, el 50 y el 75
+        for (let m = 0; m < 90; m += 5) {
+          const larga = [0, 25, 50, 75].includes(m);
+          const [x1, y1] = punto(cx, cy, R * (larga ? 0.855 : 0.885), m);
+          const [x2, y2] = punto(cx, cy, R * 0.94, m);
+          s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${COLOR.marino}" stroke-width="${R * (larga ? 0.04 : 0.022)}" stroke-linecap="round"/>`;
+        }
+        // Centro
+        s += `<text x="${cx}" y="${cy + R * 0.1}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${R * 0.4}" fill="${COLOR.marino}">90</text>`;
+        s += `<text x="${cx}" y="${cy + R * 0.3}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="${R * 0.12}" fill="${COLOR.suave}">minutos</text>`;
+        if (etiquetas) {
+          // Lo que dura cada tramo, sobre su color
+          for (const t of TRAMOS) {
+            const [x, y] = punto(cx, cy, rc, t.desde + t.min / 2);
+            s += `<text x="${x}" y="${y + R * 0.045}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${R * 0.115}" fill="${t.texto}">${t.min} min</text>`;
+          }
+          // Minuto de cada cambio, por fuera; el 0 y el 90, a los lados de la corona
+          for (const [m, texto] of [[25, '25'], [50, '50'], [75, '75'], [3.25, '0'], [86.75, '90']]) {
+            const [x, y] = punto(cx, cy, R * 1.17, m);
+            s += `<text x="${x}" y="${y + R * 0.05}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${R * 0.13}" fill="${COLOR.marino}">${texto}</text>`;
+          }
+        }
+        return s;
+      }
+
+      // ------------------------------------------------------------------
+      // Reloj grande de la hoja «El reloj del oral»
+      // ------------------------------------------------------------------
+      document.getElementById('reloj-grande').innerHTML = `<svg viewBox="-62 -66 124 128" role="img"
+        aria-label="Cronómetro de 90 minutos: programación del 0 al 25, unidad del 25 al 75 y debate del 75 al 90">${cronometro(0, 0, 48, { etiquetas: true })}</svg>`;
+
+      // ------------------------------------------------------------------
+      // Ilustración de la portada: folio de guion, cronómetro, caja de material, bolígrafo y lista
+      // ------------------------------------------------------------------
+      function folio() {
+        // Líneas que imitan la escritura del guion
+        const lineas = (x, y, anchos, color, opacidad, paso = 5) =>
+          anchos.map((w, i) => `<rect x="${x}" y="${y + i * paso}" width="${w}" height="1.7" rx="0.85" fill="${color}" opacity="${opacidad}"/>`).join('');
+        let s = '';
+        s += `<rect x="2.2" y="3.2" width="88" height="122" rx="2.6" fill="${COLOR.marino}" opacity="0.16"/>`;
+        s += `<rect x="0" y="0" width="88" height="122" rx="2.6" fill="#fff"/>`;
+        s += `<text x="14" y="10.5" font-family="Outfit" font-weight="700" font-size="5" fill="${COLOR.marino}">Mi guion</text>`;
+        s += `<rect x="42" y="7" width="20" height="1.6" rx="0.8" fill="${COLOR.suave}" opacity="0.3"/>`;
+        // Franja de minutos
+        s += `<clipPath id="franja-portada"><rect x="6" y="17" width="3.8" height="96" rx="1.9"/></clipPath>`;
+        s += `<g clip-path="url(#franja-portada)">
+          <rect x="6" y="17" width="3.8" height="26.7" fill="${COLOR.morado}"/>
+          <rect x="6" y="43.7" width="3.8" height="53.3" fill="${COLOR.azul}"/>
+          <rect x="6" y="97" width="3.8" height="16" fill="${COLOR.amarillo}"/></g>`;
+        for (const [m, y] of [[0, 18.2], [25, 44.9], [75, 98.2], [90, 113.8]]) {
+          s += `<text x="5" y="${y + 1}" text-anchor="end" font-family="Outfit" font-weight="700" font-size="2.9" fill="${COLOR.marino}">${m}</text>`;
+        }
+        // Programación
+        s += lineas(14, 19.5, [56, 44, 61, 50, 36], COLOR.morado, 0.33);
+        // Unidad: minuto, palabras clave y material
+        for (let i = 0; i < 9; i++) {
+          const y = 47 + i * 5.6;
+          s += `<rect x="14" y="${y}" width="4.6" height="1.7" rx="0.85" fill="${COLOR.azul}" opacity="0.7"/>`;
+          s += `<rect x="21" y="${y}" width="${[44, 36, 48, 30, 42, 38, 46, 33, 40][i]}" height="1.7" rx="0.85" fill="${COLOR.azul}" opacity="0.28"/>`;
+          if ([1, 3, 6].includes(i)) s += `<rect x="70" y="${y - 0.9}" width="12" height="3.5" rx="1.75" fill="${COLOR.naranja}"/>`;
+        }
+        // Debate
+        for (const [i, w] of [[0, 46], [1, 38]]) {
+          s += `<circle cx="15.5" cy="${101.8 + i * 5.4}" r="1.2" fill="${COLOR.amarillo}"/>`;
+          s += `<rect x="19" y="${101 + i * 5.4}" width="${w}" height="1.7" rx="0.85" fill="${COLOR.naranja}" opacity="0.45"/>`;
+        }
+        return s;
+      }
+
+      function caja() {
+        let s = '';
+        // Lo que asoma: una tarjeta, un cartón con dibujo y una moneda
+        s += `<g transform="rotate(-9 16 -6)"><rect x="6" y="-19" width="18" height="24" rx="1.6" fill="#fff" stroke="${COLOR.azul}" stroke-width="0.9"/>
+          <rect x="9" y="-15.5" width="12" height="9" rx="1" fill="${COLOR.azulTinte}"/><rect x="9" y="-4" width="10" height="1.4" rx="0.7" fill="${COLOR.azul}" opacity="0.6"/></g>`;
+        s += `<g transform="rotate(7 33 -6)"><rect x="25" y="-17" width="16" height="22" rx="1.6" fill="${COLOR.verdeTinte}" stroke="${COLOR.verde}" stroke-width="0.9"/>
+          <circle cx="33" cy="-9" r="3.6" fill="${COLOR.verde}" opacity="0.55"/></g>`;
+        s += `<circle cx="47" cy="-4" r="5.2" fill="${COLOR.amarillo}" stroke="${COLOR.naranja}" stroke-width="1"/>
+          <circle cx="47" cy="-4" r="2.8" fill="none" stroke="${COLOR.naranja}" stroke-width="0.6"/>`;
+        // La caja
+        s += `<rect x="1.5" y="2.6" width="56" height="30" rx="2.4" fill="${COLOR.marino}" opacity="0.16"/>`;
+        s += `<rect x="0" y="0" width="56" height="30" rx="2.4" fill="${COLOR.naranja}"/>`;
+        s += `<rect x="-1.5" y="-1.5" width="59" height="6" rx="1.8" fill="${COLOR.amarillo}"/>`;
+        s += `<rect x="13" y="10" width="30" height="12" rx="1.6" fill="#fff"/>`;
+        s += `<text x="28" y="18" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="4.6" fill="${COLOR.marino}">Unidad 7</text>`;
+        return s;
+      }
+
+      function boligrafo() {
+        return `<rect x="1" y="1.4" width="66" height="4.6" rx="2.3" fill="${COLOR.marino}" opacity="0.16"/>
+          <polygon points="0,0.5 -7,2.3 0,4.1" fill="${COLOR.naranjaTinte}" stroke="${COLOR.marino}" stroke-width="0.5"/>
+          <circle cx="-6.4" cy="2.3" r="0.9" fill="${COLOR.marino}"/>
+          <rect x="0" y="0" width="64" height="4.6" rx="2.3" fill="${COLOR.azul}"/>
+          <rect x="52" y="0" width="12" height="4.6" rx="2.3" fill="${COLOR.marino}"/>
+          <rect x="44" y="-1.2" width="15" height="1.5" rx="0.75" fill="${COLOR.marino}"/>`;
+      }
+
+      function lista() {
+        let s = `<rect x="1.4" y="2" width="31" height="31" rx="1.2" fill="${COLOR.marino}" opacity="0.14"/>`;
+        s += `<rect x="0" y="0" width="31" height="31" rx="1.2" fill="${COLOR.amarillo}"/>`;
+        s += `<text x="4" y="7.6" font-family="Outfit" font-weight="700" font-size="4.2" fill="${COLOR.marino}">Mochila</text>`;
+        for (let i = 0; i < 3; i++) {
+          const y = 11.5 + i * 6.2;
+          s += `<rect x="4" y="${y}" width="3.6" height="3.6" rx="0.7" fill="#fff" stroke="${COLOR.marino}" stroke-width="0.5"/>`;
+          s += `<path d="M4.6 ${y + 1.8} l1.2 1.3 l2.6 -3.4" fill="none" stroke="${COLOR.marino}" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+          s += `<rect x="10" y="${y + 1}" width="${[16, 13, 17][i]}" height="1.5" rx="0.75" fill="${COLOR.marino}" opacity="0.5"/>`;
+        }
+        return s;
+      }
+
+      document.getElementById('ilustracion').innerHTML = `
+        <circle cx="186" cy="200" r="58" fill="${COLOR.moradoTinte}"/>
+        <circle cx="16" cy="246" r="30" fill="${COLOR.amarilloTinte}"/>
+        <circle cx="114" cy="285" r="11" fill="${COLOR.azulTinte}"/>
+        <g transform="translate(24 149.5) scale(0.9) rotate(-6 44 61)">${folio()}</g>
+        <g transform="translate(101 153) rotate(9 15 15)">${lista()}</g>
+        <g>${cronometro(161, 190, 30)}</g>
+        <g transform="translate(123 235) rotate(3 28 15)">${caja()}</g>
+        <g transform="translate(50 249) rotate(-24)">${boligrafo()}</g>`;
+
+      // ------------------------------------------------------------------
+      // Guion de un folio: la misma plantilla en blanco y en los dos ejemplos
+      // ------------------------------------------------------------------
+      // Temas del debate que caben en la plantilla en blanco
+      const TEMAS_DEBATE = 3;
+
+      function datosGuion(d = {}) {
+        return `<div class="datos__fila datos__fila--1"><span>Unidad n.º</span><span>${d.numero ?? ''}</span><span>Título</span><span>${d.titulo ?? ''}</span></div>
+          <div class="datos__fila datos__fila--2"><span>Curso y etapa</span><span>${d.curso ?? ''}</span><span>En PT, alumno o grupo</span><span>${d.alumno ?? ''}</span></div>`;
+      }
+
+      function guion(d = {}) {
+        const fila = (celdas) => `<div class="fila">${celdas.map((c) => `<span>${c}</span>`).join('')}</div>`;
+        const prog = (d.prog ?? []).map(fila).join('');
+        const unidad = (d.unidad ?? []).map(fila).join('');
+        const debate = (d.debate ?? Array(TEMAS_DEBATE).fill('')).map((t, i) => fila([`${i + 1}.`, t])).join('');
+        const bloque = (titulo, lineas) =>
+          `<div class="bloque-normas" style="flex: ${d.normas ? 'none' : '1'}"><h4>${titulo}</h4><div class="renglones">${(lineas ?? [])
+            .map((l) => `<p>${l}</p>`)
+            .join('')}</div></div>`;
+        const n = d.normas ?? {};
+        return `<div class="guion">
+          <div class="franja t-prog" style="grid-row: 1"><b>0</b></div>
+          <div class="franja t-unidad" style="grid-row: 2"><b>25</b><i>50</i></div>
+          <div class="franja t-debate" style="grid-row: 3"><b>75</b><b class="fin">90</b></div>
+          <div class="zona zona--prog t-prog">
+            <p class="zona__titulo">Programación <small>del 0 al 25 · tope: 30 minutos</small></p>
+            <div class="columnas" style="grid-template-columns: 8mm minmax(0, 1fr)"><span>min</span><span>Apartados en orden: palabras clave</span></div>
+            <div class="renglones renglones--dos">${prog}</div>
+          </div>
+          <div class="zona zona--unidad t-unidad">
+            <p class="zona__titulo">Unidad <small>del 25 al 75 · entera y ajustada al tiempo</small></p>
+            <div class="columnas"><span>min</span><span>Apartados y actividades: palabras clave</span><span>Material</span></div>
+            <div class="renglones renglones--tres">${unidad}</div>
+          </div>
+          <div class="zona zona--normas t-prog">
+            <p class="zona__titulo">Normas y documentos</p>
+            ${bloque('Estatales', n.estatales)}
+            ${bloque('De la Región de Murcia', n.murcia)}
+            ${bloque('Del centro', n.centro)}
+          </div>
+          <div class="zona zona--debate t-debate">
+            <p class="zona__titulo">Debate <small>del 75 al 90 · temas que pueden salir y cómo los enlazo</small></p>
+            <div class="renglones renglones--dos debate-temas">${debate}</div>
+          </div>
+        </div>`;
+      }
+
+      document.getElementById('datos-blanco').innerHTML = datosGuion();
+      document.getElementById('guion-blanco').innerHTML = guion();
+
+      // Ejemplo de PT: unidad 8 del programa de intervención de ejemplo de IdEducando (alumna ficticia).
+      document.getElementById('datos-pt').innerHTML = datosGuion({
+        numero: '8',
+        titulo: '«La tienda del puerto»',
+        curso: '2.º de Primaria',
+        alumno: 'Noa (ficticia), con TEA, y su grupo',
+      });
+      document.getElementById('guion-pt').innerHTML = guion({
+        prog: [
+          ['0', 'Mapa: quién es Noa, qué necesita, qué hago, cómo evalúo'],
+          ['2', 'NEE como barreras (LOE 73.1); inclusión y DUA (LOE 4.3)'],
+          ['5', 'Costa, colegio de dos líneas; 2.º B, 23; EOEP de sector y de autismo'],
+          ['8', 'Noa, 7 años: informe psicopedagógico, memoria visual, el mar'],
+          ['11', 'Siete necesidades, cada una con su barrera y su fortaleza'],
+          ['14', 'Objetivos, uno por necesidad, observables'],
+          ['18', 'Apoyo dentro del aula, enseñanza estructurada, ayudas que se retiran'],
+          ['22', 'Doce unidades por trimestres; evaluación, PAP y familia'],
+        ],
+        unidad: [
+          ['25', 'Contexto: mercadillo solidario de 2.º; necesidades 1, 5 y 6', ''],
+          ['28', 'Habilidades: monedas, hasta 10 €, pedir y esperar turno', ''],
+          ['31', 'Descriptores: STEM1, STEM4, CCL1, CPSAA3, CE2', ''],
+          ['33', 'Saberes: Matemáticas A.1, A.3, A.5 y D.2; Lengua B.3', ''],
+          ['36', 'Análisis de tareas en seis pasos; emparejamiento con modelo', 'Guion visual'],
+          ['39', 'Sesiones 1 y 2: elegir productos; monedas que brillan', 'Monedas'],
+          ['43', 'Sesiones 3 y 4: barcos en fila; la etiqueta dice', 'Recta de barcos'],
+          ['47', 'Sesiones 5 y 6: sumamos la compra; abrimos la tienda', 'Etiquetas'],
+          ['51', 'Sesión 7, mercadillo real; sesión 8, caras y portafolio', 'Tablero'],
+          ['54', 'DUA: elegir, ver y tocar, responder señalando o hablando', ''],
+          ['57', 'Recursos: PT, tutora, AL, ATE y dos compañeras mentoras', ''],
+          ['60', 'Tecnologías: pizarra digital, comunicador, videomodelado', 'Capturas'],
+          ['63', 'Evaluación: cinco criterios, lista de control, registro de ayudas', 'Lista de control'],
+          ['67', 'Mi práctica: ¿retiré a tiempo las ayudas? Cambios, unidad 10', ''],
+          ['70', 'Familia: nota con fotos de trabajos; pagar en la panadería', 'Nota'],
+          ['73', 'Cierre: lo que Noa ya hace sola', ''],
+        ],
+        debate: [
+          '¿Por qué apoyo dentro del aula? Decreto 209/2022, artículo 23.7',
+          '¿Y si se desregula en la tienda? Plan de apoyo conductual del PAP',
+          'Coordinación con AL y familia: PAP y registro de comunicación',
+        ],
+        normas: {
+          estatales: ['LOE (LOMLOE): 4.3 y 71 a 74', 'Real Decreto 157/2022'],
+          murcia: [
+            'Decreto 209/2022: 7, 23 y 24',
+            'Decreto 359/2009',
+            'Orden de 4/06/2010 (PAD): 6.5',
+            'Resolución de 13/03/2018 (informe psicopedagógico)',
+            'Resolución de 20/11/2023 (PAP)',
+            'Instrucciones de inicio de curso 2026-2027',
+          ],
+          centro: ['Proyecto educativo', 'PAD y plan de convivencia', 'PAP de Noa'],
+        },
+      });
+
+      // Ejemplo de Infantil: unidad inventada para 5 años.
+      document.getElementById('datos-infantil').innerHTML = datosGuion({
+        numero: '9',
+        titulo: '«Detectives de sombras»',
+        curso: '5 años, Educación Infantil',
+        alumno: 'No se aplica',
+      });
+      document.getElementById('guion-infantil').innerHTML = guion({
+        prog: [
+          ['0', 'Mapa: por qué, para quién, qué, cómo, cómo evalúo'],
+          ['2', 'Carácter globalizado; juego y experimentación (artículo 5)'],
+          ['5', 'Colegio ficticio de barrio, dos líneas; proyecto educativo, PGA, PAD'],
+          ['8', '5 años B, 22; alumnado con NEAE: TDL y altas capacidades, con medidas'],
+          ['12', 'Objetivos de etapa b), f) y g) (artículo 7); las tres áreas'],
+          ['15', 'Competencias específicas, criterios y saberes, unidos por unidades'],
+          ['18', 'Doce unidades, cuatro por trimestre; rincones; robot de suelo, tableta'],
+          ['22', 'Evaluación global, continua y formativa (artículo 14); familias'],
+        ],
+        unidad: [
+          ['25', 'Contexto: en el patio, «¿por qué mi sombra me sigue?»', 'Lámina del patio'],
+          ['28', 'Objetivos: observar, predecir y comprobar con sombras', ''],
+          ['31', 'Área 2: competencias 2 y 3; criterios 2.3 y 3.3', ''],
+          ['33', 'Saberes: hipótesis, fenómenos naturales, día y noche', ''],
+          ['36', 'Indagación y juego; gran grupo, equipos de cuatro, parejas', ''],
+          ['39', 'Sesión 1: asamblea, ¿qué sabemos de las sombras?', 'Caja de objetos'],
+          ['42', 'Sesión 2: linternas y objetos, ¿cuál hace sombra?', 'Linterna'],
+          ['45', 'Sesión 3: el patio a las 9 y a las 12, contornos con tiza', 'Contornos'],
+          ['49', 'Sesión 4: teatro de sombras por equipos', 'Siluetas'],
+          ['52', 'Sesión 5: mural de hallazgos para las familias', 'Mural en pequeño'],
+          ['55', 'DUA: elegir objeto; responder con gesto, dibujo o palabra', 'Tarjetas'],
+          ['58', 'TDL: modelado, apoyos visuales; altas capacidades: reto', ''],
+          ['61', 'Detección: quién no predice o no participa, a tutoría', 'Hoja de registro'],
+          ['64', 'Espacios: aula, patio, rincón de luz; cinco sesiones', ''],
+          ['67', 'Evaluación: criterios 2.3 y 3.3; observación y portafolio', ''],
+          ['70', 'Mi práctica: ¿llegó a todos? ¿Funcionó el patio?', 'Diana'],
+          ['73', 'Cierre: respondemos la pregunta del principio', ''],
+        ],
+        debate: [
+          'TDL y lenguaje oral: modelado y apoyos visuales (artículo 16.6)',
+          '¿Y si llueve el día del patio? Linternas en el aula',
+          'Familias: buscar sombras en casa y traer dibujos (artículo 23)',
+        ],
+        normas: {
+          estatales: ['LOE (LOMLOE): 12 a 15', 'Real Decreto 95/2022'],
+          murcia: ['Decreto 196/2022: 5, 7, 14, 16 y 23', 'Decreto 359/2009', 'Orden de 4/06/2010 (PAD)'],
+          centro: ['Proyecto educativo', 'Programación general anual', 'PAD'],
+        },
+      });
+
+      // ------------------------------------------------------------------
+      // Caja de material: doce filas
+      // ------------------------------------------------------------------
+      document.getElementById('filas-caja').innerHTML = Array.from(
+        { length: 12 },
+        (_, i) => `<tr><th scope="row">${i + 1}</th><td></td><td></td><td></td>
+          <td><span class="rodea"><span>papel</span><span>manipulativo</span></span></td>
+          <td class="centrado"><span class="casilla" aria-hidden="true"></span></td></tr>`,
+      ).join('');
+
+      // ------------------------------------------------------------------
+      // Hoja de simulacro
+      // ------------------------------------------------------------------
+      const minutos = '<td><span class="min">min</span></td>'.repeat(3);
+      const vacias = '<td></td>'.repeat(3);
+      const preguntas = '<td><span class="numeros"><span>1</span><span>2</span><span>3</span></span></td>'.repeat(3);
+      document.getElementById('filas-simulacro').innerHTML = `
+        <tr><th scope="row">Fecha y unidad</th>${vacias}</tr>
+        <tr><th scope="row">Quién te escucha</th>${vacias}</tr>
+        <tr class="t-prog"><th scope="row">Programación<small>Plan: 25 · tope: 30</small></th>${minutos}</tr>
+        <tr class="t-unidad"><th scope="row">Unidad<small>Plan: 50</small></th>${minutos}</tr>
+        <tr class="t-debate"><th scope="row">Debate<small>Plan: 15</small></th>${minutos}</tr>
+        <tr><th scope="row">Total<small>Máximo: 90</small></th>${minutos}</tr>
+        <tr class="alta"><th scope="row">Me sobró<small>Qué y en qué tramo</small></th>${vacias}</tr>
+        <tr class="alta"><th scope="row">Me faltó<small>Qué y en qué tramo</small></th>${vacias}</tr>
+        <tr class="preguntas"><th scope="row">Preguntas del debate<small>Las tres de quien te escucha</small></th>${preguntas}</tr>
+        <tr class="alta"><th scope="row">Para el próximo ensayo<small>Un solo cambio</small></th>${vacias}</tr>`;
+
+      // Indicadores que más pesan, para marcar en cada ensayo
+      const INDICADORES = {
+        infantil: [
+          ['Programación: describes al alumnado con NEAE y sus medidas', '1'],
+          ['Programación: la relacionas con los objetivos de la etapa', '0,3'],
+          ['Programación: principios pedagógicos de la etapa', '0,3'],
+          ['Unidad: pautas del DUA y atención a la diversidad', '0,4'],
+          ['Unidad: medidas para detectar dificultades', '0,3'],
+          ['Unidad: secuencia temporal coherente y realista', '0,3'],
+          ['Unidad: evalúas también tu práctica docente', '0,3'],
+          ['Debate: argumentas y amplías lo expuesto', '0,5'],
+          ['Guion sin faltas ni abreviaturas indebidas', 'anexo XVI'],
+        ],
+        pt: [
+          ['Defensa: objetivos y contenidos coherentes con las necesidades', '1'],
+          ['Defensa: contextualizas desde la evaluación psicopedagógica', '0,5'],
+          ['Defensa: métodos, actividades y recursos según el alumno', '0,6'],
+          ['Unidad: actividades realistas siguiendo el DUA', '0,8'],
+          ['Unidad: habilidades u objetivos ajustados a las necesidades', '0,75'],
+          ['Unidad: contextualizas la unidad', '0,5'],
+          ['Unidad: tecnologías con coherencia', '0,4'],
+          ['Debate: argumentas y amplías lo expuesto', '0,25'],
+          ['Guion sin faltas ni abreviaturas indebidas', 'anexo XVI'],
+        ],
+      };
+      for (const [clave, lista] of Object.entries(INDICADORES)) {
+        const cabecera = `<li class="marcar-cabecera" aria-hidden="true"><span>Indicador y puntos</span><span>Ensayo 1 · 2 · 3</span></li>`;
+        document.getElementById(`marcar-${clave}`).innerHTML =
+          cabecera +
+          lista
+            .map(
+              ([texto, puntos]) =>
+                `<li><span>${texto} <b>${puntos}</b></span><span aria-hidden="true"><span class="casilla">1</span><span class="casilla">2</span><span class="casilla">3</span></span></li>`,
+            )
+            .join('');
+      }
+
+      // ------------------------------------------------------------------
+      // PT: los 2,25 puntos seguros, una fila por tipo de caso
+      // ------------------------------------------------------------------
+      const CASOS = [
+        'Ejercicio 1: prevención y detección en el centro',
+        'Ejercicio 2: evaluación psicopedagógica y dictamen',
+        'Trastorno del espectro del autismo (TEA)',
+        'Discapacidad intelectual',
+        'Trastorno por déficit de atención e hiperactividad (TDAH)',
+        'Dificultades específicas de aprendizaje',
+        'Trastorno del desarrollo del lenguaje (TDL)',
+        'Trastornos graves de conducta',
+        'Otro caso:',
+      ];
+      document.getElementById('filas-pt').innerHTML =
+        `<tr class="comun"><th scope="row">Para todos los casos<small>Punto de partida</small></th>
+          <td>LOE (LOMLOE): 4.3 y 71 a 74. Decreto 359/2009. Decreto 196/2022, 209/2022 o 235/2022, según la etapa.</td>
+          <td><span class="pista">Escribe aquí lo que haces en cualquier caso.</span></td>
+          <td>Plan de atención a la diversidad del centro (Orden de 4/06/2010). Plan de actuación personalizado (Resolución de 20/11/2023).</td></tr>` +
+        CASOS.map((caso) => `<tr><th scope="row">${caso}</th><td></td><td></td><td></td></tr>`).join('');
+    </script>
+  </body>
+</html>

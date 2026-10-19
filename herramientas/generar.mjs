@@ -83,6 +83,12 @@ const DOCUMENTOS = [
     asunto: 'Cuento escrito con las pautas de lectura fácil para anticipar el primer día en un colegio nuevo, con versión para fotos del centro',
     palabras: 'lectura fácil, cuento adaptado, anticipación, acogida, cambio de colegio, TEA, pictogramas, Infantil, Primaria',
   },
+  {
+    id: 'kit-examen-oposiciones-murcia',
+    asunto:
+      'Kit de plantillas para preparar la oposición de Maestros en la Región de Murcia (Pedagogía Terapéutica e Infantil): guion de un folio, reloj del oral, caja de material auxiliar, hoja de simulacro, plan del escrito y lista para el día del examen',
+    palabras: 'oposiciones, Maestros, Región de Murcia, Pedagogía Terapéutica, Educación Infantil, segunda prueba, primera prueba, guion, unidad didáctica, simulacro',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
