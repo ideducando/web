@@ -4,7 +4,7 @@ Esta carpeta guarda los pictogramas que usan los PDF del material gratuito. Cada
 
 ## De dónde salen
 
-Se descargaron el 15 de octubre de 2026 de la web de ARASAAC, en tamaño de 500 píxeles:
+Se descargaron entre el 15 y el 19 de octubre de 2026 de la web de ARASAAC, en tamaño de 500 píxeles:
 
 ```
 https://static.arasaac.org/pictograms/NÚMERO/NÚMERO_500.png
