@@ -1,5 +1,5 @@
 ---
-// La bolsa de descargas: los materiales elegidos, todos a 0 €, y el formulario con nombre y correo
+// La bolsa de descargas: los materiales elegidos, todos a 0 €, y el formulario con el correo (y el nombre, opcional)
 // que da acceso a los archivos. Mientras sitio.json diga «demostracion», no se envía ningún dato:
 // la página enseña los enlaces de descarga como lo hará cuando la recogida de datos esté activa.
 import Base from '../layouts/Base.astro';
@@ -31,12 +31,12 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 
 <Base
   titulo="Mi bolsa"
-  descripcion="Los materiales que has elegido, todos gratis. Déjanos tu nombre y tu correo y descárgalos."
+  descripcion="Los materiales que has elegido, todos gratis. Déjanos tu correo y descárgalos."
   indexable={false}
 >
   <Intro
     titulo="Mi bolsa"
-    entradilla="Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu nombre y tu correo y descárgalos."
+    entradilla="Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu correo y descárgalos."
     camino={[{ texto: 'Mi bolsa' }]}
   />
 
@@ -81,8 +81,8 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
           data-envio={demostracion ? '' : sitio.descargas.envio}
         >
           <div class="campo">
-            <label for="bolsa-nombre">Tu nombre</label>
-            <input id="bolsa-nombre" name="nombre" type="text" autocomplete="given-name" required maxlength="80" />
+            <label for="bolsa-nombre">Tu nombre (opcional)</label>
+            <input id="bolsa-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="80" />
           </div>
           <div class="campo">
             <label for="bolsa-correo">Tu correo electrónico</label>

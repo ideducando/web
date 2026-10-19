@@ -14,7 +14,7 @@
   },
   "descargas": {
     "modo": "demostracion",
-    "nota": "Modos: «demostracion» enseña la descarga sin guardar ningún dato; «formulario» envía nombre, correo y casillas a la dirección de «envio» antes de enseñarla. Se activa cuando haya responsable de los datos y herramienta de correo.",
+    "nota": "Modos: «demostracion» enseña la descarga sin guardar ningún dato; «formulario» envía el correo, el nombre si lo hay y las casillas a la dirección de «envio» antes de enseñarla. Se activa cuando haya responsable de los datos y herramienta de correo.",
     "envio": ""
   }
 }
