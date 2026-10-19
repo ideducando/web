@@ -1,6 +1,6 @@
 # Manual de estilo de los materiales
 
-> [BORRADOR] Propuesta para que la revise el equipo docente. Versión 0.1, octubre de 2026.
+> [BORRADOR] Propuesta para que la revise el equipo docente. Versión 0.2, octubre de 2026.
 
 Este manual recoge las reglas que cumple cada material de IdEducando antes de llegar al catálogo. Sirve para que cualquier persona del equipo pueda preparar una ficha que se vea, se lea y se use igual que las demás. La versión pública y resumida está en la página «Cómo hacemos los materiales» de la web.
 
@@ -21,7 +21,11 @@ Cada material lleva una ficha con estos datos. Se rellenan en el editor visual (
 | Edades | De 3 a 10 años |
 | Formato y páginas | PDF imprimible (A4), 4 páginas |
 | Tiempo de preparación | 15 minutos la primera vez |
-| Qué necesitas | Impresora, plastificadora, velcro |
+| Qué necesitas | 20 círculos de velcro adhesivo de 1,5 cm: 10 rugosos y 10 suaves |
+| Qué imprimir | Páginas 3 y 4, en cartulina blanca A4 de 160 g y a color |
+| Cómo montarlo, paso a paso | Un paso por línea, hasta tener el material terminado |
+| Lo que tendrás al terminar | Una agenda plastificada con sus tarjetas |
+| Para que dure y sea seguro | Piezas pequeñas lejos de quien se las lleva a la boca |
 | Fuentes | Normativa, estudios o materiales en los que se apoya |
 | Fechas | Publicación y última revisión |
 
@@ -104,7 +108,22 @@ La norma también recomienda validar el texto con personas lectoras. Mientras no
 - Fondos de color solo en franjas o recuadros pequeños, para ahorrar tinta.
 - Líneas de recorte discontinuas, con espacio para la tijera.
 - Comprobar que se entiende impreso en **blanco y negro**.
-- Si hay que plastificar, decirlo en «Qué necesitas».
+
+### Instrucciones de montaje, como un manual de IKEA
+
+Si un material hay que montarlo (recortar, plastificar, pegar velcro, perforar, doblar…), una seño o una madre tiene que poder dejarlo terminado sin preguntar nada. Por eso su ficha trae cinco campos que salen en la web, en «Cómo montarlo», y en la **página 2 del PDF**:
+
+1. **Qué necesitas:** cada cosa con su cantidad y su medida, empezando por el número. «20 círculos de velcro adhesivo de 1,5 cm: 10 rugosos y 10 suaves», nunca «velcro».
+2. **Qué imprimir:** qué páginas, en qué papel, a color o en blanco y negro, y al 100 % («Tamaño real») si las medidas importan. Qué páginas basta con leer en pantalla.
+3. **Paso a paso:** de 4 a 8 pasos, en orden y en imperativo, una o dos acciones por paso, hasta el material terminado y colocado.
+4. **Lo que tendrás al terminar.**
+5. **Para que dure y sea seguro:** bordes de plástico de 2 o 3 mm, esquinas redondeadas, piezas pequeñas lejos de quien se las lleva a la boca, limpieza.
+
+Palabras que usamos siempre igual: «cartulina blanca A4 de 160 g», «fundas de plastificar A4 de 125 micras», «círculos de velcro adhesivo de 2 cm» (de 1,5 cm si la tarjeta mide menos de 3 cm), «anilla metálica de 25 mm, de las que se abren», «perforadora de un agujero», «pinzas de la ropa de madera», «encuadernador de latón».
+
+**Criterio de velcro de IdEducando:** la parte rugosa va en la base (tablero, agenda, tira) y la suave, en las tarjetas que se mueven. Así las tarjetas de un material sirven en los demás. Es lo que se enseña en muchas formaciones del sistema de comunicación por intercambio de imágenes (PECS). Hay centros que usan el criterio contrario: lo importante es que todo el centro use el mismo.
+
+La hoja de montaje debe caber en una página. Después de cambiar estos campos hay que volver a generar el PDF (`herramientas/generar.mjs`).
 
 ---
 
@@ -146,6 +165,7 @@ Un PDF accesible lleva **etiquetas**: marcas invisibles que dicen al lector de p
 - [ ] Los pictogramas llevan su cita y no hay fotos ni datos de alumnos.
 - [ ] El PDF está etiquetado, con título e idioma.
 - [ ] La portada tiene descripción.
+- [ ] Si hay que montarlo, trae su hoja de montaje y alguien lo ha montado siguiendo solo esas instrucciones.
 - [ ] Alguien distinto de quien lo hizo lo ha revisado.
 
 ---
