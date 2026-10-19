@@ -1,0 +1,1568 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>El tren de las sílabas: juegos de conciencia fonológica con pictogramas · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Las hojas de tarjetas aprovechan un poco más el papel: caben 12 tarjetas de 56 × 54 mm */
+      @page tarjetas {
+        margin: 12mm 14mm 18mm 14mm;
+      }
+
+      /* ---------- Colores ---------- */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 112mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .escena {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena .suelo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 50.5mm;
+        background: var(--verde-tinte);
+      }
+
+      .escena .tren-portada {
+        position: absolute;
+        left: 0;
+        top: 165mm;
+        width: 210mm;
+        height: auto;
+      }
+
+      .escena .humo {
+        position: absolute;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.6mm solid var(--marino);
+      }
+
+      .pegatina {
+        position: absolute;
+        right: 20mm;
+        top: 64mm;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 26pt;
+        line-height: 1;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 2mm;
+      }
+
+      .encabezado h1 {
+        font-size: 24pt;
+        margin: 0;
+      }
+
+      .encabezado h1 small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 12pt;
+        color: var(--suave);
+        margin-left: 2mm;
+      }
+
+      .encabezado img {
+        width: 36mm;
+        height: auto;
+        flex: none;
+      }
+
+      .pista {
+        margin: 0 0 4mm;
+        font-size: 10.5pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 3mm 0 0;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      /* ---------- El tren grande ---------- */
+      /* El SVG va como inline-block dentro de su caja: como bloque, Chromium lo pasa entero a la hoja siguiente */
+      .marco-tren {
+        line-height: 0;
+        margin: 2mm 0 0;
+      }
+
+      .tren-grande {
+        display: inline-block;
+        vertical-align: top;
+        width: 273mm;
+        height: 118mm;
+      }
+
+      .pasos-tren {
+        list-style: none;
+        margin: 5mm 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4mm;
+        counter-reset: paso;
+      }
+
+      .pasos-tren li {
+        counter-increment: paso;
+        display: grid;
+        grid-template-columns: 7mm 19mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 3mm 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 1.4mm solid var(--c);
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .pasos-tren li::before {
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .pasos-tren img,
+      .pasos-tren svg {
+        display: block;
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .sin-partir {
+        white-space: nowrap;
+      }
+
+      /* ---------- Piezas ---------- */
+      .piezas h2 {
+        font-size: 14pt;
+        margin: 3mm 0 2.5mm;
+      }
+
+      .piezas h2 span {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 10.5pt;
+        color: var(--suave);
+      }
+
+      .cajas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(6, 22mm);
+        gap: 5mm 7mm;
+        justify-content: center;
+      }
+
+      .cajas li {
+        margin: 0;
+      }
+
+      .cajas svg {
+        display: block;
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .respuestas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 38mm);
+        gap: 6mm;
+        justify-content: center;
+      }
+
+      .respuesta {
+        margin: 0;
+        height: 42mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1mm;
+        background: #fff;
+      }
+
+      .respuesta img {
+        width: 26mm;
+        height: 26mm;
+      }
+
+      .respuesta span {
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1;
+      }
+
+      .carnes {
+        display: grid;
+        grid-template-columns: repeat(2, 85mm);
+        gap: 6mm;
+        justify-content: center;
+      }
+
+      .carne {
+        width: 85mm;
+        height: 54mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3.2mm;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+      }
+
+      .carne__cabecera {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 13mm;
+        padding: 0 3mm 0 4mm;
+        background: var(--azul);
+        color: #fff;
+        flex: none;
+      }
+
+      .carne__cabecera p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      .carne__cabecera svg {
+        width: 15mm;
+        height: 11mm;
+      }
+
+      .carne__cuerpo {
+        flex: 1;
+        padding: 3mm 4mm 3mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .carne__cuerpo .linea {
+        display: flex;
+        flex-direction: column;
+        gap: 1mm;
+        margin: 0;
+        font-size: 11pt;
+      }
+
+      .carne__cuerpo .linea span {
+        border-bottom: 0.35mm solid var(--marino);
+        height: 10mm;
+      }
+
+      .carne__cuerpo .nota {
+        margin: 0;
+        font-size: 8.5pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Tarjetas de los juegos ---------- */
+      .rejilla {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 56mm);
+        grid-auto-rows: 54mm;
+        gap: 4mm 6mm;
+        justify-content: center;
+      }
+
+      .tarjeta {
+        position: relative;
+        margin: 0;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .tarjeta::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.4mm;
+        background: var(--c);
+      }
+
+      .tarjeta .marca {
+        position: absolute;
+        left: 2.6mm;
+        top: 4mm;
+        width: 7mm;
+        height: 5mm;
+      }
+
+      .tarjeta .picto {
+        display: grid;
+        place-items: center;
+        min-height: 0;
+        padding: 4.5mm 3mm 0;
+      }
+
+      .tarjeta .picto img {
+        display: block;
+        width: 35mm;
+        height: 35mm;
+        object-fit: contain;
+        border-radius: 2mm;
+      }
+
+      .tarjeta .palabra {
+        margin: 0;
+        padding: 0.8mm 2mm 3mm;
+        text-align: center;
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .tarjeta.en-blanco .picto::after {
+        content: 'Dibuja o pega aquí';
+        display: grid;
+        place-items: center;
+        width: 38mm;
+        height: 31mm;
+        border: 0.4mm dashed var(--linea);
+        border-radius: 2mm;
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      .tarjeta.en-blanco .palabra {
+        margin: 0 6mm 4mm;
+        padding: 0;
+        height: 7mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      /* ---------- Trenecitos de «¿Con qué sonido empieza?» ---------- */
+      .trenecitos {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 3.5mm;
+      }
+
+      .trenecito {
+        margin: 0;
+        display: grid;
+        grid-template-columns: 25mm repeat(3, 46mm);
+        column-gap: 4.2mm;
+        align-items: start;
+        height: 33.5mm;
+        padding: 2.2mm 4mm 0 3mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .trenecito .cabeza {
+        display: block;
+        width: 25mm;
+        height: 29mm;
+      }
+
+      .vagoncito {
+        position: relative;
+        height: 25.5mm;
+        border: 0.6mm solid var(--marino);
+        border-bottom-width: 2.2mm;
+        border-radius: 2mm;
+        background: #fff;
+        display: grid;
+        place-items: center;
+      }
+
+      .vagoncito img {
+        display: block;
+        width: 22mm;
+        height: 22mm;
+        object-fit: contain;
+        border-radius: 1.5mm;
+      }
+
+      /* Ruedas y enganche dibujados con CSS */
+      .vagoncito::after {
+        content: '';
+        position: absolute;
+        left: 6mm;
+        bottom: -5.4mm;
+        width: 4.6mm;
+        height: 4.6mm;
+        border-radius: 50%;
+        background: var(--marino);
+        box-shadow: 28.6mm 0 0 var(--marino);
+      }
+
+      .vagoncito::before {
+        content: '';
+        position: absolute;
+        left: -5mm;
+        bottom: -1.8mm;
+        width: 4.4mm;
+        height: 1.4mm;
+        background: var(--marino);
+      }
+
+      .clave {
+        margin: 3mm 0 0;
+        font-size: 8.5pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .clave b {
+        color: var(--marino);
+      }
+
+      /* ---------- Seguimiento ---------- */
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2mm 7mm;
+        margin: 0 0 3mm;
+        font-size: 10pt;
+      }
+
+      .leyenda span {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.8mm;
+      }
+
+      .grupo-clase {
+        color: var(--suave);
+      }
+
+      .grupo-clase i {
+        display: inline-block;
+        width: 70mm;
+        height: 5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .circulito {
+        display: inline-block;
+        width: 4.6mm;
+        height: 4.6mm;
+        border-radius: 50%;
+        border: 0.4mm solid var(--marino);
+        background: #fff;
+        flex: none;
+      }
+
+      .circulito.medio {
+        background: linear-gradient(90deg, var(--marino) 0 50%, #fff 50% 100%);
+      }
+
+      .circulito.lleno {
+        background: var(--marino);
+      }
+
+      .seguimiento {
+        table-layout: fixed;
+        font-size: 9pt;
+      }
+
+      .seguimiento thead th {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.2;
+        padding: 1.4mm 1.2mm;
+      }
+
+      .seguimiento thead tr:first-child th {
+        font-family: var(--titulos);
+        font-size: 11pt;
+      }
+
+      .seguimiento thead tr:first-child th.grupo {
+        background: var(--c);
+        color: #fff;
+      }
+
+      .seguimiento thead tr + tr th {
+        background: var(--t);
+        color: var(--marino);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 8.5pt;
+        border-left: 0.3mm solid #fff;
+      }
+
+      .seguimiento th.grupo.c-amarillo,
+      .seguimiento th.grupo.c-naranja {
+        color: var(--marino);
+      }
+
+      .seguimiento tbody td {
+        height: 9.6mm;
+        border-bottom: 0.3mm solid var(--linea);
+        border-left: 0.3mm solid var(--linea);
+        vertical-align: middle;
+        text-align: center;
+        padding: 0 1mm;
+      }
+
+      .seguimiento tbody td .circulito {
+        margin: 0 1.6mm;
+        width: 5mm;
+        height: 5mm;
+        border-color: var(--suave);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 9.8pt;
+        line-height: 1.42;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.8em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .escalera {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: end;
+        gap: 3mm;
+        counter-reset: escalon;
+      }
+
+      .escalera li {
+        counter-increment: escalon;
+        margin: 0;
+        padding: 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 1.6mm solid var(--c);
+        break-inside: avoid;
+      }
+
+      /* Cada escalón un poco más alto que el anterior, como una escalera */
+      .escalera li:nth-child(2) {
+        padding-top: 6mm;
+      }
+      .escalera li:nth-child(3) {
+        padding-top: 9mm;
+      }
+      .escalera li:nth-child(4) {
+        padding-top: 12mm;
+      }
+
+      .escalera li::before {
+        content: 'Escalón ' counter(escalon);
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--suave);
+        margin-bottom: 1mm;
+      }
+
+      .escalera strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.15;
+        margin-bottom: 1mm;
+      }
+
+      .soluciones th[scope='row'] {
+        width: 22mm;
+        white-space: nowrap;
+      }
+
+      .adaptaciones {
+        columns: 2;
+        column-gap: 6mm;
+      }
+
+      .adaptaciones li {
+        break-inside: avoid;
+      }
+
+      .sonidos-solucion {
+        columns: 3;
+        column-gap: 8mm;
+        margin: 0 0 3mm;
+        padding-left: 6mm;
+      }
+
+      .sonidos-solucion li {
+        break-inside: avoid;
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 11.5pt;
+        line-height: 1.4;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.8em;
+      }
+
+      .familias ol {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1.6mm;
+      }
+
+      .marco-familias {
+        text-align: center;
+        line-height: 0;
+        margin: 1mm 0 1mm;
+      }
+
+      .tren-familias {
+        display: inline-block;
+        width: 104mm;
+        height: auto;
+      }
+
+      .recuadro {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 3mm 5mm 4mm;
+        margin-top: 4mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin: 0 0 2mm;
+        font-size: 13pt;
+      }
+
+      .recuadro .renglon {
+        height: 8.5mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        font-size: 8pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 40mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 66mm; height: 66mm; left: -26mm; top: 112mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 28mm; height: 28mm; left: 118mm; top: 132mm; background: var(--coral-tinte)"></div>
+      <div class="escena" aria-hidden="true" id="escena"><div class="suelo"></div></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego · Conciencia fonológica</p>
+        <h1 class="portada__titulo">El tren<br />de las sílabas</h1>
+        <p class="portada__subtitulo">Palmadas, rimas y sonidos para jugar con las palabras antes de leer.</p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>3</b>juegos de<br />palabras</div>
+    </section>
+
+    <!-- ======================================================================
+         EL TREN (tablero apaisado)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="encabezado">
+        <h1>El tren de las sílabas</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista" style="margin-bottom: 0">
+        Poned la tarjeta en la locomotora. Decid la palabra con una palmada en cada sílaba y cargad un vagón en cada
+        palmada.
+      </p>
+      <div class="marco-tren" id="tren-grande"></div>
+      <ol class="pasos-tren">
+        <li class="c-coral"><img src="pictogramas/9692.png" alt="" /><span>Mira la tarjeta y di la palabra.</span></li>
+        <li class="c-amarillo">
+          <img src="pictogramas/4563.png" alt="" /><span>Da una palmada en cada sílaba: <span class="sin-partir">ma-ri-po-sa</span>.</span>
+        </li>
+        <li class="c-verde"><span id="caja-paso"></span><span>Carga un vagón en cada palmada, de izquierda a derecha.</span></li>
+        <li class="c-azul"><img src="pictogramas/2714.png" alt="" /><span>¿Hasta qué vagón ha llegado? Ese es su número.</span></li>
+      </ol>
+      <p class="atribucion">
+        El tren y las fichas son de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC
+        BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PIEZAS PARA JUGAR
+         ====================================================================== -->
+    <section class="hoja piezas">
+      <div class="encabezado">
+        <h1>Piezas para jugar</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">Recorta las piezas por el borde y plastifícalas. Guárdalas en un sobre junto al tren.</p>
+
+      <h2>Fichas de carga <span>Una en cada sílaba. También sirven garbanzos, tapones o gomets.</span></h2>
+      <ul class="cajas" id="cajas" aria-label="Dieciocho fichas de carga con forma de caja"></ul>
+
+      <h2>Sí o no <span>Para responder en «¿Riman?» sin necesidad de hablar.</span></h2>
+      <ul class="respuestas">
+        <li class="respuesta"><img src="pictogramas/5584.png" alt="" /><span>sí</span></li>
+        <li class="respuesta"><img src="pictogramas/5526.png" alt="" /><span>no</span></li>
+        <li class="respuesta"><img src="pictogramas/5584.png" alt="" /><span>sí</span></li>
+        <li class="respuesta"><img src="pictogramas/5526.png" alt="" /><span>no</span></li>
+      </ul>
+
+      <h2>Carné de maquinista <span>Quien lo tiene elige la tarjeta y empieza las palmadas.</span></h2>
+      <div class="carnes" id="carnes"></div>
+      <p class="atribucion">
+        Las fichas y el carné son de IdEducando. Pictogramas de sí y no: Sergio Palao. Origen: ARASAAC (arasaac.org).
+        Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE SÍLABAS (cuatro hojas, se generan con la lista del final)
+         ====================================================================== -->
+    <div id="hojas-silabas"></div>
+
+    <!-- ======================================================================
+         ¿RIMAN? (dos hojas)
+         ====================================================================== -->
+    <div id="hojas-rimas"></div>
+
+    <!-- ======================================================================
+         ¿CON QUÉ SONIDO EMPIEZA? (dos hojas)
+         ====================================================================== -->
+    <div id="hojas-sonidos"></div>
+
+    <!-- ======================================================================
+         SEGUIMIENTO (apaisada)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="encabezado">
+        <h1>¿En qué escalón está?</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Rellena los círculos según lo que observes. El primero, al empezar; el segundo, unas semanas después. Escribe
+        solo iniciales y guarda la hoja en el centro.
+      </p>
+      <p class="leyenda">
+        <span><i class="circulito"></i>Todavía no</span>
+        <span><i class="circulito medio"></i>Con ayuda</span>
+        <span><i class="circulito lleno"></i>Sin ayuda</span>
+        <span class="grupo-clase">Grupo o clase:<i></i></span>
+      </p>
+      <table class="seguimiento">
+        <colgroup>
+          <col style="width: 24mm" />
+          <col span="6" />
+          <col style="width: 64mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" rowspan="2">Iniciales</th>
+            <th scope="colgroup" colspan="2" class="grupo c-azul">Sílabas</th>
+            <th scope="colgroup" colspan="2" class="grupo c-morado">Rima</th>
+            <th scope="colgroup" colspan="2" class="grupo c-coral">Sonido inicial</th>
+            <th scope="col" rowspan="2">Observaciones</th>
+          </tr>
+          <tr>
+            <th scope="col" class="c-azul">Separa palabras de 1 y 2 sílabas</th>
+            <th scope="col" class="c-azul">Separa palabras de 3 y 4 sílabas</th>
+            <th scope="col" class="c-morado">Dice si dos palabras riman</th>
+            <th scope="col" class="c-morado">Encuentra la pareja que rima</th>
+            <th scope="col" class="c-coral">Encuentra el que se ha colado</th>
+            <th scope="col" class="c-coral">Dice el primer sonido</th>
+          </tr>
+        </thead>
+        <tbody id="filas-seguimiento"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes <span class="borrador">[BORRADOR]</span></p>
+      <h1>Jugar con los sonidos antes de leer</h1>
+      <p>
+        La conciencia fonológica es la capacidad de fijarse en cómo suenan las palabras, además de en lo que significan:
+        oír que «mariposa» tiene cuatro trozos, que «gato» y «pato» acaban igual o que «mesa» empieza por /m/. El Panel
+        Nacional de Alfabetización Temprana de Estados Unidos (NELP, por sus siglas en inglés) la sitúa entre las seis
+        habilidades tempranas que mejor anuncian cómo se aprenderá a leer y a escribir, también cuando se tienen en cuenta
+        el cociente intelectual o el nivel socioeconómico (NELP, 2008).
+      </p>
+      <p>
+        Además, se puede enseñar. Un metaanálisis de 52 estudios sobre la enseñanza de los fonemas (los sonidos más
+        pequeños) encontró que esa enseñanza mejora la conciencia de los sonidos y también la lectura, en Infantil y en
+        primero de Primaria, y que ayuda al alumnado con riesgo de dificultades de lectura (Ehri y otros, 2001). Un estudio publicado en castellano siguió a
+        326 escolares de 2.º y 3.º de Infantil y de primero: quienes entrenaron la conciencia fonológica y la velocidad de
+        denominación (la rapidez para nombrar) dos días por semana durante tres cursos leyeron palabras con más precisión y rapidez en los primeros
+        cursos de Primaria (González Seijas y otros, 2017).
+      </p>
+      <p>
+        El currículo de Infantil de la Región de Murcia cita los materiales «para trabajar la conciencia fonológica de
+        palabras, sílabas y fonemas» (Decreto 196/2022, p. 33101) y, como el estatal, incluye la «Discriminación auditiva
+        y conciencia fonológica» entre los saberes básicos del segundo ciclo (p. 33109; Real Decreto 95/2022, anexo II).
+        Este material propone tres juegos para Infantil y primero de Primaria. Sirven a toda la clase y son especialmente
+        útiles en Audición y Lenguaje (AL), con alumnado con trastorno del desarrollo del lenguaje (TDL) o con riesgo de
+        dificultades de lectura.
+      </p>
+
+      <h2>Una escalera de lo grande a lo pequeño</h2>
+      <p>
+        La conciencia fonológica suele avanzar de las unidades grandes y concretas, como las palabras y las sílabas, a las
+        pequeñas y abstractas: los sonidos (NELP, 2008, p. 76). Según el mismo informe, lo que probablemente importa más es
+        jugar en el escalón en el que está cada niño o niña (p. 77).
+      </p>
+      <ol class="escalera">
+        <li class="c-amarillo"><strong>Palabra</strong>«Mi perro corre» llena tres vagones: uno por palabra.</li>
+        <li class="c-azul"><strong>Sílaba</strong>Palmadas y vagones con las 40 tarjetas.</li>
+        <li class="c-morado"><strong>Rima</strong>«¿Riman?»: 12 parejas para oír cómo acaban.</li>
+        <li class="c-coral"><strong>Sonido</strong>«¿Con qué sonido empieza?»: 12 trenes con un intruso.</li>
+      </ol>
+      <p>
+        La rima es el escalón que menos anuncia la lectura posterior (NELP, 2008, p. 77). Es un buen juego de paso, y
+        conviene no quedarse mucho tiempo en él.
+      </p>
+
+      <h2>Cómo se juega con el tren</h2>
+      <ol>
+        <li>Quien hace de maquinista coge una tarjeta y la pone en la locomotora.</li>
+        <li>El grupo dice la palabra despacio, con una palmada en cada sílaba: «<span class="sin-partir">ca-ra-me-lo</span>».</li>
+        <li>En cada palmada se carga un vagón con una ficha, de izquierda a derecha.</li>
+        <li>
+          Contad hasta dónde ha llegado la carga: «¡Caramelo llega al vagón 4!». Deja la tarjeta debajo de ese vagón y
+          pasa el carné. Al final tendréis las palabras ordenadas por su número de sílabas.
+        </li>
+      </ol>
+      <p style="margin-bottom: 1mm">Otras formas de jugar:</p>
+      <ul>
+        <li><strong>Con el cuerpo:</strong> un salto, un paso o un golpe en la mesa en cada sílaba.</li>
+        <li>
+          <strong>Una silla por sílaba:</strong> en psicomotricidad, poned cuatro sillas en fila como si fueran vagones. En
+          cada sílaba, un niño o una niña se sienta en la silla siguiente. ¿Cuántos vagones se han llenado?
+        </li>
+        <li>
+          <strong>El tren de las palabras:</strong> antes de las sílabas, o como repaso, cargad un vagón por palabra con
+          frases cortas.
+        </li>
+        <li>
+          <strong>Los nombres de la clase:</strong> escribidlos en las tarjetas en blanco. El currículo de Murcia propone
+          partir del nombre propio y del de los compañeros (Decreto 196/2022, p. 33101).
+        </li>
+      </ul>
+
+      <h2>¿Riman?</h2>
+      <p>
+        Dos palabras riman cuando suenan igual desde la vocal que se dice más fuerte hasta el final: «gato» y «pato»,
+        «rosa» y «mariposa». Riman aunque una sea más larga que la otra.
+      </p>
+      <ul>
+        <li>
+          <strong>¿Riman o no?</strong> Enseña dos tarjetas y nómbralas. Puede responder con la voz, con el pulgar o
+          señalando las tarjetas de sí y de no.
+        </li>
+        <li><strong>Busca su pareja:</strong> deja cuatro tarjetas boca arriba. ¿Cuál acaba igual que «gato»?</li>
+        <li><strong>Memoria de rimas:</strong> todas boca abajo. Quien levanta dos que riman se queda la pareja.</li>
+      </ul>
+
+      <h2>¿Con qué sonido empieza?</h2>
+      <ul>
+        <li>
+          Nombra los tres dibujos alargando el primer sonido: «mmmano, sssopa, mmmoto». Dos empiezan igual y el tercero se
+          ha colado en el tren: se tapa con una ficha o se marca con una pinza.
+        </li>
+        <li>
+          Di el sonido, nunca el nombre de la letra: /mmm/ y no «eme». Empieza por los sonidos que se pueden alargar (m,
+          s, f, l y n): la p y la t duran muy poco y no se pueden alargar sin añadir una vocal.
+        </li>
+        <li>
+          Las tiras no llevan las palabras escritas, para que se fije en cómo suenan; las tienes al pie de cada hoja.
+          Hemos evitado los sonidos que se escriben de varias formas (el de «casa» y «queso») o que cambian según la zona
+          (el de la z o la ll), y las palabras que empiezan con dos consonantes, como «flor».
+        </li>
+      </ul>
+      <div class="caja caja--azul">
+        <h3>En 3.º de Infantil y en primero, añade las letras</h3>
+        <p>
+          Enseñar los sonidos junto con las letras dio mejores resultados que enseñarlos solos (Ehri y otros, 2001; NELP,
+          2008). Cuando un sonido ya sale con soltura, enseña la letra que lo escribe.
+        </p>
+      </div>
+
+      <h2>Cuánto tiempo</h2>
+      <p>
+        Mejor poco y a menudo: de 10 a 15 minutos, tres o cuatro días por semana, en grupos pequeños. En el metaanálisis
+        de Ehri y otros (2001), la enseñanza dio mejores resultados en grupos pequeños que de uno en uno o con toda la
+        clase, cuando se centraba en una o dos habilidades a la vez y cuando duraba entre 5 y 18 horas en total. Diez
+        minutos, cuatro días por semana durante un trimestre, suman unas 8 horas. Juega a un solo juego hasta que salga
+        con soltura y pasa al siguiente.
+      </p>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de participar y de responder (CAST,
+        2024):
+      </p>
+      <ul class="adaptaciones">
+          <li>
+            <strong>Para quien no habla:</strong> el adulto dice la palabra y da las palmadas, y el alumno o la alumna
+            coloca las fichas, señala el vagón al que llega la carga o señala sí o no.
+          </li>
+          <li>
+            <strong>Con TDL:</strong> modela más despacio, con una pausa clara entre sílabas, y hazlo tú primero. Empieza
+            por palabras de una y de dos sílabas, compara palabras muy distintas, como «pez» y «cocodrilo», y usa pocas
+            tarjetas cada vez.
+          </li>
+          <li>
+            <strong>Con discapacidad motora:</strong> puede señalar con la mirada, con el tren en vertical o en un atril.
+            También puedes recorrer los vagones uno a uno y que te pare con un gesto acordado. Usa fichas grandes o con
+            imán.
+          </li>
+          <li>
+            <strong>Con pérdida auditiva:</strong> ponte de frente, con buena luz y sin ruido de fondo. Las palmadas y las
+            fichas hacen visible cada sílaba. Coordínate con el especialista de AL.
+          </li>
+          <li>
+            <strong>Más reto:</strong> palabras de cinco sílabas, como «hipopótamo»; quitar una sílaba («pelota» sin «pe»);
+            inventar rimas o buscar palabras que empiecen como su nombre.
+          </li>
+          <li><strong>Para toda la clase:</strong> el tren en A3 en la pizarra y una tarjeta por niño o niña en la asamblea.</li>
+      </ul>
+
+      <h2>Cuándo hablar con el especialista de AL</h2>
+      <div class="caja caja--coral">
+        <p>Juega primero unas semanas. Después, habla con el maestro o la maestra de AL y con el equipo de orientación si:</p>
+        <ul>
+          <li>con mucha práctica, sigue sin separar en sílabas palabras cortas que sus compañeros ya separan;</li>
+          <li>le cuesta mucho hacerse entender o entender lo que oye;</li>
+          <li>tienes dudas sobre cómo oye;</li>
+          <li>la familia o tú notáis que el lenguaje le frena al jugar o al aprender.</li>
+        </ul>
+        <p>
+          El TDL es una dificultad del lenguaje que afecta a la vida diaria, que tiende a durar y que no se explica por una
+          causa médica conocida (Bishop y otros, 2017). Este juego sirve para observar; el diagnóstico corresponde a los
+          profesionales.
+        </p>
+      </div>
+
+      <h2>Las palabras del juego</h2>
+      <table class="soluciones">
+        <thead>
+          <tr>
+            <th scope="col">Tarjetas</th>
+            <th scope="col">Palabras, con sus sílabas</th>
+          </tr>
+        </thead>
+        <tbody id="solucion-silabas"></tbody>
+      </table>
+      <p><strong>Parejas que riman:</strong> <span id="solucion-rimas"></span>.</p>
+      <p style="margin-bottom: 1mm">
+        <strong>¿Con qué sonido empieza?</strong> En negrita, el dibujo que se ha colado; entre barras, el sonido que
+        comparten los otros dos.
+      </p>
+      <ol class="sonidos-solucion" id="solucion-sonidos"></ol>
+
+      <div class="creditos">
+        <p>
+          <strong>El tren de las sílabas: juegos de conciencia fonológica con pictogramas.</strong> IdEducando, octubre de
+          2026. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/tren-de-las-silabas</span>
+        </p>
+        <p>
+          Fuentes: Ehri, L. C. y otros (2001), <em>Reading Research Quarterly</em>, 36(3), 250-287; National Early
+          Literacy Panel (2008), <em>Developing Early Literacy: Report of the National Early Literacy Panel</em>,
+          National Institute for Literacy, pp. 76-77; González Seijas, R. M., Cuetos Vega, F., López Larrosa, S. y Vilar
+          Fernández, J. (2017), <em>Estudios sobre Educación</em>, 32, 155-177; Bishop, D. V. M. y otros (2017),
+          <em>Journal of Child Psychology and Psychiatry</em>, 58(10), 1068-1080; CAST (2024), <em>Universal Design for
+          Learning Guidelines 3.0</em>; Decreto 196/2022, de 3 de noviembre, currículo de Educación Infantil de la Región
+          de Murcia (BORM n.º 255, de 4 de noviembre de 2022), pp. 33101 y 33109; Real Decreto 95/2022, de 1 de febrero,
+          enseñanzas mínimas de Educación Infantil, anexo II.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. El tren, las
+          fichas de carga, el carné y los iconos son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Jugar con las palabras en casa</h1>
+      <p>
+        En clase jugamos al tren de las sílabas: decimos palabras dando palmadas, buscamos palabras que riman y escuchamos
+        con qué sonido empiezan. Son juegos que preparan para aprender a leer, y en casa se pueden jugar en cualquier
+        momento, en la cocina o de camino al cole.
+      </p>
+      <div class="marco-familias" id="tren-familias"></div>
+
+      <h2>Cuatro juegos sin material</h2>
+      <ol>
+        <li>
+          <strong>Palmadas con los nombres.</strong> Decid los nombres de la familia con una palmada en cada sílaba.
+          Empezad por el suyo. ¿Qué nombre tiene más palmadas?
+        </li>
+        <li>
+          <strong>Veo, veo de sonidos.</strong> «Veo, veo una cosa que empieza por mmm». Decid el sonido alargado, sin el
+          nombre de la letra. ¿Será una mmmesa?
+        </li>
+        <li>
+          <strong>¿Riman?</strong> «¿Gato y pato riman? ¿Y gato y mesa?». Después, buscad juntos palabras que rimen con su
+          nombre, aunque sean inventadas.
+        </li>
+        <li><strong>El tren de la compra.</strong> En el súper, ¿cuántas palmadas tiene «yogur»? ¿Y «galletas»?</li>
+      </ol>
+
+      <h2>Algunos consejos</h2>
+      <ul>
+        <li>Jugad un rato corto y parad antes de que se canse.</li>
+        <li>Si se equivoca, probad juntos, despacio y con palmadas: «Vamos a decirlo a la vez: <span class="sin-partir">ca-ra-me-lo</span>».</li>
+        <li>Si veis que le cuesta mucho, contádnoslo y lo miramos juntos en el cole.</li>
+      </ul>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>El tren de las sílabas.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------------------------------
+      // Palabras del material. Cada palabra lleva sus sílabas separadas por guiones y el número
+      // de su pictograma en ARASAAC (el archivo pictogramas/NÚMERO.png).
+      // Para cambiar una palabra, cambia aquí el texto y el número, y guarda el pictograma nuevo.
+      // Evita las palabras con diptongo o hiato (león, río, piano): se pueden partir de dos maneras.
+      // ------------------------------------------------------------------------------------------
+      const SILABAS = [
+        ['sol', 7252], ['pan', 2494], ['tren', 5094], ['flor', 3102], ['pez', 2520],
+        ['mar', 2925], ['flan', 3317], ['luz', 8619], ['sal', 25576], ['gol', 6007],
+        ['ca-sa', 2317], ['co-che', 6981], ['lla-ve', 8153], ['va-ca', 2609], ['ga-fas', 3329],
+        ['de-do', 3298], ['o-jo', 6573], ['ra-na', 2543], ['u-vas', 3247], ['tar-ta', 25488],
+        ['za-pa-to', 32923], ['plá-ta-no', 2530], ['ji-ra-fa', 2437], ['ca-ba-llo', 2294], ['ga-lli-na', 2403],
+        ['mu-ñe-ca', 26238], ['ti-je-ras', 6664], ['cu-cha-ra', 2362], ['som-bre-ro', 2572], ['ti-bu-rón', 2589],
+        ['co-co-dri-lo', 2343], ['e-le-fan-te', 2372], ['bi-ci-cle-ta', 2277], ['ca-la-ba-za', 2679], ['ca-ra-me-lo', 2686],
+        ['se-má-fo-ro', 2567], ['ca-mi-se-ta', 2309], ['ma-ri-qui-ta', 2924], ['pa-ti-ne-te', 2508], ['ma-ca-rro-nes', 2455],
+      ];
+
+      // Doce parejas que riman: suenan igual desde la vocal tónica hasta el final.
+      const RIMAS = [
+        [['gato', 7114], ['pato', 2563]], [['mesa', 3129], ['fresa', 2400]], [['luna', 2933], ['cuna', 5980]],
+        [['boca', 2663], ['foca', 2397]], [['lobo', 5892], ['globo', 8313]], [['ratón', 2546], ['balón', 2269]],
+        [['tortuga', 2596], ['lechuga', 2446]], [['conejo', 2351], ['espejo', 8573]], [['bota', 8299], ['pelota', 3241]],
+        [['rosa', 3151], ['mariposa', 2465]], [['cama', 2304], ['pijama', 2522]], [['oreja', 2871], ['abeja', 2239]],
+      ];
+
+      // Doce trenes de tres: dos empiezan por el mismo sonido y el tercero (true) se ha colado.
+      // Solo sonidos con una única letra posible y que no cambian según la zona.
+      const SONIDOS = [
+        ['m', [['mano', 2928], ['sopa', 2573, true], ['moto', 7166]]],
+        ['s', [['pera', 2561, true], ['silla', 3155], ['sofá', 2571]]],
+        ['p', [['perro', 2517], ['piña', 2525], ['leche', 2445, true]]],
+        ['l', [['loro', 2934], ['mosca', 2478, true], ['libro', 2450]]],
+        ['t', [['oso', 2488, true], ['taza', 2582], ['tigre', 2590]]],
+        ['f', [['fantasma', 5469], ['foca', 2397], ['mono', 2477, true]]],
+        ['n', [['nube', 2883], ['payaso', 31426, true], ['nido', 7173]]],
+        ['m', [['tele', 25498, true], ['maleta', 2931], ['mochila', 2475]]],
+        ['s', [['sandía', 2557], ['seta', 8328], ['toro', 2595, true]]],
+        ['p', [['pájaro', 2490], ['nariz', 2887, true], ['pulpo', 3379]]],
+        ['l', [['limón', 3022], ['lápiz', 2440], ['tomate', 2594, true]]],
+        ['f', [['ola', 4706, true], ['falda', 2391], ['fútbol', 7137]]],
+      ];
+
+      const COLORES_TARJETA = ['c-azul', 'c-verde', 'c-amarillo', 'c-coral', 'c-naranja'];
+      const LOGO = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const M = '#1e2b55';
+      const C = {
+        azul: '#2f6fd6', verde: '#1fa67a', coral: '#e8553e', morado: '#8c4fb8', amarillo: '#f6c12e', naranja: '#f5961f',
+        azulTinte: '#e4edfb', verdeTinte: '#dcf3ea', amarilloTinte: '#fdf0c7', moradoTinte: '#efe5f7',
+      };
+
+      const sinGuiones = (p) => p.replaceAll('-', '');
+      const numeroDeSilabas = (p) => p.split('-').length;
+
+      // ---------------------------------------------------------------- Dibujos del tren (SVG)
+      // Las medidas están en milímetros: el tren grande mide 273 × 118 mm.
+
+      function rueda(cx, cy, r, color = C.amarillo) {
+        const radios = [0, 45, 90, 135]
+          .map((a) => {
+            const x = Math.cos((a * Math.PI) / 180) * r * 0.56;
+            const y = Math.sin((a * Math.PI) / 180) * r * 0.56;
+            return `<line x1="${cx - x}" y1="${cy - y}" x2="${cx + x}" y2="${cy + y}"/>`;
+          })
+          .join('');
+        return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${M}"/><circle cx="${cx}" cy="${cy}" r="${r * 0.66}" fill="${color}"/>
+          <g stroke="${M}" stroke-width="${r * 0.1}" stroke-linecap="round">${radios}</g><circle cx="${cx}" cy="${cy}" r="${r * 0.2}" fill="${M}"/>`;
+      }
+
+      // Caja de carga (las fichas). Si lleva texto, se escribe en una etiqueta blanca.
+      function caja(cx, cy, lado, color, texto = '') {
+        const x = cx - lado / 2;
+        const y = cy - lado / 2;
+        const g = lado * 0.055;
+        const etiqueta = texto
+          ? `<rect x="${cx - lado * 0.36}" y="${cy - lado * 0.22}" width="${lado * 0.72}" height="${lado * 0.44}" rx="${lado * 0.08}" fill="#fff" stroke="${M}" stroke-width="${g * 0.6}"/>
+             <text x="${cx}" y="${cy + lado * 0.12}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${lado * 0.34}" fill="${M}">${texto}</text>`
+          : '';
+        return `<g><rect x="${x}" y="${y}" width="${lado}" height="${lado}" rx="${lado * 0.12}" fill="${color}" stroke="${M}" stroke-width="${g}"/>
+          <path d="M${x} ${y + lado / 3}h${lado}M${x} ${y + (2 * lado) / 3}h${lado}" stroke="${M}" stroke-width="${g * 0.7}"/>
+          <path d="M${x + lado * 0.12} ${y + lado * 0.88}L${x + lado * 0.88} ${y + lado * 0.12}" stroke="${M}" stroke-width="${g * 0.7}" opacity="0.45"/>
+          ${etiqueta}</g>`;
+      }
+
+      function locomotora(pictograma) {
+        const hueco = pictograma
+          ? `<rect x="9.5" y="26.5" width="59" height="58" rx="3.5" fill="#fff" stroke="${M}" stroke-width="0.8"/>
+             <image href="pictogramas/${pictograma}.png" x="14" y="30.5" width="50" height="50"/>`
+          : `<rect x="9.5" y="26.5" width="59" height="58" rx="3.5" fill="#fff" stroke="${M}" stroke-width="0.6" stroke-dasharray="2.2 1.6"/>
+             <text x="39" y="53" text-anchor="middle" font-family="Outfit" font-weight="600" font-size="5" fill="#46578c">Aquí va</text>
+             <text x="39" y="60" text-anchor="middle" font-family="Outfit" font-weight="600" font-size="5" fill="#46578c">la tarjeta</text>`;
+        return `<g>
+          <path d="M1.5 105 L9.5 92.5 H15 V105 Z" fill="${C.amarillo}" stroke="${M}" stroke-width="1" stroke-linejoin="round"/>
+          <path d="M5.5 105 L10 98 M9.5 105 L12 101" stroke="${M}" stroke-width="0.8" stroke-linecap="round"/>
+          <rect x="16" y="10" width="12" height="16" fill="${M}"/>
+          <path d="M12.5 4.5 h19 l-3 6.5 h-13 z" fill="${M}"/>
+          <rect x="15" y="15" width="14" height="3" fill="${C.coral}"/>
+          <path d="M42 24.5 a7 6.5 0 0 1 14 0 z" fill="${C.amarillo}" stroke="${M}" stroke-width="1"/>
+          <rect x="6" y="24" width="66" height="66" rx="7" fill="${C.coral}" stroke="${M}" stroke-width="1.3"/>
+          <rect x="1.2" y="29" width="5.4" height="10" rx="1.6" fill="${M}"/>
+          <circle cx="3.6" cy="34" r="3.1" fill="${C.amarillo}" stroke="${M}" stroke-width="0.8"/>
+          <rect x="72" y="16" width="28" height="74" rx="2" fill="${C.azul}" stroke="${M}" stroke-width="1.3"/>
+          <rect x="77" y="23" width="18" height="21" rx="2.5" fill="${C.azulTinte}" stroke="${M}" stroke-width="1"/>
+          <path d="M80 27 l5 -2.5 M80 31 l9 -4.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
+          <rect x="68.5" y="10" width="35" height="7" rx="2.5" fill="${M}"/>
+          <circle cx="86" cy="56" r="1.3" fill="${M}"/><circle cx="86" cy="64" r="1.3" fill="${M}"/>
+          <rect x="5" y="88.5" width="96" height="6" rx="2" fill="${M}"/>
+          ${hueco}
+          ${rueda(17, 99.5, 6)}${rueda(37, 95.5, 10)}${rueda(61, 95.5, 10)}${rueda(89, 98.5, 7)}
+          <rect x="36" y="94.2" width="26" height="2.6" rx="1.3" fill="#c7cede" stroke="${M}" stroke-width="0.5"/>
+          <rect x="99.5" y="91.5" width="4" height="2.6" fill="${M}"/>
+        </g>`;
+      }
+
+      const VAGONES = [
+        [C.amarillo, C.amarilloTinte],
+        [C.verde, C.verdeTinte],
+        [C.azul, C.azulTinte],
+        [C.morado, C.moradoTinte],
+      ];
+
+      function vagon(i, carga) {
+        const ancho = 39;
+        const x0 = 103 + i * 43;
+        const cx = x0 + ancho / 2;
+        const [color, tinte] = VAGONES[i];
+        const puntos = Array.from(
+          { length: i + 1 },
+          (_, k) => `<circle cx="${cx + (k - i / 2) * 5.2}" cy="83" r="1.9" fill="${M}"/>`,
+        ).join('');
+        const sitio = carga
+          ? caja(cx, 46, 25, C.naranja, carga)
+          : `<circle cx="${cx}" cy="46" r="13" fill="${tinte}" stroke="${M}" stroke-width="0.6" stroke-dasharray="2.2 1.6"/>`;
+        return `<g>
+          ${sitio}
+          <rect x="${x0}" y="63" width="${ancho}" height="28" rx="3" fill="${color}" stroke="${M}" stroke-width="1.2"/>
+          <rect x="${x0 - 1.2}" y="59.5" width="${ancho + 2.4}" height="5" rx="1.6" fill="${M}"/>
+          <rect x="${x0 + 5}" y="66" width="${ancho - 10}" height="21.5" rx="3" fill="#fff" stroke="${M}" stroke-width="0.7"/>
+          <text x="${cx}" y="77.2" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="11" fill="${M}">${i + 1}</text>
+          ${puntos}
+          <rect x="${x0}" y="90.5" width="${ancho}" height="3.5" rx="1" fill="${M}"/>
+          ${rueda(x0 + 9.5, 99.5, 6)}${rueda(x0 + 29.5, 99.5, 6)}
+          ${i < 3 ? `<rect x="${x0 + ancho}" y="91.5" width="4" height="2.6" fill="${M}"/>` : ''}
+        </g>`;
+      }
+
+      function via() {
+        let traviesas = '';
+        for (let x = 1.5; x < 272; x += 9) traviesas += `<rect x="${x}" y="106.6" width="6" height="2.6" rx="0.6" fill="#d8c19a"/>`;
+        return `${traviesas}<rect x="0" y="105" width="273" height="1.8" rx="0.9" fill="${M}"/>`;
+      }
+
+      function humo() {
+        return `<circle cx="34" cy="6.5" r="3.4" fill="#fff" stroke="${M}" stroke-width="0.6"/>
+          <circle cx="41.5" cy="4" r="2.4" fill="#fff" stroke="${M}" stroke-width="0.6"/>`;
+      }
+
+      function tren({ pictograma = null, cargas = [], etiqueta = '' } = {}) {
+        const accesible = etiqueta ? `role="img" aria-label="${etiqueta}"` : 'aria-hidden="true"';
+        return `<svg viewBox="0 0 273 118" ${accesible}>${via()}${humo()}${locomotora(pictograma)}${[0, 1, 2, 3]
+          .map((i) => vagon(i, cargas[i]))
+          .join('')}</svg>`;
+      }
+
+      // Iconos pequeños: locomotora (trenecitos y carné), vagón (tarjetas de sílabas) y notas (rimas)
+      function cabeza(numero) {
+        return `<svg class="cabeza" viewBox="0 0 25 29" aria-hidden="true">
+          <rect x="4" y="2" width="5" height="6" fill="${M}"/><rect x="2.8" y="0.6" width="7.4" height="2.4" rx="0.8" fill="${M}"/>
+          <rect x="1" y="7.5" width="17" height="15" rx="2.4" fill="${C.coral}" stroke="${M}" stroke-width="0.6"/>
+          <rect x="17.5" y="4" width="6.5" height="18.5" rx="1" fill="${C.azul}" stroke="${M}" stroke-width="0.6"/>
+          <rect x="16.6" y="2.4" width="8.2" height="2.2" rx="0.8" fill="${M}"/>
+          <circle cx="9.5" cy="15" r="5.6" fill="#fff" stroke="${M}" stroke-width="0.5"/>
+          <text x="9.5" y="17.6" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="7.4" fill="${M}">${numero}</text>
+          <rect x="0.6" y="22" width="24" height="2" rx="0.6" fill="${M}"/>
+          ${rueda(6, 25.6, 3.2)}${rueda(14, 25.6, 3.2)}${rueda(21, 26, 2.8)}
+        </svg>`;
+      }
+
+      function iconoVagon() {
+        return `<svg class="marca" viewBox="0 0 14 10" aria-hidden="true"><rect x="1" y="1" width="12" height="6" rx="1" fill="none" stroke="#46578c" stroke-width="1"/>
+          <circle cx="4" cy="8.4" r="1.3" fill="#46578c"/><circle cx="10" cy="8.4" r="1.3" fill="#46578c"/></svg>`;
+      }
+
+      function iconoNotas() {
+        return `<svg class="marca" viewBox="0 0 14 10" aria-hidden="true"><path d="M4.6 7.6V1.4l6.6-1v6" fill="none" stroke="#46578c" stroke-width="0.9"/>
+          <ellipse cx="3.2" cy="7.8" rx="1.8" ry="1.3" fill="#46578c"/><ellipse cx="9.8" cy="6.8" rx="1.8" ry="1.3" fill="#46578c"/></svg>`;
+      }
+
+      // ---------------------------------------------------------------- Tarjetas
+
+      function tarjeta(palabra, pictograma, color, icono) {
+        return `<li class="tarjeta ${color}">${icono}<span class="picto"><img src="pictogramas/${pictograma}.png" alt=""></span><p class="palabra">${palabra}</p></li>`;
+      }
+
+      function tarjetaEnBlanco(color, icono) {
+        return `<li class="tarjeta en-blanco ${color}">${icono}<span class="picto"></span><p class="palabra"></p></li>`;
+      }
+
+      function hojaTarjetas(titulo, pista, tarjetas, etiqueta) {
+        return `<section class="hoja-tarjetas">
+          <div class="encabezado"><h1>${titulo}</h1>${LOGO}</div>
+          <p class="pista">${pista}</p>
+          <ul class="rejilla" aria-label="${etiqueta}">${tarjetas.join('')}</ul>
+          <p class="atribucion">${ATRIBUCION}</p>
+        </section>`;
+      }
+
+      // Cuatro hojas de sílabas: diez palabras y dos tarjetas en blanco en cada una
+      const hojasSilabas = [1, 2, 3, 4].map((n) => {
+        const palabras = SILABAS.filter(([p]) => numeroDeSilabas(p) === n);
+        if (palabras.length !== 10) console.error(`Hay ${palabras.length} palabras de ${n} sílabas`);
+        const tarjetas = palabras.map(([p, id], i) => tarjeta(sinGuiones(p), id, COLORES_TARJETA[i % 5], iconoVagon()));
+        tarjetas.push(tarjetaEnBlanco('c-morado', iconoVagon()), tarjetaEnBlanco('c-morado', iconoVagon()));
+        return hojaTarjetas(
+          `Palabras de ${n} sílaba${n > 1 ? 's' : ''}`,
+          n === 1
+            ? 'Recorta por la línea de puntos y plastifica. En las tarjetas en blanco, escribe o dibuja palabras vuestras: los nombres de la clase, por ejemplo.'
+            : `Recorta por la línea de puntos y plastifica. En el tren, estas palabras llegan hasta el vagón ${n}.`,
+          tarjetas,
+          `Tarjetas de palabras de ${n} sílaba${n > 1 ? 's' : ''}`,
+        );
+      });
+      document.getElementById('hojas-silabas').outerHTML = hojasSilabas.join('');
+
+      // Dos hojas de rimas: seis parejas en cada una
+      const hojasRimas = [0, 1].map((h) => {
+        const parejas = RIMAS.slice(h * 6, h * 6 + 6);
+        const tarjetas = parejas.flat().map(([p, id]) => tarjeta(p, id, 'c-morado', iconoNotas()));
+        return hojaTarjetas(
+          `¿Riman? <small>Parejas ${h * 6 + 1} a ${h * 6 + 6}</small>`,
+          h === 0
+            ? 'Recorta, plastifica y mezcla las tarjetas. Cada palabra tiene su pareja: suenan igual al final.'
+            : 'Las parejas están en la guía. Juega primero con pocas: dos o tres parejas bastan para empezar.',
+          tarjetas,
+          `Tarjetas de rimas, parejas ${h * 6 + 1} a ${h * 6 + 6}`,
+        );
+      });
+      document.getElementById('hojas-rimas').outerHTML = hojasRimas.join('');
+
+      // Dos hojas de trenecitos: seis en cada una, con la clave para el adulto al pie
+      const hojasSonidos = [0, 1].map((h) => {
+        const grupos = SONIDOS.slice(h * 6, h * 6 + 6);
+        const filas = grupos
+          .map(([, palabras], i) => {
+            const n = h * 6 + i + 1;
+            const vagones = palabras
+              .map(([p, id]) => `<div class="vagoncito"><img src="pictogramas/${id}.png" alt="${p}"></div>`)
+              .join('');
+            return `<li class="trenecito" aria-label="Tren ${n}">${cabeza(n)}${vagones}</li>`;
+          })
+          .join('');
+        const clave = grupos
+          .map(([, palabras], i) => `<b>${h * 6 + i + 1}.</b> ${palabras.map(([p]) => p).join(', ')}`)
+          .join(' · ');
+        return `<section class="hoja-tarjetas">
+          <div class="encabezado"><h1>¿Con qué sonido empieza? <small>Trenes ${h * 6 + 1} a ${h * 6 + 6}</small></h1>${LOGO}</div>
+          <p class="pista">Nombra los tres dibujos alargando el primer sonido: «mmmano». Dos empiezan igual. ¿Quién se ha colado en el tren? Tápalo con una ficha o ponle una pinza.</p>
+          <ol class="trenecitos">${filas}</ol>
+          <p class="clave">Para el adulto, los nombres de los dibujos: ${clave}.</p>
+          <p class="atribucion" style="margin-top: 1.5mm">${ATRIBUCION}</p>
+        </section>`;
+      });
+      document.getElementById('hojas-sonidos').outerHTML = hojasSonidos.join('');
+
+      // ---------------------------------------------------------------- Tren, piezas y seguimiento
+
+      document.getElementById('tren-grande').innerHTML = tren({
+        etiqueta: 'Tren con una locomotora, donde va la tarjeta, y cuatro vagones numerados del 1 al 4, con tantos puntos como su número.',
+      }).replace('<svg ', '<svg class="tren-grande" ');
+
+      document.getElementById('caja-paso').outerHTML = `<svg viewBox="0 0 30 30" aria-hidden="true">${caja(15, 15, 24, C.naranja)}</svg>`;
+
+      const coloresCajas = [C.naranja, C.azul, C.verde, C.morado, C.coral, C.amarillo];
+      document.getElementById('cajas').innerHTML = Array.from(
+        { length: 18 },
+        (_, i) => `<li><svg viewBox="0 0 22 22" aria-hidden="true">${caja(11, 11, 21, coloresCajas[i % 6])}</svg></li>`,
+      ).join('');
+
+      const carne = `<article class="carne">
+        <div class="carne__cabecera"><p>Carné de maquinista</p><svg viewBox="0 0 25 22" aria-hidden="true">
+          <rect x="4" y="2" width="5" height="6" fill="#fff"/><rect x="1" y="7.5" width="17" height="11" rx="2.4" fill="${C.coral}" stroke="#fff" stroke-width="0.8"/>
+          <rect x="17.5" y="4" width="6.5" height="14.5" rx="1" fill="${C.amarillo}" stroke="#fff" stroke-width="0.8"/>
+          <circle cx="6" cy="19.5" r="2.6" fill="#fff"/><circle cx="14" cy="19.5" r="2.6" fill="#fff"/><circle cx="21" cy="19.8" r="2.2" fill="#fff"/></svg></div>
+        <div class="carne__cuerpo">
+          <p class="linea">Hoy conduce el tren:<span></span></p>
+          <p class="nota">Elige la tarjeta, la pone en la locomotora y empieza las palmadas. Después, pasa el carné.</p>
+        </div>
+      </article>`;
+      document.getElementById('carnes').innerHTML = carne + carne;
+
+      const circulos = '<i class="circulito"></i><i class="circulito"></i>';
+      document.getElementById('filas-seguimiento').innerHTML = Array.from(
+        { length: 13 },
+        () => `<tr><td></td>${`<td>${circulos}</td>`.repeat(6)}<td></td></tr>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Soluciones de la guía
+
+      document.getElementById('solucion-silabas').innerHTML = [1, 2, 3, 4]
+        .map((n) => {
+          const palabras = SILABAS.filter(([p]) => numeroDeSilabas(p) === n).map(([p]) => p);
+          const lista = palabras.map((p) => `<span class="sin-partir">${p}</span>`).join(', ');
+          return `<tr><th scope="row">${n} sílaba${n > 1 ? 's' : ''}</th><td>${lista}</td></tr>`;
+        })
+        .join('');
+
+      document.getElementById('solucion-rimas').textContent = RIMAS.map(([[a], [b]]) => `${a} y ${b}`).join(', ');
+
+      document.getElementById('solucion-sonidos').innerHTML = SONIDOS.map(
+        ([sonido, palabras]) =>
+          `<li>${palabras.map(([p, , colado]) => (colado ? `<strong>${p}</strong>` : p)).join(', ')} (/${sonido}/)</li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Ilustraciones
+
+      // Portada: el tren cargado con «ma-ri-po-sa» y humo que sube
+      const escena = document.getElementById('escena');
+      escena.insertAdjacentHTML(
+        'beforeend',
+        tren({ pictograma: 2465, cargas: ['ma', 'ri', 'po', 'sa'] }).replace('<svg ', '<svg class="tren-portada" '),
+      );
+      for (const [x, y, d] of [
+        [33.5, 153.5, 9],
+        [42.5, 141, 12],
+        [55.5, 129.5, 15],
+      ]) {
+        escena.insertAdjacentHTML('beforeend', `<div class="humo" style="left:${x}mm;top:${y}mm;width:${d}mm;height:${d}mm"></div>`);
+      }
+
+      // Nota para las familias: el tren con «ca-ra-me-lo»
+      document.getElementById('tren-familias').innerHTML = tren({
+        pictograma: 2686,
+        cargas: ['ca', 'ra', 'me', 'lo'],
+        etiqueta: 'El tren con la tarjeta de caramelo en la locomotora y una caja en cada vagón: ca, ra, me, lo.',
+      }).replace('<svg ', '<svg class="tren-familias" ');
+    </script>
+  </body>
+</html>

@@ -101,6 +101,18 @@ const DOCUMENTOS = [
       'Pausas activas para todos: 24 cartas de movimiento con versión de pie y versión sentada para calmar, activar o concentrar, con cartel, dado, ruleta, guía para docentes y nota para las familias',
     palabras: 'pausas activas, movimiento en el aula, actividad física, inclusión, discapacidad motora, silla de ruedas, TDAH, TEA, DUA, Infantil, Primaria',
   },
+  {
+    id: 'tarjeta-cole-casa-tdah',
+    asunto:
+      'Tarjeta diaria cole-casa para el TDAH en versión visual para Infantil y para Primaria, con banco de 24 objetivos, menú de recompensas, registro y gráfica de progreso y apoyos de funciones ejecutivas',
+    palabras: 'tarjeta diaria, daily report card, TDAH, cole-casa, familias, funciones ejecutivas, refuerzo positivo, apoyo conductual positivo, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'tren-de-las-silabas',
+    asunto:
+      'Juegos de conciencia fonológica con pictogramas de ARASAAC: tren de las sílabas con 40 tarjetas, parejas que riman, trenes de sonido inicial, hoja de seguimiento, guía para docentes y nota para las familias',
+    palabras: 'conciencia fonológica, sílabas, rima, sonido inicial, prelectura, Audición y Lenguaje, TDL, pictogramas, ARASAAC, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

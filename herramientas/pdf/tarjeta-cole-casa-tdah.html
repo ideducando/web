@@ -1,0 +1,2662 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mi tarjeta de ida y vuelta: tarjeta diaria cole-casa para el TDAH · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Hojas de tarjetas: dos tarjetas de media hoja (A5 apaisado) en cada A4.
+         La línea de corte queda casi en la mitad exacta de la hoja. */
+      @page tarjetas {
+        margin: 12mm 10mm 14mm 10mm;
+      }
+
+      /* ---------- Colores de los grupos ---------- */
+      .azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      /* Texto para lectores de pantalla y para el índice del PDF: está, pero no se ve.
+         Con «clip» o con texto transparente, Chromium lo deja fuera de los marcadores. */
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* Lo que aparece «escrito a mano» en los ejemplos */
+      .tinta {
+        font-style: italic;
+        color: var(--morado-texto);
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__titulo {
+        font-size: 44pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 104mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .escena {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena svg.paisaje {
+        position: absolute;
+        left: 0;
+        top: 126mm;
+        width: 210mm;
+        height: 171mm;
+      }
+
+      .escena .mini {
+        position: absolute;
+        left: 48mm;
+        top: 163mm;
+        transform: rotate(-4deg);
+        filter: drop-shadow(0 2.5mm 3mm rgb(30 43 85 / 0.3));
+      }
+
+      .mini {
+        width: calc(190mm * var(--s));
+        height: calc(129.5mm * var(--s));
+      }
+
+      .mini > .tarjeta {
+        transform: scale(var(--s));
+        transform-origin: 0 0;
+      }
+
+      .pegatina {
+        position: absolute;
+        right: 20mm;
+        top: 96mm;
+        width: 36mm;
+        height: 36mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 21pt;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 2mm;
+      }
+
+      .encabezado h1 {
+        font-size: 24pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 4mm;
+        font-size: 10pt;
+        line-height: 1.4;
+        color: var(--suave);
+      }
+
+      .pista img {
+        width: 8mm;
+        height: 8mm;
+        vertical-align: middle;
+      }
+
+      .atribucion {
+        margin: 2.5mm 0 0;
+        font-size: 7.5pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Tarjeta (común a las dos versiones) ---------- */
+      /* El medio milímetro de arriba evita que Chromium pinte el borde de la primera tarjeta
+         en el límite inferior de la hoja anterior (se notaba en la miniatura del catálogo). */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+        position: relative;
+        padding-top: 0.6mm;
+      }
+
+      .tarjeta {
+        position: relative;
+        width: 190mm;
+        height: 129.5mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 5mm;
+        overflow: hidden;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tarjeta > .rayos {
+        flex: none;
+        height: 1.8mm;
+      }
+
+      .tarjeta__cabeza {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        padding: 1.8mm 5mm 1.8mm 4mm;
+        background: var(--crema);
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .emblema {
+        width: 11mm;
+        height: 11mm;
+        flex: none;
+      }
+
+      .tarjeta__titulo {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15.5pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .tarjeta__titulo small {
+        display: block;
+        margin-top: 1mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      .campos {
+        margin-left: auto;
+        display: flex;
+        gap: 4mm;
+      }
+
+      .campo {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.5mm;
+        margin: 0;
+        font-size: 9.5pt;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      .campo > span {
+        display: inline-block;
+        width: 38mm;
+        height: 5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .campo--fecha > span {
+        width: 22mm;
+      }
+
+      .campo > span.tinta {
+        border-bottom-color: var(--marino);
+        font-size: 10.5pt;
+        padding-left: 1mm;
+      }
+
+      /* Rejilla de objetivos y franjas: las líneas son el hueco entre celdas */
+      .rejilla {
+        flex: none;
+        display: grid;
+        gap: 0.35mm;
+        margin: 2.4mm 4mm 0;
+        background: var(--linea);
+        border: 0.45mm solid var(--marino);
+        border-radius: 3mm;
+        overflow: hidden;
+      }
+
+      .rejilla > * {
+        background: #fff;
+        min-width: 0;
+      }
+
+      .rejilla--infantil {
+        grid-template-columns: 70mm repeat(3, minmax(0, 1fr));
+        grid-template-rows: 8.5mm repeat(3, 17mm);
+      }
+
+      .rejilla--primaria {
+        grid-template-columns: 54mm repeat(6, minmax(0, 1fr)) 13mm;
+        grid-template-rows: 11.5mm repeat(3, 14.5mm);
+      }
+
+      .th {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5mm;
+        padding: 0 1.5mm;
+        background: var(--t, var(--crema)) !important;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9.5pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .th--objetivos {
+        justify-content: flex-start;
+        padding-left: 3mm;
+        background: var(--crema) !important;
+      }
+
+      .th img {
+        width: 7mm;
+        height: 7mm;
+        border-radius: 1.2mm;
+        background: #fff;
+        flex: none;
+      }
+
+      .th--franja {
+        flex-direction: column;
+        gap: 0.6mm;
+      }
+
+      /* El pictograma va en fila: dentro de una columna flexible, Chromium
+         reparte mal las hojas y la segunda tarjeta salta a otra página. */
+      .th--recreo {
+        gap: 0.8mm;
+        padding: 0 0.6mm;
+        font-size: 8.5pt;
+      }
+
+      .th--recreo img {
+        width: 5.4mm;
+        height: 5.4mm;
+      }
+
+      .th--franja .area {
+        display: block;
+        width: 88%;
+        height: 3.4mm;
+        border-bottom: 0.3mm solid var(--suave);
+      }
+
+      .objetivo {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        padding: 1mm 2.5mm 1mm 1.6mm;
+      }
+
+      .numero {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 5.4mm;
+        height: 5.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        line-height: 1;
+      }
+
+      .hueco-picto {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 15mm;
+        height: 15mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2mm;
+        font-size: 6.5pt;
+        line-height: 1.15;
+        text-align: center;
+        color: var(--suave);
+        padding: 1mm;
+      }
+
+      .hueco-picto.lleno {
+        border-style: solid;
+        border-color: var(--linea);
+        padding: 0.6mm;
+      }
+
+      .hueco-picto img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .objetivo__texto {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2.2mm;
+      }
+
+      .objetivo__texto .renglon {
+        display: block;
+        height: 4.4mm;
+        border-bottom: 0.3mm solid var(--suave);
+      }
+
+      .objetivo__texto .tinta {
+        font-size: 10.5pt;
+        line-height: 1.2;
+      }
+
+      .objetivo .numero + .objetivo__texto {
+        margin-left: -1mm;
+      }
+
+      .celda {
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+
+      .celda .cara {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      /* «Hoy no toca»: casilla tachada */
+      .celda.no-toca::after {
+        content: '';
+        position: absolute;
+        inset: 2.2mm 4mm;
+        background: linear-gradient(
+          to top right,
+          transparent calc(50% - 0.35mm),
+          #7a3fa5 calc(50% - 0.35mm) calc(50% + 0.35mm),
+          transparent calc(50% + 0.35mm)
+        );
+      }
+
+      .celda.no-toca .cara {
+        opacity: 0.35;
+      }
+
+      .sino {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2mm;
+      }
+
+      .sino span {
+        display: block;
+        min-width: 7mm;
+        padding: 0.3mm 1.6mm;
+        border: 0.3mm solid var(--suave);
+        border-radius: 99px;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 7.8pt;
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      .total {
+        display: grid;
+        place-items: center;
+      }
+
+      .caja-num {
+        display: inline-block;
+        width: 8mm;
+        height: 6mm;
+        border: 0.35mm solid var(--marino);
+        border-radius: 1.2mm;
+        background: #fff;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 5.6mm;
+      }
+
+      .caja-num.tinta {
+        font-size: 10.5pt;
+      }
+
+      .leyenda {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 1.5mm;
+        margin: 1.4mm 5mm 0;
+        font-size: 8pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .leyenda .cara {
+        width: 4.6mm;
+        height: 4.6mm;
+        flex: none;
+      }
+
+      .leyenda .separa {
+        margin: 0 2mm;
+      }
+
+      .leyenda .pastilla {
+        display: inline-block;
+        padding: 0 1.4mm;
+        border: 0.3mm solid var(--suave);
+        border-radius: 99px;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 7.5pt;
+        color: var(--marino);
+      }
+
+      .partes {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 2mm 4mm 0;
+      }
+
+      .parte {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9mm;
+        padding: 1.4mm 3mm 1.6mm;
+        border-radius: 3mm;
+        border-top: 1.4mm solid var(--c);
+        background: var(--t);
+        font-size: 9pt;
+        line-height: 1.2;
+      }
+
+      .parte__titulo {
+        margin: 0 0 0.4mm !important;
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10.5pt;
+        line-height: 1.15;
+      }
+
+      .parte__titulo img {
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 1.4mm;
+        background: #fff;
+      }
+
+      .parte p {
+        margin: 0;
+        display: flex;
+        align-items: flex-end;
+        gap: 1.4mm;
+        white-space: nowrap;
+      }
+
+      .parte p .l {
+        flex: 1;
+        min-width: 0;
+        height: 4.4mm;
+        border-bottom: 0.3mm solid var(--marino);
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .parte p .l.tinta {
+        font-size: 9.5pt;
+        line-height: 4.4mm;
+        padding-left: 1mm;
+      }
+
+      .parte p.cuenta {
+        align-items: center;
+      }
+
+      .marca {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.2mm;
+        margin-right: 3mm;
+      }
+
+      .marca::before {
+        content: '';
+        flex: none;
+        width: 3.6mm;
+        height: 3.6mm;
+        border: 0.35mm solid var(--marino);
+        border-radius: 0.8mm;
+        background: #fff;
+      }
+
+      .marca.hecha::before {
+        background:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1.8 5.4 L4.1 7.6 L8.4 2.4' fill='none' stroke='%237a3fa5' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+            center / 100% no-repeat,
+          #fff;
+      }
+
+      .firma {
+        display: block;
+        width: 18mm;
+        height: 5mm;
+      }
+
+      .tarjeta__creditos {
+        flex: none;
+        margin: 1.1mm 5mm 1.2mm;
+        font-size: 6.3pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      /* Línea de corte entre las dos tarjetas */
+      .corte {
+        height: 10.4mm;
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        font-size: 7.5pt;
+        color: var(--suave);
+      }
+
+      .corte::before,
+      .corte::after {
+        content: '';
+        flex: 1;
+        border-top: 0.35mm dashed var(--suave);
+      }
+
+      .corte svg {
+        width: 5mm;
+        height: 5mm;
+      }
+
+      /* ---------- Banco de objetivos ---------- */
+      .banco {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3.5mm 6mm;
+        align-items: start;
+      }
+
+      .grupo {
+        border: 0.4mm solid var(--linea);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+
+      .grupo h2 {
+        margin: 0;
+        padding: 1.6mm 3.5mm;
+        background: var(--t);
+        border-bottom: 1.2mm solid var(--c);
+        font-size: 11.5pt;
+      }
+
+      .grupo ol {
+        list-style: none;
+        margin: 0;
+        padding: 0 3mm;
+      }
+
+      .grupo li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.4mm 0;
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      .grupo li:last-child {
+        border-bottom: 0;
+      }
+
+      .grupo li img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .grupo li b {
+        display: block;
+        font-size: 10pt;
+        line-height: 1.2;
+      }
+
+      .grupo li b .n {
+        display: inline-grid;
+        place-items: center;
+        width: 4.6mm;
+        height: 4.6mm;
+        margin-right: 1.4mm;
+        border-radius: 50%;
+        background: var(--t);
+        box-shadow: inset 0 0 0 0.45mm var(--c);
+        font-family: var(--titulos);
+        font-size: 7.5pt;
+        line-height: 1;
+        vertical-align: 0.2mm;
+      }
+
+      .grupo li small {
+        display: block;
+        margin-top: 0.5mm;
+        font-size: 8.3pt;
+        line-height: 1.25;
+        color: var(--suave);
+      }
+
+      /* ---------- Recortables ---------- */
+      .recortables {
+        display: grid;
+        grid-template-columns: repeat(12, 14.8mm);
+        grid-auto-rows: 14.8mm;
+        justify-content: center;
+        border-top: 0.35mm dashed var(--suave);
+        border-left: 0.35mm dashed var(--suave);
+        width: max-content;
+        margin: 0 auto;
+      }
+
+      .recortable {
+        position: relative;
+        display: grid;
+        place-items: center;
+        border-right: 0.35mm dashed var(--suave);
+        border-bottom: 0.35mm dashed var(--suave);
+      }
+
+      .recortable img {
+        width: 12.6mm;
+        height: 12.6mm;
+      }
+
+      .recortable span {
+        position: absolute;
+        left: 0.5mm;
+        top: 0.3mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 5.8pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .tira-objetivos {
+        display: grid;
+        grid-template-columns: 34mm repeat(3, minmax(0, 1fr));
+        height: 30mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 4mm;
+        overflow: hidden;
+        margin-bottom: 4mm;
+      }
+
+      .tira-objetivos > div {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        padding: 2mm 3mm;
+        border-left: 0.35mm solid var(--linea);
+      }
+
+      .tira-objetivos > div:first-child {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1mm;
+        border-left: 0;
+        background: var(--crema);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+      }
+
+      .tira-objetivos .emblema {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .tira-objetivos .renglones {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3mm;
+      }
+
+      .tira-objetivos .renglones span {
+        display: block;
+        height: 4.5mm;
+        border-bottom: 0.3mm solid var(--suave);
+      }
+
+      /* ---------- Menú de recompensas ---------- */
+      .menu {
+        border: 0.6mm solid var(--marino);
+        border-radius: 6mm;
+        padding: 5mm 6mm 4mm;
+        outline: 0.4mm solid var(--linea);
+        outline-offset: -2.2mm;
+      }
+
+      .menu .encabezado {
+        margin-bottom: 0;
+      }
+
+      .menu .lema {
+        margin: 1mm 0 3mm;
+        font-family: var(--lema);
+        font-size: 13pt;
+        color: var(--suave);
+      }
+
+      .pacto {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5mm 6mm;
+        margin: 0 0 3mm;
+        padding: 2.4mm 4mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-size: 10pt;
+      }
+
+      .pacto p {
+        margin: 0;
+        display: flex;
+        align-items: flex-end;
+        gap: 1.5mm;
+      }
+
+      .pacto p span {
+        display: inline-block;
+        width: 36mm;
+        height: 5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .menu h2 {
+        margin: 2.5mm 0 2mm;
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        font-size: 13pt;
+      }
+
+      .menu h2 .estrella {
+        width: 7mm;
+        height: 7mm;
+        flex: none;
+      }
+
+      .platos {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: 27mm;
+        gap: 2.6mm;
+      }
+
+      .plato {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8mm;
+        padding: 1.4mm 2mm;
+        border: 0.4mm solid var(--linea);
+        border-top: 1.4mm solid var(--c);
+        border-radius: 3mm;
+        background: #fff;
+        text-align: center;
+        font-weight: 700;
+        font-size: 9pt;
+        line-height: 1.15;
+      }
+
+      .plato img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .plato.libre {
+        justify-content: flex-start;
+        align-items: stretch;
+        border: 0.4mm dashed var(--suave);
+        font-weight: 400;
+        color: var(--suave);
+        text-align: left;
+      }
+
+      .plato.libre span {
+        display: block;
+        height: 5.5mm;
+        border-bottom: 0.3mm solid var(--suave);
+      }
+
+      .basico {
+        display: grid;
+        grid-template-columns: 52mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin-top: 3.5mm;
+        padding: 2.4mm 4mm;
+        border-radius: 3mm;
+        background: var(--coral-tinte);
+        border-left: 1.6mm solid var(--coral);
+      }
+
+      .basico h2 {
+        margin: 0;
+        font-size: 12pt;
+      }
+
+      .basico h2 small {
+        display: block;
+        margin-top: 1mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 9pt;
+        line-height: 1.3;
+      }
+
+      .basico ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2mm;
+      }
+
+      .basico li {
+        margin: 0;
+        text-align: center;
+        font-size: 8.5pt;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+
+      .basico li img {
+        display: block;
+        width: 13mm;
+        height: 13mm;
+        margin: 0 auto 0.8mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .menu .nota {
+        margin: 2.5mm 0 0;
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Registro y gráfica ---------- */
+      table.registro {
+        table-layout: fixed;
+        margin-bottom: 4mm;
+      }
+
+      table.registro th,
+      table.registro td {
+        border: 0.3mm solid var(--linea);
+        font-size: 9pt;
+      }
+
+      table.registro thead th {
+        text-align: center;
+        padding: 1.4mm 1mm;
+      }
+
+      table.registro td {
+        height: 8.2mm;
+        position: relative;
+      }
+
+      table.registro td.pc::after {
+        content: '%';
+        position: absolute;
+        right: 1.5mm;
+        bottom: 0.8mm;
+        font-size: 7.5pt;
+        color: var(--suave);
+      }
+
+      .grafica {
+        display: block;
+        width: 178mm;
+        height: 62mm;
+        margin-bottom: 1mm;
+      }
+
+      h2.pequeno {
+        font-size: 12.5pt;
+        margin: 0 0 1.2mm;
+      }
+
+      .reglas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm 4mm;
+        margin-top: 3mm;
+      }
+
+      .regla {
+        margin: 0;
+        padding: 2mm 3.5mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-left: 1.6mm solid var(--c);
+        font-size: 8.8pt;
+        line-height: 1.32;
+        break-inside: avoid;
+      }
+
+      .regla h3 {
+        margin: 0 0 1mm;
+        font-size: 10.5pt;
+      }
+
+      .regla p {
+        margin: 0;
+      }
+
+      .regla ol {
+        margin: 0;
+        padding-left: 4.5mm;
+      }
+
+      .regla li {
+        margin-bottom: 0.4mm;
+      }
+
+      .regla small {
+        display: block;
+        margin-top: 1mm;
+        font-size: 7.5pt;
+        color: var(--suave);
+      }
+
+      table.conversion {
+        table-layout: fixed;
+        margin: 0;
+      }
+
+      table.conversion th,
+      table.conversion td {
+        padding: 0.9mm 0.4mm;
+        border: 0.3mm solid var(--linea);
+        text-align: center;
+        font-size: 7.6pt;
+        line-height: 1.15;
+      }
+
+      table.conversion thead th {
+        font-size: 7.6pt;
+        padding: 0.9mm 0.4mm;
+      }
+
+      table.conversion tbody th {
+        text-align: left;
+        padding-left: 1.6mm;
+        font-size: 7.8pt;
+      }
+
+      table.conversion td.vacia {
+        background: var(--crema);
+      }
+
+      /* ---------- Mi mochila lista ---------- */
+      .mochilas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8mm;
+        align-items: start;
+      }
+
+      .mochila {
+        border: 0.6mm solid var(--marino);
+        border-radius: 5mm;
+        overflow: hidden;
+      }
+
+      .mochila__cabeza {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        padding: 3mm 4mm;
+        background: var(--t);
+        border-bottom: 1.4mm solid var(--c);
+      }
+
+      .mochila__cabeza img {
+        width: 17mm;
+        height: 17mm;
+        background: #fff;
+        border-radius: 2.5mm;
+      }
+
+      .mochila__cabeza h2 {
+        margin: 0;
+        font-size: 16pt;
+        line-height: 1.05;
+      }
+
+      .mochila__cabeza h2 small {
+        display: block;
+        margin-top: 1mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 9pt;
+        color: var(--marino);
+      }
+
+      .mochila table {
+        margin: 0;
+        table-layout: fixed;
+      }
+
+      .mochila th,
+      .mochila td {
+        border-bottom: 0.3mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .mochila thead th {
+        background: #fff;
+        color: var(--suave);
+        font-size: 8pt;
+        text-align: center;
+        padding: 1.2mm 0;
+      }
+
+      .mochila tbody td {
+        height: 19mm;
+        padding: 1mm 1.2mm;
+      }
+
+      .mochila tbody td.cosa {
+        font-weight: 700;
+        font-size: 10.5pt;
+        line-height: 1.15;
+        padding-left: 2.5mm;
+      }
+
+      .mochila td.cosa img {
+        flex: none;
+        width: 14mm;
+        height: 14mm;
+        margin-right: 2.5mm;
+      }
+
+      .mochila td.cosa .cuerpo {
+        display: flex;
+        align-items: center;
+        min-height: 14mm;
+      }
+
+      .mochila td.dia {
+        text-align: center;
+        padding: 0;
+      }
+
+      .mochila td.dia::before {
+        content: '';
+        display: inline-block;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.4mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .mochila td.cosa .libre {
+        flex: 1;
+        display: block;
+        height: 6mm;
+        border-bottom: 0.3mm solid var(--suave);
+        margin-left: 1.5mm;
+      }
+
+      /* ---------- Mi tarea en tres pasos ---------- */
+      .tarea {
+        border: 0.6mm solid var(--marino);
+        border-radius: 5mm;
+        overflow: hidden;
+      }
+
+      .tarea__cabeza {
+        display: flex;
+        gap: 6mm;
+        padding: 2.6mm 5mm;
+        background: var(--crema);
+        border-bottom: 0.35mm solid var(--linea);
+        font-size: 10.5pt;
+      }
+
+      .tarea__cabeza p {
+        margin: 0;
+        display: flex;
+        align-items: flex-end;
+        gap: 1.5mm;
+      }
+
+      .tarea__cabeza p span {
+        display: inline-block;
+        height: 5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .pasos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .paso {
+        padding: 3mm 4mm 3.5mm;
+        border-left: 0.35mm solid var(--linea);
+        border-top: 1.6mm solid var(--c);
+      }
+
+      .paso:first-child {
+        border-left: 0;
+      }
+
+      .paso__titulo {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0 0 2mm;
+      }
+
+      .paso__titulo img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .paso__titulo h2 {
+        margin: 0;
+        font-size: 17pt;
+        line-height: 1;
+      }
+
+      .paso__titulo h2 small {
+        display: grid;
+        place-items: center;
+        width: 8mm;
+        height: 8mm;
+        margin-bottom: 1.4mm;
+        border-radius: 50%;
+        background: var(--t);
+        box-shadow: inset 0 0 0 0.6mm var(--c);
+        font-size: 12pt;
+      }
+
+      .paso ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .paso li {
+        display: flex;
+        align-items: flex-start;
+        gap: 2mm;
+        margin: 0 0 1.6mm;
+        font-size: 10.5pt;
+        line-height: 1.25;
+      }
+
+      .paso li::before {
+        content: '';
+        flex: none;
+        width: 4.4mm;
+        height: 4.4mm;
+        margin-top: 0.2mm;
+        border: 0.4mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      /* ---------- Mi tira de tiempo ---------- */
+      .tira {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        margin: 0 0 2mm;
+      }
+
+      .tramo {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8mm;
+        height: 33mm;
+        padding: 1.5mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 3mm;
+        background: var(--t);
+        text-align: center;
+        font-weight: 700;
+        font-size: 9.5pt;
+        line-height: 1.1;
+      }
+
+      .tramo img {
+        width: 14mm;
+        height: 14mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .tramo .min {
+        font-weight: 400;
+        font-size: 8.5pt;
+        display: flex;
+        align-items: flex-end;
+        gap: 1mm;
+      }
+
+      .tramo .min span {
+        display: inline-block;
+        width: 7mm;
+        height: 4.5mm;
+        border-bottom: 0.3mm solid var(--marino);
+      }
+
+      .tramo .grande {
+        font-family: var(--titulos);
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      .flechita {
+        flex: none;
+        width: 6mm;
+        align-self: center;
+      }
+
+      .flechita svg {
+        display: block;
+        width: 6mm;
+        height: 6mm;
+      }
+
+      .tramo .estrella {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja h3 {
+        font-size: 11.5pt;
+        margin-bottom: 1mm;
+      }
+
+      .guia .caja ul {
+        margin-bottom: 0;
+      }
+
+      .pasos-guia {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        counter-reset: paso;
+      }
+
+      .pasos-guia li {
+        counter-increment: paso;
+        margin: 0;
+        padding: 2.6mm 3mm 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 1.6mm solid var(--c);
+        font-size: 9.5pt;
+        line-height: 1.35;
+      }
+
+      .pasos-guia li::before {
+        content: 'Paso ' counter(paso);
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--suave);
+        margin-bottom: 0.6mm;
+      }
+
+      .pasos-guia strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11pt;
+        line-height: 1.15;
+        margin-bottom: 1mm;
+      }
+
+      table.respaldo td,
+      table.respaldo th {
+        font-size: 9pt;
+        line-height: 1.35;
+      }
+
+      table.respaldo td:nth-child(2) {
+        white-space: nowrap;
+        font-weight: 700;
+      }
+
+      .nivel-bueno {
+        color: var(--verde-texto);
+      }
+
+      .nivel-medio {
+        color: var(--morado-texto);
+      }
+
+      .nivel-escaso {
+        color: var(--coral-texto);
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        font-size: 7.6pt;
+        line-height: 1.4;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 11.5pt;
+        line-height: 1.45;
+      }
+
+      .familias h1 {
+        font-size: 23pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        font-size: 14pt;
+        margin: 3.5mm 0 2mm;
+      }
+
+      .tardes {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        counter-reset: tarde;
+      }
+
+      .tardes li {
+        counter-increment: tarde;
+        position: relative;
+        margin: 0;
+        padding: 7mm 3mm 3mm;
+        border-radius: 3mm;
+        background: var(--t);
+        font-size: 10pt;
+        line-height: 1.35;
+      }
+
+      .tardes li::before {
+        content: counter(tarde);
+        position: absolute;
+        left: 3mm;
+        top: -3mm;
+        display: grid;
+        place-items: center;
+        width: 8.5mm;
+        height: 8.5mm;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.7mm var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .ejemplo {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 5mm;
+        align-items: center;
+      }
+
+      .ejemplo .mini {
+        position: relative;
+        margin-left: 3.6mm;
+      }
+
+      .globo {
+        position: absolute;
+        z-index: 3;
+        display: grid;
+        place-items: center;
+        width: 6.5mm;
+        height: 6.5mm;
+        border-radius: 50%;
+        background: var(--morado);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        box-shadow: 0 0 0 0.8mm #fff;
+      }
+
+      .claves {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 10pt;
+        line-height: 1.35;
+      }
+
+      .claves li {
+        display: flex;
+        gap: 2.5mm;
+        margin: 0 0 2.2mm;
+      }
+
+      .claves li b.globo-texto {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 6.5mm;
+        height: 6.5mm;
+        border-radius: 50%;
+        background: var(--morado);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 10pt;
+      }
+
+      .familias .caja {
+        padding: 3mm 4.5mm;
+        margin-bottom: 3mm;
+      }
+
+      .familias .caja h2 {
+        margin-top: 0;
+      }
+
+      .familias .caja ul {
+        margin: 0;
+      }
+
+      .recuadro {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 2.5mm 4mm 3mm;
+      }
+
+      .recuadro h2 {
+        margin: 0 !important;
+        font-size: 12pt !important;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        font-size: 7.5pt;
+        margin-top: 3mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -58mm; top: 40mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -30mm; top: 118mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 92mm; top: 30mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Plantilla · TDAH y funciones ejecutivas</p>
+        <h1 class="portada__titulo">Mi tarjeta<br />de ida y vuelta</h1>
+        <p class="portada__subtitulo">
+          Una tarjeta diaria que viaja del cole a casa para celebrar cada logro. Con apoyos para organizarse.
+        </p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" aria-hidden="true" id="escena"></div>
+      <div class="pegatina" aria-hidden="true"><b>2</b>versiones<br />Infantil y<br />Primaria</div>
+    </section>
+
+    <!-- ======================================================================
+         TARJETA VISUAL (INFANTIL): dos por hoja
+         ====================================================================== -->
+    <section class="hoja-tarjetas" id="hoja-infantil">
+      <h1 class="solo-lector">Tarjeta visual para Infantil, dos por hoja</h1>
+    </section>
+
+    <!-- ======================================================================
+         TARJETA DE PRIMARIA: dos por hoja
+         ====================================================================== -->
+    <section class="hoja-tarjetas" id="hoja-primaria">
+      <h1 class="solo-lector">Tarjeta para Primaria, dos por hoja</h1>
+    </section>
+
+    <!-- ======================================================================
+         BANCO DE OBJETIVOS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>24 objetivos para elegir tres</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        En negrita, cómo lo dice la tarjeta: en positivo y en primera persona. Debajo, cómo lo mide el adulto en cada
+        franja, es decir, en cada parte del día de la tarjeta. Ajusta el número a su punto de partida.
+      </p>
+      <div class="banco" id="banco"></div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         RECORTABLES Y «MIS TRES OBJETIVOS»
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Pictogramas para recortar</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Tres de cada objetivo, con su número del banco y del tamaño exacto del hueco: uno para la tarjeta visual y dos
+        para «Mis tres objetivos». Prepara una tarjeta modelo, fotocópiala y así cada día solo hay que colorear.
+      </p>
+      <div class="recortables" id="recortables"></div>
+
+      <h2 style="margin: 7mm 0 1mm; font-size: 15pt">Mis tres objetivos</h2>
+      <p class="pista" style="margin-bottom: 3mm">
+        Un recordatorio para su mesa y otro para casa. Recorta, pega sus pictogramas y plastifica.
+      </p>
+      <div id="tiras-objetivos"></div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MENÚ DE RECOMPENSAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="menu">
+        <div class="encabezado">
+          <h1>Mi menú de recompensas</h1>
+          <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        </div>
+        <p class="lema">Lo elegimos juntos en casa.</p>
+        <div class="pacto">
+          <p>Me llamo<span></span></p>
+          <p>Mi meta de cada día:<span style="width: 22mm"></span>síes o caras</p>
+        </div>
+
+        <h2><svg class="estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.2 6.7.7-5 4.6 1.4 6.7L12 17l-6 3.4 1.4-6.7-5-4.6 6.7-.7z" fill="#f6c12e" stroke="#1e2b55" stroke-width="1.4" stroke-linejoin="round"/></svg>Cada día que llego a mi meta, elijo una</h2>
+        <ul class="platos" id="menu-diario"></ul>
+
+        <h2>
+          <svg class="estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.2 6.7.7-5 4.6 1.4 6.7L12 17l-6 3.4 1.4-6.7-5-4.6 6.7-.7z" fill="#8c4fb8" stroke="#1e2b55" stroke-width="1.4" stroke-linejoin="round"/></svg>Si llego a mi meta 4 días de 5, el fin de semana elijo una
+        </h2>
+        <ul class="platos" id="menu-semanal"></ul>
+
+        <div class="basico">
+          <h2>Esto nunca se gana ni se pierde<small>Con un día bueno o con uno difícil, sigue igual.</small></h2>
+          <ul id="basico"></ul>
+        </div>
+        <p class="nota">
+          Sin comida ni compras: lo que más motiva es el tiempo juntos y elegir. Cumplid el mismo día lo que se ha ganado.
+          Pictogramas: Sergio Palao. ARASAAC (arasaac.org). CC BY-NC-SA. Gobierno de Aragón.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO SEMANAL Y GRÁFICA
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>¿Cómo va? Registro y gráfica</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista" style="margin-bottom: 2.5mm">
+        Iniciales:<span style="display: inline-block; width: 22mm; border-bottom: 0.35mm solid var(--marino)"></span>
+        &nbsp; Cada día, anota el porcentaje de síes (o de caras). La tabla de abajo hace la cuenta por ti.
+      </p>
+      <table class="registro">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 25mm">Semana del</th>
+            <th scope="col">L</th>
+            <th scope="col">M</th>
+            <th scope="col">X</th>
+            <th scope="col">J</th>
+            <th scope="col">V</th>
+            <th scope="col" style="width: 21mm">Días con meta</th>
+            <th scope="col" style="width: 52mm">Criterio y cambios</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+
+      <h2 class="pequeno">Mi gráfica</h2>
+      <p class="pista" style="margin-bottom: 1.5mm">
+        Colorea cada día hasta su porcentaje y dibuja una raya de color en tu meta. Puede colorearla el alumno o la alumna.
+      </p>
+      <svg class="grafica" id="grafica" viewBox="0 0 178 62" role="img" aria-label="Gráfica en blanco: veinte días en el eje horizontal y del 0 al 100 por ciento en el vertical"></svg>
+
+      <h2 class="pequeno" style="margin-top: 2mm">De síes a porcentaje</h2>
+      <table class="conversion" id="conversion"></table>
+
+      <div class="reglas">
+        <div class="regla verde">
+          <h3>Sube el criterio</h3>
+          <p>
+            Si consigue un objetivo 9 de cada 10 veces durante una semana, pide un poco más. Por ejemplo, pasa de 3
+            recordatorios a 2.
+          </p>
+        </div>
+        <div class="regla amarilla amarillo">
+          <h3>Si cuesta demasiado</h3>
+          <p>
+            Si durante una semana lo consigue menos de 2 de cada 3 veces, el criterio es difícil. Hazlo más fácil y vuelve
+            a probar.
+          </p>
+        </div>
+        <div class="regla azul">
+          <h3>Cambia de objetivo</h3>
+          <p>
+            Cuando un objetivo sale casi siempre, con un criterio parecido al del resto de la clase, sácalo de la tarjeta y
+            celebradlo. Si hace falta, entra otro del banco.
+          </p>
+        </div>
+        <div class="regla morado">
+          <h3>Retira la tarjeta poco a poco</h3>
+          <ol>
+            <li>Menos franjas: mañana y tarde.</li>
+            <li>Tarjeta semanal, con un resumen el viernes.</li>
+            <li>Marca él o ella y el docente lo confirma.</li>
+            <li>Sin tarjeta: elogio diario y una nota de vez en cuando.</li>
+          </ol>
+          <small>
+            Si en un paso se pierde lo logrado durante una semana, volved al paso anterior. Retirarla está menos estudiado
+            que ponerla: estos pasos son una propuesta nuestra y el tercero se apoya en un estudio pequeño (Miller y otros,
+            2015).
+          </small>
+        </div>
+      </div>
+      <p class="atribucion">
+        Las reglas para ajustar el criterio siguen la guía <em>How to Establish a School-Home Daily Report Card</em> del
+        Center for Children and Families. Fuentes completas en la guía.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI MOCHILA LISTA
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Mi mochila lista</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Marca cada cosa al meterla en la mochila. Si plastificas la hoja, sirve con rotulador de pizarra toda la semana.
+      </p>
+      <div class="mochilas" id="mochilas"></div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI TAREA EN TRES PASOS Y MI TIRA DE TIEMPO
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Mi tarea en tres pasos</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">Para tener en la mesa mientras trabaja. Marca cada casilla al hacerla.</p>
+      <div class="tarea" id="tarea"></div>
+
+      <h2 style="margin: 7mm 0 1mm; font-size: 18pt">Mi tira de tiempo</h2>
+      <p class="pista">
+        Usa un reloj de arena o un temporizador <img src="pictogramas/37659.png" alt="" />. Cuando acaba un tramo, mueve
+        la pinza <img src="pictogramas/8466.png" alt="" /> al siguiente. Escribe los minutos de cada tramo.
+      </p>
+      <h3 style="margin: 0 0 1.5mm; font-size: 11pt">Trabajo y descanso</h3>
+      <div class="tira" id="tira-trabajo"></div>
+      <h3 style="margin: 3mm 0 1.5mm; font-size: 11pt">Cuenta atrás para cambiar de actividad</h3>
+      <div class="tira" id="tira-cuenta"></div>
+      <p class="pista" style="margin-top: 1.5mm">
+        Avisa cinco minutos antes del cambio. Cada minuto, tachad un número o moved la pinza. Al llegar al final, toca
+        cambiar.
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes <span class="borrador">[BORRADOR]</span></p>
+      <h1>Una tarjeta que va y vuelve cada día</h1>
+      <p>
+        La tarjeta diaria de conducta (en inglés, <em>daily report card</em>) es una de las ayudas con más respaldo para el
+        alumnado con trastorno por déficit de atención e hiperactividad (TDAH). Recoge tres objetivos concretos. El
+        docente marca en cada parte de la jornada si se han conseguido, la tarjeta viaja a casa en la agenda y la familia
+        celebra los logros con algo del menú pactado. Al día siguiente vuelve al cole con la respuesta de casa: por eso es
+        de ida y vuelta.
+      </p>
+      <p>
+        Un metaanálisis de 14 estudios de caso único, con 40 alumnos y alumnas, encontró que la conducta mejora con la
+        tarjeta (Pyle y Fabiano, 2017). En un ensayo con unos 60 alumnos y alumnas de 1.º a 6.º de Primaria con TDAH y
+        apoyos de educación especial, mejoraron la conducta en el aula, la productividad y el logro de sus objetivos
+        individuales, aunque no el rendimiento en lectura ni en matemáticas (Fabiano y otros, 2010). Las revisiones consideran
+        la gestión de la conducta en el aula, de la que forma parte la tarjeta, un tratamiento bien establecido (Evans y
+        otros, 2014).
+      </p>
+
+      <h2>Qué incluye</h2>
+      <div class="dos-columnas" style="gap: 6mm">
+        <ul style="margin: 0">
+          <li><strong>Tarjeta visual para Infantil</strong>: tres objetivos con pictograma, tres momentos del día y caras para colorear.</li>
+          <li><strong>Tarjeta para Primaria</strong>: tres objetivos, seis franjas y «Sí» o «Aún no».</li>
+          <li><strong>Banco de 24 objetivos</strong>, con pictogramas para recortar y un recordatorio para la mesa.</li>
+          <li><strong>Menú de recompensas</strong> para pactar con la familia.</li>
+        </ul>
+        <ul style="margin: 0">
+          <li><strong>Registro semanal y gráfica</strong>, con las reglas para subir el criterio y retirar la tarjeta.</li>
+          <li><strong>Apoyos para organizarse</strong>: «Mi mochila lista», «Mi tarea en tres pasos» y «Mi tira de tiempo».</li>
+          <li><strong>Nota para las familias</strong>, con un ejemplo explicado.</li>
+        </ul>
+      </div>
+
+      <h2>Cómo ponerla en marcha</h2>
+      <ol class="pasos-guia">
+        <li class="azul">
+          <strong>Elegid tres objetivos</strong>Con la familia y el equipo docente, escoged lo que más le ayudaría cambiar.
+          En el banco hay 24 ideas en positivo.
+        </li>
+        <li class="amarillo">
+          <strong>Mira cómo está ahora</strong>Durante una semana, sin tarjeta, apunta cuántas veces pasa. Fija un criterio
+          que pueda conseguir 8 o 9 de cada 10 veces.
+        </li>
+        <li class="verde">
+          <strong>Pactad el menú</strong>Con la familia y con el alumno o la alumna, elegid recompensas pequeñas. Lo básico
+          nunca se quita.
+        </li>
+        <li class="naranja">
+          <strong>Preséntala en positivo</strong>Explícale que la tarjeta sirve para ver lo que hace bien. Probad un día de
+          ensayo.
+        </li>
+        <li class="coral">
+          <strong>Úsala cada día</strong>Al acabar cada franja, marca y dile qué ha hecho bien. Al final del día, contad
+          los síes.
+        </li>
+        <li class="morado">
+          <strong>Revisad cada viernes</strong>Pasa los porcentajes a la gráfica y aplica las reglas para ajustar el
+          criterio.
+        </li>
+      </ol>
+      <p>
+        Dale al menos un mes. En un estudio con 66 niños y niñas con TDAH o problemas de conducta, la mayoría mejoró ya en
+        el primer mes y siguió mejorando hasta el cuarto, aunque en algunos casos los objetivos empeoraron (Owens y otros,
+        2012). Si tras un mes la gráfica no sube, revisad los objetivos con el equipo de orientación. Esta forma de montarla sigue los pasos de la guía gratuita del Center for
+        Children and Families.
+      </p>
+
+      <h2>La revisión de un minuto</h2>
+      <p>
+        Al final de cada franja, acércate, marca la casilla y díselo en voz baja: «Has levantado la mano en la asamblea:
+        ¡sí!». Si no lo ha conseguido, sin sermón: «Esta vez, aún no. En la siguiente lo intentas». Si un objetivo no toca
+        en una franja, tacha la casilla. Al final del día, contad juntos los síes, escribe lo mejor del día y guardad la
+        tarjeta en la agenda. Con práctica, cabe en un minuto.
+      </p>
+
+      <h2>Refuerzo inmediato y en positivo</h2>
+      <ul>
+        <li>Nombra la conducta concreta: «Has guardado el estuche sin que te lo recuerde».</li>
+        <li>
+          Elogia en el momento y más a menudo de lo que corriges. En 151 aulas de Primaria, cuanto más elogiaba el docente
+          en relación con lo que corregía, más tiempo pasaba el alumnado centrado en la tarea; no apareció ninguna
+          proporción mágica, como 4 a 1 (Caldarella y otros, 2020).
+        </li>
+        <li>Celebrad también en el aula, con un gesto pactado o un «¡bien!» discreto.</li>
+        <li>
+          En Infantil, esperar a la tarde puede ser demasiado. Añade un premio pequeño en el aula al final de la mañana,
+          como elegir la canción de la salida.
+        </li>
+      </ul>
+
+      <h2>Coordinación con la familia</h2>
+      <ul>
+        <li>Reuníos al empezar para pactar los objetivos y el menú. Entregad la nota para las familias.</li>
+        <li>Acordad que en casa se celebran los días buenos y que los días malos no se castigan.</li>
+        <li>Si un día la tarjeta no vuelve, ese día no hay recompensa, sin regañinas. Al día siguiente, otra oportunidad.</li>
+        <li>Hablad cada semana, aunque sea con una nota en la agenda: qué va bien y qué vais a ajustar.</li>
+      </ul>
+
+      <div class="dos-columnas" style="align-items: start">
+        <div class="caja caja--coral">
+          <h3>Errores frecuentes</h3>
+          <ul>
+            <li>Diez objetivos a la vez. Con tres basta; en Infantil, uno o dos para empezar.</li>
+            <li>Criterios demasiado difíciles: si casi nunca hay un sí, la tarjeta deja de motivar.</li>
+            <li>Usarla para castigar o quitar en casa lo básico por un mal día.</li>
+            <li>Exponerla delante de la clase o comparar tarjetas entre compañeros.</li>
+            <li>Marcar solo algunos días. Mejor menos franjas, bien marcadas.</li>
+            <li>Recompensas que no llegan, o que llegan sin haber meta.</li>
+          </ul>
+        </div>
+        <div class="caja caja--azul">
+          <h3>Privacidad</h3>
+          <ul>
+            <li>La tarjeta viaja en su agenda. No la cuelgues en el aula ni la enseñes a otras familias.</li>
+            <li>
+              No escribas el diagnóstico ni datos médicos. Los datos de salud son una categoría especial de datos personales
+              según el Reglamento General de Protección de Datos (RGPD), artículo 9.1.
+            </li>
+            <li>En el registro y en la gráfica, solo iniciales. Guárdalos en el centro y no los fotografíes con tu móvil.</li>
+            <li>La tarjeta queda fuera de la nota: mide objetivos personales.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Las funciones ejecutivas, dentro de la rutina</h2>
+      <p>
+        Las funciones ejecutivas nos permiten planificar, recordar lo que hay que hacer, frenar un impulso o cambiar de
+        tarea. Mejoran con la práctica, pero lo que se entrena apenas se traslada a otras tareas (Diamond y Ling, 2016).
+        Por eso los apoyos de este material se usan en tareas reales: preparar la mochila, hacer una ficha o esperar a que
+        acabe un tiempo. El entrenamiento cognitivo, como los juegos de ordenador para la memoria de trabajo, sigue siendo
+        experimental para el TDAH (Evans y otros, 2014).
+      </p>
+      <table class="respaldo">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 33mm">Apoyo</th>
+            <th scope="col" style="width: 20mm">Respaldo</th>
+            <th scope="col">Qué sabemos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Tarjeta de ida y vuelta</th>
+            <td class="nivel-bueno">Bueno</td>
+            <td>Metaanálisis y ensayos con alumnado con TDAH (Pyle y Fabiano, 2017; Fabiano y otros, 2010).</td>
+          </tr>
+          <tr>
+            <th scope="row">Mi mochila lista</th>
+            <td class="nivel-medio">Indirecto</td>
+            <td>
+              Las listas de material forman parte del entrenamiento en organización, que tiene buen respaldo (Abikoff y
+              otros, 2013; Evans y otros, 2014). La lista sola no se ha estudiado por separado.
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Mi tarea en tres pasos</th>
+            <td class="nivel-medio">Indirecto</td>
+            <td>
+              Dividir la tarea en pasos forma parte de ese mismo entrenamiento, y autorregistrar lo que uno hace mejora la
+              atención a la tarea (Reid y otros, 2005). Esta hoja concreta no se ha estudiado.
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Mi tira de tiempo</th>
+            <td class="nivel-escaso">Escaso</td>
+            <td>
+              En un estudio con 44 niños y niñas de 7 a 9 años, un reloj visual a la vista redujo la ansiedad y la
+              desatención durante una prueba, más en quienes tenían más rasgos de TDAH, sin mejorar el resultado (Hallez y
+              Vallier, 2025). Pruébala y observa si le ayuda.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Marco normativo</h2>
+      <p>
+        La Ley Orgánica de Educación (LOE) pide asegurar los recursos para el alumnado que necesita una atención educativa
+        diferente a la ordinaria, también por trastornos de atención (artículo 71.2, con la redacción de la Ley Orgánica
+        3/2020). La tarjeta no necesita diagnóstico: sirve para cualquier alumno o alumna con dificultades de atención o
+        de conducta.
+      </p>
+      <div class="caja caja--morada">
+        <h3>Si trabajas en la Región de Murcia</h3>
+        <p>
+          La identificación del TDAH sigue el Protocolo de coordinación de actuaciones educativas y sanitarias de las
+          Consejerías de Educación y de Sanidad (Resolución de 30 de julio de 2019, resuelvo quinto.3). Esa resolución pide
+          reforzar el trabajo diario señalando lo que hace mejor, dividir las tareas en pasos, entrenar el uso de la agenda
+          y mantener una relación activa con las familias (resuelvos séptimo y noveno, y anexo IV). El servicio de
+          orientación puede pedir asesoramiento al Equipo de Orientación Educativa y Psicopedagógica (EOEP) específico de
+          dificultades de aprendizaje y TDAH.
+        </p>
+      </div>
+
+      <h2>Ideas para adaptarla</h2>
+      <p>Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de participar:</p>
+      <div class="dos-columnas">
+        <ul style="margin: 0">
+          <li><strong>En Infantil:</strong> empieza con uno o dos objetivos. Las caras se pueden colorear o tapar con una pegatina.</li>
+          <li><strong>Para quien no lee:</strong> pictogramas y caras. En casa, la familia lee la tarjeta con él o con ella.</li>
+          <li><strong>Más autonomía en Primaria:</strong> que marque primero él o ella y luego lo comparéis.</li>
+        </ul>
+        <ul style="margin: 0">
+          <li>
+            <strong>Para toda la clase:</strong> elegid tres objetivos de grupo del banco y revisadlos en la pizarra al
+            final de cada franja. Así, quien lleva su tarjeta no destaca.
+          </li>
+          <li><strong>Con varios docentes:</strong> la tarjeta pasa por las especialidades con la misma forma de marcar.</li>
+          <li><strong>Si la familia no puede contestar cada día:</strong> una firma y un mensaje el viernes.</li>
+        </ul>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Mi tarjeta de ida y vuelta: tarjeta diaria cole-casa para el TDAH.</strong> IdEducando, octubre de 2026.
+          Ficha y novedades: <span class="url">ideducando.es/material-gratuito/tarjeta-cole-casa-tdah</span>
+        </p>
+        <p>
+          Fuentes: Pyle, K. y Fabiano, G. A. (2017), <em>Exceptional Children</em>, 83(4), 378-395; Fabiano, G. A. y otros
+          (2010), <em>School Psychology Review</em>, 39(2), 219-239; Center for Children and Families (W. E. Pelham),
+          <em>How to Establish a School-Home Daily Report Card</em>, guía gratuita, ccf.fiu.edu; Evans, S. W., Owens, J. S.
+          y Bunford, N. (2014), <em>Journal of Clinical Child and Adolescent Psychology</em>, 43(4), 527-551; Owens, J. S. y
+          otros (2012), <em>Behavior Therapy</em>, 43(4), 848-861; Caldarella, P. y otros (2020), <em>Educational
+          Psychology</em>, 40(10), 1306-1322; Miller, L. M. y otros (2015), <em>Journal of School Psychology</em>, 53(2),
+          121-135; Diamond, A. y Ling, D. S. (2016), <em>Developmental Cognitive Neuroscience</em>, 18, 34-48; Abikoff, H.
+          y otros (2013), <em>Journal of Consulting and Clinical Psychology</em>, 81(1), 113-128; Reid, R., Trout, A. L. y
+          Schartz, M. (2005), <em>Exceptional Children</em>, 71(4), 361-377; Hallez, Q. y Vallier, V. (2025),
+          <em>European Journal of Investigation in Health, Psychology and Education</em>, 15(12), 243; Ley Orgánica 2/2006
+          de Educación, artículo 71.2; Reglamento (UE) 2016/679, artículo 9.1; Resolución de 30 de julio de 2019 de la
+          Dirección General de Atención a la Diversidad y Calidad Educativa de la Región de Murcia (BORM n.º 184, de 10 de
+          agosto de 2019); CAST (2024), <em>Universal Design for Learning Guidelines 3.0</em>.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. Las caras y
+          los dibujos son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Una tarjeta que viaja del cole a casa</h1>
+      <p>
+        Cada día, en el cole marcamos en esta tarjeta tres objetivos que estamos trabajando. La tarjeta va a casa en la
+        agenda y vuelve al cole con vuestra respuesta. Sirve para celebrar lo que sale bien y para que cole y casa vayamos
+        a una.
+      </p>
+
+      <h2>Cada tarde, dos minutos</h2>
+      <ol class="tardes">
+        <li class="azul">Mirad la tarjeta juntos, con calma.</li>
+        <li class="amarillo">Empezad por lo bueno: «¡Mira cuántas caras!».</li>
+        <li class="verde">Si ha llegado a su meta, que elija algo del menú. Cumplidlo ese mismo día.</li>
+        <li class="naranja">Escribid en «En casa hoy…», firmad y guardad la tarjeta en la mochila.</li>
+      </ol>
+
+      <h2>Así se lee la tarjeta</h2>
+      <div class="ejemplo">
+        <div class="mini" style="--s: 0.53" id="ejemplo-familias"></div>
+        <ul class="claves">
+          <li><b class="globo-texto">1</b><span>Sus tres objetivos, con un dibujo para recordarlos.</span></li>
+          <li><b class="globo-texto">2</b><span>Cada cara coloreada es un logro. Si una casilla está tachada, ese rato no tocaba.</span></li>
+          <li><b class="globo-texto">3</b><span>Si llega a su meta, lo marcamos aquí. En Primaria, en lugar de caras hay «Sí» y «Aún no».</span></li>
+          <li><b class="globo-texto">4</b><span>Aquí contestáis vosotros. Con una frase basta.</span></li>
+        </ul>
+      </div>
+
+      <div class="caja caja--amarilla" style="margin-top: 4mm">
+        <h2>Los días que cuestan</h2>
+        <ul>
+          <li>Ese día no hay recompensa del menú. Y nada más: ni castigo ni sermón.</li>
+          <li>Podéis decir: «Hoy ha costado. Mañana, otra oportunidad».</li>
+          <li>Lo básico nunca se quita: comer, dormir, el cariño y jugar al aire libre.</li>
+          <li>Si hay muchos días seguidos sin meta, contádnoslo: quizá hay que ajustar la tarjeta.</li>
+        </ul>
+      </div>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Mi tarjeta de ida y vuelta.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      const P = (id) => `pictogramas/${id}.png`;
+
+      // ---------------------------------------------------------------------
+      // Datos
+      // ---------------------------------------------------------------------
+
+      // Banco de objetivos: pictograma de ARASAAC, cómo lo dice la tarjeta y cómo lo mide el adulto.
+      const GRUPOS = [
+        ['Empiezo y acabo', 'azul', [
+          [17004, 'Empiezo la tarea enseguida.', 'Empieza en 2 minutos o menos, con 1 aviso como mucho.'],
+          [2599, 'Sigo con mi tarea hasta el final.', 'Sigue trabajando con 2 recordatorios o menos.'],
+          [32814, 'Acabo la tarea a tiempo.', 'Termina la parte pactada antes de que acabe la franja.'],
+          [6998, 'Reviso antes de entregar.', 'Repasa con «Mi tarea en tres pasos» antes de entregar.'],
+        ]],
+        ['Espero mi turno', 'amarillo', [
+          [9034, 'Levanto la mano para hablar.', 'Habla sin turno 2 veces o menos.'],
+          [7158, 'Espero mi turno en los juegos.', 'Espera con 1 recordatorio o menos.'],
+          [3345, 'Dejo hablar a los demás.', 'Interrumpe 2 veces o menos.'],
+          [38596, 'Voy en la fila en mi sitio.', 'Sigue la fila con 1 recordatorio o menos.'],
+        ]],
+        ['Mis materiales', 'verde', [
+          [5898, 'Traigo la agenda y la tarjeta.', 'Las entrega al llegar, firmadas.'],
+          [37534, 'En mi mesa, solo lo que necesito.', 'Al empezar, con 1 recordatorio o menos.'],
+          [5514, 'Guardo mis cosas en su sitio.', 'Al acabar cada actividad, con 1 recordatorio o menos.'],
+          [8490, 'Apunto la tarea en la agenda.', 'La apunta antes de salir y el docente lo comprueba.'],
+        ]],
+        ['Escucho y sigo las indicaciones', 'morado', [
+          [22007, 'Hago lo que me pide mi profe.', 'Sigue la indicación con 2 repeticiones o menos.'],
+          [2381, 'Escucho cuando explican.', 'Mira y escucha con 2 recordatorios o menos.'],
+          [25082, 'Me quedo en mi sitio o pido permiso.', 'Se levanta sin permiso 2 veces o menos.'],
+          [25736, 'Cambio de actividad cuando toca.', 'Empieza lo siguiente con 1 aviso como mucho.'],
+        ]],
+        ['Con mis compañeros', 'coral', [
+          [2439, 'Juego sin hacer daño.', 'Ningún golpe ni empujón en la franja.'],
+          [8128, 'Uso palabras amables.', 'Ningún insulto ni burla en la franja.'],
+          [15361, 'Comparto y ayudo.', 'Comparte o ayuda cuando se lo piden, con 1 recordatorio o menos.'],
+          [8194, 'Pido las cosas antes de cogerlas.', 'Coge algo sin pedirlo 1 vez como mucho.'],
+        ]],
+        ['Con calma', 'naranja', [
+          [32826, 'Si me enfado, pido ayuda o voy a la calma.', 'Usa su plan de calma en lugar de gritar o pegar.'],
+          [25757, 'Acepto un «no» con calma.', 'Discute 1 vez como mucho tras un «no» o una corrección.'],
+          [7171, 'Pido ayuda cuando me atasco.', 'Levanta la mano o enseña su tarjeta de ayuda.'],
+          [9037, 'Hablo bajito cuando trabajamos.', 'Sube la voz con 2 recordatorios o menos.'],
+        ]],
+      ];
+
+      // Ejemplo rellenado (sin nombres): sirve para la portada y para la nota de las familias.
+      // En «caras»: 1 coloreada, 0 en blanco, 2 tachada porque ese rato no tocaba.
+      const EJEMPLO = {
+        fecha: 'lunes',
+        objetivos: [
+          [9034, 'Levanto la mano para hablar.'],
+          [7158, 'Espero mi turno en los juegos.'],
+          [5514, 'Guardo mis cosas en su sitio.'],
+        ],
+        caras: [
+          [1, 2, 1],
+          [1, 1, 0],
+          [1, 2, 1],
+        ],
+        cuenta: 6,
+        posibles: 7,
+        meta: 5,
+        mejor: 'Ha esperado su turno en el corro.',
+        eligio: 'Un juego de mesa.',
+        mensaje: '¡En casa también ha recogido!',
+      };
+
+      const MENU_DIARIO = [
+        [9810, 'Un juego de mesa juntos', 'azul'],
+        [6469, 'Un cuento más por la noche', 'verde'],
+        [29718, 'Elegir la música', 'amarillo'],
+        [2277, 'Un rato más de bici', 'coral'],
+        [7794, 'Manualidades juntos', 'morado'],
+        [2272, 'Un baño largo con juguetes', 'naranja'],
+        [34405, 'Llamar a alguien que quiero', 'azul'],
+        [4935, 'Construir juntos', 'verde'],
+        [31434, 'Fiesta de baile en el salón', 'amarillo'],
+      ];
+
+      const MENU_SEMANAL = [
+        [2859, 'Ir al parque que elija', 'morado'],
+        [2782, 'Elegir la peli del finde', 'coral'],
+        [4756, 'Acampada en el salón', 'verde'],
+        [3065, 'Ir a la biblioteca', 'azul'],
+        [2255, 'Invitar a jugar a un amigo o amiga', 'naranja'],
+        [30510, 'Elegir el plan del sábado', 'amarillo'],
+      ];
+
+      const BASICO = [
+        [2349, 'Comer'],
+        [2369, 'Dormir'],
+        [4550, 'El cariño'],
+        [33064, 'Jugar al aire libre'],
+      ];
+
+      const MOCHILAS = [
+        {
+          titulo: 'Para ir al cole',
+          sub: 'La preparo la noche antes.',
+          picto: 2475,
+          color: 'azul',
+          cosas: [
+            [5898, 'Mi agenda'],
+            [8166, 'La tarjeta firmada'],
+            [32556, 'Los deberes hechos'],
+            [8575, 'El estuche'],
+            [2450, 'Libros y cuadernos'],
+            [2281, 'El almuerzo'],
+            [39043, 'La botella de agua'],
+            [36358, 'La chaqueta'],
+            [null, 'Hoy toca:'],
+          ],
+        },
+        {
+          titulo: 'Para volver a casa',
+          sub: 'La repaso antes de salir del cole.',
+          picto: 3082,
+          color: 'naranja',
+          cosas: [
+            [5898, 'La agenda con la tarea apuntada'],
+            [8166, 'Mi tarjeta de hoy'],
+            [2359, 'Lo que necesito para los deberes'],
+            [8575, 'El estuche'],
+            [36358, 'La chaqueta'],
+            [39043, 'La botella'],
+            [null, 'Y además:'],
+            [null, 'Y además:'],
+          ],
+        },
+      ];
+
+      const PASOS = [
+        ['Planifico', 11706, 'azul', ['Leo qué tengo que hacer.', 'Preparo lo que necesito.', 'Miro cuánto tiempo tengo.']],
+        ['Hago', 2599, 'amarillo', ['Empiezo por lo primero.', 'Si me atasco, pido ayuda.', 'Sigo hasta el final.']],
+        ['Reviso', 6998, 'verde', ['¿Está todo hecho?', '¿Se entiende bien?', 'Lo entrego o lo guardo.']],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando
+      // ---------------------------------------------------------------------
+
+      // Cara para colorear: en blanco o ya coloreada (ejemplo).
+      function cara(coloreada = false) {
+        return `<svg class="cara" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="43" fill="${coloreada ? '#f6c12e' : '#fff'}" stroke="#1e2b55" stroke-width="5"/><circle cx="36" cy="42" r="5.5" fill="#1e2b55"/><circle cx="64" cy="42" r="5.5" fill="#1e2b55"/><path d="M31 59 q19 18 38 0" fill="none" stroke="#1e2b55" stroke-width="5" stroke-linecap="round"/></svg>`;
+      }
+
+      // Emblema de «ida y vuelta»: una tarjeta entre dos flechas que dan la vuelta.
+      const EMBLEMA = `<svg class="emblema" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M6.8 20.5 A17.5 17.5 0 0 1 39.6 15.5" fill="none" stroke="#2f6fd6" stroke-width="4.4" stroke-linecap="round"/>
+        <path d="M33.6 15 L40 16.4 L41.6 10" fill="none" stroke="#2f6fd6" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M41.2 27.5 A17.5 17.5 0 0 1 8.4 32.5" fill="none" stroke="#f5961f" stroke-width="4.4" stroke-linecap="round"/>
+        <path d="M14.4 33 L8 31.6 L6.4 38" fill="none" stroke="#f5961f" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="15" y="17" width="18" height="14" rx="2.6" fill="#fff" stroke="#1e2b55" stroke-width="2.4"/>
+        <path d="M19 22 h10 M19 26 h6" stroke="#1e2b55" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>`;
+
+      const TIJERAS = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3" fill="none" stroke="#46578c" stroke-width="1.8"/><circle cx="6" cy="18" r="3" fill="none" stroke="#46578c" stroke-width="1.8"/><path d="M8.6 7.6 L20 16.2 M8.6 16.4 L20 7.8" stroke="#46578c" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+
+      const ESTRELLA = (relleno = '#f6c12e') =>
+        `<svg class="estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.2 6.7.7-5 4.6 1.4 6.7L12 17l-6 3.4 1.4-6.7-5-4.6 6.7-.7z" fill="${relleno}" stroke="#1e2b55" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+
+      const FLECHITA = `<span class="flechita"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4 l8 8 l-8 8" fill="none" stroke="#1e2b55" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+
+      // Una firma inventada, hecha de garabatos (para los ejemplos).
+      const FIRMA = `<svg class="firma" viewBox="0 0 60 16" aria-hidden="true"><path d="M2 11 C 6 2, 9 2, 9 9 S 14 14, 17 6 S 22 2, 23 9 C 24 13, 28 12, 31 7 C 33 4, 35 5, 35 9 C 36 13, 41 11, 45 8 L 57 6" fill="none" stroke="#7a3fa5" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+
+      // ---------------------------------------------------------------------
+      // Tarjetas
+      // ---------------------------------------------------------------------
+
+      function cabeza(ej) {
+        // En los ejemplos no se escribe ningún nombre: solo el día.
+        const fecha = ej?.fecha ? `<span class="tinta">${ej.fecha}</span>` : '<span></span>';
+        return `<div class="rayos"></div>
+          <div class="tarjeta__cabeza">${EMBLEMA}
+            <p class="tarjeta__titulo">Mi tarjeta de ida y vuelta<small>Del cole a casa y de casa al cole</small></p>
+            <div class="campos"><p class="campo">Me llamo<span></span></p><p class="campo campo--fecha">Fecha${fecha}</p></div>
+          </div>`;
+      }
+
+      function partes(tipo, ej) {
+        const cuenta =
+          tipo === 'infantil'
+            ? `Caras de hoy <span class="caja-num ${ej ? 'tinta' : ''}">${ej?.cuenta ?? ''}</span> de <span class="caja-num ${ej ? 'tinta' : ''}">${ej?.posibles ?? ''}</span> · Mi meta <span class="caja-num ${ej ? 'tinta' : ''}">${ej?.meta ?? ''}</span>`
+            : `Síes de hoy <span class="caja-num"></span> de <span class="caja-num"></span> · Mi meta <span class="caja-num"></span>`;
+        const l = (texto) => (texto ? `<span class="l tinta">${texto}</span>` : '<span class="l"></span>');
+        return `<div class="partes">
+          <section class="parte azul">
+            <p class="parte__titulo"><img src="${P(3082)}" alt="">En el cole hoy…</p>
+            <p class="cuenta">${cuenta}</p>
+            <p><span class="marca ${ej ? 'hecha' : ''}">¡Meta conseguida!</span><span class="marca">Mañana, otra vez</span></p>
+            <p>Lo mejor de hoy:${l(ej?.mejor)}</p>
+            ${tipo === 'primaria' ? `<p>Mi momento estrella (lo escribo yo):${l()}</p>` : ''}
+            <p>Firma:${ej ? `<span class="l">${FIRMA}</span>` : l()}</p>
+          </section>
+          <section class="parte naranja">
+            <p class="parte__titulo"><img src="${P(2317)}" alt="">En casa hoy…</p>
+            <p><span class="marca ${ej ? 'hecha' : ''}">Hemos mirado la tarjeta juntos.</span></p>
+            <p>Ha elegido del menú:${l(ej?.eligio)}</p>
+            <p>Mensaje para el cole:${l(ej?.mensaje)}</p>
+            ${tipo === 'primaria' ? `<p>${l()}</p>` : ''}
+            <p>Firma:${ej ? `<span class="l">${FIRMA}</span>` : l()}</p>
+          </section>
+        </div>`;
+      }
+
+      const CREDITOS =
+        '<p class="tarjeta__creditos">IdEducando · CC BY-NC-SA 4.0 · ideducando.es · Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>';
+
+      function tarjetaInfantil(ej) {
+        const franjas = `
+          <div class="th th--objetivos">Mis objetivos</div>
+          <div class="th azul">Antes del recreo</div>
+          <div class="th amarillo"><img src="${P(33064)}" alt="">En el recreo</div>
+          <div class="th verde">Después del recreo</div>`;
+        const filas = [0, 1, 2]
+          .map((i) => {
+            const o = ej?.objetivos[i];
+            const hueco = o
+              ? `<span class="hueco-picto lleno"><img src="${P(o[0])}" alt=""></span>`
+              : '<span class="hueco-picto">Pega aquí su pictograma</span>';
+            const texto = o
+              ? `<span class="objetivo__texto"><span class="tinta">${o[1]}</span></span>`
+              : '<span class="objetivo__texto"><span class="renglon"></span><span class="renglon"></span></span>';
+            const celdas = [0, 1, 2]
+              .map((j) => {
+                const v = ej ? ej.caras[i][j] : 0;
+                return `<div class="celda ${v === 2 ? 'no-toca' : ''}">${cara(v === 1)}</div>`;
+              })
+              .join('');
+            return `<div class="objetivo"><b class="numero">${i + 1}</b>${hueco}${texto}</div>${celdas}`;
+          })
+          .join('');
+        return `<article class="tarjeta">${cabeza(ej)}
+          <div class="rejilla rejilla--infantil">${franjas}${filas}</div>
+          <p class="leyenda">${cara(true)} Cara coloreada: ¡lo ha conseguido!<span class="separa">·</span>${cara(false)} En blanco: mañana, otra vez.<span class="separa">·</span>Si ese rato no toca, tachamos la casilla.</p>
+          ${partes('infantil', ej)}${CREDITOS}</article>`;
+      }
+
+      function tarjetaPrimaria() {
+        const nombres = ['1.ª', '2.ª', '3.ª', 'Recreo', '4.ª', '5.ª'];
+        const colores = ['azul', 'verde', 'amarillo', 'naranja', 'coral', 'morado'];
+        const cab =
+          '<div class="th th--objetivos">Mis objetivos</div>' +
+          nombres
+            .map((n, i) =>
+              n === 'Recreo'
+                ? `<div class="th th--recreo ${colores[i]}"><img src="${P(33064)}" alt="">Recreo</div>`
+                : `<div class="th th--franja ${colores[i]}"><span>${n} sesión</span><span class="area"></span></div>`,
+            )
+            .join('') +
+          '<div class="th">Síes</div>';
+        const filas = [0, 1, 2]
+          .map(
+            (i) =>
+              `<div class="objetivo"><b class="numero">${i + 1}</b><span class="objetivo__texto"><span class="renglon"></span><span class="renglon"></span></span></div>` +
+              nombres.map(() => '<div class="sino"><span>Sí</span><span>Aún no</span></div>').join('') +
+              '<div class="total"><span class="caja-num"></span></div>',
+          )
+          .join('');
+        return `<article class="tarjeta">${cabeza()}
+          <div class="rejilla rejilla--primaria">${cab}${filas}</div>
+          <p class="leyenda">En cada franja, rodea <span class="pastilla">Sí</span> o <span class="pastilla">Aún no</span><span class="separa">·</span>Si ese rato no toca, tacha la casilla.<span class="separa">·</span>Debajo de cada sesión, el área.</p>
+          ${partes('primaria')}${CREDITOS}</article>`;
+      }
+
+      const corte = `<div class="corte">${TIJERAS}<span>Corta por aquí: cada mitad es una tarjeta para la agenda</span></div>`;
+      document.getElementById('hoja-infantil').insertAdjacentHTML('beforeend', tarjetaInfantil() + corte + tarjetaInfantil());
+      document.getElementById('hoja-primaria').insertAdjacentHTML('beforeend', tarjetaPrimaria() + corte + tarjetaPrimaria());
+
+      // Tarjetas de ejemplo en pequeño (portada y familias)
+      function mini(destino, s) {
+        destino.style.setProperty('--s', s);
+        destino.innerHTML = tarjetaInfantil(EJEMPLO);
+      }
+
+      // ---------------------------------------------------------------------
+      // Banco de objetivos y recortables
+      // ---------------------------------------------------------------------
+      let n = 0;
+      const todos = [];
+      document.getElementById('banco').innerHTML = GRUPOS.map(([nombre, color, objetivos]) => {
+        const items = objetivos
+          .map(([picto, dice, mide]) => {
+            n += 1;
+            todos.push([n, picto]);
+            return `<li><img src="${P(picto)}" alt=""><span><b><span class="n">${n}</span>${dice}</b><small>${mide}</small></span></li>`;
+          })
+          .join('');
+        return `<section class="grupo ${color}"><h2>${nombre}</h2><ol>${items}</ol></section>`;
+      }).join('');
+
+      const recortes = [...todos, ...todos, ...todos].map(([num, picto]) => `<div class="recortable"><span>${num}</span><img src="${P(picto)}" alt=""></div>`);
+      document.getElementById('recortables').innerHTML = recortes.join('');
+
+      const tiraObjetivos = `<div class="tira-objetivos"><div>${EMBLEMA}Mis tres<br>objetivos</div>${[1, 2, 3]
+        .map((i) => `<div><span class="numero">${i}</span><span class="hueco-picto">Pega aquí</span><span class="renglones"><span></span><span></span></span></div>`)
+        .join('')}</div>`;
+      document.getElementById('tiras-objetivos').innerHTML = tiraObjetivos + tiraObjetivos;
+
+      // ---------------------------------------------------------------------
+      // Menú de recompensas
+      // ---------------------------------------------------------------------
+      const plato = ([picto, texto, color]) => `<li class="plato ${color}"><img src="${P(picto)}" alt="">${texto}</li>`;
+      const libre = '<li class="plato libre">Otra idea:<span></span><span></span></li>';
+      document.getElementById('menu-diario').innerHTML = MENU_DIARIO.map(plato).join('') + libre.repeat(3);
+      document.getElementById('menu-semanal').innerHTML = MENU_SEMANAL.map(plato).join('') + libre.repeat(2);
+      document.getElementById('basico').innerHTML = BASICO.map(([picto, texto]) => `<li><img src="${P(picto)}" alt="">${texto}</li>`).join('');
+
+      // ---------------------------------------------------------------------
+      // Registro, gráfica y tabla de porcentajes
+      // ---------------------------------------------------------------------
+      document.getElementById('filas-registro').innerHTML = Array.from(
+        { length: 4 },
+        () => '<tr><td></td><td class="pc"></td><td class="pc"></td><td class="pc"></td><td class="pc"></td><td class="pc"></td><td></td><td></td></tr>',
+      ).join('');
+
+      (function grafica() {
+        const svg = document.getElementById('grafica');
+        const x0 = 13, ancho = 164, y0 = 2, alto = 46, col = ancho / 20;
+        let s = '';
+        for (let p = 0; p <= 10; p++) {
+          const y = y0 + alto - (alto * p) / 10;
+          const fuerte = p % 5 === 0;
+          s += `<line x1="${x0}" y1="${y}" x2="${x0 + ancho}" y2="${y}" stroke="#ead9bb" stroke-width="${fuerte ? 0.55 : 0.25}"/>`;
+          if (p % 2 === 0) s += `<text x="${x0 - 1.6}" y="${y + 1.1}" text-anchor="end" font-size="3.1" fill="#46578c" font-family="Atkinson Hyperlegible">${p * 10} %</text>`;
+        }
+        const dias = ['L', 'M', 'X', 'J', 'V'];
+        for (let d = 0; d <= 20; d++) {
+          const x = x0 + d * col;
+          const semana = d % 5 === 0;
+          s += `<line x1="${x}" y1="${y0}" x2="${x}" y2="${y0 + alto}" stroke="${semana ? '#1e2b55' : '#ead9bb'}" stroke-width="${semana ? 0.4 : 0.25}"/>`;
+          if (d < 20) s += `<text x="${x + col / 2}" y="${y0 + alto + 4.6}" text-anchor="middle" font-size="3.1" fill="#1e2b55" font-family="Atkinson Hyperlegible" font-weight="700">${dias[d % 5]}</text>`;
+        }
+        for (let w = 0; w < 4; w++) {
+          const x = x0 + w * 5 * col;
+          s += `<text x="${x + 2.5 * col}" y="${y0 + alto + 10.6}" text-anchor="middle" font-size="3.3" fill="#46578c" font-family="Outfit" font-weight="700">Semana ${w + 1}</text>`;
+          s += `<line x1="${x + 2}" y1="${y0 + alto + 12.4}" x2="${x + 5 * col - 2}" y2="${y0 + alto + 12.4}" stroke="#46578c" stroke-width="0.25" stroke-dasharray="1 1"/>`;
+        }
+        s += `<rect x="${x0}" y="${y0}" width="${ancho}" height="${alto}" fill="none" stroke="#1e2b55" stroke-width="0.45" rx="0.6"/>`;
+        svg.innerHTML = s;
+      })();
+
+      (function conversion() {
+        const tabla = document.getElementById('conversion');
+        const columnas = Array.from({ length: 18 }, (_, i) => i + 1);
+        let html = '<thead><tr><th scope="col" style="width:30mm">Síes</th>' + columnas.map((c) => `<th scope="col">${c}</th>`).join('') + '</tr></thead><tbody>';
+        for (const [total, nombre] of [[9, 'De 9 (Infantil)'], [15, 'De 15'], [18, 'De 18 (Primaria)']]) {
+          html += `<tr><th scope="row">${nombre}</th>` + columnas.map((c) => (c <= total ? `<td>${Math.round((100 * c) / total)}</td>` : '<td class="vacia"></td>')).join('') + '</tr>';
+        }
+        tabla.innerHTML = html + '</tbody>';
+      })();
+
+      // ---------------------------------------------------------------------
+      // Mochila, tarea y tiempo
+      // ---------------------------------------------------------------------
+      document.getElementById('mochilas').innerHTML = MOCHILAS.map((m) => {
+        const filas = m.cosas
+          .map(([picto, texto]) => {
+            const cuerpo = picto
+              ? `<div class="cuerpo"><img src="${P(picto)}" alt="">${texto}</div>`
+              : `<div class="cuerpo">${texto}<span class="libre"></span></div>`;
+            return `<tr><td class="cosa">${cuerpo}</td>${'<td class="dia"></td>'.repeat(5)}</tr>`;
+          })
+          .join('');
+        return `<section class="mochila ${m.color}">
+          <div class="mochila__cabeza"><img src="${P(m.picto)}" alt=""><h2>${m.titulo}<small>${m.sub}</small></h2></div>
+          <table><thead><tr><th scope="col" style="width:auto"><span class="solo-lector">Qué llevo</span></th>${['L', 'M', 'X', 'J', 'V'].map((d) => `<th scope="col" style="width:6.6mm">${d}</th>`).join('')}</tr></thead><tbody>${filas}</tbody></table>
+        </section>`;
+      }).join('');
+
+      document.getElementById('tarea').innerHTML = `
+        <div class="tarea__cabeza"><p>Mi tarea:<span style="width:88mm"></span></p><p>Tiempo:<span style="width:14mm"></span>minutos</p></div>
+        <div class="pasos">${PASOS.map(
+          ([titulo, picto, color, frases], i) =>
+            `<section class="paso ${color}"><div class="paso__titulo"><img src="${P(picto)}" alt=""><h2><small>${i + 1}</small>${titulo}</h2></div><ul>${frases.map((f) => `<li>${f}</li>`).join('')}</ul></section>`,
+        ).join('')}</div>`;
+
+      const tramo = (color, interior) => `<div class="tramo ${color}">${interior}</div>`;
+      const minutos = '<span class="min"><span></span>min</span>';
+      document.getElementById('tira-trabajo').innerHTML = [
+        tramo('azul', `<img src="${P(17004)}" alt="">Empiezo`),
+        tramo('amarillo', `<img src="${P(2599)}" alt="">Trabajo${minutos}`),
+        tramo('verde', `<img src="${P(31937)}" alt="">Descanso${minutos}`),
+        tramo('amarillo', `<img src="${P(2599)}" alt="">Trabajo${minutos}`),
+        tramo('morado', `<img src="${P(6998)}" alt="">Reviso`),
+        tramo('naranja', `${ESTRELLA()}¡Hecho!`),
+      ].join(FLECHITA);
+
+      document.getElementById('tira-cuenta').innerHTML = [
+        ...[5, 4, 3, 2, 1].map((num, i) => tramo(['azul', 'verde', 'amarillo', 'naranja', 'coral'][i], `<span class="grande">${num}</span>minuto${num > 1 ? 's' : ''}`)),
+        tramo('morado', `<img src="${P(25736)}" alt="">¡Cambio!`),
+      ].join(FLECHITA);
+
+      // ---------------------------------------------------------------------
+      // Portada y ejemplo de las familias
+      // ---------------------------------------------------------------------
+      mini(document.getElementById('ejemplo-familias'), 0.53);
+      // Centros de los números, en milímetros sobre la tarjeta reducida: en sus bordes, sin tapar texto.
+      const globos = [
+        [0, 28],
+        [100.7, 28],
+        [0, 55.5],
+        [100.7, 55.5],
+      ];
+      globos.forEach(([x, y], i) =>
+        document
+          .getElementById('ejemplo-familias')
+          .insertAdjacentHTML('beforeend', `<span class="globo" style="left:${x - 3.25}mm;top:${y - 3.25}mm">${i + 1}</span>`),
+      );
+
+      // Escena de la portada: el cole, la casa y la tarjeta en medio, con las flechas de ida y vuelta.
+      document.getElementById('escena').innerHTML = `
+        <svg class="paisaje" viewBox="0 0 210 171" aria-hidden="true">
+          <path d="M0 104 Q 52 92 104 99 T 210 94 V171 H0Z" fill="#dcf3ea"/>
+          <path d="M66 108 Q 105 114 146 106" fill="none" stroke="#fdf0c7" stroke-width="9" stroke-linecap="round"/>
+          <!-- El cole -->
+          <g transform="translate(6 30)">
+            <rect x="6" y="34" width="56" height="44" rx="2" fill="#fffdf8" stroke="#1e2b55" stroke-width="1.6"/>
+            <path d="M1 36 L34 12 L67 36Z" fill="#e8553e" stroke="#1e2b55" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="34" cy="27" r="5" fill="#fff" stroke="#1e2b55" stroke-width="1.3"/>
+            <path d="M34 24.2v2.8l2.2 1.4" stroke="#1e2b55" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+            <path d="M34 12 V1" stroke="#1e2b55" stroke-width="1.3"/>
+            <path d="M34 1 h9 l-2 2.8 l2 2.8 h-9z" fill="#2f6fd6" stroke="#1e2b55" stroke-width="1" stroke-linejoin="round"/>
+            <g fill="#e4edfb" stroke="#1e2b55" stroke-width="1.2">
+              <rect x="12" y="41" width="11" height="10" rx="1.4"/><rect x="45" y="41" width="11" height="10" rx="1.4"/>
+              <rect x="12" y="57" width="11" height="10" rx="1.4"/><rect x="45" y="57" width="11" height="10" rx="1.4"/>
+            </g>
+            <path d="M27 78 V60 a7 7 0 0 1 14 0 V78" fill="#f5961f" stroke="#1e2b55" stroke-width="1.6"/>
+          </g>
+          <!-- La casa -->
+          <g transform="translate(142 38)">
+            <rect x="6" y="30" width="50" height="40" rx="2" fill="#fdf0c7" stroke="#1e2b55" stroke-width="1.6"/>
+            <rect x="40" y="9" width="8" height="16" fill="#e8553e" stroke="#1e2b55" stroke-width="1.4"/>
+            <path d="M0 32 L31 6 L62 32Z" fill="#8c4fb8" stroke="#1e2b55" stroke-width="1.6" stroke-linejoin="round"/>
+            <rect x="23" y="37" width="13" height="12" rx="1.4" fill="#e4edfb" stroke="#1e2b55" stroke-width="1.2"/>
+            <path d="M29.5 46.4 c-3.6-2.6-5-4.1-5-5.8 a2.4 2.4 0 0 1 5-0.9 a2.4 2.4 0 0 1 5 0.9 c0 1.7-1.4 3.2-5 5.8z" fill="#e8553e"/>
+            <path d="M40 70 V54 a6 6 0 0 1 12 0 V70" fill="#2f6fd6" stroke="#1e2b55" stroke-width="1.6"/>
+            <circle cx="49" cy="62" r="0.9" fill="#1e2b55"/>
+          </g>
+          <!-- Flecha de ida, del cole a casa -->
+          <path d="M44 34 C 66 4, 146 2, 170 36" fill="none" stroke="#2f6fd6" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4.5 3.2"/>
+          <path d="M163.5 33.5 L170.6 37 L171.2 29" fill="none" stroke="#2f6fd6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Flecha de vuelta, de casa al cole -->
+          <path d="M178 112 C 160 132, 54 134, 34 113" fill="none" stroke="#f5961f" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="4.5 3.2"/>
+          <path d="M41 115.6 L33.6 112.6 L33.4 120.6" fill="none" stroke="#f5961f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Rótulos -->
+          <g font-family="Outfit" font-weight="700" font-size="5" text-anchor="middle">
+            <rect x="96" y="2.6" width="18" height="8" rx="4" fill="#fff" stroke="#2f6fd6" stroke-width="0.9"/>
+            <text x="105" y="8.3" fill="#1e2b55">ida</text>
+            <rect x="92" y="122.6" width="26" height="8" rx="4" fill="#fff" stroke="#f5961f" stroke-width="0.9"/>
+            <text x="105" y="128.3" fill="#1e2b55">vuelta</text>
+          </g>
+          <!-- Confeti -->
+          <g>
+            <circle cx="80" cy="18" r="1.6" fill="#f6c12e"/><circle cx="132" cy="14" r="1.4" fill="#1fa67a"/>
+            <circle cx="122" cy="26" r="1.1" fill="#e8553e"/><circle cx="90" cy="28" r="1.1" fill="#8c4fb8"/>
+            <path d="M70 26 l1.2 2.6 2.8 0.3 -2.1 1.9 0.6 2.8 -2.5 -1.4 -2.5 1.4 0.6 -2.8 -2.1 -1.9 2.8 -0.3z" fill="#f6c12e"/>
+            <path d="M140 22 l1 2.2 2.4 0.3 -1.8 1.6 0.5 2.4 -2.1 -1.2 -2.1 1.2 0.5 -2.4 -1.8 -1.6 2.4 -0.3z" fill="#e8553e"/>
+          </g>
+        </svg>
+        <div class="mini" id="mini-portada"></div>`;
+      mini(document.getElementById('mini-portada'), 0.6);
+    </script>
+  </body>
+</html>
