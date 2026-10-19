@@ -1,0 +1,620 @@
+---
+// La bolsa de descargas: los materiales elegidos, todos a 0 €, y el formulario con nombre y correo
+// que da acceso a los archivos. Mientras sitio.json diga «demostracion», no se envía ningún dato:
+// la página enseña los enlaces de descarga como lo hará cuando la recogida de datos esté activa.
+import Base from '../layouts/Base.astro';
+import Intro from '../components/Intro.astro';
+import Icono from '../components/Icono.astro';
+import sitio from '../data/sitio.json';
+import { TIPOS } from '../data/taxonomias';
+import { existeArchivo, extension, pesoArchivo } from '../lib/formatos';
+import { materialesOrdenados } from '../lib/materiales';
+import { ruta } from '../lib/rutas';
+
+// Catálogo para la bolsa: solo lo que de verdad se puede descargar.
+const catalogo = (await materialesOrdenados())
+  .filter((m) => existeArchivo(m.data.archivo))
+  .map((m) => ({
+    id: m.id,
+    titulo: m.data.titulo,
+    tipo: TIPOS[m.data.tipo].nombre,
+    enlace: ruta(`/material-gratuito/${m.id}/`),
+    archivo: ruta(m.data.archivo!),
+    portada: m.data.portada ? ruta(m.data.portada) : '',
+    detalle: [extension(m.data.archivo), pesoArchivo(m.data.archivo), m.data.paginas && `${m.data.paginas} páginas`]
+      .filter(Boolean)
+      .join(', '),
+  }));
+
+const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.envio;
+---
+
+<Base
+  titulo="Mi bolsa"
+  descripcion="Los materiales que has elegido, todos gratis. Déjanos tu nombre y tu correo y descárgalos."
+  indexable={false}
+>
+  <Intro
+    titulo="Mi bolsa"
+    entradilla="Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu nombre y tu correo y descárgalos."
+    camino={[{ texto: 'Mi bolsa' }]}
+  />
+
+  <div class="contenedor bolsa" data-bolsa>
+    <script type="application/json" data-bolsa-catalogo set:html={JSON.stringify(catalogo)} />
+
+    <section class="bolsa__vacia" data-bolsa-vacia hidden aria-labelledby="titulo-vacia">
+      <Icono nombre="bolsa" clase="bolsa__icono-grande" />
+      <h2 id="titulo-vacia" tabindex="-1">Tu bolsa está vacía</h2>
+      <p>Entra en cualquier material del catálogo y pulsa «Añadir a mi bolsa». Puedes llevarte varios a la vez.</p>
+      <a class="boton boton--principal" href={ruta('/material-gratuito/')}>
+        Ver el material gratuito
+        <Icono nombre="flecha" />
+      </a>
+    </section>
+
+    <div class="bolsa__rejilla" data-bolsa-llena hidden>
+      <section class="bolsa__lista" aria-labelledby="titulo-lista">
+        <h2 id="titulo-lista">Lo que has elegido</h2>
+        <ul class="bolsa__materiales" data-bolsa-materiales></ul>
+        <p class="bolsa__total">
+          <span data-bolsa-resumen></span>
+          <span class="bolsa__cero">Total: 0 €</span>
+        </p>
+        <p><a class="flecha" href={ruta('/material-gratuito/')}>Añadir más material</a></p>
+      </section>
+
+      <section class="bolsa__datos" aria-labelledby="titulo-datos">
+        <h2 id="titulo-datos">Tus datos para descargar</h2>
+        {
+          demostracion && (
+            <p class="bolsa__demo">
+              <span class="borrador">[BORRADOR]</span> Vista previa: este formulario todavía no guarda ningún dato. Al
+              pulsar el botón verás las descargas, como las verá quien lo use cuando esté activo.
+            </p>
+          )
+        }
+        <form
+          class="formulario"
+          data-bolsa-formulario
+          data-modo={demostracion ? 'demostracion' : 'formulario'}
+          data-envio={demostracion ? '' : sitio.descargas.envio}
+        >
+          <div class="campo">
+            <label for="bolsa-nombre">Tu nombre</label>
+            <input id="bolsa-nombre" name="nombre" type="text" autocomplete="given-name" required maxlength="80" />
+          </div>
+          <div class="campo">
+            <label for="bolsa-correo">Tu correo electrónico</label>
+            <input
+              id="bolsa-correo"
+              name="correo"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              required
+              maxlength="120"
+              aria-describedby="bolsa-correo-ayuda"
+            />
+            <p id="bolsa-correo-ayuda" class="campo__ayuda">Escríbelo bien: si quieres el boletín, te llegará aquí.</p>
+          </div>
+
+          <div class="trampa" aria-hidden="true">
+            <label for="bolsa-web">Deja este campo vacío</label>
+            <input id="bolsa-web" name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="casilla">
+            <input id="bolsa-privacidad" name="privacidad" type="checkbox" value="si" required />
+            <label for="bolsa-privacidad">
+              He leído y acepto la <a href={ruta('/privacidad/')}>política de privacidad</a>.
+            </label>
+          </div>
+          <div class="casilla">
+            <input id="bolsa-boletin" name="boletin" type="checkbox" value="si" />
+            <label for="bolsa-boletin">
+              Quiero recibir el boletín de IdEducando, con material nuevo y novedades de oposiciones. Me puedo dar de
+              baja cuando quiera.
+            </label>
+          </div>
+
+          <details class="bolsa__info">
+            <summary>Información básica sobre tus datos</summary>
+            <dl>
+              <div>
+                <dt>Responsable</dt>
+                <dd><span class="borrador">[BORRADOR]</span> Pendiente de decidir, como dice el aviso legal.</dd>
+              </div>
+              <div>
+                <dt>Para qué</dt>
+                <dd>Darte acceso al material y, solo si marcas la casilla, enviarte el boletín.</dd>
+              </div>
+              <div>
+                <dt>Base legal</dt>
+                <dd>Tu consentimiento, que puedes retirar cuando quieras.</dd>
+              </div>
+              <div>
+                <dt>Con quién</dt>
+                <dd>
+                  No vendemos ni cedemos tus datos. Los guarda nuestra herramienta de correo por encargo nuestro.{' '}
+                  <span class="borrador">[BORRADOR]</span> Herramienta pendiente.
+                </dd>
+              </div>
+              <div>
+                <dt>Tus derechos</dt>
+                <dd>
+                  Ver, corregir o borrar tus datos, entre otros, escribiendo a{' '}
+                  <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>. Más información en la{' '}
+                  <a href={ruta('/privacidad/')}>política de privacidad</a>.
+                </dd>
+              </div>
+            </dl>
+          </details>
+
+          <button class="boton boton--descarga bolsa__boton" type="submit">
+            <Icono nombre="descarga" />
+            Descargar gratis
+          </button>
+          <p class="campo__error" data-bolsa-error role="alert" hidden></p>
+        </form>
+      </section>
+    </div>
+
+    <section class="bolsa__listo" data-bolsa-listo hidden aria-labelledby="titulo-listo">
+      <Icono nombre="ok" clase="bolsa__icono-grande" />
+      <h2 id="titulo-listo" tabindex="-1">¡Listo<span data-bolsa-saludo></span>! Aquí tienes tu material</h2>
+      <p>Pulsa cada botón para guardarlo en tu ordenador o en tu móvil.</p>
+      <ul class="bolsa__descargas" data-bolsa-descargas></ul>
+      {
+        demostracion && (
+          <p class="bolsa__demo">
+            <span class="borrador">[BORRADOR]</span> Vista previa: no se ha guardado ningún dato.
+          </p>
+        )
+      }
+      <a class="boton boton--secundario" href={ruta('/material-gratuito/')}>Ver más material</a>
+    </section>
+
+    <template data-plantilla-material>
+      <li class="bolsa__material">
+        <img class="bolsa__portada" src="" alt="" width="1200" height="900" loading="lazy" />
+        <div class="bolsa__texto">
+          <p class="bolsa__tipo" data-tipo></p>
+          <p class="bolsa__titulo"><a data-titulo href=""></a></p>
+          <p class="bolsa__detalle" data-detalle></p>
+        </div>
+        <p class="bolsa__precio">0 €</p>
+        <button type="button" class="bolsa__quitar" data-quitar>
+          <Icono nombre="papelera" />
+          <span class="solo-lectores" data-quitar-texto>Quitar</span>
+        </button>
+      </li>
+    </template>
+
+    <template data-plantilla-descarga>
+      <li>
+        <a class="boton boton--descarga bolsa__descarga" href="" download>
+          <Icono nombre="descarga" />
+          <span><span data-titulo></span> <span class="bolsa__detalle-boton" data-detalle></span></span>
+        </a>
+      </li>
+    </template>
+
+    <noscript>
+      <p class="bolsa__sin-js">
+        La bolsa necesita JavaScript activado en el navegador. Si no puedes activarlo, escríbenos a{' '}
+        <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a> y te enviamos el material.
+      </p>
+    </noscript>
+  </div>
+</Base>
+
+<script>
+  import { alCambiarBolsa, leerBolsa, quitarDeBolsa, vaciarBolsa } from '../scripts/bolsa';
+
+  interface Material {
+    id: string;
+    titulo: string;
+    tipo: string;
+    enlace: string;
+    archivo: string;
+    portada: string;
+    detalle: string;
+  }
+
+  const raiz = document.querySelector<HTMLElement>('[data-bolsa]')!;
+  const catalogo: Material[] = JSON.parse(raiz.querySelector('[data-bolsa-catalogo]')!.textContent ?? '[]');
+  const porId = new Map(catalogo.map((m) => [m.id, m]));
+  const $ = <T extends HTMLElement>(selector: string) => raiz.querySelector<T>(selector)!;
+
+  const vacia = $('[data-bolsa-vacia]');
+  const llena = $('[data-bolsa-llena]');
+  const lista = $('[data-bolsa-materiales]');
+  const resumen = $('[data-bolsa-resumen]');
+  const formulario = $<HTMLFormElement>('[data-bolsa-formulario]');
+  const error = $('[data-bolsa-error]');
+  const listo = $('[data-bolsa-listo]');
+  const plantillaMaterial = $<HTMLTemplateElement>('[data-plantilla-material]');
+  const plantillaDescarga = $<HTMLTemplateElement>('[data-plantilla-descarga]');
+
+  let terminado = false;
+
+  const elegidos = () => leerBolsa().map((id) => porId.get(id)).filter((m): m is Material => Boolean(m));
+
+  function pintar() {
+    if (terminado) return;
+    const materiales = elegidos();
+    vacia.hidden = materiales.length > 0;
+    llena.hidden = materiales.length === 0;
+    lista.replaceChildren(
+      ...materiales.map((m) => {
+        const fila = plantillaMaterial.content.firstElementChild!.cloneNode(true) as HTMLElement;
+        const portada = fila.querySelector<HTMLImageElement>('img')!;
+        if (m.portada) portada.src = m.portada;
+        else portada.remove();
+        fila.querySelector('[data-tipo]')!.textContent = m.tipo;
+        const titulo = fila.querySelector<HTMLAnchorElement>('[data-titulo]')!;
+        titulo.textContent = m.titulo;
+        titulo.href = m.enlace;
+        fila.querySelector('[data-detalle]')!.textContent = m.detalle;
+        fila.querySelector('[data-quitar-texto]')!.textContent = `Quitar «${m.titulo}» de la bolsa`;
+        fila.querySelector('[data-quitar]')!.addEventListener('click', () => {
+          quitarDeBolsa(m.id);
+          // Tras quitar uno, el foco va al título de la lista para no perderse.
+          raiz.querySelector<HTMLElement>('#titulo-lista')?.setAttribute('tabindex', '-1');
+          raiz.querySelector<HTMLElement>(materiales.length > 1 ? '#titulo-lista' : '#titulo-vacia')?.focus();
+        });
+        return fila;
+      }),
+    );
+    resumen.textContent = materiales.length === 1 ? '1 material' : `${materiales.length} materiales`;
+  }
+
+  async function enviar(datos: FormData) {
+    const envio = formulario.dataset.envio;
+    if (formulario.dataset.modo !== 'formulario' || !envio) return;
+    const respuesta = await fetch(envio, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams([...datos.entries()].map(([k, v]) => [k, String(v)])).toString(),
+    });
+    if (!respuesta.ok) throw new Error(`Respuesta ${respuesta.status}`);
+  }
+
+  formulario.addEventListener('submit', async (evento) => {
+    evento.preventDefault();
+    error.hidden = true;
+    const datos = new FormData(formulario);
+    if (String(datos.get('sitio_web') ?? '').trim()) return; // Lo rellenó un robot.
+    const materiales = elegidos();
+    if (!materiales.length) return;
+    datos.delete('sitio_web');
+    datos.set('materiales', materiales.map((m) => m.id).join(', '));
+
+    const boton = formulario.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    boton.disabled = true;
+    try {
+      await enviar(datos);
+    } catch {
+      error.textContent = `No hemos podido enviar tus datos. Prueba otra vez en un momento o escríbenos a hola@ideducando.es.`;
+      error.hidden = false;
+      boton.disabled = false;
+      return;
+    }
+
+    terminado = true;
+    const nombre = String(datos.get('nombre') ?? '').trim();
+    $('[data-bolsa-saludo]').textContent = nombre ? `, ${nombre}` : '';
+    $('[data-bolsa-descargas]').replaceChildren(
+      ...materiales.map((m) => {
+        const fila = plantillaDescarga.content.firstElementChild!.cloneNode(true) as HTMLElement;
+        const enlace = fila.querySelector<HTMLAnchorElement>('a')!;
+        enlace.href = m.archivo;
+        fila.querySelector('[data-titulo]')!.textContent = m.titulo;
+        fila.querySelector('[data-detalle]')!.textContent = `(${m.detalle})`;
+        return fila;
+      }),
+    );
+    llena.hidden = true;
+    vacia.hidden = true;
+    listo.hidden = false;
+    vaciarBolsa();
+    raiz.querySelector<HTMLElement>('#titulo-listo')?.focus();
+  });
+
+  pintar();
+  alCambiarBolsa(pintar);
+</script>
+
+<style>
+  .bolsa {
+    padding-block: 2rem 3.5rem;
+  }
+
+  .bolsa__rejilla {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 3rem;
+    align-items: start;
+  }
+
+  @media (min-width: 60em) {
+    .bolsa__rejilla {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    }
+  }
+
+  .bolsa__vacia,
+  .bolsa__listo {
+    display: grid;
+    justify-items: center;
+    gap: 0.4rem;
+    max-width: 38rem;
+    margin-inline: auto;
+    padding: 2rem 1.25rem;
+    text-align: center;
+    border-radius: var(--radio);
+    background: var(--papel);
+    border: 2px dashed var(--amarillo);
+  }
+
+  .bolsa :global(.bolsa__icono-grande) {
+    width: 3rem;
+    height: 3rem;
+    color: var(--morado-texto);
+  }
+
+  .bolsa__listo h2:focus {
+    outline: none;
+  }
+
+  .bolsa__materiales,
+  .bolsa__descargas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .bolsa__descargas {
+    width: 100%;
+    margin-block: 0.5rem 1rem;
+  }
+
+  .bolsa__material {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem;
+    border-radius: var(--radio);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .bolsa__portada {
+    width: 5.5rem;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radio-pequeno);
+    border: 1px solid var(--linea);
+  }
+
+  .bolsa__texto p {
+    margin: 0;
+  }
+
+  .bolsa__tipo {
+    font: 700 0.8rem/1.3 var(--letra-titulos);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .bolsa__titulo {
+    font: 600 1.05rem/1.25 var(--letra-titulos);
+  }
+
+  .bolsa__titulo a {
+    color: var(--marino);
+  }
+
+  .bolsa__detalle {
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .bolsa__precio {
+    margin: 0;
+    font: 700 1.1rem/1 var(--letra-titulos);
+    color: var(--verde-texto);
+  }
+
+  .bolsa__quitar {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 2px solid var(--marino);
+    border-radius: 999px;
+    background: var(--blanco);
+    color: var(--marino);
+    cursor: pointer;
+  }
+
+  .bolsa__quitar:hover {
+    background: var(--coral-tinte);
+  }
+
+  .bolsa__quitar :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* En móviles estrechos, la portada se queda arriba y el resto debajo. */
+  @media (max-width: 26em) {
+    .bolsa__material {
+      grid-template-columns: minmax(0, 1fr) auto auto;
+    }
+
+    .bolsa__portada {
+      display: none;
+    }
+  }
+
+  .bolsa__total {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 1rem 0 0.5rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--verde-tinte);
+    font-weight: 700;
+  }
+
+  .bolsa__cero {
+    color: var(--verde-texto);
+  }
+
+  .bolsa__datos {
+    padding: 1.35rem;
+    border-radius: var(--radio);
+    background: var(--papel);
+    border: 1px solid var(--linea);
+    box-shadow: var(--sombra);
+  }
+
+  .bolsa__datos h2 {
+    margin-top: 0;
+  }
+
+  .bolsa__demo {
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--coral-tinte);
+    font-size: 0.95rem;
+  }
+
+  .formulario {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .campo {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .campo label {
+    font-weight: 700;
+  }
+
+  .campo input {
+    min-height: 3rem;
+    padding: 0.55rem 0.8rem;
+    border: 2px solid var(--marino);
+    border-radius: var(--radio-pequeno);
+    background: var(--blanco);
+    color: var(--marino);
+    font: inherit;
+  }
+
+  .campo input:focus-visible,
+  .casilla input:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 2px;
+  }
+
+  .campo__ayuda {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .campo__error {
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--coral-tinte);
+    color: var(--coral-texto);
+    font-weight: 700;
+  }
+
+  .casilla {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.6rem;
+    align-items: start;
+  }
+
+  .casilla input {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin: 0.15rem 0 0;
+    accent-color: var(--azul);
+  }
+
+  /* Campo trampa para robots: fuera de la vista y del orden del teclado. */
+  .trampa {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .bolsa__info {
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    font-size: 0.95rem;
+  }
+
+  .bolsa__info summary {
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .bolsa__info dl {
+    margin: 0.6rem 0 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .bolsa__info dt {
+    font-weight: 700;
+  }
+
+  .bolsa__info dd {
+    margin: 0;
+  }
+
+  .bolsa__boton {
+    width: 100%;
+    min-height: 3.4rem;
+    font-size: 1.15rem;
+  }
+
+  .bolsa__descarga {
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .bolsa__detalle-boton {
+    font-weight: 400;
+  }
+
+  .bolsa__sin-js {
+    padding: 1rem;
+    border-radius: var(--radio);
+    background: var(--amarillo-tinte);
+  }
+</style>

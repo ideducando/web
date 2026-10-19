@@ -14,7 +14,7 @@ borrador: true
 
 ## Para qué sirve esta web
 
-IdEducando ofrece material educativo gratuito e información sobre las oposiciones de Maestros en la Región de Murcia. No vende nada y no pide registro.
+IdEducando ofrece material educativo gratuito e información sobre las oposiciones de Maestros en la Región de Murcia. No vende nada. Para descargar el material pide un nombre y un correo electrónico.
 
 ## La información sobre oposiciones
 
