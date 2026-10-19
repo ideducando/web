@@ -7,16 +7,42 @@ etapas: [infantil, primaria]
 necesidades: [toda-la-clase, tdah, discapacidad-motora, conducta, tea]
 edades: "De 3 a 12 años"
 formato: "PDF imprimible (A4; el cartel se puede ampliar a A3)"
-paginas: 15
+paginas: 16
 archivo: /descargas/pausas-activas-de-pie-y-sentados.pdf
 portada: /portadas/pausas-activas-de-pie-y-sentados.webp
 portada_alt: "Portada del material: cuatro niños y niñas hacen la misma pausa con los brazos en alto, dos de pie, uno en una silla y otro en silla de ruedas, junto a un dado de pausas"
-tiempo: "40 minutos para imprimir, recortar y montar el dado"
+tiempo: "1 hora y media para imprimir, plastificar, recortar y montar el dado y la ruleta"
 necesitas:
-  - "Impresora, mejor en color"
-  - "Plastificadora (opcional)"
-  - "Tijeras, pegamento y una cartulina para el dado"
-  - "Un clip y un lápiz para la ruleta"
+  - "9 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina)"
+  - "1 folio A4 de 80 g para la ruleta y un cartón del mismo tamaño para pegarla debajo (vale el de una caja)"
+  - "8 fundas de plastificar A4 de 125 micras y una plastificadora: 6 para las cartas, 1 para el cartel y 1 para las cartas en blanco"
+  - "1 barra de pegamento, para el dado y la ruleta"
+  - "Tijeras"
+  - "1 clip metálico normal, de unos 3 cm, y 1 lápiz con punta, para girar la ruleta"
+  - "1 caja para guardar las cartas por colores: miden unos 9 × 12 cm con el plástico"
+  - "Cinta de doble cara o masilla adhesiva, para colgar el cartel"
+  - "Impresora, mejor a color: cada tipo de pausa tiene su color"
+imprimir:
+  - "Páginas 3 a 11 (cartel, 24 cartas, 4 cartas en blanco y dado): en cartulina, a color."
+  - "Página 12 (ruleta): en folio, a color."
+  - "Imprime al 100 % («Tamaño real»), sin «Ajustar a la página», para que cada carta mida 86 × 116 mm y el dado, 4,6 cm de lado."
+  - "Las páginas 13 a 16 (guía y nota para las familias) se pueden leer en pantalla. Imprime la 16 si vas a mandarla a casa."
+  - "Para la pared, en grande: el cartel (página 3) en A3, a color, con una funda A3."
+pasos:
+  - "Imprime las páginas 3 a 11 en cartulina y la 12 en folio, todo a color."
+  - "Recorta por la línea de puntos las 24 cartas y las 4 cartas en blanco."
+  - "Plastifica el cartel en su funda. En otras 6 fundas, coloca 4 cartas en cada una, separadas 5 mm entre sí, y plastifícalas. Guarda la última funda para las cartas en blanco, cuando la clase las rellene."
+  - "Recorta las cartas dejando 2 o 3 mm de plástico alrededor y redondea las esquinas con la tijera."
+  - "Recorta el dado por la línea continua, con sus 7 pestañas, y dóblalo por todas las líneas de puntos, con los dibujos hacia fuera."
+  - "Pega las pestañas de «El globo» y «El árbol» por dentro de «La tortuga» y «Las palomitas», apretando unos segundos cada una. Cierra con la tapa, «Nariz y oreja», y deja secar 15 minutos."
+  - "Pega la ruleta sobre el cartón. Para girarla, mete la punta del lápiz por un extremo del clip, apóyala en el punto del centro y da un toque al clip. Lee la pausa que señala en el anillo del color elegido."
+  - "Cuelga el cartel a la altura de los ojos del alumnado y guarda las cartas por colores en la caja."
+resultado: "un cartel y 24 cartas plastificadas, 4 cartas en blanco para inventar pausas, un dado de 4,6 cm de lado y una ruleta sobre cartón"
+cuidados:
+  - "El borde de plástico de 2 o 3 mm deja la carta sellada: así no se abre aunque la mojen o la doblen."
+  - "El clip es una pieza pequeña: guárdalo lejos de quien todavía se lleva cosas a la boca."
+  - "El dado y la ruleta no llevan plástico: guárdalos secos y, si una pestaña se despega, vuelve a pegarla."
+  - "Para limpiar las cartas y el cartel, basta un paño con agua y jabón."
 fuentes:
   - "Mahar, M. T. y otros (2006). Effects of a classroom-based program on physical activity and on-task behavior. Medicine and Science in Sports and Exercise, 38(12), 2086-2094"
   - "Watson, A. y otros (2017). Effect of classroom-based physical activity interventions on academic and physical activity outcomes: a systematic review and meta-analysis. International Journal of Behavioral Nutrition and Physical Activity, 14, 114"
