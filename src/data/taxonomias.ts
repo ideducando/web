@@ -98,6 +98,11 @@ export const NECESIDADES = {
     descripcion: 'Retos de ampliación y enriquecimiento.',
     color: 'morado',
   },
+  'incorporacion-tardia': {
+    nombre: 'Incorporación tardía',
+    descripcion: 'Alumnado que llega al sistema educativo español con el curso empezado, a menudo desde otro país y con otra lengua.',
+    color: 'amarillo',
+  },
 } as const satisfies Record<string, Opcion>;
 
 /** Qué tipo de material es. */

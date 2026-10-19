@@ -61,6 +61,64 @@ const DOCUMENTOS = [
     asunto: 'Hoja de registro de observación ABC: antecedente, conducta y consecuencia',
     palabras: 'registro ABC, observación, conducta, apoyo conductual positivo, Infantil, Primaria',
   },
+  {
+    id: 'tablero-comunicacion-basico',
+    asunto:
+      'Tablero de comunicación de vocabulario núcleo, primer tablero de 12 casillas y llavero de comunicación con pictogramas de ARASAAC, con guía de modelado y nota para las familias',
+    palabras: 'comunicación aumentativa, SAAC, CAA, vocabulario núcleo, tablero de comunicación, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
+  {
+    id: 'programa-intervencion-pt-ejemplo',
+    asunto:
+      'Programa de intervención de Pedagogía Terapéutica de ejemplo, modelo de la Región de Murcia, comentado con los indicadores del tribunal',
+    palabras: 'oposiciones, Pedagogía Terapéutica, programa de intervención, unidades de actuación, PAP, Región de Murcia, anexo XXII',
+  },
+  {
+    id: 'rincon-de-la-calma',
+    asunto: 'Rincón de la calma: termómetro de emociones de cinco niveles, cartel, tarjetas de estrategias y plan de calma personal',
+    palabras: 'rincón de la calma, regulación emocional, autorregulación, emociones, apoyo conductual positivo, Infantil, Primaria',
+  },
+  {
+    id: 'cuento-lectura-facil-cole-nuevo',
+    asunto: 'Cuento escrito con las pautas de lectura fácil para anticipar el primer día en un colegio nuevo, con versión para fotos del centro',
+    palabras: 'lectura fácil, cuento adaptado, anticipación, acogida, cambio de colegio, TEA, pictogramas, Infantil, Primaria',
+  },
+  {
+    id: 'kit-examen-oposiciones-murcia',
+    asunto:
+      'Kit de plantillas para preparar la oposición de Maestros en la Región de Murcia (Pedagogía Terapéutica e Infantil): guion de un folio, reloj del oral, caja de material auxiliar, hoja de simulacro, plan del escrito y lista para el día del examen',
+    palabras: 'oposiciones, Maestros, Región de Murcia, Pedagogía Terapéutica, Educación Infantil, segunda prueba, primera prueba, guion, unidad didáctica, simulacro',
+  },
+  {
+    id: 'dias-distintos-historias-sociales',
+    asunto:
+      'Seis historias sociales con pictogramas para anticipar un simulacro, una sustitución, una excursión, una fiesta, un recreo en clase y un cambio de horario, con plantilla, tarjetas para la agenda visual, guía y nota para las familias',
+    palabras: 'historias sociales, narrativas sociales, anticipación, cambios de rutina, simulacro, agenda visual, lectura fácil, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
+  {
+    id: 'pausas-activas-de-pie-y-sentados',
+    asunto:
+      'Pausas activas para todos: 24 cartas de movimiento con versión de pie y versión sentada para calmar, activar o concentrar, con cartel, dado, ruleta, guía para docentes y nota para las familias',
+    palabras: 'pausas activas, movimiento en el aula, actividad física, inclusión, discapacidad motora, silla de ruedas, TDAH, TEA, DUA, Infantil, Primaria',
+  },
+  {
+    id: 'tarjeta-cole-casa-tdah',
+    asunto:
+      'Tarjeta diaria cole-casa para el TDAH en versión visual para Infantil y para Primaria, con banco de 24 objetivos, menú de recompensas, registro y gráfica de progreso y apoyos de funciones ejecutivas',
+    palabras: 'tarjeta diaria, daily report card, TDAH, cole-casa, familias, funciones ejecutivas, refuerzo positivo, apoyo conductual positivo, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'tren-de-las-silabas',
+    asunto:
+      'Juegos de conciencia fonológica con pictogramas de ARASAAC: tren de las sílabas con 40 tarjetas, parejas que riman, trenes de sonido inicial, hoja de seguimiento, guía para docentes y nota para las familias',
+    palabras: 'conciencia fonológica, sílabas, rima, sonido inicial, prelectura, Audición y Lenguaje, TDL, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'kit-bienvenida-alumnado-recien-llegado',
+    asunto:
+      'Kit de bienvenida para el alumnado recién llegado que aún no habla castellano: tarjetas de comunicación en seis lenguas, frases para el docente, pasaporte del cole, palabra del día y carta para la familia, con guía para docentes',
+    palabras: 'acogida, incorporación tardía, alumnado extranjero, recién llegados, interculturalidad, árabe, rumano, ucraniano, inglés, francés, pictogramas, ARASAAC, periodo de silencio, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mi primer día en el cole nuevo: cuento para anticipar el cambio · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Hojas del cuento: A4 apaisado con dos páginas A5 por hoja. El pie va dentro de cada página. */
+      @page cuento {
+        size: A4 landscape;
+        margin: 7mm;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      .hoja-cuento {
+        page: cuento;
+        break-after: page;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        height: 194mm;
+        overflow: hidden;
+        break-inside: avoid;
+        position: relative;
+      }
+
+      /* Línea de corte entre las dos páginas */
+      .hoja-cuento::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        border-left: 0.35mm dashed var(--suave);
+      }
+
+      .pagina {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 7mm 10mm 6mm;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .panel {
+        height: 104mm;
+        flex: none;
+        border-radius: 6mm;
+        background: var(--t, var(--crema));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6mm;
+        overflow: hidden;
+      }
+
+      .panel img {
+        width: 66mm;
+        height: 66mm;
+        object-fit: contain;
+        background: #fff;
+        border-radius: 5mm;
+        padding: 3mm;
+      }
+
+      .panel.dos img {
+        width: 52mm;
+        height: 52mm;
+      }
+
+      .panel svg.cara {
+        width: 72mm;
+        height: 72mm;
+      }
+
+      .panel.foto {
+        background: #fff;
+        border: 0.7mm dashed var(--suave);
+        flex-direction: column;
+        gap: 3mm;
+        text-align: center;
+        padding: 8mm;
+        color: var(--suave);
+        font-size: 12pt;
+        line-height: 1.3;
+      }
+
+      .panel.foto svg {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .panel.foto b {
+        display: block;
+        color: var(--marino);
+        font-size: 15pt;
+      }
+
+      .texto {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 4mm 1mm 0;
+      }
+
+      .texto p {
+        margin: 0 0 2.4mm;
+        font-size: 22pt;
+        line-height: 1.5;
+        text-align: left;
+        hyphens: none;
+      }
+
+      .hueco {
+        display: inline-block;
+        min-width: 44mm;
+        border-bottom: 0.5mm solid var(--marino);
+        transform: translateY(-1mm);
+      }
+
+      .pie-cuento {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4mm;
+        font-size: 7pt;
+        color: var(--suave);
+        line-height: 1.25;
+      }
+
+      .pie-cuento .numero {
+        flex: none;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--crema);
+        border: 0.4mm solid var(--linea);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        color: var(--marino);
+      }
+
+      /* Portada del librito (primera página A5 de cada versión) */
+      .tapa {
+        background: var(--crema);
+        border-radius: 0;
+      }
+
+      .tapa .rayos {
+        height: 3mm;
+        margin: -7mm -10mm 8mm;
+      }
+
+      .tapa h2 {
+        font-size: 30pt;
+        line-height: 1.05;
+        margin: 4mm 0 4mm;
+      }
+
+      .tapa .lema {
+        font-family: var(--lema);
+        font-size: 13pt;
+        margin: 0 0 6mm;
+      }
+
+      .tapa .escena-mini {
+        flex: 1;
+        display: grid;
+        place-items: center;
+      }
+
+      .tapa .escena-mini svg {
+        width: 100%;
+        height: auto;
+        max-height: 92mm;
+      }
+
+      .tapa .autoria {
+        font-size: 15pt;
+        margin: 4mm 0 2mm;
+      }
+
+      /* ---------- Portada del PDF ---------- */
+      .portada__titulo {
+        font-size: 40pt;
+        line-height: 1.02;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 150mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .escena-grande {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 36mm;
+        height: 140mm;
+      }
+
+      .escena-grande svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .etiqueta-version {
+        position: absolute;
+        right: 16mm;
+        top: 124mm;
+        z-index: 4;
+        padding: 3mm 6mm;
+        border-radius: 99px;
+        background: #fff;
+        border: 0.8mm solid var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        transform: rotate(5deg);
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      /* ---------- Separadores de versión ---------- */
+      .aviso-version {
+        font-size: 9pt;
+        color: var(--suave);
+        margin: 0 0 2mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .creditos {
+        margin-top: 2mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      .fotos-lista {
+        columns: 2;
+        column-gap: 8mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA DEL PDF
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Cuento adaptado · Pautas de lectura fácil</p>
+        <h1 class="portada__titulo">Mi primer día<br />en el cole nuevo</h1>
+        <p class="portada__subtitulo">Un cuento para anticipar el cambio de cole, con una versión para tus propias fotos.</p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena-grande" aria-hidden="true" id="escena-grande"></div>
+      <div class="etiqueta-version" aria-hidden="true">2 versiones: dibujos y fotos</div>
+    </section>
+
+    <!-- Las hojas del cuento se generan con el guion del final -->
+    <div id="version-dibujos"></div>
+    <div id="version-fotos"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES Y FAMILIAS
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes y familias <span class="borrador">[BORRADOR]</span></p>
+      <h1>Contar el cambio antes de vivirlo</h1>
+      <p id="intro-cuento">
+        Empezar en un cole nuevo es un cambio grande: otro edificio, otras personas y otras rutinas. Saber antes cómo será
+        da seguridad. Este cuento cuenta el primer día en primera persona, con frases sencillas y una imagen en cada
+        página, para leerlo juntos antes del cambio. Ayuda a cualquier niño o niña, y en especial al alumnado con trastorno
+        del espectro del autismo (TEA), con dificultades de lenguaje o que llega de otro país.
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul>
+        <li><strong>Versión con dibujos:</strong> 13 páginas con pictogramas de ARASAAC, lista para imprimir.</li>
+        <li><strong>Versión para tus fotos:</strong> el mismo texto con recuadros para pegar fotos del cole de verdad.</li>
+        <li>Huecos para escribir a mano el nombre, el cole, la clase y el nombre del profe o la profe.</li>
+      </ul>
+
+      <h2>Cómo está escrito</h2>
+      <p>
+        Hemos seguido las pautas de lectura fácil de la norma UNE 153101:2018 EX: frases cortas, una idea por frase y en su
+        propia línea, en presente, con palabras de uso diario, texto alineado a la izquierda, letra grande e interlineado
+        amplio. Todavía no lo hemos validado con personas lectoras, como prevé la norma UNE 153102:2018 EX. Por eso no
+        lleva el logotipo de lectura fácil: si lo usas, cuéntanos qué tal funciona.
+      </p>
+      <p>
+        La estructura se inspira en los criterios de las historias sociales de Carol Gray (versión 10.4, de 2023): tono
+        positivo, muchas más frases que describen que frases que guían y respuestas a dónde, cuándo, quién y qué. Las
+        narrativas sociales figuran entre las prácticas con evidencia para el alumnado con TEA (Hume y otros, 2021), aunque
+        sus resultados varían mucho de un estudio a otro (Kokina y Kern, 2010). Evitamos «siempre» y «nunca»: un día puede
+        cambiar algo y el cuento no debe prometer lo que no se puede cumplir.
+      </p>
+
+      <h2>Cómo prepararlo</h2>
+      <ol>
+        <li>Elige la versión: dibujos para empezar ya, fotos si puedes visitar o fotografiar el cole.</li>
+        <li>Rellena a mano los huecos: nombre, cole, clase y el nombre del profe o la profe.</li>
+        <li>Imprime a doble cara o a una cara, corta cada hoja por la línea de puntos y grapa o une con anillas.</li>
+        <li>Si usas fotos, imprímelas pequeñas y pégalas en los recuadros.</li>
+      </ol>
+
+      <h2>Qué fotos hacer</h2>
+      <ul class="fotos-lista">
+        <li>La fachada o la entrada del cole.</li>
+        <li>La puerta por la que se entra.</li>
+        <li>El aula, sin alumnos.</li>
+        <li>El profe o la profe, si da permiso.</li>
+        <li>El patio, vacío.</li>
+        <li>La puerta del baño.</li>
+        <li>La salida, donde le recogen.</li>
+      </ul>
+
+      <div class="caja caja--coral">
+        <h3>Protección de datos</h3>
+        <p id="datos-cuento">
+          No hagas fotos en las que salgan otros niños o niñas. Pide permiso al profe o la profe antes de usar su foto. Con
+          menores de 14 años, decide la familia (Ley Orgánica 3/2018, artículo 7). Pega las fotos en papel y no las mandes
+          por mensajería: el cuento es de la familia y se queda en casa. Sigue siempre las normas de tu centro.
+        </p>
+      </div>
+
+      <h2 class="salto">Cómo leerlo</h2>
+      <ol>
+        <li>Empezad unos días antes del primer día. Leedlo juntos varias veces, sin prisa.</li>
+        <li>Señalad cada imagen mientras leéis. Dejad que pase las páginas y que pregunte.</li>
+        <li>Si se puede, visitad el cole antes y buscad juntos lo que sale en las fotos.</li>
+        <li>Después del primer día, volved a leerlo y comentad qué fue igual y qué fue distinto.</li>
+        <li>Dejad el cuento a mano durante las primeras semanas. Se puede retirar cuando ya no lo pida.</li>
+      </ol>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de acceder a la información:</p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>Si aún no lee:</strong> el adulto lee y el niño o la niña señala la imagen de cada página.</li>
+          <li><strong>Si ya escribe:</strong> que rellene los huecos y añada una página con lo que más le gustó.</li>
+          <li><strong>Con otra lengua en casa:</strong> escribid debajo las palabras clave en la lengua de la familia.</li>
+        </ul>
+        <ul>
+          <li><strong>Para escucharlo:</strong> alguien de la familia puede grabar el cuento con su voz.</li>
+          <li><strong>Para toda la clase:</strong> leedlo en la asamblea cuando llega alguien nuevo.</li>
+          <li><strong>Con agenda visual:</strong> combinadlo con la agenda del día de IdEducando.</li>
+          <li><strong>Con un compañero de acogida:</strong> un niño o una niña de la clase que le acompañe los primeros días.</li>
+        </ul>
+      </div>
+
+      <h2>Si sois la familia</h2>
+      <p>
+        Pedid al cole que os enseñe los espacios antes del primer día o que os deje hacer las fotos. Contad al profe o la
+        profe qué le tranquiliza y qué le cuesta: esa información ayuda mucho en la acogida. La normativa pide cuidar este
+        paso: en Infantil, garantizar «desde el primer contacto una transición positiva» del entorno familiar al escolar
+        (Real Decreto 95/2022, artículo 6.2).
+      </p>
+
+      <div class="creditos">
+        <p>
+          <strong>Mi primer día en el cole nuevo: cuento en lectura fácil.</strong> IdEducando, octubre de 2026. Ficha y
+          novedades: <span class="url">ideducando.es/material-gratuito/cuento-lectura-facil-cole-nuevo</span>
+        </p>
+        <p id="fuentes-cuento">
+          Fuentes: UNE 153101:2018 EX, <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>, y
+          UNE 153102:2018 EX, sobre su validación; Plena Inclusión (2022), resumen de las pautas de la norma; Gray, C. y
+          otros (2023), <em>Social Stories 10.4 Criteria</em>; Hume, K. y otros (2021), <em>Journal of Autism and
+          Developmental Disorders</em>, 51(11), 4013-4032; Kokina, A. y Kern, L. (2010), <em>Journal of Autism and
+          Developmental Disorders</em>, 40(7), 812-826; Real Decreto 95/2022, artículo 6.2; CAST (2024), <em>Universal
+          Design for Learning Guidelines 3.0</em>; Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales
+          y garantía de los derechos digitales, artículo 7.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. Las caras y
+          las ilustraciones del cole son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <script>
+      // El cuento, página a página. Cada página: líneas de texto, pictogramas (números de ARASAAC) o una cara,
+      // color del recuadro y, en la versión de fotos, qué foto va (o null si mejor un dibujo).
+      // {hueco} se convierte en una raya para escribir a mano.
+      const PAGINAS = [
+        { texto: ['Me llamo {hueco}.', 'Este cuento es sobre mí', 'y sobre mi cole nuevo.'], color: 'amarillo', dibujo: 'Tu foto o tu dibujo' },
+        { texto: ['Voy a empezar en un cole nuevo.', 'Mi cole se llama', '{hueco}.'], pictos: [3082], foto: 'La entrada del cole', color: 'azul' },
+        { texto: ['Todo es nuevo para mí.', 'Puede que tenga nervios.', 'Es normal tener nervios.'], cara: 3, color: 'amarillo' },
+        { texto: ['Por la mañana, voy al cole', 'con alguien de mi familia.', 'Me acompaña hasta la puerta.'], pictos: [37036], foto: 'La puerta por la que entro', color: 'verde' },
+        { texto: ['Mi clase es la de {hueco}.', 'Tiene mesas, sillas', 'y una pizarra.'], pictos: [9814], foto: 'Mi clase', color: 'morado' },
+        { texto: ['Mi profe se llama', '{hueco}.', 'Mi profe me ayuda a aprender.'], pictos: [6556], foto: 'Mi profe (con su permiso)', color: 'coral' },
+        { texto: ['En mi clase hay', 'otros niños y niñas.', 'Poco a poco, nos conocemos.'], pictos: [6993], color: 'azul', nota: 'Aquí, mejor un dibujo: no pongas fotos de otros niños.' },
+        { texto: ['En el cole hay un patio.', 'En el recreo, puedo jugar.'], pictos: [33064, 35717], foto: 'El patio', color: 'verde' },
+        { texto: ['A media mañana,', 'me como mi bocadillo', 'o mi fruta.'], pictos: [2281], color: 'naranja' },
+        { texto: ['Si necesito ir al baño,', 'se lo digo a mi profe.', 'También puedo enseñar mi tarjeta.'], pictos: [2430], foto: 'La puerta del baño', color: 'azul' },
+        { texto: ['Si algo me preocupa,', 'pido ayuda.', 'En el cole me pueden ayudar.'], pictos: [4570], color: 'morado' },
+        { texto: ['Al terminar las clases,', 'vienen a buscarme.', 'Vuelvo a casa.'], pictos: [37047, 2317], foto: 'La salida del cole', color: 'coral' },
+        { texto: ['Mañana vuelvo al cole.', 'Cada día es', 'un poco más fácil.'], cara: 2, color: 'verde' },
+      ];
+
+      const TINTES = {
+        amarillo: 'var(--amarillo-tinte)', azul: 'var(--azul-tinte)', verde: 'var(--verde-tinte)',
+        morado: 'var(--morado-tinte)', coral: 'var(--coral-tinte)', naranja: 'var(--naranja-tinte)',
+      };
+
+      // Caras de IdEducando (las mismas del rincón de la calma).
+      function cara(nivel) {
+        const relleno = ['', '#e4edfb', '#dcf3ea', '#fdf0c7', '#fde8cf', '#fde5e0'][nivel];
+        const trazo = 'stroke="#1e2b55" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+        const ojos = '<circle cx="36" cy="44" r="5.5" fill="#1e2b55"/><circle cx="64" cy="44" r="5.5" fill="#1e2b55"/>';
+        const partes = {
+          2: `${ojos}<path d="M31 60 q19 18 38 0" ${trazo}/>`,
+          3: `${ojos}<path d="M27 31 l14 -3 M59 28 l14 3" ${trazo}/><path d="M34 68 q8 -5 16 0 q8 5 16 0" ${trazo}/>`,
+        }[nivel];
+        return `<svg class="cara" viewBox="0 -4 100 108" aria-hidden="true"><circle cx="50" cy="52" r="42" fill="${relleno}" stroke="#1e2b55" stroke-width="5"/><g transform="translate(0 6)">${partes}</g></svg>`;
+      }
+
+      const CAMARA = `<svg viewBox="0 0 48 40" aria-hidden="true"><rect x="3" y="9" width="42" height="28" rx="6" fill="none" stroke="#46578c" stroke-width="3"/>
+        <path d="M16 9 l4 -6 h8 l4 6" fill="none" stroke="#46578c" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="23" r="8" fill="none" stroke="#46578c" stroke-width="3"/></svg>`;
+
+      // Ilustración del cole (de IdEducando): edificio, árbol, sol, camino y una mochila.
+      function escenaCole(conCielo = true) {
+        return `<svg viewBox="0 0 400 280" preserveAspectRatio="xMidYMax meet">
+          ${conCielo ? '<circle cx="330" cy="58" r="30" fill="#f6c12e"/><g stroke="#f6c12e" stroke-width="6" stroke-linecap="round"><path d="M330 10v-8M330 114v-8M282 58h-8M386 58h-8M296 24l-6-6M370 98l-6-6M364 24l6-6M290 98l6-6"/></g>' : ''}
+          <path d="M0 230 Q 100 196 200 214 T 400 206 V280 H0Z" fill="#9fdcc4"/>
+          <path d="M0 250 Q 120 226 220 240 T 400 236 V280 H0Z" fill="#1fa67a"/>
+          <rect x="96" y="104" width="190" height="112" rx="6" fill="#fffdf8" stroke="#1e2b55" stroke-width="5"/>
+          <path d="M84 110 L191 52 L298 110Z" fill="#e8553e" stroke="#1e2b55" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="191" cy="86" r="14" fill="#fff" stroke="#1e2b55" stroke-width="4"/>
+          <path d="M191 78v8l6 4" stroke="#1e2b55" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M191 52 V22" stroke="#1e2b55" stroke-width="4"/><path d="M191 22 h26 l-6 8 l6 8 h-26z" fill="#2f6fd6" stroke="#1e2b55" stroke-width="3" stroke-linejoin="round"/>
+          <g fill="#e4edfb" stroke="#1e2b55" stroke-width="4">
+            <rect x="114" y="122" width="34" height="30" rx="4"/><rect x="234" y="122" width="34" height="30" rx="4"/>
+            <rect x="114" y="166" width="34" height="30" rx="4"/><rect x="234" y="166" width="34" height="30" rx="4"/>
+          </g>
+          <path d="M170 216 V166 a21 21 0 0 1 42 0 V216" fill="#f5961f" stroke="#1e2b55" stroke-width="5"/>
+          <circle cx="203" cy="194" r="3.5" fill="#1e2b55"/>
+          <path d="M176 216 Q 186 244 150 280 H232 Q 200 244 206 216Z" fill="#fdf0c7"/>
+          <g transform="translate(316 150)"><rect x="-6" y="40" width="12" height="44" rx="4" fill="#a8743f"/>
+            <circle cx="0" cy="22" r="34" fill="#1fa67a" stroke="#1e2b55" stroke-width="5"/><circle cx="-10" cy="12" r="8" fill="#9fdcc4"/></g>
+          <g transform="translate(150 232) rotate(-8)"><rect x="0" y="6" width="34" height="38" rx="9" fill="#8c4fb8" stroke="#1e2b55" stroke-width="4"/>
+            <path d="M9 6 q8 -12 16 0" fill="none" stroke="#1e2b55" stroke-width="4"/><rect x="7" y="24" width="20" height="13" rx="4" fill="#efe5f7" stroke="#1e2b55" stroke-width="3"/></g>
+        </svg>`;
+      }
+
+      function lineas(texto) {
+        return texto.map((l) => `<p>${l.replace('{hueco}', '<span class="hueco"></span>')}</p>`).join('');
+      }
+
+      function pie(numero) {
+        return `<div class="pie-cuento"><span>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.<br>Cuento: IdEducando, CC BY-NC-SA 4.0. ideducando.es</span><span class="numero">${numero}</span></div>`;
+      }
+
+      function panel(p, version) {
+        const tinte = TINTES[p.color];
+        if (version === 'fotos' && p.foto) {
+          return `<div class="panel foto">${CAMARA}<span>Pega aquí una foto de:<b>${p.foto.toLowerCase().replace(/^./, (c) => c.toUpperCase())}</b></span></div>`;
+        }
+        if (p.dibujo) {
+          return `<div class="panel foto">${CAMARA}<span>Pega aquí:<b>${p.dibujo}</b></span></div>`;
+        }
+        if (p.cara) return `<div class="panel" style="--t:${tinte}">${cara(p.cara)}</div>`;
+        const imgs = p.pictos.map((id) => `<img src="pictogramas/${id}.png" alt="">`).join('');
+        const nota = version === 'fotos' && p.nota ? `<p class="aviso-version" style="position:absolute;bottom:3mm;left:0;right:0;text-align:center">${p.nota}</p>` : '';
+        return `<div class="panel ${p.pictos.length > 1 ? 'dos' : ''}" style="--t:${tinte};position:relative">${imgs}${nota}</div>`;
+      }
+
+      function tapa(version) {
+        const subtitulo = version === 'fotos' ? 'Versión con mis fotos' : 'Un cuento para leer juntos';
+        return `<article class="pagina tapa"><div class="rayos"></div>
+          <h2>Mi primer día en el cole nuevo</h2><p class="lema">${subtitulo}</p>
+          <div class="escena-mini">${escenaCole(true)}</div>
+          <p class="autoria">Cuento de <span class="hueco" style="min-width:60mm"></span></p>
+          ${pie('')}</article>`;
+      }
+
+      function version(nombre, destino) {
+        const paginas = [tapa(nombre)];
+        PAGINAS.forEach((p, i) => {
+          paginas.push(`<article class="pagina">${panel(p, nombre)}<div class="texto">${lineas(p.texto)}</div>${pie(i + 1)}</article>`);
+        });
+        const contenedor = document.getElementById(destino);
+        for (let i = 0; i < paginas.length; i += 2) {
+          contenedor.insertAdjacentHTML('beforeend', `<section class="hoja-cuento">${paginas[i]}${paginas[i + 1] ?? '<article class="pagina"></article>'}</section>`);
+        }
+      }
+
+      version('dibujos', 'version-dibujos');
+      version('fotos', 'version-fotos');
+      document.getElementById('escena-grande').innerHTML = escenaCole(true);
+    </script>
+  </body>
+</html>

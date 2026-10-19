@@ -7,6 +7,20 @@
     <meta name="description" content="Plazas, pruebas, puntuación, programación y calendario de las oposiciones de Maestros en la Región de Murcia para Pedagogía Terapéutica y Educación Infantil." />
     <link rel="stylesheet" href="comun.css" />
     <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
       .indice {
         columns: 2;
         column-gap: 8mm;

@@ -17,6 +17,14 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# Los PDF se descargan desde «Mi bolsa». Esta cabecera pide a los buscadores que no los
+# enseñen en sus resultados: quien llega desde Google entra por la ficha del material.
+# El enlace directo de un PDF sigue funcionando si alguien lo comparte.
+[[headers]]
+  for = "/descargas/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
 # La dirección principal es www.ideducando.es (15/10/2026). Netlify ya lleva ahí a quien
 # entra por ideducando.es; esta regla hace lo mismo con la dirección de Netlify, para que
 # los enlaces antiguos, como los de los PDF descargados antes, acaben en el dominio.

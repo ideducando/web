@@ -1,0 +1,1938 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Programa de intervención de PT de ejemplo, comentado (modelo Murcia) · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Portada ---------- */
+      .portada {
+        background: var(--crema);
+      }
+
+      .portada__titulo {
+        font-size: 38pt;
+        line-height: 1.03;
+        margin-bottom: 6mm;
+        max-width: 150mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 132mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 18mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      /* Hoja del programa con notas adhesivas, dibujada con HTML */
+      .maqueta {
+        position: absolute;
+        left: 34mm;
+        top: 142mm;
+        width: 112mm;
+        height: 128mm;
+        background: #fff;
+        border-radius: 2mm;
+        transform: rotate(-4deg);
+        box-shadow:
+          0 1mm 0 rgb(30 43 85 / 0.08),
+          0 14mm 24mm -10mm rgb(30 43 85 / 0.45);
+        padding: 12mm 12mm;
+        z-index: 2;
+      }
+
+      .maqueta .linea {
+        height: 2.6mm;
+        border-radius: 2mm;
+        background: #d9dce6;
+        margin-bottom: 3.6mm;
+      }
+
+      .maqueta .linea.titulo {
+        height: 4.6mm;
+        width: 62%;
+        background: var(--marino);
+        margin-bottom: 6mm;
+      }
+
+      .maqueta .linea.marcada {
+        background: linear-gradient(90deg, #fbe28a 0 100%);
+      }
+
+      .maqueta .tabla {
+        display: grid;
+        grid-template-columns: 1fr 2fr 2fr;
+        gap: 1.4mm;
+        margin: 5mm 0 4mm;
+      }
+
+      .maqueta .tabla span {
+        height: 5mm;
+        border-radius: 1mm;
+        background: #eef0f5;
+      }
+
+      .maqueta .tabla span:nth-child(-n + 3) {
+        background: var(--marino);
+      }
+
+      .posit {
+        position: absolute;
+        z-index: 3;
+        width: 46mm;
+        padding: 4mm 4.5mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11.5pt;
+        line-height: 1.2;
+        color: var(--marino);
+        box-shadow: 0 6mm 10mm -6mm rgb(30 43 85 / 0.5);
+      }
+
+      .posit b {
+        display: block;
+        font-weight: 700;
+        font-size: 9pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Hojas de IdEducando (voz de la guía) ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .leyenda-notas {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 2mm 0 4mm;
+      }
+
+      .leyenda-notas .nota {
+        font-size: 8.8pt;
+      }
+
+      .mapa td:nth-child(2),
+      .mapa th:nth-child(2) {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .mapa td:first-child {
+        font-family: var(--titulos);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      /* ---------- El programa (texto de ejemplo, en Arial 11 e interlineado sencillo) ---------- */
+      .programa {
+        font-family: Arial, 'Liberation Sans', Arimo, sans-serif;
+        font-size: 11pt;
+        line-height: 1.15;
+        color: #1b1b1b;
+      }
+
+      .programa h2,
+      .programa h3,
+      .programa h4 {
+        font-family: Arial, 'Liberation Sans', Arimo, sans-serif;
+        font-weight: 700;
+        color: #1b1b1b;
+        line-height: 1.15;
+      }
+
+      .programa h2 {
+        font-size: 13pt;
+        margin: 5mm 0 2.5mm;
+        padding-bottom: 1mm;
+        border-bottom: 0.3mm solid #1b1b1b;
+      }
+
+      .programa h3 {
+        font-size: 11.5pt;
+        margin: 3.5mm 0 1.5mm;
+      }
+
+      .programa h4 {
+        font-size: 11pt;
+        margin: 2.5mm 0 1mm;
+      }
+
+      .programa p,
+      .programa ul,
+      .programa ol {
+        margin: 0 0 2.2mm;
+      }
+
+      .programa li {
+        margin-bottom: 1mm;
+      }
+
+      .programa li::marker {
+        color: #1b1b1b;
+        font-weight: 400;
+      }
+
+      .programa table {
+        font-size: 11pt;
+        line-height: 1.15;
+        margin: 1mm 0 3mm;
+      }
+
+      .programa th,
+      .programa td {
+        border: 0.25mm solid #9a9a9a;
+        padding: 1.3mm 1.8mm;
+      }
+
+      .programa thead th {
+        background: #e9e9e9;
+        color: #1b1b1b;
+        font-family: Arial, 'Liberation Sans', Arimo, sans-serif;
+        font-weight: 700;
+      }
+
+      .programa tbody th {
+        font-family: Arial, 'Liberation Sans', Arimo, sans-serif;
+        font-weight: 700;
+      }
+
+      /* Cada bloque: texto del programa a la izquierda y notas al margen a la derecha */
+      .bloque {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 55mm;
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .bloque > .margen {
+        display: flex;
+        flex-direction: column;
+        gap: 2.6mm;
+        padding-top: 1mm;
+      }
+
+      .ancho {
+        margin: 0 0 1mm;
+      }
+
+      /* ---------- Notas al margen (voz de IdEducando) ---------- */
+      .nota {
+        font-family: var(--texto);
+        font-size: 9.5pt;
+        line-height: 1.32;
+        color: var(--marino);
+        background: var(--t);
+        border-left: 1.4mm solid var(--c);
+        border-radius: 0 2.4mm 2.4mm 0;
+        padding: 2mm 2.6mm 2.2mm;
+        break-inside: avoid;
+      }
+
+      .nota p {
+        margin: 0;
+      }
+
+      .nota p + p {
+        margin-top: 1mm;
+      }
+
+      .nota__tipo {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        margin-bottom: 0.6mm !important;
+      }
+
+      .nota--indicador {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .nota--ojo {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .nota--adapta {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .nota--dato {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .nota--idea {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+
+      .notas-fila {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 1mm 0 3mm;
+      }
+
+      /* Portada interna del programa (muestra de lo que pide el anexo VI) */
+      .hoja-muestra {
+        border: 0.35mm solid #9a9a9a;
+        border-radius: 1.5mm;
+        padding: 8mm 9mm;
+        text-align: center;
+        background: #fff;
+      }
+
+      .hoja-muestra .grande {
+        font-size: 15pt;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 4mm 0 3mm;
+      }
+
+      .hoja-muestra .dato-aspirante {
+        text-align: left;
+        margin: 5mm auto 0;
+        max-width: 92mm;
+      }
+
+      .hoja-muestra .dato-aspirante p {
+        margin: 0 0 1.2mm;
+      }
+
+      .indice-programa {
+        columns: 1;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .indice-programa li {
+        margin-bottom: 0.8mm;
+      }
+
+      .indice-programa ol {
+        list-style: none;
+        padding-left: 6mm;
+        margin: 1mm 0 1.5mm;
+      }
+
+      .marca-ficticio {
+        font-style: italic;
+        color: #555;
+      }
+
+      .salto-antes {
+        break-before: page;
+      }
+
+      .sin-romper {
+        break-inside: avoid;
+      }
+
+      .creditos-finales {
+        font-family: var(--texto);
+        font-size: 8.5pt;
+        color: var(--suave);
+        border-top: 0.4mm solid var(--linea);
+        padding-top: 3mm;
+        margin-top: 6mm;
+        break-inside: avoid;
+      }
+
+      .creditos-finales p {
+        margin: 0 0 1.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -50mm; top: 110mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -26mm; top: 190mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Para opositar · Pedagogía Terapéutica · Región de Murcia</p>
+        <h1 class="portada__titulo">Programa de intervención de PT, comentado</h1>
+        <p class="portada__subtitulo">
+          Un ejemplo completo para una alumna ficticia de 2.º de Primaria, con notas al margen sobre lo que puntúa el
+          tribunal.
+        </p>
+        <div class="portada__pie">
+          <p><span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="maqueta" aria-hidden="true">
+        <div class="linea titulo"></div>
+        <div class="linea"></div>
+        <div class="linea" style="width: 92%"></div>
+        <div class="linea marcada" style="width: 84%"></div>
+        <div class="linea" style="width: 95%"></div>
+        <div class="tabla"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="linea"></div>
+        <div class="linea marcada" style="width: 70%"></div>
+        <div class="linea" style="width: 88%"></div>
+        <div class="linea" style="width: 60%"></div>
+      </div>
+      <div class="posit" aria-hidden="true" style="left: 128mm; top: 150mm; background: var(--amarillo); transform: rotate(5deg)">
+        <b>Indicador</b>Objetivos coherentes con las necesidades: 1 punto
+      </div>
+      <div class="posit" aria-hidden="true" style="left: 140mm; top: 196mm; background: #9fdcc4; transform: rotate(-3deg)">
+        <b>Ojo</b>Arial 11 también en tablas y notas
+      </div>
+      <div class="posit" aria-hidden="true" style="left: 22mm; top: 236mm; background: #d8c3ea; transform: rotate(-6deg); width: 40mm">
+        <b>Normativa</b>El PTI ahora se llama PAP
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CÓMO USAR ESTE EJEMPLO (voz de IdEducando)
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Antes de empezar <span class="borrador">[BORRADOR]</span></p>
+      <h1>Cómo usar este ejemplo</h1>
+      <p>
+        Este documento tiene dos voces. A la izquierda, en Arial, va un <strong>programa de intervención de ejemplo</strong>
+        escrito como lo entregarías al tribunal. A la derecha, en recuadros de color, van <strong>nuestras notas</strong>:
+        qué indicador del tribunal cubre cada apartado, qué errores conviene evitar y qué tienes que cambiar para que el
+        programa sea tuyo.
+      </p>
+
+      <div class="leyenda-notas">
+        <div class="nota nota--indicador"><p class="nota__tipo">Indicador</p><p>Qué puntúa el tribunal y cuánto, según el anexo XXII.</p></div>
+        <div class="nota nota--dato"><p class="nota__tipo">Normativa</p><p>La norma exacta que respalda lo que escribes.</p></div>
+        <div class="nota nota--adapta"><p class="nota__tipo">Adáptalo</p><p>Lo que debes cambiar para tu caso y tu centro.</p></div>
+        <div class="nota nota--ojo"><p class="nota__tipo">Ojo</p><p>Errores frecuentes que restan puntos.</p></div>
+        <div class="nota nota--idea"><p class="nota__tipo">Idea</p><p>Detalles que distinguen un buen programa.</p></div>
+      </div>
+
+      <div class="caja caja--coral">
+        <h3>No lo copies: es un ejemplo para entender, no para entregar</h3>
+        <p>
+          La convocatoria exige que la programación sea <strong>original y de elaboración individual</strong> (anexo VI de
+          la Orden de 21 de enero de 2026, BORM n.º 18). El tribunal conoce los modelos que circulan. Usa este ejemplo para
+          ver cómo encaja cada apartado y escribe el tuyo con tu caso, tu centro y tus palabras.
+        </p>
+      </div>
+
+      <h2>Lo que conviene saber</h2>
+      <ul>
+        <li>
+          <strong>El caso es ficticio.</strong> Noa, su familia y su centro no existen. Cualquier parecido es casual. En tu
+          programa, nunca uses datos de un alumno o alumna real.
+        </li>
+        <li>
+          <strong>La referencia es la convocatoria de 2026</strong>, la última publicada. Cuando salga la próxima, revisa
+          los anexos V, VI y XXII: pueden cambiar la normativa de referencia o los indicadores.
+        </li>
+        <li>
+          <strong>La normativa está comprobada a 15 de octubre de 2026.</strong> En las notas avisamos de las normas que
+          están en trámite y pueden cambiar antes de tu examen.
+        </li>
+        <li>
+          <strong>El formato imita el real.</strong> El texto del programa va en Arial 11 con interlineado sencillo, como
+          pide el anexo VI. Si tu ordenador no tiene Arial, el PDF usa Liberation Sans, que tiene exactamente sus mismas
+          medidas. Nuestras notas usan otra letra para que se distingan.
+        </li>
+        <li>
+          <strong>Es un esqueleto completo.</strong> Sin las notas, el programa ocuparía unas 15 páginas en tu formato.
+          El límite es 70, contando índice, anexos y bibliografía: en el tuyo, desarrolla más cada apartado y las 12
+          unidades.
+        </li>
+      </ul>
+
+      <h2 class="salto">Mapa de indicadores: dónde está cada punto</h2>
+      <p>
+        La defensa del programa vale 4 puntos y la exposición de la unidad, 5,5 (anexo XXII). Esta tabla te dice en qué
+        apartado del ejemplo se trabaja cada indicador.
+      </p>
+      <table class="mapa">
+        <thead>
+          <tr><th scope="col">Defensa del programa</th><th scope="col">Puntos</th><th scope="col">Dónde está en el ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Justificación</td><td>0,3</td><td>Fundamentos psicopedagógicos, normativa estatal y autonómica y bibliografía actualizada: apartados 1, 2 y 14.</td></tr>
+          <tr><td>Contexto</td><td>0,3</td><td>Centro, aula, familias y necesidades detectadas: apartado 3.</td></tr>
+          <tr><td>La alumna</td><td>0,5</td><td>Contextualización a partir de la evaluación psicopedagógica: apartado 4.</td></tr>
+          <tr><td>Estructura</td><td>0,1</td><td>Todos los apartados, relacionados entre sí: índice y tabla de coherencia del apartado 7.</td></tr>
+          <tr><td>Objetivos y contenidos</td><td>1</td><td>Coherentes con el análisis de necesidades: apartados 5, 6 y 7.</td></tr>
+          <tr><td>Principios metodológicos</td><td>0,4</td><td>Adecuados a la etapa y a la alumna: apartado 8.1.</td></tr>
+          <tr><td>Métodos, actividades y recursos</td><td>0,6</td><td>Según las características de la alumna: apartados 8.2, 9 y 10.</td></tr>
+          <tr><td>Evaluación del aprendizaje</td><td>0,3</td><td>Momentos, procedimientos, técnicas e instrumentos: apartado 11.</td></tr>
+          <tr><td>Evaluación del programa</td><td>0,3</td><td>Mecanismos de evaluación y uso para mejorar: apartado 12.</td></tr>
+          <tr><td>Información</td><td>0,2</td><td>Cómo se traslada a las personas implicadas: apartado 13.</td></tr>
+        </tbody>
+      </table>
+      <table class="mapa">
+        <thead>
+          <tr><th scope="col">Exposición de la unidad</th><th scope="col">Puntos</th><th scope="col">Dónde está en el ejemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Contextualización</td><td>0,5</td><td>Anexo I, punto 1.</td></tr>
+          <tr><td>Habilidades específicas</td><td>0,75</td><td>Anexo I, punto 2.</td></tr>
+          <tr><td>Competencias</td><td>0,25</td><td>Anexo I, punto 3.</td></tr>
+          <tr><td>Contenidos</td><td>0,5</td><td>Anexo I, punto 4.</td></tr>
+          <tr><td>Estrategias y técnicas</td><td>0,4</td><td>Anexo I, punto 5.</td></tr>
+          <tr><td>Actividades con DUA</td><td>0,8</td><td>Anexo I, punto 6.</td></tr>
+          <tr><td>Recursos ajustados</td><td>0,4</td><td>Anexo I, punto 7.</td></tr>
+          <tr><td>Tecnologías</td><td>0,4</td><td>Anexo I, punto 8.</td></tr>
+          <tr><td>Criterios de evaluación</td><td>0,4</td><td>Anexo I, punto 9.</td></tr>
+          <tr><td>Momentos e instrumentos</td><td>0,4</td><td>Anexo I, punto 9, con la evaluación de la enseñanza.</td></tr>
+          <tr><td>Información</td><td>0,2</td><td>Anexo I, punto 10.</td></tr>
+          <tr><td>Exposición oral</td><td>0,5</td><td>Vocabulario técnico y forma de exponer: notas del anexo I.</td></tr>
+        </tbody>
+      </table>
+      <p class="fuente">
+        Anexo XXII de la Orden de 21 de enero de 2026 (BORM n.º 18, de 23/01/2026), criterios de la segunda prueba de
+        Pedagogía Terapéutica. El debate con el tribunal vale 0,5 puntos más.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         EL PROGRAMA DE EJEMPLO
+         ====================================================================== -->
+    <section class="programa salto">
+      <div class="bloque">
+        <div class="principal">
+          <div class="hoja-muestra">
+            <p style="margin: 0; font-size: 10pt; letter-spacing: 0.08em">PORTADA DEL PROGRAMA</p>
+            <p class="grande">«Rumbo a mi voz»</p>
+            <p>
+              Programa de intervención para una alumna con necesidades educativas especiales derivadas de trastorno del
+              espectro del autismo
+            </p>
+            <p><strong>Etapa:</strong> Educación Primaria · <strong>Curso:</strong> 2.º</p>
+            <div class="dato-aspirante">
+              <p><strong>Aspirante:</strong> Nombre Apellido Apellido</p>
+              <p><strong>DNI:</strong> 00000000X</p>
+              <p><strong>Cuerpo:</strong> Maestros</p>
+              <p><strong>Especialidad:</strong> Pedagogía Terapéutica (597036)</p>
+              <p><strong>Tribunal n.º:</strong> __</p>
+            </div>
+          </div>
+        </div>
+        <div class="margen">
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa</p>
+            <p>
+              La portada es de diseño libre y no cuenta en las 70 páginas. Debe llevar nombre, apellidos, DNI, cuerpo,
+              especialidad y número de tribunal y, en Maestros, la etapa y el curso (anexo VI).
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              Un título propio ayuda a que el tribunal recuerde tu programa. Elígelo a partir de los intereses de tu alumno
+              o alumna: a Noa le encanta el mar.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="principal">
+          <h2>Índice</h2>
+          <ol class="indice-programa">
+            <li>1. Introducción y justificación</li>
+            <li>2. Marco normativo</li>
+            <li>3. Contexto: entorno, centro, aula y familias</li>
+            <li>4. La alumna: contextualización psicopedagógica</li>
+            <li>5. Necesidades educativas</li>
+            <li>6. Objetivos</li>
+            <li>7. Contenidos y relación con las necesidades</li>
+            <li>8. Metodología</li>
+            <li>9. Organización de los apoyos y recursos</li>
+            <li>
+              10. Unidades de actuación
+              <ol>
+                <li>Unidad 1. Hola, soy Noa</li>
+                <li>Unidad 2. El mapa del día</li>
+                <li>Unidad 3. Mi termómetro de la calma</li>
+                <li>Unidad 4. Contamos peces</li>
+                <li>Unidad 5. Sonidos del mar</li>
+                <li>Unidad 6. Leo mi cole</li>
+                <li>Unidad 7. Me toca, te toca</li>
+                <li>Unidad 8. La tienda del puerto</li>
+                <li>Unidad 9. Escribo mi lista</li>
+                <li>Unidad 10. Problemas con dibujos</li>
+                <li>Unidad 11. Cuentos que me cuentan</li>
+                <li>Unidad 12. Me preparo para 3.º</li>
+              </ol>
+            </li>
+            <li>11. Evaluación del aprendizaje</li>
+            <li>12. Evaluación del programa y de la práctica docente</li>
+            <li>13. Información a las personas implicadas</li>
+            <li>14. Bibliografía y normativa</li>
+            <li>Anexo I. Unidad de actuación 8 desarrollada</li>
+            <li>Anexo II. Instrumentos de evaluación</li>
+          </ol>
+        </div>
+        <div class="margen">
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo · Requisito</p>
+            <p>
+              El índice debe recoger la secuencia numerada y el título de al menos 12 unidades de actuación. Si no están,
+              el programa se valora, pero la unidad tendrás que hacerla a partir del temario (anexo VI).
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,1 p</p>
+            <p>
+              «Estructura y organiza el programa […] contemplando todos los apartados con una adecuada relación entre
+              ellos». Un índice claro es el primer paso.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. INTRODUCCIÓN -->
+      <div class="bloque salto-antes">
+        <div class="principal">
+          <h2>1. Introducción y justificación</h2>
+          <p>
+            Este programa de intervención se dirige a Noa (nombre ficticio), alumna de 2.º de Educación Primaria con
+            necesidades educativas especiales (NEE) derivadas de un trastorno del espectro del autismo (TEA). Organiza,
+            durante un curso escolar, la respuesta de la maestra de Pedagogía Terapéutica (PT) en coordinación con la
+            tutora, la maestra de Audición y Lenguaje (AL), el resto del equipo docente y la familia.
+          </p>
+          <p>
+            El programa parte de la definición de NEE de la Ley Orgánica de Educación: alumnado que «afronta barreras que
+            limitan su acceso, presencia, participación o aprendizaje» y que requiere apoyos específicos (artículo 73.1).
+            Las dificultades de Noa aparecen cuando sus características se encuentran con barreras del entorno, como la
+            información solo oral, el ruido o los cambios sin aviso. Por eso el programa actúa a la vez sobre sus
+            habilidades y sobre el contexto.
+          </p>
+          <h3>1.1. Fundamentos psicopedagógicos</h3>
+          <ul>
+            <li>
+              <strong>Educación inclusiva y Diseño Universal para el Aprendizaje (DUA).</strong> La LOMLOE hace de la
+              educación inclusiva un principio fundamental de la enseñanza básica y pide medidas conforme a los principios
+              del DUA (artículo 4.3 de la LOE). Las pautas del DUA proponen ofrecer, desde el diseño, varias formas de
+              implicación, de representación y de acción y expresión (CAST, 2024).
+            </li>
+            <li>
+              <strong>El TEA como condición del neurodesarrollo.</strong> El DSM-5-TR lo describe por dificultades
+              persistentes en la comunicación y la interacción social y por patrones restringidos y repetitivos de
+              conducta, intereses o actividades, que incluyen la respuesta sensorial (American Psychiatric Association,
+              2022). La intensidad de los apoyos que necesita cada persona orienta la intervención.
+            </li>
+            <li>
+              <strong>Prácticas basadas en la evidencia.</strong> La revisión de Hume y otros (2021), sobre 972 estudios,
+              identifica 28 prácticas con evidencia para el alumnado con TEA. Este programa usa varias: apoyos visuales,
+              modelado, ayudas con retirada progresiva, refuerzo, análisis de tareas, intervenciones basadas en los
+              antecedentes, comunicación aumentativa y alternativa (CAA), instrucción mediada por iguales y
+              videomodelado.
+            </li>
+            <li>
+              <strong>Enseñanza estructurada.</strong> La organización del espacio, el tiempo y las tareas con claves
+              visuales, propia del modelo TEACCH, reduce la incertidumbre y favorece la autonomía (Mesibov, Shea y
+              Schopler, 2005).
+            </li>
+            <li>
+              <strong>Comunicación aumentativa con modelado.</strong> El alumnado aprende un sistema de CAA cuando ve a sus
+              interlocutores usarlo (Sennott, Light y McNaughton, 2016). Las revisiones no han encontrado que la CAA frene
+              el habla (Millar, Light y Schlosser, 2006).
+            </li>
+            <li>
+              <strong>Apoyo conductual positivo.</strong> Las conductas que preocupan cumplen una función. Se previenen
+              cambiando el entorno y enseñando alternativas, nunca solo reaccionando a ellas (Carr y otros, 2002).
+            </li>
+            <li>
+              <strong>Perspectiva de género.</strong> El TEA se diagnostica en una proporción cercana a tres niños por cada
+              niña, y los autores atribuyen parte de la diferencia a que a las niñas que cumplen los criterios se les diagnostica
+              menos (Loomes, Hull y Mandy, 2017). Las
+              niñas tienden más a camuflar sus dificultades sociales (Hull, Petrides y Mandy, 2020), lo que pide observar
+              con atención su bienestar.
+            </li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,3 p</p>
+            <p>
+              «Presenta y justifica adecuadamente el programa […] con fundamentos psicopedagógicos y utiliza la normativa
+              estatal y autonómica vigente así como bibliografía actualizada.» Son tres cosas distintas: que se vean las
+              tres.
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              Hablar de «barreras» y no solo de déficits conecta con la definición legal de NEE. Es una forma rápida de
+              demostrar que conoces el enfoque inclusivo de la LOMLOE.
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo</p>
+            <p>
+              Evita las teorías sin respaldo, como los estilos de aprendizaje visual, auditivo o cinestésico entendidos
+              como etiquetas fijas. El tribunal valora la bibliografía actualizada.
+            </p>
+          </div>
+          <div class="nota nota--adapta">
+            <p class="nota__tipo">Adáptalo</p>
+            <p>
+              Elige fundamentos que luego uses de verdad. Si citas el modelo TEACCH, que se vea en tus actividades. Una
+              lista larga de autores que no aparecen después resta.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. MARCO NORMATIVO -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>2. Marco normativo</h2>
+          <h3>2.1. Normativa estatal</h3>
+          <ul>
+            <li>
+              Convención sobre los derechos de las personas con discapacidad (ONU, 2006), ratificada por España (BOE de
+              21/04/2008). Su artículo 24 reconoce el derecho a una educación inclusiva y pide facilitar el aprendizaje de
+              «otros modos, medios y formatos de comunicación aumentativos o alternativos» (24.3.a).
+            </li>
+            <li>
+              Ley Orgánica 2/2006, de 3 de mayo, de Educación (LOE), modificada por la Ley Orgánica 3/2020 (LOMLOE):
+              artículos 4.3 (inclusión y DUA), 71 (alumnado con necesidad específica de apoyo educativo), 72 (recursos), 73
+              (NEE) y 74 (escolarización).
+            </li>
+            <li>
+              Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la
+              Educación Primaria.
+            </li>
+            <li>
+              Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos
+              digitales.
+            </li>
+          </ul>
+          <h3>2.2. Normativa de la Región de Murcia</h3>
+          <ul>
+            <li>
+              Decreto n.º 209/2022, de 17 de noviembre, de ordenación y currículo de la Educación Primaria (BORM n.º 267,
+              de 18/11/2022). Destacan los artículos 8.2 (currículo por ciclos), 19 (evaluación), 23 (atención a las
+              diferencias individuales; el 23.10 prevé el plan de actuación del alumnado con necesidad específica de apoyo
+              educativo) y 24 (alumnado con NEE y adaptaciones curriculares significativas).
+            </li>
+            <li>
+              Decreto n.º 359/2009, de 30 de octubre, que regula la respuesta educativa a la diversidad del alumnado (BORM
+              n.º 254, de 03/11/2009), y Orden de 4 de junio de 2010, que regula el Plan de Atención a la Diversidad (BORM
+              n.º 137, de 17/06/2010).
+            </li>
+            <li>
+              Resolución de 27 de febrero de 2013, sobre la evaluación psicopedagógica (BORM n.º 66, de 21/03/2013), y
+              Resolución de 13 de marzo de 2018, con los modelos de informe psicopedagógico y de dictamen de escolarización
+              (BORM n.º 64, de 17/03/2018).
+            </li>
+            <li>
+              Resolución de 20 de noviembre de 2023, de la Dirección General de Atención a la Diversidad, con instrucciones
+              para elaborar los planes de actuación personalizados (PAP) del alumnado con necesidad específica de apoyo
+              educativo.
+            </li>
+            <li>
+              Instrucciones de comienzo de curso de los centros de Educación Infantil y Primaria (para el curso 2026-2027,
+              Resolución de 29 de julio de 2026), en especial la instrucción decimosexta, sobre la organización de los
+              apoyos.
+            </li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa · Cambio de nombre</p>
+            <p>
+              En Murcia, el antiguo plan de trabajo individualizado (PTI) es hoy el plan de actuación personalizado (PAP).
+              Usar el término actual demuestra que estás al día.
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo · Normas en trámite</p>
+            <p>
+              El Plan Normativo regional para 2026-2027 prevé un nuevo decreto de atención a la diversidad que derogaría el
+              359/2009, y está en trámite una orden de evaluación de Infantil y Primaria. Comprueba antes del examen si ya
+              se han aprobado.
+            </p>
+          </div>
+          <div class="nota nota--adapta">
+            <p class="nota__tipo">Adáptalo</p>
+            <p>
+              Cada curso salen nuevas instrucciones de comienzo de curso. Cita las del curso de tu convocatoria y léelas en
+              educarm.es: son las que dicen cómo se organizan los apoyos.
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              No copies listas de normas: di para qué usas cada una. «El artículo 24.5 me permite la adaptación
+              significativa» vale más que diez títulos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. CONTEXTO -->
+      <div class="bloque salto-antes">
+        <div class="principal">
+          <h2>3. Contexto: entorno, centro, aula y familias</h2>
+          <h3>3.1. Entorno</h3>
+          <p>
+            El centro está en una localidad costera de la Región de Murcia de unos 20.000 habitantes, con una economía
+            basada en los servicios, el turismo y la agricultura. La población es diversa: cerca de una de cada cinco
+            familias del centro tiene origen extranjero. La localidad cuenta con biblioteca municipal, polideportivo, una
+            asociación comarcal de familias de personas con TEA y una unidad de salud mental infanto-juvenil de referencia
+            en la ciudad más cercana.
+          </p>
+          <h3>3.2. Centro</h3>
+          <p>
+            Es un colegio público de Educación Infantil y Primaria de dos líneas, con 18 unidades y unos 430 alumnos y
+            alumnas, comedor escolar y jornada continua. Su proyecto educativo incluye el Plan de Atención a la
+            Diversidad, el Plan de Convivencia, el Plan de Acción Tutorial y un plan de fomento de la lectura con tiempo
+            diario de lectura, como pide el artículo 5.8 del Decreto 209/2022.
+          </p>
+          <p>
+            Para atender a la diversidad cuenta con dos maestras de PT, una de AL, una auxiliar técnica educativa (ATE) y
+            la orientadora del equipo de orientación educativa y psicopedagógica (EOEP) de sector, que acude dos días por
+            semana. El Equipo de Apoyo a la Diversidad lo forman, entre otros, la jefa de estudios, las tutoras, las
+            maestras de PT y AL y la orientadora (artículo 6.5 de la Orden de 4 de junio de 2010). El centro recibe además
+            el asesoramiento del EOEP específico de autismo y otros trastornos graves del desarrollo.
+          </p>
+          <h3>3.3. Aula</h3>
+          <p>
+            El grupo de 2.º B tiene 23 alumnos y alumnas. Trabajan en equipos de cuatro y la tutora usa una agenda visual
+            para todo el grupo y una pizarra digital. Hay otra alumna con necesidad específica de apoyo educativo por un
+            trastorno del desarrollo del lenguaje. El aula tiene un rincón de la calma que cualquier alumno o alumna puede
+            usar.
+          </p>
+          <h3>3.4. Familias</h3>
+          <p>
+            Las familias participan en la vida del centro a través de la asociación de madres y padres y de actividades
+            abiertas. La familia de Noa colabora de forma muy estrecha con el centro (apartado 4.5).
+          </p>
+          <h3>3.5. Barreras detectadas en el contexto</h3>
+          <ul>
+            <li>El ruido del comedor y del gimnasio, que desborda a Noa.</li>
+            <li>Información que se da solo de forma oral en algunas áreas.</li>
+            <li>Cambios de horario o de maestro que no se anticipan.</li>
+            <li>Un patio sin propuestas de juego estructurado.</li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,3 p</p>
+            <p>
+              «Contextualiza de forma adecuada con referencias al centro, aula, familias y necesidades específicas de
+              apoyo educativo detectadas.» Ese es el orden que te sugerimos seguir.
+            </p>
+          </div>
+          <div class="nota nota--adapta">
+            <p class="nota__tipo">Adáptalo</p>
+            <p>
+              Inventa un centro verosímil de tu zona, pero no copies datos de un centro real con su nombre. Pon solo lo que
+              luego uses: si citas la asociación de familias, que aparezca en tus actividades.
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              El apartado 3.5 es clave: las barreras del contexto justifican medidas para todo el grupo, como la agenda
+              visual general. Así enlazas con el DUA desde el principio.
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo</p>
+            <p>
+              No describas a los demás alumnos con detalle. Basta con lo que afecta al programa.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. LA ALUMNA -->
+      <div class="bloque salto-antes">
+        <div class="principal">
+          <h2>4. La alumna: contextualización psicopedagógica</h2>
+          <h3>4.1. Datos e historia escolar</h3>
+          <p>
+            Noa tiene 7 años y 6 meses al empezar el curso. Está escolarizada en el centro desde 1.º de Educación Infantil.
+            A los 3 años, la unidad de salud mental infanto-juvenil le diagnosticó un TEA. El EOEP de sector hizo su
+            evaluación psicopedagógica y el dictamen de escolarización, que propuso una modalidad ordinaria con apoyos de
+            PT y AL. La evaluación psicopedagógica se revisó al terminar Educación Infantil, como prevé el apartado quinto
+            de la Resolución de 13 de marzo de 2018.
+          </p>
+          <h3>4.2. Conclusiones de la evaluación psicopedagógica</h3>
+          <p>
+            Según el informe psicopedagógico, Noa presenta NEE derivadas de un TEA y necesita apoyo sustancial en
+            comunicación social y en flexibilidad. Sus orientaciones son prescriptivas para el equipo docente (apartado
+            duodécimo de la Resolución de 13 de marzo de 2018).
+          </p>
+          <ul>
+            <li>
+              <strong>Desarrollo cognitivo.</strong> En una prueba de inteligencia no verbal puntúa en el rango medio-bajo.
+              Destaca su memoria visual y su discriminación perceptiva. Le cuestan las tareas que exigen cambiar de criterio.
+            </li>
+            <li>
+              <strong>Comunicación y lenguaje.</strong> Comprende órdenes sencillas del contexto si llevan apoyo visual. Se
+              expresa con frases de 2 o 3 palabras y tiene ecolalia diferida. Usa pictogramas en su agenda y empieza a
+              señalar en un tablero para pedir. Le cuesta iniciar la comunicación para comentar o pedir ayuda: suele
+              esperar o llevar al adulto de la mano.
+            </li>
+            <li>
+              <strong>Interacción social y juego.</strong> Juega en paralelo y disfruta de los juegos de movimiento con
+              adultos. Busca a dos compañeras con las que se siente segura. Le cuesta respetar los turnos.
+            </li>
+            <li>
+              <strong>Flexibilidad y conducta.</strong> Los cambios sin anticipar le provocan malestar. Tiene un interés
+              intenso por los animales marinos. Según los registros del curso anterior, tiene dos o tres episodios de
+              desregulación por semana, con gritos o tirándose al suelo, sobre todo en transiciones no anticipadas y en
+              espacios ruidosos.
+            </li>
+            <li>
+              <strong>Procesamiento sensorial.</strong> Es muy sensible al ruido y busca la presión profunda, como los
+              abrazos fuertes o las mantas.
+            </li>
+            <li>
+              <strong>Autonomía.</strong> Controla esfínteres. Necesita ayuda para abrir envases, subir la cremallera y
+              organizar su material.
+            </li>
+          </ul>
+          <h3>4.3. Nivel de competencia curricular</h3>
+          <ul>
+            <li>
+              <strong>Lengua Castellana y Literatura.</strong> Reconoce las cinco vocales y seis consonantes (m, p, l, s,
+              t, n). Lee de forma global unas 30 palabras de su entorno. Escribe su nombre y copia palabras de dos
+              sílabas. Comprende cuentos breves con imágenes y responde a preguntas de «qué» y «quién» señalando. Su nivel
+              corresponde al inicio del primer ciclo.
+            </li>
+            <li>
+              <strong>Matemáticas.</strong> Cuenta de memoria hasta 30 y cuenta objetos hasta 10. Reconoce las cifras del
+              0 al 10, forma cantidades hasta 5 y suma hasta 5 con objetos. Clasifica por color y forma. Su nivel
+              corresponde al final de Educación Infantil.
+            </li>
+          </ul>
+          <h3>4.4. Estilo de aprendizaje y motivación</h3>
+          <p>
+            Aprende mejor con información visual, tareas estructuradas de izquierda a derecha y un final claro. Mantiene
+            la atención entre 5 y 8 minutos en tareas dirigidas. Le motivan los animales marinos, la música y la tablet. Le
+            tranquiliza saber qué viene después.
+          </p>
+          <h3>4.5. Contexto familiar y apoyos externos</h3>
+          <p>
+            Vive con su madre, su padre y un hermano de 4 años. La familia usa en casa la agenda visual, acude a todas las
+            reuniones y comparte información a diario. Noa recibe logopedia privada una vez por semana y participa en el
+            ocio de la asociación comarcal de familias.
+          </p>
+          <h3>4.6. Fortalezas</h3>
+          <p>
+            Su memoria visual, su interés por el mar, su gusto por la música, su vínculo con los adultos de referencia y
+            una familia muy implicada. El programa se apoya en ellas en cada unidad.
+          </p>
+          <h3>4.7. Medidas previstas</h3>
+          <p>
+            Noa cuenta con un PAP, obligatorio para el alumnado con NEE desde el segundo ciclo de Educación Infantil
+            (Resolución de 20 de noviembre de 2023, apartado segundo.2). El PAP incluye adaptaciones curriculares
+            significativas en Lengua Castellana y Literatura y en Matemáticas, un anexo de comunicación aumentativa y
+            alternativa por tratarse de una alumna con necesidades complejas de comunicación (apartado tercero.3), su plan
+            individual de apoyo conductual positivo (apartado tercero.5) y los apoyos de PT, AL y ATE.
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,5 p</p>
+            <p>
+              «Contextualiza, partiendo de la evaluación psicopedagógica, al alumno destinatario.» Es el indicador que más
+              pesa del bloque de presentación: dedícale espacio.
+            </p>
+          </div>
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa</p>
+            <p>
+              Las orientaciones del informe psicopedagógico son prescriptivas para el equipo docente (Resolución de 13 de
+              marzo de 2018, apartado duodécimo). Decirlo justifica por qué tu programa sigue el informe.
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo</p>
+            <p>
+              No copies el informe entero. Resume lo que justifica tus objetivos: cada rasgo que describas debería
+              reaparecer en una necesidad, un objetivo o una unidad.
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea · Fortalezas</p>
+            <p>
+              Un apartado de fortalezas cambia el tono del programa. Muestra que planificas desde lo que la alumna sabe
+              hacer, no solo desde sus dificultades.
+            </p>
+          </div>
+          <div class="nota nota--adapta">
+            <p class="nota__tipo">Adáptalo · Por qué una niña</p>
+            <p>
+              Elegimos una alumna para incluir la perspectiva de género que pide la LOMLOE. Si eliges un perfil así,
+              justifícalo con bibliografía, como en el apartado 1.1.
+            </p>
+          </div>
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa · PAP en 2.º</p>
+            <p>
+              Con carácter general, el PAP empieza en 3.º de Primaria. Para el alumnado con NEE es obligatorio desde el
+              segundo ciclo de Infantil. Si tu caso no tiene NEE, revisa si en 2.º le corresponde PAP.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. NECESIDADES -->
+      <div class="ancho salto-antes">
+        <h2>5. Necesidades educativas</h2>
+        <p>
+          A partir del informe psicopedagógico, del nivel de competencia curricular y de las barreras del contexto, el
+          equipo docente identifica estas necesidades. Cada una se apoya en una fortaleza de la alumna.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 8%">N.º</th>
+              <th scope="col" style="width: 38%">Necesidad educativa</th>
+              <th scope="col" style="width: 28%">Barrera del contexto que hay que retirar</th>
+              <th scope="col">Fortaleza en la que apoyarse</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">N1</th><td>Disponer de un sistema de comunicación funcional, oral y aumentativo, para pedir, rechazar, comentar y pedir ayuda.</td><td>Información solo oral; adultos que no conocen su forma de comunicarse.</td><td>Memoria visual; ya usa pictogramas.</td></tr>
+            <tr><th scope="row">N2</th><td>Anticipar las rutinas y los cambios, y ganar flexibilidad.</td><td>Cambios sin aviso.</td><td>Le tranquiliza saber qué viene después.</td></tr>
+            <tr><th scope="row">N3</th><td>Reconocer sus emociones y su nivel de activación, y regularlos con estrategias.</td><td>Ruido en comedor y gimnasio.</td><td>Busca la presión profunda; responde a la música.</td></tr>
+            <tr><th scope="row">N4</th><td>Avanzar en la lectura y la escritura funcionales.</td><td>Textos sin apoyo visual.</td><td>Lectura global de 30 palabras.</td></tr>
+            <tr><th scope="row">N5</th><td>Avanzar en el sentido numérico y en la resolución de problemas de la vida diaria.</td><td>Tareas sin material manipulativo.</td><td>Discriminación perceptiva; interés por contar.</td></tr>
+            <tr><th scope="row">N6</th><td>Participar en el juego y la interacción con iguales.</td><td>Patio sin juego estructurado.</td><td>Dos compañeras de referencia.</td></tr>
+            <tr><th scope="row">N7</th><td>Ganar autonomía en las rutinas del centro.</td><td>Envases y materiales difíciles de manejar.</td><td>Sigue bien las secuencias visuales.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notas-fila">
+        <div class="nota nota--idea">
+          <p class="nota__tipo">Idea</p>
+          <p>
+            La columna de barreras convierte el modelo social de la discapacidad en algo práctico: cada barrera se
+            convierte después en una medida para el aula, no solo para la alumna.
+          </p>
+        </div>
+        <div class="nota nota--ojo">
+          <p class="nota__tipo">Ojo</p>
+          <p>
+            Redacta las necesidades como lo que la alumna necesita aprender o recibir, no como sus déficits. «Necesita
+            anticipar los cambios» mejor que «es rígida».
+          </p>
+        </div>
+      </div>
+
+      <!-- 6. OBJETIVOS -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>6. Objetivos</h2>
+          <p>Los objetivos generales del programa responden a cada necesidad:</p>
+          <ol>
+            <li><strong>(N1)</strong> Comunicar necesidades, deseos, rechazos y comentarios combinando el habla con su tablero y su llavero de comunicación en el aula, el patio, el comedor y casa.</li>
+            <li><strong>(N2)</strong> Anticipar la secuencia del día con la agenda visual y aceptar cambios avisados.</li>
+            <li><strong>(N3)</strong> Identificar su nivel de activación en un termómetro de cinco niveles y usar al menos tres estrategias de calma con cada vez menos ayuda.</li>
+            <li><strong>(N4)</strong> Leer y escribir palabras y frases cortas de su entorno apoyándose en la relación entre sonidos y letras.</li>
+            <li><strong>(N5)</strong> Contar, representar y comparar cantidades hasta 20 y resolver problemas sencillos de suma y resta con material y apoyos visuales.</li>
+            <li><strong>(N6)</strong> Participar en juegos con turnos con dos o tres compañeros o compañeras, con una mediación adulta que se retira poco a poco.</li>
+            <li><strong>(N7)</strong> Realizar con autonomía rutinas del centro: colgar la mochila, preparar el material, abrir el almuerzo y pedir ayuda cuando la necesite.</li>
+          </ol>
+          <p>
+            Estos objetivos contribuyen a los objetivos de la etapa del artículo 7 del Decreto 209/2022, en especial b)
+            hábitos de trabajo y confianza en sí misma, c) resolución pacífica de conflictos y autonomía en el ámbito
+            escolar y familiar, e) uso de la lengua castellana y hábitos de lectura, g) competencias matemáticas básicas y
+            m) capacidades afectivas.
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 1 p</p>
+            <p>
+              «Selecciona y relaciona objetivos y contenidos coherentes con el análisis previo de necesidades.» Es el
+              indicador que más vale de la defensa. Numera tus necesidades y cítalas en cada objetivo.
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo</p>
+            <p>
+              Un objetivo que no puedes observar no se puede evaluar. «Usar al menos tres estrategias» se comprueba;
+              «mejorar su autoestima» no.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. CONTENIDOS -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>7. Contenidos y relación con las necesidades</h2>
+          <p>
+            Los contenidos se organizan en cinco bloques. Se toman de los saberes básicos del primer ciclo del anexo III
+            del Decreto 209/2022 y se expresan, cuando conviene, en términos de habilidades específicas, como permite el
+            apartado quinto de la Resolución de 20 de noviembre de 2023.
+          </p>
+          <ol>
+            <li>
+              <strong>Comunicación y lenguaje.</strong> Funciones comunicativas: saludar, pedir, rechazar, comentar y pedir
+              ayuda. Vocabulario núcleo y vocabulario de cada unidad. Combinaciones de dos y tres palabras. Comprensión de
+              instrucciones con apoyo visual. Turnos de palabra. (Lengua, bloque B.3: interacción, comprensión y producción
+              oral.)
+            </li>
+            <li>
+              <strong>Lectura y escritura funcionales.</strong> Conciencia silábica y fonémica. Relación entre letras y
+              sonidos. Lectura de palabras y frases con pictogramas. Escritura de palabras y listas con modelo. Lectura
+              compartida y gusto por los cuentos. (Lengua, bloque B.3: comprensión lectora y producción escrita.)
+            </li>
+            <li>
+              <strong>Sentido numérico y resolución de problemas.</strong> Conteo hasta 20. Número y cantidad.
+              Composición y descomposición hasta 10. Suma y resta con material. Monedas de 1 y 2 euros. Problemas con
+              dibujos. (Matemáticas, bloques A y D.2.)
+            </li>
+            <li>
+              <strong>Regulación emocional y conducta adaptativa.</strong> Emociones básicas y niveles de activación.
+              Estrategias de calma. Petición de descanso. Aceptación de cambios avisados. (Matemáticas, competencia
+              específica 7; Lengua, competencia específica 10.)
+            </li>
+            <li>
+              <strong>Interacción y autonomía.</strong> Turnos y juego compartido. Rutinas del centro: entrada, almuerzo,
+              aseo y recogida. (Matemáticas, competencia específica 8; Lengua, criterio 3.2.)
+            </li>
+          </ol>
+        </div>
+        <div class="margen">
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa</p>
+            <p>
+              «Contenidos» y «saberes básicos» son equivalentes a efectos de la oposición y se pueden usar
+              indistintamente (notas del anexo VI).
+            </p>
+          </div>
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa · Por ciclos</p>
+            <p>
+              En Murcia, los criterios y saberes de Primaria se fijan por ciclos, no por cursos (artículo 8.2 del Decreto
+              209/2022). Para 2.º, selecciona y secuencia los del primer ciclo.
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              La tabla de la página siguiente es la prueba de coherencia que busca el tribunal: de cada necesidad a sus
+              unidades en un solo vistazo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ancho sin-romper">
+        <h3>7.1. Tabla de coherencia</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 12%">Necesidad</th>
+              <th scope="col" style="width: 16%">Objetivo</th>
+              <th scope="col" style="width: 34%">Bloque de contenidos</th>
+              <th scope="col">Unidades de actuación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>N1</td><td>1</td><td>1. Comunicación y lenguaje</td><td>1, 2, 7, 8 y 12</td></tr>
+            <tr><td>N2</td><td>2</td><td>4. Regulación y conducta adaptativa</td><td>2 y 12</td></tr>
+            <tr><td>N3</td><td>3</td><td>4. Regulación y conducta adaptativa</td><td>3 y 7</td></tr>
+            <tr><td>N4</td><td>4</td><td>2. Lectura y escritura funcionales</td><td>5, 6, 9 y 11</td></tr>
+            <tr><td>N5</td><td>5</td><td>3. Sentido numérico y problemas</td><td>4, 8 y 10</td></tr>
+            <tr><td>N6</td><td>6</td><td>5. Interacción y autonomía</td><td>7 y 8</td></tr>
+            <tr><td>N7</td><td>7</td><td>5. Interacción y autonomía</td><td>2, 9 y 12</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 8. METODOLOGÍA -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>8. Metodología</h2>
+          <h3>8.1. Principios metodológicos</h3>
+          <ol>
+            <li>
+              <strong>Apoyo dentro del aula.</strong> El apoyo se da preferentemente en el grupo ordinario (artículo 23.7
+              del Decreto 209/2022). Las sesiones fuera del aula son excepcionales y las acuerda en acta el Equipo de Apoyo
+              a la Diversidad.
+            </li>
+            <li>
+              <strong>Diseño Universal para el Aprendizaje.</strong> Cada actividad ofrece varias formas de presentar la
+              información, de participar y de responder, para Noa y para su grupo.
+            </li>
+            <li>
+              <strong>Estructura y anticipación.</strong> Espacios, tiempos y tareas organizados con claves visuales:
+              agenda, «primero y después» y bandejas de trabajo de izquierda a derecha.
+            </li>
+            <li>
+              <strong>Comunicación en todos los contextos.</strong> Todos los adultos modelan con el tablero mientras
+              hablan, sin exigir y respondiendo a cada intento.
+            </li>
+            <li>
+              <strong>Aprendizaje sin error.</strong> Se ofrece la ayuda necesaria desde el principio para que acierte y se
+              retira de forma planificada: física, gestual, visual y verbal, hasta la autonomía.
+            </li>
+            <li>
+              <strong>Funcionalidad y generalización.</strong> Lo que se aprende en el apoyo se practica en el aula, el
+              patio, el comedor y casa.
+            </li>
+            <li>
+              <strong>Motivación desde sus intereses.</strong> El mar y los animales marinos dan hilo a las unidades.
+            </li>
+            <li>
+              <strong>Prevención antes que corrección.</strong> Se anticipan los cambios, se cuida el ruido y se enseñan
+              conductas alternativas, de acuerdo con su plan de apoyo conductual positivo.
+            </li>
+          </ol>
+          <h3>8.2. Estrategias y técnicas</h3>
+          <ul>
+            <li><strong>Modelado</strong> de la comunicación y de las tareas por adultos y compañeros.</li>
+            <li><strong>Ayudas con retirada progresiva</strong>, de más a menos intrusivas, registradas en cada sesión.</li>
+            <li><strong>Análisis de tareas y encadenamiento</strong> para rutinas como preparar el material o comprar.</li>
+            <li><strong>Refuerzo natural y social</strong>: lo que pide llega, y se reconoce el esfuerzo con palabras y pictogramas.</li>
+            <li><strong>Intervenciones basadas en los antecedentes</strong>: anticipación, posibilidad de elegir y descansos programados.</li>
+            <li><strong>Instrucción mediada por iguales</strong>: compañeros y compañeras mentores en el aula y el patio.</li>
+            <li><strong>Videomodelado</strong> con grabaciones hechas en el centro, que no se difunden.</li>
+            <li><strong>Historias para anticipar</strong> los cambios con texto en lectura fácil y fotos de espacios del centro.</li>
+          </ul>
+          <h3>8.3. Agrupamientos y tipos de actividades</h3>
+          <p>
+            Noa trabaja en gran grupo con apoyo, en su equipo de cuatro, en parejas con compañeras mentoras y, de forma
+            excepcional, en un pequeño grupo de tres alumnos del ciclo con la maestra de PT. Las actividades siguen esta
+            secuencia en cada unidad: motivación y conocimientos previos, enseñanza estructurada, práctica en el aula,
+            generalización en contextos reales y evaluación.
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,4 p</p>
+            <p>
+              «Establece principios y orientaciones metodológicas adecuadas a la etapa y características del alumnado.»
+              Cada principio debe responder a un rasgo concreto de tu alumna.
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,6 p</p>
+            <p>
+              «Diseña e implanta métodos pedagógicos, concretando actividades y recursos, teniendo en cuenta las
+              características del alumno.» Los apartados 8.2, 9 y 10 responden a este indicador.
+            </p>
+          </div>
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa · Grupos de PT</p>
+            <p>
+              Las instrucciones de 2026-2027 fijan grupos de PT de tres a cinco alumnos con carácter general, y el apoyo
+              fuera del aula como excepción acordada en acta y trasladada al PAP (instrucción decimosexta).
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo</p>
+            <p>
+              Si nombras una técnica, explica cómo la aplicas. «Aprendizaje sin error» sin decir qué ayudas das y cómo las
+              retiras se queda en una etiqueta.
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              Las prácticas del apartado 8.2 coinciden con las de la revisión de Hume y otros (2021). Decirlo en la defensa
+              demuestra que tu metodología tiene respaldo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. ORGANIZACIÓN -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>9. Organización de los apoyos y recursos</h2>
+          <h3>9.1. Recursos personales</h3>
+          <p>
+            La tutora coordina el PAP. La maestra de PT diseña y desarrolla el programa, asesora al equipo docente y prepara
+            los materiales adaptados. La maestra de AL trabaja la comunicación oral y el sistema de CAA. La ATE acompaña a
+            Noa en el comedor, el aseo y el patio. La orientadora del EOEP hace el seguimiento y asesora a la familia.
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--adapta">
+            <p class="nota__tipo">Adáptalo</p>
+            <p>
+              Ajusta los recursos a lo que tendría un centro real de tu tipo. Un exceso de recursos hace poco creíble el
+              programa.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ancho sin-romper">
+        <h3>9.2. Apoyos semanales</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Recurso</th>
+              <th scope="col">Sesiones semanales</th>
+              <th scope="col">Dentro del aula</th>
+              <th scope="col">Fuera del aula</th>
+              <th scope="col">Agrupamiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">PT</th><td>7, de 45 minutos</td><td>5: Lengua (3) y Matemáticas (2)</td><td>2, en el aula de apoyo</td><td>Fuera: grupo de 3 alumnos del ciclo</td></tr>
+            <tr><th scope="row">AL</th><td>3</td><td>1, en la asamblea</td><td>2</td><td>Individual o en pareja</td></tr>
+            <tr><th scope="row">ATE</th><td>Diaria</td><td colspan="2">Comedor, aseo y patio</td><td>Individual</td></tr>
+          </tbody>
+        </table>
+        <p>
+          La tabla sigue el apartado D del modelo de PAP. Los apoyos fuera del aula se acuerdan en acta en la reunión de
+          inicio de curso del Equipo de Apoyo a la Diversidad.
+        </p>
+      </div>
+
+      <div class="bloque">
+        <div class="principal">
+          <h3>9.3. Espacios</h3>
+          <p>
+            En el aula ordinaria, Noa tiene su sitio cerca de la tutora y de la agenda, una bandeja de trabajo y el rincón
+            de la calma. El aula de apoyo tiene zonas de trabajo estructurado. En el comedor come en la mesa más alejada
+            del ruido y puede usar cascos. En el patio hay dos días por semana una zona de juego guiado para todo el
+            alumnado.
+          </p>
+          <h3>9.4. Recursos materiales y tecnológicos</h3>
+          <ul>
+            <li>Tablero de comunicación de vocabulario núcleo, en A4 para su mesa y en A3 para el aula, y llavero con tarjetas por contextos.</li>
+            <li>Agenda visual, tablero de «primero y después» y termómetro de la calma con tarjetas de estrategias.</li>
+            <li>Bandejas de trabajo, letras móviles, regletas, recta numérica y monedas de juguete.</li>
+            <li>Cuentos adaptados a lectura fácil y una historia para anticipar el cambio de curso.</li>
+            <li>Tablet con un comunicador de pictogramas, la pizarra digital del aula y los recursos de ARASAAC.</li>
+          </ul>
+          <h3>9.5. Coordinación</h3>
+          <ul>
+            <li><strong>Semanal:</strong> tutora y PT, 30 minutos para planificar el apoyo dentro del aula.</li>
+            <li><strong>Quincenal:</strong> PT, AL y ATE, para revisar el registro de comunicación y de conducta.</li>
+            <li><strong>Mensual:</strong> con la orientadora del EOEP.</li>
+            <li><strong>Trimestral:</strong> sesión de evaluación del PAP y reunión con la familia.</li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              Los recursos del apartado 9.4 son materiales gratuitos que puedes fabricar. En IdEducando tienes un tablero
+              con llavero, una agenda visual, un rincón de la calma y un cuento para anticipar.
+            </p>
+          </div>
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo · Datos</p>
+            <p>
+              Si propones grabar vídeos, di que se hacen con dispositivos del centro, con permiso y sin difundirlos. El
+              tribunal valora que cuides la protección de datos.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. UNIDADES -->
+      <div class="ancho salto-antes">
+        <h2>10. Unidades de actuación</h2>
+        <p>
+          Las 12 unidades adaptan los currículos de Lengua Castellana y Literatura (LCL) y de Matemáticas (MAT) del primer
+          ciclo. Cada una dura unas tres semanas y combina sesiones de apoyo específico con su práctica en el aula. Los
+          criterios de referencia son los del Decreto 209/2022, adaptados en el PAP.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 5%">N.º</th>
+              <th scope="col" style="width: 20%">Unidad</th>
+              <th scope="col" style="width: 15%">Cuándo</th>
+              <th scope="col" style="width: 41%">Habilidades específicas</th>
+              <th scope="col">Criterios de referencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Hola, soy Noa</td><td>1.er trim., sem. 1-3</td><td>Saludar, pedir y rechazar con el habla y el tablero. Presentar su llavero al grupo.</td><td>LCL 3.1, 3.2</td></tr>
+            <tr><td>2</td><td>El mapa del día</td><td>1.er trim., sem. 4-6</td><td>Seguir la agenda visual, aceptar un cambio avisado y ordenar los pasos de una rutina.</td><td>LCL 2.1; MAT 4.1</td></tr>
+            <tr><td>3</td><td>Mi termómetro de la calma</td><td>1.er trim., sem. 7-9</td><td>Identificar su nivel de activación, elegir una estrategia y pedir un descanso.</td><td>LCL 3.2, 10.2; MAT 7.1</td></tr>
+            <tr><td>4</td><td>Contamos peces</td><td>1.er trim., sem. 10-12</td><td>Contar hasta 20, asociar número y cantidad y usar los ordinales hasta el quinto.</td><td>MAT 1.2, 6.1</td></tr>
+            <tr><td>5</td><td>Sonidos del mar</td><td>2.º trim., sem. 1-3</td><td>Separar palabras en sílabas, identificar el sonido inicial y asociar cuatro letras nuevas a su sonido.</td><td>LCL 4.1, 9.1</td></tr>
+            <tr><td>6</td><td>Leo mi cole</td><td>2.º trim., sem. 4-6</td><td>Leer carteles, nombres y horarios del centro con apoyo de pictogramas.</td><td>LCL 4.1, 4.2</td></tr>
+            <tr><td>7</td><td>Me toca, te toca</td><td>2.º trim., sem. 7-9</td><td>Respetar turnos en juegos de mesa adaptados y aceptar ganar y perder.</td><td>LCL 3.2, 10.2; MAT 8.1, 8.2</td></tr>
+            <tr><td>8</td><td>La tienda del puerto</td><td>2.º trim., sem. 10-12</td><td>Reconocer monedas de 1 y 2 euros, formar cantidades hasta 10 euros y pedir en una tienda.</td><td>MAT 1.1, 2.1, 2.2, 5.2; LCL 3.2</td></tr>
+            <tr><td>9</td><td>Escribo mi lista</td><td>3.er trim., sem. 1-3</td><td>Escribir palabras y listas útiles con modelo y letras móviles.</td><td>LCL 5.1</td></tr>
+            <tr><td>10</td><td>Problemas con dibujos</td><td>3.er trim., sem. 4-6</td><td>Resolver problemas de juntar y quitar hasta 10 dibujando o con material.</td><td>MAT 1.1, 1.2, 2.2, 2.3, 6.2</td></tr>
+            <tr><td>11</td><td>Cuentos que me cuentan</td><td>3.er trim., sem. 7-9</td><td>Comprender cuentos adaptados, responder a qué, quién y dónde, y elegir un libro.</td><td>LCL 7.3, 7.4, 8.1</td></tr>
+            <tr><td>12</td><td>Me preparo para 3.º</td><td>3.er trim., sem. 10-12</td><td>Anticipar el cambio de curso con su propia historia y valorar sus logros con pictogramas.</td><td>LCL 2.1, 3.1; MAT 4.1, 7.2</td></tr>
+          </tbody>
+        </table>
+        <p>
+          Actividades complementarias: un mercadillo solidario en el centro (unidad 8), la visita a la biblioteca municipal
+          (unidad 11) y una actividad de todo el grupo sobre la diversidad en torno al 2 de abril, Día Mundial de
+          Concienciación sobre el Autismo.
+        </p>
+      </div>
+      <div class="notas-fila">
+        <div class="nota nota--dato">
+          <p class="nota__tipo">Normativa · Una rareza útil</p>
+          <p>
+            En el anexo III del Decreto 209/2022, los criterios de la competencia 7 de Lengua del primer ciclo aparecen
+            numerados como 7.3 y 7.4, y no como 7.1 y 7.2. Cítalos tal como están en el BORM.
+          </p>
+        </div>
+        <div class="nota nota--dato">
+          <p class="nota__tipo">Normativa · Adaptación significativa</p>
+          <p>
+            En la adaptación curricular significativa puedes seleccionar criterios del curso, añadir otros de cursos o
+            etapas anteriores, priorizarlos y secuenciarlos de otra forma (Resolución de 20/11/2023, apartado cuarto.4).
+          </p>
+        </div>
+        <div class="nota nota--ojo">
+          <p class="nota__tipo">Ojo</p>
+          <p>
+            Las unidades deben estar numeradas y adaptadas de los currículos de Murcia, preferentemente de las áreas
+            instrumentales en Primaria (anexo VI). Unidades solo de habilidades sociales, sin área de referencia, son un
+            riesgo.
+          </p>
+        </div>
+        <div class="nota nota--idea">
+          <p class="nota__tipo">Idea</p>
+          <p>
+            Un hilo común, aquí el mar, da unidad al programa y lo hace fácil de recordar. Elige el hilo a partir de los
+            intereses de tu alumno o alumna.
+          </p>
+        </div>
+      </div>
+
+      <!-- 11. EVALUACIÓN DEL APRENDIZAJE -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>11. Evaluación del aprendizaje</h2>
+          <h3>11.1. Referentes</h3>
+          <p>
+            Los criterios de evaluación de las adaptaciones curriculares significativas de Lengua y Matemáticas, que son
+            los referentes de su evaluación (artículo 24.5 del Decreto 209/2022), y las habilidades específicas del apoyo
+            recogidas en el PAP.
+          </p>
+          <h3>11.2. Momentos</h3>
+          <ul>
+            <li>
+              <strong>Inicial, en septiembre:</strong> revisión del informe psicopedagógico, nivel de competencia
+              curricular, dos semanas de registro de conducta, entrevista con la familia y evaluación de la comunicación
+              con el Registro de Comunicación Aumentativa y Alternativa en el Contexto Educativo de la Consejería.
+            </li>
+            <li><strong>Continua:</strong> registros en cada sesión y revisión quincenal con la tutora, AL y la ATE.</li>
+            <li>
+              <strong>Final de cada trimestre:</strong> valoración de cada habilidad como no conseguida, en proceso o
+              conseguida, como en el anexo IV del modelo de PAP, en la sesión de evaluación.
+            </li>
+          </ul>
+          <h3>11.3. Procedimientos, técnicas e instrumentos</h3>
+          <ul>
+            <li><strong>Observación sistemática</strong> con listas de control y escalas por unidad.</li>
+            <li><strong>Registro de comunicación:</strong> palabras modeladas, palabras usadas por su cuenta y contextos.</li>
+            <li><strong>Registro ABC</strong> de los episodios de desregulación, para ajustar el plan de apoyo conductual.</li>
+            <li><strong>Análisis de producciones</strong> en un portafolio con sus trabajos.</li>
+            <li><strong>Autoevaluación</strong> con caras y pictogramas al final de cada unidad.</li>
+            <li><strong>Entrevistas</strong> con la familia y con la tutora.</li>
+          </ul>
+          <h3>11.4. Adaptación de la evaluación</h3>
+          <p>
+            Se adaptan los instrumentos, los tiempos y los apoyos (artículo 24.4 del Decreto 209/2022): más tiempo,
+            instrucciones con pictogramas, respuesta señalando y evaluación en contextos naturales. En las actas, las áreas
+            con adaptación curricular significativa llevan un asterisco (Resolución de 20/11/2023, apartado cuarto.6).
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,3 p</p>
+            <p>
+              «Especifica los momentos, procedimientos, técnicas e instrumentos de evaluación del proceso de aprendizaje.»
+              Nombra las cuatro cosas, con sus palabras.
+            </p>
+          </div>
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa · CAA</p>
+            <p>
+              Para el alumnado con necesidades complejas de comunicación, el PAP incluye un anexo de CAA, para el que se
+              puede usar el registro publicado por la Consejería (Resolución de 20/11/2023, apartado tercero.3).
+            </p>
+          </div>
+          <div class="nota nota--idea">
+            <p class="nota__tipo">Idea</p>
+            <p>
+              Usar la misma escala que el modelo oficial de PAP (no conseguido, en proceso, conseguido) demuestra que
+              conoces cómo se trabaja de verdad en los centros de Murcia.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. EVALUACIÓN DEL PROGRAMA -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>12. Evaluación del programa y de la práctica docente</h2>
+          <p>
+            El programa se evalúa cada trimestre y al final del curso para decidir qué mantener y qué cambiar. Los
+            resultados se llevan a las sesiones de evaluación, donde el equipo docente revisa el PAP e introduce las
+            modificaciones oportunas (Resolución de 20/11/2023, apartado sexto.4).
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,3 p</p>
+            <p>
+              «Establece mecanismos para evaluar los elementos que integran el programa […] y se utiliza como elemento de
+              mejora.» Di qué decisión tomarías con cada resultado.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ancho sin-romper">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 30%">Qué se evalúa</th>
+              <th scope="col" style="width: 36%">Indicador de logro</th>
+              <th scope="col">Cómo y cuándo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Adecuación de los objetivos</td><td>Al menos el 70 % de las habilidades, en proceso o conseguidas cada trimestre.</td><td>Escala del PAP, en cada sesión de evaluación.</td></tr>
+            <tr><td>Comunicación</td><td>Usa el tablero o el llavero en al menos tres contextos distintos.</td><td>Registro de comunicación, quincenal.</td></tr>
+            <tr><td>Regulación</td><td>Baja de dos o tres episodios semanales a uno o ninguno.</td><td>Registro ABC, mensual.</td></tr>
+            <tr><td>Organización de los apoyos</td><td>Al menos el 70 % del apoyo se da dentro del aula.</td><td>Horario y diario de la PT, trimestral.</td></tr>
+            <tr><td>Coordinación y familia</td><td>Todas las reuniones previstas se celebran y la familia valora el programa como útil.</td><td>Actas y cuestionario breve a la familia, trimestral.</td></tr>
+            <tr><td>Práctica docente</td><td>Las ayudas se retiran según lo previsto y las actividades motivan a la alumna.</td><td>Diario de la PT y valoración con la tutora al final de cada unidad.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 13. INFORMACIÓN -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>13. Información a las personas implicadas</h2>
+          <ul>
+            <li>
+              <strong>Familia:</strong> entrevista inicial; reunión trimestral con la tutora, la PT y la AL; una agenda
+              diaria con pictogramas donde Noa cuenta qué ha hecho; y propuestas para practicar en casa. La tutora informa
+              de las decisiones de cada sesión de evaluación y la familia puede pedir por escrito una copia del PAP
+              (Resolución de 20/11/2023, apartado sexto.5).
+            </li>
+            <li><strong>Alumna:</strong> al final de cada unidad, con su autoevaluación y un resumen visual de lo que ha conseguido.</li>
+            <li><strong>Equipo docente:</strong> en la coordinación semanal y en las sesiones de evaluación.</li>
+            <li><strong>EOEP:</strong> seguimiento trimestral y propuesta de revisión del informe cuando haga falta.</li>
+          </ul>
+          <p>
+            El PAP se guarda en la aplicación Plumier XXI (Resolución de 20/11/2023, apartado séptimo) y toda la
+            información se trata conforme a la Ley Orgánica 3/2018 de protección de datos.
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,2 p</p>
+            <p>
+              «Realiza una propuesta para trasladar la información resultante de la evaluación a los implicados.» Incluye
+              a la propia alumna: es un detalle que se nota.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. BIBLIOGRAFÍA -->
+      <div class="bloque">
+        <div class="principal">
+          <h2>14. Bibliografía y normativa</h2>
+          <ul>
+            <li>American Psychiatric Association. (2022). <em>Diagnostic and statistical manual of mental disorders</em> (5.ª ed., texto revisado; DSM-5-TR).</li>
+            <li>CAST. (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. https://udlguidelines.cast.org</li>
+            <li>Carr, E. G., Dunlap, G., Horner, R. H., Koegel, R. L., Turnbull, A. P., Sailor, W., Anderson, J. L., Albin, R. W., Koegel, L. K. y Fox, L. (2002). Positive behavior support: Evolution of an applied science. <em>Journal of Positive Behavior Interventions</em>, 4(1), 4-16.</li>
+            <li>Hull, L., Petrides, K. V. y Mandy, W. (2020). The female autism phenotype and camouflaging: A narrative review. <em>Review Journal of Autism and Developmental Disorders</em>, 7, 306-317. https://doi.org/10.1007/s40489-020-00197-9</li>
+            <li>Hume, K., Steinbrenner, J. R., Odom, S. L. y otros. (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. https://doi.org/10.1007/s10803-020-04844-2</li>
+            <li>Loomes, R., Hull, L. y Mandy, W. P. L. (2017). What is the male-to-female ratio in autism spectrum disorder? A systematic review and meta-analysis. <em>Journal of the American Academy of Child and Adolescent Psychiatry</em>, 56(6), 466-474. https://doi.org/10.1016/j.jaac.2017.03.013</li>
+            <li>Mesibov, G. B., Shea, V. y Schopler, E. (2005). <em>The TEACCH approach to autism spectrum disorders</em>. Springer.</li>
+            <li>Millar, D. C., Light, J. C. y Schlosser, R. W. (2006). The impact of augmentative and alternative communication intervention on the speech production of individuals with developmental disabilities: A research review. <em>Journal of Speech, Language, and Hearing Research</em>, 49(2), 248-264.</li>
+            <li>Sennott, S. C., Light, J. C. y McNaughton, D. (2016). AAC modeling intervention research review. <em>Research and Practice for Persons with Severe Disabilities</em>, 41(2), 101-115.</li>
+            <li>Normativa: la citada en el apartado 2, en su redacción vigente.</li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--ojo">
+            <p class="nota__tipo">Ojo · Bibliografía actualizada</p>
+            <p>
+              El indicador habla de bibliografía «actualizada». Combina obras de referencia con artículos recientes y usa un
+              formato de cita coherente, como APA 7.
+            </p>
+          </div>
+          <div class="nota nota--adapta">
+            <p class="nota__tipo">Adáptalo</p>
+            <p>
+              Cita solo lo que hayas leído y uses. En el debate, el tribunal puede preguntarte por cualquier referencia.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANEXO I: UNIDAD 8 -->
+      <div class="bloque salto-antes">
+        <div class="principal">
+          <h2>Anexo I. Unidad de actuación 8: «La tienda del puerto»</h2>
+          <p>
+            <strong>Temporalización:</strong> 2.º trimestre, semanas 10 a 12. Ocho sesiones de apoyo específico de 45
+            minutos y práctica diaria en el aula. <strong>Áreas:</strong> Matemáticas y Lengua Castellana y Literatura.
+          </p>
+          <h3>1. Contextualización</h3>
+          <p>
+            En 2.º, el grupo trabaja el sistema monetario y prepara un mercadillo solidario. Noa participa en el mismo
+            proyecto con su nivel: monedas de 1 y 2 euros y cantidades hasta 10. La unidad aprovecha su interés por el mar,
+            convirtiendo la tienda del aula en «la tienda del puerto», y responde a sus necesidades N1, N5 y N6. Parte de lo
+            que ya sabe: contar objetos hasta 10 y sumar hasta 5 con material (unidad 4).
+          </p>
+          <h3>2. Habilidades específicas</h3>
+          <ol>
+            <li>Reconocer las monedas de 1 y 2 euros y nombrarlas o señalarlas.</li>
+            <li>Formar cantidades hasta 10 euros con monedas de 1 y 2 euros, con apoyo visual.</li>
+            <li>Sumar dos precios hasta 10 con material y la recta numérica.</li>
+            <li>Pedir un producto combinando el habla y el tablero: «quiero», nombre del producto y «¿cuánto?».</li>
+            <li>Esperar su turno en la cola de la tienda.</li>
+          </ol>
+          <h3>3. Contribución a las competencias clave</h3>
+          <p>
+            Contribuye a la competencia matemática al resolver situaciones de compra con estrategias y representaciones
+            (descriptores STEM1 y STEM4); a la comunicación lingüística al expresarse de forma oral o multimodal con su
+            tablero (CCL1, que incluye expresamente la comunicación «signada o multimodal»); a la competencia personal,
+            social y de aprender a aprender al cooperar en un equipo con roles (CPSAA3); y a la competencia emprendedora al
+            iniciarse en elementos económicos y financieros básicos de la vida cotidiana (CE2).
+          </p>
+          <h3>4. Contenidos de intervención</h3>
+          <ul>
+            <li>Monedas de 1 y 2 euros: valor y equivalencia (Matemáticas, saber A.5, educación financiera).</li>
+            <li>Conteo de 1 en 1 y de 2 en 2 hasta 10, y suma de dos cantidades (saberes A.1 y A.3).</li>
+            <li>Representación de la compra con dramatización (saber D.2, modelo matemático).</li>
+            <li>Peticiones y fórmulas de cortesía con su sistema de comunicación; espera del turno (Lengua, B.3).</li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,5 p</p>
+            <p>
+              «Contextualiza la unidad […] a la realidad escolar y a las necesidades específicas de apoyo educativo del
+              alumno.» Conecta la unidad con el proyecto del grupo: así demuestras inclusión real.
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,75 p</p>
+            <p>
+              «Determina habilidades específicas/objetivos adecuados a las necesidades del alumno.» Cinco habilidades
+              observables, cada una con su criterio en el punto 9.
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,25 p</p>
+            <p>
+              «Fundamenta y justifica cómo contribuye […] a la adquisición de competencias.» Cita descriptores del perfil de
+              salida y explica el porqué.
+            </p>
+          </div>
+          <div class="nota nota--dato">
+            <p class="nota__tipo">Normativa · Saberes</p>
+            <p>
+              El saber A.5 del primer ciclo de Matemáticas incluye las monedas de 1 y 2 euros y los billetes de 5 a 100
+              euros, con su valor y equivalencia (anexo III del Decreto 209/2022).
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,5 p</p>
+            <p>
+              «Selecciona contenidos de intervención/saberes básicos relacionados con las necesidades del alumno.» Cita el
+              saber del currículo junto a cada contenido.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="principal">
+          <h3>5. Estrategias y técnicas metodológicas</h3>
+          <ul>
+            <li>
+              <strong>Análisis de tareas.</strong> La compra se divide en seis pasos con pictogramas: hacer cola, saludar,
+              pedir, preguntar el precio, pagar y despedirse.
+            </li>
+            <li>
+              <strong>Emparejamiento con modelo.</strong> Cada precio lleva dibujadas las monedas que hay que poner encima,
+              y el dibujo se retira cuando lo domina.
+            </li>
+            <li><strong>Modelado</strong> de la compra por la PT y por dos compañeras, y modelado del tablero en cada petición.</li>
+            <li><strong>Ayudas decrecientes</strong>, anotadas en cada sesión: física, gestual, visual y verbal.</li>
+            <li><strong>Refuerzo natural:</strong> si paga bien, se lleva el producto que ha elegido.</li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,4 p</p>
+            <p>
+              «Detalla y justifica estrategias y técnicas metodológicas adecuadas a la unidad y necesidades detectadas.»
+              Justifica cada técnica con un rasgo de la alumna.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ancho">
+        <h3>6. Actividades</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 8%">Sesión</th>
+              <th scope="col" style="width: 40%">Actividad</th>
+              <th scope="col" style="width: 20%">Agrupamiento y espacio</th>
+              <th scope="col">Pautas del DUA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>«¿Qué hay en el puerto?» Fotos de la lonja y del puerto. Noa elige cinco productos para su tienda y los añade a su tablero de la unidad.</td><td>Pequeño grupo, aula de apoyo</td><td>Implicación: elección según sus intereses.</td></tr>
+            <tr><td>2</td><td>«Monedas que brillan.» Clasificar monedas por tamaño y color y emparejar las de 1 y 2 euros con su tarjeta.</td><td>Pequeño grupo, aula de apoyo</td><td>Representación: monedas reales, de juguete y dibujadas.</td></tr>
+            <tr><td>3</td><td>«Barcos en fila.» Contar de 1 en 1 y de 2 en 2 hasta 10 en una recta numérica de barcos.</td><td>Pareja con una compañera mentora, aula ordinaria</td><td>Acción: colocar, señalar o decir el número.</td></tr>
+            <tr><td>4</td><td>«La etiqueta dice.» Poner encima de cada precio las monedas dibujadas y después formar el precio sin dibujo.</td><td>Individual con apoyo, aula ordinaria</td><td>Representación: retirada progresiva del modelo.</td></tr>
+            <tr><td>5</td><td>«Sumamos la compra.» Juntar los precios de dos productos con material y comprobar en la recta.</td><td>Equipo de cuatro, aula ordinaria</td><td>Acción: material, recta o dibujo para resolver.</td></tr>
+            <tr><td>6</td><td>«Abrimos la tienda.» Dramatización con roles de vendedor y comprador. Noa pide con el habla y el tablero y espera su turno.</td><td>Gran grupo, aula ordinaria, con PT y AL</td><td>Implicación: roles rotativos y guion visual de seis pasos.</td></tr>
+            <tr><td>7</td><td>«Mercadillo solidario.» Compra real en el mercadillo del centro, con la ATE y su familia.</td><td>Todo el centro, patio</td><td>Generalización a un contexto real.</td></tr>
+            <tr><td>8</td><td>«¿Qué he aprendido?» Autoevaluación con caras y portafolio de la unidad.</td><td>Individual, aula de apoyo</td><td>Expresión: señalar, pegar o decir.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notas-fila">
+        <div class="nota nota--indicador">
+          <p class="nota__tipo">Indicador · 0,8 p</p>
+          <p>
+            «Diseña actividades realistas […] adecuadas al alumno/grupo siguiendo el Diseño Universal de Aprendizaje
+            (DUA).» Es el indicador que más vale de la unidad: haz visible el DUA en cada actividad, como en la última
+            columna.
+          </p>
+        </div>
+        <div class="nota nota--idea">
+          <p class="nota__tipo">Idea · Para la exposición</p>
+          <p>
+            Lleva el material: monedas, la recta de barcos y el tablero. Puedes apoyarte en material en papel y
+            manipulativo (artículo 51.18 de la convocatoria), y enseñar vale más que describir.
+          </p>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="principal">
+          <h3>7. Recursos</h3>
+          <ul>
+            <li><strong>Personales:</strong> PT, tutora, AL en la sesión 6, ATE en la sesión 7, dos compañeras mentoras y la familia.</li>
+            <li><strong>Materiales:</strong> monedas de juguete y reales, caja registradora, etiquetas de precio con modelo, recta numérica de barcos, guion visual de la compra y tablero de comunicación con el vocabulario de la tienda.</li>
+            <li><strong>Espaciales:</strong> aula de apoyo en las sesiones 1, 2 y 8; aula ordinaria en las sesiones 3 a 6; patio en la sesión 7.</li>
+            <li><strong>Temporales:</strong> ocho sesiones de 45 minutos en tres semanas, con práctica diaria en el aula.</li>
+          </ul>
+          <h3>8. Tecnologías</h3>
+          <ul>
+            <li>En la pizarra digital, una actividad de arrastrar monedas hasta cada precio, preparada con una herramienta de autor gratuita, para todo el grupo.</li>
+            <li>En la tablet, la página de la tienda en su comunicador de pictogramas, con fotos de los productos.</li>
+            <li>Videomodelado: un vídeo de dos compañeras comprando, grabado con la tablet del centro, con permiso de sus familias y sin difundirlo.</li>
+          </ul>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,4 p</p>
+            <p>
+              «Plantea recursos personales, materiales, espaciales y temporales ajustados a las actividades diseñadas.»
+              Los cuatro tipos, cada uno ligado a una sesión.
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,4 p</p>
+            <p>
+              «Incluye un uso coherente de las tecnologías aplicadas a la educación.» Coherente significa que la tecnología
+              resuelve algo: aquí, practicar sin riesgo y aprender viendo un modelo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bloque">
+        <div class="principal">
+          <h3>9. Evaluación</h3>
+          <p><strong>Criterios de evaluación</strong> (adaptados de MAT 1.1, 2.1, 2.2 y 5.2 y de LCL 3.2):</p>
+          <ol>
+            <li>Reconoce las monedas de 1 y 2 euros y las asocia a su valor.</li>
+            <li>Forma cantidades hasta 10 euros con monedas, con y sin modelo visual.</li>
+            <li>Suma dos precios hasta 10 con material o con la recta numérica.</li>
+            <li>Pide un producto y pregunta el precio combinando el habla y el tablero.</li>
+            <li>Espera su turno en la cola con ayuda visual.</li>
+          </ol>
+          <p>
+            <strong>Procedimientos e instrumentos:</strong> observación sistemática con la lista de control del anexo II en
+            cada sesión, registro del nivel de ayuda, análisis de las etiquetas resueltas y autoevaluación con caras.
+            <strong>Momentos:</strong> inicial (sesión 1, qué sabe de las monedas), continua (sesiones 2 a 7) y final
+            (sesión 8).
+          </p>
+          <p>
+            <strong>Evaluación de la enseñanza y de la práctica docente:</strong> al acabar la unidad, la PT y la tutora
+            valoran si las ayudas se retiraron a tiempo, si las actividades motivaron y si la dramatización funcionó para
+            todo el grupo, y anotan los cambios para la unidad 10.
+          </p>
+          <h3>10. Información a las personas implicadas</h3>
+          <p>
+            La familia recibe una nota con fotos de las producciones, sin la cara de Noa, y una propuesta para casa: pagar
+            con monedas en la panadería. La tutora recibe el registro de la unidad, que se lleva a la sesión de evaluación
+            del PAP.
+          </p>
+        </div>
+        <div class="margen">
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,4 p</p>
+            <p>«Refiere criterios de evaluación relacionados con las habilidades específicas/saberes básicos.» Uno por habilidad.</p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,4 p</p>
+            <p>
+              «Especifica los momentos, procedimientos, técnicas e instrumentos de evaluación […], así como el proceso de
+              enseñanza y la práctica docente.» No olvides la segunda parte.
+            </p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicador · 0,2 p</p>
+            <p>«Establece mecanismos para trasladar la información de la evaluación a los agentes implicados.»</p>
+          </div>
+          <div class="nota nota--indicador">
+            <p class="nota__tipo">Indicadores · 0,5 p</p>
+            <p>
+              En la exposición se valoran el vocabulario técnico y la fluidez. Usa con soltura términos como «análisis de
+              tareas», «ayudas decrecientes» o «generalización».
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANEXO II -->
+      <div class="ancho salto-antes">
+        <h2>Anexo II. Instrumentos de evaluación</h2>
+        <h3>Lista de control de la unidad 8</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 46%">Criterio</th>
+              <th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th><th scope="col">S6</th><th scope="col">S7</th>
+              <th scope="col" style="width: 14%">Final</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1. Reconoce las monedas de 1 y 2 euros</td><td></td><td></td><td></td><td></td><td></td><td></td><td>NC · EP · C</td></tr>
+            <tr><td>2. Forma cantidades hasta 10 euros</td><td></td><td></td><td></td><td></td><td></td><td></td><td>NC · EP · C</td></tr>
+            <tr><td>3. Suma dos precios hasta 10</td><td></td><td></td><td></td><td></td><td></td><td></td><td>NC · EP · C</td></tr>
+            <tr><td>4. Pide y pregunta el precio</td><td></td><td></td><td></td><td></td><td></td><td></td><td>NC · EP · C</td></tr>
+            <tr><td>5. Espera su turno</td><td></td><td></td><td></td><td></td><td></td><td></td><td>NC · EP · C</td></tr>
+          </tbody>
+        </table>
+        <p>
+          En cada sesión se anota el nivel de ayuda: F (física), G (gestual), V (visual), Vb (verbal) o I (independiente).
+          En la columna final, NC es no conseguido, EP en proceso y C conseguido, como en el anexo IV del modelo de PAP.
+        </p>
+        <h3>Registro de comunicación</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 14%">Fecha</th>
+              <th scope="col">Palabras modeladas</th>
+              <th scope="col">Palabras que usa por su cuenta</th>
+              <th scope="col" style="width: 22%">Contexto y persona</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>&#160;</td><td></td><td></td><td></td></tr>
+            <tr><td>&#160;</td><td></td><td></td><td></td></tr>
+            <tr><td>&#160;</td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notas-fila">
+        <div class="nota nota--adapta">
+          <p class="nota__tipo">Adáptalo</p>
+          <p>
+            Los anexos cuentan en las 70 páginas. Incluye solo los instrumentos que vas a mencionar en la defensa o en la
+            unidad.
+          </p>
+        </div>
+        <div class="nota nota--idea">
+          <p class="nota__tipo">Idea</p>
+          <p>
+            Registrar el nivel de ayuda, y no solo si acierta, muestra cómo avanza hacia la autonomía. Es un argumento muy
+            sólido en el debate.
+          </p>
+        </div>
+      </div>
+
+      <div class="creditos-finales">
+        <p>
+          <strong>Programa de intervención de PT de ejemplo, modelo Murcia, comentado.</strong> IdEducando, octubre de
+          2026. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/programa-intervencion-pt-ejemplo</span>
+        </p>
+        <p>
+          Fuentes de la convocatoria: Orden de 21 de enero de 2026, de la Consejería de Educación y Formación Profesional,
+          convocatoria de Maestros (BORM n.º 18, de 23/01/2026), anexos V, VI y XXII. El resto de fuentes, en el apartado
+          14 del ejemplo.
+        </p>
+        <p>
+          El caso y el centro son ficticios. Este ejemplo no sustituye a la lectura de la convocatoria ni de la normativa
+          vigente cuando prepares tu programa.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+  </body>
+</html>

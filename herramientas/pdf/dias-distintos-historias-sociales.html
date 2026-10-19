@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Días distintos: historias sociales para anticipar los cambios en el cole · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* La hoja de tarjetas usa márgenes laterales más estrechos para que quepan cuatro tarjetas
+         de 44 mm por fila. El pie (licencia y número de página) se mantiene. */
+      @page tarjetas {
+        margin: 14mm 12mm 18mm 12mm;
+      }
+
+      /* ---------- Un color para cada historia ---------- */
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 15mm;
+      }
+
+      .portada__titulo {
+        font-size: 58pt;
+        line-height: 0.96;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 128mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .calendario {
+        position: absolute;
+        z-index: 2;
+        left: 21mm;
+        top: 131mm;
+        width: 168mm;
+        padding: 9mm 6mm 6mm;
+        border: 1.2mm solid var(--marino);
+        border-radius: 6mm;
+        background: #fff;
+        transform: rotate(-2.2deg);
+        box-shadow: 0 10mm 18mm -10mm rgb(30 43 85 / 0.45);
+      }
+
+      .calendario__anilla {
+        position: absolute;
+        top: -6.5mm;
+        width: 4.2mm;
+        height: 12mm;
+        border-radius: 2.1mm;
+        background: var(--marino);
+      }
+
+      .calendario__semana,
+      .calendario__dias {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.6mm;
+      }
+
+      .calendario__semana {
+        margin-bottom: 2.6mm;
+      }
+
+      .calendario__semana span {
+        padding: 1.2mm 0;
+        border-radius: 2mm;
+        background: var(--crema);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .dia-cal {
+        position: relative;
+        height: 23mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .dia-cal b {
+        position: absolute;
+        left: 2mm;
+        top: 1.2mm;
+        font-family: var(--titulos);
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      /* Días normales: dos rayitas grises que recuerdan la rutina de siempre */
+      .dia-cal--normal::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 3.5mm;
+        width: 14mm;
+        height: 2.2mm;
+        margin-left: -7mm;
+        border-radius: 1.1mm;
+        background: var(--linea);
+        box-shadow: 0 -4mm 0 var(--linea);
+      }
+
+      .dia-cal--distinto {
+        background: var(--t);
+        border: 0.8mm solid var(--c);
+      }
+
+      .dia-cal--distinto .icono {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 17mm;
+        height: 17mm;
+        transform: translate(-50%, -46%);
+      }
+
+      .dia-cal--distinto .estrellita {
+        position: absolute;
+        right: -2.8mm;
+        top: -2.8mm;
+        width: 8mm;
+        height: 8mm;
+      }
+
+      /* Pegatina redonda en la esquina de arriba */
+      .etiqueta-kit {
+        position: absolute;
+        z-index: 4;
+        right: 17mm;
+        top: 50mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        padding: 5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1.12;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .etiqueta-kit svg {
+        width: 8mm;
+        height: 8mm;
+        margin: 0 auto 1.2mm;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabecera {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr) 34mm;
+        align-items: center;
+        gap: 5mm;
+      }
+
+      .icono-historia {
+        display: grid;
+        place-items: center;
+        width: 21mm;
+        height: 21mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+      }
+
+      .icono-historia svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .cabecera .antetitulo {
+        margin: 0 0 1mm;
+        font-size: 9pt;
+        color: var(--tx);
+      }
+
+      .cabecera h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      .cabecera > img {
+        justify-self: end;
+        width: 34mm;
+        height: auto;
+      }
+
+      .franja {
+        height: 1.6mm;
+        margin: 3.5mm 0 3mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      .cuando {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0 0 2mm;
+        font-size: 12pt;
+      }
+
+      .cuando img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .cuando .linea {
+        width: 62mm;
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .leido {
+        display: flex;
+        align-items: center;
+        gap: 1.3mm;
+        margin-left: auto;
+        white-space: nowrap;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      .leido svg {
+        width: 6.2mm;
+        height: 6.2mm;
+      }
+
+      /* ---------- Historia ---------- */
+      .historia {
+        display: flex;
+        flex-direction: column;
+        height: 258mm;
+      }
+
+      .camino {
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* Camino de puntos que une los pasos */
+      .camino::before {
+        content: '';
+        position: absolute;
+        left: 9.25mm;
+        top: 9.75mm;
+        bottom: 9.75mm;
+        border-left: 1mm dotted var(--c);
+      }
+
+      .paso {
+        display: grid;
+        grid-template-columns: 19.5mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        min-height: 19.5mm;
+        margin: 0;
+      }
+
+      /* Marco del pictograma: cuadrado con esquinas redondas para que ningún pictograma quede cortado */
+      .marco-picto {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 19.5mm;
+        height: 19.5mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4.2mm;
+        background: #fff;
+      }
+
+      .marco-picto img,
+      .marco-picto svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .paso p {
+        margin: 0;
+        font-size: 14.5pt;
+        line-height: 1.28;
+      }
+
+      .paso p > span {
+        display: block;
+      }
+
+      .hueco {
+        display: inline-block;
+        min-width: 46mm;
+        border-bottom: 0.45mm solid var(--marino);
+        transform: translateY(-0.8mm);
+      }
+
+      .hueco--largo {
+        min-width: 80mm;
+      }
+
+      /* ---------- Mi plan y foto ---------- */
+      .cierre {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 50mm;
+        gap: 5mm;
+        margin-top: 4mm;
+      }
+
+      .plan {
+        padding: 2.8mm 3.5mm 3.2mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      .plan h2 {
+        display: flex;
+        align-items: baseline;
+        gap: 3mm;
+        margin: 0;
+        font-size: 15pt;
+      }
+
+      .plan h2 small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 10.5pt;
+      }
+
+      .opciones {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 2.4mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .opciones li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        min-height: 15.5mm;
+        margin: 0;
+        padding: 1.2mm 2mm;
+        border-radius: 3mm;
+        background: #fff;
+        font-size: 10.5pt;
+        line-height: 1.15;
+      }
+
+      .opciones img,
+      .opciones svg {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .opciones .dibujo {
+        width: 13mm;
+        height: 13mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .opciones .otra span {
+        display: block;
+        height: 5mm;
+        margin-top: 1mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .foto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2mm;
+        padding: 4mm;
+        border: 0.7mm dashed var(--suave);
+        border-radius: 4mm;
+        text-align: center;
+        font-size: 10pt;
+        line-height: 1.25;
+        color: var(--suave);
+      }
+
+      .foto svg {
+        width: 12mm;
+        height: 10mm;
+      }
+
+      .foto b {
+        display: block;
+        margin-top: 0.5mm;
+        font-size: 11.5pt;
+        color: var(--marino);
+      }
+
+      .atribucion {
+        margin: 2.5mm 0 0;
+        font-size: 7.5pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Plantilla ---------- */
+      .plantilla {
+        display: flex;
+        flex-direction: column;
+        height: 258mm;
+      }
+
+      .rejilla-plantilla {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 46mm minmax(0, 1fr);
+        grid-template-rows: auto auto auto repeat(7, minmax(16mm, 1fr)) auto;
+        gap: 2mm 5mm;
+      }
+
+      .pauta {
+        display: flex;
+        align-items: center;
+        padding: 1.4mm 2.6mm;
+        border-radius: 2.5mm;
+        background: var(--crema);
+        font-size: 8.4pt;
+        line-height: 1.28;
+        color: var(--suave);
+      }
+
+      .pauta b {
+        color: var(--marino);
+      }
+
+      .pauta--general {
+        grid-column: 1 / -1;
+        font-size: 9pt;
+        border-left: 1.4mm solid var(--amarillo);
+      }
+
+      .titulo-vacio {
+        display: flex;
+        align-items: flex-end;
+        height: 12mm;
+      }
+
+      .titulo-vacio span {
+        flex: 1;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .paso-vacio {
+        display: grid;
+        grid-template-columns: 16mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+      }
+
+      .paso-vacio .marco-picto {
+        width: 16mm;
+        height: 16mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3.5mm;
+      }
+
+      .paso-vacio .renglones span {
+        display: block;
+        height: 7.5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .plantilla .cuando {
+        margin: 0;
+        font-size: 11pt;
+      }
+
+      .plantilla .cuando .linea {
+        width: 38mm;
+      }
+
+      .plantilla .cuando .leido {
+        font-size: 9pt;
+      }
+
+      .plantilla .cuando .leido svg {
+        width: 5.4mm;
+        height: 5.4mm;
+      }
+
+      .plantilla .cierre {
+        margin: 0;
+        grid-template-columns: minmax(0, 1fr) 36mm;
+        gap: 3mm;
+      }
+
+      .plantilla .plan {
+        padding: 2.2mm 3mm 2.6mm;
+      }
+
+      .plantilla .opciones {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 1.8mm;
+      }
+
+      .plantilla .opciones li {
+        min-height: 13mm;
+        padding: 1mm 2mm;
+      }
+
+      .plantilla .opciones .dibujo {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .plantilla .foto {
+        padding: 2mm;
+        font-size: 9pt;
+      }
+
+      /* ---------- Tarjetas ---------- */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .hoja-tarjetas .cabecera {
+        grid-template-columns: 21mm minmax(0, 1fr) 34mm;
+      }
+
+      .instrucciones {
+        margin: 3mm 0 0;
+        font-size: 10pt;
+        line-height: 1.4;
+      }
+
+      .seccion-tarjetas {
+        display: flex;
+        align-items: baseline;
+        gap: 3mm;
+        margin: 4mm 0 2mm;
+        font-size: 13pt;
+      }
+
+      .seccion-tarjetas small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 9.5pt;
+        color: var(--suave);
+      }
+
+      .rejilla-tarjetas {
+        display: grid;
+        justify-content: space-between;
+        row-gap: 3mm;
+      }
+
+      .rejilla-tarjetas--semana {
+        grid-template-columns: repeat(4, 44mm);
+        grid-auto-rows: 21mm;
+      }
+
+      .rejilla-tarjetas--dia {
+        grid-template-columns: repeat(3, 60mm);
+        grid-auto-rows: 23mm;
+      }
+
+      /* La línea discontinua es la línea de corte */
+      .tarjeta {
+        position: relative;
+        padding: 1.1mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2.6mm;
+      }
+
+      .tarjeta__cuerpo {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        height: 100%;
+        padding: 1mm 1.6mm;
+        border: 0.7mm solid var(--amarillo);
+        border-radius: 1.8mm;
+        background: var(--amarillo-tinte);
+      }
+
+      .tarjeta__picto {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 14.5mm;
+        height: 14.5mm;
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .tarjeta__picto img {
+        width: 13.5mm;
+        height: 13.5mm;
+      }
+
+      .tarjeta__texto {
+        min-width: 0;
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1.1;
+        padding-right: 3mm;
+      }
+
+      .tarjeta__estrella {
+        position: absolute;
+        right: 0.8mm;
+        top: 0.8mm;
+        width: 5mm;
+        height: 5mm;
+      }
+
+      .tarjeta--aviso .tarjeta__picto {
+        background: transparent;
+      }
+
+      .tarjeta--aviso .tarjeta__picto svg {
+        width: 14.5mm;
+        height: 14.5mm;
+      }
+
+      .tarjeta--blanca .tarjeta__picto {
+        border: 0.4mm dashed var(--suave);
+      }
+
+      .tarjeta--blanca .tarjeta__texto {
+        flex: 1;
+        align-self: flex-end;
+        height: 5.5mm;
+        margin-bottom: 2.2mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .rejilla-tarjetas--dia .tarjeta__picto {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .rejilla-tarjetas--dia .tarjeta__picto img,
+      .rejilla-tarjetas--dia .tarjeta--aviso .tarjeta__picto svg {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .rejilla-tarjetas--dia .tarjeta__texto {
+        font-size: 12pt;
+      }
+
+      .rejilla-tarjetas--dia .tarjeta__estrella {
+        width: 6mm;
+        height: 6mm;
+      }
+
+      .encaje {
+        display: grid;
+        grid-template-columns: 26mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin-top: 4mm;
+        padding: 2.5mm 4mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-size: 9pt;
+        line-height: 1.35;
+      }
+
+      .encaje svg {
+        width: 26mm;
+        height: auto;
+      }
+
+      .encaje p {
+        margin: 0;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.42;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja h3 {
+        font-size: 11.5pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .guia ol li,
+      .guia ul li {
+        margin-bottom: 0.9mm;
+      }
+
+      .tipos-frases th[scope='row'] {
+        white-space: nowrap;
+      }
+
+      .tipos-frases td,
+      .tipos-frases th {
+        font-size: 9.5pt;
+      }
+
+      .registro td {
+        height: 7mm;
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 11.5pt;
+        line-height: 1.45;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.8em;
+      }
+
+      .familias ol {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1.2mm;
+      }
+
+      .mini-iconos {
+        display: flex;
+        justify-content: space-between;
+        gap: 3mm;
+        margin: 3mm 0 2mm;
+      }
+
+      .mini-iconos figure {
+        flex: 1;
+        margin: 0;
+        padding: 2mm 1mm 1.6mm;
+        border-top: 1.4mm solid var(--c);
+        border-radius: 3mm;
+        background: var(--t);
+        text-align: center;
+        font-size: 9.5pt;
+        line-height: 1.2;
+      }
+
+      .mini-iconos svg {
+        width: 13mm;
+        height: 13mm;
+        margin: 0 auto 1mm;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.2mm 6mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+        font-size: 11pt;
+      }
+
+      .casillas li {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .casillas li::before {
+        content: '';
+        flex: none;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 1mm;
+        font-size: 11pt;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        font-size: 8pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -64mm; top: 18mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -30mm; top: 214mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 34mm; height: 34mm; right: 22mm; bottom: 12mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Historias sociales · Anticipación</p>
+        <h1 class="portada__titulo">Días<br />distintos</h1>
+        <p class="portada__subtitulo">Seis historias para preparar los días que cambian la rutina del cole.</p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="calendario" aria-hidden="true" id="calendario"></div>
+      <div class="etiqueta-kit" aria-hidden="true"><div><span data-icono="estrella"></span>Con plantilla y tarjetas para la agenda</div></div>
+    </section>
+
+    <!-- Las seis historias se generan con el guion del final, a partir de la lista HISTORIAS -->
+    <div id="historias"></div>
+
+    <!-- ======================================================================
+         PLANTILLA EN BLANCO
+         ====================================================================== -->
+    <section class="hoja plantilla c-amarillo">
+      <div class="cabecera">
+        <div class="icono-historia" data-icono="estrella"></div>
+        <div>
+          <p class="antetitulo">Plantilla para escribir tu propia historia</p>
+          <h1>Mi historia de un día distinto</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="franja"></div>
+      <div class="rejilla-plantilla" id="rejilla-plantilla"></div>
+      <p class="atribucion">
+        Pictograma del calendario: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de
+        Aragón. Pautas basadas en los criterios de Carol Gray (versión 10.4, 2023).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS «HOY HAY UN CAMBIO»
+         ====================================================================== -->
+    <section class="hoja-tarjetas c-amarillo">
+      <div class="cabecera">
+        <div class="icono-historia" data-icono="estrella"></div>
+        <div>
+          <p class="antetitulo">Para la agenda visual</p>
+          <h1>Tarjetas «Hoy hay un cambio»</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="instrucciones">
+        Recorta por la línea de puntos, plastifica y pega velcro detrás. Pon la tarjeta en la casilla de la actividad que
+        cambia y explícale qué pasa. La estrella amarilla avisa siempre de lo mismo: hoy hay algo distinto.
+      </p>
+
+      <h2 class="seccion-tarjetas">Para «Mi semana» <small>44 × 21 mm: caben en las casillas de la agenda semanal.</small></h2>
+      <div class="rejilla-tarjetas rejilla-tarjetas--semana" id="tarjetas-semana"></div>
+
+      <h2 class="seccion-tarjetas">Para «Mi día» <small>60 × 23 mm: caben en los huecos de la agenda del día.</small></h2>
+      <div class="rejilla-tarjetas rejilla-tarjetas--dia" id="tarjetas-dia"></div>
+
+      <div class="encaje">
+        <div id="encaje-dibujo"></div>
+        <p>
+          Las medidas están pensadas para la agenda visual de IdEducando: sus casillas miden unos 46 × 23 mm en «Mi semana» y
+          65 × 25 mm en «Mi día». Si usáis otra agenda, mide sus huecos antes de imprimir. Si en tu centro ya hay un símbolo
+          para los cambios, pégalo encima de la estrella.
+        </p>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La
+        estrella es de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes <span class="borrador">[BORRADOR]</span></p>
+      <h1>Anticipar los días que cambian la rutina</h1>
+      <p id="intro-dias">
+        La agenda visual ayuda en los días normales. Este kit es para los días distintos: un simulacro, una sustitución, una
+        excursión, una fiesta, un recreo sin patio o un cambio de horario. Para muchos alumnos y alumnas con trastorno del
+        espectro del autismo (TEA), y para cualquiera que lleve mal los cambios, saber antes qué va a pasar da seguridad. Cada
+        historia cuenta el día en primera persona, con frases cortas y pictogramas, para leerla varias veces antes.
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul>
+        <li>
+          <strong>Seis historias</strong>, una por hoja, con hueco para la fecha, estrellas para colorear cada lectura, «Mi
+          plan» y un recuadro para una foto de tu cole.
+        </li>
+        <li><strong>Una plantilla en blanco</strong> con pautas al margen para escribir las tuyas.</li>
+        <li><strong>25 tarjetas «Hoy hay un cambio»</strong> para la agenda visual, en dos tamaños.</li>
+        <li><strong>Esta guía y una nota para las familias.</strong></li>
+      </ul>
+
+      <h2>Qué es una historia social</h2>
+      <p>
+        Es un texto breve que describe una situación concreta: qué pasa, dónde, cuándo, quién está, qué sienten otras
+        personas y, a veces, qué puede hacer el alumno o la alumna. Carol Gray las creó a principios de los años noventa para
+        alumnado con autismo (Gray y Garand, 1993). Su nombre en inglés, <em>Social Stories</em>, es una marca suya (Hume y
+        otros, 2021). Las de este kit se inspiran en sus criterios, pero ella no las ha revisado.
+      </p>
+
+      <div class="caja caja--azul" id="evidencia">
+        <h3>Qué dice la evidencia</h3>
+        <p>
+          Las narrativas sociales, el nombre general de estas historias, figuran entre las 28 prácticas basadas en la
+          evidencia para alumnado con TEA de 0 a 22 años: las respaldan 21 estudios publicados entre 1990 y 2017, casi todos
+          de caso único (Hume y otros, 2021). Esa revisión contó los estudios con resultados positivos, pero no midió el
+          tamaño del efecto ni incluyó los estudios sin efecto. Los metaanálisis encuentran resultados muy variables (Reynhout
+          y Carter, 2006), mejores para reducir conductas problemáticas que para enseñar habilidades sociales (Kokina y Kern,
+          2010). Uno reciente calcula un efecto moderado, con 61 participantes en total y sin datos sobre si se mantiene (Guo
+          y otros, 2026). Es un apoyo sencillo, con evidencia todavía limitada: úsalo junto a la agenda visual (los apoyos
+          visuales también figuran entre esas prácticas) y observa si a tu alumno o alumna le ayuda.
+        </p>
+      </div>
+
+      <h2>Cómo están escritas</h2>
+      <p>
+        Siguen las pautas de lectura fácil de la norma UNE 153101:2018 EX: frases cortas, una idea por frase, presente y
+        palabras de uso diario. Aún no las hemos validado con personas lectoras, como prevé la norma, y por eso no llevan su
+        logotipo. Usan «a veces» y «normalmente» en lugar de «siempre» y «nunca»: un día puede cambiar algo.
+      </p>
+
+      <h2>Cómo y cuándo leerlas</h2>
+      <ol>
+        <li>
+          <strong>Prepárala.</strong> Escribe la fecha y los huecos, pega una foto del sitio y rodead juntos una o dos ideas de
+          «Mi plan» que ya conozca.
+        </li>
+        <li>
+          <strong>Empieza unos días antes.</strong> Leedla en un momento tranquilo, una o dos veces al día, y colorea una
+          estrella cada vez.
+        </li>
+        <li><strong>Lee despacio.</strong> Señala cada pictograma y deja que pregunte o que vuelva a leerla cuando quiera.</li>
+        <li>
+          <strong>El día del cambio</strong>, repasadla por la mañana y pon la tarjeta «Hoy hay un cambio» en su agenda.
+        </li>
+        <li>
+          <strong>Después, celebrad.</strong> Escribid con la plantilla una historia corta sobre lo que salió bien: Carol Gray
+          propone que al menos la mitad de las historias de cada alumno o alumna celebren sus logros (Gray y otros, 2023).
+        </li>
+        <li><strong>Guárdala</strong> en una carpeta para la próxima vez.</li>
+      </ol>
+
+      <h2>Cómo escribir una propia</h2>
+      <p>
+        Usa la plantilla. Los criterios actuales de Carol Gray (versión 10.4) piden un título, una introducción, un desarrollo
+        y un cierre que respondan a dónde, cuándo, quién, qué, cómo y por qué, y solo dos tipos de frases (Gray y otros, 2023):
+      </p>
+      <table class="tipos-frases">
+        <thead>
+          <tr>
+            <th scope="col">Frases</th>
+            <th scope="col">Qué hacen</th>
+            <th scope="col">Ejemplos de este kit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Descriptivas</th>
+            <td>Cuentan qué pasa, dónde, cuándo, quién, cómo y por qué. También lo que sienten o saben otras personas.</td>
+            <td>«El simulacro empieza cuando suena la alarma.» «A algunos niños y niñas el ruido les molesta mucho.»</td>
+          </tr>
+          <tr>
+            <th scope="row">Orientativas</th>
+            <td>
+              Sugieren con suavidad una respuesta: lo que puede hacer el alumno o la alumna, o cómo le ayudan los adultos.
+            </td>
+            <td>«Puedo taparme los oídos o ponerme mis cascos.» «Mi profe me avisa con la tarjeta del cambio.»</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <strong>La proporción:</strong> por cada frase orientativa, al menos cuatro descriptivas, y como mucho una que
+        oriente al propio alumno o alumna; el título cuenta como descriptiva. Por eso, en este kit las ideas para actuar van
+        aparte, en «Mi plan». Escribe en primera persona y en presente, con palabras literales (nada de «llueve a cántaros»),
+        cuenta lo que no cambia y explica por qué pasa el cambio.
+      </p>
+
+      <div class="caja caja--coral">
+        <h3>Errores frecuentes</h3>
+        <ul>
+          <li>
+            Convertirla en normas: «Tengo que estar callado». Mejor: «En el simulacro, hablamos poco para oír a mi profe».
+          </li>
+          <li>Prometer lo que no depende de ti: «La alarma no sonará fuerte» o «Volvemos a las doce».</li>
+          <li>Leerla por primera vez el mismo día, o en plena crisis: en ese momento, primero la calma.</li>
+          <li>Hacerla larga o con varios pictogramas por frase.</li>
+          <li>Usarla como premio o como castigo, o con fotos en las que salgan otros niños o niñas.</li>
+        </ul>
+      </div>
+
+      <h2>El simulacro, paso a paso</h2>
+      <p id="norma-simulacro">
+        En los centros públicos, la Orden de 13 de noviembre de 1984 pide un simulacro de evacuación cada curso, en los tres
+        primeros meses. Ni el alumnado ni el profesorado saben el día ni la hora, pero la dirección avisa antes a las
+        familias, el ejercicio se explica al alumnado con varios días de antelación y una persona se encarga de evacuar al
+        alumnado con discapacidad o con dificultades motoras. Desde el 11 de octubre de 2026, la Directriz Básica de
+        autoprotección (Orden INT/1068/2026) sustituye a la Norma Básica de Autoprotección (Real Decreto 393/2007): pide al
+        menos un simulacro al año en los centros con plan de autoprotección y medidas para proteger a las personas de alta
+        vulnerabilidad, entre ellas el alumnado con discapacidad cognitiva o sensorial y los niños y niñas de hasta 6 años. Tu
+        comunidad autónoma puede tener instrucciones propias: pide el plan de autoprotección de tu centro.
+      </p>
+      <p>
+        La alarma puede ser lo más difícil: un metaanálisis estima que alrededor del 41 % de las personas con TEA tiene
+        hiperacusia, es decir, tolera mal sonidos que a la mayoría no le molestan (Williams y otros, 2021). Algunas ideas
+        prácticas:
+      </p>
+      <ol>
+        <li>
+          <strong>Habla con la dirección.</strong> Pregunta en qué semanas puede haber simulacro y acordad cómo anticipárselo
+          a este alumno o alumna.
+        </li>
+        <li>
+          <strong>Decidid quién le acompaña</strong>, y quién lo hará si esa persona falta. Que quede escrito en el plan del
+          centro.
+        </li>
+        <li><strong>Avisa a la familia</strong> y dale la historia para leerla también en casa.</li>
+        <li>
+          <strong>Practicad el sonido.</strong> Grabad la alarma y escuchadla juntos, primero muy baja. Subid el volumen poco
+          a poco, solo si lo lleva bien, y parad si se agobia.
+        </li>
+        <li>
+          <strong>Recorred el camino</strong> hasta el punto de encuentro un día tranquilo y haced allí la foto de la historia.
+        </li>
+        <li>
+          <strong>Cascos a mano.</strong> Si los usa, que estén siempre en el mismo sitio, cerca de la puerta: en el simulacro
+          nadie vuelve a por sus cosas.
+        </li>
+        <li><strong>Después, celebradlo.</strong> Volved a leer la historia y comentad qué salió bien.</li>
+      </ol>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>
+        Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de presentar la información y de
+        participar (CAST, 2024):
+      </p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>Si aún no lee:</strong> lee el adulto y el alumno o la alumna señala cada pictograma.</li>
+          <li><strong>Más corta:</strong> en Infantil, lee solo la primera frase de cada paso.</li>
+          <li><strong>Con fotos:</strong> pega fotos de tu cole encima de los pictogramas.</li>
+        </ul>
+        <ul>
+          <li><strong>Para escucharla:</strong> grábala con tu voz.</li>
+          <li><strong>Con otra lengua en casa:</strong> escribid las palabras clave en la lengua de la familia.</li>
+          <li><strong>Para toda la clase:</strong> leed la del simulacro en la asamblea. No señala a nadie.</li>
+          <li><strong>Si ya escribe:</strong> que escriba su propia historia con la plantilla.</li>
+        </ul>
+      </div>
+
+      <h2>Coordinación y fotos</h2>
+      <p>
+        Comparte la historia con quien estará ese día con el alumno o la alumna: el maestro o la maestra de Pedagogía
+        Terapéutica (PT) o de Audición y Lenguaje (AL), el comedor, el autobús o quien haga la sustitución. Si tras unas
+        semanas no notas mejora, revisadla con el equipo de orientación. Haz las fotos sin alumnado y con permiso de los
+        adultos que salgan.
+      </p>
+
+      <h2>Anota cómo va</h2>
+      <p>Así sabrás si la historia le ayuda. Escribe solo iniciales y guarda la hoja en el centro.</p>
+      <table class="registro">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Iniciales</th>
+            <th scope="col">Historia</th>
+            <th scope="col">Lecturas antes</th>
+            <th scope="col">Cómo fue el día</th>
+            <th scope="col">Qué cambiar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="creditos">
+        <p>
+          <strong>Días distintos: historias sociales para anticipar los cambios en el cole.</strong> IdEducando, octubre de
+          2026. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/dias-distintos-historias-sociales</span>
+        </p>
+        <p id="fuentes-dias">
+          Fuentes: Hume, K. y otros (2021), <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032; Gray,
+          C. A. y Garand, J. D. (1993), <em>Focus on Autistic Behavior</em>, 8(1), 1-10; Gray, C., Faherty, C., Timmins, S. y
+          Lanou, A. (2023), <em>Social Stories 10.4 Criteria</em>, carolgraysocialstories.com; Reynhout, G. y Carter, M.
+          (2006), <em>Journal of Autism and Developmental Disorders</em>, 36(4), 445-469; Kokina, A. y Kern, L. (2010),
+          <em>Journal of Autism and Developmental Disorders</em>, 40(7), 812-826; Guo, T. y otros (2026), <em>Frontiers in
+          Psychology</em>, 17, 1855311; Williams, Z. J., Suzman, E. y Woynaroski, T. G. (2021), <em>Ear and Hearing</em>,
+          42(5), 1137-1150; Orden de 13 de noviembre de 1984 sobre evacuación de centros docentes, Boletín Oficial del Estado
+          (BOE) núm. 276, de 17 de noviembre de 1984; Orden INT/1068/2026, de 7 de octubre (Directriz Básica de
+          Planificación de Protección Civil de autoprotección), BOE núm. 252, de 10 de octubre de 2026, apartado 2.5.2 y anexos
+          II y V; Real Decreto 393/2007, Norma Básica de Autoprotección, que dejó de aplicarse el 10
+          de octubre de 2026; UNE 153101:2018 EX, <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de
+          documentos</em>; CAST (2024), <em>Universal Design for Learning Guidelines 3.0</em>.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. La estrella, la
+          agenda y los iconos de las cabeceras son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Días distintos, también en casa</h1>
+      <p>
+        En el cole hay días que cambian la rutina. A muchos niños y niñas les cuesta no saber qué va a pasar. Para
+        prepararlos, en clase leemos historias cortas con pictogramas que cuentan, paso a paso, cómo será ese día:
+      </p>
+      <div class="mini-iconos" id="mini-iconos"></div>
+
+      <h2>Cómo podéis ayudar</h2>
+      <ol>
+        <li>Leed la historia en casa unos días antes, sin prisa. Si la pide muchas veces, está bien.</li>
+        <li>Hablad del día con palabras sencillas: qué va a pasar, quién estará y qué se queda igual.</li>
+        <li>Usad «a veces» y «normalmente». Evitad prometer cosas que no dependen de vosotros.</li>
+        <li>Contad al cole lo que le preocupa y lo que le ayuda: los ruidos, la ropa, la comida o un objeto que le calma.</li>
+        <li>Después del día, preguntad cómo fue y celebrad lo que salió bien.</li>
+      </ol>
+
+      <h2>Si en el cole hay un simulacro</h2>
+      <p>
+        Un simulacro es un ensayo para aprender a salir del cole si un día hace falta. Normalmente, el cole avisa a las
+        familias de que habrá uno, pero no dice el día ni la hora. Si a vuestro hijo o hija le molestan mucho los ruidos fuertes, contádselo a
+        su tutor o tutora: así podréis prepararlo juntos.
+      </p>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p style="margin: 0 0 2mm">Estos días leemos la historia:</p>
+        <ul class="casillas">
+          <li>Hoy hay un simulacro</li>
+          <li>Hoy viene otra seño u otro profe</li>
+          <li>Nos vamos de excursión</li>
+          <li>Hoy hay fiesta en el cole</li>
+          <li>Hoy no salimos al patio</li>
+          <li>Hoy cambia mi horario</li>
+        </ul>
+        <p class="renglon-etiqueta">Será el día:<span></span></p>
+        <p class="renglon-etiqueta">Os pedimos:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Días distintos.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos pictográficos
+          utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Las seis historias. Cada paso: un pictograma de ARASAAC (número) o un dibujo de IdEducando
+      // (texto), y sus frases, una por línea. {hueco} se convierte en una raya para escribir a mano.
+      // En cada historia hay muchas más frases que describen que frases que orientan, y solo una
+      // orienta al propio alumno o alumna. Las ideas para actuar van en «Mi plan».
+      // ---------------------------------------------------------------------
+      const HISTORIAS = [
+        {
+          titulo: 'Hoy hay un simulacro',
+          color: 'coral',
+          icono: 'campana',
+          pasos: [
+            [3082, ['Algunos días, en el cole hay un simulacro.', 'Es un ensayo: practicamos cómo salir del cole si un día hace falta.']],
+            [36342, ['El simulacro empieza cuando suena la alarma.', 'La alarma suena muy fuerte para que la oiga todo el cole.']],
+            [39871, ['A algunos niños y niñas el ruido les molesta mucho.', 'Puedo taparme los oídos o ponerme mis cascos.']],
+            [38596, ['Salimos de clase en fila, andando, sin correr.', 'Las mochilas y las cosas se quedan en clase.']],
+            [33064, ['Vamos al punto de encuentro.', 'Normalmente, está en el patio.']],
+            [11327, ['Allí, mi profe cuenta a los niños y a las niñas.', 'Así sabe que estamos todos.']],
+            [9814, ['Después, volvemos a clase y seguimos con el día.', '¡Ya hemos practicado!']],
+          ],
+          plan: [[37857, 'Me pongo los cascos'], [39871, 'Me tapo los oídos'], [13024, 'Voy de la mano de un adulto'], [2714, 'Cuento hasta diez'], [7258, 'Respiro despacio']],
+          foto: 'el punto de encuentro',
+        },
+        {
+          titulo: 'Hoy viene otra seño u otro profe',
+          color: 'morado',
+          icono: 'persona',
+          pasos: [
+            [6556, ['A veces, mi profe no puede venir al cole.', 'Ese día, viene otra persona a mi clase.']],
+            [9853, ['Esa persona también es profe.', 'Se llama {hueco}.']],
+            [7062, ['Mi clase es la misma.', 'Mis compañeros y compañeras, también.']],
+            ['agenda', ['Normalmente, hacemos las mismas cosas que otros días.', 'A veces, las hacemos de otra manera.']],
+            [22620, ['La persona nueva todavía no sabe cómo hacemos las cosas.', 'Por eso, a veces pregunta.']],
+            [30391, ['Al principio, a veces estamos nerviosos. Es normal.', 'Si no sé qué toca, puedo mirar mi agenda o preguntar.']],
+            [6630, ['Normalmente, mi profe vuelve otro día.', 'Entonces, mi profe quiere saber cómo ha ido.']],
+          ],
+          plan: [['agenda', 'Miro mi agenda'], [9844, 'Pregunto qué toca'], [6522, 'Saludo'], [7258, 'Respiro despacio'], [4570, 'Pido ayuda']],
+          foto: 'la clase',
+        },
+        {
+          titulo: 'Nos vamos de excursión',
+          color: 'verde',
+          icono: 'autobus',
+          pasos: [
+            [4671, ['Hoy nos vamos de excursión.', 'Una excursión es una salida para aprender fuera del cole.']],
+            [6564, ['Vamos a {hueco}.', 'Allí vemos cosas nuevas.']],
+            [2262, ['Normalmente, vamos en autobús.', 'En el autobús, cada uno va en su asiento con el cinturón.']],
+            [11396, ['Vamos en grupo, con mi profe y otros adultos del cole.', 'Los adultos nos acompañan y nos ayudan.']],
+            [7116, ['A veces, en la excursión hay mucha gente o mucho ruido.', 'Puedo ir de la mano de un adulto o ponerme los cascos.']],
+            [28206, ['A media mañana, almorzamos.', 'Los adultos saben dónde está el baño.']],
+            [3082, ['Al final, volvemos al cole.', 'La excursión ha terminado.']],
+          ],
+          plan: [[13024, 'Voy de la mano de un adulto'], [37857, 'Me pongo los cascos'], [6061, 'Bebo agua'], [24503, 'Descanso un rato'], [4570, 'Pido ayuda']],
+          foto: 'el sitio de la excursión',
+        },
+        {
+          titulo: 'Hoy hay fiesta en el cole',
+          color: 'amarillo',
+          icono: 'fiesta',
+          pasos: [
+            [7099, ['Hoy hay una fiesta en el cole.', 'Celebramos {hueco}.']],
+            [6012, ['Hoy el horario es distinto.', 'Algunas clases de siempre no se hacen.']],
+            [5985, ['Algunos niños, niñas y profes se disfrazan. Otros, no.', 'Debajo del disfraz, son las personas de siempre.']],
+            [2746, ['Hay música.', 'A veces, la música suena fuerte.']],
+            [7116, ['Hay mucha gente: otras clases, profes y, a veces, familias.', 'Muchas personas hablan a la vez.']],
+            [32826, ['Si me agobio, puedo ir a un sitio tranquilo con un adulto.']],
+            [28429, ['Al final, la fiesta termina.', 'Ha sido un día distinto.']],
+          ],
+          plan: [[37857, 'Me pongo los cascos'], [32826, 'Voy a un sitio tranquilo'], [13024, 'Voy de la mano de un adulto'], ['agenda', 'Miro mi agenda'], [2714, 'Cuento hasta diez']],
+          foto: 'el sitio de la fiesta',
+        },
+        {
+          titulo: 'Hoy no salimos al patio',
+          color: 'azul',
+          icono: 'lluvia',
+          pasos: [
+            [7148, ['Hoy llueve mucho.', 'El patio está mojado.']],
+            [9028, ['Con el suelo mojado, es fácil resbalar y caerse.', 'Por eso, hoy no salimos al patio.']],
+            [9814, ['Hoy, el recreo es en clase.', 'A veces, es en otro sitio del cole, como el gimnasio.']],
+            [28206, ['Primero, almorzamos, como otros días.', 'Después, es la hora de jugar.']],
+            [32580, ['En clase hay juegos, construcciones, cuentos y papel para dibujar.', 'Puedo elegir a qué jugar.']],
+            [7062, ['A muchos niños y niñas les gusta más el patio.', 'En clase hay menos sitio y, a veces, más ruido.']],
+            [2798, ['Cuando deja de llover, el patio se seca.', 'Entonces, volvemos a salir.']],
+          ],
+          plan: [[6537, 'Juego con un amigo'], [4935, 'Juego con bloques'], [7141, 'Miro un cuento'], [8088, 'Dibujo'], [32826, 'Voy a un sitio tranquilo']],
+          foto: 'el sitio del recreo cuando llueve',
+        },
+        {
+          titulo: 'Hoy cambia mi horario',
+          color: 'naranja',
+          icono: 'reloj',
+          pasos: [
+            ['agenda', ['Cada día, mi agenda me dice qué toca.', 'Normalmente, los días se parecen.']],
+            ['estrella', ['A veces, hay un cambio.', 'Mi profe me avisa con la tarjeta del cambio.']],
+            [7229, ['Puede que una clase sea a otra hora.', 'O que hoy no la hagamos.']],
+            [4628, ['Hoy cambia esto: {hueco-largo}.', 'Es porque {hueco-largo}.']],
+            [30391, ['A muchas personas les cuestan los cambios.', 'A los mayores, también.']],
+            [9844, ['Si no sé qué toca, puedo preguntar: «¿Qué toca ahora?».', 'Preguntar está bien.']],
+            [3071, ['Lo que no hacemos hoy, normalmente lo hacemos otro día.', 'En mi agenda veo cuándo.']],
+          ],
+          plan: [['agenda', 'Miro mi agenda'], [9844, 'Pregunto qué toca'], [7258, 'Respiro despacio'], [2714, 'Cuento hasta diez'], [4570, 'Pido ayuda']],
+          foto: 'la agenda de clase',
+        },
+      ];
+
+      // Pautas de la plantilla, alineadas con cada fila.
+      const PAUTAS = {
+        general:
+          '<b>Pautas:</b> frases cortas, en presente y en primera persona. Usa «a veces» y «normalmente». Por cada frase que orienta («Puedo…»), escribe al menos cuatro que describen, y solo una frase orientada al propio alumno o alumna.',
+        titulo: '<b>Título.</b> Di qué pasa: «Hoy hay…», «Nos vamos…».',
+        cuando: '<b>Fecha.</b> Léela varios días antes. Colorea una estrella cada vez.',
+        pasos: [
+          '<b>1. Empieza.</b> Qué va a pasar y cuándo. Una idea por frase.',
+          '<b>2. Dónde y quién.</b> Nombra el sitio y a las personas que estarán.',
+          '<b>3. Cómo es.</b> Lo que se verá, se oirá o se notará. Di por qué pasa.',
+          '<b>4. Otras personas.</b> Qué sienten o saben: «A muchos niños y niñas…».',
+          '<b>5. Lo que puedo hacer.</b> Una sola frase: «Puedo…». Nada de «tengo que».',
+          '<b>6. Lo que no cambia.</b> La clase, los compañeros o quién le ayuda.',
+          '<b>7. Final.</b> Cuándo acaba y qué viene después. Termina en positivo.',
+        ],
+        plan: '<b>Mi plan.</b> Pega o dibuja ideas que ya conozca y practicadlas antes. La foto, del sitio real y sin otros niños ni niñas.',
+      };
+
+      // Tarjetas «Hoy hay un cambio»: [pictograma, texto]. 'aviso' es la tarjeta de la estrella; null, una tarjeta en blanco.
+      const TARJETAS_SEMANA = [
+        ['aviso'], ['aviso'], ['aviso'], [36342, 'Simulacro'],
+        [28003, 'Otra seño'], [28002, 'Otro profe'], [4671, 'Excursión'], [7099, 'Fiesta'],
+        [7148, 'Recreo en clase'], [7229, 'Cambio de hora'], [7108, 'Foto de clase'], [4772, 'Visita'],
+        [37047, 'Salimos antes'], [null], [null], [null],
+      ];
+      const TARJETAS_DIA = [
+        ['aviso'], [36342, 'Simulacro'], [28003, 'Otra seño'],
+        [28002, 'Otro profe'], [4671, 'Excursión'], [7099, 'Fiesta'],
+        [7148, 'Recreo en clase'], [7229, 'Cambio de hora'], [null],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+
+      const DIBUJOS = {
+        campana: `
+          <path d="M17 39 q-6 11 0 22 M83 39 q6 11 0 22" fill="none" stroke="${M}" stroke-width="5" stroke-linecap="round"/>
+          <path d="M8 32 q-10 18 0 36 M92 32 q10 18 0 36" fill="none" stroke="${M}" stroke-width="5" stroke-linecap="round" opacity=".45"/>
+          <path d="M50 14 v9" stroke="${M}" stroke-width="5" stroke-linecap="round"/>
+          <path d="M29 71 V50 a21 21 0 0 1 42 0 V71 l7 8 H22 z" fill="#e8553e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M37 52 a13 13 0 0 1 8 -11" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>
+          <circle cx="50" cy="86" r="6" fill="#f6c12e" stroke="${M}" stroke-width="4"/>`,
+        persona: `
+          <circle cx="50" cy="30" r="15" fill="#fde8cf" stroke="${M}" stroke-width="5"/>
+          <circle cx="44.5" cy="29" r="2.6" fill="${M}"/><circle cx="55.5" cy="29" r="2.6" fill="${M}"/>
+          <path d="M44 36 q6 5 12 0" fill="none" stroke="${M}" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M20 93 V80 a22 22 0 0 1 22 -22 h16 a22 22 0 0 1 22 22 V93 z" fill="#8c4fb8" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <rect x="51" y="67" width="21" height="14" rx="3" fill="#fff" stroke="${M}" stroke-width="3"/>
+          <path d="M55.5 72.5 h12 M55.5 76.5 h8" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M83 9 v14 M76 16 h14" stroke="#f6c12e" stroke-width="5" stroke-linecap="round"/>
+          <path d="M17 13 v8 M13 17 h8" stroke="#f6c12e" stroke-width="4" stroke-linecap="round"/>`,
+        autobus: `<g transform="translate(0 -5)">
+          <rect x="7" y="28" width="86" height="46" rx="10" fill="#1fa67a" stroke="${M}" stroke-width="5"/>
+          <path d="M11 61 h78" stroke="#f6c12e" stroke-width="5"/>
+          <g fill="#e4edfb" stroke="${M}" stroke-width="3.5">
+            <rect x="15" y="36" width="15" height="15" rx="3"/><rect x="35" y="36" width="15" height="15" rx="3"/>
+            <rect x="55" y="36" width="15" height="15" rx="3"/><rect x="75" y="36" width="11" height="20" rx="3"/>
+          </g>
+          <g fill="#fff" stroke="${M}" stroke-width="5"><circle cx="28" cy="76" r="9"/><circle cx="72" cy="76" r="9"/></g>
+          <circle cx="28" cy="76" r="2.8" fill="${M}"/><circle cx="72" cy="76" r="2.8" fill="${M}"/></g>`,
+        fiesta: `
+          <path d="M5 14 Q50 40 95 14" fill="none" stroke="${M}" stroke-width="3"/>
+          <g stroke="${M}" stroke-width="2.5" stroke-linejoin="round">
+            <path d="M9.8 19.5 h12 l-6 13 z" fill="#2f6fd6"/><path d="M26.9 25.1 h12 l-6 13 z" fill="#1fa67a"/>
+            <path d="M44 27 h12 l-6 13 z" fill="#f6c12e"/><path d="M61.1 25.1 h12 l-6 13 z" fill="#e8553e"/>
+            <path d="M78.2 19.5 h12 l-6 13 z" fill="#8c4fb8"/>
+          </g>
+          <path d="M50 46 L67 91 H33 Z" fill="#f6c12e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="50" cy="66" r="3.2" fill="#e8553e"/><circle cx="44" cy="80" r="3.2" fill="#2f6fd6"/><circle cx="57" cy="81" r="3.2" fill="#8c4fb8"/>
+          <circle cx="50" cy="44" r="6" fill="#e8553e" stroke="${M}" stroke-width="4"/>
+          <rect x="15" y="58" width="8" height="3.6" rx="1.6" fill="#2f6fd6" transform="rotate(-25 19 60)"/>
+          <rect x="77" y="54" width="8" height="3.6" rx="1.6" fill="#1fa67a" transform="rotate(30 81 56)"/>
+          <rect x="19" y="80" width="8" height="3.6" rx="1.6" fill="#8c4fb8" transform="rotate(15 23 82)"/>
+          <rect x="75" y="79" width="8" height="3.6" rx="1.6" fill="#e8553e" transform="rotate(-20 79 81)"/>`,
+        lluvia: `
+          <path d="M26 60 a14 14 0 0 1 1 -28 a20 20 0 0 1 38 -5 a15 15 0 0 1 10 33 z" fill="#e4edfb" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <g fill="#2f6fd6" stroke="${M}" stroke-width="2.5">
+            <path d="M34 70 C30 77 30 83 34 83 C38 83 38 77 34 70 Z"/>
+            <path d="M51 75 C47 82 47 88 51 88 C55 88 55 82 51 75 Z"/>
+            <path d="M68 70 C64 77 64 83 68 83 C72 83 72 77 68 70 Z"/>
+          </g>`,
+        reloj: `
+          <circle cx="46" cy="56" r="31" fill="#fff" stroke="${M}" stroke-width="5"/>
+          <path d="M46 31 v5 M71 56 h-5 M46 81 v-5 M21 56 h5" stroke="${M}" stroke-width="4" stroke-linecap="round"/>
+          <path d="M46 56 V41 M46 56 L58 63" stroke="${M}" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="46" cy="56" r="3.5" fill="${M}"/>
+          <path d="M58 13 A44 44 0 0 1 90 41" fill="none" stroke="#f5961f" stroke-width="6" stroke-linecap="round"/>
+          <path d="M90 41 l-9.5 -2.5 M90 41 l3.5 -9" stroke="#f5961f" stroke-width="6" stroke-linecap="round"/>`,
+        estrella: `<path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M40 40 l4 -9" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`,
+        agenda: `
+          <rect x="25" y="5" width="50" height="90" rx="7" fill="#fff" stroke="${M}" stroke-width="5"/>
+          <rect x="34" y="11" width="32" height="5" rx="2.5" fill="#2f6fd6"/>
+          <g stroke="${M}" stroke-width="3">
+            <rect x="33" y="22" width="34" height="19" rx="3" fill="#dcf3ea"/>
+            <rect x="33" y="45" width="34" height="19" rx="3" fill="#fdf0c7"/>
+            <rect x="33" y="68" width="34" height="19" rx="3" fill="#e4edfb"/>
+          </g>
+          <circle cx="42" cy="31.5" r="4" fill="#1fa67a"/><path d="M50 31.5 h11" stroke="${M}" stroke-width="3" stroke-linecap="round"/>
+          <g transform="translate(41 46.6) scale(0.18)"><path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="12" stroke-linejoin="round"/></g>
+          <circle cx="42" cy="77.5" r="4" fill="#2f6fd6"/><path d="M50 77.5 h11" stroke="${M}" stroke-width="3" stroke-linecap="round"/>`,
+      };
+      const dibujo = (nombre, clase = '') => svg(DIBUJOS[nombre], clase);
+      const estrellaVacia = svg(`<path d="${ESTRELLA}" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`);
+      const CAMARA = svg(
+        `<rect x="3" y="9" width="42" height="28" rx="6" fill="none" stroke="#46578c" stroke-width="3"/>
+         <path d="M16 9 l4 -6 h8 l4 6" fill="none" stroke="#46578c" stroke-width="3" stroke-linejoin="round"/>
+         <circle cx="24" cy="23" r="8" fill="none" stroke="#46578c" stroke-width="3"/>`,
+        '',
+        '0 0 48 40',
+      );
+
+      const imagen = (picto, clase = '') =>
+        typeof picto === 'number' ? `<img src="pictogramas/${picto}.png" alt="" class="${clase}">` : dibujo(picto, clase);
+      const logo = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
+      const frase = (texto) =>
+        `<span>${texto.replace('{hueco-largo}', '<span class="hueco hueco--largo"></span>').replace('{hueco}', '<span class="hueco"></span>')}</span>`;
+
+      const barraCuando = () => `<div class="cuando"><img src="pictogramas/3071.png" alt=""><span>¿Cuándo?</span><span class="linea"></span>
+        <span class="leido">Lo he leído: ${estrellaVacia.repeat(5)}</span></div>`;
+
+      // ---------------------------------------------------------------------
+      // Hojas de las historias
+      // ---------------------------------------------------------------------
+      const contenedor = document.getElementById('historias');
+      HISTORIAS.forEach((h, i) => {
+        const pasos = h.pasos
+          .map(([picto, frases]) => `<li class="paso"><div class="marco-picto">${imagen(picto)}</div><p>${frases.map(frase).join('')}</p></li>`)
+          .join('');
+        const opciones = h.plan
+          .map(([picto, texto]) => `<li>${imagen(picto)}<span>${texto}</span></li>`)
+          .join('');
+        contenedor.insertAdjacentHTML(
+          'beforeend',
+          `<section class="hoja historia c-${h.color}">
+            <div class="cabecera">
+              <div class="icono-historia">${dibujo(h.icono)}</div>
+              <div><p class="antetitulo">Historia ${i + 1} de 6 · Para leer antes del día</p><h1>${h.titulo}</h1></div>
+              ${logo}
+            </div>
+            <div class="franja"></div>
+            ${barraCuando()}
+            <ol class="camino">${pasos}</ol>
+            <div class="cierre">
+              <div class="plan">
+                <h2>Mi plan <small>Rodea una o dos cosas que te ayudan.</small></h2>
+                <ul class="opciones">${opciones}<li class="otra"><span class="dibujo"></span><div>Otra idea:<span></span></div></li></ul>
+              </div>
+              <div class="foto">${CAMARA}<div>Pega aquí una foto de:<b>${h.foto}</b></div></div>
+            </div>
+            <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Los dibujos de la cabecera son de IdEducando.</p>
+          </section>`,
+        );
+      });
+
+      // ---------------------------------------------------------------------
+      // Plantilla en blanco con pautas al margen
+      // ---------------------------------------------------------------------
+      const rejilla = document.getElementById('rejilla-plantilla');
+      const pauta = (texto, clase = '') => `<div class="pauta ${clase}"><span>${texto}</span></div>`;
+      let filas = pauta(PAUTAS.general, 'pauta--general');
+      filas += `${pauta(PAUTAS.titulo)}<div class="titulo-vacio"><span></span></div>`;
+      filas += `${pauta(PAUTAS.cuando)}${barraCuando()}`;
+      for (const texto of PAUTAS.pasos) {
+        filas += `${pauta(texto)}<div class="paso-vacio"><div class="marco-picto"></div><div class="renglones"><span></span><span></span></div></div>`;
+      }
+      const opcionesVacias = '<li class="otra"><span class="dibujo"></span><div><span></span></div></li>'.repeat(4);
+      filas += `${pauta(PAUTAS.plan)}
+        <div class="cierre">
+          <div class="plan"><h2>Mi plan <small>Rodea una o dos.</small></h2><ul class="opciones">${opcionesVacias}</ul></div>
+          <div class="foto">${CAMARA}<div>Pega aquí una foto del sitio</div></div>
+        </div>`;
+      rejilla.innerHTML = filas;
+
+      // ---------------------------------------------------------------------
+      // Tarjetas
+      // ---------------------------------------------------------------------
+      function tarjeta([picto, texto]) {
+        const estrella = svg(`<path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="7" stroke-linejoin="round"/>`, 'tarjeta__estrella');
+        if (picto === 'aviso') {
+          return `<div class="tarjeta tarjeta--aviso"><div class="tarjeta__cuerpo"><div class="tarjeta__picto">${dibujo('estrella')}</div><div class="tarjeta__texto">Hoy hay un cambio</div></div></div>`;
+        }
+        if (picto === null) {
+          return `<div class="tarjeta tarjeta--blanca"><div class="tarjeta__cuerpo"><div class="tarjeta__picto"></div><div class="tarjeta__texto"></div>${estrella}</div></div>`;
+        }
+        return `<div class="tarjeta"><div class="tarjeta__cuerpo"><div class="tarjeta__picto"><img src="pictogramas/${picto}.png" alt=""></div><div class="tarjeta__texto">${texto}</div>${estrella}</div></div>`;
+      }
+      document.getElementById('tarjetas-semana').innerHTML = TARJETAS_SEMANA.map(tarjeta).join('');
+      document.getElementById('tarjetas-dia').innerHTML = TARJETAS_DIA.map(tarjeta).join('');
+
+      // Dibujo de cómo encaja la tarjeta en la casilla de la agenda
+      document.getElementById('encaje-dibujo').innerHTML = svg(
+        `<rect x="2" y="2" width="96" height="50" rx="5" fill="#fff" stroke="${M}" stroke-width="1.6" stroke-dasharray="4 3"/>
+         <rect x="6" y="6" width="88" height="42" rx="4" fill="#fdf0c7" stroke="#f6c12e" stroke-width="2"/>
+         <rect x="11" y="11" width="30" height="32" rx="3" fill="#fff"/>
+         <path d="M48 22 h34 M48 31 h24" stroke="${M}" stroke-width="3.2" stroke-linecap="round"/>
+         <g transform="translate(80 8) scale(0.1)"><path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="9" stroke-linejoin="round"/></g>`,
+        '',
+        '0 0 100 54',
+      );
+
+      // Iconos de cabecera en la plantilla y en la hoja de tarjetas
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // ---------------------------------------------------------------------
+      // Portada: un calendario con seis días distintos
+      // ---------------------------------------------------------------------
+      const DIAS_DISTINTOS = { 3: 0, 9: 1, 12: 3, 15: 4, 18: 2, 24: 5 };
+      const numeros = [1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 22, 23, 24, 25, 26];
+      const celdas = numeros
+        .map((n) => {
+          const h = HISTORIAS[DIAS_DISTINTOS[n]];
+          if (!h) return `<div class="dia-cal dia-cal--normal"><b>${n}</b></div>`;
+          return `<div class="dia-cal dia-cal--distinto c-${h.color}"><b>${n}</b>${dibujo(h.icono, 'icono')}${dibujo('estrella', 'estrellita')}</div>`;
+        })
+        .join('');
+      document.getElementById('calendario').innerHTML = `
+        <span class="calendario__anilla" style="left: 34mm"></span><span class="calendario__anilla" style="right: 34mm"></span>
+        <div class="calendario__semana"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span></div>
+        <div class="calendario__dias">${celdas}</div>`;
+
+      // Nota para las familias: los seis días en pequeño
+      const NOMBRES_CORTOS = ['Simulacro', 'Otra seño u otro profe', 'Excursión', 'Fiesta', 'Recreo en clase', 'Cambio de horario'];
+      document.getElementById('mini-iconos').innerHTML = HISTORIAS.map(
+        (h, i) => `<figure class="c-${h.color}">${dibujo(h.icono)}<figcaption>${NOMBRES_CORTOS[i]}</figcaption></figure>`,
+      ).join('');
+    </script>
+  </body>
+</html>
