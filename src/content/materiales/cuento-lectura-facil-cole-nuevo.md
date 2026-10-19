@@ -20,12 +20,13 @@ fuentes:
   - "UNE 153101:2018 EX. Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos. UNE"
   - "Gray, C. y otros (2023). Social Stories 10.4 Criteria"
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
+  - "Kokina, A. y Kern, L. (2010). Social Story interventions for students with autism spectrum disorders: a meta-analysis. Journal of Autism and Developmental Disorders, 40(7), 812-826"
   - "Real Decreto 95/2022, de 1 de febrero, de enseñanzas mínimas de Educación Infantil, artículo 6.2"
   - "Ley Orgánica 3/2018, de Protección de Datos Personales y garantía de los derechos digitales, artículo 7"
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-15
-actualizado: 2026-10-15
+actualizado: 2026-10-19
 destacado: false
 borrador: true
 ---

@@ -89,6 +89,18 @@ const DOCUMENTOS = [
       'Kit de plantillas para preparar la oposición de Maestros en la Región de Murcia (Pedagogía Terapéutica e Infantil): guion de un folio, reloj del oral, caja de material auxiliar, hoja de simulacro, plan del escrito y lista para el día del examen',
     palabras: 'oposiciones, Maestros, Región de Murcia, Pedagogía Terapéutica, Educación Infantil, segunda prueba, primera prueba, guion, unidad didáctica, simulacro',
   },
+  {
+    id: 'dias-distintos-historias-sociales',
+    asunto:
+      'Seis historias sociales con pictogramas para anticipar un simulacro, una sustitución, una excursión, una fiesta, un recreo en clase y un cambio de horario, con plantilla, tarjetas para la agenda visual, guía y nota para las familias',
+    palabras: 'historias sociales, narrativas sociales, anticipación, cambios de rutina, simulacro, agenda visual, lectura fácil, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
+  {
+    id: 'pausas-activas-de-pie-y-sentados',
+    asunto:
+      'Pausas activas para todos: 24 cartas de movimiento con versión de pie y versión sentada para calmar, activar o concentrar, con cartel, dado, ruleta, guía para docentes y nota para las familias',
+    palabras: 'pausas activas, movimiento en el aula, actividad física, inclusión, discapacidad motora, silla de ruedas, TDAH, TEA, DUA, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

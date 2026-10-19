@@ -1,0 +1,2724 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pausas activas para todos: cartas de movimiento de pie y sentados · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Colores de los tres tipos de pausa ---------- */
+      .calmar {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .activar {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .concentrar {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 0.98;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 104mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .pegatina {
+        position: absolute;
+        right: 20mm;
+        top: 20mm;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.12;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .portada .pegatina b {
+        display: block;
+        font-size: 24pt;
+        line-height: 1;
+      }
+
+      .portada__dado {
+        position: absolute;
+        right: 10mm;
+        top: 84mm;
+        width: 74mm;
+        height: 74mm;
+        z-index: 2;
+      }
+
+      .portada__grupo {
+        position: absolute;
+        left: 3mm;
+        top: 164mm;
+        width: 204mm;
+        height: 92mm;
+        z-index: 1;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 2mm;
+      }
+
+      .encabezado h1 {
+        font-size: 22pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 34mm;
+        height: auto;
+        flex: none;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 10pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 2mm 0 0;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      .chip-tipo {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.4mm;
+        padding: 0.4mm 2.6mm 0.4mm 1.4mm;
+        border-radius: 99px;
+        background: var(--t);
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--marino);
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      .chip-tipo--num {
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: 10pt;
+        padding: 0.2mm 2.6mm;
+      }
+
+      .chip-tipo svg {
+        width: 4.4mm;
+        height: 4.4mm;
+      }
+
+      /* ---------- Cartas ---------- */
+      .cartas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 116mm;
+        gap: 4mm 6mm;
+      }
+
+      .carta {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .carta__banda {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        height: 9.4mm;
+        padding: 0 3mm;
+        background: var(--c);
+        flex: none;
+      }
+
+      .carta__tipo,
+      .carta__tiempo {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.2mm;
+        padding: 0.5mm 2.4mm 0.5mm 1.3mm;
+        border-radius: 99px;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.6pt;
+        line-height: 1.2;
+        color: var(--marino);
+        white-space: nowrap;
+      }
+
+      .carta__tipo {
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .carta__tipo svg,
+      .carta__tiempo svg {
+        width: 4.2mm;
+        height: 4.2mm;
+        flex: none;
+      }
+
+      .carta__tiempo {
+        margin-left: auto;
+      }
+
+      .carta__num {
+        display: grid;
+        place-items: center;
+        width: 6.6mm;
+        height: 6.6mm;
+        border-radius: 50%;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        flex: none;
+      }
+
+      .carta h2 {
+        margin: 2mm 3.4mm 1.4mm;
+        font-size: 16.5pt;
+        line-height: 1.05;
+      }
+
+      .versiones {
+        position: relative;
+        flex: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0 4.6mm;
+        padding: 0 3mm 2.6mm;
+        min-height: 0;
+      }
+
+      /* Línea entre las dos versiones, con una «o» en medio: se elige una de las dos */
+      .versiones::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 3mm;
+        border-left: 0.35mm dashed var(--linea);
+      }
+
+      .versiones::after {
+        content: 'o';
+        position: absolute;
+        left: 50%;
+        top: 25mm;
+        transform: translateX(-50%);
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.45mm solid var(--linea);
+        display: grid;
+        place-items: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .version {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .version h3 {
+        display: flex;
+        align-items: center;
+        gap: 1.2mm;
+        margin: 0 0 1mm;
+        font-size: 10.5pt;
+        line-height: 1.1;
+      }
+
+      .version h3 svg {
+        width: 4.6mm;
+        height: 4.6mm;
+        flex: none;
+      }
+
+      .version__dibujo {
+        background: var(--t);
+        border-radius: 3mm;
+        flex: none;
+      }
+
+      .version__dibujo svg {
+        display: block;
+        width: 100%;
+        height: 42mm;
+      }
+
+      .pasos {
+        list-style: none;
+        margin: 1.8mm 0 0;
+        padding: 0;
+        counter-reset: paso;
+        font-size: 9.4pt;
+        line-height: 1.22;
+      }
+
+      .pasos li {
+        counter-increment: paso;
+        position: relative;
+        padding-left: 4.8mm;
+        margin: 0 0 0.9mm;
+      }
+
+      .pasos li::before {
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: 0.25mm;
+        width: 3.5mm;
+        height: 3.5mm;
+        border-radius: 50%;
+        background: var(--t);
+        border: 0.35mm solid var(--c);
+        display: grid;
+        place-items: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 6.6pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .pasos li::marker {
+        content: none;
+      }
+
+      /* Cartas en blanco */
+      .carta--blanca .carta__banda {
+        background: #fff;
+        border-bottom: 0.4mm dashed var(--suave);
+      }
+
+      .carta--blanca .carta__banda .colorea {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        font-size: 8.4pt;
+        color: var(--suave);
+      }
+
+      .carta--blanca .carta__banda .colorea span {
+        width: 4.2mm;
+        height: 4.2mm;
+        border-radius: 50%;
+        border: 0.5mm solid var(--c);
+        background: var(--t);
+      }
+
+      .carta--blanca h2 {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        font-size: 12pt;
+      }
+
+      .carta--blanca h2 span {
+        flex: 1;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 6mm;
+      }
+
+      .carta--blanca h2 span.corta {
+        flex: none;
+        width: 9mm;
+      }
+
+      .carta--blanca .version__dibujo {
+        height: 42mm;
+        background: #fff;
+        border: 0.4mm dashed var(--suave);
+        display: grid;
+        place-items: center;
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      .renglones {
+        margin-top: 2mm;
+      }
+
+      .renglones div {
+        height: 7.4mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .cartas--blancas {
+        grid-auto-rows: 107mm;
+      }
+
+      .reglas {
+        list-style: none;
+        margin: 0 0 3mm;
+        padding: 2.4mm 4mm;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1mm 6mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-size: 10pt;
+        line-height: 1.25;
+      }
+
+      .reglas li {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .reglas li::before {
+        content: '';
+        flex: none;
+        width: 4.4mm;
+        height: 4.4mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+        background: #fff;
+      }
+
+      /* ---------- Cartel ---------- */
+      .cartel h1 {
+        font-size: 31pt;
+        line-height: 1.02;
+      }
+
+      .cartel .lema {
+        font-family: var(--lema);
+        font-size: 14pt;
+        margin: 1mm 0 4mm;
+        color: var(--suave);
+      }
+
+      .necesidades {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 4mm;
+      }
+
+      .necesidad {
+        display: grid;
+        grid-template-columns: 51mm minmax(0, 1fr) 56mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 3.4mm 4mm;
+        border-radius: 4mm;
+        background: var(--t);
+        border-left: 2.4mm solid var(--c);
+      }
+
+      .necesidad .pictos {
+        display: flex;
+        gap: 2.4mm;
+      }
+
+      .necesidad .pictos img {
+        width: 24mm;
+        height: 24mm;
+        background: #fff;
+        border-radius: 2.4mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .necesidad ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 12.5pt;
+        line-height: 1.25;
+      }
+
+      .necesidad ul li {
+        margin: 0 0 1.4mm;
+        padding-left: 4.2mm;
+        position: relative;
+      }
+
+      .necesidad ul li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 1.6mm;
+        width: 2mm;
+        height: 2mm;
+        border-radius: 50%;
+        background: var(--c);
+      }
+
+      .necesidad .tipo {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        padding: 2.6mm 3mm;
+        border-radius: 3mm;
+        background: #fff;
+        border: 0.6mm solid var(--c);
+      }
+
+      .necesidad .tipo svg {
+        width: 12.5mm;
+        height: 12.5mm;
+        flex: none;
+      }
+
+      .necesidad .tipo p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1.1;
+      }
+
+      .necesidad .tipo b {
+        display: block;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .cartel__pie {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4mm;
+        margin-top: 3.4mm;
+      }
+
+      .recuadro-cartel {
+        border: 0.5mm solid var(--linea);
+        border-radius: 4mm;
+        padding: 3mm 3.8mm;
+        font-size: 10.8pt;
+        line-height: 1.3;
+      }
+
+      .recuadro-cartel h2 {
+        font-size: 13.5pt;
+        margin: 0 0 1.6mm;
+      }
+
+      .recuadro-cartel p {
+        margin: 0 0 1mm;
+      }
+
+      .termo {
+        display: flex;
+        gap: 1mm;
+        margin: 0 0 2mm;
+      }
+
+      .termo figure {
+        flex: 1;
+        margin: 0;
+        padding: 1mm 0 0.6mm;
+        border-radius: 2mm;
+        background: var(--t);
+        border-top: 1.2mm solid var(--c);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+        line-height: 1;
+      }
+
+      .termo svg {
+        display: block;
+        width: 12mm;
+        height: 12mm;
+        margin: 0 auto 0.6mm;
+      }
+
+      .n1 {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .n2 {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .n3 {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .n4 {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .n5 {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+
+      .dos-formas {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+      }
+
+      .dos-formas span {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.2mm;
+        padding: 0.8mm 2.6mm 0.8mm 1.6mm;
+        border-radius: 99px;
+        background: var(--crema);
+        border: 0.4mm solid var(--linea);
+      }
+
+      .dos-formas svg {
+        width: 6mm;
+        height: 6mm;
+      }
+
+      .rutina {
+        list-style: none;
+        margin: 3.4mm 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.4mm;
+        counter-reset: rutina;
+      }
+
+      .rutina li {
+        counter-increment: rutina;
+        position: relative;
+        margin: 0;
+        padding: 2mm 1.6mm 1.8mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        text-align: center;
+        font-size: 9.6pt;
+        line-height: 1.2;
+      }
+
+      .rutina li::before {
+        content: counter(rutina);
+        position: absolute;
+        left: 1.4mm;
+        top: 1.4mm;
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+      }
+
+      .rutina .ico {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1mm;
+        height: 20mm;
+        margin-bottom: 1.2mm;
+      }
+
+      .rutina .ico img {
+        width: 19mm;
+        height: 19mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .rutina .ico.dos img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .rutina .ico svg {
+        width: 15mm;
+        height: 17.4mm;
+      }
+
+      .rutina strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 10.5pt;
+        margin-bottom: 0.4mm;
+      }
+
+      /* ---------- Dado ---------- */
+      .instrucciones {
+        list-style: none;
+        margin: 0 0 3mm;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        counter-reset: paso;
+      }
+
+      .instrucciones li {
+        counter-increment: paso;
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 1.6mm 2.4mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-size: 10pt;
+        line-height: 1.25;
+      }
+
+      .instrucciones img {
+        width: 14mm;
+        height: 14mm;
+        flex: none;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .instrucciones b {
+        font-family: var(--titulos);
+      }
+
+      .desarrollo {
+        display: block;
+        width: 141mm;
+        height: 194mm;
+        margin: 0 auto;
+      }
+
+      /* ---------- Ruleta ---------- */
+      .ruleta {
+        display: block;
+        width: 174mm;
+        height: 174mm;
+        margin: 1mm auto 3mm;
+      }
+
+      .leyenda {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2mm 4mm;
+        font-size: 10pt;
+      }
+
+      .leyenda li {
+        margin: 0;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 9.8pt;
+        line-height: 1.42;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja h3 {
+        font-size: 11.5pt;
+      }
+
+      .guia ul,
+      .guia ol {
+        margin-bottom: 0.6em;
+      }
+
+      .tres-tipos {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+      }
+
+      .tres-tipos li {
+        margin: 0;
+        padding: 2.6mm 3mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 1.6mm solid var(--c);
+        break-inside: avoid;
+      }
+
+      .tres-tipos strong {
+        display: flex;
+        align-items: center;
+        gap: 1.4mm;
+        font-family: var(--titulos);
+        font-size: 11pt;
+        line-height: 1.15;
+        margin-bottom: 1mm;
+      }
+
+      .tres-tipos svg {
+        width: 5.4mm;
+        height: 5.4mm;
+        flex: none;
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 11.6pt;
+        line-height: 1.42;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.7em;
+      }
+
+      .familias ol {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1.4mm;
+      }
+
+      .tres-pausas {
+        list-style: none;
+        margin: 2mm 0 2mm;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+      }
+
+      .tres-pausas li {
+        margin: 0;
+        padding: 2mm 2.6mm 2.4mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 1.4mm solid var(--c);
+        font-size: 10.5pt;
+        line-height: 1.3;
+      }
+
+      .tres-pausas .dibujos {
+        display: flex;
+        justify-content: center;
+        gap: 1mm;
+        margin-bottom: 1mm;
+      }
+
+      .tres-pausas .dibujos svg {
+        width: 19mm;
+        height: 22mm;
+      }
+
+      .tres-pausas strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        margin-bottom: 0.6mm;
+      }
+
+      .mensaje {
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 3mm 5mm 3.4mm;
+        margin-top: 3mm;
+        break-inside: avoid;
+      }
+
+      .mensaje h2 {
+        margin: 0 0 2mm;
+        font-size: 13pt;
+      }
+
+      .mensaje .renglon {
+        height: 7.8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        font-size: 7.8pt;
+        margin-top: 4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 70mm; background: var(--naranja-tinte)"></div>
+      <div class="circulo" style="width: 66mm; height: 66mm; left: -26mm; top: 112mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 230mm; height: 120mm; left: -10mm; top: 214mm; border-radius: 50%; background: var(--morado-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego · Movimiento en el aula</p>
+        <h1 class="portada__titulo">Pausas activas<br />para todos</h1>
+        <p class="portada__subtitulo">
+          24 cartas con dos versiones, de pie y sentados, para que toda la clase se mueva a la vez.
+        </p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>24</b>cartas<br />de pie<br />y sentados</div>
+      <svg class="portada__dado" id="portada-dado" viewBox="-60 -60 120 120" aria-hidden="true"></svg>
+      <svg class="portada__grupo" id="portada-grupo" viewBox="0 0 364 164" aria-hidden="true"></svg>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL: ¿QUÉ PAUSA NECESITAMOS?
+         ====================================================================== -->
+    <section class="hoja cartel">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <div class="encabezado">
+        <h1>¿Qué pausa necesitamos?</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="lema">Miramos cómo está la clase y elegimos el color.</p>
+      <ul class="necesidades">
+        <li class="necesidad calmar">
+          <div class="pictos"><img src="pictogramas/33064.png" alt="" /><img src="pictogramas/30391.png" alt="" /></div>
+          <ul>
+            <li>Volvemos del recreo o de Educación Física.</li>
+            <li>Estamos nerviosos o hay mucho ruido.</li>
+          </ul>
+          <div class="tipo"><span data-icono="calmar"></span><p>Pausa para<b>calmar</b></p></div>
+        </li>
+        <li class="necesidad activar">
+          <div class="pictos"><img src="pictogramas/25082.png" alt="" /><img src="pictogramas/32174.png" alt="" /></div>
+          <ul>
+            <li>Llevamos mucho rato sentados.</li>
+            <li>Bostezamos o nos cuesta estar atentos.</li>
+          </ul>
+          <div class="tipo"><span data-icono="activar"></span><p>Pausa para<b>activar</b></p></div>
+        </li>
+        <li class="necesidad concentrar">
+          <div class="pictos"><img src="pictogramas/2599.png" alt="" /><img src="pictogramas/2380.png" alt="" /></div>
+          <ul>
+            <li>Vamos a empezar algo que pide atención.</li>
+            <li>Nos distraemos con cualquier cosa.</li>
+          </ul>
+          <div class="tipo"><span data-icono="concentrar"></span><p>Pausa para<b>concentrar</b></p></div>
+        </li>
+      </ul>
+
+      <div class="cartel__pie">
+        <div class="recuadro-cartel">
+          <h2>¿Usáis el termómetro del rincón de la calma?</h2>
+          <div class="termo" id="termo" aria-hidden="true"></div>
+          <p><strong>En el 3 o en el 4:</strong> primero, una pausa para calmar.</p>
+          <p><strong>En el 5:</strong> antes de nada, el rincón de la calma y un adulto cerca.</p>
+        </div>
+        <div class="recuadro-cartel">
+          <h2>Cada pausa tiene dos versiones</h2>
+          <p class="dos-formas"><span data-icono="de-pie">De pie</span> o <span data-icono="silla">Sentados</span></p>
+          <p>Cada cual elige la suya. Algunos días, toda la clase la hace sentada.</p>
+          <p>Vale mover solo una parte del cuerpo.</p>
+        </div>
+      </div>
+
+      <ol class="rutina" aria-label="Así hacemos la pausa">
+        <li>
+          <div class="ico"><img src="pictogramas/37659.png" alt="" /></div>
+          <strong>Aviso</strong>«Dentro de un momento, pausa».
+        </li>
+        <li>
+          <div class="ico dos"><img src="pictogramas/31071.png" alt="" /><img src="pictogramas/37961.png" alt="" /></div>
+          <strong>Elegimos</strong>Con el cartel, el dado o la ruleta.
+        </li>
+        <li>
+          <div class="ico" data-iconos="de-pie silla"></div>
+          <strong>Mi versión</strong>De pie o sentados.
+        </li>
+        <li>
+          <div class="ico" id="rutina-figura"></div>
+          <strong>¡Pausa!</strong>De 1 a 3 minutos, en nuestro sitio.
+        </li>
+        <li>
+          <div class="ico"><img src="pictogramas/34409.png" alt="" /></div>
+          <strong>Volvemos</strong>Respiramos despacio y a la tarea.
+        </li>
+      </ol>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Dibujos
+        y caras del termómetro: IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CARTAS (seis hojas, cuatro cartas por hoja)
+         ====================================================================== -->
+    <div id="hojas-cartas"></div>
+
+    <!-- ======================================================================
+         CARTAS EN BLANCO: NUESTRAS PAUSAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Nuestras pausas</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">Inventad una pausa, dibujadla y probadla en clase. Si cumple las cuatro reglas, entra en la caja.</p>
+      <ul class="reglas" aria-label="Reglas para una pausa nueva">
+        <li>Tiene versión de pie y versión sentada.</li>
+        <li>Se hace en el sitio, sin tocar a nadie.</li>
+        <li>Dura de 1 a 3 minutos.</li>
+        <li>Nadie gana y nadie pierde.</li>
+      </ul>
+      <div class="cartas cartas--blancas" id="cartas-blancas"></div>
+    </section>
+
+    <!-- ======================================================================
+         DADO DE PAUSAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Dado de pausas</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ol class="instrucciones">
+        <li><img src="pictogramas/2547.png" alt="" /><span><b>1.</b> Recorta por la línea continua.</span></li>
+        <li><img src="pictogramas/5544.png" alt="" /><span><b>2.</b> Dobla por todas las líneas de puntos.</span></li>
+        <li><img src="pictogramas/2510.png" alt="" /><span><b>3.</b> Pon pegamento en las pestañas y cierra el cubo.</span></li>
+      </ol>
+      <svg class="desarrollo" id="desarrollo" viewBox="-1.5 -1.5 141 194" role="img" aria-label="Desarrollo de un cubo para recortar, con seis pausas en sus caras"></svg>
+      <p class="atribucion">
+        Mejor en cartulina, o pega la hoja sobre una cartulina antes de recortar. Tirad el dado y haced la pausa que salga, de pie
+        o sentados. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         RULETA DE PAUSAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Ruleta de pausas</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        1. Elegid el color con el cartel. 2. Poned la punta de un lápiz en el centro, dentro de un clip, y haced girar el clip.
+        3. Leed la pausa que señala el clip en el anillo de vuestro color.
+      </p>
+      <svg class="ruleta" id="ruleta" viewBox="0 0 200 200" role="img" aria-label="Ruleta de tres anillos: fuera, las pausas para calmar; en medio, para activar; dentro, para concentrar"></svg>
+      <ul class="leyenda">
+        <li><span class="chip-tipo calmar"><span data-icono="calmar"></span>Fuera: calmar</span></li>
+        <li><span class="chip-tipo activar"><span data-icono="activar"></span>En medio: activar</span></li>
+        <li><span class="chip-tipo concentrar"><span data-icono="concentrar"></span>Dentro: concentrar</span></li>
+      </ul>
+      <p class="atribucion" style="text-align: center; margin-top: 3mm">
+        Para que dure, pega la hoja sobre un cartón. Si el clip se para en una línea, gira otra vez.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes <span class="borrador">[BORRADOR]</span></p>
+      <h1>Toda la clase se mueve a la vez</h1>
+      <p>
+        Una pausa activa es un rato corto de movimiento en mitad de la clase. En este material, cada pausa tiene dos versiones,
+        de pie y sentados, y la hace todo el grupo a la vez: también quien va en silla de ruedas, quien lleva una escayola o
+        quien ese día necesita moverse menos. Cada cual elige su versión sin dar explicaciones, y algunos días la hace toda la
+        clase sentada. Así nadie hace «la versión especial» ni se queda mirando.
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul class="tres-tipos">
+        <li class="calmar"><strong><span data-icono="calmar"></span>8 para calmar</strong>Respiración y movimientos lentos para bajar el ritmo. Después del recreo o cuando hay nervios.</li>
+        <li class="activar"><strong><span data-icono="activar"></span>8 para activar</strong>Mover todo el cuerpo y subir la energía. Tras mucho rato sentados.</li>
+        <li class="concentrar"><strong><span data-icono="concentrar"></span>8 para concentrar</strong>Juegos de coordinación y equilibrio que piden atención. Antes de una tarea difícil.</li>
+      </ul>
+      <p>
+        Además: el cartel «¿Qué pausa necesitamos?» con la rutina de la pausa, cuatro cartas en blanco para que el alumnado
+        invente las suyas, un dado para montar, una ruleta de tres anillos y una nota para las familias. Cada carta dice cuánto
+        dura, de 1 a 3 minutos.
+      </p>
+
+      <h2>Cómo empezar</h2>
+      <ol>
+        <li>Presentad pocas pausas cada vez, dos o tres por semana, empezando por las de calmar.</li>
+        <li>Practicad las dos versiones con toda la clase, también la sentada, y colgad el cartel.</li>
+        <li>Usad siempre la misma rutina: aviso, elegimos, cada cual su versión, pausa y vuelta a la tarea.</li>
+        <li>
+          Si usáis el termómetro del rincón de la calma de IdEducando, miradlo antes de elegir: en el 3 o en el 4, primero una
+          pausa para calmar; en el 5, antes de nada, el rincón y un adulto cerca.
+        </li>
+      </ol>
+
+      <h2>Lo que dicen los estudios</h2>
+      <p id="estudios">
+        <strong>Atención a la tarea.</strong> Es el efecto con más respaldo. En un estudio con 3.º y 4.º de Primaria, pausas de
+        unos 10 minutos guiadas por el docente aumentaron un 8 % el tiempo centrado en la tarea, y un 20 % en el alumnado que
+        menos atendía (Mahar y otros, 2006). Una revisión sistemática con metaanálisis, que reunió 39 estudios, encontró la misma
+        mejora, sobre todo justo después de la pausa (Watson y otros, 2017).
+      </p>
+      <p>
+        <strong>Actividad física.</strong> En ese estudio, la clase con pausas dio más pasos durante la jornada (Mahar y otros,
+        2006). La mayoría de los estudios encuentran aumentos pequeños, aunque el metaanálisis no confirmó el efecto y no está claro
+        si se compensan con menos movimiento en otros momentos del día (Watson y otros, 2017).
+      </p>
+      <p>
+        <strong>Lo que no está claro.</strong> Que mejoren las notas o funciones como la memoria. Los resultados son mixtos y muchos estudios
+        son pequeños o de calidad baja o media (Watson y otros, 2017; Daly-Smith y otros, 2018). Una revisión sobre la atención
+        medida con pruebas encontró algunos efectos positivos, pero la mayoría no fueron significativos; eso sí, las pausas no
+        empeoraron la atención (Infantes-Paniagua y otros, 2021). En 5.º y 6.º de Primaria, un equipo de la Universidad de Murcia
+        probó pausas de 5 a 10 minutos que mezclaban ejercicio intenso y contenidos de clase, unas cuatro al día durante 17
+        semanas, y el grupo con pausas mejoró más en varias funciones ejecutivas que el grupo de control. El estudio no fue aleatorizado, así que conviene leerlo con prudencia
+        (Muñoz-Parreño y otros, 2021).
+      </p>
+      <div class="caja caja--amarilla">
+        <p>
+          Algunos programas comerciales, como Brain Gym, prometen grandes mejoras en el aprendizaje con movimientos parecidos a
+          «Cruza y toca» o «El circuito». Esas promesas apenas tienen respaldo (Spaulding, Mostert y Beam, 2010). Aquí los
+          proponemos porque piden coordinación y atención, y porque gustan.
+        </p>
+      </div>
+
+      <h2>Cuándo y cuánto</h2>
+      <p id="cuanto">
+        La Organización Mundial de la Salud (OMS) recomienda que niños y niñas de 5 a 17 años hagan una media de 60 minutos al
+        día de actividad física moderada o intensa y que limiten el tiempo sedentario, sobre todo delante de pantallas. La
+        recomendación es la misma para la infancia con discapacidad (Bull y otros, 2020). Para 3 y 4 años, pide al menos 180 minutos de actividad repartidos en el
+        día y evitar ratos largos sentados (OMS, 2019). En España, el Ministerio de Sanidad propone los descansos activos para
+        reducir el sedentarismo (Ministerio de Sanidad, 2022), y la Ley Orgánica de Educación (LOE) pide a las administraciones
+        educativas promover el ejercicio físico diario durante la jornada escolar (disposición adicional cuadragésima sexta).
+      </p>
+      <ul>
+        <li>
+          <strong>Cada cuánto.</strong> La OMS no fija una cifra porque no hay datos suficientes. Como orientación práctica,
+          probad con una pausa cada media hora de trabajo sentado y ajustadla a vuestro grupo.
+        </li>
+        <li>
+          <strong>Cuánto rato.</strong> Las pausas que mejoraron la atención a la tarea duraban más de 10 minutos de actividad
+          moderada, o unos 5 si eran más intensas (Daly-Smith y otros, 2018). Nuestras cartas duran de 1 a 3 minutos: si buscáis ese efecto, encadenad
+          dos o tres. Una sola carta sirve para cortar un rato largo sentados.
+        </li>
+        <li><strong>Para cerrar,</strong> después de una pausa para activar, haced una para calmar o dos respiraciones lentas.</li>
+      </ul>
+
+      <h2>Seguridad</h2>
+      <ul>
+        <li><strong>Espacio:</strong> cada cual en su sitio, con los brazos estirados sin tocar a nadie. Mochilas bajo la mesa y sillas con las cuatro patas en el suelo.</li>
+        <li><strong>Sillas de ruedas,</strong> con los frenos puestos.</li>
+        <li>
+          <strong>Saltos:</strong> solo con calzado y en un suelo que no resbale, aterrizando suave con las rodillas un poco
+          dobladas. En suelos duros, mejor la versión sin salto. En calcetines, nunca.
+        </li>
+        <li><strong>Respiración:</strong> despacio y sin forzar. Si alguien se marea, que respire normal y se siente.</li>
+        <li><strong>Sin competir:</strong> nadie gana ni queda eliminado. En «El semáforo», quien se mueve en rojo sigue jugando.</li>
+        <li><strong>Si algo duele, se para.</strong> Tened en cuenta las indicaciones de salud de cada alumno o alumna.</li>
+      </ul>
+
+      <h2>Inclusión real</h2>
+      <ul id="inclusion">
+        <li>Presenta las dos versiones a la vez, con la carta y con la voz: «De pie o sentados, como prefiráis».</li>
+        <li>Algunos días, toda la clase la hace sentada. Así nadie hace «la versión especial».</li>
+        <li>Nadie tiene que explicar por qué elige una versión.</li>
+        <li>
+          Vale mover solo una parte del cuerpo: si un brazo está escayolado, se mueve el otro; si las piernas no se mueven,
+          brazos, hombros y cabeza. La OMS lo recoge: quien usa silla de ruedas o tiene poca movilidad puede evitar el
+          sedentarismo con actividades que no usan las piernas (Bull y otros, 2020).
+        </li>
+        <li>Pregunta al alumno o a la alumna, a su familia y a su fisioterapeuta qué movimientos le convienen.</li>
+        <li>
+          Para quien no ve, describe cada movimiento con palabras claras. Para quien no oye, usa señales visibles para empezar y
+          parar, como tarjetas de colores.
+        </li>
+      </ul>
+      <p>
+        La Convención sobre los derechos de las personas con discapacidad pide igual acceso al juego y al deporte, también dentro
+        del sistema escolar (artículo 30.5.d). Y el Diseño Universal para el Aprendizaje (DUA) pide ofrecer y respetar distintas
+        formas de moverse (CAST, 2024, pauta 4.1).
+      </p>
+
+      <h2>Alumnado con trastorno por déficit de atención e hiperactividad (TDAH)</h2>
+      <p id="tdah">
+        <strong>Moverse dentro de una rutina.</strong> La guía del instituto británico NICE (National Institute for Health and
+        Care Excellence) incluye entre los ajustes del entorno para el TDAH los periodos cortos de trabajo con pausas para
+        moverse y las tarjetas de «necesito un descanso» (NICE, 2018).
+      </p>
+      <ul>
+        <li>La pausa, siempre igual: la misma señal para empezar y para acabar, un tiempo visible y el mismo cierre antes de volver a la tarea.</li>
+        <li>Dale un papel: llevar el tiempo, enseñar la carta o guiar la pausa.</li>
+        <li>
+          Moverse puede ayudarle a pensar: en un estudio pequeño, los niños con TDAH resolvían mejor tareas de memoria cuando se
+          movían más (Sarver y otros, 2015).
+        </li>
+        <li>
+          La pausa no se le quita a nadie, por la misma razón por la que la Academia Americana de Pediatría desaconseja quitar el
+          recreo como castigo (Murray y Ramstetter, 2013).
+        </li>
+      </ul>
+
+      <h2>Alumnado con trastorno del espectro del autismo (TEA)</h2>
+      <p id="tea">
+        <strong>Avisar antes y bajar el ruido.</strong> A este alumnado le cuestan los cambios por sorpresa. El ejercicio y el
+        movimiento y los apoyos visuales están entre las 28 prácticas con evidencia para el alumnado autista (Hume y otros, 2021).
+      </p>
+      <ul>
+        <li>Avisa antes, «dentro de un minuto, pausa», y enseña la carta.</li>
+        <li>Empezad siempre por las mismas pausas y añadid nuevas poco a poco.</li>
+        <li>Bajad el ruido: sin gritos ni música alta.</li>
+        <li>Puede participar con un papel, como llevar el reloj o elegir el color.</li>
+        <li>Sin contacto: en «Lluvia suave» cada cual se toca a sí mismo y en «El espejo» nadie toca a nadie.</li>
+      </ul>
+
+      <h2>Que el alumnado proponga sus pausas</h2>
+      <ol>
+        <li>Inventan la pausa en pequeños grupos con las cartas en blanco: nombre, dibujo y pasos de las dos versiones.</li>
+        <li>Comprueban las cuatro reglas: versión de pie y sentada, en el sitio y sin tocar a nadie, de 1 a 3 minutos, y nadie gana ni pierde.</li>
+        <li>La prueba toda la clase. Si funciona, entra en la caja con su color.</li>
+        <li>Cada semana, una persona distinta se encarga de la pausa: avisa, elige la carta y la guía.</li>
+      </ol>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>Siguiendo el DUA, que propone varias formas de participar:</p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>En Infantil:</strong> empezad con seis cartas. Los dibujos bastan: no hace falta leer.</li>
+          <li><strong>El cartel,</strong> en A3 y a la altura de los ojos del alumnado.</li>
+          <li><strong>Poco espacio:</strong> las pausas para concentrar y las versiones sentadas caben en cualquier aula.</li>
+        </ul>
+        <ul>
+          <li><strong>Más reto en Primaria:</strong> que guíen la pausa o que inventen una para cada color.</li>
+          <li><strong>Con música:</strong> una canción corta marca el tiempo de la pausa.</li>
+          <li><strong>En casa:</strong> la nota para las familias propone tres pausas para los deberes.</li>
+        </ul>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Pausas activas para todos: cartas de movimiento de pie y sentados.</strong> IdEducando, octubre de 2026. Ficha
+          y novedades: <span class="url">ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados</span>
+        </p>
+        <p id="fuentes">
+          Fuentes: Mahar, M. T. y otros (2006), <em>Medicine and Science in Sports and Exercise</em>, 38(12), 2086-2094; Watson, A.
+          y otros (2017), <em>International Journal of Behavioral Nutrition and Physical Activity</em>, 14, 114; Daly-Smith, A. J.
+          y otros (2018), <em>BMJ Open Sport &amp; Exercise Medicine</em>, 4(1), e000341; Infantes-Paniagua, Á. y otros (2021),
+          <em>Brain Sciences</em>, 11(6), 675; Muñoz-Parreño, J. A. y otros (2021), <em>Psicothema</em>, 33(3), 466-472;
+          Spaulding, L. S., Mostert, M. P. y Beam, A. (2010), <em>Exceptionality</em>, 18(1), 18-30; Bull, F. C. y otros
+          (2020), Directrices de la OMS sobre actividad física y hábitos sedentarios, <em>British Journal of Sports Medicine</em>,
+          54(24), 1451-1462; OMS (2019), <em>Guidelines on physical activity, sedentary behaviour and sleep for children under 5
+          years of age</em>; Ministerio de Sanidad (2022), <em>Actividad física para la salud y reducción del sedentarismo.
+          Recomendaciones para la población</em>; Ley Orgánica 2/2006 de Educación, disposición adicional cuadragésima sexta;
+          Convención sobre los derechos de las personas con discapacidad, publicada en el Boletín Oficial del Estado el 21/04/2008, artículo 30.5.d; CAST (2024),
+          <em>Universal Design for Learning Guidelines 3.0</em>, pauta 4.1; NICE (2018, actualizada en 2019), guía NG87 sobre el
+          TDAH; Sarver, D. E. y otros (2015), <em>Journal of Abnormal Child Psychology</em>, 43(7), 1219-1232; Murray, R. y
+          Ramstetter, C. (2013), <em>Pediatrics</em>, 131(1), 183-188; Hume, K. y otros (2021), <em>Journal of Autism and
+          Developmental Disorders</em>, 51(11), 4013-4032.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio
+          Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el
+          material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. Los dibujos de las cartas, el
+          dado y la ruleta, y las caras del termómetro, son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Pausas activas, también con los deberes</h1>
+      <p>
+        En clase hacemos pausas activas: ratos de 1 a 3 minutos en los que nos movemos todos a la vez. Cada pausa se puede hacer de
+        pie o sentados, y cada cual elige su versión.
+      </p>
+      <p>
+        En el aula, después de una pausa así, el alumnado suele centrarse mejor en la tarea (Watson y otros, 2017). Además, la
+        Organización Mundial de la Salud recomienda pasar menos tiempo sentados (Bull y otros, 2020).
+      </p>
+
+      <h2>En casa, durante los deberes</h2>
+      <ol>
+        <li>Cuando lleve un buen rato sentado o notéis que le cuesta seguir, proponed una pausa corta.</li>
+        <li>Si está nervioso, una para calmar. Si está cansado, una para activar. Antes de algo difícil, una para concentrarse.</li>
+        <li>Hacedla juntos: el adulto también se mueve.</li>
+        <li>Al acabar, dos respiraciones lentas y de vuelta a la tarea.</li>
+      </ol>
+
+      <h2>Tres pausas para empezar</h2>
+      <ul class="tres-pausas" id="tres-pausas"></ul>
+
+      <h2>Algo importante</h2>
+      <p>
+        La pausa es para mover el cuerpo, así que mejor sin pantallas. Si tiene una lesión o ese día necesita moverse menos, la
+        versión sentada vale igual.
+      </p>
+
+      <div class="mensaje">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Pausas activas para todos.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los dibujos son de
+          IdEducando. Fuentes: Watson, A. y otros (2017), <em>International Journal of Behavioral Nutrition and Physical
+          Activity</em>, 14, 114; Bull, F. C. y otros (2020), <em>British Journal of Sports Medicine</em>, 54(24), 1451-1462.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------------
+      // Dibujos propios de IdEducando: niños y niñas que se mueven, de pie o sentados.
+      // Cada dibujo se construye con un esqueleto sencillo (cadera, hombros, codos,
+      // manos, rodillas y tobillos) y se pinta con trazos gruesos y redondeados.
+      // ---------------------------------------------------------------------------
+      const TINTA = '#1e2b55';
+      const GRIS = '#8a93ad';
+      const PANTALON = '#34406a';
+      const MEJILLA = '#f29a8a';
+
+      // Niños y niñas de los dibujos: tono de piel, peinado y color de pelo.
+      const NINOS = [
+        { piel: '#f8d9bd', pelo: 'corto', colorPelo: '#7a4a28' },
+        { piel: '#c98d63', pelo: 'monos', colorPelo: '#2a1b12' },
+        { piel: '#8f5c3c', pelo: 'rizos', colorPelo: '#211510' },
+        { piel: '#f6cfac', pelo: 'largo', colorPelo: '#d7a23f' },
+        { piel: '#e2a77f', pelo: 'coleta', colorPelo: '#3d2618', gafas: true },
+        { piel: '#6f442b', pelo: 'rapado', colorPelo: '#1b120c' },
+        { piel: '#f3c7a3', pelo: 'rizos', colorPelo: '#b5562b' },
+        { piel: '#d39a6f', pelo: 'largo', colorPelo: '#2a1b12', gafas: true },
+      ];
+
+      const L = { torso: 25, cuello: 14, brazo: 14.6, antebrazo: 13.4, muslo: 17, pierna: 16, hombros: 8.6, caderas: 5.2, cabeza: 11 };
+
+      const r2 = (n) => Math.round(n * 10) / 10;
+      const P = (p) => `${r2(p[0])} ${r2(p[1])}`;
+      const rad = (g) => (g * Math.PI) / 180;
+      const hacia = (p, ang, l) => [p[0] + Math.sin(rad(ang)) * l, p[1] + Math.cos(rad(ang)) * l];
+      const dist = (a, b) => Math.hypot(b[0] - a[0], b[1] - a[1]);
+      const suma = (a, b, k = 1) => [a[0] + b[0] * k, a[1] + b[1] * k];
+
+      /** Articulación del medio (codo o rodilla) entre a y b. `lado` elige hacia dónde se dobla. */
+      function articulacion(a, b, l1, l2, lado, centroX) {
+        if (Array.isArray(lado)) return lado;
+        let d = dist(a, b) || 0.01;
+        const ux = (b[0] - a[0]) / d;
+        const uy = (b[1] - a[1]) / d;
+        d = Math.min(Math.max(d, Math.abs(l1 - l2) + 0.05), l1 + l2 - 0.05);
+        const ang = Math.acos(Math.max(-1, Math.min(1, (l1 * l1 + d * d - l2 * l2) / (2 * l1 * d))));
+        const candidatos = [ang, -ang].map((g) => [a[0] + (ux * Math.cos(g) - uy * Math.sin(g)) * l1, a[1] + (ux * Math.sin(g) + uy * Math.cos(g)) * l1]);
+        const criterio = {
+          fuera: (p) => Math.abs(p[0] - centroX),
+          dentro: (p) => -Math.abs(p[0] - centroX),
+          arriba: (p) => -p[1],
+          abajo: (p) => p[1],
+        }[lado ?? 'fuera'];
+        return criterio(candidatos[0]) >= criterio(candidatos[1]) ? candidatos[0] : candidatos[1];
+      }
+
+      /** Punto final de un segmento que sale de `a` hacia `b` con longitud fija. */
+      const alcanzar = (a, b, l) => {
+        const d = dist(a, b) || 1;
+        return [a[0] + ((b[0] - a[0]) / d) * l, a[1] + ((b[1] - a[1]) / d) * l];
+      };
+
+      // ---------- Peinados (coordenadas de la cabeza: centro 0,0 y radio 11) ----------
+      function peinado(estilo, color) {
+        const borde = `fill="${color}" stroke="${TINTA}" stroke-width="2" stroke-linejoin="round"`;
+        const casco = `<path ${borde} d="M-11.4 -0.5 C-12.4 -9.5 -6.5 -14.6 0 -14.3 C6.8 -14.6 12.6 -9.6 11.4 -0.5 C10 -4.6 7.6 -6.6 4.2 -7.6 C2.4 -5.4 -1.6 -5 -4.4 -7.4 C-6.4 -5.4 -9.4 -3.6 -11.4 -0.5 Z"/>`;
+        switch (estilo) {
+          case 'rapado':
+            return { detras: '', delante: `<path ${borde} d="M-10.9 -3.2 C-10 -10.8 -5 -13.2 0 -13.2 C5 -13.2 10 -10.8 10.9 -3.2 C7.5 -6.6 -7.5 -6.6 -10.9 -3.2 Z"/>` };
+          case 'monos':
+            return {
+              detras: `<circle cx="-9.6" cy="-10.4" r="4.6" ${borde}/><circle cx="9.6" cy="-10.4" r="4.6" ${borde}/>`,
+              delante: casco,
+            };
+          case 'coleta':
+            return {
+              detras: `<path ${borde} d="M8.5 -9 C17 -11 19.5 -2 16.5 6 C15 10 12.6 12 12 9 C14 3 13 -3 8.5 -4 Z"/>`,
+              delante: casco,
+            };
+          case 'largo':
+            return {
+              detras: `<path ${borde} d="M-11.6 -3 C-13.5 4 -13.6 10 -12.2 14.6 C-6 16.4 6 16.4 12.2 14.6 C13.6 10 13.5 4 11.6 -3 Z"/>`,
+              delante: casco,
+            };
+          case 'rizos': {
+            let bolas = '';
+            for (let g = 205; g <= 335; g += 26) {
+              const x = Math.cos(rad(g)) * 11.6;
+              const y = Math.sin(rad(g)) * 11.6;
+              bolas += `<circle cx="${r2(x)}" cy="${r2(y)}" r="5.4" ${borde}/>`;
+            }
+            return {
+              detras: `<circle cx="0" cy="-3" r="14.4" ${borde}/>${bolas}`,
+              delante: `<path fill="${color}" d="M-10 -4 C-8 -9 -3 -10 0 -9 C3 -10 8 -9 10 -4 C6 -7.5 -6 -7.5 -10 -4 Z"/>`,
+            };
+          }
+          default:
+            return { detras: '', delante: casco };
+        }
+      }
+
+      // ---------- Caras ----------
+      function cara(gesto, mira = [0, 0]) {
+        const t = `stroke="${TINTA}" stroke-width="1.6" stroke-linecap="round" fill="none"`;
+        const [mx, my] = mira;
+        const ojos = `<circle cx="${-4 + mx}" cy="${0.6 + my}" r="1.5" fill="${TINTA}"/><circle cx="${4 + mx}" cy="${0.6 + my}" r="1.5" fill="${TINTA}"/>`;
+        const cerrados = `<path ${t} d="M-5.8 0.6 Q-4 2.4 -2.2 0.6 M2.2 0.6 Q4 2.4 5.8 0.6"/>`;
+        const mejillas = `<circle cx="-6.8" cy="4" r="2.1" fill="${MEJILLA}" opacity=".5"/><circle cx="6.8" cy="4" r="2.1" fill="${MEJILLA}" opacity=".5"/>`;
+        const sonrisa = `<path ${t} d="M-3.6 4.6 Q0 7.6 3.6 4.6"/>`;
+        switch (gesto) {
+          case 'calma':
+            return mejillas + cerrados + `<path ${t} d="M-2.6 5 Q0 6.8 2.6 5"/>`;
+          case 'soplar':
+            return mejillas + cerrados + `<ellipse cx="0" cy="5.8" rx="1.5" ry="1.8" fill="none" stroke="${TINTA}" stroke-width="1.5"/>`;
+          case 'risa':
+            return mejillas + ojos + `<path fill="${TINTA}" d="M-4.2 4.2 Q0 5 4.2 4.2 Q3.6 9.6 0 9.6 Q-3.6 9.6 -4.2 4.2 Z"/><path fill="#e76f6f" d="M-2.2 8 Q0 6.6 2.2 8 Q1.4 9.4 0 9.4 Q-1.4 9.4 -2.2 8 Z"/>`;
+          case 'sorpresa':
+            return mejillas + ojos + `<path ${t} d="M-6 -3.4 Q-4 -5 -2 -3.6 M2 -3.6 Q4 -5 6 -3.4"/><ellipse cx="0" cy="6" rx="2" ry="2.4" fill="${TINTA}"/>`;
+          case 'atenta':
+            return mejillas + ojos + `<path ${t} d="M-2.4 5.4 Q0 6.4 2.4 5.4"/><path fill="#e76f6f" d="M1.2 5.9 q1.6 0.3 1.4 2 q-1.6 0.4 -1.9 -1.4 Z"/>`;
+          case 'robot':
+            return ojos + `<path ${t} d="M-3.2 5.4 H3.2"/>`;
+          default:
+            return mejillas + ojos + sonrisa;
+        }
+      }
+
+      /**
+       * Dibuja una figura.
+       * pose: { sentado: false | 'silla' | 'ruedas', cadera, t (inclinación del tronco), cab (inclinación de la cabeza),
+       *   enc (encoger hombros, 0-1), mD, mI (manos), codoD, codoI, rodD, rodI, pieD, pieI, cara, mira,
+       *   detras(j), delante(j), escayola: 'D' | 'I' }
+       * D es el lado derecho del dibujo; I, el izquierdo.
+       */
+      function figura(pose, nino, color) {
+        const sentado = pose.sentado || false;
+        const base = sentado === 'ruedas' ? [50, 85] : sentado ? [50, 86] : [50, 75];
+        const H = pose.cadera ?? base;
+        const t = pose.t ?? 0;
+        const enc = pose.enc ?? 0;
+        const LT = L.torso * (1 - 0.24 * (pose.doblar ?? 0));
+        const S = hacia(H, 180 - t, LT);
+        const u = [(S[0] - H[0]) / LT, (S[1] - H[1]) / LT];
+        const p = [-u[1], u[0]];
+        const hD = suma(suma(S, p, L.hombros), u, enc * 3.4);
+        const hI = suma(suma(S, p, -L.hombros), u, enc * 3.4);
+        const cD = suma(H, p, L.caderas);
+        const cI = suma(H, p, -L.caderas);
+        const angCab = t + (pose.cab ?? 0);
+        const C = hacia(S, 180 - angCab, L.cuello - enc * 4.2);
+        const centroX = S[0];
+
+        // Brazos (por defecto, colgando junto al cuerpo)
+        const mD0 = pose.mD ?? suma(hD, [3.4, 26.4]);
+        const mI0 = pose.mI ?? suma(hI, [-3.4, 26.4]);
+        const eD = articulacion(hD, mD0, L.brazo, L.antebrazo, pose.codoD ?? 'fuera', centroX);
+        const eI = articulacion(hI, mI0, L.brazo, L.antebrazo, pose.codoI ?? 'fuera', centroX);
+        const mD = alcanzar(eD, mD0, L.antebrazo);
+        const mI = alcanzar(eI, mI0, L.antebrazo);
+
+        // Piernas
+        let pieD, pieI, rD, rI;
+        if (sentado) {
+          const yPie = sentado === 'ruedas' ? 105.4 : 108.4;
+          pieD = pose.pieD ?? [H[0] + 9.6, yPie];
+          pieI = pose.pieI ?? [H[0] - 9.6, yPie];
+          rD = pose.rodD ?? [H[0] + 9.6, H[1] + 7.6];
+          rI = pose.rodI ?? [H[0] - 9.6, H[1] + 7.6];
+        } else {
+          pieD = pose.pieD ?? [cD[0] + 1.6, 108];
+          pieI = pose.pieI ?? [cI[0] - 1.6, 108];
+          rD = articulacion(cD, pieD, L.muslo, L.pierna, pose.rodD ?? 'fuera', centroX);
+          rI = articulacion(cI, pieI, L.muslo, L.pierna, pose.rodI ?? 'fuera', centroX);
+          pieD = alcanzar(rD, pieD, L.pierna);
+          pieI = alcanzar(rI, pieI, L.pierna);
+        }
+
+        const j = { H, S, C, hD, hI, eD, eI, mD, mI, cD, cI, rD, rI, pieD, pieI, angCab };
+        const pelo = peinado(nino.pelo, nino.colorPelo);
+        const contorno = `stroke="${TINTA}" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+
+        let svg = '';
+        // Sombra en el suelo
+        svg += `<ellipse cx="${r2(H[0])}" cy="113.2" rx="${sentado ? 27 : 17}" ry="2.6" fill="${TINTA}" opacity=".09"/>`;
+        if (pose.detras) svg += pose.detras(j);
+
+        // Silla o silla de ruedas, por detrás de la figura (el asiento también: los muslos van encima)
+        if (sentado === 'silla') svg += sillaDetras(H) + sillaDelante(H);
+        if (sentado === 'ruedas') svg += ruedasDetras(H) + ruedasDelante(H);
+
+        // Pelo largo, coletas y moños, por detrás de todo el cuerpo
+        svg += `<g transform="translate(${P(C)}) rotate(${r2(angCab)})">${pelo.detras}</g>`;
+
+        // Piernas
+        for (const [c, r, pie, lado] of [
+          [cI, rI, pieI, 'I'],
+          [cD, rD, pieD, 'D'],
+        ]) {
+          const d = `M${P(c)} L${P(r)} L${P(pie)}`;
+          svg += `<path d="${d}" ${contorno} stroke-width="9.4"/><path d="${d}" stroke="${PANTALON}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+          if (sentado) {
+            // Muslo visto de frente: corto y ancho, con la rodilla redonda
+            svg += `<path d="M${P(c)} L${P(r)}" ${contorno} stroke-width="11.6"/><path d="M${P(c)} L${P(r)}" stroke="${PANTALON}" stroke-width="8.2" stroke-linecap="round" fill="none"/>`;
+          }
+          if (pose.escayolaPierna === lado) {
+            const a = [r[0] + (pie[0] - r[0]) * 0.2, r[1] + (pie[1] - r[1]) * 0.2];
+            svg += `<path d="M${P(a)} L${P(pie)}" stroke="${TINTA}" stroke-width="10" stroke-linecap="round"/><path d="M${P(a)} L${P(pie)}" stroke="#fff" stroke-width="7" stroke-linecap="round"/>`;
+            // Garabatos de colores: en las escayolas siempre firma alguien
+            const g1 = [a[0] + (pie[0] - a[0]) * 0.35, a[1] + (pie[1] - a[1]) * 0.35];
+            const g2 = [a[0] + (pie[0] - a[0]) * 0.65, a[1] + (pie[1] - a[1]) * 0.65];
+            svg += `<path d="M${r2(g1[0] - 1.6)} ${r2(g1[1])} q1.6 -1.6 3.2 0" stroke="#e8553e" stroke-width="1" fill="none" stroke-linecap="round"/><path d="M${r2(g2[0] - 1.4)} ${r2(g2[1] + 0.6)} l2.8 -1.2" stroke="#2f6fd6" stroke-width="1" stroke-linecap="round"/>`;
+          }
+        }
+        // Zapatillas
+        for (const [pie, s] of [
+          [pieI, -1],
+          [pieD, 1],
+        ]) {
+          svg += `<ellipse cx="${r2(pie[0] + s * 2.2)}" cy="${r2(pie[1] + 2.6)}" rx="5.4" ry="3" fill="#fff" stroke="${TINTA}" stroke-width="1.8"/>`;
+          svg += `<path d="M${r2(pie[0] + s * 2.2 - 5)} ${r2(pie[1] + 3.6)} H${r2(pie[0] + s * 2.2 + 5)}" stroke="${color}" stroke-width="1.4"/>`;
+        }
+        // Cuello y tronco
+        const loc = (lx, ly) => P([S[0] + p[0] * lx - u[0] * ly, S[1] + p[1] * lx - u[1] * ly]);
+        svg += `<path d="M${loc(-3, -6)} L${loc(3, -6)} L${loc(3, 2)} L${loc(-3, 2)} Z" fill="${nino.piel}" stroke="${TINTA}" stroke-width="1.8"/>`;
+        const rr = 6;
+        const fondo = LT + 2;
+        svg += `<path d="M${loc(-10.6 + rr, -1)} L${loc(10.6 - rr, -1)} Q${loc(10.6, -1)} ${loc(10.6, -1 + rr)} L${loc(8.6, fondo - 3)} Q${loc(8.6, fondo)} ${loc(8.6 - 3, fondo)} L${loc(-8.6 + 3, fondo)} Q${loc(-8.6, fondo)} ${loc(-8.6, fondo - 3)} L${loc(-10.6, -1 + rr)} Q${loc(-10.6, -1)} ${loc(-10.6 + rr, -1)} Z" fill="${color}" stroke="${TINTA}" stroke-width="2" stroke-linejoin="round"/>`;
+        // Cuello de la camiseta
+        svg += `<path d="M${loc(-3.6, -1)} Q${loc(0, 2.6)} ${loc(3.6, -1)}" stroke="${TINTA}" stroke-width="1.4" fill="none" stroke-linecap="round"/>`;
+
+        // Cabeza
+        svg += `<g transform="translate(${P(C)}) rotate(${r2(angCab)})">`;
+        svg += `<circle r="${L.cabeza}" fill="${nino.piel}" stroke="${TINTA}" stroke-width="2.1"/>`;
+        svg += `<g>${cara(pose.cara ?? 'feliz', pose.mira)}</g>`;
+        svg += pelo.delante;
+        if (nino.gafas && !pose.sinGafas) {
+          svg += `<g fill="none" stroke="${TINTA}" stroke-width="1.2"><circle cx="-4" cy="0.6" r="3.1"/><circle cx="4" cy="0.6" r="3.1"/><path d="M-0.9 0.4 H0.9"/></g>`;
+        }
+        if (pose.cabeza) svg += pose.cabeza;
+        svg += '</g>';
+
+        // Brazos
+        for (const [h, e, m, lado] of [
+          [hI, eI, mI, 'I'],
+          [hD, eD, mD, 'D'],
+        ]) {
+          const d = `M${P(h)} L${P(e)} L${P(m)}`;
+          svg += `<path d="${d}" ${contorno} stroke-width="8.2"/>`;
+          svg += `<path d="${d}" stroke="${nino.piel}" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`;
+          // Manga corta
+          const mitad = [h[0] + (e[0] - h[0]) * 0.55, h[1] + (e[1] - h[1]) * 0.55];
+          svg += `<path d="M${P(h)} L${P(mitad)}" stroke="${color}" stroke-width="5.4" stroke-linecap="butt" fill="none"/>`;
+          if (pose.escayola === lado) {
+            const a = [e[0] + (m[0] - e[0]) * 0.18, e[1] + (m[1] - e[1]) * 0.18];
+            const b = [e[0] + (m[0] - e[0]) * 0.92, e[1] + (m[1] - e[1]) * 0.92];
+            svg += `<path d="M${P(a)} L${P(b)}" stroke="${TINTA}" stroke-width="8.6" stroke-linecap="round"/>`;
+            svg += `<path d="M${P(a)} L${P(b)}" stroke="#fff" stroke-width="5.6" stroke-linecap="round"/>`;
+            const g = [a[0] + (b[0] - a[0]) * 0.5, a[1] + (b[1] - a[1]) * 0.5];
+            svg += `<path d="M${r2(g[0] - 1.4)} ${r2(g[1])} q1.4 -1.4 2.8 0" stroke="#e8553e" stroke-width="0.9" fill="none" stroke-linecap="round"/>`;
+          }
+          const mano = alcanzar(e, m, L.antebrazo + 1.6);
+          svg += `<circle cx="${r2(mano[0])}" cy="${r2(mano[1])}" r="3.3" fill="${nino.piel}" stroke="${TINTA}" stroke-width="1.6"/>`;
+        }
+
+        if (pose.delante) svg += pose.delante(j);
+        return svg;
+      }
+
+      // ---------- Sillas ----------
+      function sillaDetras(H) {
+        const x = H[0];
+        const y = H[1];
+        return (
+          `<path d="M${x - 11.5} ${y + 5} L${x - 11} 111.6 M${x + 11.5} ${y + 5} L${x + 11} 111.6" stroke="${GRIS}" stroke-width="2.2" stroke-linecap="round"/>` +
+          `<path d="M${x - 14} ${y - 10} V${y + 2} M${x + 14} ${y - 10} V${y + 2}" stroke="${GRIS}" stroke-width="2.4" stroke-linecap="round"/>` +
+          `<rect x="${x - 17.5}" y="${y - 28}" width="35" height="18" rx="3.6" fill="#f6c12e" stroke="${TINTA}" stroke-width="1.8"/>`
+        );
+      }
+
+      function sillaDelante(H) {
+        const x = H[0];
+        const y = H[1];
+        return (
+          `<path d="M${x - 17} ${y + 8} L${x - 18.6} 112.6 M${x + 17} ${y + 8} L${x + 18.6} 112.6" stroke="${GRIS}" stroke-width="2.5" stroke-linecap="round"/>` +
+          `<rect x="${x - 20}" y="${y + 2.4}" width="40" height="6" rx="2.6" fill="#f6c12e" stroke="${TINTA}" stroke-width="1.8"/>`
+        );
+      }
+
+      function ruedasDetras(H) {
+        const x = H[0];
+        const y = H[1];
+        return (
+          // Empuñaduras
+          `<path d="M${x - 13.4} ${y - 25.6} L${x - 16.4} ${y - 27.6} M${x + 13.4} ${y - 25.6} L${x + 16.4} ${y - 27.6}" stroke="${TINTA}" stroke-width="3" stroke-linecap="round"/>` +
+          // Respaldo
+          `<rect x="${x - 14}" y="${y - 27}" width="28" height="26" rx="2.6" fill="#55618f" stroke="${TINTA}" stroke-width="1.8"/>` +
+          // Ruedas grandes
+          [-1, 1]
+            .map(
+              (s) =>
+                `<ellipse cx="${x + s * 21.5}" cy="${y + 9.5}" rx="7.2" ry="18.6" fill="#fff" fill-opacity=".55" stroke="${TINTA}" stroke-width="2.6"/>` +
+                `<ellipse cx="${x + s * 21.5}" cy="${y + 9.5}" rx="5" ry="15" fill="none" stroke="${GRIS}" stroke-width="1.5"/>` +
+                `<path d="M${x + s * 21.5} ${y - 5.5} V${y + 24.5} M${x + s * 16.8} ${y + 9.5} H${x + s * 26.2}" stroke="${GRIS}" stroke-width="0.9"/>` +
+                `<circle cx="${x + s * 21.5}" cy="${y + 9.5}" r="1.8" fill="${TINTA}"/>`,
+            )
+            .join('')
+        );
+      }
+
+      function ruedasDelante(H) {
+        const x = H[0];
+        const y = H[1];
+        return (
+          `<rect x="${x - 15.5}" y="${y + 0.6}" width="31" height="5" rx="2" fill="#55618f" stroke="${TINTA}" stroke-width="1.6"/>` +
+          `<path d="M${x - 9} ${y + 6} L${x - 10.5} 108.6 M${x + 9} ${y + 6} L${x + 10.5} 108.6" stroke="${GRIS}" stroke-width="2" stroke-linecap="round"/>` +
+          `<rect x="${x - 13}" y="108.2" width="26" height="2.8" rx="1.2" fill="${GRIS}" stroke="${TINTA}" stroke-width="1.2"/>` +
+          `<circle cx="${x - 13.5}" cy="111.2" r="2.4" fill="${TINTA}"/><circle cx="${x + 13.5}" cy="111.2" r="2.4" fill="${TINTA}"/>`
+        );
+      }
+
+      // ---------- Marcas de movimiento y objetos ----------
+      const trazo = (color = TINTA, ancho = 1.8) => `stroke="${color}" stroke-width="${ancho}" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+
+      /** Flecha curva (Bézier cuadrática) con punta. */
+      function flecha(a, c, b, color = TINTA, ancho = 1.8) {
+        const ang = Math.atan2(b[1] - c[1], b[0] - c[0]);
+        const k = 3.6;
+        const p1 = [b[0] - k * Math.cos(ang - 0.5), b[1] - k * Math.sin(ang - 0.5)];
+        const p2 = [b[0] - k * Math.cos(ang + 0.5), b[1] - k * Math.sin(ang + 0.5)];
+        return `<path d="M${P(a)} Q${P(c)} ${P(b)}" ${trazo(color, ancho)}/><path d="M${P(p1)} L${P(b)} L${P(p2)}" ${trazo(color, ancho)}/>`;
+      }
+
+      /** Arquitos de movimiento alrededor de un punto. */
+      function vaiven(c, r, desde, hasta, color = TINTA) {
+        let s = '';
+        for (const k of [0, 4.2]) {
+          const rr = r + k;
+          const a = [c[0] + Math.cos(rad(desde)) * rr, c[1] + Math.sin(rad(desde)) * rr];
+          const b = [c[0] + Math.cos(rad(hasta)) * rr, c[1] + Math.sin(rad(hasta)) * rr];
+          s += `<path d="M${P(a)} A${r2(rr)} ${r2(rr)} 0 0 ${hasta > desde ? 1 : 0} ${P(b)}" ${trazo(color, 1.6)}/>`;
+        }
+        return s;
+      }
+
+      /** Rayitas cortas que salen de un punto (sacudir, palmada, golpe). */
+      function rayitas(c, r1, r2_, angulos, color = TINTA, ancho = 1.7) {
+        return angulos
+          .map((g) => {
+            const a = [c[0] + Math.cos(rad(g)) * r1, c[1] + Math.sin(rad(g)) * r1];
+            const b = [c[0] + Math.cos(rad(g)) * r2_, c[1] + Math.sin(rad(g)) * r2_];
+            return `<path d="M${P(a)} L${P(b)}" ${trazo(color, ancho)}/>`;
+          })
+          .join('');
+      }
+
+      const gota = (x, y, s, color = '#5b9be6') =>
+        `<path d="M${r2(x)} ${r2(y - s)} C${r2(x + s * 0.95)} ${r2(y + s * 0.1)} ${r2(x + s * 0.7)} ${r2(y + s * 1.15)} ${r2(x)} ${r2(y + s * 1.15)} C${r2(x - s * 0.7)} ${r2(y + s * 1.15)} ${r2(x - s * 0.95)} ${r2(y + s * 0.1)} ${r2(x)} ${r2(y - s)} Z" fill="${color}" stroke="${TINTA}" stroke-width="1"/>`;
+
+      const chispa = (x, y, s, color = '#f6c12e') =>
+        `<path d="M${r2(x)} ${r2(y - s)} Q${r2(x + s * 0.18)} ${r2(y - s * 0.18)} ${r2(x + s)} ${r2(y)} Q${r2(x + s * 0.18)} ${r2(y + s * 0.18)} ${r2(x)} ${r2(y + s)} Q${r2(x - s * 0.18)} ${r2(y + s * 0.18)} ${r2(x - s)} ${r2(y)} Q${r2(x - s * 0.18)} ${r2(y - s * 0.18)} ${r2(x)} ${r2(y - s)} Z" fill="${color}" stroke="${TINTA}" stroke-width="0.9"/>`;
+
+      function sol(x, y, r) {
+        let rayos = '';
+        for (let g = 0; g < 360; g += 45) {
+          const a = [x + Math.cos(rad(g)) * (r + 2.2), y + Math.sin(rad(g)) * (r + 2.2)];
+          const b = [x + Math.cos(rad(g)) * (r + 5.6), y + Math.sin(rad(g)) * (r + 5.6)];
+          rayos += `<path d="M${P(a)} L${P(b)}" ${trazo('#f5961f', 2)}/>`;
+        }
+        return `${rayos}<circle cx="${x}" cy="${y}" r="${r}" fill="#f6c12e" stroke="${TINTA}" stroke-width="1.5"/>`;
+      }
+
+      function nota(x, y, s = 1, color = TINTA) {
+        return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="0" rx="2.6" ry="2" transform="rotate(-20)" fill="${color}"/><path d="M2.3 -0.6 V-11 Q5 -9 6.4 -6.4" ${trazo(color, 1.4)}/></g>`;
+      }
+
+      function viento(x, y, largo, color = '#5b9be6') {
+        return `<path d="M${x} ${y} H${x + largo} q4 0 4 -3.4 q0 -3 -3 -3 q-2.6 0 -2.6 2.4" ${trazo(color, 1.8)}/>`;
+      }
+
+      function hoja(x, y, giro, color = '#1fa67a') {
+        return `<path transform="translate(${x} ${y}) rotate(${giro})" d="M0 0 Q4 -4.4 9 0 Q4 4.4 0 0 Z M0 0 H8" fill="${color}" stroke="${TINTA}" stroke-width="0.9"/>`;
+      }
+
+      /** Iconos para las etiquetas: persona de pie y silla. */
+      const ICONO_DE_PIE = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4.6" r="2.9" fill="currentColor"/><path d="M12 9.2 V15.4 M12 15.4 L8.8 21.6 M12 15.4 L15.2 21.6 M6.6 11.2 Q12 9.8 17.4 11.2" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const ICONO_SILLA = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 14 V22 M13.6 14 V22 M19.8 10.6 V18.6" stroke="#1e2b55" stroke-width="1.9" stroke-linecap="round"/><path d="M10.4 10.6 V2.8 Q10.4 1.6 11.6 1.6 H18.6 Q19.8 1.6 19.8 2.8 V10.6 Z" fill="#f6c12e" stroke="#1e2b55" stroke-width="1.5" stroke-linejoin="round"/><path d="M4.2 14 L10.4 10.6 H19.8 L13.6 14 Z" fill="#f6c12e" stroke="#1e2b55" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+
+      // Base de cada postura: cadera (H), centro de los hombros (S), cabeza (C), hombros y caderas.
+      function base(sentado) {
+        const H = sentado === 'ruedas' ? [50, 85] : sentado ? [50, 86] : [50, 75];
+        const S = [H[0], H[1] - L.torso];
+        return { H, S, C: [S[0], S[1] - L.cuello], hD: [S[0] + L.hombros, S[1]], hI: [S[0] - L.hombros, S[1]], cD: [H[0] + L.caderas, H[1]], cI: [H[0] - L.caderas, H[1]], sentado };
+      }
+
+      function giro(c, r, color = TINTA, sentido = 1) {
+        const a0 = rad(-150);
+        const a1 = rad(150);
+        const p0 = [c[0] + Math.cos(a0) * r, c[1] + Math.sin(a0) * r];
+        const p1 = [c[0] + Math.cos(a1) * r, c[1] + Math.sin(a1) * r];
+        const tan = sentido > 0 ? a1 + Math.PI / 2 : a0 - Math.PI / 2;
+        const fin = sentido > 0 ? p1 : p0;
+        const k = 3.2;
+        const q1 = [fin[0] - k * Math.cos(tan - 0.55), fin[1] - k * Math.sin(tan - 0.55)];
+        const q2 = [fin[0] - k * Math.cos(tan + 0.55), fin[1] - k * Math.sin(tan + 0.55)];
+        return `<path d="M${P(p0)} A${r} ${r} 0 1 1 ${P(p1)}" ${trazo(color, 1.6)}/><path d="M${P(q1)} L${P(fin)} L${P(q2)}" ${trazo(color, 1.6)}/>`;
+      }
+
+      const corazon = (x, y, s = 1, color = '#e8553e') =>
+        `<path transform="translate(${x} ${y}) scale(${s})" d="M0 3 C-5 -0.6 -3.4 -5 0 -2.4 C3.4 -5 5 -0.6 0 3 Z" fill="${color}" stroke="${TINTA}" stroke-width="0.9"/>`;
+
+      const nube = (x, y, s = 1) =>
+        `<path transform="translate(${x} ${y}) scale(${s})" d="M-12 4 Q-15 4 -15 0.6 Q-15 -3.4 -10.6 -3.4 Q-10 -8.6 -4.4 -8.6 Q-1 -12.4 4.2 -9.4 Q9.6 -10 10.4 -4.6 Q15 -4.4 15 0 Q15 4 11.4 4 Z" fill="#fff" stroke="${TINTA}" stroke-width="1.4" stroke-linejoin="round"/>`;
+
+      const palomita = (x, y, s = 1) =>
+        `<g transform="translate(${x} ${y}) scale(${s})"><path d="M-4 1.6 A3 3 0 0 1 -2.6 -3.4 A3.2 3.2 0 0 1 3 -3 A3 3 0 0 1 4 2 A3 3 0 0 1 -0.4 4.4 A3 3 0 0 1 -4 1.6 Z" fill="#fff" stroke="${TINTA}" stroke-width="1"/><circle cx="0.6" cy="0.4" r="1.1" fill="#f6c12e"/></g>`;
+
+      function estrellaFondo(cx, cy, R, r, puntas, relleno) {
+        let d = '';
+        for (let i = 0; i < puntas * 2; i++) {
+          const g = -90 + (180 / puntas) * i;
+          const rr = i % 2 ? r : R;
+          d += `${i ? 'L' : 'M'}${r2(cx + Math.cos(rad(g)) * rr)} ${r2(cy + Math.sin(rad(g)) * rr)} `;
+        }
+        return `<path d="${d}Z" fill="${relleno}" stroke="none"/>`;
+      }
+
+      const texto = (x, y, t, tam = 8, color = TINTA, giro_ = 0) =>
+        `<text x="${x}" y="${y}" transform="rotate(${giro_} ${x} ${y})" font-family="Outfit, sans-serif" font-weight="700" font-size="${tam}" fill="${color}" text-anchor="middle">${t}</text>`;
+    </script>
+    <script>
+      // ---------------------------------------------------------------------------
+      // Las 24 pausas. Cada una tiene: tipo (calmar, activar o concentrar), nombre,
+      // minutos, pasos de pie, pasos sentados y la postura de los dos dibujos.
+      // Para cambiar un texto, cámbialo aquí: las cartas, el dado y la ruleta se
+      // construyen a partir de esta lista.
+      // ---------------------------------------------------------------------------
+      const COLOR = { calmar: '#2f6fd6', activar: '#f5961f', concentrar: '#8c4fb8' };
+
+      const PAUSAS = [
+        // ---------- CALMAR ----------
+        {
+          tipo: 'calmar',
+          nombre: 'El globo',
+          min: 1,
+          pie: ['Manos en la tripa.', 'Cogemos aire por la nariz: la tripa se hincha como un globo.', 'Lo soltamos muy despacio por la boca. Cinco veces.'],
+          sen: ['Espalda apoyada y manos en la tripa.', 'Inflamos el globo por la nariz.', 'Lo desinflamos despacio por la boca. Cinco veces.'],
+          fig: (b) => ({
+            mD: [b.H[0] + 3.5, b.H[1] - 9],
+            mI: [b.H[0] - 3.5, b.H[1] - 7.5],
+            cara: 'calma',
+            detras: () =>
+              `<path d="M84 29.4 Q86.4 34 82.6 38 Q79 42 81.4 47" ${trazo(TINTA, 1.1)}/><ellipse cx="84" cy="19.6" rx="7.4" ry="9" fill="#9cc2f5" stroke="${TINTA}" stroke-width="1.4"/><path d="M82.4 28.4 L84 30 L85.6 28.4 Z" fill="${TINTA}"/><path d="M80.6 15 Q81.6 12.6 84 12.2" ${trazo('#fff', 1.4)}/>`,
+            delante: (j) => vaiven([j.H[0], j.H[1] - 9], 13.5, -32, 32, COLOR.calmar) + vaiven([j.H[0], j.H[1] - 9], 13.5, 148, 212, COLOR.calmar),
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'La ola',
+          min: 1,
+          pie: ['Brazos abajo y pies firmes.', 'Al coger aire, los brazos suben por los lados.', 'Al soltarlo, bajan despacio, como una ola. Cinco veces.'],
+          sen: ['Manos sobre las rodillas.', 'Al coger aire, los brazos suben por los lados.', 'Al soltarlo, bajan despacio hasta las rodillas. Cinco veces.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 22, b.hD[1] - 13],
+            mI: [b.hI[0] - 22, b.hI[1] - 13],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            cara: 'calma',
+            delante: (j) =>
+              flecha([j.hD[0] + 16, j.hD[1] + 25], [j.hD[0] + 33, j.hD[1] + 12], [j.hD[0] + 31, j.hD[1] - 4], COLOR.calmar) +
+              flecha([j.hI[0] - 16, j.hI[1] + 25], [j.hI[0] - 33, j.hI[1] + 12], [j.hI[0] - 31, j.hI[1] - 4], COLOR.calmar) +
+              `<path d="M32 ${r2(j.C[1] - 25)} q4.5 -4.6 9 0 t9 0 t9 0 t9 0" ${trazo(COLOR.calmar, 2)}/>`,
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'El muñeco de nieve',
+          min: 2,
+          pie: ['Somos muñecos de nieve: muy tiesos, con todo el cuerpo apretado.', 'Sale el sol y nos derretimos poco a poco.', 'Acabamos blanditos, con las rodillas dobladas.'],
+          sen: ['Apretamos puños, brazos y hombros: muy tiesos.', 'Sale el sol y nos derretimos poco a poco.', 'Acabamos blanditos, con los brazos colgando.'],
+          figPie: (b) => ({
+            cadera: [50, 79],
+            t: 5,
+            cab: 16,
+            mD: [b.hD[0] + 9, b.hD[1] + 28],
+            mI: [b.hI[0] - 3, b.hI[1] + 30],
+            pieD: [57.5, 108],
+            pieI: [42.5, 108],
+            cara: 'calma',
+            detras: () => `<ellipse cx="50" cy="112.4" rx="25" ry="3.4" fill="#bcd6f7"/>` + sol(85, 13, 6),
+            delante: (j) => gota(j.mD[0] + 2, j.mD[1] + 9, 2.4) + gota(j.mI[0] - 2, j.mI[1] + 10, 2.4) + gota(j.C[0] - 15, j.C[1] + 3, 2.2),
+          }),
+          figSen: (b) => ({
+            t: -4,
+            cab: -15,
+            mD: [b.hD[0] + 12, b.hD[1] + 25],
+            mI: [b.hI[0] - 12, b.hI[1] + 25],
+            cara: 'calma',
+            detras: () => `<ellipse cx="50" cy="112.4" rx="26" ry="3.4" fill="#bcd6f7"/>` + sol(85, 13, 6),
+            delante: (j) => gota(j.mD[0] + 3, j.mD[1] + 8, 2.4) + gota(j.mI[0] - 3, j.mI[1] + 8, 2.4),
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'La tortuga',
+          min: 1,
+          pie: ['Subimos los hombros hasta las orejas: la tortuga se esconde.', 'Contamos hasta tres.', 'Los bajamos despacio y la tortuga se asoma. Cinco veces.'],
+          sen: ['Manos en las rodillas.', 'Subimos los hombros hasta las orejas y contamos hasta tres.', 'Los bajamos despacio. Cinco veces.'],
+          figPie: (b) => ({
+            enc: 1,
+            mD: [b.hD[0] + 5, b.hD[1] + 22],
+            mI: [b.hI[0] - 5, b.hI[1] + 22],
+            cara: 'calma',
+            delante: (j) => tortugaFlechas(j) + tortuguita(84, 104),
+          }),
+          figSen: (b) => ({
+            enc: 1,
+            mD: [b.H[0] + 9.4, b.H[1] + 5],
+            mI: [b.H[0] - 9.4, b.H[1] + 5],
+            cara: 'calma',
+            delante: (j) => tortugaFlechas(j) + tortuguita(86, 101),
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'Lluvia suave',
+          min: 1,
+          pie: ['Con la punta de los dedos, damos toquecitos en la cabeza: empieza a llover.', 'La lluvia baja por los hombros y los brazos.', 'Cada vez llueve más flojito, hasta que para.'],
+          sen: ['Toquecitos con la punta de los dedos en la cabeza.', 'La lluvia baja por los hombros, los brazos y, si queremos, las piernas.', 'Cada vez más flojito, hasta que para.'],
+          fig: (b) => ({
+            mD: [b.C[0] + 7.5, b.C[1] - 9],
+            mI: [b.C[0] - 7.5, b.C[1] - 9],
+            cara: 'calma',
+            detras: (j) => nube(50, j.C[1] - 25, 1.05),
+            delante: (j) => gota(38, j.C[1] - 14, 1.8) + gota(62, j.C[1] - 13, 1.8) + gota(17, j.C[1] + 2, 2.2) + gota(83, j.C[1] + 6, 2.2) + gota(22, j.C[1] + 22, 2) + gota(80, j.C[1] + 26, 2),
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'El árbol en el viento',
+          min: 1,
+          pie: ['Pies firmes, como raíces, y brazos arriba, como ramas.', 'Sopla el viento: nos inclinamos despacio a un lado y al otro.', 'Para el viento y nos quedamos quietos.'],
+          sen: ['Bien sentados: la silla es la raíz. Brazos arriba, como ramas.', 'Sopla el viento: nos inclinamos despacio a un lado y al otro.', 'Para el viento y nos quedamos quietos.'],
+          fig: (b) => ({
+            t: 9,
+            cab: 3,
+            escayolaPierna: b.sentado === 'silla' ? 'D' : undefined,
+            mD: [b.hD[0] + 11, b.hD[1] - 24],
+            mI: [b.hI[0] - 4, b.hI[1] - 27],
+            cara: 'calma',
+            delante: (j) =>
+              viento(3, j.C[1] - 8, 11) + viento(1, j.C[1] + 6, 15) + viento(5, j.C[1] + 20, 9) + hoja(j.mD[0] + 1.5, j.mD[1] - 6, -40) + hoja(j.mI[0] - 2, j.mI[1] - 8, 230),
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'El abrazo del oso',
+          min: 1,
+          pie: ['Cruzamos los brazos y nos agarramos los hombros.', 'Apretamos un poco y nos balanceamos despacio.', 'Soltamos y respiramos hondo.'],
+          sen: ['Cruzamos los brazos y nos agarramos los hombros.', 'Apretamos un poco y nos mecemos en la silla, despacio.', 'Soltamos y respiramos hondo.'],
+          fig: (b) => ({
+            mD: [b.hI[0] + 2.5, b.hI[1] + 5],
+            mI: [b.hD[0] - 2.5, b.hD[1] + 5],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            cara: 'calma',
+            delante: (j) => vaiven(j.C, 15.5, 196, 232, COLOR.calmar) + vaiven(j.C, 15.5, -52, -16, COLOR.calmar) + corazon(82, j.C[1] - 10, 1.1) + corazon(17, j.C[1] + 14, 0.9),
+          }),
+        },
+        {
+          tipo: 'calmar',
+          nombre: 'La flor',
+          min: 2,
+          pie: ['Somos una semilla: agachados, con la cabeza baja.', 'Muy despacio, la flor crece: subimos y abrimos los brazos.', 'Miramos al sol y respiramos.'],
+          sen: ['Somos una semilla: encogidos, con la cabeza baja.', 'Muy despacio, la flor se abre: espalda recta y brazos abiertos.', 'Miramos al sol y respiramos.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 15, b.hD[1] - 21],
+            mI: [b.hI[0] - 15, b.hI[1] - 21],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            mira: [0, -1.2],
+            detras: (j) => petalos(j.C) + sol(86, 11, 5),
+            delante: (j) => (b.sentado ? '' : hoja(j.pieD[0] + 5, 106, -25) + hoja(j.pieI[0] - 5, 106, 205)),
+          }),
+        },
+
+        // ---------- ACTIVAR ----------
+        {
+          tipo: 'activar',
+          nombre: 'La carrera quieta',
+          min: 2,
+          pie: ['Corremos sin movernos del sitio, con brazos de corredor.', 'Rápido mientras contamos hasta 20.', 'Despacio hasta 10, y otra vez rápido.'],
+          sen: ['Corremos con los brazos y, si podemos, con los pies bajo la mesa.', 'Rápido mientras contamos hasta 20.', 'Despacio hasta 10, y otra vez rápido.'],
+          figPie: (b) => ({
+            pieD: [b.cD[0] + 2.5, 97],
+            mD: [b.hD[0] + 7, b.hD[1] + 19],
+            mI: [b.hI[0] - 9, b.hI[1] - 9],
+            codoI: 'abajo',
+            cara: 'risa',
+            delante: () => velocidad(),
+          }),
+          figSen: (b) => ({
+            pieD: [b.H[0] + 10, 101.5],
+            rodD: [b.H[0] + 9.6, b.H[1] + 5],
+            mD: [b.hD[0] + 7, b.hD[1] + 19],
+            mI: [b.hI[0] - 9, b.hI[1] - 9],
+            codoI: 'abajo',
+            cara: 'risa',
+            delante: () => velocidad(),
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'La estrella',
+          min: 1,
+          pie: ['Abrimos brazos y piernas como una estrella y los cerramos.', 'Sin saltar o con un saltito suave: cada cual elige.', 'Diez veces.'],
+          sen: ['Abrimos los brazos hacia arriba como una estrella y los cerramos.', 'Si podemos, los pies también se abren y se cierran.', 'Diez veces.'],
+          figPie: (b) => ({
+            mD: [b.hD[0] + 19, b.hD[1] - 19],
+            mI: [b.hI[0] - 19, b.hI[1] - 19],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            pieD: [b.cD[0] + 9, 107.5],
+            pieI: [b.cI[0] - 9, 107.5],
+            escayola: 'I',
+            cara: 'risa',
+            detras: () => estrellaFondo(50, 56, 50, 22, 5, 'rgb(255 255 255 / .8)'),
+            delante: () => chispa(12, 18, 3.6) + chispa(88, 16, 3.6) + chispa(9, 70, 2.8) + chispa(91, 72, 2.8),
+          }),
+          figSen: (b) => ({
+            mD: [b.hD[0] + 19, b.hD[1] - 19],
+            mI: [b.hI[0] - 19, b.hI[1] - 19],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            rodD: [b.H[0] + 12, b.H[1] + 7.4],
+            rodI: [b.H[0] - 12, b.H[1] + 7.4],
+            pieD: [b.H[0] + (b.sentado === 'ruedas' ? 11 : 15), b.sentado === 'ruedas' ? 105.4 : 108.4],
+            pieI: [b.H[0] - (b.sentado === 'ruedas' ? 11 : 15), b.sentado === 'ruedas' ? 105.4 : 108.4],
+            cara: 'risa',
+            detras: () => estrellaFondo(50, 62, 50, 22, 5, 'rgb(255 255 255 / .8)'),
+            delante: () => chispa(12, 18, 3.6) + chispa(88, 16, 3.6),
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'Sacude, sacude',
+          min: 1,
+          pie: ['Sacudimos una mano contando hasta 8. Luego la otra mano, un pie y el otro pie.', 'Otra vez, contando hasta 4, hasta 2 y hasta 1.', '¡Y brazos arriba!'],
+          sen: ['Sacudimos una mano contando hasta 8. Luego la otra mano, un hombro y el otro hombro.', 'Otra vez, contando hasta 4, hasta 2 y hasta 1.', '¡Y brazos arriba!'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 22, b.hD[1] - 7],
+            codoD: 'abajo',
+            cara: 'risa',
+            delante: (j) => {
+              const m = alcanzar(j.eD, j.mD, L.antebrazo + 1.6);
+              return rayitas(m, 6, 10, [-70, -35, 0, 35, 70], TINTA, 1.6) + cuentaAtras();
+            },
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'Las palomitas',
+          min: 2,
+          pie: ['Somos granos de maíz: agachados, muy pequeñitos.', 'La sartén se calienta y temblamos un poco.', '¡Pop! Nos estiramos de golpe con los brazos arriba.'],
+          sen: ['Somos granos de maíz: hechos una bolita en la silla.', 'La sartén se calienta y temblamos un poco.', '¡Pop! Brazos arriba y bien abiertos.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 16, b.hD[1] - 22],
+            mI: [b.hI[0] - 16, b.hI[1] - 22],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            cara: 'sorpresa',
+            detras: (j) => estrellaFondo(50, j.S[1] - 6, 44, 30, 12, 'rgb(255 255 255 / .8)'),
+            delante: (j) => palomita(13, 22, 1.2) + palomita(88, 34, 1.1) + palomita(12, 60, 1) + palomita(90, 70, 1.2) + texto(79, 12, '¡POP!', 11, TINTA, -8),
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'A nadar',
+          min: 2,
+          pie: ['Nadamos a crol: un brazo y luego el otro, por encima de la cabeza.', 'Ahora a braza: manos juntas delante y abrimos el agua.', 'Y de espaldas: los brazos van hacia atrás.'],
+          sen: ['Separamos un poco la silla de la mesa.', 'Nadamos a crol, a braza y de espaldas.', 'Sin tocar a quien está al lado.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 4, b.hD[1] - 28],
+            mI: [b.hI[0] - 15, b.hI[1] + 12],
+            codoI: 'abajo',
+            sinGafas: true,
+            cabeza: `<path d="M-11.2 -0.4 H11.2" stroke="${COLOR.calmar}" stroke-width="1.8"/><circle cx="-4.2" cy="0.4" r="3.6" fill="#bfe0ff" stroke="${TINTA}" stroke-width="1.4"/><circle cx="4.2" cy="0.4" r="3.6" fill="#bfe0ff" stroke="${TINTA}" stroke-width="1.4"/>`,
+            delante: (j) => olas(b.sentado ? 101 : 99) + gota(j.mD[0] + 8, j.mD[1] + 2, 1.8) + gota(j.mD[0] - 8, j.mD[1] + 5, 1.6),
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'El robot',
+          min: 2,
+          pie: ['Somos robots: nos movemos con golpes secos, una parte cada vez.', 'Cabeza, un brazo, el otro, una pierna, la otra.', 'Se acaba la pila: nos paramos poco a poco.'],
+          sen: ['Somos robots: nos movemos con golpes secos, una parte cada vez.', 'Cabeza, un brazo, el otro, los hombros, el tronco.', 'Se acaba la pila: nos paramos poco a poco.'],
+          fig: (b) => ({
+            codoD: [b.hD[0] + 13.8, b.hD[1] + 0.6],
+            mD: [b.hD[0] + 13.8, b.hD[1] - 14],
+            codoI: [b.hI[0] - 13.8, b.hI[1] + 0.6],
+            mI: [b.hI[0] - 13.8, b.hI[1] + 15],
+            cara: 'robot',
+            cabeza: `<path d="M0 -12 V-18.4" ${trazo(TINTA, 1.6)}/><circle cx="0" cy="-20" r="2.4" fill="${COLOR.activar}" stroke="${TINTA}" stroke-width="1.2"/>`,
+            delante: (j) => texto(82, j.C[1] - 12, 'bip', 8.5, TINTA, 10) + texto(19, j.C[1] - 6, 'bip', 7, TINTA, -10),
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'La escalada',
+          min: 1,
+          pie: ['Subimos por una escalera invisible: una mano arriba y la rodilla contraria.', 'Cambiamos: la otra mano y la otra rodilla.', '¡Hasta la cima, cada vez más rápido!'],
+          sen: ['Subimos por una escalera invisible: una mano arriba y luego la otra.', 'Si podemos, las rodillas suben también.', '¡Hasta la cima, cada vez más rápido!'],
+          figPie: (b) => ({
+            mD: [b.hD[0] + 3, b.hD[1] - 27],
+            mI: [b.hI[0] - 10, b.hI[1] - 7],
+            codoI: 'abajo',
+            pieI: [b.cI[0] - 2, 97],
+            mira: [0.6, -1.2],
+            detras: () => escalera(),
+          }),
+          figSen: (b) => ({
+            mD: [b.hD[0] + 3, b.hD[1] - 27],
+            mI: [b.hI[0] - 10, b.hI[1] - 7],
+            codoI: 'abajo',
+            rodI: [b.H[0] - 9.6, b.H[1] + 4.6],
+            pieI: [b.H[0] - 10, b.sentado === 'ruedas' ? 101.5 : 102.5],
+            mira: [0.6, -1.2],
+            detras: () => escalera(),
+          }),
+        },
+        {
+          tipo: 'activar',
+          nombre: 'Los molinos',
+          min: 1,
+          pie: ['Brazos en cruz, como las aspas de un molino.', 'Hacemos círculos pequeños y luego grandes.', 'Primero hacia delante y después hacia atrás.'],
+          sen: ['Brazos en cruz, sin tocar la mesa ni a nadie.', 'Hacemos círculos pequeños y luego grandes.', 'Primero hacia delante y después hacia atrás.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 28, b.hD[1] + 1],
+            mI: [b.hI[0] - 28, b.hI[1] + 1],
+            cara: 'risa',
+            delante: (j) => {
+              const mD = alcanzar(j.eD, j.mD, L.antebrazo + 1.6);
+              const mI = alcanzar(j.eI, j.mI, L.antebrazo + 1.6);
+              return giro(mD, 7.4, COLOR.activar, 1) + giro(mI, 7.4, COLOR.activar, -1);
+            },
+          }),
+        },
+
+        // ---------- CONCENTRAR ----------
+        {
+          tipo: 'concentrar',
+          nombre: 'El espejo',
+          min: 3,
+          pie: ['En parejas, frente a frente.', 'Quien guía se mueve muy despacio y la otra persona lo copia, como un espejo.', 'Al minuto, cambiamos.'],
+          sen: ['En parejas, frente a frente: vale una persona de pie y otra sentada.', 'Movemos brazos, manos y cara muy despacio, como un espejo.', 'Al minuto, cambiamos.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 16, b.hD[1] - 15],
+            codoD: 'abajo',
+            mI: [b.hI[0] - 3, b.hI[1] + 22],
+            cara: 'atenta',
+            mira: [1.3, -0.4],
+            detras: (j) => espejo(j),
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'El semáforo',
+          min: 3,
+          pie: ['Verde: andamos en el sitio. Amarillo: muy despacio.', 'Rojo: ¡estatuas!', 'Quien guía dice o enseña el color, cada vez más rápido.'],
+          sen: ['Verde: palmas en las rodillas. Amarillo: muy despacio.', 'Rojo: ¡estatuas!', 'Quien guía dice o enseña el color, cada vez más rápido.'],
+          figPie: (b) => ({
+            pieD: [b.cD[0] + 2, 99],
+            mD: [b.hD[0] + 6, b.hD[1] + 19],
+            mI: [b.hI[0] - 9, b.hI[1] - 8],
+            codoI: 'abajo',
+            cara: 'atenta',
+            detras: () => semaforo(),
+          }),
+          figSen: (b) => ({
+            mD: [b.H[0] + 9.6, b.H[1] + 4],
+            mI: [b.H[0] - 9.6, b.H[1] + 1],
+            cara: 'atenta',
+            detras: () => semaforo(),
+            delante: (j) => rayitas([j.H[0] - 10, j.H[1] + 2], 6.5, 9.5, [-150, -120, -90], TINTA, 1.4),
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'El árbol',
+          min: 2,
+          pie: ['Apoyamos un pie en el tobillo o en la pierna contraria.', 'Juntamos las manos arriba y miramos un punto fijo.', 'Contamos hasta 10 y cambiamos de pie.'],
+          sen: ['Nos ponemos un estuche o un libro fino en la cabeza.', 'Espalda muy recta y brazos arriba, como ramas.', 'Contamos hasta 10 sin que se caiga.'],
+          figPie: (b) => ({
+            pieD: [b.cI[0] + 4.5, 93],
+            mD: [b.C[0] + 1.6, b.C[1] - 18],
+            mI: [b.C[0] - 1.6, b.C[1] - 18],
+            cara: 'atenta',
+            delante: (j) => hoja(j.mD[0] + 2.5, j.mD[1] - 5, -55) + hoja(j.mI[0] - 2.5, j.mI[1] - 5, 235) + hoja(70, 96, -20) + hoja(30, 96, 200),
+          }),
+          figSen: (b) => ({
+            mD: [b.hD[0] + 13, b.hD[1] - 21],
+            mI: [b.hI[0] - 13, b.hI[1] - 21],
+            codoD: 'abajo',
+            codoI: 'abajo',
+            cara: 'atenta',
+            cabeza: `<g transform="translate(0 -15.4) rotate(-3)"><rect x="-12" y="-3.6" width="24" height="7" rx="1.2" fill="${COLOR.concentrar}" stroke="${TINTA}" stroke-width="1.3"/><path d="M-10 -0.1 H10" stroke="#fff" stroke-width="1.1"/></g>`,
+            delante: (j) => hoja(j.mD[0] + 2.5, j.mD[1] - 5, -55) + hoja(j.mI[0] - 2.5, j.mI[1] - 5, 235),
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'Cruza y toca',
+          min: 1,
+          pie: ['Subimos una rodilla y la tocamos con la mano contraria.', 'Cambiamos de lado.', 'Despacio y luego más rápido.'],
+          sen: ['Tocamos la rodilla izquierda con la mano derecha.', 'Y la rodilla derecha con la mano izquierda.', 'Despacio y luego más rápido.'],
+          figPie: (b) => ({
+            t: -4,
+            pieI: [b.cI[0] + 1.5, 97],
+            mD: [b.cI[0] - 4, b.H[1] + 4],
+            codoD: 'abajo',
+            mI: [b.hI[0] - 20, b.hI[1] + 6],
+            codoI: 'abajo',
+            cara: 'atenta',
+            delante: (j) => {
+              const m = alcanzar(j.eD, j.mD, L.antebrazo + 1.6);
+              return rayitas(m, 5, 8, [-150, -110, -70], COLOR.concentrar, 1.5);
+            },
+          }),
+          figSen: (b) => ({
+            t: -9,
+            doblar: 0.45,
+            mD: [b.H[0] - 9.4, b.H[1] + 5],
+            codoD: 'abajo',
+            mI: [b.hI[0] - 16, b.hI[1] + 12],
+            codoI: 'abajo',
+            cara: 'atenta',
+            delante: (j) => {
+              const m = alcanzar(j.eD, j.mD, L.antebrazo + 1.6);
+              return rayitas(m, 5, 8, [-160, -120, -80], COLOR.concentrar, 1.5);
+            },
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'El circuito',
+          min: 1,
+          pie: ['Brazo estirado y pulgar arriba: es un coche de carreras.', 'Dibujamos en el aire un ocho tumbado muy grande.', 'Lo seguimos con los ojos, sin mover la cabeza. Cambiamos de mano.'],
+          sen: ['Espalda apoyada, brazo estirado y pulgar arriba.', 'Dibujamos en el aire un ocho tumbado muy grande.', 'Lo seguimos con los ojos, sin mover la cabeza. Cambiamos de mano.'],
+          fig: (b) => ({
+            mD: [b.hD[0] + 21, b.hD[1] - 17],
+            codoD: 'abajo',
+            cara: 'atenta',
+            mira: [1.4, -1.1],
+            escayolaPierna: b.sentado === 'silla' ? 'I' : undefined,
+            delante: (j) => circuito(j),
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'El eco',
+          min: 2,
+          pie: ['Quien guía hace un ritmo con palmas y pisotones.', 'Lo repetimos todos, como un eco.', 'Cada ritmo es un poco más largo.'],
+          sen: ['Quien guía hace un ritmo con palmas en la mesa y en las rodillas.', 'Lo repetimos todos, como un eco.', 'Cada ritmo es un poco más largo.'],
+          figPie: (b) => ({
+            mD: [b.S[0] + 2, b.S[1] + 5],
+            mI: [b.S[0] - 2, b.S[1] + 5],
+            pieD: [b.cD[0] + 3, 102.5],
+            cara: 'risa',
+            delante: (j) => rayitas([j.S[0], j.S[1] + 5], 7.5, 11.5, [-165, -140, -40, -15], TINTA, 1.6) + nota(14, 30, 1.1) + nota(82, 22, 1.2) + nota(86, 48, 0.9) + rayitas([j.pieD[0] + 2, 111], 7, 10, [-160, -20], TINTA, 1.5),
+          }),
+          figSen: (b) => ({
+            mD: [b.S[0] + 2, b.S[1] + 5],
+            mI: [b.S[0] - 2, b.S[1] + 5],
+            cara: 'risa',
+            delante: (j) => rayitas([j.S[0], j.S[1] + 5], 7.5, 11.5, [-165, -140, -40, -15], TINTA, 1.6) + nota(14, 30, 1.1) + nota(82, 22, 1.2) + nota(86, 48, 0.9),
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'Nariz y oreja',
+          min: 1,
+          pie: ['Una mano en la nariz y la otra en la oreja contraria.', 'Palmada y cambiamos de mano.', '¡Cada vez más rápido!'],
+          sen: ['Una mano en la nariz y la otra en la oreja contraria.', 'Palmada y cambiamos de mano.', '¡Cada vez más rápido!'],
+          fig: (b) => ({
+            mD: [b.C[0] - 11.4, b.C[1] + 1.4],
+            codoD: 'abajo',
+            mI: [b.C[0] + 0.6, b.C[1] + 4.4],
+            codoI: 'abajo',
+            cara: 'risa',
+            delante: (j) => flecha([70, j.C[1] - 17], [80, j.C[1] - 25], [90, j.C[1] - 17], COLOR.concentrar) + flecha([90, j.C[1] - 9], [80, j.C[1] - 1], [70, j.C[1] - 9], COLOR.concentrar),
+          }),
+        },
+        {
+          tipo: 'concentrar',
+          nombre: 'La cadena',
+          min: 3,
+          pie: ['Quien guía hace un movimiento y lo copiamos.', 'Añade otro: hacemos los dos seguidos.', 'Y otro más. ¿Hasta cuántos llegamos?'],
+          sen: ['Quien guía hace un movimiento con brazos, manos o cabeza.', 'Lo copiamos. Añade otro: hacemos los dos seguidos.', 'Y otro más. ¿Hasta cuántos llegamos?'],
+          fig: (b) => ({
+            mD: [b.C[0] + 8, b.C[1] - 8],
+            mI: [b.C[0] - 8, b.C[1] - 8],
+            cara: 'feliz',
+            delante: (j) => cadena(j),
+          }),
+        },
+      ];
+
+      // ---------- Dibujos auxiliares de algunas pausas ----------
+      function tortugaFlechas(j) {
+        return (
+          flecha([j.hD[0] + 9, j.hD[1] + 9], [j.hD[0] + 9.6, j.hD[1] + 2], [j.hD[0] + 9, j.hD[1] - 5], COLOR.calmar) +
+          flecha([j.hI[0] - 9, j.hI[1] + 9], [j.hI[0] - 9.6, j.hI[1] + 2], [j.hI[0] - 9, j.hI[1] - 5], COLOR.calmar)
+        );
+      }
+
+      function tortuguita(x, y) {
+        return `<g transform="translate(${x} ${y})">
+          <path d="M-9 1 Q-11.5 4 -9 4.6 M-3 1 Q-3.6 4.6 -1.6 4.6 M3 1 Q3.6 4.6 5.6 4.6" ${trazo(TINTA, 1.4)}/>
+          <circle cx="9.4" cy="-1" r="2.8" fill="#9fdcc4" stroke="${TINTA}" stroke-width="1.2"/>
+          <path d="M-10.6 1.4 Q-9.6 -9 0 -9 Q8.8 -9 9 1.4 Z" fill="#1fa67a" stroke="${TINTA}" stroke-width="1.3"/>
+          <path d="M-5 -6.6 L-2.6 1.4 M4.4 -6.6 L2 1.4 M-8.4 -3 H7.4" stroke="${TINTA}" stroke-width="0.8" opacity=".55"/>
+        </g>`;
+      }
+
+      function petalos(C) {
+        let s = '';
+        for (let g = 0; g < 360; g += 45) {
+          const x = C[0] + Math.cos(rad(g)) * 17;
+          const y = C[1] + Math.sin(rad(g)) * 17;
+          s += `<ellipse cx="${r2(x)}" cy="${r2(y)}" rx="7.6" ry="11.4" transform="rotate(${g + 90} ${r2(x)} ${r2(y)})" fill="#fde5e0" stroke="#e8553e" stroke-width="1"/>`;
+        }
+        return s;
+      }
+
+      function velocidad() {
+        return `<path d="M4 58 H15 M1 66 H13 M5 74 H14 M86 56 H97 M88 64 H99 M85 72 H95" ${trazo(TINTA, 1.6)} opacity=".6"/>`;
+      }
+
+      function cuentaAtras() {
+        return [
+          [13, 12, 6.4, '8'],
+          [28, 12, 5.4, '4'],
+          [40.5, 12, 4.6, '2'],
+          [51, 12, 4, '1'],
+        ]
+          .map(([x, y, r, n]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#fde8cf" stroke="${COLOR.activar}" stroke-width="1.4"/>` + texto(x, y + r * 0.42, n, r * 1.25))
+          .join('');
+      }
+
+      function olas(y) {
+        return `<path d="M2 ${y} q6 -4 12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0" ${trazo(COLOR.calmar, 2)}/><path d="M8 ${y + 7} q6 -4 12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0" ${trazo(COLOR.calmar, 1.6)} opacity=".6"/>`;
+      }
+
+      function escalera() {
+        let s = `<path d="M33 3 V112 M67 3 V112" stroke="#b9c1d6" stroke-width="2" stroke-dasharray="3 3" stroke-linecap="round"/>`;
+        for (let y = 10; y < 112; y += 12) s += `<path d="M33 ${y} H67" stroke="#b9c1d6" stroke-width="1.8" stroke-dasharray="3 3" stroke-linecap="round"/>`;
+        return s;
+      }
+
+      function espejo(j) {
+        const m = alcanzar(j.eD, j.mD, L.antebrazo + 1.6);
+        return (
+          `<rect x="81" y="6" width="16" height="98" rx="4" fill="#e4edfb" stroke="${TINTA}" stroke-width="1.6"/>` +
+          `<path d="M85 18 L92 11 M85 26 L94 17" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>` +
+          `<circle cx="${r2(2 * 81 - m[0] + 8)}" cy="${r2(m[1])}" r="3.3" fill="none" stroke="${TINTA}" stroke-width="1.2" opacity=".35"/>`
+        );
+      }
+
+      function semaforo() {
+        return (
+          `<path d="M89 44 V112" stroke="${GRIS}" stroke-width="3" stroke-linecap="round"/>` +
+          `<rect x="81.5" y="4" width="15" height="40" rx="4.4" fill="${TINTA}"/>` +
+          `<circle cx="89" cy="11.6" r="4.6" fill="#e8553e"/><circle cx="89" cy="24" r="4.6" fill="#f6c12e"/><circle cx="89" cy="36.4" r="4.6" fill="#1fa67a"/>`
+        );
+      }
+
+      function circuito(j) {
+        const m = alcanzar(j.eD, j.mD, L.antebrazo + 1.6);
+        const cx = m[0] - 6;
+        const cy = m[1] - 19;
+        const d = `M${cx} ${cy} C${cx + 6} ${cy - 9} ${cx + 17} ${cy - 9} ${cx + 17} ${cy} C${cx + 17} ${cy + 9} ${cx + 6} ${cy + 9} ${cx} ${cy} C${cx - 6} ${cy - 9} ${cx - 17} ${cy - 9} ${cx - 17} ${cy} C${cx - 17} ${cy + 9} ${cx - 6} ${cy + 9} ${cx} ${cy} Z`;
+        return (
+          `<path d="${r2d(d)}" fill="none" stroke="${COLOR.concentrar}" stroke-width="1.8" stroke-dasharray="3.2 2.6" stroke-linecap="round"/>` +
+          `<g transform="translate(${r2(cx + 9)} ${r2(cy - 7.2)})"><rect x="-4.6" y="-2.6" width="9.2" height="4.6" rx="1.8" fill="${COLOR.activar}" stroke="${TINTA}" stroke-width="1"/><circle cx="-2.6" cy="2.4" r="1.3" fill="${TINTA}"/><circle cx="2.6" cy="2.4" r="1.3" fill="${TINTA}"/></g>`
+        );
+      }
+
+      function r2d(d) {
+        return d.replace(/-?\d+\.\d+/g, (n) => r2(Number(n)));
+      }
+
+      function cadena(j) {
+        const y0 = j.C[1] - 6;
+        let s = '';
+        for (let k = 0; k < 3; k++) {
+          const y = y0 + k * 17;
+          if (k) s += `<ellipse cx="11" cy="${y - 8.5}" rx="2.2" ry="4" fill="none" stroke="${TINTA}" stroke-width="1.3"/>`;
+          s += `<circle cx="11" cy="${y}" r="5.8" fill="#efe5f7" stroke="${COLOR.concentrar}" stroke-width="1.5"/>` + texto(11, y + 2.6, String(k + 1), 7.4);
+        }
+        return s;
+      }
+    </script>
+    <script>
+      // ---------------------------------------------------------------------------
+      // Montaje: construye las cartas, el dado, la ruleta y los dibujos de la portada,
+      // del cartel y de la nota para las familias a partir de la lista PAUSAS.
+      // ---------------------------------------------------------------------------
+      const NOMBRE_TIPO = { calmar: 'Calmar', activar: 'Activar', concentrar: 'Concentrar' };
+      const TINTE = { calmar: '#e4edfb', activar: '#fde8cf', concentrar: '#efe5f7' };
+
+      const ICONOS = {
+        calmar: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#e4edfb"/><path d="M4.4 10 q2.6 -3 5.2 0 t5.2 0 t5.2 0 M4.4 15.4 q2.6 -3 5.2 0 t5.2 0 t5.2 0" fill="none" stroke="#1e2b55" stroke-width="2.1" stroke-linecap="round"/></svg>`,
+        activar: `<svg viewBox="0 0 24 24" aria-hidden="true"><g stroke="#1e2b55" stroke-width="2" stroke-linecap="round"><path d="M12 1.6 V4.4 M12 19.6 V22.4 M1.6 12 H4.4 M19.6 12 H22.4 M4.6 4.6 L6.6 6.6 M17.4 17.4 L19.4 19.4 M4.6 19.4 L6.6 17.4 M17.4 6.6 L19.4 4.6"/></g><circle cx="12" cy="12" r="5.4" fill="#f5961f" stroke="#1e2b55" stroke-width="1.8"/></svg>`,
+        concentrar: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#efe5f7" stroke="#1e2b55" stroke-width="1.8"/><circle cx="12" cy="12" r="6" fill="#fff" stroke="#1e2b55" stroke-width="1.8"/><circle cx="12" cy="12" r="2.4" fill="#8c4fb8"/></svg>`,
+        'de-pie': ICONO_DE_PIE,
+        silla: ICONO_SILLA,
+      };
+
+      const ICONO_RELOJ = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 6.6 V12 L15.6 14.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+      /** Qué niño o niña dibuja cada versión, y si la versión sentada va en silla de ruedas. */
+      function reparto(i, version) {
+        if (version === 'pie') return { sentado: false, nino: NINOS[(2 * i) % NINOS.length] };
+        return { sentado: i % 3 === 1 ? 'ruedas' : 'silla', nino: NINOS[(2 * i + 3) % NINOS.length] };
+      }
+
+      function dibujo(i, version, color = COLOR[PAUSAS[i].tipo], nino) {
+        const pz = PAUSAS[i];
+        const r = reparto(i, version);
+        const b = base(r.sentado);
+        const f = (version === 'pie' ? pz.figPie : pz.figSen) ?? pz.fig;
+        return figura({ ...f(b), sentado: r.sentado }, nino ?? r.nino, color);
+      }
+
+      const svgFigura = (contenido, clase = '') => `<svg class="${clase}" viewBox="0 0 100 116" aria-hidden="true">${contenido}</svg>`;
+
+      // ---------- Cartas ----------
+      function carta(pz, i) {
+        const pasos = (lista) => `<ol class="pasos">${lista.map((p) => `<li>${p}</li>`).join('')}</ol>`;
+        return `<article class="carta ${pz.tipo}">
+          <div class="carta__banda"><span class="carta__tipo">${ICONOS[pz.tipo]}${NOMBRE_TIPO[pz.tipo]}</span><span class="carta__tiempo">${ICONO_RELOJ}${pz.min} min</span><span class="carta__num">${i + 1}</span></div>
+          <h2>${pz.nombre}</h2>
+          <div class="versiones">
+            <section class="version"><h3>${ICONOS['de-pie']}De pie</h3><div class="version__dibujo">${svgFigura(dibujo(i, 'pie'))}</div>${pasos(pz.pie)}</section>
+            <section class="version"><h3>${ICONOS.silla}Sentados</h3><div class="version__dibujo">${svgFigura(dibujo(i, 'sen'))}</div>${pasos(pz.sen)}</section>
+          </div>
+        </article>`;
+      }
+
+      const PISTAS = [
+        'Recorta por la línea de puntos y plastifica. Guárdalas por colores en una caja o en una anilla.',
+        'Las pausas azules bajan el ritmo: después del recreo o cuando hay nervios.',
+        'Las pausas naranjas suben la energía tras mucho rato sentados. Al acabar, dos respiraciones lentas.',
+        'Antes de empezar, espacio para estirar los brazos sin tocar a nadie.',
+        'Las pausas moradas piden atención y coordinación: antes de una tarea que lo necesita.',
+        'Puede guiar el docente o un alumno o una alumna. Nadie gana y nadie pierde.',
+      ];
+
+      function hojasDeCartas() {
+        let html = '';
+        for (let h = 0; h < 6; h++) {
+          const grupo = PAUSAS.slice(h * 4, h * 4 + 4);
+          const tipo = grupo[0].tipo;
+          html += `<section class="hoja">
+            <div class="encabezado"><h1>Pausas para ${NOMBRE_TIPO[tipo].toLowerCase()} <small class="chip-tipo chip-tipo--num ${tipo}">${h * 4 + 1} a ${h * 4 + 4}</small></h1><img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" /></div>
+            <p class="pista">${PISTAS[h]}</p>
+            <div class="cartas">${grupo.map((pz, k) => carta(pz, h * 4 + k)).join('')}</div>
+          </section>`;
+        }
+        document.getElementById('hojas-cartas').innerHTML = html;
+      }
+
+      function cartasBlancas() {
+        const version = (icono, nombre) =>
+          `<section class="version"><h3>${icono}${nombre}</h3><div class="version__dibujo">Dibujo</div><div class="renglones"><div></div><div></div><div></div><div></div></div></section>`;
+        const una = `<article class="carta carta--blanca calmar">
+          <div class="carta__banda"><span class="colorea">Colorea su tipo:</span><span class="colorea"><span class="calmar"></span>calmar</span><span class="colorea"><span class="activar"></span>activar</span><span class="colorea"><span class="concentrar"></span>concentrar</span></div>
+          <h2>Nombre<span></span>Dura<span class="corta"></span>min</h2>
+          <div class="versiones">${version(ICONOS['de-pie'], 'De pie')}${version(ICONOS.silla, 'Sentados')}</div>
+        </article>`;
+        document.getElementById('cartas-blancas').innerHTML = una.repeat(4);
+      }
+
+      // ---------- Dado: desarrollo de un cubo con pestañas ----------
+      function desarrolloDado() {
+        const s = 46;
+        const t = 8;
+        const caras = [
+          [s, 0],
+          [0, s],
+          [s, s],
+          [2 * s, s],
+          [s, 2 * s],
+          [s, 3 * s],
+        ];
+        const elegidas = [0, 3, 9, 11, 18, 22];
+        const corte = `stroke="${TINTA}" stroke-width="0.45" fill="none" stroke-linecap="round"`;
+        const pliegue = `stroke="${TINTA}" stroke-width="0.35" stroke-dasharray="1.6 1.3" fill="none"`;
+        let svg = '';
+
+        const pestana = (lado, [x, y]) => {
+          const pts = {
+            izq: [[x, y], [x - t, y + t], [x - t, y + s - t], [x, y + s]],
+            der: [[x + s, y], [x + s + t, y + t], [x + s + t, y + s - t], [x + s, y + s]],
+            abajo: [[x, y + s], [x + t, y + s + t], [x + s - t, y + s + t], [x + s, y + s]],
+          }[lado];
+          const giro = lado === 'abajo' ? 0 : lado === 'izq' ? -90 : 90;
+          const centro = lado === 'abajo' ? [x + s / 2, y + s + t / 2] : lado === 'izq' ? [x - t / 2, y + s / 2] : [x + s + t / 2, y + s / 2];
+          return (
+            `<path d="M${pts.map((p) => p.join(' ')).join(' L')} Z" fill="#f4efe4"/>` +
+            `<path d="M${pts.map((p) => p.join(' ')).join(' L')}" ${corte}/>` +
+            `<text x="${centro[0]}" y="${centro[1] + 1}" transform="rotate(${giro} ${centro[0]} ${centro[1]})" font-family="Atkinson Hyperlegible, sans-serif" font-size="2.8" fill="${'#46578c'}" text-anchor="middle">pegamento</text>`
+          );
+        };
+
+        for (const [lado, k] of [
+          ['izq', 0],
+          ['der', 0],
+          ['izq', 4],
+          ['der', 4],
+          ['izq', 5],
+          ['der', 5],
+          ['abajo', 5],
+        ])
+          svg += pestana(lado, caras[k]);
+
+        caras.forEach(([x, y], k) => {
+          const i = elegidas[k];
+          const pz = PAUSAS[i];
+          const c = COLOR[pz.tipo];
+          svg += `<g transform="translate(${x} ${y})">
+            <rect width="${s}" height="${s}" fill="${TINTE[pz.tipo]}"/>
+            <rect x="1.6" y="1.6" width="${s - 3.2}" height="${s - 3.2}" rx="3" fill="none" stroke="${c}" stroke-width="1.1"/>
+            <svg x="2.4" y="6" width="20.6" height="24" viewBox="0 0 100 116">${dibujo(i, 'pie')}</svg>
+            <svg x="23" y="6" width="20.6" height="24" viewBox="0 0 100 116">${dibujo(i, 'sen')}</svg>
+            <circle cx="7" cy="7" r="3.4" fill="#fff" stroke="${c}" stroke-width="0.8"/>
+            <text x="7" y="8.4" font-family="Outfit, sans-serif" font-weight="700" font-size="3.8" fill="${TINTA}" text-anchor="middle">${i + 1}</text>
+            ${lineas(pz.nombre, 14)
+              .map((l, n, todas) => `<text x="${s / 2}" y="${s - 7.6 - (todas.length - 1 - n) * 4.6}" font-family="Outfit, sans-serif" font-weight="700" font-size="4.4" fill="${TINTA}" text-anchor="middle">${l}</text>`)
+              .join('')}
+          </g>`;
+        });
+
+        // Pliegues: entre caras y entre cara y pestaña
+        const pl = [
+          [s, s, 2 * s, s],
+          [s, 2 * s, 2 * s, 2 * s],
+          [s, 3 * s, 2 * s, 3 * s],
+          [s, s, s, 2 * s],
+          [2 * s, s, 2 * s, 2 * s],
+          [s, 0, s, s],
+          [2 * s, 0, 2 * s, s],
+          [s, 2 * s, s, 3 * s],
+          [2 * s, 2 * s, 2 * s, 3 * s],
+          [s, 3 * s, s, 4 * s],
+          [2 * s, 3 * s, 2 * s, 4 * s],
+          [s, 4 * s, 2 * s, 4 * s],
+        ];
+        for (const [a, b, c, d] of pl) svg += `<path d="M${a} ${b} L${c} ${d}" ${pliegue}/>`;
+        // Cortes: los bordes de las caras que no llevan pestaña ni tocan otra cara
+        const co = [
+          [s, 0, 2 * s, 0],
+          [0, s, s, s],
+          [0, s, 0, 2 * s],
+          [0, 2 * s, s, 2 * s],
+          [2 * s, s, 3 * s, s],
+          [3 * s, s, 3 * s, 2 * s],
+          [2 * s, 2 * s, 3 * s, 2 * s],
+        ];
+        for (const [a, b, c, d] of co) svg += `<path d="M${a} ${b} L${c} ${d}" ${corte}/>`;
+        document.getElementById('desarrollo').innerHTML = svg;
+      }
+
+      /** Parte un nombre en líneas de hasta `max` caracteres, por los espacios. */
+      function lineas(nombre, max) {
+        if (nombre.length <= max) return [nombre];
+        const palabras = nombre.split(' ');
+        let mejor = null;
+        for (let k = 1; k < palabras.length; k++) {
+          const a = palabras.slice(0, k).join(' ');
+          const b = palabras.slice(k).join(' ');
+          const peor = Math.max(a.length, b.length);
+          if (!mejor || peor < mejor[0]) mejor = [peor, [a, b]];
+        }
+        return mejor[1];
+      }
+
+      // ---------- Ruleta de tres anillos ----------
+      function ruleta() {
+        const cx = 100;
+        const cy = 100;
+        const anillos = [
+          { tipo: 'concentrar', desde: 16, r0: 25, r1: 49, max: 9, letra: 3.7 },
+          { tipo: 'activar', desde: 8, r0: 49, r1: 73, max: 11, letra: 4 },
+          { tipo: 'calmar', desde: 0, r0: 73, r1: 98, max: 12, letra: 4.2 },
+        ];
+        const tonos = { calmar: ['#e4edfb', '#d2e1f8'], activar: ['#fde8cf', '#fbd9b0'], concentrar: ['#efe5f7', '#e3d3f0'] };
+        const pt = (r, g) => [cx + Math.cos(rad(g)) * r, cy + Math.sin(rad(g)) * r];
+        let s = '';
+        for (const a of anillos) {
+          for (let k = 0; k < 8; k++) {
+            const g0 = -112.5 + k * 45;
+            const g1 = g0 + 45;
+            const [p0, p1, p2, p3] = [pt(a.r1, g0), pt(a.r1, g1), pt(a.r0, g1), pt(a.r0, g0)];
+            s += `<path d="M${P(p0)} A${a.r1} ${a.r1} 0 0 1 ${P(p1)} L${P(p2)} A${a.r0} ${a.r0} 0 0 0 ${P(p3)} Z" fill="${tonos[a.tipo][k % 2]}" stroke="#fff" stroke-width="1.1"/>`;
+          }
+        }
+        for (const a of anillos) s += `<circle cx="${cx}" cy="${cy}" r="${a.r1 - 0.6}" fill="none" stroke="${COLOR[a.tipo]}" stroke-width="1.2"/>`;
+        s += `<circle cx="${cx}" cy="${cy}" r="98.6" fill="none" stroke="${TINTA}" stroke-width="1.2"/>`;
+        for (const a of anillos) {
+          for (let k = 0; k < 8; k++) {
+            const gm = -90 + k * 45;
+            const rm = (a.r0 + a.r1) / 2;
+            const [x, y] = pt(rm, gm);
+            const i = a.desde + k;
+            const ls = lineas(PAUSAS[i].nombre, a.max);
+            const alto = ls.length * a.letra * 1.12;
+            const yNum = y - alto / 2 - 1.2;
+            s += `<circle cx="${r2(x)}" cy="${r2(yNum)}" r="3.1" fill="#fff" stroke="${COLOR[a.tipo]}" stroke-width="0.8"/>`;
+            s += `<text x="${r2(x)}" y="${r2(yNum + 1.2)}" font-family="Outfit, sans-serif" font-weight="700" font-size="3.4" fill="${TINTA}" text-anchor="middle">${i + 1}</text>`;
+            ls.forEach((l, n) => {
+              s += `<text x="${r2(x)}" y="${r2(y - alto / 2 + 3.4 + (n + 0.62) * a.letra * 1.12)}" font-family="Atkinson Hyperlegible, sans-serif" font-weight="700" font-size="${a.letra}" fill="${TINTA}" text-anchor="middle">${l}</text>`;
+            });
+          }
+        }
+        // Centro: aquí va la punta del lápiz, dentro de un clip
+        s += `<circle cx="${cx}" cy="${cy}" r="24.4" fill="#fff" stroke="${TINTA}" stroke-width="1"/>`;
+        s += `<path d="M${cx} ${cy} m0 -1.6 v-13.4 a3.2 3.2 0 0 1 6.4 0 v14 a4.6 4.6 0 0 1 -9.2 0 v-11" fill="none" stroke="${GRIS}" stroke-width="1.1" stroke-linecap="round" transform="rotate(32 ${cx} ${cy})"/>`;
+        s += `<circle cx="${cx}" cy="${cy}" r="2.2" fill="${TINTA}"/>`;
+        s += `<text x="${cx}" y="${cy + 9.6}" font-family="Atkinson Hyperlegible, sans-serif" font-weight="700" font-size="3.6" fill="${TINTA}" text-anchor="middle">lápiz y clip</text>`;
+        s += `<text x="${cx}" y="${cy + 14.4}" font-family="Atkinson Hyperlegible, sans-serif" font-size="3.4" fill="#46578c" text-anchor="middle">en el punto</text>`;
+        document.getElementById('ruleta').innerHTML = s;
+      }
+
+      // ---------- Portada ----------
+      function dado3D() {
+        const a = 38;
+        const c30 = Math.cos(Math.PI / 6);
+        const T0 = [0, -a];
+        const T1 = [a * c30, -a / 2];
+        const T2 = [0, 0];
+        const T3 = [-a * c30, -a / 2];
+        const B1 = [a * c30, a / 2];
+        const B2 = [0, a];
+        const B3 = [-a * c30, a / 2];
+        const resta = (p, q) => [p[0] - q[0], p[1] - q[1]];
+        // Lleva un cuadrado de 100 × 100 a una cara del cubo: origen o y lados u y v.
+        const mapa = (o, u, v) => `matrix(${r2(u[0]) / 100} ${r2(u[1]) / 100} ${r2(v[0]) / 100} ${r2(v[1]) / 100} ${r2(o[0])} ${r2(o[1])})`;
+        const cara = (i, version, sombra) => {
+          const pz = PAUSAS[i];
+          return `<rect width="100" height="100" fill="${TINTE[pz.tipo]}" stroke="${TINTA}" stroke-width="3"/>
+            <rect x="6" y="6" width="88" height="88" rx="10" fill="none" stroke="${COLOR[pz.tipo]}" stroke-width="3.4"/>
+            <svg x="14" y="8" width="72" height="84" viewBox="0 0 100 116">${dibujo(i, version)}</svg>
+            ${sombra ? `<rect width="100" height="100" fill="${TINTA}" opacity="${sombra}"/>` : ''}`;
+        };
+        let svg = `<g transform="rotate(-9)">`;
+        svg += `<ellipse cx="2" cy="${a + 6}" rx="${a * 0.95}" ry="5" fill="${TINTA}" opacity=".12"/>`;
+        svg += `<g transform="${mapa(T3, resta(T0, T3), resta(T2, T3))}">${cara(9, 'pie', 0)}</g>`;
+        svg += `<g transform="${mapa(T3, resta(T2, T3), resta(B3, T3))}">${cara(0, 'sen', 0.05)}</g>`;
+        svg += `<g transform="${mapa(T2, resta(T1, T2), resta(B2, T2))}">${cara(18, 'pie', 0.1)}</g>`;
+        svg += `</g>`;
+        svg += vaiven([-4, -2], 50, 196, 228, TINTA) + vaiven([4, 4], 50, 20, 48, TINTA);
+        document.getElementById('portada-dado').innerHTML = svg;
+      }
+
+      function grupoPortada() {
+        const est = PAUSAS[9];
+        const kids = [
+          { version: 'pie', sentado: false, nino: NINOS[3], color: '#1fa67a', extra: { escayola: 'I' } },
+          { version: 'sen', sentado: 'silla', nino: NINOS[1], color: '#2f6fd6' },
+          { version: 'sen', sentado: 'ruedas', nino: NINOS[2], color: '#8c4fb8' },
+          { version: 'pie', sentado: false, nino: NINOS[4], color: '#f5961f', extra: { escayola: undefined } },
+        ];
+        let svg = '';
+        svg += chispa(24, 20, 6) + chispa(118, 8, 5) + chispa(186, 24, 6.4) + chispa(256, 6, 5) + chispa(340, 22, 6) + chispa(86, 36, 3.6) + chispa(300, 38, 3.6);
+        kids.forEach((k, n) => {
+          const b = base(k.sentado);
+          const f = (k.version === 'pie' ? est.figPie : est.figSen) ?? est.fig;
+          const pose = { ...f(b), sentado: k.sentado, ...(k.extra ?? {}) };
+          delete pose.detras;
+          svg += `<svg x="${n * 88}" y="46" width="100" height="116" viewBox="0 0 100 116">${figura(pose, k.nino, k.color)}</svg>`;
+        });
+        document.getElementById('portada-grupo').innerHTML = svg;
+      }
+
+      // ---------- Cartel ----------
+      // Caras del termómetro de cinco niveles del rincón de la calma de IdEducando (mismo dibujo).
+      function caraNivel(nivel) {
+        const relleno = ['', '#e4edfb', '#dcf3ea', '#fdf0c7', '#fde8cf', '#fde5e0'][nivel];
+        const t = 'stroke="#1e2b55" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"';
+        const ojos = '<circle cx="36" cy="44" r="5.5" fill="#1e2b55"/><circle cx="64" cy="44" r="5.5" fill="#1e2b55"/>';
+        const partes = {
+          1: `<path d="M27 44 q9 7 18 0 M55 44 q9 7 18 0" ${t}/><path d="M36 64 q14 10 28 0" ${t}/>`,
+          2: `${ojos}<path d="M31 60 q19 18 38 0" ${t}/>`,
+          3: `${ojos}<path d="M27 31 l14 -3 M59 28 l14 3" ${t}/><path d="M34 68 q8 -5 16 0 q8 5 16 0" ${t}/>`,
+          4: `${ojos}<path d="M26 29 l17 8 M74 29 l-17 8" ${t}/><path d="M33 72 q17 -13 34 0" ${t}/>`,
+          5: `${ojos}<path d="M24 27 l20 11 M76 27 l-20 11" ${t}/><path d="M35 63 q15 -6 30 0 q1 17 -15 17 q-16 0 -15 -17z" fill="#1e2b55"/><path d="M20 9 l4 7 M50 2 v8 M80 9 l-4 7" ${t}/>`,
+        }[nivel];
+        return `<svg viewBox="0 -4 100 108" aria-hidden="true"><circle cx="50" cy="52" r="42" fill="${relleno}" stroke="#1e2b55" stroke-width="5"/><g transform="translate(0 6)">${partes}</g></svg>`;
+      }
+
+      function cartel() {
+        document.getElementById('termo').innerHTML = [1, 2, 3, 4, 5].map((n) => `<figure class="n${n}">${caraNivel(n)}${n}</figure>`).join('');
+        const b = base(false);
+        const pose = { ...PAUSAS[9].figPie(b) };
+        delete pose.detras;
+        delete pose.delante;
+        delete pose.escayola;
+        document.getElementById('rutina-figura').innerHTML = svgFigura(figura(pose, NINOS[0], '#1fa67a'));
+      }
+
+      // ---------- Nota para las familias ----------
+      function tresPausas() {
+        const elegidas = [
+          [0, 'Manos en la tripa. Cogemos aire por la nariz y lo soltamos despacio por la boca, cinco veces.'],
+          [10, 'Sacudimos cada mano y cada pie contando hasta 8. Después hasta 4, hasta 2 y hasta 1.'],
+          [18, 'De pie, un pie apoyado en el tobillo contrario. Sentados, un libro en la cabeza. Contamos hasta 10.'],
+        ];
+        document.getElementById('tres-pausas').innerHTML = elegidas
+          .map(([i, texto_]) => {
+            const pz = PAUSAS[i];
+            return `<li class="${pz.tipo}"><div class="dibujos">${svgFigura(dibujo(i, 'pie'))}${svgFigura(dibujo(i, 'sen'))}</div><strong>${pz.nombre}</strong>Para ${NOMBRE_TIPO[pz.tipo].toLowerCase()}. ${texto_}</li>`;
+          })
+          .join('');
+      }
+
+      // ---------- Iconos con atributo data-icono y data-iconos ----------
+      function iconos() {
+        for (const el of document.querySelectorAll('[data-icono]')) el.insertAdjacentHTML('afterbegin', ICONOS[el.dataset.icono]);
+        for (const el of document.querySelectorAll('[data-iconos]')) el.innerHTML = el.dataset.iconos.split(' ').map((k) => ICONOS[k]).join('');
+      }
+
+      hojasDeCartas();
+      cartasBlancas();
+      desarrolloDado();
+      ruleta();
+      dado3D();
+      grupoPortada();
+      cartel();
+      tresPausas();
+      iconos();
+    </script>
+  </body>
+</html>
