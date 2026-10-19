@@ -7,16 +7,38 @@ etapas: [infantil, primaria]
 necesidades: [tea, tdl, discapacidad-motora, discapacidad-intelectual, toda-la-clase]
 edades: "De 3 a 12 años"
 formato: "PDF imprimible (A4; el tablero se puede ampliar a A3)"
-paginas: 9
+paginas: 10
 archivo: /descargas/tablero-comunicacion-basico.pdf
 portada: /portadas/tablero-comunicacion-basico.webp
 portada_alt: "Portada del material: tarjetas de comunicación con pictogramas abiertas en abanico y colgadas de una anilla"
-tiempo: "30 minutos para imprimir, plastificar y recortar"
+tiempo: "45 minutos para imprimir, plastificar, recortar y montar el llavero"
 necesitas:
-  - "Impresora, mejor en color"
-  - "Plastificadora"
-  - "Perforadora y una anilla de unos 25 mm"
-  - "Velcro para el hueco libre (opcional)"
+  - "4 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina)"
+  - "4 fundas de plastificar A4 de 125 micras y una plastificadora"
+  - "1 anilla metálica de 25 mm, de las que se abren"
+  - "1 perforadora de un agujero (vale la de oficina)"
+  - "Tijeras o una guillotina"
+  - "Impresora, mejor a color: los colores ayudan a encontrar cada tipo de palabra"
+  - "6 círculos de velcro adhesivo de 2 cm, solo si quieres ir cambiando la palabra del hueco libre: 1 rugoso y 5 suaves"
+imprimir:
+  - "Páginas 3 y 4 (los dos tableros): en cartulina, a color. Son apaisadas; la impresora las gira sola."
+  - "Páginas 5 y 6 (las 16 tarjetas del llavero): en cartulina, a color."
+  - "Imprime al 100 % («Tamaño real»), sin «Ajustar a la página», para que cada tarjeta mida 85 × 54 mm."
+  - "Las páginas 7 a 10 (guía y hoja para la familia) se pueden leer en pantalla. Imprime la 10 si vas a mandarla a casa."
+  - "Para la pared de la clase: la página 3 en A3, también a color."
+pasos:
+  - "Imprime las páginas 3 a 6 en cartulina, a color y al 100 %."
+  - "Recorta las 16 tarjetas de las páginas 5 y 6 por la línea de puntos."
+  - "Antes de plastificar, rellena «Me llamo» con el cole, la clase y el teléfono del cole (nunca la dirección de casa) y pega en las tarjetas en blanco los pictogramas que tu alumno o alumna ya conoce."
+  - "Plastifica cada tablero en su funda. En las otras dos fundas, coloca 8 tarjetas en cada una, separadas 5 mm entre sí, y plastifícalas."
+  - "Recorta todo dejando 2 o 3 mm de plástico alrededor y redondea las esquinas con la tijera."
+  - "Perfora el círculo marcado en cada tarjeta y mételas en la anilla: primero «Para hablar conmigo» y después «Me llamo»."
+  - "Si quieres ir cambiando la palabra del hueco libre, pega el círculo de velcro rugoso en el hueco del tablero y uno suave detrás de cada pictograma (de unos 2,5 cm, también plastificado)."
+resultado: "dos tableros plastificados, uno de 45 palabras y otro de 12, y un llavero con 10 tarjetas o más."
+cuidados:
+  - "El borde de plástico de 2 o 3 mm deja la tarjeta sellada: así no se abre aunque la mojen o la doblen."
+  - "La anilla y los círculos de velcro son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
+  - "Para limpiarlo, basta un paño con agua y jabón."
 fuentes:
   - "ARASAAC, Centro Aragonés para la Comunicación Aumentativa y Alternativa. arasaac.org"
   - "Boenisch, J. y Soto, G. (2015). The oral core vocabulary of typically developing English-speaking school-aged children: Implications for AAC practice. Augmentative and Alternative Communication, 31(1), 77-84"
@@ -26,7 +48,7 @@ fuentes:
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-15
-actualizado: 2026-10-15
+actualizado: 2026-10-19
 destacado: true
 borrador: true
 ---

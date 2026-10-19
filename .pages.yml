@@ -150,6 +150,25 @@ content:
         label: Qué necesitas
         type: string
         list: true
+        description: "Con cantidad y medida exactas, empezando por el número. Ejemplo: 20 círculos de velcro adhesivo de 2 cm."
+      - name: imprimir
+        label: Qué imprimir
+        type: string
+        list: true
+        description: "Qué páginas, en qué papel y cómo. Ejemplo: Páginas 3 y 4, en cartulina blanca A4 de 160 g y a color."
+      - name: pasos
+        label: Cómo montarlo, paso a paso
+        type: string
+        list: true
+        description: "Un paso por línea y en orden, hasta tener el material terminado. Si hay pasos, la ficha enseña «Cómo montarlo» y el PDF lleva la hoja de montaje en la página 2 (hay que volver a generar el PDF)."
+      - name: resultado
+        label: Lo que tendrás al terminar
+        type: string
+        description: "Ejemplo: un tablero plastificado y un llavero con 8 tarjetas."
+      - name: cuidados
+        label: Para que dure y sea seguro
+        type: string
+        list: true
       - name: fuentes
         label: Fuentes
         type: string

@@ -406,3 +406,177 @@ tbody th {
 .url {
   white-space: nowrap;
 }
+
+/* ---------- Cómo montarlo ----------
+   Página 2 de los materiales que hay que montar, como un manual de IKEA: lo que necesitas,
+   qué imprimir y los pasos. La rellena ../generar.mjs con los datos de la ficha
+   (src/lib/montaje.mjs); en el HTML solo hace falta el hueco
+   <section class="montaje" data-montaje></section> justo después de la portada.
+   Está pensada para caber en una hoja: si se pasa, conviene acortar los textos de la ficha. */
+
+.montaje {
+  break-after: page;
+}
+
+.montaje h1 {
+  font-size: 20pt;
+  margin-bottom: 1.5mm;
+}
+
+.montaje h2 {
+  font-size: 12pt;
+  margin: 3.5mm 0 2mm;
+}
+
+.montaje__intro,
+.montaje__velcro {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8mm;
+  margin: 0;
+  font-size: 9pt;
+  line-height: 1.35;
+  color: var(--suave);
+}
+
+.montaje__velcro {
+  margin-top: 1.8mm;
+  padding: 1.6mm 2.5mm;
+  border-radius: 2mm;
+  background: var(--amarillo-tinte);
+  font-size: 8.5pt;
+  color: var(--marino);
+}
+
+.montaje__icono-mini {
+  flex: none;
+  width: 4.2mm;
+  height: 4.2mm;
+  margin-top: 0.1mm;
+  color: var(--morado-texto);
+}
+
+.montaje__piezas,
+.montaje__imprimir,
+.montaje__pasos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.montaje__columnas {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  gap: 0 6mm;
+  align-items: start;
+}
+
+.montaje__piezas {
+  display: grid;
+  gap: 1.6mm;
+}
+
+.montaje__piezas li {
+  display: grid;
+  grid-template-columns: 8mm auto 1fr;
+  align-items: center;
+  gap: 2mm;
+  margin: 0;
+  padding: 1.5mm 2.5mm;
+  border: 0.35mm solid var(--linea);
+  border-radius: 2.2mm;
+  font-size: 9pt;
+  line-height: 1.25;
+  break-inside: avoid;
+}
+
+.montaje__icono {
+  width: 8mm;
+  height: 8mm;
+  color: var(--azul);
+}
+
+.montaje__cantidad {
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 14pt;
+  line-height: 1;
+}
+
+.montaje__imprimir li {
+  display: flex;
+  gap: 1.8mm;
+  margin: 0 0 1mm;
+  font-size: 9.5pt;
+  line-height: 1.3;
+}
+
+.montaje__pasos {
+  display: grid;
+  gap: 1.8mm;
+}
+
+.montaje__pasos li {
+  display: grid;
+  grid-template-columns: 6.5mm 7mm 1fr;
+  align-items: start;
+  gap: 2mm;
+  margin: 0;
+  padding: 2mm 2.5mm;
+  border-radius: 2.2mm;
+  background: var(--crema);
+  break-inside: avoid;
+}
+
+.montaje__pasos .montaje__icono {
+  width: 7mm;
+  height: 7mm;
+}
+
+.montaje__pasos p {
+  margin: 0;
+  font-size: 9pt;
+  line-height: 1.3;
+}
+
+.montaje__numero {
+  display: grid;
+  place-items: center;
+  width: 6.5mm;
+  height: 6.5mm;
+  border-radius: 50%;
+  background: var(--marino);
+  color: #fff;
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 10pt;
+}
+
+.montaje__resultado {
+  margin: 2.5mm 0 0;
+  padding: 1.8mm 3mm;
+  border-left: 1.4mm solid var(--morado);
+  background: var(--morado-tinte);
+  font-size: 9.5pt;
+  line-height: 1.35;
+}
+
+.montaje__cuidados.caja {
+  margin: 2.5mm 0 0;
+  padding: 2mm 3.5mm;
+  font-size: 9pt;
+  line-height: 1.35;
+}
+
+.montaje__cuidados h3 {
+  margin: 0 0 1mm;
+  font-size: 10.5pt;
+}
+
+.montaje__cuidados ul {
+  margin: 0;
+}
+
+.montaje__cuidados li {
+  margin-bottom: 0.6mm;
+}

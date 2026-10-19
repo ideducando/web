@@ -1,0 +1,249 @@
+---
+// «Cómo montarlo»: lo que hay que tener, qué imprimir y los pasos hasta tener el material
+// terminado, como un manual de IKEA. Usa los mismos datos e iconos que la página 2 del PDF
+// (src/lib/montaje.mjs), así que la web y el PDF dicen siempre lo mismo.
+import { CRITERIO_VELCRO, iconoPara, llevaVelcro, separarCantidad, svgIcono } from '../lib/montaje.mjs';
+
+interface Props {
+  tiempo?: string;
+  necesitas: string[];
+  imprimir: string[];
+  pasos: string[];
+  resultado?: string;
+  cuidados: string[];
+}
+
+const { tiempo, necesitas, imprimir, pasos, resultado, cuidados } = Astro.props;
+const conVelcro = llevaVelcro({ necesitas });
+---
+
+<section class="seccion montaje" id="como-montarlo" aria-labelledby="titulo-montaje">
+  <div class="contenedor">
+    <p class="montaje__antetitulo">Antes de empezar</p>
+    <h2 id="titulo-montaje">Cómo montarlo</h2>
+    <p class="montaje__intro">
+      {
+        tiempo && (
+          <>
+            <strong>Tiempo:</strong> {tiempo}.{' '}
+          </>
+        )
+      }
+      Lo mismo viene en la página 2 del PDF, para que lo tengas a mano mientras lo montas.
+    </p>
+
+    <div class="montaje__rejilla">
+      <div>
+        {
+          necesitas.length > 0 && (
+            <>
+              <h3>Lo que necesitas</h3>
+              <ul class="montaje__piezas">
+                {necesitas.map((n) => {
+                  const { cantidad, resto } = separarCantidad(n);
+                  return (
+                    <li>
+                      <Fragment set:html={svgIcono(iconoPara(n), 'montaje__icono')} />
+                      {cantidad && <span class="montaje__cantidad">{cantidad}</span>}
+                      <span>{resto}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )
+        }
+        {conVelcro && <p class="montaje__velcro">{CRITERIO_VELCRO}</p>}
+        {
+          imprimir.length > 0 && (
+            <>
+              <h3>Qué imprimir</h3>
+              <ul class="montaje__imprimir">
+                {imprimir.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+      </div>
+
+      <div>
+        <h3>Paso a paso</h3>
+        <ol class="montaje__pasos">
+          {
+            pasos.map((p, i) => (
+              <li>
+                <span class="montaje__numero">{i + 1}</span>
+                <Fragment set:html={svgIcono(iconoPara(p), 'montaje__icono')} />
+                <p>{p}</p>
+              </li>
+            ))
+          }
+        </ol>
+        {
+          resultado && (
+            <p class="montaje__resultado">
+              <strong>Al terminar tendrás:</strong> {resultado}
+            </p>
+          )
+        }
+        {
+          cuidados.length > 0 && (
+            <div class="montaje__cuidados">
+              <h3>Para que dure y sea seguro</h3>
+              <ul>
+                {cuidados.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .montaje {
+    background: var(--papel);
+    border-block: 1px solid var(--linea);
+  }
+
+  .montaje__antetitulo {
+    margin-bottom: 0.3rem;
+    font: 700 0.85rem/1.3 var(--letra-titulos);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--morado-texto);
+  }
+
+  .montaje__intro {
+    max-width: var(--ancho-texto);
+    color: var(--texto-suave);
+  }
+
+  .montaje__rejilla {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem 2.5rem;
+  }
+
+  @media (min-width: 56em) {
+    .montaje__rejilla {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    }
+  }
+
+  .montaje h3 {
+    margin-top: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .montaje__piezas,
+  .montaje__pasos,
+  .montaje__imprimir {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .montaje__piezas {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .montaje__piezas li {
+    display: grid;
+    grid-template-columns: 2.4rem auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-pequeno);
+    background: var(--blanco);
+    line-height: 1.35;
+  }
+
+  .montaje :global(.montaje__icono) {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--azul);
+  }
+
+  .montaje__cantidad {
+    font: 700 1.5rem/1 var(--letra-titulos);
+  }
+
+  .montaje__velcro {
+    margin-block: 0.75rem 0;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--amarillo-tinte);
+    font-size: 0.95rem;
+  }
+
+  .montaje__imprimir li {
+    margin: 0 0 0.45rem;
+    padding-left: 1.1rem;
+    border-left: 3px solid var(--amarillo);
+  }
+
+  .montaje__pasos {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .montaje__pasos li {
+    display: grid;
+    grid-template-columns: 2.1rem 2.4rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0.75rem 0.85rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--crema);
+  }
+
+  .montaje__pasos p {
+    margin: 0;
+  }
+
+  .montaje__numero {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background: var(--marino);
+    color: var(--blanco);
+    font: 700 1.1rem/1 var(--letra-titulos);
+  }
+
+  .montaje__resultado {
+    margin-block: 1rem 0;
+    padding: 0.8rem 1rem;
+    border-left: 5px solid var(--morado);
+    border-radius: 0 var(--radio-pequeno) var(--radio-pequeno) 0;
+    background: var(--morado-tinte);
+  }
+
+  .montaje__cuidados {
+    margin-top: 1rem;
+    padding: 0.2rem 1rem 0.6rem;
+    border-left: 5px solid var(--verde);
+    border-radius: 0 var(--radio-pequeno) var(--radio-pequeno) 0;
+    background: var(--verde-tinte);
+  }
+
+  .montaje__cuidados h3 {
+    margin-top: 0.8rem;
+    font-size: 1.05rem;
+  }
+
+  .montaje__cuidados ul {
+    margin-bottom: 0;
+  }
+</style>
