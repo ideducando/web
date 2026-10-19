@@ -559,6 +559,17 @@ h3 .borrador {
   font-family: var(--letra-titulos);
 }
 
+/* En el móvil, las tablas de los textos en Markdown nunca ensanchan la página: si una palabra
+   no cabe en su columna, se parte. «anywhere» deja que la tabla encoja hasta el ancho de la pantalla. */
+@media (max-width: 39.99em) {
+  .prosa th,
+  .prosa td {
+    padding: 0.5rem 0.55rem;
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+}
+
 .prosa thead th:first-child {
   border-top-left-radius: var(--radio-pequeno);
 }

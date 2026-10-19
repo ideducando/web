@@ -114,6 +114,7 @@ content:
             - { name: discapacidad-visual, label: Discapacidad visual }
             - { name: conducta, label: Regulación y conducta }
             - { name: altas-capacidades, label: Altas capacidades }
+            - { name: incorporacion-tardia, label: Incorporación tardía }
       - name: edades
         label: Edades
         type: string
