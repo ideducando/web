@@ -1,15 +1,15 @@
 ---
 titulo: "Privacidad"
-entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Para descargar el material te pedimos un nombre y un correo, y aquí te contamos qué hacemos con ellos."
+entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Para descargar el material te pedimos un correo, y aquí te contamos qué hacemos con ellos."
 actualizado: 2026-10-14
 borrador: true
 ---
 
-[BORRADOR: estamos preparando la bolsa de descargas, que pedirá un nombre y un correo para descargar el material. Mientras sea una vista previa no guarda ningún dato. Antes de activarla, esta página explicará quién es el responsable, para qué usamos los datos, la herramienta de correo, cuánto tiempo los guardamos y cómo darte de baja.]
+[BORRADOR: estamos preparando la bolsa de descargas, que pedirá un correo (y el nombre, si quieres darlo) para descargar el material. Mientras sea una vista previa no guarda ningún dato. Antes de activarla, esta página explicará quién es el responsable, para qué usamos los datos, la herramienta de correo, cuánto tiempo los guardamos y cómo darte de baja.]
 
 ## Resumen
 
-- Para descargar el material pedimos un nombre y un correo. El boletín es aparte y solo te llega si marcas su casilla. [BORRADOR: todavía no activo.]
+- Para descargar el material pedimos un correo; el nombre es opcional. El boletín es aparte y solo te llega si marcas su casilla. [BORRADOR: todavía no activo.]
 - No hay cuentas ni contraseñas.
 - No hay cookies de seguimiento ni herramientas de analítica.
 - Las letras de la web se sirven desde nuestro propio alojamiento, no desde Google.

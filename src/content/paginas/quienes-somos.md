@@ -17,7 +17,7 @@ Hacemos dos cosas:
 
 ## Cómo trabajamos
 
-**Gratis de verdad.** Todo cuesta 0 €. Para descargar solo pedimos un nombre y un correo, no ponemos anuncios y no vendemos ni cedemos tus datos.
+**Gratis de verdad.** Todo cuesta 0 €. Para descargar solo pedimos un correo, no ponemos anuncios y no vendemos ni cedemos tus datos.
 
 **Con fuentes.** Cada material tiene una ficha técnica con la edad, las necesidades a las que responde, en qué se apoya y cuándo lo revisamos por última vez.
 
