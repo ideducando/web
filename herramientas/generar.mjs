@@ -113,6 +113,12 @@ const DOCUMENTOS = [
       'Juegos de conciencia fonológica con pictogramas de ARASAAC: tren de las sílabas con 40 tarjetas, parejas que riman, trenes de sonido inicial, hoja de seguimiento, guía para docentes y nota para las familias',
     palabras: 'conciencia fonológica, sílabas, rima, sonido inicial, prelectura, Audición y Lenguaje, TDL, pictogramas, ARASAAC, Infantil, Primaria',
   },
+  {
+    id: 'kit-bienvenida-alumnado-recien-llegado',
+    asunto:
+      'Kit de bienvenida para el alumnado recién llegado que aún no habla castellano: tarjetas de comunicación en seis lenguas, frases para el docente, pasaporte del cole, palabra del día y carta para la familia, con guía para docentes',
+    palabras: 'acogida, incorporación tardía, alumnado extranjero, recién llegados, interculturalidad, árabe, rumano, ucraniano, inglés, francés, pictogramas, ARASAAC, periodo de silencio, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

@@ -1,0 +1,2417 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>¡Hola! Kit de bienvenida para el alumnado recién llegado · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Letras de las otras lenguas ----------
+         Cada letra sale de la fuente que la tiene: el rumano (ă, â, î, ș, ț) de Atkinson Hyperlegible
+         y Outfit en su versión latin-ext, el ucraniano de Noto Sans (cirílico) y el árabe de Noto Sans
+         Arabic. El unicode-range hace que el resto del texto siga con las letras de la marca. */
+      @font-face {
+        font-family: 'Atkinson Hyperlegible';
+        font-weight: 400;
+        src: url('../../node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-ext-400-normal.woff2')
+          format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+          U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Atkinson Hyperlegible';
+        font-weight: 700;
+        src: url('../../node_modules/@fontsource/atkinson-hyperlegible/files/atkinson-hyperlegible-latin-ext-700-normal.woff2')
+          format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+          U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Outfit';
+        font-weight: 600;
+        src: url('../../node_modules/@fontsource/outfit/files/outfit-latin-ext-600-normal.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+          U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Outfit';
+        font-weight: 700;
+        src: url('../../node_modules/@fontsource/outfit/files/outfit-latin-ext-700-normal.woff2') format('woff2');
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+          U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      @font-face {
+        font-family: 'Noto Sans';
+        font-weight: 400;
+        src: url('../node_modules/@fontsource/noto-sans/files/noto-sans-cyrillic-400-normal.woff2') format('woff2');
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: 'Noto Sans';
+        font-weight: 700;
+        src: url('../node_modules/@fontsource/noto-sans/files/noto-sans-cyrillic-700-normal.woff2') format('woff2');
+        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      @font-face {
+        font-family: 'Noto Sans Arabic';
+        font-weight: 400;
+        src: url('../node_modules/@fontsource/noto-sans-arabic/files/noto-sans-arabic-arabic-400-normal.woff2')
+          format('woff2');
+        unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E,
+          U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+      }
+      @font-face {
+        font-family: 'Noto Sans Arabic';
+        font-weight: 700;
+        src: url('../node_modules/@fontsource/noto-sans-arabic/files/noto-sans-arabic-arabic-700-normal.woff2')
+          format('woff2');
+        unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E,
+          U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+      }
+
+      [lang='ar'] {
+        font-family: 'Noto Sans Arabic', 'Atkinson Hyperlegible', sans-serif;
+      }
+
+      [lang='uk'] {
+        font-family: 'Atkinson Hyperlegible', 'Noto Sans', sans-serif;
+      }
+
+      :is(h1, h2, h3, .titular)[lang='uk'],
+      [lang='uk'] :is(h1, h2, h3, .titular) {
+        font-family: 'Outfit', 'Noto Sans', sans-serif;
+      }
+
+      :is(h1, h2, h3, .titular)[lang='ar'],
+      [lang='ar'] :is(h1, h2, h3, .titular) {
+        font-family: 'Noto Sans Arabic', 'Outfit', sans-serif;
+      }
+
+      /* ---------- Colores ---------- */
+      /* Cada lengua tiene su color en todo el kit */
+      .l-ar {
+        --lc: var(--verde);
+        --lt: var(--verde-tinte);
+      }
+      .l-ro {
+        --lc: var(--azul);
+        --lt: var(--azul-tinte);
+      }
+      .l-uk {
+        --lc: var(--amarillo);
+        --lt: var(--amarillo-tinte);
+      }
+      .l-en {
+        --lc: var(--coral);
+        --lt: var(--coral-tinte);
+      }
+      .l-fr {
+        --lc: var(--morado);
+        --lt: var(--morado-tinte);
+      }
+      .l-es {
+        --lc: var(--marino);
+        --lt: #e8ebf3;
+      }
+
+      /* Y cada grupo de tarjetas, el suyo */
+      .g-social {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .g-necesidades {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .g-acciones {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .g-sentir {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .g-personas {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .g-libre {
+        --c: var(--suave);
+        --t: #fff;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 100pt;
+        line-height: 0.92;
+        letter-spacing: -0.015em;
+        margin-bottom: 7mm;
+      }
+
+      .portada__titulo span {
+        display: block;
+        margin-top: 4mm;
+        font-size: 30pt;
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      .portada__subtitulo {
+        max-width: 90mm;
+        font-size: 14pt;
+      }
+
+      .portada__lenguas {
+        list-style: none;
+        margin: 7mm 0 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm;
+        max-width: 92mm;
+      }
+
+      .portada__lenguas li {
+        margin: 0;
+        padding: 0.6mm 3mm 0.8mm;
+        border-radius: 10mm;
+        background: #fff;
+        border: 0.6mm solid var(--lc);
+        font-weight: 700;
+        font-size: 10.5pt;
+        line-height: 1.3;
+      }
+
+      .portada__lenguas li[lang='ar'] {
+        font-size: 11.5pt;
+        line-height: 1.2;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .escena {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      /* Pasaporte dibujado de la portada */
+      .libro {
+        position: absolute;
+        left: 124mm;
+        top: 94mm;
+        width: 66mm;
+        height: 92mm;
+        border-radius: 3mm 6mm 6mm 3mm;
+        background: var(--marino);
+        transform: rotate(-7deg);
+        box-shadow:
+          inset 3mm 0 0 rgb(255 255 255 / 0.08),
+          0 12mm 20mm -10mm rgb(30 43 85 / 0.55);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 9mm 4mm 8mm;
+        color: var(--amarillo);
+        font-family: var(--titulos);
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 0.18em;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .libro svg {
+        width: 34mm;
+        height: 34mm;
+      }
+
+      .bocadillo {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        padding: 3mm 6mm 3.4mm;
+        border-radius: 8mm;
+        border: 1mm solid var(--marino);
+        background: var(--lt);
+        color: var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+        box-shadow: 0 7mm 12mm -9mm rgb(30 43 85 / 0.5);
+        z-index: 2;
+      }
+
+      .bocadillo::after {
+        content: '';
+        position: absolute;
+        width: 6mm;
+        height: 6mm;
+        background: inherit;
+        border-right: 1mm solid var(--marino);
+        border-bottom: 1mm solid var(--marino);
+        bottom: -3.6mm;
+        left: var(--cola, 9mm);
+        transform: rotate(45deg);
+      }
+
+      .bocadillo.arriba::after {
+        bottom: auto;
+        top: -3.6mm;
+        transform: rotate(225deg);
+      }
+
+      .pegatina {
+        position: absolute;
+        left: 30mm;
+        bottom: 46mm;
+        width: 38mm;
+        height: 38mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(-8deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 24pt;
+        line-height: 1;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 2mm;
+      }
+
+      /* Con Outfit y el interlineado de comun.css (1,15), Chromium repite en el índice del PDF los títulos
+         que abren una hoja. Con 1,25 o más ya no pasa. */
+      .encabezado h1 {
+        font-size: 24pt;
+        line-height: 1.25;
+        margin: 0;
+      }
+
+      .encabezado .antetitulo {
+        margin: 0 0 0.6mm;
+        font-size: 11pt;
+      }
+
+      .encabezado img {
+        width: 36mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 10pt;
+        line-height: 1.4;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 3mm 0 0;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      .leyenda {
+        list-style: none;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5mm 2.4mm;
+        font-size: 8.5pt;
+      }
+
+      .leyenda li {
+        margin: 0;
+        padding: 0.3mm 2mm 0.4mm 1.6mm;
+        border-radius: 1.2mm;
+        background: var(--lt);
+        border-left: 1.4mm solid var(--lc);
+        line-height: 1.35;
+      }
+
+      .leyenda b[lang='ar'] {
+        font-size: 9.5pt;
+      }
+
+      /* ---------- Tarjetas de supervivencia ---------- */
+      .tarjetas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 69mm;
+        gap: 3.5mm 5mm;
+      }
+
+      .tarjeta {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 4.6mm 4mm 3mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .tarjeta::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.4mm;
+        background: var(--c);
+      }
+
+      .tarjeta .numero {
+        position: absolute;
+        right: 3.4mm;
+        top: 4.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      .tarjeta__cabeza {
+        display: grid;
+        grid-template-columns: 29mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+      }
+
+      .tarjeta__picto {
+        display: grid;
+        place-items: center;
+        width: 29mm;
+        height: 29mm;
+        border-radius: 3mm;
+        background: var(--t);
+      }
+
+      .tarjeta__picto img {
+        width: 25.5mm;
+        height: 25.5mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .tarjeta__palabra {
+        margin: 0;
+        padding-right: 5mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1.05;
+      }
+
+      .lenguas {
+        margin: 3mm 0 0;
+        display: grid;
+        gap: 0.9mm;
+      }
+
+      .lenguas > div {
+        display: grid;
+        grid-template-columns: 20mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .lenguas dt {
+        padding: 0.2mm 1.2mm 0.3mm 1.3mm;
+        border-radius: 1.2mm;
+        background: var(--lt);
+        border-left: 1.2mm solid var(--lc);
+        font-size: 7.5pt;
+        font-weight: 700;
+        line-height: 1.35;
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .lenguas dt[lang='ar'] {
+        font-size: 7.8pt;
+        line-height: 1.25;
+      }
+
+      .lenguas dd {
+        margin: 0;
+        font-size: 11.5pt;
+        line-height: 1.22;
+        text-align: left;
+      }
+
+      .lenguas dd[lang='ar'] {
+        font-size: 13pt;
+        line-height: 1.12;
+      }
+
+      /* Tarjetas en blanco */
+      .tarjeta.g-libre .tarjeta__picto {
+        border: 0.5mm dashed var(--suave);
+        font-size: 8.5pt;
+        line-height: 1.2;
+        text-align: center;
+        color: var(--suave);
+        padding: 2mm;
+      }
+
+      .tarjeta.g-libre .tarjeta__palabra {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 9pt;
+        color: var(--suave);
+        border-bottom: 0.4mm solid var(--marino);
+        padding: 0 0 7mm;
+        margin-right: 5mm;
+      }
+
+      .lenguas dd.raya {
+        height: 4.6mm;
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      .lenguas dt.vacio {
+        background: #fff;
+        border: 0.3mm dashed var(--suave);
+        border-left: 1.2mm solid var(--suave);
+        color: var(--suave);
+        font-weight: 400;
+      }
+
+      /* ---------- Frases para el docente ---------- */
+      .frases {
+        table-layout: fixed;
+        font-size: 9.6pt;
+        margin: 0;
+      }
+
+      .frases col.es {
+        width: 50mm;
+      }
+
+      .frases th,
+      .frases td {
+        padding: 0.9mm 2mm 1mm;
+        vertical-align: middle;
+        line-height: 1.2;
+      }
+
+      .frases thead th {
+        background: var(--lt);
+        color: var(--marino);
+        border-top: 1.4mm solid var(--lc);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 9.5pt;
+        line-height: 1.2;
+      }
+
+      .frases thead th small {
+        display: block;
+        font-weight: 400;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      .frases thead th[lang='ar'] {
+        font-family: 'Noto Sans Arabic', 'Atkinson Hyperlegible', sans-serif;
+        font-size: 10.5pt;
+      }
+
+      .frases thead th[lang='uk'] {
+        font-family: 'Atkinson Hyperlegible', 'Noto Sans', sans-serif;
+      }
+
+      .frases tbody th {
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 10.5pt;
+      }
+
+      .frases tbody th .fila-es {
+        display: grid;
+        grid-template-columns: 10mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .frases tbody th img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .frases tbody tr:nth-child(even) {
+        background: #fbf8f1;
+      }
+
+      .frases td[lang='ar'] .dicho {
+        font-size: 11.5pt;
+        line-height: 1.15;
+      }
+
+      .frases .suena {
+        display: block;
+        margin-top: 0.5mm;
+        font-family: var(--texto);
+        font-size: 8pt;
+        font-style: italic;
+        line-height: 1.2;
+        color: var(--suave);
+        direction: ltr;
+        text-align: left;
+      }
+
+      .frases td[lang='ar'] {
+        text-align: left;
+      }
+
+      /* ---------- Pasaporte ---------- */
+      .libreta {
+        border: 0.8mm solid var(--marino);
+        border-radius: 5mm;
+        overflow: hidden;
+        background:
+          repeating-radial-gradient(circle at 100% 0, rgb(47 111 214 / 0.05) 0 1.2mm, transparent 1.2mm 3mm),
+          var(--crema);
+      }
+
+      .libreta__banda {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2.4mm 5mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .libreta__banda span:last-child {
+        letter-spacing: 0.04em;
+        text-transform: none;
+        font-size: 9.5pt;
+        color: var(--amarillo);
+      }
+
+      .libreta__cuerpo {
+        display: grid;
+        grid-template-columns: 44mm minmax(0, 1fr);
+        gap: 6mm;
+        padding: 5mm 5mm 2mm;
+      }
+
+      .foto {
+        display: grid;
+        place-content: center;
+        gap: 2mm;
+        height: 56mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        text-align: center;
+        color: var(--suave);
+        font-size: 9pt;
+        line-height: 1.25;
+        padding: 3mm;
+      }
+
+      .foto svg {
+        width: 16mm;
+        height: 16mm;
+        margin: 0 auto;
+      }
+
+      .campo {
+        display: flex;
+        align-items: flex-end;
+        gap: 2.4mm;
+        margin: 0 0 2.6mm;
+        font-size: 13pt;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .campo img {
+        width: 10mm;
+        height: 10mm;
+        flex: none;
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .campo .raya {
+        flex: 1;
+        height: 8mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .campo .raya.corta {
+        flex: 0 0 20mm;
+      }
+
+      .libreta__fila {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5mm;
+        padding: 2mm 5mm 4mm;
+      }
+
+      .cajita {
+        position: relative;
+        border-radius: 4mm;
+        background: #fff;
+        border: 0.6mm solid var(--marino);
+        padding: 3mm 4mm;
+      }
+
+      .cajita .etiqueta-caja {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.2;
+      }
+
+      .cajita .etiqueta-caja img {
+        width: 10mm;
+        height: 10mm;
+        flex: none;
+      }
+
+      .cajita.bocadillo-hola {
+        height: 41mm;
+      }
+
+      .cajita.bocadillo-hola::after {
+        content: '';
+        position: absolute;
+        left: 12mm;
+        bottom: -3.5mm;
+        width: 6mm;
+        height: 6mm;
+        background: #fff;
+        border-right: 0.6mm solid var(--marino);
+        border-bottom: 0.6mm solid var(--marino);
+        transform: rotate(45deg);
+      }
+
+      .cajita .renglon {
+        height: 9mm;
+        border-bottom: 0.4mm solid var(--linea);
+      }
+
+      .guia-foto {
+        display: grid;
+        grid-template-columns: 26mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: end;
+        margin-top: 2.6mm;
+      }
+
+      .guia-foto .marco {
+        height: 26mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: 7.5pt;
+        line-height: 1.2;
+        color: var(--suave);
+        padding: 1.5mm;
+      }
+
+      .guia-foto .raya {
+        height: 8mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .mrz {
+        margin: 0;
+        padding: 1.8mm 5mm 2.4mm;
+        border-top: 0.3mm dashed var(--linea);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 9.5pt;
+        letter-spacing: 0.32em;
+        color: var(--suave);
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .sellos-titulo {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 4mm;
+        margin: 5mm 0 2.4mm;
+      }
+
+      .sellos-titulo h2 {
+        margin: 0;
+        font-size: 16pt;
+      }
+
+      .sellos-titulo p {
+        margin: 0;
+        font-size: 9.5pt;
+        color: var(--suave);
+      }
+
+      .sellos {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6mm 4mm;
+      }
+
+      .sellos li {
+        display: grid;
+        grid-template-columns: 12mm minmax(0, 1fr) 15mm;
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 1.2mm 2.6mm;
+        border-radius: 3mm;
+        background: #fff;
+        border: 0.4mm solid var(--linea);
+        font-size: 11pt;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .sellos img {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .sellos li::after {
+        content: '';
+        width: 15mm;
+        height: 15mm;
+        border-radius: 50%;
+        border: 0.5mm dashed var(--suave);
+        background: var(--crema);
+      }
+
+      /* ---------- La palabra del día ---------- */
+      .cartel-palabra h1 {
+        font-size: 38pt;
+        line-height: 1;
+      }
+
+      .cartel-palabra .lema {
+        margin: 1mm 0 6mm;
+        font-family: var(--lema);
+        font-size: 14pt;
+        color: var(--suave);
+      }
+
+      .gran-bocadillo {
+        position: relative;
+        border: 1.2mm solid var(--marino);
+        border-radius: 9mm;
+        background: #fff;
+        padding: 6mm 8mm 7mm;
+        margin-bottom: 9mm;
+        box-shadow: 2.4mm 2.4mm 0 var(--azul-tinte);
+      }
+
+      .gran-bocadillo::after {
+        content: '';
+        position: absolute;
+        right: 30mm;
+        bottom: -5.6mm;
+        width: 9mm;
+        height: 9mm;
+        background: #fff;
+        border-right: 1.2mm solid var(--marino);
+        border-bottom: 1.2mm solid var(--marino);
+        transform: rotate(45deg);
+      }
+
+      .gran-bocadillo .campo {
+        font-size: 16pt;
+        margin-bottom: 4mm;
+      }
+
+      .gran-bocadillo .campo .raya {
+        height: 10mm;
+      }
+
+      .pizarra {
+        height: 56mm;
+        margin: 1mm 0 5mm;
+        border-radius: 5mm;
+        background: var(--amarillo-tinte);
+        border: 0.5mm dashed #b88a12;
+        display: grid;
+        place-items: end start;
+        padding: 3mm 4mm;
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      .palabra-pie {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        align-items: stretch;
+      }
+
+      .dibujo {
+        border: 0.6mm dashed var(--suave);
+        border-radius: 5mm;
+        min-height: 62mm;
+        padding: 3mm 4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        background: #fff;
+      }
+
+      .experto {
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        justify-items: center;
+        text-align: center;
+        border-radius: 5mm;
+        background: var(--morado-tinte);
+        padding: 4mm 5mm;
+      }
+
+      .experto svg {
+        width: 32mm;
+        height: 36mm;
+      }
+
+      .experto p {
+        margin: 1mm 0 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1.15;
+      }
+
+      .experto .raya {
+        align-self: end;
+        width: 100%;
+        height: 9mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      /* ---------- Diccionario y chapas ---------- */
+      .diccionario {
+        table-layout: fixed;
+        margin-bottom: 2mm;
+      }
+
+      .diccionario thead th {
+        font-size: 9.5pt;
+      }
+
+      .diccionario td {
+        height: 13mm;
+        border-bottom: 0.35mm solid var(--linea);
+        border-right: 0.35mm dashed var(--linea);
+      }
+
+      .diccionario td:last-child {
+        border-right: 0;
+      }
+
+      .chapas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 42mm);
+        justify-content: space-around;
+        gap: 4mm 0;
+      }
+
+      .chapa {
+        width: 42mm;
+        height: 42mm;
+        margin: 0;
+        border-radius: 50%;
+        border: 0.4mm dashed var(--suave);
+        padding: 1.6mm;
+      }
+
+      .chapa > div {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: var(--t);
+        border: 1.6mm solid var(--c);
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        text-align: center;
+        padding: 2mm 4mm;
+        line-height: 1.1;
+      }
+
+      .chapa img {
+        width: 10mm;
+        height: 10mm;
+        border-radius: 50%;
+        background: #fff;
+        margin-bottom: 0.8mm;
+      }
+
+      .chapa small {
+        font-size: 7.5pt;
+        color: var(--marino);
+      }
+
+      .chapa b {
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.05;
+      }
+
+      .chapa .raya {
+        width: 24mm;
+        height: 5mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      /* Tras un salto de página, el título empieza arriba. Un poco de relleno evita que Chromium lo
+         repita en el índice del PDF (pasa si las letras tocan el borde superior de la hoja). */
+      .guia h2.salto {
+        margin-top: 0;
+        padding-top: 1mm;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja h3 {
+        font-size: 11.5pt;
+      }
+
+      .guia .dos-columnas .caja {
+        font-size: 9.6pt;
+        line-height: 1.42;
+      }
+
+      .marcar {
+        list-style: none;
+        padding: 0;
+        columns: 2;
+        column-gap: 7mm;
+      }
+
+      .marcar li {
+        display: flex;
+        gap: 2.2mm;
+        break-inside: avoid;
+      }
+
+      .marcar li::before {
+        content: '';
+        flex: none;
+        width: 3.8mm;
+        height: 3.8mm;
+        margin-top: 0.6mm;
+        border: 0.4mm solid var(--marino);
+        border-radius: 0.8mm;
+      }
+
+      .semana {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        gap: 1mm;
+      }
+
+      .semana li {
+        display: grid;
+        grid-template-columns: 27mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: start;
+        margin: 0;
+        padding: 1.1mm 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-left: 1.6mm solid var(--c);
+        break-inside: avoid;
+      }
+
+      .semana li > b {
+        font-family: var(--titulos);
+        font-size: 10.5pt;
+        line-height: 1.15;
+      }
+
+      .semana li p {
+        margin: 0;
+      }
+
+      .semana li > b span {
+        display: block;
+        font-size: 8.5pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--suave);
+      }
+
+      .dariya {
+        margin: 1mm 0 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1mm 4mm;
+        font-size: 9.5pt;
+      }
+
+      .dariya div {
+        margin: 0;
+      }
+
+      .dariya dt {
+        font-weight: 700;
+        display: inline;
+      }
+
+      .dariya dd {
+        display: inline;
+        margin: 0;
+      }
+
+      .primeros-pasos {
+        break-inside: avoid;
+      }
+
+      .primeros-pasos td {
+        height: 11mm;
+      }
+
+      .guia .creditos {
+        margin-top: 2mm;
+        font-size: 8pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Cartas para las familias ---------- */
+      .carta {
+        break-before: page;
+        font-size: 10pt;
+        line-height: 1.4;
+      }
+
+      .carta__cabecera {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin: 3mm 0 3mm;
+      }
+
+      .carta__cabecera img {
+        width: 36mm;
+        height: auto;
+      }
+
+      .carta__nombre {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1mm;
+      }
+
+      .carta__nombre .antetitulo {
+        margin: 0;
+      }
+
+      .carta__nombre .lengua,
+      .lengua-propia {
+        display: inline-block;
+        margin: 0;
+        padding: 0.4mm 2.4mm 0.6mm;
+        border-radius: 1.2mm;
+        background: var(--lt);
+        border-left: 1.4mm solid var(--lc);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1.3;
+      }
+
+      .lengua-propia[lang='ar'] {
+        font-family: 'Noto Sans Arabic', 'Atkinson Hyperlegible', sans-serif;
+        font-size: 10.5pt;
+        line-height: 1.2;
+        border-left: 0;
+        border-right: 1.4mm solid var(--lc);
+      }
+
+      .lengua-propia[lang='uk'] {
+        font-family: 'Atkinson Hyperlegible', 'Noto Sans', sans-serif;
+      }
+
+
+
+      .par {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) 12mm minmax(0, 1fr);
+        gap: 0 3.4mm;
+        align-items: start;
+      }
+
+      .carta--sola .par {
+        grid-template-columns: minmax(0, 1fr) 12mm;
+      }
+
+      .par > .es {
+        font-size: 8.6pt;
+        line-height: 1.36;
+        color: var(--suave);
+      }
+
+      .principal {
+        font-size: 10.5pt;
+        line-height: 1.4;
+      }
+
+      .principal[lang='ar'] {
+        font-size: 11.5pt;
+        line-height: 1.5;
+      }
+
+      .carta--sola .principal {
+        font-size: 11.5pt;
+      }
+
+      .par p {
+        margin: 0 0 1.2mm;
+      }
+
+      .par p:last-child {
+        margin-bottom: 0;
+      }
+
+      .carta .titulo-carta {
+        margin: 0 0 2.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 19pt;
+        line-height: 1.2;
+      }
+
+      .par > .es .titulo-carta {
+        font-family: var(--lema);
+        font-weight: 400;
+        font-size: 12pt;
+        color: var(--suave);
+        margin-top: 1.6mm;
+      }
+
+      .carta .titulo-mensaje {
+        margin: 0 0 0.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .par > .es .titulo-mensaje {
+        font-family: var(--texto);
+        font-size: 9pt;
+        color: var(--marino);
+      }
+
+      .principal[lang='ar'] .titulo-mensaje {
+        font-size: 12pt;
+      }
+
+      /* Los títulos de la carta en árabe y en ucraniano, con sus letras */
+      .carta .principal[lang='ar'] .titular {
+        font-family: 'Noto Sans Arabic', 'Outfit', sans-serif;
+      }
+
+      .carta .principal[lang='uk'] .titular {
+        font-family: 'Outfit', 'Noto Sans', sans-serif;
+      }
+
+      .icono {
+        display: grid;
+        justify-items: center;
+        padding-top: 0.4mm;
+      }
+
+      .icono img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mensajes .par {
+        padding: 2mm 0;
+        border-top: 0.3mm solid var(--linea);
+      }
+
+      .datos {
+        margin: 2.4mm 0 2.4mm;
+        padding: 2.8mm 4mm 3mm;
+        border-radius: 4mm;
+        background: var(--crema);
+        border: 0.4mm solid var(--linea);
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 2.6mm 6mm;
+      }
+
+      .dato {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr);
+        gap: 2.2mm;
+        align-items: center;
+        margin: 0;
+      }
+
+      .dato img {
+        width: 9mm;
+        height: 9mm;
+        background: #fff;
+        border-radius: 1.4mm;
+      }
+
+      .dato .linea-dato {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.6mm;
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1.2;
+      }
+
+      .dato .linea-dato[lang='ar'] {
+        font-size: 11pt;
+      }
+
+      .dato .linea-dato > span {
+        white-space: nowrap;
+      }
+
+      .dato .raya {
+        flex: 1;
+        min-width: 10mm;
+        height: 5.5mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .dato .etiqueta-es,
+      .traer .etiqueta-es {
+        display: block;
+        font-size: 7.5pt;
+        font-weight: 400;
+        color: var(--suave);
+        line-height: 1.2;
+      }
+
+      .traer {
+        grid-column: 1 / -1;
+      }
+
+      .traer > .titulo {
+        display: flex;
+        align-items: baseline;
+        gap: 2mm;
+        margin: 0 0 1.4mm;
+        font-weight: 700;
+        font-size: 10pt;
+      }
+
+      .traer > .titulo .etiqueta[lang='ar'] {
+        font-size: 11pt;
+      }
+
+      .traer ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 3mm;
+      }
+
+      .traer li {
+        display: grid;
+        grid-template-columns: 4.2mm 10mm minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        column-gap: 1.6mm;
+        row-gap: 0.6mm;
+        align-items: center;
+        margin: 0;
+        font-size: 8.8pt;
+        line-height: 1.15;
+      }
+
+      .traer li::before {
+        content: '';
+        width: 4.2mm;
+        height: 4.2mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 0.8mm;
+        background: #fff;
+      }
+
+      .traer li img {
+        width: 10mm;
+        height: 10mm;
+        background: #fff;
+        border-radius: 1.4mm;
+      }
+
+      .traer li > span[lang] {
+        grid-column: 1 / -1;
+      }
+
+      .traer li span small {
+        display: block;
+        color: var(--suave);
+        font-size: 7.4pt;
+      }
+
+      .traer li span[lang='ar'] {
+        font-size: 9.8pt;
+      }
+
+      .traer li.otra .hueco-cosa {
+        width: 10mm;
+        height: 10mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 1.4mm;
+        background: #fff;
+      }
+
+      .traer li.otra .raya {
+        display: block;
+        height: 4.6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .nota-cole {
+        margin: 1mm 0 3mm;
+        padding: 2.4mm 4mm 3mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        font-size: 11pt;
+        font-weight: 700;
+      }
+
+      .nota-cole p {
+        margin: 0;
+      }
+
+      .nota-cole .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .firma {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin-top: 2.4mm;
+      }
+
+      .firma .raya {
+        flex: 0 1 60mm;
+        height: 7mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .carta .creditos {
+        margin-top: 3mm;
+        font-size: 7.5pt;
+        padding-top: 2mm;
+      }
+
+      .carta .creditos p {
+        margin: 0;
+      }
+
+      /* En árabe, la carta se lee de derecha a izquierda: la columna árabe va a la derecha */
+      .carta[dir='rtl'] .es,
+      .carta[dir='rtl'] .etiqueta-es,
+      .carta[dir='rtl'] .creditos,
+      .carta[dir='rtl'] .carta__cabecera {
+        direction: ltr;
+      }
+
+      .carta[dir='rtl'] .etiqueta-es {
+        text-align: right;
+      }
+
+      /* La carta solo en castellano tiene más sitio: letra más grande */
+      .carta--sola .principal {
+        font-size: 12pt;
+      }
+
+      .carta--sola .principal .titulo-mensaje {
+        font-size: 12.5pt;
+      }
+
+      .carta--sola .dato .linea-dato,
+      .carta--sola .traer > .titulo {
+        font-size: 11pt;
+      }
+
+      .carta--sola .traer li {
+        font-size: 9.6pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -50mm; top: 58mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -28mm; top: 196mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; right: 26mm; bottom: 34mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Acogida</p>
+        <h1 class="portada__titulo">¡Hola! <span>Kit de bienvenida</span></h1>
+        <p class="portada__subtitulo">
+          Para recibir al alumno o la alumna que llega de otro país y aún no habla castellano.
+        </p>
+        <ul class="portada__lenguas" aria-label="Lenguas del kit">
+          <li class="l-es">castellano</li>
+          <li class="l-ar" lang="ar" dir="rtl">العربية</li>
+          <li class="l-ro" lang="ro">Română</li>
+          <li class="l-uk" lang="uk">Українська</li>
+          <li class="l-en" lang="en">English</li>
+          <li class="l-fr" lang="fr">Français</li>
+        </ul>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            <span class="borrador">[BORRADOR]</span> Traducciones pendientes de revisión por personas nativas.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" aria-hidden="true">
+        <div class="libro">
+          <span>PASAPORTE</span>
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" fill="none" stroke="#f6c12e" stroke-width="5" />
+            <ellipse cx="50" cy="50" rx="20" ry="44" fill="none" stroke="#f6c12e" stroke-width="4" />
+            <path d="M8 36 H92 M8 64 H92 M50 6 V94" stroke="#f6c12e" stroke-width="4" fill="none" />
+          </svg>
+          <span>DEL COLE</span>
+        </div>
+        <p class="bocadillo titular l-ar" lang="ar" dir="rtl" style="left: 119mm; top: 62mm; font-size: 25pt; transform: rotate(-6deg); --cola: 26mm">مرحبًا</p>
+        <p class="bocadillo titular l-en" lang="en" style="left: 168mm; top: 80mm; font-size: 20pt; transform: rotate(7deg); --cola: 8mm">Hello!</p>
+        <p class="bocadillo titular l-ro arriba" lang="ro" style="left: 172mm; top: 152mm; font-size: 20pt; transform: rotate(-5deg); --cola: 7mm">Bună!</p>
+        <p class="bocadillo titular l-uk arriba" lang="uk" style="left: 108mm; top: 190mm; font-size: 22pt; transform: rotate(5deg); --cola: 28mm">Привіт!</p>
+        <p class="bocadillo titular l-fr arriba" lang="fr" style="left: 152mm; top: 210mm; font-size: 20pt; transform: rotate(-4deg); --cola: 12mm">Bonjour&nbsp;!</p>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>22</b>tarjetas en<br />6 lenguas</div>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE SUPERVIVENCIA (cuatro hojas, las crea el programa del final)
+         ====================================================================== -->
+    <div id="hojas-tarjetas"></div>
+
+    <!-- ======================================================================
+         FRASES PARA EL DOCENTE (apaisada)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="encabezado">
+        <h1>Para decírselo tú</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Frases para los primeros días. Debajo, cómo suena: léelo como en castellano; la tilde marca la sílaba fuerte, la h se
+        aspira como una j suave y sh suena como en inglés «she». En árabe, a una niña se le habla en femenino (tras «niña»).
+      </p>
+      <table class="frases" id="frases">
+        <colgroup>
+          <col class="es" />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+      </table>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+        <span class="borrador">[BORRADOR]</span> Traducciones pendientes de revisión por personas nativas.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI PASAPORTE DEL COLE
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Mi pasaporte del cole</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Rellenadlo sin prisa, con su guía o con la familia. Puede dibujar, escribir en su lengua o pegar fotos. Nada es
+        obligatorio.
+      </p>
+      <div class="libreta">
+        <p class="libreta__banda"><span>Pasaporte del cole</span><span>¡Hola! · Bună! · Hello!</span></p>
+        <div class="libreta__cuerpo">
+          <div class="foto">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="6" y="16" width="52" height="38" rx="7" fill="none" stroke="#46578c" stroke-width="4" />
+              <path d="M22 16 l5 -7 h10 l5 7" fill="none" stroke="#46578c" stroke-width="4" stroke-linejoin="round" />
+              <circle cx="32" cy="35" r="10" fill="none" stroke="#46578c" stroke-width="4" />
+            </svg>
+            <span>Pega tu foto<br />o dibújate</span>
+          </div>
+          <div>
+            <p class="campo"><img src="pictogramas/27357.png" alt="" />Me llamo<span class="raya"></span></p>
+            <p class="campo"><img src="pictogramas/7072.png" alt="" />Tengo<span class="raya corta"></span>años</p>
+            <p class="campo"><img src="pictogramas/30015.png" alt="" />Vengo de<span class="raya"></span></p>
+            <p class="campo"><img src="pictogramas/6517.png" alt="" />Hablo<span class="raya"></span></p>
+            <p class="campo"><img src="pictogramas/37721.png" alt="" />Me gusta<span class="raya"></span></p>
+          </div>
+        </div>
+        <div class="libreta__fila">
+          <div class="cajita bocadillo-hola">
+            <p class="etiqueta-caja"><img src="pictogramas/6522.png" alt="" />En mi lengua, «hola» se dice:</p>
+            <div class="renglon"></div>
+            <div class="renglon"></div>
+          </div>
+          <div class="cajita">
+            <p class="etiqueta-caja"><img src="pictogramas/39421.png" alt="" />Mi compañero o compañera guía es:</p>
+            <div class="guia-foto">
+              <div class="marco">Foto o dibujo</div>
+              <div class="raya"></div>
+            </div>
+          </div>
+        </div>
+        <p class="mrz" aria-hidden="true">P&lt;COLE&lt;&lt;HOLA&lt;&lt;MARHABA&lt;&lt;BUNA&lt;&lt;PRYVIT&lt;&lt;HELLO&lt;&lt;BONJOUR&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</p>
+      </div>
+
+      <div class="sellos-titulo">
+        <h2>Mis primeros sellos</h2>
+        <p>Cuando lo consiga, pon un sello o una pegatina en el círculo.</p>
+      </div>
+      <ul class="sellos">
+        <li><img src="pictogramas/9814.png" alt="" />Conozco mi clase</li>
+        <li><img src="pictogramas/38603.png" alt="" />Sé dónde está el baño</li>
+        <li><img src="pictogramas/39421.png" alt="" />Conozco a mi guía</li>
+        <li><img src="pictogramas/33064.png" alt="" />He jugado en el recreo</li>
+        <li><img src="pictogramas/6522.png" alt="" />Ya digo «hola» en castellano</li>
+        <li><img src="pictogramas/9837.png" alt="" />He enseñado una palabra de mi lengua</li>
+      </ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL: LA PALABRA DEL DÍA
+         ====================================================================== -->
+    <section class="hoja cartel-palabra">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <div class="encabezado">
+        <h1>La palabra del día</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="lema">Cada día, nuestra clase aprende a decir una palabra en otra lengua.</p>
+      <div class="gran-bocadillo">
+        <p class="campo"><img src="pictogramas/9837.png" alt="" />En castellano:<span class="raya"></span></p>
+        <p class="campo"><img src="pictogramas/39433.png" alt="" />En<span class="raya corta" style="flex-basis: 52mm"></span>se dice:</p>
+        <div class="pizarra">Escríbela aquí con su letra</div>
+        <p class="campo"><img src="pictogramas/6517.png" alt="" />Suena así:<span class="raya"></span></p>
+      </div>
+      <div class="palabra-pie">
+        <div class="dibujo">Así es:</div>
+        <div class="experto">
+          <svg viewBox="0 0 80 90" aria-hidden="true">
+            <path d="M26 52 L16 86 L28 79 L34 90 L40 56Z" fill="#2f6fd6" />
+            <path d="M54 52 L64 86 L52 79 L46 90 L40 56Z" fill="#e8553e" />
+            <path
+              d="M40 4 L46 12 L56 8 L58 18 L68 20 L64 30 L72 37 L64 44 L68 54 L58 56 L56 66 L46 62 L40 70 L34 62 L24 66 L22 56 L12 54 L16 44 L8 37 L16 30 L12 20 L22 18 L24 8 L34 12Z"
+              fill="#f6c12e"
+              stroke="#1e2b55"
+              stroke-width="2.5"
+              stroke-linejoin="round"
+            />
+            <circle cx="40" cy="37" r="17" fill="#fff" stroke="#1e2b55" stroke-width="2.5" />
+            <path d="M31 37 l6 6 l12 -13" fill="none" stroke="#1e2b55" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <p>Nos la enseña nuestro experto o nuestra experta:</p>
+          <span class="raya"></span>
+        </div>
+      </div>
+      <p class="pista" style="margin-top: 5mm">
+        Plastifica el cartel y escribe con rotulador de pizarra: así sirve para todo el curso. Apuntad cada palabra en el
+        diccionario de la clase.
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         DICCIONARIO DE LA CLASE Y CHAPAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="encabezado">
+        <h1>Nuestro diccionario</h1>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">Apuntad aquí cada palabra del día. Al final del mes, contad cuántas palabras nuevas sabe la clase.</p>
+      <table class="diccionario">
+        <colgroup>
+          <col style="width: 17mm" />
+          <col />
+          <col />
+          <col />
+          <col style="width: 34mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Día</th>
+            <th scope="col">En castellano</th>
+            <th scope="col">En su lengua</th>
+            <th scope="col">Cómo suena</th>
+            <th scope="col">Dibujo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h2 style="font-size: 16pt; margin: 6mm 0 1mm">Chapas</h2>
+      <p class="pista">
+        Para el compañero o la compañera guía, para quien enseña la palabra del día y para presentarse. Recórtalas por el
+        círculo de puntos y pégalas en una pinza o con cinta de doble cara.
+      </p>
+      <ul class="chapas">
+        <li class="chapa g-acciones"><div><img src="pictogramas/39421.png" alt="" /><small>Soy</small><b>compañero guía</b></div></li>
+        <li class="chapa g-sentir"><div><img src="pictogramas/39421.png" alt="" /><small>Soy</small><b>compañera guía</b></div></li>
+        <li class="chapa g-personas"><div><img src="pictogramas/9837.png" alt="" /><b>Experto en</b><span class="raya"></span></div></li>
+        <li class="chapa g-social"><div><img src="pictogramas/9837.png" alt="" /><b>Experta en</b><span class="raya"></span></div></li>
+        <li class="chapa g-necesidades"><div><img src="pictogramas/6522.png" alt="" /><b>¡Hola!</b><small>Me llamo</small><span class="raya"></span></div></li>
+        <li class="chapa g-acciones"><div><img src="pictogramas/6522.png" alt="" /><b>¡Hola!</b><small>Me llamo</small><span class="raya"></span></div></li>
+      </ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA DOCENTES
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes <span class="borrador">[BORRADOR]</span></p>
+      <h1>Cómo recibir a quien llega sin hablar castellano</h1>
+      <p id="intro">
+        En el curso 2024-2025, el 15,5 % del alumnado de la Región de Murcia era de nacionalidad extranjera, frente al 12,9 %
+        de media en España, según los datos de avance de la Red de Información Educativa (<span class="url">Eurydice España-REDIE</span>). Una parte
+        llega con el curso empezado y sin hablar castellano. Este kit reúne lo necesario para que, desde el primer día, el alumno o la alumna pueda entenderse con
+        la clase y vea que su lengua también cuenta.
+      </p>
+
+      <div class="caja caja--coral">
+        <p>
+          <span class="borrador">[BORRADOR]</span> Traducciones pendientes de revisión por personas nativas. Antes de usarlas,
+          pide a alguien que hable cada lengua que las revise.
+        </p>
+      </div>
+
+      <h2>Qué incluye</h2>
+      <ul>
+        <li><strong>22 tarjetas de supervivencia</strong> en castellano y en árabe, rumano, ucraniano, inglés y francés, y 2 en blanco.</li>
+        <li><strong>Frases para decírselo tú</strong> en los primeros días, con cómo suenan.</li>
+        <li><strong>Mi pasaporte del cole</strong>, para presentarse dibujando, y sus primeros sellos.</li>
+        <li><strong>La palabra del día</strong>: cartel, diccionario de la clase y chapas.</li>
+        <li><strong>Carta de bienvenida para la familia</strong> en seis lenguas, con huecos para el horario, qué traer y cómo contactar.</li>
+      </ul>
+
+      <h2>Antes de que llegue</h2>
+      <ul class="marcar">
+        <li>Pregunta qué lengua se habla en casa: el país no siempre lo dice.</li>
+        <li>Aprende a decir bien su nombre y escríbelo como lo escribe su familia.</li>
+        <li>Pregunta si ha ido antes a la escuela y si lee en su lengua.</li>
+        <li>Anota alergias, medicinas y qué personas pueden ir a buscarle.</li>
+        <li>Elige a su compañero o compañera guía.</li>
+        <li>Cuenta a la clase que llega alguien nuevo y aprended a decir «hola» en su lengua.</li>
+        <li>Prepara su sitio, su percha y su nombre en la mesa.</li>
+        <li>Imprime y recorta las tarjetas, y prepara la carta para la familia.</li>
+      </ul>
+
+      <h2>Plan para la primera semana</h2>
+      <ol class="semana">
+        <li class="g-social">
+          <b><span>Día 1</span>Bienvenida</b>
+          <p>
+            Saluda en su lengua: «hola» y «bienvenido» o «bienvenida». Con su guía, recorred el cole: clase, baño, patio,
+            comedor y salida. Enséñale las tarjetas y dile, también en su lengua, que su familia vendrá luego. Entrega la
+            carta a la familia.
+          </p>
+        </li>
+        <li class="g-necesidades">
+          <b><span>Día 2</span>Rutinas</b>
+          <p>Anticipa cada momento con la agenda visual de la clase. Practicad cinco tarjetas: hola, baño, agua, sí y no.</p>
+        </li>
+        <li class="g-acciones">
+          <b><span>Día 3</span>Su lengua cuenta</b>
+          <p>Primera palabra del día: hoy enseña él o ella. Empezad el pasaporte del cole.</p>
+        </li>
+        <li class="g-sentir">
+          <b><span>Día 4</span>Con el grupo</b>
+          <p>Tareas en pareja o en grupo pequeño, con imágenes y gestos. Primeros sellos del pasaporte.</p>
+        </li>
+        <li class="g-personas">
+          <b><span>Día 5</span>Con la familia</b>
+          <p>Una charla breve, con intérprete si hace falta: cómo ha ido la semana, qué le gusta y qué le preocupa.</p>
+        </li>
+      </ol>
+
+      <h2 class="salto">El compañero o la compañera guía</h2>
+      <p>
+        Elige a alguien amable y paciente, aunque no saque las mejores notas. Le acompaña al baño, al patio y al comedor, juega
+        con él o con ella y le enseña las rutinas con el ejemplo. Si alguien habla su lengua, puede ayudar, pero no cargues
+        todo en esa persona. Cambiad de guía cada semana o cada dos para que nadie se agote y haya más amistades.
+      </p>
+
+      <h2>La palabra del día</h2>
+      <p>
+        Dos minutos al día: el alumno o la alumna que acaba de llegar enseña a la clase una palabra de su lengua, la escribe en
+        el cartel con su letra y todos la repiten. Después la apuntáis en el diccionario. Por un rato, quien enseña es él o
+        ella: dale la chapa de experto o experta. Empezad por palabras útiles, como hola, gracias, agua o jugar.
+      </p>
+
+      <h2>Con el resto de la clase</h2>
+      <ul>
+        <li>Contad que llega alguien de otro país que aún no habla castellano y que lo irá aprendiendo con vosotros.</li>
+        <li>Aprended a decir «hola» en su lengua y a pronunciar bien su nombre.</li>
+        <li>Acordad gestos para lo básico, como «ven», «espera» o «muy bien».</li>
+        <li>Para ayudar, basta con hablar despacio y señalar. Habladlo antes: reírse de cómo habla alguien hace daño.</li>
+      </ul>
+
+      <h2>El periodo de silencio</h2>
+      <p id="silencio">
+        Muchos niños y niñas que empiezan a aprender una segunda lengua apenas la hablan al principio. Ese periodo varía mucho:
+        desde unos días hasta más de un año (Kan y otros, 2025). Mientras tanto se comunican de otras formas, con gestos,
+        señalando o en su propia lengua, y a menudo repiten en voz baja lo que oyen para practicar (Saville-Troike, 1988). Los
+        estudios sobre este periodo son pocos y de calidad desigual (Roberts, 2014): mira a cada niño o niña sin prisas ni
+        etiquetas.
+      </p>
+      <div class="dos-columnas" style="align-items: start">
+        <div class="caja caja--azul">
+          <h3>Qué ayuda</h3>
+          <p>
+            Háblale mucho, con frases cortas y gestos. Cuenta lo que hacéis mientras lo hacéis. Acepta que responda
+            señalando o con las tarjetas, espera unos segundos antes de ayudar y celebra cada intento.
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>Cuándo consultar</h3>
+          <p id="consultar">
+            Si no se comunica de ninguna forma (ni con gestos, ni señalando, ni en su lengua) o en casa tampoco habla,
+            consulta al equipo de orientación (Kan y otros, 2025). Desconocer la lengua y tener un trastorno del lenguaje son
+            cosas distintas: la Ley Orgánica de Educación (LOE) los distingue (artículo 71.2).
+          </p>
+        </div>
+      </div>
+
+      <h2>Lo que mejor evitar</h2>
+      <div class="caja caja--coral">
+        <ul style="margin: 0">
+          <li><strong>Pedirle que hable delante de toda la clase</strong> o que se presente en público. Si quiere participar, que sea en pareja o con las tarjetas.</li>
+          <li><strong>Corregirlo todo.</strong> Si dice «yo querer agua», responde con la frase bien dicha: «¿Quieres agua? Toma». Así oye el modelo sin sentirse corregido.</li>
+          <li><strong>Usar a otro niño o niña de intérprete en temas delicados</strong>, como la salud, la familia, los conflictos o las notas. Para eso hace falta una persona adulta: pídela al equipo directivo.</li>
+          <li><strong>Cambiarle el nombre</strong> o acortarlo sin preguntar, y <strong>prohibir su lengua</strong> en clase o en el patio.</li>
+          <li>
+            <strong>Pasar casi todo el día fuera de su aula.</strong> Los programas de apoyo se dan a la vez que asiste a su grupo
+            (LOE, artículo 79.2).
+          </li>
+        </ul>
+      </div>
+
+      <h2 class="salto">Con la familia</h2>
+      <p id="familia">
+        Entrega la carta en su lengua y explícala en persona: no todas las familias leen con soltura. El mensaje más
+        importante es que sigan hablando en casa su lengua. Cummins (1979) propuso que lo que un niño o una niña aprende en su
+        primera lengua sirve, en parte, de base para la segunda: es la hipótesis de la interdependencia. Una revisión de 2016
+        que reunió decenas de estudios encontró que el dominio oral de cada lengua se relaciona, de forma modesta, con la
+        lectura en la otra (Prevoo y otros, 2016). Además, para aprender una lengua cuenta mucho oírla a personas que
+        la hablan bien (Hoff, 2018): el castellano llegará en el colegio, y en casa lo mejor es la lengua que la familia
+        domina.
+      </p>
+      <p>
+        Para las reuniones importantes, ofrece un intérprete. La LOE pide que las familias del alumnado que se incorpora
+        tarde reciban asesoramiento sobre sus derechos, deberes y oportunidades (artículo 79.3). Pregunta siempre en qué
+        lengua prefieren recibir la información.
+      </p>
+
+      <h2>Las lenguas del kit</h2>
+      <p id="lenguas">
+        Entre las personas nacidas fuera de España que viven en la Región de Murcia, las que vienen de países donde no se habla
+        castellano proceden sobre todo de Marruecos (102.930), el Reino Unido (16.534), Francia (10.024), Ucrania (9.480) y
+        Rumanía (8.657), seguidas de Argelia, Senegal y Bulgaria (Censo anual de población 2025, publicado por el Centro
+        Regional de Estadística de Murcia, CREM). El árabe, el inglés y el francés sirven además a familias de muchos otros
+        países. Para cualquier otra lengua, usa las tarjetas en blanco.
+      </p>
+
+      <div class="caja caja--verde" id="marruecos">
+        <h3>Si la familia viene de Marruecos</h3>
+        <p>
+          Las tarjetas usan el árabe estándar, el que se lee y se escribe en la escuela. En Marruecos, el 91,9 % de la
+          población usa el dariya (árabe marroquí) y el 24,8 % alguna variedad del amazigh, como el tarifit o el tachelhit
+          (Alto Comisariado del Plan de Marruecos, HCP, 2024). En dariya cambian bastante algunas palabras; las escribimos
+          como suenan:
+        </p>
+        <dl class="dariya">
+          <div><dt>quiero:</dt> <dd>«bguít»</dd></div>
+          <div><dt>no entiendo:</dt> <dd>«ma fhémch»</dd></div>
+          <div><dt>agua:</dt> <dd>«l-ma»</dd></div>
+          <div><dt>baño:</dt> <dd>«bit l-ma»</dd></div>
+          <div><dt>sí:</dt> <dd>«íyeh» o «uája»</dd></div>
+          <div><dt>he terminado:</dt> <dd>«salít»</dd></div>
+          <div><dt>¿estás bien?:</dt> <dd>«labás?»</dd></div>
+          <div><dt>muy bien:</dt> <dd>«mzián bzaf»</dd></div>
+          <div><dt>no pasa nada:</dt> <dd>«makáin mushkil»</dd></div>
+        </dl>
+        <p style="margin-top: 1.6mm">
+          En Marruecos, el «hammam» es el baño público de vapor: por eso la tarjeta del baño usa otra palabra árabe.
+        </p>
+      </div>
+
+      <h2>Qué dice la norma</h2>
+      <p id="norma">
+        La LOE cuenta el desconocimiento grave de la lengua de aprendizaje y la incorporación tardía entre los motivos para
+        recibir una atención educativa diferente a la ordinaria (artículo 71.2). Pide escolarizar a este alumnado según sus
+        circunstancias, conocimientos, edad e historial académico, con los apoyos oportunos (artículo 78), y desarrollar
+        programas específicos para quien tiene graves carencias lingüísticas, siempre a la vez que asiste a su grupo
+        (artículo 79).
+      </p>
+
+      <h2>Apoyos en la Región de Murcia</h2>
+      <p id="murcia">
+        El alumnado con carencias graves en lengua española puede ser atendido temporalmente en un aula de acogida (Decreto
+        359/2009, artículo 14.5, y Orden de 16 de diciembre de 2005). Cada curso, la Dirección General de Atención a la
+        Diversidad autoriza qué centros públicos la tienen: para 2026-2027 ha autorizado su continuidad en institutos y en
+        algunos colegios (Resolución de 6 de julio de 2026). Si tu centro no tiene aula de acogida, pregunta al equipo
+        directivo y al equipo de orientación qué apoyos podéis pedir.
+      </p>
+
+      <h2 class="salto">Ideas para adaptarlo</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone cultivar la comprensión y el respeto entre lenguas y fomentar
+        que todo el grupo se sienta parte de la clase (CAST, 2024, consideraciones 2.3 y 8.4). Algunas ideas:
+      </p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>En Infantil:</strong> empieza con seis tarjetas (hola, baño, agua, sí, no y me duele) y acompáñalas siempre de un gesto.</li>
+          <li><strong>Si aún no lee:</strong> di tú la frase en su lengua con la ayuda de «cómo suena», o pide a la familia que se la diga en casa.</li>
+          <li><strong>Llavero:</strong> plastifica las tarjetas, perfora una esquina y únelas con una anilla. Así van al patio y al comedor.</li>
+        </ul>
+        <ul>
+          <li><strong>Para toda la clase:</strong> cuelga en la puerta las tarjetas de saludo. Todos aprenden a decir «hola» en varias lenguas.</li>
+          <li><strong>Otras lenguas:</strong> completa las tarjetas en blanco con la familia, por ejemplo en amazigh o en wólof.</li>
+          <li><strong>Si su lengua es el castellano:</strong> el pasaporte, la figura del guía y la carta en castellano también le sirven.</li>
+        </ul>
+      </div>
+
+      <h2>Anota sus primeros pasos</h2>
+      <p>
+        Durante las primeras semanas, apunta cómo se comunica y con quién. Te servirá para ver avances y para hablar con la
+        familia y con el equipo de orientación. Escribe solo iniciales y guarda la hoja en el centro.
+      </p>
+      <table class="primeros-pasos">
+        <thead>
+          <tr>
+            <th scope="col">Semana</th>
+            <th scope="col">Cómo se comunica</th>
+            <th scope="col">Palabras que ya usa</th>
+            <th scope="col">Con quién juega</th>
+            <th scope="col">Notas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <div class="creditos">
+        <p>
+          <strong>¡Hola! Kit de bienvenida para el alumnado recién llegado.</strong> IdEducando, octubre de 2026. Ficha y
+          novedades: <span class="url">ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado</span>
+        </p>
+        <p id="fuentes">
+          Fuentes: <span class="url">Eurydice España-REDIE</span> (2026), <em>Distribución de alumnado extranjero por Administración educativa</em>,
+          curso <span class="url">2024-25</span>, datos de avance; CREM (2026), <em>Censo de población anual 2025</em>, tabla 9; HCP (2024),
+          <em>Recensement général de la population et de l’habitat 2024</em>, principales resultados; Cummins, J. (1979),
+          <em>Review of Educational Research</em>, 49(2), <span class="url">222-251</span>; Prevoo, M. J. L. y otros (2016), <em>Review of Educational
+          Research</em>, 86(1), <span class="url">237-276</span>; Hoff, E. (2018), <em>Child Development Perspectives</em>, 12(2), <span class="url">80-86</span>;
+          Saville-Troike, M. (1988), <em>Journal of Child Language</em>, 15(3), <span class="url">567-590</span>; Roberts, T. A. (2014), <em>Early
+          Childhood Research Quarterly</em>, 29(1), <span class="url">22-40</span>; Kan, P. F. y otros (2025), <em>Journal of Child Language</em>,
+          52(3), <span class="url">558-591</span>; Ley Orgánica 2/2006 de Educación, artículos 71.2, 78 y 79; Decreto 359/2009 de la Región de
+          Murcia, artículo 14.5; Orden de 16 de diciembre de 2005 de la Consejería de Educación y Cultura de la Región de
+          Murcia; Resolución de 6 de julio de 2026 de la Dirección General de Atención a la Diversidad; CAST (2024),
+          <em>Universal Design for Learning Guidelines 3.0</em>.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. Los dibujos de
+          la portada y del cartel son de IdEducando.
+        </p>
+        <p>
+          Traducciones de IdEducando, pendientes de revisión por personas nativas. Letras: Outfit, Young Serif, Atkinson
+          Hyperlegible, Noto Sans y Noto Sans Arabic, con licencia SIL Open Font License.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CARTAS PARA LAS FAMILIAS (seis hojas, las crea el programa del final)
+         ====================================================================== -->
+    <div id="cartas"></div>
+
+    <script>
+      // ======================================================================
+      // TRADUCCIONES
+      // Para corregir una traducción, cámbiala aquí y vuelve a generar el PDF.
+      // Todas están pendientes de revisión por personas nativas.
+      // ======================================================================
+
+      // Las cinco lenguas, en el orden en que salen en las tarjetas.
+      const LENGUAS = [
+        ['ar', 'العربية', 'árabe'],
+        ['ro', 'Română', 'rumano'],
+        ['uk', 'Українська', 'ucraniano'],
+        ['en', 'English', 'inglés'],
+        ['fr', 'Français', 'francés'],
+      ];
+      const NBSP = ' '; // espacio que no se parte: en francés va antes de ! y ?
+
+      // Tarjetas: [castellano, pictograma de ARASAAC, grupo, árabe, rumano, ucraniano, inglés, francés].
+      // Las frases sirven igual para niños y niñas: por eso «أريد أن آكل» (quiero comer) o «Я хочу їсти».
+      const TARJETAS = [
+        ['¡Hola!', 6522, 'social', 'مرحبًا', 'Bună!', 'Привіт!', 'Hello!', `Bonjour${NBSP}!`],
+        ['¡Adiós!', 6028, 'social', 'مع السلامة', 'La revedere!', 'До побачення!', 'Goodbye!', `Au revoir${NBSP}!`],
+        ['Sí', 5584, 'social', 'نعم', 'Da', 'Так', 'Yes', 'Oui'],
+        ['No', 5526, 'social', 'لا', 'Nu', 'Ні', 'No', 'Non'],
+        ['Gracias', 8129, 'social', 'شكرًا', 'Mulțumesc', 'Дякую', 'Thank you', 'Merci'],
+        ['No entiendo', 37827, 'social', 'لا أفهم', 'Nu înțeleg', 'Я не розумію', 'I don’t understand', 'Je ne comprends pas'],
+
+        ['Baño', 38603, 'necesidades', 'المرحاض', 'Toaleta', 'Туалет', 'Toilet', 'Les toilettes'],
+        ['Agua', 32464, 'necesidades', 'ماء', 'Apă', 'Вода', 'Water', 'De l’eau'],
+        ['Tengo hambre', 7272, 'necesidades', 'أريد أن آكل', 'Mi-e foame', 'Я хочу їсти', 'I’m hungry', 'J’ai faim'],
+        ['Tengo sueño', 8514, 'necesidades', 'أشعر بالنعاس', 'Mi-e somn', 'Я хочу спати', 'I’m sleepy', 'J’ai sommeil'],
+        ['Me duele', 30620, 'necesidades', 'أشعر بألم', 'Mă doare', 'Мені боляче', 'It hurts', 'J’ai mal'],
+        ['Necesito ayuda', 7171, 'necesidades', 'أحتاج إلى مساعدة', 'Am nevoie de ajutor', 'Мені потрібна допомога', 'I need help', 'J’ai besoin d’aide'],
+
+        ['Quiero', 5441, 'acciones', 'أريد', 'Vreau', 'Я хочу', 'I want', 'Je veux'],
+        ['Me gusta', 37721, 'acciones', 'يعجبني', 'Îmi place', 'Мені подобається', 'I like it', 'J’aime bien'],
+        ['¿Jugamos?', 6537, 'acciones', 'هيا نلعب!', 'Ne jucăm?', 'Пограємо?', 'Shall we play?', `On joue${NBSP}?`],
+        ['Otra vez', 37162, 'acciones', 'مرة أخرى', 'Încă o dată', 'Ще раз', 'Again', 'Encore'],
+        ['He terminado', 28429, 'acciones', 'انتهيت', 'Am terminat', 'Готово!', 'I’ve finished', 'J’ai fini'],
+
+        ['Estoy bien', 13630, 'sentir', 'أنا بخير', 'Sunt bine', 'У мене все добре', 'I’m OK', 'Je vais bien'],
+        ['Estoy triste', 35545, 'sentir', 'أشعر بالحزن', 'Sunt trist / tristă', 'Мені сумно', 'I’m sad', 'Je suis triste'],
+        ['Tengo miedo', 39248, 'sentir', 'أشعر بالخوف', 'Mi-e frică', 'Мені страшно', 'I’m scared', 'J’ai peur'],
+        ['Maestro, maestra', 6556, 'personas', 'المعلّم، المعلّمة', 'Învățător, învățătoare', 'Учитель, учителька', 'Teacher', 'Maître, maîtresse'],
+        ['Mi familia', 38351, 'personas', 'عائلتي', 'Familia mea', 'Моя сім’я', 'My family', 'Ma famille'],
+      ];
+
+      // Hojas de tarjetas: [título, antetítulo, primera tarjeta, última (sin incluir), tarjeta en blanco al final].
+      const HOJAS = [
+        ['Para saludar y responder', 'Tarjetas 1 a 6', 0, 6, null],
+        ['Lo que necesito', 'Tarjetas 7 a 12', 6, 12, null],
+        ['En clase y en el recreo', 'Tarjetas 13 a 17', 12, 17, 'lenguas'],
+        ['Cómo estoy y quién me cuida', 'Tarjetas 18 a 22', 17, 22, 'otras'],
+      ];
+
+      // Frases para el docente: [castellano, pictograma, [árabe, cómo suena, cómo suena si es una niña],
+      // [rumano, cómo suena], [ucraniano, cómo suena], inglés, francés].
+      const FRASES = [
+        ['¡Bienvenido! ¡Bienvenida!', 6936, ['أهلًا وسهلًا', 'áhlan wa sáhlan'], ['Bine ai venit!', 'bíne ai vénit'], ['Ласкаво просимо!', 'láskavo prósimo'], 'Welcome!', `Bienvenue${NBSP}!`],
+        ['Me llamo…', 27357, ['اسمي…', 'ísmi…'], ['Mă numesc…', 'me numésc…'], ['Мене звати…', 'mené zváti…'], 'My name is…', 'Je m’appelle…'],
+        ['¿Cómo te llamas?', 27353, ['ما اسمك؟', 'ma ísmuka?', 'ma ísmuki?'], ['Cum te cheamă?', 'cum te kiáme?'], ['Як тебе звати?', 'iak tebé zváti?'], 'What’s your name?', `Comment tu t’appelles${NBSP}?`],
+        ['Ven conmigo.', 32669, ['تعالَ معي / تعالي معي', 'taála maí', 'taálay maí'], ['Vino cu mine.', 'víno cu míne'], ['Ходи зі мною.', 'jodí zi mnóiu'], 'Come with me.', 'Viens avec moi.'],
+        ['Este es tu sitio.', 9819, ['هذا مكانك.', 'háda makánuka', 'háda makánuki'], ['Acesta e locul tău.', 'achésta ie lócul teu'], ['Це твоє місце.', 'tse tvoié mítse'], 'This is your seat.', 'C’est ta place.'],
+        ['Tu familia vendrá luego.', 37047, ['ستأتي العائلة لاحقًا.', 'satáti l-áila láhiqan'], ['Familia ta vine mai târziu.', 'famíli-a ta víne mai tirzíu'], ['Твоя сім’я прийде пізніше.', 'tvoiá simiá príide pizníshe'], 'Your family will come later.', 'Ta famille viendra plus tard.'],
+        ['¿Estás bien?', 13630, ['هل أنت بخير؟', 'hal ánta bijáir?', 'hal ánti bijáir?'], ['Ești bine?', 'iéshti bíne?'], ['У тебе все добре?', 'u tebé vse dóbre?'], 'Are you OK?', `Ça va${NBSP}?`],
+        ['No pasa nada.', 31310, ['لا بأس.', 'la bas'], ['Nu-i nimic.', 'nui nimíc'], ['Нічого страшного.', 'nichóho strashnóho'], 'It’s OK.', 'Ce n’est pas grave.'],
+        ['¡Muy bien!', 38564, ['أحسنت!', 'ahsánta!', 'ahsánti!'], ['Foarte bine!', 'foárte bíne'], ['Молодець!', 'molodéts'], 'Well done!', `Bravo${NBSP}!`],
+        ['¡Hasta mañana!', 7152, ['إلى اللقاء غدًا!', 'íla l-liqá gádan'], ['Pe mâine!', 'pe míne'], ['До завтра!', 'do závtra'], 'See you tomorrow!', `À demain${NBSP}!`],
+      ];
+
+      // Carta para la familia, en castellano y en las cinco lenguas.
+      const CARTA = {
+        es: {
+          titulo: '¡Os damos la bienvenida!',
+          saludo: 'Querida familia:',
+          intro: 'Nos alegra mucho que vuestro hijo o vuestra hija empiece en nuestro colegio. Aquí tenéis lo más importante para los primeros días.',
+          clase: 'Clase',
+          maestro: 'Maestro o maestra',
+          horario: ['Horario: de', 'a'],
+          contacto: 'Para hablar con nosotros',
+          traer: 'Qué traer cada día',
+          cosas: ['Mochila', 'Almuerzo', 'Botella de agua', 'Ropa de cambio', 'Otra cosa'],
+          mensajes: [
+            ['Hablad en casa vuestra lengua.', 'Hablad mucho con vuestro hijo o vuestra hija en la lengua que mejor conocéis: contadle cuentos y cantad juntos. Lo que aprende en vuestra lengua le ayuda también en el colegio. El castellano lo aprenderá aquí, poco a poco.'],
+            ['Al principio, es normal que hable poco.', 'Escucha y aprende cada día. Tened paciencia y dadle mucho ánimo.'],
+            ['Contadnos lo importante.', 'Si tiene alguna alergia, toma alguna medicina o hay algo que debamos saber, decídnoslo.'],
+            ['Estamos para ayudaros.', 'Si necesitáis un intérprete, pedídnoslo. Podéis venir a hablar con nosotros siempre que lo necesitéis.'],
+          ],
+          despedida: 'Un saludo afectuoso,',
+          firma: 'Firma:',
+        },
+        ar: {
+          titulo: 'أهلًا وسهلًا بكم!',
+          saludo: 'العائلة العزيزة،',
+          intro: 'يسعدنا كثيرًا أن يبدأ ابنكم أو ابنتكم الدراسة في مدرستنا. إليكم أهمّ المعلومات للأيام الأولى.',
+          clase: 'الصف',
+          maestro: 'المعلّم أو المعلّمة',
+          horario: ['التوقيت: من', 'إلى'],
+          contacto: 'للتواصل معنا',
+          traer: 'ما يجب إحضاره كل يوم',
+          cosas: ['الحقيبة المدرسية', 'وجبة خفيفة', 'قارورة ماء', 'ملابس احتياطية', 'شيء آخر'],
+          mensajes: [
+            ['تحدّثوا في البيت بلغتكم.', 'تحدّثوا مع ابنكم أو ابنتكم كثيرًا باللغة التي تتقنونها أكثر: احكوا القصص وغنّوا معًا. ما يتعلّمه بلغتكم يساعده أيضًا في المدرسة. أمّا الإسبانية فسيتعلّمها هنا شيئًا فشيئًا.'],
+            ['في البداية، من الطبيعي أن يتكلّم قليلًا.', 'إنّه يستمع ويتعلّم كل يوم. تحلّوا بالصبر وشجّعوه كثيرًا.'],
+            ['أخبرونا بما هو مهمّ.', 'إذا كانت لديه حساسية أو كان يتناول دواءً، أو إذا كان هناك أمر يجب أن نعرفه، فأخبرونا.'],
+            ['نحن هنا لمساعدتكم.', 'إذا احتجتم إلى مترجم، فاطلبوه منّا. يمكنكم المجيء للتحدّث معنا متى احتجتم إلى ذلك.'],
+          ],
+          despedida: 'مع أطيب التحيات،',
+          firma: 'التوقيع:',
+        },
+        ro: {
+          titulo: 'Bine ați venit!',
+          saludo: 'Dragă familie,',
+          intro: 'Ne bucurăm mult că fiul sau fiica dumneavoastră începe școala la noi. Iată cele mai importante informații pentru primele zile.',
+          clase: 'Clasa',
+          maestro: 'Învățătorul sau învățătoarea',
+          horario: ['Programul: de la', 'la'],
+          contacto: 'Cum ne puteți contacta',
+          traer: 'Ce trebuie să aducă în fiecare zi',
+          cosas: ['Ghiozdan', 'Gustare', 'Sticlă cu apă', 'Haine de schimb', 'Altceva'],
+          mensajes: [
+            ['Vorbiți acasă limba dumneavoastră.', 'Vorbiți mult cu fiul sau fiica dumneavoastră în limba pe care o cunoașteți cel mai bine: spuneți-i povești și cântați împreună. Ce învață în limba dumneavoastră îi folosește și la școală. Limba spaniolă o va învăța aici, puțin câte puțin.'],
+            ['La început, este normal să vorbească puțin.', 'Ascultă și învață în fiecare zi. Aveți răbdare și dați-i mult curaj.'],
+            ['Spuneți-ne ce este important.', 'Dacă are vreo alergie, ia vreun medicament sau trebuie să știm ceva, spuneți-ne.'],
+            ['Suntem aici să vă ajutăm.', 'Dacă aveți nevoie de un interpret, spuneți-ne. Puteți veni să vorbiți cu noi oricând aveți nevoie.'],
+          ],
+          despedida: 'Cu drag,',
+          firma: 'Semnătura:',
+        },
+        uk: {
+          titulo: 'Ласкаво просимо!',
+          saludo: 'Дорога родино!',
+          intro: 'Ми дуже раді, що ваш син або ваша донька починає навчання в нашій школі. Ось найважливіше для перших днів.',
+          clase: 'Клас',
+          maestro: 'Учитель або учителька',
+          horario: ['Час занять: з', 'до'],
+          contacto: 'Як з нами зв’язатися',
+          traer: 'Що приносити щодня',
+          cosas: ['Рюкзак', 'Перекус', 'Пляшка з водою', 'Змінний одяг', 'Інше'],
+          mensajes: [
+            ['Розмовляйте вдома своєю мовою.', 'Багато розмовляйте з дитиною мовою, якою володієте найкраще: розповідайте казки й співайте разом. Те, що дитина вивчає вашою мовою, допомагає їй і в школі. Іспанську вона вивчить тут, крок за кроком.'],
+            ['Спочатку дитина може говорити мало, і це нормально.', 'Вона слухає й навчається щодня. Будьте терплячими й часто підбадьорюйте її.'],
+            ['Розкажіть нам про важливе.', 'Якщо в дитини є алергія, вона приймає ліки або є щось, що нам варто знати, повідомте нам.'],
+            ['Ми тут, щоб допомогти.', 'Якщо вам потрібен перекладач, скажіть нам. Ви можете прийти й поговорити з нами, коли буде потрібно.'],
+          ],
+          despedida: 'З повагою,',
+          firma: 'Підпис:',
+        },
+        en: {
+          titulo: 'Welcome to our school!',
+          saludo: 'Dear family,',
+          intro: 'We are very happy that your son or daughter is starting at our school. Here is the most important information for the first days.',
+          clase: 'Class',
+          maestro: 'Teacher',
+          horario: ['School hours: from', 'to'],
+          contacto: 'How to contact us',
+          traer: 'What to bring every day',
+          cosas: ['School bag', 'Snack', 'Water bottle', 'Spare clothes', 'Something else'],
+          mensajes: [
+            ['Speak your language at home.', 'Talk a lot with your child in the language you know best: tell stories and sing together. What your child learns in your language also helps at school. They will learn Spanish here, little by little.'],
+            ['At first, it is normal for your child to speak very little.', 'Your child is listening and learning every day. Be patient and give lots of encouragement.'],
+            ['Tell us what is important.', 'If your child has an allergy, takes medicine or there is anything we should know, please tell us.'],
+            ['We are here to help.', 'If you need an interpreter, just ask us. You can come and talk to us whenever you need to.'],
+          ],
+          despedida: 'Best wishes,',
+          firma: 'Signature:',
+        },
+        fr: {
+          titulo: `Bienvenue dans notre école${NBSP}!`,
+          saludo: 'Chère famille,',
+          intro: 'Nous sommes très heureux que votre fils ou votre fille commence l’école chez nous. Voici l’essentiel pour les premiers jours.',
+          clase: 'Classe',
+          maestro: 'Enseignant ou enseignante',
+          horario: [`Horaires${NBSP}: de`, 'à'],
+          contacto: 'Pour nous contacter',
+          traer: 'À apporter chaque jour',
+          cosas: ['Cartable', 'Goûter', 'Bouteille d’eau', 'Vêtements de rechange', 'Autre chose'],
+          mensajes: [
+            ['Parlez votre langue à la maison.', `Parlez beaucoup avec votre enfant dans la langue que vous connaissez le mieux${NBSP}: racontez-lui des histoires et chantez ensemble. Ce qu’il apprend dans votre langue l’aide aussi à l’école. L’espagnol, il l’apprendra ici, petit à petit.`],
+            ['Au début, il est normal que votre enfant parle peu.', 'Il écoute et apprend chaque jour. Soyez patients et encouragez-le beaucoup.'],
+            ['Dites-nous ce qui est important.', 'Si votre enfant a une allergie, prend un médicament ou s’il y a quelque chose que nous devons savoir, prévenez-nous.'],
+            ['Nous sommes là pour vous aider.', 'Si vous avez besoin d’un interprète, demandez-nous. Vous pouvez venir nous parler quand vous en avez besoin.'],
+          ],
+          despedida: 'Bien cordialement,',
+          firma: `Signature${NBSP}:`,
+        },
+      };
+
+      // Pictogramas de la carta: los datos y los cuatro mensajes.
+      const PICTOS_CARTA = {
+        clase: 9814,
+        maestro: 6556,
+        horario: 7230,
+        contacto: 6518,
+        cosas: [2475, 28205, 38604, 7233, null],
+        mensajes: [6461, 6572, 8163, 39433],
+      };
+
+      // ======================================================================
+      // A partir de aquí, el programa que monta las hojas. No hace falta tocarlo.
+      // ======================================================================
+      const LOGO = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const dir = (id) => (id === 'ar' ? ' dir="rtl"' : '');
+
+      function leyenda() {
+        const items = LENGUAS.map(
+          ([id, nombre, es]) => `<li class="l-${id}"><b lang="${id}"${dir(id)}>${nombre}</b> ${es}</li>`,
+        ).join('');
+        return `<ul class="leyenda" aria-label="Lenguas de las tarjetas">${items}</ul>`;
+      }
+
+      function tarjeta([es, picto, grupo, ...traducciones], numero) {
+        const filas = LENGUAS.map(
+          ([id, nombre], i) =>
+            `<div class="l-${id}"><dt lang="${id}"${dir(id)}>${nombre}</dt><dd lang="${id}"${dir(id)}>${traducciones[i]}</dd></div>`,
+        ).join('');
+        return `<li class="tarjeta g-${grupo}"><span class="numero">${numero}</span>
+          <div class="tarjeta__cabeza"><span class="tarjeta__picto"><img src="pictogramas/${picto}.png" alt="" /></span>
+          <p class="tarjeta__palabra">${es}</p></div><dl class="lenguas">${filas}</dl></li>`;
+      }
+
+      function tarjetaEnBlanco(tipo) {
+        const filas =
+          tipo === 'lenguas'
+            ? LENGUAS.map(([id, nombre]) => `<div class="l-${id}"><dt lang="${id}"${dir(id)}>${nombre}</dt><dd class="raya"></dd></div>`)
+            : Array.from({ length: 5 }, () => '<div><dt class="vacio">Lengua:</dt><dd class="raya"></dd></div>');
+        return `<li class="tarjeta g-libre">
+          <div class="tarjeta__cabeza"><span class="tarjeta__picto">Pega o dibuja</span>
+          <p class="tarjeta__palabra">Escribe la palabra en castellano</p></div><dl class="lenguas">${filas.join('')}</dl></li>`;
+      }
+
+      const hojasTarjetas = document.getElementById('hojas-tarjetas');
+      HOJAS.forEach(([titulo, antetitulo, desde, hasta, blanca], h) => {
+        const tarjetas = TARJETAS.slice(desde, hasta)
+          .map((t, i) => tarjeta(t, desde + i + 1))
+          .join('');
+        const pista = [
+          'Recorta por la línea de puntos y plastifica. Debajo de cada palabra, cómo se dice en cinco lenguas:',
+          'Deja estas tarjetas siempre a mano, en su mesa o en un llavero, para que pueda señalarlas.',
+          'En la tarjeta en blanco, escribe con la familia otra palabra que necesite.',
+          'La última tarjeta en blanco sirve para otra lengua, por ejemplo el amazigh o el wólof.',
+        ][h];
+        hojasTarjetas.insertAdjacentHTML(
+          'beforeend',
+          `<section class="hoja"><div class="encabezado"><div><p class="antetitulo">${antetitulo}</p><h1>${titulo}</h1></div>${LOGO}</div>
+          <p class="pista">${pista}</p>${leyenda()}
+          <ul class="tarjetas">${tarjetas}${blanca ? tarjetaEnBlanco(blanca) : ''}</ul>
+          <p class="atribucion">${ATRIBUCION}</p></section>`,
+        );
+      });
+
+      // Tabla de frases
+      const frases = document.getElementById('frases');
+      const cabecera = LENGUAS.map(
+        ([id, nombre, es]) => `<th scope="col" class="l-${id}" lang="${id}"${dir(id)}>${nombre}<small lang="es">${es}</small></th>`,
+      ).join('');
+      const suena = (texto, nina) =>
+        `<span class="suena" lang="es">${texto}${nina ? `<br />niña: ${nina}` : ''}</span>`;
+      const filasFrases = FRASES.map(([es, picto, ar, ro, uk, en, fr]) => {
+        const celdas = [
+          ['ar', ar],
+          ['ro', ro],
+          ['uk', uk],
+        ]
+          .map(([id, [dicho, como, nina]]) => `<td lang="${id}"${dir(id)}><span class="dicho">${dicho}</span>${suena(como, nina)}</td>`)
+          .join('');
+        return `<tr><th scope="row"><span class="fila-es"><img src="pictogramas/${picto}.png" alt="" /><span>${es}</span></span></th>
+          ${celdas}<td lang="en">${en}</td><td lang="fr">${fr}</td></tr>`;
+      }).join('');
+      frases.insertAdjacentHTML(
+        'beforeend',
+        `<thead><tr><th scope="col" class="l-es">Castellano</th>${cabecera}</tr></thead><tbody>${filasFrases}</tbody>`,
+      );
+
+      // Cartas para las familias
+      function carta(id) {
+        const c = CARTA[id];
+        const es = CARTA.es;
+        const sola = id === 'es';
+        const nombre = sola ? 'castellano' : LENGUAS.find(([l]) => l === id)[2];
+        const propio = sola ? '' : `<p class="lengua-propia l-${id}" lang="${id}"${dir(id)}>${LENGUAS.find(([l]) => l === id)[1]}</p>`;
+        const principal = (contenido) => `<div class="principal" lang="${id}"${dir(id)}>${contenido}</div>`;
+        const traduccion = (contenido) => (sola ? '' : `<div class="es" lang="es">${contenido}</div>`);
+        const par = (a, icono, b) => `<div class="par">${principal(a)}<div class="icono">${icono}</div>${traduccion(b)}</div>`;
+        const enCastellano = (texto) => (sola ? '' : `<span class="etiqueta-es" lang="es">${texto}</span>`);
+        const dato = (clave) =>
+          `<div class="dato"><img src="pictogramas/${PICTOS_CARTA[clave]}.png" alt="" /><div>
+            <span class="linea-dato" lang="${id}"${dir(id)}><span>${c[clave]}</span><span class="raya"></span></span>${enCastellano(es[clave])}</div></div>`;
+        const horas = `<div class="dato"><img src="pictogramas/${PICTOS_CARTA.horario}.png" alt="" /><div>
+          <span class="linea-dato" lang="${id}"${dir(id)}><span>${c.horario[0]}</span><span class="raya"></span><span>${c.horario[1]}</span><span class="raya"></span></span>
+          ${enCastellano(es.horario[0].replace(': de', ''))}</div></div>`;
+        const cosas = c.cosas
+          .map((cosa, i) => {
+            const picto = PICTOS_CARTA.cosas[i];
+            const otra = picto === null;
+            const imagen = otra ? '<span class="hueco-cosa"></span>' : `<img src="pictogramas/${picto}.png" alt="" />`;
+            return `<li class="${otra ? 'otra' : ''}">${imagen}<span lang="${id}"${dir(id)}>${cosa}${sola ? '' : `<small lang="es">${es.cosas[i]}</small>`}${otra ? '<span class="raya"></span>' : ''}</span></li>`;
+          })
+          .join('');
+        const mensajes = c.mensajes
+          .map(([titulo, texto], i) =>
+            par(
+              `<p class="titular titulo-mensaje">${titulo}</p><p>${texto}</p>`,
+              `<img src="pictogramas/${PICTOS_CARTA.mensajes[i]}.png" alt="" />`,
+              `<p class="titular titulo-mensaje">${es.mensajes[i][0]}</p><p>${es.mensajes[i][1]}</p>`,
+            ),
+          )
+          .join('');
+        const lado = id === 'ar' ? ' dir="rtl"' : '';
+        return `<section class="carta l-${id}${sola ? ' carta--sola' : ''}"${lado}>
+          <div class="rayos"></div>
+          <div class="carta__cabecera">${LOGO}<div class="carta__nombre"><p class="antetitulo">Para la familia</p><h1 class="lengua">Carta en ${nombre}</h1>${propio}</div></div>
+          ${par(`<p class="titular titulo-carta">${c.titulo}</p>`, '', `<p class="titular titulo-carta">${es.titulo}</p>`)}
+          ${par(`<p><strong>${c.saludo}</strong></p><p>${c.intro}</p>`, '', `<p><strong>${es.saludo}</strong></p><p>${es.intro}</p>`)}
+          <div class="datos">${dato('clase')}${dato('maestro')}${horas}${dato('contacto')}
+            <div class="traer"><p class="titulo"><span class="etiqueta" lang="${id}"${dir(id)}>${c.traer}</span>${enCastellano(es.traer)}</p><ul>${cosas}</ul></div>
+          </div>
+          <div class="mensajes">${mensajes}</div>
+          ${sola ? '<div class="nota-cole"><p>Nota del cole:</p><div class="renglon"></div><div class="renglon"></div></div>' : ''}
+          ${par(`<p>${c.despedida}</p><p class="firma"><span>${c.firma}</span><span class="raya"></span></p>`, '', `<p>${es.despedida}</p>`)}
+          <div class="creditos"><p>Carta de bienvenida · ¡Hola! Kit de bienvenida · IdEducando, 2026 · CC BY-NC-SA 4.0. ${ATRIBUCION}${sola ? '' : ' <span class="borrador">[BORRADOR]</span> Traducción pendiente de revisión por personas nativas.'}</p></div>
+        </section>`;
+      }
+
+      const cartas = document.getElementById('cartas');
+      for (const id of ['es', 'ar', 'ro', 'uk', 'en', 'fr']) cartas.insertAdjacentHTML('beforeend', carta(id));
+    </script>
+  </body>
+</html>
