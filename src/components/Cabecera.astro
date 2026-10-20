@@ -9,6 +9,7 @@ const actual = Astro.url.pathname;
 const menu = [
   { texto: 'Inicio', enlace: '/' },
   { texto: 'Material gratuito', enlace: '/material-gratuito/' },
+  { texto: 'Familias', enlace: '/familias/' },
   { texto: 'Oposiciones', enlace: '/oposiciones/' },
   { texto: 'Consejos', enlace: '/consejos/' },
   { texto: 'Quiénes somos', enlace: '/quienes-somos/' },
@@ -323,6 +324,7 @@ const menu = [
     .menu a {
       padding: 0.55rem 0.7rem;
       font-size: 1.02rem;
+      white-space: nowrap;
     }
 
     .menu a[aria-current='page'],
@@ -337,6 +339,11 @@ const menu = [
   }
 
   @media (min-width: 64em) and (max-width: 80em) {
+    .menu a {
+      padding-inline: 0.45rem;
+      font-size: 0.98rem;
+    }
+
     .cabecera__mochila-texto,
     .cabecera__buscar span {
       position: absolute;

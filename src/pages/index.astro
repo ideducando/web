@@ -31,15 +31,15 @@ const consejos = (await getCollection('consejos'))
         <h1 class="lema portada__titulo">{sitio.lema}</h1>
         <p class="entradilla">
           <Borrador />
-          Material para docentes de toda España, pensado para la diversidad del aula. Todo a 0 €: lo añades a
-          tu mochila, nos dejas tu correo y lo descargas.
+          Para docentes y familias de toda España: material pensado para la diversidad, en el aula y en casa. Hoy
+          todo cuesta 0 €: lo añades a tu mochila, nos dejas tu correo y lo descargas.
         </p>
         <div class="botones">
           <a class="boton boton--principal" href={ruta('/material-gratuito/')}>
             Ver el material gratuito
             <Icono nombre="flecha" />
           </a>
-          <a class="boton boton--secundario" href={ruta('/oposiciones/')}>Oposiciones en Murcia</a>
+          <a class="boton boton--secundario" href={ruta('/familias/')}>Para familias</a>
         </div>
       </div>
 
@@ -66,8 +66,8 @@ const consejos = (await getCollection('consejos'))
       <ul class="rejilla distintos__lista">
         <li class="posit posit--amarillo">
           <Icono nombre="corazon" clase="distintos__icono" />
-          <h3>Gratis de verdad</h3>
-          <p>Todo cuesta 0 €. Solo te pedimos un correo, y no vendemos ni cedemos tus datos.</p>
+          <h3>Gratis y sin anuncios</h3>
+          <p>Hoy todo cuesta 0 €. Solo te pedimos un correo, y no vendemos ni cedemos tus datos.</p>
         </li>
         <li class="posit posit--verde">
           <Icono nombre="lista" clase="distintos__icono" />
@@ -99,6 +99,33 @@ const consejos = (await getCollection('consejos'))
       </div>
       <ul class="rejilla">
         {escaparate.map((m) => <TarjetaMaterial material={m} />)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion familias-bloque" aria-labelledby="titulo-familias">
+    <div class="contenedor familias-bloque__rejilla">
+      <div>
+        <p class="portada__antetitulo">Para familias</p>
+        <h2 id="titulo-familias">En casa, también</h2>
+        <p>
+          <Borrador />
+          Si tu hijo o tu hija tiene alguna necesidad específica de apoyo, casi todo nuestro material sirve también en
+          casa: agendas para anticipar el día, tableros para comunicarse, historias para preparar los cambios y juegos
+          cortos. Los que hay que montar traen su hoja, con lo que hay que comprar y en qué medida.
+        </p>
+        <div class="botones">
+          <a class="boton boton--principal" href={ruta('/familias/')}>
+            Material para familias
+            <Icono nombre="flecha" />
+          </a>
+        </div>
+      </div>
+      <ul class="familias-bloque__lista">
+        <li>Hablad con el cole antes de empezar.</li>
+        <li>Usad en casa los mismos pictogramas que en clase.</li>
+        <li>Empezad por una sola cosa: la agenda del día o el tablero.</li>
+        <li>Leed la hoja de montaje antes de comprar nada.</li>
       </ul>
     </div>
   </section>
@@ -390,6 +417,40 @@ const consejos = (await getCollection('consejos'))
     margin: 0;
     font-size: 0.92rem;
     color: var(--texto-suave);
+  }
+
+  .familias-bloque {
+    background: var(--verde-tinte);
+    border-block: 1px solid #bfe6d6;
+  }
+
+  .familias-bloque__rejilla {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 56em) {
+    .familias-bloque__rejilla {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+  }
+
+  .familias-bloque__lista {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .familias-bloque__lista li {
+    padding: 0.9rem 1.1rem;
+    border-radius: 0.9rem;
+    background: var(--blanco);
+    box-shadow: 0 2px 0 rgb(30 43 85 / 0.08);
+    font-weight: 700;
   }
 
   .nosotras {

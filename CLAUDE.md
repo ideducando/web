@@ -1,8 +1,8 @@
 # IdEducando · instrucciones del proyecto
 
 ## Qué es
-IdEducando es una academia de oposiciones de maestros (Región de Murcia, convocatoria de 2028, clases desde septiembre de 2027). Mientras tanto, es una web con material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España.
-Públicos: seños en activo que buscan material para el aula, y seños y futuras maestras que quieren opositar.
+IdEducando es una web de material educativo de Pedagogía Terapéutica (PT) e Infantil para docentes y familias de toda España. Hoy el material es gratis y se va guardando en la web mientras está en borrador. Más adelante será lo que se venda: en descarga a precio bajo (después, con suscripción), con lo necesario para montarlo en casa (velcro, fundas, anillas, plastificadora) o ya montado y enviado desde Cartagena. A largo plazo, una tienda física en Cartagena y clases y programaciones a medida para las oposiciones de maestros de la Región de Murcia (convocatoria prevista en 2028). Lo decidió José el 20/10/2026.
+Públicos: docentes que buscan material para el aula; familias que trabajan en casa con sus hijos, sobre todo si tienen alguna necesidad específica de apoyo; y, más adelante, opositoras.
 Nombre: siempre "IdEducando", con la I y la E en mayúscula. Junta "idea" y "educando".
 Subtítulo: Aprendizaje inclusivo y creativo. Lema: en revisión desde el 19/10/2026; en la web se prueba «Cada peque, una idea» (src/data/sitio.json). El anterior, «Donde cada forma de aprender se celebra», ya no se usa.
 
@@ -20,6 +20,7 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 
 ## Estado (octubre de 2026)
 - Prioridad: la web y el material gratuito. Las clases de oposición no tienen fecha.
+- Durante el próximo año se prepara la web para vender. Nada con pictogramas de ARASAAC se vende sin su permiso por escrito: su licencia (CC BY-NC-SA) no admite el uso comercial.
 - La web está en borrador: aviso visible, noindex y textos marcados con [BORRADOR] hasta que el equipo los revise.
 - En la web no salen nombres ni fotos del equipo hasta que cada persona lo autorice.
 
