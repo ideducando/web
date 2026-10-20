@@ -1,6 +1,6 @@
 # Web de IdEducando
 
-*Aprendizaje inclusivo y creativo. Donde cada forma de aprender se celebra.*
+*Aprendizaje inclusivo y creativo.*
 
 Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España, y guías para opositar a Maestros en la Región de Murcia. Todo a 0 €, sin registro y sin seguimiento.
 

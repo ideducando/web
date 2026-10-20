@@ -3,7 +3,7 @@ titulo: "El escrito de Murcia: cómo repartir el tiempo y qué puntúa el tribun
 resumen: "La primera prueba parte por parte: qué piden los ejercicios de Infantil y de PT, dónde están los puntos, cómo descuenta la ortografía y qué hacer para no perder el anonimato."
 seccion: oposiciones
 fecha: 2026-10-19
-actualizado: 2026-10-19
+actualizado: 2026-10-20
 autoria: "Equipo IdEducando"
 lectura: "9 minutos"
 borrador: true
@@ -17,6 +17,7 @@ La primera prueba es eliminatoria y se hace por escrito en dos partes: un ejerci
 
 - **Educación Infantil:** un ejercicio a elegir entre dos. Es «un planteamiento completo de una situación didáctica» en el que hay que «diseñar, justificar y secuenciar» una intervención (anexo XVII, p. 1720).
 - **Pedagogía Terapéutica (PT):** dos ejercicios con opción A o B cada uno, y cada uno vale el 50 %. El primero parte de una situación de centro; el segundo, de «la evaluación psicopedagógica o el dictamen de escolarización» (anexo XXII, p. 1750).
+- **Quién lo prepara:** cuando una especialidad tiene más de un tribunal, el práctico lo prepara la comisión de selección de la especialidad, formada por los presidentes de sus tribunales, y el texto final lo deciden al menos cinco de sus miembros (artículos 22 y 32, pp. 1644 y 1648-1649).
 
 **Parte B, tema: 2 horas.** Un tema a elegir entre dos sacados al azar por el tribunal, igual en las dos especialidades (art. 48.3, p. 1654).
 
@@ -132,6 +133,7 @@ El tribunal corrige sin saber de quién es cada examen: solo ve «un número de 
 - Hay un «único llamamiento»: quien no se presenta queda fuera, salvo fuerza mayor (artículo 37.2, p. 1650).
 - Para identificarte vale el DNI, el «pasaporte en vigor» o «el permiso de conducir» (artículo 37.4, p. 1651).
 - Ni móvil ni reloj inteligente dentro del aula: quien entre con uno «será apartado inmediatamente del procedimiento selectivo» (artículo 44.5, p. 1653).
+- **Te llevas una copia.** El cuadernillo lleva hojas autocopiativas: al entregar, el tribunal las separa del examen (anexo XV, p. 1716) y, según [CSIF](https://www.csif.es/es/noticia/portada/regiondemurcia/articulo/84154), son para que te lleves la copia. Guárdala: te servirá para revisar tu nota.
 
 Si apruebas, la segunda prueba tiene sus propias reglas. Las contamos en [El oral de Murcia](/consejos/segunda-prueba-oral-murcia/).
 
