@@ -147,6 +147,11 @@ export const TIPOS = {
     descripcion: 'Programaciones didácticas y programas de intervención de ejemplo.',
     color: 'azul',
   },
+  situacion: {
+    nombre: 'Situación de aprendizaje',
+    descripcion: 'Un reto con producto final, sesión a sesión, con el DUA y actividades en varios niveles.',
+    color: 'coral',
+  },
 } as const satisfies Record<string, Opcion>;
 
 export type Seccion = keyof typeof SECCIONES;
