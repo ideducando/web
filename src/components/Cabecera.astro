@@ -34,11 +34,11 @@ const menu = [
         <Icono nombre="buscar" />
         <span>Buscar</span>
       </a>
-      <a class="cabecera__bolsa" href={ruta('/mi-bolsa/')} aria-current={esActual(actual, '/mi-bolsa/')}>
-        <Icono nombre="bolsa" />
-        <span class="cabecera__bolsa-texto">Mi bolsa</span>
-        <span class="cabecera__cuenta" data-bolsa-cuenta aria-hidden="true" hidden></span>
-        <span class="solo-lectores" data-bolsa-cuenta-texto></span>
+      <a class="cabecera__mochila" href={ruta('/mi-mochila/')} aria-current={esActual(actual, '/mi-mochila/')}>
+        <Icono nombre="mochila" />
+        <span class="cabecera__mochila-texto">Mi mochila</span>
+        <span class="cabecera__cuenta" data-mochila-cuenta aria-hidden="true" hidden></span>
+        <span class="solo-lectores" data-mochila-cuenta-texto></span>
       </a>
       <button
         class="cabecera__menu"
@@ -70,13 +70,13 @@ const menu = [
 </header>
 
 <script>
-  import { alCambiarBolsa, leerBolsa } from '../scripts/bolsa';
+  import { alCambiarMochila, leerMochila } from '../scripts/mochila';
 
-  // Contador de la bolsa de descargas: el número junto al icono y el texto para lectores de pantalla.
-  const cuenta = document.querySelector<HTMLElement>('[data-bolsa-cuenta]');
-  const cuentaTexto = document.querySelector<HTMLElement>('[data-bolsa-cuenta-texto]');
+  // Contador de la mochila de descargas: el número junto al icono y el texto para lectores de pantalla.
+  const cuenta = document.querySelector<HTMLElement>('[data-mochila-cuenta]');
+  const cuentaTexto = document.querySelector<HTMLElement>('[data-mochila-cuenta-texto]');
   const pintarCuenta = () => {
-    const n = leerBolsa().length;
+    const n = leerMochila().length;
     if (cuenta) {
       cuenta.textContent = String(n);
       cuenta.hidden = n === 0;
@@ -84,7 +84,7 @@ const menu = [
     if (cuentaTexto) cuentaTexto.textContent = n === 0 ? ', vacía' : n === 1 ? ', 1 material' : `, ${n} materiales`;
   };
   pintarCuenta();
-  alCambiarBolsa(pintarCuenta);
+  alCambiarMochila(pintarCuenta);
 
   const boton = document.querySelector<HTMLButtonElement>('[data-boton-menu]');
   const menu = document.querySelector<HTMLElement>('[data-menu]');
@@ -161,7 +161,7 @@ const menu = [
   }
 
   .cabecera__buscar,
-  .cabecera__bolsa,
+  .cabecera__mochila,
   .cabecera__menu {
     display: inline-flex;
     align-items: center;
@@ -178,18 +178,18 @@ const menu = [
   }
 
   .cabecera__buscar:hover,
-  .cabecera__bolsa:hover,
+  .cabecera__mochila:hover,
   .cabecera__menu:hover {
     background: var(--amarillo-tinte);
     color: var(--marino);
   }
 
   .cabecera__buscar[aria-current],
-  .cabecera__bolsa[aria-current] {
+  .cabecera__mochila[aria-current] {
     background: var(--amarillo);
   }
 
-  .cabecera__bolsa {
+  .cabecera__mochila {
     position: relative;
   }
 
@@ -206,7 +206,7 @@ const menu = [
   }
 
   .cabecera__buscar :global(svg),
-  .cabecera__bolsa :global(svg),
+  .cabecera__mochila :global(svg),
   .cabecera__menu :global(svg) {
     width: 1.3rem;
     height: 1.3rem;
@@ -227,13 +227,13 @@ const menu = [
   /* En móviles estrechos, «Buscar» se queda en icono (el texto sigue ahí para lectores de pantalla). */
   @media (max-width: 29.99em) {
     .cabecera__buscar,
-    .cabecera__bolsa,
+    .cabecera__mochila,
     .cabecera__menu {
       padding-inline: 0.65rem;
     }
 
     .cabecera__menu-texto,
-    .cabecera__bolsa-texto,
+    .cabecera__mochila-texto,
     .cabecera__buscar span {
       position: absolute;
       width: 1px;
@@ -337,7 +337,7 @@ const menu = [
   }
 
   @media (min-width: 64em) and (max-width: 80em) {
-    .cabecera__bolsa-texto,
+    .cabecera__mochila-texto,
     .cabecera__buscar span {
       position: absolute;
       width: 1px;

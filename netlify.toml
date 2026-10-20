@@ -17,7 +17,7 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Los PDF se descargan desde «Mi bolsa». Esta cabecera pide a los buscadores que no los
+# Los PDF se descargan desde «Mi mochila». Esta cabecera pide a los buscadores que no los
 # enseñen en sus resultados: quien llega desde Google entra por la ficha del material.
 # El enlace directo de un PDF sigue funcionando si alguien lo comparte.
 [[headers]]
@@ -34,3 +34,10 @@
   to = "https://www.ideducando.es/:splat"
   status = 301
   force = true
+
+# «Mi bolsa» pasó a llamarse «Mi mochila» el 20/10/2026. Quien tenga guardada la dirección
+# antigua llega a la nueva.
+[[redirects]]
+  from = "/mi-bolsa/"
+  to = "/mi-mochila/"
+  status = 301
