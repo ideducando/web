@@ -4,13 +4,15 @@
 //   npm install          (solo la primera vez)
 //   npm run pdf          (todo)
 //   npm run pdf -- agenda-visual-semanal   (solo un documento)
+//   npm run pdf -- og-imagen               (solo la imagen para compartir)
 //
 // Qué hace:
 //   1. Abre cada documento HTML de pdf/ en Chromium y lo imprime como PDF etiquetado
 //      (accesible para lectores de pantalla) en public/descargas/.
 //   2. Saca una miniatura de la primera página.
 //   3. Crea la portada de cada ficha del catálogo (1200 × 900 px) en public/portadas/.
-//   4. Crea la imagen para compartir en redes (public/og-imagen.png).
+//   4. Crea la imagen para compartir en redes (public/og-imagen.png), con el lema de src/data/sitio.json.
+//      Si cambia el lema, hay que rehacerla.
 
 import { chromium } from 'playwright';
 import { execFileSync } from 'node:child_process';
@@ -229,7 +231,7 @@ for (const archivo of readdirSync(carpetaMateriales).filter((a) => a.endsWith('.
 // 4. Imagen para compartir en redes
 // ---------------------------------------------------------------------------
 
-if (!elegidos.length && !salidaAparte) {
+if ((!elegidos.length || elegidos.includes('og-imagen')) && !salidaAparte) {
   await capturar(imagenRedes(), 1200, 630, join(raiz, 'public', 'og-imagen.png'));
   console.log('Imagen para redes lista: public/og-imagen.png');
 }
@@ -341,6 +343,7 @@ function portadaProximamente(titulo, tipo, color) {
 }
 
 function imagenRedes() {
+  const { lema } = JSON.parse(readFileSync(join(raiz, 'src', 'data', 'sitio.json'), 'utf8'));
   const logo = pathToFileURL(join(raiz, 'marca', '08-logo-vertical-transparente.png')).href;
   return `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>
     ${estilosBase()}
@@ -351,7 +354,7 @@ function imagenRedes() {
   </style></head><body>
     <div class="circulo" style="width:360px;height:360px;right:-90px;top:-120px;background:#fdf0c7"></div>
     <img src="${logo}" alt="">
-    <p style="position:relative">Donde cada forma de aprender se celebra<small>Material gratuito de PT e Infantil</small></p>
+    <p style="position:relative">${escapar(lema)}<small>Material gratuito de PT e Infantil</small></p>
     <div class="rayos"></div>
   </body></html>`;
 }

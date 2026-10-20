@@ -4,7 +4,7 @@
 IdEducando es una academia de oposiciones de maestros (Región de Murcia, convocatoria de 2028, clases desde septiembre de 2027). Mientras tanto, es una web con material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España.
 Públicos: seños en activo que buscan material para el aula, y seños y futuras maestras que quieren opositar.
 Nombre: siempre "IdEducando", con la I y la E en mayúscula. Junta "idea" y "educando".
-Subtítulo: Aprendizaje inclusivo y creativo. Lema: Donde cada forma de aprender se celebra.
+Subtítulo: Aprendizaje inclusivo y creativo. Lema: en revisión desde el 19/10/2026; en la web se prueba «Cada peque, una idea» (src/data/sitio.json). El anterior, «Donde cada forma de aprender se celebra», ya no se usa.
 
 ## Marca
 Colores: azul #2F6FD6, verde #1FA67A, coral #E8553E, morado #8C4FB8, amarillo #F6C12E, naranja #F5961F, marino #1E2B55 para el texto y crema #FFF6E6 para los fondos.
