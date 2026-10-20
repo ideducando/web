@@ -1,0 +1,2927 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Exploradores del cole: situación de aprendizaje para 5 años, con DUA y multinivel · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <link rel="stylesheet" href="situaciones.css" />
+    <style>
+      /* Igual que en los demás materiales: la portada sin márgenes ni pie. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Hojas de señales: dos A5 exactos en un A4 apaisado. El contenido queda a 10 mm del borde
+         y cada señal lleva su propio pie con la licencia, la cita de ARASAAC y el número de página. */
+      @page senales {
+        size: A4 landscape;
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Portada: un plano del cole con su camino ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1.02;
+      }
+
+      .portada__subtitulo {
+        max-width: 98mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .plano-portada {
+        position: absolute;
+        left: 113mm;
+        top: 141mm;
+        width: 82mm;
+        height: 104mm;
+        z-index: 2;
+        transform: rotate(-3deg);
+        border: 0.8mm solid var(--marino);
+        border-radius: 3mm;
+        background-color: #fff;
+        background-image:
+          linear-gradient(rgb(234 217 187 / 0.75) 0.3mm, transparent 0.3mm),
+          linear-gradient(90deg, rgb(234 217 187 / 0.75) 0.3mm, transparent 0.3mm);
+        background-size: 7mm 7mm;
+        box-shadow: 0 6mm 14mm -8mm rgb(30 43 85 / 0.45);
+      }
+
+      .plano-portada .ruta {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .plano-portada .parada,
+      .robot-portada {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 26mm;
+        height: 26mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.6mm solid var(--marino);
+        box-shadow: 0 3mm 7mm -4mm rgb(30 43 85 / 0.5);
+      }
+
+      .plano-portada .parada img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .plano-portada .estrella {
+        position: absolute;
+        left: 23mm;
+        top: 1.5mm;
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .robot-portada {
+        left: 108mm;
+        top: 229mm;
+        width: 27mm;
+        height: 27mm;
+        z-index: 3;
+      }
+
+      .robot-portada img {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .vistazo .datos {
+        gap: 2mm 5mm;
+        margin-bottom: 3mm;
+      }
+
+      .vistazo .datos li {
+        font-size: 9.5pt;
+        padding: 1.8mm 3mm;
+      }
+
+      .vistazo .reto {
+        padding: 3.5mm 5mm;
+        margin-bottom: 3mm;
+      }
+
+      .vistazo .reto p {
+        font-size: 11pt;
+      }
+
+      .vistazo .reto .reto__pregunta {
+        font-size: 14.5pt;
+      }
+
+      .vistazo .datos li.ancho ol {
+        margin: 0.5mm 0 0;
+        padding-left: 5mm;
+      }
+
+      .vistazo .datos li.ancho ol li {
+        margin: 0 0 0.3mm;
+        padding: 0;
+        border: 0;
+        background: none;
+        font-size: 9.5pt;
+      }
+
+      .mapa-sesiones li span {
+        display: block;
+        margin-top: 0.6mm;
+        color: var(--suave);
+        font-size: 8.5pt;
+        line-height: 1.25;
+      }
+
+      .mapa-sesiones b small {
+        font-weight: 600;
+        color: var(--suave);
+        letter-spacing: 0.02em;
+      }
+
+      .semanas {
+        margin: -2mm 0 3mm;
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      .guia-texto {
+        font-size: 9.8pt;
+        line-height: 1.4;
+      }
+
+      .guia-texto h2 {
+        font-size: 13pt;
+        margin: 2.4mm 0 1.2mm;
+      }
+
+      .guia-texto p {
+        margin-bottom: 1.2mm;
+      }
+
+      .guia-texto .dua-tres {
+        margin-bottom: 2.5mm;
+      }
+
+      .guia-texto .niveles {
+        margin-bottom: 2mm;
+      }
+
+      .caja-seguridad {
+        font-size: 9.5pt;
+        line-height: 1.38;
+      }
+
+      .caja-seguridad h3 {
+        font-size: 11pt;
+        margin-bottom: 1mm;
+      }
+
+      .caja-seguridad ul {
+        margin: 0;
+      }
+
+      /* ---------- Currículo ---------- */
+      .tabla-curricular td ul {
+        margin: 0;
+        padding-left: 3.5mm;
+      }
+
+      .tabla-curricular td li {
+        margin-bottom: 0.9mm;
+      }
+
+      .tabla-curricular td li::marker {
+        color: var(--suave);
+      }
+
+      .tabla-curricular p {
+        margin: 0 0 1.2mm;
+      }
+
+      .tabla-curricular .competencia {
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      .lista-breve {
+        font-size: 9.5pt;
+        line-height: 1.38;
+        padding-left: 4mm;
+      }
+
+      .lista-breve li {
+        margin-bottom: 0.8mm;
+      }
+
+      /* ---------- Sesiones ---------- */
+      .sesion .fase ol {
+        padding-left: 5mm;
+      }
+
+      .sesion__para .antes {
+        display: block;
+        margin-top: 0.8mm;
+      }
+
+      /* ---------- Evaluación ---------- */
+      .momentos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 3mm;
+      }
+
+      .momentos > div {
+        padding: 2.6mm 3.2mm;
+        border-radius: 2.6mm;
+        background: var(--crema);
+        border-top: 1.2mm solid var(--morado);
+        font-size: 9.5pt;
+        line-height: 1.35;
+      }
+
+      .momentos h3 {
+        margin: 0 0 1mm;
+        font-size: 11pt;
+      }
+
+      .momentos p {
+        margin: 0;
+      }
+
+      .tres-opciones {
+        display: flex;
+        gap: 4mm;
+        margin: 1mm 0 3mm;
+      }
+
+      .tres-opciones figure {
+        flex: 1;
+        margin: 0;
+        padding: 2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 2.6mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10.5pt;
+      }
+
+      .tres-opciones img {
+        width: 15mm;
+        height: 15mm;
+        margin: 0 0.6mm 1mm;
+      }
+
+      .registro-hoja {
+        page: apaisada;
+      }
+
+      .registro-hoja .cabecera h1 {
+        font-size: 17pt;
+        margin-bottom: 1mm;
+      }
+
+      .registro-hoja .cabecera .rayos {
+        margin-bottom: 2.5mm;
+      }
+
+      .registro {
+        table-layout: fixed;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      .registro th,
+      .registro td {
+        border: 0.3mm solid #d9c7a7;
+        padding: 0.7mm 1mm;
+      }
+
+      .registro thead th {
+        vertical-align: bottom;
+        font-size: 8.5pt;
+        font-weight: 600;
+        line-height: 1.15;
+      }
+
+      .registro thead th b {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 0.6mm;
+      }
+
+      .registro tbody td {
+        height: 5.55mm;
+      }
+
+      .registro tbody td:first-child {
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      .registro tbody tr:nth-child(even) td {
+        background: #fffaf1;
+      }
+
+      /* ---------- Atención a la diversidad ---------- */
+      .diversidad {
+        font-size: 9.3pt;
+        line-height: 1.32;
+      }
+
+      .diversidad th,
+      .diversidad td {
+        padding: 1.5mm 2mm;
+      }
+
+      .diversidad tbody th {
+        width: 34mm;
+      }
+
+      .diversidad td {
+        width: 50%;
+      }
+
+      .detectar {
+        font-size: 9.5pt;
+        line-height: 1.36;
+      }
+
+      .detectar ul {
+        columns: 2;
+        column-gap: 6mm;
+        margin: 1mm 0 0;
+      }
+
+      .detectar li {
+        break-inside: avoid;
+      }
+
+      /* ---------- Familias (lectura fácil) ---------- */
+      .familias-nota {
+        font-size: 12.5pt;
+        line-height: 1.42;
+      }
+
+      .familias-nota h1 {
+        font-size: 24pt;
+        margin-bottom: 2.5mm;
+      }
+
+      .familias-nota h2 {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        font-size: 15pt;
+        margin: 3.2mm 0 1.2mm;
+      }
+
+      .familias-nota h2 img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .familias-nota p {
+        margin-bottom: 1.4mm;
+      }
+
+      .familias-nota ol,
+      .familias-nota ul {
+        margin-bottom: 2mm;
+        padding-left: 7mm;
+      }
+
+      .familias-nota li {
+        margin-bottom: 1mm;
+      }
+
+      .lenguas-casa {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm 6mm;
+        margin: 1mm 0 2mm;
+      }
+
+      .lenguas-casa p {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .lenguas-casa i,
+      .recuadro .renglon {
+        flex: 1;
+        display: block;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 8mm;
+      }
+
+      .recuadro {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 2.5mm 4mm 3mm;
+        margin-top: 2mm;
+      }
+
+      .recuadro h2 {
+        margin-top: 0 !important;
+      }
+
+      .familias-nota .creditos {
+        font-size: 8.5pt;
+        margin-top: 3mm;
+      }
+
+      /* ---------- Imprimibles ---------- */
+      .imprimible .cabecera {
+        margin-bottom: 2mm;
+      }
+
+      .imprimible .cabecera .rayos {
+        margin-bottom: 3mm;
+      }
+
+      .imprimible .cabecera h1 {
+        font-size: 21pt;
+        margin-bottom: 1mm;
+      }
+
+      .recortables li {
+        position: relative;
+      }
+
+      .recortables li small {
+        position: absolute;
+        right: 1.5mm;
+        top: 1.2mm;
+        padding: 0 0.8mm;
+        border-radius: 1mm;
+        background: #fff;
+        font-family: var(--texto);
+        font-size: 8.5pt;
+        color: var(--suave);
+        z-index: 1;
+      }
+
+      .recortables li.vacia span {
+        display: block;
+        width: 80%;
+        height: 7mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .recortables li.vacia .hueco {
+        width: var(--picto, 30mm);
+        height: var(--picto, 30mm);
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .atribucion {
+        margin: 2mm 0 0;
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      /* Mensaje de la clase de 3 años */
+      .nota-docente {
+        margin: 0 0 3mm;
+        padding: 2mm 3mm;
+        border-radius: 2mm;
+        background: var(--amarillo-tinte);
+        font-size: 9.5pt;
+        line-height: 1.35;
+      }
+
+      .carta {
+        border: 0.7mm solid var(--marino);
+        border-radius: 4mm;
+        padding: 5mm 7mm 4mm;
+        background: #fff;
+      }
+
+      .carta .linea {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        margin: 0 0 2.2mm;
+      }
+
+      .carta .linea img {
+        width: 22mm;
+        height: 22mm;
+        object-fit: contain;
+      }
+
+      .carta .linea p {
+        margin: 0;
+        font-size: 21pt;
+        line-height: 1.18;
+      }
+
+      .carta .firma {
+        margin-top: 3mm;
+        height: 28mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 2mm 3mm;
+        font-size: 18pt;
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* Hoja de ruta */
+      .ruta {
+        margin: 0;
+        table-layout: fixed;
+      }
+
+      .ruta th,
+      .ruta td {
+        border: 0.4mm solid #d9c7a7;
+        vertical-align: middle;
+        padding: 0.9mm 2mm;
+      }
+
+      .ruta thead th {
+        font-size: 18pt;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .ruta td.picto {
+        width: 24mm;
+        text-align: center;
+      }
+
+      .ruta td.picto img {
+        width: 20mm;
+        height: 20mm;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .ruta td.sitio {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1.1;
+      }
+
+      .ruta td.encontrado {
+        width: 42mm;
+      }
+
+      .ruta td.encontrado span {
+        display: block;
+        width: 15mm;
+        height: 15mm;
+        margin: 0 auto;
+        border: 0.7mm solid var(--marino);
+        border-radius: 50%;
+      }
+
+      .ruta td.sino {
+        width: 42mm;
+        text-align: center;
+      }
+
+      .ruta td.sino {
+        white-space: nowrap;
+      }
+
+      .ruta td.sino img {
+        width: 12mm;
+        height: 12mm;
+        margin: 0 2.5mm;
+        vertical-align: middle;
+      }
+
+      .ruta tr.pliegue td {
+        border-bottom: 0.7mm dashed var(--coral-texto);
+      }
+
+      .ruta-datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 3mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .ruta-datos p {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .ruta-datos i {
+        flex: 1;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 8mm;
+      }
+
+      .pliegue-aviso {
+        margin: 1.5mm 0 0;
+        font-size: 9pt;
+        color: var(--coral-texto);
+      }
+
+      /* Señales A5 */
+      .hoja-senales {
+        page: senales;
+        position: relative;
+        display: grid;
+        grid-template-columns: 148.5mm 148.5mm;
+        width: 297mm;
+        height: 209.5mm;
+        overflow: hidden;
+        break-after: page;
+      }
+
+      .hoja-senales::after {
+        content: '';
+        position: absolute;
+        left: 148.5mm;
+        top: 0;
+        bottom: 0;
+        border-left: 0.4mm dashed var(--suave);
+      }
+
+      .hoja-senales .tijeras {
+        position: absolute;
+        left: 145.5mm;
+        top: 3mm;
+        width: 6mm;
+        height: 6mm;
+        color: var(--suave);
+        background: #fff;
+        z-index: 2;
+      }
+
+      .senal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 209.5mm;
+        padding: 11mm 11mm 9mm;
+      }
+
+      .senal__picto {
+        display: grid;
+        place-items: center;
+        width: 82mm;
+        height: 82mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 5mm;
+        background: #fff;
+      }
+
+      .senal__picto img {
+        width: 73mm;
+        height: 73mm;
+        object-fit: contain;
+      }
+
+      .senal__picto.hueco {
+        border-style: dashed;
+        border-color: var(--suave);
+        padding: 8mm;
+        text-align: center;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      .senal__palabra {
+        margin: 4mm 0 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 38pt;
+        line-height: 1;
+        letter-spacing: 0.02em;
+      }
+
+      .senal__palabra.en-blanco {
+        width: 100mm;
+        height: 15mm;
+        border-bottom: 0.5mm solid var(--marino);
+      }
+
+      .senal__extra {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        width: 70mm;
+        margin: 1.5mm 0 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .senal__extra i {
+        flex: 1;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 7mm;
+      }
+
+      .senal__escribimos {
+        position: relative;
+        width: 100%;
+        flex: 1;
+        min-height: 26mm;
+        margin-top: 5mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 3mm;
+      }
+
+      .senal__escribimos span {
+        position: absolute;
+        left: 4mm;
+        top: -2.6mm;
+        padding: 0 1.5mm;
+        background: #fff;
+        font-size: 9pt;
+        line-height: 1.2;
+      }
+
+      .senal__lenguas {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        width: 100%;
+        margin: 3mm 0 0;
+        font-size: 9pt;
+      }
+
+      .senal__lenguas i {
+        flex: 1;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 6mm;
+      }
+
+      .senal__pie {
+        margin: 3mm 0 0;
+        font-size: 8pt;
+        line-height: 1.25;
+        color: var(--suave);
+        text-align: center;
+      }
+
+      /* Cuadrícula */
+      .cuadricula-guia {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 78mm;
+        gap: 6mm;
+        font-size: 10pt;
+        line-height: 1.4;
+      }
+
+      .cuadricula-guia ol {
+        padding-left: 5mm;
+        margin-bottom: 2mm;
+      }
+
+      .cuadricula-guia li {
+        margin-bottom: 1.2mm;
+      }
+
+      .cuadricula-guia figure {
+        margin: 0;
+      }
+
+      .cuadricula-guia figcaption {
+        font-size: 9pt;
+        color: var(--suave);
+        margin-top: 1.5mm;
+      }
+
+      .programa-ejemplo {
+        display: flex;
+        gap: 2mm;
+        margin: 2mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .programa-ejemplo li {
+        flex: 1;
+        margin: 0;
+        padding: 1.5mm 1mm;
+        border: 0.4mm solid var(--marino);
+        border-radius: 2mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        line-height: 1.1;
+      }
+
+      .programa-ejemplo svg {
+        display: block;
+        width: 11mm;
+        height: 11mm;
+        margin: 0 auto 0.8mm;
+      }
+
+      /* Tarjetas de flechas */
+      .recortables .flecha {
+        width: var(--picto, 30mm);
+        height: var(--picto, 30mm);
+      }
+
+      .recortables li .punto {
+        position: absolute;
+        right: 3mm;
+        top: 3mm;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        border: 0.5mm solid var(--marino);
+      }
+
+      /* Leyenda del mapa */
+      .leyenda-mapa {
+        border: 0.8mm solid var(--marino);
+        border-radius: 4mm;
+        padding: 4mm 5mm 4.5mm;
+        margin: 0 0 4mm;
+      }
+
+      .leyenda-mapa h2 {
+        margin: 0 0 3mm;
+        font-size: 22pt;
+      }
+
+      .leyenda-mapa ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.2mm 8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .leyenda-mapa li {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .leyenda-mapa img,
+      .leyenda-mapa svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .pegatinas {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pegatinas li {
+        display: grid;
+        place-items: center;
+        height: 31mm;
+        margin: -0.2mm 0 0 -0.2mm;
+        border: 0.4mm dashed var(--suave);
+        break-inside: avoid;
+      }
+
+      .pegatinas img,
+      .pegatinas svg {
+        width: 25mm;
+        height: 25mm;
+      }
+
+      /* Autoevaluación */
+      .autoevaluacion {
+        margin: 0;
+      }
+
+      .autoevaluacion th,
+      .autoevaluacion td {
+        border: 0.45mm solid #d9c7a7;
+        vertical-align: middle;
+        text-align: center;
+        padding: 2mm;
+      }
+
+      .autoevaluacion {
+        table-layout: fixed;
+      }
+
+      .autoevaluacion thead th {
+        background: #fff;
+        color: var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+        width: 37mm;
+      }
+
+      .autoevaluacion thead th:first-child {
+        width: auto;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      .autoevaluacion thead img {
+        display: block;
+        width: 18mm;
+        height: 18mm;
+        margin: 0 auto 1.5mm;
+      }
+
+      .autoevaluacion thead .dos img {
+        display: inline-block;
+        width: 15mm;
+        height: 15mm;
+        margin: 0 0.5mm 1.5mm;
+      }
+
+      .autoevaluacion td.tarea {
+        text-align: left;
+      }
+
+      .autoevaluacion td.tarea div {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .autoevaluacion td.tarea img {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .autoevaluacion td.opcion img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .autoevaluacion td.opcion .dos img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .autoevaluacion tbody tr {
+        height: 31mm;
+      }
+
+      /* Créditos */
+      .creditos-hoja .creditos {
+        font-size: 9pt;
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      .creditos-hoja .creditos h2 {
+        font-size: 12pt;
+        margin: 3.5mm 0 1.2mm;
+        color: var(--marino);
+      }
+
+      .creditos-hoja .creditos p {
+        margin-bottom: 1.6mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 160mm; height: 160mm; right: -58mm; top: 88mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 64mm; height: 64mm; left: -24mm; top: 176mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 74mm; top: 214mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Situación de aprendizaje · 5 años · 8 sesiones</p>
+        <h1 class="portada__titulo">Exploradores<br />del cole</h1>
+        <p class="portada__subtitulo">Hacemos el mapa y las señales del cole para que nadie se pierda.</p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Con el Diseño Universal para el Aprendizaje (DUA) y actividades en tres niveles.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="plano-portada" aria-hidden="true">
+        <svg class="ruta" viewBox="0 0 82 104" preserveAspectRatio="none">
+          <path
+            d="M17 17 C 36 7, 54 14, 65 33 C 72 46, 34 42, 19 61 C 11 75, 42 92, 63 87"
+            fill="none"
+            stroke="#e8553e"
+            stroke-width="1.6"
+            stroke-dasharray="3 2.4"
+            stroke-linecap="round"
+          />
+        </svg>
+        <div class="parada" style="left: 4mm; top: 4mm"><img src="pictogramas/9814.png" alt="" /></div>
+        <div class="parada" style="left: 52mm; top: 20mm"><img src="pictogramas/38603.png" alt="" /></div>
+        <div class="parada" style="left: 6mm; top: 48mm"><img src="pictogramas/5970.png" alt="" /></div>
+        <div class="parada" style="left: 50mm; top: 74mm"><img src="pictogramas/33064.png" alt="" /></div>
+        <svg class="estrella" viewBox="0 0 24 24">
+          <path
+            d="M12 1.8l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.3 5.6 21l1.6-7.1L1.8 9.1l7.2-.7z"
+            fill="#f6c12e"
+            stroke="#1e2b55"
+            stroke-width="1.4"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <div class="robot-portada" aria-hidden="true"><img src="pictogramas/6208.png" alt="" /></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">De un vistazo</p>
+        <h1>Exploradores del cole</h1>
+      </div>
+
+      <div class="reto">
+        <h2>El reto</h2>
+        <p class="reto__pregunta">«Los de 3 años y quienes llegan nuevos se pierden en el cole. ¿Cómo les ayudamos a encontrar cada sitio?»</p>
+        <p>
+          <strong>Producto final:</strong> un mapa grande del cole con pictogramas, señales con pictograma y palabra en las
+          puertas principales y una ruta guiada para la clase de 3 años o para el alumnado recién llegado.
+        </p>
+      </div>
+
+      <ul class="datos">
+        <li><strong>Curso y duración</strong>5 años (tercer curso del segundo ciclo de Infantil). 8 sesiones de unos 45 minutos, en unas 3 semanas.</li>
+        <li>
+          <strong>Áreas</strong>Crecimiento en Armonía <span class="chip chip--ca">CA</span>, Descubrimiento y Exploración del
+          Entorno <span class="chip chip--dee">DEE</span>, con más peso, y Comunicación y Representación de la Realidad
+          <span class="chip chip--crr">CRR</span>.
+        </li>
+        <li><strong>Agrupamientos</strong>Asamblea, parejas, pequeños grupos de 4 a 6 y parejas con la clase de 3 años.</li>
+        <li><strong>Espacios</strong>El aula, los pasillos y sitios comunes del cole, y el patio o el gimnasio.</li>
+        <li class="ancho">
+          <strong>Qué van a aprender</strong>
+          <ol>
+            <li>Usar las nociones espaciales (delante, detrás, al lado, dentro…) para dar y seguir instrucciones.</li>
+            <li>Encontrar los sitios del cole con una hoja de ruta y contar un recorrido en orden.</li>
+            <li>Representar un camino real en un plano visto desde arriba.</li>
+            <li>Programar con tarjetas de flechas un camino de 3 a 6 pasos y corregirlo si falla.</li>
+            <li>Hacer señales con pictograma y palabra, explicar a quién ayudan y guiar con ellas a los pequeños.</li>
+          </ol>
+        </li>
+        <li class="ancho">
+          <strong>Cómo se evalúa</strong>Observación directa con el registro del grupo (página <span data-pag="registro"></span>),
+          lo que producen y la autoevaluación con pictogramas (página <span data-pag="autoevaluacion"></span>). La prueba final
+          es real: ¿encuentran los pequeños los sitios?
+        </li>
+        <li class="ancho">
+          <strong>Materiales de IdEducando que se aprovechan</strong>La
+          <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a>, para anticipar cada
+          sesión; el
+          <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>,
+          para la palabra en otras lenguas; y el
+          <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>, para
+          que todos puedan decir adónde ir.
+        </li>
+      </ul>
+
+      <h2 style="margin-top: 0">Las 8 sesiones</h2>
+      <ol class="mapa-sesiones">
+        <li><b>1 <small>· semana 1</small></b>¡Nos perdemos!<span>Nos escribe la clase de 3 años.</span></li>
+        <li><b>2 <small>· semana 1</small></b>Arriba, abajo, delante, detrás<span>Nociones y tesoro.</span></li>
+        <li><b>3 <small>· semana 1</small></b>Exploramos el cole<span>Paseo con hoja de ruta.</span></li>
+        <li><b>4 <small>· semana 2</small></b>Dibujamos el camino<span>Maqueta y camino al patio.</span></li>
+        <li><b>5 <small>· semana 2</small></b>Las señales del cole<span>A quién ayudan.</span></li>
+        <li><b>6 <small>· semana 2</small></b>Programamos el robot<span>Flechas en el suelo.</span></li>
+        <li><b>7 <small>· semana 3</small></b>Montamos el gran mapa<span>Mapa y señales.</span></li>
+        <li><b>8 <small>· semana 3</small></b>¡Ruta guiada!<span>Guiamos y valoramos.</span></li>
+      </ol>
+    </section>
+
+    <!-- ======================================================================
+         CÓMO ESTÁ PENSADA: DUA Y MULTINIVEL
+         ====================================================================== -->
+    <section class="hoja guia-texto">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Cómo está pensada</p>
+        <h1>Un problema real del cole, para toda la clase</h1>
+      </div>
+
+      <h2 style="margin-top: 0">Por qué este reto</h2>
+      <p>
+        Parte de algo que el grupo ve: en el cole hay quien se pierde. Resolverlo moviliza a la vez las tres áreas, como pide
+        el anexo III del Decreto 196/2022, y deja algo útil para todo el centro. Según la ley, la accesibilidad cognitiva se
+        hace efectiva, entre otros medios, con pictogramas (texto refundido de la Ley General de derechos de las personas con
+        discapacidad, art. 2 k, redacción de la Ley 6/2022). La guía del Ministerio propone que el alumnado dibuje mapas del
+        centro y que haya planos hechos entre todos (Belinchón y otros, 2014, p. 25). Las guías aconsejan pocos pictogramas y
+        comprobar con quien los usa que se entienden (Equipo ARASAAC, 2026; CERMI, 2019; Belinchón y otros, 2014, p. 26): por
+        eso las señales van solo en las puertas principales y la sesión 8 es la prueba.
+      </p>
+
+      <h2>El Diseño Universal para el Aprendizaje en esta situación</h2>
+      <p>
+        El decreto pide el DUA (arts. 4.6 y 17.3). Pautas (en la versión 3.0, «directrices») de CAST (2024) que más pesan aquí:
+      </p>
+      <div class="dua-tres">
+        <div class="principio">
+          <h3>Compromiso</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.2</span> El mapa y las señales se quedan en el cole y los usan otros.</li>
+            <li><span class="chip chip--dua">7.3</span> El tesoro, el robot humano y la ruta son juegos.</li>
+            <li><span class="chip chip--dua">8.3</span> Cada grupo hace una pieza del mismo mapa.</li>
+          </ul>
+        </div>
+        <div class="principio">
+          <h3>Representación</h3>
+          <ul>
+            <li><span class="chip chip--dua">2.5</span> Foto, pictograma, palabra, maqueta y paseo real.</li>
+            <li><span class="chip chip--dua">2.3</span> La palabra, también en las lenguas de la clase.</li>
+            <li><span class="chip chip--dua">3.4</span> De la cuadrícula al cole y del cole a casa.</li>
+          </ul>
+        </div>
+        <div class="principio">
+          <h3>Acción y expresión</h3>
+          <ul>
+            <li><span class="chip chip--dua">4.1</span> Andar, señalar, pegar, hablar o usar el tablero.</li>
+            <li><span class="chip chip--dua">6.2</span> Se planifica el camino antes de moverse.</li>
+            <li><span class="chip chip--dua">6.4</span> Hoja de ruta y autoevaluación: se ve lo logrado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Los tres niveles de cada actividad</h2>
+      <p>
+        La enseñanza multinivel propone un mismo objetivo para todo el grupo, con distintas formas de presentarlo, practicarlo
+        y evaluarlo (Collicott, 1991; Inclusive Schools Network, 2011). Toda la clase hace la misma actividad, a la vez y en el
+        mismo sitio. Los niveles describen la tarea, no al niño o la niña, y cada uno sube o baja dentro de la sesión.
+      </p>
+      <ul class="niveles leyenda-niveles">
+        <li class="nivel nivel-1">
+          <h4><span class="marca">1</span>Con más apoyo</h4>
+          <p>Rutas de 2 o 3 sitios, fotos y objetos reales, pocas opciones, el modelo del adulto y ayuda física o verbal.</p>
+        </li>
+        <li class="nivel nivel-2">
+          <h4><span class="marca">2</span>Base</h4>
+          <p>Lo esperado a los 5 años: se orienta con pictogramas, ordena de 4 a 6 pasos y programa un camino con un giro.</p>
+        </li>
+        <li class="nivel nivel-3">
+          <h4><span class="marca">3</span>Con más reto</h4>
+          <p>Más elementos y explicar el porqué: el camino más corto, símbolos propios, escribir sin modelo u otra lengua.</p>
+        </li>
+      </ul>
+      <p>
+        «Ajustes», en cada sesión, recoge apoyos para el alumnado con trastorno del espectro del autismo (TEA), trastorno por
+        déficit de atención e hiperactividad (TDAH), trastorno del desarrollo del lenguaje (TDL), discapacidad, altas
+        capacidades o recién llegado. Resumen en la página <span data-pag="diversidad"></span>.
+      </p>
+
+      <div class="oposicion">
+        <h3>Si preparas la oposición</h3>
+        <p>
+          La parte A de la primera prueba pide «diseñar, justificar y secuenciar una intervención educativa» (Boletín Oficial de
+          la Región de Murcia, BORM, n.º 18, de 23 de enero de 2026, anexo XVII). Dónde mirar cada indicador de la unidad: DUA
+          y atención a la diversidad (páginas 4 y <span data-pag="diversidad"></span>), secuencia y agrupamientos (página 3 y
+          sesiones), detección (página <span data-pag="diversidad"></span>), criterios, competencias y saberes (páginas
+          <span data-pag="curriculo"></span> y <span data-pag="curriculoFin"></span>), evaluación y práctica docente (páginas
+          <span data-pag="evaluacion"></span> y <span data-pag="registro"></span>). <strong>Úsala como modelo, nunca como
+          copia:</strong> tu programación y tu unidad tienen que ser originales.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CONEXIÓN CON EL CURRÍCULO
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Conexión con el currículo de la Región de Murcia</p>
+        <h1>Qué trabaja del Decreto 196/2022</h1>
+        <p class="entradilla">
+          Solo lo que se trabaja y se evalúa en esta situación, con el texto literal del decreto (BORM n.º 255, de 4 de
+          noviembre de 2022): criterios de evaluación y saberes básicos del segundo ciclo.
+        </p>
+      </div>
+      <table class="tabla-curricular">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 24mm">Área</th>
+            <th scope="col" style="width: 38mm">Competencia específica</th>
+            <th scope="col">Criterios de evaluación</th>
+            <th scope="col" style="width: 52mm">Saberes básicos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ca">
+            <th scope="row" rowspan="2">Crecimiento en Armonía (CA)</th>
+            <td class="competencia">2. Reconocer, manifestar y regular progresivamente sus emociones expresando necesidades y sentimientos…</td>
+            <td><p><span class="codigo">2.2</span> Ofrecer y pedir ayuda en situaciones cotidianas, valorando los beneficios de la cooperación y la ayuda entre iguales.</p></td>
+            <td rowspan="2">
+              <ul>
+                <li><span class="codigo">B.</span> Estrategias de ayuda y cooperación en contextos de juego y rutinas.</li>
+                <li><span class="codigo">D.</span> Fórmulas de cortesía e interacción social positiva. Actitud de ayuda y cooperación.</li>
+                <li><span class="codigo">D.</span> La respuesta empática a la diversidad debida a distintas formas de discapacidad y a sus implicaciones en la vida cotidiana.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="ca">
+            <td class="competencia">4. Establecer interacciones sociales en condiciones de igualdad, valorando la importancia de la amistad, el respeto y la empatía…</td>
+            <td>
+              <p><span class="codigo">4.1</span> Participar con iniciativa en juegos y actividades colectivas relacionándose con otras personas con actitudes de afecto y de empatía, respetando los distintos ritmos individuales y evitando todo tipo de discriminación.</p>
+              <p><span class="codigo">4.3</span> Participar activamente en actividades relacionadas con la reflexión sobre las normas sociales que regulan la convivencia y promueven valores como el respeto a la diversidad, el trato no discriminatorio hacia las personas con discapacidad y la igualdad de género.</p>
+            </td>
+          </tr>
+          <tr class="dee">
+            <th scope="row" rowspan="2">Descubrimiento y Exploración del Entorno (DEE)</th>
+            <td class="competencia">1. Identificar las características de materiales, objetos y colecciones y establecer relaciones entre ellos…</td>
+            <td>
+              <p><span class="codigo">1.3</span> Ubicarse adecuadamente en los espacios habituales, tanto en reposo como en movimiento, aplicando sus conocimientos acerca de las nociones espaciales básicas y jugando con el propio cuerpo y con objetos.</p>
+              <p><span class="codigo">1.5</span> Organizar su actividad, ordenando las secuencias y utilizando las nociones temporales básicas.</p>
+            </td>
+            <td rowspan="2">
+              <ul>
+                <li><span class="codigo">A.</span> Nociones espaciales básicas en relación con el propio cuerpo, los objetos y las acciones, tanto en reposo como en movimiento.</li>
+                <li><span class="codigo">B.</span> Nociones de cálculo para resolver retos. Programación robótica. Juegos de deducción. Pasatiempos lógico-matemáticos.</li>
+                <li><span class="codigo">B.</span> Estrategias de planificación, organización o autorregulación de tareas. Iniciativa en la búsqueda de acuerdos o consensos en la toma de decisiones.</li>
+                <li><span class="codigo">B.</span> Procesos y resultados. Hallazgos, verificación y conclusiones.</li>
+                <li><span class="codigo">C.</span> Conocimiento de los diferentes elementos que componen el entorno: vía pública, mobiliario, señales de tráfico...</li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="dee">
+            <td class="competencia">2. Desarrollar, de manera progresiva, los procedimientos del método científico y las destrezas del pensamiento computacional…</td>
+            <td>
+              <p><span class="codigo">2.5</span> Programar secuencias de acciones o instrucciones para la resolución de tareas analógicas y digitales, desarrollando habilidades básicas de pensamiento computacional.</p>
+              <p><span class="codigo">2.6</span> Participar en proyectos utilizando dinámicas cooperativas, compartiendo y valorando opiniones propias y ajenas, y expresando conclusiones personales a partir de ellas.</p>
+            </td>
+          </tr>
+          <tr class="crr">
+            <th scope="row" rowspan="3">Comunicación y Representación de la Realidad (CRR)</th>
+            <td class="competencia">3. Producir mensajes de manera eficaz, personal y creativa, utilizando diferentes lenguajes…</td>
+            <td>
+              <p><span class="codigo">3.1</span> Hacer un uso funcional del lenguaje oral, aumentando su repertorio lingüístico y construyendo progresivamente un discurso más eficaz, organizado y coherente en contextos formales e informales.</p>
+              <p><span class="codigo">3.2</span> Utilizar el lenguaje oral como instrumento regulador de la acción en las interacciones con los demás con seguridad y confianza respetando los hábitos sociales básicos como el turno de palabra y actitud de escucha.</p>
+              <p><span class="codigo">3.4</span> Elaborar creaciones plásticas, explorando y utilizando diferentes materiales y técnicas y participando activamente en el trabajo en grupo cuando se precise.</p>
+            </td>
+            <td rowspan="3">
+              <ul>
+                <li><span class="codigo">B.</span> La realidad lingüística del entorno. Fórmulas o expresiones que responden a sus necesidades o intereses.</li>
+                <li><span class="codigo">C.</span> Verbalización de la secuencia de acciones en una acción planificada.</li>
+                <li><span class="codigo">D.</span> Los usos sociales de la lectura y la escritura. Funcionalidad y significatividad en situaciones comunicativas.</li>
+                <li><span class="codigo">D.</span> Aproximación al código escrito desde las escrituras indeterminadas.</li>
+                <li><span class="codigo">D.</span> Otros códigos de representación gráfica: imágenes, símbolos, números…</li>
+                <li><span class="codigo">G.</span> Materiales específicos e inespecíficos, elementos, diversidad de técnicas y procedimientos plásticos, materiales y soportes. Experimentación y manipulación.</li>
+                <li><span class="codigo">I.</span> Desarrollo del pensamiento computacional.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="crr">
+            <td class="competencia">4. Participar por iniciativa propia en actividades relacionadas con textos escritos, mostrando interés y curiosidad…</td>
+            <td><p><span class="codigo">4.1</span> Mostrar interés por comunicarse a través de códigos escritos, convencionales o no, valorando su función comunicativa.</p></td>
+          </tr>
+          <tr class="crr">
+            <td class="competencia">5. Valorar la diversidad lingüística presente en su entorno, así como otras manifestaciones culturales…</td>
+            <td><p><span class="codigo">5.1</span> Relacionarse de forma respetuosa en la pluralidad lingüística y cultural de su entorno, manifestando interés por otras lenguas, etnias y culturas.</p></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dos-columnas" style="align-items: start; gap: 6mm">
+        <div>
+          <h2 style="font-size: 13pt; margin-top: 3mm">Objetivos de la etapa (art. 7)</h2>
+          <ul class="lista-breve">
+            <li><strong>b)</strong> «Observar y explorar su entorno familiar, natural y social»: recorren su cole, lo observan y lo representan.</li>
+            <li><strong>c)</strong> «Adquirir progresivamente autonomía en sus actividades habituales»: saber dónde está cada sitio da autonomía, a ellos y a los pequeños.</li>
+            <li><strong>e)</strong> Relacionarse con los demás y «ejercitarse en el uso de la empatía»: guían con paciencia a quien llega.</li>
+            <li><strong>f)</strong> «Desarrollar habilidades comunicativas en diferentes lenguajes y formas de expresión»: palabra, pictograma, plano y gesto.</li>
+            <li><strong>g)</strong> «Iniciarse en las habilidades lógico-matemáticas, en la lectura y la escritura»: espacio, secuencias, programación y la palabra de cada señal.</li>
+          </ul>
+        </div>
+        <div>
+          <h2 style="font-size: 13pt; margin-top: 3mm">Competencias clave (anexo I)</h2>
+          <ul class="lista-breve">
+            <li><strong>Competencia en comunicación lingüística (CCL):</strong> dan y siguen instrucciones y escriben las señales.</li>
+            <li><strong>Competencia plurilingüe (CP):</strong> la palabra de cada sitio, también en las lenguas de la clase.</li>
+            <li><strong>Competencia matemática y competencia en ciencia, tecnología e ingeniería (STEM):</strong> nociones espaciales, planos y secuencias.</li>
+            <li><strong>Competencia digital (CD):</strong> programar con flechas inicia el pensamiento computacional, sin pantallas.</li>
+            <li><strong>Competencia personal, social y de aprender a aprender (CPSAA):</strong> planifican, comprueban y corrigen.</li>
+            <li><strong>Competencia ciudadana (CC):</strong> hacen el cole más fácil de entender para todas las personas.</li>
+            <li><strong>Competencia emprendedora (CE):</strong> resuelven un problema real con un producto propio.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 1
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 1 de 8"><small>Sesión</small><span>1</span></p>
+        <div>
+          <h1>¡Nos perdemos!</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> asamblea y parejas</span>
+            <span><b>Espacio:</b> zona de la asamblea</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> entender el mensaje de la clase de 3 años, nombrar los sitios del cole y decidir juntos cómo ayudar.
+        <span class="chip chip--crr">CRR 4.1</span><span class="chip chip--ca">CA 2.2</span><span class="chip chip--dee">DEE 1.3 inicial</span>
+        <br /><strong>Materiales:</strong> el mensaje de la clase de 3 años (página <span data-pag="mensaje"></span>) en un sobre;
+        8 fotos de sitios del cole, sin personas, a media hoja; las tarjetas de los sitios (página <span data-pag="sitios"></span>);
+        papel continuo para «Nuestro plan».
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Pon en la <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a> los
+          pictogramas de la sesión: asamblea, carta y fotos (página <span data-pag="agenda"></span>). Llega un sobre: mejor si lo
+          trae la tutora o el tutor de 3 años. Lee el mensaje despacio, señalando cada pictograma, y pregunta: «¿Qué les pasa?
+          ¿Os ha pasado alguna vez?». Recuerda también a quien llega nuevo al cole con el curso empezado. Es la evaluación
+          inicial: anota quién nombra sitios del cole y cómo explica dónde están.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <ol>
+          <li><strong>¿Qué sitios tiene el cole?</strong> Enseña las fotos una a una. El grupo dice qué sitio es y qué se hace allí. Deja cada foto en el suelo, en el centro del corro.</li>
+          <li><strong>Foto y pictograma.</strong> Cada pareja recibe la tarjeta de un sitio, busca su foto y la coloca al lado. Después cuenta a la clase qué se hace allí.</li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Elige entre 2 fotos la que va con su tarjeta. El adulto nombra el sitio y hace el gesto (comer, jugar). Vale señalar.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Empareja su tarjeta con la foto y dice qué se hace en ese sitio.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Además, explica cómo se llega desde la clase («salgo y está al lado del patio») o lee la palabra de la tarjeta.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Pregunta: «¿Cómo podemos ayudarles?». Apunta sus ideas en el papel continuo con dibujos y palabras: es «Nuestro plan».
+          Si no salen, propón tú un mapa, señales en las puertas y una ruta para acompañarles. Anticipa: «Mañana entrenamos para
+          explorar el cole».
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.2</span> Un problema real de otra clase da sentido al reto.</li>
+            <li><span class="chip chip--dua">2.5</span> Cada sitio llega por foto, pictograma, palabra y gesto.</li>
+            <li><span class="chip chip--dua">5.1</span> Se responde señalando, emparejando o explicándolo.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--crr">CRR 4.1</span> ¿Le interesa lo que dice el mensaje? ¿Intenta leer un pictograma o una palabra?</li>
+            <li><span class="chip chip--ca">CA 2.2</span> ¿Propone formas de ayudar a los pequeños?</li>
+            <li><span class="chip chip--dee">DEE 1.3</span> Inicial: ¿sabe dónde están los sitios del cole?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TEA:</b> anuncia en la agenda que llegará una carta, para que la sorpresa no agobie.</li>
+            <li><b>TDL:</b> modela frases cortas con sitio y acción: «En el comedor comemos».</li>
+            <li><b>Recién llegados:</b> la foto y el gesto bastan. Di el sitio en su lengua si lo sabes.</li>
+            <li><b>Visual:</b> fotos grandes y con buen contraste, descritas en voz alta.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 2
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 2 de 8"><small>Sesión</small><span>2</span></p>
+        <div>
+          <h1>Arriba, abajo, delante, detrás</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> toda la clase y parejas</span>
+            <span><b>Espacio:</b> aula despejada o sala de psicomotricidad</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> usar las nociones espaciales con el cuerpo y con objetos para seguir y dar instrucciones.
+        <span class="chip chip--dee">DEE 1.3</span><span class="chip chip--crr">CRR 3.2</span>
+        <br /><strong>Materiales:</strong> 2 juegos de tarjetas de las nociones espaciales (página <span data-pag="nociones"></span>)
+        en una cesta; un «tesoro» por pareja, grande para que no quepa en la boca (una estrella de cartulina, un peluche); la
+        mascota de la clase o un muñeco; un aro.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Agenda: jugar, tesoro y asamblea (página <span data-pag="agenda"></span>). Jugad a «La exploradora dice»: «Pon las
+          manos encima de la cabeza», «ponte detrás de la silla», «mete un pie dentro del aro». Enseña la tarjeta de cada noción
+          mientras lo dices. Después esconde el muñeco y que el grupo diga dónde está: «¡Debajo de la mesa!».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>Búsqueda del tesoro por parejas.</strong> Uno esconde el tesoro mientras el otro se tapa los ojos. Después le da
+          la pista con palabras y con la tarjeta de la cesta: «Está debajo de la mesa azul». Lo busca y cambian de papel. Cada
+          pareja juega al menos 4 veces.
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Una pista, con la tarjeta en la mano y el tesoro a la vista y cerca. El adulto hace el gesto mientras lo dice.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Sigue una pista con una noción («detrás de la puerta») y da otra a su pareja con la tarjeta.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Da y sigue pistas dobles («dentro de la caja que está al lado de la ventana») o usa la derecha y la izquierda.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          En la asamblea, cada pareja cuenta dónde escondió su tesoro y enseña la tarjeta. Pregunta: «¿Qué palabras nos ayudan a
+          encontrar las cosas?». Guardad las tarjetas en la cesta: servirán para explicar a los pequeños dónde está cada sitio.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.3</span> El tesoro convierte la práctica en juego.</li>
+            <li><span class="chip chip--dua">2.1</span> Cada noción, con tarjeta, gesto y palabra.</li>
+            <li><span class="chip chip--dua">4.1</span> Se responde moviéndose, señalando o diciéndolo.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.3</span> ¿Se sitúa y sitúa objetos delante, detrás, encima, debajo, dentro y al lado? ¿En qué nivel?</li>
+            <li><span class="chip chip--crr">CRR 3.2</span> ¿Da una pista clara a su pareja y espera su turno?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TDAH:</b> que empiece escondiendo, con una zona clara («solo en la alfombra y las mesas»).</li>
+            <li><b>Motora:</b> tesoros al alcance de su mano; vale decir dónde está sin desplazarse.</li>
+            <li><b>Auditiva:</b> la tarjeta siempre a la vista y la cara de quien habla, de frente.</li>
+            <li><b>Altas capacidades:</b> inventa pistas con dos nociones para otra pareja.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 3
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 3 de 8"><small>Sesión</small><span>3</span></p>
+        <div>
+          <h1>Exploramos el cole</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> pequeños grupos de 5 o 6, cada uno con un adulto</span>
+            <span><b>Espacio:</b> pasillos y sitios comunes del cole</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> recorrer el cole, encontrar los sitios con la hoja de ruta y fijarse en las señales que ya hay.
+        <span class="chip chip--dee">DEE 1.3</span><span class="chip chip--crr">CRR 4.1</span>
+        <br /><strong>Materiales:</strong> una hoja de ruta (página <span data-pag="ruta"></span>) por niño o niña, sobre un cartón
+        que haga de tablilla; ceras o gomets; un móvil o una cámara del centro, solo para fotos de sitios y señales.
+        <span class="antes"><strong>Antes:</strong> pide permiso al equipo directivo, avisa a las clases por las que pasaréis y
+        cuenta con los adultos que fije el centro, uno por grupo. Da a cada grupo un orden distinto para no coincidir.</span>
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Agenda: asamblea, pasear y explorar (página <span data-pag="agenda"></span>). Repasa las normas del paseo con gestos:
+          andamos, vamos juntos, hablamos bajito y caminamos al lado del adulto. Reparte las hojas de ruta, lee los sitios en voz
+          alta y di a cada grupo cuál es su primer sitio.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>Paseo.</strong> En cada sitio, el grupo se para y comprueba si es el de la hoja: lo colorea o le pone un gomet.
+          Mirad si la puerta tiene ya una señal y rodead «sí» o «no». El adulto fotografía el sitio y las señales, nunca a las
+          personas.
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Ruta de 3 sitios, con la hoja doblada por la línea. Busca el sitio con el pictograma en la mano; el adulto lo nombra y lo señala.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Ruta de 8 sitios: encuentra cada uno, lo marca y dice si tiene señal.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Además, dice qué sitio viene después y qué hay cerca («al lado del comedor está la cocina») o qué señal falta.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          De vuelta en clase, cada grupo cuenta qué sitios encontró y qué señales vio. Apunta en «Nuestro plan» los sitios sin
+          señal o con señales difíciles de entender: «¡Ahí pondremos las nuestras!».
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.4</span> Las normas del paseo, anticipadas con gestos, quitan incertidumbre.</li>
+            <li><span class="chip chip--dua">6.4</span> Marcar cada sitio deja ver cuánto falta.</li>
+            <li><span class="chip chip--dua">3.4</span> Lo trabajado en clase se usa en el cole real.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.3</span> ¿Se orienta por el cole y encuentra los sitios con la hoja de ruta?</li>
+            <li><span class="chip chip--crr">CRR 4.1</span> ¿Se fija en carteles y señales? ¿Pregunta qué pone?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TEA:</b> enseña antes las fotos del recorrido y avisa de los sitios con ruido. Si usa cascos, que los lleve.</li>
+            <li><b>TDAH:</b> que lleve la hoja de ruta del grupo y avise en cada parada.</li>
+            <li><b>Motora:</b> elige el recorrido con rampa o ascensor y apúntalo para el mapa.</li>
+            <li><b>Visual:</b> describe el camino con referencias que se oyen o se tocan.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 4
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 4 de 8"><small>Sesión</small><span>4</span></p>
+        <div>
+          <h1>Dibujamos el camino</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> asamblea y pequeños grupos de 4 o 5</span>
+            <span><b>Espacio:</b> aula</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> ordenar los pasos de un recorrido, contarlo y pasarlo al papel visto desde arriba.
+        <span class="chip chip--dee">DEE 1.5</span><span class="chip chip--crr">CRR 3.1</span><span class="chip chip--crr">CRR 3.4</span>
+        <br /><strong>Materiales:</strong> un pliego de papel continuo en el suelo, bloques de construcción y un rotulador; para
+        cada grupo, las 6 fotos del camino de la clase al patio, una tira de papel continuo de 1 m, pegamento y ceras.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Agenda: construir, ordenar, dibujar y recoger (página <span data-pag="agenda"></span>). «La clase vista por un
+          pájaro»: sobre el papel del suelo, cada niño o niña pone un bloque donde está su mesa; otros bloques son la puerta y la
+          pizarra. Rodea los bloques con el rotulador y quítalos: «Así se ve la clase desde arriba. Esto es un plano».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>El camino de la clase al patio.</strong> En pequeños grupos, ordenad las fotos del recorrido en la tira,
+          pegadlas y unidlas con flechas. Después, contadlo: «Primero salimos de clase, después…».
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Ordena 3 fotos (la clase, el pasillo y el patio) con un modelo al lado. Al pegarlas, dice «primero» y «al final».</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Ordena las 6 fotos, las une con flechas y cuenta el camino con «primero, después y al final».</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Dibuja el camino visto desde arriba, con las puertas y lo que hay al lado, y se lo explica a otro grupo.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Cada grupo enseña su tira. Comparad: ¿todos los caminos son iguales? ¿Cuál es más corto? Decidid qué sitios llevará
+          el gran mapa y apuntadlo en «Nuestro plan». Recoged los bloques entre todos.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">3.2</span> La maqueta enseña la idea clave de un mapa: mirar desde arriba.</li>
+            <li><span class="chip chip--dua">5.2</span> Bloques, fotos y dibujo: varias formas de construir.</li>
+            <li><span class="chip chip--dua">8.3</span> En cada grupo, cada uno pega, dibuja o cuenta una parte.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.5</span> ¿Ordena los pasos del recorrido? ¿Cuántos?</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Cuenta el camino con orden («primero, después»)?</li>
+            <li><span class="chip chip--crr">CRR 3.4</span> ¿Participa en la maqueta y en la tira con su grupo?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Discapacidad intelectual:</b> las fotos de una en una y, si hace falta, repetid el camino real.</li>
+            <li><b>Motora:</b> fotos pegadas en cartón, más fáciles de coger.</li>
+            <li><b>TDL:</b> tres tarjetas escritas, «primero», «después» y «al final», para señalar mientras cuenta.</li>
+            <li><b>Altas capacidades:</b> compara dos caminos y explica cuál es mejor.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 5
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 5 de 8"><small>Sesión</small><span>5</span></p>
+        <div>
+          <h1>Las señales del cole</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> asamblea y parejas o tríos</span>
+            <span><b>Espacio:</b> aula</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> descubrir a quién ayudan las señales y hacer las nuestras con pictograma y palabra.
+        <span class="chip chip--ca">CA 4.3</span><span class="chip chip--crr">CRR 4.1</span><span class="chip chip--crr">CRR 5.1</span>
+        <br /><strong>Materiales:</strong> fotos de las señales del paseo y de la calle (un semáforo, un paso de peatones); las
+        señales para recortar (páginas <span data-pag="senalesIni"></span> a <span data-pag="senalesFin"></span>), una por
+        pareja o trío; ceras, lápices y un rotulador amarillo; la tarjeta «baño» del
+        <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>, si os sirve.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Agenda: asamblea, señales y escribir (página <span data-pag="agenda"></span>). Enseña las fotos: «¿Para qué sirven las
+          señales?». Plantea casos con la mascota: «Mi amiga aún no sabe leer», «mi amigo habla otra lengua», «mi amiga va en
+          silla de ruedas: ¿por dónde sube?», «mi amigo no ve». ¿Qué les ayuda? Llegad a una idea: un dibujo claro y la palabra
+          grande, a la altura de los ojos, ayudan a muchas personas; a quien no ve le ayuda tocar algo o que le acompañen.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>Nuestras señales.</strong> Cada pareja o trío prepara la señal de un sitio de «Nuestro plan». Comprueban que
+          el pictograma y la palabra dicen lo mismo y cada uno escribe la palabra una vez en el recuadro «Lo escribimos
+          en clase». Si en clase se habla otra lengua, la palabra en esa lengua va en su línea.
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Repasa con cera la palabra que el adulto ha escrito antes en amarillo dentro del recuadro.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Copia la palabra mirando la impresa y la comprueba letra a letra con su pareja.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Escribe la palabra sin mirar y la compara después; añade otra lengua o dibuja el pictograma de un sitio sin señal.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Cada grupo enseña su señal: «¿La entendería alguien de 3 años? ¿Y alguien que no lee?». Después de la sesión, plastifica
+          cada señal en su funda A5. Anticipa: «Pediremos permiso al equipo directivo para ponerlas».
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">9.4</span> Ponerse en el lugar de quien no lee, no ve o va en silla.</li>
+            <li><span class="chip chip--dua">2.3</span> La palabra, también en las lenguas de la clase.</li>
+            <li><span class="chip chip--dua">5.3</span> Repasar, copiar o escribir solo: apoyos graduados.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--ca">CA 4.3</span> ¿Explica a quién ayuda una señal y por qué?</li>
+            <li><span class="chip chip--crr">CRR 4.1</span> ¿Escribe la palabra repasando, copiando o solo?</li>
+            <li><span class="chip chip--crr">CRR 5.1</span> ¿Le interesa cómo se dice en otras lenguas?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Motora:</b> cera gruesa o letras imantadas para componer la palabra.</li>
+            <li><b>Visual:</b> en la señal de su clase, un objeto pegado que se reconozca al tocarlo.</li>
+            <li><b>Recién llegados:</b> dice cómo se llama el sitio en su lengua y tú lo escribes: es quien más sabe.</li>
+            <li><b>TDAH:</b> dos pasos, cada uno con su pictograma: escribir y después colorear.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 6
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 6 de 8"><small>Sesión</small><span>6</span></p>
+        <div>
+          <h1>Programamos el robot</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> asamblea y 4 grupos de 6, dos en cada cuadrícula</span>
+            <span><b>Espacio:</b> patio, gimnasio o aula despejada</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> programar con tarjetas de flechas el camino a un sitio, comprobarlo y corregirlo si falla.
+        <span class="chip chip--dee">DEE 2.5</span><span class="chip chip--crr">CRR 3.2</span><span class="chip chip--dee">DEE 1.3</span>
+        <br /><strong>Materiales:</strong> 2 cuadrículas de 4 × 4 casillas en el suelo (página <span data-pag="cuadricula"></span>);
+        2 juegos de tarjetas de flechas (página <span data-pag="flechas"></span>); las tarjetas de los sitios (página
+        <span data-pag="sitios"></span>); un gomet por niño o niña. El robot de suelo del cole, si lo hay (opcional).
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Agenda: asamblea, robot y pensar (página <span data-pag="agenda"></span>). Pon a cada uno un gomet en la mano derecha.
+          Explica: «Un robot hace lo que le decimos, paso a paso, y no adivina». Presenta las tarjetas «avanza», «gira a la
+          derecha» y «gira a la izquierda». Haz tú de robot y que la clase te programe hasta la puerta. Si una tarjeta está mal,
+          obedécela: «¡Hago lo que pone!».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>El robot lleva a los pequeños.</strong> Pon la tarjeta de un sitio en una casilla: «Hay que llevar a una niña de
+          3 años al baño». Un grupo coloca las flechas en fila junto a la cuadrícula. El otro hace de robot y comprueba: el robot
+          sigue las tarjetas una a una mientras todos las leen en voz alta. Si no llega, buscad la tarjeta que falla y cambiadla.
+          Después, cambiad los papeles.
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>El sitio está en línea recta: solo «avanza», de 1 a 3 tarjetas. Primero hace el camino andando y después pone una tarjeta por paso.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>El sitio pide un giro: programa de 3 a 5 tarjetas y lo comprueba.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Dos giros o un obstáculo (una silla): busca el camino más corto o arregla un programa con un error puesto a propósito.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Pregunta: «¿Qué pasaba cuando una tarjeta estaba mal?». Llegad juntos a una idea: el orden importa. Si tenéis robot de
+          suelo, probad con él uno de los programas. Recuerda: «A la derecha es hacia la mano del gomet».
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.3</span> Hacer de robot es un juego.</li>
+            <li><span class="chip chip--dua">6.2</span> Antes de mover, se planifica el camino.</li>
+            <li><span class="chip chip--dua">8.5</span> El robot enseña el error al momento y el grupo lo corrige.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 2.5</span> ¿Ordena las flechas para llegar al sitio? ¿Encuentra la que falla?</li>
+            <li><span class="chip chip--crr">CRR 3.2</span> ¿Guía al robot con la palabra y respeta el turno?</li>
+            <li><span class="chip chip--dee">DEE 1.3</span> ¿Gira a la derecha y a la izquierda sin cambiar de casilla?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Motora:</b> casillas de 60 cm para que quepa la silla, o programa mientras otro hace de robot.</li>
+            <li><b>TDAH:</b> que sea robot en la primera ronda; turnos cortos y un papel claro.</li>
+            <li><b>TEA:</b> anticipa con pictogramas el orden de los papeles; si no quiere ser robot, que lea las tarjetas.</li>
+            <li><b>TDL y auditiva:</b> se levanta y se señala la tarjeta antes de decirla.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 7
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 7 de 8"><small>Sesión</small><span>7</span></p>
+        <div>
+          <h1>Montamos el gran mapa</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> pequeños grupos de 4 o 5, una zona del cole cada uno</span>
+            <span><b>Espacio:</b> aula y pasillos</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> hacer entre todos el mapa del cole con caminos y pictogramas, y poner las señales en las puertas.
+        <span class="chip chip--dee">DEE 2.6</span><span class="chip chip--crr">CRR 3.4</span>
+        <br /><strong>Materiales:</strong> un trozo de papel continuo de 1 m por grupo; las tiras del camino (sesión 4); la
+        leyenda y los pictogramas para el mapa (página <span data-pag="leyenda"></span>); ceras, rotuladores gruesos y pegamento;
+        las señales plastificadas y masilla adhesiva.
+        <span class="antes"><strong>Antes:</strong> pide permiso al equipo directivo para colgar el mapa y poner las señales, y
+        decidid juntos dónde van. Cuenta con un adulto por grupo para ponerlas.</span>
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">5 minutos</span></h2>
+        <p>
+          Agenda: mapa, pegar y colgar (página <span data-pag="agenda"></span>). Recordad «Nuestro plan» y las tiras del camino.
+          Reparte las zonas del cole, por ejemplo: la entrada, el pasillo de Infantil, el patio, el comedor y el gimnasio. Cada
+          grupo hará la pieza de su zona.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>Las piezas del mapa.</strong> Cada grupo dibuja su zona: los sitios con su pictograma y los caminos con flechas.
+          Mientras, preguntad: «¿Esto va al lado o enfrente? ¿Se entiende desde arriba?».
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Pega los pictogramas sobre las marcas que ha hecho el adulto y une los puntos del camino con una cera.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Decide con su grupo dónde va cada sitio, lo pega y dibuja el camino con flechas.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Añade puertas, escaleras, la rampa y otras referencias, y completa la leyenda con símbolos propios.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">15 minutos</span></h2>
+        <p>
+          Unid las piezas en el suelo como un puzle, pegad la leyenda y la estrella «Estás aquí»: es el gran mapa. Colgadlo donde
+          decidió el equipo directivo. Después, cada grupo pone con su adulto las señales de su zona: a la altura de los ojos de
+          los pequeños y sin tapar las señales de evacuación.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">8.3</span> Cada grupo hace una pieza del mismo mapa: todas hacen falta.</li>
+            <li><span class="chip chip--dua">6.3</span> La leyenda ordena lo que significa cada símbolo.</li>
+            <li><span class="chip chip--dua">5.2</span> Pegar, dibujar y escribir: varias herramientas.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 2.6</span> ¿Aporta ideas y escucha las de su grupo? ¿Explica por qué un sitio va ahí?</li>
+            <li><span class="chip chip--crr">CRR 3.4</span> ¿Participa en la pieza del mapa con distintos materiales y técnicas?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TEA:</b> un encargo visual en su grupo (pegar los pictogramas) y aviso antes de salir a poner las señales.</li>
+            <li><b>Motora:</b> la pieza en una mesa a su altura, en vez de en el suelo.</li>
+            <li><b>Discapacidad intelectual:</b> marcas donde pegar y una pieza terminada como modelo.</li>
+            <li><b>Altas capacidades:</b> mide en pasos la distancia entre dos sitios y la apunta en el mapa.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 8
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 8 de 8"><small>Sesión</small><span>8</span></p>
+        <div>
+          <h1>¡Ruta guiada!</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 45 minutos</span>
+            <span><b>Grupo:</b> parejas con la clase de 3 años, en grupos con un adulto; asamblea</span>
+            <span><b>Espacio:</b> el cole</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> guiar a los más pequeños con el mapa y las señales, comprobar si se entienden y valorar lo aprendido.
+        <span class="chip chip--ca">CA 2.2</span><span class="chip chip--ca">CA 4.1</span><span class="chip chip--crr">CRR 3.1</span><span class="chip chip--dee">DEE 2.6</span>
+        <br /><strong>Materiales:</strong> el gran mapa y las señales ya puestas; gomets; la autoevaluación (página
+        <span data-pag="autoevaluacion"></span>) y la nota para las familias (página <span data-pag="familias"></span>), una por
+        niño o niña.
+        <span class="antes"><strong>Antes:</strong> acuerda con la tutora o el tutor de 3 años la hora, las parejas y los adultos
+        de cada grupo. Si en otras clases hay alumnado recién llegado, invítalo también.</span>
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Agenda: guiar, pensar y camino a casa (página <span data-pag="agenda"></span>). En la clase de 3 años, el grupo presenta
+          el mapa: «Esta estrella dice dónde estamos». Cada niño o niña de 5 años conoce a su pareja y repasan las normas: de la
+          mano, despacio y esperando.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <p>
+          <strong>La ruta.</strong> Grupos de 4 o 5 parejas, cada uno con un adulto y un orden distinto. En cada sitio, quien
+          tiene 5 años enseña la señal y pregunta: «¿Qué sitio es?». Si su pareja no la entiende, lo recuerdan para mejorarla.
+        </p>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Guía de la mano a su pareja a 1 o 2 sitios, junto al adulto, y le enseña la señal.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Guía a 3 sitios, enseña cada señal y explica qué se hace allí.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Explica el camino con palabras de lugar («ahora a la derecha») y marca con un gomet en el mapa las señales que no se entendieron.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Ya en clase: «¿Lo han entendido? ¿Qué cambiaríamos?». Apuntad las mejoras. Cada niño o niña hace su autoevaluación:
+          léela fila a fila. Reparte la nota para las familias: el reto sigue en el camino de casa al cole.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">9.3</span> Pensar juntos qué ha funcionado y qué mejorar.</li>
+            <li><span class="chip chip--dua">8.4</span> La clase ayuda a otra: el cole es de todos.</li>
+            <li><span class="chip chip--dua">7.2</span> Lo que han hecho sirve de verdad.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--ca">CA 2.2</span> ¿Ofrece ayuda sin hacerlo todo por su pareja?</li>
+            <li><span class="chip chip--ca">CA 4.1</span> ¿Espera y adapta su paso al de su pareja?</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Explica el camino con orden y palabras de lugar?</li>
+            <li><span class="chip chip--dee">DEE 2.6</span> ¿Saca una conclusión para mejorar el mapa o las señales?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TEA:</b> pareja y ruta conocidas de antemano; si le cuesta dar la mano, que guíe con el mapa.</li>
+            <li><b>TDAH:</b> que lleve el mapa del grupo.</li>
+            <li><b>Recién llegados:</b> guía junto a un compañero o compañera, con las tarjetas «¡Hola!» y «Baño» del kit de bienvenida.</li>
+            <li><b>Auditiva:</b> acordad gestos para «para», «sigue» y «mira».</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         EVALUACIÓN (1): MOMENTOS, AUTOEVALUACIÓN Y PRÁCTICA DOCENTE
+         ====================================================================== -->
+    <section class="hoja guia-texto">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Evaluación</p>
+        <h1>Observar para ajustar</h1>
+        <p class="entradilla">
+          En Infantil la evaluación es «global, continua y formativa», y «la observación directa y sistemática constituirá la
+          técnica principal» (Decreto 196/2022, art. 14.1). Se toman como referencia los criterios del ciclo (art. 14.2).
+        </p>
+      </div>
+
+      <h2 style="margin-top: 0">Momentos</h2>
+      <div class="momentos">
+        <div>
+          <h3>Inicial · sesión 1</h3>
+          <p>En la asamblea, anota qué sitios del cole conoce cada niño o niña y cómo explica dónde están.</p>
+        </div>
+        <div>
+          <h3>Continua · sesiones 2 a 7</h3>
+          <p>Cada sesión dice qué observar. Anota en el registro si lo hace solo, con ayuda o aún no, y en qué nivel.</p>
+        </div>
+        <div>
+          <h3>Final · sesión 8</h3>
+          <p>La ruta con los pequeños, la autoevaluación del alumnado y el registro completo. Compara con la evaluación inicial.</p>
+        </div>
+      </div>
+
+      <h2>Instrumentos</h2>
+      <ul>
+        <li><strong>Registro del grupo</strong> (página <span data-pag="registro"></span>): un indicador por criterio, 25 filas.</li>
+        <li><strong>Producciones:</strong> la hoja de ruta, la tira del camino, la señal y la pieza del mapa. Si las fotografías, que sean solo las producciones.</li>
+        <li><strong>Autoevaluación con pictogramas</strong> (página <span data-pag="autoevaluacion"></span>) y la conversación final de la sesión 8.</li>
+      </ul>
+
+      <h2>La autoevaluación del alumnado</h2>
+      <p>
+        En la sesión 8, cada niño o niña rodea o colorea una opción en cada fila. Léela con el grupo, fila a fila, y anota lo que
+        digan. No hay caras tristes: ninguna respuesta es mala.
+      </p>
+      <div class="tres-opciones">
+        <figure><img src="pictogramas/6632.png" alt="" /><img src="pictogramas/7310.png" alt="" /><figcaption>Lo he hecho yo</figcaption></figure>
+        <figure><img src="pictogramas/32648.png" alt="" /><figcaption>Con ayuda</figcaption></figure>
+        <figure><img src="pictogramas/37163.png" alt="" /><figcaption>Quiero practicar más</figcaption></figure>
+      </div>
+
+      <h2>Evalúo mi práctica</h2>
+      <p>Todos los profesionales evalúan su propia práctica educativa (art. 14.3). Al terminar, marca y anota:</p>
+      <ul class="casillas-docente">
+        <li>¿El reto ha tenido sentido para el grupo? ¿Lo recordaban sin que yo lo nombrase?</li>
+        <li>¿Toda la clase ha hecho la misma actividad, cada uno con el apoyo que necesitaba?</li>
+        <li>¿He cambiado de nivel a alguien dentro de la sesión cuando lo he visto preparado?</li>
+        <li>¿Los tiempos han sido realistas? ¿Qué sesión se ha alargado o se ha quedado corta?</li>
+        <li>¿Los paseos se han hecho con seguridad y con los adultos previstos?</li>
+        <li>¿Las señales y el mapa se entienden de verdad? ¿Qué no entendieron los pequeños?</li>
+        <li>¿Me he coordinado lo necesario con la tutora o el tutor de 3 años, el equipo directivo y las familias?</li>
+        <li>¿Qué cambiaría la próxima vez?</li>
+      </ul>
+      <div class="recuadro">
+        <h3 style="margin: 0; font-size: 11pt">Mis notas</h3>
+        <span class="renglon"></span>
+        <span class="renglon"></span>
+        <span class="renglon"></span>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         EVALUACIÓN (2): REGISTRO DEL GRUPO (APAISADA)
+         ====================================================================== -->
+    <section class="hoja registro-hoja">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <h1>Registro del grupo · Exploradores del cole</h1>
+        <p class="leyenda">
+          <strong>✓</strong> lo hace solo · <strong>~</strong> con ayuda · <strong>·</strong> aún no. Añade el nivel en que lo
+          logra: ① ② ③. Escribe solo el nombre o las iniciales y guarda la hoja en el centro.
+        </p>
+      </div>
+      <table class="registro" id="registro">
+        <colgroup>
+          <col style="width: 41mm" />
+        </colgroup>
+        <thead><tr id="registro-cabecera"><th scope="col">Nombre</th></tr></thead>
+        <tbody id="registro-filas"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         ATENCIÓN A LA DIVERSIDAD
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Atención a la diversidad</p>
+        <h1>Si en tu clase hay…</h1>
+        <p class="entradilla">
+          Dos medidas de esta situación para cada necesidad. Describen apoyos, no a los niños y niñas. La atención
+          individualizada es «la pauta ordinaria de la acción educativa» (Decreto 196/2022, art. 16.1).
+        </p>
+      </div>
+      <table class="diversidad">
+        <thead>
+          <tr>
+            <th scope="col">Necesidad</th>
+            <th scope="col">Medida 1</th>
+            <th scope="col">Medida 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Alumnado con TEA</th>
+            <td>Anticipa cada salida con fotos del recorrido en la agenda y avisa de los sitios con ruido.</td>
+            <td>Dale un papel fijo y concreto en cada grupo: llevar la hoja de ruta, pegar los pictogramas o leer las tarjetas.</td>
+          </tr>
+          <tr>
+            <th scope="row">TDAH</th>
+            <td>Papeles con movimiento y responsabilidad: robot, quien lleva el mapa o quien avisa en cada parada.</td>
+            <td>Tareas cortas con algo que marcar (un gomet, una cruz) y una zona de juego con límites claros.</td>
+          </tr>
+          <tr>
+            <th scope="row">TDL</th>
+            <td>Frases modelo cortas con palabras de lugar y gesto: «Está detrás de la puerta». Repite ampliando lo que diga.</td>
+            <td>Tarjetas de nociones y de sitios para señalar mientras habla, y el tablero de comunicación a mano.</td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad intelectual</th>
+            <td>Menos sitios (2 o 3) con fotos de su propio cole, y el mismo camino real repetido varias veces.</td>
+            <td>Una instrucción cada vez, con el modelo del adulto y un objeto real del sitio (una cuchara para el comedor).</td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad motora</th>
+            <td>Recorridos con rampa o ascensor, que también salen en el mapa y en la leyenda.</td>
+            <td>Casillas de 60 cm en la cuadrícula y tarjetas grandes con pestaña o velcro, fáciles de coger.</td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad visual</th>
+            <td>Señales con buen contraste y, en su clase, un objeto pegado que se reconozca al tocarlo.</td>
+            <td>Describe el camino con referencias que se oyen o se tocan, y marca la cuadrícula con cinta gruesa o cuerda.</td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad auditiva</th>
+            <td>Instrucciones con tarjeta y gesto, y la cara de quien habla siempre de frente.</td>
+            <td>En los paseos, explica en cada parada y nunca mientras andáis. Acordad gestos para «para» y «sigue».</td>
+          </tr>
+          <tr>
+            <th scope="row">Altas capacidades</th>
+            <td>Retos de diseño: símbolos propios para la leyenda, el camino más corto o el plano de otra planta.</td>
+            <td>Papel de ayudante que explica y comprueba, sin hacer la tarea de otro.</td>
+          </tr>
+          <tr>
+            <th scope="row">Incorporación tardía</th>
+            <td>La palabra del sitio en su lengua, en las señales: es quien más sabe de esa palabra.</td>
+            <td>Un compañero o compañera guía y las tarjetas del kit de bienvenida para pedir y entender.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="caja caja--amarilla detectar">
+        <h3>Detectar a tiempo</h3>
+        <p>
+          Anota lo que ves, cuándo y cuántas veces, sin diagnosticar. Si alguna de estas señales se repite pese a los apoyos,
+          habla con la familia y con el equipo de orientación del centro: en la Región de Murcia, el Equipo de Orientación
+          Educativa y Psicopedagógica (EOEP).
+        </p>
+        <ul>
+          <li>Se desorienta a menudo en sitios que conoce bien.</li>
+          <li>Tropieza mucho, evita las escaleras o pierde el equilibrio al girar.</li>
+          <li>Se acerca mucho a los pictogramas para verlos o no los distingue de lejos.</li>
+          <li>No responde a las instrucciones si no mira a quien habla.</li>
+          <li>No usa palabras de lugar aunque las haya practicado.</li>
+          <li>Lo pasa muy mal en sitios con mucho ruido o mucha gente.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja familias-nota">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Exploradores del cole</h1>
+      <p>En clase estamos haciendo un mapa del cole.</p>
+      <p>Los niños y niñas de 3 años a veces se pierden. Quienes llegan nuevos, también.</p>
+      <p>Vamos a ayudarles.</p>
+
+      <h2><img src="pictogramas/27575.png" alt="" />Qué hacemos en clase</h2>
+      <ul>
+        <li>Jugamos con palabras como delante, detrás o al lado.</li>
+        <li>Paseamos por el cole y hacemos señales para las puertas.</li>
+        <li>Programamos un robot con flechas.</li>
+        <li>Al final, guiamos a los pequeños por el cole.</li>
+      </ul>
+
+      <h2><img src="pictogramas/38917.png" alt="" />Una idea para casa: el camino al cole</h2>
+      <ol>
+        <li>Cuando vengáis al cole, buscad juntos 3 cosas que os ayuden a no perderos. Por ejemplo, una tienda, un árbol o una señal.</li>
+        <li>Preguntad: «¿Por dónde vamos ahora? ¿Qué hay al lado?».</li>
+        <li>Dejad que os guíe un trocito del camino. Siempre de la mano y con cuidado en la calle.</li>
+        <li>Mirad juntos las señales de tráfico y el semáforo. ¿Qué nos dicen?</li>
+      </ol>
+      <p>No hace falta escribir vuestra dirección ni hacer fotos.</p>
+
+      <h2><img src="pictogramas/38351.png" alt="" />¿En casa habláis otra lengua?</h2>
+      <p>Escribid cómo se dicen estas palabras en vuestra lengua. Las pondremos en las señales.</p>
+      <div class="lenguas-casa">
+        <p>baño <i></i></p>
+        <p>patio <i></i></p>
+        <p>comedor <i></i></p>
+      </div>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <span class="renglon"></span>
+        <span class="renglon"></span>
+        <span class="renglon"></span>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Exploradores del cole.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Escrito siguiendo las
+          pautas de lectura fácil. Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados
+          por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: PICTOGRAMAS DE LA AGENDA
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesiones 1 a 8</p>
+        <h1>Pictogramas de la agenda</h1>
+      </div>
+      <p class="tijera">
+        Recorta por la línea de puntos. El número pequeño dice en qué sesiones se usa. Para la tira «Mi día» de la agenda
+        visual, imprímela al 70 %: cada pictograma medirá unos 2 × 2 cm.
+      </p>
+      <ul class="recortables" id="agenda" style="--columnas: 4; --alto: 41.5mm; --picto: 28mm; --letra: 18pt"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: MENSAJE DE LA CLASE DE 3 AÑOS
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 1</p>
+        <h1>El mensaje de la clase de 3 años</h1>
+      </div>
+      <p class="nota-docente">
+        <strong>Para la tutora o el tutor de 3 años:</strong> leed el mensaje en vuestra clase, firmadlo con dibujos y metedlo
+        en un sobre para la clase de 5 años.
+      </p>
+      <div class="carta" id="carta"></div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: TARJETAS DE LOS SITIOS
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesiones 1 y 6</p>
+        <h1>Tarjetas de los sitios del cole</h1>
+      </div>
+      <p class="tijera">
+        Recorta por la línea de puntos. En la sesión 1 se emparejan con las fotos de tu cole; en la 6 marcan los sitios de la
+        cuadrícula.
+      </p>
+      <ul class="recortables" id="sitios" style="--columnas: 2; --alto: 54mm; --picto: 36mm; --letra: 24pt"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: NOCIONES ESPACIALES
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 2</p>
+        <h1>Tarjetas de las nociones espaciales</h1>
+      </div>
+      <p class="tijera">
+        Recorta por la línea de puntos. Imprime 2 copias. Las dos tarjetas en blanco son para otra palabra que uséis en clase.
+      </p>
+      <ul class="recortables" id="nociones" style="--columnas: 4; --alto: 53mm; --picto: 32mm; --letra: 18pt"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: HOJA DE RUTA
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 3</p>
+        <h1>Mi hoja de ruta</h1>
+      </div>
+      <div class="ruta-datos">
+        <p>Me llamo <i></i></p>
+        <p>Grupo <i></i></p>
+      </div>
+      <table class="ruta">
+        <colgroup>
+          <col style="width: 24mm" />
+          <col />
+          <col style="width: 40mm" />
+          <col style="width: 42mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" colspan="2">Sitio</th>
+            <th scope="col">¡Lo encontramos!</th>
+            <th scope="col">¿Tiene señal?</th>
+          </tr>
+        </thead>
+        <tbody id="ruta"></tbody>
+      </table>
+      <p class="pliegue-aviso">Ruta corta: dobla la hoja por la línea roja de puntos y quedan los 3 primeros sitios.</p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: SEÑALES A5 (las crea el script, dos por hoja apaisada)
+         ====================================================================== -->
+    <div id="senales"></div>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: CÓMO MARCAR LA CUADRÍCULA (para el docente)
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Para el docente · Sesión 6</p>
+        <h1>Cómo marcar la cuadrícula del suelo</h1>
+        <p class="entradilla">Unos 15 minutos por cuadrícula. Haz dos, para que nadie espere mucho su turno.</p>
+      </div>
+      <div class="cuadricula-guia">
+        <div>
+          <ol>
+            <li>Elige un sitio llano y despejado: el patio, el gimnasio o el aula sin mesas.</li>
+            <li>Marca un cuadrado de 1,60 × 1,60 m con cinta de carrocero, o con tiza si es en el patio.</li>
+            <li>Divide cada lado en 4 partes de 40 cm y une las marcas: salen 16 casillas. En cada una caben los dos pies de un niño o niña. Gastarás unos 16 m de cinta.</li>
+            <li>Pega con un trozo de cinta las tarjetas de 3 o 4 sitios en algunas casillas: la clase, el baño, el comedor o el patio.</li>
+            <li>Marca la salida con una estrella y una flecha que diga hacia dónde mira el robot al empezar.</li>
+            <li>Junto a la cuadrícula, deja libre una franja del suelo: ahí se ponen en fila las tarjetas del programa, de izquierda a derecha.</li>
+            <li>Antes de empezar, pon un gomet en la mano derecha de cada niño o niña. La tarjeta de girar a la derecha lleva un punto, como el gomet.</li>
+          </ol>
+          <div class="caja caja--azul" style="font-size: 9.5pt; padding: 3mm 4mm">
+            <h3 style="font-size: 11pt; margin-bottom: 1mm">Las reglas del robot</h3>
+            <p style="margin: 0">
+              Hace solo lo que dicen las tarjetas, una cada vez y en orden. «Avanza»: pasa a la casilla de delante. «Gira a la
+              derecha» o «gira a la izquierda»: da un cuarto de vuelta sin cambiar de casilla. Si llega a un borde o a una
+              casilla con obstáculo, se para y el grupo busca el error.
+            </p>
+          </div>
+          <div class="caja caja--verde" style="font-size: 9.5pt; padding: 3mm 4mm">
+            <h3 style="font-size: 11pt; margin-bottom: 1mm">Si el cole tiene un robot de suelo</h3>
+            <p style="margin: 0">
+              Haz otra cuadrícula en papel continuo con casillas del tamaño de su paso: míralo en sus instrucciones. Programad
+              primero con las tarjetas y después pasad las mismas órdenes al robot.
+            </p>
+          </div>
+        </div>
+        <figure>
+          <svg viewBox="0 0 160 160" role="img" aria-labelledby="cuadricula-titulo">
+            <title id="cuadricula-titulo">
+              Cuadrícula de 4 por 4 casillas. La salida, con una estrella, está abajo a la izquierda y el robot mira hacia
+              arriba. El baño está dos casillas más arriba y una a la derecha. Un camino de puntos sube dos casillas y gira a la
+              derecha hasta el baño.
+            </title>
+            <g fill="none" stroke="#1e2b55" stroke-width="1.2">
+              <rect x="0.6" y="0.6" width="158.8" height="158.8" />
+              <path d="M40 0.6V159.4M80 0.6V159.4M120 0.6V159.4M0.6 40H159.4M0.6 80H159.4M0.6 120H159.4" />
+            </g>
+            <path d="M20 128 V60 H52" fill="none" stroke="#e8553e" stroke-width="2.4" stroke-dasharray="5 4" stroke-linecap="round" />
+            <path d="M51 53 L60 60 L51 67" fill="none" stroke="#e8553e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M20 133l3.2 7 7.6.7-5.7 5 1.7 7.5-6.8-4-6.8 4 1.7-7.5-5.7-5 7.6-.7z"
+              fill="#f6c12e"
+              stroke="#1e2b55"
+              stroke-width="1.2"
+              stroke-linejoin="round"
+            />
+            <path d="M20 128 v-12 m-5 5 l5 -6 l5 6" fill="none" stroke="#1e2b55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <image href="pictogramas/38603.png" x="45" y="45" width="30" height="30" />
+            <image href="pictogramas/33064.png" x="125" y="5" width="30" height="30" />
+            <image href="pictogramas/5970.png" x="85" y="125" width="30" height="30" />
+          </svg>
+          <figcaption>Ejemplo: de la salida (estrella) al baño. El programa tiene 4 tarjetas:</figcaption>
+          <ol class="programa-ejemplo" id="programa-ejemplo"></ol>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: TARJETAS DE FLECHAS
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 6</p>
+        <h1>Tarjetas de flechas para programar</h1>
+      </div>
+      <p class="tijera">Recorta por la línea de puntos. Imprime 2 copias, una para cada cuadrícula.</p>
+      <ul class="recortables" id="flechas" style="--columnas: 4; --alto: 53mm; --picto: 30mm; --letra: 18pt"></ul>
+      <p class="atribucion">Las flechas son de IdEducando.</p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: LEYENDA DEL MAPA
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 7</p>
+        <h1>Leyenda y pictogramas para el mapa</h1>
+      </div>
+      <p class="tijera">Recorta la leyenda entera y pégala en una esquina del mapa. Los pictogramas de abajo van en el mapa, en su sitio.</p>
+      <div class="leyenda-mapa">
+        <h2>Leyenda de nuestro mapa</h2>
+        <ul id="leyenda"></ul>
+      </div>
+      <p class="tijera">Para pegar en el mapa: recorta por la línea de puntos.</p>
+      <ul class="pegatinas" id="pegatinas"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La
+        estrella y el camino son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLE: AUTOEVALUACIÓN
+         ====================================================================== -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 8</p>
+        <h1>¿Cómo lo he hecho?</h1>
+      </div>
+      <div class="ruta-datos" style="grid-template-columns: minmax(0, 1fr)">
+        <p>Me llamo <i></i></p>
+      </div>
+      <table class="autoevaluacion">
+        <thead>
+          <tr>
+            <th scope="col"><span class="tijera" style="font-family: var(--texto); font-weight: 400; font-size: 9.5pt">Rodea o colorea un dibujo en cada fila.</span></th>
+            <th scope="col" class="dos"><img src="pictogramas/6632.png" alt="" /><img src="pictogramas/7310.png" alt="" /><br />Lo he hecho yo</th>
+            <th scope="col"><img src="pictogramas/32648.png" alt="" />Con ayuda</th>
+            <th scope="col"><img src="pictogramas/37163.png" alt="" />Quiero practicar más</th>
+          </tr>
+        </thead>
+        <tbody id="autoevaluacion"></tbody>
+      </table>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja creditos-hoja">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Para terminar</p>
+        <h1>Fuentes y créditos</h1>
+      </div>
+      <div class="creditos">
+        <p>
+          <strong>Exploradores del cole: situación de aprendizaje para 5 años, con DUA y multinivel.</strong> IdEducando, octubre
+          de 2026. <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente. Ficha y novedades:
+          <span class="url">ideducando.es/material-gratuito/situacion-aprendizaje-5-anos-mapa-del-cole</span>
+        </p>
+
+        <h2>Currículo y normativa</h2>
+        <p>
+          Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación
+          Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: artículos 4.6, 7,
+          14, 16 y 17.3; anexo I; Crecimiento en Armonía, págs. 33078 y 33083 a 33086; Descubrimiento y Exploración del Entorno,
+          págs. 33090, 33091 y 33094 a 33097; Comunicación y Representación de la Realidad, págs. 33102 a 33104 y 33107 a
+          33110; anexo III, pág. 33111.
+        </p>
+        <p>
+          Real Decreto Legislativo 1/2013, de 29 de noviembre, texto refundido de la Ley General de derechos de las personas con
+          discapacidad y de su inclusión social, artículo 2 k), en la redacción de la Ley 6/2022, de 31 de marzo (BOE núm. 78,
+          de 1 de abril de 2022). Convención sobre los derechos de las personas con discapacidad (ONU, 2006), artículo 9:
+          instrumento de ratificación en el BOE núm. 96, de 21 de abril de 2008.
+        </p>
+        <p>
+          Convocatoria de oposiciones: BORM n.º 18, de 23 de enero de 2026, anexo XVII, «Cuerpo de Maestros. 597031 - Educación
+          Infantil», págs. 1720 a 1724.
+        </p>
+
+        <h2>Diseño Universal para el Aprendizaje y enseñanza multinivel</h2>
+        <p>
+          CAST (2024). <em>Pautas para el Diseño Universal para el Aprendizaje, versión 3.0.</em> udlguidelines.cast.org/es.
+          Collicott, J. (1991). Implementing multi-level instruction: Strategies for classroom teachers. En G. L. Porter y D.
+          Richler (Eds.), <em>Changing Canadian Schools: Perspectives on disability and inclusion</em> (pp. 191-218). Roeher
+          Institute. Inclusive Schools Network (2011). <em>Using multi-level instruction for a classroom of diverse learners.</em>
+          inclusiveschools.org.
+        </p>
+
+        <h2>Accesibilidad cognitiva, mapas y señales</h2>
+        <p>
+          Belinchón, M., Casas, S., Díez, C. y Tamarit, J. (2014). <em>Accesibilidad cognitiva en los centros educativos.</em>
+          Ministerio de Educación, Cultura y Deporte (Guías prácticas de orientaciones para la inclusión educativa), págs. 25 y
+          26. Subcomisión de Accesibilidad Cognitiva del Comité Español de Representantes de Personas con Discapacidad (CERMI)
+          (2019). <em>Cómo usar los pictogramas.</em> Versión en lectura fácil de Plena inclusión España. Equipo ARASAAC
+          (2026). «7.3 Accesibilidad cognitiva con pictogramas en los centros educativos». En <em>Arasaac</em>, Librería CATEDU,
+          libros.catedu.es.
+        </p>
+        <p>
+          El mensaje de la clase de 3 años y la nota para las familias siguen las pautas de la norma UNE 153101:2018 EX,
+          <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. No están validados con personas
+          lectoras.
+        </p>
+
+        <h2>Pictogramas e ilustraciones</h2>
+        <p>
+          «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+          ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el material,
+          mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. La ilustración de la portada, las flechas,
+          la estrella y el camino son de IdEducando.
+        </p>
+
+        <h2>Licencia</h2>
+        <p>
+          Licencia CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando, sin fines comerciales y con la
+          misma licencia.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // Páginas de cada parte. Si cambia el orden o el número de hojas, se cambia aquí y en la ficha.
+      const PAGINAS = {
+        curriculo: 5,
+        curriculoFin: 6,
+        evaluacion: 15,
+        registro: 16,
+        diversidad: 17,
+        familias: 18,
+        agenda: 19,
+        mensaje: 20,
+        sitios: 21,
+        nociones: 22,
+        ruta: 23,
+        senalesIni: 24,
+        senalesFin: 28,
+        cuadricula: 29,
+        flechas: 30,
+        leyenda: 31,
+        autoevaluacion: 32,
+      };
+      for (const el of document.querySelectorAll('[data-pag]')) el.textContent = PAGINAS[el.dataset.pag];
+
+      const pic = (id, alt = '') => `<img src="pictogramas/${id}.png" alt="${alt}">`;
+
+      // ---------- Agenda: [palabra, pictograma, sesiones] ----------
+      const AGENDA = [
+        ['asamblea', 27575, '1 · 2 · 3 · 5 · 6'],
+        ['carta', 2688, '1'],
+        ['fotos', 7107, '1'],
+        ['jugar', 6537, '2'],
+        ['tesoro', 6229, '2'],
+        ['pasear', 29951, '3'],
+        ['explorar', 9927, '3'],
+        ['construir', 4935, '4'],
+        ['ordenar', 25282, '4'],
+        ['dibujar', 8088, '4'],
+        ['recoger', 8680, '4'],
+        ['señales', 35505, '5'],
+        ['escribir', 2380, '5'],
+        ['robot', 6208, '6'],
+        ['pensar', 38796, '6 · 8'],
+        ['mapa', 24161, '7'],
+        ['pegar', 2511, '7'],
+        ['colgar', 36035, '7'],
+        ['guiar', 8994, '8'],
+        ['camino a casa', 38917, '8'],
+      ];
+      document.getElementById('agenda').innerHTML = AGENDA.map(
+        ([palabra, id, sesiones]) =>
+          `<li><small>${sesiones}</small>${pic(id, `Pictograma de ${palabra}`)}<span>${palabra}</span></li>`,
+      ).join('');
+
+      // ---------- Sitios del cole ----------
+      const SITIOS = [
+        ['clase', 9814],
+        ['baño', 38603],
+        ['comedor', 5970],
+        ['patio', 33064],
+        ['biblioteca', 6063],
+        ['gimnasio', 33076],
+        ['secretaría', 34784],
+        ['conserjería', 5972],
+      ];
+      document.getElementById('sitios').innerHTML = SITIOS.map(
+        ([palabra, id]) => `<li>${pic(id, `Pictograma de ${palabra}`)}<span>${palabra}</span></li>`,
+      ).join('');
+
+      // ---------- Nociones espaciales ----------
+      const NOCIONES = [
+        ['arriba', 5388],
+        ['abajo', 5355],
+        ['encima', 5451],
+        ['debajo', 5437],
+        ['delante', 5438],
+        ['detrás', 5443],
+        ['dentro', 5439],
+        ['fuera', 5475],
+        ['al lado', 5367],
+        ['entre', 7765],
+        ['cerca', 30383],
+        ['lejos', 30385],
+        ['a la izquierda', 9203],
+        ['a la derecha', 9202],
+      ];
+      document.getElementById('nociones').innerHTML =
+        NOCIONES.map(([palabra, id]) => `<li>${pic(id, `Pictograma de ${palabra}`)}<span>${palabra}</span></li>`).join('') +
+        '<li class="vacia"><div class="hueco"></div><span></span></li>'.repeat(2);
+
+      // ---------- Hoja de ruta: los 3 primeros forman la ruta corta ----------
+      const RUTA = [
+        ['clase de 3 años', 9814],
+        ['baño', 38603],
+        ['patio', 33064],
+        ['comedor', 5970],
+        ['gimnasio', 33076],
+        ['biblioteca', 6063],
+        ['secretaría', 34784],
+        ['conserjería', 5972],
+      ];
+      document.getElementById('ruta').innerHTML = RUTA.map(
+        ([palabra, id], i) =>
+          `<tr${i === 2 ? ' class="pliegue"' : ''}><td class="picto">${pic(id, `Pictograma de ${palabra}`)}</td>
+          <td class="sitio">${palabra}</td><td class="encontrado"><span></span></td>
+          <td class="sino">${pic(5584, 'Sí')}${pic(5526, 'No')}</td></tr>`,
+      ).join('');
+
+      // ---------- Mensaje de la clase de 3 años ----------
+      const CARTA = [
+        [6522, 'hola', '¡Hola, clase de 5 años!'],
+        [6454, 'colegio', 'Somos la clase de 3 años.<br>El cole es muy grande.'],
+        [36295, 'perdido', 'A veces nos perdemos.'],
+        [38603, 'baño', '¿Dónde está el baño?'],
+        [5970, 'comedor', '¿Y el comedor? ¿Y el patio?'],
+        [32648, 'ayudar', '¿Nos ayudáis?'],
+        [8129, 'gracias', '¡Gracias!<br>La clase de 3 años'],
+      ];
+      document.getElementById('carta').innerHTML =
+        CARTA.map(([id, alt, texto]) => `<div class="linea">${pic(id, `Pictograma de ${alt}`)}<p>${texto}</p></div>`).join('') +
+        '<div class="firma">Lo firmamos con un dibujo:</div>';
+
+      // ---------- Flechas para programar (dibujadas para IdEducando) ----------
+      const FLECHA = {
+        avanza:
+          '<path d="M50 8 L84 46 H62 V92 H38 V46 H16 Z" fill="#1e2b55"/>',
+        derecha:
+          '<path d="M34 94 V54 Q34 32 56 32 H64" fill="none" stroke="#1e2b55" stroke-width="16" stroke-linejoin="round"/><path d="M60 10 L94 32 L60 54 Z" fill="#1e2b55"/>',
+        izquierda:
+          '<path d="M66 94 V54 Q66 32 44 32 H36" fill="none" stroke="#1e2b55" stroke-width="16" stroke-linejoin="round"/><path d="M40 10 L6 32 L40 54 Z" fill="#1e2b55"/>',
+      };
+      const svgFlecha = (tipo, titulo) =>
+        `<svg class="flecha" viewBox="0 0 100 100" role="img" aria-label="${titulo}">${FLECHA[tipo]}</svg>`;
+      const tarjetasFlechas = [
+        ...Array(8).fill(['avanza', 'avanza', 'Flecha hacia delante']),
+        ...Array(4).fill(['derecha', 'gira a la derecha', 'Flecha que gira a la derecha']),
+        ...Array(4).fill(['izquierda', 'gira a la izquierda', 'Flecha que gira a la izquierda']),
+      ];
+      document.getElementById('flechas').innerHTML = tarjetasFlechas
+        .map(
+          ([tipo, texto, titulo]) =>
+            `<li>${tipo === 'derecha' ? '<i class="punto" aria-hidden="true"></i>' : ''}${svgFlecha(tipo, titulo)}<span>${texto}</span></li>`,
+        )
+        .join('');
+      document.getElementById('programa-ejemplo').innerHTML = [
+        ['avanza', 'avanza'],
+        ['avanza', 'avanza'],
+        ['derecha', 'gira a la derecha'],
+        ['avanza', 'avanza'],
+      ]
+        .map(([tipo, texto]) => `<li>${svgFlecha(tipo, texto)}${texto}</li>`)
+        .join('');
+
+      // ---------- Leyenda y pictogramas para el mapa ----------
+      const ESTRELLA =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8l3 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.3 5.6 21l1.6-7.1L1.8 9.1l7.2-.7z" fill="#f6c12e" stroke="#1e2b55" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+      const CAMINO =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 18 C 8 4, 14 22, 20 8" fill="none" stroke="#e8553e" stroke-width="2.4" stroke-dasharray="3 2.4" stroke-linecap="round"/><path d="M17 7.5 L21 6 L21.5 10.5" fill="none" stroke="#e8553e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      const LEYENDA = [
+        ...SITIOS.map(([palabra, id]) => [pic(id, `Pictograma de ${palabra}`), palabra]),
+        [ESTRELLA, 'estás aquí'],
+        [CAMINO, 'camino'],
+        [pic(3244, 'Pictograma de puerta'), 'puerta'],
+        [pic(2379, 'Pictograma de escalera'), 'escalera'],
+        [pic(2542, 'Pictograma de rampa'), 'rampa'],
+        [pic(2260, 'Pictograma de ascensor'), 'ascensor'],
+      ];
+      document.getElementById('leyenda').innerHTML = LEYENDA.map(([dibujo, palabra]) => `<li>${dibujo}<span>${palabra}</span></li>`).join('');
+      document.getElementById('pegatinas').innerHTML =
+        SITIOS.map(([palabra, id]) => `<li>${pic(id, `Pictograma de ${palabra}`)}</li>`).join('') +
+        `<li>${ESTRELLA}</li>`.repeat(2);
+
+      // ---------- Autoevaluación ----------
+      const AUTO = [
+        [9927, 'Encuentro los sitios del cole.'],
+        [6208, 'Programo el robot.'],
+        [35505, 'Hago una señal.'],
+        [24161, 'Hago el mapa con mi grupo.'],
+        [8994, 'Ayudo a los pequeños.'],
+      ];
+      document.getElementById('autoevaluacion').innerHTML = AUTO.map(
+        ([id, texto]) =>
+          `<tr><td class="tarea"><div>${pic(id, '')}<span>${texto}</span></div></td>
+          <td class="opcion"><span class="dos">${pic(6632, 'Lo he hecho yo')}${pic(7310, '')}</span></td>
+          <td class="opcion">${pic(32648, 'Con ayuda')}</td>
+          <td class="opcion">${pic(37163, 'Quiero practicar más')}</td></tr>`,
+      ).join('');
+
+      // ---------- Registro del grupo: un indicador por criterio ----------
+      const INDICADORES = [
+        ['ca', 'CA 2.2', 'Ofrece ayuda a los pequeños'],
+        ['ca', 'CA 4.1', 'Espera y respeta su ritmo'],
+        ['ca', 'CA 4.3', 'Explica a quién ayuda una señal'],
+        ['dee', 'DEE 1.3', 'Usa las nociones y se orienta'],
+        ['dee', 'DEE 1.5', 'Ordena los pasos del camino'],
+        ['dee', 'DEE 2.5', 'Programa y corrige las flechas'],
+        ['dee', 'DEE 2.6', 'Coopera y saca conclusiones'],
+        ['crr', 'CRR 3.1', 'Cuenta un camino en orden'],
+        ['crr', 'CRR 3.2', 'Da y sigue instrucciones'],
+        ['crr', 'CRR 3.4', 'Participa en la maqueta y el mapa'],
+        ['crr', 'CRR 4.1', 'Escribe la palabra de la señal'],
+        ['crr', 'CRR 5.1', 'Se interesa por otras lenguas'],
+      ];
+      document.getElementById('registro-cabecera').insertAdjacentHTML(
+        'beforeend',
+        INDICADORES.map(([area, codigo, texto]) => `<th scope="col"><b>${codigo}</b>${texto}</th>`).join(''),
+      );
+      document.getElementById('registro-filas').innerHTML = Array.from(
+        { length: 25 },
+        (_, i) => `<tr><td>${i + 1}</td>${'<td></td>'.repeat(INDICADORES.length)}</tr>`,
+      ).join('');
+
+      // ---------- Señales A5: dos por hoja apaisada ----------
+      const TIJERAS =
+        '<svg class="tijeras" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6.5" r="3"/><circle cx="6" cy="17.5" r="3"/><path d="M8.6 8.2L20 18M8.6 15.8L20 6"/></svg>';
+      const SENALES = [...SITIOS.map(([palabra, id]) => [palabra, id]), [null, null], [null, null]];
+      const contenedor = document.getElementById('senales');
+      for (let h = 0; h < SENALES.length / 2; h++) {
+        const pagina = PAGINAS.senalesIni + h;
+        const caras = SENALES.slice(h * 2, h * 2 + 2)
+          .map(([palabra, id]) => {
+            const dibujo = id
+              ? `<div class="senal__picto">${pic(id, `Pictograma de ${palabra}`)}</div>`
+              : '<div class="senal__picto hueco">Pega o dibuja aquí el pictograma</div>';
+            const texto = palabra
+              ? `<p class="senal__palabra">${palabra.toUpperCase()}</p>`
+              : '<p class="senal__palabra en-blanco"></p>';
+            const extra = palabra === 'clase' ? '<p class="senal__extra">de <i></i></p>' : '';
+            const credito = id
+              ? 'Pictograma: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.'
+              : 'Si usas un pictograma de ARASAAC, cítalo: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.';
+            return `<div class="senal">${dibujo}${texto}${extra}
+              <div class="senal__escribimos"><span>Lo escribimos en clase:</span></div>
+              <p class="senal__lenguas">En otras lenguas de la clase: <i></i></p>
+              <p class="senal__pie">${credito}<br>IdEducando · Licencia CC BY-NC-SA 4.0 · ideducando.es · Página ${pagina}</p></div>`;
+          })
+          .join('');
+        contenedor.insertAdjacentHTML('beforeend', `<section class="hoja-senales">${TIJERAS}${caras}</section>`);
+      }
+    </script>
+  </body>
+</html>
