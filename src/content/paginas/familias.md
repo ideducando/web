@@ -30,6 +30,7 @@ Si no hay diagnóstico, no pasa nada. El material marcado como [Toda la clase (D
 - **[Mi tarjeta de ida y vuelta](/material-gratuito/tarjeta-cole-casa-tdah/).** Una tarjeta diaria para el TDAH que va del cole a casa y vuelve: así el cole y la familia se cuentan cada día cómo ha ido.
 - **[El tren de las sílabas](/material-gratuito/tren-de-las-silabas/).** Juegos cortos para oír las sílabas y los sonidos de las palabras, con una nota para las familias.
 - **[Pausas activas](/material-gratuito/pausas-activas-de-pie-y-sentados/).** Cartas de 1 a 3 minutos para moverse entre tarea y tarea, de pie o sentados.
+- **[Estaciones de matemáticas de otoño](/material-gratuito/estaciones-matematicas-otono/).** Para contar, emparejar y ordenar lo que recogéis en un paseo, con una nota para las familias y una versión con fichas, sin piezas pequeñas.
 - **[¡Hola!](/material-gratuito/kit-bienvenida-alumnado-recien-llegado/).** Si acabáis de llegar a España, tarjetas con pictogramas en seis lenguas y una carta para la familia.
 
 ## Montarlo en casa
@@ -50,6 +51,41 @@ Casi todo se monta con lo mismo:
 - **Usad el mismo código.** Si en el cole usan unos pictogramas, una agenda o unos colores, usad los mismos en casa. Así no tiene que aprender dos maneras de decir lo mismo.
 - **Empezad por una sola cosa,** como la agenda del día o el tablero, y añadid la siguiente cuando ya sea parte del día.
 - **Si hay TDAH,** la [tarjeta de ida y vuelta](/material-gratuito/tarjeta-cole-casa-tdah/) está hecha para que el cole y la casa trabajen juntos.
+
+## Dónde pedir ayuda
+
+En el curso 2024-2025, el 15,6 % del alumnado de España recibió algún apoyo por una necesidad específica de apoyo educativo. En la Región de Murcia, el 19,8 % ([Ministerio de Educación, nota resumen del curso 2024-2025](https://www.educacionfpydeportes.gob.es/dam/jcr:27b3a08d-2d3d-41fd-90e2-30b32e6815cc/2024-25-acneae-nota-resumen.pdf)).
+
+### En el cole
+
+- **Habla con su tutora o su tutor.** Cuéntale lo que veis en casa. La ley os pide informar de las dificultades de vuestros hijos y os da derecho a saber cómo avanzan ([Ley Orgánica del Derecho a la Educación](https://www.boe.es/buscar/act.php?id=BOE-A-1985-12978), artículo 4).
+- **Si hace falta, el cole pide una valoración.** En la Región de Murcia, cuando los apoyos de siempre no bastan, el profesorado la pide al servicio de orientación ([Resolución de 30 de mayo de 2024](https://www.carm.es/web/descarga?ARCHIVO=Res_solicitServOrienta.pdf&ALIAS=ARCH&IDCONTENIDO=190992&IDTIPO=60&RASTRO=c950$m22298,45189)). En Infantil y Primaria lo llevan los equipos de orientación educativa y psicopedagógica (EOEP). Hay equipos específicos de autismo, de TDAH y dificultades de aprendizaje, de discapacidad auditiva, visual y motora, y de altas capacidades ([directorio de la Consejería de Educación](https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298)).
+- **Os informan antes y podéis pedir el informe.** El equipo os explica la valoración en una reunión antes de hacerla ([Resolución de 27 de febrero de 2013](https://www.carm.es/web/descarga?ARCHIVO=resol_ev_psi2013.pdf&ALIAS=ARCH&IDCONTENIDO=92311&IDTIPO=60&RASTRO=c950$m4463,4466)). Después, podéis pedir por escrito a la dirección del cole una copia del informe ([Resolución de 13 de marzo de 2018](https://www.carm.es/web/descarga?ARCHIVO=1824-2018.pdf&ALIAS=ARCH&IDCONTENIDO=143386&IDTIPO=60&RASTRO=c950$m4463,4466)).
+- **Tenéis derecho a participar.** La administración tiene que asegurar que las familias participan en las decisiones sobre la escolarización y que reciben asesoramiento (artículo 71.4 de la [Ley Orgánica de Educación](https://www.boe.es/buscar/act.php?id=BOE-A-2006-7899)). Antes de decidir dónde y cómo se escolariza, os tienen que oír e informar (artículo 74.2).
+
+Si vivís en otra comunidad, el camino es parecido: preguntad en el cole por su equipo de orientación.
+
+### De 0 a 6 años: atención temprana
+
+- **Qué es.** Apoyos para niños y niñas de 0 a 6 años con dificultades en su desarrollo, o con riesgo de tenerlas, y para su familia. En la Región de Murcia es gratuita ([Ley 6/2021 de atención temprana](https://www.boe.es/buscar/act.php?id=BOE-A-2022-864), artículo 5).
+- **Cómo se pide.** La pide la familia, con el informe de pediatría, en la [sede electrónica de la Comunidad Autónoma](https://sede.carm.es/web/pagina?IDCONTENIDO=1273&IDTIPO=240&RASTRO=c$m40288) (trámite 1273) o en una oficina de registro. Podéis elegir centro de desarrollo infantil y atención temprana (CDIAT); si no elegís, os asignan el más cercano. Tienen 40 días hábiles para resolver y no hay que pagar nada.
+- **Dudas.** En el correo [atencion.temprana@carm.es](mailto:atencion.temprana@carm.es) o en el 012 ([página de atención temprana](https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m)).
+
+### Asociaciones de familias
+
+Orientan, acompañan y os ponen en contacto con la entidad más cercana:
+
+- **Autismo:** [Confederación Autismo España](https://autismo.org.es/) y, en la Región, la [Federación de Autismo de la Región de Murcia](https://autismomurcia.org/).
+- **Discapacidad intelectual:** [Plena inclusión](https://www.plenainclusion.org/familias/informacion-orientacion-y-asesoramiento/) y [Plena inclusión Región de Murcia](https://plenainclusionmurcia.org/).
+- **TDAH:** [FEAADAH](https://www.feaadah.org/), la federación española de asociaciones de TDAH, y en Cartagena, [ADAHI](https://www.adahi.es/).
+- **Sordera:** [FIAPAS](https://fiapas.es/redes-de-trabajo/atencion-y-apoyo-a-familias/), con servicios de atención y apoyo a familias.
+- **Discapacidad visual:** la [ONCE](https://www.once.es/servicios-sociales/educacion-inclusiva), que tiene convenios educativos con todas las comunidades autónomas.
+- **Parálisis cerebral:** [Confederación ASPACE](https://aspace.org/centros).
+- **Síndrome de Down:** [DOWN ESPAÑA](https://www.sindromedown.org/familias/).
+
+### Qué es lo esperable a cada edad
+
+En Familia, la web para familias de la Asociación Española de Pediatría, explica cómo se desarrollan la [audición y el lenguaje](https://www.aeped.es/enfamilia/salud-en-familia/desarrollo-audicion-lenguaje) a cada edad. Es orientativo: ante cualquier duda, pregunta a tu pediatra.
 
 ## Lo que estamos preparando
 

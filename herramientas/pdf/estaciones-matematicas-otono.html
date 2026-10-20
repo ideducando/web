@@ -86,7 +86,7 @@
         font-weight: 700;
         font-size: 7.5pt;
         line-height: 1;
-        vertical-align: -0.9mm;
+        vertical-align: baseline;
       }
 
       .nv.n1 {
@@ -102,7 +102,6 @@
         height: 5.2mm;
         clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
         font-size: 7pt;
-        vertical-align: -1.3mm;
       }
 
       .nv.grande {
@@ -270,7 +269,7 @@
       /* ---------- De un vistazo ---------- */
       .datos {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
         gap: 2mm 3mm;
         margin: 0 0 3mm;
         padding: 0;
@@ -443,7 +442,7 @@
 
       .sello__marca {
         position: absolute;
-        right: -2mm;
+        right: 3mm;
         top: -5mm;
         width: 16mm;
         height: 16mm;
@@ -934,7 +933,7 @@
       }
 
       .icono-e5 img + img {
-        margin-left: -6%;
+        margin-left: -8%;
       }
 
       /* ---------- Cabecera de los imprimibles ---------- */
@@ -1314,7 +1313,7 @@
 
       .doble {
         display: grid;
-        grid-template-columns: 30mm 72mm 72mm;
+        grid-template-columns: 37mm 68.5mm 68.5mm;
         grid-template-rows: 21mm 60mm 60mm;
         gap: 1.6mm;
       }
@@ -1347,7 +1346,7 @@
         align-content: center;
         justify-items: center;
         gap: 1.6mm;
-        font-size: 15pt;
+        font-size: 18pt;
       }
 
       .doble .cab img,
@@ -1600,8 +1599,8 @@
 
       .tabla-medir {
         display: grid;
-        grid-template-columns: 33mm repeat(6, 39mm);
-        grid-template-rows: 17mm 19mm;
+        grid-template-columns: 51mm repeat(6, 36mm);
+        grid-template-rows: 18mm 21mm;
         width: 267mm;
         border: 0.35mm dashed var(--suave);
         border-radius: 3mm;
@@ -1631,14 +1630,15 @@
         padding: 0 2mm;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 9.5pt;
-        line-height: 1.1;
+        font-size: 18pt;
+        line-height: 1.05;
         background: var(--t);
       }
 
       .tabla-medir .rot img {
-        width: 8mm;
-        height: 8mm;
+        width: 10mm;
+        height: 10mm;
+        flex: none;
       }
 
       .tabla-medir .mini img,
@@ -1649,8 +1649,8 @@
       }
 
       .tabla-medir .mini svg.barra {
-        width: 28mm;
-        height: 10mm;
+        width: 24mm;
+        height: 8.6mm;
       }
 
       .tabla-medir .escribe::after {
@@ -1693,7 +1693,7 @@
         border-bottom: 1.2mm solid var(--c);
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 16pt;
+        font-size: 18pt;
         line-height: 1.05;
       }
 
@@ -1811,7 +1811,7 @@
         margin: 0;
         font-family: var(--texto);
         font-weight: 700;
-        font-size: 17pt;
+        font-size: 18pt;
         line-height: 1;
       }
 
@@ -1838,8 +1838,8 @@
 
       .grupos {
         display: grid;
-        grid-template-columns: repeat(6, 43mm);
-        gap: 3.2mm;
+        grid-template-columns: repeat(6, 44.5mm);
+        gap: 2mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1850,7 +1850,7 @@
         grid-template-rows: 15mm minmax(0, 1fr);
         height: 48mm;
         margin: 0;
-        padding: 1.6mm 2.4mm;
+        padding: 1.6mm 1.6mm;
         border: 0.35mm dashed var(--suave);
         border-radius: 3mm;
         background: #fff;
@@ -1859,18 +1859,18 @@
       .grupo__cab {
         display: flex;
         align-items: center;
-        gap: 1.6mm;
+        gap: 1.2mm;
         margin: 0;
         font-family: var(--texto);
         font-weight: 700;
-        font-size: 15pt;
+        font-size: 18pt;
         line-height: 1.02;
       }
 
       .grupo__cab img,
       .grupo__cab svg {
-        width: 12.5mm;
-        height: 12.5mm;
+        width: 9.5mm;
+        height: 9.5mm;
         flex: none;
       }
 
@@ -2026,14 +2026,11 @@
         break-inside: avoid;
       }
 
+      /* Bloque normal (sin flex): con flex en columna, Chromium mandaba el contenido a la hoja siguiente al imprimir. */
       .auto-fila .cabeza {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 1mm;
-        height: 41mm;
-        padding: 1.4mm 1mm;
+        display: block;
+        height: 44mm;
+        padding: 2.4mm 1mm 1.4mm;
         border-radius: 3mm;
         background: var(--crema);
         font-family: var(--texto);
@@ -2044,8 +2041,10 @@
       }
 
       .auto-fila .cabeza img {
+        display: block;
         width: 19mm;
         height: 19mm;
+        margin: 0 auto 1.6mm;
       }
 
       .auto-fila .que {
@@ -2333,7 +2332,7 @@
       <div class="fila-dos">
         <div class="caja-mini niveles-caja">
           <h2>Tres niveles en cada estación</h2>
-          <p>Misma meta y misma actividad para todo el grupo, a la vez. El nivel describe la tarea, no al niño o la niña, y nadie tiene un nivel fijo.</p>
+          <p>Misma meta y actividad para todos. El nivel describe la tarea, no al niño o la niña.</p>
           <ul>
             <li><span class="nv n1 medio">1</span><span><b>Con más apoyo:</b> pocas piezas y modelo del adulto.</span></li>
             <li><span class="nv n2 medio">2</span><span><b>Base:</b> lo que se espera para la edad.</span></li>
@@ -2424,12 +2423,12 @@
         <tbody>
           <tr class="e1">
             <th scope="row">1 · ¿Cuántos hay?</th>
-            <td>10 castañas o bellotas en un cuenco.</td>
-            <td>10 castañas.</td>
+            <td>10 castañas, bellotas o macarrones en un cuenco.</td>
+            <td>10 fichas de castaña.</td>
           </tr>
           <tr class="e2">
             <th scope="row">2 · Cada uno con su pareja</th>
-            <td><span class="nv n1">1</span> 3 castañas. <span class="nv n2">2</span> 3 hojas y 3 bellotas. <span class="nv n3">3</span> 2 hojas grandes y 2 pequeñas, 2 castañas grandes y 2 pequeñas, 1 piña grande y 1 pequeña.</td>
+            <td><span class="nv n1">1</span> 3 castañas. <span class="nv n2">2</span> 3 hojas pequeñas y 3 bellotas. <span class="nv n3">3</span> 2 hojas grandes y 2 pequeñas, 2 castañas grandes y 2 pequeñas, 1 piña grande y 1 pequeña.</td>
             <td>19 fichas: las mismas piezas. En las fichas «pequeñas», el dibujo es pequeño.</td>
           </tr>
           <tr class="e3">
@@ -2467,12 +2466,13 @@
           </li>
           <li>
             <strong>Por eso, la versión de otoño:</strong> solo a partir de 3 años, nunca con quien todavía se lleva cosas a la
-            boca y con un adulto sentado en la mesa todo el rato. Si no puede estar, versión segura. Las fichas miden unos 5 cm y no
-            caben en ese cilindro. No usamos botones: la AEP pide no dejar a los niños pequeños jugar con ellos.
+            boca y con un adulto sentado en la mesa todo el rato. Si no puede estar, versión segura. La AEP aconseja intentar evitar
+            las piezas pequeñas en menores de 3 a 5 años: en la clase de 3 años, empieza por la versión segura. Las fichas miden unos
+            5 cm y no caben en ese cilindro. No usamos botones: la AEP pide no dejar a los niños jugar con ellos.
           </li>
           <li>
             <strong>Frutos secos y alergias.</strong> Castañas y bellotas son solo para tocar, nunca para comer. Antes, pregunta a
-            las familias por alergias: hay reacciones alérgicas por tocar un alimento, no solo por comerlo
+            las familias por alergias: la reacción puede llegar por comer el alimento, por tocarlo e incluso por olerlo
             <span class="ref">(Ibáñez Sandín, En Familia, AEP)</span>.
           </li>
           <li>
@@ -2481,7 +2481,7 @@
           </li>
           <li>
             <strong>Lo que recogemos.</strong> Hojas, castañas y piñas, lavadas, bien secas y sin moho. Cuidado con el castaño de
-            Indias, un árbol de parques y jardines: sus semillas se confunden con las castañas y son tóxicas si se comen
+            Indias: sus semillas se confunden con las castañas y son tóxicas si se comen
             <span class="ref">(Poison Control)</span>.
           </li>
           <li>
@@ -2587,7 +2587,7 @@
           <li><b>7.3 Fomentar la alegría y el juego:</b> el otoño y las piezas de verdad convierten la tarea en juego.</li>
           <li><b>8.2 Optimizar los desafíos y el apoyo:</b> tres niveles en cada estación, y se puede subir o bajar.</li>
           <li><b>2.5 Ilustrar a través de múltiples medios:</b> la misma idea con piezas, dibujos, pictogramas, números y palabras.</li>
-          <li><b>4.1 Variar y valorar los métodos de respuesta:</b> poner, señalar, decir o apuntar valen igual.</li>
+          <li><b>4.1 Variar y valorar los métodos de respuesta, navegación y movimiento:</b> poner, señalar, decir o apuntar valen igual.</li>
           <li><b>6.4 Ampliar la capacidad para dar seguimiento al progreso:</b> la tira de comprobar, la tarjeta de pasos y la autoevaluación.</li>
         </ul>
       </div>
@@ -2616,13 +2616,13 @@
         <p><span class="codigo">DEE-A</span> «Funcionalidad de los números en la vida cotidiana». «Cuantificadores básicos contextualizados: muchos-pocos, unos-algunos- varios, más que-menos que, todos-ninguno...».</p>
       </div>
       <div class="material-dos">
-        <div class="version version--otono"><h3>Versión de otoño</h3><p>10 castañas o bellotas, en un cuenco.</p></div>
+        <div class="version version--otono"><h3>Versión de otoño</h3><p>10 castañas, bellotas o macarrones, en un cuenco.</p></div>
         <div class="version version--segura"><h3>Versión segura</h3><p>10 fichas de castaña (página 23).</p></div>
       </div>
       <p class="imprimibles"><strong>Imprimibles:</strong> tarjetas de los niveles 1 y 2 (página 7), tarjetas del nivel 3 y tira de comprobar (página 8).</p>
       <div class="aviso-corto">
         <img src="pictogramas/8674.png" alt="" />
-        <p>Castañas y bellotas son piezas pequeñas y no se comen: úsalas solo con un adulto en la mesa. Si no puede estar, fichas.</p>
+        <p>Castañas, bellotas y macarrones son piezas pequeñas y no se comen: úsalas solo con un adulto en la mesa. Si no puede estar o hay alumnado celíaco, fichas.</p>
       </div>
       <h2>Cómo se juega</h2>
       <ol class="pasos-juego">
@@ -2703,8 +2703,8 @@
         contar bien.
       </p>
       <div class="curriculo">
-        <p><span class="codigo">DEE 1.1</span> «Establecer distintas relaciones entre los objetos a partir de sus cualidades o atributos, mostrando curiosidad e interés». <span class="codigo">DEE 1.2</span> Los cuantificadores: «todas», «ninguna», «sobra», «falta».</p>
-        <p><span class="codigo">DEE-A</span> «Cualidades o atributos de objetos y materiales. Relaciones de orden, correspondencia, clasificación y comparación».</p>
+        <p><span class="codigo">DEE 1.1</span> «Establecer distintas relaciones entre los objetos a partir de sus cualidades o atributos, mostrando curiosidad e interés». <span class="codigo">DEE 1.2</span> «Emplear los cuantificadores básicos más significativos en el contexto del juego y en la interacción con los demás».</p>
+        <p><span class="codigo">DEE-A</span> «Cualidades o atributos de objetos y materiales. Relaciones de orden, correspondencia, clasificación y comparación». «Cuantificadores básicos contextualizados: muchos-pocos, unos-algunos- varios, más que-menos que, todos-ninguno...».</p>
       </div>
       <div class="material-dos">
         <div class="version version--otono"><h3>Versión de otoño</h3><p><span class="nv n1">1</span> 3 castañas. <span class="nv n2">2</span> 3 hojas pequeñas y 3 bellotas. <span class="nv n3">3</span> 2 hojas grandes y 2 pequeñas, 2 castañas grandes y 2 pequeñas, 1 piña grande y 1 pequeña.</p></div>
@@ -2901,7 +2901,7 @@
       <h2>Los tres niveles</h2>
       <ul class="niveles3">
         <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Por tipo, con 2 cuencos: hojas o castañas.</p></li>
-        <li><h3><span class="nv n2">2</span>Base</h3><p>Por color, con 3 cuencos: hojas rojas, amarillas y marrones. Etiquetas y hojas llevan también el nombre y una marca (corazón, estrella o triángulo): así no depende solo del color.</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>Por color, con 3 cuencos: hojas rojas, amarillas y marrones. Las etiquetas llevan el nombre del color y una marca (corazón, estrella o triángulo), y las fichas, la misma marca: así no depende solo del color.</p></li>
         <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Por dos criterios a la vez, en la tabla de doble entrada: tipo y tamaño.</p><p class="reto">Más reto: clasifica tú en secreto y que adivinen el criterio.</p></li>
       </ul>
       <div class="pie-docente">
@@ -2916,7 +2916,7 @@
         <div class="ajustes">
           <h3>Ajustes</h3>
           <ul>
-            <li><b>Si no distingue bien los colores:</b> que clasifique por las marcas. Nadie tiene que notarlo.</li>
+            <li><b>Si no distingue bien los colores:</b> usa las fichas, que llevan marca, y que clasifique por las marcas. Nadie tiene que notarlo.</li>
             <li><b>Si le cuesta coger piezas:</b> aros grandes en el suelo o cuencos con base antideslizante.</li>
             <li><b>Si habla poco:</b> frase modelo «Va aquí porque es…» y acepta que señale.</li>
           </ul>
@@ -2937,7 +2937,7 @@
         </div>
         <ul class="etiquetas" id="e4-etiquetas" aria-label="Cinco etiquetas: hojas, castañas, hojas rojas, hojas amarillas y hojas marrones"></ul>
       </div>
-      <p class="atribucion">Recorta por la línea de puntos y plastifica. Pictogramas de castaña, grande y pequeño: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las hojas son de IdEducando.</p>
+      <p class="atribucion">Recorta por la línea de puntos y plastifica. En la tabla, las fichas pueden montarse unas sobre otras. Pictogramas de castaña, grande y pequeño: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las hojas son de IdEducando.</p>
     </section>
 
     <!-- ESTACIÓN 5 · DE PEQUEÑO A GRANDE -->
@@ -3037,7 +3037,7 @@
       <p class="imprimibles"><strong>Imprimible:</strong> tiras, dibujos, tarjetas «más larga» y «más corta» y tabla de medir (página 20), con un rotulador de pizarra.</p>
       <div class="aviso-corto">
         <img src="pictogramas/8674.png" alt="" />
-        <p>Las fichas son seguras. Si hacéis el «más reto» con castañas de verdad, un adulto en la mesa.</p>
+        <p>Las fichas son seguras. Si usas castañas de verdad en el «más reto», siéntate en la mesa.</p>
       </div>
       <h2>Cómo se juega</h2>
       <ol class="pasos-juego">
@@ -3052,7 +3052,7 @@
       <ul class="niveles3">
         <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Compara dos tiras: las pone juntas, con un extremo a la par, y señala la más larga con su tarjeta.</p></li>
         <li><h3><span class="nv n2">2</span>Base</h3><p>Mide tiras y dibujos con fichas en fila y lo dice: «Mide 4 fichas».</p></li>
-        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Mide y lo apunta en la tabla con el número, con puntos o con rayas.</p><p class="reto">Más reto: medid con castañas de verdad. ¿Por qué sale distinto?</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Mide y lo apunta en la tabla con el número, con puntos o con rayas.</p><p class="reto">Más reto: que mida la misma tira con castañas de verdad. ¿Por qué sale distinto?</p></li>
       </ul>
       <div class="pie-docente">
         <div class="observar">
@@ -3081,7 +3081,7 @@
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </header>
       <div id="e6-contenido"></div>
-      <p class="atribucion">Recorta por la línea de puntos y plastifica. Mide con las fichas de bellota (página 24): las tiras miden 2, 3, 4 y 5 fichas. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La rama, la bufanda, la hoja y las tiras son de IdEducando.</p>
+      <p class="atribucion">Recorta por la línea de puntos y plastifica. Mide con las fichas de bellota de la página 24, ya plastificadas: las tiras miden 2, 3, 4 y 5 fichas. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La rama, la bufanda, la hoja y las tiras son de IdEducando.</p>
     </section>
 
     <!-- ======================================================================
@@ -3118,10 +3118,7 @@
         <h1>Tarjetas de fiesta <small>Opcionales: para las estaciones 1, 2 y 3</small></h1>
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </header>
-      <p class="pista">
-        Cambian las piezas según lo que celebre tu centro: cuenta tarjetas en la estación 1, empareja tarjetas iguales en la 2 y haz
-        series en la 3, empezándolas tú en la mesa. Recorta, plastifica y guarda cada juego en su sobre.
-      </p>
+      <p class="pista">Úsalas para contar (estación 1), emparejar (2) o hacer series (3), según lo que celebre tu centro. Guarda cada juego en su sobre.</p>
       <ul class="fichas" id="fiesta" aria-label="Veinte tarjetas: diez de Halloween amable y diez de castañas asadas y Todos los Santos"></ul>
       <p class="leyenda-fichas" id="fiesta-leyenda"></p>
     </section>
@@ -3328,8 +3325,8 @@
         <li><span class="pictos"><img src="pictogramas/8328.png" alt="Pictograma de seta" /><img src="pictogramas/11595.png" alt="Pictograma de no tocar" /></span><span>Las setas no se tocan ni se cogen. Algunas son venenosas.</span></li>
         <li><span class="pictos"><img src="pictogramas/8975.png" alt="Pictograma de lavarse las manos" /></span><span>Al volver a casa, lavaos las manos con agua y jabón.</span></li>
       </ul>
-      <p style="margin-top: 2.4mm">En los parques hay un árbol, el castaño de Indias, con semillas que parecen castañas. Son tóxicas. No se comen nunca.</p>
-      <p>Si tiene alergia a algún fruto seco o tiene celiaquía, decídnoslo en el cole.</p>
+      <p style="margin-top: 2.4mm">Hay un árbol, el castaño de Indias, con semillas que parecen castañas. Son tóxicas. No se comen nunca.</p>
+      <p>Si hay alergia a algún fruto seco o celiaquía, decídnoslo en el cole.</p>
 
       <div class="recuadro">
         <h2>Mensaje del cole</h2>
@@ -3359,7 +3356,7 @@
         <p>
           <strong>Estaciones de matemáticas de otoño: seis estaciones en tres niveles, con versión segura.</strong> IdEducando,
           octubre de 2026. <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente. Ficha y novedades:
-          <span class="url">ideducando.es/material-gratuito/estaciones-matematicas-otono</span>
+          <a class="url" href="https://www.ideducando.es/material-gratuito/estaciones-matematicas-otono/">ideducando.es/material-gratuito/estaciones-matematicas-otono</a>
         </p>
 
         <h2>Currículo</h2>
@@ -3396,18 +3393,18 @@
         <h2>Seguridad</h2>
         <ul>
           <li>
-            Real Decreto 1205/2011, de 26 de agosto, sobre la seguridad de los juguetes. BOE n.º 209, de 31 de agosto de 2011:
+            Real Decreto 1205/2011, de 26 de agosto, sobre la seguridad de los juguetes. Boletín Oficial del Estado (BOE) n.º 209, de 31 de agosto de 2011:
             anexo II, parte I, punto 4 d), y anexo V, parte B, punto 1 («No conviene para niños menores de 36 meses»).
           </li>
           <li>
-            Cilindro de piezas pequeñas: 31,7 mm de diámetro y de 25,4 a 57,1 mm de profundidad. Código de Regulaciones Federales de
+            Cilindro de piezas pequeñas: 31,7 mm de diámetro y de 25,4 a 57,1 mm de profundidad. Código de Regulaciones Federales (CFR) de
             Estados Unidos, 16 CFR 1501.4, figura 1. La norma europea UNE-EN 71-1 usa el mismo cilindro: Eurofins (23 de mayo de
             2023), <em>Common reasons toy products fail compliance testing or certification</em>.
           </li>
           <li>
             Asociación Española de Pediatría (AEP), Comité de Soporte Vital (23 de diciembre de 2024). <em>Atragantamiento</em>,
-            documento de la noticia «Medidas efectivas para prevención de atragantamiento en niños»: supervisión constante, objetos
-            redondeados y lisos, botones. aeped.es
+            documento de la noticia «Medidas efectivas para prevención de atragantamiento en niños»: supervisión constante, evitar
+            piezas pequeñas en menores de 3 a 5 años, objetos redondeados y lisos, botones. aeped.es
           </li>
           <li>
             Ibáñez Sandín, M. D. P. <em>Alergia a los alimentos. ¿Qué es?</em> En Familia, AEP: «Estas reacciones se pueden producir
@@ -3424,11 +3421,11 @@
 
         <h2>Materiales de IdEducando que usa</h2>
         <ul>
-          <li>Agenda visual: <span class="url">ideducando.es/material-gratuito/agenda-visual-semanal</span></li>
-          <li>Pausas activas: <span class="url">ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados</span></li>
-          <li>Tablero de comunicación: <span class="url">ideducando.es/material-gratuito/tablero-comunicacion-basico</span></li>
-          <li>Kit de bienvenida: <span class="url">ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado</span></li>
-          <li>Para 4 años, la situación de aprendizaje «Pequeños hortelanos»: <span class="url">ideducando.es/material-gratuito/situacion-aprendizaje-4-anos-huerto</span></li>
+          <li>Agenda visual: <a class="url" href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">ideducando.es/material-gratuito/agenda-visual-semanal</a></li>
+          <li>Pausas activas: <a class="url" href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados</a></li>
+          <li>Tablero de comunicación: <a class="url" href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">ideducando.es/material-gratuito/tablero-comunicacion-basico</a></li>
+          <li>Kit de bienvenida: <a class="url" href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado</a></li>
+          <li>Para 4 años, la situación de aprendizaje «Pequeños hortelanos»: <a class="url" href="https://www.ideducando.es/material-gratuito/situacion-aprendizaje-4-anos-huerto/">ideducando.es/material-gratuito/situacion-aprendizaje-4-anos-huerto</a></li>
         </ul>
 
         <h2>Pictogramas y licencia</h2>
@@ -3517,7 +3514,7 @@
 
       // Tres calabazas de menor a mayor: icono de la estación 5 (tres pictogramas juntos, sin cambiarlos).
       function iconoE5(lado) {
-        const t = [0.3, 0.4, 0.52].map((f) => (lado * f).toFixed(2));
+        const t = [0.28, 0.37, 0.48].map((f) => (lado * f).toFixed(2));
         return `<span class="icono-e5" style="width:${lado}mm;height:${lado}mm">${t.map((x) => `<img src="pictogramas/2679.png" alt="" style="width:${x}mm;height:${x}mm">`).join('')}</span>`;
       }
 
@@ -3532,14 +3529,13 @@
         </svg>`;
       }
 
+      // Bufanda de rayas sin flecos: mide justo 3 fichas de punta a punta, sin dudas sobre dónde empieza.
       function bufanda() {
         const rayas = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-          .map((i) => `<rect x="${12 + i * 14.67}" y="5.5" width="14.67" height="14" fill="${['#e8553e', '#f6c12e', '#2f6fd6'][i % 3]}"/>`)
+          .map((i) => `<rect x="${(0.5 + i * (155 / 9)).toFixed(2)}" y="5.5" width="${(155 / 9).toFixed(2)}" height="14" fill="${['#e8553e', '#f6c12e', '#2f6fd6'][i % 3]}"/>`)
           .join('');
-        const flecos = (x0) =>
-          [0, 1, 2, 3, 4].map((i) => `<path d="M${x0} ${7.5 + i * 2.5} h${x0 < 50 ? 10.6 : -10.6}" stroke="#e8553e" stroke-width="1.5" stroke-linecap="round"/>`).join('');
-        return `<svg viewBox="0 0 156 25" style="width:156mm;height:25mm" role="img" aria-label="Una bufanda de rayas con flecos en los dos extremos">
-          ${flecos(0.8)}${flecos(155.2)}${rayas}<rect x="12" y="5.5" width="132" height="14" fill="none" stroke="#1d1d1b" stroke-width="0.9" rx="1"/>
+        return `<svg viewBox="0 0 156 25" style="width:156mm;height:25mm" role="img" aria-label="Una bufanda de rayas">
+          ${rayas}<rect x="0.5" y="5.5" width="155" height="14" fill="none" stroke="#1d1d1b" stroke-width="0.9" rx="1"/>
         </svg>`;
       }
 
@@ -3693,7 +3689,7 @@
         `<svg class="barra" viewBox="0 0 28 10" aria-hidden="true"><rect x="0.5" y="2" width="${5.2 * n}" height="6" rx="1.4" fill="${tinte}" stroke="${borde}" stroke-width="0.6"/></svg>`;
       const miniTira = ([tipo, n, tinte, borde]) => `<div class="mini sin-arriba">${iconoTira(tipo)}${barra(n, tinte, borde)}</div>`;
       const miniRama = `<svg class="barra" viewBox="0 0 28 10" aria-hidden="true"><path d="M1 6 C 7 5, 12 7, 17 5.5 S 25 5, 27 5.5" stroke="#7a4a22" stroke-width="1.6" stroke-linecap="round" fill="none"/><path d="M10 6 L13 2.5" stroke="#7a4a22" stroke-width="1" stroke-linecap="round"/></svg>`;
-      const miniBufanda = `<svg class="barra" viewBox="0 0 28 10" aria-hidden="true"><rect x="3.5" y="2.5" width="21" height="5" fill="#f6c12e" stroke="#1d1d1b" stroke-width="0.4"/><rect x="10.5" y="2.5" width="7" height="5" fill="#e8553e"/><path d="M0.6 3.5 h2.9 M0.6 5 h2.9 M0.6 6.5 h2.9 M24.5 3.5 h2.9 M24.5 5 h2.9 M24.5 6.5 h2.9" stroke="#e8553e" stroke-width="0.6"/></svg>`;
+      const miniBufanda = `<svg class="barra" viewBox="0 0 28 10" aria-hidden="true"><rect x="1" y="2.5" width="8.6" height="5" fill="#e8553e"/><rect x="9.6" y="2.5" width="8.7" height="5" fill="#f6c12e"/><rect x="18.3" y="2.5" width="8.7" height="5" fill="#2f6fd6"/><rect x="1" y="2.5" width="26" height="5" fill="none" stroke="#1d1d1b" stroke-width="0.4"/></svg>`;
 
       document.getElementById('e6-contenido').innerHTML = `
         <div class="medir-fila">${tiraMedir(TIRAS_MEDIR.bellota)}</div>
@@ -3702,7 +3698,7 @@
         <div class="medir-fila"><div class="dibujo-medir">${rama()}</div>${cmpMini(26162, 'más<br>larga', 'Pictograma de largo')}</div>
         <div class="medir-fila"><div class="dibujo-medir">${bufanda()}</div>${cmpMini(26002, 'más<br>corta', 'Pictograma de corto')}</div>
         <div class="tabla-medir" role="img" aria-label="Tabla de medir: una casilla para escribir cuántas fichas mide cada tira y cada dibujo">
-          <div class="rot sin-arriba sin-izq"><span class="nv n3">3</span>Mido…</div>
+          <div class="rot sin-arriba sin-izq"><span class="nv n3 grande">3</span>Mido…</div>
           ${['castana', 'bellota', 'hoja', 'pina'].map((t) => miniTira(TIRAS_MEDIR[t])).join('')}
           <div class="mini sin-arriba">${miniRama}</div>
           <div class="mini sin-arriba">${miniBufanda}</div>
@@ -3798,14 +3794,14 @@
 
       const FIESTA = [
         [2679, 'calabaza', 3], [5469, 'fantasma', 3], [2903, 'murciélago', 2], [9879, 'gato', 2],
-        [15501, 'castañera', 3], [36354, 'boniato asado', 3], [13366, 'huesos de santo', 2], [3102, 'flor', 2],
+        [15501, 'castañera', 3], [36354, 'boniato', 3], [13366, 'huesos de santo', 2], [3102, 'flor', 2],
       ];
       document.getElementById('fiesta').innerHTML = FIESTA.flatMap(([id, nombre, n]) =>
         Array.from({ length: n }, () => `<li class="ficha" aria-label="${nombre}"><img class="g" src="pictogramas/${id}.png" alt=""></li>`),
       ).join('');
       document.getElementById('fiesta-leyenda').innerHTML =
         '<strong>Halloween amable</strong> (filas 1 y 2 y la mitad de la 3): 3 calabazas, 3 fantasmas sonrientes, 2 murciélagos y 2 gatos. ' +
-        '<strong>Castañas asadas y Todos los Santos</strong> (el resto): 3 castañeras, 3 boniatos asados, 2 bandejas de huesos de santo y 2 flores. ' +
+        '<strong>Castañas asadas y Todos los Santos</strong> (el resto): 3 castañeras, 3 boniatos, 2 bandejas de huesos de santo y 2 flores. ' +
         '<span class="atribucion-linea">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</span>';
 
       // ---------------------------------------------------------------- Registro y autoevaluación

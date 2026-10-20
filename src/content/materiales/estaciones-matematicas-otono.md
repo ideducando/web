@@ -4,8 +4,8 @@ resumen: "Seis estaciones manipulativas para Infantil: contar, emparejar, seguir
 seccion: aula
 tipo: juego
 etapas: [infantil]
-necesidades: [toda-la-clase, tea, discapacidad-intelectual, tdl, discapacidad-motora]
-edades: "De 3 a 6 años (la versión segura, también para menores de 3)"
+necesidades: [toda-la-clase, tea, tdah, discapacidad-intelectual, tdl, discapacidad-motora]
+edades: "De 3 a 6 años"
 formato: "PDF imprimible (A4)"
 paginas: 32
 archivo: /descargas/estaciones-matematicas-otono.pdf
@@ -19,12 +19,13 @@ necesitas:
   - "20 sobres o bolsas con cierre: 3 por estación y 2 para las tarjetas"
   - "6 cuencos, o 1 cuenco y 5 aros de psicomotricidad"
   - "1 temporizador visual o un reloj de arena, y 1 rotulador de pizarra"
-  - "Para la versión de otoño: 30 castañas, 10 bellotas, 30 hojas secas pequeñas (10 rojas, 10 amarillas y 10 marrones), 5 piñas pequeñas y 5 calabacitas"
+  - "Tijeras o una guillotina, e impresora, mejor a color"
+  - "Para la versión de otoño: 30 castañas, 10 bellotas, 30 hojas secas de 2 a 5 cm (10 rojas, 10 amarillas y 10 marrones), 5 piñas pequeñas y 5 calabacitas"
 imprimir:
-  - "Páginas 7 a 27 en cartulina, a color y al 100 % («Tamaño real»): así las fichas encajan en los tableros y las tiras. La 27 es opcional."
-  - "En folio: el registro (página 28), una autoevaluación por niño o niña (29) y una nota por familia (31). El resto se puede leer en pantalla."
+  - "En cartulina, a color y al 100 % («Tamaño real»), sin «Ajustar a la página»: páginas 7, 8, 10, 11, 13, 14, 16, 18 y 20 a 27 (la 27 es opcional). Así las fichas encajan en los tableros y en las tiras."
+  - "En folio: el registro (página 28), una autoevaluación por niño o niña (29) y una nota por familia (31). Las hojas del docente se pueden leer en pantalla."
 pasos:
-  - "Imprime en cartulina las páginas 7 a 27, a color y al 100 %. Las apaisadas, la impresora las gira sola."
+  - "Imprime en cartulina las páginas 7, 8, 10, 11, 13, 14, 16, 18 y 20 a 27, a color y al 100 %. Las apaisadas, la impresora las gira sola."
   - "Recorta por la línea de puntos las tarjetas, los tableros, las tiras, las etiquetas y las 80 fichas."
   - "Plastifica dejando 5 mm entre pieza y pieza: caben 15 fichas en cada funda."
   - "Recorta dejando 2 o 3 mm de plástico alrededor y redondea las esquinas: las fichas quedan de unos 5 cm."
@@ -37,13 +38,13 @@ cuidados:
   - "Castañas y bellotas no se comen: consulta antes las alergias con las familias. Con alumnado celíaco, versión segura."
   - "Si una ficha se despega o se rompe, retírala. Todo se limpia con un paño con agua y jabón."
 fuentes:
-  - "Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056), art. 14.1 (pág. 33060), art. 17.3 (pág. 33061), Crecimiento en Armonía (págs. 33083 a 33086) y Descubrimiento y Exploración del Entorno (págs. 33094 a 33097)"
+  - "Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056), art. 14.1 (pág. 33060), art. 17.3 (pág. 33061), Crecimiento en Armonía (págs. 33083 a 33086) y Descubrimiento y Exploración del Entorno (págs. 33094 a 33097)"
   - "CAST (2024). Pautas para el Diseño Universal para el Aprendizaje, versión 3.0. udlguidelines.cast.org/es"
   - "Collicott, J. (1991). Implementing multi-level instruction: Strategies for classroom teachers. En G. L. Porter y D. Richler (Eds.), Changing Canadian Schools: Perspectives on disability and inclusion (pp. 191-218). Roeher Institute"
   - "Inclusive Schools Network (2011). Using multi-level instruction for a classroom of diverse learners. inclusiveschools.org"
   - "Carbonneau, K. J., Marley, S. C. y Selig, J. P. (2013). A meta-analysis of the efficacy of teaching mathematics with concrete manipulatives. Journal of Educational Psychology, 105(2), 380-400. doi:10.1037/a0031084"
-  - "Real Decreto 1205/2011, de 26 de agosto, sobre la seguridad de los juguetes. BOE n.º 209, de 31 de agosto de 2011: anexo II, parte I, punto 4 d), y anexo V, parte B, punto 1"
-  - "Cilindro de piezas pequeñas: 31,7 mm de diámetro y de 25,4 a 57,1 mm de profundidad. Código de Regulaciones Federales de Estados Unidos, 16 CFR 1501.4, figura 1. La norma UNE-EN 71-1 usa las mismas medidas: Eurofins (23 de mayo de 2023), Common reasons toy products fail compliance testing or certification"
+  - "Real Decreto 1205/2011, de 26 de agosto, sobre la seguridad de los juguetes. Boletín Oficial del Estado (BOE) n.º 209, de 31 de agosto de 2011: anexo II, parte I, punto 4 d), y anexo V, parte B, punto 1"
+  - "Cilindro de piezas pequeñas: 31,7 mm de diámetro y de 25,4 a 57,1 mm de profundidad. Código de Regulaciones Federales (CFR) de Estados Unidos, 16 CFR 1501.4, figura 1. La norma UNE-EN 71-1 usa las mismas medidas: Eurofins (23 de mayo de 2023), Common reasons toy products fail compliance testing or certification"
   - "Asociación Española de Pediatría, Comité de Soporte Vital (23 de diciembre de 2024). Atragantamiento. Documento de la noticia «Medidas efectivas para prevención de atragantamiento en niños». aeped.es"
   - "Ibáñez Sandín, M. D. P. Alergia a los alimentos. ¿Qué es? En Familia, Asociación Española de Pediatría. aeped.es/enfamilia (consultado en octubre de 2026)"
   - "Asociación Española de Pediatría, En Familia. Celiacos y dieta sin gluten, y Lavado de manos. aeped.es/enfamilia (consultados en octubre de 2026)"
@@ -66,15 +67,17 @@ Todas las estaciones tienen tres niveles. El nivel cambia el apoyo y la compleji
 
 ## Qué incluye
 
-1. **De un vistazo** (página 3): qué es, para quién, cuánto dura, qué van a aprender y los criterios y saberes del currículo de la Región de Murcia que trabaja, con su texto literal.
-2. **Seguridad y material** (página 4): qué lleva cada estación en las dos versiones y el aviso de seguridad, con sus fuentes.
-3. **Cómo organizarlas** (página 5): rotación, grupos, señal de cambio y papel del adulto.
-4. **Las seis estaciones** (páginas 6 a 20): una hoja para el docente y sus imprimibles en tres niveles, con letra grande para el alumnado.
-5. **Tarjeta de pasos y panel de rotación** (páginas 21 y 22), con pictogramas y tarjetas de grupo con los nombres escritos.
-6. **80 fichas de la versión segura** (páginas 23 a 26), de unos 5 cm, para las seis estaciones.
-7. **Tarjetas de fiesta** (página 27, opcional): Halloween amable y castañas asadas y Todos los Santos.
-8. **Registro de observación** (página 28) y **autoevaluación** con pictogramas (página 29).
-9. **Atención a la diversidad** (página 30) y **nota para las familias** en lectura fácil (página 31).
+1. **Cómo montarlo** (página 2): lo que necesitas, qué imprimir y los pasos.
+2. **De un vistazo** (página 3): qué es, para quién, cuánto dura, qué van a aprender y los criterios y saberes del currículo de la Región de Murcia que trabaja, con su texto literal.
+3. **Seguridad y material** (página 4): qué lleva cada estación en las dos versiones y el aviso de seguridad, con sus fuentes.
+4. **Cómo organizarlas** (página 5): rotación, grupos, señal de cambio y papel del adulto.
+5. **Las seis estaciones** (páginas 6 a 20): una hoja para el docente y sus imprimibles en tres niveles, con letra grande para el alumnado.
+6. **Tarjeta de pasos y panel de rotación** (páginas 21 y 22), con pictogramas y tarjetas de grupo con los nombres escritos.
+7. **80 fichas de la versión segura** (páginas 23 a 26), de unos 5 cm, para las seis estaciones.
+8. **Tarjetas de fiesta** (página 27, opcional): Halloween amable y castañas asadas y Todos los Santos.
+9. **Registro de observación** (página 28) y **autoevaluación** con pictogramas (página 29).
+10. **Atención a la diversidad** (página 30) y **nota para las familias** en lectura fácil (página 31).
+11. **Fuentes y créditos** (página 32).
 
 ## Cómo usarlo
 
@@ -96,15 +99,15 @@ Todas las estaciones tienen tres niveles. El nivel cambia el apoyo y la compleji
 
 ## Seguridad: la versión segura
 
-Las castañas, las bellotas, las piñas pequeñas y la pasta son piezas pequeñas. La versión de otoño es solo a partir de 3 años, nunca con quien todavía se lleva cosas a la boca y con un adulto en la mesa todo el rato. La Asociación Española de Pediatría (AEP) recuerda que la mejor prevención del atragantamiento es la supervisión constante y que los objetos redondos y lisos son los de más riesgo.
+Las castañas, las bellotas, las piñas pequeñas y la pasta son piezas pequeñas. La versión de otoño es solo a partir de 3 años, nunca con quien todavía se lleva cosas a la boca y con un adulto en la mesa todo el rato. La Asociación Española de Pediatría (AEP) recuerda que la mejor prevención del atragantamiento es la supervisión constante y que los objetos redondos y lisos son los de más riesgo. También aconseja intentar evitar las piezas pequeñas en menores de 3 a 5 años: en la clase de 3 años, empieza por la versión segura.
 
-La versión segura cambia las piezas por fichas plastificadas de unos 5 cm con los mismos dibujos. Sirve para menores de 3 años, para quien se lleva cosas a la boca y para clases con alergias o con alumnado celíaco. Si alguien la necesita, úsala con todo el grupo: así nadie trabaja con un material distinto delante de los demás.
+La versión segura cambia las piezas por fichas plastificadas de unos 5 cm con los mismos dibujos. Sirve para la clase de 3 años, para quien aún se lleva cosas a la boca y para clases con alergias o con alumnado celíaco. Si alguien la necesita, úsala con todo el grupo: así nadie trabaja con un material distinto delante de los demás.
 
 Castañas y bellotas son solo para tocar, nunca para comer, y antes hay que consultar las alergias con las familias. Lo que se recoge en el paseo va lavado, seco y sin moho. Las setas, solo dibujadas: nunca se recogen del campo.
 
 ## El DUA y los tres niveles
 
-El Diseño Universal para el Aprendizaje (DUA) propone diseñar desde el principio para toda la clase. Aquí se ve en los tres niveles de cada estación, en las piezas, los dibujos, los números y las palabras que dicen lo mismo, y en las formas de responder: poner, señalar, decir o apuntar. Los niveles se marcan con número y forma (círculo, cuadrado y rombo) y describen la tarea, nunca al niño o la niña. Cada estación trae ajustes para el alumnado con trastorno del espectro del autismo (TEA), trastorno del desarrollo del lenguaje (TDL), discapacidad intelectual o discapacidad motora, entre otros. Para responder sin hablar, tened a mano el [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/).
+El Diseño Universal para el Aprendizaje (DUA) propone diseñar desde el principio para toda la clase. Aquí se ve en los tres niveles de cada estación, en las piezas, los dibujos, los números y las palabras que dicen lo mismo, y en las formas de responder: poner, señalar, decir o apuntar. Los niveles se marcan con número y forma (círculo, cuadrado y rombo) y describen la tarea, nunca al niño o la niña. Cada estación trae ajustes para el alumnado con trastorno del espectro del autismo (TEA), trastorno del desarrollo del lenguaje (TDL), discapacidad intelectual o discapacidad motora, entre otros. Para responder sin hablar, ten a mano el [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/).
 
 Si buscas una propuesta más larga para el aula de 4 años, mira la situación de aprendizaje [«Pequeños hortelanos»](/material-gratuito/situacion-aprendizaje-4-anos-huerto/).
 
