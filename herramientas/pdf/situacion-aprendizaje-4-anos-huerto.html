@@ -1,0 +1,3342 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pequeños hortelanos: situación de aprendizaje para 4 años, con DUA y multinivel · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <link rel="stylesheet" href="situaciones.css" />
+    <style>
+      /* Igual que en los demás materiales: la portada sin márgenes ni pie. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Portada: del huerto a la mesa, en cuatro pasos ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__titulo {
+        font-size: 40pt;
+        line-height: 1.02;
+      }
+
+      .portada__subtitulo {
+        max-width: 92mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .camino {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        z-index: 1;
+      }
+
+      .burbuja {
+        position: absolute;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 4mm 10mm -6mm rgb(30 43 85 / 0.45);
+      }
+
+      .burbuja img {
+        width: 30mm;
+        height: 30mm;
+      }
+
+      .burbuja b {
+        position: absolute;
+        left: -1mm;
+        top: -1mm;
+        display: grid;
+        place-items: center;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 12pt;
+      }
+
+      /* ---------- Páginas de la guía ---------- */
+      .datos ol {
+        margin: 0.5mm 0 0;
+        padding-left: 5mm;
+      }
+
+      .datos ol li {
+        margin: 0 0 0.6mm;
+        padding: 0;
+        border: 0;
+        background: none;
+        font-size: 10pt;
+      }
+
+      .seguridad {
+        padding: 2.8mm 4.5mm;
+        margin: 0 0 1mm;
+      }
+
+      .seguridad h2 {
+        margin: 0 0 1.5mm;
+        font-size: 12pt;
+      }
+
+      .seguridad ul {
+        columns: 2;
+        column-gap: 6mm;
+        margin: 0;
+        padding-left: 4mm;
+        font-size: 9pt;
+        line-height: 1.32;
+      }
+
+      .seguridad li {
+        break-inside: avoid;
+        margin-bottom: 1mm;
+      }
+
+      .vistazo .reto {
+        padding: 3.5mm 5mm;
+        margin-bottom: 3mm;
+      }
+
+      .vistazo .datos {
+        gap: 2mm 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .vistazo .datos > li {
+        padding: 1.8mm 3mm;
+      }
+
+      .junto {
+        white-space: nowrap;
+      }
+
+      .vistazo .mapa-sesiones {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 1.5mm;
+        margin: 3mm 0 0;
+      }
+
+      .vistazo .mapa-sesiones li {
+        padding: 1.6mm 1.8mm;
+      }
+
+      .mapa-sesiones small {
+        display: block;
+        margin-top: 0.4mm;
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      .pensada h2 {
+        font-size: 14pt;
+        margin: 3mm 0 1.6mm;
+      }
+
+      .pensada p {
+        font-size: 9.5pt;
+        line-height: 1.4;
+        margin-bottom: 2mm;
+      }
+
+      .pensada .oposicion p {
+        margin: 0;
+      }
+
+      .curriculo h2 {
+        font-size: 12pt;
+        margin: 3mm 0 1.2mm;
+      }
+
+      .curriculo .lista-corta {
+        font-size: 9pt;
+        line-height: 1.32;
+      }
+
+      .curriculo .lista-corta li {
+        margin-bottom: 0.8mm;
+      }
+
+      .curriculo .tabla-curricular {
+        table-layout: fixed;
+      }
+
+      .curriculo .tabla-curricular td,
+      .curriculo .tabla-curricular th {
+        padding: 1.2mm 1.6mm;
+      }
+
+      .curriculo .tabla-curricular tbody th {
+        width: auto;
+      }
+
+      .curriculo .tabla-curricular tbody th small {
+        display: block;
+        margin-top: 1mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 8.5pt;
+        color: var(--suave);
+      }
+
+      .curriculo .tabla-curricular td p {
+        margin: 0 0 1mm;
+      }
+
+      .lista-corta {
+        margin: 0;
+        padding-left: 4.5mm;
+        font-size: 9.5pt;
+        line-height: 1.38;
+      }
+
+      .lista-corta li {
+        margin-bottom: 1.2mm;
+      }
+
+      .sesion__cuando {
+        margin: -1mm 0 2mm;
+        font-size: 9.5pt;
+        color: var(--suave);
+      }
+
+      .fase ol {
+        padding-left: 5mm;
+      }
+
+      /* ---------- Evaluación ---------- */
+      .evaluacion h2 {
+        font-size: 13.5pt;
+        margin: 3.5mm 0 1.8mm;
+      }
+
+      .momentos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5mm;
+        margin: 0 0 2.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .momentos li {
+        margin: 0;
+        padding: 2.4mm 3mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border-top: 1.2mm solid var(--morado);
+        font-size: 9.5pt;
+        line-height: 1.33;
+      }
+
+      .momentos b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 10.5pt;
+      }
+
+      .evaluacion p {
+        font-size: 10pt;
+        line-height: 1.4;
+        margin-bottom: 2mm;
+      }
+
+      .evaluacion .autoeval li {
+        font-size: 18pt;
+        padding: 2.5mm;
+      }
+
+      .evaluacion .autoeval img {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .linea-escribir {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 2mm 0 0;
+        font-size: 10pt;
+      }
+
+      .linea-escribir span {
+        flex: 1;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 6mm;
+      }
+
+      /* Registro del grupo: página apaisada */
+      .registro .cabecera {
+        margin-bottom: 2mm;
+      }
+
+      .registro .cabecera .rayos {
+        margin-bottom: 2.5mm;
+      }
+
+      .registro .cabecera h1 {
+        font-size: 17pt;
+        margin: 0;
+      }
+
+      .registro .leyenda {
+        margin: 0 0 2mm;
+        font-size: 9.5pt;
+        color: var(--marino);
+      }
+
+      .registro .leyenda .marca-mini {
+        display: inline-grid;
+        place-items: center;
+        width: 4.6mm;
+        height: 4.6mm;
+        margin: 0 0.6mm;
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        vertical-align: -0.8mm;
+      }
+
+      .marca-mini.n1 {
+        background: var(--azul);
+        border-radius: 50%;
+      }
+
+      .marca-mini.n2 {
+        background: var(--verde-texto);
+        border-radius: 0.6mm;
+      }
+
+      .marca-mini.n3 {
+        background: var(--morado);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        width: 5.4mm;
+        height: 5.4mm;
+      }
+
+      .tabla-registro {
+        table-layout: fixed;
+        font-size: 9pt;
+        line-height: 1.2;
+      }
+
+      .tabla-registro th,
+      .tabla-registro td {
+        border: 0.3mm solid var(--linea);
+        padding: 0.8mm 1mm;
+      }
+
+      .tabla-registro thead th {
+        vertical-align: bottom;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 8.5pt;
+        line-height: 1.15;
+        text-align: left;
+      }
+
+      .tabla-registro thead th b {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 9pt;
+      }
+
+      .tabla-registro thead th small {
+        display: block;
+        margin-top: 0.4mm;
+        font-size: 8.5pt;
+      }
+
+      .tabla-registro tbody td {
+        height: 4.9mm;
+        padding: 0 1mm;
+      }
+
+      .tabla-registro tbody td:first-child {
+        text-align: right;
+        color: var(--suave);
+        font-size: 8.5pt;
+      }
+
+      /* ---------- Atención a la diversidad ---------- */
+      .diversidad table {
+        font-size: 9pt;
+        line-height: 1.3;
+      }
+
+      .diversidad tbody th {
+        width: 30mm;
+        font-size: 9.5pt;
+      }
+
+      .diversidad td ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .diversidad td li {
+        margin-bottom: 0.6mm;
+      }
+
+      .diversidad .caja {
+        font-size: 9.5pt;
+        line-height: 1.35;
+        padding: 3mm 4.5mm;
+      }
+
+      .diversidad .caja ul {
+        columns: 2;
+        column-gap: 6mm;
+        margin: 1mm 0 1.5mm;
+        padding-left: 4.5mm;
+      }
+
+      .diversidad .caja li {
+        break-inside: avoid;
+        margin-bottom: 0.8mm;
+      }
+
+      .diversidad .caja p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Para las familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.42;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 14.5pt;
+        margin: 4mm 0 1.5mm;
+      }
+
+      .familias p,
+      .familias ul {
+        margin-bottom: 2mm;
+      }
+
+      .familias ul {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 0.8mm;
+      }
+
+      .partes-casa {
+        display: flex;
+        gap: 4mm;
+        margin: 1mm 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .partes-casa li {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 1.5mm 3mm 1.5mm 1.5mm;
+        border-radius: 3mm;
+        background: var(--verde-tinte);
+        font-size: 12pt;
+      }
+
+      .partes-casa img {
+        width: 13mm;
+        height: 13mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .recuadro {
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        padding: 2.5mm 4mm;
+        margin-top: 2mm;
+      }
+
+      .recuadro h2 {
+        margin: 0 0 1mm;
+      }
+
+      .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .devolver {
+        margin-top: 4mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        font-size: 11pt;
+      }
+
+      .devolver h2 {
+        margin: 0 0 1.5mm;
+        font-size: 12.5pt;
+      }
+
+      .devolver p {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 2mm;
+      }
+
+      .devolver p span.linea {
+        flex: 1;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 6mm;
+      }
+
+      .devolver .casilla {
+        flex: none;
+        width: 4.6mm;
+        height: 4.6mm;
+        margin-bottom: 0.8mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 0.8mm;
+      }
+
+      /* ---------- Imprimibles: cabecera corta ---------- */
+      .imprimible .cabecera {
+        margin-bottom: 2.5mm;
+      }
+
+      .imprimible .cabecera .rayos {
+        margin-bottom: 3mm;
+      }
+
+      .imprimible .cabecera h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .imprimible .tijera {
+        margin-bottom: 2.5mm;
+      }
+
+      /* Todo lo que lee el alumnado: 18 pt o más */
+      .alumno {
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.2;
+      }
+
+      .me-llamo {
+        display: flex;
+        align-items: flex-end;
+        gap: 3mm;
+        margin: 0 0 3mm;
+      }
+
+      .me-llamo span {
+        flex: 1;
+        border-bottom: 0.45mm solid var(--marino);
+        height: 9mm;
+      }
+
+      .para-adulto {
+        margin: 0 0 3mm;
+        font-size: 9.5pt;
+        color: var(--suave);
+      }
+
+      /* Agenda de la situación */
+      .agenda-tarjetas span {
+        font-family: var(--texto);
+      }
+
+      /* Hoja de predicciones */
+      .pred {
+        table-layout: fixed;
+        border-collapse: collapse;
+        margin: 0 0 3mm;
+      }
+
+      .pred th,
+      .pred td {
+        border: 0.45mm solid var(--marino);
+        padding: 4.5mm 2mm;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+      .pred thead th {
+        background: var(--crema);
+        color: var(--marino);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .pred thead img {
+        display: block;
+        width: 16mm;
+        height: 16mm;
+        margin: 0 auto 1mm;
+      }
+
+      .pred tbody th {
+        font-family: var(--texto);
+        font-weight: 700;
+      }
+
+      .vaso {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .vaso__num {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 18pt;
+      }
+
+      .condicion {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .condicion img {
+        width: 26mm;
+        height: 26mm;
+      }
+
+      .tachado {
+        position: relative;
+        display: block;
+        width: 26mm;
+        height: 26mm;
+      }
+
+      .tachado img {
+        position: absolute;
+        inset: 0;
+      }
+
+      .tachado img + img {
+        opacity: 0.9;
+      }
+
+      .opciones {
+        display: flex;
+        justify-content: center;
+        gap: 3mm;
+      }
+
+      .opcion {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        width: 20mm;
+        padding: 3mm 1mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 50%;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .opcion img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .aviso-picto {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 2.5mm 4mm;
+        border-radius: 3mm;
+        background: var(--coral-tinte);
+      }
+
+      .aviso-picto img {
+        width: 18mm;
+        height: 18mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      /* Diario del huerto */
+      .diario-portada {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 46mm;
+        align-items: center;
+        gap: 6mm;
+        height: 112mm;
+        margin: 0 0 4mm;
+        padding: 6mm 8mm;
+        border: 0.6mm solid var(--verde);
+        border-radius: 5mm;
+        background: var(--verde-tinte);
+      }
+
+      .diario-portada h2 {
+        margin: 0 0 6mm;
+        font-size: 30pt;
+        line-height: 1.05;
+      }
+
+      .diario-portada .me-llamo {
+        margin: 0;
+      }
+
+      .diario-portada .dibujo {
+        height: 32mm;
+        margin-top: 5mm;
+        border: 0.45mm dashed var(--verde-texto);
+        border-radius: 3mm;
+        background: #fff;
+        padding: 2mm 3mm;
+        font-size: 14pt;
+        color: var(--suave);
+      }
+
+      .diario-portada img {
+        width: 46mm;
+        height: 46mm;
+        padding: 3mm;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .entrada {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 2.5mm;
+        height: 118mm;
+        margin: 0 0 4mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        break-inside: avoid;
+      }
+
+      .entrada:last-child {
+        margin-bottom: 0;
+      }
+
+      .entrada__dia {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+      }
+
+      .entrada__dia .dia {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 50%;
+        font-size: 18pt;
+      }
+
+      .entrada__dia .fecha {
+        margin-left: auto;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      .entrada__cuerpo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 30mm 36mm;
+        gap: 4mm;
+        min-height: 0;
+      }
+
+      .entrada__dibujo {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 1.5mm;
+      }
+
+      .entrada__dibujo div {
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+      }
+
+      .medida {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        justify-items: center;
+        gap: 1.5mm;
+        text-align: center;
+      }
+
+      .cuadros {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0.8mm;
+      }
+
+      .cuadros i {
+        display: block;
+        width: 9mm;
+        height: 6.4mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 0.6mm;
+      }
+
+      .regado {
+        display: grid;
+        align-content: start;
+        justify-items: center;
+        gap: 2mm;
+        text-align: center;
+      }
+
+      .regado img {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .regado .opciones {
+        gap: 2mm;
+      }
+
+      .regado .opcion {
+        width: 15mm;
+        padding: 1.5mm 0.5mm;
+      }
+
+      .regado .opcion img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      /* Secuencia de plantar y receta: tarjetas con número */
+      .pasos-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(var(--columnas, 2), minmax(0, 1fr));
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-tarjetas li {
+        position: relative;
+        display: grid;
+        grid-template-columns: var(--picto, 32mm) minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        min-height: var(--alto, 56mm);
+        margin: -0.2mm 0 0 -0.2mm;
+        padding: 3mm 3mm 3mm 5mm;
+        border: 0.4mm dashed var(--suave);
+        break-inside: avoid;
+      }
+
+      .pasos-tarjetas img {
+        width: var(--picto, 32mm);
+        height: var(--picto, 32mm);
+        object-fit: contain;
+      }
+
+      .pasos-tarjetas p {
+        margin: 0;
+      }
+
+      .pasos-tarjetas .numero {
+        position: absolute;
+        left: 2.5mm;
+        top: 2.5mm;
+        display: grid;
+        place-items: center;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+      }
+
+      .pasos-tarjetas.verticales li {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        justify-items: center;
+        text-align: center;
+        gap: 2mm;
+        padding: 4mm 3mm 3mm;
+      }
+
+      /* Carteles para las macetas */
+      .carteles {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .carteles li {
+        display: grid;
+        grid-template-columns: 32mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        height: 56mm;
+        margin: -0.2mm 0 0 -0.2mm;
+        padding: 3mm 4mm;
+        border: 0.4mm dashed var(--suave);
+        break-inside: avoid;
+      }
+
+      .carteles img,
+      .carteles .hueco {
+        width: 32mm;
+        height: 32mm;
+      }
+
+      .carteles .hueco {
+        display: grid;
+        place-items: center;
+        border: 0.45mm dashed var(--linea);
+        border-radius: 3mm;
+        font-size: 9pt;
+        color: var(--suave);
+        text-align: center;
+        padding: 2mm;
+      }
+
+      .carteles .planta {
+        margin: 0 0 2mm;
+        font-size: 20pt;
+      }
+
+      .carteles .planta.en-blanco {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+      }
+
+      .carteles .planta.en-blanco span {
+        flex: 1;
+        border-bottom: 0.45mm solid var(--marino);
+        height: 8mm;
+      }
+
+      .carteles .cuidan {
+        margin: 0;
+      }
+
+      .carteles .renglon {
+        height: 9mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .carteles .plante {
+        margin: 2mm 0 0;
+        font-size: 9pt;
+        color: var(--suave);
+      }
+
+      /* Partes de la planta */
+      .partes-titulo {
+        margin: 1mm 0 1.5mm;
+        font-size: 12pt;
+      }
+
+      /* Fichas de la frutería */
+      .fichas {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .fichas li {
+        display: grid;
+        place-items: center;
+        height: 31mm;
+        margin: 0;
+      }
+
+      .fichas .ficha {
+        display: grid;
+        place-items: center;
+        width: 29mm;
+        height: 29mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 50%;
+        background: var(--amarillo-tinte);
+      }
+
+      .fichas svg {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      /* Precios y lista de la compra */
+      .precios,
+      .compra {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .precios li,
+      .compra li {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        gap: 1.5mm;
+        margin: -0.2mm 0 0 -0.2mm;
+        padding: 2.5mm 2mm;
+        border: 0.4mm dashed var(--suave);
+        text-align: center;
+        break-inside: avoid;
+      }
+
+      .precios li {
+        height: 31mm;
+      }
+
+      .compra li {
+        height: 52mm;
+      }
+
+      .precios .cifra,
+      .compra .cifra {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      .puntos {
+        display: flex;
+        gap: 1.5mm;
+      }
+
+      .puntos i {
+        display: block;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: var(--marino);
+      }
+
+      .compra img {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .compra .fila {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      /* Receta */
+      .receta h1.cartel-titulo {
+        margin: 0 0 1mm;
+        font-size: 30pt;
+      }
+
+      .receta h2 {
+        margin: 3mm 0 2mm;
+        font-size: 18pt;
+      }
+
+      .ingredientes {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ingredientes li {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        margin: 0;
+        padding: 2mm 1mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        text-align: center;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .ingredientes img {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .utensilios {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3mm 6mm;
+        margin: 2mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .utensilios li {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-size: 18pt;
+      }
+
+      .utensilios img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .receta .para-adulto {
+        margin-top: 3mm;
+      }
+
+      /* Cuadrante del huerto */
+      .cuadrante {
+        table-layout: fixed;
+      }
+
+      .cuadrante th,
+      .cuadrante td {
+        border: 0.45mm solid var(--marino);
+        padding: 2mm;
+        vertical-align: middle;
+      }
+
+      .cuadrante thead th {
+        text-align: center;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 20pt;
+      }
+
+      .cuadrante thead th:first-child {
+        width: 82mm;
+        text-align: left;
+        font-size: 18pt;
+      }
+
+      .cuadrante tbody th {
+        height: 42mm;
+      }
+
+      .tarea {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .tarea img {
+        width: 20mm;
+        height: 20mm;
+        flex: none;
+      }
+
+      /* Autoevaluación del alumnado */
+      .auto-opciones {
+        display: grid;
+        grid-template-columns: 70mm repeat(3, minmax(0, 1fr));
+        gap: 0;
+        margin: 0;
+      }
+
+      .auto-opciones > div {
+        display: grid;
+        justify-items: center;
+        align-content: center;
+        gap: 1.5mm;
+        padding: 2mm;
+        text-align: center;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .auto-opciones > div img {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .auto-fila {
+        display: grid;
+        grid-template-columns: 70mm repeat(3, minmax(0, 1fr));
+        align-items: center;
+        min-height: 40mm;
+        border-bottom: 0.4mm solid var(--linea);
+      }
+
+      .auto-fila .que {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .auto-fila .que img {
+        width: 22mm;
+        height: 22mm;
+        flex: none;
+      }
+
+      .auto-fila .rodea {
+        display: grid;
+        place-items: center;
+      }
+
+      .auto-fila .rodea span {
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 50%;
+      }
+
+      .auto-fila .rodea img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      /* Fuentes y créditos */
+      .final .creditos {
+        font-size: 9pt;
+        line-height: 1.4;
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0;
+      }
+
+      .final .creditos ul {
+        margin: 0 0 3mm;
+        padding-left: 4.5mm;
+      }
+
+      .final .creditos li {
+        margin-bottom: 1.2mm;
+      }
+
+      .final h2 {
+        font-size: 13pt;
+        margin: 4mm 0 2mm;
+        color: var(--marino);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -50mm; top: 82mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 60mm; height: 60mm; left: -20mm; top: 165mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; right: 18mm; top: 98mm; background: var(--amarillo)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Situación de aprendizaje · 4 años · 8 sesiones</p>
+        <h1 class="portada__titulo">Pequeños<br />hortelanos</h1>
+        <p class="portada__subtitulo">Cuidamos el huerto de la clase y llevamos a la mesa lo que da la tierra.</p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Con el Diseño Universal para el Aprendizaje (DUA) y actividades en tres niveles.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <svg class="camino" viewBox="0 0 210 297" aria-hidden="true">
+        <path
+          d="M136 156 C 158 160, 168 168, 180 180 C 168 196, 150 200, 136 208 C 150 218, 166 224, 180 234"
+          fill="none"
+          stroke="#1e2b55"
+          stroke-width="1.1"
+          stroke-dasharray="0.1 3.2"
+          stroke-linecap="round"
+        />
+      </svg>
+      <div class="burbuja" style="left: 116mm; top: 136mm" aria-hidden="true"><b>1</b><img src="pictogramas/8689.png" alt="" /></div>
+      <div class="burbuja" style="left: 160mm; top: 160mm" aria-hidden="true"><b>2</b><img src="pictogramas/38613.png" alt="" /></div>
+      <div class="burbuja" style="left: 116mm; top: 188mm" aria-hidden="true"><b>3</b><img src="pictogramas/35657.png" alt="" /></div>
+      <div class="burbuja" style="left: 160mm; top: 212mm" aria-hidden="true"><b>4</b><img src="pictogramas/8620.png" alt="" /></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">De un vistazo · Segundo curso del segundo ciclo de Infantil (4 años)</p>
+        <h1>Pequeños hortelanos</h1>
+      </div>
+
+      <div class="reto">
+        <h2>El reto</h2>
+        <p class="reto__pregunta">
+          «Nos ha llegado un sobre lleno de semillas: ¿qué necesitan para crecer y cómo llega a nuestra mesa lo que da la tierra?»
+        </p>
+        <p>
+          <strong>Producto final:</strong> el huerto de la clase (macetas o jardineras que el grupo cuida, con sus carteles), el
+          diario del huerto y un almuerzo saludable preparado por el grupo.
+        </p>
+      </div>
+
+      <ul class="datos">
+        <li><strong>Curso y duración</strong>4 años. 8 sesiones de unos 40 minutos, en unas 3 semanas. El huerto sigue después.</li>
+        <li>
+          <strong>Cómo se evalúa</strong>Observando, con el registro (página 16), el diario y la autoevaluación (página 30).
+        </li>
+        <li>
+          <strong>Áreas</strong><span class="junto"><span class="chip chip--ca">CA</span> Crecimiento en Armonía,</span>
+          <span class="junto"><span class="chip chip--dee">DEE</span> Descubrimiento y Exploración del Entorno</span> y
+          <span class="junto"><span class="chip chip--crr">CRR</span> Comunicación y Representación de la Realidad.</span>
+        </li>
+        <li>
+          <strong>Agrupamientos y espacios</strong>Asamblea, parejas, pequeños grupos de 4 a 6, individual y rincones. En el aula,
+          junto a una ventana, en el rincón del huerto o el patio y en el lavabo.
+        </li>
+        <li class="ancho">
+          <strong>Qué van a aprender</strong>
+          <ol>
+            <li>Agrupar semillas y alimentos por su tamaño, su color, su forma o la parte de la planta que son.</li>
+            <li>Predecir qué necesita una semilla para brotar y comprobarlo cambiando una sola cosa.</li>
+            <li>Medir una planta con cubos o tiras de papel y registrarlo en un diario.</li>
+            <li>Plantar y cocinar siguiendo pasos con pictogramas, con higiene y con seguridad.</li>
+            <li>Usar números y cuantificadores al comprar, y contar a otros lo que han descubierto.</li>
+          </ol>
+        </li>
+        <li class="ancho">
+          <strong>Otros materiales que aprovecha</strong>De IdEducando:
+          <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a>,
+          <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">pausas activas</a> y
+          <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>. Tarjetas
+          de la agenda: página 19.
+        </li>
+      </ul>
+
+      <div class="caja caja--coral seguridad">
+        <h2>Seguridad: léelo antes de empezar</h2>
+        <ul>
+          <li>
+            <strong>Antes de la sesión 1</strong>, consulta alergias e intolerancias con las familias (página 18) y en la ficha de
+            salud: las legumbres y el maíz también son alimentos. Alternativa segura, sin señalar a nadie.
+          </li>
+          <li>
+            <strong>Nada de frutos secos ni cacahuetes:</strong> la Agencia Española de Seguridad Alimentaria y Nutrición (AESAN)
+            pide evitarlos en menores de 5 años por el riesgo de asfixia.
+          </li>
+          <li>
+            Semillas con supervisión: nada a la boca ni a la nariz; los germinados no se comen. Manos con jabón tras tocar tierra.
+            Plantas no tóxicas: pregunta en el vivero.
+          </li>
+          <li>
+            Cuchillos de plástico de punta redonda, solo para fruta blanda; lo duro lo corta un adulto. Uvas, peladas, sin semillas y
+            en cuatro trozos a lo largo, como aconseja la Asociación Española de Pediatría (AEP).
+          </li>
+        </ul>
+      </div>
+
+      <ol class="mapa-sesiones" aria-label="Las 8 sesiones">
+        <li><b>1</b>Un sobre misterioso</li>
+        <li><b>2</b>¿Qué necesita una semilla?</li>
+        <li><b>3</b>El diario del huerto <small>Cuando brote la semilla</small></li>
+        <li><b>4</b>¡A plantar!</li>
+        <li><b>5</b>¿Qué parte de la planta me como?</li>
+        <li><b>6</b>La frutería de la clase <small>El día antes de la 7</small></li>
+        <li><b>7</b>Cocinamos sano <small>El mismo día que la 8</small></li>
+        <li><b>8</b>Del huerto a la mesa <small>Con el almuerzo</small></li>
+      </ol>
+    </section>
+
+    <!-- ======================================================================
+         CÓMO ESTÁ PENSADA: DUA Y MULTINIVEL
+         ====================================================================== -->
+    <section class="hoja pensada">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Cómo está pensada</p>
+        <h1>Un huerto de verdad para toda la clase</h1>
+      </div>
+
+      <h2>Por qué este reto</h2>
+      <p>
+        A los 4 años, una semilla que brota despierta muchas preguntas. El anexo III del Decreto 196/2022 pide un reto «de cierta
+        complejidad» que movilice lo aprendido «en las tres áreas» y lo lleve a «la realidad cotidiana del niño». Aquí el grupo
+        investiga qué necesita una semilla y cuida su huerto hasta llevar a la mesa lo que da la tierra. Trabaja también la
+        alimentación sana y «la sostenibilidad», otro tema que el anexo pide abordar.
+      </p>
+
+      <h2>Las pautas DUA de esta situación</h2>
+      <p>Tres principios. Cada número es una pauta (en la versión 3.0, «directriz») de CAST (2024).</p>
+      <div class="dua-tres">
+        <div class="principio">
+          <h3>Compromiso</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.2</span> Un huerto y un almuerzo de verdad: lo que hacen sirve para algo.</li>
+            <li><span class="chip chip--dua">8.3</span> Cada pareja cuida su maceta; al final, el grupo se reparte las tareas.</li>
+            <li><span class="chip chip--dua">9.3</span> La autoevaluación con pictogramas ayuda a pensar en lo aprendido.</li>
+          </ul>
+        </div>
+        <div class="principio">
+          <h3>Representación</h3>
+          <ul>
+            <li><span class="chip chip--dua">2.1</span> Cada palabra nueva, con el objeto real, el pictograma y la palabra escrita.</li>
+            <li><span class="chip chip--dua">2.5</span> Semillas, plantas y fruta de verdad, además de dibujos.</li>
+            <li><span class="chip chip--dua">3.2</span> En el experimento solo cambia una cosa: así se ve qué importa.</li>
+          </ul>
+        </div>
+        <div class="principio">
+          <h3>Acción y expresión</h3>
+          <ul>
+            <li><span class="chip chip--dua">4.1</span> Se responde señalando, pegando, rodeando, con el tablero o hablando.</li>
+            <li><span class="chip chip--dua">5.2</span> Se mide con cubos o tiras y se registra con dibujos, marcas o números.</li>
+            <li><span class="chip chip--dua">6.4</span> El diario deja ver cómo crece la planta y lo que avanza cada uno.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Los tres niveles de cada actividad</h2>
+      <p>
+        Toda la clase hace la misma actividad, a la vez y en el mismo sitio. Cambian el apoyo y la complejidad, nunca el tema. Los
+        niveles describen la tarea, no al niño o la niña.
+      </p>
+      <ul class="niveles leyenda-niveles">
+        <li class="nivel nivel-1">
+          <h4><span class="marca">1</span>Con más apoyo</h4>
+          <p>Modelo antes de cada paso, objetos reales, 2 opciones y ayuda física si la acepta. Vale señalar o usar el tablero.</p>
+        </li>
+        <li class="nivel nivel-2">
+          <h4><span class="marca">2</span>Base</h4>
+          <p>Lo esperable a los 4 años: agrupa por un atributo, predice, mide con cubos y cuenta, sigue los pasos del cartel.</p>
+        </li>
+        <li class="nivel nivel-3">
+          <h4><span class="marca">3</span>Con más reto</h4>
+          <p>Más elementos, explicar el porqué, comparar, proponer otra prueba o ayudar a su pareja.</p>
+        </li>
+      </ul>
+      <p>
+        Nadie tiene un nivel fijo: cada uno sube o baja dentro de la misma sesión, y en el registro se anota el nivel en que lo
+        logra. Cada sesión trae, además, ajustes para el alumnado con trastorno del espectro del autismo (TEA), trastorno por
+        déficit de atención e hiperactividad (TDAH) o trastorno del desarrollo del lenguaje (TDL), entre otros.
+      </p>
+
+      <div class="oposicion">
+        <h3>Si preparas la oposición</h3>
+        <p>
+          La convocatoria de Infantil de 2026 en la Región de Murcia (Boletín Oficial de la Región de Murcia, BORM, n.º 18, de 23 de
+          enero de 2026, anexo XVII) valora en la unidad didáctica, entre otros: pautas DUA y atención a la diversidad (0,4
+          puntos), una secuencia coherente y realista (0,3), agrupamientos variados (0,2), detección de dificultades (0,3),
+          criterios relacionados con competencias y saberes (0,3), momentos e instrumentos de evaluación (0,3) y evaluación de la
+          práctica docente (0,3). Los encontrarás en esta hoja, en las sesiones, en el currículo, en «Detectar a tiempo» y en la
+          evaluación. Úsala como modelo: tu programación y tu unidad tienen que ser originales; no entregues este material copiado.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CONEXIÓN CON EL CURRÍCULO
+         ====================================================================== -->
+    <section class="hoja curriculo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Conexión con el currículo de la Región de Murcia</p>
+        <h1>Qué trabaja del Decreto 196/2022</h1>
+        <p class="entradilla">
+          Decreto 196/2022, de 3 de noviembre (BORM n.º 255, de 4 de noviembre de 2022). Criterios y saberes del segundo ciclo, con
+          su texto literal. CA, DEE y CRR son abreviaturas nuestras de las tres áreas.
+        </p>
+      </div>
+      <table class="tabla-curricular">
+        <colgroup>
+          <col style="width: 27mm" />
+          <col style="width: 47mm" />
+          <col style="width: 52mm" />
+          <col style="width: 52mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Área</th>
+            <th scope="col">Competencia específica</th>
+            <th scope="col">Criterios de evaluación</th>
+            <th scope="col">Saberes básicos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ca">
+            <th scope="row">Crecimiento en Armonía (CA)<small>págs. 33078 y 33083 a 33086</small></th>
+            <td>
+              1. Progresar en el conocimiento y control de su cuerpo y en la adquisición de distintas estrategias, adecuando sus
+              acciones a la realidad del entorno de una manera segura, para construir una autoimagen ajustada y positiva.
+            </td>
+            <td>
+              <span class="codigo">1.3</span> Manejar diferentes objetos, útiles y herramientas en situaciones de juego y en la
+              realización de tareas cotidianas, mostrando un control progresivo y de coordinación de movimientos de carácter fino.
+            </td>
+            <td>
+              <span class="codigo">A.</span> Dominio activo del tono y la postura en función de las características de los objetos,
+              acciones y situaciones. Progresiva autonomía en la realización de tareas.
+            </td>
+          </tr>
+          <tr class="ca">
+            <th scope="row">Crecimiento en Armonía (CA)</th>
+            <td>
+              3. Adoptar modelos, normas y hábitos, desarrollando la confianza en sus posibilidades y sentimientos de logro, para
+              promover un estilo de vida saludable y ecosocialmente responsable.
+            </td>
+            <td>
+              <span class="codigo">3.1</span> Realizar actividades relacionadas con el autocuidado y el cuidado del entorno con una
+              actitud respetuosa, mostrando autoconfianza e iniciativa.
+            </td>
+            <td>
+              <span class="codigo">C.</span> Hábitos y prácticas sostenibles y ecosocialmente responsables relacionados con la
+              alimentación, la higiene, el descanso, el autocuidado y el cuidado del entorno. Identificación de situaciones
+              peligrosas, en escenarios de la vida cotidiana, y prevención de accidentes.
+            </td>
+          </tr>
+          <tr class="dee">
+            <th scope="row">Descubrimiento y Exploración del Entorno (DEE)<small>págs. 33090, 33091 y 33094 a 33097</small></th>
+            <td>
+              1. Identificar las características de materiales, objetos y colecciones y establecer relaciones entre ellos, mediante
+              la exploración, la manipulación sensorial, el manejo de herramientas sencillas, y el desarrollo de destrezas
+              lógico-matemáticas para descubrir y crear una idea cada vez más compleja del mundo.
+            </td>
+            <td>
+              <p>
+                <span class="codigo">1.1</span> Establecer distintas relaciones entre los objetos a partir de sus cualidades o
+                atributos, mostrando curiosidad e interés.
+              </p>
+              <p>
+                <span class="codigo">1.2</span> Emplear los cuantificadores básicos más significativos en el contexto del juego y en
+                la interacción con los demás.
+              </p>
+              <p>
+                <span class="codigo">1.4</span> Identificar las situaciones cotidianas en las que es preciso medir, utilizando el
+                cuerpo u otros materiales y herramientas para efectuar las medidas.
+              </p>
+              <p>
+                <span class="codigo">1.5</span> Organizar su actividad, ordenando las secuencias y utilizando las nociones temporales
+                básicas.
+              </p>
+            </td>
+            <td>
+              <span class="codigo">A.</span> Cualidades o atributos de objetos y materiales. Relaciones de orden, correspondencia,
+              clasificación y comparación. Cuantificadores básicos contextualizados: muchos-pocos, unos-algunos-varios, más
+              que-menos que, todos-ninguno... Funcionalidad de los números en la vida cotidiana. Situaciones en que se hace necesario
+              medir. Diferentes herramientas de medida convencionales (regla, metro, balanzas, recipientes...) y no convencionales
+              (pasos, pies, cuerdas, piedras...). El tiempo y su organización: día-noche, estaciones, ciclos, calendario...
+            </td>
+          </tr>
+          <tr class="dee">
+            <th scope="row">Descubrimiento y Exploración del Entorno (DEE)</th>
+            <td>
+              2. Desarrollar, de manera progresiva, los procedimientos del método científico y las destrezas del pensamiento
+              computacional, a través de procesos de observación y manipulación de objetos, para iniciarse en la interpretación del
+              entorno y responder de forma creativa a las situaciones y retos que se plantean.
+            </td>
+            <td>
+              <p>
+                <span class="codigo">2.3</span> Plantear hipótesis acerca del comportamiento de ciertos elementos o materiales,
+                verificándolas a través de la manipulación y la actuación sobre ellos.
+              </p>
+              <p>
+                <span class="codigo">2.6</span> Participar en proyectos utilizando dinámicas cooperativas, compartiendo y valorando
+                opiniones propias y ajenas, y expresando conclusiones personales a partir de ellas.
+              </p>
+            </td>
+            <td>
+              <span class="codigo">B.</span> Modelo de control de variables. Estrategias y técnicas de investigación: ensayo-error,
+              observación, experimentación, formulación y comprobación de hipótesis, realización de preguntas, manejo y búsqueda en
+              distintas fuentes de información. Procesos y resultados. Hallazgos, verificación y conclusiones.
+            </td>
+          </tr>
+          <tr class="dee">
+            <th scope="row">Descubrimiento y Exploración del Entorno (DEE)</th>
+            <td>
+              3. Reconocer elementos y fenómenos de la naturaleza, mostrando interés por los hábitos que inciden sobre ella, para
+              apreciar la importancia del uso sostenible, el cuidado y la conservación del entorno en la vida de las personas.
+            </td>
+            <td>
+              <span class="codigo">3.1</span> Mostrar una actitud de respeto, cuidado y protección hacia el medio natural y los
+              animales, identificando el impacto positivo o negativo que algunas acciones humanas ejercen sobre ellos.
+            </td>
+            <td>
+              <span class="codigo">C.</span> Experimentación con elementos naturales (agua, tierra, piedras, ramas, arena, hojas).
+              Iniciativa en el compromiso de aceptar pequeñas responsabilidades relacionadas con el cuidado y la conservación de
+              animales y plantas. Características generales de los seres vivos.
+            </td>
+          </tr>
+          <tr class="crr">
+            <th scope="row">Comunicación y Representación de la Realidad (CRR)<small>págs. 33102 a 33104 y 33107 a 33110</small></th>
+            <td>
+              3. Producir mensajes de manera eficaz, personal y creativa, utilizando diferentes lenguajes, descubriendo los códigos de
+              cada uno de ellos y explorando sus posibilidades expresivas, para responder a diferentes necesidades comunicativas.
+            </td>
+            <td>
+              <span class="codigo">3.1</span> Hacer un uso funcional del lenguaje oral, aumentando su repertorio lingüístico y
+              construyendo progresivamente un discurso más eficaz, organizado y coherente en contextos formales e informales.
+            </td>
+            <td>
+              <span class="codigo">C.</span> El lenguaje oral en situaciones cotidianas: conversaciones, juegos de interacción social
+              y expresión de vivencias. Verbalización de la secuencia de acciones en una acción planificada.
+            </td>
+          </tr>
+          <tr class="crr">
+            <th scope="row">Comunicación y Representación de la Realidad (CRR)</th>
+            <td>
+              4. Participar por iniciativa propia en actividades relacionadas con textos escritos, mostrando interés y curiosidad,
+              para comprender su funcionalidad y algunas de sus características.
+            </td>
+            <td>
+              <p>
+                <span class="codigo">4.1</span> Mostrar interés por comunicarse a través de códigos escritos, convencionales o no,
+                valorando su función comunicativa.
+              </p>
+              <p>
+                <span class="codigo">4.2</span> Identificar, de manera acompañada, alguna de las características textuales y
+                paratextuales mediante la indagación en textos de uso social libres de prejuicios y estereotipos sexistas.
+              </p>
+            </td>
+            <td>
+              <span class="codigo">D.</span> Los usos sociales de la lectura y la escritura. Funcionalidad y significatividad en
+              situaciones comunicativas. Aproximación al código escrito desde las escrituras indeterminadas. Otros códigos de
+              representación gráfica: imágenes, símbolos, números…
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dos-columnas">
+        <div>
+          <h2>Objetivos de etapa (art. 7)</h2>
+          <ul class="lista-corta">
+            <li><strong>b)</strong> Observar y explorar su entorno: semillas y plantas.</li>
+            <li><strong>c)</strong> Autonomía: lavarse las manos, regar y cocinar.</li>
+            <li><strong>e)</strong> Relacionarse en igualdad: parejas y turnos.</li>
+            <li><strong>f)</strong> Habilidades comunicativas: hablan, dibujan y presentan.</li>
+            <li><strong>g)</strong> Habilidades lógico-matemáticas, lectura y escritura: miden, cuentan y escriben su nombre.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Competencias clave (anexo I)</h2>
+          <ul class="lista-corta">
+            <li><strong>Comunicación lingüística (CCL):</strong> explican, piden y leen.</li>
+            <li><strong>Matemática y en ciencia, tecnología e ingeniería (STEM):</strong> miden, cuentan y comprueban hipótesis.</li>
+            <li><strong>Personal, social y de aprender a aprender (CPSAA):</strong> higiene, cooperación y autoevaluación.</li>
+            <li><strong>Ciudadana (CC):</strong> cuidan un ser vivo para el grupo.</li>
+            <li><strong>Emprendedora (CE):</strong> planifican el huerto y la frutería.</li>
+            <li><strong>Conciencia y expresión culturales (CCEC):</strong> dibujan lo que observan.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 1
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 1 de 8"><small>Sesión</small><span>1</span></p>
+        <div>
+          <h1>Un sobre misterioso</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> asamblea y pequeños grupos</span>
+            <span><b>Espacio:</b> asamblea y mesas</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> explorar semillas, agruparlas por su tamaño, su color o su forma y decir qué creemos que necesitan
+        para crecer.
+        <span class="chip chip--dee">DEE 1.1</span><span class="chip chip--dee">DEE 2.3</span><span class="chip chip--crr">CRR 3.1</span>
+        <br /><strong>Materiales:</strong> un sobre grande con semillas y una carta corta; por mesa, una bandeja con semillas grandes
+        (alubias, garbanzos, maíz, pipas de calabaza y un hueso de aguacate) y unas pocas lentejas, 2 platos y 1 lupa; papel
+        continuo; tarjetas de la agenda (página 19). Nada de frutos secos ni cacahuetes.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">8 minutos</span></h2>
+        <p>
+          Antes, revisa las alergias: las legumbres y el maíz son alimentos. Pon en la
+          <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a> las tarjetas asamblea,
+          semillas, agrupar y recoger. Abre el sobre despacio, saca un puñado de semillas y lee la carta: «Son semillas. Si las
+          cuidáis, os darán comida. ¿Qué necesitan para crecer? Firmado: una hortelana».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <ol>
+          <li>
+            <strong>Exploramos.</strong> Cada mesa recibe su bandeja: miran con la lupa, tocan y comparan. Norma: «Las semillas no
+            van a la boca ni a la nariz». Quien aún se lleva cosas a la boca las explora dentro de una botella transparente cerrada.
+          </li>
+          <li>
+            <strong>Hacemos grupos.</strong> Cada mesa separa sus semillas en dos platos con una regla que decide el grupo: grandes y
+            pequeñas, oscuras y claras, redondas y alargadas.
+          </li>
+          <li>
+            <strong>Nuestras ideas.</strong> En asamblea: «¿Qué necesita una semilla para crecer?». Apunta cada idea en papel
+            continuo con un dibujo. Es la evaluación inicial: guarda el mural.
+          </li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Separa 2 semillas muy distintas (alubia y lenteja) en «grande» y «pequeño», con el modelo de la maestra.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Separa todas las semillas de su bandeja con una regla (tamaño, color o forma) y dice cuál ha usado.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Agrupa con una regla y luego con otra, ordena de la más grande a la más pequeña y explica su idea con «porque».</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Cada mesa enseña sus platos: «Aquí, las grandes; aquí, las pequeñas». Contad las semillas grandes al recoger y lavaos las
+          manos. Anticipa: «En la próxima sesión comprobamos si tenéis razón».
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.3</span> El sobre misterioso convierte la exploración en un juego.</li>
+            <li><span class="chip chip--dua">2.5</span> Las semillas llegan por la vista, el tacto, la lupa y la palabra.</li>
+            <li><span class="chip chip--dua">4.1</span> Se responde separando, señalando, con el tablero o hablando.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.1</span> ¿Agrupa las semillas con una regla? ¿Cuál? ¿En qué nivel?</li>
+            <li><span class="chip chip--dee">DEE 2.3</span> ¿Propone qué necesita una semilla? Es su idea de partida.</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Explica su idea con una frase?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TEA:</b> anticipa el sobre con la agenda y deja que mire antes de tocar; si la textura le molesta, una cuchara.</li>
+            <li><b>TDL:</b> «grande» y «pequeño» con gesto y pictograma. Amplía: «Grande. Sí, la alubia es grande».</li>
+            <li><b>Visual:</b> semillas grandes sobre un plato que contraste y lupa con buena luz.</li>
+            <li><b>Motora:</b> bandeja con borde y semillas que se cogen con la mano entera.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 2
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 2 de 8"><small>Sesión</small><span>2</span></p>
+        <div>
+          <h1>¿Qué necesita una semilla?</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> asamblea, pequeños grupos e individual</span>
+            <span><b>Espacio:</b> asamblea, mesas y una ventana</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> predecir si una semilla brotará con agua o sin agua, con luz o a oscuras, y preparar una prueba en
+        la que solo cambia una cosa.
+        <span class="chip chip--dee">DEE 2.3</span><span class="chip chip--dee">DEE 2.6</span><span class="chip chip--crr">CRR 3.1</span>
+        <br /><strong>Materiales:</strong> por mesa, 3 vasos transparentes numerados del 1 al 3, algodón, 18 lentejas o judías (6
+        por vaso), un pulverizador o una cuchara y agua; una caja de cartón para tapar los vasos 3; la hoja de predicciones (página
+        20), una por alumno o alumna; ceras.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">5 minutos</span></h2>
+        <p>
+          Agenda: asamblea, experimento, pausa activa y lavar las manos. Leed el mural de la sesión 1 y elegid dos ideas para
+          comprobar: «¿Necesita agua? ¿Necesita luz?». Explica la idea clave con las manos: «Para que la prueba sea justa, solo
+          cambiamos una cosa».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">28 minutos</span></h2>
+        <ol>
+          <li>
+            <strong>El modelo.</strong> Prepara tú tres vasos delante del grupo. Vaso 1: algodón mojado, a la luz. Vaso 2: algodón
+            seco, a la luz (solo cambia el agua). Vaso 3: algodón mojado, a oscuras dentro de la caja (solo cambia la luz).
+          </li>
+          <li>
+            <strong>Cada mesa prepara los suyos.</strong> Se reparten el trabajo: quien pone el algodón, quien cuenta 6 semillas y
+            quien moja. Así hay varios vasos de cada tipo, como en un experimento de verdad. Lo que brote es para mirar: no se come.
+          </li>
+          <li>
+            <strong>Predecimos.</strong> En la hoja de predicciones, cada uno rodea «sí» o «no» en cada vaso: «¿Brotará?».
+          </li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Predice los vasos 1 y 2 eligiendo entre dos tarjetas, «sí» y «no», que le enseña la maestra. Vale señalar.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Predice los tres vasos y lo marca en su hoja.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Explica por qué («porque no tiene agua») y propone otra prueba en la que solo cambie una cosa.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Pausa activa «La flor» (carta 8 de las
+          <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">pausas activas</a>): somos
+          semillas que crecen despacio. Decidid quién moja cada día los vasos 1 y 3: un poco, sin hacer charco, porque la semilla
+          también necesita aire. El vaso 2 nunca se moja. Lavaos las manos.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">8.1</span> La meta se dice al principio y se repite: comprobar qué necesita una semilla.</li>
+            <li><span class="chip chip--dua">3.2</span> Solo cambia una cosa en cada vaso, y lo marcan el número y el pictograma.</li>
+            <li><span class="chip chip--dua">5.1</span> La predicción se dice, se señala o se rodea.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 2.3</span> ¿Predice qué pasará en cada vaso? ¿En qué nivel?</li>
+            <li><span class="chip chip--dee">DEE 2.6</span> ¿Hace su parte del trabajo en la mesa y escucha a los demás?</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Explica su predicción con una frase?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TDAH:</b> dale el pulverizador o el reparto del algodón: una tarea con movimiento y con un final claro.</li>
+            <li><b>Discapacidad intelectual:</b> un vaso cada vez, con el vaso de la maestra al lado como modelo.</li>
+            <li><b>Auditiva:</b> pon los vasos en fila y señala lo que cambia en cada uno.</li>
+            <li><b>Altas capacidades:</b> que diseñe una cuarta prueba (¿y con frío?) y diga qué cambia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 3
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 3 de 8"><small>Sesión</small><span>3</span></p>
+        <div>
+          <h1>El diario del huerto</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> asamblea, parejas e individual</span>
+            <span><b>Espacio:</b> asamblea y mesas</span>
+          </p>
+        </div>
+      </div>
+      <p class="sesion__cuando">Cuándo: en pocos días, cuando hayan brotado las semillas de los vasos 1.</p>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> comprobar las predicciones, medir lo que ha crecido con cubos o tiras de papel y empezar el diario
+        del huerto.
+        <span class="chip chip--dee">DEE 2.3</span><span class="chip chip--dee">DEE 1.4</span><span class="chip chip--crr">CRR 4.1</span>
+        <br /><strong>Materiales:</strong> los vasos de todas las mesas y las hojas de predicciones; unos 20 cubos encajables por
+        pareja; tiras de papel y tijeras para el adulto; el diario (páginas 21 y 22) grapado, uno por alumno o alumna; lápices de
+        colores, pegamento y lupas.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Agenda: asamblea, mirar, medir, dibujar y recoger. Saca los vasos 3 de la caja y pon los de todas las mesas en fila: 1, 2 y 3.
+          «¿Qué ha pasado?». Deja que miren con la lupa, sin tocar.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">26 minutos</span></h2>
+        <ol>
+          <li>
+            <strong>Comprobamos.</strong> Vaso a vaso, cada uno rodea en su hoja lo que ha pasado. Lo esperable: el vaso 2, seco, no
+            ha brotado; en el 1 y en el 3 sí, pero las plantitas del 3, a oscuras, salen pálidas y más largas. Escribe en el mural la
+            conclusión del grupo: «Para brotar, la semilla necesita agua. Para ponerse verde, necesita luz».
+          </li>
+          <li>
+            <strong>Medimos.</strong> Por parejas, miden con cubos la plantita más alta de un vaso 1 y la de un vaso 3: «¿Cuántos
+            cubos mide? ¿Cuál es más alta?».
+          </li>
+          <li>
+            <strong>Primera página del diario.</strong> Cada uno rodea el día, dibuja la planta y colorea un cuadro por cada cubo.
+          </li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Pega en el diario una tira de papel que el adulto corta a la altura de la planta y colorea los cuadros con ayuda.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Mide con cubos, los cuenta y colorea tantos cuadros como cubos.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Mide las dos plantitas, dice cuál es más alta y por cuántos cubos, y escribe el número.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Poned los vasos 3 a la luz: «¿Se pondrán verdes?». Es una nueva predicción para los próximos días. Cada uno guarda su
+          diario en la caja del huerto y se lava las manos. Desde hoy, el diario se rellena dos o tres veces por semana.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">3.1</span> Se parte de lo que predijeron: el mural y su hoja.</li>
+            <li><span class="chip chip--dua">5.2</span> Se mide con cubos o con tiras y se registra dibujando, coloreando o escribiendo.</li>
+            <li><span class="chip chip--dua">6.4</span> El diario deja ver cómo crece la planta día a día.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 2.3</span> ¿Compara lo que pensaba con lo que ha pasado?</li>
+            <li><span class="chip chip--dee">DEE 1.4</span> ¿Mide con cubos o tiras y cuenta? ¿En qué nivel?</li>
+            <li><span class="chip chip--crr">CRR 4.1</span> ¿Registra con dibujos, marcas o números?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Discapacidad intelectual:</b> dale una torre de cubos ya hecha para que la compare con la planta.</li>
+            <li><b>Motora:</b> cubos grandes de construcción o la tira de papel; ceras gruesas para colorear.</li>
+            <li><b>Visual:</b> cubos de un color que contraste con la planta y cuadros de borde grueso.</li>
+            <li><b>TDL:</b> «alto», «bajo» y «más» con gesto, siempre en la misma frase: «Mide 3 cubos».</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 4
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 4 de 8"><small>Sesión</small><span>4</span></p>
+        <div>
+          <h1>¡A plantar!</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> parejas</span>
+            <span><b>Espacio:</b> patio o mesas cubiertas con papel de periódico</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> plantar una maceta en pareja siguiendo los pasos con pictogramas y escribir el cartel con el
+        nombre.
+        <span class="chip chip--dee">DEE 1.5</span><span class="chip chip--ca">CA 1.3</span><span class="chip chip--crr">CRR 4.1</span
+        ><span class="chip chip--dee">DEE 3.1</span>
+        <br /><strong>Materiales:</strong> una maceta de 15 a 20 cm con agujero por pareja (o una jardinera para cada 3 parejas);
+        tierra para macetas; una plantita de vivero por pareja (lechuga, fresa, hierbabuena o perejil, de temporada y que no sea
+        tóxica: pregúntalo en el vivero); palas y regaderas pequeñas; la secuencia de plantar (página 23) en cartel y en tarjetas;
+        los carteles (página 24), palos de helado y cinta adhesiva transparente.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">5 minutos</span></h2>
+        <p>
+          Agenda: asamblea, plantar, regar, lavar las manos y pausa activa. Lee la secuencia del cartel señalando cada número: «primero…,
+          después…, al final…». Saca una plantita de su maceta: «Esta es la raíz. Va debajo de la tierra».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">28 minutos</span></h2>
+        <ol>
+          <li>
+            <strong>Plantamos.</strong> Cada pareja sigue los pasos del cartel: tierra, agujero, plantita, tapar, regar, cartel y
+            manos. Un niño o una niña hace un paso y su pareja, el siguiente.
+          </li>
+          <li>
+            <strong>El cartel.</strong> Cada pareja escribe sus nombres en el cartel de su planta. Fórralo por las dos caras con
+            cinta adhesiva y pégalo al palo. Si habéis pasado a una maceta las plantitas del experimento, también llevan cartel: son
+            para mirar.
+          </li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Sigue el cartel con la maestra, que señala cada pictograma. En el cartel, pega su nombre impreso o hace su marca.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Sigue los pasos con su pareja mirando el cartel y copia su nombre en el cartel.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Antes de empezar, ordena las tarjetas de los pasos y se los explica a su pareja: «primero, después, al final».</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Todos se lavan las manos con jabón: hemos tocado tierra. Después, pausa activa «Lluvia suave» (carta 5): la lluvia cae,
+          con la punta de los dedos, por la cabeza y los brazos. Acordad la norma del riego: «Toco la tierra con el dedo. Si está
+          seca, riego un poco».
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">6.3</span> La secuencia con números y pictogramas organiza la tarea.</li>
+            <li><span class="chip chip--dua">8.3</span> La pareja se reparte los pasos y se ayuda.</li>
+            <li><span class="chip chip--dua">4.2</span> Palas de mango grueso y la maceta a la altura de cada uno.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.5</span> ¿Sigue los pasos en orden? ¿Los ordena él o ella?</li>
+            <li><span class="chip chip--ca">CA 1.3</span> ¿Maneja la pala y la regadera con control?</li>
+            <li><span class="chip chip--crr">CRR 4.1</span> ¿Escribe o marca su nombre en el cartel?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TDAH:</b> que riegue y lleve las macetas a su sitio: tareas con movimiento.</li>
+            <li><b>Motora:</b> maceta sobre un salvamanteles antideslizante, a la altura de la silla; tierra en un cuenco.</li>
+            <li><b>TEA:</b> si la tierra le molesta, guantes o pala. Nadie le obliga a tocarla.</li>
+            <li><b>Recién llegados:</b> la secuencia de pictogramas y el gesto bastan para seguir la tarea.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 5
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 5 de 8"><small>Sesión</small><span>5</span></p>
+        <div>
+          <h1>¿Qué parte de la planta me como?</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> asamblea y pequeños grupos</span>
+            <span><b>Espacio:</b> asamblea y mesas</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> reconocer raíz, tallo, hoja, flor, fruto y semilla, y relacionar alimentos de verdad con la parte
+        de la planta que son.
+        <span class="chip chip--dee">DEE 1.1</span><span class="chip chip--crr">CRR 3.1</span>
+        <br /><strong>Materiales:</strong> una plantita de lechuga con raíz o una zanahoria con hojas; por mesa, una bandeja con 1
+        zanahoria, 2 espárragos verdes, 1 lechuga pequeña, 1 trozo de brócoli, 1 tomate y un puñado de lentejas; las tarjetas de las
+        partes de la planta (página 25).
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Agenda: asamblea, la planta, pausa activa y lavar las manos. Enseña la plantita con raíz y nombra sus partes
+          con las tarjetas: raíz, tallo y hoja. Abre el tomate: «Esto es el fruto. Dentro guarda las semillas». Con el brócoli: «Nos
+          comemos sus flores, antes de que se abran».
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <ol>
+          <li><strong>Las bandejas.</strong> Cada mesa mira, toca y huele sus alimentos. Hoy no se prueban.</li>
+          <li>
+            <strong>¿Qué parte es?</strong> Con las 6 tarjetas sobre la mesa, el grupo coloca cada alimento en su parte: la
+            zanahoria, en la raíz; los espárragos, en el tallo; la lechuga, en la hoja; el brócoli, en la flor; el tomate, en el
+            fruto; las lentejas, en la semilla.
+          </li>
+          <li><strong>Lo contamos.</strong> En asamblea, cada mesa dice una pareja: «La zanahoria es una raíz».</li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Relaciona 2 alimentos con 2 partes (zanahoria y raíz, lechuga y hoja), con la planta de verdad delante como modelo.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Coloca los 6 alimentos en su parte y lo dice.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Explica cómo lo sabe («crece debajo de la tierra») y busca otro ejemplo: el rábano también es una raíz.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">8 minutos</span></h2>
+        <p>
+          Pausa activa «El árbol en el viento» (carta 6): los pies son raíces y los brazos, ramas. Resumid juntos: «Comemos raíces,
+          tallos, hojas, flores, frutos y semillas». Propuesta para casa: buscar un alimento de cada parte (página 18). Lavaos las
+          manos.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">2.1</span> Cada palabra nueva llega con el alimento, el pictograma y la palabra escrita.</li>
+            <li><span class="chip chip--dua">1.2</span> Se percibe con la vista, el tacto y el olfato.</li>
+            <li><span class="chip chip--dua">3.4</span> En casa buscan más ejemplos: lo aprendido sale del aula.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.1</span> ¿Relaciona cada alimento con su parte? ¿En qué nivel?</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Dice la pareja con una frase completa?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TDL:</b> usa siempre la misma frase modelo: «La ___ es una ___».</li>
+            <li><b>Visual:</b> alimentos de verdad para tocar y tarjetas ampliadas.</li>
+            <li><b>Discapacidad intelectual:</b> empieza con raíz y hoja; añade una parte nueva cuando las domine.</li>
+            <li><b>Altas capacidades:</b> que clasifique su almuerzo de hoy por partes de la planta.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 6
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 6 de 8"><small>Sesión</small><span>6</span></p>
+        <div>
+          <h1>La frutería de la clase</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> pequeños grupos en 4 rincones de tienda</span>
+            <span><b>Espacio:</b> aula con 4 mesas de tienda</span>
+          </p>
+        </div>
+      </div>
+      <p class="sesion__cuando">Cuándo: el día antes de la sesión 7. Así, la fruta de verdad que se «compra» es la de la receta.</p>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> comprar y vender usando números y cuantificadores («muchos», «pocos», «más», «menos»,
+        «ninguno») en el juego.
+        <span class="chip chip--dee">DEE 1.2</span><span class="chip chip--crr">CRR 3.1</span>
+        <br /><strong>Materiales:</strong> 4 mesas de tienda con fruta y verdura de juguete y, si las alergias lo permiten, la fruta
+        de verdad de la receta; cestas o bolsas; precios y lista de la compra (página 27); 70 fichas (página 26), 5 por cliente; un
+        temporizador; el
+        <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Agenda: asamblea, frutería y recoger. «¿Cómo llega la fruta a nuestra mesa? Del huerto a la frutería, y de la frutería a
+          casa». Haz de frutera con un niño o una niña delante del grupo: «Hola, quiero 2 plátanos». «Son 2 fichas». Contad juntos
+          las fichas al pagar.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <ol>
+          <li>
+            <strong>Las tiendas.</strong> En cada mesa hay 2 vendedores y 4 clientes. Cada cliente tiene 5 fichas y una tarjeta de
+            la lista de la compra.
+          </li>
+          <li>
+            <strong>Compramos.</strong> El cliente pide, paga contando las fichas y da las gracias. Cuando suena el temporizador,
+            cambian de papel.
+          </li>
+          <li>
+            <strong>Preguntas con cuantificadores.</strong> Pasa por las mesas: «¿Te quedan muchas fichas o pocas?», «¿Quién tiene
+            más fresas?», «¿Quedan plátanos? No, ninguno».
+          </li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Compra 1 cosa que cuesta 1 ficha. Pide señalando o con el tablero: «quiero» y la fruta.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Compra lo de su tarjeta (hasta 3 fichas) y cuenta las fichas al pagar.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Compra dos cosas de precios distintos, cuenta cuántas fichas le quedan y compara: «Me quedan más que a ti».</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">8 minutos</span></h2>
+        <p>
+          «¿Qué tienda ha vendido más? ¿Cuál menos?». Guardad en un sitio fresco la fruta de verdad para la receta de mañana; la de
+          juguete se queda unos días en el rincón de la frutería para jugar libremente. Lavaos las manos.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">7.2</span> Una compra con sentido: la fruta es la de la receta de mañana.</li>
+            <li><span class="chip chip--dua">7.3</span> El juego simbólico mantiene el interés.</li>
+            <li><span class="chip chip--dua">2.2</span> Los precios llevan número y puntos para contar.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 1.2</span> ¿Usa «muchos», «pocos», «más», «menos» o «ninguno» al jugar? ¿En qué nivel?</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Pide, saluda y da las gracias? ¿Con qué apoyo?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>TEA:</b> guion visual de la compra (hola, quiero, toma, gracias) con el tablero; si le da seguridad, que empiece vendiendo.</li>
+            <li><b>TDAH:</b> el temporizador marca los cambios de papel; que reparta las fichas.</li>
+            <li><b>Auditiva:</b> los precios se ven: número y puntos. Habla de cara y con gestos.</li>
+            <li><b>Recién llegados:</b> vale pedir señalando y contar con los dedos.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 7
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 7 de 8"><small>Sesión</small><span>7</span></p>
+        <div>
+          <h1>Cocinamos sano</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos</span>
+            <span><b>Grupo:</b> pequeños grupos de 5, con un adulto si es posible</span>
+            <span><b>Espacio:</b> mesas y lavabo</span>
+          </p>
+        </div>
+      </div>
+      <p class="sesion__cuando">Cuándo: el mismo día que la sesión 8, antes del almuerzo.</p>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> preparar una macedonia siguiendo una receta con pictogramas, con higiene y con seguridad.
+        <span class="chip chip--ca">CA 3.1</span><span class="chip chip--ca">CA 1.3</span><span class="chip chip--crr">CRR 4.2</span
+        ><span class="chip chip--dee">DEE 1.5</span>
+        <br /><strong>Materiales:</strong> la receta (página 28) en cartel; por mesa, un barreño con agua, un bol grande, platos
+        llanos, cuchillos de plástico de punta redonda, una cuchara grande y papel de cocina; fruta blanda y madura de temporada
+        (plátano, pera, kiwi, fresa, mandarina) para el grupo y los invitados; vasos y cucharillas; un paño limpio para tapar.
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">6 minutos</span></h2>
+        <p>
+          Repasa antes la lista de alergias y deja preparada una alternativa segura, sin señalar a nadie. Agenda: lavar las manos, lavar
+          la fruta, receta y recoger. Lee la receta del cartel: «¿Cómo se llama? ¿Qué necesitamos? ¿Qué número va primero?».
+          Señala el título, la lista de lo que necesitamos y los pasos con número.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">27 minutos</span></h2>
+        <ol>
+          <li><strong>Manos y fruta.</strong> Todos se lavan las manos con jabón. Cada mesa lava su fruta en el barreño y la seca.</li>
+          <li>
+            <strong>Pelamos y cortamos.</strong> Pelan plátanos y mandarinas (el kiwi lo pela un adulto) y cortan la fruta blanda en
+            trozos pequeños con el cuchillo de punta redonda, sobre el plato. Lo duro lo corta el adulto. Si hay uvas, el adulto las
+            pela, les quita las semillas y las corta en cuatro trozos a lo largo.
+          </li>
+          <li><strong>Mezclamos y guardamos.</strong> Todo al bol, se mezcla con la cuchara y se tapa para el almuerzo.</li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Pela el plátano y lo corta con la mano del adulto encima, si la acepta, o lo parte con los dedos. Señala cada paso en la receta.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Corta plátano, pera y kiwi y sigue los pasos mirando la receta.</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>«Lee» la receta a su mesa por los números, comprueba si falta algo y ayuda a otro a cortar.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">7 minutos</span></h2>
+        <p>
+          Recoged y limpiad las mesas. «¿Qué parte de la planta hemos usado? ¡Frutos!». Lavaos las manos. Si el cole tiene nevera,
+          guarda allí los boles tapados hasta el almuerzo.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">6.2</span> La receta anticipa todos los pasos antes de empezar.</li>
+            <li><span class="chip chip--dua">7.4</span> Las normas de seguridad se repasan con pictogramas y sin señalar a nadie.</li>
+            <li><span class="chip chip--dua">1.1</span> La receta en grande, a la vista desde todas las mesas.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--ca">CA 3.1</span> ¿Se lava las manos y lava la fruta sin que se lo recuerden?</li>
+            <li><span class="chip chip--ca">CA 1.3</span> ¿Corta con control con el cuchillo de plástico? ¿En qué nivel?</li>
+            <li><span class="chip chip--crr">CRR 4.2</span> ¿Reconoce el título, la lista o los números de los pasos?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Motora:</b> plátano ya pelado y empezado, y plato sobre un salvamanteles antideslizante.</li>
+            <li><b>TDAH:</b> que se encargue del barreño o de repartir los vasos; un paso cada vez.</li>
+            <li><b>Visual:</b> receta ampliada y fruta de colores vivos sobre un plato oscuro.</li>
+            <li><b>Discapacidad intelectual:</b> solo plátano, con el modelo del adulto al lado.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SESIÓN 8
+         ====================================================================== -->
+    <section class="sesion">
+      <div class="sesion__cabecera">
+        <p class="sesion__numero" aria-label="Sesión 8 de 8"><small>Sesión</small><span>8</span></p>
+        <div>
+          <h1>Del huerto a la mesa</h1>
+          <p class="sesion__datos">
+            <span><b>Duración:</b> 40 minutos y el almuerzo</span>
+            <span><b>Grupo:</b> gran grupo, parejas y pequeños grupos</span>
+            <span><b>Espacio:</b> aula y rincón del huerto</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="sesion__para">
+        <strong>Para qué:</strong> enseñar el huerto y el diario a otra clase o a las familias, compartir el almuerzo, valorar lo
+        aprendido y repartir el cuidado del huerto.
+        <span class="chip chip--dee">DEE 2.6</span><span class="chip chip--dee">DEE 3.1</span><span class="chip chip--crr">CRR 3.1</span
+        ><span class="chip chip--ca">CA 3.1</span>
+        <br /><strong>Materiales:</strong> las macetas, los diarios, los vasos y las hojas de predicciones; la macedonia de la sesión
+        7, vasos, cucharillas y agua; la autoevaluación (página 30), una por alumno o alumna; el cuadrante del huerto (página 29).
+      </p>
+
+      <div class="fase">
+        <h2>Inicio <span class="tiempo">5 minutos</span></h2>
+        <p>
+          Antes, pregunta a la tutora de la clase invitada, o a las familias que vengan, por sus alergias e intolerancias. Agenda:
+          enseñar, almuerzo, hablar y huerto. Reparte los papeles: guías (cada pareja, junto a su maceta), quienes explican el
+          experimento y quienes sirven el almuerzo.
+        </p>
+      </div>
+
+      <div class="fase">
+        <h2>Desarrollo <span class="tiempo">25 minutos</span></h2>
+        <ol>
+          <li>
+            <strong>La visita.</strong> Los invitados pasan por las macetas. Cada pareja enseña su planta, su cartel y su diario. Un
+            grupo explica el experimento con los vasos 1, 2 y 3 y las hojas de predicciones.
+          </li>
+          <li>
+            <strong>El almuerzo compartido.</strong> Sentados y con calma, se sirve la macedonia en vasos y agua para beber. «¿Qué
+            parte de la planta nos estamos comiendo?». Hablad de por qué es un almuerzo sano: fruta fresca de temporada en vez de
+            zumo, y agua para beber.
+          </li>
+        </ol>
+        <ul class="niveles">
+          <li class="nivel nivel-1">
+            <h4><span class="marca">1</span>Con más apoyo</h4>
+            <p>Enseña su maceta y señala su cartel o su diario. Puede decir una palabra o usar el tablero.</p>
+          </li>
+          <li class="nivel nivel-2">
+            <h4><span class="marca">2</span>Base</h4>
+            <p>Explica con una frase qué ha hecho: «Plantamos una lechuga y la regamos».</p>
+          </li>
+          <li class="nivel nivel-3">
+            <h4><span class="marca">3</span>Con más reto</h4>
+            <p>Explica el experimento con «porque» y responde a las preguntas de los invitados.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fase">
+        <h2>Cierre <span class="tiempo">10 minutos</span></h2>
+        <p>
+          Cuando se vayan los invitados, autoevaluación en pequeños grupos (página 30): lee cada frase y cada uno rodea su respuesta.
+          Después, en asamblea, el cuadrante del huerto (página 29): cada niño o niña elige una tarea para la semana. El huerto
+          sigue, y el diario también.
+        </p>
+      </div>
+
+      <div class="sesion__pie">
+        <div class="en-dua">
+          <h3>DUA en esta sesión</h3>
+          <ul>
+            <li><span class="chip chip--dua">8.4</span> Invitar a otros hace del huerto algo de toda la comunidad.</li>
+            <li><span class="chip chip--dua">9.3</span> La autoevaluación con pictogramas ayuda a pensar en lo aprendido.</li>
+            <li><span class="chip chip--dua">5.1</span> Se explica hablando, señalando o enseñando el diario.</li>
+          </ul>
+        </div>
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li><span class="chip chip--dee">DEE 2.6</span> ¿Cuenta lo que ha descubierto el grupo? ¿En qué nivel?</li>
+            <li><span class="chip chip--dee">DEE 3.1</span> ¿Elige una tarea de cuidado y la cumple los días siguientes?</li>
+            <li><span class="chip chip--crr">CRR 3.1</span> ¿Explica a los invitados con frases ordenadas?</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li>
+              <b>TEA:</b> anticipa la visita con una historia de
+              <a href="https://www.ideducando.es/material-gratuito/dias-distintos-historias-sociales/">«Días distintos»</a> y dale
+              un papel con guion: enseñar su cartel.
+            </li>
+            <li><b>TDL:</b> una tarjeta con la frase modelo: «Esta es mi ___. La riego».</li>
+            <li><b>Auditiva:</b> invitados en semicírculo y de cara; apóyate en el diario.</li>
+            <li><b>Altas capacidades:</b> que presente el experimento y responda a las preguntas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         EVALUACIÓN (1): MOMENTOS, AUTOEVALUACIÓN Y PRÁCTICA DOCENTE
+         ====================================================================== -->
+    <section class="hoja evaluacion">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Evaluación</p>
+        <h1>Observar para ajustar</h1>
+        <p class="entradilla">
+          En Infantil, la evaluación es «global, continua y formativa», y su técnica principal es «la observación directa y
+          sistemática» (art. 14.1 del Decreto 196/2022).
+        </p>
+      </div>
+
+      <h2>Cuándo y con qué</h2>
+      <ul class="momentos">
+        <li>
+          <b>Inicial · sesión 1</b>Cómo agrupan las semillas y qué creen que necesitan para crecer: el mural de ideas.
+        </li>
+        <li>
+          <b>Continua · sesiones 2 a 7</b>Registro del grupo (página 16), hoja de predicciones (página 20) y diario del huerto
+          (páginas 21 y 22).
+        </li>
+        <li>
+          <b>Final · sesión 8</b>Lo que cuentan a los invitados, la autoevaluación (página 30) y el registro completo.
+        </li>
+      </ul>
+      <p>
+        En cada sesión, el apartado «Qué observar» dice qué mirar y con qué criterio. Anótalo en el registro con la marca y el nivel
+        en que lo logra. Un mismo niño o niña puede lograrlo en el nivel ① un día y en el ② la semana siguiente: eso es progreso.
+      </p>
+
+      <h2>La autoevaluación del alumnado</h2>
+      <p>
+        En la sesión 8, en grupos de 4 o 5. Lee cada frase de la hoja (página 30) y enseña las tres respuestas. Cada niño o niña
+        rodea la suya o pega un gomet. Nadie elige por otro. Ninguna respuesta es mala: «quiero practicar más» también vale, porque
+        marca una meta.
+      </p>
+      <ul class="autoeval">
+        <li><img src="pictogramas/2617.png" alt="Pictograma de un niño que se señala a sí mismo" />Lo he hecho yo</li>
+        <li><img src="pictogramas/4570.png" alt="Pictograma de dos manos que se ayudan" />Con ayuda</li>
+        <li><img src="pictogramas/37163.png" alt="Pictograma de otra vez: dos flechas en círculo" />Quiero practicar más</li>
+      </ul>
+
+      <h2>Evalúo mi práctica</h2>
+      <p>Todo el profesorado evalúa su propia práctica (art. 14.3). Al terminar, marca lo que se ha cumplido:</p>
+      <ul class="casillas-docente">
+        <li>El reto ha mantenido el interés del grupo hasta la sesión 8.</li>
+        <li>Las sesiones han cabido en unos 40 minutos. Si no, sé qué parte acortar.</li>
+        <li>Toda la clase ha hecho la misma actividad, a la vez, con el apoyo que necesitaba cada uno.</li>
+        <li>He cambiado de nivel a alguien dentro de la sesión al ver que lo necesitaba.</li>
+        <li>He dado varias formas de responder: señalar, pegar, dibujar, decir.</li>
+        <li>Se han cumplido siempre las normas de seguridad: alergias, semillas, manos y cuchillos.</li>
+        <li>He anotado a todo el grupo en el registro, también a quien participa menos.</li>
+        <li>Las familias han sabido qué hacíamos y han podido participar.</li>
+      </ul>
+      <p class="linea-escribir">Lo que cambiaré la próxima vez:<span></span></p>
+    </section>
+
+    <!-- ======================================================================
+         EVALUACIÓN (2): REGISTRO DEL GRUPO (APAISADA)
+         ====================================================================== -->
+    <section class="hoja registro" style="page: apaisada">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Evaluación · Registro del grupo</p>
+        <h1>Pequeños hortelanos: qué observo en cada criterio</h1>
+      </div>
+      <p class="leyenda">
+        <strong>Leyenda:</strong> ✓ lo hace solo · ~ con ayuda · · aún no. Al lado, el nivel en que lo logra:
+        <span class="marca-mini n1">1</span><span class="marca-mini n2">2</span><span class="marca-mini n3">3</span>.
+        Escribe solo el nombre o las iniciales y guarda la hoja en el centro.
+      </p>
+      <table class="tabla-registro">
+        <colgroup>
+          <col style="width: 6mm" />
+          <col style="width: 39mm" />
+          <col span="12" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">N.º</th>
+            <th scope="col"><b>Nombre</b></th>
+            <th scope="col"><b>CA 1.3</b>Usa pala, regadera y cuchillo<small>Sesiones<br />4 y 7</small></th>
+            <th scope="col"><b>CA 3.1</b>Se lava las manos y cuida su seguridad<small>Sesiones<br />7 y 8</small></th>
+            <th scope="col"><b>DEE 1.1</b>Agrupa y relaciona por atributos<small>Sesiones<br />1 y 5</small></th>
+            <th scope="col"><b>DEE 1.2</b>Usa muchos, pocos, más, menos<small>Sesión<br />6</small></th>
+            <th scope="col"><b>DEE 1.4</b>Mide con cubos o tiras<small>Sesión<br />3</small></th>
+            <th scope="col"><b>DEE 1.5</b>Sigue u ordena los pasos<small>Sesiones<br />4 y 7</small></th>
+            <th scope="col"><b>DEE 2.3</b>Predice y comprueba<small>Sesiones<br />1 a 3</small></th>
+            <th scope="col"><b>DEE 2.6</b>Coopera y cuenta lo descubierto<small>Sesiones<br />2 y 8</small></th>
+            <th scope="col"><b>DEE 3.1</b>Cuida la planta<small>Sesiones<br />4 y 8</small></th>
+            <th scope="col"><b>CRR 3.1</b>Explica con frases<small>Sesiones<br />1, 2, 5, 6 y 8</small></th>
+            <th scope="col"><b>CRR 4.1</b>Escribe o marca en cartel y diario<small>Sesiones<br />3 y 4</small></th>
+            <th scope="col"><b>CRR 4.2</b>Reconoce partes de la receta<small>Sesión<br />7</small></th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         ATENCIÓN A LA DIVERSIDAD
+         ====================================================================== -->
+    <section class="hoja diversidad">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Atención a la diversidad</p>
+        <h1>Si en tu clase hay…</h1>
+        <p class="entradilla">
+          Dos medidas de esta situación para cada caso. Se describe lo que ayuda, sin etiquetas: muchas sirven a toda la clase.
+        </p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Si en tu clase hay alumnado con…</th>
+            <th scope="col">En esta situación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">TEA</th>
+            <td>
+              <ul>
+                <li>Anticipa cada sesión con la agenda y enseña antes lo nuevo: el algodón, la tierra, la fruta. Nadie le obliga a tocar.</li>
+                <li>En la frutería y en la visita, un guion visual con el tablero de comunicación: hola, quiero, toma, gracias.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">TDAH</th>
+            <td>
+              <ul>
+                <li>Tareas con movimiento y final claro: regar, repartir bandejas, llevar los vasos.</li>
+                <li>Pasos cortos con la secuencia a la vista, temporizador y una pausa activa entre fases.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">TDL</th>
+            <td>
+              <ul>
+                <li>Las palabras clave (semilla, raíz, tallo, hoja…) siempre con objeto, pictograma y palabra, en todas las sesiones.</li>
+                <li>Frases modelo cortas y repetidas; amplía lo que dice: «Raíz». «Sí, la zanahoria es una raíz».</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad intelectual</th>
+            <td>
+              <ul>
+                <li>Menos elementos y más repeticiones: 2 semillas, 2 partes de la planta, solo plátano en la receta.</li>
+                <li>Modelo del adulto antes de cada paso y ayuda física que se retira poco a poco.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad motora</th>
+            <td>
+              <ul>
+                <li>Mesa y maceta a la altura de la silla de ruedas, superficies antideslizantes y palas de mango grueso.</li>
+                <li>Responder señalando o con la mirada; cubos grandes o la tira de papel para medir.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad visual</th>
+            <td>
+              <ul>
+                <li>Semillas grandes y alimentos de verdad para explorar con las manos, sobre fondos que contrasten.</li>
+                <li>Pictogramas ampliados y cuadros del diario con borde grueso; gomets en relieve para marcar.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad auditiva</th>
+            <td>
+              <ul>
+                <li>Habla de cara y con buena luz; cada explicación, con el objeto o el pictograma delante.</li>
+                <li>Avisa de los cambios de actividad con un gesto o una señal visual; los precios llevan número y puntos.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Altas capacidades</th>
+            <td>
+              <ul>
+                <li>Retos abiertos: diseñar otra prueba, comparar alturas y hacer una gráfica con gomets.</li>
+                <li>Investigar otra planta en libros o en casa y contarla a la clase.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Incorporación tardía</th>
+            <td>
+              <ul>
+                <li>
+                  Las palabras clave en su lengua (pregunta a la familia cómo se dice «semilla» o «agua») y el
+                  <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>
+                  de IdEducando.
+                </li>
+                <li>El gesto, el pictograma y la acción valen igual que la palabra; en la frutería se cuenta con los dedos.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="caja caja--amarilla">
+        <h3>Detectar a tiempo</h3>
+        <p>Anota con fecha lo que ves, sin diagnosticar, si se repite durante varias sesiones. Por ejemplo, si un niño o una niña:</p>
+        <ul>
+          <li>no sigue una consigna sencilla aunque tenga el pictograma delante, o no responde cuando le llaman;</li>
+          <li>habla mucho menos que el resto o casi no se le entiende fuera de casa;</li>
+          <li>se acerca mucho para ver las semillas o tropieza a menudo;</li>
+          <li>evita con mucho malestar texturas como la tierra o el algodón, o rechaza casi todos los alimentos;</li>
+          <li>le cuesta mucho más que al resto coger semillas o usar la pala;</li>
+          <li>no se mantiene en la actividad ni con apoyos, mucho más que el resto del grupo.</li>
+        </ul>
+        <p>
+          Habla con la familia y con el equipo de orientación del centro: en la Región de Murcia, el equipo de orientación educativa
+          y psicopedagógica (EOEP) de tu sector. Lleva tus notas: describen lo que pasa y ayudan a decidir los siguientes pasos.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Estamos haciendo un huerto en clase</h1>
+      <p>Ha llegado a clase un sobre con semillas. Durante unas 3 semanas, vamos a:</p>
+      <ul>
+        <li>Descubrir qué necesita una semilla para crecer.</li>
+        <li>Plantar y cuidar nuestras plantas.</li>
+        <li>Jugar a la frutería con fichas.</li>
+        <li>Preparar una macedonia para el almuerzo del día ____________.</li>
+      </ul>
+      <p>Si tenéis un huerto o plantas en casa y queréis venir a contarlo, decídnoslo.</p>
+
+      <h2>Lo más importante: las alergias</h2>
+      <p>
+        Vamos a tocar semillas, legumbres, fruta y verdura. Algunos niños y niñas tienen alergia o intolerancia a algún alimento.
+        Por favor, rellenad la parte de abajo y devolvedla al cole. No usaremos frutos secos ni cacahuetes.
+      </p>
+
+      <h2>En casa podéis…</h2>
+      <p>Cuando cocinéis o vayáis a la compra, preguntad juntos: «¿Qué parte de la planta es?».</p>
+      <ul class="partes-casa">
+        <li><img src="pictogramas/2619.png" alt="Pictograma de zanahoria" />La zanahoria es una raíz.</li>
+        <li><img src="pictogramas/2446.png" alt="Pictograma de lechuga" />La lechuga es una hoja.</li>
+        <li><img src="pictogramas/2594.png" alt="Pictograma de tomate" />El tomate es un fruto.</li>
+      </ul>
+      <p>
+        Dejad que os ayude a lavar la fruta o a pelar un plátano. Para el almuerzo, la fruta entera y el agua son una buena
+        elección. Si os apetece, poned una lenteja en un algodón húmedo y mirad juntos cómo brota. Es para mirar: no se come.
+      </p>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="devolver">
+        <h2>✂ Para devolver al cole</h2>
+        <p>Nombre del niño o de la niña:<span class="linea"></span></p>
+        <p><span class="casilla"></span>Puede tocar y comer fruta, verdura y legumbres.</p>
+        <p><span class="casilla"></span>No puede tocar o comer:<span class="linea"></span></p>
+        <p>Firma de la familia:<span class="linea"></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Pequeños hortelanos.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos pictográficos
+          utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org),
+          que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         IMPRIMIBLES
+         ====================================================================== -->
+
+    <!-- Agenda de la situación -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Todas las sesiones</p>
+        <h1>Tarjetas de la agenda</h1>
+      </div>
+      <p class="tijera">
+        Recorta por la línea de puntos y pega detrás un círculo de velcro suave. Cada sesión dice qué tarjetas poner en la agenda.
+      </p>
+      <ul class="recortables agenda-tarjetas" style="--columnas: 4; --alto: 44.4mm; --picto: 25mm; --letra: 18pt">
+        <li><img src="pictogramas/27575.png" alt="Pictograma de asamblea" /><span>asamblea</span></li>
+        <li><img src="pictogramas/8689.png" alt="Pictograma de semilla" /><span>semillas</span></li>
+        <li><img src="pictogramas/9927.png" alt="Pictograma de lupa" /><span>mirar</span></li>
+        <li><img src="pictogramas/8077.png" alt="Pictograma de clasificar" /><span>agrupar</span></li>
+        <li><img src="pictogramas/8119.png" alt="Pictograma de experimento" /><span>experimento</span></li>
+        <li><img src="pictogramas/23991.png" alt="Pictograma de una planta que crece junto a una regla" /><span>medir</span></li>
+        <li><img src="pictogramas/8088.png" alt="Pictograma de dibujar" /><span>dibujar</span></li>
+        <li><img src="pictogramas/2828.png" alt="Pictograma de plantar" /><span>plantar</span></li>
+        <li><img src="pictogramas/2816.png" alt="Pictograma de regar" /><span>regar</span></li>
+        <li><img src="pictogramas/8975.png" alt="Pictograma de lavarse las manos" /><span>lavar las manos</span></li>
+        <li><img src="pictogramas/3143.png" alt="Pictograma de una planta con su raíz" /><span>la planta</span></li>
+        <li><img src="pictogramas/35657.png" alt="Pictograma de frutería" /><span>frutería</span></li>
+        <li><img src="pictogramas/34826.png" alt="Pictograma de lavar la fruta" /><span>lavar la fruta</span></li>
+        <li><img src="pictogramas/7805.png" alt="Pictograma de receta" /><span>receta</span></li>
+        <li><img src="pictogramas/37843.png" alt="Pictograma de almuerzo" /><span>almuerzo</span></li>
+        <li><img src="pictogramas/31902.png" alt="Pictograma de enseñar" /><span>enseñar</span></li>
+        <li><img src="pictogramas/3345.png" alt="Pictograma de hablar" /><span>hablar</span></li>
+        <li><img src="pictogramas/39562.png" alt="Pictograma de huerto" /><span>huerto</span></li>
+        <li><img src="pictogramas/13040.png" alt="Pictograma de hacer ejercicio" /><span>pausa activa</span></li>
+        <li><img src="pictogramas/8680.png" alt="Pictograma de recoger" /><span>recoger</span></li>
+      </ul>
+    </section>
+
+    <!-- Hoja de predicciones -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesiones 2 y 3</p>
+        <h1>Hoja de predicciones</h1>
+      </div>
+      <p class="me-llamo alumno">Me llamo <span></span></p>
+      <p class="para-adulto">
+        Para el adulto: en la sesión 2, lee cada vaso y el niño o la niña rodea «sí» o «no» en «Lo que pienso». En la sesión 3,
+        rodea lo que ha pasado.
+      </p>
+      <table class="pred">
+        <colgroup>
+          <col style="width: 86mm" />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col"><img src="pictogramas/36921.png" alt="Pictograma de una semilla que brota" />¿Brotará?</th>
+            <th scope="col">Lo que pienso</th>
+            <th scope="col">Lo que ha pasado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">
+              <div class="vaso">
+                <span class="vaso__num">1</span>
+                <span class="condicion"><img src="pictogramas/32464.png" alt="Pictograma de agua" />con agua</span>
+                <span class="condicion"><img src="pictogramas/8619.png" alt="Pictograma de luz" />con luz</span>
+              </div>
+            </th>
+            <td>
+              <div class="opciones">
+                <span class="opcion alumno"><img src="pictogramas/5584.png" alt="" />sí</span>
+                <span class="opcion alumno"><img src="pictogramas/5526.png" alt="" />no</span>
+              </div>
+            </td>
+            <td>
+              <div class="opciones">
+                <span class="opcion alumno"><img src="pictogramas/5584.png" alt="" />sí</span>
+                <span class="opcion alumno"><img src="pictogramas/5526.png" alt="" />no</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <div class="vaso">
+                <span class="vaso__num">2</span>
+                <span class="condicion"
+                  ><span class="tachado"
+                    ><img src="pictogramas/32464.png" alt="Pictograma de agua tachado: sin agua" /><img
+                      src="pictogramas/5526.png"
+                      alt="" /></span
+                  >sin agua</span
+                >
+                <span class="condicion"><img src="pictogramas/8619.png" alt="Pictograma de luz" />con luz</span>
+              </div>
+            </th>
+            <td>
+              <div class="opciones">
+                <span class="opcion alumno"><img src="pictogramas/5584.png" alt="" />sí</span>
+                <span class="opcion alumno"><img src="pictogramas/5526.png" alt="" />no</span>
+              </div>
+            </td>
+            <td>
+              <div class="opciones">
+                <span class="opcion alumno"><img src="pictogramas/5584.png" alt="" />sí</span>
+                <span class="opcion alumno"><img src="pictogramas/5526.png" alt="" />no</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <div class="vaso">
+                <span class="vaso__num">3</span>
+                <span class="condicion"><img src="pictogramas/32464.png" alt="Pictograma de agua" />con agua</span>
+                <span class="condicion"><img src="pictogramas/10742.png" alt="Pictograma de oscuridad" />a oscuras</span>
+              </div>
+            </th>
+            <td>
+              <div class="opciones">
+                <span class="opcion alumno"><img src="pictogramas/5584.png" alt="" />sí</span>
+                <span class="opcion alumno"><img src="pictogramas/5526.png" alt="" />no</span>
+              </div>
+            </td>
+            <td>
+              <div class="opciones">
+                <span class="opcion alumno"><img src="pictogramas/5584.png" alt="" />sí</span>
+                <span class="opcion alumno"><img src="pictogramas/5526.png" alt="" />no</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="aviso-picto alumno">
+        <img src="pictogramas/8674.png" alt="Pictograma de prohibido comer" />Los vasos son para mirar. No se comen.
+      </p>
+    </section>
+
+    <!-- Diario del huerto (1): portada y primera entrada -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesiones 3 a 8 · Diario del huerto</p>
+      </div>
+      <div class="diario-portada">
+        <div>
+          <h2>Mi diario<br />del huerto</h2>
+          <p class="me-llamo alumno">Me llamo <span></span></p>
+          <div class="dibujo">Dibuja aquí tu planta.</div>
+        </div>
+        <img src="pictogramas/38613.png" alt="Pictograma de una planta en su maceta" />
+      </div>
+      <div class="entrada" data-entrada></div>
+    </section>
+
+    <!-- Diario del huerto (2): dos entradas -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Diario del huerto · Fotocopia esta hoja tantas veces como necesites</p>
+      </div>
+      <div class="entrada" data-entrada></div>
+      <div class="entrada" data-entrada></div>
+    </section>
+
+    <!-- Secuencia de plantar -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 4</p>
+        <h1>Así plantamos</h1>
+      </div>
+      <p class="tijera">Imprime dos copias: una entera, como cartel, y otra recortada en tarjetas para ordenar los pasos.</p>
+      <ol class="pasos-tarjetas" style="--columnas: 2; --alto: 56mm; --picto: 32mm">
+        <li><span class="numero">1</span><img src="pictogramas/2867.png" alt="Pictograma de pala" /><p class="alumno">Llena la maceta de tierra.</p></li>
+        <li><span class="numero">2</span><img src="pictogramas/3298.png" alt="Pictograma de dedo" /><p class="alumno">Haz un agujero con el dedo.</p></li>
+        <li><span class="numero">3</span><img src="pictogramas/7245.png" alt="Pictograma de sembrar" /><p class="alumno">Mete la plantita o la semilla.</p></li>
+        <li><span class="numero">4</span><img src="pictogramas/3160.png" alt="Pictograma de tierra" /><p class="alumno">Tapa con tierra y aprieta suave.</p></li>
+        <li><span class="numero">5</span><img src="pictogramas/2816.png" alt="Pictograma de regar" /><p class="alumno">Riega un poco.</p></li>
+        <li><span class="numero">6</span><img src="pictogramas/37407.png" alt="Pictograma de escribir el nombre" /><p class="alumno">Escribe tu nombre en el cartel.</p></li>
+        <li><span class="numero">7</span><img src="pictogramas/8975.png" alt="Pictograma de lavarse las manos" /><p class="alumno">Lávate las manos con jabón.</p></li>
+        <li><span class="numero">8</span><img src="pictogramas/38613.png" alt="Pictograma de una planta en su maceta" /><p class="alumno">¡Ya está! Ahora la cuidamos.</p></li>
+      </ol>
+    </section>
+
+    <!-- Carteles para las macetas -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 4</p>
+        <h1>Carteles para las macetas</h1>
+      </div>
+      <p class="tijera">
+        Recorta, escribid los nombres, forra cada cartel con cinta adhesiva y pégalo a un palo de helado. En los blancos, dibujad la
+        planta y escribid su nombre.
+      </p>
+      <ul class="carteles">
+        <li>
+          <img src="pictogramas/2446.png" alt="Pictograma de lechuga" />
+          <div><p class="planta alumno">Soy una lechuga.</p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantada el día ____________</p></div>
+        </li>
+        <li>
+          <img src="pictogramas/2400.png" alt="Pictograma de fresa" />
+          <div><p class="planta alumno">Soy una fresa.</p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantada el día ____________</p></div>
+        </li>
+        <li>
+          <img src="pictogramas/21982.png" alt="Pictograma de hierbabuena" />
+          <div><p class="planta alumno">Soy hierbabuena.</p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantada el día ____________</p></div>
+        </li>
+        <li>
+          <img src="pictogramas/11334.png" alt="Pictograma de perejil" />
+          <div><p class="planta alumno">Soy perejil.</p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantado el día ____________</p></div>
+        </li>
+        <li>
+          <img src="pictogramas/8678.png" alt="Pictograma de rábano" />
+          <div><p class="planta alumno">Soy un rábano.</p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantado el día ____________</p></div>
+        </li>
+        <li>
+          <img src="pictogramas/38071.png" alt="Pictograma de una planta de lenteja" />
+          <div><p class="planta alumno">Soy una lenteja.</p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Para mirar: no se come.</p></div>
+        </li>
+        <li>
+          <span class="hueco">Dibuja la planta</span>
+          <div><p class="planta alumno en-blanco">Soy<span></span></p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantada el día ____________</p></div>
+        </li>
+        <li>
+          <span class="hueco">Dibuja la planta</span>
+          <div><p class="planta alumno en-blanco">Soy<span></span></p><p class="cuidan alumno">Me cuidan:</p><div class="renglon"></div><p class="plante">Plantada el día ____________</p></div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Partes de la planta -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 5</p>
+        <h1>¿Qué parte de la planta me como?</h1>
+      </div>
+      <p class="tijera">Recorta por la línea de puntos. Arriba, las partes de la planta; abajo, los alimentos para emparejar.</p>
+      <h2 class="partes-titulo">Las partes de la planta</h2>
+      <ul class="recortables" style="--columnas: 3; --alto: 47mm; --picto: 30mm; --letra: 20pt">
+        <li><img src="pictogramas/3148.png" alt="Pictograma de una planta con la raíz señalada" /><span>raíz</span></li>
+        <li><img src="pictogramas/37009.png" alt="Pictograma de una planta con el tallo señalado" /><span>tallo</span></li>
+        <li><img src="pictogramas/3114.png" alt="Pictograma de una planta con una hoja señalada" /><span>hoja</span></li>
+        <li><img src="pictogramas/3102.png" alt="Pictograma de flor" /><span>flor</span></li>
+        <li><img src="pictogramas/3203.png" alt="Pictograma de un manzano con la fruta señalada" /><span>fruto</span></li>
+        <li><img src="pictogramas/8689.png" alt="Pictograma de semilla" /><span>semilla</span></li>
+      </ul>
+      <h2 class="partes-titulo">¿Qué parte es?</h2>
+      <ul class="recortables" style="--columnas: 3; --alto: 47mm; --picto: 30mm; --letra: 20pt">
+        <li><img src="pictogramas/2619.png" alt="Pictograma de zanahoria" /><span>zanahoria</span></li>
+        <li><img src="pictogramas/34127.png" alt="Pictograma de espárragos verdes" /><span>espárragos</span></li>
+        <li><img src="pictogramas/2446.png" alt="Pictograma de lechuga" /><span>lechuga</span></li>
+        <li><img src="pictogramas/23853.png" alt="Pictograma de brócoli" /><span>brócoli</span></li>
+        <li><img src="pictogramas/2594.png" alt="Pictograma de tomate" /><span>tomate</span></li>
+        <li><img src="pictogramas/2448.png" alt="Pictograma de lentejas" /><span>lentejas</span></li>
+      </ul>
+    </section>
+
+    <!-- Fichas de la frutería -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 6</p>
+        <h1>Fichas de la frutería</h1>
+      </div>
+      <p class="tijera">
+        Imprime esta hoja dos veces en cartulina y recorta por la línea de puntos: 70 fichas. Cada ficha vale 1. También sirven los
+        tapones o las fichas de colores de clase.
+      </p>
+      <ul class="fichas" id="fichas"></ul>
+    </section>
+
+    <!-- Precios y lista de la compra -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 6</p>
+        <h1>Precios y lista de la compra</h1>
+      </div>
+      <p class="tijera">Recorta por la línea de puntos. Pon un precio junto a cada fruta de la tienda y da a cada cliente una tarjeta de la compra.</p>
+      <h2 class="partes-titulo">Precios</h2>
+      <ul class="precios" id="precios"></ul>
+      <h2 class="partes-titulo">Lista de la compra</h2>
+      <ul class="compra">
+        <li><span class="fila"><span class="cifra">2</span><span class="puntos"><i></i><i></i></span></span><img src="pictogramas/2530.png" alt="Pictograma de plátano" /><span class="alumno">plátanos</span></li>
+        <li><span class="fila"><span class="cifra">3</span><span class="puntos"><i></i><i></i><i></i></span></span><img src="pictogramas/2400.png" alt="Pictograma de fresa" /><span class="alumno">fresas</span></li>
+        <li><span class="fila"><span class="cifra">1</span><span class="puntos"><i></i></span></span><img src="pictogramas/2561.png" alt="Pictograma de pera" /><span class="alumno">pera</span></li>
+        <li><span class="fila"><span class="cifra">2</span><span class="puntos"><i></i><i></i></span></span><img src="pictogramas/2955.png" alt="Pictograma de kiwi" /><span class="alumno">kiwis</span></li>
+        <li><span class="fila"><span class="cifra">1</span><span class="puntos"><i></i></span></span><img src="pictogramas/11298.png" alt="Pictograma de mandarina" /><span class="alumno">mandarina</span></li>
+        <li><span class="fila"><span class="cifra">1</span><span class="puntos"><i></i></span></span><img src="pictogramas/2446.png" alt="Pictograma de lechuga" /><span class="alumno">lechuga</span></li>
+        <li><span class="fila"><span class="cifra">2</span><span class="puntos"><i></i><i></i></span></span><img src="pictogramas/2594.png" alt="Pictograma de tomate" /><span class="alumno">tomates</span></li>
+        <li><span class="fila"><span class="cifra">3</span><span class="puntos"><i></i><i></i><i></i></span></span><img src="pictogramas/2619.png" alt="Pictograma de zanahoria" /><span class="alumno">zanahorias</span></li>
+      </ul>
+    </section>
+
+    <!-- Receta -->
+    <section class="hoja imprimible receta">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 7 · Cartel</p>
+      </div>
+      <h1 class="cartel-titulo">Macedonia en vaso</h1>
+      <h2>Necesitamos</h2>
+      <ul class="ingredientes">
+        <li><img src="pictogramas/2530.png" alt="Pictograma de plátano" />plátano</li>
+        <li><img src="pictogramas/2561.png" alt="Pictograma de pera" />pera</li>
+        <li><img src="pictogramas/2955.png" alt="Pictograma de kiwi" />kiwi</li>
+        <li><img src="pictogramas/2400.png" alt="Pictograma de fresa" />fresa</li>
+        <li><img src="pictogramas/11298.png" alt="Pictograma de mandarina" />mandarina</li>
+      </ul>
+      <ul class="utensilios">
+        <li><img src="pictogramas/2610.png" alt="Pictograma de vaso" />vaso</li>
+        <li><img src="pictogramas/2362.png" alt="Pictograma de cuchara" />cuchara</li>
+        <li><img src="pictogramas/4931.png" alt="Pictograma de cuchillo de punta redonda" />cuchillo de punta redonda</li>
+      </ul>
+      <h2>Pasos</h2>
+      <ol class="pasos-tarjetas verticales" style="--columnas: 3; --alto: 60mm; --picto: 30mm">
+        <li><span class="numero">1</span><img src="pictogramas/8975.png" alt="Pictograma de lavarse las manos" /><p class="alumno">Lávate las manos.</p></li>
+        <li><span class="numero">2</span><img src="pictogramas/34826.png" alt="Pictograma de lavar la fruta" /><p class="alumno">Lava la fruta.</p></li>
+        <li><span class="numero">3</span><img src="pictogramas/39631.png" alt="Pictograma de pelar un plátano" /><p class="alumno">Pela el plátano y la mandarina.</p></li>
+        <li><span class="numero">4</span><img src="pictogramas/10185.png" alt="Pictograma de trocear" /><p class="alumno">Corta la fruta en trozos pequeños.</p></li>
+        <li><span class="numero">5</span><img src="pictogramas/7162.png" alt="Pictograma de mezclar" /><p class="alumno">Ponla en el vaso y mezcla.</p></li>
+        <li><span class="numero">6</span><img src="pictogramas/8620.png" alt="Pictograma de macedonia" /><p class="alumno">A comer, sentados y con calma.</p></li>
+      </ol>
+      <p class="para-adulto">
+        Para el adulto: solo fruta blanda para el alumnado. Pela tú el kiwi y corta lo duro; las uvas, peladas, sin semillas y en
+        cuatro trozos a lo largo. Nada de frutos secos. Antes, repasa las alergias.
+      </p>
+    </section>
+
+    <!-- Cuadrante del huerto -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 8 y después</p>
+        <h1>¿Quién cuida el huerto esta semana?</h1>
+      </div>
+      <p class="para-adulto">Plastifícalo y escribe con rotulador de pizarra el nombre de cada niño o niña en el día que elige. Se borra con un paño.</p>
+      <table class="cuadrante">
+        <thead>
+          <tr>
+            <th scope="col">Tarea</th>
+            <th scope="col">L</th>
+            <th scope="col">M</th>
+            <th scope="col">X</th>
+            <th scope="col">J</th>
+            <th scope="col">V</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="tarea alumno"><img src="pictogramas/3298.png" alt="Pictograma de dedo" />Toco la tierra. Si está seca, riego.</span></th>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="tarea alumno"><img src="pictogramas/23991.png" alt="Pictograma de una planta que crece junto a una regla" />Mido la planta.</span></th>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="tarea alumno"><img src="pictogramas/8088.png" alt="Pictograma de dibujar" />Dibujo en el diario.</span></th>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="tarea alumno"><img src="pictogramas/5076.png" alt="Pictograma de una hoja seca" />Quito las hojas secas.</span></th>
+            <td></td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Autoevaluación del alumnado -->
+    <section class="hoja imprimible">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Imprimible · Sesión 8</p>
+        <h1>Mi autoevaluación</h1>
+      </div>
+      <p class="me-llamo alumno">Me llamo <span></span></p>
+      <p class="para-adulto">Para el adulto: lee cada frase. El niño o la niña rodea o colorea una respuesta en cada fila.</p>
+      <div class="auto-opciones">
+        <div></div>
+        <div class="alumno"><img src="pictogramas/2617.png" alt="Pictograma de yo" />Lo he hecho yo</div>
+        <div class="alumno"><img src="pictogramas/4570.png" alt="Pictograma de ayudar" />Con ayuda</div>
+        <div class="alumno"><img src="pictogramas/37163.png" alt="Pictograma de otra vez" />Quiero practicar más</div>
+      </div>
+      <div class="auto-fila">
+        <span class="que alumno"><img src="pictogramas/2816.png" alt="Pictograma de regar" />Cuido mi planta.</span>
+        <span class="rodea"><span><img src="pictogramas/2617.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/4570.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/37163.png" alt="" /></span></span>
+      </div>
+      <div class="auto-fila">
+        <span class="que alumno"><img src="pictogramas/23991.png" alt="Pictograma de medir la planta" />Miro, mido y dibujo.</span>
+        <span class="rodea"><span><img src="pictogramas/2617.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/4570.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/37163.png" alt="" /></span></span>
+      </div>
+      <div class="auto-fila">
+        <span class="que alumno"><img src="pictogramas/8620.png" alt="Pictograma de macedonia" />Preparo la receta.</span>
+        <span class="rodea"><span><img src="pictogramas/2617.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/4570.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/37163.png" alt="" /></span></span>
+      </div>
+      <div class="auto-fila">
+        <span class="que alumno"><img src="pictogramas/3345.png" alt="Pictograma de hablar" />Cuento lo que sé.</span>
+        <span class="rodea"><span><img src="pictogramas/2617.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/4570.png" alt="" /></span></span>
+        <span class="rodea"><span><img src="pictogramas/37163.png" alt="" /></span></span>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja final">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Fuentes y créditos</p>
+        <h1>De dónde sale cada cosa</h1>
+      </div>
+      <div class="creditos">
+        <p>
+          <strong>Pequeños hortelanos: situación de aprendizaje para 4 años, con DUA y multinivel.</strong> IdEducando, octubre de
+          2026. <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente. Ficha y novedades:
+          <span class="url">ideducando.es/material-gratuito/situacion-aprendizaje-4-anos-huerto</span>
+        </p>
+
+        <h2>Currículo y oposición</h2>
+        <ul>
+          <li>
+            Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación
+            Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056),
+            art. 7 (págs. 33057 y 33058), art. 14 y 16 (pág. 33060), art. 17.3 (pág. 33061), anexo I (pág. 33068), competencias,
+            criterios y saberes de las tres áreas (págs. 33078 a 33110) y anexo III (pág. 33111).
+          </li>
+          <li>BORM n.º 18, de 23 de enero de 2026, anexo XVII, «Cuerpo de Maestros. 597031 - Educación Infantil», págs. 1720 a 1724.</li>
+        </ul>
+
+        <h2>Diseño Universal para el Aprendizaje y enseñanza multinivel</h2>
+        <ul>
+          <li>CAST (2024). Pautas para el Diseño Universal para el Aprendizaje, versión 3.0. udlguidelines.cast.org/es</li>
+          <li>
+            Collicott, J. (1991). Implementing multi-level instruction: Strategies for classroom teachers. En G. L. Porter y D.
+            Richler (Eds.), <em>Changing Canadian Schools: Perspectives on disability and inclusion</em> (pp. 191-218). Roeher
+            Institute.
+          </li>
+          <li>Inclusive Schools Network (2011). <em>Using multi-level instruction for a classroom of diverse learners</em>. inclusiveschools.org</li>
+        </ul>
+
+        <h2>Alimentación, seguridad y plantas</h2>
+        <ul>
+          <li>
+            Agencia Española de Seguridad Alimentaria y Nutrición (AESAN) (2022). <em>Recomendaciones dietéticas saludables y
+            sostenibles complementadas con recomendaciones de actividad física para la población española</em>: fruta y hortalizas
+            cada día y fruta entera mejor que zumo (pág. 4), evitar los frutos secos en menores de 5 años por el riesgo de asfixia
+            (pág. 7), el agua como bebida (pág. 11) y fruta de temporada y de proximidad (pág. 17).
+          </li>
+          <li>
+            Asociación Española de Pediatría (AEP), Comité de Soporte Vital (diciembre de 2025). Nota de prensa sobre la prevención
+            de atragantamientos en menores de 5 años: uvas peladas, sin semillas y en cuatro trozos a lo largo; comer sentado y con
+            un adulto. aeped.es/actualidad/atragantamientos-navidad
+          </li>
+          <li>
+            AEP, En Familia (24 de noviembre de 2025). <em>5 verdades y 5 mitos sobre los atragantamientos</em>: zanahoria y manzana
+            crudas, duras hasta los 3 a 6 años; frutas pequeñas en cuartos o en tiras. aeped.es/enfamilia
+          </li>
+          <li>
+            Kimball, J. W. <em>Biología</em>, apartados 16.4B «Germinación de semillas» y 16.4C «Etiolación». LibreTexts Español,
+            licencia CC BY 3.0: la semilla siempre necesita agua para germinar; a oscuras, la planta crece pálida y alargada.
+          </li>
+          <li>
+            Armarego-Marriott, T., Sandoval-Ibañez, O. y Kowalewska, Ł. (2020). Beyond the darkness: recent lessons from etiolation
+            and de-etiolation studies. <em>Journal of Experimental Botany</em>, 71(4), 1215-1225.
+          </li>
+          <li>Instituto Nacional de Toxicología y Ciencias Forenses. Servicio de Información Toxicológica: 91 562 04 20, las 24 horas.</li>
+        </ul>
+
+        <h2>Materiales de IdEducando que usa</h2>
+        <ul>
+          <li>Agenda visual: <span class="url">ideducando.es/material-gratuito/agenda-visual-semanal</span></li>
+          <li>Pausas activas: <span class="url">ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados</span></li>
+          <li>Tablero de comunicación: <span class="url">ideducando.es/material-gratuito/tablero-comunicacion-basico</span></li>
+          <li>«Días distintos»: <span class="url">ideducando.es/material-gratuito/dias-distintos-historias-sociales</span></li>
+          <li>Kit de bienvenida: <span class="url">ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado</span></li>
+        </ul>
+
+        <h2>Pictogramas y licencia</h2>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio
+          Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el
+          material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender. El camino de la portada, las
+          fichas de la frutería y los cuadros del diario son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.</p>
+      </div>
+    </section>
+
+    <script>
+      // Filas del registro del grupo: 25 nombres y una casilla por criterio.
+      const filas = document.getElementById('filas-registro');
+      for (let i = 1; i <= 25; i++) {
+        filas.insertAdjacentHTML('beforeend', `<tr><td>${i}</td><td></td>${'<td></td>'.repeat(12)}</tr>`);
+      }
+
+      // Entradas del diario: el día, el dibujo, la medida en cuadros y si se ha regado.
+      const entrada = `
+        <div class="entrada__dia alumno">Hoy es
+          <span class="dia">L</span><span class="dia">M</span><span class="dia">X</span><span class="dia">J</span><span class="dia">V</span>
+          <span class="fecha">Fecha: ______________</span>
+        </div>
+        <div class="entrada__cuerpo">
+          <div class="entrada__dibujo"><span class="alumno">Así está mi planta</span><div></div></div>
+          <div class="medida"><span class="alumno">Mide</span><div class="cuadros">${'<i></i>'.repeat(10)}</div><span class="alumno">cubos</span></div>
+          <div class="regado"><span class="alumno">La he regado</span><img src="pictogramas/2817.png" alt="Pictograma de regadera" />
+            <div class="opciones"><span class="opcion alumno"><img src="pictogramas/5584.png" alt="">sí</span><span class="opcion alumno"><img src="pictogramas/5526.png" alt="">no</span></div>
+          </div>
+        </div>`;
+      for (const el of document.querySelectorAll('[data-entrada]')) el.innerHTML = entrada;
+
+      // Fichas de la frutería: 35 por hoja, con un brote dibujado para IdEducando y el número 1.
+      const brote = `<svg viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M20 19 V12" stroke="#127055" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          <path d="M20 14 C 14 14, 10.5 10, 10.5 4.5 C 16.5 4.5, 20 8.5, 20 14 Z" fill="#1fa67a" stroke="#127055" stroke-width="1.4"/>
+          <path d="M20 12 C 25.5 12, 29.5 8.5, 29.5 3 C 23.5 3, 20 6.5, 20 12 Z" fill="#1fa67a" stroke="#127055" stroke-width="1.4"/>
+          <text x="20" y="37" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="19" fill="#1e2b55">1</text>
+        </svg>`;
+      document.getElementById('fichas').innerHTML = `<li><span class="ficha">${brote}</span></li>`.repeat(35);
+
+      // Precios: 4 de cada (1, 2 y 3 fichas), con número y puntos para contar.
+      const precios = [1, 2, 3]
+        .flatMap((n) => Array(4).fill(n))
+        .map(
+          (n) =>
+            `<li><span class="cifra">${n}</span><span class="puntos">${'<i></i>'.repeat(n)}</span><span class="alumno">${n === 1 ? 'ficha' : 'fichas'}</span></li>`,
+        )
+        .join('');
+      document.getElementById('precios').innerHTML = precios;
+    </script>
+  </body>
+</html>

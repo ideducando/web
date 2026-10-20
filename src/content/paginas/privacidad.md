@@ -5,7 +5,7 @@ actualizado: 2026-10-14
 borrador: true
 ---
 
-[BORRADOR: estamos preparando la bolsa de descargas, que pedirá un correo (y el nombre, si quieres darlo) para descargar el material. Mientras sea una vista previa no guarda ningún dato. Antes de activarla, esta página explicará quién es el responsable, para qué usamos los datos, la herramienta de correo, cuánto tiempo los guardamos y cómo darte de baja.]
+[BORRADOR: estamos preparando la mochila de descargas, que pedirá un correo (y el nombre, si quieres darlo) para descargar el material. Mientras sea una vista previa no guarda ningún dato. Antes de activarla, esta página explicará quién es el responsable, para qué usamos los datos, la herramienta de correo, cuánto tiempo los guardamos y cómo darte de baja.]
 
 ## Resumen
 
@@ -29,7 +29,7 @@ La web está alojada en Netlify, un servicio de Netlify, Inc. Como cualquier ser
 
 ## Lo que se guarda en tu navegador
 
-La bolsa de descargas recuerda en tu navegador qué materiales has elegido, y la web recuerda que ya viste la ventana de bienvenida para no enseñártela otra vez. Esos datos no salen de tu dispositivo.
+La mochila de descargas recuerda en tu navegador qué materiales has elegido, y la web recuerda que ya viste la ventana de bienvenida para no enseñártela otra vez. Esos datos no salen de tu dispositivo.
 
 La [lista para revisar la programación](/oposiciones/programacion/) guarda tus marcas en el almacenamiento local de tu navegador para que no las pierdas al volver. Ese dato no sale de tu dispositivo y no lo vemos. Es un almacenamiento necesario para el servicio que pides, por lo que no requiere consentimiento según el artículo 22.2 de la LSSI. Puedes borrarlo con el botón «Borrar mis marcas» o desde los ajustes de tu navegador.
 

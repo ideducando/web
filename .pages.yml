@@ -89,6 +89,7 @@ content:
             - { name: guia, label: Guía }
             - { name: lista, label: Lista de comprobación }
             - { name: programacion, label: Programación }
+            - { name: situacion, label: Situación de aprendizaje }
       - name: etapas
         label: Etapas
         type: select

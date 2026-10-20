@@ -1,0 +1,647 @@
+/* ==========================================================================
+   IdEducando · estilos de las situaciones de aprendizaje
+   Se cargan después de comun.css. Mismas piezas en todas las situaciones:
+   de un vistazo, diseño DUA, niveles, sesiones, evaluación e imprimibles.
+   Los colores solo están en bordes y fondos: el texto siempre es marino
+   (contraste AA) y cada nivel lleva también número y forma.
+   ========================================================================== */
+
+:root {
+  --ca: var(--coral);
+  --ca-tinte: var(--coral-tinte);
+  --dee: var(--verde);
+  --dee-tinte: var(--verde-tinte);
+  --crr: var(--azul);
+  --crr-tinte: var(--azul-tinte);
+}
+
+.hoja {
+  break-after: page;
+}
+
+.hoja:last-child {
+  break-after: auto;
+}
+
+.cabecera {
+  margin-bottom: 4mm;
+}
+
+.cabecera .rayos {
+  margin-bottom: 4mm;
+}
+
+.cabecera h1 {
+  font-size: 22pt;
+  margin-bottom: 1.5mm;
+}
+
+.cabecera .entradilla {
+  margin: 0;
+  font-size: 11pt;
+  color: var(--suave);
+  max-width: 160mm;
+}
+
+/* ---------- Etiquetas pequeñas: áreas, criterios y pautas DUA ---------- */
+
+.chip {
+  display: inline-block;
+  padding: 0.2mm 1.6mm;
+  margin: 0 0.6mm 0.8mm 0;
+  border-radius: 1.4mm;
+  border: 0.35mm solid var(--linea);
+  background: #fff;
+  font-family: var(--titulos);
+  font-weight: 600;
+  font-size: 8.5pt;
+  line-height: 1.45;
+  white-space: nowrap;
+  color: var(--marino);
+}
+
+.chip--ca {
+  border-color: var(--ca);
+  background: var(--ca-tinte);
+}
+
+.chip--dee {
+  border-color: var(--dee);
+  background: var(--dee-tinte);
+}
+
+.chip--crr {
+  border-color: var(--crr);
+  background: var(--crr-tinte);
+}
+
+.chip--dua {
+  border-color: var(--morado);
+  background: var(--morado-tinte);
+}
+
+/* ---------- De un vistazo ---------- */
+
+.reto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1mm;
+  padding: 4.5mm 5.5mm;
+  margin: 0 0 4mm;
+  border-radius: 3.5mm;
+  background: var(--amarillo-tinte);
+  border: 0.6mm solid var(--amarillo);
+  break-inside: avoid;
+}
+
+.reto h2 {
+  margin: 0;
+  font-size: 13pt;
+}
+
+.reto p {
+  margin: 0;
+  font-size: 12pt;
+  line-height: 1.4;
+}
+
+.reto .reto__pregunta {
+  font-family: var(--lema);
+  font-size: 15pt;
+  line-height: 1.3;
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5mm 5mm;
+  margin: 0 0 4mm;
+  padding: 0;
+  list-style: none;
+}
+
+.datos li {
+  margin: 0;
+  padding: 2.2mm 3mm;
+  border-left: 1.2mm solid var(--linea);
+  background: var(--crema);
+  border-radius: 0 2mm 2mm 0;
+  font-size: 10pt;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+.datos li strong {
+  display: block;
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 9pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--morado-texto);
+}
+
+.datos li.ancho {
+  grid-column: 1 / -1;
+}
+
+.mapa-sesiones {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2mm;
+  margin: 0 0 4mm;
+  padding: 0;
+  list-style: none;
+}
+
+.mapa-sesiones li {
+  margin: 0;
+  padding: 2mm 2.5mm;
+  border: 0.35mm solid var(--linea);
+  border-radius: 2.4mm;
+  font-size: 9pt;
+  line-height: 1.3;
+  break-inside: avoid;
+}
+
+.mapa-sesiones b {
+  display: block;
+  font-family: var(--titulos);
+  font-size: 9pt;
+  color: var(--morado-texto);
+}
+
+/* ---------- Diseño DUA: los tres principios ---------- */
+
+.dua-tres {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3mm;
+  margin: 0 0 4mm;
+}
+
+.principio {
+  padding: 3mm 3.5mm;
+  border-radius: 3mm;
+  background: var(--morado-tinte);
+  border-top: 1.4mm solid var(--morado);
+  font-size: 9.5pt;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+.principio h3 {
+  margin: 0 0 1.5mm;
+  font-size: 11pt;
+}
+
+.principio ul {
+  margin: 0;
+  padding-left: 1em;
+}
+
+.principio li {
+  margin-bottom: 1mm;
+}
+
+/* ---------- Los tres niveles (multinivel) ---------- */
+
+.niveles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5mm;
+  margin: 1.5mm 0 2.5mm;
+  padding: 0;
+  list-style: none;
+}
+
+.nivel {
+  position: relative;
+  margin: 0;
+  padding: 2.4mm 3mm 2.6mm;
+  border-radius: 2.6mm;
+  border: 0.45mm solid var(--c);
+  background: var(--t);
+  font-size: 10pt;
+  line-height: 1.35;
+  break-inside: avoid;
+}
+
+.nivel h4 {
+  display: flex;
+  align-items: center;
+  gap: 1.6mm;
+  margin: 0 0 1mm;
+  font-size: 9.5pt;
+  letter-spacing: 0.02em;
+}
+
+.nivel p {
+  margin: 0;
+}
+
+.nivel p + p {
+  margin-top: 1mm;
+}
+
+/* La marca de cada nivel: número dentro de una forma distinta (círculo, cuadrado y rombo),
+   para que no dependa del color. */
+.marca {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 5.4mm;
+  height: 5.4mm;
+  background: var(--c);
+  color: #fff;
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 8.5pt;
+  line-height: 1;
+}
+
+.nivel-1 {
+  --c: var(--azul);
+  --t: var(--azul-tinte);
+}
+
+.nivel-1 .marca {
+  border-radius: 50%;
+}
+
+.nivel-2 {
+  --c: var(--verde-texto);
+  --t: var(--verde-tinte);
+}
+
+.nivel-2 .marca {
+  border-radius: 0.8mm;
+}
+
+.nivel-3 {
+  --c: var(--morado);
+  --t: var(--morado-tinte);
+}
+
+.nivel-3 .marca {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  width: 6.6mm;
+  height: 6.6mm;
+}
+
+/* Leyenda de los niveles (página de diseño) */
+.leyenda-niveles .nivel {
+  font-size: 10pt;
+}
+
+/* ---------- Sesión: una hoja por sesión ---------- */
+
+.sesion {
+  break-before: page;
+  break-after: page;
+}
+
+.sesion__cabecera {
+  display: grid;
+  grid-template-columns: 20mm 1fr;
+  gap: 0 4mm;
+  align-items: center;
+  padding-bottom: 2.5mm;
+  margin-bottom: 2.5mm;
+  border-bottom: 0.5mm solid var(--linea);
+}
+
+.sesion__numero {
+  display: grid;
+  place-items: center;
+  width: 20mm;
+  height: 20mm;
+  border-radius: 50%;
+  background: var(--marino);
+  color: #fff;
+  font-family: var(--titulos);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+.sesion__numero small {
+  display: block;
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sesion__numero span {
+  display: block;
+  font-size: 20pt;
+}
+
+.sesion__cabecera h1 {
+  font-size: 18pt;
+  margin: 0 0 1mm;
+}
+
+.sesion__datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1mm 4mm;
+  margin: 0;
+  font-size: 9.5pt;
+  color: var(--suave);
+}
+
+.sesion__datos b {
+  color: var(--marino);
+  font-family: var(--titulos);
+  font-weight: 600;
+}
+
+.sesion__para {
+  margin: 0 0 2mm;
+  padding: 2mm 3mm;
+  border-radius: 2.2mm;
+  background: var(--crema);
+  font-size: 10.5pt;
+  line-height: 1.35;
+}
+
+.fase {
+  margin: 0 0 2.2mm;
+  font-size: 10.5pt;
+  line-height: 1.4;
+}
+
+.fase h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  margin: 0 0 1mm;
+  font-size: 11.5pt;
+}
+
+.fase h2 .tiempo {
+  font-family: var(--texto);
+  font-weight: 400;
+  font-size: 9pt;
+  color: var(--suave);
+}
+
+.fase p,
+.fase ul,
+.fase ol {
+  margin-bottom: 1.2mm;
+}
+
+.fase li {
+  margin-bottom: 0.6mm;
+}
+
+.sesion__pie {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.5mm;
+  margin-top: 2.5mm;
+}
+
+.sesion__pie > div {
+  padding: 2.4mm 3mm;
+  border-radius: 2.4mm;
+  font-size: 9.5pt;
+  line-height: 1.33;
+  break-inside: avoid;
+}
+
+.sesion__pie h3 {
+  margin: 0 0 1mm;
+  font-size: 10pt;
+}
+
+.sesion__pie ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sesion__pie li {
+  margin-bottom: 1.2mm;
+}
+
+.sesion__pie .en-dua {
+  background: var(--morado-tinte);
+}
+
+.sesion__pie .observar {
+  background: var(--amarillo-tinte);
+}
+
+.sesion__pie .ajustes {
+  background: var(--azul-tinte);
+}
+
+/* Etiqueta de la necesidad al principio de cada ajuste */
+.ajustes b {
+  font-family: var(--titulos);
+  font-weight: 600;
+}
+
+/* ---------- Tabla del currículo ---------- */
+
+.tabla-curricular {
+  font-size: 9pt;
+  line-height: 1.32;
+}
+
+.tabla-curricular td,
+.tabla-curricular th {
+  padding: 1.6mm 2mm;
+}
+
+.tabla-curricular tbody th {
+  width: 26mm;
+  border-left: 1.4mm solid var(--c, var(--linea));
+}
+
+.tabla-curricular tr.ca {
+  --c: var(--ca);
+}
+
+.tabla-curricular tr.dee {
+  --c: var(--dee);
+}
+
+.tabla-curricular tr.crr {
+  --c: var(--crr);
+}
+
+.tabla-curricular .codigo {
+  font-family: var(--titulos);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- Evaluación ---------- */
+
+.escala {
+  font-size: 9pt;
+  line-height: 1.3;
+}
+
+.escala th,
+.escala td {
+  padding: 1.5mm 1.8mm;
+  border: 0.3mm solid var(--linea);
+}
+
+.escala thead th {
+  text-align: center;
+  font-size: 8.5pt;
+}
+
+.escala thead th:first-child {
+  text-align: left;
+}
+
+.escala td.casilla {
+  width: 14mm;
+  height: 9mm;
+}
+
+.escala .indicador {
+  font-size: 9pt;
+}
+
+.leyenda {
+  font-size: 9pt;
+  color: var(--suave);
+}
+
+.autoeval {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4mm;
+  margin: 2mm 0 4mm;
+  padding: 0;
+  list-style: none;
+}
+
+.autoeval li {
+  margin: 0;
+  padding: 3mm;
+  border: 0.5mm solid var(--linea);
+  border-radius: 3mm;
+  text-align: center;
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: 16pt;
+  line-height: 1.15;
+  break-inside: avoid;
+}
+
+.autoeval img {
+  display: block;
+  width: 30mm;
+  height: 30mm;
+  margin: 0 auto 2mm;
+  object-fit: contain;
+}
+
+.casillas-docente {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 4mm;
+}
+
+.casillas-docente li {
+  display: grid;
+  grid-template-columns: 6mm 1fr;
+  gap: 2mm;
+  margin: 0 0 1.6mm;
+  font-size: 10pt;
+  line-height: 1.35;
+}
+
+.casillas-docente li::before {
+  content: '';
+  width: 4.5mm;
+  height: 4.5mm;
+  margin-top: 0.6mm;
+  border: 0.45mm solid var(--marino);
+  border-radius: 0.8mm;
+}
+
+/* ---------- Caja para quien prepara la oposición ---------- */
+
+.oposicion {
+  padding: 3.5mm 4.5mm;
+  border-radius: 3mm;
+  background: var(--morado-tinte);
+  border-left: 1.6mm solid var(--morado);
+  font-size: 9.5pt;
+  line-height: 1.38;
+  break-inside: avoid;
+}
+
+.oposicion h3 {
+  margin: 0 0 1.5mm;
+  font-size: 11pt;
+}
+
+.oposicion > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Imprimibles: tarjetas para recortar ---------- */
+
+.recortables {
+  display: grid;
+  grid-template-columns: repeat(var(--columnas, 4), 1fr);
+  gap: 0;
+  margin: 0 0 4mm;
+  padding: 0;
+  list-style: none;
+}
+
+.recortables li {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  align-items: center;
+  margin: 0;
+  padding: 3mm 2mm 2.5mm;
+  border: 0.4mm dashed var(--suave);
+  margin: -0.2mm 0 0 -0.2mm;
+  min-height: var(--alto, 50mm);
+  text-align: center;
+  break-inside: avoid;
+}
+
+.recortables img {
+  width: var(--picto, 30mm);
+  height: var(--picto, 30mm);
+  object-fit: contain;
+}
+
+.recortables span {
+  font-family: var(--titulos);
+  font-weight: 700;
+  font-size: var(--letra, 15pt);
+  line-height: 1.1;
+}
+
+.tijera {
+  margin: 0 0 2mm;
+  font-size: 9pt;
+  color: var(--suave);
+}
+
+/* ---------- Nota para las familias ---------- */
+
+.familias-nota {
+  font-size: 11pt;
+}
+
+.familias-nota .caja {
+  font-size: 10.5pt;
+}

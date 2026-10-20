@@ -1,5 +1,5 @@
 ---
-// Ficha de cada material: como la página de un producto a 0 €. El material se añade a la bolsa
+// Ficha de cada material: como la página de un producto a 0 €. El material se añade a la mochila
 // y se descarga desde allí, junto con los demás que se hayan elegido.
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
@@ -74,7 +74,7 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
           <div class="ficha__compra" data-ficha-compra>
             <p class="ficha__precio">
               <span class="ficha__cero">0 €</span>
-              <span>Gratis. Lo añades a tu bolsa y lo descargas desde allí.</span>
+              <span>Gratis. Lo añades a tu mochila y lo descargas desde allí.</span>
             </p>
             {
               disponible ? (
@@ -82,27 +82,27 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
                   <button
                     type="button"
                     class="boton boton--descarga ficha__boton"
-                    data-bolsa-anadir={material.id}
+                    data-mochila-anadir={material.id}
                     hidden
                   >
-                    <Icono nombre="bolsa" />
+                    <Icono nombre="mochila" />
                     <span>
-                      Añadir a mi bolsa{' '}
+                      Añadir a mi mochila{' '}
                       <span class="ficha__peso">
                         (gratis, {formatoArchivo}
                         {peso && `, ${peso}`})
                       </span>
                     </span>
                   </button>
-                  <div class="ficha__en-bolsa" data-bolsa-hecho hidden>
+                  <div class="ficha__en-mochila" data-mochila-hecho hidden>
                     <p class="ficha__aviso" role="status">
                       <Icono nombre="ok" />
-                      <span>Está en tu bolsa.</span>
+                      <span>Está en tu mochila.</span>
                     </p>
                     <div class="botones">
-                      <a class="boton boton--principal" href={ruta('/mi-bolsa/')}>
+                      <a class="boton boton--principal" href={ruta('/mi-mochila/')}>
                         <Icono nombre="descarga" />
-                        Ir a mi bolsa y descargar
+                        Ir a mi mochila y descargar
                       </a>
                       <a class="boton boton--secundario" href={ruta('/material-gratuito/')}>
                         Seguir mirando
@@ -322,25 +322,25 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
   }
 
   <script>
-    import { alCambiarBolsa, anadirABolsa, estaEnBolsa } from '../../scripts/bolsa';
+    import { alCambiarMochila, anadirAMochila, estaEnMochila } from '../../scripts/mochila';
 
-    const boton = document.querySelector<HTMLButtonElement>('[data-bolsa-anadir]');
-    const hecho = document.querySelector<HTMLElement>('[data-bolsa-hecho]');
+    const boton = document.querySelector<HTMLButtonElement>('[data-mochila-anadir]');
+    const hecho = document.querySelector<HTMLElement>('[data-mochila-hecho]');
 
     if (boton && hecho) {
-      const id = boton.dataset.bolsaAnadir!;
+      const id = boton.dataset.mochilaAnadir!;
       const pintar = () => {
-        const dentro = estaEnBolsa(id);
+        const dentro = estaEnMochila(id);
         boton.hidden = dentro;
         hecho.hidden = !dentro;
       };
       boton.addEventListener('click', () => {
-        anadirABolsa(id);
+        anadirAMochila(id);
         pintar();
         hecho.querySelector<HTMLAnchorElement>('a')?.focus();
       });
       pintar();
-      alCambiarBolsa(pintar);
+      alCambiarMochila(pintar);
     }
   </script>
 

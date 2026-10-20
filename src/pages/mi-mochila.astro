@@ -1,5 +1,5 @@
 ---
-// La bolsa de descargas: los materiales elegidos, todos a 0 €, y el formulario con el correo (y el nombre, opcional)
+// La mochila de descargas: los materiales elegidos, todos a 0 €, y el formulario con el correo (y el nombre, opcional)
 // que da acceso a los archivos. Mientras sitio.json diga «demostracion», no se envía ningún dato:
 // la página enseña los enlaces de descarga como lo hará cuando la recogida de datos esté activa.
 import Base from '../layouts/Base.astro';
@@ -11,7 +11,7 @@ import { existeArchivo, extension, pesoArchivo } from '../lib/formatos';
 import { materialesOrdenados } from '../lib/materiales';
 import { ruta } from '../lib/rutas';
 
-// Catálogo para la bolsa: solo lo que de verdad se puede descargar.
+// Catálogo para la mochila: solo lo que de verdad se puede descargar.
 const catalogo = (await materialesOrdenados())
   .filter((m) => existeArchivo(m.data.archivo))
   .map((m) => ({
@@ -30,45 +30,45 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 ---
 
 <Base
-  titulo="Mi bolsa"
+  titulo="Mi mochila"
   descripcion="Los materiales que has elegido, todos gratis. Déjanos tu correo y descárgalos."
   indexable={false}
 >
   <Intro
-    titulo="Mi bolsa"
+    titulo="Mi mochila"
     entradilla="Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu correo y descárgalos."
-    camino={[{ texto: 'Mi bolsa' }]}
+    camino={[{ texto: 'Mi mochila' }]}
   />
 
-  <div class="contenedor bolsa" data-bolsa>
-    <script type="application/json" data-bolsa-catalogo set:html={JSON.stringify(catalogo)} />
+  <div class="contenedor mochila" data-mochila>
+    <script type="application/json" data-mochila-catalogo set:html={JSON.stringify(catalogo)} />
 
-    <section class="bolsa__vacia" data-bolsa-vacia hidden aria-labelledby="titulo-vacia">
-      <Icono nombre="bolsa" clase="bolsa__icono-grande" />
-      <h2 id="titulo-vacia" tabindex="-1">Tu bolsa está vacía</h2>
-      <p>Entra en cualquier material del catálogo y pulsa «Añadir a mi bolsa». Puedes llevarte varios a la vez.</p>
+    <section class="mochila__vacia" data-mochila-vacia hidden aria-labelledby="titulo-vacia">
+      <Icono nombre="mochila" clase="mochila__icono-grande" />
+      <h2 id="titulo-vacia" tabindex="-1">Tu mochila está vacía</h2>
+      <p>Entra en cualquier material del catálogo y pulsa «Añadir a mi mochila». Puedes llevarte varios a la vez.</p>
       <a class="boton boton--principal" href={ruta('/material-gratuito/')}>
         Ver el material gratuito
         <Icono nombre="flecha" />
       </a>
     </section>
 
-    <div class="bolsa__rejilla" data-bolsa-llena hidden>
-      <section class="bolsa__lista" aria-labelledby="titulo-lista">
+    <div class="mochila__rejilla" data-mochila-llena hidden>
+      <section class="mochila__lista" aria-labelledby="titulo-lista">
         <h2 id="titulo-lista">Lo que has elegido</h2>
-        <ul class="bolsa__materiales" data-bolsa-materiales></ul>
-        <p class="bolsa__total">
-          <span data-bolsa-resumen></span>
-          <span class="bolsa__cero">Total: 0 €</span>
+        <ul class="mochila__materiales" data-mochila-materiales></ul>
+        <p class="mochila__total">
+          <span data-mochila-resumen></span>
+          <span class="mochila__cero">Total: 0 €</span>
         </p>
         <p><a class="flecha" href={ruta('/material-gratuito/')}>Añadir más material</a></p>
       </section>
 
-      <section class="bolsa__datos" aria-labelledby="titulo-datos">
+      <section class="mochila__datos" aria-labelledby="titulo-datos">
         <h2 id="titulo-datos">Tus datos para descargar</h2>
         {
           demostracion && (
-            <p class="bolsa__demo">
+            <p class="mochila__demo">
               <span class="borrador">[BORRADOR]</span> Vista previa: este formulario todavía no guarda ningún dato. Al
               pulsar el botón verás las descargas, como las verá quien lo use cuando esté activo.
             </p>
@@ -76,49 +76,49 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
         }
         <form
           class="formulario"
-          data-bolsa-formulario
+          data-mochila-formulario
           data-modo={demostracion ? 'demostracion' : 'formulario'}
           data-envio={demostracion ? '' : sitio.descargas.envio}
         >
           <div class="campo">
-            <label for="bolsa-nombre">Tu nombre (opcional)</label>
-            <input id="bolsa-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="80" />
+            <label for="mochila-nombre">Tu nombre (opcional)</label>
+            <input id="mochila-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="80" />
           </div>
           <div class="campo">
-            <label for="bolsa-correo">Tu correo electrónico</label>
+            <label for="mochila-correo">Tu correo electrónico</label>
             <input
-              id="bolsa-correo"
+              id="mochila-correo"
               name="correo"
               type="email"
               autocomplete="email"
               inputmode="email"
               required
               maxlength="120"
-              aria-describedby="bolsa-correo-ayuda"
+              aria-describedby="mochila-correo-ayuda"
             />
-            <p id="bolsa-correo-ayuda" class="campo__ayuda">Escríbelo bien: si quieres el boletín, te llegará aquí.</p>
+            <p id="mochila-correo-ayuda" class="campo__ayuda">Escríbelo bien: si quieres el boletín, te llegará aquí.</p>
           </div>
 
           <div class="trampa" aria-hidden="true">
-            <label for="bolsa-web">Deja este campo vacío</label>
-            <input id="bolsa-web" name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
+            <label for="mochila-web">Deja este campo vacío</label>
+            <input id="mochila-web" name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
           </div>
 
           <div class="casilla">
-            <input id="bolsa-privacidad" name="privacidad" type="checkbox" value="si" required />
-            <label for="bolsa-privacidad">
+            <input id="mochila-privacidad" name="privacidad" type="checkbox" value="si" required />
+            <label for="mochila-privacidad">
               He leído y acepto la <a href={ruta('/privacidad/')}>política de privacidad</a>.
             </label>
           </div>
           <div class="casilla">
-            <input id="bolsa-boletin" name="boletin" type="checkbox" value="si" />
-            <label for="bolsa-boletin">
+            <input id="mochila-boletin" name="boletin" type="checkbox" value="si" />
+            <label for="mochila-boletin">
               Quiero recibir el boletín de IdEducando, con material nuevo y novedades de oposiciones. Me puedo dar de
               baja cuando quiera.
             </label>
           </div>
 
-          <details class="bolsa__info">
+          <details class="mochila__info">
             <summary>Información básica sobre tus datos</summary>
             <dl>
               <div>
@@ -151,23 +151,23 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
             </dl>
           </details>
 
-          <button class="boton boton--descarga bolsa__boton" type="submit">
+          <button class="boton boton--descarga mochila__boton" type="submit">
             <Icono nombre="descarga" />
             Descargar gratis
           </button>
-          <p class="campo__error" data-bolsa-error role="alert" hidden></p>
+          <p class="campo__error" data-mochila-error role="alert" hidden></p>
         </form>
       </section>
     </div>
 
-    <section class="bolsa__listo" data-bolsa-listo hidden aria-labelledby="titulo-listo">
-      <Icono nombre="ok" clase="bolsa__icono-grande" />
-      <h2 id="titulo-listo" tabindex="-1">¡Listo<span data-bolsa-saludo></span>! Aquí tienes tu material</h2>
+    <section class="mochila__listo" data-mochila-listo hidden aria-labelledby="titulo-listo">
+      <Icono nombre="ok" clase="mochila__icono-grande" />
+      <h2 id="titulo-listo" tabindex="-1">¡Listo<span data-mochila-saludo></span>! Aquí tienes tu material</h2>
       <p>Pulsa cada botón para guardarlo en tu ordenador o en tu móvil.</p>
-      <ul class="bolsa__descargas" data-bolsa-descargas></ul>
+      <ul class="mochila__descargas" data-mochila-descargas></ul>
       {
         demostracion && (
-          <p class="bolsa__demo">
+          <p class="mochila__demo">
             <span class="borrador">[BORRADOR]</span> Vista previa: no se ha guardado ningún dato.
           </p>
         )
@@ -176,15 +176,15 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     </section>
 
     <template data-plantilla-material>
-      <li class="bolsa__material">
-        <img class="bolsa__portada" src="" alt="" width="1200" height="900" loading="lazy" />
-        <div class="bolsa__texto">
-          <p class="bolsa__tipo" data-tipo></p>
-          <p class="bolsa__titulo"><a data-titulo href=""></a></p>
-          <p class="bolsa__detalle" data-detalle></p>
+      <li class="mochila__material">
+        <img class="mochila__portada" src="" alt="" width="1200" height="900" loading="lazy" />
+        <div class="mochila__texto">
+          <p class="mochila__tipo" data-tipo></p>
+          <p class="mochila__titulo"><a data-titulo href=""></a></p>
+          <p class="mochila__detalle" data-detalle></p>
         </div>
-        <p class="bolsa__precio">0 €</p>
-        <button type="button" class="bolsa__quitar" data-quitar>
+        <p class="mochila__precio">0 €</p>
+        <button type="button" class="mochila__quitar" data-quitar>
           <Icono nombre="papelera" />
           <span class="solo-lectores" data-quitar-texto>Quitar</span>
         </button>
@@ -193,16 +193,16 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 
     <template data-plantilla-descarga>
       <li>
-        <a class="boton boton--descarga bolsa__descarga" href="" download>
+        <a class="boton boton--descarga mochila__descarga" href="" download>
           <Icono nombre="descarga" />
-          <span><span data-titulo></span> <span class="bolsa__detalle-boton" data-detalle></span></span>
+          <span><span data-titulo></span> <span class="mochila__detalle-boton" data-detalle></span></span>
         </a>
       </li>
     </template>
 
     <noscript>
-      <p class="bolsa__sin-js">
-        La bolsa necesita JavaScript activado en el navegador. Si no puedes activarlo, escríbenos a{' '}
+      <p class="mochila__sin-js">
+        La mochila necesita JavaScript activado en el navegador. Si no puedes activarlo, escríbenos a{' '}
         <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a> y te enviamos el material.
       </p>
     </noscript>
@@ -210,7 +210,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 </Base>
 
 <script>
-  import { alCambiarBolsa, leerBolsa, quitarDeBolsa, vaciarBolsa } from '../scripts/bolsa';
+  import { alCambiarMochila, leerMochila, quitarDeMochila, vaciarMochila } from '../scripts/mochila';
 
   interface Material {
     id: string;
@@ -222,24 +222,24 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     detalle: string;
   }
 
-  const raiz = document.querySelector<HTMLElement>('[data-bolsa]')!;
-  const catalogo: Material[] = JSON.parse(raiz.querySelector('[data-bolsa-catalogo]')!.textContent ?? '[]');
+  const raiz = document.querySelector<HTMLElement>('[data-mochila]')!;
+  const catalogo: Material[] = JSON.parse(raiz.querySelector('[data-mochila-catalogo]')!.textContent ?? '[]');
   const porId = new Map(catalogo.map((m) => [m.id, m]));
   const $ = <T extends HTMLElement>(selector: string) => raiz.querySelector<T>(selector)!;
 
-  const vacia = $('[data-bolsa-vacia]');
-  const llena = $('[data-bolsa-llena]');
-  const lista = $('[data-bolsa-materiales]');
-  const resumen = $('[data-bolsa-resumen]');
-  const formulario = $<HTMLFormElement>('[data-bolsa-formulario]');
-  const error = $('[data-bolsa-error]');
-  const listo = $('[data-bolsa-listo]');
+  const vacia = $('[data-mochila-vacia]');
+  const llena = $('[data-mochila-llena]');
+  const lista = $('[data-mochila-materiales]');
+  const resumen = $('[data-mochila-resumen]');
+  const formulario = $<HTMLFormElement>('[data-mochila-formulario]');
+  const error = $('[data-mochila-error]');
+  const listo = $('[data-mochila-listo]');
   const plantillaMaterial = $<HTMLTemplateElement>('[data-plantilla-material]');
   const plantillaDescarga = $<HTMLTemplateElement>('[data-plantilla-descarga]');
 
   let terminado = false;
 
-  const elegidos = () => leerBolsa().map((id) => porId.get(id)).filter((m): m is Material => Boolean(m));
+  const elegidos = () => leerMochila().map((id) => porId.get(id)).filter((m): m is Material => Boolean(m));
 
   function pintar() {
     if (terminado) return;
@@ -257,9 +257,9 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
         titulo.textContent = m.titulo;
         titulo.href = m.enlace;
         fila.querySelector('[data-detalle]')!.textContent = m.detalle;
-        fila.querySelector('[data-quitar-texto]')!.textContent = `Quitar «${m.titulo}» de la bolsa`;
+        fila.querySelector('[data-quitar-texto]')!.textContent = `Quitar «${m.titulo}» de la mochila`;
         fila.querySelector('[data-quitar]')!.addEventListener('click', () => {
-          quitarDeBolsa(m.id);
+          quitarDeMochila(m.id);
           // Tras quitar uno, el foco va al título de la lista para no perderse.
           raiz.querySelector<HTMLElement>('#titulo-lista')?.setAttribute('tabindex', '-1');
           raiz.querySelector<HTMLElement>(materiales.length > 1 ? '#titulo-lista' : '#titulo-vacia')?.focus();
@@ -304,8 +304,8 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 
     terminado = true;
     const nombre = String(datos.get('nombre') ?? '').trim();
-    $('[data-bolsa-saludo]').textContent = nombre ? `, ${nombre}` : '';
-    $('[data-bolsa-descargas]').replaceChildren(
+    $('[data-mochila-saludo]').textContent = nombre ? `, ${nombre}` : '';
+    $('[data-mochila-descargas]').replaceChildren(
       ...materiales.map((m) => {
         const fila = plantillaDescarga.content.firstElementChild!.cloneNode(true) as HTMLElement;
         const enlace = fila.querySelector<HTMLAnchorElement>('a')!;
@@ -318,20 +318,20 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     llena.hidden = true;
     vacia.hidden = true;
     listo.hidden = false;
-    vaciarBolsa();
+    vaciarMochila();
     raiz.querySelector<HTMLElement>('#titulo-listo')?.focus();
   });
 
   pintar();
-  alCambiarBolsa(pintar);
+  alCambiarMochila(pintar);
 </script>
 
 <style>
-  .bolsa {
+  .mochila {
     padding-block: 2rem 3.5rem;
   }
 
-  .bolsa__rejilla {
+  .mochila__rejilla {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem 3rem;
@@ -339,13 +339,13 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
   }
 
   @media (min-width: 60em) {
-    .bolsa__rejilla {
+    .mochila__rejilla {
       grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     }
   }
 
-  .bolsa__vacia,
-  .bolsa__listo {
+  .mochila__vacia,
+  .mochila__listo {
     display: grid;
     justify-items: center;
     gap: 0.4rem;
@@ -358,18 +358,18 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     border: 2px dashed var(--amarillo);
   }
 
-  .bolsa :global(.bolsa__icono-grande) {
+  .mochila :global(.mochila__icono-grande) {
     width: 3rem;
     height: 3rem;
     color: var(--morado-texto);
   }
 
-  .bolsa__listo h2:focus {
+  .mochila__listo h2:focus {
     outline: none;
   }
 
-  .bolsa__materiales,
-  .bolsa__descargas {
+  .mochila__materiales,
+  .mochila__descargas {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -378,12 +378,12 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     gap: 0.75rem;
   }
 
-  .bolsa__descargas {
+  .mochila__descargas {
     width: 100%;
     margin-block: 0.5rem 1rem;
   }
 
-  .bolsa__material {
+  .mochila__material {
     display: grid;
     grid-template-columns: 5.5rem minmax(0, 1fr) auto auto;
     align-items: center;
@@ -395,7 +395,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     box-shadow: var(--sombra-suave);
   }
 
-  .bolsa__portada {
+  .mochila__portada {
     width: 5.5rem;
     height: auto;
     aspect-ratio: 4 / 3;
@@ -404,37 +404,37 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     border: 1px solid var(--linea);
   }
 
-  .bolsa__texto p {
+  .mochila__texto p {
     margin: 0;
   }
 
-  .bolsa__tipo {
+  .mochila__tipo {
     font: 700 0.8rem/1.3 var(--letra-titulos);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--texto-suave);
   }
 
-  .bolsa__titulo {
+  .mochila__titulo {
     font: 600 1.05rem/1.25 var(--letra-titulos);
   }
 
-  .bolsa__titulo a {
+  .mochila__titulo a {
     color: var(--marino);
   }
 
-  .bolsa__detalle {
+  .mochila__detalle {
     font-size: 0.92rem;
     color: var(--texto-suave);
   }
 
-  .bolsa__precio {
+  .mochila__precio {
     margin: 0;
     font: 700 1.1rem/1 var(--letra-titulos);
     color: var(--verde-texto);
   }
 
-  .bolsa__quitar {
+  .mochila__quitar {
     display: grid;
     place-items: center;
     width: 2.75rem;
@@ -446,27 +446,27 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     cursor: pointer;
   }
 
-  .bolsa__quitar:hover {
+  .mochila__quitar:hover {
     background: var(--coral-tinte);
   }
 
-  .bolsa__quitar :global(svg) {
+  .mochila__quitar :global(svg) {
     width: 1.25rem;
     height: 1.25rem;
   }
 
   /* En móviles estrechos, la portada se queda arriba y el resto debajo. */
   @media (max-width: 26em) {
-    .bolsa__material {
+    .mochila__material {
       grid-template-columns: minmax(0, 1fr) auto auto;
     }
 
-    .bolsa__portada {
+    .mochila__portada {
       display: none;
     }
   }
 
-  .bolsa__total {
+  .mochila__total {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -478,11 +478,11 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     font-weight: 700;
   }
 
-  .bolsa__cero {
+  .mochila__cero {
     color: var(--verde-texto);
   }
 
-  .bolsa__datos {
+  .mochila__datos {
     padding: 1.35rem;
     border-radius: var(--radio);
     background: var(--papel);
@@ -490,11 +490,11 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     box-shadow: var(--sombra);
   }
 
-  .bolsa__datos h2 {
+  .mochila__datos h2 {
     margin-top: 0;
   }
 
-  .bolsa__demo {
+  .mochila__demo {
     padding: 0.7rem 0.9rem;
     border-radius: var(--radio-pequeno);
     background: var(--coral-tinte);
@@ -569,7 +569,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     overflow: hidden;
   }
 
-  .bolsa__info {
+  .mochila__info {
     padding: 0.7rem 0.9rem;
     border-radius: var(--radio-pequeno);
     background: var(--blanco);
@@ -577,42 +577,42 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     font-size: 0.95rem;
   }
 
-  .bolsa__info summary {
+  .mochila__info summary {
     font-weight: 700;
     cursor: pointer;
   }
 
-  .bolsa__info dl {
+  .mochila__info dl {
     margin: 0.6rem 0 0;
     display: grid;
     gap: 0.5rem;
   }
 
-  .bolsa__info dt {
+  .mochila__info dt {
     font-weight: 700;
   }
 
-  .bolsa__info dd {
+  .mochila__info dd {
     margin: 0;
   }
 
-  .bolsa__boton {
+  .mochila__boton {
     width: 100%;
     min-height: 3.4rem;
     font-size: 1.15rem;
   }
 
-  .bolsa__descarga {
+  .mochila__descarga {
     width: 100%;
     justify-content: flex-start;
     text-align: left;
   }
 
-  .bolsa__detalle-boton {
+  .mochila__detalle-boton {
     font-weight: 400;
   }
 
-  .bolsa__sin-js {
+  .mochila__sin-js {
     padding: 1rem;
     border-radius: var(--radio);
     background: var(--amarillo-tinte);
