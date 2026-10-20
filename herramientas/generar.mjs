@@ -150,6 +150,12 @@ const DOCUMENTOS = [
       'Seis estaciones de matemáticas manipulativas de otoño para Educación Infantil, en tres niveles y con una versión segura sin piezas pequeñas: cantidad, correspondencia, series, clasificación, orden por tamaño y medida. Con tarjetas de pasos con pictogramas, registro de observación, ajustes para la diversidad, nota para las familias y tarjetas opcionales de fiesta',
     palabras: 'matemáticas manipulativas, estaciones de aprendizaje, rincones, otoño, Educación Infantil, cantidad, correspondencia, series, clasificación, seriación, medida, DUA, multinivel, seguridad, Decreto 196/2022, Región de Murcia, pictogramas, ARASAAC',
   },
+  {
+    id: 'historias-sociales-cole-y-casa',
+    asunto:
+      'Ocho historias sociales con pictogramas para leer justo antes de cada momento, en clase, en el patio, en el comedor y el baño y en casa: cuatro explican una situación y cuatro celebran lo que el niño o la niña ya hace bien. Con la comprobación de la fórmula de Carol Gray, plantilla para escribir una historia propia, guía para el adulto y nota para las familias',
+    palabras: 'historias sociales, narrativas sociales, conducta, apoyo conductual positivo, pedir ayuda, turno de palabra, recreo, lavado de manos, comedor escolar, médico, tareas de casa, lectura fácil, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

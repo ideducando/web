@@ -25,6 +25,7 @@ Si no hay diagnóstico, no pasa nada. El material marcado como [Toda la clase (D
 - **[Agenda visual](/material-gratuito/agenda-visual-semanal/).** Para anticipar el día: qué toca por la mañana, qué viene después de la merienda o cómo será la visita al médico.
 - **[Comunicación en el bolsillo](/material-gratuito/tablero-comunicacion-basico/).** Un tablero y un llavero con tarjetas para pedir, elegir y contar cómo se siente, también en casa.
 - **[Días distintos](/material-gratuito/dias-distintos-historias-sociales/).** Historias con pictogramas para preparar una excursión, una fiesta o un cambio de horario antes de que lleguen.
+- **[En el cole y en casa](/material-gratuito/historias-sociales-cole-y-casa/).** Ocho historias cortas para leer justo antes de un momento que cuesta, como ir al médico o lavarse las manos. Trae una plantilla para escribir la vuestra, con su nombre y sus fotos.
 - **[Mi primer día en el cole nuevo](/material-gratuito/cuento-lectura-facil-cole-nuevo/).** Un cuento para leer juntos antes de cambiar de cole, con hueco para pegar fotos del cole de verdad.
 - **[Rincón de la calma](/material-gratuito/rincon-de-la-calma/).** Un termómetro de emociones y tarjetas con ideas para calmarse, con una nota para las familias.
 - **[Mi tarjeta de ida y vuelta](/material-gratuito/tarjeta-cole-casa-tdah/).** Una tarjeta diaria para el TDAH que va del cole a casa y vuelve: así el cole y la familia se cuentan cada día cómo ha ido.
