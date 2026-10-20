@@ -18,7 +18,7 @@ necesitas:
   - "6 fundas de plastificar A4 y 10 fundas de plastificar A5, de 125 micras"
   - "24 círculos de velcro adhesivo de 2 cm para la agenda: 20 suaves y 4 rugosos"
   - "32 m de cinta de carrocero de 2,5 cm, para 2 cuadrículas (o tiza, en el patio)"
-  - "12 m de papel continuo, 25 gomets redondos y masilla adhesiva"
+  - "13 m de papel continuo, 250 gomets redondos y masilla adhesiva"
   - "38 fotos de tu cole, sin personas: 8 de sitios, a media hoja, y 30 del camino al patio (6 por grupo)"
   - "Tijeras o guillotina, plastificadora e impresora a color"
 imprimir:
@@ -106,6 +106,6 @@ Los paseos por el cole se hacen en pequeños grupos y con los adultos que fije e
 
 ## Sobre los pictogramas
 
-La ilustración de la portada y las flechas son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org) y su licencia (CC BY-NC-SA) pide citarlos, como ya hace el material. Por esa licencia, este material no se puede vender.
+El plano de la portada, la estrella y las flechas son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org) y su licencia (CC BY-NC-SA) pide citarlos, como ya hace el material. Por esa licencia, este material no se puede vender.
 
 Para la señalización pública, la guía de Plena inclusión y del Comité Español de Representantes de Personas con Discapacidad (CERMI) recomienda pictogramas estándar, que se entienden sin formación. En el cole usamos los de ARASAAC porque el alumnado ya los conoce de la [agenda visual](/material-gratuito/agenda-visual-semanal/) y del [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/). Si tu centro ya tiene señales, usad los mismos dibujos en todo el centro. Para la palabra en otras lenguas, te ayuda el [kit de bienvenida](/material-gratuito/kit-bienvenida-alumnado-recien-llegado/).
