@@ -22,10 +22,15 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const aqui = dirname(fileURLToPath(import.meta.url));
 const raiz = resolve(aqui, '..');
 const carpetaPdf = join(aqui, 'pdf');
-const descargas = join(raiz, 'public', 'descargas');
+// Para probar un PDF sin tocar la web: IDE_SALIDA=/otra/carpeta npm run pdf -- id.
+// Deja el PDF en esa carpeta y no rehace portadas ni la imagen para redes.
+const salidaAparte = process.env.IDE_SALIDA;
+const descargas = salidaAparte ?? join(raiz, 'public', 'descargas');
 const portadas = join(raiz, 'public', 'portadas');
-const temporal = join(aqui, '.temporal');
+const temporal = salidaAparte ? join(salidaAparte, '.temporal') : join(aqui, '.temporal');
 const sharp = createRequire(join(raiz, 'package.json'))('sharp');
+const { parse: leerYaml } = createRequire(join(raiz, 'package.json'))('yaml');
+const { hojaMontaje, tieneMontaje } = await import(pathToFileURL(join(raiz, 'src', 'lib', 'montaje.mjs')).href);
 
 for (const carpeta of [descargas, portadas, temporal]) mkdirSync(carpeta, { recursive: true });
 
@@ -144,6 +149,19 @@ for (const doc of DOCUMENTOS) {
   );
   for (const [familia, cargada] of letras) if (!cargada) throw new Error(`${doc.id}: no se ha cargado ${familia}`);
 
+  // Página «Cómo montarlo»: sale de los datos de la ficha, para que la web y el PDF digan lo mismo.
+  const ficha = leerFicha(doc.id);
+  const hueco = await pagina.locator('[data-montaje]').count();
+  if (tieneMontaje(ficha)) {
+    if (!hueco) throw new Error(`${doc.id}: la ficha tiene pasos de montaje y al HTML le falta <section class="montaje" data-montaje>`);
+    await pagina.evaluate((html) => {
+      document.querySelector('[data-montaje]').outerHTML = html;
+    }, hojaMontaje(ficha));
+    await pagina.evaluate(() => document.fonts.ready);
+  } else if (hueco) {
+    throw new Error(`${doc.id}: el HTML tiene el hueco de montaje y la ficha no tiene pasos`);
+  }
+
   const destino = join(descargas, `${doc.id}.pdf`);
   await pagina.pdf({
     path: destino,
@@ -163,7 +181,7 @@ for (const doc of DOCUMENTOS) {
     await pagina.locator('[data-miniatura]').first().screenshot({ path: `${miniatura}.png` });
   }
   await pagina.close();
-  console.log(`PDF listo: public/descargas/${doc.id}.pdf`);
+  console.log(`PDF listo: ${salidaAparte ? destino : `public/descargas/${doc.id}.pdf`}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -178,7 +196,7 @@ const COLORES = {
 const carpetaMateriales = join(raiz, 'src', 'content', 'materiales');
 for (const archivo of readdirSync(carpetaMateriales).filter((a) => a.endsWith('.md'))) {
   const id = archivo.replace(/\.md$/, '');
-  if (elegidos.length && !elegidos.includes(id)) continue;
+  if (salidaAparte || (elegidos.length && !elegidos.includes(id))) continue;
   const datos = leerFrontmatter(readFileSync(join(carpetaMateriales, archivo), 'utf8'));
   const color = COLORES[datos.seccion] ?? COLORES.aula;
   const miniatura = join(temporal, `${id}.png`);
@@ -193,7 +211,7 @@ for (const archivo of readdirSync(carpetaMateriales).filter((a) => a.endsWith('.
 // 4. Imagen para compartir en redes
 // ---------------------------------------------------------------------------
 
-if (!elegidos.length) {
+if (!elegidos.length && !salidaAparte) {
   await capturar(imagenRedes(), 1200, 630, join(raiz, 'public', 'og-imagen.png'));
   console.log('Imagen para redes lista: public/og-imagen.png');
 }
@@ -318,6 +336,14 @@ function imagenRedes() {
     <p style="position:relative">Donde cada forma de aprender se celebra<small>Material gratuito de PT e Infantil</small></p>
     <div class="rayos"></div>
   </body></html>`;
+}
+
+/** Todos los datos de la ficha de un material (el frontmatter de su .md). */
+function leerFicha(id) {
+  const archivo = join(raiz, 'src', 'content', 'materiales', `${id}.md`);
+  if (!existsSync(archivo)) return {};
+  const bloque = readFileSync(archivo, 'utf8').match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+  return leerYaml(bloque) ?? {};
 }
 
 /** Lee los campos sencillos del frontmatter de una ficha (titulo, seccion, tipo). */

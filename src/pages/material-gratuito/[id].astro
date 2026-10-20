@@ -5,6 +5,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Migas from '../../components/Migas.astro';
 import Icono from '../../components/Icono.astro';
+import ComoMontarlo from '../../components/ComoMontarlo.astro';
 import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
 import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../../data/taxonomias';
 import { existeArchivo, extension, fecha, fechaISO, pesoArchivo } from '../../lib/formatos';
@@ -28,6 +29,7 @@ const disponible = existeArchivo(d.archivo);
 const peso = pesoArchivo(d.archivo);
 const formatoArchivo = extension(d.archivo);
 const parecidos = relacionados(material, materiales);
+const seMonta = d.pasos.length > 0;
 const anio = d.fecha.getFullYear();
 const enlacePublico = new URL(ruta(`/material-gratuito/${material.id}/`), Astro.site).toString();
 const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando' : `${d.autoria} para IdEducando`} (${anio}). Licencia ${d.licencia}. ${enlacePublico}`;
@@ -121,6 +123,15 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
               )
             }
           </div>
+
+          {
+            seMonta && (
+              <p class="ficha__montaje">
+                <Icono nombre="lista" />
+                <a href="#como-montarlo">Mira qué necesitas y cómo montarlo, paso a paso</a>
+              </p>
+            )
+          }
 
           <ul class="etiquetas" aria-label="Para quién es">
             {
@@ -227,7 +238,7 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
           )
         }
         {
-          d.necesitas.length > 0 && (
+          d.necesitas.length > 0 && !seMonta && (
             <div>
               <dt>Necesitas</dt>
               <dd>
@@ -283,6 +294,19 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
   </div>
 
   {
+    seMonta && (
+      <ComoMontarlo
+        tiempo={d.tiempo}
+        necesitas={d.necesitas}
+        imprimir={d.imprimir}
+        pasos={d.pasos}
+        resultado={d.resultado}
+        cuidados={d.cuidados}
+      />
+    )
+  }
+
+  {
     parecidos.length > 0 && (
       <section class="seccion seccion--blanca" aria-labelledby="titulo-parecidos" data-pagefind-ignore>
         <div class="contenedor">
@@ -329,6 +353,21 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
 </Base>
 
 <style>
+  .ficha__montaje {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block: -0.4rem 1rem;
+    font-weight: 700;
+  }
+
+  .ficha__montaje :global(svg) {
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--morado-texto);
+  }
+
   .ficha-cabecera {
     padding-block: 1.5rem 2.5rem;
     background: var(--papel);

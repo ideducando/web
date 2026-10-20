@@ -7,16 +7,39 @@ etapas: [infantil, primaria]
 necesidades: [conducta, tea, tdah, toda-la-clase]
 edades: "De 4 a 10 años"
 formato: "PDF imprimible (A4)"
-paginas: 10
+paginas: 11
 archivo: /descargas/rincon-de-la-calma.pdf
 portada: /portadas/rincon-de-la-calma.webp
 portada_alt: "Portada del material: un termómetro de cinco colores con caras que van de la calma al enfado"
-tiempo: "30 minutos para preparar el rincón"
+tiempo: "40 minutos para imprimir, plastificar, recortar y colocar el rincón"
 necesitas:
-  - "Impresora, mejor en color"
-  - "Plastificadora"
-  - "Una pinza de ropa"
-  - "Un cojín, un reloj de arena, una pelota blanda y unos cascos"
+  - "4 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina)"
+  - "4 fundas de plastificar A4 de 125 micras y una plastificadora: 1 para el termómetro, 1 para el cartel y 2 para las 12 tarjetas"
+  - "1 pinza de la ropa de madera, para marcar el nivel en el termómetro"
+  - "Tijeras o una guillotina"
+  - "Cinta de doble cara o masilla adhesiva, para colgar el termómetro y el cartel"
+  - "1 caja para dejar las tarjetas en el rincón: miden unos 9 × 8 cm con el plástico"
+  - "Impresora, mejor a color: cada nivel del termómetro tiene su color"
+  - "1 cojín o una alfombra y 1 reloj de arena de 3 o 5 minutos"
+  - "1 pelota blanda, 1 par de cascos antirruido de talla infantil, lápices de colores, papel y 2 o 3 cuentos"
+imprimir:
+  - "Páginas 3 a 6 (termómetro, cartel y 12 tarjetas): en cartulina, a color."
+  - "Página 7 (plan de calma): en folio, una por cada alumno o alumna que lo necesite."
+  - "Las páginas 8 a 11 (guía y nota para las familias) se pueden leer en pantalla. Imprime la 10 para anotar el uso del rincón y la 11 para mandarla a casa."
+pasos:
+  - "Imprime las páginas 3 a 6 en cartulina y a color."
+  - "Recorta las 12 tarjetas por la línea de puntos."
+  - "Plastifica el termómetro y el cartel, cada uno en su funda. En las otras 2 fundas, coloca 6 tarjetas en cada una, separadas 5 mm entre sí, y plastifícalas."
+  - "Recorta todo dejando 2 o 3 mm de plástico alrededor y redondea las esquinas con la tijera."
+  - "Elige un sitio tranquilo y visible desde tu mesa. Cuelga allí el cartel y el termómetro, a una altura a la que llegue el alumnado. Sujeta el termómetro solo por las esquinas, para que la pinza entre por el borde."
+  - "Engancha la pinza en el borde izquierdo del termómetro: cada cual la mueve junto al número que dice cómo está."
+  - "Deja las tarjetas en una caja, junto al cojín, el reloj de arena, la pelota, los cascos, los cuentos, el papel y los lápices."
+resultado: "un termómetro con su pinza y un cartel colgados en el rincón, y 12 tarjetas de estrategias plastificadas en su caja"
+cuidados:
+  - "El borde de plástico de 2 o 3 mm deja la tarjeta sellada: así no se abre aunque la mojen o la doblen."
+  - "La pinza es una pieza pequeña: vigílala si en el grupo hay quien todavía se lleva cosas a la boca."
+  - "Evita las mantas y los chalecos con peso, y nunca envuelvas a nadie: su eficacia no está demostrada y su mal uso ha causado accidentes graves."
+  - "Para limpiar el termómetro, el cartel y las tarjetas, basta un paño con agua y jabón."
 fuentes:
   - "Blewitt, C. y otros (2018). Social and emotional learning associated with universal curriculum-based interventions in early childhood education and care centers. JAMA Network Open, 1(8), e185727"
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
@@ -26,7 +49,7 @@ fuentes:
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-15
-actualizado: 2026-10-15
+actualizado: 2026-10-19
 destacado: true
 borrador: true
 ---

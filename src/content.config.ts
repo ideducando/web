@@ -29,6 +29,12 @@ const materiales = defineCollection({
     portada_alt: opcional(z.string().optional()),
     tiempo: opcional(z.string().optional()),
     necesitas: opcional(z.array(z.string()).default([])),
+    // Instrucciones de montaje (src/lib/montaje.mjs). Si hay pasos, salen en la ficha
+    // y en la página 2 del PDF.
+    imprimir: opcional(z.array(z.string()).default([])),
+    pasos: opcional(z.array(z.string()).default([])),
+    resultado: opcional(z.string().optional()),
+    cuidados: opcional(z.array(z.string()).default([])),
     // Normativa, estudios o materiales en los que se apoya la ficha.
     fuentes: opcional(z.array(z.string()).default([])),
     autoria: z.string().default('Equipo IdEducando'),
