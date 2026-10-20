@@ -14,20 +14,17 @@ portada_alt: "Portada del material: el título «Estaciones de matemáticas de o
 tiempo: "3 horas para imprimir, recortar y plastificar todo (menos con guillotina); recoger las piezas en un paseo, aparte"
 necesitas:
   - "16 hojas de cartulina blanca A4 de 160 g"
-  - "19 fundas de plastificar A4 de 125 micras (17 sin las tarjetas de fiesta) y una plastificadora"
-  - "12 círculos de velcro adhesivo de 2 cm: 6 rugosos y 6 suaves, para el panel de rotación"
-  - "20 sobres o bolsas con cierre: 3 por estación (uno por nivel), uno para las tarjetas de grupo y otro para las de fiesta"
+  - "19 fundas de plastificar A4 de 125 micras y una plastificadora"
+  - "12 círculos de velcro adhesivo de 2 cm: 6 rugosos y 6 suaves"
+  - "20 sobres o bolsas con cierre: 3 por estación y 2 para las tarjetas"
   - "6 cuencos, o 1 cuenco y 5 aros de psicomotricidad"
-  - "1 temporizador visual o un reloj de arena, y 1 rotulador de pizarra blanca"
-  - "Tijeras o una guillotina, e impresora a color"
-  - "Para la versión de otoño (opcional): 30 castañas, 10 bellotas, 30 hojas secas pequeñas (10 rojas, 10 amarillas y 10 marrones), 5 piñas pequeñas y 5 calabacitas de tamaños distintos"
+  - "1 temporizador visual o un reloj de arena, y 1 rotulador de pizarra"
+  - "Para la versión de otoño: 30 castañas, 10 bellotas, 30 hojas secas pequeñas (10 rojas, 10 amarillas y 10 marrones), 5 piñas pequeñas y 5 calabacitas"
 imprimir:
-  - "Páginas 7 a 27, en cartulina, a color y al 100 % («Tamaño real», sin «Ajustar a la página»): así las fichas encajan en los tableros y en las tiras. La 27, tarjetas de fiesta, es opcional."
-  - "Las páginas 11, 13, 14, 16, 18, 20 y 22 son apaisadas: la impresora las gira sola."
-  - "En folio: el registro (página 28), una autoevaluación por niño o niña (página 29) y una nota por familia (página 31)."
-  - "Las páginas 3 a 6, 9, 12, 15, 17, 19, 30 y 32 se pueden leer en pantalla."
+  - "Páginas 7 a 27 en cartulina, a color y al 100 % («Tamaño real»): así las fichas encajan en los tableros y las tiras. La 27 es opcional."
+  - "En folio: el registro (página 28), una autoevaluación por niño o niña (29) y una nota por familia (31). El resto se puede leer en pantalla."
 pasos:
-  - "Imprime en cartulina las páginas 7 a 27, a color y al 100 %."
+  - "Imprime en cartulina las páginas 7 a 27, a color y al 100 %. Las apaisadas, la impresora las gira sola."
   - "Recorta por la línea de puntos las tarjetas, los tableros, las tiras, las etiquetas y las 80 fichas."
   - "Plastifica dejando 5 mm entre pieza y pieza: caben 15 fichas en cada funda."
   - "Recorta dejando 2 o 3 mm de plástico alrededor y redondea las esquinas: las fichas quedan de unos 5 cm."
@@ -36,9 +33,9 @@ pasos:
   - "Para la versión de otoño, lava las piezas recogidas, sécalas bien y tira las que tengan moho."
 resultado: "las seis estaciones en sus sobres, con tarjetas, tableros, tiras, etiquetas y 80 fichas seguras; una tarjeta de pasos para cada mesa y el panel de rotación con 6 tarjetas de grupo"
 cuidados:
-  - "Castañas, bellotas, piñas pequeñas y pasta son piezas pequeñas: solo a partir de 3 años, nunca con quien todavía se lleva cosas a la boca y con un adulto en la mesa todo el rato."
-  - "Castañas y bellotas no se comen. Antes, consulta las alergias con las familias. Con alumnado celíaco, nada de pasta: usa la versión segura."
-  - "Si una ficha se despega o se rompe, retírala y haz otra. Todo se limpia con un paño con agua y jabón, y al terminar, manos a lavar."
+  - "Castañas, bellotas, piñas pequeñas y pasta son piezas pequeñas: solo desde los 3 años, nunca con quien aún se lleva cosas a la boca y con un adulto en la mesa todo el rato."
+  - "Castañas y bellotas no se comen: consulta antes las alergias con las familias. Con alumnado celíaco, versión segura."
+  - "Si una ficha se despega o se rompe, retírala. Todo se limpia con un paño con agua y jabón."
 fuentes:
   - "Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056), art. 14.1 (pág. 33060), art. 17.3 (pág. 33061), Crecimiento en Armonía (págs. 33083 a 33086) y Descubrimiento y Exploración del Entorno (págs. 33094 a 33097)"
   - "CAST (2024). Pautas para el Diseño Universal para el Aprendizaje, versión 3.0. udlguidelines.cast.org/es"
@@ -63,7 +60,7 @@ borrador: true
 
 ## Para qué sirve
 
-Seis mesas, seis ideas matemáticas y el otoño como excusa. Cada estación trabaja una idea del currículo de Infantil con castañas, bellotas, hojas y piñas: contar, emparejar, seguir series, clasificar, ordenar por tamaño y medir. Los grupos de 4 o 5 niños y niñas rotan por las mesas, de 10 a 15 minutos en cada una.
+Cada mesa es una estación, y cada estación trabaja una idea matemática del currículo de Infantil con castañas, bellotas, hojas y piñas: contar, emparejar, seguir series, clasificar, ordenar por tamaño y medir. Los grupos de 4 o 5 niños y niñas rotan por las mesas, de 10 a 15 minutos en cada una.
 
 Todas las estaciones tienen tres niveles. El nivel cambia el apoyo y la complejidad, nunca el tema ni el sitio: toda la clase hace lo mismo, a la vez, y cada niño o niña sube o baja de nivel cuando lo necesita. Sirve a toda la clase en el segundo ciclo de Infantil y en Pedagogía Terapéutica (PT) en pequeño grupo.
 
