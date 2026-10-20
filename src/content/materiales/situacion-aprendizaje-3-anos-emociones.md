@@ -17,9 +17,9 @@ necesitas:
   - "1 hoja de cartulina de color A4, para el panel de «Lo que me ayuda»"
   - "12 fundas de plastificar A4 de 125 micras y una plastificadora"
   - "37 círculos de velcro adhesivo de 2 cm: 12 rugosos y 25 suaves"
-  - "1 trozo de papel continuo de 1 m y pintura de dedos lavable"
+  - "2 trozos de papel continuo de 1 m (cartel del reto y cartel de las huellas) y pintura de dedos lavable"
   - "5 gomets redondos por niño o niña"
-  - "Masilla adhesiva, para colgar tarjetas y carteles"
+  - "Masilla adhesiva"
   - "Tijeras o una guillotina"
   - "1 cojín, 1 o 2 peluches, 2 o 3 cuentos de cartón y música suave, para el rincón"
 imprimir:
@@ -30,9 +30,9 @@ pasos:
   - "Plastifica cada hoja en su funda, menos la del cartel, que va pegada en el papel continuo. Plastifica también la cartulina de color del panel."
   - "Recorta las tarjetas por la línea de puntos y las normas por la mitad, con 2 o 3 mm de plástico alrededor. Redondea las esquinas. El cuento no se recorta."
   - "Pega un círculo de velcro suave detrás de las 16 tarjetas de la agenda y de las 9 de «Lo que me ayuda»."
-  - "Pega 3 círculos rugosos en una tira de cartulina para la agenda de cada sesión y 9 en el panel, en 3 filas de 3."
+  - "Pega 3 círculos rugosos donde pongas la agenda de la clase (la pizarra o una tira de cartulina) y 9 en el panel, en 3 filas de 3."
   - "Cuelga las tarjetas grandes con masilla en la zona de la asamblea. Guarda las pequeñas en 12 juegos de 5, con una goma."
-  - "Pega el cartel en el centro del papel continuo. Las huellas, el panel y las normas se colocan con el grupo en las sesiones 6 y 7."
+  - "Pega el cartel del rincón en el centro de un papel continuo; el otro es para el cartel del reto. Las huellas, el panel y las normas se colocan con el grupo en las sesiones 6 y 7."
 resultado: "16 tarjetas para la agenda, 8 tarjetas grandes, 12 juegos de 5 tarjetas pequeñas, el cuento de Nube, un panel con 9 tarjetas de «Lo que me ayuda», 4 normas para elegir y el cartel listo para las huellas"
 cuidados:
   - "El velcro, los gomets y las tarjetas pequeñas son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
@@ -82,10 +82,17 @@ Nube, la mascota de la clase, hace de hilo conductor: puede ser un osito de pelu
 
 El rincón es un sitio al que se va por propia voluntad. Nunca se usa como castigo y nadie está obligado a quedarse.
 
+La situación se apoya en otros materiales gratuitos de IdEducando:
+
+- La [agenda visual](/material-gratuito/agenda-visual-semanal/), para anticipar cada sesión.
+- El [rincón de la calma](/material-gratuito/rincon-de-la-calma/): su guía, con los objetos que conviene poner, y su cartel, que comparte dos normas con esta situación. Su termómetro de cinco niveles es para más adelante, a partir de 4 años.
+- Las [pausas activas](/material-gratuito/pausas-activas-de-pie-y-sentados/): «El muñeco de nieve» y «La carrera quieta», en las sesiones 3 y 4.
+- El [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/), para quien lo necesite: «ayudar», «sí», «no» y las emociones del llavero.
+
 ## Las 8 sesiones
 
 1. ¿Cómo está Nube? Contento y triste.
-2. Nube y sus amigos: enfadado y con miedo, con un cuento corto con pictogramas.
+2. Nube y sus amigos: enfadado y con miedo, en un cuento corto con pictogramas.
 3. La música de las emociones: moverse como cada emoción y jugar a las estatuas.
 4. ¿Qué siento en el cuerpo? El corazón rápido y la respiración de la flor y la vela.
 5. Lo que me ayuda: explorar objetos y acciones que calman y elegir con pictogramas.
@@ -95,21 +102,14 @@ El rincón es un sitio al que se va por propia voluntad. Nunca se usa como casti
 
 ## El DUA y los tres niveles
 
-El Diseño Universal para el Aprendizaje (DUA) propone pensar desde el principio en todo el alumnado. Por eso cada emoción llega de varias formas (cara, pictograma, gesto, palabra y música) y se puede responder señalando, con una tarjeta, con el cuerpo o hablando. El Decreto 196/2022 de Murcia pide que la práctica educativa se base en el DUA (artículos 4.6 y 17.3).
+El DUA propone pensar desde el principio en todo el alumnado. Por eso cada emoción llega de varias formas (cara, pictograma, gesto, palabra y música) y se puede responder señalando, con una tarjeta, con el cuerpo o hablando. El Decreto 196/2022 de Murcia pide que la práctica educativa se base en el DUA (artículos 4.6 y 17.3).
 
 Cada actividad principal tiene tres niveles: con más apoyo, base y con más reto. Toda la clase hace la misma actividad a la vez y con la misma meta. Los niveles cambian el apoyo y la complejidad, y nadie tiene un nivel fijo: cada niño o niña puede subir o bajar en la misma sesión.
 
 ## Si preparas la oposición
 
-La situación sirve de modelo para ver cómo encajan las piezas que valora el tribunal de Infantil en Murcia, según el Boletín Oficial de la Región de Murcia (BORM) de 23 de enero de 2026: pautas DUA y atención a la diversidad, secuencia de actividades, agrupamientos, detección de dificultades, relación de criterios con competencias y saberes, momentos e instrumentos de evaluación y evaluación de la práctica docente. El PDF señala dónde está cada una. Tu programación y tu unidad tienen que ser originales: este material no se puede entregar copiado.
+La situación sirve de modelo para ver cómo encajan las piezas que valora el tribunal de Infantil en Murcia, según el Boletín Oficial de la Región de Murcia (BORM) n.º 18, de 23 de enero de 2026: pautas DUA y atención a la diversidad, secuencia de actividades, agrupamientos, detección de dificultades, relación de criterios con competencias y saberes, momentos e instrumentos de evaluación y evaluación de la práctica docente. El PDF señala dónde está cada una. Tu programación y tu unidad tienen que ser originales: este material no se puede entregar copiado.
 
 ## Sobre los pictogramas
 
 Los pictogramas son de [ARASAAC](https://arasaac.org) y su licencia (CC BY-NC-SA) pide citarlos, como ya hace el material. Por esa licencia, este material no se puede vender. Si vuestro alumnado ya usa otros pictogramas para las emociones, usad los suyos.
-
-## Otros materiales que se aprovechan
-
-- La [agenda visual](/material-gratuito/agenda-visual-semanal/), para anticipar cada sesión.
-- El [rincón de la calma](/material-gratuito/rincon-de-la-calma/): su guía, con los objetos que conviene poner, y su cartel, que comparte dos normas con esta situación. Su termómetro de cinco niveles es para más adelante, a partir de 4 años.
-- Las [pausas activas](/material-gratuito/pausas-activas-de-pie-y-sentados/): «El muñeco de nieve» y «La carrera quieta», en las sesiones 3 y 4.
-- El [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/), para quien lo necesite: «ayudar», «sí», «no» y las emociones del llavero.

@@ -113,6 +113,32 @@
         color: var(--suave);
       }
 
+      .vistazo .datos {
+        gap: 1.6mm 4mm;
+        margin-bottom: 2mm;
+      }
+
+      .vistazo .h2-corto {
+        margin-top: 1mm;
+      }
+
+      .vistazo .datos > li {
+        padding: 1.8mm 3mm;
+      }
+
+      .vistazo .reto {
+        padding: 3.2mm 5mm;
+        margin-bottom: 2.4mm;
+      }
+
+      .vistazo .mapa-sesiones li {
+        padding: 1.6mm 2.4mm;
+      }
+
+      .principio {
+        line-height: 1.3;
+      }
+
       .mapa-sesiones li span {
         display: block;
         color: var(--suave);
@@ -137,6 +163,20 @@
       }
 
       /* ---------- Currículo ---------- */
+      .tabla-curricular {
+        table-layout: fixed;
+        line-height: 1.27;
+      }
+
+      .tabla-curricular td,
+      .tabla-curricular th {
+        padding: 1.3mm 1.6mm;
+      }
+
+      .tabla-curricular tbody th {
+        width: auto;
+      }
+
       .tabla-curricular p {
         margin: 0 0 1.2mm;
       }
@@ -168,7 +208,7 @@
       }
 
       .claves li {
-        margin: 0 0 1.2mm;
+        margin: 0 0 0.8mm;
         padding-left: 3mm;
         border-left: 1mm solid var(--linea);
       }
@@ -222,6 +262,16 @@
       .tabla-indicadores td,
       .tabla-indicadores th {
         padding: 1.2mm 2mm;
+      }
+
+      .tabla-indicadores .codigo {
+        font-family: var(--titulos);
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .evaluacion .casillas-docente li {
+        margin-bottom: 1mm;
       }
 
       .tabla-indicadores td:first-child {
@@ -283,7 +333,11 @@
 
       .registro .escala th,
       .registro .escala td {
-        padding: 0.6mm 1mm;
+        padding: 0.3mm 1mm;
+      }
+
+      .registro .escala thead th {
+        padding: 1mm;
       }
 
       .registro .escala thead th {
@@ -299,7 +353,7 @@
       }
 
       .registro .escala td {
-        height: 5.9mm;
+        height: 5.7mm;
       }
 
       .registro .escala td:first-child {
@@ -318,8 +372,8 @@
         padding: 1.3mm 2mm;
       }
 
-      .tabla-diversidad tbody th {
-        width: 34mm;
+      .tabla-diversidad {
+        table-layout: fixed;
       }
 
       .tabla-diversidad ul {
@@ -756,14 +810,11 @@
     <!-- ======================================================================
          DE UN VISTAZO
          ====================================================================== -->
-    <section class="hoja">
+    <section class="hoja vistazo">
       <div class="cabecera">
         <div class="rayos"></div>
         <p class="antetitulo">De un vistazo</p>
         <h1>Así me siento</h1>
-        <p class="entradilla">
-          Para el primer curso del segundo ciclo de Infantil. Hilo conductor: Nube, la mascota de la clase.
-        </p>
       </div>
 
       <div class="reto">
@@ -776,7 +827,7 @@
       </div>
 
       <ul class="datos">
-        <li><strong>Curso y duración</strong>3 años. 8 sesiones de unos 30 minutos, en 2 o 3 semanas.</li>
+        <li><strong>Curso y duración</strong>3 años. 8 sesiones de unos 30 minutos, en 2 o 3 semanas. Hilo conductor: Nube.</li>
         <li><strong>Agrupamientos</strong>Asamblea, parejas, pequeños grupos de 4 o 5, individual y el propio rincón.</li>
         <li class="ancho">
           <strong>Áreas</strong><span class="chip chip--ca">CA</span> Crecimiento en Armonía, la que más pesa ·
@@ -795,30 +846,29 @@
         </li>
         <li><strong>Espacios</strong>Zona de la asamblea, aula de psicomotricidad o patio (sesiones 3 y 4), mesas por grupos y el rincón.</li>
         <li>
-          <strong>Cómo se evalúa</strong>Observación directa y sistemática (artículo 14.1 del decreto): inicial en la sesión 1,
-          continua y final en la 8. Registro (página 16) y autoevaluación (página 29).
+          <strong>Cómo se evalúa</strong>Observación directa y sistemática: inicial (sesión 1), continua y final (sesión 8).
+          Registro (página 16) y autoevaluación (página 29).
         </li>
         <li class="ancho">
           <strong>Materiales de IdEducando que se aprovechan</strong>
-          <ul>
-            <li><a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">Agenda visual</a>: <span class="url">ideducando.es/material-gratuito/agenda-visual-semanal</span></li>
-            <li><a href="https://www.ideducando.es/material-gratuito/rincon-de-la-calma/">Rincón de la calma</a>, su guía y su cartel (sin el termómetro): <span class="url">ideducando.es/material-gratuito/rincon-de-la-calma</span></li>
-            <li><a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">Pausas activas</a>: <span class="url">ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados</span></li>
-            <li><a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">Tablero de comunicación</a>: <span class="url">ideducando.es/material-gratuito/tablero-comunicacion-basico</span></li>
-          </ul>
+          <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">Agenda visual</a>,
+          <a href="https://www.ideducando.es/material-gratuito/rincon-de-la-calma/">rincón de la calma</a> (su guía y su
+          cartel), <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">pausas activas</a>
+          y <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>.
+          Todos, gratis en <span class="url">ideducando.es/material-gratuito</span>
         </li>
       </ul>
 
       <h2 class="h2-corto">Las 8 sesiones</h2>
       <ol class="mapa-sesiones">
         <li><b>1 · ¿Cómo está Nube?</b>Contento y triste.<span>Asamblea y parejas</span></li>
-        <li><b>2 · Nube y sus amigos</b>Enfadado y con miedo, con un cuento.<span>Asamblea y parejas</span></li>
-        <li><b>3 · La música de las emociones</b>Moverse como cada emoción.<span>Gran grupo e individual</span></li>
-        <li><b>4 · ¿Qué siento en el cuerpo?</b>El corazón y la respiración.<span>Gran grupo e individual</span></li>
-        <li><b>5 · Lo que me ayuda</b>Explorar y elegir lo que calma.<span>Pequeños grupos</span></li>
-        <li><b>6 · Construimos nuestro rincón</b>El sitio, las huellas y los objetos.<span>Asamblea, grupos y parejas</span></li>
-        <li><b>7 · Las normas del rincón</b>Juego simbólico con Nube.<span>Asamblea y parejas</span></li>
-        <li><b>8 · ¡Estrenamos el rincón!</b>Inauguración y autoevaluación.<span>Parejas e individual</span></li>
+        <li><b>2 · Nube y sus amigos</b>Enfadado y con miedo.<span>Asamblea y parejas</span></li>
+        <li><b>3 · La música de las emociones</b>Bailar cada emoción.<span>Gran grupo e individual</span></li>
+        <li><b>4 · ¿Qué siento en el cuerpo?</b>Corazón y respiración.<span>Gran grupo e individual</span></li>
+        <li><b>5 · Lo que me ayuda</b>Explorar y elegir.<span>Pequeños grupos</span></li>
+        <li><b>6 · Construimos nuestro rincón</b>El sitio y las huellas.<span>Asamblea, grupos y parejas</span></li>
+        <li><b>7 · Las normas del rincón</b>Juego simbólico.<span>Asamblea y parejas</span></li>
+        <li><b>8 · ¡Estrenamos el rincón!</b>Estreno y autoevaluación.<span>Parejas e individual</span></li>
       </ol>
     </section>
 
@@ -835,45 +885,43 @@
       <h2 class="h2-corto">Por qué este reto</h2>
       <p class="texto-corto">
         A los 3 años, enfadarse, ponerse triste o tener miedo pasa cada día, y calmarse se aprende con un adulto que pone
-        nombre a lo que pasa y enseña cómo hacerlo (Murray y otros, 2015). El anexo III del decreto pide un reto cercano,
-        que movilice lo aprendido en las tres áreas y se transfiera «a la resolución de un problema de la realidad cotidiana
-        del niño»: aquí, un sitio de la clase y unas ideas para sentirse mejor. Los programas de aprendizaje socioemocional
-        para todo el grupo, de 2 a 6 años, mejoran sobre todo el conocimiento, la comprensión y la regulación de las
-        emociones (Blewitt y otros, 2018).
+        nombre a lo que pasa y enseña cómo hacerlo (Murray y otros, 2015). El anexo III del decreto pide un reto cercano que
+        movilice las tres áreas y resuelva «un problema de la realidad cotidiana del niño»: aquí, tener un sitio y unas ideas
+        para sentirse mejor. Los programas que enseñan las emociones a todo el grupo, de 2 a 6 años, mejoran sobre todo su
+        conocimiento, su comprensión y su regulación (Blewitt y otros, 2018).
       </p>
       <p class="nota">
-        <strong>Por qué en este orden.</strong> Contento, enfadado y triste son las primeras palabras de emociones que usan
-        los niños y niñas pequeños para nombrar una cara; el miedo llega más tarde (Widen y Russell, 2003). Por eso «con
-        miedo» aparece en la sesión 2 y con más apoyo.
+        <strong>Por qué en este orden.</strong> Contento, enfadado y triste son las primeras emociones que los niños y niñas
+        nombran en una cara; el miedo llega después (Widen y Russell, 2003). Por eso el miedo lleva más apoyo.
       </p>
 
       <h2 class="h2-corto">Las pautas DUA de esta situación</h2>
       <p class="nota">
-        Las pautas (en la versión 3.0, «directrices») de CAST (2024), con su número. Cada sesión señala las suyas.
+        Del centro de investigación CAST (2024), con su número. En la versión 3.0, las pautas se llaman «directrices».
       </p>
       <div class="dua-tres">
         <div class="principio">
           <h3>Compromiso</h3>
           <ul>
-            <li><span class="chip chip--dua">7.1</span> Elegir: lo que me ayuda (sesión 5), el sitio del rincón (6) y sus normas (7).</li>
-            <li><span class="chip chip--dua">7.3</span> Jugar: Nube, la música, las estatuas y la fiesta de estreno.</li>
-            <li><span class="chip chip--dua">9.2</span> Mirar hacia dentro: notar el cuerpo y poner nombre a lo que siento.</li>
+            <li><span class="chip chip--dua">7.1</span> Elegir lo que me ayuda, el sitio del rincón y sus normas.</li>
+            <li><span class="chip chip--dua">7.3</span> Jugar: Nube, la música, las estatuas y la fiesta.</li>
+            <li><span class="chip chip--dua">9.2</span> Notar el cuerpo y poner nombre a lo que siento.</li>
           </ul>
         </div>
         <div class="principio">
           <h3>Representación</h3>
           <ul>
-            <li><span class="chip chip--dua">2.5</span> Cada emoción llega por la cara, el pictograma, el gesto, la palabra y la música.</li>
-            <li><span class="chip chip--dua">2.1</span> Un pictograma con cada palabra clave del cuento y de las normas.</li>
-            <li><span class="chip chip--dua">3.2</span> Patrones que se ven, se oyen y se notan: rápido y lento, fuerte y suave.</li>
+            <li><span class="chip chip--dua">2.5</span> Cada emoción llega por cara, pictograma, gesto, palabra y música.</li>
+            <li><span class="chip chip--dua">2.1</span> Pictogramas con las palabras clave del cuento y las normas.</li>
+            <li><span class="chip chip--dua">3.2</span> Patrones que se ven, se oyen y se notan: rápido y lento.</li>
           </ul>
         </div>
         <div class="principio">
           <h3>Acción y expresión</h3>
           <ul>
-            <li><span class="chip chip--dua">4.1</span> Responder señalando, con la tarjeta, con el gesto o hablando: todo vale igual.</li>
-            <li><span class="chip chip--dua">5.1</span> Expresarse con el cuerpo, la música y la pintura, además de la palabra.</li>
-            <li><span class="chip chip--dua">6.4</span> La autoevaluación con pictogramas y el registro por niveles muestran el progreso.</li>
+            <li><span class="chip chip--dua">4.1</span> Responder señalando, con tarjeta, con gesto o hablando.</li>
+            <li><span class="chip chip--dua">5.1</span> Expresarse con el cuerpo, la música y la pintura.</li>
+            <li><span class="chip chip--dua">6.4</span> Autoevaluación con pictogramas y registro por niveles.</li>
           </ul>
         </div>
       </div>
@@ -882,11 +930,11 @@
       <ul class="niveles leyenda-niveles">
         <li class="nivel nivel-1">
           <h4><span class="marca">1</span>Con más apoyo</h4>
-          <p>El adulto hace de modelo y está al lado. Dos opciones, objetos reales y ayuda física si la acepta. Vale señalar o mirar.</p>
+          <p>El adulto hace de modelo y está al lado. Dos opciones, objetos reales y ayuda física si la acepta.</p>
         </li>
         <li class="nivel nivel-2">
           <h4><span class="marca">2</span>Base</h4>
-          <p>Lo esperado a los 3 años: reconoce, elige o hace la tarea entre 4 o 5 opciones y lo dice con la palabra, el gesto o la tarjeta.</p>
+          <p>Lo esperado a los 3 años: lo hace entre 4 o 5 opciones y lo dice con palabra, gesto o tarjeta.</p>
         </li>
         <li class="nivel nivel-3">
           <h4><span class="marca">3</span>Con más reto</h4>
@@ -894,30 +942,24 @@
         </li>
       </ul>
       <p class="nota">
-        Toda la clase hace la misma actividad, con la misma meta, a la vez y en el mismo sitio. Nadie tiene un nivel fijo:
-        cada niño o niña empieza donde lo ves y sube o baja en la misma sesión. En el registro se anota el nivel en que lo
-        logra, sin etiquetar a nadie.
+        Toda la clase hace la misma actividad, con la misma meta y a la vez. Nadie tiene un nivel fijo: cada niño o niña sube
+        o baja en la misma sesión, y el registro anota el nivel en que lo logra. Cada sesión trae ajustes, por ejemplo para el
+        trastorno del espectro del autismo (TEA), el trastorno por déficit de atención e hiperactividad (TDAH) o el trastorno
+        del desarrollo del lenguaje (TDL).
       </p>
 
       <div class="caja caja--coral caja-calma">
-        <h3>Un rincón, nunca un castigo</h3>
-        <p>
-          Al rincón se va por propia voluntad. Nunca se usa como castigo y nadie está obligado a quedarse. Ponlo donde lo veas
-          siempre desde tu sitio.
-        </p>
+        <p><strong>Un rincón, nunca un castigo.</strong> Al rincón se va por propia voluntad: nunca se usa como castigo y nadie está obligado a quedarse.</p>
       </div>
 
       <div class="oposicion">
         <h3>Si preparas la oposición</h3>
         <p>
-          En la oposición de Infantil de la Región de Murcia (Boletín Oficial de la Región de Murcia, BORM, n.º 18, de 23 de
-          enero de 2026, anexo XVII), la parte A de la primera prueba pide «un planteamiento completo de una situación
-          didáctica». En la exposición de la unidad, el tribunal valora, entre otros indicadores: pautas DUA y atención a la
-          diversidad (páginas 4, 7 a 14 y 17), una secuencia coherente y realista (página 3 y los minutos de cada fase),
-          variedad de agrupamientos, detección de dificultades (página 17), criterios relacionados con competencias y saberes
-          (páginas 5 y 6), momentos e instrumentos de evaluación (páginas 15 y 16) y evaluación de la práctica docente (página
-          15). Úsala para ver cómo encajan las piezas: tu programación y tu unidad tienen que ser originales, y este material no
-          se puede entregar copiado.
+          En Murcia (Boletín Oficial de la Región de Murcia, BORM, n.º 18, de 23 de enero de 2026, anexo XVII), la primera
+          prueba pide «un planteamiento completo de una situación didáctica». El tribunal valora, entre otros indicadores: DUA
+          y diversidad (páginas 4, 7 a 14 y 17), secuencia realista (3), agrupamientos, detección de dificultades (17),
+          criterios con competencias y saberes (5 y 6), momentos e instrumentos de evaluación (15 y 16) y evaluación de la
+          práctica docente (15). Tu programación y tu unidad tienen que ser originales: no entregues este material copiado.
         </p>
       </div>
     </section>
@@ -931,11 +973,17 @@
         <p class="antetitulo">Conexión con el currículo de la Región de Murcia</p>
         <h1>Qué trabaja del Decreto 196/2022</h1>
         <p class="entradilla">
-          Solo lo que se trabaja y se evalúa en esta situación, con el texto literal del decreto (BORM n.º 255, de 4 de
-          noviembre de 2022). Junto a cada criterio, las sesiones en que se observa.
+          Lo que se trabaja y se evalúa, con el texto literal del decreto. Lo abreviado lleva «…» y cada criterio lleva sus
+          sesiones.
         </p>
       </div>
       <table class="tabla-curricular">
+        <colgroup>
+          <col style="width: 13mm" />
+          <col style="width: 42mm" />
+          <col style="width: 66mm" />
+          <col style="width: 57mm" />
+        </colgroup>
         <thead>
           <tr>
             <th scope="col">Área</th>
@@ -946,8 +994,8 @@
         </thead>
         <tbody>
           <tr class="ca">
-            <th scope="row">Crecimiento en Armonía (CA)</th>
-            <td>1. Progresar en el conocimiento y control de su cuerpo y en la adquisición de distintas estrategias, adecuando sus acciones a la realidad del entorno de una manera segura, para construir una autoimagen ajustada y positiva.</td>
+            <th scope="row">CA</th>
+            <td>1. Progresar en el conocimiento y control de su cuerpo y en la adquisición de distintas estrategias…</td>
             <td>
               <p><span class="codigo">1.1</span> Progresar en el conocimiento de su cuerpo ajustando acciones y reacciones y desarrollando el equilibrio, la percepción sensorial y la coordinación en el movimiento. <span class="sesiones-crit">Sesiones 3 y 4</span></p>
             </td>
@@ -957,8 +1005,8 @@
             </td>
           </tr>
           <tr class="ca">
-            <th scope="row">Crecimiento en Armonía (CA)</th>
-            <td>2. Reconocer, manifestar y regular progresivamente sus emociones expresando necesidades y sentimientos para lograr bienestar emocional y seguridad afectiva.</td>
+            <th scope="row">CA</th>
+            <td>2. Reconocer, manifestar y regular progresivamente sus emociones expresando necesidades y sentimientos…</td>
             <td>
               <p><span class="codigo">2.1</span> Identificar y expresar sus necesidades y sentimientos, ajustando progresivamente el control de sus emociones. <span class="sesiones-crit">Sesiones 1, 2, 4 y 8</span></p>
               <p><span class="codigo">2.2</span> Ofrecer y pedir ayuda en situaciones cotidianas, valorando los beneficios de la cooperación y la ayuda entre iguales. <span class="sesiones-crit">Sesiones 5 y 6</span></p>
@@ -970,8 +1018,8 @@
             </td>
           </tr>
           <tr class="ca">
-            <th scope="row">Crecimiento en Armonía (CA)</th>
-            <td>4. Establecer interacciones sociales en condiciones de igualdad, valorando la importancia de la amistad, el respeto y la empatía, para construir su propia identidad basada en valores democráticos y de respeto a los derechos humanos.</td>
+            <th scope="row">CA</th>
+            <td>4. Establecer interacciones sociales en condiciones de igualdad, valorando la importancia de la amistad, el respeto y la empatía…</td>
             <td>
               <p><span class="codigo">4.1</span> Participar con iniciativa en juegos y actividades colectivas relacionándose con otras personas con actitudes de afecto y de empatía, respetando los distintos ritmos individuales y evitando todo tipo de discriminación. <span class="sesiones-crit">Sesiones 2, 7 y 8</span></p>
             </td>
@@ -983,8 +1031,8 @@
             </td>
           </tr>
           <tr class="dee">
-            <th scope="row">Descubrimiento y Exploración del Entorno (DEE)</th>
-            <td>1. Identificar las características de materiales, objetos y colecciones y establecer relaciones entre ellos, mediante la exploración, la manipulación sensorial, el manejo de herramientas sencillas, y el desarrollo de destrezas lógico-matemáticas para descubrir y crear una idea cada vez más compleja del mundo.</td>
+            <th scope="row">DEE</th>
+            <td>1. Identificar las características de materiales, objetos y colecciones y establecer relaciones entre ellos…</td>
             <td>
               <p><span class="codigo">1.1</span> Establecer distintas relaciones entre los objetos a partir de sus cualidades o atributos, mostrando curiosidad e interés. <span class="sesiones-crit">Sesión 5</span></p>
             </td>
@@ -993,8 +1041,8 @@
             </td>
           </tr>
           <tr class="dee">
-            <th scope="row">Descubrimiento y Exploración del Entorno (DEE)</th>
-            <td>2. Desarrollar, de manera progresiva, los procedimientos del método científico y las destrezas del pensamiento computacional, a través de procesos de observación y manipulación de objetos, para iniciarse en la interpretación del entorno y responder de forma creativa a las situaciones y retos que se plantean.</td>
+            <th scope="row">DEE</th>
+            <td>2. Desarrollar, de manera progresiva, los procedimientos del método científico y las destrezas del pensamiento computacional…</td>
             <td>
               <p><span class="codigo">2.6</span> Participar en proyectos utilizando dinámicas cooperativas, compartiendo y valorando opiniones propias y ajenas, y expresando conclusiones personales a partir de ellas. <span class="sesiones-crit">Sesiones 6 y 7</span></p>
             </td>
@@ -1003,19 +1051,19 @@
             </td>
           </tr>
           <tr class="crr">
-            <th scope="row">Comunicación y Representación de la Realidad (CRR)</th>
-            <td>1. Manifestar interés por interactuar en situaciones cotidianas a través de la exploración y el uso de su repertorio comunicativo, para expresar sus necesidades e intenciones y responder a las exigencias del entorno.</td>
+            <th scope="row">CRR</th>
+            <td>1. Manifestar interés por interactuar en situaciones cotidianas a través de la exploración y el uso de su repertorio comunicativo…</td>
             <td>
               <p><span class="codigo">1.1</span> Participar de manera activa, espontánea y respetuosa con las diferencias individuales en situaciones comunicativas de progresiva complejidad, en función de su desarrollo individual. <span class="sesiones-crit">Sesiones 1 y 7</span></p>
             </td>
             <td>
               <p><span class="codigo">A.</span> Repertorio comunicativo y elementos de comunicación no verbal.</p>
-              <p>Convenciones sociales del intercambio lingüístico en situaciones comunicativas que potencien el respeto y la igualdad: atención, escucha activa, turnos de diálogo y alternancia. Acomodación a las diferentes situaciones y formatos de comunicación.</p>
+              <p>Convenciones sociales del intercambio lingüístico en situaciones comunicativas que potencien el respeto y la igualdad: atención, escucha activa, turnos de diálogo y alternancia…</p>
             </td>
           </tr>
           <tr class="crr">
-            <th scope="row">Comunicación y Representación de la Realidad (CRR)</th>
-            <td>2. Interpretar y comprender mensajes y representaciones apoyándose en conocimientos y recursos de su propia experiencia para responder a las demandas del entorno y construir nuevos aprendizajes.</td>
+            <th scope="row">CRR</th>
+            <td>2. Interpretar y comprender mensajes y representaciones apoyándose en conocimientos y recursos de su propia experiencia…</td>
             <td>
               <p><span class="codigo">2.1</span> Interpretar de forma eficaz los mensajes e intenciones comunicativas de los demás. <span class="sesiones-crit">Sesiones 1 y 2</span></p>
             </td>
@@ -1024,8 +1072,8 @@
             </td>
           </tr>
           <tr class="crr">
-            <th scope="row">Comunicación y Representación de la Realidad (CRR)</th>
-            <td>3. Producir mensajes de manera eficaz, personal y creativa, utilizando diferentes lenguajes, descubriendo los códigos de cada uno de ellos y explorando sus posibilidades expresivas, para responder a diferentes necesidades comunicativas.</td>
+            <th scope="row">CRR</th>
+            <td>3. Producir mensajes de manera eficaz, personal y creativa, utilizando diferentes lenguajes…</td>
             <td>
               <p><span class="codigo">3.4</span> Elaborar creaciones plásticas, explorando y utilizando diferentes materiales y técnicas y participando activamente en el trabajo en grupo cuando se precise. <span class="sesiones-crit">Sesión 6</span></p>
               <p><span class="codigo">3.6</span> Ajustar armónicamente su movimiento al de los demás y al espacio como forma de expresión corporal libre, manifestando interés e iniciativa. <span class="sesiones-crit">Sesión 3</span></p>
@@ -1037,10 +1085,10 @@
             </td>
           </tr>
           <tr class="crr">
-            <th scope="row">Comunicación y Representación de la Realidad (CRR)</th>
-            <td>5. Valorar la diversidad lingüística presente en su entorno, así como otras manifestaciones culturales, para enriquecer sus estrategias comunicativas y su bagaje cultural.</td>
+            <th scope="row">CRR</th>
+            <td>5. Valorar la diversidad lingüística presente en su entorno, así como otras manifestaciones culturales…</td>
             <td>
-              <p><span class="codigo">5.4</span> Expresar emociones, ideas y pensamientos a través de manifestaciones artísticas y culturales, disfrutando del proceso creativo. <span class="sesiones-crit">Sesiones 3 y 6</span></p>
+              <p><span class="codigo">5.4</span> Expresar emociones, ideas y pensamientos a través de manifestaciones artísticas y culturales, disfrutando del proceso creativo. <span class="sesiones-crit">Sesión 3</span></p>
             </td>
             <td>
               <p><span class="codigo">F.</span> Intención expresiva en las producciones musicales.</p>
@@ -1050,26 +1098,26 @@
         </tbody>
       </table>
       <p class="fuente">
-        Páginas del BORM n.º 255: competencias específicas, 33078 (CA), 33090 y 33091 (DEE) y 33102 a 33104 (CRR); criterios
-        y saberes del segundo ciclo, 33083 a 33086 (CA), 33094 a 33097 (DEE) y 33107 a 33110 (CRR).
+        Decreto 196/2022, BORM n.º 255, de 4 de noviembre de 2022. Competencias: págs. 33078, 33090, 33091 y 33102 a 33104.
+        Criterios y saberes: págs. 33083 a 33086, 33094 a 33097 y 33107 a 33110.
       </p>
 
       <h2 class="h2-corto">Objetivos de etapa (artículo 7)</h2>
       <ul class="claves">
-        <li><strong>a)</strong> Conocer su propio cuerpo y el de los otros, así como sus posibilidades de acción y aprender a respetar las diferencias. Aquí: notar el corazón y la respiración (sesiones 3 y 4).</li>
+        <li><strong>a)</strong> Conocer su propio cuerpo y el de los otros, así como sus posibilidades de acción y aprender a respetar las diferencias. Sesiones 3 y 4.</li>
         <li><strong>d)</strong> Desarrollar sus capacidades emocionales y afectivas. Es el centro de toda la situación.</li>
-        <li><strong>e)</strong> Relacionarse con los demás en igualdad y adquirir progresivamente pautas elementales de convivencia y relación social, así como ejercitarse en el uso de la empatía y la resolución pacífica de conflictos, evitando cualquier tipo de violencia. Aquí: las normas del rincón (sesión 7).</li>
-        <li><strong>f)</strong> Desarrollar habilidades comunicativas en diferentes lenguajes y formas de expresión. Aquí: palabra, gesto, música y pintura.</li>
+        <li><strong>e)</strong> Relacionarse con los demás en igualdad y adquirir progresivamente pautas elementales de convivencia y relación social, así como ejercitarse en el uso de la empatía y la resolución pacífica de conflictos, evitando cualquier tipo de violencia. Sesiones 7 y 8.</li>
+        <li><strong>f)</strong> Desarrollar habilidades comunicativas en diferentes lenguajes y formas de expresión: palabra, gesto, música y pintura.</li>
       </ul>
 
       <h2 class="h2-corto">Competencias clave (anexo I)</h2>
       <ul class="claves">
-        <li><strong>Competencia personal, social y de aprender a aprender (CPSAA):</strong> reconocer lo que siento y saber qué hacer para estar mejor.</li>
+        <li><strong>Competencia personal, social y de aprender a aprender (CPSAA):</strong> reconocer lo que siento y saber qué hacer.</li>
         <li><strong>Competencia en comunicación lingüística (CCL):</strong> las palabras de las emociones, el cuento y la asamblea.</li>
-        <li><strong>Competencia ciudadana (CC):</strong> el rincón es de todos y sus normas las decide el grupo.</li>
-        <li><strong>Competencia en conciencia y expresión culturales (CCEC):</strong> expresar emociones con la música, el cuerpo y la pintura.</li>
-        <li><strong>Competencia matemática y en ciencia, tecnología e ingeniería (STEM):</strong> comparar objetos por sus cualidades y contar votos.</li>
-        <li><strong>Competencia emprendedora (CE):</strong> planificar y construir entre todos algo que la clase necesita.</li>
+        <li><strong>Competencia ciudadana (CC):</strong> el rincón es de todos y las normas, del grupo.</li>
+        <li><strong>Competencia en conciencia y expresión culturales (CCEC):</strong> emociones con música, cuerpo y pintura.</li>
+        <li><strong>Competencia matemática y en ciencia, tecnología e ingeniería (STEM):</strong> comparar objetos y contar votos.</li>
+        <li><strong>Competencia emprendedora (CE):</strong> planificar y construir algo que la clase necesita.</li>
       </ul>
     </section>
 
@@ -1092,7 +1140,7 @@
       <p class="sesion__para">
         <strong>Para qué:</strong> reconocer en una cara si alguien está contento o triste, y decirlo con la palabra, un gesto o una tarjeta.
         <span class="chip chip--ca">CA 2.1</span><span class="chip chip--crr">CRR 2.1</span><span class="chip chip--crr">CRR 1.1</span>
-        <br /><strong>Materiales:</strong> Nube, la mascota de la clase; las tarjetas grandes «contento» y «triste» (página 20); un juego de tarjetas pequeñas por pareja, solo con esas dos (página 22); un espejo irrompible.
+        <br /><strong>Materiales:</strong> Nube, la mascota de la clase (un osito de peluche o una marioneta que ya tengáis); las tarjetas grandes «contento» y «triste» (página 20); un juego de tarjetas pequeñas por pareja, solo con esas dos (página 22); un espejo irrompible.
       </p>
 
       <div class="fase">
@@ -1141,6 +1189,7 @@
           <ul>
             <li><span class="chip chip--ca">CA 2.1</span> Evaluación inicial: ¿qué emociones nombra ya? ¿Reconoce «contento» y «triste» en otra cara? ¿En qué nivel?</li>
             <li><span class="chip chip--crr">CRR 2.1</span> ¿Entiende la historia corta y lo que siente Nube?</li>
+            <li><span class="chip chip--crr">CRR 1.1</span> ¿Participa en la asamblea a su manera: mira, señala o habla?</li>
           </ul>
         </div>
         <div class="ajustes">
@@ -1174,7 +1223,7 @@
       <p class="sesion__para">
         <strong>Para qué:</strong> reconocer las caras de enfadado y con miedo, y entender qué le pasa a Nube en un cuento corto.
         <span class="chip chip--ca">CA 2.1</span><span class="chip chip--crr">CRR 2.1</span><span class="chip chip--ca">CA 4.1</span>
-        <br /><strong>Materiales:</strong> Nube; el cuento «Nube y sus amigos» (páginas 23 y 24); las tarjetas grandes de las cinco emociones (páginas 20 y 21); un papel grande para el cartel del reto.
+        <br /><strong>Materiales:</strong> Nube; el cuento «Nube y sus amigos» (páginas 23 y 24); las tarjetas grandes de las cinco emociones (páginas 20 y 21); un juego de tarjetas pequeñas por pareja (página 22); papel continuo para el cartel del reto.
       </p>
 
       <div class="fase">
@@ -1186,7 +1235,7 @@
         <h2>Desarrollo <span class="tiempo">20 minutos</span></h2>
         <ol>
           <li><strong>El cuento.</strong> Lee «Nube y sus amigos» despacio, señalando cada pictograma. Mueve a Nube en cada escena. En las escenas 2 y 3, para y pregunta: «¿Cómo está Nube ahora?». Cuelga la tarjeta grande de «enfadado», luego la de «con miedo» y, al final, la de «tranquilo». Dedica más tiempo al miedo: es la que más cuesta (página 4).</li>
-          <li><strong>El juego de las caras.</strong> Por parejas, uno elige en secreto una de las cuatro caras y la pone; su pareja la adivina con la palabra o señalando la tarjeta grande. Luego cambian.</li>
+          <li><strong>El juego de las caras.</strong> Por parejas, uno saca en secreto una tarjeta pequeña y pone esa cara; su pareja la adivina con la palabra o señalando la tarjeta grande. Luego cambian.</li>
         </ol>
         <ul class="niveles">
           <li class="nivel nivel-1">
@@ -1257,7 +1306,7 @@
       <p class="sesion__para">
         <strong>Para qué:</strong> expresar con el cuerpo cada emoción al ritmo de músicas distintas y pararse en estatua.
         <span class="chip chip--crr">CRR 5.4</span><span class="chip chip--crr">CRR 3.6</span><span class="chip chip--ca">CA 1.1</span>
-        <br /><strong>Materiales:</strong> Nube; las tarjetas grandes de las cinco emociones; un pandero; un altavoz y cinco músicas cortas.
+        <br /><strong>Materiales:</strong> Nube; las tarjetas grandes de las cinco emociones (páginas 20 y 21); un pandero; un altavoz y cinco músicas cortas.
       </p>
       <p class="musicas">
         <strong>Ideas de música</strong> (1 minuto de cada una): contento, Vivaldi, «La primavera», primer movimiento; triste,
@@ -1626,7 +1675,7 @@
 
       <div class="fase">
         <h2>Cierre <span class="tiempo">5 minutos</span></h2>
-        <p>«Vengo cuando lo necesito» va siempre: recuerda que el rincón es voluntario. Las otras las vota el grupo con un gomet, y las 1 o 2 con más gomets se cuelgan en el rincón, a la altura de sus ojos.</p>
+        <p>«Vengo cuando lo necesito» va siempre: recuerda que el rincón es voluntario. De las otras tres, el grupo vota con un gomet y se cuelgan una o dos, las que tengan más gomets, a la altura de sus ojos.</p>
       </div>
 
       <div class="sesion__pie">
@@ -1744,7 +1793,7 @@
     <!-- ======================================================================
          EVALUACIÓN (1): momentos, indicadores, autoevaluación y práctica docente
          ====================================================================== -->
-    <section class="hoja">
+    <section class="hoja evaluacion">
       <div class="cabecera">
         <div class="rayos"></div>
         <p class="antetitulo">Evaluación</p>
@@ -1758,20 +1807,26 @@
       <div class="momentos">
         <div>
           <h3>Inicial · sesión 1</h3>
-          <p>Qué emociones nombra ya cada niño o niña. En la sesión 2, las ideas del grupo sobre el reto, en el cartel.</p>
+          <p>Qué emociones nombra ya cada uno. En la 2, las ideas del grupo sobre el reto.</p>
         </div>
         <div>
           <h3>Continua · sesiones 2 a 7</h3>
-          <p>«Qué observar» de cada sesión. Anota en el registro el símbolo y el nivel en que lo logra.</p>
+          <p>«Qué observar» de cada sesión: anota el símbolo y el nivel en el registro.</p>
         </div>
         <div>
           <h3>Final · sesión 8</h3>
-          <p>Uso del rincón, autoevaluación y respuestas al reto, comparadas con las de la sesión 2.</p>
+          <p>Uso del rincón, autoevaluación y respuestas al reto, frente a las de la sesión 2.</p>
         </div>
       </div>
 
       <h2 class="h2-corto">Los 10 indicadores del registro (página 16)</h2>
       <table class="tabla-indicadores">
+        <colgroup>
+          <col style="width: 9mm" />
+          <col />
+          <col style="width: 36mm" />
+          <col style="width: 18mm" />
+        </colgroup>
         <thead>
           <tr>
             <th scope="col">N.º</th>
@@ -1781,22 +1836,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>1</td><td>Reconoce contento, triste, enfadado y con miedo en una cara y lo dice con palabra, gesto o tarjeta.</td><td><span class="chip chip--ca">CA 2.1</span></td><td class="sesiones-ind">1, 2 y 8</td></tr>
-          <tr><td>2</td><td>Entiende qué le pasa a Nube y cómo se siente en una historia corta.</td><td><span class="chip chip--crr">CRR 2.1</span></td><td class="sesiones-ind">1 y 2</td></tr>
-          <tr><td>3</td><td>Expresa cada emoción con el cuerpo y ajusta su movimiento a la música, al espacio y a los demás.</td><td><span class="chip chip--crr">CRR 5.4</span><span class="chip chip--crr">CRR 3.6</span></td><td class="sesiones-ind">3</td></tr>
-          <tr><td>4</td><td>Nota en su cuerpo el corazón rápido y el corazón tranquilo, y mantiene el equilibrio en la estatua.</td><td><span class="chip chip--ca">CA 1.1</span></td><td class="sesiones-ind">3 y 4</td></tr>
-          <tr><td>5</td><td>Usa la respiración de la flor y la vela para calmarse.</td><td><span class="chip chip--ca">CA 2.1</span></td><td class="sesiones-ind">4 y 8</td></tr>
-          <tr><td>6</td><td>Explora los objetos y los compara: blando o duro, con ruido o en silencio.</td><td><span class="chip chip--dee">DEE 1.1</span></td><td class="sesiones-ind">5</td></tr>
-          <tr><td>7</td><td>Elige lo que le ayuda, lo pide o pide ayuda a un adulto.</td><td><span class="chip chip--ca">CA 2.3</span><span class="chip chip--ca">CA 2.2</span></td><td class="sesiones-ind">5, 6 y 8</td></tr>
-          <tr><td>8</td><td>Explora la técnica de la huella y participa en el cartel del grupo.</td><td><span class="chip chip--crr">CRR 3.4</span></td><td class="sesiones-ind">6</td></tr>
-          <tr><td>9</td><td>Da su opinión y escucha la de los demás al decidir el sitio y las normas.</td><td><span class="chip chip--dee">DEE 2.6</span><span class="chip chip--crr">CRR 1.1</span></td><td class="sesiones-ind">6 y 7</td></tr>
-          <tr><td>10</td><td>Respeta las normas, el turno y a quien está en el rincón, y se interesa por cómo están los demás.</td><td><span class="chip chip--ca">CA 4.1</span></td><td class="sesiones-ind">2, 7 y 8</td></tr>
+          <tr><td>1</td><td>Reconoce las 4 emociones en una cara y lo dice a su manera.</td><td class="codigo">CA 2.1</td><td class="sesiones-ind">1, 2 y 8</td></tr>
+          <tr><td>2</td><td>Entiende qué le pasa a Nube y cómo se siente en el cuento.</td><td class="codigo">CRR 2.1</td><td class="sesiones-ind">1 y 2</td></tr>
+          <tr><td>3</td><td>Expresa emociones con el cuerpo y ajusta su movimiento al espacio.</td><td class="codigo">CRR 5.4 y 3.6</td><td class="sesiones-ind">3</td></tr>
+          <tr><td>4</td><td>Nota el corazón rápido y el tranquilo, y se para en equilibrio.</td><td class="codigo">CA 1.1</td><td class="sesiones-ind">3 y 4</td></tr>
+          <tr><td>5</td><td>Usa la respiración de la flor y la vela para calmarse.</td><td class="codigo">CA 2.1</td><td class="sesiones-ind">4 y 8</td></tr>
+          <tr><td>6</td><td>Explora objetos y los compara: blando o duro, ruido o silencio.</td><td class="codigo">DEE 1.1</td><td class="sesiones-ind">5</td></tr>
+          <tr><td>7</td><td>Elige lo que le ayuda y lo pide, o pide ayuda a un adulto.</td><td class="codigo">CA 2.3 y 2.2</td><td class="sesiones-ind">5, 6 y 8</td></tr>
+          <tr><td>8</td><td>Explora la técnica de la huella y participa en el cartel.</td><td class="codigo">CRR 3.4</td><td class="sesiones-ind">6</td></tr>
+          <tr><td>9</td><td>Da su opinión y escucha la de otros al decidir sitio y normas.</td><td class="codigo">DEE 2.6 y CRR 1.1</td><td class="sesiones-ind">6 y 7</td></tr>
+          <tr><td>10</td><td>Respeta las normas, el turno y a quien está en el rincón.</td><td class="codigo">CA 4.1</td><td class="sesiones-ind">2, 7 y 8</td></tr>
         </tbody>
       </table>
 
       <h2 class="h2-corto">La autoevaluación del alumnado (página 29)</h2>
       <p class="texto-corto">
-        En la sesión 8, lee cada frase con su pictograma y cada niño o niña pega un gomet en una de estas tres opciones. Todas
+        En la sesión 8, lee cada frase con su pictograma; cada niño o niña pega un gomet en una de estas tres opciones. Todas
         valen: dicen qué hace ya sin ayuda y qué quiere seguir practicando.
       </p>
       <ul class="autoeval-mini">
@@ -1828,26 +1883,25 @@
         <h1>Así me siento: registro de observación</h1>
       </div>
       <p class="leyenda">
-        En cada casilla: <strong>✓</strong> lo hace solo · <strong>~</strong> con ayuda · <strong>·</strong> aún no, y el nivel en
-        que lo logra: ① con más apoyo, ② base, ③ con más reto. Los indicadores completos están en la página 15. Escribe solo
-        el nombre o las iniciales y guarda la hoja en el centro.
+        <strong>✓</strong> lo hace solo · <strong>~</strong> con ayuda · <strong>·</strong> aún no, y el nivel en que lo logra:
+        ①, ② o ③. Indicadores completos en la página 15. Solo nombre o iniciales; la hoja se queda en el centro.
       </p>
       <table class="escala">
         <colgroup>
-          <col style="width: 46mm" />
+          <col style="width: 40mm" />
           <col span="10" />
         </colgroup>
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col"><b>1 · CA 2.1</b>Reconoce 4 emociones</th>
+            <th scope="col"><b>1 · CA 2.1</b>Reconoce emociones</th>
             <th scope="col"><b>2 · CRR 2.1</b>Entiende el cuento</th>
             <th scope="col"><b>3 · CRR 5.4 y 3.6</b>Se expresa con el cuerpo</th>
             <th scope="col"><b>4 · CA 1.1</b>Nota su corazón</th>
             <th scope="col"><b>5 · CA 2.1</b>Respira para calmarse</th>
             <th scope="col"><b>6 · DEE 1.1</b>Explora y compara</th>
             <th scope="col"><b>7 · CA 2.3 y 2.2</b>Elige y pide ayuda</th>
-            <th scope="col"><b>8 · CRR 3.4</b>Su huella en el cartel</th>
+            <th scope="col"><b>8 · CRR 3.4</b>Huella en el cartel</th>
             <th scope="col"><b>9 · DEE 2.6 y CRR 1.1</b>Da su opinión</th>
             <th scope="col"><b>10 · CA 4.1</b>Respeta a los demás</th>
           </tr>
@@ -1870,49 +1924,28 @@
         </p>
       </div>
       <table class="tabla-diversidad">
+        <colgroup>
+          <col style="width: 28mm" />
+          <col />
+          <col />
+        </colgroup>
         <thead>
           <tr>
             <th scope="col">Si hay alumnado con…</th>
-            <th scope="col">Qué hacer en esta situación</th>
+            <th scope="col">Medida 1</th>
+            <th scope="col">Medida 2</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Trastorno del espectro del autismo (TEA)</th>
-            <td><ul><li>Anticipa cada sesión con la agenda y con la foto de Nube, y avisa antes de la música, el trueno del cuento y la fiesta.</li><li>Ofrece alternativas a lo que le molesta: pincel o guante para la pintura, cascos y volumen bajo para la música.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Trastorno por déficit de atención e hiperactividad (TDAH)</th>
-            <td><ul><li>Dale tareas con movimiento: llevar a Nube, levantar las tarjetas, tocar el pandero o repartir los gomets.</li><li>Fases cortas, con una señal clara de inicio y de final, y un sitio cerca de ti en la asamblea.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Trastorno del desarrollo del lenguaje (TDL)</th>
-            <td><ul><li>Frases modelo cortas y siempre iguales, «Nube está enfadado», y amplía lo que diga sin corregirle.</li><li>Un pictograma con cada palabra clave y más tiempo para responder. Vale señalar.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Discapacidad intelectual</th>
-            <td><ul><li>Empieza con dos emociones y añade una cada vez. El nivel 1, con objetos reales.</li><li>Repite cada día las mismas rutinas: agenda, cierre con Nube y la respiración de la flor y la vela.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Discapacidad motora</th>
-            <td><ul><li>Versión sentada de los movimientos y de las estatuas, como en las pausas activas de IdEducando.</li><li>Huella con la mano que pueda abrir o con un sello de mango grueso, y un rincón al que se llega en silla de ruedas.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Discapacidad visual</th>
-            <td><ul><li>Tarjetas con buen contraste y caras táctiles, con la boca de limpiapipas. Describe en voz alta cada escena del cuento.</li><li>El rincón siempre en el mismo sitio y con el camino libre. Que explore sus objetos con las manos antes de usarlo.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Discapacidad auditiva</th>
-            <td><ul><li>Señales que se ven y se notan: la tarjeta en alto para cambiar de música y el pandero en el suelo.</li><li>Tu cara siempre visible al hablar. Si usa lengua de signos española (LSE), sus signos para cada emoción.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Altas capacidades</th>
-            <td><ul><li>Nivel 3 en cada sesión: inventar movimientos, explicar el porqué o proponer normas.</li><li>Que haga de guía del rincón en la sesión 8 y busque en casa qué música calma a su familia.</li></ul></td>
-          </tr>
-          <tr>
-            <th scope="row">Incorporación tardía (recién llegados)</th>
-            <td><ul><li>El gesto y la tarjeta valen igual que la palabra. Ten a mano el <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a> con «ayudar», «sí» y «no».</li><li>Pide a la familia cómo se dice cada emoción en su lengua y usadla junto a la nuestra. Ver también el <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>.</li></ul></td>
-          </tr>
+          <tr><th scope="row">TEA</th><td>Anticipa cada sesión con la agenda y la foto de Nube. Avisa antes de la música, del trueno del cuento y de la fiesta.</td><td>Ofrece alternativas a lo que le molesta: pincel o guante para la pintura, cascos y volumen bajo para la música.</td></tr>
+          <tr><th scope="row">TDAH</th><td>Tareas con movimiento: llevar a Nube, levantar las tarjetas, tocar el pandero o repartir los gomets.</td><td>Fases cortas, con una señal clara de inicio y de final, y un sitio cerca de ti en la asamblea.</td></tr>
+          <tr><th scope="row">TDL</th><td>Frases modelo cortas y siempre iguales, «Nube está enfadado». Amplía lo que diga sin corregirle.</td><td>Un pictograma con cada palabra clave y más tiempo para responder. Vale señalar.</td></tr>
+          <tr><th scope="row">Discapacidad intelectual</th><td>Empieza con dos emociones y añade una cada vez. En el nivel 1, objetos reales.</td><td>Las mismas rutinas cada día: agenda, cierre con Nube y respiración de la flor y la vela.</td></tr>
+          <tr><th scope="row">Discapacidad motora</th><td>Versión sentada de los movimientos y de las estatuas, como en las pausas activas de IdEducando.</td><td>Huella con la mano que pueda abrir o con un sello de mango grueso. Rincón accesible en silla de ruedas.</td></tr>
+          <tr><th scope="row">Discapacidad visual</th><td>Tarjetas con buen contraste y caras táctiles, con la boca de limpiapipas. Describe en voz alta cada escena.</td><td>El rincón siempre en el mismo sitio y con el camino libre. Que explore sus objetos con las manos.</td></tr>
+          <tr><th scope="row">Discapacidad auditiva</th><td>Señales que se ven y se notan: la tarjeta en alto para cambiar de música y el pandero en el suelo.</td><td>Tu cara siempre visible al hablar. Si usa lengua de signos española (LSE), sus signos para cada emoción.</td></tr>
+          <tr><th scope="row">Altas capacidades</th><td>Nivel 3 en cada sesión: inventar movimientos, explicar el porqué o proponer normas.</td><td>Que haga de guía del rincón en la sesión 8 y busque en casa qué música calma a su familia.</td></tr>
+          <tr><th scope="row">Incorporación tardía (recién llegados)</th><td>El gesto y la tarjeta valen igual que la palabra. Ten a mano el <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>.</td><td>Pide a la familia cómo se dice cada emoción en su lengua y usadla junto a la nuestra. Ver el <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>.</td></tr>
         </tbody>
       </table>
 
@@ -1948,7 +1981,7 @@
 
       <h2>Qué estamos haciendo</h2>
       <p>Estas semanas aprendemos a decir cómo nos sentimos.</p>
-      <p>Nos ayuda Nube, el osito de la clase.</p>
+      <p>Nos ayuda Nube, la mascota de la clase.</p>
       <p>Conocemos 5 emociones:</p>
       <ul class="emociones-familia">
         <li><img src="pictogramas/35547.png" alt="" />contento</li>
