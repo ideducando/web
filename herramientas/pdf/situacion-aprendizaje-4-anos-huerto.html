@@ -96,7 +96,7 @@
         padding: 0;
         border: 0;
         background: none;
-        font-size: 9.5pt;
+        font-size: 10pt;
       }
 
       .seguridad {
@@ -137,16 +137,18 @@
         padding: 1.8mm 3mm;
       }
 
-      .vistazo > h2.etiqueta-mapa {
-        margin: 3mm 0 1.5mm;
-        font-size: 9.5pt;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--morado-texto);
+      .junto {
+        white-space: nowrap;
       }
 
       .vistazo .mapa-sesiones {
-        margin: 0;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 1.5mm;
+        margin: 3mm 0 0;
+      }
+
+      .vistazo .mapa-sesiones li {
+        padding: 1.6mm 1.8mm;
       }
 
       .mapa-sesiones small {
@@ -171,13 +173,18 @@
         margin: 0;
       }
 
-      .pensada .principio {
-        font-size: 9pt;
+      .curriculo h2 {
+        font-size: 12pt;
+        margin: 3mm 0 1.2mm;
       }
 
-      .curriculo h2 {
-        font-size: 13pt;
-        margin: 4mm 0 1.5mm;
+      .curriculo .lista-corta {
+        font-size: 9pt;
+        line-height: 1.32;
+      }
+
+      .curriculo .lista-corta li {
+        margin-bottom: 0.8mm;
       }
 
       .curriculo .tabla-curricular {
@@ -317,7 +324,7 @@
         color: #fff;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 7.5pt;
+        font-size: 8.5pt;
         vertical-align: -0.8mm;
       }
 
@@ -340,7 +347,7 @@
 
       .tabla-registro {
         table-layout: fixed;
-        font-size: 8pt;
+        font-size: 9pt;
         line-height: 1.2;
       }
 
@@ -354,8 +361,8 @@
         vertical-align: bottom;
         font-family: var(--texto);
         font-weight: 400;
-        font-size: 7.5pt;
-        line-height: 1.18;
+        font-size: 8.5pt;
+        line-height: 1.15;
         text-align: left;
       }
 
@@ -363,14 +370,13 @@
         display: block;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 8.5pt;
+        font-size: 9pt;
       }
 
       .tabla-registro thead th small {
         display: block;
         margin-top: 0.4mm;
-        font-size: 7pt;
-        opacity: 0.85;
+        font-size: 8.5pt;
       }
 
       .tabla-registro tbody td {
@@ -381,7 +387,7 @@
       .tabla-registro tbody td:first-child {
         text-align: right;
         color: var(--suave);
-        font-size: 7.5pt;
+        font-size: 8.5pt;
       }
 
       /* ---------- Atención a la diversidad ---------- */
@@ -592,7 +598,7 @@
       .pred th,
       .pred td {
         border: 0.45mm solid var(--marino);
-        padding: 2mm;
+        padding: 4.5mm 2mm;
         vertical-align: middle;
         text-align: center;
       }
@@ -646,15 +652,15 @@
       }
 
       .condicion img {
-        width: 22mm;
-        height: 22mm;
+        width: 26mm;
+        height: 26mm;
       }
 
       .tachado {
         position: relative;
         display: block;
-        width: 22mm;
-        height: 22mm;
+        width: 26mm;
+        height: 26mm;
       }
 
       .tachado img {
@@ -676,8 +682,8 @@
         display: grid;
         justify-items: center;
         gap: 1mm;
-        width: 19mm;
-        padding: 2mm 1mm;
+        width: 20mm;
+        padding: 3mm 1mm;
         border: 0.4mm solid var(--linea);
         border-radius: 50%;
         font-size: 18pt;
@@ -685,8 +691,8 @@
       }
 
       .opcion img {
-        width: 13mm;
-        height: 13mm;
+        width: 15mm;
+        height: 15mm;
       }
 
       .aviso-picto {
@@ -1344,9 +1350,9 @@
           <strong>Cómo se evalúa</strong>Observando, con el registro (página 16), el diario y la autoevaluación (página 30).
         </li>
         <li>
-          <strong>Áreas</strong><span class="chip chip--ca">CA</span> Crecimiento en Armonía,
-          <span class="chip chip--dee">DEE</span> Descubrimiento y Exploración del Entorno y
-          <span class="chip chip--crr">CRR</span> Comunicación y Representación de la Realidad.
+          <strong>Áreas</strong><span class="junto"><span class="chip chip--ca">CA</span> Crecimiento en Armonía,</span>
+          <span class="junto"><span class="chip chip--dee">DEE</span> Descubrimiento y Exploración del Entorno</span> y
+          <span class="junto"><span class="chip chip--crr">CRR</span> Comunicación y Representación de la Realidad.</span>
         </li>
         <li>
           <strong>Agrupamientos y espacios</strong>Asamblea, parejas, pequeños grupos de 4 a 6 e individual. En el aula, junto a
@@ -1363,11 +1369,11 @@
           </ol>
         </li>
         <li class="ancho">
-          <strong>Materiales de IdEducando</strong
-          ><a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">Agenda visual</a>,
+          <strong>Otros materiales que aprovecha</strong>De IdEducando:
+          <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a>,
           <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">pausas activas</a> y
-          <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>. Las
-          tarjetas de la agenda de esta situación están en la página 19.
+          <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>. Tarjetas
+          de la agenda: página 19.
         </li>
       </ul>
 
@@ -1390,12 +1396,10 @@
             Cuchillos de plástico de punta redonda, solo para fruta blanda; lo duro lo corta un adulto. Uvas, peladas, sin semillas y
             en cuatro trozos a lo largo, como aconseja la Asociación Española de Pediatría (AEP).
           </li>
-          <li>Si alguien se traga algo: Servicio de Información Toxicológica, 91 562 04 20. Si le cuesta respirar, 112.</li>
         </ul>
       </div>
 
-      <h2 class="etiqueta-mapa">Las 8 sesiones</h2>
-      <ol class="mapa-sesiones">
+      <ol class="mapa-sesiones" aria-label="Las 8 sesiones">
         <li><b>1</b>Un sobre misterioso</li>
         <li><b>2</b>¿Qué necesita una semilla?</li>
         <li><b>3</b>El diario del huerto <small>Cuando brote la semilla</small></li>
@@ -1507,10 +1511,10 @@
       </div>
       <table class="tabla-curricular">
         <colgroup>
-          <col style="width: 28mm" />
-          <col style="width: 41mm" />
-          <col style="width: 56mm" />
-          <col style="width: 53mm" />
+          <col style="width: 27mm" />
+          <col style="width: 47mm" />
+          <col style="width: 52mm" />
+          <col style="width: 52mm" />
         </colgroup>
         <thead>
           <tr>
@@ -1668,22 +1672,22 @@
         <div>
           <h2>Objetivos de etapa (art. 7)</h2>
           <ul class="lista-corta">
-            <li><strong>b)</strong> Observar y explorar su entorno: semillas, plantas y el camino de la comida.</li>
-            <li><strong>c)</strong> Autonomía en sus actividades habituales: lavarse las manos, regar, preparar el almuerzo.</li>
-            <li><strong>e)</strong> Relacionarse con los demás en igualdad: la maceta en pareja y los turnos de la frutería.</li>
-            <li><strong>f)</strong> Habilidades comunicativas: explican, dibujan el diario y presentan el huerto.</li>
-            <li><strong>g)</strong> Habilidades lógico-matemáticas, lectura y escritura: miden, cuentan y leen una receta.</li>
+            <li><strong>b)</strong> Observar y explorar su entorno: semillas y plantas.</li>
+            <li><strong>c)</strong> Autonomía: lavarse las manos, regar y cocinar.</li>
+            <li><strong>e)</strong> Relacionarse en igualdad: parejas y turnos.</li>
+            <li><strong>f)</strong> Habilidades comunicativas: hablan, dibujan y presentan.</li>
+            <li><strong>g)</strong> Habilidades lógico-matemáticas, lectura y escritura: miden, cuentan y escriben su nombre.</li>
           </ul>
         </div>
         <div>
           <h2>Competencias clave (anexo I)</h2>
           <ul class="lista-corta">
-            <li><strong>Comunicación lingüística (CCL):</strong> explican sus ideas, piden y leen la receta.</li>
-            <li><strong>Matemática y en ciencia, tecnología e ingeniería (STEM):</strong> miden, cuentan y comprueban una hipótesis.</li>
+            <li><strong>Comunicación lingüística (CCL):</strong> explican, piden y leen.</li>
+            <li><strong>Matemática y en ciencia, tecnología e ingeniería (STEM):</strong> miden, cuentan y comprueban hipótesis.</li>
             <li><strong>Personal, social y de aprender a aprender (CPSAA):</strong> higiene, cooperación y autoevaluación.</li>
-            <li><strong>Ciudadana (CC):</strong> cuidan un ser vivo y asumen tareas para el grupo.</li>
-            <li><strong>Emprendedora (CE):</strong> planifican el huerto y organizan la frutería.</li>
-            <li><strong>Conciencia y expresión culturales (CCEC):</strong> expresan con dibujos lo que observan.</li>
+            <li><strong>Ciudadana (CC):</strong> cuidan un ser vivo para el grupo.</li>
+            <li><strong>Emprendedora (CE):</strong> planifican el huerto y la frutería.</li>
+            <li><strong>Conciencia y expresión culturales (CCEC):</strong> dibujan lo que observan.</li>
           </ul>
         </div>
       </div>
@@ -1719,7 +1723,7 @@
         <p>
           Antes, revisa las alergias: las legumbres y el maíz son alimentos. Pon en la
           <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a> las tarjetas asamblea,
-          semillas, mirar y recoger. Abre el sobre despacio, saca un puñado de semillas y lee la carta: «Son semillas. Si las
+          semillas, agrupar y recoger. Abre el sobre despacio, saca un puñado de semillas y lee la carta: «Son semillas. Si las
           cuidáis, os darán comida. ¿Qué necesitan para crecer? Firmado: una hortelana».
         </p>
       </div>
@@ -1760,7 +1764,7 @@
         <h2>Cierre <span class="tiempo">7 minutos</span></h2>
         <p>
           Cada mesa enseña sus platos: «Aquí, las grandes; aquí, las pequeñas». Contad las semillas grandes al recoger y lavaos las
-          manos. Anticipa: «Mañana comprobamos si tenéis razón».
+          manos. Anticipa: «En la próxima sesión comprobamos si tenéis razón».
         </p>
       </div>
 
@@ -1821,8 +1825,9 @@
       <div class="fase">
         <h2>Inicio <span class="tiempo">5 minutos</span></h2>
         <p>
-          Agenda: asamblea, experimento, pausa activa y lavarse las manos. Leed el mural de ayer: «Dijisteis que necesitan agua, luz
-          y tierra. Hoy lo comprobamos». Explica la idea clave con las manos: «Para que la prueba sea justa, solo cambiamos una cosa».
+          Agenda: asamblea, experimento, pausa activa y lavar las manos. Leed el mural de la sesión 1 y elegid dos ideas para
+          comprobar: «¿Necesita agua? ¿Necesita luz?». Explica la idea clave con las manos: «Para que la prueba sea justa, solo
+          cambiamos una cosa».
         </p>
       </div>
 
@@ -1925,7 +1930,7 @@
       <div class="fase">
         <h2>Inicio <span class="tiempo">7 minutos</span></h2>
         <p>
-          Agenda: asamblea, medir, dibujar y recoger. Saca los vasos 3 de la caja y pon los de todas las mesas en fila: 1, 2 y 3.
+          Agenda: asamblea, mirar, medir, dibujar y recoger. Saca los vasos 3 de la caja y pon los de todas las mesas en fila: 1, 2 y 3.
           «¿Qué ha pasado?». Deja que miren con la lupa, sin tocar.
         </p>
       </div>
@@ -2029,7 +2034,7 @@
       <div class="fase">
         <h2>Inicio <span class="tiempo">5 minutos</span></h2>
         <p>
-          Agenda: asamblea, plantar, regar y lavarse las manos. Lee la secuencia del cartel señalando cada número: «primero…,
+          Agenda: asamblea, plantar, regar, lavar las manos y pausa activa. Lee la secuencia del cartel señalando cada número: «primero…,
           después…, al final…». Saca una plantita de su maceta: «Esta es la raíz. Va debajo de la tierra».
         </p>
       </div>
@@ -2066,8 +2071,9 @@
       <div class="fase">
         <h2>Cierre <span class="tiempo">7 minutos</span></h2>
         <p>
-          Pausa activa «Lluvia suave» (carta 5): con la punta de los dedos, llueve sobre el huerto. Acordad la norma del riego:
-          «Toco la tierra con el dedo. Si está seca, riego un poco». Todos se lavan las manos con jabón: hemos tocado tierra.
+          Todos se lavan las manos con jabón: hemos tocado tierra. Después, pausa activa «Lluvia suave» (carta 5): la lluvia cae,
+          con la punta de los dedos, por la cabeza y los brazos. Acordad la norma del riego: «Toco la tierra con el dedo. Si está
+          seca, riego un poco».
         </p>
       </div>
 
@@ -2128,7 +2134,7 @@
       <div class="fase">
         <h2>Inicio <span class="tiempo">7 minutos</span></h2>
         <p>
-          Agenda: asamblea, partes de la planta, pausa activa y lavarse las manos. Enseña la plantita con raíz y nombra sus partes
+          Agenda: asamblea, la planta, pausa activa y lavar las manos. Enseña la plantita con raíz y nombra sus partes
           con las tarjetas: raíz, tallo y hoja. Abre el tomate: «Esto es el fruto. Dentro guarda las semillas». Con el brócoli: «Nos
           comemos sus flores, antes de que se abran».
         </p>
@@ -2331,8 +2337,8 @@
       <div class="fase">
         <h2>Inicio <span class="tiempo">6 minutos</span></h2>
         <p>
-          Repasa antes la lista de alergias y deja preparada una alternativa segura, sin señalar a nadie. Agenda: lavarse las manos,
-          lavar la fruta, receta y recoger. Lee la receta del cartel: «¿Cómo se llama? ¿Qué necesitamos? ¿Qué número va primero?».
+          Repasa antes la lista de alergias y deja preparada una alternativa segura, sin señalar a nadie. Agenda: lavar las manos, lavar
+          la fruta, receta y recoger. Lee la receta del cartel: «¿Cómo se llama? ¿Qué necesitamos? ¿Qué número va primero?».
           Señala el título, la lista de lo que necesitamos y los pasos con número.
         </p>
       </div>
@@ -2342,9 +2348,9 @@
         <ol>
           <li><strong>Manos y fruta.</strong> Todos se lavan las manos con jabón. Cada mesa lava su fruta en el barreño y la seca.</li>
           <li>
-            <strong>Pelamos y cortamos.</strong> Pelan plátanos y mandarinas y cortan la fruta blanda en trozos pequeños con el
-            cuchillo de punta redonda, sobre el plato. Lo duro lo corta el adulto. Si hay uvas, el adulto las pela, les quita las
-            semillas y las corta en cuatro trozos a lo largo.
+            <strong>Pelamos y cortamos.</strong> Pelan plátanos y mandarinas (el kiwi lo pela un adulto) y cortan la fruta blanda en
+            trozos pequeños con el cuchillo de punta redonda, sobre el plato. Lo duro lo corta el adulto. Si hay uvas, el adulto las
+            pela, les quita las semillas y las corta en cuatro trozos a lo largo.
           </li>
           <li><strong>Mezclamos y guardamos.</strong> Todo al bol, se mezcla con la cuchara y se tapa para el almuerzo.</li>
         </ol>
@@ -2444,7 +2450,8 @@
           </li>
           <li>
             <strong>El almuerzo compartido.</strong> Sentados y con calma, se sirve la macedonia en vasos y agua para beber. «¿Qué
-            parte de la planta nos estamos comiendo?».
+            parte de la planta nos estamos comiendo?». Hablad de por qué es un almuerzo sano: fruta fresca de temporada en vez de
+            zumo, y agua para beber.
           </li>
         </ol>
         <ul class="niveles">
@@ -2588,18 +2595,18 @@
           <tr>
             <th scope="col">N.º</th>
             <th scope="col"><b>Nombre</b></th>
-            <th scope="col"><b>CA 1.3</b>Usa pala, regadera y cuchillo<small>Sesiones 4 y 7</small></th>
-            <th scope="col"><b>CA 3.1</b>Se lava las manos y cuida su seguridad<small>Sesiones 7 y 8</small></th>
-            <th scope="col"><b>DEE 1.1</b>Agrupa y relaciona por atributos<small>Sesiones 1 y 5</small></th>
-            <th scope="col"><b>DEE 1.2</b>Usa muchos, pocos, más, menos<small>Sesión 6</small></th>
-            <th scope="col"><b>DEE 1.4</b>Mide con cubos o tiras<small>Sesión 3</small></th>
-            <th scope="col"><b>DEE 1.5</b>Sigue u ordena los pasos<small>Sesiones 4 y 7</small></th>
-            <th scope="col"><b>DEE 2.3</b>Predice y comprueba<small>Sesiones 1 a 3</small></th>
-            <th scope="col"><b>DEE 2.6</b>Coopera y cuenta lo descubierto<small>Sesiones 2 y 8</small></th>
-            <th scope="col"><b>DEE 3.1</b>Cuida la planta<small>Sesiones 4 y 8</small></th>
-            <th scope="col"><b>CRR 3.1</b>Explica con frases<small>Sesiones 1, 5, 6 y 8</small></th>
-            <th scope="col"><b>CRR 4.1</b>Escribe o marca en cartel y diario<small>Sesiones 3 y 4</small></th>
-            <th scope="col"><b>CRR 4.2</b>Reconoce partes de la receta<small>Sesión 7</small></th>
+            <th scope="col"><b>CA 1.3</b>Usa pala, regadera y cuchillo<small>Sesiones<br />4 y 7</small></th>
+            <th scope="col"><b>CA 3.1</b>Se lava las manos y cuida su seguridad<small>Sesiones<br />7 y 8</small></th>
+            <th scope="col"><b>DEE 1.1</b>Agrupa y relaciona por atributos<small>Sesiones<br />1 y 5</small></th>
+            <th scope="col"><b>DEE 1.2</b>Usa muchos, pocos, más, menos<small>Sesión<br />6</small></th>
+            <th scope="col"><b>DEE 1.4</b>Mide con cubos o tiras<small>Sesión<br />3</small></th>
+            <th scope="col"><b>DEE 1.5</b>Sigue u ordena los pasos<small>Sesiones<br />4 y 7</small></th>
+            <th scope="col"><b>DEE 2.3</b>Predice y comprueba<small>Sesiones<br />1 a 3</small></th>
+            <th scope="col"><b>DEE 2.6</b>Coopera y cuenta lo descubierto<small>Sesiones<br />2 y 8</small></th>
+            <th scope="col"><b>DEE 3.1</b>Cuida la planta<small>Sesiones<br />4 y 8</small></th>
+            <th scope="col"><b>CRR 3.1</b>Explica con frases<small>Sesiones<br />1, 5, 6 y 8</small></th>
+            <th scope="col"><b>CRR 4.1</b>Escribe o marca en cartel y diario<small>Sesiones<br />3 y 4</small></th>
+            <th scope="col"><b>CRR 4.2</b>Reconoce partes de la receta<small>Sesión<br />7</small></th>
           </tr>
         </thead>
         <tbody id="filas-registro"></tbody>
@@ -2654,7 +2661,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Discapacidad intelectual</th>
+            <th scope="row">Alumnado con discapacidad intelectual</th>
             <td>
               <ul>
                 <li>Menos elementos y más repeticiones: 2 semillas, 2 partes de la planta, solo plátano en la receta.</li>
@@ -2663,7 +2670,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Discapacidad motora</th>
+            <th scope="row">Alumnado con discapacidad motora</th>
             <td>
               <ul>
                 <li>Mesa y maceta a la altura de la silla de ruedas, superficies antideslizantes y palas de mango grueso.</li>
@@ -2672,7 +2679,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Discapacidad visual</th>
+            <th scope="row">Alumnado con discapacidad visual</th>
             <td>
               <ul>
                 <li>Semillas grandes y alimentos de verdad para explorar con las manos, sobre fondos que contrasten.</li>
@@ -2681,7 +2688,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Discapacidad auditiva</th>
+            <th scope="row">Alumnado con discapacidad auditiva</th>
             <td>
               <ul>
                 <li>Habla de cara y con buena luz; cada explicación, con el objeto o el pictograma delante.</li>
@@ -2690,7 +2697,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Altas capacidades</th>
+            <th scope="row">Alumnado con altas capacidades</th>
             <td>
               <ul>
                 <li>Retos abiertos: diseñar otra prueba, comparar alturas y hacer una gráfica con gomets.</li>
@@ -2699,7 +2706,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Incorporación tardía</th>
+            <th scope="row">Alumnado de incorporación tardía</th>
             <td>
               <ul>
                 <li>
@@ -2744,8 +2751,9 @@
         <li>Descubrir qué necesita una semilla para crecer.</li>
         <li>Plantar y cuidar nuestras plantas.</li>
         <li>Jugar a la frutería con fichas.</li>
-        <li>Preparar una macedonia para el almuerzo.</li>
+        <li>Preparar una macedonia para el almuerzo del día ____________.</li>
       </ul>
+      <p>Si tenéis un huerto o plantas en casa y queréis venir a contarlo, decídnoslo.</p>
 
       <h2>Lo más importante: las alergias</h2>
       <p>
@@ -2761,8 +2769,8 @@
         <li><img src="pictogramas/2594.png" alt="Pictograma de tomate" />El tomate es un fruto.</li>
       </ul>
       <p>
-        Dejad que os ayude a lavar la fruta o a pelar un plátano. Si os apetece, poned una lenteja en un algodón húmedo y mirad
-        juntos cómo brota. Es para mirar: no se come.
+        Dejad que os ayude a lavar la fruta o a pelar un plátano. Para el almuerzo, la fruta entera y el agua son una buena
+        elección. Si os apetece, poned una lenteja en un algodón húmedo y mirad juntos cómo brota. Es para mirar: no se come.
       </p>
 
       <div class="recuadro">
@@ -3117,8 +3125,8 @@
         <li><span class="numero">6</span><img src="pictogramas/8620.png" alt="Pictograma de macedonia" /><p class="alumno">A comer, sentados y con calma.</p></li>
       </ol>
       <p class="para-adulto">
-        Para el adulto: solo fruta blanda para el alumnado. Lo duro lo cortas tú; las uvas, peladas, sin semillas y en cuatro trozos
-        a lo largo. Nada de frutos secos. Antes, repasa las alergias.
+        Para el adulto: solo fruta blanda para el alumnado. Pela tú el kiwi y corta lo duro; las uvas, peladas, sin semillas y en
+        cuatro trozos a lo largo. Nada de frutos secos. Antes, repasa las alergias.
       </p>
     </section>
 

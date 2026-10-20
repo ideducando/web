@@ -10,7 +10,7 @@ formato: "PDF imprimible (A4)"
 paginas: 31
 archivo: /descargas/situacion-aprendizaje-4-anos-huerto.pdf
 portada: /portadas/situacion-aprendizaje-4-anos-huerto.webp
-portada_alt: "Portada del material: el título «Pequeños hortelanos» sobre fondo crema y cuatro pictogramas en círculos blancos unidos por un camino de puntos: una semilla que brota, una planta en su maceta, una frutería y un bol de macedonia"
+portada_alt: "Portada del material: el título «Pequeños hortelanos» sobre fondo crema y cuatro pictogramas en círculos blancos unidos por puntos: una semilla que brota, una planta en su maceta, una frutería y un bol de macedonia"
 tiempo: "1 hora y media para imprimir, plastificar, recortar y pegar el velcro (las fotocopias del alumnado, aparte)"
 necesitas:
   - "11 hojas de cartulina blanca A4 de 160 g"
@@ -35,6 +35,7 @@ resultado: "la agenda de la situación con velcro, la secuencia de plantar en ca
 cuidados:
   - "Antes de tocar o probar alimentos, también legumbres, consulta alergias e intolerancias con las familias y la ficha de salud."
   - "Las semillas, las fichas y el velcro son piezas pequeñas: lejos de quien todavía se lleva cosas a la boca."
+  - "Si alguien se traga una semilla o una pieza, llama al Servicio de Información Toxicológica (91 562 04 20). Si le cuesta respirar, al 112."
   - "Redondea las esquinas plastificadas para que no pinchen. Se limpian con un paño con agua y jabón."
 fuentes:
   - "Decreto 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022"
