@@ -124,6 +124,24 @@ const DOCUMENTOS = [
       'Kit de bienvenida para el alumnado recién llegado que aún no habla castellano: tarjetas de comunicación en seis lenguas, frases para el docente, pasaporte del cole, palabra del día y carta para la familia, con guía para docentes',
     palabras: 'acogida, incorporación tardía, alumnado extranjero, recién llegados, interculturalidad, árabe, rumano, ucraniano, inglés, francés, pictogramas, ARASAAC, periodo de silencio, Infantil, Primaria',
   },
+  {
+    id: 'situacion-aprendizaje-3-anos-emociones',
+    asunto:
+      'Situación de aprendizaje para 3 años sobre las emociones, en 8 sesiones, con el Diseño Universal para el Aprendizaje y actividades en tres niveles: el grupo construye su rincón de la calma. Con conexión al currículo de Infantil de la Región de Murcia, evaluación, ajustes, imprimibles y nota para las familias',
+    palabras: 'situación de aprendizaje, Educación Infantil, 3 años, emociones, rincón de la calma, DUA, multinivel, sesiones, Decreto 196/2022, Región de Murcia, oposiciones, pictogramas, ARASAAC',
+  },
+  {
+    id: 'situacion-aprendizaje-4-anos-huerto',
+    asunto:
+      'Situación de aprendizaje para 4 años sobre las plantas y la alimentación saludable, en 8 sesiones, con el Diseño Universal para el Aprendizaje y actividades en tres niveles: el grupo cultiva su huerto y prepara un almuerzo sano. Con conexión al currículo de Infantil de la Región de Murcia, evaluación, ajustes, imprimibles y nota para las familias',
+    palabras: 'situación de aprendizaje, Educación Infantil, 4 años, huerto escolar, plantas, semillas, alimentación saludable, método científico, DUA, multinivel, sesiones, Decreto 196/2022, Región de Murcia, oposiciones, pictogramas, ARASAAC',
+  },
+  {
+    id: 'situacion-aprendizaje-5-anos-mapa-del-cole',
+    asunto:
+      'Situación de aprendizaje para 5 años sobre la orientación en el espacio, en 8 sesiones, con el Diseño Universal para el Aprendizaje y actividades en tres niveles: el grupo hace el mapa y las señales con pictogramas de su cole y guía a los recién llegados. Con conexión al currículo de Infantil de la Región de Murcia, evaluación, ajustes, imprimibles y nota para las familias',
+    palabras: 'situación de aprendizaje, Educación Infantil, 5 años, orientación espacial, mapa, señalización con pictogramas, accesibilidad cognitiva, pensamiento computacional, DUA, multinivel, sesiones, Decreto 196/2022, Región de Murcia, oposiciones, pictogramas, ARASAAC',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
