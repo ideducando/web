@@ -1,6 +1,6 @@
 ---
 titulo: "Pequeños hortelanos: situación de aprendizaje para 4 años, con DUA y multinivel"
-resumen: "8 sesiones para 4 años: el grupo descubre qué necesita una semilla, cuida el huerto de la clase y prepara un almuerzo sano. Con actividades en tres niveles, evaluación, ajustes e imprimibles."
+resumen: "Ocho sesiones para 4 años: el grupo descubre qué necesita una semilla, cuida el huerto de la clase y prepara un almuerzo sano. Con actividades en tres niveles, evaluación, ajustes e imprimibles."
 seccion: aula
 tipo: situacion
 etapas: [infantil]
@@ -59,7 +59,7 @@ borrador: true
 
 ## Para qué sirve
 
-Un día llega a clase un sobre lleno de semillas y una pregunta: «¿Qué necesitan para crecer?». En 8 sesiones de unos 40 minutos, el grupo de 4 años investiga como en un laboratorio, planta y cuida su propio huerto y descubre cómo llega a la mesa lo que da la tierra. Al final, enseña el huerto y el diario a otra clase o a las familias y comparte un almuerzo que ha preparado él mismo.
+Un día llega a clase un sobre lleno de semillas y una pregunta: «¿Qué necesitan para crecer?». En 8 sesiones de unos 40 minutos, el grupo de 4 años investiga qué necesita una semilla y cuida su propio huerto hasta llevar a la mesa lo que da la tierra. Al final, enseña el huerto y el diario a otra clase o a las familias y comparte un almuerzo que ha preparado él mismo.
 
 Sirve para el aula, tal cual, y como modelo para quien prepara la oposición de Infantil en la Región de Murcia: cada pieza está conectada con el currículo del Decreto 196/2022.
 
@@ -80,7 +80,7 @@ Sirve para el aula, tal cual, y como modelo para quien prepara la oposición de 
 1. Antes de la sesión 1, envía la nota para las familias y consulta la ficha de salud del centro: vais a tocar legumbres, fruta y verdura.
 2. Prepara los imprimibles con la hoja «Cómo montarlo».
 3. Pide en un vivero cercano plantitas de temporada que no sean tóxicas.
-4. Sigue las sesiones en orden. La 6 funciona mejor el día antes de la 7, y la 7 y la 8, el mismo día: así la fruta llega fresca al almuerzo.
+4. Sigue las sesiones en orden. La 3 llega cuando hayan brotado las semillas, en pocos días. La 6 funciona mejor el día antes de la 7, y la 7 y la 8, el mismo día: así la fruta llega fresca al almuerzo.
 5. Anota lo que ves en el registro del grupo. El huerto y el diario siguen después de la sesión 8.
 
 ## Las 8 sesiones
@@ -116,4 +116,4 @@ El material responde a varios indicadores que el tribunal de Infantil de la Regi
 
 ## Sobre los pictogramas
 
-Los pictogramas son de [ARASAAC](https://arasaac.org). Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender. La ilustración de la portada, las fichas y los cuadros para medir son de IdEducando.
+Los pictogramas son de [ARASAAC](https://arasaac.org). Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender. El camino de puntos de la portada, las fichas de la frutería y los cuadros para medir son de IdEducando.
