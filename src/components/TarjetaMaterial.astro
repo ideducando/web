@@ -1,6 +1,8 @@
 ---
 // Tarjeta de un material del catálogo, como el producto de una tienda donde todo cuesta 0 €.
+// Desde la tarjeta se puede añadir a la mochila sin entrar en la ficha, y la tarjeta enseña si ya está dentro.
 import type { CollectionEntry } from 'astro:content';
+import Icono from './Icono.astro';
 import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../data/taxonomias';
 import { existeArchivo } from '../lib/formatos';
 import { ruta } from '../lib/rutas';
@@ -50,6 +52,14 @@ const resto = etiquetas.length - visibles.length;
       >
         {disponible ? 'Gratis' : 'Próximamente'}
       </span>
+      {
+        disponible && (
+          <span class="material__sello" data-mochila-sello hidden data-pagefind-ignore>
+            <Icono nombre="ok" />
+            En tu mochila
+          </span>
+        )
+      }
     </div>
     <div class="material__cuerpo">
       <p class="material__tipo">
@@ -64,9 +74,77 @@ const resto = etiquetas.length - visibles.length;
         {visibles.map((e) => <li class={`etiqueta etiqueta--${e.color}`}>{e.texto}</li>)}
         {resto > 0 && <li class="etiqueta etiqueta--amarillo">+{resto}</li>}
       </ul>
+      {
+        disponible && (
+          <button
+            type="button"
+            class="material__mochila"
+            data-mochila-boton={material.id}
+            data-titulo={d.titulo}
+            hidden
+            data-pagefind-ignore
+          >
+            <span class="material__mochila-fuera">
+              <Icono nombre="mochila" />
+              Añadir a mi mochila
+            </span>
+            <span class="material__mochila-dentro">
+              <span class="material__mochila-estado">
+                <Icono nombre="ok" />
+                Añadido
+              </span>
+              <span class="solo-lectores">, </span>
+              <span class="material__quitar">Quitar</span>
+            </span>
+            <span class="solo-lectores">{` «${d.titulo}»`}</span>
+          </button>
+        )
+      }
     </div>
   </article>
 </li>
+
+<script>
+  // Botón de la mochila en cada tarjeta: añade o quita el material sin entrar en su ficha, y la tarjeta
+  // enseña si ya está dentro. Sin JavaScript el botón no sale y el material se añade desde su ficha.
+  import { alCambiarMochila, anadirAMochila, cuantos, estaEnMochila, leerMochila, quitarDeMochila } from '../scripts/mochila';
+  import { avisar } from '../scripts/aviso-flotante';
+
+  const botones = [...document.querySelectorAll<HTMLButtonElement>('[data-mochila-boton]')];
+  // En el aviso basta el nombre corto: lo que va antes de los dos puntos del título.
+  const corto = (titulo = '') => titulo.split(/:\s/)[0];
+
+  const pintar = () => {
+    const mochila = leerMochila();
+    for (const boton of botones) {
+      const dentro = mochila.includes(boton.dataset.mochilaBoton!);
+      const tarjeta = boton.closest<HTMLElement>('[data-material]');
+      const sello = tarjeta?.querySelector<HTMLElement>('[data-mochila-sello]');
+      boton.hidden = false;
+      boton.toggleAttribute('data-dentro', dentro);
+      tarjeta?.toggleAttribute('data-en-mochila', dentro);
+      if (sello) sello.hidden = !dentro;
+    }
+  };
+
+  for (const boton of botones) {
+    boton.addEventListener('click', () => {
+      const id = boton.dataset.mochilaBoton!;
+      const titulo = corto(boton.dataset.titulo);
+      if (estaEnMochila(id)) {
+        quitarDeMochila(id);
+        const n = leerMochila().length;
+        avisar(`Has quitado «${titulo}» de tu mochila. ${n ? `Llevas ${cuantos(n)}.` : 'Tu mochila está vacía.'}`);
+      } else {
+        anadirAMochila(id);
+        avisar(`Has añadido «${titulo}» a tu mochila. Llevas ${cuantos(leerMochila().length)}.`);
+      }
+    });
+  }
+
+  pintar();
+  alCambiarMochila(pintar);
+</script>
 
 <style>
   .material {
@@ -178,5 +256,104 @@ const resto = etiquetas.length - visibles.length;
   .material .etiquetas {
     margin-top: auto;
     padding-top: 0.25rem;
+  }
+
+  /* Ya está en la mochila: borde verde y sello en la portada, además del texto del botón. */
+  .material[data-en-mochila] .material__tarjeta {
+    border-color: var(--verde-texto);
+    box-shadow:
+      0 0 0 2px var(--verde-texto),
+      var(--sombra-suave);
+  }
+
+  .material__sello {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem 0.3rem 0.55rem;
+    border-radius: 999px;
+    background: var(--verde-texto);
+    color: var(--blanco);
+    font: 700 0.95rem/1.2 var(--letra-titulos);
+    box-shadow: 0 2px 0 rgb(30 43 85 / 0.25);
+  }
+
+  .material__sello :global(svg) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  /* El botón va por encima del enlace que cubre la tarjeta, para que se pueda pulsar. */
+  .material__mochila {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.75rem;
+    margin-top: 0.35rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--marino);
+    border-radius: 999px;
+    background: var(--blanco);
+    color: var(--marino);
+    font: 600 1rem/1.2 var(--letra-titulos);
+    cursor: pointer;
+  }
+
+  .material__mochila:hover {
+    background: var(--amarillo-tinte);
+  }
+
+  .material__mochila-fuera,
+  .material__mochila-dentro,
+  .material__mochila-estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+  }
+
+  .material__mochila-dentro {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.1rem 0;
+  }
+
+  .material__mochila :global(svg) {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .material__mochila-dentro,
+  .material__mochila[data-dentro] .material__mochila-fuera {
+    display: none;
+  }
+
+  .material__mochila[data-dentro] {
+    border-color: var(--verde-texto);
+    background: var(--verde-tinte);
+  }
+
+  .material__mochila[data-dentro] .material__mochila-dentro {
+    display: inline-flex;
+  }
+
+  .material__mochila[data-dentro] :global(svg) {
+    color: var(--verde-texto);
+  }
+
+  .material__quitar {
+    margin-left: 0.6rem;
+    padding-left: 0.7rem;
+    border-left: 1px solid var(--marino);
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
   }
 </style>

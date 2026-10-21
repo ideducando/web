@@ -156,6 +156,18 @@ const DOCUMENTOS = [
       'Ocho historias sociales con pictogramas para leer justo antes de cada momento, en clase, en el patio, en el comedor y el baño y en casa: cuatro explican una situación y cuatro celebran lo que el niño o la niña ya hace bien. Con la comprobación de la fórmula de Carol Gray, plantilla para escribir una historia propia, guía para el adulto y nota para las familias',
     palabras: 'historias sociales, narrativas sociales, conducta, apoyo conductual positivo, pedir ayuda, turno de palabra, recreo, lavado de manos, comedor escolar, médico, tareas de casa, lectura fácil, pictogramas, ARASAAC, TEA, Infantil, Primaria',
   },
+  {
+    id: 'historias-sociales-calma-y-palabras',
+    asunto:
+      'Cuatro historias sociales con pictogramas sobre emociones y compañeros: cuando me enfado mucho, cuando tengo ganas de morder, digo lo que me pasa y comparto el material de clase. Dos explican una situación y dos celebran lo que el niño o la niña ya hace bien. Con la comprobación de la fórmula de Carol Gray, qué hacer en el momento de un mordisco o una rabieta, plantilla, guía para el adulto y nota para las familias',
+    palabras: 'historias sociales, narrativas sociales, conducta, apoyo conductual positivo, morder, mordiscos, rabietas, enfado, rincón de la calma, compartir, comunicación, lectura fácil, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
+  {
+    id: 'secuencias-rutinas-paso-a-paso',
+    asunto:
+      'Cinco secuencias con pictogramas para las rutinas de clase: llegar a clase, el desayuno, lavarse las manos, ir al baño y coger y recoger el material. Dos tiras iguales por hoja, plantilla para hacer las tuyas, guía para enseñar los pasos, registro de pasos y nota para las familias',
+    palabras: 'secuencias, pictogramas, rutinas, autonomía, análisis de tareas, apoyos visuales, encadenamiento, lavado de manos, ir al baño, desayuno, almuerzo, abrigo, percha, material de clase, ARASAAC, TEA, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

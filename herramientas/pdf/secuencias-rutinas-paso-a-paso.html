@@ -1,0 +1,1494 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Paso a paso: cinco secuencias con pictogramas para las rutinas de clase · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Un color para cada rutina ----------
+         --c: color de la rutina · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .r-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .r-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .r-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .r-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .r-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .r-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 60pt;
+        line-height: 0.96;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 122mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .etiqueta-kit {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 48mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        padding: 5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1.12;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .etiqueta-kit svg {
+        width: 8mm;
+        height: 8mm;
+        margin: 0 auto 1.2mm;
+      }
+
+      /* La escalera: un escalón por rutina, con su pictograma encima. Se sube paso a paso. */
+      .escalera {
+        position: absolute;
+        z-index: 2;
+        left: 20mm;
+        right: 20mm;
+        bottom: 36mm;
+        height: 118mm;
+      }
+
+      .suelo {
+        position: absolute;
+        left: -6mm;
+        right: -6mm;
+        bottom: 0;
+        height: 7mm;
+        border-radius: 3.5mm;
+        background: var(--verde-tinte);
+        border: 0.6mm solid var(--verde);
+      }
+
+      .escalon {
+        position: absolute;
+        bottom: 6mm;
+        width: 34mm;
+        display: grid;
+        justify-items: center;
+        gap: 2.5mm;
+      }
+
+      .escalon__picto {
+        display: grid;
+        place-items: center;
+        width: 27mm;
+        height: 27mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 1mm var(--t);
+      }
+
+      .escalon__picto img {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .escalon__bloque {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        border: 0.9mm solid var(--marino);
+        border-bottom: 0;
+        border-radius: 2.5mm 2.5mm 0 0;
+        background: var(--c);
+      }
+
+      .escalon__numero {
+        display: grid;
+        place-items: center;
+        width: 10mm;
+        height: 10mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 24pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 4mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .resumen {
+        display: grid;
+        gap: 3mm;
+        margin: 0 0 4mm;
+      }
+
+      .fila-rutina {
+        display: grid;
+        grid-template-columns: 52mm minmax(0, 1fr);
+        gap: 4mm;
+        align-items: center;
+        padding: 2.6mm 3.2mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .fila-rutina__nombre {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        gap: 2.6mm;
+        align-items: center;
+      }
+
+      .fila-rutina__nombre img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .fila-rutina h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.1;
+      }
+
+      .fila-rutina__cuantos {
+        margin: 0.8mm 0 0;
+        font-size: 9pt;
+        color: var(--tx);
+        font-weight: 700;
+      }
+
+      .mini-pasos {
+        display: flex;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mini-pasos li {
+        display: grid;
+        place-items: center;
+        width: 11.5mm;
+        height: 11.5mm;
+        border: 0.4mm solid var(--c);
+        border-radius: 2mm;
+      }
+
+      .mini-pasos img {
+        width: 9.5mm;
+        height: 9.5mm;
+      }
+
+      .fila-rutina__datos {
+        margin: 1.6mm 0 0;
+        font-size: 9.5pt;
+        line-height: 1.3;
+      }
+
+      .vistazo .caja {
+        padding: 2.8mm 4mm;
+        font-size: 10.5pt;
+        line-height: 1.38;
+      }
+
+      /* ---------- Hojas de las secuencias (apaisadas, dos tiras iguales por hoja) ---------- */
+      /* Al imprimir, Chromium descoloca las cajas flexibles en columna (display: flex con
+         flex-direction: column) y las alturas que dependen de ellas: las tiras se montan unas encima de
+         otras. Por eso aquí las alturas van en milímetros y las cajas en columna son rejillas (grid).
+         Cada hoja suma unos 180 mm de los 182 que deja la página apaisada. */
+      .rutina {
+        page: apaisada;
+        break-after: page;
+        break-inside: avoid;
+      }
+
+      .rutina__aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2mm;
+        font-size: 9pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .rutina__aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--tx);
+      }
+
+      .tira {
+        padding: 2.6mm 3.5mm 1.6mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      /* Línea para cortar entre las dos tiras */
+      .corte {
+        position: relative;
+        flex: none;
+        height: 7mm;
+        color: var(--suave);
+      }
+
+      .corte::before {
+        content: '';
+        position: absolute;
+        left: 8mm;
+        right: 0;
+        top: 50%;
+        border-top: 0.4mm dashed var(--suave);
+      }
+
+      .corte svg {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 6mm;
+        height: 6mm;
+        transform: translateY(-50%);
+      }
+
+      .tira__cabecera {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        height: 13mm;
+        margin: 0 0 2.4mm;
+      }
+
+      .tira__icono {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 13mm;
+        height: 13mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.9mm var(--t);
+      }
+
+      .tira__icono img {
+        width: 9.5mm;
+        height: 9.5mm;
+      }
+
+      .tira__titulo {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 19pt;
+        line-height: 1;
+      }
+
+      .tira__donde {
+        margin: 0 0 0 auto;
+        font-size: 9pt;
+        color: var(--tx);
+      }
+
+      .tira__logo {
+        flex: none;
+        width: 24mm;
+        height: auto;
+      }
+
+      .tira__cuerpo {
+        display: flex;
+        align-items: stretch;
+        height: 58mm;
+      }
+
+      .pasos {
+        flex: 1;
+        display: flex;
+        gap: 5.5mm;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .paso {
+        position: relative;
+        flex: 1 1 0;
+        min-width: 0;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        padding: 2.4mm 1.4mm 1.6mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      /* Flecha hacia el paso siguiente (y, en el último, hacia la estrella del final) */
+      .paso::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -4.4mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        margin-top: -1.2mm;
+        border-top: 0.8mm solid var(--c);
+        border-right: 0.8mm solid var(--c);
+        transform: rotate(45deg);
+      }
+
+      .paso__numero {
+        position: absolute;
+        top: -2.4mm;
+        left: -2.4mm;
+        display: grid;
+        place-items: center;
+        width: 8.5mm;
+        height: 8.5mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1;
+      }
+
+      .paso img {
+        width: var(--picto);
+        height: var(--picto);
+      }
+
+      .paso p {
+        margin: 1.4mm 0 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: var(--letra);
+        line-height: 1.12;
+        text-wrap: balance;
+      }
+
+      .fin {
+        flex: 0 0 17mm;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 1.6mm;
+        margin: 0 0 0 5.5mm;
+        border: 0.7mm solid var(--amarillo);
+        border-radius: 3.5mm;
+        background: var(--amarillo-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .fin svg {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .tira__pie {
+        display: flex;
+        justify-content: space-between;
+        gap: 4mm;
+        margin: 1.4mm 0 0;
+        font-size: 6.5pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      /* El tamaño del pictograma y de la letra depende de cuántos pasos tiene la tira */
+      .n4 {
+        --picto: 38mm;
+        --letra: 13pt;
+      }
+      .n5 {
+        --picto: 35mm;
+        --letra: 12.5pt;
+      }
+      .n6 {
+        --picto: 30mm;
+        --letra: 12pt;
+      }
+      .n7 {
+        --picto: 25mm;
+        --letra: 11pt;
+      }
+
+      /* ---------- Plantilla ---------- */
+      .tira__icono--vacio {
+        border-style: dashed;
+        box-shadow: none;
+        font-size: 6.5pt;
+        line-height: 1.1;
+        text-align: center;
+        color: var(--suave);
+      }
+
+      .renglon {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        font-size: 11pt;
+      }
+
+      .renglon .linea {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .renglon--titulo {
+        flex: 1.6;
+      }
+
+      .renglon--donde {
+        flex: 1;
+      }
+
+      .hueco-picto {
+        display: grid;
+        place-items: center;
+        width: var(--picto);
+        height: var(--picto);
+        padding: 2mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 2.5mm;
+        text-align: center;
+        font-size: 7.5pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .lineas {
+        align-self: stretch;
+        margin: 1mm 1.5mm 0;
+      }
+
+      .lineas span {
+        display: block;
+        height: 6mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10.5pt;
+        line-height: 1.4;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.75em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+        line-height: 1.36;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .guia ol li,
+      .guia ul li {
+        margin-bottom: 0.9mm;
+      }
+
+      .guia td,
+      .guia th {
+        font-size: 10pt;
+        padding: 1.4mm 2mm;
+        vertical-align: top;
+      }
+
+      .formas {
+        table-layout: fixed;
+      }
+
+      .formas tbody th {
+        white-space: nowrap;
+      }
+
+      .notas {
+        columns: 2;
+        column-gap: 7mm;
+        padding-left: 4.5mm;
+      }
+
+      .notas li {
+        break-inside: avoid;
+      }
+
+      .preguntas dt {
+        margin: 2mm 0 0.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .preguntas dd {
+        margin: 0;
+      }
+
+      /* ---------- Registro de pasos ---------- */
+      .registro {
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .registro h1 {
+        font-size: 22pt;
+      }
+
+      .clave {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5mm 6mm;
+        margin: 0 0 3mm;
+        padding: 2.4mm 3.5mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-size: 10pt;
+      }
+
+      .clave b {
+        display: inline-grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        margin-right: 1.2mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1.2mm;
+        font-family: var(--titulos);
+      }
+
+      .datos-registro {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        gap: 8mm;
+        margin: 0 0 3mm;
+      }
+
+      .datos-registro .renglon {
+        font-size: 11pt;
+      }
+
+      .tabla-registro {
+        table-layout: fixed;
+      }
+
+      .tabla-registro th,
+      .tabla-registro td {
+        border: 0.3mm solid var(--suave);
+        padding: 1mm 1.6mm;
+        font-size: 9.5pt;
+        text-align: center;
+      }
+
+      .tabla-registro td {
+        height: 12.5mm;
+      }
+
+      .tabla-registro tbody th {
+        text-align: left;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+      }
+
+      .tabla-registro tr.total th,
+      .tabla-registro tr.total td {
+        background: var(--verde-tinte);
+      }
+
+      .registro .ejemplo {
+        margin-top: 3mm;
+        font-size: 10pt;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2.5mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.5em;
+        margin-bottom: 0.35em;
+      }
+
+      .familias p {
+        margin-bottom: 0.4em;
+      }
+
+      .familias ol,
+      .familias ul {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1mm;
+      }
+
+      .ejemplo-tira {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        margin: 2.5mm 0 1.5mm;
+        padding: 2.4mm 3mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 3mm;
+      }
+
+      .ejemplo-tira figure {
+        position: relative;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        width: 19mm;
+        height: 19mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 2.4mm;
+      }
+
+      .ejemplo-tira img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .ejemplo-tira b {
+        position: absolute;
+        top: -1.8mm;
+        left: -1.8mm;
+        display: grid;
+        place-items: center;
+        width: 5.6mm;
+        height: 5.6mm;
+        border: 0.45mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-size: 8.5pt;
+        line-height: 1;
+      }
+
+      .ejemplo-tira .estrella-fin {
+        width: 13mm;
+        height: 13mm;
+        margin-left: 1mm;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.2mm 6mm;
+        margin: 1.5mm 0 2mm;
+        padding: 0;
+        list-style: none;
+        font-size: 11.5pt;
+      }
+
+      .casillas li {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .casillas li::before {
+        content: '';
+        flex: none;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+        background: #fff;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 1mm;
+        font-size: 12pt;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        height: 6.5mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 8pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 10.5pt;
+        line-height: 1.42;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 14pt;
+        margin-top: 0.9em;
+      }
+
+      .fuentes .referencias li {
+        margin-bottom: 1.2mm;
+        font-size: 10pt;
+        line-height: 1.35;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -64mm; top: 14mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -38mm; top: 118mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 46mm; height: 46mm; right: -12mm; top: 150mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Secuencias con pictogramas · Rutinas de clase</p>
+        <h1 class="portada__titulo">Paso<br />a paso</h1>
+        <p class="portada__subtitulo">
+          Cinco tiras para llegar a clase, desayunar, lavarse las manos, ir al baño y coger y recoger el material.
+        </p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escalera" aria-hidden="true" id="escalera"></div>
+      <div class="etiqueta-kit" aria-hidden="true"><div><span data-icono="estrella"></span>Con plantilla para hacer la tuya</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Cinco secuencias para cinco rutinas del cole. Cada una divide la rutina en pasos cortos, con un número y un
+        pictograma, que se leen de izquierda a derecha. Al final, una estrella dice «¡Hecho!». Cada hoja trae dos tiras
+        iguales: una para pegarla junto al sitio de la rutina y otra de repuesto o para casa.
+      </p>
+      <div class="resumen" id="resumen"></div>
+      <div class="caja caja--azul">
+        <p>
+          <strong>Por qué ayudan.</strong> Dividir una tarea en pasos pequeños (análisis de tareas) y mostrarla con
+          imágenes (apoyos visuales) son dos de las prácticas basadas en la evidencia para el alumnado con trastorno del
+          espectro del autismo (TEA) (Hume y otros, 2021). Cómo enseñar cada rutina, en la página
+          <span data-pagina="guia"></span>.
+        </p>
+      </div>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Empieza por una sola rutina:</strong> la que más cuesta o la que más se repite. Cuando le salga, añade
+          otra. Si en vuestra clase algún paso es distinto, haz tu tira con la plantilla de la página
+          <span data-pagina="plantilla"></span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Las cinco hojas de las secuencias se generan con el guion del final, a partir de la lista RUTINAS -->
+    <div id="rutinas"></div>
+
+    <!-- ======================================================================
+         PLANTILLA EN BLANCO (apaisada)
+         ====================================================================== -->
+    <section class="rutina r-amarillo">
+      <p class="rutina__aviso">
+        <span><strong>Plantilla</strong> · Dos tiras: una de 4 pasos y otra de 6. Escribe y pega los pictogramas o las fotos antes de plastificar.</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <div id="plantillas"></div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL ADULTO
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el adulto <span class="borrador">[BORRADOR]</span></p>
+      <h1>Cómo enseñar una rutina paso a paso</h1>
+      <p>
+        Una secuencia divide una rutina en pasos cortos y los muestra en orden, con un pictograma cada uno. Así el niño o
+        la niña sabe qué toca ahora, qué viene después y cuándo ha terminado, sin depender de que un adulto se lo vaya
+        diciendo. Este pack trae cinco rutinas del cole: llegar a clase, el desayuno, lavarse las manos, ir al baño y
+        coger y recoger el material.
+      </p>
+
+      <div class="caja caja--azul">
+        <h2>Qué dice la evidencia</h2>
+        <p>
+          El análisis de tareas, que divide una habilidad en pasos pequeños para enseñarlos uno a uno, y los apoyos
+          visuales figuran entre las 28 prácticas basadas en la evidencia para el alumnado con TEA. En la misma lista están
+          las ayudas, el modelado y el refuerzo, que sirven para enseñar cada paso (Hume y otros, 2021). El módulo AFIRM
+          de la Universidad de Carolina del Norte explica cómo combinarlas (Sam y AFIRM Team, 2024). Esos estudios son
+          sobre alumnado con TEA; en clase, una secuencia puede ayudar también a cualquiera que esté aprendiendo una
+          rutina.
+        </p>
+      </div>
+
+      <h2>Antes de empezar</h2>
+      <ol>
+        <li>
+          <strong>Comprueba que los pasos son los de tu clase.</strong> Si en vuestro cole la rutina es distinta, por
+          ejemplo si el desayuno se toma en el patio, haz tu tira con la plantilla de la página
+          <span data-pagina="plantilla"></span>. Una secuencia tiene que contar lo que pasa de verdad.
+        </li>
+        <li>
+          <strong>Mira qué pasos ya hace sin ayuda.</strong> Durante dos o tres días, antes de enseñar nada nuevo, anota
+          cómo hace cada paso con el registro de la página <span data-pagina="registro"></span>.
+        </li>
+        <li>
+          <strong>Pega la tira junto al sitio de la rutina,</strong> a la altura de sus ojos: en las perchas, en la mesa
+          del desayuno, sobre el lavabo, frente al váter o en la estantería.
+        </li>
+      </ol>
+
+      <h2>Tres formas de enseñar los pasos</h2>
+      <p>
+        El módulo AFIRM describe tres (Sam y AFIRM Team, 2024). Elige una para cada rutina y mantenla unas semanas:
+      </p>
+      <table class="formas">
+        <colgroup>
+          <col style="width: 22%" />
+          <col style="width: 42%" />
+          <col style="width: 36%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Forma</th>
+            <th scope="col">Cómo se hace</th>
+            <th scope="col">Un ejemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">La tarea completa</th>
+            <td>Hace la rutina entera cada vez, con la ayuda que necesite en cada paso.</td>
+            <td>«Llego a clase»: cada mañana hace los cinco pasos y tú ayudas solo donde se atasca.</td>
+          </tr>
+          <tr>
+            <th scope="row">Hacia delante</th>
+            <td>Le enseñas el primer paso y los demás los hacéis juntos. Cuando el primero le sale, enseñas el segundo.</td>
+            <td>«El desayuno»: primero aprende a lavarse las manos; el resto lo hacéis juntos.</td>
+          </tr>
+          <tr>
+            <th scope="row">Hacia atrás</th>
+            <td>
+              Le ayudas en todos los pasos menos en el último, que hace sin ayuda. Cuando le sale, también el penúltimo, y
+              así hacia el principio.
+            </td>
+            <td>«Me lavo las manos»: le ayudas en todo y él o ella se seca. Es el ejemplo del propio módulo AFIRM.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>La ayuda justa, y cada vez menos</h2>
+      <p>En cada paso, empieza por la ayuda más pequeña y sube solo si hace falta (Sam y AFIRM Team, 2024):</p>
+      <ol>
+        <li><strong>Espera</strong> unos segundos: a veces solo necesita tiempo.</li>
+        <li><strong>Señala la tira,</strong> sin hablar.</li>
+        <li><strong>Díselo</strong> con pocas palabras o con un gesto: «El abrigo».</li>
+        <li><strong>Enséñaselo</strong> haciéndolo tú.</li>
+        <li><strong>Ayúdale con tus manos,</strong> y retira esa ayuda en cuanto pueda hacerlo sin ella.</li>
+      </ol>
+      <p>
+        La meta es que la tira haga de recordatorio y que tu ayuda desaparezca. Si siempre le dices el paso siguiente, puede
+        acostumbrarse a esperar tu voz en lugar de mirar la tira.
+      </p>
+
+      <h2>Celebra los pasos y, sobre todo, el final</h2>
+      <p>
+        Di en concreto lo que ha hecho bien: «¡Has colgado el abrigo en tu percha!». La estrella «¡Hecho!» del final de
+        cada tira marca que la rutina ha terminado: celebradlo juntos. Si usas algo que le motiva mucho, guárdalo para el
+        final de la rutina (Sam y AFIRM Team, 2024).
+      </p>
+
+      <h2>Cómo saber si avanza</h2>
+      <p>
+        Una o dos veces por semana, anota en el registro de la página <span data-pagina="registro"></span> cómo hace cada
+        paso: sin ayuda (S), mirando la tira cuando se la señalas (T), con palabras o un gesto (P), viéndotelo hacer (M) o
+        con ayuda física (F). Cuando un paso sale sin ayuda varios días seguidos, deja de ayudar en ese paso.
+      </p>
+
+      <h2>Cuándo retirar la tira</h2>
+      <p>
+        Cuando haga la rutina sin ayuda durante unas dos semanas, deja de señalarla. Puedes dejarla puesta: no estorba y
+        sirve a quien la necesite. Si vuelve a costar, por ejemplo después de unas vacaciones, úsala de nuevo unos días.
+      </p>
+
+      <h2>Notas para cada rutina</h2>
+      <ul class="notas">
+        <li>
+          <strong>Llego a clase.</strong> Pon su foto o su nombre en la percha, a su altura. Un lazo de cinta cosido en el
+          cuello del abrigo le ayuda a colgarlo sin ayuda.
+        </li>
+        <li>
+          <strong>El desayuno.</strong> En muchos coles se llama almuerzo: si es vuestro caso, cambia la palabra con la
+          plantilla. Si necesita ayuda para abrir la fiambrera, que pueda pedirla con palabras, con un gesto o con el
+          tablero «Comunicación en el bolsillo». Si hay alergias en clase, el desayuno no se comparte.
+        </li>
+        <li>
+          <strong>Me lavo las manos.</strong> Los Centros para el Control y la Prevención de Enfermedades de Estados Unidos
+          (CDC) recomiendan frotar al menos 20 segundos, el tiempo de cantar dos veces «Cumpleaños feliz», también por el
+          dorso, entre los dedos y bajo las uñas. También proponen cerrar el grifo mientras os enjabonáis: si lo hacéis
+          así, añade ese paso con la plantilla (CDC, 2024).
+        </li>
+        <li>
+          <strong>Voy al baño.</strong> Respeta su intimidad y usad las mismas palabras que en casa para «pis» y «caca». Si
+          hace pis de pie, usa pañal o está aprendiendo, adapta los pasos con la plantilla y con la familia. Un adulto
+          está siempre pendiente del baño.
+        </li>
+        <li>
+          <strong>Cojo y recojo mi material.</strong> Pon en cada caja o estante una etiqueta con el pictograma y el nombre
+          del material: así sabe dónde va cada cosa. Si el material es de todos, combínala con la historia «Comparto el
+          material de clase», del pack «Con calma y con palabras».
+        </li>
+      </ul>
+
+      <h2>Cómo están escritos los pasos</h2>
+      <p>
+        En primera persona y en presente, con una sola acción por paso y palabras de uso diario, siguiendo las pautas de
+        lectura fácil de la norma UNE 153101:2018 EX. Aún no los hemos validado con personas lectoras.
+      </p>
+
+      <h2>Ideas para adaptarlas</h2>
+      <p>
+        Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de presentar la información y de
+        participar (CAST, 2024):
+      </p>
+      <ul class="notas">
+        <li>
+          <strong>Con fotos:</strong> pega encima fotos de vuestra percha, vuestro lavabo o vuestra estantería, sin otros
+          niños ni niñas.
+        </li>
+        <li>
+          <strong>Más pasos o menos:</strong> con la plantilla, divide en dos un paso que cueste o junta los que ya hace sin
+          ayuda.
+        </li>
+        <li><strong>En mayúsculas:</strong> si en vuestra clase leéis en mayúsculas, escribid así los pasos en la plantilla.</li>
+        <li><strong>Más grande:</strong> imprime la página en A3.</li>
+        <li>
+          <strong>Para toda la clase:</strong> «Me lavo las manos» y «Llego a clase» sirven a todo el grupo y no señalan a
+          nadie.
+        </li>
+        <li>
+          <strong>Con objetos:</strong> si todavía no entiende los pictogramas, empieza con objetos reales, como el jabón o
+          la toalla, y añade la tira poco a poco.
+        </li>
+      </ul>
+
+      <h2>Preguntas frecuentes</h2>
+      <dl class="preguntas">
+        <dt>¿Y si se salta un paso?</dt>
+        <dd>
+          Señala en la tira el número del paso que falta y espera. Si no basta, sube un poco la ayuda. No hace falta volver
+          a empezar la rutina.
+        </dd>
+        <dt>¿Y si arranca la tira o juega con ella?</dt>
+        <dd>
+          Las primeras semanas, úsala con un adulto al lado. Si sigue pasando, pégala un poco más arriba, siempre a la vista,
+          o plastifícala sobre un cartón más duro.
+        </dd>
+        <dt>¿Cuánto tarda en aprender una rutina?</dt>
+        <dd>
+          Depende de cada niño o niña y de cada rutina. Mira el registro: si en dos o tres semanas no avanza ningún paso,
+          revisad en equipo si algún paso es demasiado grande o si la ayuda es la adecuada.
+        </dd>
+        <dt>¿Sirve también en casa?</dt>
+        <dd>
+          Sí. Da a la familia la segunda tira y la nota de la página <span data-pagina="familias"></span>, y usad las mismas
+          palabras en los dos sitios.
+        </dd>
+      </dl>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE PASOS (para imprimir)
+         ====================================================================== -->
+    <section class="registro salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para el adulto · Para imprimir</p>
+      <h1>Registro de pasos</h1>
+      <p>
+        Una hoja por rutina. Escribe la fecha arriba de cada columna y, en cada paso, la letra de la ayuda que ha
+        necesitado. Anota también unos días antes de empezar: así podrás comparar. Escribe solo iniciales, nunca el nombre
+        completo, y guarda la hoja en el centro o en casa.
+      </p>
+      <p class="clave">
+        <span><b>S</b>sin ayuda</span>
+        <span><b>T</b>mirando la tira cuando se la señalo</span>
+        <span><b>P</b>con palabras o un gesto</span>
+        <span><b>M</b>viéndomelo hacer</span>
+        <span><b>F</b>con ayuda física</span>
+      </p>
+      <div class="datos-registro">
+        <p class="renglon"><span>Rutina:</span><span class="linea"></span></p>
+        <p class="renglon"><span>Iniciales:</span><span class="linea"></span></p>
+      </div>
+      <table class="tabla-registro" id="tabla-registro"></table>
+      <div class="caja caja--verde ejemplo">
+        <p>
+          <strong>Ejemplo.</strong> En «Llego a clase», el paso 3, «Cuelgo el abrigo en mi percha», salió el lunes con M,
+          el miércoles con T y el viernes con S. En la última fila, cuenta cuántos pasos han salido sin ayuda ese día.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="familias salto r-verde">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Paso a paso, también en casa</h1>
+      <p>En el cole usamos tiras con pictogramas para las rutinas del día. Por ejemplo, para lavarse las manos.</p>
+      <p>Cada tira tiene pasos con un número. Se leen de izquierda a derecha. Al final hay una estrella: «¡Hecho!».</p>
+      <div class="ejemplo-tira" id="ejemplo-tira" aria-hidden="true"></div>
+
+      <h2>Cómo usar la tira en casa</h2>
+      <ol>
+        <li>Pegad la tira junto al lavabo o al váter, a la altura de sus ojos.</li>
+        <li>Las primeras veces, haced vosotros los pasos. Señalad cada pictograma.</li>
+        <li>Ayudad solo en lo que haga falta.</li>
+        <li>Al final, celebradlo juntos: «¡Hecho!».</li>
+        <li>Usad las mismas palabras que en el cole.</li>
+      </ol>
+
+      <h2>Es importante</h2>
+      <ul>
+        <li>Cada niño y cada niña tiene su ritmo. Poco a poco, lo hará sin ayuda.</li>
+        <li>No hace falta que salga perfecto.</li>
+        <li>Contad al cole cómo va en casa.</li>
+      </ul>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p style="margin: 0">Os damos la tira de:</p>
+        <ul class="casillas" id="casillas-familias"></ul>
+        <p class="renglon-etiqueta">Ahora aprendemos el paso:<span></span></p>
+        <p class="renglon-etiqueta">Contadnos cómo va:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Paso a paso.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos pictográficos
+          utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos <span class="borrador">[BORRADOR]</span></p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Paso a paso: cinco secuencias con pictogramas para las rutinas de clase.</strong> Equipo IdEducando,
+        octubre de 2026. Pendiente de revisión por el equipo docente. Ficha y novedades:
+        <span class="url">ideducando.es/material-gratuito/secuencias-rutinas-paso-a-paso</span>
+      </p>
+
+      <h2>Fuentes</h2>
+      <ul class="referencias">
+        <li>CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. udlguidelines.cast.org</li>
+        <li>
+          Centers for Disease Control and Prevention, CDC (2024). <em>About Handwashing</em>.
+          <span class="url">cdc.gov/clean-hands/about</span>
+        </li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
+          generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032.
+        </li>
+        <li>
+          Sam, A. y AFIRM Team (2024). <em>Task Analysis</em> (actualización). Universidad de Carolina del Norte en Chapel
+          Hill, Frank Porter Graham Child Development Institute. <span class="url">afirm.fpg.unc.edu</span>
+        </li>
+        <li>
+          UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Asociación
+          Española de Normalización.
+        </li>
+      </ul>
+
+      <h2>Pictogramas</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Portal Aragonés de la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados
+        por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+        Si adaptas el material, mantén la cita. Con pictogramas de ARASAAC, este material no se puede vender.
+      </p>
+
+      <h2>Dibujos</h2>
+      <p>La escalera de la portada, la estrella «¡Hecho!», las flechas y las tijeras son de IdEducando.</p>
+
+      <h2>Fotos y datos personales</h2>
+      <p>
+        Si usas fotos del niño o la niña en la plantilla, pide permiso a la familia, no las subas a internet y no hagas
+        fotos en las que salgan otros niños o niñas.
+      </p>
+
+      <h2>Licencia</h2>
+      <p>
+        CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando, sin fines comerciales y con la misma
+        licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Las cinco rutinas. Cada paso: [pictograma de ARASAAC, texto].
+      // color = color de la rutina · picto = pictograma de la rutina · donde = dónde se pega la tira
+      // ---------------------------------------------------------------------
+      const RUTINAS = [
+        {
+          color: 'azul',
+          titulo: 'Llego a clase',
+          picto: 28687,
+          cuando: 'al llegar por la mañana',
+          donde: 'junto a las perchas',
+          pasos: [
+            [6944, 'Digo «buenos&nbsp;días»'],
+            [37421, 'Me quito el abrigo'],
+            [37895, 'Cuelgo el abrigo en mi percha'],
+            [10133, 'Cuelgo la mochila'],
+            [27575, 'Voy a la asamblea'],
+          ],
+        },
+        {
+          color: 'naranja',
+          titulo: 'El desayuno',
+          picto: 39457,
+          cuando: 'a la hora del desayuno o del almuerzo',
+          donde: 'en la mesa del desayuno',
+          pasos: [
+            [8975, 'Me lavo las manos'],
+            [36444, 'Saco el desayuno'],
+            [25082, 'Me siento en mi sitio'],
+            [28206, 'Me como el desayuno'],
+            [38129, 'Tiro la basura a la papelera'],
+            [36418, 'Guardo la fiambrera'],
+          ],
+        },
+        {
+          color: 'verde',
+          titulo: 'Me lavo las manos',
+          picto: 36910,
+          cuando: 'antes de comer y después de ir al baño',
+          donde: 'sobre el lavabo',
+          pasos: [
+            [8975, 'Me mojo las manos'],
+            [36525, 'Me echo jabón'],
+            [36910, 'Froto mientras canto'],
+            [2443, 'Me aclaro con agua'],
+            [11739, 'Cierro el grifo'],
+            [37049, 'Me seco las manos'],
+          ],
+        },
+        {
+          color: 'morado',
+          titulo: 'Voy al baño',
+          picto: 2430,
+          cuando: 'cada vez que va al baño',
+          donde: 'frente al váter',
+          pasos: [
+            [10143, 'Me bajo la ropa'],
+            [10177, 'Me siento en el váter'],
+            [37458, 'Hago pis o caca'],
+            [10170, 'Me limpio con papel'],
+            [10184, 'Tiro de la cadena'],
+            [10180, 'Me subo la ropa'],
+            [8975, 'Me lavo las manos'],
+          ],
+        },
+        {
+          color: 'coral',
+          titulo: 'Cojo y recojo mi material',
+          picto: 34153,
+          cuando: 'al trabajar en la mesa o en los rincones',
+          donde: 'junto a la estantería',
+          pasos: [
+            [31847, 'Pienso qué necesito'],
+            [39611, 'Voy a la estantería'],
+            [34153, 'Cojo el material'],
+            [6139, 'Lo llevo a mi mesa'],
+            [2599, 'Trabajo'],
+            [5514, 'Lo guardo en su sitio'],
+          ],
+        },
+      ];
+
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      const PRIMERA_RUTINA = 4; // portada = 1, montaje = 2, de un vistazo = 3
+      const PAGINAS = { plantilla: 9, guia: 10, registro: 13, familias: 14 };
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const DIBUJOS = {
+        estrella: `<path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M40 40 l4 -9" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`,
+        tijeras: `
+          <circle cx="24" cy="30" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <circle cx="24" cy="70" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <path d="M35 38 L92 72 M35 62 L92 28" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>`,
+      };
+      const dibujo = (nombre, clase = '') => svg(DIBUJOS[nombre], clase);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const logo = (clase = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+      const fin = `<p class="fin">${dibujo('estrella')}¡Hecho!</p>`;
+      const corte = `<div class="corte" aria-hidden="true">${dibujo('tijeras')}</div>`;
+      const ATRIBUCION = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // ---------------------------------------------------------------------
+      // Hojas de las secuencias: dos tiras iguales por hoja
+      // ---------------------------------------------------------------------
+      function tira(r) {
+        const pasos = r.pasos
+          .map(
+            ([n, texto], j) =>
+              `<li class="paso"><span class="paso__numero" aria-hidden="true">${j + 1}</span>${picto(n)}<p>${texto}</p></li>`,
+          )
+          .join('');
+        return `<div class="tira r-${r.color} n${r.pasos.length}">
+            <div class="tira__cabecera">
+              <div class="tira__icono">${picto(r.picto)}</div>
+              <h2 class="tira__titulo">${r.titulo}</h2>
+              <p class="tira__donde">Dónde: ${r.donde}</p>
+              ${logo('tira__logo')}
+            </div>
+            <div class="tira__cuerpo"><ol class="pasos">${pasos}</ol>${fin}</div>
+            <p class="tira__pie"><span>${ATRIBUCION}</span><span>IdEducando · ideducando.es · CC BY-NC-SA 4.0</span></p>
+          </div>`;
+      }
+
+      document.getElementById('rutinas').innerHTML = RUTINAS.map(
+        (r, i) => `<section class="rutina r-${r.color}">
+          <p class="rutina__aviso">
+            <span><strong>Secuencia ${i + 1} de ${RUTINAS.length}</strong> · Dos tiras iguales: una para pegarla ${r.donde} y otra de repuesto o para casa.</span>
+            <span>Corta por la línea de puntos</span>
+          </p>
+          ${tira(r)}${corte}${tira(r)}
+        </section>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Plantilla: una tira de 4 pasos y otra de 6
+      // ---------------------------------------------------------------------
+      function tiraEnBlanco(n) {
+        const pasos = Array.from(
+          { length: n },
+          (_, j) =>
+            `<li class="paso"><span class="paso__numero" aria-hidden="true">${j + 1}</span><div class="hueco-picto">Pega un pictograma o una foto</div><div class="lineas"><span></span><span></span></div></li>`,
+        ).join('');
+        return `<div class="tira r-amarillo n${n}">
+            <div class="tira__cabecera">
+              <div class="tira__icono tira__icono--vacio">Pega aquí</div>
+              <p class="renglon renglon--titulo"><span>Título:</span><span class="linea"></span></p>
+              <p class="renglon renglon--donde"><span>Dónde:</span><span class="linea"></span></p>
+            </div>
+            <div class="tira__cuerpo"><ol class="pasos">${pasos}</ol>${fin}</div>
+            <p class="tira__pie"><span>Si pegas pictogramas de ARASAAC, cita: Sergio Palao. ARASAAC (arasaac.org). CC BY-NC-SA.</span><span>Plantilla de IdEducando · ideducando.es · CC BY-NC-SA 4.0</span></p>
+          </div>`;
+      }
+      document.getElementById('plantillas').outerHTML = tiraEnBlanco(4) + corte + tiraEnBlanco(6);
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('resumen').innerHTML = RUTINAS.map(
+        (r, i) => `<article class="fila-rutina r-${r.color}">
+          <div class="fila-rutina__nombre">${picto(r.picto)}<div><h2>${r.titulo}</h2><p class="fila-rutina__cuantos">${r.pasos.length} pasos · página ${PRIMERA_RUTINA + i}</p></div></div>
+          <div>
+            <ol class="mini-pasos">${r.pasos.map(([n]) => `<li>${picto(n)}</li>`).join('')}</ol>
+            <p class="fila-rutina__datos"><strong>Cuándo:</strong> ${r.cuando}. <strong>Dónde:</strong> ${r.donde}.</p>
+          </div>
+        </article>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Registro de pasos: 8 pasos y 10 días
+      // ---------------------------------------------------------------------
+      const DIAS = 10;
+      const celdas = (texto = '') => `<td>${texto}</td>`.repeat(DIAS);
+      document.getElementById('tabla-registro').innerHTML = `<colgroup><col style="width: 16%">${'<col>'.repeat(DIAS)}</colgroup>
+        <thead><tr><th scope="col">Fecha</th>${'<th scope="col"></th>'.repeat(DIAS)}</tr></thead>
+        <tbody>${Array.from({ length: 8 }, (_, j) => `<tr><th scope="row">Paso ${j + 1}</th>${celdas()}</tr>`).join('')}
+        <tr class="total"><th scope="row">Pasos sin ayuda</th>${celdas()}</tr></tbody>`;
+
+      // ---------------------------------------------------------------------
+      // Nota para las familias: una tira de ejemplo y las casillas
+      // ---------------------------------------------------------------------
+      const manos = RUTINAS[2];
+      document.getElementById('ejemplo-tira').innerHTML =
+        manos.pasos.map(([n], j) => `<figure><b>${j + 1}</b>${picto(n)}</figure>`).join('') + dibujo('estrella', 'estrella-fin');
+      document.getElementById('casillas-familias').innerHTML = RUTINAS.map((r) => `<li>${r.titulo}</li>`).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: la escalera, un escalón por rutina
+      // ---------------------------------------------------------------------
+      document.getElementById('escalera').innerHTML =
+        '<div class="suelo"></div>' +
+        RUTINAS.map(
+          (r, i) => `<div class="escalon r-${r.color}" style="left: ${1.6 + i * 33.2}mm">
+            <div class="escalon__picto">${picto(r.picto)}</div>
+            <div class="escalon__bloque" style="height: ${16 + i * 16}mm"><span class="escalon__numero">${i + 1}</span></div>
+          </div>`,
+        ).join('');
+
+      // Icono de la pegatina de la portada
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

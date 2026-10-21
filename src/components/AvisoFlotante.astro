@@ -1,0 +1,96 @@
+---
+// Aviso que sale abajo de la pantalla para confirmar lo que se acaba de hacer, como añadir un material
+// a la mochila desde una tarjeta. Lo enseña avisar() (src/scripts/aviso-flotante.ts). Los lectores de pantalla
+// lo oyen por la zona «status», que está siempre en la página aunque el aviso no se vea.
+import Icono from './Icono.astro';
+import { ruta } from '../lib/rutas';
+---
+
+<p class="solo-lectores" role="status" data-aviso-voz></p>
+<div class="aviso-flotante" data-aviso-flotante hidden data-pagefind-ignore>
+  <p class="aviso-flotante__texto" data-aviso-flotante-texto></p>
+  <a class="aviso-flotante__enlace" href={ruta('/mi-mochila/')}>Ver mi mochila</a>
+  <button type="button" class="aviso-flotante__cerrar" data-aviso-flotante-cerrar>
+    <Icono nombre="cerrar" />
+    <span class="solo-lectores">Cerrar el aviso</span>
+  </button>
+</div>
+
+<style>
+  .aviso-flotante {
+    position: fixed;
+    z-index: 30;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 1rem;
+    max-width: 34rem;
+    margin-inline: auto;
+    padding: 0.7rem 0.6rem 0.7rem 1.1rem;
+    border-radius: var(--radio);
+    background: var(--marino);
+    color: var(--blanco);
+    box-shadow: 0 14px 34px -10px rgb(30 43 85 / 0.55);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .aviso-flotante {
+      animation: aviso-flotante-entra 0.25s ease-out;
+    }
+  }
+
+  @keyframes aviso-flotante-entra {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  .aviso-flotante__texto {
+    flex: 1 1 14rem;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .aviso-flotante__enlace {
+    color: var(--blanco);
+    font-family: var(--letra-titulos);
+    font-weight: 700;
+    text-underline-offset: 0.2em;
+  }
+
+  .aviso-flotante__enlace:hover {
+    color: var(--amarillo);
+  }
+
+  .aviso-flotante__cerrar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-left: auto;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--blanco);
+    cursor: pointer;
+  }
+
+  .aviso-flotante__cerrar:hover {
+    background: rgb(255 255 255 / 0.14);
+  }
+
+  .aviso-flotante__cerrar :global(svg) {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .aviso-flotante :focus-visible {
+    outline-color: var(--amarillo);
+  }
+</style>
