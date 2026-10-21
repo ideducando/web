@@ -46,7 +46,7 @@ Las tres se distribuyen con la licencia SIL Open Font License 1.1 y las servimos
 
 ## Herramientas
 
-La web está hecha con [Astro](https://astro.build) y el buscador con [Pagefind](https://pagefind.app), los dos de código abierto con licencia MIT. Se publica con GitHub Pages.
+La web está hecha con [Astro](https://astro.build) y el buscador con [Pagefind](https://pagefind.app), los dos de código abierto con licencia MIT. Se publica con Netlify.
 
 ## Textos legales y oficiales
 

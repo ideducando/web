@@ -2,7 +2,7 @@
   "nombre": "IdEducando",
   "subtitulo": "Aprendizaje inclusivo y creativo",
   "lema": "Cada peque, una idea",
-  "descripcion": "Material gratuito de Pedagogía Terapéutica e Infantil para docentes de toda España y recursos para opositar en la Región de Murcia.",
+  "descripcion": "Material gratuito de Pedagogía Terapéutica e Infantil para docentes y familias de toda España, y recursos para opositar en la Región de Murcia.",
   "correo": "hola@ideducando.es",
   "borrador": true,
   "aviso_borrador": "Web en construcción. Los textos marcados con [BORRADOR] son de prueba y todavía no los ha revisado el equipo.",
@@ -10,7 +10,7 @@
   "pinterest": "",
   "bienvenida": {
     "titulo": "Aquí cabemos todos",
-    "texto": "Ideas y materiales gratis para que cada peque aprenda a su manera, y para la seño que lo acompaña cada día."
+    "texto": "Ideas y materiales gratis para que cada peque aprenda a su manera, y para la seño y la familia que lo acompañan cada día."
   },
   "descargas": {
     "modo": "demostracion",
