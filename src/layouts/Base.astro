@@ -11,6 +11,7 @@ import '../styles/global.css';
 import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
 import Bienvenida from '../components/Bienvenida.astro';
+import AvisoFlotante from '../components/AvisoFlotante.astro';
 import sitio from '../data/sitio.json';
 import { ruta } from '../lib/rutas';
 
@@ -88,6 +89,7 @@ const imagenAbsoluta = new URL(ruta(imagen), Astro.site);
       {indexable && imagenBuscador && <span hidden data-pagefind-meta={`image:${ruta('/apple-touch-icon.png')}`} />}
     </main>
     <Pie />
+    <AvisoFlotante />
     <Bienvenida />
   </body>
 </html>

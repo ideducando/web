@@ -53,6 +53,11 @@ export function vaciarMochila() {
   guardar([]);
 }
 
+/** «1 material», «3 materiales». */
+export function cuantos(n: number): string {
+  return n === 1 ? '1 material' : `${n} materiales`;
+}
+
 /** Avisa cuando la mochila cambia en esta pestaña o en otra. */
 export function alCambiarMochila(funcion: () => void) {
   document.addEventListener(EVENTO, funcion);

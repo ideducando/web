@@ -76,12 +76,20 @@ const menu = [
   // Contador de la mochila de descargas: el número junto al icono y el texto para lectores de pantalla.
   const cuenta = document.querySelector<HTMLElement>('[data-mochila-cuenta]');
   const cuentaTexto = document.querySelector<HTMLElement>('[data-mochila-cuenta-texto]');
+  let anterior: number | undefined;
   const pintarCuenta = () => {
     const n = leerMochila().length;
     if (cuenta) {
       cuenta.textContent = String(n);
       cuenta.hidden = n === 0;
+      // El número da un salto cuando cambia, para que se note que algo ha entrado o salido.
+      if (anterior !== undefined && n !== anterior) {
+        cuenta.classList.remove('cabecera__cuenta--salta');
+        void cuenta.offsetWidth;
+        cuenta.classList.add('cabecera__cuenta--salta');
+      }
     }
+    anterior = n;
     if (cuentaTexto) cuentaTexto.textContent = n === 0 ? ', vacía' : n === 1 ? ', 1 material' : `, ${n} materiales`;
   };
   pintarCuenta();
@@ -204,6 +212,18 @@ const menu = [
     background: var(--marino);
     color: var(--blanco);
     font: 700 0.85rem/1 var(--letra-titulos);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cabecera__cuenta--salta {
+      animation: cabecera-salta 0.45s ease;
+    }
+  }
+
+  @keyframes cabecera-salta {
+    40% {
+      transform: scale(1.45);
+    }
   }
 
   .cabecera__buscar :global(svg),

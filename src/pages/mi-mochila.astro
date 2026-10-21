@@ -46,7 +46,10 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     <section class="mochila__vacia" data-mochila-vacia hidden aria-labelledby="titulo-vacia">
       <Icono nombre="mochila" clase="mochila__icono-grande" />
       <h2 id="titulo-vacia" tabindex="-1">Tu mochila está vacía</h2>
-      <p>Entra en cualquier material del catálogo y pulsa «Añadir a mi mochila». Puedes llevarte varios a la vez.</p>
+      <p>
+        En el catálogo, pulsa «Añadir a mi mochila» en cada material que quieras, sin entrar en él o desde su ficha.
+        Puedes llevarte varios a la vez.
+      </p>
       <a class="boton boton--principal" href={ruta('/material-gratuito/')}>
         Ver el material gratuito
         <Icono nombre="flecha" />
