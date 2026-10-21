@@ -1,5 +1,6 @@
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
+import { formatoPeso } from './peso';
 
 const fechaLarga = new Intl.DateTimeFormat('es-ES', {
   day: 'numeric',
@@ -18,19 +19,23 @@ export function fechaISO(valor: Date): string {
   return valor.toISOString().slice(0, 10);
 }
 
+/** Bytes de un archivo de public/, o 0 si no existe. */
+export function bytesArchivo(rutaPublica?: string): number {
+  if (!rutaPublica) return 0;
+  try {
+    return statSync(join(process.cwd(), 'public', rutaPublica)).size;
+  } catch {
+    return 0;
+  }
+}
+
 /**
  * Peso de un archivo de public/ en formato legible (1,2 MB).
  * Se calcula al construir la web, así nunca queda desfasado.
  */
 export function pesoArchivo(rutaPublica?: string): string | undefined {
-  if (!rutaPublica) return undefined;
-  try {
-    const bytes = statSync(join(process.cwd(), 'public', rutaPublica)).size;
-    if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
-    return `${(bytes / (1024 * 1024)).toLocaleString('es-ES', { maximumFractionDigits: 1 })} MB`;
-  } catch {
-    return undefined;
-  }
+  const bytes = bytesArchivo(rutaPublica);
+  return bytes ? formatoPeso(bytes) : undefined;
 }
 
 /** Comprueba que el archivo de una ficha existe de verdad en public/. */

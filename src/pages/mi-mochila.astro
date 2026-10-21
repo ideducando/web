@@ -7,7 +7,7 @@ import Intro from '../components/Intro.astro';
 import Icono from '../components/Icono.astro';
 import sitio from '../data/sitio.json';
 import { TIPOS } from '../data/taxonomias';
-import { existeArchivo, extension, pesoArchivo } from '../lib/formatos';
+import { bytesArchivo, existeArchivo, extension, pesoArchivo } from '../lib/formatos';
 import { materialesOrdenados } from '../lib/materiales';
 import { ruta } from '../lib/rutas';
 
@@ -20,6 +20,7 @@ const catalogo = (await materialesOrdenados())
     tipo: TIPOS[m.data.tipo].nombre,
     enlace: ruta(`/material-gratuito/${m.id}/`),
     archivo: ruta(m.data.archivo!),
+    bytes: bytesArchivo(m.data.archivo),
     portada: m.data.portada ? ruta(m.data.portada) : '',
     detalle: [extension(m.data.archivo), pesoArchivo(m.data.archivo), m.data.paginas && `${m.data.paginas} páginas`]
       .filter(Boolean)
@@ -166,7 +167,31 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     <section class="mochila__listo" data-mochila-listo hidden aria-labelledby="titulo-listo">
       <Icono nombre="ok" clase="mochila__icono-grande" />
       <h2 id="titulo-listo" tabindex="-1">¡Listo<span data-mochila-saludo></span>! Aquí tienes tu material</h2>
-      <p>Pulsa cada botón para guardarlo en tu ordenador o en tu móvil.</p>
+      <div class="mochila__todo" data-mochila-todo hidden>
+        <p>Descárgalo todo de una vez o elige uno a uno.</p>
+        <div class="botones mochila__opciones">
+          <button type="button" class="boton boton--descarga" data-mochila-zip>
+            <Icono nombre="descarga" />
+            <span>
+              Todo junto en un ZIP <span class="mochila__detalle-boton" data-mochila-zip-peso></span>
+            </span>
+          </button>
+          <button type="button" class="boton boton--secundario" data-mochila-separado>
+            <Icono nombre="descarga" />
+            Todos por separado
+          </button>
+        </div>
+        <progress class="mochila__progreso" data-mochila-progreso aria-label="Preparando el ZIP" hidden></progress>
+        <p class="mochila__estado" data-mochila-estado role="status"></p>
+        <a class="flecha" data-mochila-zip-enlace href="" download="ideducando-material.zip" hidden>
+          Guardar el ZIP
+        </a>
+        <p class="mochila__ayuda">
+          Un ZIP es un solo archivo con todos los PDF dentro. En el móvil se abre desde la app de archivos.
+        </p>
+        <h3 class="mochila__uno-a-uno">O uno a uno</h3>
+      </div>
+      <p data-mochila-solo-uno>Pulsa el botón para guardarlo en tu ordenador o en tu móvil.</p>
       <ul class="mochila__descargas" data-mochila-descargas></ul>
       {
         demostracion && (
@@ -214,6 +239,8 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 
 <script>
   import { alCambiarMochila, leerMochila, quitarDeMochila, vaciarMochila } from '../scripts/mochila';
+  import { crearZip } from '../scripts/zip';
+  import { formatoPeso } from '../lib/peso';
 
   interface Material {
     id: string;
@@ -221,6 +248,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     tipo: string;
     enlace: string;
     archivo: string;
+    bytes: number;
     portada: string;
     detalle: string;
   }
@@ -241,8 +269,80 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
   const plantillaDescarga = $<HTMLTemplateElement>('[data-plantilla-descarga]');
 
   let terminado = false;
+  // Lo que se ha pedido al pulsar «Descargar gratis»: la mochila se vacía, pero esto sigue para las descargas.
+  let descargados: Material[] = [];
+  let ocupado = false;
 
   const elegidos = () => leerMochila().map((id) => porId.get(id)).filter((m): m is Material => Boolean(m));
+  const nombreArchivo = (m: Material) => m.archivo.split('/').pop() || `${m.id}.pdf`;
+  const pausa = (ms: number) => new Promise((seguir) => setTimeout(seguir, ms));
+
+  const todo = $('[data-mochila-todo]');
+  const botonZip = $<HTMLButtonElement>('[data-mochila-zip]');
+  const botonSeparado = $<HTMLButtonElement>('[data-mochila-separado]');
+  const progreso = $<HTMLProgressElement>('[data-mochila-progreso]');
+  const estado = $('[data-mochila-estado]');
+  const enlaceZip = $<HTMLAnchorElement>('[data-mochila-zip-enlace]');
+
+  /** Mientras se prepara una descarga, los dos botones esperan (sin perder el foco). */
+  function esperar(si: boolean) {
+    ocupado = si;
+    for (const boton of [botonZip, botonSeparado]) boton.setAttribute('aria-disabled', String(si));
+    progreso.hidden = !si || progreso.max <= 1;
+  }
+
+  function descargar(href: string, nombre: string) {
+    const enlace = document.createElement('a');
+    enlace.href = href;
+    enlace.download = nombre;
+    enlace.hidden = true;
+    document.body.append(enlace);
+    enlace.click();
+    enlace.remove();
+  }
+
+  // Todo junto: se piden los PDF a la propia web, se meten en un ZIP y se guarda.
+  botonZip.addEventListener('click', async () => {
+    if (ocupado) return;
+    enlaceZip.hidden = true;
+    progreso.max = descargados.length;
+    progreso.value = 0;
+    esperar(true);
+    estado.textContent = `Preparando el ZIP con ${descargados.length} PDF…`;
+    try {
+      const archivos = [];
+      for (const m of descargados) {
+        const respuesta = await fetch(m.archivo);
+        if (!respuesta.ok) throw new Error(`Respuesta ${respuesta.status}`);
+        archivos.push({ nombre: nombreArchivo(m), datos: await respuesta.arrayBuffer() });
+        progreso.value += 1;
+      }
+      if (enlaceZip.href.startsWith('blob:')) URL.revokeObjectURL(enlaceZip.href);
+      enlaceZip.href = URL.createObjectURL(crearZip(archivos));
+      enlaceZip.click();
+      enlaceZip.hidden = false;
+      estado.textContent = 'Hecho: el ZIP se guarda en tu carpeta de descargas. Si no empieza, pulsa «Guardar el ZIP».';
+    } catch {
+      estado.textContent = 'No hemos podido preparar el ZIP. Prueba con «Todos por separado» o descárgalos uno a uno.';
+    } finally {
+      esperar(false);
+    }
+  });
+
+  // Por separado: cada PDF se descarga por su lado, con un respiro entre uno y otro.
+  botonSeparado.addEventListener('click', async () => {
+    if (ocupado) return;
+    enlaceZip.hidden = true;
+    progreso.max = 1;
+    esperar(true);
+    estado.textContent = `Descargando ${descargados.length} PDF. Si tu navegador pregunta si permites varias descargas, pulsa «Permitir».`;
+    for (const m of descargados) {
+      descargar(m.archivo, nombreArchivo(m));
+      await pausa(800);
+    }
+    estado.textContent = 'Hecho: búscalos en tu carpeta de descargas. Si falta alguno, descárgalo con su botón de abajo.';
+    esperar(false);
+  });
 
   function pintar() {
     if (terminado) return;
@@ -306,6 +406,11 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     }
 
     terminado = true;
+    descargados = materiales;
+    const varios = materiales.length > 1;
+    todo.hidden = !varios;
+    $('[data-mochila-solo-uno]').hidden = varios;
+    $('[data-mochila-zip-peso]').textContent = `(${formatoPeso(materiales.reduce((suma, m) => suma + m.bytes, 0))})`;
     const nombre = String(datos.get('nombre') ?? '').trim();
     $('[data-mochila-saludo]').textContent = nombre ? `, ${nombre}` : '';
     $('[data-mochila-descargas]').replaceChildren(
@@ -313,6 +418,8 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
         const fila = plantillaDescarga.content.firstElementChild!.cloneNode(true) as HTMLElement;
         const enlace = fila.querySelector<HTMLAnchorElement>('a')!;
         enlace.href = m.archivo;
+        // Con varios, lo principal es «Todo junto» o «Todos por separado»; los de uno en uno van en segundo plano.
+        if (varios) enlace.classList.replace('boton--descarga', 'boton--secundario');
         fila.querySelector('[data-titulo]')!.textContent = m.titulo;
         fila.querySelector('[data-detalle]')!.textContent = `(${m.detalle})`;
         return fila;
@@ -609,6 +716,50 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     width: 100%;
     justify-content: flex-start;
     text-align: left;
+  }
+
+  .mochila__todo {
+    display: grid;
+    justify-items: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .mochila__todo p {
+    margin: 0;
+  }
+
+  .mochila__opciones {
+    justify-content: center;
+  }
+
+  .mochila__opciones [aria-disabled='true'] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .mochila__progreso {
+    width: min(100%, 20rem);
+    height: 0.75rem;
+    accent-color: var(--verde-texto);
+  }
+
+  .mochila__estado:empty {
+    display: none;
+  }
+
+  .mochila__estado {
+    font-weight: 700;
+  }
+
+  .mochila__ayuda {
+    font-size: 0.95rem;
+    color: var(--texto-suave);
+  }
+
+  .mochila__uno-a-uno {
+    margin: 0.75rem 0 0;
+    font-size: 1.1rem;
   }
 
   .mochila__detalle-boton {
