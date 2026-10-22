@@ -20,7 +20,7 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 
 ## Estado (octubre de 2026)
 - Prioridad: la web y el material gratuito. Las clases de oposición no tienen fecha.
-- Durante el próximo año se prepara la web para vender. Nada con pictogramas de ARASAAC se vende sin su permiso por escrito: su licencia (CC BY-NC-SA) no admite el uso comercial.
+- Durante el próximo año se prepara la web para vender. Nada con pictogramas de ARASAAC se vende: su licencia (CC BY-NC-SA) no admite el uso comercial y ARASAAC confirmó por teléfono el 22/10/2026 que no da permiso para venderlo. Lo que se venda irá con pictogramas e ilustraciones propios.
 - La web está en borrador: aviso visible, noindex y textos marcados con [BORRADOR] hasta que el equipo los revise.
 - En la web no salen nombres ni fotos del equipo hasta que cada persona lo autorice.
 
