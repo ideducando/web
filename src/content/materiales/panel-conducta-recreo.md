@@ -55,7 +55,7 @@ borrador: true
 
 ## Para qué sirve
 
-Antes del recreo, en el recreo y al volver a clase son momentos en los que a algunos niños y niñas les cuesta más esperar, compartir o calmarse. Este panel ayuda a trabajar pocas conductas a la vez, dichas en positivo, en esos tres momentos. Cada vez que el niño o la niña hace la conducta, gana una pegatina, un sello o una ficha. Cuando llega a la meta, consigue la recompensa que habéis pactado. Lo pidió una maestra del equipo para su clase de Infantil.
+Antes del recreo, en el recreo y al volver a clase son momentos en los que a algunos niños y niñas les cuesta más esperar, compartir o calmarse. Este panel ayuda a trabajar pocas conductas a la vez, dichas en positivo, en esos tres momentos. Cada vez que el niño o la niña hace la conducta, gana una pegatina, un sello o una ficha. Cuando llega a la meta, consigue la recompensa que habéis pactado. Lo pidió una maestra del equipo para Infantil.
 
 ## Qué incluye
 
