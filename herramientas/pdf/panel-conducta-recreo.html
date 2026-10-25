@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>¡Lo consigo!: panel de conducta para antes, durante y después del recreo · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* El panel va en una hoja apaisada sin pie: así caben cuatro filas con tarjetas de 34 mm.
+         La licencia y la dirección van dentro del propio panel. */
+      @page panel {
+        size: A4 landscape;
+        margin: 10mm;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      :root {
+        --tarjeta: 34mm;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Portada ---------- */
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 44pt;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 128mm;
+      }
+
+      .etiqueta-kit {
+        position: absolute;
+        z-index: 4;
+        right: 16mm;
+        top: 40mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        padding: 5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.12;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .etiqueta-kit svg {
+        width: 9mm;
+        height: 9mm;
+        margin: 0 auto 1.2mm;
+      }
+
+      /* Panel en miniatura de la portada: el mismo panel, más pequeño. */
+      .portada__panel {
+        position: absolute;
+        z-index: 2;
+        left: 20mm;
+        right: 20mm;
+        bottom: 40mm;
+        height: 104mm;
+        padding: 4mm;
+        border: 0.8mm solid var(--marino);
+        border-radius: 5mm;
+        background: #fff;
+        box-shadow: 0 2mm 0 rgb(30 43 85 / 0.16);
+        transform: rotate(-1.6deg);
+      }
+
+      .mini {
+        display: grid;
+        grid-template-columns: 30mm repeat(3, minmax(0, 1fr)) 34mm;
+        grid-template-rows: 14mm repeat(3, minmax(0, 1fr));
+        gap: 2mm;
+        height: 100%;
+      }
+
+      .mini__momento {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5mm;
+        border-radius: 2.5mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .mini__momento svg {
+        width: 8mm;
+        height: 8mm;
+        flex: none;
+      }
+
+      .mini__conducta {
+        display: grid;
+        place-items: center;
+        border-radius: 2.5mm;
+        background: var(--azul-tinte);
+      }
+
+      .mini__conducta img {
+        width: 19mm;
+        height: 19mm;
+        object-fit: contain;
+        background: #fff;
+        border: 0.5mm solid var(--azul);
+        border-radius: 2mm;
+        padding: 0.8mm;
+      }
+
+      .mini__casilla {
+        display: grid;
+        place-items: center;
+        border: 0.45mm solid var(--linea);
+        border-radius: 2.5mm;
+      }
+
+      .mini__casilla svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .mini__hueco {
+        width: 15mm;
+        height: 15mm;
+        border: 0.5mm dashed #b7c3dd;
+        border-radius: 50%;
+      }
+
+      .mini__premio {
+        grid-column: 5;
+        grid-row: 2 / span 3;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 2mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border: 0.5mm solid var(--amarillo);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8.5pt;
+        text-align: center;
+      }
+
+      .mini__premio .tarjeta {
+        transform: scale(0.78);
+      }
+
+      .mini__cabecera-premio {
+        grid-column: 5;
+        grid-row: 1;
+      }
+
+      /* ---------- Colores de los momentos ---------- */
+
+      .m-antes {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+
+      .m-recreo {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+
+      .m-despues {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      /* ---------- De un vistazo ---------- */
+
+      .vistazo__intro {
+        font-size: 12pt;
+        margin-bottom: 6mm;
+      }
+
+      .pasos-vistazo {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-vistazo li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: start;
+        padding: 4mm;
+        border-radius: 4mm;
+        background: var(--crema);
+        margin: 0;
+      }
+
+      .pasos-vistazo b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12.5pt;
+        margin-bottom: 0.8mm;
+      }
+
+      .numero-grande {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+      }
+
+      .incluye {
+        columns: 2;
+        column-gap: 8mm;
+        margin: 0 0 5mm;
+      }
+
+      .incluye li {
+        break-inside: avoid;
+      }
+
+      /* ---------- El panel ---------- */
+
+      .panel {
+        page: panel;
+        break-after: page;
+        height: 190mm;
+        display: grid;
+        grid-template-rows: 16mm minmax(0, 1fr);
+        gap: 3mm;
+      }
+
+      .panel__cabecera {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto auto;
+        align-items: end;
+        gap: 6mm;
+      }
+
+      .panel__titulo {
+        margin: 0;
+        font-size: 24pt;
+        line-height: 1;
+      }
+
+      .panel__renglon {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        padding-bottom: 1mm;
+      }
+
+      .panel__renglon span {
+        flex: 1;
+        min-width: 30mm;
+        border-bottom: 0.5mm solid var(--marino);
+        height: 7mm;
+      }
+
+      .panel__marca {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        font-size: 7pt;
+        line-height: 1.25;
+        color: var(--suave);
+        padding-bottom: 1mm;
+      }
+
+      .panel__marca img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .rejilla {
+        display: grid;
+        grid-template-columns: 44mm repeat(3, minmax(0, 1fr)) 60mm;
+        grid-template-rows: 18mm repeat(var(--filas), minmax(0, 1fr));
+        gap: 2mm 3mm;
+        min-height: 0;
+      }
+
+      .rejilla__esquina {
+        display: grid;
+        align-content: end;
+        padding: 0 1mm 1.5mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+      }
+
+      .momento {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5mm;
+        padding: 0 2.5mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border: 0.6mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11.5pt;
+        line-height: 1.05;
+      }
+
+      .momento svg {
+        width: 12mm;
+        height: 12mm;
+        flex: none;
+      }
+
+      .momento__numero {
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        flex: none;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-size: 10pt;
+      }
+
+      .momento__flecha {
+        position: absolute;
+        right: -3.6mm;
+        top: 50%;
+        width: 4.2mm !important;
+        height: 6mm !important;
+        transform: translateY(-50%);
+        z-index: 2;
+      }
+
+      .hueco-tarjeta {
+        display: grid;
+        place-items: center;
+        border-radius: 3mm;
+        background: var(--azul-tinte);
+      }
+
+      .hueco-tarjeta div,
+      .hueco-premio {
+        display: grid;
+        place-items: center;
+        width: var(--tarjeta);
+        height: var(--tarjeta);
+        border: 0.6mm dashed #8aa6d8;
+        border-radius: 3mm;
+        background: #fff;
+        font-size: 7.5pt;
+        line-height: 1.2;
+        color: var(--suave);
+        text-align: center;
+        padding: 3mm;
+      }
+
+      .casilla {
+        display: grid;
+        place-items: center;
+        border-radius: 3mm;
+        border: 0.6mm solid var(--c);
+        background: #fff;
+      }
+
+      .casilla div {
+        width: var(--circulo);
+        height: var(--circulo);
+        border: 0.6mm dashed var(--c);
+        border-radius: 50%;
+        background: var(--t);
+      }
+
+      .premio__cabecera {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border: 0.6mm solid var(--naranja);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .premio__cabecera svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .premio {
+        grid-column: 5;
+        grid-row: 2 / span var(--filas);
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 4mm;
+        padding: 4mm;
+        border-radius: 4mm;
+        background: var(--amarillo-tinte);
+        border: 0.6mm solid var(--naranja);
+        text-align: center;
+      }
+
+      .premio__meta {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .premio__meta span {
+        display: inline-block;
+        width: 12mm;
+        height: 9mm;
+        margin: 0 1mm;
+        vertical-align: middle;
+        border: 0.6mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .premio__nota {
+        font-size: 7.5pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Tarjetas ---------- */
+
+      .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(5, var(--tarjeta));
+        grid-auto-rows: var(--tarjeta);
+        justify-content: center;
+        margin: 0 0 5mm;
+      }
+
+      /* Línea de corte: discontinua, compartida entre tarjetas vecinas. */
+      .corte {
+        display: grid;
+        place-items: center;
+        border: 0.3mm dashed #9aa6c4;
+        margin: -0.15mm;
+      }
+
+      .tarjeta {
+        width: calc(var(--tarjeta) - 3mm);
+        height: calc(var(--tarjeta) - 3mm);
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        justify-items: center;
+        padding: 1.2mm 1.2mm 1.4mm;
+        border: 0.7mm solid var(--borde, var(--azul));
+        border-radius: 3mm;
+        background: #fff;
+        text-align: center;
+      }
+
+      .tarjeta img,
+      .tarjeta svg {
+        width: 19.5mm;
+        height: 19.5mm;
+        object-fit: contain;
+      }
+
+      .tarjeta span {
+        font-weight: 700;
+        font-size: 7.6pt;
+        line-height: 1.12;
+        min-height: 6.6mm;
+        display: grid;
+        place-items: center;
+      }
+
+      .tarjeta--premio {
+        --borde: var(--naranja);
+      }
+
+      .tarjeta--vacia {
+        grid-template-rows: minmax(0, 1fr) auto;
+        border-style: dashed;
+      }
+
+      .tarjeta--vacia .renglon-mini {
+        width: 100%;
+        border-bottom: 0.4mm solid var(--linea);
+        height: 5mm;
+      }
+
+      .tarjeta--vacia small {
+        align-self: center;
+        font-size: 7pt;
+        color: var(--suave);
+      }
+
+      .leyenda {
+        display: flex;
+        gap: 6mm;
+        align-items: center;
+        font-size: 9.5pt;
+      }
+
+      .leyenda svg {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      /* ---------- Fichas ---------- */
+
+      .fichas {
+        display: grid;
+        grid-template-columns: repeat(7, 25.4mm);
+        grid-auto-rows: 25.4mm;
+        justify-content: center;
+        margin-bottom: 4mm;
+      }
+
+      .fichas .corte {
+        border-color: transparent;
+      }
+
+      .ficha {
+        width: 23.6mm;
+        height: 23.6mm;
+        border-radius: 50%;
+        border: 0.3mm dashed #9aa6c4;
+        display: grid;
+        place-items: center;
+      }
+
+      .ficha svg {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      /* ---------- Guía ---------- */
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 5mm;
+        color: var(--azul);
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 3mm;
+      }
+
+      .guia li {
+        margin-bottom: 1.2mm;
+      }
+
+      .no-hacemos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .no-hacemos li {
+        padding-left: 6mm;
+        position: relative;
+        margin: 0;
+      }
+
+      .no-hacemos li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 1.6mm;
+        width: 3.2mm;
+        height: 3.2mm;
+        border-radius: 50%;
+        background: var(--coral);
+      }
+
+      .ejemplo {
+        font-style: italic;
+        color: var(--suave);
+      }
+
+      /* ---------- Registro ---------- */
+
+      .registro {
+        page: apaisada;
+        break-after: page;
+      }
+
+      .registro table {
+        width: 100%;
+        table-layout: fixed;
+        font-size: 9pt;
+      }
+
+      .registro th,
+      .registro td {
+        border: 0.3mm solid var(--linea);
+        text-align: center;
+        vertical-align: middle;
+        padding: 1mm;
+      }
+
+      .registro thead th {
+        background: var(--crema);
+        font-family: var(--titulos);
+      }
+
+      .registro .dia {
+        font-size: 11pt;
+      }
+
+      .registro .sub svg {
+        width: 6mm;
+        height: 6mm;
+        margin: 0 auto;
+      }
+
+      .registro tbody td {
+        height: 17mm;
+      }
+
+      .registro tbody td:first-child {
+        text-align: left;
+      }
+
+      .registro .total {
+        background: var(--amarillo-tinte);
+      }
+
+      .registro__pie {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 5mm;
+        margin-top: 5mm;
+      }
+
+      .registro__pie div {
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        padding: 3mm 4mm;
+        min-height: 30mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+      }
+
+      /* ---------- Familias ---------- */
+
+      .familias p,
+      .familias li {
+        font-size: 13pt;
+        line-height: 1.5;
+      }
+
+      .recuadro {
+        margin-top: 6mm;
+        padding: 5mm 6mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 4mm;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        gap: 2mm;
+        align-items: flex-end;
+        margin: 4mm 0 0;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 7mm;
+      }
+
+      .tira-familias {
+        display: flex;
+        gap: 3mm;
+        margin: 3mm 0 4mm;
+      }
+
+      .tira-familias div {
+        flex: 1;
+        display: grid;
+        place-items: center;
+        gap: 1mm;
+        padding: 2mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        text-align: center;
+      }
+
+      .tira-familias svg {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .fuentes li {
+        margin-bottom: 2mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -64mm; top: 10mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -40mm; top: 112mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 46mm; height: 46mm; right: -10mm; top: 150mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Panel de conducta · Infantil</p>
+        <h1 class="portada__titulo">¡Lo consigo!</h1>
+        <p class="portada__subtitulo">
+          Un panel para antes, durante y después del recreo, con hueco para la recompensa y tarjetas de premios fáciles de
+          dar en clase.
+        </p>
+        <div class="portada__pie">
+          <p>
+            <span class="borrador">[BORRADOR]</span> Pendiente de revisión por el equipo docente.<br />
+            Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="portada__panel" aria-hidden="true"><div class="mini" id="mini-panel"></div></div>
+      <div class="etiqueta-kit" aria-hidden="true"><div><span data-icono="regalo"></span>16 recompensas para Infantil</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Un panel para trabajar pocas conductas en tres momentos que suelen costar: antes del recreo, en el recreo y
+        después del recreo. Cada vez que el niño o la niña hace la conducta, gana una pegatina, un sello o una ficha en su
+        casilla. Cuando llega a la meta, consigue la recompensa que habéis elegido juntos.
+      </p>
+      <ol class="pasos-vistazo">
+        <li>
+          <span class="numero-grande">1</span>
+          <div><b>Elige las conductas</b>De dos a cuatro, dichas en positivo: lo que sí tiene que hacer. En Infantil, mejor empezar con dos.</div>
+        </li>
+        <li>
+          <span class="numero-grande">2</span>
+          <div><b>Pactad la recompensa</b>Elegidla juntos entre las tarjetas de premios y ponedla en su hueco del panel.</div>
+        </li>
+        <li>
+          <span class="numero-grande">3</span>
+          <div><b>Celebra cada casilla</b>Justo después de cada momento, pon la pegatina, el sello o la ficha y dile qué ha hecho bien.</div>
+        </li>
+        <li>
+          <span class="numero-grande">4</span>
+          <div><b>Cumple la meta</b>Si llega a la meta, la recompensa llega ese mismo día. Si no, mañana hay otra oportunidad.</div>
+        </li>
+      </ol>
+
+      <h2>Qué incluye</h2>
+      <ul class="incluye">
+        <li>Tres paneles apaisados: de <strong>cuatro, tres y dos conductas</strong> (páginas <span data-pagina="panel4"></span> a <span data-pagina="panel2"></span>).</li>
+        <li><strong>16 tarjetas de conductas</strong> con pictogramas, y 4 en blanco (página <span data-pagina="conductas"></span>).</li>
+        <li><strong>16 tarjetas de recompensas</strong> que una maestra puede dar en clase, sin comida ni dinero, y 4 en blanco (página <span data-pagina="recompensas"></span>).</li>
+        <li><strong>42 fichas</strong> de estrellas y caritas, por si prefieres no usar pegatinas (página <span data-pagina="fichas"></span>).</li>
+        <li><strong>Guía para el adulto</strong>, con lo que dice la investigación (página <span data-pagina="guia"></span>).</li>
+        <li><strong>Registro de la semana</strong> y <strong>nota para las familias</strong> en lectura fácil.</li>
+      </ul>
+
+      <div class="caja caja--azul">
+        <p>
+          <strong>Por qué ayuda.</strong> En las aulas de Infantil, los sistemas de fichas como este tienen un efecto grande
+          en la conducta, según un metaanálisis de diez estudios (Hayes y otros, 2023), aunque sus autores avisan de que
+          muchos de esos estudios tienen fallos de método. Funcionan mejor con pocas conductas, dichas en positivo, y con un
+          elogio que diga qué ha hecho bien: «¡Has esperado tu turno en el tobogán!».
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         LOS TRES PANELES (se rellenan con el programa del final)
+         ====================================================================== -->
+    <section class="panel" data-filas="4" aria-label="Panel de cuatro conductas"></section>
+    <section class="panel" data-filas="3" aria-label="Panel de tres conductas"></section>
+    <section class="panel" data-filas="2" aria-label="Panel de dos conductas, para empezar"></section>
+
+    <!-- ======================================================================
+         TARJETAS DE CONDUCTAS
+         ====================================================================== -->
+    <section class="hoja">
+      <p class="antetitulo">Para recortar · Página para cartulina</p>
+      <h1>Tarjetas de conductas</h1>
+      <p>
+        Recorta por la línea de puntos. Cada tarjeta dice lo que sí tiene que hacer el niño o la niña. En las cuatro en
+        blanco puedes pegar otro pictograma o una foto y escribir la conducta.
+      </p>
+      <div class="tarjetas" id="tarjetas-conductas"></div>
+      <p class="leyenda"><span data-icono="velcro"></span><span>Detrás de cada tarjeta, un círculo de velcro <strong>suave</strong>. El rugoso va en el panel.</span></p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE RECOMPENSAS
+         ====================================================================== -->
+    <section class="hoja">
+      <p class="antetitulo">Para recortar · Página para cartulina</p>
+      <h1>Tarjetas de recompensas</h1>
+      <p>
+        Recompensas que una maestra puede dar en clase sin gastar dinero y sin comida. Elegid una juntos antes de empezar
+        y ponedla en el hueco de «Mi recompensa». En las cuatro en blanco caben las que funcionen en vuestra clase.
+      </p>
+      <div class="tarjetas" id="tarjetas-recompensas"></div>
+      <p class="leyenda"><span data-icono="velcro"></span><span>Detrás de cada tarjeta, un círculo de velcro <strong>suave</strong>. El rugoso va en el panel.</span></p>
+    </section>
+
+    <!-- ======================================================================
+         FICHAS
+         ====================================================================== -->
+    <section class="hoja">
+      <p class="antetitulo">Para recortar · Solo si usas fichas</p>
+      <h1>Fichas para el panel</h1>
+      <p>
+        Si prefieres no gastar pegatinas, usa estas fichas: se ponen y se quitan con velcro, y el panel dura todo el curso.
+        Se recortan en un momento con una perforadora de círculos de 2,5 cm, o con tijeras.
+      </p>
+      <div class="fichas" id="fichas"></div>
+      <p class="leyenda"><span data-icono="velcro"></span><span>Velcro <strong>suave</strong> detrás de cada ficha y <strong>rugoso</strong> en cada casilla del panel.</span></p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL ADULTO
+         ====================================================================== -->
+    <section class="hoja guia">
+      <p class="antetitulo">Guía para el adulto · 1 de 2</p>
+      <h1>Cómo usar el panel</h1>
+      <p>
+        «¡Lo consigo!» es un sistema de fichas sencillo: el niño o la niña gana una pegatina, un sello o una ficha cada vez
+        que hace la conducta en ese momento, y al llegar a la meta consigue la recompensa que habéis pactado. Sirve para
+        uno o dos niños que lo necesiten, no para toda la clase a la vez.
+      </p>
+
+      <h2>Antes de empezar</h2>
+      <ol>
+        <li><strong>Elige pocas conductas.</strong> En Infantil, empieza con una o dos y pasa al panel de tres o cuatro cuando ya funcione.</li>
+        <li><strong>Dilas en positivo.</strong> Lo que sí tiene que hacer: «Juego con mis compañeros», en lugar de «No pego».</li>
+        <li><strong>Que se vean.</strong> Una conducta concreta, que se pueda ver y contar. «Me siento en mi silla» se ve; «Me porto bien», no.</li>
+        <li><strong>Pactad la recompensa</strong> antes de empezar, con las tarjetas delante. Si no le apetece de verdad, no funcionará.</li>
+        <li><strong>Pon una meta que pueda conseguir desde el primer día,</strong> por ejemplo 4 casillas de 6. Súbela poco a poco.</li>
+      </ol>
+
+      <h2>Cada día</h2>
+      <ol>
+        <li>Antes de cada momento, recuérdale la conducta señalando su tarjeta: «Ahora vamos al recreo. ¿Qué toca?».</li>
+        <li>Justo después, si lo ha hecho, pon la pegatina, el sello o la ficha y dile qué ha hecho bien: <span class="ejemplo">«¡Has esperado tu turno en el tobogán!»</span>.</li>
+        <li>Si no lo ha hecho, la casilla se queda vacía, sin regañinas. En el siguiente momento tiene otra oportunidad.</li>
+        <li>Al llegar a la meta, la recompensa llega ese mismo día y lo antes posible.</li>
+        <li>Anota cómo ha ido en el registro de la semana (página <span data-pagina="registro"></span>).</li>
+      </ol>
+
+      <h2>Lo que no hacemos</h2>
+      <ul class="no-hacemos">
+        <li>Quitar fichas o pegatinas ya ganadas.</li>
+        <li>Dar comida o chucherías como premio.</li>
+        <li>Comparar en voz alta su panel con el de otros.</li>
+        <li>Usar el panel como amenaza: «Si sigues así, no hay pegatina».</li>
+        <li>Colgarlo donde lo vea todo el mundo: mejor cerca de su mesa.</li>
+        <li>Mantenerlo para siempre: el objetivo es que deje de hacer falta.</li>
+      </ul>
+    </section>
+
+    <section class="hoja guia">
+      <p class="antetitulo">Guía para el adulto · 2 de 2</p>
+      <h1>Para que funcione</h1>
+
+      <h2>Qué dice la investigación</h2>
+      <ul>
+        <li>
+          En las aulas de Infantil, los sistemas de fichas tienen un efecto grande en la conducta, según un metaanálisis de
+          diez estudios (Hayes y otros, 2023). Otro metaanálisis, con 26 estudios en aulas de todas las edades, encontró
+          efectos de medianos a grandes (Soares y otros, 2016). Los dos avisan de que muchos estudios tienen fallos de
+          método, así que conviene comprobar con el registro si a este niño o a esta niña le funciona.
+        </li>
+        <li>
+          El elogio que dice exactamente qué ha hecho bien («Has recogido los juguetes») se considera una práctica con
+          respaldo en la investigación (Royer y otros, 2019). Por eso cada casilla va con una frase así.
+        </li>
+        <li>
+          Las normas de clase funcionan mejor si son pocas, se dicen en positivo, se enseñan y se refuerzan (Simonsen y
+          otros, 2008).
+        </li>
+        <li>
+          Los Centros para el Control y la Prevención de Enfermedades de Estados Unidos (CDC) no recomiendan premiar con
+          comida o bebida, porque puede unir el éxito con comer y animar a comer sin hambre (CDC, 2019). Por eso ninguna
+          tarjeta de recompensa es de comida.
+        </li>
+      </ul>
+
+      <h2>Cómo retirarlo poco a poco</h2>
+      <ol>
+        <li>Cuando consiga la meta casi todos los días durante dos semanas, sube la meta.</li>
+        <li>Después, quita un momento: por ejemplo, solo el recreo.</li>
+        <li>Al final, deja solo el elogio. Si vuelve a costar, se recupera el panel sin dramas.</li>
+      </ol>
+
+      <h2>Para adaptarlo</h2>
+      <ul>
+        <li><strong>Trastorno del espectro del autismo (TEA):</strong> anticipa con la tarjeta cada momento y usa recompensas que le gusten de verdad, aunque sean distintas de las de la clase.</li>
+        <li><strong>Trastorno por déficit de atención e hiperactividad (TDAH):</strong> la casilla tiene que llegar enseguida; si el recreo se hace largo, parte el momento en dos.</li>
+        <li><strong>Si pega o muerde cuando se enfada:</strong> combina el panel con el <a href="https://www.ideducando.es/material-gratuito/rincon-de-la-calma/">rincón de la calma</a> y las historias de <a href="https://www.ideducando.es/material-gratuito/historias-sociales-calma-y-palabras/">Con calma y con palabras</a>. El panel premia lo que sí hace; la calma se enseña aparte.</li>
+        <li><strong>Con la familia:</strong> manda la nota de la página <span data-pagina="familias"></span>. En casa no hacen falta ni premios ni castigos por el panel: basta con preguntar y felicitar.</li>
+      </ul>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE LA SEMANA
+         ====================================================================== -->
+    <section class="registro">
+      <p class="antetitulo">Para el adulto</p>
+      <h1>Registro de la semana</h1>
+      <p>Marca con una cruz cada casilla conseguida. Al final del día, apunta el total y si ha llegado a la meta.</p>
+      <table id="registro"></table>
+      <div class="registro__pie">
+        <div>Meta de esta semana:</div>
+        <div>Qué ha funcionado:</div>
+        <div>Qué cambio la semana que viene:</div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja familias">
+      <p class="antetitulo">Para las familias</p>
+      <h1>En el cole usamos «¡Lo consigo!»</h1>
+      <p>En el cole usamos un panel para aprender algunas conductas.</p>
+      <p>Hay tres momentos:</p>
+      <div class="tira-familias" id="tira-familias"></div>
+      <p>Cada vez que lo consigue, gana una pegatina, un sello o una ficha.</p>
+      <p>Cuando llega a la meta, gana un premio en el cole.</p>
+
+      <h2>Cómo podéis ayudar</h2>
+      <ul>
+        <li>Preguntadle cada día: «¿Qué has conseguido hoy?».</li>
+        <li>Felicitadle por lo que ha hecho bien.</li>
+        <li>Si un día no lo consigue, no pasa nada. Mañana hay otra oportunidad.</li>
+        <li>En casa no hace falta castigar ni dar premios por el panel.</li>
+      </ul>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p class="renglon-etiqueta">Estamos trabajando:<span></span></p>
+        <p class="renglon-etiqueta">Su recompensa es:<span></span></p>
+        <p class="renglon-etiqueta">Contadnos cómo va en casa:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>¡Lo consigo!</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos pictográficos
+          utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos <span class="borrador">[BORRADOR]</span></p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>¡Lo consigo!: panel de conducta para antes, durante y después del recreo.</strong> Equipo IdEducando,
+        octubre de 2026. Lo pidió una maestra del equipo para su clase de Infantil. Pendiente de revisión por el equipo
+        docente. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/panel-conducta-recreo</span>
+      </p>
+
+      <h2>Fuentes</h2>
+      <ul class="fuentes">
+        <li>
+          Centers for Disease Control and Prevention, CDC (2019). <em>Healthy Student Rewards: How Can You Help?</em>
+          Parents for Healthy Schools. <span class="url">cdc.gov/healthy-schools</span>
+        </li>
+        <li>
+          Hayes, L. B., Dufrene, B. A., Taylor, C., Olmi, D. J., Troughton, L., Dart, E. H. y Weaver, C. M. (2023). The
+          effect of token economies on student behavior in the preschool classroom: A meta-analysis. <em>Perspectives on
+          Early Childhood Psychology and Education</em>, 7(1), artículo 5.
+        </li>
+        <li>
+          Royer, D. J., Lane, K. L., Dunlap, K. D. y Ennis, R. P. (2019). A systematic review of teacher-delivered
+          behavior-specific praise on K-12 student performance. <em>Remedial and Special Education</em>, 40(2), 112-128.
+        </li>
+        <li>
+          Simonsen, B., Fairbanks, S., Briesch, A., Myers, D. y Sugai, G. (2008). Evidence-based practices in classroom
+          management: Considerations for research to practice. <em>Education and Treatment of Children</em>, 31(3), 351-380.
+        </li>
+        <li>
+          Soares, D. A., Harrison, J. R., Vannest, K. J. y McClelland, S. S. (2016). Effect size for token economy use in
+          contemporary classroom settings: A meta-analysis of single-case research. <em>School Psychology Review</em>,
+          45(4), 379-399.
+        </li>
+      </ul>
+
+      <h2>Pictogramas</h2>
+      <p>
+        Los pictogramas de las tarjetas son de ARASAAC, el Portal Aragonés de la Comunicación Aumentativa y Alternativa.
+        Su licencia pide citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y
+        han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative
+        Commons BY-NC-SA». Si adaptas el material, mantén la cita. Con pictogramas de ARASAAC, este material no se puede
+        vender.
+      </p>
+
+      <h2>Dibujos</h2>
+      <p>
+        La pizarra, el tobogán, el regalo, las flechas, la pegatina, las estrellas y las caritas de las fichas son de
+        IdEducando. El panel no lleva pictogramas de ARASAAC: solo los llevan las tarjetas.
+      </p>
+
+      <h2>Licencia</h2>
+      <p>
+        CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando, sin fines comerciales y con la misma
+        licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Páginas a las que remite el texto (portada = 1, montaje = 2, de un vistazo = 3).
+      // ---------------------------------------------------------------------
+      const PAGINAS = { panel4: 4, panel3: 5, panel2: 6, conductas: 7, recompensas: 8, fichas: 9, guia: 10, registro: 12, familias: 13 };
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina];
+
+      // ---------------------------------------------------------------------
+      // Conductas y recompensas. Cada una: [pictograma de ARASAAC, texto].
+      // Las conductas se dicen en positivo: lo que sí tiene que hacer.
+      // ---------------------------------------------------------------------
+      const CONDUCTAS = [
+        [25082, 'Me siento en mi silla'],
+        [9034, 'Levanto la mano para hablar'],
+        [8109, 'Espero mi turno'],
+        [2381, 'Escucho a la seño'],
+        [38596, 'Voy en la fila en mi sitio'],
+        [15361, 'Comparto'],
+        [2439, 'Juego con mis compañeros'],
+        [8128, 'Digo «por favor» y «gracias»'],
+        [4570, 'Pido ayuda'],
+        [8680, 'Recojo los juguetes'],
+        [34409, 'Respiro despacio si me enfado'],
+        [9037, 'Hablo bajito'],
+        [34153, 'Cuido el material'],
+        [2599, 'Termino mi trabajo'],
+        [37312, 'Mis manos, tranquilas'],
+        [5938, 'Al oír el timbre, voy a la fila'],
+      ];
+
+      // 'pegatina' no es de ARASAAC: es un dibujo de IdEducando.
+      const RECOMPENSAS = [
+        ['pegatina', 'Una pegatina'],
+        [10324, 'Un sello'],
+        [35197, '¡Choca esos cinco!'],
+        [4563, 'Un aplauso de la clase'],
+        [26377, 'Reparto el material'],
+        [6483, 'Elijo el cuento'],
+        [31434, 'Bailamos mi canción'],
+        [33064, 'Elijo el juego del patio'],
+        [32178, 'Más rato en mi rincón'],
+        [4726, 'Voy delante en la fila'],
+        [3264, 'El cojín especial'],
+        [4945, 'La mascota viene a casa'],
+        [3128, 'Una medalla'],
+        [6963, 'Una nota para casa'],
+        [2526, 'Pinto en la pizarra'],
+        [6945, 'Pompas de jabón'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (SVG). Contorno marino y colores de la marca.
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const puntosEstrella = (cx, cy, R, r, n = 5, giro = -90) =>
+        Array.from({ length: n * 2 }, (_, i) => {
+          const a = ((giro + (i * 180) / n) * Math.PI) / 180;
+          const rr = i % 2 ? r : R;
+          return `${(cx + rr * Math.cos(a)).toFixed(2)},${(cy + rr * Math.sin(a)).toFixed(2)}`;
+        }).join(' ');
+
+      const ICONOS = {
+        // Pizarra de clase: los dos momentos de clase.
+        clase: `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="10" width="52" height="36" rx="3" fill="#f5961f" stroke="${M}" stroke-width="2.6"/><rect x="11" y="15" width="42" height="26" rx="1.5" fill="#1fa67a" stroke="${M}" stroke-width="2"/><text x="32" y="34" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="13" fill="#fff">a b c</text><path d="M14 46 L50 46" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/><path d="M20 46 L16 56 M44 46 L48 56" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/><rect x="38" y="43" width="8" height="2.6" rx="1" fill="#fff" stroke="${M}" stroke-width="1.2"/></svg>`,
+        // Tobogán con pelota y sol: el recreo.
+        recreo: `<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="52" cy="12" r="7" fill="#f6c12e" stroke="${M}" stroke-width="2"/><path d="M14 56 L14 18 M24 56 L24 18 M14 26 L24 26 M14 34 L24 34 M14 42 L24 42 M14 50 L24 50" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/><path d="M24 18 L28 18 C36 18 38 40 58 50 L58 55 C36 46 32 26 24 26 Z" fill="#e8553e" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/><circle cx="42" cy="54" r="6" fill="#2f6fd6" stroke="${M}" stroke-width="2"/><path d="M36.5 52.5 C40 55 44 55 47.5 52.5" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M6 58 L60 58" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+        // Flecha entre momentos.
+        flecha: `<svg viewBox="0 0 14 20" aria-hidden="true"><path d="M2 2 L12 10 L2 18 Z" fill="${M}"/></svg>`,
+        // Regalo: la recompensa.
+        regalo: `<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="26" width="44" height="32" rx="3" fill="#e8553e" stroke="${M}" stroke-width="2.6"/><rect x="6" y="18" width="52" height="11" rx="2.5" fill="#e8553e" stroke="${M}" stroke-width="2.6"/><rect x="28" y="18" width="8" height="40" fill="#f6c12e" stroke="${M}" stroke-width="2.2"/><path d="M32 18 C24 6 12 10 18 17 C21 20 28 19 32 18 C36 19 43 20 46 17 C52 10 40 6 32 18 Z" fill="#f6c12e" stroke="${M}" stroke-width="2.2" stroke-linejoin="round"/></svg>`,
+        // Círculo de velcro, para las leyendas.
+        velcro: `<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#ead9bb" stroke="${M}" stroke-width="2"/><path d="M12 16 Q15 13 18 16 T24 16 T30 16 M12 22 Q15 19 18 22 T24 22 T30 22 M14 28 Q17 25 20 28 T26 28" fill="none" stroke="${M}" stroke-width="1.4" opacity="0.6"/></svg>`,
+        // Pegatina de estrella con una esquina despegada.
+        pegatina: `<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="8" y="10" width="84" height="80" rx="9" fill="#e4edfb" stroke="${M}" stroke-width="3"/><polygon points="${puntosEstrella(48, 54, 32, 14)}" fill="#fff" stroke="#fff" stroke-width="12" stroke-linejoin="round"/><polygon points="${puntosEstrella(48, 54, 32, 14)}" fill="#f6c12e" stroke="${M}" stroke-width="3.2" stroke-linejoin="round"/><circle cx="41" cy="52" r="2.6" fill="${M}"/><circle cx="55" cy="52" r="2.6" fill="${M}"/><path d="M41 60 Q48 66 55 60" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/><path d="M70 14 L88 14 L88 32 Z" fill="#fff" stroke="${M}" stroke-width="2.6" stroke-linejoin="round"/><path d="M76 22 L82 16" stroke="#9aa6c4" stroke-width="2" stroke-linecap="round"/></svg>`,
+        // Ficha de estrella con cara.
+        fichaEstrella: `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#fdf0c7" stroke="#f5961f" stroke-width="4"/><polygon points="${puntosEstrella(50, 53, 36, 16)}" fill="#f6c12e" stroke="${M}" stroke-width="3.4" stroke-linejoin="round"/><circle cx="43" cy="52" r="3" fill="${M}"/><circle cx="57" cy="52" r="3" fill="${M}"/><path d="M43 60 Q50 66 57 60" fill="none" stroke="${M}" stroke-width="2.8" stroke-linecap="round"/></svg>`,
+        // Ficha de carita sonriente.
+        fichaCarita: `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#dcf3ea" stroke="#1fa67a" stroke-width="4"/><circle cx="50" cy="50" r="31" fill="#fff" stroke="${M}" stroke-width="3.4"/><circle cx="40" cy="45" r="4" fill="${M}"/><circle cx="60" cy="45" r="4" fill="${M}"/><path d="M36 58 Q50 70 64 58" fill="none" stroke="${M}" stroke-width="3.4" stroke-linecap="round"/><circle cx="33" cy="56" r="4" fill="#e8553e" opacity="0.35"/><circle cx="67" cy="56" r="4" fill="#e8553e" opacity="0.35"/></svg>`,
+      };
+      for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = ICONOS[el.dataset.icono];
+
+      const P = (n) => `pictogramas/${n}.png`;
+      const imagen = (id) => (id === 'pegatina' ? ICONOS.pegatina : `<img src="${P(id)}" alt="">`);
+      const tarjeta = ([id, texto], tipo = '') =>
+        `<div class="tarjeta${tipo ? ` tarjeta--${tipo}` : ''}">${imagen(id)}<span>${texto}</span></div>`;
+      const vacia = (tipo, aviso) =>
+        `<div class="tarjeta tarjeta--vacia${tipo ? ` tarjeta--${tipo}` : ''}"><small>${aviso}</small><span class="renglon-mini"></span></div>`;
+      const corte = (contenido) => `<div class="corte">${contenido}</div>`;
+
+      const MOMENTOS = [
+        { clase: 'm-antes', icono: 'clase', texto: 'Antes del recreo' },
+        { clase: 'm-recreo', icono: 'recreo', texto: 'En el recreo' },
+        { clase: 'm-despues', icono: 'clase', texto: 'Después del recreo' },
+      ];
+
+      // ---------------------------------------------------------------------
+      // Los tres paneles: 4, 3 y 2 filas de conductas.
+      // ---------------------------------------------------------------------
+      for (const seccion of document.querySelectorAll('.panel')) {
+        const filas = Number(seccion.dataset.filas);
+        const circulo = { 4: '27mm', 3: '33mm', 2: '42mm' }[filas];
+        const casillas = filas * 3;
+        let rejilla = `<div class="rejilla__esquina">Mis conductas</div>`;
+        rejilla += MOMENTOS.map(
+          (m, i) =>
+            `<div class="momento ${m.clase}"><span class="momento__numero">${i + 1}</span>${ICONOS[m.icono]}<span>${m.texto}</span>${
+              i < 2 ? ICONOS.flecha.replace('<svg', '<svg class="momento__flecha"') : ''
+            }</div>`,
+        ).join('');
+        rejilla += `<div class="premio__cabecera">${ICONOS.regalo}Mi recompensa</div>`;
+        for (let f = 0; f < filas; f++) {
+          rejilla += `<div class="hueco-tarjeta"><div>Pon aquí la tarjeta de la conducta</div></div>`;
+          rejilla += MOMENTOS.map((m) => `<div class="casilla ${m.clase}"><div></div></div>`).join('');
+        }
+        rejilla += `<div class="premio"><div class="hueco-premio">Pon aquí la tarjeta de la recompensa</div><p class="premio__meta">La consigo con<br><span></span> de ${casillas}</p><p class="premio__nota">Pegatina, sello o ficha en cada casilla conseguida.</p></div>`;
+
+        seccion.innerHTML = `
+          <div class="panel__cabecera">
+            <h2 class="panel__titulo">¡Lo consigo!</h2>
+            <p class="panel__renglon">Panel de<span></span></p>
+            <p class="panel__renglon">Semana<span style="min-width: 34mm"></span></p>
+            <p class="panel__marca"><img src="../../marca/simbolo.svg" alt="">IdEducando<br>CC BY-NC-SA 4.0<br>ideducando.es</p>
+          </div>
+          <div class="rejilla" style="--filas: ${filas}; --circulo: ${circulo}">${rejilla}</div>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Tarjetas para recortar: 16 con pictograma y 4 en blanco por hoja.
+      // ---------------------------------------------------------------------
+      document.getElementById('tarjetas-conductas').innerHTML =
+        CONDUCTAS.map((c) => corte(tarjeta(c))).join('') + corte(vacia('', 'Otra conducta')).repeat(4);
+      document.getElementById('tarjetas-recompensas').innerHTML =
+        RECOMPENSAS.map((r) => corte(tarjeta(r, 'premio'))).join('') + corte(vacia('premio', 'Otra recompensa')).repeat(4);
+
+      // ---------------------------------------------------------------------
+      // Fichas: 21 estrellas y 21 caritas.
+      // ---------------------------------------------------------------------
+      document.getElementById('fichas').innerHTML = Array.from({ length: 42 }, (_, i) =>
+        corte(`<div class="ficha">${i < 21 ? ICONOS.fichaEstrella : ICONOS.fichaCarita}</div>`),
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: el panel en miniatura, con tres conductas y la pegatina como recompensa.
+      // ---------------------------------------------------------------------
+      (function miniPanel() {
+        const conductas = [CONDUCTAS[1], CONDUCTAS[6], CONDUCTAS[4]];
+        const marcas = [
+          ['fichaEstrella', 'fichaEstrella', 'fichaCarita'],
+          ['fichaCarita', 'fichaEstrella', ''],
+          ['fichaEstrella', '', ''],
+        ];
+        let t = '<div></div>';
+        t += MOMENTOS.map((m) => `<div class="mini__momento ${m.clase}" style="background: var(--t); border: 0.45mm solid var(--c)">${ICONOS[m.icono]}<span>${m.texto}</span></div>`).join('');
+        t += `<div class="mini__momento mini__cabecera-premio" style="background: var(--amarillo-tinte); border: 0.45mm solid var(--naranja)">${ICONOS.regalo}<span>Mi recompensa</span></div>`;
+        conductas.forEach(([id], f) => {
+          t += `<div class="mini__conducta"><img src="${P(id)}" alt=""></div>`;
+          t += marcas[f]
+            .map((m, i) => `<div class="mini__casilla ${MOMENTOS[i].clase}" style="border-color: var(--c)">${m ? ICONOS[m] : '<div class="mini__hueco"></div>'}</div>`)
+            .join('');
+        });
+        t += `<div class="mini__premio">${tarjeta(RECOMPENSAS[0], 'premio')}</div>`;
+        document.getElementById('mini-panel').innerHTML = t;
+      })();
+
+      // ---------------------------------------------------------------------
+      // Registro de la semana: 4 conductas × 5 días × 3 momentos.
+      // ---------------------------------------------------------------------
+      (function registro() {
+        const dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+        const iconosMomento = MOMENTOS.map((m) => ICONOS[m.icono]);
+        let html = '<colgroup><col style="width: 44mm">' + '<col>'.repeat(15) + '<col style="width: 16mm"></colgroup>';
+        html += '<thead><tr><th scope="col" rowspan="2">Conducta</th>' + dias.map((d) => `<th scope="colgroup" colspan="3" class="dia">${d}</th>`).join('') + '<th scope="col" rowspan="2">Total</th></tr>';
+        html += '<tr>' + dias.map(() => MOMENTOS.map((m, i) => `<th scope="col" class="sub ${m.clase}" style="background: var(--t)" title="${m.texto}">${iconosMomento[i]}</th>`).join('')).join('') + '</tr></thead><tbody>';
+        for (let f = 0; f < 4; f++) html += '<tr><td></td>' + '<td></td>'.repeat(15) + '<td class="total"></td></tr>';
+        html += '<tr><th scope="row" style="text-align: left">¿Meta conseguida?</th>' + dias.map(() => '<td colspan="3">Sí · No</td>').join('') + '<td class="total"></td></tr>';
+        document.getElementById('registro').innerHTML = html + '</tbody>';
+      })();
+
+      // ---------------------------------------------------------------------
+      // Nota para las familias: los tres momentos.
+      // ---------------------------------------------------------------------
+      document.getElementById('tira-familias').innerHTML = MOMENTOS.map((m, i) => `<div class="${m.clase}">${ICONOS[m.icono]}${i + 1}. ${m.texto}</div>`).join('');
+    </script>
+  </body>
+</html>
