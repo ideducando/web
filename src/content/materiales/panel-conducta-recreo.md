@@ -4,7 +4,7 @@ resumen: "Un panel para trabajar de dos a cuatro conductas antes, durante y desp
 seccion: aula
 tipo: apoyo-visual
 etapas: [infantil]
-necesidades: [conducta, tdah, tea, toda-la-clase]
+necesidades: [conducta, tdah, tea]
 edades: "De 3 a 6 años"
 formato: "PDF imprimible (A4)"
 paginas: 14
@@ -61,7 +61,7 @@ Antes del recreo, en el recreo y al volver a clase son momentos en los que a alg
 
 1. **Tres paneles apaisados**, de cuatro, tres y dos conductas, con una columna para cada momento y un hueco grande para «Mi recompensa».
 2. **16 tarjetas de conductas** con pictogramas, todas en positivo: «Espero mi turno», «Juego con mis compañeros», «Respiro despacio si me enfado»… Y 4 en blanco.
-3. **16 tarjetas de recompensas** que una maestra puede dar en clase, sin comida ni dinero: una pegatina, un sello, choca esos cinco, repartir el material, elegir el cuento, el cojín especial… Y 4 en blanco.
+3. **16 tarjetas de recompensas** que se pueden dar en clase, sin comida ni dinero: una pegatina, un sello, choca esos cinco, repartir el material, elegir el cuento, el cojín especial… Y 4 en blanco.
 4. **42 fichas** de estrellas y caritas, para usar el panel con velcro todo el curso.
 5. **Guía para el adulto**: cómo elegir las conductas, cómo dar cada casilla, lo que no hacemos y cómo retirar el panel poco a poco.
 6. **Registro de la semana** y **nota para las familias** en lectura fácil.
