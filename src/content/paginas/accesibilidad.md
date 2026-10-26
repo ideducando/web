@@ -1,8 +1,8 @@
 ---
 titulo: "Accesibilidad"
 entradilla: "Queremos que cualquier persona pueda usar esta web y nuestros materiales, también con lector de pantalla, solo con teclado o con baja visión."
-actualizado: 2026-10-14
-borrador: true
+actualizado: 2026-10-26
+borrador: false
 ---
 
 ## Nuestro objetivo
@@ -21,7 +21,7 @@ Cumplir el nivel AA de las Pautas de Accesibilidad para el Contenido Web (WCAG) 
 
 ## Cómo lo comprobamos
 
-[BORRADOR: revisión automática con axe-core y revisión manual con teclado en octubre de 2026. Pendiente de probar con lectores de pantalla (NVDA y VoiceOver).]
+Cada cambio de la web pasa una revisión automática con axe-core, una herramienta que busca fallos de accesibilidad, en el móvil y en el ordenador, también con el motor de Safari. En octubre de 2026 la revisamos además a mano, solo con el teclado. Nos falta probarla con lectores de pantalla (NVDA y VoiceOver): si usas uno y algo falla, cuéntanoslo.
 
 ## Si algo no funciona
 

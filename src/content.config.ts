@@ -42,7 +42,7 @@ const materiales = defineCollection({
     fecha: z.coerce.date(),
     actualizado: opcional(z.coerce.date().optional()),
     destacado: z.boolean().default(false),
-    borrador: z.boolean().default(true),
+    borrador: z.boolean().default(false),
   }),
 });
 
@@ -56,7 +56,7 @@ const consejos = defineCollection({
     actualizado: opcional(z.coerce.date().optional()),
     autoria: z.string().default('Equipo IdEducando'),
     lectura: opcional(z.string().optional()),
-    borrador: z.boolean().default(true),
+    borrador: z.boolean().default(false),
   }),
 });
 
@@ -68,7 +68,7 @@ const paginas = defineCollection({
     entradilla: opcional(z.string().max(260).optional()),
     descripcion: opcional(z.string().max(200).optional()),
     actualizado: z.coerce.date(),
-    borrador: z.boolean().default(true),
+    borrador: z.boolean().default(false),
   }),
 });
 

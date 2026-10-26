@@ -3,7 +3,6 @@
 import Base from '../../layouts/Base.astro';
 import Intro from '../../components/Intro.astro';
 import Icono from '../../components/Icono.astro';
-import Borrador from '../../components/Borrador.astro';
 import calendario from '../../data/calendario.json';
 import { fecha } from '../../lib/formatos';
 import { ruta } from '../../lib/rutas';
@@ -95,7 +94,6 @@ const eventos = (calendario.eventos as Evento[]).slice().sort((a, b) => a.orden.
         <li>Las plazas que quedan desiertas en Maestros y la tasa de interinidad.</li>
       </ul>
       <p>
-        <Borrador />
         ¿Has visto una fecha que no está aquí? Escríbenos a <a href="mailto:hola@ideducando.es">hola@ideducando.es</a>{' '}
         con el enlace y la revisamos.
       </p>

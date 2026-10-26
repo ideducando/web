@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Intro from '../../components/Intro.astro';
 import Icono from '../../components/Icono.astro';
-import Borrador from '../../components/Borrador.astro';
 import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
 import { materialesOrdenados } from '../../lib/materiales';
 import { fecha, fechaISO } from '../../lib/formatos';
@@ -277,14 +276,12 @@ const BORM = 'https://www.borm.es/services/boletin/ano/2026/numero/18/pdf';
     )
   }
 
-  <section class="seccion seccion--blanca" aria-labelledby="titulo-pronto">
+  <section class="seccion seccion--blanca" aria-labelledby="titulo-cuentanos">
     <div class="contenedor prosa">
-      <h2 id="titulo-pronto">Próximamente</h2>
+      <h2 id="titulo-cuentanos">¿Qué te ayudaría?</h2>
       <p>
-        <Borrador />
-        Estamos preparando simulacros de supuestos prácticos de PT y de Infantil. Si hay algo que te haría falta,
-        cuéntanoslo en{' '}
-        <a href="mailto:hola@ideducando.es">hola@ideducando.es</a>.
+        Cuéntanos qué material te haría falta para preparar la oposición en{' '}
+        <a href="mailto:hola@ideducando.es">hola@ideducando.es</a>. Lo tenemos en cuenta para el siguiente.
       </p>
     </div>
   </section>

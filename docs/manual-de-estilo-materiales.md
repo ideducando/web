@@ -151,10 +151,12 @@ Un PDF accesible lleva **etiquetas**: marcas invisibles que dicen al lector de p
 
 ## 9. Del borrador a la web
 
-1. **Borrador:** quien prepara el material sube la ficha con «Borrador» marcado.
-2. **Revisión docente:** una maestra especialista revisa el contenido y el lenguaje.
-3. **Revisión técnica:** se comprueba la accesibilidad del PDF y de la ficha.
-4. **Publicación:** se desmarca «Borrador» y se hace el merge del PR.
+Desde el 26/10/2026 la web y los PDF no llevan la marca [BORRADOR] (decisión de José).
+
+1. **Preparación:** quien prepara el material sube la ficha y el PDF en un PR, con la casilla «Borrador» sin marcar.
+2. **Revisión técnica:** la revisión automática comprueba enlaces y accesibilidad, y se mira la vista previa del PR.
+3. **Publicación:** se hace el merge del PR.
+4. **Revisión docente:** una maestra especialista revisa el contenido y el lenguaje en la tabla «Revisión de materiales» de Notion, y sus cambios entran en el siguiente PR.
 
 ### Lista final antes de publicar
 

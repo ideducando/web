@@ -6,7 +6,7 @@ fecha: 2026-10-14
 actualizado: 2026-10-14
 autoria: "Equipo IdEducando"
 lectura: "4 minutos"
-borrador: true
+borrador: false
 ---
 
 [ARASAAC](https://arasaac.org), el Centro Aragonés para la Comunicación Aumentativa y Alternativa, es el banco de pictogramas más usado en las aulas de España. Es un proyecto del Gobierno de Aragón y los pictogramas son obra de Sergio Palao. Son gratuitos y tienen una licencia Creative Commons con condiciones.

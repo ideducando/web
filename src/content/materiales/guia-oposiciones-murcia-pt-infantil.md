@@ -22,7 +22,7 @@ licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-14
 actualizado: 2026-10-14
 destacado: true
-borrador: true
+borrador: false
 ---
 
 ## Qué vas a encontrar
