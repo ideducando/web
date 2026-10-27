@@ -1,7 +1,9 @@
 ---
-// La mochila de descargas: los materiales elegidos, todos a 0 €, y el formulario con el correo (y el nombre, opcional)
-// que da acceso a los archivos. Mientras sitio.json diga «demostracion», no se envía ningún dato:
-// la página enseña los enlaces de descarga como lo hará cuando la recogida de datos esté activa.
+// La mochila de descargas: los materiales elegidos, todos a 0 €, y el formulario con el correo (y el nombre, opcional).
+// Con sitio.json en modo «correo», la función de Netlify netlify/functions/mochila.mjs manda los enlaces al correo
+// con Brevo; si Brevo no puede, la página enseña la descarga en pantalla. En modo «demostracion» no se envía
+// ningún dato y la página enseña la descarga directamente.
+// Los enlaces «Descargarlo todo junto» de los correos traen aquí ?descargar=id1,id2 y la página abre la descarga.
 import Base from '../layouts/Base.astro';
 import Intro from '../components/Intro.astro';
 import Icono from '../components/Icono.astro';
@@ -27,17 +29,25 @@ const catalogo = (await materialesOrdenados())
       .join(', '),
   }));
 
-const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.envio;
+const demostracion = sitio.descargas.modo !== 'correo' || !sitio.descargas.envio;
 ---
 
 <Base
   titulo="Mi mochila"
-  descripcion="Los materiales que has elegido, todos gratis. Déjanos tu correo y descárgalos."
+  descripcion={
+    demostracion
+      ? 'Los materiales que has elegido, todos gratis. Déjanos tu correo y descárgalos.'
+      : 'Los materiales que has elegido, todos gratis. Déjanos tu correo y te los mandamos.'
+  }
   indexable={false}
 >
   <Intro
     titulo="Mi mochila"
-    entradilla="Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu correo y descárgalos."
+    entradilla={
+      demostracion
+        ? 'Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu correo y descárgalos.'
+        : 'Aquí tienes los materiales que has elegido. Todos cuestan 0 €: déjanos tu correo y te mandamos los enlaces para descargarlos.'
+    }
     camino={[{ texto: 'Mi mochila' }]}
   />
 
@@ -69,7 +79,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
       </section>
 
       <section class="mochila__datos" aria-labelledby="titulo-datos">
-        <h2 id="titulo-datos">Tus datos para descargar</h2>
+        <h2 id="titulo-datos">{demostracion ? 'Tus datos para descargar' : '¿Adónde te lo mandamos?'}</h2>
         {
           demostracion && (
             <p class="mochila__demo">
@@ -81,7 +91,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
         <form
           class="formulario"
           data-mochila-formulario
-          data-modo={demostracion ? 'demostracion' : 'formulario'}
+          data-modo={demostracion ? 'demostracion' : 'correo'}
           data-envio={demostracion ? '' : sitio.descargas.envio}
         >
           <div class="campo">
@@ -100,7 +110,13 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
               maxlength="120"
               aria-describedby="mochila-correo-ayuda"
             />
-            <p id="mochila-correo-ayuda" class="campo__ayuda">Escríbelo bien: si quieres el boletín, te llegará aquí.</p>
+            <p id="mochila-correo-ayuda" class="campo__ayuda">
+              {
+                demostracion
+                  ? 'Escríbelo bien: si quieres el boletín, te llegará aquí.'
+                  : 'Escríbelo bien: te mandamos ahí los enlaces para descargar.'
+              }
+            </p>
           </div>
 
           <div class="trampa" aria-hidden="true">
@@ -117,8 +133,8 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
           <div class="casilla">
             <input id="mochila-boletin" name="boletin" type="checkbox" value="si" />
             <label for="mochila-boletin">
-              Quiero recibir el boletín de IdEducando, con material nuevo y novedades de oposiciones. Me puedo dar de
-              baja cuando quiera.
+              Quiero recibir el boletín de IdEducando, con material nuevo y novedades de oposiciones. Lo confirmaré
+              desde mi correo y me puedo dar de baja cuando quiera.
             </label>
           </div>
 
@@ -131,7 +147,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
               </div>
               <div>
                 <dt>Para qué</dt>
-                <dd>Darte acceso al material y, solo si marcas la casilla, enviarte el boletín.</dd>
+                <dd>Mandarte el material a tu correo y, solo si marcas la casilla y lo confirmas, el boletín.</dd>
               </div>
               <div>
                 <dt>Base legal</dt>
@@ -140,7 +156,8 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
               <div>
                 <dt>Con quién</dt>
                 <dd>
-                  No vendemos ni cedemos tus datos. Los guarda nuestra herramienta de correo por encargo nuestro.
+                  No vendemos ni cedemos tus datos. Los correos los envía Brevo, por encargo nuestro, con servidores en
+                  la Unión Europea.
                 </dd>
               </div>
               <div>
@@ -155,17 +172,38 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
           </details>
 
           <button class="boton boton--descarga mochila__boton" type="submit">
-            <Icono nombre="descarga" />
-            Descargar gratis
+            <Icono nombre={demostracion ? 'descarga' : 'correo'} />
+            {demostracion ? 'Descargar gratis' : 'Enviar a mi correo'}
           </button>
           <p class="campo__error" data-mochila-error role="alert" hidden></p>
         </form>
       </section>
     </div>
 
+    <section class="mochila__listo" data-mochila-enviado hidden aria-labelledby="titulo-enviado">
+      <Icono nombre="correo" clase="mochila__icono-grande" />
+      <h2 id="titulo-enviado" tabindex="-1">¡Hecho<span data-mochila-saludo></span>! Revisa tu correo</h2>
+      <p>
+        Te hemos mandado los enlaces para descargar a <strong class="mochila__correo" data-mochila-correo></strong>.
+        Suele llegar en menos de un minuto.
+      </p>
+      <p>
+        ¿No lo ves? Mira en Promociones o en Spam, y guarda {sitio.correo} en tus contactos para que los siguientes
+        lleguen bien.
+      </p>
+      <p class="mochila__aviso" data-mochila-boletin hidden></p>
+      <div class="botones mochila__opciones">
+        <button type="button" class="boton boton--secundario" data-mochila-corregir>Me he equivocado de correo</button>
+        <a class="boton boton--secundario" href={ruta('/material-gratuito/')}>Ver más material</a>
+      </div>
+    </section>
+
     <section class="mochila__listo" data-mochila-listo hidden aria-labelledby="titulo-listo">
       <Icono nombre="ok" clase="mochila__icono-grande" />
-      <h2 id="titulo-listo" tabindex="-1">¡Listo<span data-mochila-saludo></span>! Aquí tienes tu material</h2>
+      <h2 id="titulo-listo" tabindex="-1" data-mochila-titulo-listo>
+        ¡Listo<span data-mochila-saludo></span>! Aquí tienes tu material
+      </h2>
+      <p class="mochila__aviso" data-mochila-aviso hidden></p>
       <div class="mochila__todo" data-mochila-todo hidden>
         <p>Descárgalo todo de una vez o elige uno a uno.</p>
         <div class="botones mochila__opciones">
@@ -237,7 +275,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 </Base>
 
 <script>
-  import { alCambiarMochila, leerMochila, quitarDeMochila, vaciarMochila } from '../scripts/mochila';
+  import { alCambiarMochila, anadirAMochila, leerMochila, quitarDeMochila, vaciarMochila } from '../scripts/mochila';
   import { crearZip } from '../scripts/zip';
   import { formatoPeso } from '../lib/peso';
 
@@ -264,6 +302,7 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
   const formulario = $<HTMLFormElement>('[data-mochila-formulario]');
   const error = $('[data-mochila-error]');
   const listo = $('[data-mochila-listo]');
+  const enviado = $('[data-mochila-enviado]');
   const plantillaMaterial = $<HTMLTemplateElement>('[data-plantilla-material]');
   const plantillaDescarga = $<HTMLTemplateElement>('[data-plantilla-descarga]');
 
@@ -372,16 +411,76 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     resumen.textContent = materiales.length === 1 ? '1 material' : `${materiales.length} materiales`;
   }
 
-  async function enviar(datos: FormData) {
-    const envio = formulario.dataset.envio;
-    if (formulario.dataset.modo !== 'formulario' || !envio) return;
-    const respuesta = await fetch(envio, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams([...datos.entries()].map(([k, v]) => [k, String(v)])).toString(),
-    });
-    if (!respuesta.ok) throw new Error(`Respuesta ${respuesta.status}`);
+  // Lo que contesta la función de Netlify (netlify/functions/mochila.mjs).
+  interface Respuesta {
+    enviado: boolean;
+    motivo?: string;
+    boletin?: 'no' | 'enviado' | 'ya' | 'pendiente' | 'error';
   }
+
+  const ERRORES: Record<string, string> = {
+    correo: 'Revisa tu correo: parece que le falta algo, como la @ o el final (.es, .com…).',
+    privacidad: 'Para mandarte el material necesitamos que aceptes la política de privacidad.',
+    materiales: 'No encontramos esos materiales. Vuelve al catálogo y añádelos otra vez.',
+    prisa: 'Has hecho varios intentos seguidos. Espera unos minutos y vuelve a probar.',
+    red: 'No hemos podido enviar tus datos. Prueba otra vez en un momento o escríbenos a hola@ideducando.es.',
+  };
+
+  const BOLETIN: Record<string, string> = {
+    enviado: 'Te llega también otro correo para confirmar el boletín. Hasta que pulses «Sí, quiero el boletín», no te apuntamos.',
+    ya: 'Tu correo ya estaba apuntado al boletín: no tienes que hacer nada más.',
+    pendiente: 'Hoy ya te mandamos el correo para confirmar el boletín: búscalo y pulsa «Sí, quiero el boletín».',
+    error: 'No hemos podido mandarte el correo para confirmar el boletín. Si lo quieres, vuelve a marcar la casilla otro día.',
+  };
+
+  /** En modo demostración no se envía nada (null). En modo correo, contesta la función o salta un error. */
+  async function enviar(datos: FormData): Promise<Respuesta | null> {
+    const envio = formulario.dataset.envio;
+    if (formulario.dataset.modo !== 'correo' || !envio) return null;
+    let respuesta: Response;
+    try {
+      respuesta = await fetch(envio, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams([...datos.entries()].map(([k, v]) => [k, String(v)])).toString(),
+      });
+    } catch {
+      throw new Error('red');
+    }
+    if (respuesta.status === 429) throw new Error('prisa');
+    const cuerpo = await respuesta.json().catch(() => ({}));
+    if (!respuesta.ok) throw new Error(cuerpo.error in ERRORES ? cuerpo.error : 'red');
+    return cuerpo as Respuesta;
+  }
+
+  /** Pantalla «Revisa tu correo». Guarda lo pedido por si hay que corregir la dirección. */
+  let pedidos: Material[] = [];
+  function mostrarEnviado(correo: string, nombre: string, boletin = 'no') {
+    terminado = true;
+    for (const saludo of raiz.querySelectorAll('[data-mochila-saludo]')) saludo.textContent = nombre ? `, ${nombre}` : '';
+    $('[data-mochila-correo]').textContent = correo;
+    const aviso = $('[data-mochila-boletin]');
+    aviso.textContent = BOLETIN[boletin] ?? '';
+    aviso.hidden = !aviso.textContent;
+    llena.hidden = true;
+    vacia.hidden = true;
+    listo.hidden = true;
+    enviado.hidden = false;
+    vaciarMochila();
+    raiz.querySelector<HTMLElement>('#titulo-enviado')?.focus();
+  }
+
+  // «Me he equivocado de correo»: vuelve el formulario con lo mismo en la mochila.
+  $('[data-mochila-corregir]').addEventListener('click', () => {
+    for (const m of pedidos) anadirAMochila(m.id);
+    terminado = false;
+    enviado.hidden = true;
+    formulario.querySelector<HTMLButtonElement>('button[type="submit"]')!.disabled = false;
+    pintar();
+    const campo = formulario.querySelector<HTMLInputElement>('#mochila-correo')!;
+    campo.focus();
+    campo.select();
+  });
 
   formulario.addEventListener('submit', async (evento) => {
     evento.preventDefault();
@@ -395,23 +494,45 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
 
     const boton = formulario.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     boton.disabled = true;
+    let respuesta: Respuesta | null;
     try {
-      await enviar(datos);
-    } catch {
-      error.textContent = `No hemos podido enviar tus datos. Prueba otra vez en un momento o escríbenos a hola@ideducando.es.`;
+      respuesta = await enviar(datos);
+    } catch (fallo) {
+      error.textContent = ERRORES[(fallo as Error).message] ?? ERRORES.red;
       error.hidden = false;
       boton.disabled = false;
       return;
     }
 
+    const nombre = String(datos.get('nombre') ?? '').trim();
+    pedidos = materiales;
+    if (respuesta?.enviado) {
+      mostrarEnviado(String(datos.get('correo') ?? '').trim(), nombre, respuesta.boletin);
+      return;
+    }
+    // Sin correo (modo demostración, o Brevo no ha podido): la descarga, en pantalla.
+    const aviso = !respuesta
+      ? ''
+      : respuesta.motivo === 'repetido'
+        ? 'Hoy ya te hemos mandado este correo varias veces, así que aquí tienes el material para descargarlo.'
+        : 'Ahora mismo no podemos mandarte el correo, así que aquí tienes el material para descargarlo.';
+    mostrarDescargas(materiales, nombre, aviso);
+    vaciarMochila();
+  });
+
+  /** Pantalla de descarga: ZIP, todos por separado o uno a uno. */
+  function mostrarDescargas(materiales: Material[], nombre: string, aviso = '', desdeCorreo = false) {
     terminado = true;
     descargados = materiales;
     const varios = materiales.length > 1;
     todo.hidden = !varios;
     $('[data-mochila-solo-uno]').hidden = varios;
     $('[data-mochila-zip-peso]').textContent = `(${formatoPeso(materiales.reduce((suma, m) => suma + m.bytes, 0))})`;
-    const nombre = String(datos.get('nombre') ?? '').trim();
-    $('[data-mochila-saludo]').textContent = nombre ? `, ${nombre}` : '';
+    for (const saludo of raiz.querySelectorAll('[data-mochila-saludo]')) saludo.textContent = nombre ? `, ${nombre}` : '';
+    if (desdeCorreo) $('[data-mochila-titulo-listo]').textContent = 'Aquí tienes tu material';
+    const avisoListo = $('[data-mochila-aviso]');
+    avisoListo.textContent = aviso;
+    avisoListo.hidden = !aviso;
     $('[data-mochila-descargas]').replaceChildren(
       ...materiales.map((m) => {
         const fila = plantillaDescarga.content.firstElementChild!.cloneNode(true) as HTMLElement;
@@ -426,12 +547,19 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     );
     llena.hidden = true;
     vacia.hidden = true;
+    enviado.hidden = true;
     listo.hidden = false;
-    vaciarMochila();
-    raiz.querySelector<HTMLElement>('#titulo-listo')?.focus();
-  });
+    // Al llegar desde el correo, la página empieza aquí y el foco no se mueve.
+    if (!desdeCorreo) raiz.querySelector<HTMLElement>('#titulo-listo')?.focus();
+  }
 
-  pintar();
+  // El botón «Descargarlo todo junto» del correo trae ?descargar=id1,id2: se abre la descarga sin formulario.
+  const delCorreo = (new URLSearchParams(location.search).get('descargar') ?? '')
+    .split(',')
+    .map((id) => porId.get(id.trim()))
+    .filter((m): m is Material => Boolean(m));
+  if (delCorreo.length) mostrarDescargas(delCorreo, '', '', true);
+  else pintar();
   alCambiarMochila(pintar);
 </script>
 
@@ -608,6 +736,17 @@ const demostracion = sitio.descargas.modo !== 'formulario' || !sitio.descargas.e
     border-radius: var(--radio-pequeno);
     background: var(--coral-tinte);
     font-size: 0.95rem;
+  }
+
+  .mochila__aviso {
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--amarillo-tinte);
+  }
+
+  /* Un correo largo no ensancha la página en el móvil. */
+  .mochila__correo {
+    overflow-wrap: anywhere;
   }
 
   .formulario {

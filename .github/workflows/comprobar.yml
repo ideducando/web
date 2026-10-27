@@ -12,7 +12,9 @@ permissions:
 jobs:
   comprobar:
     name: Construir y revisar accesibilidad
-    runs-on: ubuntu-latest
+    # Ubuntu 24.04 fijo: desde octubre de 2026, ubuntu-latest es la 26.04 y Playwright 1.56
+    # no sabe instalar ahí Chromium ni WebKit.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7

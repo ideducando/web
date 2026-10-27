@@ -14,7 +14,8 @@ const SITE =
 export default defineConfig({
   site: SITE,
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  // La página para confirmar el boletín no va en el mapa para buscadores: solo sirve desde el correo.
+  integrations: [sitemap({ filter: (pagina) => !pagina.includes('/boletin/') })],
   markdown: {
     // smartypants desactivado: no convierte guiones en rayas ni cambia las comillas.
     processor: unified({ smartypants: false }),
