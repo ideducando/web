@@ -33,8 +33,8 @@ components:
   borrador:
     type: boolean
     label: Borrador
-    description: "Mientras esté marcado, la ficha muestra la etiqueta [BORRADOR]. Desmárcalo cuando el equipo la haya revisado."
-    default: true
+    description: "Si lo marcas, la ficha muestra la etiqueta [BORRADOR]. Desde el 26/10/2026 la web no la usa: la revisión del equipo va en Notion."
+    default: false
 
 content:
   - name: materiales

@@ -2,12 +2,10 @@
 titulo: "Licencias y créditos"
 entradilla: "Puedes usar, compartir y adaptar nuestros materiales en tu aula. Aquí tienes las condiciones y la forma de citarlos."
 actualizado: 2026-10-14
-borrador: true
+borrador: false
 ---
 
 ## Los materiales
-
-[BORRADOR: licencia propuesta, pendiente de que el equipo la apruebe.]
 
 Los materiales de IdEducando se publican con la licencia **Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional** ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)). Significa que puedes:
 

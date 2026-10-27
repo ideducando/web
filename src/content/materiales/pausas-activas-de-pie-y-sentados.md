@@ -57,7 +57,7 @@ licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-19
 actualizado: 2026-10-19
 destacado: true
-borrador: true
+borrador: false
 ---
 
 ## Para qué sirve

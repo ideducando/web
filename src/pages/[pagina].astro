@@ -4,6 +4,7 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Intro from '../components/Intro.astro';
+import Titular from '../components/Titular.astro';
 import { fecha, fechaISO } from '../lib/formatos';
 
 export async function getStaticPaths() {
@@ -24,6 +25,7 @@ const { Content } = await render(pagina);
   <Intro titulo={d.titulo} entradilla={d.entradilla} camino={[{ texto: d.titulo }]} borrador={d.borrador} />
   <div class="contenedor pagina">
     <article class="prosa">
+      {pagina.id === 'aviso-legal' && <Titular />}
       <Content />
       <p class="pagina__fecha">
         Última revisión: <time datetime={fechaISO(d.actualizado)}>{fecha(d.actualizado)}</time>.

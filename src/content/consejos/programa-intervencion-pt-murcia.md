@@ -6,7 +6,7 @@ fecha: 2026-10-14
 actualizado: 2026-10-14
 autoria: "Equipo IdEducando"
 lectura: "6 minutos"
-borrador: true
+borrador: false
 ---
 
 En la especialidad de Pedagogía Terapéutica (PT), la segunda prueba gira alrededor de un **programa de intervención** para alumnado con necesidades específicas de apoyo educativo (NEAE). La convocatoria de 2026 lo deja claro en su anexo VI: a todos los efectos, el programa de intervención cuenta como la programación didáctica.

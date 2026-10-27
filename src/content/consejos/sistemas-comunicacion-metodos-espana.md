@@ -6,7 +6,7 @@ fecha: 2026-10-19
 actualizado: 2026-10-19
 autoria: "Equipo IdEducando"
 lectura: "12 minutos"
-borrador: true
+borrador: false
 ---
 
 ARASAAC es el sistema de pictogramas más conocido en los coles de España, pero hay más. Para elegir bien conviene separar dos cosas: el **sistema**, que es el vocabulario (pictogramas, fotos o signos), y el **método**, que es la forma de enseñarlo. Un mismo alumno puede usar pictogramas de ARASAAC con el método PECS, o signos junto a un tablero.

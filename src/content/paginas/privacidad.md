@@ -1,15 +1,14 @@
 ---
 titulo: "Privacidad"
-entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Para descargar el material te pedimos un correo, y aquí te contamos qué hacemos con ellos."
-actualizado: 2026-10-14
-borrador: true
+entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Aquí te contamos qué datos tratamos y para qué."
+actualizado: 2026-10-26
+borrador: false
 ---
-
-[BORRADOR: estamos preparando la mochila de descargas, que pedirá un correo (y el nombre, si quieres darlo) para descargar el material. Mientras sea una vista previa no guarda ningún dato. Antes de activarla, esta página explicará quién es el responsable, para qué usamos los datos, la herramienta de correo, cuánto tiempo los guardamos y cómo darte de baja.]
 
 ## Resumen
 
-- Para descargar el material pedimos un correo; el nombre es opcional. El boletín es aparte y solo te llega si marcas su casilla. [BORRADOR: todavía no activo.]
+- Hoy la web no guarda ningún dato personal. La mochila de descargas funciona como vista previa: el correo que escribes no sale de tu navegador.
+- Cuando la activemos, pedirá un correo para enviarte el material. El boletín irá aparte y solo te llegará si marcas su casilla. Antes de activarla, esta página dirá qué herramienta de correo usamos, cuánto tiempo guardamos los datos y cómo darte de baja.
 - No hay cuentas ni contraseñas.
 - No hay cookies de seguimiento ni herramientas de analítica.
 - Las letras de la web se sirven desde nuestro propio alojamiento, no desde Google.
@@ -17,7 +16,7 @@ borrador: true
 
 ## Responsable
 
-[BORRADOR: pendiente de decidir el titular, como en el [aviso legal](/aviso-legal/).] Puedes escribir sobre cualquier cuestión de privacidad a [hola@ideducando.es](mailto:hola@ideducando.es).
+El responsable de tus datos es el titular de la web. Su nombre y sus datos de contacto están en el [aviso legal](/aviso-legal/). Puedes escribir sobre cualquier cuestión de privacidad a [hola@ideducando.es](mailto:hola@ideducando.es).
 
 ## Si nos escribes
 
@@ -25,7 +24,7 @@ Si nos mandas un correo, usamos tu dirección y tu mensaje solo para contestarte
 
 ## El alojamiento de la web
 
-La web está alojada en Netlify, un servicio de Netlify, Inc. Como cualquier servidor, registra datos técnicos de cada visita, como la dirección IP, por seguridad. [BORRADOR: revisar la política de privacidad de Netlify y la base de la transferencia internacional de datos antes de publicar.]
+La web está alojada en Netlify, un servicio de Netlify, Inc. Como cualquier servidor, registra datos técnicos de cada visita, como la dirección IP, por seguridad. Netlify es una empresa de Estados Unidos que está adherida al Marco de Privacidad de Datos UE-EE. UU., el acuerdo que permite enviar datos de la Unión Europea a empresas de ese país que se comprometen a protegerlos igual. Lo explica en su [política de privacidad](https://www.netlify.com/privacy/).
 
 ## Lo que se guarda en tu navegador
 

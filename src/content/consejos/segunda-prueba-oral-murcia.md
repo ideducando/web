@@ -6,7 +6,7 @@ fecha: 2026-10-19
 actualizado: 2026-10-19
 autoria: "Equipo IdEducando"
 lectura: "8 minutos"
-borrador: true
+borrador: false
 ---
 
 La segunda prueba, la de aptitud pedagógica, es la que mejor se puede entrenar: sus reglas caben en un folio y casi todas se ensayan en casa. Aquí están las de la [Orden de 21 de enero de 2026](https://www.borm.es/services/boletin/ano/2026/numero/18/pdf) (Boletín Oficial de la Región de Murcia, BORM, n.º 18), con la página de cada una. Después va lo que haríamos nosotros con ellas.

@@ -38,4 +38,4 @@ Revisa que no haya enlaces internos rotos ni palabras pegadas a un enlace o a un
 
 Si en tu equipo no está instalado WebKit, esa pasada se omite con un aviso; en GitHub Actions siempre se hace.
 
-La revisión automática no lo detecta todo: antes de quitar el borrador hay que probar también con teclado y con un lector de pantalla.
+La revisión automática no lo detecta todo: hay que probar también con teclado y con un lector de pantalla.

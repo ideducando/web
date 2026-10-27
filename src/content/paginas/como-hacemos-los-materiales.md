@@ -3,7 +3,7 @@ titulo: "Cómo hacemos los materiales"
 entradilla: "Las reglas que sigue cada ficha antes de llegar al catálogo. Las publicamos para que sepas qué puedes esperar y nos avises si alguna falla."
 descripcion: "Criterios pedagógicos, de accesibilidad y de licencia que cumple cada material gratuito de IdEducando."
 actualizado: 2026-10-14
-borrador: true
+borrador: false
 ---
 
 ## Pensados para toda la clase

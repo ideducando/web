@@ -6,7 +6,7 @@ fecha: 2026-10-14
 actualizado: 2026-10-14
 autoria: "Equipo IdEducando"
 lectura: "4 minutos"
-borrador: true
+borrador: false
 ---
 
 El Diseño Universal para el Aprendizaje (DUA) parte de una idea sencilla: si diseñas pensando desde el principio en la diversidad, necesitas hacer menos adaptaciones después. Lo propuso el centro de investigación CAST, que publicó en 2024 la versión 3.0 de sus pautas, y la LOMLOE lo recoge en el artículo 4.3 de la Ley Orgánica de Educación.

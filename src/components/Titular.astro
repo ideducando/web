@@ -1,0 +1,23 @@
+---
+// Datos del titular de la web para el aviso legal (artículo 10 de la LSSI).
+// El repositorio es público y no guarda datos personales: José los pone en las variables de
+// entorno de Netlify (TITULAR_NOMBRE, TITULAR_NIF y TITULAR_DOMICILIO) y se escriben en cada
+// publicación. Si falta alguna, como al construir fuera de Netlify, su línea no sale.
+const dato = (clave: string) => (process.env[clave] ?? '').trim();
+const datos = [
+  ['Nombre', dato('TITULAR_NOMBRE')],
+  ['NIF', dato('TITULAR_NIF')],
+  ['Domicilio', dato('TITULAR_DOMICILIO')],
+].filter(([, valor]) => valor);
+---
+
+<h2>Titular</h2>
+<p>
+  IdEducando es el nombre del proyecto. Mientras no exista una sociedad, la titularidad de la web corresponde a la
+  persona del equipo que se encarga de la parte digital. Estos son sus datos, como pide el artículo 10 de la Ley
+  34/2002, de servicios de la sociedad de la información (LSSI):
+</p>
+<ul>
+  {datos.map(([etiqueta, valor]) => <li>{etiqueta}: {valor}</li>)}
+  <li>Correo electrónico: <a href="mailto:hola@ideducando.es">hola@ideducando.es</a></li>
+</ul>

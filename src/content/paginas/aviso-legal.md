@@ -1,16 +1,9 @@
 ---
 titulo: "Aviso legal"
 entradilla: "Quién está detrás de esta web y en qué condiciones puedes usarla."
-actualizado: 2026-10-14
-borrador: true
+actualizado: 2026-10-26
+borrador: false
 ---
-
-## Titular
-
-[BORRADOR: pendiente de decidir quién figura como titular de la web mientras no exista una sociedad. La Ley 34/2002, de servicios de la sociedad de la información (LSSI), pide en su artículo 10 el nombre, el número de identificación fiscal (NIF) y el domicilio cuando la web forma parte de una actividad económica.]
-
-- Nombre: IdEducando [BORRADOR: titular pendiente]
-- Correo electrónico: [hola@ideducando.es](mailto:hola@ideducando.es)
 
 ## Para qué sirve esta web
 

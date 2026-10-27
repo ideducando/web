@@ -3,7 +3,7 @@ titulo: "Quiénes somos"
 entradilla: "Un proyecto pequeño de la Región de Murcia que hace el material que nos habría gustado encontrar cuando lo necesitábamos."
 descripcion: "IdEducando: material gratuito de Pedagogía Terapéutica e Infantil para docentes y familias, y recursos para opositar en la Región de Murcia."
 actualizado: 2026-10-20
-borrador: true
+borrador: false
 ---
 
 ## Qué es IdEducando
@@ -34,8 +34,6 @@ Las guías para opositar son de la Región de Murcia, y el material sirve en cua
 **Abierto.** Puedes compartir y adaptar nuestro material para tu clase o para tu casa. Las condiciones están en [licencias y créditos](/licencias/).
 
 ## El equipo
-
-[BORRADOR: aquí irá la presentación del equipo, con nombre y foto de quien quiera salir. Hasta que cada persona lo decida, la web no publica nombres.]
 
 Somos un equipo de la Región de Murcia: maestras especialistas en Pedagogía Terapéutica, que preparan y revisan el material, y una persona que se ocupa de la parte digital.
 

@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icono from '../components/Icono.astro';
 import TarjetaMaterial from '../components/TarjetaMaterial.astro';
-import Borrador from '../components/Borrador.astro';
 import sitio from '../data/sitio.json';
 import { NECESIDADES } from '../data/taxonomias';
 import { fecha, fechaISO } from '../lib/formatos';
@@ -30,7 +29,6 @@ const consejos = (await getCollection('consejos'))
         <p class="portada__antetitulo">Material gratuito de PT e Infantil</p>
         <h1 class="lema portada__titulo">{sitio.lema}</h1>
         <p class="entradilla">
-          <Borrador />
           Para docentes y familias de toda España: material pensado para la diversidad, en el aula y en casa. Hoy
           todo cuesta 0 €: lo añades a tu mochila, nos dejas tu correo y lo descargas.
         </p>
@@ -109,7 +107,6 @@ const consejos = (await getCollection('consejos'))
         <p class="portada__antetitulo">Para familias</p>
         <h2 id="titulo-familias">En casa, también</h2>
         <p>
-          <Borrador />
           Si tu hijo o tu hija tiene alguna necesidad específica de apoyo, casi todo nuestro material sirve también en
           casa: agendas para anticipar el día, tableros para comunicarse, historias para preparar los cambios y juegos
           cortos. Los que hay que montar traen su hoja, con lo que hay que comprar y en qué medida.
@@ -229,7 +226,6 @@ const consejos = (await getCollection('consejos'))
     <div class="contenedor nosotras">
       <h2 id="titulo-nosotras" class="lema">¿Quién hay detrás?</h2>
       <p class="entradilla">
-        <Borrador />
         Un equipo pequeño de la Región de Murcia: maestras especialistas en Pedagogía Terapéutica y alguien que
         se ocupa de la parte digital. Hacemos el material que nos habría gustado encontrar.
       </p>

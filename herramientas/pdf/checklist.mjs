@@ -90,7 +90,7 @@ export function generarChecklist(raiz, carpetaPdf) {
       <div class="caja caja--azul">
         <h3>De dónde sale</h3>
         <p>Anexo VI y anexos XVII (Infantil) y XXII (PT) de la ${esc(datos.fuente.nombre)}.</p>
-        <p>Revisada el 14/10/2026. <span class="borrador">[BORRADOR]</span></p>
+        <p>Revisada el 14/10/2026.</p>
       </div>
     </div>
     <div class="caja caja--coral">

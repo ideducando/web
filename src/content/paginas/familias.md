@@ -3,10 +3,8 @@ titulo: "Para familias"
 entradilla: "Material para trabajar en casa con tu hijo o tu hija, sobre todo si tiene alguna necesidad específica de apoyo. Es el mismo que usan las seños en clase."
 descripcion: "Material gratuito de PT e Infantil para usar en casa: agendas visuales, tableros de comunicación, historias sociales y juegos, con su hoja para montarlo."
 actualizado: 2026-10-20
-borrador: true
+borrador: false
 ---
-
-[BORRADOR: página nueva, pendiente de que el equipo la revise.]
 
 ## Por dónde empezar
 

@@ -5,7 +5,7 @@
 Material gratuito de Pedagogía Terapéutica (PT) e Infantil para docentes de toda España, y guías para opositar a Maestros en la Región de Murcia. Todo a 0 €, sin registro y sin seguimiento.
 
 - **Dirección:** [www.ideducando.es](https://www.ideducando.es/). Quien entra por ideducando.es o por ideducando.netlify.app llega ahí solo.
-- **Estado:** borrador. Los textos marcados con `[BORRADOR]` son de prueba y los tiene que revisar el equipo.
+- **Estado:** publicada en www.ideducando.es y, desde el 26/10/2026, sin avisos de borrador. La revisión docente de cada material sigue en Notion.
 - **Instrucciones del proyecto:** [CLAUDE.md](CLAUDE.md).
 
 ---
@@ -78,7 +78,7 @@ El proyecto tiene una regla: **cada cambio va en una rama con su PR**. Una rama 
 3. Rellena los campos. Los obligatorios son título, resumen, «Para», tipo y fecha.
 4. En **Archivo para descargar**, sube el PDF. Si lo dejas vacío, la ficha sale como «Próximamente».
 5. En **Portada**, sube la imagen y escribe debajo una descripción para quien no la ve.
-6. Deja marcado **Borrador** hasta que el equipo lo revise.
+6. Deja **Borrador** sin marcar. La revisión del equipo se apunta en la tabla «Revisión de materiales» de Notion.
 7. Guarda y abre el PR como se explica arriba.
 
 Antes de publicar un material, repasa el [manual de estilo de materiales](docs/manual-de-estilo-materiales.md).

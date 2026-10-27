@@ -168,6 +168,12 @@ const DOCUMENTOS = [
       'Cinco secuencias con pictogramas para las rutinas de clase: llegar a clase, el desayuno, lavarse las manos, ir al baño y coger y recoger el material. Dos tiras iguales por hoja, plantilla para hacer las tuyas, guía para enseñar los pasos, registro de pasos y nota para las familias',
     palabras: 'secuencias, pictogramas, rutinas, autonomía, análisis de tareas, apoyos visuales, encadenamiento, lavado de manos, ir al baño, desayuno, almuerzo, abrigo, percha, material de clase, ARASAAC, TEA, Infantil, Primaria',
   },
+  {
+    id: 'panel-conducta-recreo',
+    asunto:
+      'Panel de conducta para Educación Infantil con tres momentos (antes, durante y después del recreo) y hueco para la recompensa: paneles de cuatro, tres y dos conductas, 16 tarjetas de conductas en positivo y 16 de recompensas que se pueden dar en clase sin comida ni dinero, fichas de estrellas y caritas, guía para el adulto, registro de la semana y nota para las familias',
+    palabras: 'panel de conducta, economía de fichas, modificación de conducta, apoyo conductual positivo, recompensas, refuerzo positivo, elogio, recreo, pegatinas, sello, normas de clase, ARASAAC, TEA, TDAH, Infantil',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
