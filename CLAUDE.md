@@ -1,8 +1,8 @@
 # IdEducando · instrucciones del proyecto
 
 ## Qué es
-IdEducando es una web de material educativo de Pedagogía Terapéutica (PT) e Infantil para docentes y familias de toda España. Hoy el material es gratis y se publica en la web. Más adelante será lo que se venda: en descarga a precio bajo (después, con suscripción), con lo necesario para montarlo en casa (velcro, fundas, anillas, plastificadora) o ya montado y enviado desde Cartagena. A largo plazo, una tienda física en Cartagena y clases y programaciones a medida para las oposiciones de maestros de la Región de Murcia (convocatoria prevista en 2028). Lo decidió José el 20/10/2026.
-Públicos: docentes que buscan material para el aula; familias que trabajan en casa con sus hijos, sobre todo si tienen alguna necesidad específica de apoyo; y, más adelante, opositoras.
+IdEducando es una web de material educativo de Pedagogía Terapéutica (PT) e Infantil para docentes y familias de toda España. Hoy el material es gratis y se publica en la web. Más adelante será lo que se venda: en descarga a precio bajo (después, con suscripción), con lo necesario para montarlo en casa (velcro, fundas, anillas, plastificadora) o ya montado y enviado desde Cartagena. A largo plazo, una tienda física en Cartagena. Lo decidió José el 20/10/2026. No habrá clases de oposición: el equipo docente no las dará (27/10/2026); quizá, más adelante, consejos y seguimiento a quien lo pida por los canales oficiales.
+Públicos: docentes que buscan material para el aula; familias que trabajan en casa con sus hijos, sobre todo si tienen alguna necesidad específica de apoyo; y opositoras, con material gratuito para la oposición de maestros de la Región de Murcia (convocatoria prevista en 2028).
 Nombre: siempre "IdEducando", con la I y la E en mayúscula. Junta "idea" y "educando".
 Subtítulo: Aprendizaje inclusivo y creativo. Lema: «Cada peque, una idea» (José, 26/10/2026; src/data/sitio.json). El anterior, «Donde cada forma de aprender se celebra», ya no se usa.
 
@@ -19,8 +19,9 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 - En castellano de España.
 
 ## Estado (octubre de 2026)
-- Prioridad: la web y el material gratuito. Las clases de oposición no tienen fecha.
+- Prioridad: la web y el material gratuito.
 - Durante el próximo año se prepara la web para vender. Nada con pictogramas de ARASAAC se vende: su licencia (CC BY-NC-SA) no admite el uso comercial y ARASAAC confirmó por teléfono el 22/10/2026 que no da permiso para venderlo. Lo que se venda irá con pictogramas e ilustraciones propios.
+- Libros: la versión con pictogramas es siempre gratis y el libro con texto e ilustraciones, de pago (José, 27/10/2026). Cuando RORESMO, los pictogramas propios, tenga su catálogo, la versión gratuita se podrá descargar con ARASAAC o con RORESMO, a elegir.
 - Desde el 26/10/2026 la web y los PDF no llevan avisos de borrador ni noindex (José). La revisión del equipo sigue en la tabla «Revisión de materiales» de Notion y cada cambio entra en un PR. El campo borrador de las fichas existe, pero va desmarcado.
 - Titular de la web: José, como responsable de la parte digital (26/10/2026). Su nombre, NIF y domicilio salen en el aviso legal desde las variables de Netlify TITULAR_NOMBRE, TITULAR_NIF y TITULAR_DOMICILIO (src/components/Titular.astro); nunca se escriben en el repositorio.
 - Mi mochila: correo obligatorio para recibir el material y boletín solo con su casilla aparte, sin marcar (José, 26/10/2026). Sigue en modo demostración hasta conectar la herramienta de correo.
