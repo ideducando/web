@@ -1,0 +1,6 @@
+# IdEducando: los buscadores pueden leer toda la web.
+# Los PDF de /descargas/ llevan su propia cabecera noindex (netlify.toml).
+User-agent: *
+Allow: /
+
+Sitemap: https://www.ideducando.es/sitemap-index.xml
