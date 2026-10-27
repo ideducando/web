@@ -97,6 +97,7 @@ Antes de publicar un material, repasa el [manual de estilo de materiales](docs/m
 | `src/pages/` | El diseño de cada página |
 | `public/descargas/` | Los PDF que se descargan |
 | `public/portadas/` | Las portadas del catálogo |
+| `netlify/functions/` | Las funciones de Netlify: mandan por correo, con Brevo, el material de Mi mochila y confirman el boletín. Lo común está en `netlify/lib/` |
 | `herramientas/` | Programas para generar los PDF y revisar la accesibilidad. No se publican |
 | `docs/` | Documentación del equipo, como el manual de estilo |
 | `.github/workflows/` | El robot que revisa cada PR |
@@ -108,6 +109,7 @@ Antes de publicar un material, repasa el [manual de estilo de materiales](docs/m
 
 - **Astro** es el programa que construye la web. Funciona como una línea de envasado: le entran los textos y las plantillas, y sale la web terminada en páginas HTML listas para servir. Por eso la web es rápida y no necesita servidor ni base de datos.
 - **Netlify** construye la web y la publica cada vez que se hace merge en `main`. Con cada PR prepara además una vista previa, una copia de prueba con el cambio. Su configuración está en `netlify.toml`.
+- **Las funciones de Netlify** son trocitos de código que solo se encienden cuando alguien los usa, como la luz de la escalera. Cuando alguien pide su material en Mi mochila, una función le pide a **Brevo**, el servicio de correo, que le mande los enlaces desde hola@ideducando.es. La clave de Brevo está en la variable secreta `BREVO_API_KEY` de Netlify, nunca en el repositorio.
 - **GitHub Actions** son los robots de GitHub. Con cada PR, uno construye la web y la revisa: enlaces, accesibilidad y que nada se salga de la pantalla.
 - **Pagefind** es el buscador. Crea un índice al construir la web y la búsqueda ocurre en el navegador de quien busca: no se envía nada a ningún servidor.
 - **Las letras** (Outfit, Young Serif y Atkinson Hyperlegible) se sirven desde la propia web. Así no se manda la dirección IP de nadie a Google. En 2022, un tribunal alemán condenó a una web a indemnizar a un visitante por cargar las letras desde Google (LG München I, sentencia de 20/01/2022, 3 O 17493/20).

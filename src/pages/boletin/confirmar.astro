@@ -1,0 +1,143 @@
+---
+// Confirmación del boletín. El correo «Confirma tu alta en el boletín de IdEducando» trae aquí ?t=código.
+// Hace falta pulsar el botón: algunos antivirus de correo abren solos los enlaces, y así nadie queda apuntado
+// sin quererlo. El botón manda el código a la función de Netlify netlify/functions/boletin.mjs, que lo comprueba
+// y apunta el correo en la lista «Boletín IdEducando» de Brevo.
+import Base from '../../layouts/Base.astro';
+import Intro from '../../components/Intro.astro';
+import Icono from '../../components/Icono.astro';
+import sitio from '../../data/sitio.json';
+import { ruta } from '../../lib/rutas';
+---
+
+<Base
+  titulo="Confirma el boletín"
+  descripcion="Un clic para apuntarte al boletín de IdEducando."
+  indexable={false}
+>
+  <Intro
+    titulo="Confirma el boletín"
+    entradilla="Material nuevo y novedades de oposiciones en tu correo. Te puedes dar de baja cuando quieras."
+    camino={[{ texto: 'Boletín' }]}
+  />
+
+  <div class="contenedor boletin" data-boletin data-envio="/api/boletin">
+    <section class="boletin__caja" data-estado="pedir" aria-labelledby="boletin-pedir">
+      <Icono nombre="correo" clase="boletin__icono" />
+      <h2 id="boletin-pedir" tabindex="-1">Un clic y listo</h2>
+      <p>Pulsa el botón para apuntarte al boletín de IdEducando.</p>
+      <button type="button" class="boton boton--principal" data-boletin-confirmar>
+        <Icono nombre="ok" />
+        Sí, quiero el boletín
+      </button>
+      <p class="boletin__error" role="alert" data-boletin-error hidden></p>
+    </section>
+
+    <section class="boletin__caja" data-estado="hecho" hidden aria-labelledby="boletin-hecho">
+      <Icono nombre="ok" clase="boletin__icono" />
+      <h2 id="boletin-hecho" tabindex="-1">¡Ya estás dentro!</h2>
+      <p>Te llegará el boletín a tu correo. Al final de cada uno hay un enlace para darte de baja cuando quieras.</p>
+      <a class="boton boton--secundario" href={ruta('/material-gratuito/')}>Ver el material gratuito</a>
+    </section>
+
+    <section class="boletin__caja" data-estado="caducado" hidden aria-labelledby="boletin-caducado">
+      <Icono nombre="atencion" clase="boletin__icono" />
+      <h2 id="boletin-caducado" tabindex="-1">Este enlace ya no vale</h2>
+      <p>
+        Los enlaces para confirmar duran 7 días. Para apuntarte, pide material en Mi mochila y marca la casilla del
+        boletín: te llegará uno nuevo.
+      </p>
+      <a class="boton boton--secundario" href={ruta('/mi-mochila/')}>Ir a Mi mochila</a>
+    </section>
+
+    <noscript>
+      <p class="boletin__sin-js">
+        Para confirmar hace falta JavaScript activado en el navegador. Si no puedes activarlo, escríbenos a{' '}
+        <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a> y te apuntamos.
+      </p>
+    </noscript>
+  </div>
+</Base>
+
+<script>
+  const raiz = document.querySelector<HTMLElement>('[data-boletin]')!;
+  const codigo = new URLSearchParams(location.search).get('t') ?? '';
+  const boton = raiz.querySelector<HTMLButtonElement>('[data-boletin-confirmar]')!;
+  const error = raiz.querySelector<HTMLElement>('[data-boletin-error]')!;
+
+  function mostrar(estado: 'pedir' | 'hecho' | 'caducado', mover = true) {
+    for (const caja of raiz.querySelectorAll<HTMLElement>('[data-estado]')) caja.hidden = caja.dataset.estado !== estado;
+    if (mover) raiz.querySelector<HTMLElement>(`[data-estado="${estado}"] h2`)?.focus();
+  }
+
+  // Sin código no hay nada que confirmar.
+  if (!codigo) mostrar('caducado', false);
+
+  boton.addEventListener('click', async () => {
+    boton.disabled = true;
+    error.hidden = true;
+    try {
+      const respuesta = await fetch(raiz.dataset.envio!, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ t: codigo }),
+      });
+      const cuerpo = await respuesta.json().catch(() => ({}));
+      if (respuesta.ok && cuerpo.ok) return mostrar('hecho');
+      if (cuerpo.motivo === 'caducado') return mostrar('caducado');
+      throw new Error(`Respuesta ${respuesta.status}`);
+    } catch {
+      error.textContent = 'No hemos podido apuntarte ahora. Prueba otra vez en un rato o escríbenos a hola@ideducando.es.';
+      error.hidden = false;
+      boton.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .boletin {
+    padding-block: 2rem 3.5rem;
+  }
+
+  .boletin__caja {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    max-width: 38rem;
+    margin-inline: auto;
+    padding: 2rem 1.25rem;
+    text-align: center;
+    border-radius: var(--radio);
+    background: var(--papel);
+    border: 2px dashed var(--amarillo);
+  }
+
+  .boletin__caja h2 {
+    margin: 0;
+  }
+
+  .boletin__caja h2:focus {
+    outline: none;
+  }
+
+  .boletin :global(.boletin__icono) {
+    width: 3rem;
+    height: 3rem;
+    color: var(--morado-texto);
+  }
+
+  .boletin__error {
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--coral-tinte);
+    color: var(--coral-texto);
+    font-weight: 700;
+  }
+
+  .boletin__sin-js {
+    padding: 1rem;
+    border-radius: var(--radio);
+    background: var(--amarillo-tinte);
+  }
+</style>

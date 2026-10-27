@@ -10,6 +10,13 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Funciones de Netlify: trocitos de código que solo se encienden cuando alguien los usa.
+# mochila.mjs manda por correo, con Brevo, el material de «Mi mochila» y boletin.mjs confirma el alta
+# en el boletín. Usan la variable secreta BREVO_API_KEY, que está en Netlify y nunca en el repositorio.
+# Cada uso gasta una fracción mínima de crédito: del orden de 5 créditos por cada 1.000 peticiones.
+[functions]
+  directory = "netlify/functions"
+
 # Los archivos de _astro llevan su huella en el nombre: si cambian, cambia el nombre.
 # El navegador puede guardarlos un año y así cada visita pide menos al servidor.
 [[headers]]
@@ -22,6 +29,18 @@
 # El enlace directo de un PDF sigue funcionando si alguien lo comparte.
 [[headers]]
   for = "/descargas/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# La página para confirmar el boletín solo sirve a quien llega desde su correo, y el catálogo de la
+# mochila es para la función de Netlify: ninguno de los dos tiene que salir en los buscadores.
+[[headers]]
+  for = "/boletin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/datos/*"
   [headers.values]
     X-Robots-Tag = "noindex"
 

@@ -13,8 +13,8 @@
     "texto": "Ideas y materiales gratis para que cada peque aprenda a su manera, y para la seño y la familia que lo acompañan cada día."
   },
   "descargas": {
-    "modo": "demostracion",
-    "nota": "Modos: «demostracion» enseña la descarga sin guardar ningún dato; «formulario» envía el correo, el nombre si lo hay y las casillas a la dirección de «envio» antes de enseñarla. Se activa cuando haya responsable de los datos y herramienta de correo.",
-    "envio": ""
+    "modo": "correo",
+    "nota": "Modos: «correo» manda los enlaces del material al correo con Brevo, desde la función de Netlify de «envio» (netlify/functions/mochila.mjs), y si Brevo no puede enseña la descarga en pantalla; «demostracion» enseña la descarga sin enviar ningún dato.",
+    "envio": "/api/mochila"
   }
 }
