@@ -17,7 +17,7 @@ fuentes:
   - "Anexo VI de la Orden de 21 de enero de 2026 (BORM nº 18, de 23/01/2026): aspectos formales y específicos de la programación"
   - "Anexos XVII (Educación Infantil) y XXII (Pedagogía Terapéutica) de la misma orden: criterios de valoración de la segunda prueba"
 autoria: "Equipo IdEducando"
-licencia: "CC BY-NC-SA 4.0"
+licencia: "Todos los derechos reservados"
 fecha: 2026-10-14
 actualizado: 2026-10-14
 destacado: true

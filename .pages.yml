@@ -181,8 +181,13 @@ content:
         default: "Equipo IdEducando"
       - name: licencia
         label: Licencia
-        type: string
+        type: select
         default: "CC BY-NC-SA 4.0"
+        description: "CC BY-NC-SA 4.0 si el material lleva pictogramas de ARASAAC; si no, todos los derechos reservados."
+        options:
+          values:
+            - { name: "CC BY-NC-SA 4.0", label: "CC BY-NC-SA 4.0 (lleva pictogramas de ARASAAC)" }
+            - { name: "Todos los derechos reservados", label: "Todos los derechos reservados (sin ARASAAC)" }
       - name: fecha
         label: Fecha de publicación
         type: date

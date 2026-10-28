@@ -1,7 +1,7 @@
 ---
 titulo: "Aviso legal"
 entradilla: "Quién está detrás de esta web y en qué condiciones puedes usarla."
-actualizado: 2026-10-26
+actualizado: 2026-10-28
 borrador: false
 ---
 
@@ -15,7 +15,7 @@ Lo que publicamos sobre oposiciones es orientativo. Lo citamos siempre con su fu
 
 ## Propiedad intelectual
 
-Los materiales se publican con la licencia Creative Commons que indica cada ficha. El nombre y el logo de IdEducando no están incluidos en esa licencia. Los detalles están en [licencias y créditos](/licencias/).
+Cada material indica su licencia en su ficha: Creative Commons BY-NC-SA 4.0 si lleva pictogramas de ARASAAC, o todos los derechos reservados si no los lleva. El nombre y el logo de IdEducando no están incluidos en ninguna licencia. Los detalles están en [licencias y créditos](/licencias/).
 
 ## Enlaces a otras webs
 

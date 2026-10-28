@@ -32,7 +32,9 @@ const parecidos = relacionados(material, materiales);
 const seMonta = d.pasos.length > 0;
 const anio = d.fecha.getFullYear();
 const enlacePublico = new URL(ruta(`/material-gratuito/${material.id}/`), Astro.site).toString();
-const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando' : `${d.autoria} para IdEducando`} (${anio}). Licencia ${d.licencia}. ${enlacePublico}`;
+// Si la licencia es Creative Commons se nombra; si no, la cita dice «Todos los derechos reservados».
+const derechos = d.licencia.startsWith('CC ') ? `Licencia ${d.licencia}` : d.licencia;
+const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando' : `${d.autoria} para IdEducando`} (${anio}). ${derechos}. ${enlacePublico}`;
 ---
 
 <Base titulo={d.titulo} descripcion={d.resumen} imagen={d.portada} tipo="article" imagenBuscador={!d.portada}>

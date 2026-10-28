@@ -20,7 +20,7 @@ fuentes:
   - "Decreto n.º 359/2009, de 30 de octubre, de respuesta educativa a la diversidad del alumnado (BORM n.º 254)"
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
 autoria: "Equipo IdEducando"
-licencia: "CC BY-NC-SA 4.0"
+licencia: "Todos los derechos reservados"
 fecha: 2026-10-15
 actualizado: 2026-10-15
 destacado: true

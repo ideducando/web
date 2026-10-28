@@ -43,6 +43,13 @@ export function generarChecklist(raiz, carpetaPdf) {
   <title>Revisa tu programación: lista de comprobación del modelo de Murcia · IdEducando</title>
   <link rel="stylesheet" href="comun.css" />
   <style>
+    /* Sin pictogramas de ARASAAC: todos los derechos reservados (José, 28/10/2026). */
+    @page {
+      @bottom-left {
+        content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+      }
+    }
+
     .cabecera { display: flex; justify-content: space-between; align-items: flex-start; gap: 8mm; margin: 0 0 5mm; }
     .cabecera img { width: 46mm; height: auto; }
     .cabecera h1 { font-size: 24pt; margin-bottom: 2mm; }
@@ -125,7 +132,7 @@ export function generarChecklist(raiz, carpetaPdf) {
 
   <div class="creditos">
     <p><strong>Revisa tu programación.</strong> IdEducando, octubre de 2026. Versión interactiva: <span class="url">ideducando.es/oposiciones/programacion</span></p>
-    <p>Licencia CC BY-NC-SA 4.0. Los criterios reproducidos son textos oficiales de la convocatoria (artículo 13 de la Ley de Propiedad Intelectual). Lo que vale es lo publicado en el BORM. Errores: hola@ideducando.es</p>
+    <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirla y usarla para revisar tu programación; para recomendarla, comparte el enlace de su ficha en ideducando.es, no el archivo. Los criterios reproducidos son textos oficiales de la convocatoria (artículo 13 de la Ley de Propiedad Intelectual). Lo que vale es lo publicado en el BORM. Errores: hola@ideducando.es</p>
   </div>
 </body>
 </html>`;

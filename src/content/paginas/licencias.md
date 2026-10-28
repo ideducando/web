@@ -1,13 +1,17 @@
 ---
 titulo: "Licencias y créditos"
-entradilla: "Puedes usar, compartir y adaptar nuestros materiales en tu aula. Aquí tienes las condiciones y la forma de citarlos."
-actualizado: 2026-10-14
+entradilla: "Todos nuestros materiales gratuitos se pueden descargar y usar en el aula y en casa. Aquí tienes lo que permite cada licencia y cómo citarlos."
+actualizado: 2026-10-28
 borrador: false
 ---
 
 ## Los materiales
 
-Los materiales de IdEducando se publican con la licencia **Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional** ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)). Significa que puedes:
+Cada ficha dice cuál es su licencia, en el apartado «Licencia». Hay dos.
+
+### Con pictogramas de ARASAAC: CC BY-NC-SA 4.0
+
+Los materiales que llevan pictogramas de ARASAAC se publican con la licencia **Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional** ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)). Significa que puedes:
 
 - **Compartir**: copiar y redistribuir el material en cualquier formato.
 - **Adaptar**: cambiarlo y crear otros a partir de él.
@@ -18,13 +22,29 @@ Siempre que:
 - **No lo uses con fines comerciales**: no puedes venderlo ni incluirlo en un producto de pago.
 - **Compartas tus adaptaciones con la misma licencia.**
 
-Elegimos esta licencia porque es la misma que usan los pictogramas de ARASAAC, de modo que puedes combinarlos sin problemas.
+Es la misma licencia de los pictogramas de ARASAAC, como pide ARASAAC para lo que se hace con ellos.
+
+### Sin pictogramas de ARASAAC: todos los derechos reservados
+
+Los materiales que no llevan pictogramas de ARASAAC, como las guías para opositoras o el registro de observación ABC, son gratis y tienen todos los derechos reservados. Puedes:
+
+- **Descargarlos** e imprimirlos tantas veces como quieras.
+- **Usarlos** en tu aula, con tu alumnado o para preparar tu oposición, y adaptarlos para tu propio uso.
+
+Sin nuestro permiso no puedes:
+
+- Compartir el archivo, subirlo a otra web o publicar una versión cambiada.
+- Venderlo o incluirlo en un producto de pago.
+
+Si quieres recomendar uno, comparte el enlace de su ficha: así siempre llega la última versión. Para cualquier otro uso, escríbenos a hola@ideducando.es.
 
 ## Cómo citarlos
 
 Cada ficha trae el texto ya preparado en el apartado «Cómo citarlo». El formato es:
 
 > «Título del material», IdEducando (año). Licencia CC BY-NC-SA 4.0. Dirección de la ficha.
+
+En los materiales sin pictogramas de ARASAAC, en lugar de la licencia pone «Todos los derechos reservados».
 
 ## Lo que no entra en la licencia
 
