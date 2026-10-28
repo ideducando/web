@@ -41,7 +41,7 @@ fuentes:
   - "Mesibov, G. B., Shea, V. y Schopler, E. (2005). The TEACCH approach to autism spectrum disorders. Springer"
   - "CAST (2024). Universal Design for Learning Guidelines version 3.0. udlguidelines.cast.org"
 autoria: "Equipo IdEducando"
-licencia: "CC BY-NC-SA 4.0"
+licencia: "Todos los derechos reservados"
 fecha: 2026-10-14
 actualizado: 2026-10-19
 destacado: true

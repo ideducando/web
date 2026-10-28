@@ -30,6 +30,8 @@ const peso = pesoArchivo(d.archivo);
 const formatoArchivo = extension(d.archivo);
 const parecidos = relacionados(material, materiales);
 const seMonta = d.pasos.length > 0;
+// Lo que lleva pictogramas de ARASAAC va con su licencia, CC, y es gratis siempre (José, 28/10/2026).
+const conArasaac = d.licencia.startsWith('CC ');
 const anio = d.fecha.getFullYear();
 const enlacePublico = new URL(ruta(`/material-gratuito/${material.id}/`), Astro.site).toString();
 // Si la licencia es Creative Commons se nombra; si no, la cita dice «Todos los derechos reservados».
@@ -76,7 +78,16 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
           <div class="ficha__compra" data-ficha-compra>
             <p class="ficha__precio">
               <span class="ficha__cero">0 €</span>
-              <span>Gratis. Lo añades a tu mochila y lo descargas desde allí.</span>
+              {
+                conArasaac ? (
+                  <span>
+                    Gratis siempre, como todo lo que lleva pictogramas de ARASAAC (
+                    <a href={ruta('/quienes-somos/#gratis-siempre')}>por qué</a>). Lo añades a tu mochila y lo descargas desde allí.
+                  </span>
+                ) : (
+                  <span>Gratis. Lo añades a tu mochila y lo descargas desde allí.</span>
+                )
+              }
             </p>
             {
               disponible ? (

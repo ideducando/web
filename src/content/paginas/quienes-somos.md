@@ -2,7 +2,7 @@
 titulo: "Quiénes somos"
 entradilla: "Un proyecto pequeño de la Región de Murcia que hace el material que nos habría gustado encontrar cuando lo necesitábamos."
 descripcion: "IdEducando: material gratuito de Pedagogía Terapéutica e Infantil para docentes y familias, y recursos para opositar en la Región de Murcia."
-actualizado: 2026-10-20
+actualizado: 2026-10-28
 borrador: false
 ---
 
@@ -15,6 +15,14 @@ Hacemos dos cosas:
 - **Material gratuito** de Pedagogía Terapéutica (PT) e Infantil para docentes y familias de toda España: apoyos visuales, plantillas, juegos y fichas pensadas para la diversidad, en el aula y en casa.
 - **Guías para opositar** a Maestros en la Región de Murcia, escritas con el Boletín Oficial de la Región de Murcia (BORM) delante y con cada dato enlazado a su fuente.
 
+## Gratis siempre
+
+IdEducando nace para ayudar a quien acompaña a un peque con necesidades específicas de apoyo, sea su madre, su padre, su seño o un amigo de la familia. Por eso **todo el material que lleva pictogramas de ARASAAC es gratis y lo será siempre**.
+
+Además, la licencia de ARASAAC no permite venderlo. Aunque lo permitiera, lo regalaríamos igual: cuando una familia necesita un tablero de comunicación o una historia social, lo necesita ya, y el dinero no tiene que ser un freno.
+
+Los libros que algún día vendamos con ilustraciones tendrán siempre su versión gratuita con pictogramas.
+
 ## Cómo queremos ser
 
 Queremos que IdEducando sea profesional y, a la vez, agradable para las seños, para las familias y para los niños, y que esté al día de la normativa y de lo que se pide hoy en las aulas.
@@ -23,7 +31,7 @@ Las guías para opositar son de la Región de Murcia, y el material sirve en cua
 
 ## Cómo trabajamos
 
-**Gratis y sin anuncios.** Hoy todo el material cuesta 0 €. Para descargar solo pedimos un correo, no ponemos anuncios y no vendemos ni cedemos tus datos.
+**Gratis y sin anuncios.** Hoy todo el material cuesta 0 €, y lo que lleva pictogramas de ARASAAC lo será siempre. Para descargar solo pedimos un correo, no ponemos anuncios y no vendemos ni cedemos tus datos.
 
 **Con fuentes.** Cada material tiene una ficha técnica con la edad, las necesidades a las que responde, en qué se apoya y cuándo lo revisamos por última vez.
 
@@ -31,7 +39,7 @@ Las guías para opositar son de la Región de Murcia, y el material sirve en cua
 
 **Sin seguimiento.** Esta web no usa cookies de seguimiento ni analítica de terceros. Lo explicamos en la página de [privacidad](/privacidad/).
 
-**Abierto.** Puedes compartir y adaptar nuestro material para tu clase o para tu casa. Las condiciones están en [licencias y créditos](/licencias/).
+**Para compartir.** El material con pictogramas de ARASAAC lo puedes compartir y adaptar. El resto lo puedes usar en tu clase o en tu casa, y para recomendarlo basta con el enlace de su ficha. Las condiciones están en [licencias y créditos](/licencias/).
 
 ## El equipo
 

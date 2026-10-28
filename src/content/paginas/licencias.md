@@ -11,6 +11,8 @@ Cada ficha dice cuál es su licencia, en el apartado «Licencia». Hay dos.
 
 ### Con pictogramas de ARASAAC: CC BY-NC-SA 4.0
 
+Son gratis y lo serán siempre, porque IdEducando existe para ayudar a quien los necesita ([por qué](/quienes-somos/#gratis-siempre)).
+
 Los materiales que llevan pictogramas de ARASAAC se publican con la licencia **Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional** ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)). Significa que puedes:
 
 - **Compartir**: copiar y redistribuir el material en cualquier formato.
@@ -26,7 +28,7 @@ Es la misma licencia de los pictogramas de ARASAAC, como pide ARASAAC para lo qu
 
 ### Sin pictogramas de ARASAAC: todos los derechos reservados
 
-Los materiales que no llevan pictogramas de ARASAAC, como las guías para opositoras o el registro de observación ABC, son gratis y tienen todos los derechos reservados. Puedes:
+Los materiales que no llevan pictogramas de ARASAAC, como la agenda visual, que va en blanco, las guías para opositoras o el registro de observación ABC, son gratis y tienen todos los derechos reservados. Puedes:
 
 - **Descargarlos** e imprimirlos tantas veces como quieras.
 - **Usarlos** en tu aula, con tu alumnado o para preparar tu oposición, y adaptarlos para tu propio uso.
