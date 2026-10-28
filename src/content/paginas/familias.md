@@ -2,9 +2,11 @@
 titulo: "Para familias"
 entradilla: "Material para trabajar en casa con tu hijo o tu hija, sobre todo si tiene alguna necesidad específica de apoyo. Es el mismo que usan las seños en clase."
 descripcion: "Material gratuito de PT e Infantil para usar en casa: agendas visuales, tableros de comunicación, historias sociales y juegos, con su hoja para montarlo."
-actualizado: 2026-10-20
+actualizado: 2026-10-28
 borrador: false
 ---
+
+**Todo lo que lleva pictogramas de ARASAAC es gratis y lo será siempre.** Estamos aquí para ayudar a quien acompaña a un peque con necesidades específicas, y el dinero no tiene que ser un freno. Te lo contamos en [quiénes somos](/quienes-somos/#gratis-siempre).
 
 ## Por dónde empezar
 

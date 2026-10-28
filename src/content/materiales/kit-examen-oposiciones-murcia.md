@@ -18,7 +18,7 @@ fuentes:
   - "Real Decreto 276/2007, de 23 de febrero, Reglamento de ingreso en los cuerpos docentes (artículo 21.2.B)"
   - "Decreto n.º 196/2022 (Educación Infantil) y Decreto n.º 209/2022 (Educación Primaria) de la Región de Murcia, para los ejemplos"
 autoria: "Equipo IdEducando"
-licencia: "CC BY-NC-SA 4.0"
+licencia: "Todos los derechos reservados"
 fecha: 2026-10-19
 actualizado: 2026-10-19
 destacado: false

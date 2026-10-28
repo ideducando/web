@@ -18,7 +18,7 @@ fuentes:
   - "Real Decreto 276/2007, de 23 de febrero, Reglamento de ingreso en los cuerpos docentes"
   - "Notas de prensa de la Consejería de Educación de la Región de Murcia (mayo a julio de 2026)"
 autoria: "Equipo IdEducando"
-licencia: "CC BY-NC-SA 4.0"
+licencia: "Todos los derechos reservados"
 fecha: 2026-10-14
 actualizado: 2026-10-14
 destacado: true

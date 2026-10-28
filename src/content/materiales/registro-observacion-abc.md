@@ -17,7 +17,7 @@ fuentes:
   - "O'Neill, R. E. y otros (2015). Functional Assessment and Program Development for Problem Behavior: A Practical Handbook (3.ª ed.). Cengage"
   - "Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales"
 autoria: "Equipo IdEducando"
-licencia: "CC BY-NC-SA 4.0"
+licencia: "Todos los derechos reservados"
 fecha: 2026-10-14
 actualizado: 2026-10-14
 destacado: false

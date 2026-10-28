@@ -38,7 +38,8 @@ const materiales = defineCollection({
     // Normativa, estudios o materiales en los que se apoya la ficha.
     fuentes: opcional(z.array(z.string()).default([])),
     autoria: z.string().default('Equipo IdEducando'),
-    licencia: z.string().default('CC BY-NC-SA 4.0'),
+    // Lo que lleva pictogramas de ARASAAC, con su misma licencia; lo demás, con todos los derechos reservados (José, 28/10/2026).
+    licencia: z.enum(['CC BY-NC-SA 4.0', 'Todos los derechos reservados']).default('CC BY-NC-SA 4.0'),
     fecha: z.coerce.date(),
     actualizado: opcional(z.coerce.date().optional()),
     destacado: z.boolean().default(false),
