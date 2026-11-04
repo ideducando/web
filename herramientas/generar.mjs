@@ -243,6 +243,18 @@ const DOCUMENTOS = [
       'Mañana en clase: fichas rápidas para el TEA, el TDAH, el TDL y la discapacidad intelectual, con señales, ajustes que funcionan, errores frecuentes, frases que ayudan y a quién pedir ayuda en la Región de Murcia',
     palabras: 'TEA, TDAH, TDL, discapacidad intelectual, atención a la diversidad, ajustes razonables, inclusión, DUA, orientación, Región de Murcia, docentes',
   },
+  {
+    id: 'derechos-infancia-lectura-facil',
+    asunto:
+      'Mis derechos: los derechos de la infancia en lectura fácil, con pictogramas de ARASAAC, preguntas en tres niveles, un mural para la clase y guía para el 20 de noviembre',
+    palabras: 'derechos de la infancia, Convención sobre los Derechos del Niño, 20 de noviembre, lectura fácil, pictogramas, ARASAAC, valores, comprensión lectora, Primaria',
+  },
+  {
+    id: 'dialogos-para-completar',
+    asunto:
+      'Diálogos para completar: conversaciones cortas de invierno con huecos, respuestas con y sin pictogramas de ARASAAC y preguntas sobre lo que piensan y sienten, en tres niveles',
+    palabras: 'pragmática, diálogos, conversación, inferencias, emociones, lenguaje, TDL, TEA, pictogramas, ARASAAC, Audición y Lenguaje, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
