@@ -8,7 +8,7 @@
 //
 // Qué hace:
 //   1. Abre cada documento HTML de pdf/ en Chromium y lo imprime como PDF etiquetado
-//      (accesible para lectores de pantalla) en public/descargas/.
+//      (accesible para lectores de pantalla) en public/descargas/, con un marcador por título.
 //   2. Saca una miniatura de la primera página.
 //   3. Crea la portada de cada ficha del catálogo (1200 × 900 px) en public/portadas/.
 //   4. Crea la imagen para compartir en redes (public/og-imagen.png), con el lema de src/data/sitio.json.
@@ -215,6 +215,45 @@ for (const doc of DOCUMENTOS) {
     throw new Error(`${doc.id}: el HTML tiene el hueco de montaje y la ficha no tiene pasos`);
   }
 
+  // Texto de cada título para su marcador. Chromium escribe los marcadores del PDF con las letras que
+  // pinta: pierde el espacio en cada salto de línea (un <br />, un salto automático) y entre piezas que
+  // separa un margen (un número en un círculo), y a veces repite el título. Aquí se lee el título letra
+  // a letra y se pone un espacio donde dos letras seguidas están separadas en la hoja. metadatos.py
+  // corrige los marcadores con esta lista.
+  await pagina.emulateMedia({ media: 'print' });
+  const titulos = await pagina.evaluate(() => {
+    const rango = document.createRange();
+    const leer = (titulo) => {
+      let texto = '';
+      let antes = null; // la caja de la letra anterior y su espaciado entre letras
+      const nodos = document.createTreeWalker(titulo, NodeFilter.SHOW_TEXT);
+      for (let nodo = nodos.nextNode(); nodo; nodo = nodos.nextNode()) {
+        const estilo = getComputedStyle(nodo.parentElement);
+        if (estilo.visibility === 'hidden') continue;
+        const espaciado = parseFloat(estilo.letterSpacing) || 0;
+        let i = 0;
+        for (const letra of nodo.data) {
+          rango.setStart(nodo, i);
+          rango.setEnd(nodo, (i += letra.length));
+          const caja = rango.getBoundingClientRect();
+          if (!caja.width && !caja.height) continue; // un espacio de sobra, que no se pinta
+          if (antes) {
+            const otraLinea = (caja.top + caja.bottom) / 2 > antes.caja.bottom;
+            const hueco = Math.max(caja.left - antes.caja.right, antes.caja.left - caja.right) - antes.espaciado;
+            if (otraLinea || hueco > 0.15 * parseFloat(estilo.fontSize)) texto += ' ';
+          }
+          texto += estilo.textTransform === 'uppercase' ? letra.toLocaleUpperCase('es') : letra;
+          antes = { caja, espaciado };
+        }
+      }
+      return texto.replace(/\s+/g, ' ').trim();
+    };
+    return [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')]
+      .filter((h) => h.getClientRects().length > 0 && getComputedStyle(h).visibility !== 'hidden')
+      .map(leer);
+  });
+  await pagina.emulateMedia({ media: null });
+
   const destino = join(descargas, `${doc.id}.pdf`);
   await pagina.pdf({
     path: destino,
@@ -224,7 +263,7 @@ for (const doc of DOCUMENTOS) {
     outline: true,
   });
 
-  completarMetadatos(destino, doc);
+  completarMetadatos(destino, doc, titulos);
 
   // Miniatura de la primera página: con pdftoppm (Poppler) si está instalado, que la pinta igual que el PDF.
   const miniatura = join(temporal, doc.id);
@@ -276,12 +315,23 @@ rmSync(temporal, { recursive: true, force: true });
 // Ayudas
 // ---------------------------------------------------------------------------
 
-/** Título, autoría y palabras clave en el PDF, y que el visor muestre el título. Usa Python con pypdf. */
-function completarMetadatos(ruta, doc) {
+/**
+ * Título, autoría y palabras clave en el PDF, que el visor muestre el título y que cada marcador diga
+ * su título con los espacios bien puestos. Usa Python con pypdf.
+ */
+function completarMetadatos(ruta, doc, titulos) {
+  const listaTitulos = join(temporal, `${doc.id}.titulos.json`);
+  writeFileSync(listaTitulos, JSON.stringify(titulos));
   try {
-    execFileSync('python3', ['-I', join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras], { stdio: 'inherit' });
-  } catch {
-    console.warn(`Aviso: no se han podido completar los metadatos de ${doc.id} (¿falta Python con pypdf?).`);
+    execFileSync('python3', ['-I', join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras, listaTitulos], {
+      stdio: 'inherit',
+    });
+  } catch (error) {
+    // 3: los marcadores no cuadran con los títulos del HTML. metadatos.py ya ha explicado por qué.
+    if (error.status === 3) throw new Error(`${doc.id}: no se han podido corregir los marcadores del PDF`);
+    console.warn(
+      `Aviso: no se han podido completar los metadatos ni corregir los marcadores de ${doc.id} (¿falta Python con pypdf?).`,
+    );
   }
 }
 

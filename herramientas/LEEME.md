@@ -10,7 +10,7 @@ npm install
 npx playwright install chromium webkit   # los navegadores que imprimen los PDF y revisan la web
 ```
 
-También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa.
+También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF y dejar bien sus marcadores, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa.
 
 ## Generar los PDF y las portadas
 
@@ -24,6 +24,9 @@ npm run pdf -- agenda-visual-semanal # solo uno
 - Si un documento empieza con portada, su HTML lleva la regla `@page :first` con margen cero. Sin ella, Chromium descoloca la portada cuando lleva imágenes.
 - La lista de comprobación de la programación se construye a partir de `src/data/programacion.json`, el mismo archivo que usa la versión interactiva de la web.
 - Los PDF salen en `public/descargas/`, etiquetados para lectores de pantalla, con título, idioma, autoría y marcadores.
+- Los marcadores (el índice lateral del lector de PDF, que usan también los lectores de pantalla) salen de los títulos `h1` a `h6`. Chromium los escribe sin el espacio de cada salto de línea («El rincónde la calma») y a veces repite el título, así que `generar.mjs` lee cada título como se ve en la hoja y `metadatos.py` corrige su marcador. Si un marcador no cuadra con su título, el programa para y explica cuál.
+- En los títulos con `<br />` se pone `&nbsp;` antes del salto, salvo si el título va centrado: ahí el espacio duro correría la línea.
+- Chromium se abre sin «hinting» (el ajuste de las letras a los píxeles), como se hicieron los PDF publicados. Con él, el texto se corre y algunos PDF ganan una página.
 - Las portadas (1200 × 900) salen en `public/portadas/`. Si una ficha no tiene PDF todavía, su portada lleva el aviso «Próximamente».
 
 ## Revisar la web
