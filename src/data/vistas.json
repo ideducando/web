@@ -1,0 +1,1066 @@
+{
+  "agenda-visual-semanal": {
+    "total": 5,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Mi semana"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Mi día"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Primero y después"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente"
+      }
+    ]
+  },
+  "checklist-programacion-murcia": {
+    "total": 9,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Oposiciones de Maestros · Región de Murcia"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Indica la etapa educativa y el curso al que va dirigida"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Si te presentas por Educación Infantil"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Contribuye a los planes y programas del centro"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Define los objetivos de aprendizaje de la unidad"
+      }
+    ]
+  },
+  "cuento-lectura-facil-cole-nuevo": {
+    "total": 18,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cuento adaptado · pautas de lectura fácil"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Mi primer día en el cole"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Voy a empezar en un cole nuevo"
+      },
+      {
+        "pagina": 5,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Por la mañana, voy al cole"
+      },
+      {
+        "pagina": 6,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Mi profe se llama"
+      }
+    ]
+  },
+  "dias-distintos-historias-sociales": {
+    "total": 14,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historias sociales · anticipación"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 1 de 6 · para leer antes del día"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 2 de 6 · para leer antes del día"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 3 de 6 · para leer antes del día"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 4 de 6 · para leer antes del día"
+      }
+    ]
+  },
+  "estaciones-matematicas-otono": {
+    "total": 32,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Con ver"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "De un vistazo · segundo ciclo de Infantil"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Seguridad y material"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo organizarlas"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Estación 1 · cantidad y número"
+      }
+    ]
+  },
+  "guia-oposiciones-murcia-pt-infantil": {
+    "total": 14,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía gratuita · edición de octubre de 2026"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Las cifras"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo es la oposición"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "La primera prueba"
+      }
+    ]
+  },
+  "historias-sociales-calma-y-palabras": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historias sociales · emociones y compañeros"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 1 de 4 · con mis emociones"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 2 de 4 · con mis emociones"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 3 de 4 · con mis compañeros"
+      }
+    ]
+  },
+  "historias-sociales-cole-y-casa": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historias sociales · cole y casa"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 1 de 8 · clase"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 2 de 8 · clase"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia 3 de 8 · patio"
+      }
+    ]
+  },
+  "kit-bienvenida-alumnado-recien-llegado": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Apoyo visual · acogida"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas 1 a 6"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas 7 a 12"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
+  "kit-examen-oposiciones-murcia": {
+    "total": 13,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Oposiciones de Maestros · Región de Murcia"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía de uso"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Segunda prueba · para la pared"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Segunda prueba · plantilla"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Segunda prueba · ejemplo de Pedagogía Terapéutica"
+      }
+    ]
+  },
+  "panel-conducta-recreo": {
+    "total": 14,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Panel de conducta · Infantil"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 6,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      }
+    ]
+  },
+  "pausas-activas-de-pie-y-sentados": {
+    "total": 16,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "cartas"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "¿Qué pausa necesitamos?"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Pausas para calmar 1 a 4"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Pausas para calmar 5 a 8"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Pausas para activar 9 a 12"
+      }
+    ]
+  },
+  "programa-intervencion-pt-ejemplo": {
+    "total": 22,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para opositar · Pedagogía Terapéutica · Región de Murcia"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Mapa de indicadores: dónde está cada punto"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Normativa"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
+  "registro-observacion-abc": {
+    "total": 3,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Registro de observación"
+      },
+      {
+        "pagina": 2,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Después de 10 o 12 anotaciones"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía de uso"
+      }
+    ]
+  },
+  "registro-sesiones-pt-al": {
+    "total": 5,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla · Pedagogía Terapéutica (PT) y Audición y Lenguaje (AL)"
+      },
+      {
+        "pagina": 2,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Registro de sesiones · PT y AL"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Seguimiento del trimestre"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Coordinación"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía de uso"
+      }
+    ]
+  },
+  "rincon-de-la-calma": {
+    "total": 11,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Apoyo visual · regulación emocional"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "¿Cómo estoy?"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nuestro rincón"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ideas para volver a la calma"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ideas para volver a la calma"
+      }
+    ]
+  },
+  "secuencias-rutinas-paso-a-paso": {
+    "total": 15,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Secuencias con pictogramas · rutinas de clase"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 6,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      }
+    ]
+  },
+  "situacion-aprendizaje-3-anos-emociones": {
+    "total": 30,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Situación de aprendizaje · 3 años · 8 sesiones"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "De un vistazo"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo está pensada"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Conexión con el currículo de la Región de Murcia"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
+  "situacion-aprendizaje-4-anos-huerto": {
+    "total": 31,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Situación de aprendizaje · 4 años · 8 sesiones"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "De un vistazo · segundo curso del segundo ciclo de Infantil (4 años)"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo está pensada"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Conexión con el currículo de la Región de Murcia"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
+  "situacion-aprendizaje-5-anos-mapa-del-cole": {
+    "total": 33,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Situación de aprendizaje · 5 años · 8 sesiones"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "De un vistazo"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo está pensada"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Conexión con el currículo de la Región de Murcia"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
+  "tablero-comunicacion-basico": {
+    "total": 10,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Apoyo visual · comunicación aumentativa"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Mi tablero"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Mi primer tablero"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Llavero de comunicación"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas para completar"
+      }
+    ]
+  },
+  "tarjeta-cole-casa-tdah": {
+    "total": 14,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué llevo"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjeta visual para Infantil, dos por hoja"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjeta para Primaria, dos por hoja"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "24 objetivos para elegir tres"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Pictogramas para recortar"
+      }
+    ]
+  },
+  "tren-de-las-silabas": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Juego · conciencia fonológica"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "El tren de las sílabas"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Piezas para jugar"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Palabras de 1 sílaba"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Palabras de 2 sílabas"
+      }
+    ]
+  },
+  "ya-he-terminado": {
+    "total": 34,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "juegos"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Ya he terminado. ¿A qué juego?"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diferencias"
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Laberintos"
+      },
+      {
+        "pagina": 23,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "La oca"
+      },
+      {
+        "pagina": 26,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  }
+}

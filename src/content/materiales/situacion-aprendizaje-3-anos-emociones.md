@@ -14,7 +14,7 @@ portada_alt: "Portada del material: Nube, un osito de peluche, rodeado de cinco 
 tiempo: "1 hora y media para imprimir, plastificar, recortar y pegar el velcro (el rincón se monta con el grupo en la sesión 6)"
 necesitas:
   - "12 hojas de cartulina blanca A4 de 160 g"
-  - "1 hoja de cartulina de color A4, para el panel de «Lo que me ayuda»"
+  - "1 cartulina A4 amarilla de 160 g, para el panel de «Lo que me ayuda»"
   - "12 fundas de plastificar A4 de 125 micras y una plastificadora"
   - "37 círculos de velcro adhesivo de 2 cm: 12 rugosos y 25 suaves"
   - "2 trozos de papel continuo de 1 m (cartel del reto y cartel de las huellas) y pintura de dedos lavable"
@@ -51,7 +51,7 @@ fuentes:
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-20
-actualizado: 2026-10-20
+actualizado: 2026-11-04
 destacado: false
 borrador: false
 ---

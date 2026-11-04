@@ -13,6 +13,7 @@
 //   3. Crea la portada de cada ficha del catálogo (1200 × 900 px) en public/portadas/.
 //   4. Crea la imagen para compartir en redes (public/og-imagen.png), con el lema de src/data/sitio.json.
 //      Si cambia el lema, hay que rehacerla.
+//   5. Rehace las fotos de la galería de cada ficha con vistas.mjs.
 
 import { chromium } from 'playwright';
 import { execFileSync } from 'node:child_process';
@@ -174,6 +175,18 @@ const DOCUMENTOS = [
       'Panel de conducta para Educación Infantil con tres momentos (antes, durante y después del recreo) y hueco para la recompensa: paneles de cuatro, tres y dos conductas, 16 tarjetas de conductas en positivo y 16 de recompensas que se pueden dar en clase sin comida ni dinero, fichas de estrellas y caritas, guía para el adulto, registro de la semana y nota para las familias',
     palabras: 'panel de conducta, economía de fichas, modificación de conducta, apoyo conductual positivo, recompensas, refuerzo positivo, elogio, recreo, pegatinas, sello, normas de clase, ARASAAC, TEA, TDAH, Infantil',
   },
+  {
+    id: 'registro-sesiones-pt-al',
+    asunto:
+      'Registro de sesiones para Pedagogía Terapéutica y Audición y Lenguaje: hoja de cada sesión, seguimiento trimestral de objetivos, coordinación con el tutor o la tutora y con la familia, y guía de uso',
+    palabras: 'registro de sesiones, Pedagogía Terapéutica, Audición y Lenguaje, seguimiento, objetivos, plan de trabajo individual, evaluación, coordinación, Infantil, Primaria',
+  },
+  {
+    id: 'ya-he-terminado',
+    asunto:
+      'Ya he terminado: rincón de juegos tranquilos para cuando el alumnado acaba antes, con tablero de elección con pictogramas de ARASAAC, siete juegos en tres niveles, tarjetas de pasos, temporizador visual, guía y nota para las familias',
+    palabras: 'ya he terminado, early finishers, rincón, juegos tranquilos, tiempos de espera, autonomía, tablero de elección, DUA, pictogramas, ARASAAC, TEA, TDAH, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
@@ -268,6 +281,15 @@ if ((!elegidos.length || elegidos.includes('og-imagen')) && !salidaAparte) {
 
 await navegador.close();
 rmSync(temporal, { recursive: true, force: true });
+
+// ---------------------------------------------------------------------------
+// 5. Fotos de la galería de cada ficha, con los PDF recién hechos (vistas.mjs)
+// ---------------------------------------------------------------------------
+
+if (!salidaAparte) {
+  const hechos = DOCUMENTOS.map((d) => d.id).filter((id) => !elegidos.length || elegidos.includes(id));
+  if (hechos.length) execFileSync('node', [join(aqui, 'vistas.mjs'), ...hechos], { stdio: 'inherit' });
+}
 
 // ---------------------------------------------------------------------------
 // Ayudas

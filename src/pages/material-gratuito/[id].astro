@@ -6,11 +6,13 @@ import Base from '../../layouts/Base.astro';
 import Migas from '../../components/Migas.astro';
 import Icono from '../../components/Icono.astro';
 import ComoMontarlo from '../../components/ComoMontarlo.astro';
+import Galeria, { type Foto } from '../../components/Galeria.astro';
 import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
 import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../../data/taxonomias';
 import { existeArchivo, extension, fecha, fechaISO, pesoArchivo } from '../../lib/formatos';
 import { materialesOrdenados, relacionados, type Material } from '../../lib/materiales';
 import { ruta } from '../../lib/rutas';
+import vistas from '../../data/vistas.json';
 
 export async function getStaticPaths() {
   const materiales = await materialesOrdenados();
@@ -36,6 +38,22 @@ const anio = d.fecha.getFullYear();
 const enlacePublico = new URL(ruta(`/material-gratuito/${material.id}/`), Astro.site).toString();
 // Si la licencia es Creative Commons se nombra; si no, la cita dice «Todos los derechos reservados».
 const derechos = d.licencia.startsWith('CC ') ? `Licencia ${d.licencia}` : d.licencia;
+
+// Galería: la portada y algunas páginas de dentro, como las fotos de un producto (herramientas/vistas.mjs).
+type Vista = { total: number; fotos: { pagina: number; ancho: number; alto: number; titulo: string }[] };
+const vista = (vistas as Record<string, Vista>)[material.id];
+const dosCifras = (n: number) => String(n).padStart(2, '0');
+const fotos: Foto[] = (vista?.fotos ?? []).map((f) => ({
+  src: ruta(`/vistas/${material.id}/pagina-${dosCifras(f.pagina)}.webp`),
+  mini: ruta(`/vistas/${material.id}/pagina-${dosCifras(f.pagina)}-mini.webp`),
+  ancho: f.ancho,
+  alto: f.alto,
+  alt:
+    f.pagina === 1
+      ? (d.portada_alt ?? `Portada de «${d.titulo}»`)
+      : `Página ${f.pagina} de ${vista!.total} de «${d.titulo.split(/:\s/)[0]}»${f.titulo ? `: ${f.titulo}` : ''}`,
+  pie: f.pagina === 1 ? 'Portada' : `Página ${f.pagina} de ${vista!.total}`,
+}));
 const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando' : `${d.autoria} para IdEducando`} (${anio}). ${derechos}. ${enlacePublico}`;
 ---
 
@@ -47,23 +65,34 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
       </div>
 
       <div class="ficha">
-        <div class="ficha__portada">
-          {
-            d.portada ? (
-              <img
-                src={ruta(d.portada)}
-                alt={d.portada_alt ?? `Portada de «${d.titulo}»`}
-                width="1200"
-                height="900"
-                data-pagefind-meta="image[src]"
-              />
-            ) : (
-              <div class="ficha__sin-portada" aria-hidden="true">
-                <Icono nombre="documento" />
-              </div>
-            )
-          }
-        </div>
+        {
+          fotos.length > 0 ? (
+            <div class="ficha__galeria">
+              <Galeria fotos={fotos} titulo={d.titulo} />
+              {vista && vista.total > fotos.length && (
+                <p class="ficha__nota-galeria">
+                  Aquí ves {fotos.length} de sus {vista.total} páginas. El PDF entero es gratis.
+                </p>
+              )}
+            </div>
+          ) : (
+            <div class="ficha__portada">
+              {d.portada ? (
+                <img
+                  src={ruta(d.portada)}
+                  alt={d.portada_alt ?? `Portada de «${d.titulo}»`}
+                  width="1200"
+                  height="900"
+                  data-pagefind-meta="image[src]"
+                />
+              ) : (
+                <div class="ficha__sin-portada" aria-hidden="true">
+                  <Icono nombre="documento" />
+                </div>
+              )}
+            </div>
+          )
+        }
 
         <div class="ficha__info">
           <p class="ficha__tipo">
@@ -418,8 +447,15 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
   @media (min-width: 56em) {
     .ficha {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-      align-items: center;
+      align-items: start;
     }
+  }
+
+  .ficha__nota-galeria {
+    margin: 0.35rem 0 0;
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--texto-suave);
   }
 
   .ficha__portada {

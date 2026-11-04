@@ -4,7 +4,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { ETAPAS, NECESIDADES, SECCIONES, TIPOS, claves } from './data/taxonomias';
+import { ESTADOS_TIENDA, ETAPAS, NECESIDADES, PUBLICOS, SECCIONES, TIPOS, TIPOS_TIENDA, claves } from './data/taxonomias';
 
 // El editor visual puede guardar un campo vacío como "" o null. Aquí cuenta como «sin rellenar».
 const opcional = <T extends z.ZodType>(esquema: T) =>
@@ -27,6 +27,9 @@ const materiales = defineCollection({
     archivo: opcional(z.string().optional()),
     portada: opcional(z.string().optional()),
     portada_alt: opcional(z.string().optional()),
+    // Páginas del PDF que salen en la galería de la ficha (herramientas/vistas.mjs). Vacío: la 1 y las
+    // siguientes, hasta 5, sin la hoja «Cómo montarlo».
+    vistas: opcional(z.array(z.number().int().positive()).default([])),
     tiempo: opcional(z.string().optional()),
     necesitas: opcional(z.array(z.string()).default([])),
     // Instrucciones de montaje (src/lib/montaje.mjs). Si hay pasos, salen en la ficha
@@ -73,4 +76,57 @@ const paginas = defineCollection({
   }),
 });
 
-export const collections = { materiales, consejos, paginas };
+// Tienda: lo que es o será de pago. Hoy no se vende nada (José, 04/11/2026): cada ficha enseña la portada,
+// alguna página de muestra y el resto bloqueado, y un botón para escribirnos. Nada lleva pictogramas de ARASAAC.
+// Las imágenes de las muestras las hace herramientas/tienda.mjs desde la carpeta privada de las fuentes de pago.
+const tienda = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/tienda' }),
+  schema: z.object({
+    titulo: z.string().min(3).max(90),
+    resumen: z.string().min(20).max(220),
+    tipo: z.enum(claves(TIPOS_TIENDA)),
+    para: z.array(z.enum(claves(PUBLICOS))).min(1),
+    edades: opcional(z.string().optional()),
+    // Cómo se podrá conseguir: descarga, kit para montar, ya montado, en papel…
+    formatos: z.array(z.string()).min(1),
+    estado: z.enum(claves(ESTADOS_TIENDA)),
+    // Portada de 1200 × 900, nítida. Dentro de public/, por ejemplo /tienda/me-llamo-error/portada.webp.
+    portada: z.string(),
+    portada_alt: z.string().min(10),
+    // Páginas de la muestra, en orden. Las bloqueadas se ven borrosas a propósito y no llevan alt:
+    // las nombra su pie («Página 9 · Bloqueado»). Las nítidas necesitan su alt.
+    orientacion: z.enum(['horizontal', 'vertical']).default('vertical'),
+    muestra: opcional(
+      z
+        .array(
+          z
+            .object({
+              pagina: z.number().int().positive(),
+              bloqueada: z.boolean().default(true),
+              alt: opcional(z.string().optional()),
+            })
+            .refine((m) => m.bloqueada || (m.alt && m.alt.length >= 10), {
+              message: 'Cada página nítida de la muestra necesita su texto alternativo (alt).',
+            }),
+        )
+        .default([]),
+    ),
+    // Archivo de pago dentro de la carpeta privada (FUENTES_PAGO). No se publica: solo lo lee herramientas/vistas.mjs.
+    fuente: opcional(z.string().optional()),
+    // Si la fuente es una muestra de pocas hojas y no el producto entero, la galería dice «Hoja 3 de la muestra»
+    // y «paginas» son las previstas para el producto completo.
+    solo_muestra: z.boolean().default(false),
+    paginas: opcional(z.number().int().positive().optional()),
+    incluye: z.array(z.string()).min(1),
+    // Si hay o habrá una versión gratis (por ejemplo, la de pictogramas), se cuenta aquí.
+    gratis: opcional(z.string().optional()),
+    // Id de un material gratuito relacionado (src/content/materiales).
+    relacionado: opcional(z.string().optional()),
+    orden: z.number().int().default(100),
+    fecha: z.coerce.date(),
+    actualizado: opcional(z.coerce.date().optional()),
+    borrador: z.boolean().default(false),
+  }),
+});
+
+export const collections = { materiales, consejos, paginas, tienda };

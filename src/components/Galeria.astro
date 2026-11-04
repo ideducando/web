@@ -1,0 +1,396 @@
+---
+// Galería de fotos de un producto, como en cualquier tienda: una foto grande que se pasa con las flechas,
+// con las miniaturas o con el dedo. Debajo, qué página es («Página 3 de 12»).
+// Sin JavaScript se ve la tira de fotos y se pasa deslizando o con la barra; las flechas y las miniaturas
+// salen al cargar el script.
+// Las páginas bloqueadas de la tienda llegan ya difuminadas desde herramientas/vistas.mjs: aquí solo se les
+// pone el candado y la palabra «Bloqueado» encima.
+import Icono from './Icono.astro';
+
+export interface Foto {
+  src: string;
+  mini: string;
+  ancho: number;
+  alto: number;
+  /** Texto alternativo. Las bloqueadas van sin él: las nombra su pie. */
+  alt: string;
+  /** Lo que se lee bajo la foto y anuncia el lector de pantalla: «Portada», «Página 3 de 12», «Página 9 de 26 · Bloqueada»… */
+  pie: string;
+  bloqueada?: boolean;
+}
+
+interface Props {
+  fotos: Foto[];
+  /** Nombre del producto, para la etiqueta de la galería. */
+  titulo: string;
+  /** Lo que dice la foto bloqueada bajo «Bloqueado». */
+  avisoBloqueo?: string;
+}
+
+const { fotos, titulo, avisoBloqueo = 'Se verá entera cuando salga a la venta.' } = Astro.props;
+const primera = fotos[0];
+const proporcion = primera ? `${primera.ancho} / ${primera.alto}` : '4 / 3';
+const corto = titulo.split(/:\s/)[0];
+---
+
+{
+  fotos.length > 0 && (
+    <section
+      class="galeria"
+      aria-roledescription="galería"
+      aria-label={`Fotos de «${corto}»`}
+      data-galeria
+      style={`--proporcion: ${proporcion}`}
+    >
+      <div class="galeria__escenario">
+        <ul class="galeria__pista" data-galeria-pista tabindex="0" aria-label="Fotos: desliza o usa las flechas">
+          {fotos.map((foto, i) => (
+            <li
+              class:list={['galeria__foto', { 'galeria__foto--bloqueada': foto.bloqueada }]}
+              aria-roledescription="foto"
+              aria-label={`${i + 1} de ${fotos.length}`}
+              data-galeria-foto
+            >
+              <img
+                src={foto.src}
+                alt={foto.alt}
+                width={foto.ancho}
+                height={foto.alto}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
+                decoding="async"
+                data-pagefind-meta={i === 0 ? 'image[src]' : undefined}
+              />
+              {foto.bloqueada && (
+                <span class="galeria__candado">
+                  <Icono nombre="candado" />
+                  <span class="galeria__candado-texto">Bloqueado</span>
+                  <span class="galeria__candado-aviso">{avisoBloqueo}</span>
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+
+        {fotos.length > 1 && (
+          <>
+            <button type="button" class="galeria__flecha galeria__flecha--antes" data-galeria-antes hidden>
+              <Icono nombre="flecha" />
+              <span class="solo-lectores">Foto anterior</span>
+            </button>
+            <button type="button" class="galeria__flecha galeria__flecha--despues" data-galeria-despues hidden>
+              <Icono nombre="flecha" />
+              <span class="solo-lectores">Foto siguiente</span>
+            </button>
+          </>
+        )}
+      </div>
+
+      <p class="galeria__cuenta" data-galeria-cuenta aria-live="polite">
+        {primera.pie}
+      </p>
+
+      {fotos.length > 1 && (
+        <ul class="galeria__minis" data-galeria-minis hidden>
+          {fotos.map((foto, i) => (
+            <li>
+              <button
+                type="button"
+                class="galeria__mini"
+                data-galeria-ir={i}
+                data-pie={foto.pie}
+                aria-current={i === 0 ? 'true' : undefined}
+              >
+                <img src={foto.mini} alt="" width="160" height="160" loading="lazy" decoding="async" />
+                {foto.bloqueada && <Icono nombre="candado" clase="galeria__mini-candado" />}
+                <span class="solo-lectores">{`Ver ${foto.pie.charAt(0).toLowerCase()}${foto.pie.slice(1)}`}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}
+
+<script>
+  // Cada galería se maneja sola. Se mueve desplazando la tira, así que deslizar con el dedo, las flechas,
+  // las miniaturas y el teclado van siempre a la par.
+  for (const galeria of document.querySelectorAll<HTMLElement>('[data-galeria]')) {
+    const pista = galeria.querySelector<HTMLElement>('[data-galeria-pista]')!;
+    const fotos = [...galeria.querySelectorAll<HTMLElement>('[data-galeria-foto]')];
+    const antes = galeria.querySelector<HTMLButtonElement>('[data-galeria-antes]');
+    const despues = galeria.querySelector<HTMLButtonElement>('[data-galeria-despues]');
+    const cuenta = galeria.querySelector<HTMLElement>('[data-galeria-cuenta]');
+    const minis = [...galeria.querySelectorAll<HTMLButtonElement>('[data-galeria-ir]')];
+    if (fotos.length < 2) continue;
+
+    const tira = galeria.querySelector<HTMLElement>('[data-galeria-minis]');
+    galeria.classList.add('galeria--viva');
+    tira?.removeAttribute('hidden');
+    antes?.removeAttribute('hidden');
+    despues?.removeAttribute('hidden');
+
+    let actual = 0;
+    const suave = window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 'smooth' : 'auto';
+
+    const pintar = (indice: number) => {
+      actual = indice;
+      if (antes) antes.disabled = indice === 0;
+      if (despues) despues.disabled = indice === fotos.length - 1;
+      minis.forEach((mini, i) => {
+        if (i === indice) mini.setAttribute('aria-current', 'true');
+        else mini.removeAttribute('aria-current');
+      });
+      if (cuenta) cuenta.textContent = minis[indice]?.dataset.pie ?? '';
+      // La miniatura de la foto que se ve tiene que estar a la vista en su tira, sin mover la página.
+      const mini = minis[indice];
+      if (tira && mini) {
+        const caja = mini.getBoundingClientRect();
+        const marco = tira.getBoundingClientRect();
+        if (caja.left < marco.left) tira.scrollBy({ left: caja.left - marco.left - 8, behavior: suave });
+        else if (caja.right > marco.right) tira.scrollBy({ left: caja.right - marco.right + 8, behavior: suave });
+      }
+    };
+
+    // Cada foto ocupa todo el ancho de la tira: la foto 3 empieza a 2 anchos del principio.
+    const ir = (indice: number) => {
+      const destino = Math.max(0, Math.min(fotos.length - 1, indice));
+      pista.scrollTo({ left: destino * pista.clientWidth, behavior: suave });
+      pintar(destino);
+    };
+
+    antes?.addEventListener('click', () => ir(actual - 1));
+    despues?.addEventListener('click', () => ir(actual + 1));
+    minis.forEach((mini, i) => mini.addEventListener('click', () => ir(i)));
+
+    pista.addEventListener('keydown', (evento) => {
+      const teclas: Record<string, number> = {
+        ArrowLeft: actual - 1,
+        ArrowRight: actual + 1,
+        Home: 0,
+        End: fotos.length - 1,
+      };
+      if (evento.key in teclas) {
+        evento.preventDefault();
+        ir(teclas[evento.key]);
+      }
+    });
+
+    // Al deslizar con el dedo, la cuenta y las miniaturas siguen a la foto que queda delante.
+    let espera: number | undefined;
+    pista.addEventListener(
+      'scroll',
+      () => {
+        window.clearTimeout(espera);
+        espera = window.setTimeout(() => {
+          const indice = Math.round(pista.scrollLeft / Math.max(1, pista.clientWidth));
+          if (indice !== actual) pintar(Math.max(0, Math.min(fotos.length - 1, indice)));
+        }, 90);
+      },
+      { passive: true },
+    );
+
+    pintar(0);
+  }
+</script>
+
+<style>
+  .galeria {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.6rem;
+  }
+
+  .galeria__escenario {
+    position: relative;
+  }
+
+  .galeria__pista {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    border-radius: var(--radio);
+    border: 1px solid var(--linea);
+    background:
+      radial-gradient(circle at 12% 18%, var(--amarillo-tinte) 0 4.5rem, transparent 4.6rem),
+      radial-gradient(circle at 92% 88%, var(--azul-tinte) 0 5.5rem, transparent 5.6rem),
+      var(--papel);
+    box-shadow: var(--sombra);
+  }
+
+  .galeria--viva .galeria__pista {
+    scrollbar-width: none;
+  }
+
+  .galeria--viva .galeria__pista::-webkit-scrollbar {
+    display: none;
+  }
+
+  .galeria__pista:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 3px;
+  }
+
+  .galeria__foto {
+    position: relative;
+    flex: 0 0 100%;
+    display: grid;
+    place-items: center;
+    aspect-ratio: var(--proporcion);
+    max-height: min(64vh, 40rem);
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .galeria__foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 18px rgb(30 43 85 / 0.22));
+  }
+
+  /* Página bloqueada: la foto ya viene borrosa; encima, el candado con su palabra. */
+  .galeria__candado {
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    justify-items: center;
+    gap: 0.2rem;
+    width: min(17rem, calc(100% - 7.5rem));
+    padding: 1rem 1.1rem 0.95rem;
+    border-radius: var(--radio);
+    background: rgb(255 255 255 / 0.94);
+    border: 2px solid var(--marino);
+    box-shadow: 0 6px 0 rgb(30 43 85 / 0.2);
+    color: var(--marino);
+    text-align: center;
+  }
+
+  .galeria__candado :global(svg) {
+    width: 2.2rem;
+    height: 2.2rem;
+    color: var(--coral-texto);
+  }
+
+  .galeria__candado-texto {
+    font: 700 1.35rem/1.1 var(--letra-titulos);
+  }
+
+  .galeria__candado-aviso {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .galeria__flecha {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-top: -1.5rem;
+    padding: 0;
+    border: 2px solid var(--marino);
+    border-radius: 50%;
+    background: var(--blanco);
+    color: var(--marino);
+    box-shadow: 0 3px 0 rgb(30 43 85 / 0.25);
+    cursor: pointer;
+  }
+
+  .galeria__flecha:hover {
+    background: var(--amarillo-tinte);
+  }
+
+  .galeria__flecha:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .galeria__flecha :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .galeria__flecha--antes {
+    left: 0.6rem;
+  }
+
+  .galeria__flecha--antes :global(svg) {
+    transform: scaleX(-1);
+  }
+
+  .galeria__flecha--despues {
+    right: 0.6rem;
+  }
+
+  .galeria__cuenta {
+    margin: 0;
+    font: 600 1rem/1.3 var(--letra-titulos);
+    color: var(--texto-suave);
+    text-align: center;
+  }
+
+  .galeria__minis {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.2rem 0.1rem 0.4rem;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .galeria__minis li {
+    flex: none;
+  }
+
+  .galeria__mini {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 4.6rem;
+    height: 4.6rem;
+    padding: 0.3rem;
+    border: 2px solid var(--linea);
+    border-radius: var(--radio-pequeno);
+    background: var(--blanco);
+    cursor: pointer;
+  }
+
+  .galeria__mini:hover {
+    border-color: var(--marino);
+  }
+
+  .galeria__mini[aria-current='true'] {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 2px var(--azul);
+  }
+
+  .galeria__mini img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .galeria__mini :global(.galeria__mini-candado) {
+    position: absolute;
+    right: 0.2rem;
+    bottom: 0.2rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    padding: 0.15rem;
+    border-radius: 50%;
+    background: var(--marino);
+    color: var(--blanco);
+  }
+</style>

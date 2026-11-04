@@ -5,7 +5,8 @@
   "description": "Herramientas para generar los PDF y las portadas del material gratuito. No forman parte de la web.",
   "scripts": {
     "pdf": "node generar.mjs",
-    "comprobar": "node comprobar.mjs"
+    "comprobar": "node comprobar.mjs",
+    "vistas": "node vistas.mjs"
   },
   "dependencies": {
     "@axe-core/playwright": "4.13.0",

@@ -18,6 +18,12 @@ media:
     output: /descargas
     extensions: [pdf, zip]
     rename: safe
+  - name: tienda
+    label: Imágenes de la tienda (portadas y muestras)
+    input: public/tienda
+    output: /tienda
+    extensions: [webp, svg, png, jpg, jpeg]
+    rename: safe
 
 settings:
   content:
@@ -144,6 +150,11 @@ content:
         label: Descripción de la portada
         type: string
         description: "Describe la imagen para quien no la ve, en una frase. Ejemplo: Plantilla con los cinco días de la semana en columnas de colores."
+      - name: vistas
+        label: Páginas de la galería
+        type: number
+        list: true
+        description: "Qué páginas del PDF salen en la galería de la ficha. Si lo dejas vacío, la 1 y las siguientes, hasta 5, sin la hoja «Cómo montarlo». Después hay que rehacer las fotos con npm run vistas."
       - name: tiempo
         label: Tiempo de preparación
         type: string
@@ -206,6 +217,162 @@ content:
         default: false
       - name: borrador
         component: borrador
+      - name: body
+        label: Texto de la ficha
+        type: rich-text
+        options:
+          format: markdown
+          media: false
+
+  - name: tienda
+    label: Tienda (lo que será de pago)
+    type: collection
+    path: src/content/tienda
+    format: yaml-frontmatter
+    filename:
+      template: "{primary}.md"
+      field: create
+    view:
+      primary: titulo
+      fields: [titulo, tipo, estado, orden]
+      sort: [orden, titulo]
+      default:
+        sort: orden
+        order: asc
+    fields:
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+        options:
+          maxlength: 90
+      - name: resumen
+        label: Resumen
+        type: text
+        required: true
+        description: "Una o dos frases, entre 20 y 220 caracteres. Sale en la tarjeta de la tienda y en Google."
+        options:
+          minlength: 20
+          maxlength: 220
+      - name: tipo
+        label: Tipo de producto
+        type: select
+        required: true
+        options:
+          values:
+            - { name: libro, label: Libro ilustrado }
+            - { name: historias, label: Historias sociales }
+            - { name: cuaderno, label: Cuaderno y planificador }
+            - { name: manipulativo, label: Material manipulativo }
+            - { name: montaje, label: Kits y montaje }
+            - { name: asesoria, label: Asesoría }
+      - name: para
+        label: Para
+        type: select
+        required: true
+        options:
+          multiple: true
+          values:
+            - { name: docentes, label: Docentes }
+            - { name: familias, label: Familias }
+            - { name: opositoras, label: Opositoras }
+      - name: edades
+        label: Edades
+        type: string
+      - name: formatos
+        label: Cómo se podrá conseguir
+        type: string
+        list: true
+        description: "Una forma por línea. Ejemplo: Descarga en PDF, para imprimirlo."
+      - name: estado
+        label: En qué punto está
+        type: select
+        required: true
+        options:
+          values:
+            - { name: aprobado, label: "Aprobado por el equipo docente" }
+            - { name: en-revision, label: "Hecho, en revisión" }
+            - { name: en-preparacion, label: En preparación }
+            - { name: en-estudio, label: En estudio }
+      - name: portada
+        label: Portada (1200 × 900)
+        type: image
+        required: true
+        options:
+          media: tienda
+      - name: portada_alt
+        label: Descripción de la portada
+        type: string
+        required: true
+      - name: orientacion
+        label: Páginas apaisadas o verticales
+        type: select
+        default: vertical
+        options:
+          values:
+            - { name: vertical, label: Verticales }
+            - { name: horizontal, label: Apaisadas }
+      - name: fuente
+        label: Archivo de pago en la carpeta privada
+        type: string
+        description: "Ruta dentro de la carpeta privada del material de pago, por ejemplo libros/me-llamo-error.pdf. Ese archivo no se sube nunca aquí: las fotos se hacen con npm run vistas -- tienda."
+      - name: solo_muestra
+        label: La fuente es solo una muestra
+        type: boolean
+        default: false
+        description: "Márcalo si el PDF de la carpeta privada tiene unas pocas hojas de muestra y no el producto entero. La galería dirá «Hoja 3 de la muestra»."
+      - name: muestra
+        label: Páginas de la muestra
+        type: object
+        list: true
+        description: "En el orden que quieras: se ordenan solas. Las bloqueadas se ven borrosas; las nítidas necesitan su descripción."
+        fields:
+          - name: pagina
+            label: Página
+            type: number
+            required: true
+          - name: bloqueada
+            label: Bloqueada (se ve borrosa)
+            type: boolean
+            default: true
+          - name: alt
+            label: Descripción (solo si se ve nítida)
+            type: string
+      - name: paginas
+        label: Páginas del producto
+        type: number
+      - name: incluye
+        label: Qué incluirá
+        type: string
+        list: true
+      - name: gratis
+        label: Versión gratis
+        type: string
+        description: "Si hay o habrá una versión gratis, por ejemplo la de pictogramas, cuéntalo aquí."
+      - name: relacionado
+        label: Material gratuito relacionado
+        type: string
+        description: "El nombre del archivo del material, sin .md. Por ejemplo: tablero-comunicacion-basico. Sale en la ficha como «Gratis, mientras tanto»."
+      - name: orden
+        label: Orden en la tienda
+        type: number
+        default: 100
+      - name: fecha
+        label: Fecha
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: actualizado
+        label: Fecha de la última revisión
+        type: date
+        default: ""
+        options:
+          format: yyyy-MM-dd
+      - name: borrador
+        label: Oculto (no sale en la tienda)
+        type: boolean
+        default: false
       - name: body
         label: Texto de la ficha
         type: rich-text

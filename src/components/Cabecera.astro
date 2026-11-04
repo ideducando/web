@@ -9,6 +9,7 @@ const actual = Astro.url.pathname;
 const menu = [
   { texto: 'Inicio', enlace: '/' },
   { texto: 'Material gratuito', enlace: '/material-gratuito/' },
+  { texto: 'Tienda', enlace: '/tienda/' },
   { texto: 'Familias', enlace: '/familias/' },
   { texto: 'Oposiciones', enlace: '/oposiciones/' },
   { texto: 'Consejos', enlace: '/consejos/' },
@@ -328,6 +329,7 @@ const menu = [
 
     .cabecera__acciones {
       order: 3;
+      flex-shrink: 0;
     }
 
     .cabecera__menu {
@@ -360,8 +362,12 @@ const menu = [
 
   @media (min-width: 64em) and (max-width: 80em) {
     .menu a {
-      padding-inline: 0.45rem;
-      font-size: 0.98rem;
+      padding-inline: 0.32rem;
+      font-size: 0.95rem;
+    }
+
+    .cabecera__logo img {
+      height: 3rem;
     }
 
     .cabecera__mochila-texto,
