@@ -177,7 +177,10 @@ const DOCUMENTOS = [
 ];
 
 const elegidos = process.argv.slice(2);
-const navegador = await chromium.launch();
+// Sin «hinting» (el ajuste de cada letra a la cuadrícula de píxeles), como se hicieron los PDF publicados.
+// El Chromium sin ventana que Playwright usa por defecto lo activa en Linux: las letras se corren unas
+// décimas, cambian los saltos de línea y algunos PDF ganan una página.
+const navegador = await chromium.launch({ args: ['--font-render-hinting=none'] });
 
 // ---------------------------------------------------------------------------
 // 1 y 2. PDF y miniaturas
