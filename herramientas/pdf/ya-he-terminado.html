@@ -1,0 +1,3086 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ya he terminado: rincón de juegos tranquilos · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Colores de cada juego: el mismo en el tablero, la hoja y la tarjeta ---------- */
+      .j-dif {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .j-lab {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .j-sopa {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .j-tres {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .j-mem {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .j-stop {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .j-oca {
+        --c: var(--marino);
+        --t: var(--crema);
+      }
+      .j-tiempo {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* La hoja de montaje, con letra de 11 puntos como el resto del cuerpo del material */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__piezas li {
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 112mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 9pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .pegatina {
+        position: absolute;
+        right: 20mm;
+        top: 22mm;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .portada .pegatina b {
+        display: block;
+        font-size: 26pt;
+        line-height: 1;
+      }
+
+      .portada__ilustracion {
+        position: absolute;
+        left: 0;
+        top: 128mm;
+        width: 210mm;
+        height: 146mm;
+        z-index: 1;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .banda {
+        height: 3mm;
+        border-radius: 1.5mm;
+        background: var(--c);
+        margin-bottom: 3.5mm;
+      }
+
+      .cabecera {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .cabecera__picto {
+        width: 19mm;
+        height: 19mm;
+        flex: none;
+        border-radius: 3mm;
+        background: #fff;
+        border: 0.7mm solid var(--c);
+      }
+
+      .cabecera__texto {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .cabecera h1 {
+        font-size: 26pt;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .cabecera__logo {
+        width: 32mm;
+        height: auto;
+        flex: none;
+      }
+
+      .nivel {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 1.8mm 0 0;
+        padding: 0.5mm 2.8mm 0.5mm 3mm;
+        border-radius: 99px;
+        border: 0.45mm solid var(--marino);
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.2;
+      }
+
+      .nivel span {
+        display: inline-flex;
+        gap: 1mm;
+      }
+
+      .nivel i {
+        width: 3.2mm;
+        height: 3.2mm;
+        border-radius: 50%;
+        border: 0.45mm solid var(--marino);
+        background: #fff;
+      }
+
+      .nivel i.lleno {
+        background: var(--marino);
+      }
+
+      .consigna {
+        margin: 0 0 4mm;
+        font-size: 15pt;
+        line-height: 1.35;
+      }
+
+      .n1 .consigna {
+        font-size: 18pt;
+      }
+
+      .consigna img {
+        width: 10mm;
+        height: 10mm;
+        vertical-align: middle;
+        margin: 0 0.6mm;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 12pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 3mm 0 0;
+        font-size: 9pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+
+      /* ---------- Tablero de elección (apaisado) ---------- */
+      .tablero-cabecera {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .tablero-cabecera img.picto {
+        width: 17mm;
+        height: 17mm;
+        flex: none;
+      }
+
+      .tablero-cabecera h1 {
+        font-size: 27pt;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .tablero-cabecera p {
+        margin: 0.8mm 0 0;
+        font-size: 13pt;
+        line-height: 1.2;
+      }
+
+      .tablero-cabecera .cabecera__logo {
+        margin-left: auto;
+      }
+
+      .tablero {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 2.6mm;
+      }
+
+      .casilla {
+        position: relative;
+        margin: 0;
+        padding: 5mm 1.2mm 1.6mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+        overflow: hidden;
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 2mm;
+        break-inside: avoid;
+      }
+
+      .casilla::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 3mm;
+        background: var(--c);
+      }
+
+      .casilla h2 {
+        margin: 0;
+        break-after: auto;
+        min-height: 2.1em;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 16pt;
+        line-height: 1.05;
+      }
+
+      .casilla__picto {
+        width: 34mm;
+        height: 34mm;
+      }
+
+      .sitios {
+        display: grid;
+        grid-template-rows: 22mm 22mm;
+        gap: 2.4mm;
+        width: 34mm;
+      }
+
+      .sitio {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2.4mm;
+        background: var(--t);
+        display: grid;
+        place-items: center;
+      }
+
+      .sitio i {
+        width: 15mm;
+        height: 15mm;
+        border-radius: 50%;
+        border: 0.35mm dashed var(--suave);
+        background: #fff;
+      }
+
+      .rutina {
+        margin: 3mm 0 0;
+        padding: 2.4mm 3mm;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        border-radius: 4mm;
+        background: var(--crema);
+      }
+
+      .rutina ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4mm;
+        counter-reset: paso;
+      }
+
+      .rutina h2 {
+        margin: 0;
+        font-size: 15pt;
+      }
+
+      .rutina li {
+        counter-increment: paso;
+        display: grid;
+        grid-template-columns: 6mm 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-size: 14pt;
+        line-height: 1.15;
+      }
+
+      .rutina li::before {
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .rutina img {
+        width: 17mm;
+        height: 17mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .tablero-nota {
+        margin: 2.6mm 0 0;
+        font-size: 12pt;
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .tablero-nota svg {
+        width: 7mm;
+        height: 7mm;
+        flex: none;
+      }
+
+      /* ---------- Tarjetas de nombre ---------- */
+      .nombres {
+        display: grid;
+        grid-template-columns: repeat(5, 28mm);
+        grid-auto-rows: 16mm;
+        gap: 6mm 7mm;
+        justify-content: center;
+        margin: 3mm 0 5mm;
+      }
+
+      .nombre {
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2.4mm;
+        display: grid;
+        grid-template-columns: 10mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.6mm;
+        padding: 0 2mm;
+        background: #fff;
+      }
+
+      .nombre i {
+        width: 10mm;
+        height: 10mm;
+        border: 0.3mm solid var(--linea);
+        border-radius: 1.6mm;
+        background: var(--crema);
+      }
+
+      .nombre b {
+        align-self: end;
+        margin-bottom: 3.4mm;
+        border-bottom: 0.3mm solid var(--suave);
+        height: 1px;
+      }
+
+      .hoy-no {
+        display: grid;
+        grid-template-columns: repeat(5, 30mm);
+        grid-auto-rows: 42mm;
+        gap: 7mm;
+        justify-content: center;
+        margin: 3mm 0 4mm;
+      }
+
+      .hoy-no div {
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2.4mm;
+        background: var(--coral-tinte);
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+      }
+
+      .hoy-no svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .nombres-hoja h2 {
+        font-size: 14pt;
+        margin: 0 0 1mm;
+      }
+
+      .nombres-hoja .pista {
+        margin-bottom: 0;
+      }
+
+      /* ---------- Diferencias ---------- */
+      .escena {
+        width: 168mm;
+        margin: 0 auto;
+        border: 0.5mm solid var(--marino);
+        border-radius: 3mm;
+        overflow: hidden;
+      }
+
+      .escena svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .rotulo {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        width: 168mm;
+        margin: 0 auto 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1.2;
+      }
+
+      .rotulo + .escena {
+        margin-bottom: 3mm;
+      }
+
+      .rotulo svg {
+        width: 6mm;
+        height: 6mm;
+      }
+
+      .contador {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        width: 168mm;
+        margin: 0 auto;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+      }
+
+      .contador span {
+        display: inline-flex;
+        gap: 2.4mm;
+      }
+
+      .contador i {
+        width: 9mm;
+        height: 9mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 50%;
+      }
+
+      /* ---------- Laberintos ---------- */
+      .laberinto {
+        display: grid;
+        grid-template-columns: 17mm auto 17mm;
+        justify-content: center;
+        gap: 1mm;
+        margin-top: 2mm;
+      }
+
+      .laberinto figure {
+        margin: 0;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+      }
+
+      .laberinto figure img {
+        width: 16mm;
+        height: 16mm;
+        display: block;
+        margin: 0 auto 1mm;
+      }
+
+      /* La flecha de la salida queda a la altura de la primera casilla y la de la meta, de la última. */
+      .laberinto .salida {
+        align-self: start;
+        margin-top: calc(var(--celda) / 2 + var(--grosor) - 3mm);
+      }
+
+      .laberinto .meta {
+        align-self: end;
+        margin-bottom: calc(var(--celda) / 2 + var(--grosor) - 3mm);
+      }
+
+      .flecha-lab {
+        width: 12mm;
+        height: 6mm;
+        margin: 0 auto;
+      }
+
+      .laberinto .salida .flecha-lab {
+        margin-bottom: 1.5mm;
+      }
+
+      .laberinto .meta .flecha-lab {
+        margin-top: 1.5mm;
+      }
+
+      /* ---------- Sopas de letras ---------- */
+      .sopa {
+        width: auto;
+        margin: 2mm auto 5mm;
+        border-collapse: collapse;
+        border: 0.6mm solid var(--marino);
+        break-inside: avoid;
+      }
+
+      .sopa td {
+        width: var(--celda);
+        height: var(--celda);
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
+        border: 0.3mm solid var(--linea);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: var(--letra);
+        line-height: 1;
+      }
+
+      .palabras {
+        list-style: none;
+        margin: 0 auto;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(var(--columnas), minmax(0, 1fr));
+        gap: 3mm;
+        max-width: 178mm;
+      }
+
+      .palabras li {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        padding: 1.6mm 2.4mm;
+        border-radius: 3mm;
+        background: var(--t);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: var(--palabra);
+        letter-spacing: 0.04em;
+      }
+
+      .palabras img {
+        width: var(--picto);
+        height: var(--picto);
+        flex: none;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .palabras li::after {
+        content: '';
+        margin-left: auto;
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.4mm;
+        background: #fff;
+      }
+
+      .direcciones {
+        display: inline-flex;
+        gap: 1.4mm;
+        vertical-align: middle;
+      }
+
+      .direcciones svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      /* ---------- Tres en raya ---------- */
+      .tableros3 {
+        display: grid;
+        grid-template-columns: repeat(var(--columnas), auto);
+        justify-content: center;
+        gap: var(--hueco);
+      }
+
+      .tableros3 figure {
+        margin: 0;
+      }
+
+      .tableros3 figcaption {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        margin-bottom: 1mm;
+      }
+
+      .asi-se-gana {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 4mm;
+        padding: 2.4mm 4mm;
+        border-radius: 3mm;
+        background: var(--t);
+        font-size: 13pt;
+      }
+
+      .asi-se-gana b {
+        font-family: var(--titulos);
+      }
+
+      .asi-se-gana div {
+        display: flex;
+        gap: 3mm;
+      }
+
+      .marcas {
+        display: flex;
+        gap: 6mm;
+        margin: 0 0 4mm;
+        font-size: 14pt;
+      }
+
+      .marcas span {
+        display: inline-flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .marcas svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      /* ---------- Memoria ---------- */
+      .cartas {
+        display: grid;
+        grid-template-columns: repeat(var(--columnas), var(--lado));
+        grid-auto-rows: var(--lado);
+        gap: var(--hueco);
+        justify-content: center;
+      }
+
+      .carta {
+        position: relative;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 3mm;
+        display: grid;
+        place-items: center;
+        background: #fff;
+      }
+
+      .carta img {
+        width: 76%;
+        height: 76%;
+      }
+
+      .carta .puntos {
+        position: absolute;
+        right: 2mm;
+        bottom: 2mm;
+        display: flex;
+        gap: 0.8mm;
+      }
+
+      .carta .puntos i {
+        width: 2mm;
+        height: 2mm;
+        border-radius: 50%;
+        background: var(--morado);
+      }
+
+      .carta--palabra {
+        align-content: center;
+        gap: 1mm;
+        text-align: center;
+        background: var(--morado-tinte);
+      }
+
+      .carta--palabra b {
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1;
+        letter-spacing: 0.04em;
+      }
+
+      .carta--palabra span {
+        font-family: var(--texto);
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      /* ---------- STOP ---------- */
+      .letras {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0 0 4mm;
+        padding: 2.4mm 3mm;
+        border-radius: 3mm;
+        background: var(--t);
+      }
+
+      .letras p {
+        margin: 0 2mm 0 0;
+        font-size: 13pt;
+        line-height: 1.2;
+        flex-basis: 100%;
+      }
+
+      .letras span {
+        display: grid;
+        place-items: center;
+        width: var(--letra-caja);
+        height: var(--letra-caja);
+        border-radius: 2mm;
+        background: #fff;
+        border: 0.4mm solid var(--marino);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: var(--letra-tam);
+        line-height: 1;
+      }
+
+      .tabla-stop {
+        table-layout: fixed;
+        border-collapse: collapse;
+        font-size: 12pt;
+        margin: 0;
+      }
+
+      .tabla-stop th,
+      .tabla-stop td {
+        border: 0.45mm solid var(--marino);
+        padding: 1mm;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .tabla-stop thead th {
+        background: var(--t);
+        color: var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: var(--cat-tam);
+        line-height: 1.05;
+      }
+
+      .tabla-stop thead img {
+        display: block;
+        width: var(--cat-picto);
+        height: var(--cat-picto);
+        margin: 0 auto 0.8mm;
+      }
+
+      .tabla-stop td {
+        height: var(--fila);
+      }
+
+      .tabla-stop td:first-child {
+        background: var(--crema);
+      }
+
+      .regla-stop {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 3mm 0 0;
+        font-size: 13pt;
+      }
+
+      .regla-stop img {
+        width: 13mm;
+        height: 13mm;
+        flex: none;
+      }
+
+      /* ---------- La oca ---------- */
+      .oca-tablero {
+        margin: 0 auto;
+      }
+
+      .leyenda-oca {
+        list-style: none;
+        margin: 4mm 0 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 5mm;
+        font-size: 11.5pt;
+        line-height: 1.25;
+      }
+
+      .leyenda-oca li {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .leyenda-oca img {
+        width: 12mm;
+        height: 12mm;
+        flex: none;
+        background: #fff;
+        border-radius: 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .leyenda-oca b {
+        font-family: var(--titulos);
+      }
+
+      .leyenda-oca .ancha {
+        grid-column: 1 / -1;
+      }
+
+      /* ---------- Tarjetas de pasos ---------- */
+      .tarjetas-pasos {
+        display: grid;
+        grid-template-columns: repeat(2, 84mm);
+        grid-template-rows: repeat(2, 117mm);
+        gap: 7mm 8mm;
+        justify-content: center;
+      }
+
+      .tarjeta {
+        position: relative;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+      }
+
+      .tarjeta__cab {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        padding: 4.6mm 3.4mm 2mm;
+        background: var(--t);
+        border-top: 3mm solid var(--c);
+      }
+
+      .tarjeta__cab img {
+        width: 17mm;
+        height: 17mm;
+        flex: none;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .tarjeta__cab h2 {
+        margin: 0;
+        font-size: 17pt;
+        line-height: 1.05;
+      }
+
+      .tarjeta__cab p {
+        margin: 1mm 0 0;
+        font-size: 11pt;
+        line-height: 1.2;
+      }
+
+      .tarjeta ol {
+        list-style: none;
+        margin: 0;
+        padding: 2.4mm 3.2mm 3mm;
+        display: grid;
+        gap: 2mm;
+        flex: 1;
+        align-content: space-evenly;
+        counter-reset: paso;
+      }
+
+      .tarjeta li {
+        counter-increment: paso;
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+      }
+
+      .tarjeta li img {
+        width: 17mm;
+        height: 17mm;
+        border-radius: 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .tarjeta li b {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1.05;
+      }
+
+      .tarjeta li b::before {
+        content: counter(paso) '. ';
+        color: var(--suave);
+      }
+
+      .tarjeta li span {
+        display: block;
+        font-size: 12.5pt;
+        line-height: 1.22;
+      }
+
+      /* ---------- Temporizador ---------- */
+      .temporizador {
+        display: grid;
+        grid-template-columns: 110mm minmax(0, 1fr);
+        gap: 4mm 6mm;
+        align-items: start;
+      }
+
+      .temporizador h2 {
+        font-size: 14pt;
+        margin: 0 0 2mm;
+      }
+
+      .temporizador ol {
+        margin: 0;
+        padding-left: 5.5mm;
+        font-size: 12.5pt;
+        line-height: 1.3;
+      }
+
+      .temporizador li {
+        margin-bottom: 1.6mm;
+      }
+
+      .usar-tiempo {
+        list-style: none;
+        padding: 0 !important;
+      }
+
+      .usar-tiempo li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        gap: 2.4mm;
+        align-items: center;
+      }
+
+      .usar-tiempo img {
+        width: 14mm;
+        height: 14mm;
+        border-radius: 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      /* ---------- Soluciones ---------- */
+      .soluciones h2 {
+        font-size: 15pt;
+        margin: 4mm 0 2mm;
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .soluciones h2 img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .fila-sol {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        align-items: end;
+      }
+
+      .fila-sol figure {
+        margin: 0;
+      }
+
+      .fila-sol figcaption,
+      .retos-sol figcaption {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        margin-bottom: 1mm;
+      }
+
+      .fila-sol svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .fila-sol .marco {
+        border: 0.35mm solid var(--marino);
+        border-radius: 2mm;
+        overflow: hidden;
+      }
+
+      .retos-sol {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 2.4mm;
+      }
+
+      .retos-sol figure {
+        margin: 0;
+        text-align: center;
+      }
+
+      .retos-sol svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .ideas-stop {
+        table-layout: fixed;
+        font-size: 11pt;
+        margin-top: 1mm;
+      }
+
+      .ideas-stop th,
+      .ideas-stop td {
+        padding: 0.9mm 1.2mm;
+        line-height: 1.2;
+      }
+
+      .ideas-stop tbody th {
+        text-align: center;
+        background: var(--crema);
+      }
+
+      .mini-sopa {
+        border-collapse: collapse;
+        margin: 0 auto;
+        width: 100%;
+        table-layout: fixed;
+        border: 0.35mm solid var(--marino);
+      }
+
+      .mini-sopa td {
+        padding: 0;
+        text-align: center;
+        font-family: var(--texto);
+        font-weight: 700;
+        line-height: 1;
+        border: 0.2mm solid var(--linea);
+      }
+
+      .mini-sopa td.si {
+        background: var(--amarillo);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.42;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia h3 {
+        font-size: 12pt;
+        margin: 0.8em 0 0.3em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia ul,
+      .guia ol {
+        margin-bottom: 0.6em;
+      }
+
+      .presentacion {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        counter-reset: sesion;
+      }
+
+      .presentacion li {
+        counter-increment: sesion;
+        margin: 0;
+        padding: 2.6mm 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 1.6mm solid var(--c);
+        line-height: 1.3;
+      }
+
+      .presentacion li::before {
+        content: 'Paso ' counter(sesion);
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--suave);
+        margin-bottom: 0.6mm;
+      }
+
+      .presentacion strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+        line-height: 1.15;
+        margin-bottom: 0.8mm;
+      }
+
+      .tabla-niveles {
+        table-layout: fixed;
+        font-size: 11pt;
+      }
+
+      .tabla-niveles th,
+      .tabla-niveles td {
+        padding: 1.2mm 2mm;
+        line-height: 1.25;
+      }
+
+      .tabla-niveles col.juego {
+        width: 30mm;
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        font-size: 9pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12.5pt;
+        line-height: 1.45;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 3mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.8em;
+      }
+
+      .familias ol {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 1.5mm;
+      }
+
+      .juegos-familias {
+        list-style: none;
+        margin: 2mm 0 3mm;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 2mm;
+      }
+
+      .juegos-familias li {
+        margin: 0;
+        padding: 1.6mm 1mm 1.4mm;
+        border-radius: 2.4mm;
+        border-top: 1.4mm solid var(--c);
+        background: var(--t);
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.15;
+      }
+
+      .juegos-familias img {
+        display: block;
+        width: 15mm;
+        height: 15mm;
+        margin: 0 auto 1mm;
+        background: #fff;
+        border-radius: 1.6mm;
+      }
+
+      .mensaje {
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 3mm 5mm 3.4mm;
+        margin-top: 3mm;
+        break-inside: avoid;
+      }
+
+      .mensaje h2 {
+        margin: 0 0 2mm;
+        font-size: 13pt;
+      }
+
+      .mensaje .renglon {
+        height: 7.8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        font-size: 9pt;
+        margin-top: 4mm;
+      }
+
+      /* Aviso que solo sale si alguna comprobación de los juegos falla */
+      .aviso-error {
+        position: absolute;
+        z-index: 50;
+        left: 10mm;
+        right: 10mm;
+        top: 10mm;
+        padding: 4mm;
+        background: #fff;
+        border: 1.5mm solid var(--coral-texto);
+        color: var(--coral-texto);
+        font-size: 14pt;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -60mm; top: 96mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -28mm; top: 118mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 44mm; height: 44mm; left: -14mm; top: 246mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego · Autonomía en el aula</p>
+        <h1 class="portada__titulo">Ya he<br />terminado</h1>
+        <p class="portada__subtitulo">Un rincón de juegos tranquilos para cuando acabas antes o toca esperar.</p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. Origen: ARASAAC, Centro Aragonés<br />para la Comunicación Aumentativa y Alternativa.<br />Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>7</b>juegos<br />en 3 niveles</div>
+      <svg class="portada__ilustracion" id="portada-ilustracion" viewBox="0 0 210 146" aria-hidden="true"></svg>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- Tablero, tarjetas de nombre, juegos, tarjetas de pasos, temporizador y soluciones:
+         los crea el programa del final de este archivo -->
+    <div id="hojas"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para docentes</p>
+      <h1>Un rincón para cuando ya han terminado</h1>
+      <p>
+        «Ya he terminado» es un rincón de juegos tranquilos que el alumnado usa sin ayuda del docente. Sirve para cuando
+        alguien acaba la tarea antes que el resto o cuando la clase espera al siguiente maestro o maestra. También acompaña a quien un
+        día no sale al recreo. Cada juego tiene tres niveles y se juega en voz baja, así que tú puedes seguir con quien te
+        necesita.
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul>
+        <li><strong>Tablero de elección</strong> con dos sitios por juego, 30 tarjetas de nombre y 5 de «Hoy no».</li>
+        <li>
+          <strong>Siete juegos en tres niveles:</strong> diferencias, laberintos, sopas de letras, tres en raya, memoria, STOP
+          de palabras y una oca de diseño propio.
+        </li>
+        <li><strong>Ocho tarjetas de pasos</strong>, una por juego y otra para el temporizador visual, que se recorta y se monta.</li>
+        <li><strong>Soluciones</strong> e ideas para el STOP, y una <strong>nota para las familias</strong>.</li>
+      </ul>
+
+      <h2>Cómo presentarlo</h2>
+      <ol class="presentacion">
+        <li class="j-dif"><strong>El tablero</strong>Enseña el tablero y practicad la rutina con las diferencias.</li>
+        <li class="j-lab"><strong>Juegos de uno</strong>Presenta los laberintos y la sopa de letras. Juega tú primero en voz alta.</li>
+        <li class="j-tres"><strong>Juegos de dos</strong>Tres en raya y memoria: practicad los turnos en pareja.</li>
+        <li class="j-oca"><strong>Los más largos</strong>El STOP y la oca: jugadlos juntos antes de dejarlos en el rincón.</li>
+      </ol>
+      <p>Añade un juego nuevo solo cuando la rutina ya funcione. Así el rincón crece con la clase.</p>
+
+      <h2>La rutina, siempre igual</h2>
+      <ol>
+        <li>Quien termina deja su tarea donde acordéis y va al tablero.</li>
+        <li>Pone su tarjeta de nombre en un sitio libre del juego que elige. Si los dos sitios están ocupados, elige otro.</li>
+        <li>Coge la carpeta del juego y elige el nivel. Juega en su mesa o en el rincón, con rotulador de pizarra.</li>
+        <li>Cuando acaba el tiempo, borra la hoja con el trapo y la guarda en su carpeta. Después quita su nombre del tablero.</li>
+      </ol>
+      <p>No hace falta terminar el juego: lo importante es que la espera sea tranquila.</p>
+
+      <h2>Los tres niveles</h2>
+      <table class="tabla-niveles">
+        <colgroup>
+          <col class="juego" />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Juego</th>
+            <th scope="col">Nivel 1</th>
+            <th scope="col">Nivel 2</th>
+            <th scope="col">Nivel 3</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-niveles"></tbody>
+      </table>
+      <p>
+        Los niveles describen la tarea, nunca al niño o la niña. Cada cual empieza por el que quiere y cambia cuando le
+        apetece. Si un nivel resulta fácil, propón el siguiente. Si cuesta, volved al anterior sin darle importancia.
+      </p>
+
+      <h2>Por qué dejar elegir</h2>
+      <p>
+        Las pautas del Diseño Universal para el Aprendizaje (DUA) del centro de investigación CAST, en su versión 3.0 de
+        2024, proponen optimizar la elección y la autonomía (pauta 7, consideración 7.1). Entre las opciones que citan está
+        elegir qué contenido explorar o en qué orden hacer las tareas. También avisan de que no basta con ofrecer opciones,
+        porque cada persona necesita una cantidad distinta. Por eso el tablero tiene siete juegos y las tarjetas de «Hoy no»
+        dejan ofrecer menos cuando hace falta.
+      </p>
+      <p>
+        La Ley Orgánica de Educación (LOE) pide que las medidas para atender la diversidad se adopten «conforme a los
+        principios del Diseño universal de aprendizaje» (artículo 4.3).
+      </p>
+
+      <h2>Ideas para cada alumno o alumna</h2>
+      <h3>Alumnado con trastorno del espectro del autismo (TEA)</h3>
+      <ul>
+        <li>
+          Los apoyos visuales están entre las 28 prácticas con respaldo para el alumnado autista (Hume y otros, 2021). Aquí lo
+          son el tablero, las tarjetas de pasos, el temporizador y los pictogramas de cada juego.
+        </li>
+        <li>Enseña el rincón en un momento tranquilo y practicad la rutina antes de usarla de verdad.</li>
+        <li>Si siete opciones son muchas, empieza con dos y cierra las demás con las tarjetas de «Hoy no».</li>
+        <li>Avisa antes de acabar, «Te quedan 2 minutos», y enséñale el temporizador.</li>
+        <li>Los juegos para uno, como las diferencias o los laberintos, no piden turnos ni hablar.</li>
+      </ul>
+      <h3>Alumnado con trastorno por déficit de atención e hiperactividad (TDAH)</h3>
+      <ul>
+        <li>Juegos cortos y con final claro: una hoja de diferencias o un laberinto se acaban en pocos minutos.</li>
+        <li>Temporizador a la vista y una sola hoja cada vez.</li>
+        <li>Las soluciones le dan la respuesta enseguida, sin esperar al adulto.</li>
+        <li>Si lo necesita, que juegue de pie en el rincón.</li>
+      </ul>
+      <h3>Alumnado con trastorno del desarrollo del lenguaje (TDL)</h3>
+      <ul>
+        <li>En la sopa de letras y en la memoria, cada palabra va con su pictograma: decidla en voz alta antes de buscarla.</li>
+        <li>En el STOP del nivel 1 vale dibujar. Si se atasca, dale el primer sonido: «/m/, como mono».</li>
+        <li>Para jugar sin leer ni hablar: laberintos, diferencias, tres en raya y memoria de los niveles 1 y 2.</li>
+      </ul>
+      <h3>Alumnado con discapacidad intelectual</h3>
+      <ul>
+        <li>Empieza por el nivel 1 y por un solo juego. Jugad juntos las primeras veces y retira la ayuda poco a poco.</li>
+        <li>En la memoria, quita parejas: con tres ya es un juego.</li>
+        <li>Reconoce cada paso de la rutina, sobre todo recoger.</li>
+      </ul>
+      <h3>Para quien pide más reto</h3>
+      <ul>
+        <li>Que invente un laberinto o una sopa de letras para la clase en un folio, o un STOP con categorías nuevas.</li>
+      </ul>
+
+      <div class="caja caja--coral">
+        <h3>Lo que el rincón no es</h3>
+        <ul>
+          <li>No es un premio para quien acaba antes. Si siempre lo usan los mismos, reserva un rato a la semana para toda la clase.</li>
+          <li>
+            Tampoco es un castigo ni sustituye al recreo. La Academia Americana de Pediatría pide que el recreo no se quite como
+            castigo ni por motivos académicos (Murray y Ramstetter, 2013). Si alguien no puede salir un día, por ejemplo por salud,
+            el rincón le acompaña.
+          </li>
+        </ul>
+      </div>
+
+      <h2>El temporizador</h2>
+      <p>
+        El color enseña el tiempo que queda, hasta 30 minutos. Cada 5 minutos se gira un número hacia el 0: puedes hacerlo
+        tú, mirando el reloj de la clase, o una persona encargada con un reloj de arena de 5 minutos.
+      </p>
+
+      <h2>Dudas frecuentes</h2>
+      <div class="dos-columnas" style="align-items: start">
+        <div class="caja caja--amarilla">
+          <h3>¿Y si siempre elige el mismo juego?</h3>
+          <p>
+            Es normal, sobre todo al principio. Propón «primero uno nuevo y después el tuyo». Si hace falta, cierra ese juego
+            un día con «Hoy no».
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>¿Le doy puntos o premios?</h3>
+          <p>No hace falta. Reconoce con palabras lo que hace bien: «Has recogido la carpeta tú solo».</p>
+        </div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Ya he terminado: rincón de juegos tranquilos.</strong> IdEducando, noviembre de 2026. Ficha y novedades:
+          <span class="url">ideducando.es/material-gratuito/ya-he-terminado</span>
+        </p>
+        <p>
+          Fuentes: CAST (2024), <em>CAST Universal Design for Learning Guidelines version 3.0</em>, pauta 7, consideración
+          7.1, udlguidelines.cast.org; Hume, K. y otros (2021), <em>Journal of Autism and Developmental Disorders</em>, 51(11),
+          4013-4032; Murray, R. y Ramstetter, C. (2013), <em>Pediatrics</em>, 131(1), 183-188; Ley Orgánica 2/2006 de
+          Educación, artículo 4.3.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio
+          Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». ARASAAC es el
+          Centro Aragonés para la Comunicación Aumentativa y Alternativa. Si adaptas el material, mantén este texto. Con
+          pictogramas de ARASAAC, el material no se puede vender. Los dibujos, los laberintos, las sopas, los tableros y el
+          temporizador son de IdEducando.
+        </p>
+        <p>
+          Licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0): puedes copiarlo y
+          adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Esperar también se aprende jugando</h1>
+      <p>
+        En clase tenemos un rincón que se llama «Ya he terminado». Cuando alguien acaba antes o toca esperar, elige un juego
+        tranquilo y juega sin ayuda, en voz baja. Estos son los juegos:
+      </p>
+      <ul class="juegos-familias" id="juegos-familias"></ul>
+      <p>Cada juego tiene tres niveles y cada niño o niña elige el suyo.</p>
+
+      <h2>En casa</h2>
+      <ol>
+        <li>Si sabéis que os toca esperar, en el médico o en un viaje, llevad 2 o 3 juegos en una carpeta.</li>
+        <li>Dejad que elija entre 2 juegos. Así decide él o ella.</li>
+        <li>Usad un reloj de cocina o un reloj de arena, para que vea cuánto falta.</li>
+        <li>La primera vez, jugad juntos. Después, que lo intente sin ayuda.</li>
+        <li>Al terminar, que lo recoja. Decidle lo que ha hecho bien: «Lo has guardado tú solo».</li>
+      </ol>
+
+      <h2>Algo importante</h2>
+      <p>
+        No es un deber ni un examen. Si un juego cuesta, se cambia por uno más fácil. En casa no hace falta plastificar: en un
+        folio se juega con lápiz. Todo el material es gratis y está en ideducando.es.
+      </p>
+
+      <div class="mensaje">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Ya he terminado.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ===========================================================================
+      // Ya he terminado · IdEducando
+      // Todo lo que hay en las hojas de juego sale de este programa: los laberintos, las sopas
+      // de letras y los retos de tres en raya se generan con una semilla fija (salen siempre
+      // iguales) y se comprueban aquí mismo. Si una comprobación falla, la portada lo avisa.
+      // ===========================================================================
+
+      const M = '#1e2b55';
+      const C = {
+        azul: '#2f6fd6',
+        verde: '#1fa67a',
+        coral: '#e8553e',
+        morado: '#8c4fb8',
+        amarillo: '#f6c12e',
+        naranja: '#f5961f',
+        crema: '#fff6e6',
+        suave: '#46578c',
+        linea: '#ead9bb',
+        azulT: '#e4edfb',
+        verdeT: '#dcf3ea',
+        coralT: '#fde5e0',
+        moradoT: '#efe5f7',
+        amarilloT: '#fdf0c7',
+        naranjaT: '#fde8cf',
+        pizarra: '#127055',
+      };
+
+      const P = (id) => `pictogramas/${id}.png`;
+      const img = (id, clase = '', alt = '') => `<img${clase ? ` class="${clase}"` : ''} src="${P(id)}" alt="${alt}">`;
+      const LOGO = '<img class="cabecera__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">';
+      const ATRIBUCION =
+        '<p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>';
+
+      // Comprobaciones: cada fallo se apunta aquí y sale en la portada.
+      const PROBLEMAS = [];
+      const REVISION = {};
+      const comprobar = (condicion, mensaje) => {
+        if (!condicion) PROBLEMAS.push(mensaje);
+        return condicion;
+      };
+
+      // Números pseudoaleatorios con semilla (mulberry32): mismos juegos en cada impresión.
+      function azar(semilla) {
+        let a = semilla >>> 0;
+        return () => {
+          a = (a + 0x6d2b79f5) | 0;
+          let t = Math.imul(a ^ (a >>> 15), 1 | a);
+          t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+          return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+        };
+      }
+
+      const f1 = (n) => Number(n.toFixed(2));
+      const trazo = (w = 2) => `stroke="${M}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
+
+      // ---------------------------------------------------------------- Los siete juegos
+
+      const JUEGOS = [
+        { id: 'dif', nombre: 'Diferencias', picto: 27391, clase: 'j-dif', jugadores: 'Para 1 o 2', juega: [6285, 'Juega', 'Busca lo que cambia en el dibujo de abajo y rodéalo.'] },
+        { id: 'lab', nombre: 'Laberintos', picto: 29626, clase: 'j-lab', jugadores: 'Para 1', juega: [8088, 'Juega', 'Haz el camino de la salida a la meta sin cruzar las líneas.'] },
+        { id: 'sopa', nombre: 'Sopa de letras', picto: 34361, clase: 'j-sopa', jugadores: 'Para 1', juega: [6285, 'Juega', 'Busca cada palabra y rodéala. Marca su casilla en la lista.'] },
+        { id: 'tres', nombre: 'Tres en raya', picto: 7284, clase: 'j-tres', jugadores: 'Para 2. Los retos, para 1', juega: [7158, 'Juega', 'Por turnos, pon tu cruz o tu círculo. Gana quien hace 3 en raya.'], coge: 'Coge una hoja y 2 rotuladores de colores distintos.' },
+        { id: 'mem', nombre: 'Memoria', picto: 39085, clase: 'j-mem', jugadores: 'Para 1 o 2', juega: [37230, 'Juega', 'Da la vuelta a 2 cartas. Si son pareja, te las quedas.'], coge: 'Coge la bolsita de tu nivel y pon las cartas boca abajo.', recoge: 'Junta todas las cartas y guárdalas en su bolsita.' },
+        { id: 'stop', nombre: 'STOP de palabras', picto: 8289, clase: 'j-stop', jugadores: 'Para 1 o 2', juega: [2380, 'Juega', 'Elige una letra y escribe una palabra en cada casilla. Al acabar, di «¡STOP!».'] },
+        { id: 'oca', nombre: 'La oca', picto: 3421, clase: 'j-oca', jugadores: 'Para 2', juega: [31071, 'Juega', 'Por turnos, tira el dado y avanza. Gana quien llega a la meta.'], coge: 'Coge un tablero, el dado y una ficha por persona.', recoge: 'Guarda el tablero, el dado y las fichas en su carpeta.' },
+      ];
+      const J = Object.fromEntries(JUEGOS.map((j) => [j.id, j]));
+
+      function cabecera(j, nivel) {
+        const puntos = [1, 2, 3].map((i) => `<i class="${i <= nivel ? 'lleno' : ''}"></i>`).join('');
+        return `<div class="banda"></div><header class="cabecera">${img(j.picto, 'cabecera__picto')}<div class="cabecera__texto"><h1>${j.nombre}</h1>${
+          nivel ? `<p class="nivel">Nivel ${nivel}<span aria-hidden="true">${puntos}</span></p>` : ''
+        }</div>${LOGO}</header>`;
+      }
+
+      const hoja = (clases, html) => `<section class="hoja ${clases}">${html}</section>`;
+
+      // ===========================================================================
+      // 1. DIFERENCIAS: dibujos de IdEducando. Cada escena se dibuja dos veces (A y B) y solo
+      //    cambian los objetos de su lista. Las diferencias son de forma, número o presencia,
+      //    nunca solo de color: así también se ven en blanco y negro.
+      // ===========================================================================
+
+      function sol(cx, cy, r) {
+        let rayos = '';
+        for (let k = 0; k < 8; k++) {
+          const a = (k * Math.PI) / 4;
+          rayos += `M${f1(cx + Math.cos(a) * (r + 4))} ${f1(cy + Math.sin(a) * (r + 4))}L${f1(cx + Math.cos(a) * (r + 10))} ${f1(cy + Math.sin(a) * (r + 10))}`;
+        }
+        return `<path d="${rayos}" ${trazo(2.4)} fill="none"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="${C.amarillo}" ${trazo()}/>`;
+      }
+
+      function nube(x, y, s = 1) {
+        return `<path transform="translate(${x} ${y}) scale(${s})" d="M0 0 C-9 0 -10 -12 0 -13 C1 -23 15 -26 20 -17 C25 -26 40 -22 38 -11 C46 -10 46 0 38 0 Z" fill="#fff" ${trazo(2 / s)}/>`;
+      }
+
+      function ventana(x, y) {
+        return `<rect x="${x}" y="${y}" width="17" height="17" fill="${C.azulT}" ${trazo()}/><path d="M${x + 8.5} ${y}V${y + 17}M${x} ${y + 8.5}H${x + 17}" ${trazo(1.6)} fill="none"/>`;
+      }
+
+      function flor(x, y) {
+        const cy = y - 30;
+        let s = `<path d="M${x} ${y}V${cy + 6}" ${trazo(2)} fill="none"/>`;
+        s += `<path d="M${x} ${y - 9} q8 -10 15 -6 q-6 9 -15 6z" fill="${C.verde}" ${trazo(1.6)}/>`;
+        for (let k = 0; k < 5; k++) {
+          const a = -Math.PI / 2 + (k * 2 * Math.PI) / 5;
+          s += `<circle cx="${f1(x + Math.cos(a) * 7.5)}" cy="${f1(cy + Math.sin(a) * 7.5)}" r="5.6" fill="${C.coral}" ${trazo(1.6)}/>`;
+        }
+        return s + `<circle cx="${x}" cy="${cy}" r="4.6" fill="${C.amarillo}" ${trazo(1.6)}/>`;
+      }
+
+      function mariposa(x, y) {
+        return `<g transform="translate(${x} ${y})">
+          <path d="M0 -2 C-6 -16 -20 -16 -18 -5 C-17 1 -8 2 0 0Z" fill="${C.morado}" ${trazo(1.6)}/>
+          <path d="M0 -2 C6 -16 20 -16 18 -5 C17 1 8 2 0 0Z" fill="${C.morado}" ${trazo(1.6)}/>
+          <path d="M0 0 C-6 2 -15 6 -12 12 C-9 16 -3 10 0 2Z" fill="${C.moradoT}" ${trazo(1.6)}/>
+          <path d="M0 0 C6 2 15 6 12 12 C9 16 3 10 0 2Z" fill="${C.moradoT}" ${trazo(1.6)}/>
+          <path d="M0 -8 V10" ${trazo(3)}/><path d="M-1 -8 Q-4 -15 -8 -16 M1 -8 Q4 -15 8 -16" ${trazo(1.3)} fill="none"/></g>`;
+      }
+
+      function escenaJardin(v) {
+        let s = `<rect width="300" height="160" fill="#fff"/>`;
+        s += `<path d="M0 128H300V160H0Z" fill="${C.verdeT}"/><path d="M0 128H300" ${trazo()} fill="none"/>`;
+        if (v === 'A') s += sol(44, 36, 14);
+        s += nube(214, 46, 1.25);
+        s += `<rect x="90" y="80" width="78" height="48" fill="${C.naranjaT}" ${trazo()}/>`;
+        s += `<path d="M82 82L129 42L176 82Z" fill="${C.coral}" ${trazo()}/>`;
+        s += `<rect x="120" y="99" width="19" height="29" rx="2" fill="${C.azul}" ${trazo()}/><circle cx="134.5" cy="114" r="1.8" fill="${M}"/>`;
+        s += ventana(97, 89);
+        if (v === 'A') s += ventana(145, 89);
+        s += `<rect x="232" y="94" width="12" height="34" fill="${C.naranja}" ${trazo()}/><circle cx="238" cy="80" r="24" fill="${C.verde}" ${trazo()}/>`;
+        s += `<circle cx="228" cy="74" r="3.6" fill="${C.coral}" ${trazo(1.4)}/><circle cx="247" cy="70" r="3.6" fill="${C.coral}" ${trazo(1.4)}/><circle cx="243" cy="89" r="3.6" fill="${C.coral}" ${trazo(1.4)}/>`;
+        s += flor(42, 128);
+        s += `<circle cx="276" cy="140" r="9" fill="${C.azul}" ${trazo()}/><path d="M267.5 137 Q276 144 284.5 137" ${trazo(1.6)} fill="none"/>`;
+        if (v === 'B') s += mariposa(188, 60);
+        return s;
+      }
+
+      function pez(x, y, dir, color) {
+        return `<g transform="translate(${x} ${y}) scale(${dir} 1)">
+          <path d="M-11 0L-22 -9L-22 9Z" fill="${color}" ${trazo(1.6)}/>
+          <ellipse cx="0" cy="0" rx="14" ry="9" fill="${color}" ${trazo(1.6)}/>
+          <circle cx="7" cy="-2" r="2" fill="${M}"/><path d="M-3 -8 Q2 -14 7 -8" ${trazo(1.4)} fill="none"/></g>`;
+      }
+
+      function planta(x, y, n) {
+        const hojas = [
+          [-7, -12, -28],
+          [7, -22, 28],
+          [-7, -32, -28],
+          [7, -42, 28],
+        ].slice(0, n);
+        let s = `<path d="M${x} ${y}V${y - 48}" ${trazo(2)} fill="none"/>`;
+        for (const [dx, dy, ang] of hojas)
+          s += `<ellipse cx="${x + dx}" cy="${y + dy}" rx="8.5" ry="3.8" transform="rotate(${ang} ${x + dx} ${y + dy})" fill="${C.verde}" ${trazo(1.4)}/>`;
+        return s;
+      }
+
+      function castillo(x, y, bandera) {
+        let s = `<path d="M${x} ${y}V${y - 36}h8v5h8v-5h8v5h8v-5h8v5h8v-5V${y}Z" fill="${C.amarilloT}" ${trazo(1.8)}/>`;
+        s += `<path d="M${x + 16} ${y - 31}V${y - 54}h4v4h4v-4h4v4h4v-4V${y - 31}" fill="${C.amarilloT}" ${trazo(1.8)}/>`;
+        s += `<path d="M${x + 18} ${y}V${y - 13}a6 6 0 0 1 12 0V${y}" fill="${C.azul}" ${trazo(1.6)}/>`;
+        if (bandera) s += `<path d="M${x + 24} ${y - 54}V${y - 72}" ${trazo(1.6)}/><path d="M${x + 24} ${y - 72}L${x + 38} ${y - 67}L${x + 24} ${y - 62}Z" fill="${C.coral}" ${trazo(1.4)}/>`;
+        return s;
+      }
+
+      function cangrejo(x, y) {
+        return `<g transform="translate(${x} ${y})">
+          <path d="M-11 2L-19 8M-10 5L-15 11M11 2L19 8M10 5L15 11M-9 -4L-16 -11M9 -4L16 -11" ${trazo(1.6)} fill="none"/>
+          <circle cx="-17" cy="-13" r="4.2" fill="${C.coral}" ${trazo(1.4)}/><circle cx="17" cy="-13" r="4.2" fill="${C.coral}" ${trazo(1.4)}/>
+          <ellipse cx="0" cy="0" rx="13" ry="8" fill="${C.coral}" ${trazo(1.6)}/>
+          <path d="M-4 -8V-12M4 -8V-12" ${trazo(1.4)}/><circle cx="-4" cy="-13" r="1.9" fill="${M}"/><circle cx="4" cy="-13" r="1.9" fill="${M}"/></g>`;
+      }
+
+      function concha(x, y) {
+        return `<g transform="translate(${x} ${y})"><path d="M0 5L-13 -6Q0 -19 13 -6Z" fill="${C.coralT}" ${trazo(1.6)}/><path d="M0 5L-7 -12M0 5V-13M0 5L7 -12" ${trazo(1.2)} fill="none"/></g>`;
+      }
+
+      function estrellaMar(x, y, r = 12) {
+        let d = '';
+        for (let k = 0; k < 10; k++) {
+          const a = -Math.PI / 2 + (k * Math.PI) / 5;
+          const rr = k % 2 ? r * 0.45 : r;
+          d += `${k ? 'L' : 'M'}${f1(x + Math.cos(a) * rr)} ${f1(y + Math.sin(a) * rr)}`;
+        }
+        return `<path d="${d}Z" fill="${C.naranja}" ${trazo(1.6)}/>`;
+      }
+
+      function escenaPecera(v) {
+        let s = `<rect width="300" height="160" fill="#fff"/>`;
+        s += `<rect x="14" y="8" width="272" height="146" rx="8" fill="${C.azulT}" ${trazo()}/>`;
+        s += `<path d="M16 24Q36 18 56 24T96 24T136 24T176 24T216 24T256 24T284 24" ${trazo(1.4)} fill="none"/>`;
+        s += `<path d="M16 132Q60 122 110 130T200 128T284 126V146Q284 152 278 152H22Q16 152 16 146Z" fill="${C.amarilloT}" ${trazo(1.6)}/>`;
+        s += planta(44, 136, 3);
+        s += planta(262, 134, v === 'A' ? 4 : 3);
+        s += castillo(180, 134, v === 'A');
+        s += pez(84, 56, v === 'A' ? 1 : -1, C.naranja);
+        s += pez(150, 44, 1, C.amarillo);
+        s += pez(124, 98, -1, C.coral);
+        for (const [bx, by, br] of [
+          [168, 34, 3.4],
+          [173, 27, 2.6],
+          [170, 19, 2],
+        ])
+          s += `<circle cx="${bx}" cy="${by}" r="${br}" fill="#fff" ${trazo(1.2)}/>`;
+        if (v === 'A') s += cangrejo(98, 138);
+        s += v === 'A' ? concha(146, 141) : estrellaMar(146, 139);
+        return s;
+      }
+
+      function escenaClase(v) {
+        let s = `<rect width="300" height="160" fill="#fff"/>`;
+        s += `<path d="M0 134H300V160H0Z" fill="${C.naranjaT}"/><path d="M0 134H300" ${trazo()} fill="none"/>`;
+        // reloj
+        s += `<circle cx="38" cy="32" r="16" fill="#fff" ${trazo()}/>`;
+        s += `<path d="M38 18.5V21.5M51.5 32H48.5M38 45.5V42.5M24.5 32H27.5" ${trazo(1.6)} fill="none"/>`;
+        s += `<path d="M38 32V22" ${trazo(2.2)}/>`;
+        s += v === 'A' ? `<path d="M38 32H46" ${trazo(2.8)}/>` : `<path d="M38 32H30" ${trazo(2.8)}/>`;
+        s += `<circle cx="38" cy="32" r="1.8" fill="${M}"/>`;
+        // ventana
+        s += `<rect x="72" y="12" width="64" height="50" fill="${C.azulT}" ${trazo()}/><path d="M104 12V62M72 37H136" ${trazo(1.6)} fill="none"/>`;
+        s += `<rect x="68" y="62" width="72" height="5" rx="1" fill="#fff" ${trazo(1.6)}/>`;
+        if (v === 'A')
+          s += `<g transform="translate(118 55)"><path d="M-9 0 L-15 -4 L-14 2Z" fill="${C.azul}" ${trazo(1.2)}/><ellipse cx="0" cy="0" rx="9" ry="6" fill="${C.azul}" ${trazo(1.4)}/><circle cx="7" cy="-6" r="4.4" fill="${C.azul}" ${trazo(1.4)}/><path d="M11 -6.5L15 -5L11 -4" fill="${C.amarillo}" ${trazo(1)}/><circle cx="8" cy="-7" r="1" fill="${M}"/><path d="M-1 6V8M3 6V8" ${trazo(1.2)}/></g>`;
+        // pizarra
+        s += `<rect x="154" y="12" width="130" height="56" rx="3" fill="${C.pizarra}" ${trazo()}/><rect x="168" y="68" width="102" height="4" fill="#fff" ${trazo(1.4)}/>`;
+        const letras = v === 'A' ? ['A', 'B', 'C'] : ['A', 'B'];
+        letras.forEach((l, i) => {
+          s += `<text x="${184 + i * 36}" y="52" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="30" fill="#fff">${l}</text>`;
+        });
+        // estantería con libros
+        s += `<rect x="12" y="94" width="56" height="4" fill="${C.naranja}" ${trazo(1.6)}/>`;
+        const libros = [
+          [16, 68, C.azul],
+          [28, 72, C.coral],
+          [40, 70, C.amarillo],
+          [52, 74, C.verde],
+        ].filter((l, i) => v === 'A' || i !== 1);
+        for (const [x, y, color] of libros) s += `<rect x="${x}" y="${y}" width="10" height="${94 - y}" rx="1" fill="${color}" ${trazo(1.6)}/>`;
+        // maceta
+        s += `<path d="M18 134L21 116H43L46 134Z" fill="${C.coralT}" ${trazo(1.6)}/>`;
+        s += `<path d="M32 116C30 106 22 102 18 103C20 110 26 114 32 116ZM32 116C34 106 42 101 46 102C44 110 38 114 32 116Z" fill="${C.verde}" ${trazo(1.4)}/>`;
+        // mesa
+        s += `<rect x="84" y="104" width="148" height="8" rx="2" fill="${C.naranjaT}" ${trazo()}/><path d="M92 112V134M224 112V134" ${trazo(3)}/>`;
+        s += `<rect x="146" y="96" width="38" height="8" rx="1.5" fill="${C.moradoT}" ${trazo(1.6)}/><path d="M165 96V104" ${trazo(1.2)}/>`;
+        if (v === 'A') s += `<path d="M194 100H220L226 102L220 104H194Z" fill="${C.amarillo}" ${trazo(1.4)}/><path d="M220 100V104" ${trazo(1)}/>`;
+        s += `<circle cx="116" cy="97" r="7" fill="${C.coral}" ${trazo(1.6)}/><path d="M116 90V86" ${trazo(1.6)}/>`;
+        if (v === 'A') s += `<path d="M116 87Q122 82 126 85Q121 90 116 87Z" fill="${C.verde}" ${trazo(1.2)}/>`;
+        // mochila
+        s += `<path d="M250 110Q262 98 274 110" ${trazo(2.4)} fill="none"/>`;
+        s += `<rect x="244" y="108" width="36" height="42" rx="8" fill="${C.azul}" ${trazo()}/>`;
+        if (v === 'A') s += `<rect x="251" y="126" width="22" height="16" rx="4" fill="${C.azulT}" ${trazo(1.6)}/><path d="M251 132H273" ${trazo(1.2)}/>`;
+        return s;
+      }
+
+      // Las diferencias de cada escena, con el círculo de la solución (en unidades del dibujo).
+      const DIFERENCIAS = [
+        {
+          nivel: 1,
+          escena: escenaJardin,
+          titulo: 'un jardín con una casa, un árbol, una flor y una pelota',
+          lista: [
+            ['el sol', 44, 36, 27],
+            ['una ventana', 153.5, 97.5, 15],
+            ['la mariposa', 188, 60, 22],
+          ],
+        },
+        {
+          nivel: 2,
+          escena: escenaPecera,
+          titulo: 'una pecera con tres peces, un castillo, plantas y conchas',
+          lista: [
+            ['un pez mira al otro lado', 84, 56, 25],
+            ['la bandera del castillo', 211, 70, 15],
+            ['el cangrejo', 98, 136, 22],
+            ['la concha y la estrella de mar', 146, 139, 15],
+            ['una hoja de la planta', 269, 92, 12],
+          ],
+        },
+        {
+          nivel: 3,
+          escena: escenaClase,
+          titulo: 'una clase con un reloj, una ventana, una pizarra, una mesa y una mochila',
+          lista: [
+            ['la aguja corta del reloj', 38, 32, 13],
+            ['el pájaro', 118, 53, 17],
+            ['la letra C', 256, 41, 17],
+            ['un libro', 33, 82, 12],
+            ['el lápiz', 210, 102, 18],
+            ['la hoja de la manzana', 121, 86, 9],
+            ['el bolsillo de la mochila', 262, 134, 15],
+          ],
+        },
+      ];
+
+      const svgEscena = (d, v, extra = '', etiqueta = '') =>
+        `<svg viewBox="0 0 300 160" ${etiqueta ? `role="img" aria-label="${etiqueta}"` : 'aria-hidden="true"'} data-escena="${d.nivel}${v}">${d.escena(v)}${extra}</svg>`;
+
+      const icoOjo = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="#fff" ${trazo(1.8)}/><circle cx="12" cy="12" r="3.2" fill="${M}"/></svg>`;
+      const icoLupa = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="#fff" ${trazo(1.8)}/><path d="M15 15l6 6" ${trazo(2.6)}/></svg>`;
+
+      function hojaDiferencias(d) {
+        const n = d.lista.length;
+        const circulos = '<i></i>'.repeat(n);
+        return hoja(
+          `j-dif n${d.nivel}`,
+          `${cabecera(J.dif, d.nivel)}
+          <p class="consigna">Busca las ${n} diferencias y rodéalas con el rotulador ${img(6285)}.</p>
+          <p class="rotulo">${icoOjo}Mira este dibujo</p>
+          <div class="escena">${svgEscena(d, 'A', '', `Dibujo de ${d.titulo}`)}</div>
+          <p class="rotulo">${icoLupa}Busca aquí las ${n} diferencias</p>
+          <div class="escena">${svgEscena(d, 'B', '', `El mismo dibujo, con ${n} cosas distintas`)}</div>
+          <p class="contador">Llevo<span aria-hidden="true">${circulos}</span></p>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ===========================================================================
+      // 2. LABERINTOS: laberintos perfectos (un solo camino entre dos casillas), generados con
+      //    el algoritmo de vuelta atrás. Se comprueba que se llega a todas las casillas, que no
+      //    hay ciclos y que hay camino de la salida a la meta.
+      // ===========================================================================
+
+      const N_ = 1,
+        E_ = 2,
+        S_ = 4,
+        O_ = 8;
+      const PASOS = [
+        [0, -1, N_, S_],
+        [1, 0, E_, O_],
+        [0, 1, S_, N_],
+        [-1, 0, O_, E_],
+      ];
+
+      function generarLaberinto(cols, filas, semilla) {
+        const r = azar(semilla);
+        const muros = Array.from({ length: filas }, () => Array(cols).fill(15));
+        const visto = Array.from({ length: filas }, () => Array(cols).fill(false));
+        const pila = [[0, 0]];
+        visto[0][0] = true;
+        while (pila.length) {
+          const [x, y] = pila[pila.length - 1];
+          const opciones = PASOS.filter(([dx, dy]) => {
+            const nx = x + dx,
+              ny = y + dy;
+            return nx >= 0 && ny >= 0 && nx < cols && ny < filas && !visto[ny][nx];
+          });
+          if (!opciones.length) {
+            pila.pop();
+            continue;
+          }
+          const [dx, dy, b, bo] = opciones[Math.floor(r() * opciones.length)];
+          muros[y][x] &= ~b;
+          muros[y + dy][x + dx] &= ~bo;
+          visto[y + dy][x + dx] = true;
+          pila.push([x + dx, y + dy]);
+        }
+        return { cols, filas, muros, semilla };
+      }
+
+      // Busca en anchura el camino más corto de la salida (arriba a la izquierda) a la meta.
+      function resolverLaberinto(L) {
+        const { cols, filas, muros } = L;
+        const previo = new Map();
+        const clave = (x, y) => y * cols + x;
+        const cola = [[0, 0]];
+        previo.set(0, -1);
+        while (cola.length) {
+          const [x, y] = cola.shift();
+          for (const [dx, dy, b] of PASOS) {
+            if (muros[y][x] & b) continue;
+            const nx = x + dx,
+              ny = y + dy;
+            if (nx < 0 || ny < 0 || nx >= cols || ny >= filas) continue;
+            const k = clave(nx, ny);
+            if (previo.has(k)) continue;
+            previo.set(k, clave(x, y));
+            cola.push([nx, ny]);
+          }
+        }
+        const alcanzadas = previo.size;
+        const meta = clave(cols - 1, filas - 1);
+        const camino = [];
+        if (previo.has(meta)) for (let k = meta; k !== -1; k = previo.get(k)) camino.unshift([k % cols, Math.floor(k / cols)]);
+        // Pasos abiertos: en un laberinto perfecto son las casillas menos una.
+        let abiertos = 0;
+        for (let y = 0; y < filas; y++)
+          for (let x = 0; x < cols; x++) {
+            if (x < cols - 1 && !(muros[y][x] & E_)) abiertos++;
+            if (y < filas - 1 && !(muros[y][x] & S_)) abiertos++;
+          }
+        return { camino, alcanzadas, abiertos };
+      }
+
+      const LABERINTOS = [
+        { nivel: 1, cols: 6, filas: 7, celda: 23, grosor: 1.5, semilla: 101, largo: [17, 26], salida: [2239, 'la abeja'], meta: [3102, 'la flor'] },
+        { nivel: 2, cols: 10, filas: 12, celda: 13.8, grosor: 1.1, semilla: 202, largo: [42, 70], salida: [2546, 'el ratón'], meta: [2541, 'el queso'] },
+        { nivel: 3, cols: 14, filas: 17, celda: 10, grosor: 0.85, semilla: 303, largo: [80, 140], salida: [2344, 'el cohete'], meta: [2829, 'el planeta'] },
+      ].map((cfg) => {
+        // Prueba semillas seguidas hasta que el camino tenga un largo adecuado al nivel.
+        for (let s = cfg.semilla; s < cfg.semilla + 400; s++) {
+          const L = generarLaberinto(cfg.cols, cfg.filas, s);
+          const sol = resolverLaberinto(L);
+          if (sol.camino.length >= cfg.largo[0] && sol.camino.length <= cfg.largo[1]) return { ...cfg, ...L, ...sol };
+        }
+        comprobar(false, `Laberinto ${cfg.nivel}: ninguna semilla da un camino de ${cfg.largo.join(' a ')} casillas`);
+        return cfg;
+      });
+
+      for (const L of LABERINTOS) {
+        const total = L.cols * L.filas;
+        comprobar(L.alcanzadas === total, `Laberinto ${L.nivel}: hay casillas a las que no se llega`);
+        comprobar(L.abiertos === total - 1, `Laberinto ${L.nivel}: no es perfecto (tiene ciclos o huecos)`);
+        comprobar(L.camino.length > 0, `Laberinto ${L.nivel}: no tiene solución`);
+      }
+      REVISION.laberintos = LABERINTOS.map((L) => ({
+        nivel: L.nivel,
+        cols: L.cols,
+        filas: L.filas,
+        semilla: L.semilla,
+        muros: L.muros,
+        camino: L.camino.length,
+      }));
+
+      function svgLaberinto(L, { solucion = false, escala = 1, etiqueta = '' } = {}) {
+        const c = L.celda;
+        const W = L.cols * c,
+          H = L.filas * c,
+          g = L.grosor;
+        let d = '';
+        for (let y = 0; y < L.filas; y++)
+          for (let x = 0; x < L.cols; x++) {
+            const w = L.muros[y][x],
+              x0 = x * c,
+              y0 = y * c;
+            if (w & N_) d += `M${x0} ${y0}H${x0 + c}`;
+            if (w & O_ && !(x === 0 && y === 0)) d += `M${x0} ${y0}V${y0 + c}`;
+            if (x === L.cols - 1 && w & E_ && y !== L.filas - 1) d += `M${x0 + c} ${y0}V${y0 + c}`;
+            if (y === L.filas - 1 && w & S_) d += `M${x0} ${y0 + c}H${x0 + c}`;
+          }
+        let camino = '';
+        if (solucion) {
+          const pts = L.camino.map(([x, y]) => `${f1(x * c + c / 2)} ${f1(y * c + c / 2)}`);
+          camino = `<path d="M${-g} ${f1(c / 2)}L${pts.join('L')}L${f1(W + g)} ${f1(H - c / 2)}" fill="none" stroke="${C.coral}" stroke-width="${f1(c * 0.32)}" stroke-linejoin="round" stroke-linecap="round" opacity="0.9"/>`;
+        }
+        const m = g;
+        const ancho = (W + 2 * m) * escala,
+          alto = (H + 2 * m) * escala;
+        return `<svg viewBox="${-m} ${-m} ${W + 2 * m} ${H + 2 * m}" width="${f1(ancho)}mm" height="${f1(alto)}mm" ${
+          etiqueta ? `role="img" aria-label="${etiqueta}"` : 'aria-hidden="true"'
+        }><rect x="0" y="0" width="${W}" height="${H}" fill="#fff"/>${camino}<path d="${d}" fill="none" stroke="${M}" stroke-width="${g}" stroke-linecap="square"/></svg>`;
+      }
+
+      const flechaDerecha = `<svg class="flecha-lab" viewBox="0 0 24 12" aria-hidden="true"><path d="M1 6H19M14 1L20 6L14 11" fill="none" ${trazo(2)}/></svg>`;
+
+      function hojaLaberinto(L) {
+        const [ps, ns] = L.salida,
+          [pm, nm] = L.meta;
+        return hoja(
+          `j-lab n${L.nivel}`,
+          `${cabecera(J.lab, L.nivel)}
+          <p class="consigna">Lleva ${ns} hasta ${nm}. Haz el camino con el rotulador ${img(8088)} sin cruzar las líneas.</p>
+          <div class="laberinto" style="--celda:${L.celda}mm;--grosor:${L.grosor}mm">
+            <figure class="salida">${flechaDerecha}${img(ps, '', ns.replace(/^(el|la) /, ''))}Salida</figure>
+            ${svgLaberinto(L, { etiqueta: `Laberinto de ${L.cols} por ${L.filas} casillas. Se entra por arriba a la izquierda y se sale por abajo a la derecha.` })}
+            <figure class="meta">${img(pm, '', nm.replace(/^(el|la) /, ''))}Meta${flechaDerecha}</figure>
+          </div>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ===========================================================================
+      // 3. SOPAS DE LETRAS: se colocan las palabras y se rellena con letras al azar. Se comprueba
+      //    que cada palabra sale una sola vez, en una dirección permitida, y que no aparece
+      //    ninguna palabra malsonante en ninguna dirección.
+      // ===========================================================================
+
+      const DIRECCIONES = {
+        derecha: [1, 0],
+        abajo: [0, 1],
+        diagonal: [1, 1],
+      };
+      const OCHO = [
+        [1, 0],
+        [-1, 0],
+        [0, 1],
+        [0, -1],
+        [1, 1],
+        [-1, -1],
+        [1, -1],
+        [-1, 1],
+      ];
+      const PROHIBIDAS = ['CACA', 'CULO', 'PEDO', 'PIS', 'PUTA', 'PUTO', 'TETA', 'MIERDA', 'POLLA', 'COÑO', 'PENE', 'NAZI', 'CAGA', 'MEA', 'MEO', 'TONTO', 'TONTA', 'GORDO', 'GORDA', 'FEO', 'FEA'];
+
+      // Todas las veces que sale una palabra, en las ocho direcciones. Cada aparición se guarda
+      // por sus casillas, así un palíndromo como OSO cuenta una sola vez.
+      function apariciones(g, palabra) {
+        const n = g.length;
+        const vistas = new Map();
+        for (let y = 0; y < n; y++)
+          for (let x = 0; x < n; x++)
+            for (const [dx, dy] of OCHO) {
+              let ok = true;
+              const celdas = [];
+              for (let i = 0; i < palabra.length; i++) {
+                const cx = x + dx * i,
+                  cy = y + dy * i;
+                if (cx < 0 || cy < 0 || cx >= n || cy >= n || g[cy][cx] !== palabra[i]) {
+                  ok = false;
+                  break;
+                }
+                celdas.push(cy * n + cx);
+              }
+              if (ok) {
+                const k = [...celdas].sort((a, b) => a - b).join(',');
+                if (!vistas.has(k)) vistas.set(k, { x, y, dx, dy });
+              }
+            }
+        return [...vistas.values()];
+      }
+
+      function generarSopa(cfg) {
+        const r = azar(cfg.semilla);
+        const n = cfg.tam;
+        const dirs = cfg.direcciones.map((d) => DIRECCIONES[d]);
+        for (let intento = 0; intento < 3000; intento++) {
+          const g = Array.from({ length: n }, () => Array(n).fill(''));
+          const usadas = new Set();
+          const filasUsadas = new Set();
+          const colocadas = [];
+          let ok = true;
+          for (const { palabra } of cfg.palabras) {
+            let puesta = false;
+            for (let k = 0; k < 400 && !puesta; k++) {
+              const [dx, dy] = dirs[Math.floor(r() * dirs.length)];
+              const x0 = Math.floor(r() * n),
+                y0 = Math.floor(r() * n);
+              const x1 = x0 + dx * (palabra.length - 1),
+                y1 = y0 + dy * (palabra.length - 1);
+              if (x1 >= n || y1 >= n) continue;
+              if (cfg.unaPorFila && filasUsadas.has(y0)) continue;
+              let cabe = true;
+              for (let i = 0; i < palabra.length && cabe; i++) {
+                const celda = g[y0 + dy * i][x0 + dx * i];
+                if (cfg.sinCruces ? celda : celda && celda !== palabra[i]) cabe = false;
+              }
+              if (!cabe) continue;
+              for (let i = 0; i < palabra.length; i++) {
+                g[y0 + dy * i][x0 + dx * i] = palabra[i];
+                usadas.add((y0 + dy * i) * n + x0 + dx * i);
+              }
+              filasUsadas.add(y0);
+              colocadas.push({ palabra, x: x0, y: y0, dx, dy });
+              puesta = true;
+            }
+            if (!puesta) {
+              ok = false;
+              break;
+            }
+          }
+          if (!ok) continue;
+          for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (!g[y][x]) g[y][x] = cfg.relleno[Math.floor(r() * cfg.relleno.length)];
+          const fallos = revisarSopa(g, cfg, colocadas);
+          if (!fallos.length) return { ...cfg, g, colocadas, intento };
+        }
+        comprobar(false, `Sopa ${cfg.nivel}: no se ha podido generar sin fallos`);
+        return { ...cfg, g: [], colocadas: [] };
+      }
+
+      function revisarSopa(g, cfg, colocadas) {
+        const fallos = [];
+        const permitidas = cfg.direcciones.map((d) => DIRECCIONES[d].join());
+        for (const { palabra } of cfg.palabras) {
+          const ap = apariciones(g, palabra);
+          if (ap.length !== 1) fallos.push(`${palabra} sale ${ap.length} veces`);
+          else if (!permitidas.includes([ap[0].dx, ap[0].dy].join()) && !permitidas.includes([-ap[0].dx, -ap[0].dy].join()))
+            fallos.push(`${palabra} va en una dirección no permitida`);
+          const puesta = colocadas.find((c) => c.palabra === palabra);
+          if (!puesta) fallos.push(`${palabra} no se ha colocado`);
+        }
+        for (const mala of PROHIBIDAS) if (apariciones(g, mala).length) fallos.push(`sale «${mala}»`);
+        return fallos;
+      }
+
+      const SOPAS = [
+        {
+          nivel: 1,
+          tam: 5,
+          semilla: 11,
+          direcciones: ['derecha'],
+          sinCruces: true,
+          unaPorFila: true,
+          relleno: 'AEIOULMNPRSTBD',
+          celda: '23mm',
+          letra: '28pt',
+          tema: 'Animales',
+          palabras: [
+            { palabra: 'OSO', picto: 2488 },
+            { palabra: 'PEZ', picto: 2520 },
+            { palabra: 'GATO', picto: 9879 },
+          ],
+        },
+        {
+          nivel: 2,
+          tam: 7,
+          semilla: 22,
+          direcciones: ['derecha', 'abajo'],
+          sinCruces: true,
+          relleno: 'AEIOULMNPRSTBDC',
+          celda: '17mm',
+          letra: '22pt',
+          tema: 'En clase',
+          palabras: [
+            { palabra: 'MESA', picto: 3129 },
+            { palabra: 'SILLA', picto: 3155 },
+            { palabra: 'LIBRO', picto: 2450 },
+            { palabra: 'GOMA', picto: 2409 },
+            { palabra: 'PAPEL', picto: 8349 },
+          ],
+        },
+        {
+          nivel: 3,
+          tam: 10,
+          semilla: 33,
+          direcciones: ['derecha', 'abajo', 'diagonal'],
+          sinCruces: false,
+          relleno: 'AEIOULMNPRSTBDCG',
+          celda: '13mm',
+          letra: '17pt',
+          tema: 'Frutas',
+          palabras: [
+            { palabra: 'MANZANA', picto: 2462 },
+            { palabra: 'NARANJA', picto: 2483 },
+            { palabra: 'CIRUELA', picto: 8305 },
+            { palabra: 'CEREZA', picto: 8303 },
+            { palabra: 'FRESA', picto: 2400 },
+            { palabra: 'MANGO', picto: 16813 },
+            { palabra: 'PERA', picto: 2561 },
+            { palabra: 'UVA', picto: 3247 },
+          ],
+        },
+      ].map(generarSopa);
+
+      for (const s of SOPAS) {
+        if (!s.g.length) continue;
+        const fallos = revisarSopa(s.g, s, s.colocadas);
+        comprobar(!fallos.length, `Sopa ${s.nivel}: ${fallos.join('; ')}`);
+      }
+      REVISION.sopas = SOPAS.map((s) => ({ nivel: s.nivel, filas: s.g.map((f) => f.join('')), palabras: s.palabras.map((p) => p.palabra), direcciones: s.direcciones }));
+
+      const FLECHAS = {
+        derecha: `<svg viewBox="0 0 24 24" role="img" aria-label="de izquierda a derecha"><path d="M3 12H19M14 6L20 12L14 18" fill="none" ${trazo(2.4)}/></svg>`,
+        abajo: `<svg viewBox="0 0 24 24" role="img" aria-label="de arriba abajo"><path d="M12 3V19M6 14L12 20L18 14" fill="none" ${trazo(2.4)}/></svg>`,
+        diagonal: `<svg viewBox="0 0 24 24" role="img" aria-label="en diagonal hacia abajo"><path d="M5 5L18 18M18 10V18H10" fill="none" ${trazo(2.4)}/></svg>`,
+      };
+
+      function hojaSopa(s) {
+        const filas = s.g.map((f) => `<tr>${f.map((l) => `<td>${l}</td>`).join('')}</tr>`).join('');
+        const lista = s.palabras.map((p) => `<li>${img(p.picto)}${p.palabra}</li>`).join('');
+        const cols = 3;
+        const tamPal = s.nivel === 1 ? '20pt' : s.nivel === 2 ? '16pt' : '14pt';
+        const picto = s.nivel === 1 ? '20mm' : s.nivel === 2 ? '15mm' : '12mm';
+        const dirTexto = { 1: 'de izquierda a derecha', 2: 'de izquierda a derecha o de arriba abajo', 3: 'de izquierda a derecha, de arriba abajo o en diagonal' }[s.nivel];
+        const que = { 1: '3 animales', 2: '5 cosas de clase', 3: '8 frutas' }[s.nivel];
+        const rodea = s.nivel === 1 ? 'Rodéalos' : 'Rodéalas';
+        return hoja(
+          `j-sopa n${s.nivel}`,
+          `${cabecera(J.sopa, s.nivel)}
+          <p class="consigna">Busca ${que}. Van ${dirTexto} <span class="direcciones">${s.direcciones.map((d) => FLECHAS[d]).join('')}</span>. ${rodea} con el rotulador ${img(6285)}.</p>
+          <table class="sopa" style="--celda:${s.celda};--letra:${s.letra}" aria-label="Sopa de letras de ${s.tam} por ${s.tam}"><tbody>${filas}</tbody></table>
+          <ul class="palabras" style="--columnas:${cols};--palabra:${tamPal};--picto:${picto}">${lista}</ul>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ===========================================================================
+      // 4. TRES EN RAYA: el nivel 1 es la partida de siempre. Los retos de los niveles 2 y 3 se
+      //    buscan entre todas las posiciones posibles y se comprueba que su respuesta es única.
+      // ===========================================================================
+
+      const LINEAS = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+      const gana = (t, j) => LINEAS.some((l) => l.every((i) => t[i] === j));
+      const ganadoras = (t, j) =>
+        [...Array(9).keys()].filter((i) => {
+          if (t[i]) return false;
+          const u = [...t];
+          u[i] = j;
+          return gana(u, j);
+        });
+
+      // Las ocho simetrías del tablero, para no repetir un reto girado o en espejo.
+      const SIMETRIAS = [
+        [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        [6, 3, 0, 7, 4, 1, 8, 5, 2],
+        [8, 7, 6, 5, 4, 3, 2, 1, 0],
+        [2, 5, 8, 1, 4, 7, 0, 3, 6],
+        [2, 1, 0, 5, 4, 3, 8, 7, 6],
+        [6, 7, 8, 3, 4, 5, 0, 1, 2],
+        [0, 3, 6, 1, 4, 7, 2, 5, 8],
+        [8, 5, 2, 7, 4, 1, 6, 3, 0],
+      ];
+      const canonico = (t) => SIMETRIAS.map((s) => s.map((i) => t[i] || '-').join('')).sort()[0];
+
+      function buscarRetos(tipo, semilla) {
+        const candidatos = [];
+        const vistos = new Set();
+        for (let n = 0; n < 19683; n++) {
+          const t = [];
+          let k = n;
+          for (let i = 0; i < 9; i++) {
+            t.push(['', 'X', 'O'][k % 3]);
+            k = Math.floor(k / 3);
+          }
+          const x = t.filter((c) => c === 'X').length,
+            o = t.filter((c) => c === 'O').length;
+          if (x !== o || x < 2 || x > 3) continue; // le toca a la cruz
+          if (gana(t, 'X') || gana(t, 'O')) continue;
+          const gx = ganadoras(t, 'X'),
+            go = ganadoras(t, 'O');
+          let respuesta = null;
+          if (tipo === 'gana' && gx.length === 1) respuesta = gx[0];
+          if (tipo === 'para' && gx.length === 0 && go.length === 1) respuesta = go[0];
+          if (respuesta === null) continue;
+          const cano = canonico(t);
+          if (vistos.has(cano)) continue;
+          vistos.add(cano);
+          candidatos.push({ t, respuesta, marcas: x + o });
+        }
+        // Se eligen 8 variados: la respuesta en esquina, en lado y en el centro.
+        const r = azar(semilla);
+        const barajados = candidatos.map((c) => [r(), c]).sort((a, b) => a[0] - b[0]).map(([, c]) => c);
+        const tipoCasilla = (i) => (i === 4 ? 'centro' : [0, 2, 6, 8].includes(i) ? 'esquina' : 'lado');
+        const cupo = { esquina: 3, lado: 3, centro: 2 };
+        const elegidos = [];
+        for (const c of barajados) {
+          const tc = tipoCasilla(c.respuesta);
+          if (cupo[tc] > 0 && (c.marcas === 4 || elegidos.filter((e) => e.marcas === 6).length < 3)) {
+            cupo[tc]--;
+            elegidos.push(c);
+          }
+          if (elegidos.length === 8) break;
+        }
+        return { candidatos: candidatos.length, elegidos };
+      }
+
+      const RETOS = { gana: buscarRetos('gana', 7), para: buscarRetos('para', 9) };
+      for (const [tipo, { elegidos }] of Object.entries(RETOS)) {
+        comprobar(elegidos.length === 8, `Retos de tres en raya (${tipo}): solo hay ${elegidos.length}`);
+        for (const { t, respuesta } of elegidos) {
+          const gx = ganadoras(t, 'X'),
+            go = ganadoras(t, 'O');
+          if (tipo === 'gana') comprobar(gx.length === 1 && gx[0] === respuesta, 'Reto de ganar con más de una respuesta');
+          else comprobar(gx.length === 0 && go.length === 1 && go[0] === respuesta, 'Reto de parar con más de una respuesta');
+        }
+      }
+      REVISION.tresEnRaya = Object.fromEntries(Object.entries(RETOS).map(([k, v]) => [k, v.elegidos.map((e) => ({ t: e.t.map((c) => c || '-').join(''), respuesta: e.respuesta }))]));
+
+      const marcaX = (cx, cy, c) =>
+        `<path d="M${f1(cx - c)} ${f1(cy - c)}L${f1(cx + c)} ${f1(cy + c)}M${f1(cx + c)} ${f1(cy - c)}L${f1(cx - c)} ${f1(cy + c)}" stroke="${C.azul}" stroke-width="${f1(c * 0.5)}" stroke-linecap="round"/>`;
+      const marcaO = (cx, cy, c) => `<circle cx="${cx}" cy="${cy}" r="${f1(c * 1.05)}" fill="none" stroke="${C.coral}" stroke-width="${f1(c * 0.45)}"/>`;
+
+      function svgTres(t, lado, { respuesta = null, etiqueta = '' } = {}) {
+        const c = lado / 3;
+        const centro = (i) => [(i % 3) * c + c / 2, Math.floor(i / 3) * c + c / 2];
+        let fondo = '',
+          marcas = '';
+        if (respuesta !== null) {
+          // En las soluciones, la casilla buena va con fondo amarillo y la cruz dentro.
+          const [cx, cy] = centro(respuesta);
+          fondo = `<rect x="${f1(cx - c * 0.44)}" y="${f1(cy - c * 0.44)}" width="${f1(c * 0.88)}" height="${f1(c * 0.88)}" rx="${f1(c * 0.12)}" fill="${C.amarillo}"/>`;
+          marcas += marcaX(cx, cy, c * 0.24);
+        }
+        t.forEach((v, i) => {
+          const [cx, cy] = centro(i);
+          if (v === 'X') marcas += marcaX(cx, cy, c * 0.24);
+          if (v === 'O') marcas += marcaO(cx, cy, c * 0.24);
+        });
+        const w = f1(lado * 0.035);
+        const a = f1(c * 0.08),
+          b = f1(lado - c * 0.08);
+        const rejilla = `<path d="M${f1(c)} ${a}V${b}M${f1(2 * c)} ${a}V${b}M${a} ${f1(c)}H${b}M${a} ${f1(2 * c)}H${b}" stroke="${M}" stroke-width="${w}" stroke-linecap="round"/>`;
+        return `<svg viewBox="0 0 ${lado} ${lado}" width="${lado}mm" height="${lado}mm" ${
+          etiqueta ? `role="img" aria-label="${etiqueta}"` : 'aria-hidden="true"'
+        }>${fondo}${marcas}${rejilla}</svg>`;
+      }
+
+      const describir = (t) => {
+        const nombres = ['arriba a la izquierda', 'arriba en el centro', 'arriba a la derecha', 'en medio a la izquierda', 'en el centro', 'en medio a la derecha', 'abajo a la izquierda', 'abajo en el centro', 'abajo a la derecha'];
+        const x = t.map((v, i) => (v === 'X' ? nombres[i] : null)).filter(Boolean);
+        const o = t.map((v, i) => (v === 'O' ? nombres[i] : null)).filter(Boolean);
+        return `Cruces ${x.join(', ')}. Círculos ${o.join(', ')}.`;
+      };
+
+      const miniX = `<svg viewBox="0 0 24 24" aria-hidden="true">${marcaX(12, 12, 7)}</svg>`;
+      const miniO = `<svg viewBox="0 0 24 24" aria-hidden="true">${marcaO(12, 12, 7)}</svg>`;
+
+      function hojasTres() {
+        const linea = (l) => {
+          const t = Array(9).fill('');
+          l.forEach((i) => (t[i] = 'X'));
+          return svgTres(t, 17);
+        };
+        const vacios = Array.from({ length: 6 }, (_, i) => `<figure>${svgTres(Array(9).fill(''), 52, { etiqueta: `Tablero ${i + 1}, vacío` })}</figure>`).join('');
+        const n1 = hoja(
+          'j-tres n1',
+          `${cabecera(J.tres, 1)}
+          <p class="consigna">Juega con un compañero o una compañera ${img(7158)}. Por turnos, cada uno pone su marca. Gana quien hace 3 en raya.</p>
+          <p class="marcas"><span>${miniX} Cruz</span><span>${miniO} Círculo</span></p>
+          <div class="asi-se-gana"><b>Así se gana:</b><div>${linea([0, 1, 2])}${linea([1, 4, 7])}${linea([0, 4, 8])}</div><span>en fila, en columna o en diagonal.</span></div>
+          <div class="tableros3" style="--columnas:3;--hueco:9mm 10mm">${vacios}</div>
+          ${ATRIBUCION}`,
+        );
+        const retos = (tipo, nivel, consigna) =>
+          hoja(
+            `j-tres n${nivel}`,
+            `${cabecera(J.tres, nivel)}
+            <p class="consigna">${consigna}</p>
+            <p class="marcas"><span>${miniX} Tú juegas con la cruz</span><span>${miniO} El círculo juega contra ti</span></p>
+            <div class="tableros3" style="--columnas:3;--hueco:4mm 12mm">${RETOS[tipo].elegidos
+              .map((e, i) => `<figure><figcaption>Reto ${i + 1}</figcaption>${svgTres(e.t, 48, { etiqueta: `Reto ${i + 1}. ${describir(e.t)}` })}</figure>`)
+              .join('')}</div>
+            ${ATRIBUCION}`,
+          );
+        return (
+          n1 +
+          retos('gana', 2, `Retos para jugar solo o sola. Te toca con la cruz: ¿dónde la pones para hacer 3 en raya? Hay una casilla buena en cada reto.`) +
+          retos('para', 3, `Retos para jugar solo o sola. El círculo va a hacer 3 en raya: ¿dónde pones tu cruz para pararlo? Hay una casilla buena en cada reto.`)
+        );
+      }
+
+      // ===========================================================================
+      // 5. MEMORIA: 52 cartas con pictogramas de ARASAAC. Nivel 1, 6 parejas iguales; nivel 2,
+      //    10 parejas iguales; nivel 3, 10 parejas de dibujo y palabra.
+      // ===========================================================================
+
+      const MEMORIA = [
+        { nivel: 1, lado: '48mm', columnas: 3, hueco: '5mm 6mm', cartas: [[7252, 'sol'], [2339, 'coche'], [3241, 'pelota'], [2317, 'casa'], [3102, 'flor'], [2517, 'perro']] },
+        { nivel: 2, lado: '39mm', columnas: 4, hueco: '4mm 5mm', cartas: [[9879, 'gato'], [2520, 'pez'], [3057, 'árbol'], [2530, 'plátano'], [7282, 'tren'], [8313, 'globo'], [32923, 'zapato'], [6932, 'barco'], [2465, 'mariposa'], [2596, 'tortuga']] },
+        { nivel: 3, lado: '39mm', columnas: 4, hueco: '4mm 5mm', palabras: true, cartas: [[2563, 'pato'], [3129, 'mesa'], [2304, 'cama'], [2731, 'dado'], [2561, 'pera'], [2480, 'moto'], [2573, 'sopa'], [2883, 'nube'], [2582, 'taza'], [2610, 'vaso']] },
+      ];
+      for (const m of MEMORIA) {
+        const ids = new Set(m.cartas.map(([id]) => id));
+        comprobar(ids.size === m.cartas.length, `Memoria ${m.nivel}: hay pictogramas repetidos`);
+      }
+      REVISION.memoria = MEMORIA.map((m) => ({ nivel: m.nivel, cartas: m.cartas.length * 2 }));
+
+      function hojaMemoria(m) {
+        const puntos = '<i></i>'.repeat(m.nivel);
+        const carta = ([id, palabra]) => `<div class="carta">${img(id, '', palabra)}<span class="puntos" aria-hidden="true">${puntos}</span></div>`;
+        const cartaPalabra = ([, palabra]) => `<div class="carta carta--palabra"><b>${palabra.toUpperCase()}</b><span>${palabra}</span><span class="puntos" aria-hidden="true">${puntos}</span></div>`;
+        const cartas = m.palabras ? [...m.cartas.map(carta), ...m.cartas.map(cartaPalabra)] : [...m.cartas, ...m.cartas].map(carta);
+        const consigna = m.palabras ? 'Cada dibujo con su palabra.' : `${m.cartas.length} parejas iguales.`;
+        return hoja(
+          `j-mem n${m.nivel}`,
+          `${cabecera(J.mem, m.nivel)}
+          <p class="pista">${consigna} Recorta las ${cartas.length} cartas por la línea de puntos.</p>
+          <div class="cartas" style="--lado:${m.lado};--columnas:${m.columnas};--hueco:${m.hueco}">${cartas.join('')}</div>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ===========================================================================
+      // 6. STOP DE PALABRAS: se comprueba que cada letra de cada nivel tiene al menos una idea
+      //    para cada categoría, y que la idea empieza por esa letra.
+      // ===========================================================================
+
+      const CATEGORIAS = {
+        animal: ['Animal', 6901],
+        comida: ['Comida', 4610],
+        cosa: ['Cosa', 11318],
+        nombre: ['Nombre', 27357],
+        lugar: ['País o ciudad', 2704],
+        oficio: ['Oficio', 7795],
+      };
+      const IDEAS = {
+        A: { nombre: 'Ana', animal: 'abeja', comida: 'arroz', cosa: 'anillo', lugar: 'Alicante', oficio: 'albañil' },
+        B: { nombre: 'Bruno', animal: 'ballena', comida: 'bocadillo', cosa: 'balón', lugar: 'Bilbao', oficio: 'bombera' },
+        C: { nombre: 'Claudia', animal: 'caballo', comida: 'cereza', cosa: 'cuchara', lugar: 'Cartagena', oficio: 'cocinero' },
+        D: { nombre: 'Daniel', animal: 'delfín', comida: 'dátil', cosa: 'dado', lugar: 'Dinamarca', oficio: 'dentista' },
+        E: { nombre: 'Elena', animal: 'elefante', comida: 'ensalada', cosa: 'espejo', lugar: 'España', oficio: 'enfermero' },
+        F: { nombre: 'Fátima', animal: 'foca', comida: 'fresa', cosa: 'flauta', lugar: 'Francia', oficio: 'fontanera' },
+        G: { nombre: 'Gabriel', animal: 'gato', comida: 'galleta', cosa: 'gafas', lugar: 'Granada', oficio: 'granjero' },
+        J: { nombre: 'Julia', animal: 'jirafa', comida: 'jamón', cosa: 'juguete', lugar: 'Jaén', oficio: 'jardinera' },
+        L: { nombre: 'Lucía', animal: 'león', comida: 'limón', cosa: 'lápiz', lugar: 'Lorca', oficio: 'leñador' },
+        M: { nombre: 'Mateo', animal: 'mono', comida: 'manzana', cosa: 'mesa', lugar: 'Murcia', oficio: 'médica' },
+        N: { nombre: 'Nora', animal: 'nutria', comida: 'naranja', cosa: 'nevera', lugar: 'Navarra', oficio: 'nadadora' },
+        O: { nombre: 'Óscar', animal: 'oso', comida: 'oliva', cosa: 'olla', lugar: 'Oviedo', oficio: 'obrero' },
+        P: { nombre: 'Pablo', animal: 'pato', comida: 'pera', cosa: 'pelota', lugar: 'Portugal', oficio: 'pintora' },
+        R: { nombre: 'Rocío', animal: 'rana', comida: 'rosquilla', cosa: 'reloj', lugar: 'Roma', oficio: 'repartidor' },
+        S: { nombre: 'Sara', animal: 'sapo', comida: 'sopa', cosa: 'silla', lugar: 'Sevilla', oficio: 'socorrista' },
+        T: { nombre: 'Tomás', animal: 'tigre', comida: 'tomate', cosa: 'tijeras', lugar: 'Toledo', oficio: 'taxista' },
+        V: { nombre: 'Vera', animal: 'vaca', comida: 'verdura', cosa: 'vaso', lugar: 'Valencia', oficio: 'veterinaria' },
+      };
+      const STOP = [
+        { nivel: 1, letras: 'MPSLT', categorias: ['animal', 'comida', 'cosa'], filas: 5, fila: '25mm', letraCaja: '15mm', letraTam: '24pt', catTam: '14pt', catPicto: '15mm' },
+        { nivel: 2, letras: 'MPSLTCBRGFDN', categorias: ['animal', 'comida', 'nombre', 'cosa'], filas: 6, fila: '22mm', letraCaja: '11mm', letraTam: '18pt', catTam: '13pt', catPicto: '13mm' },
+        { nivel: 3, letras: 'ABCDEFGJLMNOPRSTV', categorias: ['nombre', 'animal', 'comida', 'cosa', 'lugar', 'oficio'], filas: 7, fila: '18mm', letraCaja: '8.6mm', letraTam: '15pt', catTam: '11pt', catPicto: '11mm' },
+      ];
+      const sinTilde = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
+      for (const st of STOP)
+        for (const letra of st.letras)
+          for (const cat of st.categorias) {
+            const idea = IDEAS[letra]?.[cat];
+            comprobar(idea && sinTilde(idea)[0] === letra, `STOP ${st.nivel}: falta una idea de ${cat} con la ${letra}`);
+          }
+      REVISION.stop = STOP.map((st) => ({ nivel: st.nivel, letras: st.letras, categorias: st.categorias }));
+
+      function hojaStop(st) {
+        const cabezas = st.categorias.map((c) => `<th scope="col">${img(CATEGORIAS[c][1])}${CATEGORIAS[c][0]}</th>`).join('');
+        const filas = Array.from({ length: st.filas }, () => `<tr><td></td>${st.categorias.map(() => '<td></td>').join('')}</tr>`).join('');
+        const anchoLetra = st.nivel === 1 ? 24 : 20;
+        const anchoCat = (178 - anchoLetra) / st.categorias.length;
+        const cols = `<col style="width:${anchoLetra}mm">${st.categorias.map(() => `<col style="width:${f1(anchoCat)}mm">`).join('')}`;
+        const consigna =
+          st.nivel === 1
+            ? `Elige una letra. Escribe o dibuja ${img(2380)} algo que empiece por esa letra en cada casilla.`
+            : `Elige una letra. Escribe ${img(2380)} en cada casilla una palabra que empiece por esa letra.`;
+        return hoja(
+          `j-stop n${st.nivel}`,
+          `${cabecera(J.stop, st.nivel)}
+          <p class="consigna">${consigna}</p>
+          <div class="letras" style="--letra-caja:${st.letraCaja};--letra-tam:${st.letraTam}"><p>Cierra los ojos y pon el dedo en una letra. Escríbela en la primera casilla de la fila.</p>${[...st.letras]
+            .map((l) => `<span>${l}</span>`)
+            .join('')}</div>
+          <table class="tabla-stop" style="--fila:${st.fila};--cat-tam:${st.catTam};--cat-picto:${st.catPicto}"><colgroup>${cols}</colgroup><thead><tr><th scope="col">Letra</th>${cabezas}</tr></thead><tbody>${filas}</tbody></table>
+          <p class="regla-stop">${img(8289)}<span>Quien acaba la fila dice «¡STOP!» y todos dejan de escribir. Si juegas solo o sola, usa el temporizador.</span></p>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ===========================================================================
+      // 7. LA OCA: tableros de IdEducando en zigzag. Se comprueba que el camino es continuo, que
+      //    cada casilla especial lleva a una casilla que existe y, jugando 5000 partidas al azar,
+      //    que todas terminan.
+      // ===========================================================================
+
+      const ESPECIALES = {
+        oca: { picto: 2878, nombre: 'Oca', tinte: C.amarilloT },
+        puente: { picto: 37257, nombre: 'Puente', tinte: C.verdeT, va: 12 },
+        banco: { picto: 3255, nombre: 'Banco', tinte: C.coralT, espera: 1 },
+        dado: { picto: 2731, nombre: 'Dado', tinte: C.verdeT, va: 53 },
+        charco: { picto: 25936, nombre: 'Charco', tinte: C.coralT, espera: 2 },
+        laberinto: { picto: 29627, nombre: 'Laberinto', tinte: C.coralT, va: 30 },
+        tobogan: { picto: 4759, nombre: 'Tobogán', tinte: C.coralT, va: 40 },
+      };
+      const OCAS = [
+        { nivel: 1, n: 20, cols: 5, celda: 34, justo: false, especiales: { 5: 'oca', 9: 'oca', 14: 'oca', 18: 'oca' } },
+        { nivel: 2, n: 42, cols: 7, celda: 25, justo: false, especiales: { 5: 'oca', 6: 'puente', 9: 'oca', 14: 'oca', 18: 'oca', 19: 'banco', 23: 'oca', 27: 'oca', 32: 'oca', 36: 'oca', 41: 'oca' } },
+        {
+          nivel: 3,
+          n: 63,
+          cols: 9,
+          celda: 19.5,
+          justo: true,
+          especiales: { 5: 'oca', 6: 'puente', 9: 'oca', 14: 'oca', 18: 'oca', 19: 'banco', 23: 'oca', 26: 'dado', 27: 'oca', 31: 'charco', 32: 'oca', 36: 'oca', 41: 'oca', 42: 'laberinto', 45: 'oca', 50: 'oca', 54: 'oca', 58: 'tobogan', 59: 'oca' },
+        },
+      ];
+
+      // Posición de cada casilla (1, 2, 3…) en la rejilla en zigzag.
+      const posicionOca = (O, k) => {
+        const i = k - 1;
+        const fila = Math.floor(i / O.cols);
+        const col = fila % 2 === 0 ? i % O.cols : O.cols - 1 - (i % O.cols);
+        return [col, fila];
+      };
+
+      // Una jugada: dónde acaba quien está en «desde» y saca «dado», y si vuelve a tirar o espera.
+      function jugadaOca(O, desde, dado) {
+        let k = desde + dado;
+        if (k > O.n) k = O.justo ? O.n - (k - O.n) : O.n;
+        const tipo = O.especiales[k];
+        if (tipo === 'oca') {
+          const siguiente = Object.keys(O.especiales)
+            .map(Number)
+            .filter((c) => c > k && O.especiales[c] === 'oca')[0];
+          return { k: siguiente ?? k, otra: true };
+        }
+        const e = ESPECIALES[tipo];
+        if (e?.va) return { k: e.va, otra: tipo === 'puente' || tipo === 'dado', espera: 0 };
+        if (e?.espera) return { k, otra: false, espera: e.espera };
+        return { k, otra: false, espera: 0 };
+      }
+
+      function simularOca(O, partidas, semilla) {
+        const r = azar(semilla);
+        let rondas = 0,
+          maximo = 0,
+          atascadas = 0;
+        for (let p = 0; p < partidas; p++) {
+          const pos = [1, 1],
+            espera = [0, 0];
+          let ronda = 0,
+            fin = false;
+          while (!fin && ronda < 400) {
+            ronda++;
+            for (let j = 0; j < 2 && !fin; j++) {
+              if (espera[j]) {
+                espera[j]--;
+                continue;
+              }
+              let otra = true,
+                tiradas = 0;
+              while (otra && !fin && tiradas < 20) {
+                tiradas++;
+                const res = jugadaOca(O, pos[j], 1 + Math.floor(r() * 6));
+                pos[j] = res.k;
+                otra = res.otra;
+                if (res.espera) espera[j] = res.espera;
+                if (pos[j] === O.n) fin = true;
+              }
+            }
+          }
+          if (!fin) atascadas++;
+          rondas += ronda;
+          maximo = Math.max(maximo, ronda);
+        }
+        return { media: rondas / partidas, maximo, atascadas };
+      }
+
+      for (const O of OCAS) {
+        const casillas = Object.keys(O.especiales).map(Number);
+        comprobar(casillas.every((c) => c > 1 && c < O.n), `Oca ${O.nivel}: una casilla especial está fuera del tablero`);
+        for (const c of casillas) {
+          const e = ESPECIALES[O.especiales[c]];
+          if (e.va) comprobar(e.va > 1 && e.va < O.n && !O.especiales[e.va], `Oca ${O.nivel}: la casilla ${c} lleva a una casilla especial o que no existe`);
+        }
+        for (let k = 1; k < O.n; k++) {
+          const [x1, y1] = posicionOca(O, k),
+            [x2, y2] = posicionOca(O, k + 1);
+          comprobar(Math.abs(x1 - x2) + Math.abs(y1 - y2) === 1, `Oca ${O.nivel}: las casillas ${k} y ${k + 1} no están juntas`);
+        }
+        O.simulacion = simularOca(O, 5000, 40 + O.nivel);
+        comprobar(O.simulacion.atascadas === 0, `Oca ${O.nivel}: hay partidas que no terminan`);
+      }
+      REVISION.oca = OCAS.map((O) => ({ nivel: O.nivel, casillas: O.n, simulacion: O.simulacion }));
+
+      function svgOca(O) {
+        const c = O.celda;
+        const filas = Math.ceil(O.n / O.cols);
+        const W = O.cols * c,
+          H = filas * c;
+        const g = 0.6;
+        let s = '';
+        for (let k = 1; k <= O.n; k++) {
+          const [col, fila] = posicionOca(O, k);
+          const x = col * c,
+            y = fila * c;
+          const tipo = O.especiales[k];
+          const e = ESPECIALES[tipo];
+          const fondo = k === 1 ? C.verdeT : k === O.n ? C.amarillo : e ? e.tinte : (col + fila) % 2 ? '#fff' : C.crema;
+          s += `<rect x="${f1(x + 0.8)}" y="${f1(y + 0.8)}" width="${f1(c - 1.6)}" height="${f1(c - 1.6)}" rx="${f1(c * 0.12)}" fill="${fondo}" stroke="${M}" stroke-width="${g}"/>`;
+          const tam = f1(c * 0.3);
+          if (k === 1) {
+            s += `<text x="${f1(x + c / 2)}" y="${f1(y + c * 0.47)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${f1(c * 0.2)}" fill="${M}">Salida</text>`;
+            s += `<path d="M${f1(x + c * 0.28)} ${f1(y + c * 0.68)}H${f1(x + c * 0.7)}M${f1(x + c * 0.6)} ${f1(y + c * 0.58)}L${f1(x + c * 0.72)} ${f1(y + c * 0.68)}L${f1(x + c * 0.6)} ${f1(y + c * 0.78)}" fill="none" ${trazo(f1(c * 0.05))}/>`;
+          } else if (k === O.n) {
+            s += `<image href="${P(16817)}" x="${f1(x + c * 0.22)}" y="${f1(y + c * 0.08)}" width="${f1(c * 0.56)}" height="${f1(c * 0.56)}"/>`;
+            s += `<text x="${f1(x + c / 2)}" y="${f1(y + c * 0.88)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${f1(c * 0.2)}" fill="${M}">Meta ${k}</text>`;
+          } else {
+            s += `<text x="${f1(x + c * 0.1)}" y="${f1(y + c * 0.1 + c * 0.24)}" font-family="Outfit" font-weight="700" font-size="${tam}" fill="${M}">${k}</text>`;
+            if (e) s += `<image href="${P(e.picto)}" x="${f1(x + c * 0.32)}" y="${f1(y + c * 0.32)}" width="${f1(c * 0.6)}" height="${f1(c * 0.6)}"/>`;
+          }
+        }
+        // Flechas en los cambios de fila, para seguir el zigzag.
+        for (let fila = 0; fila < filas - 1; fila++) {
+          const col = fila % 2 === 0 ? O.cols - 1 : 0;
+          const cx = col * c + c / 2,
+            cy = (fila + 1) * c;
+          s += `<circle cx="${f1(cx)}" cy="${f1(cy)}" r="${f1(c * 0.13)}" fill="${M}"/><path d="M${f1(cx - c * 0.06)} ${f1(cy - c * 0.04)}L${f1(cx)} ${f1(cy + c * 0.05)}L${f1(cx + c * 0.06)} ${f1(cy - c * 0.04)}" fill="none" stroke="#fff" stroke-width="${f1(c * 0.035)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+        }
+        // En el nivel 3 sobra una casilla de la rejilla: allí va la oca grande.
+        if (O.n < filas * O.cols) {
+          const [col, fila] = posicionOca(O, O.n + 1);
+          s += `<image href="${P(2878)}" x="${f1(col * c + c * 0.08)}" y="${f1(fila * c + c * 0.08)}" width="${f1(c * 0.84)}" height="${f1(c * 0.84)}"/>`;
+        }
+        return `<svg class="oca-tablero" viewBox="0 0 ${f1(W)} ${f1(H)}" width="${f1(W)}mm" height="${f1(H)}mm" role="img" aria-label="Tablero de la oca de ${O.n} casillas en zigzag: se empieza arriba a la izquierda y la meta es la casilla ${O.n}.">${s}</svg>`;
+      }
+
+      function hojaOca(O) {
+        const usadas = [...new Set(Object.values(O.especiales))];
+        const reglas = {
+          oca: 'De oca a oca y tiro porque me toca: salta a la oca siguiente y vuelve a tirar. En la última, vuelve a tirar.',
+          puente: 'Puente (6): pasa a la 12 y vuelve a tirar.',
+          banco: 'Banco (19): descansas y pierdes 1 turno.',
+          dado: 'Dado (26): avanza a la 53 y vuelve a tirar.',
+          charco: 'Charco (31): pierdes 2 turnos.',
+          laberinto: 'Laberinto (42): vuelve a la 30.',
+          tobogan: 'Tobogán (58): baja a la 40.',
+        };
+        const meta = O.justo
+          ? `Meta (${O.n}): hay que llegar justo. Si te pasas, cuenta hacia atrás lo que sobra.`
+          : `Meta (${O.n}): si te pasas, llegas igual.`;
+        const lista = usadas.map((t) => `<li${t === 'oca' ? ' class="ancha"' : ''}>${img(ESPECIALES[t].picto)}<span>${reglas[t]}</span></li>`).join('');
+        return hoja(
+          `j-oca n${O.nivel}`,
+          `${cabecera(J.oca, O.nivel)}
+          <p class="consigna">Por turnos, tira el dado ${img(31071)} y avanza. Gana quien llega primero a la meta.</p>
+          ${svgOca(O)}
+          <ul class="leyenda-oca">${lista}<li class="ancha">${img(16817)}<span>${meta}</span></li></ul>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ===========================================================================
+      // TABLERO DE ELECCIÓN, TARJETAS DE NOMBRE, TARJETAS DE PASOS Y TEMPORIZADOR
+      // ===========================================================================
+
+      const simboloNo = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="#fff" stroke="${C.coral}" stroke-width="3"/><path d="M5.5 5.5L18.5 18.5" stroke="${C.coral}" stroke-width="3" stroke-linecap="round"/></svg>`;
+
+      function hojaTablero() {
+        const casillas = JUEGOS.map(
+          (j) => `<li class="casilla ${j.clase}"><h2>${j.nombre}</h2>${img(j.picto, 'casilla__picto')}<div class="sitios" aria-hidden="true"><div class="sitio"><i></i></div><div class="sitio"><i></i></div></div></li>`,
+        ).join('');
+        const elegir = img(30510).replace('<img', '<img style="width:8mm;height:8mm;vertical-align:middle"');
+        return `<section class="apaisada tablero-hoja">
+          <div class="tablero-cabecera">${img(32814, 'picto')}<div><h1>Ya he terminado. ¿A qué juego?</h1><p>Elige un juego ${elegir} y pon tu nombre en un sitio libre.</p></div>${LOGO}</div>
+          <ul class="tablero">${casillas}</ul>
+          <div class="rutina"><h2>Así se juega</h2><ol>
+            <li>${img(37269)}<span>Pon tu nombre en un sitio libre.</span></li>
+            <li>${img(5568)}<span>Coge el juego.</span></li>
+            <li>${img(9037)}<span>Juega bajito.</span></li>
+            <li>${img(5514)}<span>Recoge y quita tu nombre.</span></li></ol></div>
+          <p class="tablero-nota">${simboloNo}<span>¿Los 2 sitios están ocupados? Elige otro juego. Si pone «Hoy no», ese juego descansa.</span></p>
+          ${ATRIBUCION}
+        </section>`;
+      }
+
+      function hojaNombres() {
+        const nombres = Array.from({ length: 30 }, () => '<div class="nombre"><i></i><b></b></div>').join('');
+        const hoyNo = Array.from({ length: 5 }, () => `<div>${simboloNo}<span>Hoy no</span></div>`).join('');
+        return hoja(
+          'nombres-hoja',
+          `<div class="banda" style="--c: var(--marino)"></div><header class="cabecera">${img(37269, 'cabecera__picto')}<div class="cabecera__texto"><h1>Tarjetas de nombre</h1></div>${LOGO}</header>
+          <p class="pista">Antes de plastificar, escribe un nombre en cada tarjeta. Si aún no lee su nombre, dibuja en el cuadrado su símbolo de clase o algo que reconozca. Recórtalas con 2 o 3 mm de plástico alrededor y pega detrás un círculo de velcro suave. Guárdalas en un sobre junto al tablero.</p>
+          <div class="nombres" role="img" aria-label="30 tarjetas de nombre en blanco para recortar">${nombres}</div>
+          <h2>«Hoy no»</h2>
+          <p class="pista">Cada una tapa los 2 sitios de un juego: ese día, el juego descansa. Con las 5 puedes dejar abiertos solo 2 juegos. Pega su velcro suave detrás, arriba, a la altura del primer sitio.</p>
+          <div class="hoy-no" role="img" aria-label="5 tarjetas de «Hoy no» para recortar">${hoyNo}</div>`,
+        );
+      }
+
+      function tarjetaPasos(j) {
+        const coge = j.coge ?? 'Coge una hoja y un rotulador.';
+        const recoge = j.recoge ?? 'Borra la hoja con el trapo y guárdala en su carpeta.';
+        const [pj, , tj] = j.juega;
+        return `<article class="tarjeta ${j.clase}"><div class="tarjeta__cab">${img(j.picto)}<div><h2>${j.nombre}</h2><p>${j.jugadores}</p></div></div>
+          <ol><li>${img(5568)}<div><b>Coge</b><span>${coge}</span></div></li>
+          <li>${img(pj)}<div><b>Juega</b><span>${tj}</span></div></li>
+          <li>${img(5514)}<div><b>Recoge</b><span>${recoge}</span></div></li></ol></article>`;
+      }
+
+      const tarjetaTiempo = `<article class="tarjeta j-tiempo"><div class="tarjeta__cab">${img(37659)}<div><h2>Temporizador</h2><p>Para ver cuánto tiempo queda</p></div></div>
+          <ol><li>${img(37659)}<div><b>Ponlo</b><span>Gira la pieza blanca hasta los minutos que tienes.</span></div></li>
+          <li>${img(2474)}<div><b>Míralo</b><span>El color es el tiempo que queda. Cada 5 minutos, gíralo un número.</span></div></li>
+          <li>${img(5514)}<div><b>Recoge</b><span>Cuando ya no se ve color, recoge el juego.</span></div></li></ol></article>`;
+
+      function hojasPasos() {
+        const tarjetas = [...JUEGOS.map(tarjetaPasos), tarjetaTiempo];
+        const pagina = (lista, titulo) =>
+          hoja(
+            '',
+            `<p class="pista" style="margin-bottom: 3mm"><strong>${titulo}.</strong> Recorta cada tarjeta con 2 o 3 mm de plástico alrededor y ponla delante de su carpeta.</p>
+            <div class="tarjetas-pasos">${lista.join('')}</div>`,
+          );
+        return pagina(tarjetas.slice(0, 4), 'Tarjetas de pasos, 1 de 2') + pagina(tarjetas.slice(4), 'Tarjetas de pasos, 2 de 2');
+      }
+
+      // Temporizador: una base con medio círculo de color (de 0 a 30 minutos) y una pieza blanca
+      // que gira encima, sujeta con un encuadernador. El color que se ve es el tiempo que queda.
+      const posTiempo = (cx, cy, r, minutos) => {
+        const a = (minutos * 6 * Math.PI) / 180;
+        return [f1(cx - r * Math.sin(a)), f1(cy - r * Math.cos(a))];
+      };
+
+      function svgBaseTiempo(lado = 110, mini = false) {
+        const cx = lado / 2,
+          cy = lado / 2,
+          r = lado * 0.33;
+        let s = '';
+        if (!mini) s += `<rect x="0.4" y="0.4" width="${lado - 0.8}" height="${lado - 0.8}" rx="6" fill="#fff" stroke="${C.suave}" stroke-width="0.4" stroke-dasharray="2 1.6"/>`;
+        // medio círculo de color: de las 12 (0 minutos) a las 6 (30 minutos), por la izquierda
+        s += `<path d="M${cx} ${cy}V${f1(cy - r)}A${r} ${r} 0 0 0 ${cx} ${f1(cy + r)}Z" fill="${C.coral}"/>`;
+        for (let m = 5; m < 30; m += 5) {
+          const [x, y] = posTiempo(cx, cy, r, m);
+          s += `<path d="M${cx} ${cy}L${x} ${y}" stroke="#fff" stroke-width="${f1(lado * 0.006)}"/>`;
+        }
+        s += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${M}" stroke-width="${f1(lado * 0.006)}"/>`;
+        for (let m = 0; m <= 30; m++) {
+          const largo = m % 5 === 0 ? lado * 0.045 : lado * 0.022;
+          const [x1, y1] = posTiempo(cx, cy, r + lado * 0.012, m),
+            [x2, y2] = posTiempo(cx, cy, r + lado * 0.012 + largo, m);
+          s += `<path d="M${x1} ${y1}L${x2} ${y2}" stroke="${M}" stroke-width="${f1(m % 5 === 0 ? lado * 0.01 : lado * 0.006)}" stroke-linecap="round"/>`;
+          if (m % 5 === 0 && !mini) {
+            const [tx, ty] = posTiempo(cx, cy, r + lado * 0.105, m);
+            s += `<text x="${tx}" y="${f1(ty + lado * 0.025)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${f1(lado * 0.07)}" fill="${M}">${m}</text>`;
+          }
+        }
+        if (!mini) {
+          s += `<text x="${f1(cx + r * 0.45)}" y="${f1(cy + lado * 0.02)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${f1(lado * 0.052)}" fill="${C.suave}">minutos</text>`;
+          s += `<path d="M${cx - 2.4} ${cy}H${cx + 2.4}M${cx} ${cy - 2.4}V${cy + 2.4}" stroke="${M}" stroke-width="0.4"/>`;
+        }
+        return s;
+      }
+
+      function svgPiezaTiempo(r = 36.3, mini = false) {
+        // Medio círculo blanco (la mitad izquierda) con una flecha arriba, en su borde recto. Con la flecha
+        // en el 0 tapa todo el color; al girarla hacia los números, deja ver los minutos que quedan.
+        const pico = r + 6;
+        let s = `<path d="M0 0V${-r}A${r} ${r} 0 0 0 0 ${r}Z" fill="${C.crema}" stroke="${M}" stroke-width="${mini ? 0.8 : 0.4}"/>`;
+        s += `<path d="M-3.2 ${-r + 1.5}L0 ${-pico}L3.2 ${-r + 1.5}Z" fill="${M}"/>`;
+        // Línea de corte, a 3 mm del borde, con la flecha dentro
+        if (!mini) s += `<path d="M3 ${f1(r + 3)}V${f1(-pico - 3)}H-6V${f1(-r - 2.2)}A${f1(r + 3)} ${f1(r + 3)} 0 0 0 3 ${f1(r + 3)}Z" fill="none" stroke="${C.suave}" stroke-width="0.35" stroke-dasharray="2 1.6"/>`;
+        if (!mini) {
+          s += `<text x="${f1(-r * 0.45)}" y="${f1(-r * 0.04)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="5.2" fill="${C.suave}">Gira</text>`;
+          s += `<path d="M${f1(-r * 0.2)} ${f1(r * 0.18)}A${f1(r * 0.3)} ${f1(r * 0.3)} 0 0 1 ${f1(-r * 0.62)} ${f1(r * 0.12)}" fill="none" stroke="${C.suave}" stroke-width="0.8" stroke-linecap="round"/>`;
+          s += `<path d="M-2.4 0H2.4M0 -2.4V2.4" stroke="${M}" stroke-width="0.4"/>`;
+        }
+        return s;
+      }
+
+      function hojaTiempo() {
+        const base = `<svg viewBox="0 0 110 110" width="110mm" height="110mm" role="img" aria-label="Base del temporizador: medio círculo de color con los minutos de 0 a 30, de 5 en 5">${svgBaseTiempo()}</svg>`;
+        const r = 110 * 0.33;
+        const pieza = `<svg viewBox="${f1(-r - 6)} ${f1(-r - 9)} ${f1(r + 12)} ${f1(2 * r + 12)}" width="${f1(r + 12)}mm" height="${f1(2 * r + 12)}mm" role="img" aria-label="Pieza blanca del temporizador: medio círculo con una flecha">${svgPiezaTiempo(r)}</svg>`;
+        return hoja(
+          'j-tiempo',
+          `${cabecera({ nombre: 'Temporizador', picto: 37659 }, 0)}
+          <p class="pista">Imprime esta hoja en cartulina y plastifícala. Hasta 30 minutos: el color que se ve es el tiempo que queda.</p>
+          <div class="temporizador">
+            ${base}
+            <div><h2>Cómo se usa</h2><ol class="usar-tiempo">
+              <li>${img(37659)}<span>Gira la pieza blanca hasta los minutos que hay.</span></li>
+              <li>${img(2474)}<span>Cada 5 minutos, gírala hasta el número anterior.</span></li>
+              <li>${img(5514)}<span>Cuando ya no se ve color, se recoge.</span></li></ol></div>
+            ${pieza}
+            <div><h2>Cómo se monta</h2><ol>
+              <li>Recorta la base y la pieza blanca por la línea de puntos.</li>
+              <li>Haz un agujero en las 2 cruces del centro con la punta de las tijeras.</li>
+              <li>Pon la pieza blanca encima de la base, con la flecha en el 0.</li>
+              <li>Une las 2 piezas con el encuadernador y abre sus patas por detrás. Así la pieza blanca gira.</li></ol></div>
+          </div>
+          ${ATRIBUCION}`,
+        );
+      }
+
+      // ---------------------------------------------------------------- Soluciones
+
+      function hojasSoluciones() {
+        const dif = DIFERENCIAS.map((d) => {
+          const circulos = d.lista.map(([, x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${C.coral}" stroke-width="3.2"/>`).join('');
+          return `<figure><figcaption>Nivel ${d.nivel}: ${d.lista.length} diferencias</figcaption><div class="marco">${svgEscena(d, 'B', circulos, `Soluciones del nivel ${d.nivel}: ${d.lista.map((l) => l[0]).join(', ')}`)}</div></figure>`;
+        }).join('');
+        const lab = LABERINTOS.map((L) => {
+          const escala = 52 / (L.cols * L.celda);
+          return `<figure><figcaption>Nivel ${L.nivel}</figcaption>${svgLaberinto(L, { solucion: true, escala, etiqueta: `Solución del laberinto del nivel ${L.nivel}` })}</figure>`;
+        }).join('');
+        const sopa = SOPAS.map((s) => {
+          const marcadas = new Set();
+          for (const c of s.colocadas) for (let i = 0; i < c.palabra.length; i++) marcadas.add(`${c.x + c.dx * i},${c.y + c.dy * i}`);
+          const tam = { 1: '10.4mm', 2: '7.4mm', 3: '5.4mm' }[s.nivel];
+          const letra = { 1: '15pt', 2: '12pt', 3: '11pt' }[s.nivel];
+          const filas = s.g.map((f, y) => `<tr>${f.map((l, x) => `<td class="${marcadas.has(`${x},${y}`) ? 'si' : ''}" style="height:${tam};font-size:${letra}">${l}</td>`).join('')}</tr>`).join('');
+          return `<figure><figcaption>Nivel ${s.nivel}</figcaption><table class="mini-sopa" aria-label="Solución de la sopa del nivel ${s.nivel}"><tbody>${filas}</tbody></table></figure>`;
+        }).join('');
+        const retos = (tipo) =>
+          RETOS[tipo].elegidos.map((e, i) => `<figure><figcaption>${i + 1}</figcaption>${svgTres(e.t, 20, { respuesta: e.respuesta, etiqueta: `Reto ${i + 1}: la cruz va ${['arriba a la izquierda', 'arriba en el centro', 'arriba a la derecha', 'en medio a la izquierda', 'en el centro', 'en medio a la derecha', 'abajo a la izquierda', 'abajo en el centro', 'abajo a la derecha'][e.respuesta]}` })}</figure>`).join('');
+        const st = STOP[2];
+        const ideas = [...st.letras]
+          .map((l) => `<tr><th scope="row">${l}</th>${st.categorias.map((c) => `<td>${IDEAS[l][c]}</td>`).join('')}</tr>`)
+          .join('');
+        const p1 = hoja(
+          'soluciones',
+          `<div class="banda" style="--c: var(--marino)"></div><header class="cabecera">${img(6998, 'cabecera__picto')}<div class="cabecera__texto"><h1>Soluciones</h1></div>${LOGO}</header>
+          <p class="pista">Para corregir o para que cada cual se corrija. Guárdalas en su carpeta.</p>
+          <h2 class="j-dif">${img(27391)}Diferencias</h2><div class="fila-sol">${dif}</div>
+          <h2>${img(29626)}Laberintos</h2><div class="fila-sol">${lab}</div>
+          <h2>${img(34361)}Sopas de letras</h2><div class="fila-sol">${sopa}</div>
+          ${ATRIBUCION}`,
+        );
+        const p2 = hoja(
+          'soluciones',
+          `<h2 style="margin-top:0">${img(7284)}Tres en raya, nivel 2: gana en una jugada</h2><div class="retos-sol">${retos('gana')}</div>
+          <h2>${img(7284)}Tres en raya, nivel 3: para al círculo</h2><div class="retos-sol">${retos('para')}</div>
+          <h2>${img(8289)}STOP: una idea para cada letra</h2>
+          <p class="pista" style="margin-bottom:1mm">Sirve para los tres niveles. Vale cualquier otra palabra que empiece por la letra.</p>
+          <table class="ideas-stop"><thead><tr><th scope="col" style="width:12mm">Letra</th>${st.categorias.map((c) => `<th scope="col">${CATEGORIAS[c][0]}</th>`).join('')}</tr></thead><tbody>${ideas}</tbody></table>
+          ${ATRIBUCION}`,
+        );
+        return p1 + p2;
+      }
+
+      // ---------------------------------------------------------------- Portada
+
+      function ilustracionPortada() {
+        const hojaJuego = (x, y, ang, color, interior, w = 64, h = 86) =>
+          `<g transform="translate(${x} ${y}) rotate(${ang})"><rect x="${-w / 2 + 1.4}" y="${-h / 2 + 2.2}" width="${w}" height="${h}" rx="4" fill="${M}" opacity="0.18"/><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="4" fill="#fff" stroke="${M}" stroke-width="0.7"/><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="6" rx="3" fill="${color}"/><g transform="translate(${-w / 2 + 6} ${-h / 2 + 12})">${interior}</g></g>`;
+        // sopa en pequeño
+        const letras = ['GATOM', 'SOLPA', 'PEZRI', 'LUNAS', 'OSONE'];
+        let sopa = '';
+        letras.forEach((f, y) =>
+          [...f].forEach((l, x) => {
+            sopa += `<rect x="${x * 10.4}" y="${y * 10.4}" width="10.4" height="10.4" fill="${y === 0 && x < 4 ? C.amarillo : '#fff'}" stroke="${C.linea}" stroke-width="0.4"/><text x="${x * 10.4 + 5.2}" y="${y * 10.4 + 7.8}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="7.4" fill="${M}">${l}</text>`;
+          }),
+        );
+        sopa += `<rect x="0" y="0" width="52" height="52" fill="none" stroke="${M}" stroke-width="0.6"/><rect x="0.6" y="0.6" width="40.4" height="9.2" rx="4.6" fill="none" stroke="${C.coral}" stroke-width="1.2"/>`;
+        // tres en raya
+        const t = ['X', 'O', '', '', 'X', 'O', '', '', 'X'];
+        let tres = `<g transform="scale(1)">`;
+        const c3 = 17.3;
+        t.forEach((v, i) => {
+          const cx = (i % 3) * c3 + c3 / 2,
+            cy = Math.floor(i / 3) * c3 + c3 / 2;
+          if (v === 'X') tres += marcaX(cx, cy, c3 * 0.24);
+          if (v === 'O') tres += marcaO(cx, cy, c3 * 0.24);
+        });
+        tres += `<path d="M${c3} 1V${3 * c3 - 1}M${2 * c3} 1V${3 * c3 - 1}M1 ${c3}H${3 * c3 - 1}M1 ${2 * c3}H${3 * c3 - 1}" stroke="${M}" stroke-width="1.4" stroke-linecap="round"/><path d="M4 4L${3 * c3 - 4} ${3 * c3 - 4}" stroke="${C.coral}" stroke-width="1.6" stroke-linecap="round"/></g>`;
+        // laberinto pequeño de verdad
+        const Lp = generarLaberinto(6, 7, 5);
+        const solp = resolverLaberinto(Lp);
+        const lab = svgLaberinto({ ...Lp, ...solp, celda: 9, grosor: 0.9 }, { solucion: true }).replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '');
+        // cartas de memoria (dibujos propios sencillos)
+        const carta = (x, y, ang, dibujo) =>
+          `<g transform="translate(${x} ${y}) rotate(${ang})"><rect x="-12" y="-12" width="24" height="24" rx="3" fill="#fff" stroke="${M}" stroke-width="0.6"/><rect x="-12" y="-12" width="24" height="24" rx="3" fill="none" stroke="${C.morado}" stroke-width="1.2"/>${dibujo}</g>`;
+        const solito = `<circle cx="0" cy="0" r="5.4" fill="${C.amarillo}" ${trazo(0.8)}/><path d="M0 -9V-7M0 7V9M-9 0H-7M7 0H9M-6.4 -6.4L-5 -5M5 5L6.4 6.4M-6.4 6.4L-5 5M5 -5L6.4 -6.4" ${trazo(0.9)}/>`;
+        const pececito = `<g transform="scale(0.42)">${pez(2, 0, 1, C.naranja)}</g>`;
+        const dorso = `<rect x="-9" y="-9" width="18" height="18" rx="2" fill="${C.moradoT}"/><text x="0" y="5" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="14" fill="${C.morado}">?</text>`;
+        // temporizador
+        const tiempo = `<g transform="translate(168 104)"><circle cx="0" cy="0" r="31" fill="#fff" stroke="${M}" stroke-width="0.8"/><g transform="translate(-27 -27) scale(0.4909)">${svgBaseTiempo(110, true)}</g><g transform="rotate(-80)">${svgPiezaTiempo(17.8, true)}</g><circle r="1.6" fill="${M}"/></g>`;
+        // rotulador
+        const rotulador = `<g transform="translate(132 112) rotate(-38)"><rect x="-4" y="-26" width="8" height="40" rx="2.4" fill="${C.azul}" stroke="${M}" stroke-width="0.7"/><rect x="-4" y="-34" width="8" height="10" rx="2" fill="#fff" stroke="${M}" stroke-width="0.7"/><path d="M-2.4 14L0 21L2.4 14Z" fill="${M}"/></g>`;
+        return (
+          hojaJuego(46, 60, -10, C.amarillo, sopa) +
+          hojaJuego(150, 44, 9, C.coral, `<g transform="translate(0 4)">${tres}</g>`) +
+          hojaJuego(100, 74, -2, C.verde, `<g transform="translate(-1 2)">${lab}</g>`, 68, 88) +
+          carta(30, 108, -12, solito) +
+          carta(54, 117, 8, pececito) +
+          carta(76, 111, -4, dorso) +
+          rotulador +
+          tiempo
+        );
+      }
+
+      // ---------------------------------------------------------------- Montar el documento
+
+      let html = hojaTablero() + hojaNombres();
+      html += DIFERENCIAS.map(hojaDiferencias).join('');
+      html += LABERINTOS.map(hojaLaberinto).join('');
+      html += SOPAS.map(hojaSopa).join('');
+      html += hojasTres();
+      html += MEMORIA.map(hojaMemoria).join('');
+      html += STOP.map(hojaStop).join('');
+      html += OCAS.map(hojaOca).join('');
+      html += hojasPasos();
+      html += hojaTiempo();
+      html += hojasSoluciones();
+      document.getElementById('hojas').innerHTML = html;
+      document.getElementById('portada-ilustracion').innerHTML = ilustracionPortada();
+
+      // Tabla de niveles de la guía
+      const NIVELES = [
+        ['dif', '3 diferencias grandes', '5 diferencias', '7 diferencias pequeñas'],
+        ['lab', `${LABERINTOS[0].cols} × ${LABERINTOS[0].filas} casillas anchas`, `${LABERINTOS[1].cols} × ${LABERINTOS[1].filas} casillas`, `${LABERINTOS[2].cols} × ${LABERINTOS[2].filas} casillas`],
+        ['sopa', '5 × 5, 3 palabras de izquierda a derecha', '7 × 7, 5 palabras, también hacia abajo', '10 × 10, 8 palabras, también en diagonal'],
+        ['tres', 'Partida con un compañero o una compañera', 'Retos: gana en una jugada', 'Retos: para al círculo'],
+        ['mem', '6 parejas iguales, cartas grandes', '10 parejas iguales', '10 parejas de dibujo y palabra'],
+        ['stop', '3 casillas y 5 letras; vale dibujar', '4 casillas y 12 letras', '6 casillas y 17 letras'],
+        ['oca', '20 casillas, solo con ocas', '42 casillas, con puente y banco', '63 casillas, con todas las especiales; hay que llegar justo'],
+      ];
+      document.getElementById('tabla-niveles').innerHTML = NIVELES.map(([id, ...n]) => `<tr><th scope="row">${J[id].nombre}</th>${n.map((t) => `<td>${t}</td>`).join('')}</tr>`).join('');
+
+      // Juegos en la nota para las familias
+      document.getElementById('juegos-familias').innerHTML = JUEGOS.map((j) => `<li class="${j.clase}">${img(j.picto)}${j.nombre}</li>`).join('');
+
+      // Resultado de las comprobaciones, para la revisión desde fuera (herramientas o Playwright).
+      REVISION.problemas = PROBLEMAS;
+      window.REVISION = REVISION;
+      if (PROBLEMAS.length) {
+        console.error('Comprobaciones fallidas:', PROBLEMAS);
+        document.querySelector('.portada').insertAdjacentHTML('beforeend', `<div class="aviso-error">Revisa el material: ${PROBLEMAS.join(' · ')}</div>`);
+      }
+    </script>
+  </body>
+</html>

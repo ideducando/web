@@ -1,4 +1,4 @@
-// Categorías del catálogo de material gratuito.
+// Categorías del catálogo de material gratuito y de la tienda.
 // Si añades una opción aquí, añádela también en .pages.yml para que salga en el editor.
 
 export type Color = 'azul' | 'verde' | 'coral' | 'morado' | 'amarillo' | 'naranja';
@@ -154,10 +154,96 @@ export const TIPOS = {
   },
 } as const satisfies Record<string, Opcion>;
 
+// ---------------------------------------------------------------------------
+// Tienda (src/content/tienda): lo que es o será de pago. Hoy no se vende nada: cada producto
+// enseña una muestra bloqueada y un botón para escribirnos. Nada de la tienda lleva pictogramas
+// de ARASAAC: su licencia no admite el uso comercial (José, 28/10/2026).
+// ---------------------------------------------------------------------------
+
+/** Qué tipo de producto es. */
+export const TIPOS_TIENDA = {
+  libro: {
+    nombre: 'Libro ilustrado',
+    descripcion: 'Cuentos con texto e ilustraciones propias. La versión con pictogramas será gratis siempre.',
+    color: 'coral',
+  },
+  historias: {
+    nombre: 'Historias sociales',
+    descripcion: 'Packs de historias para anticipar situaciones del día a día, con dibujos propios.',
+    color: 'azul',
+  },
+  cuaderno: {
+    nombre: 'Cuaderno y planificador',
+    descripcion: 'Para organizar el curso, las sesiones de apoyo o el estudio de la oposición.',
+    color: 'morado',
+  },
+  manipulativo: {
+    nombre: 'Material manipulativo',
+    descripcion: 'Páginas para tocar, encajar y repetir, plastificadas y con velcro.',
+    color: 'verde',
+  },
+  montaje: {
+    nombre: 'Kits y montaje',
+    descripcion: 'El material impreso con lo necesario para montarlo, o ya montado y enviado desde Cartagena.',
+    color: 'amarillo',
+  },
+  asesoria: {
+    nombre: 'Asesoría',
+    descripcion: 'Una videollamada con el equipo docente para un caso concreto.',
+    color: 'naranja',
+  },
+} as const satisfies Record<string, Opcion>;
+
+/** Para quién es cada producto de la tienda. */
+export const PUBLICOS = {
+  docentes: {
+    nombre: 'Docentes',
+    descripcion: 'Maestras y maestros de Infantil, Primaria, PT y AL.',
+    color: 'verde',
+  },
+  familias: {
+    nombre: 'Familias',
+    descripcion: 'Madres, padres y quien acompaña a un peque en casa.',
+    color: 'coral',
+  },
+  opositoras: {
+    nombre: 'Opositoras',
+    descripcion: 'Quien prepara la oposición de Maestros en la Región de Murcia.',
+    color: 'morado',
+  },
+} as const satisfies Record<string, Opcion>;
+
+/** En qué punto está cada producto. Se dice tal cual: nada de urgencias falsas. */
+export const ESTADOS_TIENDA = {
+  aprobado: {
+    nombre: 'Aprobado',
+    descripcion: 'Está terminado y el equipo docente le ha dado el visto bueno. Falta preparar la venta.',
+    color: 'verde',
+  },
+  'en-revision': {
+    nombre: 'Hecho, en revisión',
+    descripcion: 'Está terminado y lo revisa el equipo docente antes de ponerlo a la venta.',
+    color: 'verde',
+  },
+  'en-preparacion': {
+    nombre: 'En preparación',
+    descripcion: 'Ya hay una muestra y estamos haciendo el resto.',
+    color: 'amarillo',
+  },
+  'en-estudio': {
+    nombre: 'En estudio',
+    descripcion: 'Estamos calculando costes, proveedores y lo que pide la ley antes de ofrecerlo.',
+    color: 'azul',
+  },
+} as const satisfies Record<string, Opcion>;
+
 export type Seccion = keyof typeof SECCIONES;
 export type Etapa = keyof typeof ETAPAS;
 export type Necesidad = keyof typeof NECESIDADES;
 export type Tipo = keyof typeof TIPOS;
+export type TipoTienda = keyof typeof TIPOS_TIENDA;
+export type Publico = keyof typeof PUBLICOS;
+export type EstadoTienda = keyof typeof ESTADOS_TIENDA;
 
 /** Las dimensiones que tienen página propia en el catálogo. */
 export const DIMENSIONES = {

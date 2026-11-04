@@ -1,0 +1,104 @@
+---
+// Tienda: todo lo que es o será de pago, con la portada y unas páginas a la vista y el resto bloqueado.
+// Hoy no se vende nada: cada producto lleva un botón para escribirnos (José, 04/11/2026).
+import Base from '../../layouts/Base.astro';
+import Intro from '../../components/Intro.astro';
+import Icono from '../../components/Icono.astro';
+import TarjetaTienda from '../../components/TarjetaTienda.astro';
+import sitio from '../../data/sitio.json';
+import { productosOrdenados } from '../../lib/tienda';
+import { ruta } from '../../lib/rutas';
+
+const productos = await productosOrdenados();
+---
+
+<Base
+  titulo="Tienda"
+  indexable={false}
+  descripcion="Lo que estamos preparando y será de pago: libros ilustrados, historias sociales, cuadernos, kits para montar y asesorías. Todavía no vendemos nada: escríbenos si algo te interesa."
+>
+  <Intro
+    titulo="Tienda"
+    entradilla="Aquí está lo que preparamos y será de pago. Todavía no vendemos nada: de cada cosa te enseñamos la portada y algunas páginas, y el resto va bloqueado. Si algo te interesa, escríbenos y te contamos cómo va."
+    camino={[{ texto: 'Tienda' }]}
+  />
+
+  <section class="contenedor tienda-aviso" aria-labelledby="titulo-gratis-siempre">
+    <div class="aviso aviso--ok">
+      <Icono nombre="corazon" clase="aviso__icono" />
+      <div>
+        <h2 id="titulo-gratis-siempre" class="tienda-aviso__titulo">Lo que lleva pictogramas de ARASAAC no está aquí</h2>
+        <p>
+          Es gratis siempre y lo tienes en <a href={ruta('/material-gratuito/')}>Material gratuito</a>{' '}
+          (<a href={ruta('/quienes-somos/#gratis-siempre')}>por qué</a>). En la tienda solo hay material con dibujos y
+          pictogramas propios.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contenedor tienda-lista" aria-labelledby="titulo-productos">
+    <h2 id="titulo-productos" class="solo-lectores">Productos</h2>
+    <ul class="rejilla">
+      {productos.map((p) => <TarjetaTienda producto={p} />)}
+    </ul>
+  </section>
+
+  <section class="seccion seccion--blanca" aria-labelledby="titulo-como-funciona">
+    <div class="contenedor">
+      <h2 id="titulo-como-funciona"><span class="subrayado">Cómo funciona, por ahora</span></h2>
+      <ol class="rejilla pasos-tienda">
+        <li class="posit posit--amarillo">
+          <h3>Mira por dentro</h3>
+          <p>Entra en cada producto y pasa las fotos. Las páginas bloqueadas se ven borrosas a propósito.</p>
+        </li>
+        <li class="posit posit--verde">
+          <h3>Escríbenos</h3>
+          <p>
+            Pulsa «Ponte en contacto con nosotros» o escribe a{' '}
+            <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>. Cuéntanos qué te interesa y en qué formato.
+          </p>
+        </li>
+        <li class="posit posit--morado">
+          <h3>Te contestamos</h3>
+          <p>Te contamos qué tenemos, en qué punto está y cuándo saldrá. Tu correo solo lo usamos para contestarte.</p>
+        </li>
+        <li class="posit posit--coral">
+          <h3>Lo que pedís va primero</h3>
+          <p>Con vuestros mensajes decidimos qué terminamos antes. Cuando algo salga a la venta, lo diremos aquí.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tienda-aviso {
+    padding-top: 1.75rem;
+  }
+
+  .tienda-aviso__titulo {
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .tienda-aviso p {
+    margin: 0;
+  }
+
+  .tienda-lista {
+    padding-block: 1.75rem 3rem;
+  }
+
+  .pasos-tienda {
+    counter-reset: paso;
+  }
+
+  .pasos-tienda > li {
+    counter-increment: paso;
+  }
+
+  .pasos-tienda h3::before {
+    content: counter(paso) '. ';
+  }
+</style>

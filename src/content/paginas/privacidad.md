@@ -1,7 +1,7 @@
 ---
 titulo: "Privacidad"
 entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Aquí te contamos qué datos tratamos y para qué."
-actualizado: 2026-10-27
+actualizado: 2026-11-04
 borrador: false
 ---
 
@@ -22,6 +22,8 @@ El responsable de tus datos es el titular de la web. Su nombre y sus datos de co
 ## Si nos escribes
 
 Si nos mandas un correo, usamos tu dirección y tu mensaje solo para contestarte. La base legal es tu propia petición (artículo 6.1 del Reglamento General de Protección de Datos, RGPD). Guardamos la conversación mientras dure y la borramos cuando ya no haga falta. Nuestro proveedor de correo es Zoho Mail, con servidores en la Unión Europea.
+
+Lo mismo vale para el botón «Ponte en contacto con nosotros» de la [tienda](/tienda/): abre tu programa de correo con el mensaje empezado, y la web no guarda nada. Si nos pides que te avisemos cuando un producto salga a la venta, guardamos tu correo solo para ese aviso, porque nos lo pides (artículo 6.1.a del RGPD), y lo borramos después de avisarte. Puedes pedirnos que lo borremos antes cuando quieras.
 
 ## Mi mochila y el boletín
 

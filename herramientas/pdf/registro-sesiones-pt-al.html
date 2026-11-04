@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Registro de sesiones de PT y AL · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Sin pictogramas de ARASAAC: todos los derechos reservados (decisión del 28/10/2026). */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+        }
+      }
+
+      /* En este material ningún texto baja de 11 pt, tampoco el pie de página. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      :root {
+        /* Borde de las casillas para escribir: 3,15:1 sobre blanco, se ve bien en blanco y negro. */
+        --borde: #8790b3;
+        /* Lo que «escribe a mano» la maestra en el ejemplo: 4,99:1 sobre blanco. */
+        --boli: #2b6cd5;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 18mm;
+      }
+
+      .portada__titulo {
+        font-size: 40pt;
+        line-height: 1.04;
+        margin-bottom: 6mm;
+        max-width: 150mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 128mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      /* Hoja del registro dibujada con HTML: filas y círculos que se van llenando */
+      .maqueta {
+        position: absolute;
+        z-index: 2;
+        background: #fff;
+        border-radius: 2mm;
+        box-shadow:
+          0 1mm 0 rgb(30 43 85 / 0.08),
+          0 14mm 24mm -10mm rgb(30 43 85 / 0.45);
+      }
+
+      .maqueta--rejilla {
+        left: 92mm;
+        top: 128mm;
+        width: 100mm;
+        height: 100mm;
+        padding: 10mm 9mm;
+        transform: rotate(5deg);
+      }
+
+      .maqueta--sesion {
+        left: 24mm;
+        top: 154mm;
+        width: 108mm;
+        height: 108mm;
+        padding: 10mm 9mm;
+        transform: rotate(-4deg);
+        z-index: 3;
+      }
+
+      .maqueta .barra {
+        height: 4.6mm;
+        width: 58%;
+        border-radius: 2mm;
+        background: var(--marino);
+        margin-bottom: 6mm;
+      }
+
+      .maqueta .fila {
+        display: grid;
+        grid-template-columns: 1fr 1.6fr 8mm;
+        align-items: center;
+        gap: 3mm;
+        padding: 3.4mm 0;
+        border-bottom: 0.4mm solid #e3e6ef;
+      }
+
+      .maqueta .fila span {
+        height: 2.6mm;
+        border-radius: 2mm;
+        background: #d9dce6;
+      }
+
+      .maqueta .fila svg {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .maqueta .semanas {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 3.2mm 2.2mm;
+        margin-top: 2mm;
+      }
+
+      .maqueta .semanas svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .posit {
+        position: absolute;
+        z-index: 4;
+        right: 14mm;
+        top: 234mm;
+        width: 50mm;
+        margin: 0;
+        padding: 5mm 5mm;
+        background: var(--amarillo);
+        transform: rotate(5deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.15;
+        color: var(--marino);
+        box-shadow: 0 6mm 10mm -6mm rgb(30 43 85 / 0.5);
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 3mm;
+      }
+
+      .encabezado .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .encabezado h1 {
+        font-size: 21pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 38mm;
+        height: auto;
+      }
+
+      /* Datos de la cabecera: etiqueta y raya para escribir */
+      .datos {
+        display: grid;
+        gap: 2mm 7mm;
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+      }
+
+      .datos--registro {
+        grid-template-columns: 1.1fr 1.1fr 1fr;
+      }
+
+      .datos--trimestre {
+        grid-template-columns: 1fr 0.8fr 1.15fr 1fr;
+      }
+
+      .datos--coordinacion {
+        grid-template-columns: 1fr 0.8fr 1.3fr;
+      }
+
+      .dato {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .dato .hueco {
+        flex: 1;
+        min-width: 10mm;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 6mm;
+      }
+
+      .rodea {
+        display: inline-block;
+        padding: 0 1.4mm;
+        margin-left: 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* Círculos de la respuesta: vacío, a medias y lleno */
+      .ico {
+        display: inline-block;
+        width: 3.8mm;
+        height: 3.8mm;
+        vertical-align: -0.6mm;
+        margin-right: 1.2mm;
+        color: var(--marino);
+        flex: none;
+      }
+
+      /* ---------- Registro de sesiones ---------- */
+      table.registro {
+        table-layout: fixed;
+        font-size: 11pt;
+        margin-bottom: 2.5mm;
+        border: 0.4mm solid var(--borde);
+      }
+
+      table.registro th {
+        font-size: 11pt;
+        line-height: 1.2;
+        padding: 1.8mm 1.8mm;
+        vertical-align: bottom;
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.registro td {
+        height: 20mm;
+        padding: 1.2mm 1.6mm;
+        border: 0.3mm solid var(--borde);
+      }
+
+      th.col-apoyo {
+        background: var(--amarillo-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      th.col-respuesta {
+        background: var(--verde-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      th.col-ajusto {
+        background: var(--morado-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      .opciones {
+        color: var(--suave);
+        line-height: 1.32;
+        vertical-align: middle !important;
+      }
+
+      .opciones > span {
+        display: flex;
+        align-items: center;
+        gap: 3.2mm;
+        white-space: nowrap;
+      }
+
+      .opciones--respuesta > span {
+        gap: 0;
+      }
+
+      /* Al final del trimestre: dos líneas para que las filas sean más bajas */
+      .opciones--final > span {
+        gap: 3mm;
+      }
+
+      .opciones--final > span > span {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .leyenda {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .leyenda b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* ---------- Seguimiento del trimestre ---------- */
+      .clave {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1mm 6mm;
+        margin: 0 0 3mm;
+        font-size: 11pt;
+      }
+
+      .clave span {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      .clave .ico {
+        width: 5mm;
+        height: 5mm;
+        vertical-align: 0;
+        margin-right: 1.6mm;
+      }
+
+      table.trimestre {
+        table-layout: fixed;
+        font-size: 11pt;
+        margin-bottom: 3mm;
+        border: 0.4mm solid var(--borde);
+      }
+
+      table.trimestre th {
+        font-size: 11pt;
+        line-height: 1.2;
+        padding: 1.6mm 1.4mm;
+        vertical-align: bottom;
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.trimestre thead th.semanas {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      table.trimestre thead th.semana {
+        background: var(--azul-tinte) !important;
+        color: var(--marino) !important;
+        text-align: center;
+        padding: 1mm 0.6mm 1.2mm;
+      }
+
+      .semana .semana__num {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .semana .hueco-fecha {
+        display: block;
+        height: 5.5mm;
+        margin-top: 0.8mm;
+        background: #fff;
+        border-radius: 1mm;
+      }
+
+      table.trimestre thead th.col-final {
+        background: var(--verde-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.trimestre tbody th {
+        text-align: center;
+        vertical-align: middle;
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.trimestre td {
+        height: 15mm;
+        padding: 1mm 1.4mm;
+        border: 0.3mm solid var(--borde);
+      }
+
+      .cierre {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8mm;
+      }
+
+      .cierre p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .lineas div {
+        height: 7.5mm;
+        border-bottom: 0.3mm solid var(--borde);
+      }
+
+      /* ---------- Coordinación ---------- */
+      .hoja h2 {
+        font-size: 15pt;
+        margin: 5mm 0 2.5mm;
+      }
+
+      .dato--ancho {
+        margin: 0 0 3mm;
+      }
+
+      .sitios {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .sitio {
+        border: 0.35mm solid var(--borde);
+        border-radius: 2.5mm;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+
+      .sitio h3 {
+        margin: 0;
+        padding: 2mm 3mm 0.6mm;
+        font-size: 12pt;
+      }
+
+      .sitio p {
+        margin: 0;
+        padding: 0 3mm 1.6mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .sitio .lineas {
+        padding: 0 3mm 3mm;
+        background: #fff;
+      }
+
+      .sitio--clase {
+        background: var(--azul-tinte);
+      }
+
+      .sitio--apoyo {
+        background: var(--amarillo-tinte);
+      }
+
+      .sitio--casa {
+        background: var(--coral-tinte);
+      }
+
+      .dos-datos {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 2mm 8mm;
+        margin: 0 0 1mm;
+        font-size: 11pt;
+      }
+
+      table.contactos {
+        table-layout: fixed;
+        font-size: 11pt;
+        border: 0.4mm solid var(--borde);
+      }
+
+      table.contactos th {
+        font-size: 11pt;
+        line-height: 1.2;
+        padding: 1.8mm 2mm;
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.contactos td {
+        height: 21mm;
+        padding: 1.2mm 1.8mm;
+        border: 0.3mm solid var(--borde);
+      }
+
+      .consejo {
+        margin-top: 4mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia h1 {
+        font-size: 22pt;
+        margin-bottom: 2mm;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin: 3mm 0 1.6mm;
+      }
+
+      .guia p,
+      .guia li {
+        line-height: 1.4;
+      }
+
+      .guia ol {
+        margin-bottom: 1.5mm;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .ejemplo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0 6mm;
+        padding: 2.5mm 4mm;
+        border: 0.35mm solid var(--borde);
+        border-radius: 2.5mm;
+        margin: 0 0 3mm;
+        break-inside: avoid;
+      }
+
+      .ejemplo p {
+        margin: 0;
+        padding: 0.5mm 0;
+        border-bottom: 0.3mm dashed var(--linea);
+      }
+
+      .ejemplo b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .ejemplo .boli {
+        color: var(--boli);
+      }
+
+      .ejemplo .rodeado {
+        display: inline-block;
+        padding: 0 1.6mm;
+        border: 0.45mm solid var(--boli);
+        border-radius: 999px;
+        line-height: 1.25;
+      }
+
+      .datos-protegidos p {
+        line-height: 1.4;
+        margin-bottom: 1.6mm;
+      }
+
+      .datos-protegidos h2 {
+        font-size: 13pt;
+        margin: 0 0 1.5mm;
+      }
+
+      .creditos {
+        font-size: 11pt;
+        line-height: 1.4;
+        margin-top: 2mm;
+        padding-top: 2.5mm;
+      }
+
+      .creditos p {
+        margin-bottom: 1.2mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Círculos de la respuesta: se dibujan una vez y se reutilizan -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-aun-no" viewBox="0 0 12 12">
+          <circle cx="6" cy="6" r="4.9" fill="#fff" stroke="currentColor" stroke-width="1.3" />
+        </symbol>
+        <symbol id="i-en-proceso" viewBox="0 0 12 12">
+          <circle cx="6" cy="6" r="4.9" fill="#fff" stroke="currentColor" stroke-width="1.3" />
+          <path d="M6 1.1a4.9 4.9 0 0 1 0 9.8z" fill="currentColor" />
+        </symbol>
+        <symbol id="i-conseguido" viewBox="0 0 12 12">
+          <circle cx="6" cy="6" r="4.9" fill="currentColor" stroke="currentColor" stroke-width="1.3" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -56mm; top: 112mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 66mm; height: 66mm; left: -26mm; top: 206mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 150mm; top: 92mm; background: var(--verde-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Plantilla · Pedagogía Terapéutica (PT) y Audición y Lenguaje (AL)</p>
+        <h1 class="portada__titulo">Registro de sesiones&nbsp;<br />de PT y AL</h1>
+        <p class="portada__subtitulo">Anota cada sesión en dos minutos y mira de un vistazo cómo avanza cada objetivo.</p>
+        <div class="portada__pie">
+          <p>© IdEducando. Todos los derechos reservados<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="maqueta maqueta--rejilla" aria-hidden="true">
+        <div class="barra" style="width: 46%; background: var(--morado)"></div>
+        <div class="semanas" id="semanas"></div>
+      </div>
+      <div class="maqueta maqueta--sesion" aria-hidden="true">
+        <div class="barra"></div>
+        <div class="fila"><span></span><span></span><svg style="color: var(--verde)"><use href="#i-conseguido" /></svg></div>
+        <div class="fila"><span></span><span style="width: 80%"></span><svg style="color: var(--naranja)"><use href="#i-en-proceso" /></svg></div>
+        <div class="fila"><span style="width: 70%"></span><span></span><svg style="color: var(--azul)"><use href="#i-aun-no" /></svg></div>
+        <div class="fila"><span></span><span style="width: 90%"></span><svg style="color: var(--naranja)"><use href="#i-en-proceso" /></svg></div>
+        <div class="fila"><span style="width: 85%"></span><span style="width: 70%"></span><svg style="color: var(--verde)"><use href="#i-conseguido" /></svg></div>
+      </div>
+      <p class="posit">Cada sesión, <br />en 2&nbsp;minutos</p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE SESIONES (una fila por alumno o alumna y sesión)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Registro de sesiones · PT y AL</p>
+          <h1>¿Cómo ha ido la sesión?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos datos--registro">
+        <p class="dato">Semana del<span class="hueco"></span></p>
+        <p class="dato">Grupo u hora<span class="hueco"></span></p>
+        <p class="dato">Especialidad (rodea):<span class="rodea">PT</span><span class="rodea">AL</span></p>
+      </div>
+      <table class="registro">
+        <colgroup>
+          <col style="width: 17mm" />
+          <col style="width: 22mm" />
+          <col style="width: 41mm" />
+          <col style="width: 40mm" />
+          <col style="width: 40mm" />
+          <col style="width: 32mm" />
+          <col style="width: 41mm" />
+          <col style="width: 40mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Iniciales</th>
+            <th scope="col">Objetivo del plan de trabajo</th>
+            <th scope="col">Actividad y material</th>
+            <th scope="col" class="col-apoyo">Apoyo que ha necesitado</th>
+            <th scope="col" class="col-respuesta">Respuesta</th>
+            <th scope="col">Observaciones</th>
+            <th scope="col" class="col-ajusto">Qué ajusto la próxima vez</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <p class="leyenda">
+        <b>Rodea el mayor apoyo que ha necesitado y una respuesta.</b> Total: le guías en toda la tarea. Parcial: le
+        ayudas a empezar o en un paso. Verbal: le das una pista con palabras. Visual: le señalas o le enseñas una imagen.
+        Sin apoyo: lo hace solo o sola. Escribe solo iniciales, nunca el nombre completo.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         SEGUIMIENTO DEL TRIMESTRE (una hoja por alumno o alumna)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Seguimiento del trimestre</p>
+          <h1>Cada objetivo, semana a semana</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos datos--trimestre">
+        <p class="dato">Iniciales<span class="hueco"></span></p>
+        <p class="dato">Curso<span class="hueco"></span></p>
+        <p class="dato">Trimestre (rodea):<span class="rodea">1.º</span><span class="rodea">2.º</span><span class="rodea">3.º</span></p>
+        <p class="dato">Especialidad (rodea):<span class="rodea">PT</span><span class="rodea">AL</span></p>
+      </div>
+      <p class="clave">
+        <span><b style="font-family: var(--titulos)">Cada semana, dibuja cómo va el objetivo:</b></span>
+        <span><svg class="ico" aria-hidden="true"><use href="#i-conseguido" /></svg>Conseguido</span>
+        <span><svg class="ico" aria-hidden="true"><use href="#i-en-proceso" /></svg>En proceso</span>
+        <span><svg class="ico" aria-hidden="true"><use href="#i-aun-no" /></svg>Aún no</span>
+        <span>Si esa semana no lo trabajaste, deja la casilla en blanco.</span>
+      </p>
+      <table class="trimestre">
+        <colgroup>
+          <col style="width: 10mm" />
+          <col style="width: 59mm" />
+          <col span="15" style="width: 10mm" />
+          <col style="width: 54mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" rowspan="2">N.º</th>
+            <th scope="col" rowspan="2">Objetivo del plan de trabajo</th>
+            <th scope="colgroup" colspan="15" class="semanas">Semanas: escribe debajo de cada número la fecha del lunes</th>
+            <th scope="col" rowspan="2" class="col-final">Al final del trimestre</th>
+          </tr>
+          <tr id="cabecera-semanas"></tr>
+        </thead>
+        <tbody id="filas-trimestre"></tbody>
+      </table>
+      <div class="cierre">
+        <div>
+          <p>Lo que más le ha ayudado</p>
+          <div class="lineas"><div></div><div></div></div>
+        </div>
+        <div>
+          <p>Lo que cambio el próximo trimestre</p>
+          <div class="lineas"><div></div><div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         COORDINACIÓN CON EL TUTOR O LA TUTORA Y CON LA FAMILIA
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Coordinación</p>
+          <h1>Con el tutor o la tutora y con la familia</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos datos--coordinacion">
+        <p class="dato">Iniciales<span class="hueco"></span></p>
+        <p class="dato">Curso<span class="hueco"></span></p>
+        <p class="dato">Trimestre (rodea):<span class="rodea">1.º</span><span class="rodea">2.º</span><span class="rodea">3.º</span></p>
+      </div>
+
+      <h2>Un objetivo que trabajamos a la vez</h2>
+      <p class="dato dato--ancho">Objetivo:<span class="hueco"></span></p>
+      <div class="sitios">
+        <div class="sitio sitio--clase">
+          <h3>En clase</h3>
+          <p>Tutor o tutora</p>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+        <div class="sitio sitio--apoyo">
+          <h3>En el aula de apoyo</h3>
+          <p>PT o AL</p>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+        <div class="sitio sitio--casa">
+          <h3>En casa</h3>
+          <p>Familia</p>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+      <div class="dos-datos">
+        <p class="dato">La ayuda que usamos en los tres sitios:<span class="hueco"></span></p>
+        <p class="dato">Lo revisamos el día:<span class="hueco"></span></p>
+      </div>
+
+      <h2>Reuniones y avisos</h2>
+      <table class="contactos">
+        <colgroup>
+          <col style="width: 20mm" />
+          <col style="width: 36mm" />
+          <col style="width: 50mm" />
+          <col style="width: 52mm" />
+          <col style="width: 20mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Con quién (rodea)</th>
+            <th scope="col">Qué hemos hablado</th>
+            <th scope="col">Qué hará cada persona</th>
+            <th scope="col">¿Hecho?</th>
+          </tr>
+        </thead>
+        <tbody id="filas-contactos"></tbody>
+      </table>
+
+      <div class="caja caja--amarilla consejo">
+        <p>
+          <strong>Para hablar con la familia:</strong> empieza por un avance concreto y acordad una sola cosa para casa.
+          Dale por escrito solo lo que hayáis acordado.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA DE UNA PÁGINA
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <p class="antetitulo">Guía de uso</p>
+      <h1>Cómo usar el registro</h1>
+      <p>Sirve para decidir con datos qué cambiar en la sesión siguiente.</p>
+
+      <h2>En dos minutos, al acabar la sesión</h2>
+      <ol>
+        <li>Escribe la fecha y las iniciales.</li>
+        <li>Anota el objetivo del plan de trabajo: basta con su número en la hoja del trimestre.</li>
+        <li>Rodea el mayor apoyo que ha necesitado y una respuesta.</li>
+        <li>Apunta una sola idea en «Qué ajusto la próxima vez» y empieza por ella la sesión siguiente.</li>
+      </ol>
+      <p>Actividad y observaciones, breves. Una vez a la semana, pasa las respuestas a la hoja del trimestre.</p>
+
+      <h2>Un ejemplo, con un caso inventado</h2>
+      <div class="ejemplo">
+        <div>
+          <p><b>Fecha:</b> <span class="boli">4/11</span></p>
+          <p><b>Iniciales:</b> <span class="boli">M. R.</span></p>
+          <p><b>Objetivo:</b> <span class="boli">2 (contar sílabas)</span></p>
+          <p><b>Actividad y material:</b> <span class="boli">el tren de las sílabas, con 10 tarjetas.</span></p>
+        </div>
+        <div>
+          <p><b>Apoyo:</b> <span class="boli rodeado">Visual</span> <span class="boli">(le señalo cada vagón)</span></p>
+          <p>
+            <b>Respuesta:</b>
+            <span class="boli rodeado"><svg class="ico" aria-hidden="true" style="color: var(--boli)"><use href="#i-en-proceso" /></svg>En proceso</span>
+          </p>
+          <p><b>Observaciones:</b> <span class="boli">acierta con las de dos sílabas. En las de tres se salta una.</span></p>
+          <p><b>Qué ajusto:</b> <span class="boli">seguir con 4 palabras de tres sílabas y señalar solo el primer vagón.</span></p>
+        </div>
+      </div>
+
+      <div class="caja caja--coral datos-protegidos">
+        <h2>Protección de datos</h2>
+        <p>
+          Escribe solo las iniciales y lo necesario para la sesión, como pide el Reglamento General de Protección de Datos
+          (RGPD, artículo 5). El diagnóstico y otros datos de salud tienen más protección (artículo 9) y aquí no hacen falta.
+        </p>
+        <p>
+          Las iniciales no hacen anónima la hoja: en tu centro se sabe de quién hablas (RGPD, considerando 26). Guárdala en
+          el centro, bajo llave, y no le hagas fotos con tu móvil.
+        </p>
+        <p>
+          El profesorado tiene deber de sigilo sobre los datos del alumnado y de su familia (Ley Orgánica de Educación,
+          disposición adicional vigesimotercera). La confidencialidad sigue cuando dejas el puesto (Ley Orgánica 3/2018,
+          artículo 5). Sigue siempre las normas de tu centro.
+        </p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Registro de sesiones de PT y AL.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/registro-sesiones-pt-al</span>
+        </p>
+        <p>
+          Fuentes: Stecker, P. M., Fuchs, L. S. y Fuchs, D. (2005). Using curriculum-based measurement to improve student
+          achievement: Review of research. <em>Psychology in the Schools, 42</em>(8), 795-819. Jung, P.-G. y otros (2018).
+          Effects of data-based individualization for students with intensive learning needs: A meta-analysis.
+          <em>Learning Disabilities Research &amp; Practice, 33</em>(3), 144-155. Normativa: Reglamento (UE) 2016/679
+          (RGPD), Ley Orgánica 3/2018, de 5 de diciembre, y Ley Orgánica 2/2006, de 3 de mayo, de Educación.
+        </p>
+        <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirlo, rellenarlo y adaptarlo para tu alumnado. No se puede compartir el archivo, subirlo a otra web ni venderlo: para recomendarlo, comparte el enlace de su ficha en ideducando.es.</p>
+      </div>
+    </section>
+
+    <script>
+      // Filas en blanco: se generan aquí para no repetir el mismo HTML muchas veces.
+      const usar = (id) => `<svg class="ico" aria-hidden="true"><use href="#${id}" /></svg>`;
+      const respuesta = `<td class="opciones opciones--respuesta">
+        <span>${usar('i-conseguido')}Conseguido</span>
+        <span>${usar('i-en-proceso')}En proceso</span>
+        <span>${usar('i-aun-no')}Aún no</span>
+      </td>`;
+      const final = `<td class="opciones opciones--final">
+        <span><span>${usar('i-conseguido')}Conseguido</span></span>
+        <span><span>${usar('i-en-proceso')}En proceso</span><span>${usar('i-aun-no')}Aún no</span></span>
+      </td>`;
+      const apoyo = `<td class="opciones">
+        <span><span>Total</span><span>Parcial</span></span>
+        <span><span>Verbal</span><span>Visual</span></span>
+        <span><span>Sin apoyo</span></span>
+      </td>`;
+
+      document.getElementById('filas-registro').innerHTML = Array.from(
+        { length: 6 },
+        () => `<tr><td></td><td></td><td></td><td></td>${apoyo}${respuesta}<td></td><td></td></tr>`,
+      ).join('');
+
+      document.getElementById('cabecera-semanas').innerHTML = Array.from(
+        { length: 15 },
+        (_, i) => `<th scope="col" class="semana"><span class="semana__num">${i + 1}</span><span class="hueco-fecha"></span></th>`,
+      ).join('');
+
+      document.getElementById('filas-trimestre').innerHTML = Array.from(
+        { length: 6 },
+        (_, i) => `<tr><th scope="row">${i + 1}</th><td></td>${'<td></td>'.repeat(15)}${final}</tr>`,
+      ).join('');
+
+      document.getElementById('filas-contactos').innerHTML = Array.from(
+        { length: 5 },
+        () => `<tr><td></td><td class="opciones">
+          <span>Tutor o tutora</span><span>Familia</span><span>Otra persona</span>
+        </td><td></td><td></td><td></td></tr>`,
+      ).join('');
+
+      // Portada: una rejilla de semanas en la que los círculos se van llenando.
+      const estados = [
+        ['i-aun-no', 'i-aun-no', 'i-en-proceso', 'i-en-proceso', 'i-en-proceso', 'i-conseguido', 'i-conseguido'],
+        ['i-aun-no', 'i-en-proceso', 'i-en-proceso', 'i-conseguido', 'i-conseguido', 'i-conseguido', 'i-conseguido'],
+        ['i-aun-no', 'i-aun-no', 'i-aun-no', 'i-en-proceso', 'i-en-proceso', 'i-en-proceso', 'i-conseguido'],
+        ['i-en-proceso', 'i-en-proceso', 'i-conseguido', 'i-conseguido', 'i-conseguido', 'i-conseguido', 'i-conseguido'],
+        ['i-aun-no', 'i-en-proceso', 'i-en-proceso', 'i-en-proceso', 'i-conseguido', 'i-conseguido', 'i-conseguido'],
+      ];
+      const tonos = { 'i-aun-no': 'var(--azul)', 'i-en-proceso': 'var(--naranja)', 'i-conseguido': 'var(--verde)' };
+      document.getElementById('semanas').innerHTML = estados
+        .flat()
+        .map((e) => `<svg style="color: ${tonos[e]}"><use href="#${e}" /></svg>`)
+        .join('');
+    </script>
+  </body>
+</html>
