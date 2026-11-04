@@ -93,10 +93,13 @@ Antes de publicar un material, repasa el [manual de estilo de materiales](docs/m
 | `src/content/materiales/` | Una ficha por material, en texto con formato (Markdown) |
 | `src/content/consejos/` | Los artículos de Consejos |
 | `src/content/paginas/` | Las páginas de texto: quiénes somos y legales |
+| `src/content/tienda/` | Una ficha por cada cosa que será de pago. Hoy no se vende nada: la tienda enseña una muestra bloqueada y un botón para escribirnos |
 | `src/data/` | El calendario, los ajustes de la web, las categorías del catálogo y la lista de la programación |
 | `src/pages/` | El diseño de cada página |
 | `public/descargas/` | Los PDF que se descargan |
 | `public/portadas/` | Las portadas del catálogo |
+| `public/vistas/` | Las fotos de la galería de cada ficha: la portada y algunas páginas de dentro |
+| `public/tienda/` | Las portadas y las muestras de la tienda. Las páginas bloqueadas ya van difuminadas en el archivo |
 | `netlify/functions/` | Las funciones de Netlify: mandan por correo, con Brevo, el material de Mi mochila y confirman el boletín. Lo común está en `netlify/lib/` |
 | `herramientas/` | Programas para generar los PDF y revisar la accesibilidad. No se publican |
 | `docs/` | Documentación del equipo, como el manual de estilo |
@@ -130,6 +133,7 @@ PDF, portadas y revisión de accesibilidad (ver [herramientas/LEEME.md](herramie
 cd herramientas
 npm install
 npm run pdf          # genera los PDF de public/descargas y las portadas
+npm run vistas       # fotos de la galería de cada ficha (npm run pdf ya las rehace)
 npm run comprobar    # enlaces rotos y accesibilidad WCAG 2.2 AA (necesita npm run build antes)
 ```
 

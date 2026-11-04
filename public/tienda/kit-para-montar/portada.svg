@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#fde5e0"/>
+<circle cx="100" cy="80" r="260" fill="#fdf0c7"/>
+<circle cx="1140" cy="860" r="210" fill="#efe5f7"/>
+<g fill="none" stroke="#1e2b55" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+
+<path d="M360 430l480 0 -40 -60 -400 0z" fill="#c4874a"/>
+<rect x="395" y="230" width="230" height="300" rx="16" fill="#e4edfb" opacity="0.9" transform="rotate(-14 510 380)"/>
+<g transform="rotate(-9 520 360)"><rect x="410" y="215" width="230" height="300" rx="16" fill="#fff"/><circle cx="525" cy="320" r="42" fill="#f6c12e"/><path d="M525 255v-18M525 403v-18M460 320h-18M608 320h-18M480 275l-12-12M570 365l12 12M570 275l12-12M480 365l-12 12" /><path d="M450 455h150M450 485h100" stroke="#2f6fd6"/><path d="M430 235l60 0" stroke="#fff" stroke-width="10" opacity="0.6"/></g>
+<g transform="rotate(9 735 360)"><rect x="640" y="250" width="210" height="190" rx="16" fill="#fffdf8"/>
+<g fill="#46578c" stroke="none"><circle cx="680" cy="290" r="15"/><circle cx="725" cy="290" r="15"/><circle cx="770" cy="290" r="15"/><circle cx="815" cy="290" r="15"/><circle cx="680" cy="335" r="15"/><circle cx="725" cy="335" r="15"/><circle cx="770" cy="335" r="15"/><circle cx="815" cy="335" r="15"/></g>
+<circle cx="680" cy="390" r="15" fill="#fff"/><circle cx="725" cy="390" r="15" fill="#fff"/><circle cx="770" cy="390" r="15" fill="#fff"/><circle cx="815" cy="390" r="15" fill="#fff"/></g>
+<path d="M340 440h520l-30 330H370z" fill="#d99a5b"/>
+<path d="M340 440l-80 70 90 20z" fill="#e8b97f"/><path d="M860 440l80 70-90 20z" fill="#e8b97f"/>
+<path d="M600 600s-46-25-46-55a23 23 0 0 1 46-10 23 23 0 0 1 46 10c0 30-46 55-46 55z" fill="#e8553e"/>
+<path d="M400 700h120" stroke="#fff6e6" stroke-width="10" opacity="0.7"/>
+<circle cx="975" cy="420" r="52" stroke="#8c4fb8" stroke-width="14"/><circle cx="1010" cy="500" r="52" stroke="#8c4fb8" stroke-width="14"/>
+<path d="M140 640l120-30 30 120-120 30z" fill="#fff" opacity="0.85"/><path d="M160 655l85-22" stroke="#2f6fd6"/>
+
+</g>
+<rect x="0" y="886" width="240" height="14" fill="#2f6fd6"/><rect x="240" y="886" width="240" height="14" fill="#1fa67a"/><rect x="480" y="886" width="240" height="14" fill="#f6c12e"/><rect x="720" y="886" width="240" height="14" fill="#e8553e"/><rect x="960" y="886" width="240" height="14" fill="#8c4fb8"/>
+</svg>

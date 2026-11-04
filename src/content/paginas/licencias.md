@@ -1,7 +1,7 @@
 ---
 titulo: "Licencias y créditos"
 entradilla: "Todos nuestros materiales gratuitos se pueden descargar y usar en el aula y en casa. Aquí tienes lo que permite cada licencia y cómo citarlos."
-actualizado: 2026-10-28
+actualizado: 2026-11-04
 borrador: false
 ---
 
@@ -39,6 +39,10 @@ Sin nuestro permiso no puedes:
 - Venderlo o incluirlo en un producto de pago.
 
 Si quieres recomendar uno, comparte el enlace de su ficha: así siempre llega la última versión. Para cualquier otro uso, escríbenos a hola@ideducando.es.
+
+### Lo que se enseña en la tienda
+
+Los libros, los packs, las ilustraciones y las muestras de la [tienda](/tienda/) tienen todos los derechos reservados. Ninguno lleva pictogramas de ARASAAC. Las páginas bloqueadas se ven borrosas a propósito, y las que se ven enteras son solo para mirarlas: no se pueden copiar, imprimir para usarlas ni compartir.
 
 ## Cómo citarlos
 

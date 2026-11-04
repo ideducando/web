@@ -13,7 +13,7 @@ portada: /portadas/secuencias-rutinas-paso-a-paso.webp
 portada_alt: "Portada del material: una escalera de cinco escalones de colores, cada uno con un número y un pictograma encima: entrar en clase, una fiambrera, unas manos con jabón, un váter y material escolar"
 tiempo: "40 minutos para imprimir, cortar, plastificar y pegar las cinco secuencias"
 necesitas:
-  - "5 hojas de cartulina blanca A4 de 160 g, una por secuencia (o folios, si tu impresora no admite cartulina)"
+  - "6 hojas de cartulina blanca A4 de 160 g: una por secuencia y otra para la plantilla (o folios, si tu impresora no admite cartulina)"
   - "6 fundas de plastificar A4 de 125 micras y una plastificadora: 1 para las dos tiras de cada secuencia y 1 para la plantilla"
   - "Tijeras o guillotina"
   - "Masilla adhesiva reutilizable: 4 bolitas del tamaño de un garbanzo por tira"
@@ -47,7 +47,7 @@ fuentes:
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-10-21
-actualizado: 2026-10-21
+actualizado: 2026-11-04
 destacado: false
 borrador: false
 ---

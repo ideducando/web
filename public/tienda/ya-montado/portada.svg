@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
+<rect width="1200" height="900" fill="#fde5e0"/>
+<circle cx="100" cy="80" r="260" fill="#fdf0c7"/>
+<circle cx="1140" cy="860" r="210" fill="#efe5f7"/>
+<g fill="none" stroke="#1e2b55" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+
+<rect x="190" y="250" width="560" height="420" rx="26" fill="#fff"/>
+<rect x="190" y="250" width="560" height="70" rx="26" fill="#2f6fd6"/><rect x="190" y="290" width="560" height="30" fill="#2f6fd6" stroke="none"/>
+<path d="M190 320h560"/>
+<circle cx="300" cy="245" r="26" stroke="#8c4fb8" stroke-width="12"/><circle cx="470" cy="245" r="26" stroke="#8c4fb8" stroke-width="12"/><circle cx="640" cy="245" r="26" stroke="#8c4fb8" stroke-width="12"/>
+<g>
+<rect x="225" y="350" width="110" height="110" rx="14" fill="#fdf0c7"/><circle cx="280" cy="405" r="26" fill="#f6c12e"/>
+<rect x="355" y="350" width="110" height="110" rx="14" fill="#dcf3ea"/><path d="M410 375l12 25 27 4-20 19 5 27-24-13-24 13 5-27-20-19 27-4z" fill="#1fa67a"/>
+<rect x="485" y="350" width="110" height="110" rx="14" fill="#fde5e0"/><path d="M540 385c-25-15-45 5-40 30 5 25 30 35 40 30 10 5 35-5 40-30 5-25-15-45-40-30z" fill="#e8553e"/><path d="M540 385c0-10 5-18 14-22"/>
+<rect x="615" y="350" width="110" height="110" rx="14" fill="#efe5f7"/><path d="M640 380h60v55h-60z" fill="#8c4fb8"/><path d="M670 380v55"/>
+</g>
+<rect x="225" y="490" width="500" height="40" rx="20" fill="#46578c" stroke="none"/>
+<rect x="240" y="545" width="100" height="100" rx="14" fill="#fff"/><circle cx="290" cy="595" r="22" fill="#2f6fd6"/>
+<rect x="360" y="545" width="100" height="100" rx="14" fill="#fff"/><path d="M385 620l25-50 25 50z" fill="#f5961f"/>
+<path d="M250 270l70 0" stroke="#fff" stroke-width="10" opacity="0.5"/>
+<path d="M800 470h300v270H800z" fill="#d99a5b"/><path d="M800 470l40-60h220l40 60z" fill="#e8b97f"/>
+<path d="M935 410v330" stroke="#c4874a" stroke-width="24"/><path d="M935 410v330"/>
+<path d="M1010 640s-40-22-40-48a20 20 0 0 1 40-9 20 20 0 0 1 40 9c0 26-40 48-40 48z" fill="#e8553e"/>
+<path d="M860 520c0-22 18-40 40-40s40 18 40 40c0 30-40 70-40 70s-40-40-40-70z" fill="#fff" transform="translate(-10 0) scale(0.9) translate(90 50)"/>
+
+</g>
+<rect x="0" y="886" width="240" height="14" fill="#2f6fd6"/><rect x="240" y="886" width="240" height="14" fill="#1fa67a"/><rect x="480" y="886" width="240" height="14" fill="#f6c12e"/><rect x="720" y="886" width="240" height="14" fill="#e8553e"/><rect x="960" y="886" width="240" height="14" fill="#8c4fb8"/>
+</svg>

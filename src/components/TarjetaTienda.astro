@@ -1,0 +1,197 @@
+---
+// Tarjeta de un producto de la tienda. Lleva a su ficha, donde se ve por dentro y está el botón para
+// escribirnos. El sello «Bloqueado» dice que todavía no está a la venta.
+import Icono from './Icono.astro';
+import { ESTADOS_TIENDA, TIPOS_TIENDA } from '../data/taxonomias';
+import { ruta } from '../lib/rutas';
+import type { Producto } from '../lib/tienda';
+
+interface Props {
+  producto: Producto;
+  nivel?: 'h2' | 'h3';
+}
+
+const { producto, nivel = 'h3' } = Astro.props;
+const d = producto.data;
+const Titulo = nivel;
+const estado = ESTADOS_TIENDA[d.estado];
+---
+
+<li class={`producto producto--${TIPOS_TIENDA[d.tipo].color}`}>
+  <article class="producto__tarjeta">
+    <div class="producto__portada">
+      <img src={ruta(d.portada)} alt="" width="1200" height="900" loading="lazy" decoding="async" />
+      <span class="producto__sello">
+        <Icono nombre="candado" />
+        Bloqueado
+      </span>
+    </div>
+    <div class="producto__cuerpo">
+      <p class="producto__tipo">{TIPOS_TIENDA[d.tipo].nombre}</p>
+      <Titulo class="producto__titulo">
+        <a class="enlace-tarjeta" href={ruta(`/tienda/${producto.id}/`)}>{d.titulo}</a>
+      </Titulo>
+      <p class="producto__resumen">{d.resumen}</p>
+      <p class={`producto__estado producto__estado--${estado.color}`}>{estado.nombre}</p>
+      <span class="producto__ver" aria-hidden="true">
+        Ver por dentro
+        <Icono nombre="flecha" />
+      </span>
+    </div>
+  </article>
+</li>
+
+<style>
+  .producto {
+    display: flex;
+  }
+
+  .producto__tarjeta {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: var(--radio);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .producto__tarjeta:hover {
+    box-shadow: var(--sombra);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .producto__tarjeta:hover {
+      transform: translateY(-3px);
+    }
+  }
+
+  .producto__portada {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--coral-tinte);
+    border-bottom: 6px solid var(--coral);
+  }
+
+  .producto--azul .producto__portada {
+    border-bottom-color: var(--azul);
+  }
+
+  .producto--morado .producto__portada {
+    border-bottom-color: var(--morado);
+  }
+
+  .producto--verde .producto__portada {
+    border-bottom-color: var(--verde);
+  }
+
+  .producto--amarillo .producto__portada {
+    border-bottom-color: var(--amarillo);
+  }
+
+  .producto--naranja .producto__portada {
+    border-bottom-color: var(--naranja);
+  }
+
+  .producto__portada img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .producto__sello {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem 0.3rem 0.55rem;
+    border-radius: 999px;
+    background: var(--marino);
+    color: var(--blanco);
+    font: 700 0.95rem/1.2 var(--letra-titulos);
+    box-shadow: 0 2px 0 rgb(30 43 85 / 0.25);
+    transform: rotate(-3deg);
+  }
+
+  .producto__sello :global(svg) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .producto__cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    padding: 1rem 1.15rem 1.25rem;
+  }
+
+  .producto__cuerpo > * {
+    margin: 0;
+  }
+
+  .producto__tipo {
+    font: 700 0.85rem/1.3 var(--letra-titulos);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .producto__titulo {
+    font-size: 1.25rem;
+  }
+
+  .producto__resumen {
+    font-size: 0.98rem;
+    line-height: 1.5;
+  }
+
+  .producto__estado {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    font: 600 0.9rem/1.3 var(--letra-titulos);
+    color: var(--marino);
+    background: var(--amarillo-tinte);
+  }
+
+  .producto__estado--verde {
+    background: var(--verde-tinte);
+  }
+
+  .producto__estado--azul {
+    background: var(--azul-tinte);
+  }
+
+  .producto__ver {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font: 700 1rem/1.2 var(--letra-titulos);
+    color: var(--enlace);
+  }
+
+  .producto__ver :global(svg) {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .producto__ver :global(svg) {
+      transition: transform 0.2s ease;
+    }
+
+    .producto__tarjeta:hover .producto__ver :global(svg) {
+      transform: translateX(3px);
+    }
+  }
+</style>
