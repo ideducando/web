@@ -37,15 +37,6 @@
         display: block;
       }
 
-      .oculto {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-        white-space: nowrap;
-      }
-
       /* ---------- Colores de cada grupo de tarjetas ---------- */
       .s-previos {
         --c: var(--azul);
@@ -352,19 +343,7 @@
         line-height: 1.1;
       }
 
-      /* Título de cada versión, pequeño, en el margen de arriba de su primera hoja */
-      .version {
-        position: absolute;
-        left: 0;
-        top: -10mm;
-        margin: 0;
-        font-family: var(--titulos);
-        font-weight: 600;
-        font-size: 9pt;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--suave);
-      }
+
 
       .chip {
         flex: none;
@@ -389,12 +368,14 @@
       }
 
       .chip--mano {
+        order: 3;
         margin-left: auto;
         border-color: var(--marino);
         background: #fff;
       }
 
       .tarjeta__titulo {
+        order: 2;
         flex: 1;
         min-width: 0;
       }
@@ -1466,16 +1447,18 @@
       const MODOS = { diestros: ['modelo', 'repasa', 'punto', 'nada'], zurdos: ['repasa', 'punto', 'nada', 'modelo'] };
 
       /** Cabecera, cuerpo y pie de una tarjeta. */
-      function tarjeta({ seccion, titulo, subtitulo, version, cuerpo, conTitulo = true }) {
+      function tarjeta({ seccion, titulo, subtitulo, version, cuerpo, conTitulo = true, primera = false }) {
         const nombreSeccion = { previos: 'Trazos previos', numeros: 'Números', letras: 'Letras' }[seccion];
-        // El título es el encabezado. En los marcadores del PDF cuelga de «Tarjetas para diestros»
-        // o «Tarjetas para zurdos», el título de cada versión.
+        // El título de la tarjeta es un encabezado de nivel 2. En la primera tarjeta de cada versión,
+        // la etiqueta «Para diestros» o «Para zurdos» es el de nivel 1: así los marcadores del PDF
+        // agrupan cada versión. Va la primera en el orden de lectura y se ve a la derecha.
         const etiqueta = conTitulo ? 'h2' : 'p';
+        const etiquetaMano = primera ? 'h1' : 'p';
         return `<article class="tarjeta s-${seccion} ${version}">
           <div class="cabecera">
+            <${etiquetaMano} class="chip chip--mano">${mano(version === 'zurdos')}Para ${version}</${etiquetaMano}>
             <p class="chip">${ICONOS[seccion]}${nombreSeccion}</p>
             <div class="tarjeta__titulo"><${etiqueta}>${titulo}</${etiqueta}>${subtitulo ? `<p>${subtitulo}</p>` : ''}</div>
-            <p class="chip chip--mano">${mano(version === 'zurdos')}Para ${version}</p>
           </div>
           ${cuerpo}
           <p class="tarjeta__pie">© IdEducando · ideducando.es</p>
@@ -1540,12 +1523,13 @@
       const ORDEN_NUMEROS = '0123456789'.split('');
 
       function tarjetasDe(version) {
-        const previos = PREVIOS.map((p) =>
+        const previos = PREVIOS.map((p, i) =>
           tarjeta({
             seccion: 'previos',
             titulo: p.titulo,
             subtitulo: p.subtitulo,
             version,
+            primera: i === 0,
             cuerpo: p.tipo === 'cajas' ? cuerpoCajas(version, (modo) => p.caja(modo), p.desc.charAt(0).toLowerCase() + p.desc.slice(1)) : cuerpoFilas(version, p),
           }),
         );
@@ -1578,12 +1562,12 @@
       }
 
       /** Junta las tarjetas de 2 en 2 en cada folio, con la línea de corte en medio. */
-      function hojas(lista, encabezado = '') {
+      function hojas(lista) {
         const corte = `<div class="corte"><span>${ICONOS.tijeras}Corta por la línea</span></div>`;
         const out = [];
         for (let i = 0; i < lista.length; i += 2) {
           const segunda = lista[i + 1] ?? '<div class="tarjeta tarjeta--vacia"></div>';
-          out.push(`<section class="hoja">${i === 0 ? encabezado : ''}${lista[i]}${corte}${segunda}</section>`);
+          out.push(`<section class="hoja">${lista[i]}${corte}${segunda}</section>`);
         }
         return out;
       }
@@ -1594,11 +1578,8 @@
       let pagina = PRIMERA;
       for (const version of ['diestros', 'zurdos']) {
         const t = tarjetasDe(version);
-        const encabezado = `<h1 class="version">Tarjetas para ${version}</h1>`;
-        let primera = true;
         for (const [clave, lista] of Object.entries(t)) {
-          const hs = hojas(lista, primera ? encabezado : '');
-          primera = false;
+          const hs = hojas(lista);
           grupos.push({ version, clave, desde: pagina, hasta: pagina + hs.length - 1, tarjetas: lista.length });
           pagina += hs.length;
           html += hs.join('');

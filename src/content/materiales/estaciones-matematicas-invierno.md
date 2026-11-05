@@ -17,7 +17,7 @@ necesitas:
   - "15 hojas de cartulina blanca A4 de 160 g"
   - "15 fundas de plastificar A4 de 125 micras y una plastificadora"
   - "12 círculos de velcro adhesivo de 2 cm: 6 rugosos y 6 suaves"
-  - "20 sobres o bolsas con cierre: 18 para los niveles de las mesas y 2 para las tarjetas"
+  - "20 sobres o bolsas con cierre: 18 para los niveles de las mesas y 2 más para las tarjetas"
   - "6 cuencos o cajas: 3 para las piezas y 3 para guardar la ropa"
   - "1 reloj de arena o un temporizador visual, y 1 rotulador de pizarra"
   - "Impresora, mejor a color, y tijeras o guillotina"
@@ -26,9 +26,9 @@ necesitas:
 imprimir:
   - "A color, en cartulina y sin reducir (al 100 %, «Tamaño real»), para que todo encaje: páginas 8, 9, 11, 12, 14, 15, 17, 19 y 21 a 27."
   - "La página 24 solo hace falta para la versión segura."
-  - "En papel normal: el registro (página 28), una autoevaluación para cada niño o niña (29) y una nota para cada familia (31). El resto se lee en pantalla."
+  - "En papel normal: el registro (página 28), una autoevaluación para cada niño o niña (29) y, para cada familia, una nota (31). El resto se lee en pantalla."
 pasos:
-  - "Saca en cartulina, a color y al 100 %, las páginas de «Qué imprimir»."
+  - "Saca a color, en cartulina y sin reducir (al 100 %), las páginas de «Qué imprimir»."
   - "Antes de plastificar, separa las 80 fichas de las páginas 24 a 27 cortando por la línea de puntos."
   - "Plastifica las demás hojas enteras y, aparte, las fichas, con 5 mm entre una y otra: 20 en cada funda."
   - "Recorta cada pieza con un borde de plástico de 2 o 3 mm y redondea las esquinas."
@@ -70,7 +70,7 @@ Las seis estaciones tienen tres niveles. Cambian la ayuda y el número de piezas
 5. **Las seis estaciones** (páginas 7 a 21): para cada una, una guía del docente y sus tarjetas, tiras y tableros en tres niveles.
 6. **Tarjetas de pasos** con pictogramas (página 22) y **panel de rotación** con tarjetas de grupo para escribir los nombres (página 23).
 7. **80 fichas de unos 5 cm** (páginas 24 a 27): copos, gorros con número, piezas para las series, ropa, manoplas y pingüinos.
-8. **Hoja de registro** para observar (página 28) y **autoevaluación** con pictogramas (página 29).
+8. **Hoja de registro** para observar (página 28) y una **autoevaluación** con pictogramas para el alumnado (página 29).
 9. **Ideas para la diversidad** (página 30) y **nota en lectura fácil** para las familias (página 31).
 10. **Fuentes, licencia y créditos** (página 32).
 
@@ -94,7 +94,7 @@ Las seis estaciones tienen tres niveles. Cambian la ayuda y el número de piezas
 
 ## Seguridad: dos versiones
 
-La versión de clase y casa usa pompones y tapones de botella. Son piezas pequeñas: a partir de 3 años, con un adulto sentado junto al grupo y lejos de quien todavía se mete objetos en la boca. Para la Asociación Española de Pediatría (AEP), la mejor prevención es la supervisión constante, y aconseja intentar evitar las piezas pequeñas hasta los 3 a 5 años. Con la clase de 3 años, usa primero la versión segura.
+La versión de clase y casa usa pompones y tapones de botella. Son piezas pequeñas: a partir de 3 años, con un adulto sentado junto al grupo y lejos de quien todavía se mete objetos en la boca. La Asociación Española de Pediatría (AEP) recuerda que «La mejor medida preventiva es la supervisión constante» y aconseja intentar evitar las piezas pequeñas hasta los 3 a 5 años. Con la clase de 3 años, usa primero la versión segura.
 
 En la versión segura, los pompones y los tapones se cambian por fichas de 5 cm de lado, plastificadas y con el mismo dibujo. Las estaciones 2, 4 y 5 usan tarjetas, fichas o ropa de verdad en las dos versiones.
 
@@ -102,7 +102,7 @@ Los botones solo están dibujados, porque la AEP pide no dejar jugar con monedas
 
 ## Tres niveles para toda la clase
 
-Con el Diseño Universal para el Aprendizaje (DUA), el material piensa en toda la clase desde el principio. Se nota en los tres niveles, en los que cada número va dentro de un círculo, un cuadrado o un rombo, en las piezas que se tocan y en que se puede responder sin hablar. La hoja de cada estación trae ajustes, y la página 30 reúne ideas para el alumnado con trastorno del espectro del autismo (TEA), trastorno por déficit de atención e hiperactividad (TDAH), trastorno del desarrollo del lenguaje (TDL) y discapacidad intelectual o motora, entre otras necesidades. Si alguien responde mejor señalando, usa el [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/).
+Con el Diseño Universal para el Aprendizaje (DUA), el material piensa en toda la clase desde el principio. Se nota en los tres niveles, en los que cada número va dentro de un círculo, un cuadrado o un rombo, en las piezas que se tocan y en que se puede responder sin hablar. La hoja de cada estación trae ajustes, y la página 30 reúne ideas para alumnado con discapacidad intelectual o motora, trastorno del espectro del autismo (TEA), trastorno por déficit de atención e hiperactividad (TDAH) o trastorno del desarrollo del lenguaje (TDL), entre otras necesidades. Si alguien responde mejor señalando, usa el [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/).
 
 ## Sobre los dibujos y los pictogramas
 
