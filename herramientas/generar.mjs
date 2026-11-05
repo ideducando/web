@@ -255,6 +255,33 @@ const DOCUMENTOS = [
       'Diálogos para completar: conversaciones cortas de invierno con huecos, respuestas con y sin pictogramas de ARASAAC y preguntas sobre lo que piensan y sienten, en tres niveles',
     palabras: 'pragmática, diálogos, conversación, inferencias, emociones, lenguaje, TDL, TEA, pictogramas, ARASAAC, Audición y Lenguaje, Infantil, Primaria',
   },
+  {
+    id: 'fiestas-sin-sobresaltos',
+    asunto:
+      'Fiestas sin sobresaltos: anticipar el festival de Navidad, la fiesta de fin de trimestre y otras fiestas del cole, con historias sociales, agenda de la fiesta, plan de descanso y tarjetas con pictogramas de ARASAAC',
+    palabras: 'fiestas, festival de Navidad, anticipación, historias sociales, ruido, sensibilidad sensorial, descanso, TEA, apoyos visuales, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'retos-diciembre',
+    asunto: 'Retos de diciembre: un reto amable para cada día lectivo, en tres niveles, con pictogramas de ARASAAC y versión de Adviento opcional',
+    palabras: 'diciembre, retos, calendario, convivencia, emociones, autonomía, DUA, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'carta-de-deseos',
+    asunto: 'Carta de deseos con pictogramas: para escribir, dibujar o pegar lo que deseo, con versión para los Reyes Magos o Papá Noel',
+    palabras: 'carta, deseos, Navidad, Reyes Magos, escritura, comunicación, CAA, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'rincon-lenguaje-invierno',
+    asunto:
+      'Rincón de lenguaje de invierno: vocabulario, cazapalabras, sílabas que faltan y más actividades en tres niveles, con tarjetas de pasos con pictogramas de ARASAAC',
+    palabras: 'invierno, rincón de lenguaje, vocabulario, conciencia fonológica, sílabas, lectura, escritura, DUA, pictogramas, ARASAAC, TDL, Infantil',
+  },
+  {
+    id: 'misiones-invierno',
+    asunto: 'Misiones de invierno: tarjetas de encargos con pasos, temporizador y registro, para el alumnado con TDAH y para toda la clase, con pictogramas de ARASAAC',
+    palabras: 'TDAH, funciones ejecutivas, encargos, autonomía, organización, refuerzo, invierno, pictogramas, ARASAAC, Primaria, Infantil',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
