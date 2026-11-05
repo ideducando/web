@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cartilla de sílabas trabadas · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Las hojas de los grupos aprovechan un poco más el papel. El margen de los lados deja sitio
+         a los agujeros de las anillas (a 1 cm del borde). */
+      @page hoja {
+        margin: 12mm 16mm 17mm 16mm;
+      }
+
+      /* ---------- Colores de cada grupo ---------- */
+      .g-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .g-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .g-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .g-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .g-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .g-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      /* La trabada dentro de una sílaba, una palabra o una frase: negrita y raya debajo.
+         Así se distingue también en blanco y negro. La raya va por debajo de las letras con rabo (p, g). */
+      .tr {
+        font-weight: 700;
+        border-bottom: 0.085em solid var(--marino);
+        padding: 0 0.02em;
+      }
+
+      .hoja {
+        page: hoja;
+        break-after: page;
+        display: flex;
+        flex-direction: column;
+        height: 266mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__titulo {
+        font-size: 44pt;
+        line-height: 1.02;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 120mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .pegatina {
+        position: absolute;
+        right: 20mm;
+        top: 62mm;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 28pt;
+        line-height: 1;
+      }
+
+      /* Doce bloques apilados como una pirámide: 5 abajo, 4 en medio y 3 arriba */
+      .bloques {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        z-index: 2;
+      }
+
+      .bloque {
+        position: absolute;
+        width: 31mm;
+        height: 27mm;
+        border-radius: 3.5mm;
+        border: 0.7mm solid var(--marino);
+        background: var(--c);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 30pt;
+        line-height: 1;
+        color: var(--marino);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.22);
+      }
+
+      .bloque.g-azul,
+      .bloque.g-morado {
+        color: #fff;
+      }
+
+      .suelo-portada {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 50mm;
+        background: var(--azul-tinte);
+        z-index: 1;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabecera {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .cabecera h1 {
+        font-size: 19pt;
+        margin: 0;
+      }
+
+      .cabecera__dato {
+        margin: 0.6mm 0 0;
+        font-size: 10.5pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .cabecera img {
+        width: 30mm;
+        height: auto;
+        margin-left: auto;
+        flex: none;
+      }
+
+      .apartado {
+        display: flex;
+        align-items: center;
+        gap: 2.2mm;
+        margin: 0 0 1.6mm;
+        font-size: 13pt;
+      }
+
+      .apartado img,
+      .apartado svg {
+        width: 8.5mm;
+        height: 8.5mm;
+        flex: none;
+      }
+
+      .pista {
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--marino);
+      }
+
+      .atribucion {
+        margin: 1.6mm 0 0;
+        font-size: 8pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Cartilla: la trabada y sus sílabas ---------- */
+      .heroe {
+        display: flex;
+        align-items: center;
+        gap: 5mm;
+        margin-bottom: 3.5mm;
+      }
+
+      .trabada {
+        flex: none;
+        width: 42mm;
+        height: 34mm;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        border-radius: 5mm;
+        border: 0.6mm solid var(--marino);
+        border-top: 3.2mm solid var(--c);
+        background: var(--t);
+        font-weight: 700;
+        font-size: 66pt;
+        line-height: 1;
+        letter-spacing: 0.02em;
+      }
+
+      .silabas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.6mm;
+      }
+
+      .silabas li {
+        margin: 0;
+        height: 24mm;
+        display: grid;
+        place-items: center;
+        border-radius: 3mm;
+        border: 0.45mm solid var(--marino);
+        border-top: 2.4mm solid var(--c);
+        background: #fff;
+        font-size: 34pt;
+        line-height: 1;
+      }
+
+      /* ---------- Cartilla: palabras ---------- */
+      .palabras {
+        list-style: none;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.6mm 3.5mm;
+      }
+
+      .palabras.de-5 li:nth-child(4) {
+        grid-column: 1 / span 1;
+      }
+
+      .palabras li {
+        margin: 0;
+        height: 37mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1mm;
+        border-radius: 3mm;
+        border: 0.35mm solid var(--suave);
+        background: #fff;
+      }
+
+      .palabras img {
+        width: 23mm;
+        height: 23mm;
+        object-fit: contain;
+      }
+
+      .partida {
+        margin: 0;
+        font-size: 24pt;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .guion {
+        padding: 0 0.1em;
+        color: var(--suave);
+      }
+
+      /* ---------- Cartilla: oye la diferencia ---------- */
+      .oye {
+        margin: 0 0 3.5mm;
+        padding: 2.4mm 4mm 3mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+      }
+
+      .oye .pista {
+        margin-bottom: 1.6mm;
+      }
+
+      .parejas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+      }
+
+      .pareja {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3mm;
+        min-height: 32mm;
+        border-radius: 3mm;
+        background: var(--crema);
+      }
+
+      .pareja figure {
+        margin: 0;
+        width: 32mm;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6mm;
+      }
+
+      .pareja figure img {
+        width: 20mm;
+        height: 20mm;
+        object-fit: contain;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .pareja figcaption {
+        font-size: 21pt;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .pareja .o {
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 13pt;
+        color: var(--suave);
+      }
+
+      .silaba-sola {
+        width: 24mm;
+        height: 22mm;
+        display: grid;
+        place-items: center;
+        border-radius: 3mm;
+        border: 0.45mm solid var(--marino);
+        background: #fff;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      /* ---------- Cartilla: frases ---------- */
+      .frases {
+        list-style: none;
+        margin: 0 0 3mm;
+        padding: 0;
+        counter-reset: frase;
+      }
+
+      .frases li {
+        counter-increment: frase;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 1.2mm;
+        padding: 0 0 0.8mm;
+        border-bottom: 0.3mm solid var(--linea);
+        font-size: 22pt;
+        line-height: 1.32;
+      }
+
+      .frases li::before {
+        content: counter(frase);
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 6.6mm;
+        height: 6.6mm;
+        border-radius: 50%;
+        border: 0.35mm solid var(--marino);
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10.5pt;
+        line-height: 1;
+      }
+
+      /* ---------- Cartilla: tira de lectura ---------- */
+      .tira {
+        margin-top: auto;
+        display: grid;
+        grid-template-columns: 21mm repeat(10, minmax(0, 1fr));
+        height: 17mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 8.5mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .tira__inicio {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1mm;
+        background: var(--t);
+        border-right: 0.5mm solid var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1;
+      }
+
+      .tira__inicio svg {
+        width: 5mm;
+        height: 5mm;
+      }
+
+      .tira span {
+        display: grid;
+        place-items: center;
+        font-size: 22pt;
+        line-height: 1;
+        border-left: 0.3mm dashed var(--suave);
+      }
+
+      .tira span:first-of-type {
+        border-left: 0;
+      }
+
+      .tira-pie {
+        margin: 1mm 0 0;
+        font-size: 9.5pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Juegos ---------- */
+      .intro-juegos {
+        margin: 0 0 3mm;
+        padding: 2mm 3.5mm;
+        border-radius: 2.5mm;
+        background: var(--t);
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .juego {
+        margin: 0 0 3.5mm;
+      }
+
+      .palmas {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm 4mm;
+      }
+
+      .palmas li {
+        margin: 0;
+        height: 30mm;
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        padding: 0 3mm;
+        border-radius: 3mm;
+        border: 0.35mm solid var(--suave);
+      }
+
+      .palmas img {
+        width: 24mm;
+        height: 24mm;
+        object-fit: contain;
+      }
+
+      .palmas p {
+        margin: 0 0 2mm;
+        font-size: 20pt;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .circulos {
+        display: flex;
+        gap: 2mm;
+      }
+
+      .circulos i {
+        display: block;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        border: 0.45mm solid var(--marino);
+        background: #fff;
+      }
+
+      .cambios {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+      }
+
+      .cambios li {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4mm;
+        padding: 2mm 2mm 2.6mm;
+        border-radius: 3mm;
+        border: 0.35mm solid var(--suave);
+      }
+
+      .cambios img {
+        width: 20mm;
+        height: 20mm;
+        object-fit: contain;
+      }
+
+      .cambios .palabra {
+        margin: 0;
+        font-size: 19pt;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .operacion {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .ficha {
+        display: grid;
+        place-items: center;
+        min-width: 15mm;
+        height: 10mm;
+        padding: 0 2mm;
+        border-radius: 5mm;
+        border: 0.45mm solid var(--marino);
+        background: var(--t);
+        font-weight: 700;
+        font-size: 19pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .operacion svg {
+        width: 7mm;
+        height: 5mm;
+      }
+
+      .hueco {
+        display: grid;
+        place-items: center;
+        width: 17mm;
+        height: 11mm;
+        border-radius: 2mm;
+        border: 0.45mm dashed var(--suave);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        color: var(--suave);
+      }
+
+      .clave {
+        margin: auto 0 0;
+        padding-top: 2mm;
+        border-top: 0.3mm solid var(--linea);
+        font-size: 10pt;
+        line-height: 1.4;
+      }
+
+      .clave .sin-partir {
+        white-space: nowrap;
+      }
+
+      /* ---------- Registro ---------- */
+      .registro h1 {
+        font-size: 22pt;
+        margin-bottom: 2mm;
+      }
+
+      .datos-alumno {
+        display: flex;
+        gap: 6mm;
+        margin: 0 0 3mm;
+        font-size: 10.5pt;
+      }
+
+      .datos-alumno span {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        flex: 1;
+      }
+
+      .datos-alumno i {
+        flex: 1;
+        height: 6mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2mm 7mm;
+        margin: 0 0 3mm;
+        font-size: 10.5pt;
+      }
+
+      .leyenda span {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.8mm;
+      }
+
+      .circulito {
+        display: inline-block;
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        border: 0.4mm solid var(--marino);
+        background: #fff;
+        flex: none;
+      }
+
+      .circulito.medio {
+        background: linear-gradient(90deg, var(--marino) 0 50%, #fff 50% 100%);
+      }
+
+      .circulito.lleno {
+        background: var(--marino);
+      }
+
+      .seguimiento {
+        table-layout: fixed;
+        font-size: 9.5pt;
+      }
+
+      .seguimiento thead th {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.2;
+        padding: 1.6mm 1mm;
+        font-size: 9.5pt;
+      }
+
+      .seguimiento tbody th,
+      .seguimiento tbody td {
+        height: 15.4mm;
+        vertical-align: middle;
+        text-align: center;
+        padding: 0 1mm;
+        border-bottom: 0.3mm solid var(--linea);
+        border-left: 0.3mm solid var(--linea);
+      }
+
+      .seguimiento tbody th {
+        border-left: 0;
+      }
+
+      .seguimiento tbody td .circulito {
+        width: 6mm;
+        height: 6mm;
+        margin: 0 1.4mm;
+        border-color: var(--suave);
+      }
+
+      .mini-trabada {
+        display: inline-grid;
+        place-items: center;
+        width: 13mm;
+        height: 10mm;
+        border-radius: 2mm;
+        border: 0.4mm solid var(--marino);
+        border-top: 1.6mm solid var(--c);
+        background: var(--t);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+      }
+
+      .estrella {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .nota-registro {
+        margin: 3mm 0 0;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 10pt;
+        line-height: 1.42;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.8em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja h3 {
+        font-size: 12pt;
+        margin-bottom: 1.4mm;
+      }
+
+      .guia ol li,
+      .guia ul li {
+        margin-bottom: 0.9mm;
+      }
+
+      .errores td:first-child {
+        width: 44%;
+      }
+
+      .adaptaciones {
+        columns: 2;
+        column-gap: 6mm;
+      }
+
+      .adaptaciones li {
+        break-inside: avoid;
+      }
+
+      .casa {
+        break-inside: avoid;
+      }
+
+      .casa h2 {
+        margin-top: 0;
+      }
+
+      .lista-palabras {
+        font-size: 9.2pt;
+      }
+
+      .lista-palabras th[scope='row'] {
+        width: 13mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .lista-palabras td:last-child {
+        width: 52mm;
+      }
+
+      .guia .creditos {
+        margin-top: 4mm;
+        font-size: 8.5pt;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1.2mm;
+      }
+
+      .sin-partir {
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 40mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 66mm; height: 66mm; left: -26mm; top: 112mm; background: var(--amarillo-tinte)"></div>
+      <div class="suelo-portada" aria-hidden="true"></div>
+      <div class="bloques" id="bloques" aria-hidden="true"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Fichas · Lectura</p>
+        <h1 class="portada__titulo">Cartilla de<br />sílabas trabadas</h1>
+        <p class="portada__subtitulo">Doce grupos, de pl a tr, para leer palabras de cada día y jugar con sus sonidos.</p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>12</b>grupos de<br />trabadas</div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         LOS DOCE GRUPOS: por delante, la cartilla; por detrás, los juegos.
+         Se generan con la lista GRUPOS del final.
+         ====================================================================== -->
+    <div id="grupos"></div>
+
+    <!-- ======================================================================
+         REGISTRO DE AVANCE
+         ====================================================================== -->
+    <section class="registro salto" style="break-after: page">
+      <div class="cabecera">
+        <div>
+          <h1>Registro de avance</h1>
+          <p class="cabecera__dato">Una hoja por niño o niña. Escribe solo las iniciales y guarda la hoja en el centro.</p>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="datos-alumno">
+        <span>Iniciales:<i></i></span>
+        <span>Curso:<i></i></span>
+        <span>Empezamos el:<i></i></span>
+      </p>
+      <p class="leyenda">
+        <span><i class="circulito"></i>Todavía no</span>
+        <span><i class="circulito medio"></i>Con ayuda</span>
+        <span><i class="circulito lleno"></i>Sin ayuda</span>
+      </p>
+      <table class="seguimiento">
+        <colgroup>
+          <col style="width: 19mm" />
+          <col span="4" />
+          <col style="width: 25mm" />
+          <col style="width: 20mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Grupo</th>
+            <th scope="col">Oye la diferencia</th>
+            <th scope="col">Lee la tira</th>
+            <th scope="col">Lee las palabras</th>
+            <th scope="col">Lee las frases</th>
+            <th scope="col">Lo consigue el día</th>
+            <th scope="col">¡Lo he conseguido!</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <p class="nota-registro">
+        Rellena un círculo cada día que lo observes: el primero, un día; el segundo, otro día distinto. Cuando los
+        cuatro tengan los dos círculos llenos, pasad al grupo siguiente. La estrella la colorea el niño o la niña.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE Y LA FAMILIA
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente y la familia</p>
+      <h1>Cómo usar la cartilla</h1>
+      <p>
+        Una sílaba trabada lleva dos consonantes seguidas antes de la vocal: <strong>pla</strong>,
+        <strong>bra</strong>. La segunda siempre es una l o una r, y las dos se dicen de un golpe. Por eso cuestan más
+        que las sílabas como pa o ba, y conviene practicarlas despacio.
+      </p>
+      <p>
+        La cartilla tiene doce grupos: cinco con l (pl, bl, fl, cl y gl) y siete con r (pr, br, fr, cr, gr, dr y tr).
+        Cada grupo ocupa una hoja. Por delante, para leer: la trabada con sus cinco sílabas, palabras de uso diario con
+        pictograma, parejas para oír la diferencia, frases cortas y una tira de lectura. Por detrás, juegos para oír
+        los sonidos sin leer.
+      </p>
+      <p>
+        Está pensada para el último curso de Infantil y el primer ciclo de Primaria, de 5 a 8 años, cuando ya se leen
+        sílabas sencillas. Sirve a toda la clase y es especialmente útil con alumnado con trastorno del desarrollo del
+        lenguaje (TDL), con dificultades de aprendizaje, como la dislexia, o con discapacidad intelectual. El currículo
+        estatal de Infantil recoge la «discriminación auditiva y conciencia fonológica» entre los saberes básicos del
+        segundo ciclo (Real Decreto 95/2022, anexo II). El de Primaria espera que en esta etapa «se produzca la
+        adquisición y consolidación del código escrito» (Real Decreto 157/2022, anexo II).
+      </p>
+
+      <h2>El orden: primero la l, después la r</h2>
+      <p>
+        Proponemos empezar por las trabadas con l. La l se puede alargar («plllato»), y así es más fácil fijarse en
+        ella. La r de «pra» es un toque muy rápido de la lengua que no se puede alargar. Al hablar, la l también suele
+        llegar antes: en un estudio con niños y niñas de México, la l apareció antes que la r, y en los grupos de dos
+        consonantes lo habitual era perder la segunda, como en «pancha» por «plancha» (Oropeza Escobar, 2017).
+      </p>
+      <p>
+        Dentro de cada familia, la cartilla va de los sonidos que se hacen con los labios (p, b y f) a los que se hacen
+        al fondo de la boca (c y g). Las de r terminan con dr y tr. Es un orden orientativo: si un grupo se atasca,
+        pasad al siguiente de la misma familia y volved después.
+      </p>
+
+      <h2>Una sesión, paso a paso</h2>
+      <p>Mejor poco y a menudo: de 10 a 15 minutos, tres o cuatro días por semana, con un solo grupo cada vez.</p>
+      <ol>
+        <li>
+          <strong>Jugad con los sonidos.</strong> Empezad por los juegos de la parte de detrás. Se juegan de oído: el
+          niño o la niña no tiene que leer.
+        </li>
+        <li>
+          <strong>Oye la diferencia.</strong> Tápate la boca con una hoja y di una de las dos palabras de la pareja.
+          Que señale la que ha oído. Cambia el orden sin avisar.
+        </li>
+        <li>
+          <strong>Lee las sílabas.</strong> Léelas tú primero, señalando con el dedo. Después, que las lea sin tu
+          ayuda.
+        </li>
+        <li>
+          <strong>Lee las palabras.</strong> Sílaba a sílaba, con una palmada en cada una, y después la palabra entera.
+          El pictograma ayuda a comprobar que se ha leído bien.
+        </li>
+        <li><strong>Lee las frases.</strong> Si se atasca en una palabra, buscadla arriba, en la lista.</li>
+        <li>
+          <strong>Termina con la tira.</strong> De izquierda a derecha y sin prisa. En la tira se mezclan sílabas con
+          trabada y sin ella, todas con la misma letra: así se fija en cada sílaba y no adivina.
+        </li>
+      </ol>
+
+      <div class="caja caja--verde">
+        <h3>Cuándo pasar al grupo siguiente</h3>
+        <p style="margin-bottom: 1mm">Pasad al grupo siguiente cuando, en dos días distintos:</p>
+        <ul>
+          <li>en «Oye la diferencia» acierta 4 de cada 5 veces;</li>
+          <li>lee la tira sin quitar ni añadir sonidos;</li>
+          <li>lee sin ayuda todas las palabras, o todas menos una;</li>
+          <li>lee las frases, aunque sea despacio.</li>
+        </ul>
+        <p>
+          Primero, que lo lea bien; la soltura llega con la práctica. Apuntadlo en el registro de avance. Si en dos o
+          tres semanas no avanza, quedaos más tiempo en los juegos de detrás o probad otro grupo de la misma familia.
+        </p>
+      </div>
+
+      <h2>Los juegos de detrás</h2>
+      <p>
+        Se juegan de oído y en voz alta. Entre barras va el sonido: /l/ es el sonido de la l, sin decir «ele». Las
+        soluciones están al pie de cada hoja.
+      </p>
+      <ul>
+        <li>
+          <strong>Palmas:</strong> una palmada en cada sílaba y un círculo en cada palmada. Después, rodead el círculo
+          en el que suena la trabada.
+        </li>
+        <li>
+          <strong>Quita un sonido:</strong> di la palabra sin la l o sin la r. A veces sale una palabra conocida, como
+          «pato»; otras, una inventada, como «panta». Las dos valen.
+        </li>
+        <li><strong>Cambia la palabra:</strong> añade el sonido y di la palabra nueva: «pato» con /l/ es «plato».</li>
+      </ul>
+
+      <h2>Si se equivoca</h2>
+      <table class="errores">
+        <thead>
+          <tr>
+            <th scope="col">Si lee…</th>
+            <th scope="col">Prueba a…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>«pato» donde pone «plato»: se come la l o la r.</td>
+            <td>Señalar las dos consonantes con el dedo y decirlas despacio. Con la l, alargarla: «plllato».</td>
+          </tr>
+          <tr>
+            <td>«palato» por «plato» o «terén» por «tren»: mete una vocal entre las dos consonantes.</td>
+            <td>
+              Decir la palabra cada vez más deprisa, hasta que la vocal desaparezca. Es una estrategia que describe
+              Oropeza Escobar (2017) con estas dos palabras.
+            </td>
+          </tr>
+          <tr>
+            <td>«pal» donde pone «pla»: cambia el orden.</td>
+            <td>Leer letra a letra, con el dedo debajo. Escribid «pal» y «pla» en la pizarra y que diga cuál es cuál.</td>
+          </tr>
+          <tr>
+            <td>«pra» donde pone «pla»: cambia la l por la r.</td>
+            <td>Jugar a «Oye la diferencia» con sílabas: «pla» o «pra».</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Hay quien lee bien la trabada y todavía no la dice al hablar. En ese caso, valora la lectura por lo que
+        señala: que elija bien el pictograma o la sílaba. Coméntalo con el especialista de Audición y Lenguaje (AL).
+      </p>
+
+      <h2>Ideas para adaptarlo (DUA)</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de presentar la información y de
+        responder (CAST, 2024).
+      </p>
+      <ul class="adaptaciones">
+        <li>
+          <strong>Con TDL:</strong> más tiempo en los juegos de oído y en las parejas. Habla despacio y con pocas
+          palabras cada vez. Fuera del juego de las parejas, que te vea la boca.
+        </li>
+        <li>
+          <strong>Con dificultades de aprendizaje:</strong> un grupo por semana como mucho. Una tira de cartulina debajo
+          de la línea ayuda a no saltarse letras. La tira de lectura, cada día.
+        </li>
+        <li>
+          <strong>Con discapacidad intelectual:</strong> empieza con 2 o 3 palabras y, si puedes, con el objeto de
+          verdad, como un plato o un globo. Si todavía no lee, que señale.
+        </li>
+        <li>
+          <strong>Para quien no habla:</strong> di tú la sílaba o la palabra y que señale la que has dicho. En los
+          juegos, que responda señalando.
+        </li>
+        <li>
+          <strong>Para toda la clase:</strong> proyecta la hoja en la pizarra digital. En «Oye la diferencia», que
+          levanten la mano cuando oigan la l o la r.
+        </li>
+        <li><strong>Más reto:</strong> buscar más palabras del grupo e inventar una frase con ellas.</li>
+      </ul>
+
+      <div class="caja caja--amarilla casa">
+        <h2>En casa</h2>
+        <ul>
+          <li>Con 10 minutos al día basta. Elegid un rato tranquilo.</li>
+          <li>Leed juntos la hoja del grupo que se esté trabajando en el cole.</li>
+          <li>Los juegos de detrás se juegan sin papel: de camino al cole o en la cocina.</li>
+          <li>Si se equivoca, repetid la palabra bien, sin decir «mal»: «¡Sí, un plato!».</li>
+          <li>Celebrad el esfuerzo. Si veis que le cuesta mucho, contádselo a su maestra o maestro.</li>
+        </ul>
+      </div>
+
+      <h2>Cuándo pedir ayuda</h2>
+      <div class="caja caja--coral">
+        <p style="margin-bottom: 1mm">
+          Practicad unas semanas. Después, habla con el maestro o la maestra de AL y con el equipo de orientación si:
+        </p>
+        <ul>
+          <li>con mucha práctica, sigue sin leer trabadas que sus compañeros ya leen;</li>
+          <li>al hablar se le entiende poco, o le cuesta mucho entender lo que oye;</li>
+          <li>tienes dudas sobre cómo oye.</li>
+        </ul>
+        <p>Esta cartilla sirve para practicar y para observar. El diagnóstico corresponde a los profesionales.</p>
+      </div>
+
+      <h2>Las palabras de la cartilla</h2>
+      <table class="lista-palabras">
+        <thead>
+          <tr>
+            <th scope="col">Grupo</th>
+            <th scope="col">Palabras, con sus sílabas</th>
+            <th scope="col">Para oír la diferencia</th>
+          </tr>
+        </thead>
+        <tbody id="lista-palabras"></tbody>
+      </table>
+      <p style="font-size: 9pt">
+        Cuando un grupo no tiene una pareja de palabras clara y conocida, la cartilla usa sílabas, como «pa» y «pra».
+      </p>
+
+      <div class="creditos">
+        <p>
+          <strong>Cartilla de sílabas trabadas.</strong> IdEducando, noviembre de 2026. Ficha y novedades:
+          <span class="url">ideducando.es/material-gratuito/cartilla-trabadas</span>
+        </p>
+        <p>
+          Fuentes: Oropeza Escobar, M. (2017). Adquisición de las consonantes líquidas en el español de México.
+          <em>CPU-e, Revista de Investigación Educativa</em>, 25, 168-196; CAST (2024), <em>Universal Design for
+          Learning Guidelines version 3.0</em>; Real Decreto 95/2022, de 1 de febrero, enseñanzas mínimas de la
+          Educación Infantil, anexo II; Real Decreto 157/2022, de 1 de marzo, enseñanzas mínimas de la Educación
+          Primaria, anexo II.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+          Si adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender: es
+          gratis siempre. La portada, los iconos y el diseño de las hojas son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.</p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------------------------------
+      // Los doce grupos. Cada palabra lleva sus sílabas separadas por guiones y el número de su
+      // pictograma en ARASAAC (el archivo pictogramas/NÚMERO.png).
+      //   parejas: dos parejas para «Oye la diferencia». Si un grupo no tiene una pareja de palabras
+      //            clara y conocida, la pareja es de sílabas (sin pictograma).
+      //   palmas:  cuatro palabras de la lista para el juego de las palmas.
+      //   quita:   [palabra de la lista, lo que sale sin la l o la r, true si sale una palabra conocida]
+      //   cambia:  [palabra, pictograma, sonido que se añade, lo que sale, true si sale una palabra conocida]
+      // Todas las palabras de la lista y de las parejas se comprobaron en el Diccionario de la lengua
+      // española de la RAE (noviembre de 2026).
+      // ------------------------------------------------------------------------------------------
+      const GRUPOS = [
+        {
+          t: 'pl', color: 'g-azul',
+          palabras: [['pla-to', 2532], ['pla-ya', 2826], ['plu-ma', 7208], ['plan-ta', 38613], ['plá-ta-no', 2530], ['cum-ple-a-ños', 3087]],
+          parejas: [[['pato', 2563], ['plato', 2532]], [['sopa', 2573], ['sopla', 10179]]],
+          frases: ['El plátano está en el plato.', 'Vamos a la playa.', 'Hoy es mi cumpleaños.'],
+          palmas: ['pla-to', 'plá-ta-no', 'cum-ple-a-ños', 'plu-ma'],
+          quita: [['plátano', 'pátano'], ['planta', 'panta'], ['cumpleaños', 'cumpeaños']],
+          cambia: [['pato', 2563, 'l', 'plato', true], ['sopa', 2573, 'l', 'sopla', true], ['puma', 9068, 'l', 'pluma', true]],
+        },
+        {
+          t: 'bl', color: 'g-verde',
+          palabras: [['blan-co', 8043], ['blu-sa', 13642], ['blo-ques', 4935], ['ta-bla', 6143], ['ca-ble', 6948], ['om-bli-go', 2873]],
+          parejas: [[['banco', 3255], ['blanco', 8043]], [['bo'], ['blo']]],
+          frases: ['La blusa es blanca.', 'Pablo hace una torre de bloques.', 'Mi pueblo tiene una plaza.'],
+          palmas: ['blu-sa', 'ta-bla', 'ca-ble', 'om-bli-go'],
+          quita: [['blusa', 'busa'], ['cable', 'cabe', true], ['ombligo', 'ombigo']],
+          cambia: [['banco', 3255, 'l', 'blanco', true], ['bota', 8299, 'l', 'blota'], ['boca', 2663, 'l', 'bloca']],
+        },
+        {
+          t: 'fl', color: 'g-amarillo',
+          palabras: [['flor', 3102], ['flan', 3317], ['fle-cha', 5471], ['flau-ta', 2396], ['flo-ta-dor', 4650], ['fle-qui-llo', 28803]],
+          parejas: [[['fecha', 34799], ['flecha', 5471]], [['fo'], ['flo']]],
+          frases: ['La flor es amarilla.', 'Toco la flauta.', 'Me como un flan.'],
+          palmas: ['flor', 'fle-cha', 'flo-ta-dor', 'fle-qui-llo'],
+          quita: [['flor', 'for'], ['flauta', 'fauta'], ['flotador', 'fotador']],
+          cambia: [['fecha', 34799, 'l', 'flecha', true], ['foca', 2397, 'l', 'floca'], ['fuego', 4654, 'l', 'fluego']],
+        },
+        {
+          t: 'cl', color: 'g-naranja',
+          palabras: [['cla-se', 33072], ['cla-vo', 8306], ['clip', 10309], ['chi-cle', 8724], ['bi-ci-cle-ta', 2277], ['te-cla-do', 2793]],
+          parejas: [[['cara', 31915], ['clara', 6980]], [['co'], ['clo']]],
+          frases: ['Vamos a clase en bicicleta.', 'El chicle es de menta.', 'Saco un clavo de la tabla.'],
+          palmas: ['clip', 'chi-cle', 'te-cla-do', 'bi-ci-cle-ta'],
+          quita: [['clavo', 'cavo', true], ['teclado', 'tecado'], ['bicicleta', 'biciqueta']],
+          cambia: [['cara', 31915, 'l', 'clara', true], ['casa', 2317, 'l', 'clasa'], ['coche', 2339, 'l', 'cloche']],
+        },
+        {
+          t: 'gl', color: 'g-coral',
+          palabras: [['glo-bo', 8313], ['re-gla', 2815], ['i-glú', 8137], ['i-gle-sia', 3118], ['jun-gla', 3385]],
+          parejas: [[['lobo', 5892], ['globo', 8313]], [['ga'], ['gla']]],
+          frases: ['El globo es rojo.', 'El iglú es de hielo.', 'Mido la mesa con la regla.'],
+          palmas: ['glo-bo', 're-gla', 'i-glú', 'i-gle-sia'],
+          quita: [['globo', 'gobo'], ['regla', 'rega'], ['iglú', 'igú']],
+          cambia: [['lobo', 5892, 'g', 'globo', true], ['gato', 2406, 'l', 'glato'], ['goma', 2409, 'l', 'gloma']],
+        },
+        {
+          t: 'pr', color: 'g-morado',
+          palabras: [['prin-ce-sa', 5554], ['pre-mio', 26845], ['pri-ma-ve-ra', 5553], ['pro-fe-so-ra', 28003], ['sor-pre-sa', 8517], ['com-pra', 9058]],
+          parejas: [[['pa'], ['pra']], [['pi'], ['pri']]],
+          frases: ['La princesa gana el premio.', 'En primavera hay muchas flores.', 'Mi profesora tiene una sorpresa.'],
+          palmas: ['com-pra', 'pre-mio', 'prin-ce-sa', 'pri-ma-ve-ra'],
+          quita: [['princesa', 'pincesa'], ['premio', 'pemio'], ['sorpresa', 'sorpesa']],
+          cambia: [['pato', 2563, 'r', 'prato'], ['pino', 3216, 'r', 'prino'], ['pera', 2561, 'r', 'prera']],
+        },
+        {
+          t: 'br', color: 'g-azul',
+          palabras: [['bra-zo', 2669], ['bru-ja', 5404], ['li-bro', 2450], ['a-bri-go', 2242], ['som-bre-ro', 2572], ['ca-bra', 2295]],
+          parejas: [[['cara', 31915], ['cabra', 2295]], [['bo'], ['bro']]],
+          frases: ['Abre el libro.', 'La bruja tiene un sombrero.', 'Ponte el abrigo.'],
+          palmas: ['bra-zo', 'li-bro', 'a-bri-go', 'som-bre-ro'],
+          quita: [['bruja', 'buja'], ['abrigo', 'abigo'], ['sombrero', 'sombero']],
+          cambia: [['cara', 31915, 'b', 'cabra', true], ['barco', 2273, 'r', 'brarco'], ['burro', 2291, 'r', 'brurro']],
+        },
+        {
+          t: 'fr', color: 'g-verde',
+          palabras: [['fre-sa', 2400], ['fru-ta', 4653], ['fram-bue-sa', 36540], ['fre-go-na', 3324], ['co-fre', 5966], ['fri-go-rí-fi-co', 3272]],
+          parejas: [[['fa'], ['fra']], [['fe'], ['fre']]],
+          frases: ['La fresa es una fruta.', 'El cofre está lleno de oro.', 'La leche está en el frigorífico.'],
+          palmas: ['fre-sa', 'co-fre', 'fre-go-na', 'fri-go-rí-fi-co'],
+          quita: [['fresa', 'fesa'], ['cofre', 'cofe'], ['frambuesa', 'fambuesa']],
+          cambia: [['foca', 2397, 'r', 'froca'], ['falda', 2391, 'r', 'fralda'], ['fuego', 4654, 'r', 'fruego']],
+        },
+        {
+          t: 'cr', color: 'g-amarillo',
+          palabras: [['cre-ma', 21568], ['cro-mos', 26016], ['cres-ta', 7069], ['crua-sán', 2358], ['mi-cró-fo-no', 2912], ['es-cri-bir', 2380]],
+          parejas: [[['ca'], ['cra']], [['co'], ['cro']]],
+          frases: ['Me pongo crema en la cara.', 'Hoy desayuno un cruasán.', 'Tengo un cromo nuevo.'],
+          palmas: ['cre-ma', 'cro-mos', 'es-cri-bir', 'mi-cró-fo-no'],
+          quita: [['crema', 'quema', true], ['cromos', 'comos'], ['micrófono', 'micófono']],
+          cambia: [['cama', 2304, 'r', 'crama'], ['copa', 2356, 'r', 'cropa'], ['cuchara', 2362, 'r', 'cruchara']],
+        },
+        {
+          t: 'gr', color: 'g-naranja',
+          palabras: [['gri-fo', 2414], ['gran-ja', 3337], ['grú-a', 3341], ['ti-gre', 2590], ['can-gre-jo', 2312], ['lá-gri-ma', 14252]],
+          parejas: [[['oro', 6161], ['ogro', 6160]], [['ga'], ['gra']]],
+          frases: ['El tigre es grande.', 'Abro el grifo.', 'En la granja hay una cabra.'],
+          palmas: ['gri-fo', 'ti-gre', 'can-gre-jo', 'lá-gri-ma'],
+          quita: [['grifo', 'guifo'], ['tigre', 'tigue'], ['cangrejo', 'canguejo']],
+          cambia: [['oro', 6161, 'g', 'ogro', true], ['gusano', 3344, 'r', 'grusano'], ['gorro', 2412, 'r', 'grorro']],
+        },
+        {
+          t: 'dr', color: 'g-coral',
+          palabras: [['dra-gón', 5572], ['cua-dra-do', 4616], ['pie-dra', 6594], ['la-dri-llo', 2951], ['co-co-dri-lo', 2343], ['dro-me-da-rio', 2305]],
+          parejas: [[['da'], ['dra']], [['do'], ['dro']]],
+          frases: ['El dragón vuela alto.', 'Mi madre pinta un cuadrado.', 'El cocodrilo duerme en la piedra.'],
+          palmas: ['dra-gón', 'pie-dra', 'la-dri-llo', 'co-co-dri-lo'],
+          quita: [['dragón', 'dagón'], ['piedra', 'pieda'], ['cocodrilo', 'cocodilo']],
+          cambia: [['dado', 2731, 'r', 'drado'], ['dedo', 3298, 'r', 'dredo'], ['dos', 2628, 'r', 'dros']],
+        },
+        {
+          t: 'tr', color: 'g-morado',
+          palabras: [['tren', 5094], ['tres', 2629], ['trom-pe-ta', 2607], ['es-tre-lla', 4644], ['trac-tor', 2600], ['tri-go', 7285]],
+          parejas: [[['ta'], ['tra']], [['te'], ['tre']]],
+          frases: ['El tren tiene tres vagones.', 'Mira esa estrella.', 'El tractor va por el campo.'],
+          palmas: ['tren', 'trac-tor', 'es-tre-lla', 'trom-pe-ta'],
+          quita: [['trompeta', 'tompeta'], ['tractor', 'tactor'], ['trigo', 'tigo']],
+          cambia: [['toro', 2595, 'r', 'troro'], ['tomate', 2594, 'r', 'tromate'], ['tele', 25498, 'r', 'trele']],
+        },
+      ];
+
+      const LOGO = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const VOCALES = ['a', 'e', 'i', 'o', 'u'];
+      const sinGuiones = (p) => p.replaceAll('-', '');
+      const silabasDe = (p) => p.split('-').length;
+
+      // Sílabas sin trabada para la tira: la c y la g cambian de letra delante de e y de i.
+      function sencillas(consonante) {
+        if (consonante === 'c') return ['ca', 'que', 'qui', 'co', 'cu'];
+        if (consonante === 'g') return ['ga', 'gue', 'gui', 'go', 'gu'];
+        return VOCALES.map((v) => consonante + v);
+      }
+
+      // Marca la trabada (negrita y raya debajo) dentro de un texto. Solo la del grupo de la hoja.
+      function marcar(texto, t) {
+        return texto.replace(new RegExp(t, 'gi'), (m) => `<b class="tr">${m}</b>`);
+      }
+
+      // «pla-to» → sílabas separadas por un guion suave, con la trabada marcada
+      function partida(p, t) {
+        return p
+          .split('-')
+          .map((s) => `<span>${marcar(s, t)}</span>`)
+          .join('<span class="guion">-</span>');
+      }
+
+      const img = (id, alt = '') => `<img src="pictogramas/${id}.png" alt="${alt}" />`;
+
+      // Iconos de IdEducando para los juegos de quitar y añadir, y la flecha
+      const ICONO_MENOS = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="var(--t)" stroke="#1e2b55" stroke-width="1.6"/><path d="M7 12h10" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+      const ICONO_MAS = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="var(--t)" stroke="#1e2b55" stroke-width="1.6"/><path d="M7 12h10M12 7v10" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round"/></svg>`;
+      const FLECHA = `<svg viewBox="0 0 28 20" aria-hidden="true"><path d="M2 10h20M15 3l7 7-7 7" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const OJO = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z" fill="#fff" stroke="#1e2b55" stroke-width="1.6"/><circle cx="12" cy="12" r="3.2" fill="#1e2b55"/></svg>`;
+
+      // Orden de la tira: cinco sílabas con trabada (T) y cinco sin ella (S), mezcladas sin un patrón fijo
+      const PATRONES = [
+        ['T0', 'S1', 'S3', 'T2', 'T4', 'S0', 'T1', 'S4', 'T3', 'S2'],
+        ['S2', 'T3', 'T1', 'S0', 'T4', 'S3', 'S1', 'T0', 'S4', 'T2'],
+      ];
+
+      function tira(g, n) {
+        const con = VOCALES.map((v) => g.t + v);
+        const sin = sencillas(g.t[0]);
+        const silabas = PATRONES[n % 2].map((clave) => {
+          const k = (Number(clave[1]) + n) % 5;
+          return clave[0] === 'T' ? con[k] : sin[k];
+        });
+        return `<div class="tira" role="group" aria-label="Tira de lectura: ${silabas.join(', ')}">
+          <p class="tira__inicio" style="margin:0">${OJO}Lee</p>
+          ${silabas.map((s) => `<span>${s}</span>`).join('')}
+        </div>`;
+      }
+
+      // ---------------------------------------------------------------- La cartilla (por delante)
+
+      function figuraPareja([texto, id], t) {
+        if (!id) return `<span class="silaba-sola">${marcar(texto, t)}</span>`;
+        return `<figure>${img(id)}<figcaption>${marcar(texto, t)}</figcaption></figure>`;
+      }
+
+      function cartilla(g, n) {
+        const familia = g.t[1] === 'l' ? 'Familia de la l' : 'Familia de la r';
+        const silabas = VOCALES.map((v) => `<li><b class="tr">${g.t}</b>${v}</li>`).join('');
+        const palabras = g.palabras
+          .map(([p, id]) => `<li>${img(id)}<p class="partida">${partida(p, g.t)}</p></li>`)
+          .join('');
+        const deSilabas = g.parejas.every(([a]) => !a[1]);
+        const pista = deSilabas
+          ? 'Tápate la boca con una hoja y di una sílaba de una pareja. ¿Cuál ha oído? Que la señale.'
+          : 'Tápate la boca con una hoja y di una palabra de una pareja. ¿Cuál ha oído? Que la señale.';
+        const parejas = g.parejas
+          .map(([a, b]) => `<div class="pareja">${figuraPareja(a, g.t)}<span class="o">o</span>${figuraPareja(b, g.t)}</div>`)
+          .join('');
+        const frases = g.frases.map((f) => `<li>${marcar(f, g.t)}</li>`).join('');
+        return `<section class="hoja cartilla ${g.color}">
+          <div class="cabecera">
+            <div><h1>Trabadas con ${g.t}</h1><p class="cabecera__dato">Grupo ${n + 1} de 12 · ${familia}</p></div>
+            ${LOGO}
+          </div>
+          <div class="heroe">
+            <p class="trabada"><b class="tr">${g.t}</b></p>
+            <ul class="silabas" aria-label="Las cinco sílabas de ${g.t}">${silabas}</ul>
+          </div>
+          <h2 class="apartado">${img(31680)}Lee las palabras</h2>
+          <ul class="palabras${g.palabras.length === 5 ? ' de-5' : ''}" aria-label="Palabras con ${g.t}">${palabras}</ul>
+          <div class="oye">
+            <h2 class="apartado">${img(2381)}Oye la diferencia</h2>
+            <p class="pista">${pista}</p>
+            <div class="parejas">${parejas}</div>
+          </div>
+          <h2 class="apartado">${img(31680)}Lee las frases</h2>
+          <ol class="frases">${frases}</ol>
+          ${tira(g, n)}
+          <p class="atribucion">${ATRIBUCION}</p>
+        </section>`;
+      }
+
+      // ---------------------------------------------------------------- Los juegos (por detrás)
+
+      function juegos(g, n) {
+        const sonido = g.t[1];
+        const idDe = (palabra) => g.palabras.find(([p]) => sinGuiones(p) === palabra)?.[1];
+        const palmas = g.palmas
+          .map((p) => {
+            const id = idDe(sinGuiones(p));
+            return `<li>${img(id)}<div><p>${sinGuiones(p)}</p><span class="circulos" aria-hidden="true">${'<i></i>'.repeat(5)}</span></div></li>`;
+          })
+          .join('');
+        const quita = g.quita
+          .map(
+            ([p]) => `<li>${img(idDe(p))}<p class="palabra">${p}</p>
+              <span class="operacion"><span class="ficha" aria-label="sin ${sonido}">− ${sonido}</span>${FLECHA}<span class="hueco">?</span></span></li>`,
+          )
+          .join('');
+        const cambia = g.cambia
+          .map(
+            ([p, id, s]) => `<li>${img(id)}<p class="palabra">${p}</p>
+              <span class="operacion"><span class="ficha" aria-label="más ${s}">+ ${s}</span>${FLECHA}<span class="hueco">?</span></span></li>`,
+          )
+          .join('');
+
+        // Soluciones para el adulto. En negrita, lo que sale una palabra conocida.
+        const posicion = (p) => {
+          const i = p.split('-').findIndex((s) => s.toLowerCase().includes(g.t));
+          return i;
+        };
+        const solPalmas = g.palmas
+          .map((p) => {
+            const n = silabasDe(p);
+            const i = posicion(p);
+            const donde = n > 1 && i > 0 ? `, /${g.t}/ en la ${i + 1}.ª` : '';
+            return `<span class="sin-partir">${p} (${n}${donde})</span>`;
+          })
+          .join(', ');
+        const resultado = ([, , , r, conocida]) => (conocida ? `<strong>${r}</strong>` : r);
+        const solQuita = g.quita.map(([, r, conocida]) => (conocida ? `<strong>${r}</strong>` : r)).join(', ');
+        const solCambia = g.cambia.map(resultado).join(', ');
+
+        return `<section class="hoja juegos ${g.color}">
+          <div class="cabecera">
+            <div><h1>Juegos con ${g.t}</h1><p class="cabecera__dato">Grupo ${n + 1} de 12 · Para jugar de oído, sin leer</p></div>
+            ${LOGO}
+          </div>
+          <p class="intro-juegos">Di tú las palabras, despacio y en voz alta. Entre barras va el sonido: /${sonido}/ es el sonido de la ${sonido}, sin decir su nombre. Con rotulador de pizarra se marca y se borra.</p>
+          <div class="juego">
+            <h2 class="apartado">${img(4563)}Palmas</h2>
+            <p class="pista">Di la palabra con una palmada en cada sílaba y rellena un círculo en cada palmada. Después, rodea el círculo en el que suena /${g.t}/.</p>
+            <ul class="palmas">${palmas}</ul>
+          </div>
+          <div class="juego">
+            <h2 class="apartado">${ICONO_MENOS}Quita un sonido</h2>
+            <p class="pista">Di la palabra sin /${sonido}/. ¿Qué sale? Puede salir una palabra conocida o una inventada.</p>
+            <ul class="cambios">${quita}</ul>
+          </div>
+          <div class="juego">
+            <h2 class="apartado">${ICONO_MAS}Cambia la palabra</h2>
+            <p class="pista">Añade el sonido de la ficha y di la palabra nueva.</p>
+            <ul class="cambios">${cambia}</ul>
+          </div>
+          <p class="clave"><strong>Soluciones.</strong> Palmas: ${solPalmas}. Sin /${sonido}/: ${solQuita}. Con el sonido nuevo: ${solCambia}. En negrita, las que salen palabras conocidas.</p>
+          <p class="atribucion">${ATRIBUCION}</p>
+        </section>`;
+      }
+
+      document.getElementById('grupos').outerHTML = GRUPOS.map((g, n) => cartilla(g, n) + juegos(g, n)).join('');
+
+      // ---------------------------------------------------------------- Registro
+
+      const ESTRELLA = `<svg class="estrella" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.8l-5.8 3.3 1.4-6.4-4.9-4.4 6.5-.7z" fill="#fff" stroke="#1e2b55" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
+      const dosCirculos = '<i class="circulito"></i><i class="circulito"></i>';
+      document.getElementById('filas-registro').innerHTML = GRUPOS.map(
+        (g) =>
+          `<tr class="${g.color}"><th scope="row"><span class="mini-trabada">${g.t}</span></th>${`<td>${dosCirculos}</td>`.repeat(4)}<td></td><td>${ESTRELLA}</td></tr>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Lista de palabras de la guía
+
+      document.getElementById('lista-palabras').innerHTML = GRUPOS.map((g) => {
+        const palabras = g.palabras.map(([p]) => `<span class="sin-partir">${p}</span>`).join(', ');
+        const parejas = g.parejas.every(([a]) => !a[1])
+          ? `sílabas: ${g.parejas.map(([a, b]) => `${a[0]} y ${b[0]}`).join(', ')}`
+          : g.parejas
+              .map(([a, b]) => (a[1] ? `${a[0]} y ${b[0]}` : `sílabas ${a[0]} y ${b[0]}`))
+              .join('; ');
+        return `<tr><th scope="row">${g.t}</th><td>${palabras}</td><td>${parejas}</td></tr>`;
+      }).join('');
+
+      // ---------------------------------------------------------------- Portada: la pirámide de bloques
+
+      const filas = [
+        { y: 216, grupos: GRUPOS.slice(0, 5) },
+        { y: 186, grupos: GRUPOS.slice(5, 9) },
+        { y: 156, grupos: GRUPOS.slice(9, 12) },
+      ];
+      const giros = [-4, 3, -2, 5, -3, 2, -5, 4, -2, 3, -4, 2];
+      let k = 0;
+      const bloques = filas
+        .map(({ y, grupos }) => {
+          const ancho = grupos.length * 31 + (grupos.length - 1) * 3.5;
+          const x0 = (210 - ancho) / 2;
+          return grupos
+            .map((g, i) => {
+              const giro = giros[k++];
+              return `<div class="bloque ${g.color}" style="left:${x0 + i * 34.5}mm;top:${y}mm;transform:rotate(${giro}deg)">${g.t}</div>`;
+            })
+            .join('');
+        })
+        .join('');
+      document.getElementById('bloques').innerHTML = bloques;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1871 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Agenda visual con pictogramas · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css (José, 28/10/2026).
+         La agenda en blanco (agenda-visual-semanal.html) sigue sin pictogramas: esa se puede vender como kit.
+         Las tarjetas pequeñas miden 44 × 21 mm y caben en las casillas de la agenda en blanco
+         (46 × 23 mm en «Mi semana» y 65 × 25 mm en «Mi día»); las grandes, 8 × 8 cm, en «Primero y después». */
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida. Esta regla lo asegura (como en «Ya he terminado»). */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* El pie lo lee el adulto: 11 puntos como mínimo. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+          padding-top: 4mm;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+          padding-top: 4mm;
+        }
+      }
+
+      /* Hojas de tarjetas con márgenes de 10 mm a los lados: así caben 4 tarjetas por fila. */
+      @page tarjetas {
+        margin: 12mm 10mm 16mm 10mm;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      img {
+        display: block;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      /* ---------- Colores: cada grupo de tarjetas y cada día lleva el suyo ---------- */
+      .g-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .g-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .g-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .g-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .g-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .g-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .g-marino {
+        --c: var(--marino);
+        --t: var(--crema);
+      }
+
+      /* ---------- La hoja de montaje, con letra de 11 puntos (como en «Ya he terminado») ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 118mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .pegatina {
+        position: absolute;
+        right: 18mm;
+        top: 20mm;
+        width: 42mm;
+        height: 42mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .portada .pegatina b {
+        display: block;
+        font-size: 28pt;
+        line-height: 1;
+      }
+
+      .portada__escena {
+        position: absolute;
+        left: 0;
+        top: 136mm;
+        width: 210mm;
+        height: 126mm;
+        z-index: 2;
+      }
+
+      .portada__escena .grande {
+        position: absolute;
+        box-shadow: 0 1.5mm 3mm rgb(30 43 85 / 0.18);
+        border-style: solid;
+        border-color: var(--linea);
+      }
+
+      .portada__tira {
+        position: absolute;
+        left: 22mm;
+        top: 8mm;
+        padding: 3.5mm;
+        display: grid;
+        gap: 2.6mm;
+        background: #fff;
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+        transform: rotate(-3deg);
+        box-shadow: 0 1.5mm 3mm rgb(30 43 85 / 0.15);
+      }
+
+      .portada__tira .carta {
+        border-style: solid;
+        border-color: var(--linea);
+      }
+
+      /* ---------- Cabecera de los tableros ---------- */
+      .encabezado {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .encabezado__picto {
+        width: 15mm;
+        height: 15mm;
+        flex: none;
+      }
+
+      .encabezado h1 {
+        font-size: 26pt;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .encabezado .logo {
+        width: 34mm;
+        height: auto;
+        margin-left: auto;
+        flex: none;
+      }
+
+      .rellenar {
+        font-size: 13pt;
+        margin: 0 0 0 4mm;
+        align-self: flex-end;
+      }
+
+      .rellenar span {
+        display: inline-block;
+        width: 55mm;
+        border-bottom: 0.4mm solid var(--marino);
+        margin-left: 2mm;
+      }
+
+      /* Frase para el alumnado, con las pautas de lectura fácil */
+      .frase {
+        margin: 0 0 4mm;
+        font-size: 15pt;
+        line-height: 1.3;
+      }
+
+      /* Explicación para el adulto */
+      .pista {
+        margin: 3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 2.5mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* Casilla de la base: el círculo gris marca dónde va el velcro rugoso */
+      .casilla {
+        position: relative;
+        width: 45.6mm;
+        height: 23mm;
+        flex: none;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .casilla::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 5mm;
+        height: 5mm;
+        margin: -2.5mm 0 0 -2.5mm;
+        border-radius: 50%;
+        background: var(--linea);
+      }
+
+      .casilla--hecho {
+        background: var(--verde-tinte);
+      }
+
+      .hueco-grande {
+        position: relative;
+        width: 86mm;
+        height: 86mm;
+        margin: 4.5mm auto;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .hueco-grande::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 7mm;
+        height: 7mm;
+        margin: -3.5mm 0 0 -3.5mm;
+        border-radius: 50%;
+        background: var(--linea);
+      }
+
+      /* ---------- Tarjetas pequeñas (44 × 21 mm). La línea discontinua es la de corte. ---------- */
+      .carta {
+        width: 44mm;
+        height: 21mm;
+        display: grid;
+        grid-template-columns: 19.4mm minmax(0, 1fr);
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2.4mm;
+        overflow: hidden;
+        background: var(--t, #fff);
+        break-inside: avoid;
+      }
+
+      .carta__picto {
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border-right: 0.6mm solid var(--c, var(--linea));
+      }
+
+      .carta__picto img {
+        width: 18.4mm;
+        height: 18.4mm;
+      }
+
+      .carta__texto {
+        display: flex;
+        align-items: center;
+        padding: 0 0.9mm 0 1.1mm;
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.08;
+        text-wrap: balance;
+        hyphens: manual;
+      }
+
+      /* Tarjeta en blanco: para dibujar, pegar una foto o escribir la palabra */
+      .carta--blanca .carta__picto {
+        padding: 1.6mm;
+      }
+
+      .carta--blanca .carta__picto i {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 1.5mm;
+      }
+
+      .carta--blanca .carta__texto {
+        align-items: flex-end;
+        padding-bottom: 4.5mm;
+      }
+
+      .carta--blanca .carta__texto i {
+        display: block;
+        width: 100%;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      /* Días para «Ayer, hoy y mañana» */
+      .carta-dia {
+        width: 44mm;
+        height: 21mm;
+        display: grid;
+        grid-template-rows: 9.4mm minmax(0, 1fr);
+        gap: 0.6mm;
+        padding: 1.3mm 1.5mm 0.6mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2.4mm;
+        background: var(--t);
+        break-inside: avoid;
+      }
+
+      .carta-dia img,
+      .dia__cabecera img {
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        background: #fff;
+        border-radius: 1mm;
+      }
+
+      .carta-dia img {
+        height: 9.4mm;
+      }
+
+      .carta-dia b {
+        display: grid;
+        place-items: center;
+        font-size: 14pt;
+        line-height: 1;
+        border-top: 0.6mm solid var(--c);
+      }
+
+      /* ---------- Tarjetas grandes (8 × 8 cm) ---------- */
+      .grande {
+        width: 80mm;
+        height: 80mm;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) 15mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .grande__picto {
+        display: grid;
+        place-items: center;
+      }
+
+      .grande__picto img {
+        width: 60mm;
+        height: 60mm;
+      }
+
+      .grande__texto {
+        display: grid;
+        place-items: center;
+        padding: 0 2mm;
+        background: var(--t);
+        border-top: 1.2mm solid var(--c);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      /* ---------- Mi semana ---------- */
+      .semana {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 3.5mm;
+      }
+
+      .dia {
+        border: 0.6mm solid var(--marino);
+        border-top: 2.5mm solid var(--c);
+        border-radius: 3mm;
+        overflow: hidden;
+      }
+
+      .dia__cabecera {
+        padding: 1.6mm 2.4mm 2mm;
+        background: var(--t);
+        text-align: center;
+      }
+
+      .dia__cabecera h2 {
+        margin: 0 0 1.3mm;
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1;
+      }
+
+      .dia__cabecera img {
+        height: 9.4mm;
+      }
+
+      .dia__casillas {
+        display: grid;
+        justify-items: center;
+        gap: 2.1mm;
+        padding: 2.4mm 0;
+      }
+
+      /* ---------- Mi día ---------- */
+      .mi-dia {
+        display: grid;
+        grid-template-columns: 9mm 45.6mm 11mm 45.6mm;
+        column-gap: 3mm;
+        row-gap: 3mm;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        margin: 2mm auto 0;
+        padding: 4mm 7mm 5mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+      }
+
+      .mi-dia__titulo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2mm;
+        margin: 0 0 1mm;
+        font-family: var(--texto);
+        font-size: 18pt;
+        line-height: 1;
+        padding: 1.6mm 0;
+        border-radius: 2mm;
+        background: var(--t);
+      }
+
+      .mi-dia__titulo img {
+        width: 13mm;
+        height: 13mm;
+        background: #fff;
+        border-radius: 1.5mm;
+      }
+
+      .numero {
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--amarillo-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .flecha {
+        width: 11mm;
+        height: 8mm;
+      }
+
+      /* ---------- Primero y después · Si hay un cambio ---------- */
+      .tablero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 18mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+      }
+
+      .casilla-grande {
+        border: 0.8mm solid var(--marino);
+        border-radius: 4mm;
+        overflow: hidden;
+      }
+
+      .casilla-grande h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3.5mm;
+        margin: 0;
+        padding: 2.4mm;
+        font-family: var(--texto);
+        font-size: 26pt;
+        line-height: 1;
+        background: var(--t);
+      }
+
+      .casilla-grande h2 img {
+        width: 17mm;
+        height: 17mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .flecha-grande {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .calma {
+        display: grid;
+        grid-template-columns: auto repeat(3, minmax(0, 1fr));
+        align-items: center;
+        gap: 5mm;
+        margin-top: 4mm;
+        padding: 3mm 5mm;
+        border-radius: 4mm;
+        background: var(--crema);
+      }
+
+      .calma p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.2;
+      }
+
+      .calma figure {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.1;
+      }
+
+      .calma img {
+        width: 21mm;
+        height: 21mm;
+        flex: none;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      /* ---------- ¿Qué necesito? ---------- */
+      .necesito {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+      }
+
+      .necesito li {
+        margin: 0;
+        display: grid;
+        grid-template-columns: 34mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        height: 46mm;
+        padding: 0 4mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      .necesito img {
+        width: 34mm;
+        height: 34mm;
+        background: #fff;
+        border-radius: 2.5mm;
+      }
+
+      .necesito b {
+        font-size: 24pt;
+        line-height: 1.05;
+      }
+
+      .necesito .otra i {
+        display: block;
+        width: 34mm;
+        height: 34mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2.5mm;
+        background: #fff;
+      }
+
+      .necesito .otra span {
+        display: block;
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.2;
+      }
+
+      .necesito .otra span i {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin-top: 9mm;
+        border: 0;
+        border-bottom: 0.4mm solid var(--marino);
+        border-radius: 0;
+        background: none;
+      }
+
+      .tijera {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 5mm 0 2mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .tijera svg {
+        width: 6mm;
+        height: 6mm;
+        flex: none;
+      }
+
+      .tira-mesa {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2mm;
+        padding: 2.4mm 3mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .tira-mesa div {
+        display: grid;
+        justify-items: center;
+        gap: 1.2mm;
+        padding: 1.6mm 1mm;
+        border-radius: 2mm;
+        background: var(--t);
+        border-top: 1mm solid var(--c);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .tira-mesa img {
+        width: 21mm;
+        height: 21mm;
+        background: #fff;
+        border-radius: 1.5mm;
+      }
+
+      /* ---------- Preparo la mochila ---------- */
+      .mochila {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6mm;
+      }
+
+      .lista {
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+        overflow: hidden;
+      }
+
+      .lista h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0;
+        padding: 2mm 3mm;
+        font-family: var(--texto);
+        font-size: 17pt;
+        line-height: 1.05;
+        background: var(--t);
+        border-bottom: 0.6mm solid var(--c);
+      }
+
+      .lista h2 img {
+        width: 15mm;
+        height: 15mm;
+        flex: none;
+        background: #fff;
+        border-radius: 1.5mm;
+      }
+
+      .lista ul {
+        list-style: none;
+        margin: 0;
+        padding: 1mm 3.5mm 2mm;
+      }
+
+      .lista li {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr) 12mm;
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 1.4mm 0;
+        border-bottom: 0.3mm solid var(--linea);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.1;
+      }
+
+      .lista li:last-child {
+        border-bottom: 0;
+      }
+
+      .lista li img {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .lista li .hueco-dibujo {
+        width: 21mm;
+        height: 21mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .lista li .renglon {
+        display: block;
+        border-bottom: 0.4mm solid var(--marino);
+        height: 7mm;
+      }
+
+      .marca {
+        width: 12mm;
+        height: 12mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      /* ---------- ¿Cómo ha ido el día? ---------- */
+      .bloque {
+        margin: 0 0 4mm;
+        padding: 2.5mm 4mm 3.5mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        break-inside: avoid;
+      }
+
+      .bloque h2 {
+        display: flex;
+        align-items: baseline;
+        gap: 3mm;
+        margin: 0 0 2mm;
+        font-family: var(--texto);
+        font-size: 17pt;
+      }
+
+      .bloque h2 small {
+        font-weight: 400;
+        font-size: 12pt;
+        color: var(--suave);
+      }
+
+      .rodear {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(var(--columnas, 3), minmax(0, 1fr));
+        gap: 2.4mm;
+      }
+
+      .rodear li {
+        margin: 0;
+        display: grid;
+        justify-items: center;
+        gap: 1.2mm;
+        padding: 2mm 1mm 1.6mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .rodear img {
+        width: var(--picto, 19mm);
+        height: var(--picto, 19mm);
+      }
+
+      .rodear .otra i {
+        display: block;
+        width: var(--picto, 19mm);
+        height: var(--picto, 19mm);
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .gustos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+      }
+
+      .gusto {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        height: 52mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .gusto h3 {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0;
+        padding: 1.4mm 2.5mm;
+        font-family: var(--texto);
+        font-size: 15pt;
+        border-bottom: 0.4mm dashed var(--suave);
+      }
+
+      .gusto h3 img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .familia-nota {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      /* ---------- Ayer, hoy y mañana ---------- */
+      .ahm {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        align-items: start;
+      }
+
+      .ahm__col {
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+        overflow: hidden;
+      }
+
+      .ahm__col--hoy {
+        outline: 1.2mm solid var(--amarillo);
+        outline-offset: 0.6mm;
+      }
+
+      .ahm__col h2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5mm;
+        margin: 0;
+        padding: 2mm;
+        font-family: var(--texto);
+        font-size: 20pt;
+        line-height: 1;
+        background: var(--t);
+      }
+
+      .ahm__col h2 img {
+        width: 15mm;
+        height: 15mm;
+        background: #fff;
+        border-radius: 1.5mm;
+      }
+
+      .ahm__casillas {
+        display: grid;
+        justify-items: center;
+        gap: 1.6mm;
+        padding: 2.5mm 0 3.5mm;
+      }
+
+      .ahm__etiqueta {
+        justify-self: stretch;
+        margin: 1mm 0 0;
+        padding: 0 4mm;
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+      }
+
+      .dias-recortar {
+        display: grid;
+        grid-template-columns: repeat(4, 44mm);
+        justify-content: space-between;
+        row-gap: 4mm;
+      }
+
+      .como {
+        margin-top: 5mm;
+      }
+
+      .como ol {
+        margin: 0;
+      }
+
+      /* ---------- Hojas de tarjetas ---------- */
+      .cabecera-tarjetas {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin-bottom: 2mm;
+      }
+
+      .cabecera-tarjetas h1 {
+        font-size: 19pt;
+        line-height: 1.05;
+        margin: 0;
+      }
+
+      .cabecera-tarjetas p {
+        margin: 0.8mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .cabecera-tarjetas .logo {
+        width: 30mm;
+        margin-left: auto;
+        flex: none;
+      }
+
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 4.5mm;
+        list-style: none;
+        margin: 0 0 3mm;
+        padding: 0;
+        font-size: 11pt;
+      }
+
+      .leyenda li {
+        display: flex;
+        align-items: center;
+        gap: 1.5mm;
+        margin: 0;
+      }
+
+      .leyenda i {
+        width: 5mm;
+        height: 5mm;
+        border-radius: 1mm;
+        background: var(--t);
+        border: 0.7mm solid var(--c);
+      }
+
+      .rejilla-pequenas {
+        display: grid;
+        grid-template-columns: repeat(4, 44mm);
+        grid-auto-rows: 21mm;
+        justify-content: space-between;
+        row-gap: 3.4mm;
+      }
+
+      .rejilla-grandes {
+        display: grid;
+        grid-template-columns: repeat(2, 80mm);
+        grid-auto-rows: 80mm;
+        justify-content: space-evenly;
+        row-gap: 4.5mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+        margin-bottom: 2mm;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin: 4mm 0 1.6mm;
+      }
+
+      .guia h3 {
+        font-size: 12pt;
+        margin: 2.6mm 0 1mm;
+      }
+
+      .guia p,
+      .guia ul,
+      .guia ol {
+        margin-bottom: 1.6mm;
+      }
+
+      .guia li {
+        margin-bottom: 0.8mm;
+      }
+
+      .guia .caja {
+        padding: 2.6mm 4mm;
+        margin-bottom: 3mm;
+      }
+
+      .incluye {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0 6mm;
+        padding-left: 0;
+        list-style: none;
+      }
+
+      .incluye li {
+        display: grid;
+        grid-template-columns: 10mm minmax(0, 1fr);
+        gap: 2mm;
+        margin-bottom: 1mm;
+        break-inside: avoid;
+      }
+
+      .incluye b {
+        font-family: var(--titulos);
+        color: var(--morado-texto);
+      }
+
+      .escalera {
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        padding: 0;
+        margin: 1mm 0 2mm;
+        counter-reset: escalon;
+      }
+
+      .escalera li {
+        counter-increment: escalon;
+        margin: 0;
+        padding: 2mm 2.5mm;
+        border-radius: 2.5mm;
+        background: var(--t);
+        border-top: 1.2mm solid var(--c);
+        line-height: 1.3;
+      }
+
+      .escalera li::before {
+        content: counter(escalon) '. ';
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .escalera strong {
+        display: inline;
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        padding-top: 2.5mm;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 104mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 74mm; height: 74mm; left: -30mm; top: 122mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 46mm; height: 46mm; left: 120mm; top: 250mm; background: var(--azul-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · En el cole y en casa</p>
+        <h1 class="portada__titulo">Agenda visual<br />con pictogramas</h1>
+        <p class="portada__subtitulo">La semana, el día y los cambios, con pictogramas de ARASAAC listos para recortar.</p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org).<br />Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+          <p>Material gratuito · CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>60</b>pictogramas<br />para recortar</div>
+      <div class="portada__escena" id="portada-escena" aria-hidden="true"></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         MI SEMANA
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/37732.png" alt="" />
+        <h1>Mi semana</h1>
+        <p class="rellenar">Nombre:<span></span></p>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="semana" id="semana"></div>
+      <p class="pista">
+        Pega un círculo de velcro rugoso en cada círculo gris. Encima van las tarjetas pequeñas, con velcro suave detrás.
+        Si en tu centro cada día ya tiene su color, usa el vuestro.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI DÍA
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/38276.png" alt="" />
+        <h1>Mi día</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="frase">Cuando acabo algo, paso su tarjeta a «Terminado».</p>
+      <div class="mi-dia" id="mi-dia"></div>
+      <p class="pista">
+        Pon las tarjetas de hoy en orden, de arriba abajo. Al terminar cada actividad, el alumno o la alumna mueve su
+        tarjeta a la derecha, a la misma fila. Si siete pasos son muchos, tapa los últimos con una cartulina.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PRIMERO Y DESPUÉS
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <h1>Primero y después</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="tablero">
+        <div class="casilla-grande g-verde">
+          <h2><img src="pictogramas/37753.png" alt="" />Primero</h2>
+          <div class="hueco-grande"></div>
+        </div>
+        <svg class="flecha-grande" viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Después">
+          <path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+        </svg>
+        <div class="casilla-grande g-azul">
+          <h2><img src="pictogramas/32749.png" alt="" />Después</h2>
+          <div class="hueco-grande"></div>
+        </div>
+      </div>
+      <p class="pista">
+        Para una sola transición: en «Primero», lo que toca; en «Después», algo que le guste. Cumple siempre lo que pones
+        en «Después». Valen las tarjetas grandes y las pequeñas: las dos se pegan en el mismo círculo.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         SI HAY UN CAMBIO
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/25736.png" alt="" />
+        <h1>Si hay un cambio</h1>
+        <p class="frase" style="margin: 0 0 0 4mm">Lo de «Antes» ya no toca. Hacemos lo de «Ahora».</p>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="tablero">
+        <div class="casilla-grande g-coral">
+          <h2><img src="pictogramas/32745.png" alt="" />Antes</h2>
+          <div class="hueco-grande" style="margin: 3.5mm auto"></div>
+        </div>
+        <svg class="flecha-grande" viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Ahora">
+          <path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+        </svg>
+        <div class="casilla-grande g-verde">
+          <h2><img src="pictogramas/32747.png" alt="" />Ahora</h2>
+          <div class="hueco-grande" style="margin: 3.5mm auto"></div>
+        </div>
+      </div>
+      <div class="calma">
+        <p>Si me pongo<br />nervioso, puedo:</p>
+        <figure><img src="pictogramas/7258.png" alt="" /><figcaption>Respirar despacio</figcaption></figure>
+        <figure><img src="pictogramas/4570.png" alt="" /><figcaption>Pedir ayuda</figcaption></figure>
+        <figure><img src="pictogramas/5898.png" alt="" /><figcaption>Mirar mi agenda</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ¿QUÉ NECESITO?
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/8194.png" alt="" />
+        <h1>¿Qué necesito?</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="frase">Señalo lo que necesito. Así me entienden.</p>
+      <ul class="necesito">
+        <li class="g-azul"><img src="pictogramas/4570.png" alt="" /><b>Ayuda</b></li>
+        <li class="g-morado"><img src="pictogramas/24503.png" alt="" /><b>Descanso</b></li>
+        <li class="g-verde"><img src="pictogramas/2276.png" alt="" /><b>Agua</b></li>
+        <li class="g-amarillo"><img src="pictogramas/38603.png" alt="" /><b>Ir al baño</b></li>
+        <li class="g-coral"><img src="pictogramas/36021.png" alt="" /><b>Parar</b></li>
+        <li class="g-marino otra"><i></i><span>Otra cosa:<i></i></span></li>
+      </ul>
+      <p class="tijera">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#46578c" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="6" cy="6.5" r="3" /><circle cx="6" cy="17.5" r="3" /><path d="M8.6 8.2L20 18M8.6 15.8L20 6" />
+        </svg>
+        Tira para la mesa: recórtala por la línea de puntos y pégala en su mesa con celo.
+      </p>
+      <div class="tira-mesa">
+        <div class="g-azul"><img src="pictogramas/4570.png" alt="" />Ayuda</div>
+        <div class="g-morado"><img src="pictogramas/24503.png" alt="" />Descanso</div>
+        <div class="g-verde"><img src="pictogramas/2276.png" alt="" />Agua</div>
+        <div class="g-amarillo"><img src="pictogramas/38603.png" alt="" />Ir al baño</div>
+        <div class="g-coral"><img src="pictogramas/36021.png" alt="" />Parar</div>
+      </div>
+      <p class="pista">
+        Cuelga el tablero cerca de su sitio. Cada vez que lo pida, señalando o con palabras, responde enseguida y di la
+        palabra en voz alta.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PREPARO LA MOCHILA
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/2475.png" alt="" />
+        <h1>Preparo la mochila</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="frase">Meto cada cosa en la mochila y marco su círculo.</p>
+      <div class="mochila" id="mochila"></div>
+      <p class="pista">
+        Plastifica la hoja y usa un rotulador de pizarra blanca: se borra con un pañuelo de papel. «Para ir al cole» se
+        usa en casa, por la mañana, y «Para volver a casa», en clase, antes de salir. En la última fila, dibuja o escribe
+        lo que necesite ese día.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         ¿CÓMO HA IDO EL DÍA?
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/2317.png" alt="" />
+        <h1>¿Cómo ha ido el día?</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="frase">En casa, cuento mi día. Rodeo lo que he hecho y cómo me he sentido.</p>
+      <div class="bloque g-azul">
+        <h2>Hoy he hecho <small>Rodea lo que has hecho</small></h2>
+        <ul class="rodear" id="hecho" style="--columnas: 5; --picto: 21mm"></ul>
+      </div>
+      <div class="bloque g-amarillo">
+        <h2>Me he sentido <small>Rodea una cara</small></h2>
+        <ul class="rodear" id="sentido" style="--columnas: 5; --picto: 21mm"></ul>
+      </div>
+      <div class="bloque g-verde">
+        <div class="gustos">
+          <div class="gusto">
+            <h3><img src="pictogramas/38891.png" alt="" />Me ha gustado</h3>
+            <div></div>
+          </div>
+          <div class="gusto">
+            <h3><img src="pictogramas/38890.png" alt="" />No me ha gustado</h3>
+            <div></div>
+          </div>
+        </div>
+      </div>
+      <p class="familia-nota">
+        <strong>Para la familia:</strong> plastificada, se usa con rotulador de pizarra blanca y se borra con un pañuelo
+        de papel. Preguntad de una en una y esperad la respuesta: puede señalar, rodear o dibujar. Si hoy no quiere
+        contarlo, no pasa nada. Lo intentáis otro día.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         AYER, HOY Y MAÑANA
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <img class="encabezado__picto" src="pictogramas/37732.png" alt="" />
+        <h1>Ayer, hoy y mañana</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="frase">Pongo cada día en su sitio. Debajo, pongo lo que pasa ese día.</p>
+      <div class="ahm" id="ahm"></div>
+      <p class="tijera" style="margin-top: 7mm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#46578c" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="6" cy="6.5" r="3" /><circle cx="6" cy="17.5" r="3" /><path d="M8.6 8.2L20 18M8.6 15.8L20 6" />
+        </svg>
+        Los días de la semana: plastifica la hoja, recórtalos por la línea de puntos y pega velcro suave detrás.
+      </p>
+      <div class="dias-recortar" id="dias-recortar"></div>
+      <div class="caja caja--amarilla como">
+        <h3>Cómo usarlo</h3>
+        <ol>
+          <li>Cada mañana, mueve los días una casilla: el de «Hoy» pasa a «Ayer» y el de «Mañana», a «Hoy».</li>
+          <li>Debajo de cada día, pon una o dos tarjetas pequeñas con lo más importante: «Ayer hubo Música».</li>
+          <li>Preguntad juntos: «¿Qué hicimos ayer? ¿Qué toca mañana?».</li>
+        </ol>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- Hojas de tarjetas pequeñas y grandes: las crea el programa del final de este archivo -->
+    <div id="hojas-tarjetas"></div>
+
+    <!-- ======================================================================
+         GUÍA 1: CÓMO USARLA
+         ====================================================================== -->
+    <section class="guia hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Guía para docentes y familias</p>
+      <h1>Cómo usar la agenda visual</h1>
+      <p>
+        Saber qué va a pasar da tranquilidad. La agenda visual convierte el tiempo, que no se ve, en tarjetas que se pueden
+        mirar y tocar. Esta versión trae 60 pictogramas de ARASAAC listos para recortar y cinco tableros nuevos. Sirve en
+        el cole y en casa.
+      </p>
+      <p>
+        Es un apoyo clásico para el alumnado con trastorno del espectro del autismo (TEA). También ayuda a quien tiene un
+        trastorno del desarrollo del lenguaje (TDL) o discapacidad intelectual, y le viene bien a toda la clase. Una
+        revisión de 31 estudios concluye que las agendas visuales son una práctica basada en la evidencia para el
+        alumnado con TEA, sobre todo cuando se enseñan de forma sistemática (Knight, Sartini y Spriggs, 2015).
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul class="incluye">
+        <li><b>P. 3</b><span><strong>Mi semana:</strong> cinco días con cinco casillas.</span></li>
+        <li><b>P. 4</b><span><strong>Mi día:</strong> siete pasos y su columna de «Terminado».</span></li>
+        <li><b>P. 5</b><span><strong>Primero y después:</strong> para una sola transición.</span></li>
+        <li><b>P. 6</b><span><strong>Si hay un cambio:</strong> lo que estaba previsto y lo que toca ahora.</span></li>
+        <li><b>P. 7</b><span><strong>¿Qué necesito?:</strong> para pedir ayuda, descanso, agua, ir al baño o parar.</span></li>
+        <li><b>P. 8</b><span><strong>Preparo la mochila:</strong> para ir al cole y para volver a casa.</span></li>
+        <li><b>P. 9</b><span><strong>¿Cómo ha ido el día?:</strong> para contarlo en casa.</span></li>
+        <li><b>P. 10</b><span><strong>Ayer, hoy y mañana:</strong> con los siete días para recortar.</span></li>
+        <li><b>P. 11</b><span><strong>Tarjetas pequeñas:</strong> 80 de 44 × 21 mm, en dos hojas.</span></li>
+        <li><b>P. 13</b><span><strong>Tarjetas grandes:</strong> 12 de 8 × 8 cm, en dos hojas.</span></li>
+      </ul>
+      <p>
+        Las tarjetas pequeñas caben también en las casillas de la agenda en blanco de IdEducando, que sigue en el
+        catálogo para quien prefiera sus propios pictogramas.
+      </p>
+
+      <h2>Antes de empezar</h2>
+      <ol>
+        <li>Monta la agenda como explica la página 2.</li>
+        <li>
+          Elige solo las tarjetas que vais a usar. Cada tarjeta lleva el dibujo y la palabra: las pautas del Diseño
+          Universal para el Aprendizaje (DUA) proponen ilustrar con varios medios (CAST, 2024, consideración 2.5). Usad
+          siempre la misma tarjeta para la misma actividad.
+        </li>
+        <li>Decide dónde vive la agenda: a la altura de sus ojos y siempre en el mismo sitio.</li>
+      </ol>
+
+      <h2>En el día a día</h2>
+      <ol>
+        <li>Al empezar el día, repasad juntos la agenda. Señala cada tarjeta mientras la nombras.</li>
+        <li>Antes de cada cambio de actividad, volved a la agenda: «¿Qué toca ahora?».</li>
+        <li>Al terminar una actividad, el alumno o la alumna pasa su tarjeta a «Terminado».</li>
+        <li>Si algo cambia, avisa con tiempo y usa el tablero «Si hay un cambio».</li>
+      </ol>
+
+      <h2>Los tableros nuevos</h2>
+      <ul>
+        <li>
+          <strong>Si hay un cambio.</strong> Pon en «Antes» la tarjeta de lo que estaba previsto y en «Ahora», la nueva.
+          Explícalo con pocas palabras y delante de él o de ella. Las ideas para calmarse de abajo se practican un día
+          tranquilo, antes de necesitarlas.
+        </li>
+        <li>
+          <strong>¿Qué necesito?</strong> Enséñalo en el momento justo: cuando tenga sed, señala «Agua» y dilo. Responde
+          siempre, también cuando lo pide sin hablar. La tira va en su mesa.
+        </li>
+        <li>
+          <strong>Preparo la mochila.</strong> Marca cada cosa con el rotulador al meterla. Una columna se usa en casa y la
+          otra, en el cole.
+        </li>
+        <li>
+          <strong>¿Cómo ha ido el día?</strong> Viaja en la mochila. En casa, la familia pregunta y el niño o la niña
+          rodea la respuesta.
+        </li>
+        <li>
+          <strong>Ayer, hoy y mañana.</strong> Cada mañana, los días se mueven una casilla. Debajo de cada día va lo más
+          importante que pasa.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA 2: ADAPTARLA A CADA PEQUE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Guía para docentes y familias</p>
+      <h1>Adaptarla a cada peque</h1>
+      <p>Cada niño o niña necesita su propia agenda. Mira qué entiende hoy y empieza por ahí.</p>
+
+      <h2>Cuánta información</h2>
+      <ul>
+        <li>Empieza con 2 o 3 tarjetas y añade más cuando las entienda.</li>
+        <li>Si el día entero es mucho, enseña solo la mañana. Si aún cuesta, usa solo «Primero y después».</li>
+        <li>Cuando el día ya está claro, pasad a la semana.</li>
+      </ul>
+
+      <h2>Cómo representar cada actividad</h2>
+      <ol class="escalera">
+        <li class="g-azul"><strong>Objeto real.</strong> Una cuchara para el comedor o una pelota para el recreo.</li>
+        <li class="g-verde"><strong>Foto.</strong> Del sitio real, sin otros niños ni niñas.</li>
+        <li class="g-amarillo"><strong>Pictograma.</strong> Las tarjetas de esta agenda.</li>
+        <li class="g-morado"><strong>Palabra.</strong> Escrita en una tarjeta en blanco.</li>
+      </ol>
+      <p>Empieza por la forma que ya entiende y sube un escalón solo cuando el anterior esté claro.</p>
+
+      <h2>Ideas para cada necesidad</h2>
+      <ul>
+        <li>
+          <strong>TEA:</strong> la misma rutina cada día y los cambios, con aviso. Los apoyos visuales y las ayudas del
+          adulto están entre las 28 prácticas con respaldo para el alumnado autista (Hume y otros, 2021).
+        </li>
+        <li><strong>TDL:</strong> di la palabra cada vez que señalas una tarjeta, con frases cortas: «Primero, asamblea. Después, recreo».</li>
+        <li><strong>Discapacidad intelectual:</strong> menos tarjetas y más grandes. Practicad la rutina juntos muchas veces.</li>
+        <li><strong>Toda la clase:</strong> una agenda grande en la pizarra ayuda a todo el grupo y no señala a nadie.</li>
+      </ul>
+
+      <h2>Retirar los apoyos poco a poco</h2>
+      <p>
+        El objetivo es la autonomía, a su ritmo. Las pautas DUA proponen dar apoyos y retirarlos de forma gradual (CAST,
+        2024, consideración 5.3).
+      </p>
+      <h3>Cuándo</h3>
+      <p>
+        Cuando mira la agenda sin que se lo digas, sabe qué viene después y lleva bien los cambios. Espera a verlo varias
+        semanas seguidas.
+      </p>
+      <h3>Cómo, paso a paso</h3>
+      <ol>
+        <li>Retira primero tu ayuda, de más a menos: guiar su mano, señalar la agenda, decir una palabra y, al final, nada.</li>
+        <li>Enseña menos de una vez: de la semana al día, del día a la mañana y de la mañana a lo siguiente.</li>
+        <li>Cambia el formato: de la agenda de la pared a una tira en su mesa o a una agenda de papel.</li>
+        <li>Pasa del dibujo a la palabra con las tarjetas en blanco.</li>
+        <li>Cambia una sola cosa cada vez y espera a que esté asentada.</li>
+      </ol>
+      <h3>Si aparecen nervios</h3>
+      <p>
+        Vuelve al paso anterior sin darle importancia. Después de unas vacaciones o de una temporada difícil, es normal
+        necesitar otra vez más apoyo.
+      </p>
+
+      <div class="creditos">
+        <p>
+          <strong>Agenda visual con pictogramas.</strong> IdEducando, noviembre de 2026. Ficha y novedades:
+          <span class="url">ideducando.es/material-gratuito/agenda-visual-pictogramas</span>
+        </p>
+        <p>
+          Las páginas 6 a 10 se inspiran en «Mi agenda diaria», de Montse Navarro, publicada en ARASAAC (material 8137).
+          Los tableros y el diseño son de IdEducando. La agenda en blanco sigue en
+          <span class="url">ideducando.es/material-gratuito/agenda-visual-semanal</span>.
+        </p>
+        <p>
+          Fuentes: Knight, V., Sartini, E. y Spriggs, A. D. (2015), <em>Journal of Autism and Developmental Disorders</em>,
+          45(1), 157-178; Hume, K. y otros (2021), <em>Journal of Autism and Developmental Disorders</em>, 51(11),
+          4013-4032; CAST (2024), <em>CAST Universal Design for Learning Guidelines version 3.0</em>, consideraciones 2.5 y
+          5.3, udlguidelines.cast.org.
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+          ARASAAC es el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Si adaptas el material, mantén este
+          texto. Con pictogramas de ARASAAC, el material no se puede vender: es gratis siempre.
+        </p>
+        <p>
+          Licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0): puedes copiarla y
+          adaptarla citando a IdEducando, sin fines comerciales y con la misma licencia.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ===========================================================================
+      // Agenda visual con pictogramas · IdEducando
+      // Las casillas de los tableros y las hojas de tarjetas salen de estas listas.
+      // Cada pictograma es el número de ARASAAC (archivo pictogramas/NÚMERO.png).
+      // ===========================================================================
+
+      const P = (n) => `pictogramas/${n}.png`;
+      const LOGO = '<img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">';
+      const ATRIBUCION =
+        '<p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>';
+
+      // Grupos de tarjetas: el color ayuda a encontrarlas; el dibujo y la palabra dicen lo mismo sin color.
+      const GRUPOS = {
+        dia: { nombre: 'Momentos del día', clase: 'g-azul' },
+        areas: { nombre: 'Áreas y sitios', clase: 'g-verde' },
+        apoyos: { nombre: 'Apoyos', clase: 'g-morado' },
+        distintos: { nombre: 'Días distintos', clase: 'g-amarillo' },
+        volver: { nombre: 'Ir y volver', clase: 'g-naranja' },
+      };
+
+      // Los 60 pictogramas: [número de ARASAAC, palabra, grupo]
+      const TARJETAS = [
+        [26063, 'Llegar al cole', 'dia'],
+        [10133, 'Colgar la mochila', 'dia'],
+        [6009, 'Saludar', 'dia'],
+        [27575, 'Asamblea', 'dia'],
+        [2599, 'Trabajar en la mesa', 'dia'],
+        [32176, 'Rincones', 'dia'],
+        [2439, 'Jugar', 'dia'],
+        [6483, 'Cuento', 'dia'],
+        [7141, 'Leer', 'dia'],
+        [2380, 'Escribir', 'dia'],
+        [7207, 'Pintar', 'dia'],
+        [8680, 'Recoger', 'dia'],
+        [38596, 'Fila', 'dia'],
+        [8109, 'Esperar', 'dia'],
+        [38377, 'Relajación', 'dia'],
+        [28206, 'Almuerzo', 'dia'],
+        [33064, 'Recreo', 'dia'],
+        [5970, 'Comedor', 'dia'],
+        [35891, 'Siesta', 'dia'],
+        [38603, 'Baño', 'dia'],
+        [8975, 'Lavarse las manos', 'dia'],
+        [31880, 'Lavarse los dientes', 'dia'],
+        [2276, 'Beber agua', 'dia'],
+        [34494, 'Ponerse el abrigo', 'dia'],
+        [37047, 'Salir', 'dia'],
+        [10258, 'Educación Física', 'areas'],
+        [32552, 'Psico', 'areas'],
+        [35434, 'Música', 'areas'],
+        [32705, 'Inglés', 'areas'],
+        [13634, 'Plástica', 'areas'],
+        [24471, 'Religión', 'areas'],
+        [34709, 'Valores', 'areas'],
+        [36371, 'Lengua', 'areas'],
+        [10260, 'Matemáticas', 'areas'],
+        [13632, 'Ciencias', 'areas'],
+        [3065, 'Biblioteca', 'areas'],
+        [7190, 'Ordenador', 'areas'],
+        [39562, 'Huerto', 'areas'],
+        [36275, 'PT', 'apoyos'],
+        [36267, 'AL', 'apoyos'],
+        [28003, 'Otra seño', 'apoyos'],
+        [28002, 'Otro profe', 'apoyos'],
+        [32497, 'Fisioterapia', 'apoyos'],
+        [4671, 'Excursión', 'distintos'],
+        [7099, 'Fiesta', 'distintos'],
+        [3087, 'Cumpleaños', 'distintos'],
+        [36342, 'Simulacro', 'distintos'],
+        [12293, 'Médico', 'distintos'],
+        [32412, 'Teatro', 'distintos'],
+        [4772, 'Visita', 'distintos'],
+        [25736, 'Cambio', 'distintos'],
+        [8517, 'Sorpresa', 'distintos'],
+        [3166, 'No hay cole', 'distintos'],
+        [2317, 'Casa', 'volver'],
+        [38090, 'Transporte escolar', 'volver'],
+        [38917, 'Ruta', 'volver'],
+        [2339, 'Coche', 'volver'],
+        [32214, 'Andando', 'volver'],
+        [2392, 'Me recogen', 'volver'],
+        [2859, 'Parque', 'volver'],
+      ];
+      const POR_NUMERO = Object.fromEntries(TARJETAS.map((t) => [t[0], t]));
+
+      // Copias de más de las de todos los días: con ellas, «Mi semana» tiene asamblea, almuerzo,
+      // recreo y casa de lunes a viernes, y aún queda una de cada para «Mi día».
+      const COPIAS = [27575, 28206, 33064, 2317];
+      const VECES = 4;
+      const EN_BLANCO = 4;
+
+      // Las 12 grandes, para «Primero y después» y «Si hay un cambio»
+      const GRANDES = [27575, 2599, 8680, 8975, 38603, 28206, 33064, 2439, 6483, 7190, 5970, 2317];
+
+      // Días de la semana: [número de ARASAAC, nombre, color]
+      const DIAS = [
+        [6554, 'Lunes', 'g-azul'],
+        [6557, 'Martes', 'g-verde'],
+        [6563, 'Miércoles', 'g-amarillo'],
+        [6536, 'Jueves', 'g-coral'],
+        [6629, 'Viernes', 'g-morado'],
+        [6605, 'Sábado', 'g-naranja'],
+        [6478, 'Domingo', 'g-marino'],
+      ];
+
+      const carta = (n) => {
+        const [num, palabra, grupo] = POR_NUMERO[n];
+        return `<div class="carta ${GRUPOS[grupo].clase}"><span class="carta__picto"><img src="${P(num)}" alt=""></span><span class="carta__texto">${palabra}</span></div>`;
+      };
+      const cartaBlanca = () =>
+        '<div class="carta carta--blanca g-marino"><span class="carta__picto"><i></i></span><span class="carta__texto"><i></i></span></div>';
+      const grande = (n) => {
+        const [num, palabra, grupo] = POR_NUMERO[n];
+        return `<div class="grande ${GRUPOS[grupo].clase}"><span class="grande__picto"><img src="${P(num)}" alt=""></span><span class="grande__texto">${palabra}</span></div>`;
+      };
+      const cartaDia = ([num, nombre, clase]) =>
+        `<div class="carta-dia ${clase}"><img src="${P(num)}" alt=""><b>${nombre}</b></div>`;
+      const casillas = (n, clase = '') => Array.from({ length: n }, () => `<div class="casilla ${clase}"></div>`).join('');
+
+      // ---------------------------------------------------------------- Portada
+      document.getElementById('portada-escena').innerHTML = `
+        <div class="portada__tira">${[26063, 27575, 2599, 33064].map(carta).join('')}</div>
+        <div class="grande g-azul" style="left: 100mm; top: 14mm; transform: rotate(6deg)"><span class="grande__picto"><img src="${P(33064)}" alt=""></span><span class="grande__texto">Recreo</span></div>`;
+
+      // ---------------------------------------------------------------- Mi semana
+      document.getElementById('semana').innerHTML = DIAS.slice(0, 5)
+        .map(
+          ([num, nombre, clase]) =>
+            `<div class="dia ${clase}"><div class="dia__cabecera"><h2>${nombre}</h2><img src="${P(num)}" alt=""></div><div class="dia__casillas">${casillas(5)}</div></div>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------- Mi día
+      const FLECHA =
+        '<svg class="flecha" viewBox="0 0 24 16" fill="none" stroke="#46578c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h17M14.5 3l5.5 5-5.5 5"/></svg>';
+      let filas = `<span></span><h2 class="mi-dia__titulo g-amarillo"><img src="${P(38276)}" alt="">Hoy</h2><span></span><h2 class="mi-dia__titulo g-verde"><img src="${P(28429)}" alt="">Terminado</h2>`;
+      for (let i = 1; i <= 7; i++) filas += `<b class="numero">${i}</b>${casillas(1)}${FLECHA}${casillas(1, 'casilla--hecho')}`;
+      document.getElementById('mi-dia').innerHTML = filas;
+
+      // ---------------------------------------------------------------- Preparo la mochila
+      const MOCHILA = [
+        ['Para ir al cole', 26063, 'g-azul', [[5898, 'Agenda'], [2281, 'Almuerzo'], [39043, 'Botella de agua'], [8575, 'Estuche'], [3229, 'Babi'], [7233, 'Ropa de cambio']]],
+        ['Para volver a casa', 2317, 'g-naranja', [[5898, 'Agenda'], [2242, 'Abrigo'], [39457, 'Fiambrera'], [39043, 'Botella de agua'], [2450, 'Libros'], [32556, 'Deberes']]],
+      ];
+      document.getElementById('mochila').innerHTML = MOCHILA.map(
+        ([titulo, picto, clase, cosas]) =>
+          `<div class="lista ${clase}"><h2><img src="${P(picto)}" alt="">${titulo}</h2><ul>${cosas
+            .map(([n, p]) => `<li><img src="${P(n)}" alt=""><span>${p}</span><i class="marca"></i></li>`)
+            .join('')}<li><i class="hueco-dibujo"></i><span class="renglon"></span><i class="marca"></i></li></ul></div>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- ¿Cómo ha ido el día?
+      const HECHO = [27575, 2599, 32176, 33064, 28206, 5970, 6483, 10258, 35434];
+      document.getElementById('hecho').innerHTML =
+        HECHO.map((n) => `<li><img src="${P(n)}" alt="">${POR_NUMERO[n][1]}</li>`).join('') + '<li class="otra"><i></i>Otra cosa</li>';
+      const SENTIDO = [
+        [35547, 'Contento'],
+        [31310, 'Tranquilo'],
+        [35537, 'Cansado'],
+        [35545, 'Triste'],
+        [35539, 'Enfadado'],
+      ];
+      document.getElementById('sentido').innerHTML = SENTIDO.map(([n, p]) => `<li><img src="${P(n)}" alt="">${p}</li>`).join('');
+
+      // ---------------------------------------------------------------- Ayer, hoy y mañana
+      const AHM = [
+        ['Ayer', 38279, 'g-coral', ''],
+        ['Hoy', 38276, 'g-amarillo', 'ahm__col--hoy'],
+        ['Mañana', 38278, 'g-azul', ''],
+      ];
+      document.getElementById('ahm').innerHTML = AHM.map(
+        ([titulo, picto, clase, extra]) =>
+          `<div class="ahm__col ${clase} ${extra}"><h2><img src="${P(picto)}" alt="">${titulo}</h2><div class="ahm__casillas"><p class="ahm__etiqueta">El día</p>${casillas(1)}<p class="ahm__etiqueta">Lo que pasa</p>${casillas(2)}</div></div>`,
+      ).join('');
+      document.getElementById('dias-recortar').innerHTML = DIAS.map(cartaDia).join('');
+
+      // ---------------------------------------------------------------- Hojas de tarjetas
+      const LEYENDA = `<ul class="leyenda">${Object.values(GRUPOS)
+        .map((g) => `<li class="${g.clase}"><i></i>${g.nombre}</li>`)
+        .join('')}</ul>`;
+      const hojaPequenas = (titulo, texto, piezas) =>
+        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><div><h1>${titulo}</h1><p>${texto}</p></div>${LOGO}</div>${LEYENDA}<div class="rejilla-pequenas">${piezas.join('')}</div>${ATRIBUCION}</section>`;
+      const hojaGrandes = (titulo, texto, piezas) =>
+        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><div><h1>${titulo}</h1><p>${texto}</p></div>${LOGO}</div><div class="rejilla-grandes">${piezas.join('')}</div>${ATRIBUCION}</section>`;
+
+      const unicas = TARJETAS.map((t) => carta(t[0]));
+      const copias = COPIAS.flatMap((n) => Array.from({ length: VECES }, () => carta(n)));
+      const blancas = Array.from({ length: EN_BLANCO }, cartaBlanca);
+      const pequenas2 = [...unicas.slice(40), ...copias, ...blancas];
+      const texto =
+        'Tarjetas de 44 × 21 mm para «Mi semana», «Mi día» y los tableros. Caben también en la agenda en blanco.';
+
+      document.getElementById('hojas-tarjetas').outerHTML =
+        hojaPequenas('Tarjetas pequeñas (1 de 2)', texto, unicas.slice(0, 40)) +
+        hojaPequenas(
+          'Tarjetas pequeñas (2 de 2)',
+          'Con 4 copias más de asamblea, almuerzo, recreo y casa, y 4 en blanco para dibujar o escribir.',
+          pequenas2,
+        ) +
+        hojaGrandes(
+          'Tarjetas grandes (1 de 2)',
+          'Tarjetas de 8 × 8 cm para «Primero y después» y «Si hay un cambio».',
+          GRANDES.slice(0, 6).map(grande),
+        ) +
+        hojaGrandes('Tarjetas grandes (2 de 2)', 'Tarjetas de 8 × 8 cm para «Primero y después» y «Si hay un cambio».', GRANDES.slice(6).map(grande));
+
+      // Comprobación: 80 tarjetas pequeñas, 12 grandes y 7 días (lo que dice la ficha)
+      console.assert(unicas.length === 60 && unicas.length + copias.length + blancas.length === 80, 'Faltan o sobran tarjetas pequeñas');
+    </script>
+  </body>
+</html>

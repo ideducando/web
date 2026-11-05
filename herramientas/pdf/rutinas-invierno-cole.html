@@ -1,0 +1,2511 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rutinas de invierno en el cole: perchero, abrigo, lluvia y nariz con pictogramas · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* ---------- Un color para cada rutina ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Cómo montarlo, con letra de 11 puntos como el resto del texto para el adulto ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__piezas li {
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 52pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 118mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 9pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 20mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        padding: 4.5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+        transform: rotate(9deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina svg {
+        width: 8mm;
+        height: 8mm;
+        margin: 0 auto 1.2mm;
+      }
+
+      /* El perchero de la clase: una tabla con cuatro ganchos, una etiqueta encima de cada uno
+         y la ropa colgada; debajo, las botas y el paragüero. */
+      .perchero {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 150mm;
+        width: 210mm;
+        height: 118mm;
+      }
+
+      .perchero > * {
+        position: absolute;
+      }
+
+      .perchero__nube {
+        right: 16mm;
+        top: -44mm;
+        width: 52mm;
+        height: 40mm;
+      }
+
+      .perchero__tabla {
+        left: 18mm;
+        right: 18mm;
+        top: 27mm;
+        height: 9mm;
+        border: 0.8mm solid var(--marino);
+        border-radius: 2.2mm;
+        background: var(--naranja);
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .perchero__etiqueta {
+        top: 2mm;
+        width: 30mm;
+        height: 21mm;
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.6mm;
+        padding: 3.2mm 2.2mm 1.6mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 2.4mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .perchero__etiqueta::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2mm;
+        background: var(--c);
+      }
+
+      .perchero__etiqueta img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .perchero__etiqueta span {
+        display: grid;
+        gap: 2.4mm;
+      }
+
+      .perchero__etiqueta span::before,
+      .perchero__etiqueta span::after {
+        content: '';
+        height: 0;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .perchero__gancho {
+        top: 35mm;
+        width: 8mm;
+        height: 11mm;
+      }
+
+      .perchero__prenda {
+        top: 41mm;
+      }
+
+      .perchero__suelo {
+        left: 10mm;
+        right: 10mm;
+        top: 108mm;
+        height: 5mm;
+        border-radius: 2.5mm;
+        background: var(--verde-tinte);
+        border: 0.6mm solid var(--verde);
+      }
+
+      /* ---------- Cabecera de las hojas verticales ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 4mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 3mm 0 0;
+        font-size: 9pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.8mm;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr) 20mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 1.6mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      /* ---------- Etiquetas del perchero ---------- */
+      .etiquetas-g {
+        display: grid;
+        grid-template-columns: repeat(2, 85mm);
+        grid-auto-rows: 70mm;
+        gap: 8mm;
+        justify-content: space-between;
+      }
+
+      .etq {
+        position: relative;
+        display: grid;
+        grid-template-rows: 6mm minmax(0, 1fr);
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .etq__banda {
+        background: var(--c);
+      }
+
+      .etq__cuerpo {
+        display: grid;
+        grid-template-columns: 32mm minmax(0, 1fr);
+        grid-template-rows: 38mm minmax(0, 1fr);
+        gap: 3mm 4mm;
+        padding: 3mm 4mm;
+      }
+
+      .etq__foto {
+        display: grid;
+        place-items: center;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 2.5mm;
+        padding: 2mm;
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .etq__derecha {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        justify-items: end;
+        gap: 2mm;
+      }
+
+      .etq__num {
+        display: grid;
+        grid-template-columns: auto 22mm;
+        align-items: center;
+        gap: 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .etq__num span {
+        height: 15mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 2mm;
+      }
+
+      .etq__percha {
+        align-self: end;
+        width: 24mm;
+        height: 16mm;
+        color: var(--c);
+      }
+
+      .etq__nombre {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .etq__nombre span {
+        height: 12mm;
+        border-bottom: 0.5mm solid var(--marino);
+      }
+
+      .etiquetas-p {
+        display: grid;
+        grid-template-columns: repeat(3, 56mm);
+        grid-auto-rows: 30mm;
+        gap: 4.6mm 5mm;
+        justify-content: space-between;
+      }
+
+      .etp {
+        display: grid;
+        grid-template-columns: 2.6mm 20mm minmax(0, 1fr) 11mm;
+        align-items: center;
+        gap: 0 2.4mm;
+        padding-right: 2.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .etp__banda {
+        align-self: stretch;
+        background: var(--c);
+      }
+
+      .etp__hueco {
+        width: 20mm;
+        height: 20mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .etp__linea {
+        align-self: end;
+        height: 0;
+        margin-bottom: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .etp__num {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        justify-items: center;
+        height: 17mm;
+        padding-top: 0.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      /* ---------- Símbolos ---------- */
+      .simbolos h2 {
+        font-size: 14pt;
+        margin: 1mm 0 2.5mm;
+      }
+
+      .simbolos-g,
+      .simbolos-p {
+        display: grid;
+        justify-content: center;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .simbolos-g {
+        grid-template-columns: repeat(5, 26mm);
+        grid-auto-rows: 26mm;
+        gap: 4.5mm 7mm;
+      }
+
+      .simbolos-p {
+        grid-template-columns: repeat(9, 16mm);
+        grid-auto-rows: 16mm;
+        gap: 4mm 3.5mm;
+      }
+
+      .simbolo {
+        display: grid;
+        place-items: center;
+        margin: 0;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .simbolos-g img {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .simbolos-p img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      /* ---------- Hojas de las secuencias (apaisadas, dos tiras por hoja) ---------- */
+      /* Al imprimir, Chromium descoloca las cajas flexibles en columna (display: flex con
+         flex-direction: column): aquí las alturas van en milímetros y las columnas son rejillas.
+         Cada hoja suma unos 180 mm de los 182 que deja la página apaisada. */
+      .rutina {
+        page: apaisada;
+        break-after: page;
+        break-inside: avoid;
+      }
+
+      .rutina__aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .rutina__aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--tx);
+      }
+
+      .tira {
+        padding: 2.4mm 3.5mm 1.4mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .corte {
+        position: relative;
+        height: 7mm;
+        color: var(--suave);
+      }
+
+      .corte::before {
+        content: '';
+        position: absolute;
+        left: 8mm;
+        right: 0;
+        top: 50%;
+        border-top: 0.4mm dashed var(--suave);
+      }
+
+      .corte svg {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 6mm;
+        height: 6mm;
+        transform: translateY(-50%);
+      }
+
+      .tira__cabecera {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        height: 13mm;
+        margin: 0 0 2.2mm;
+      }
+
+      .tira__icono {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 13mm;
+        height: 13mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.9mm var(--t);
+      }
+
+      .tira__icono img {
+        width: 9.5mm;
+        height: 9.5mm;
+      }
+
+      .tira__titulo {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .tira__donde {
+        margin: 0 0 0 auto;
+        font-size: 11pt;
+        color: var(--tx);
+      }
+
+      .tira__logo {
+        flex: none;
+        width: 24mm;
+        height: auto;
+      }
+
+      .tira__cuerpo {
+        display: flex;
+        align-items: stretch;
+        height: 59mm;
+      }
+
+      .pasos {
+        flex: 1;
+        display: flex;
+        gap: 5.5mm;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .paso {
+        position: relative;
+        flex: 1 1 0;
+        min-width: 0;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        padding: 2mm 1.4mm 1.4mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      /* Flecha hacia el paso siguiente (y, en el último, hacia la estrella del final) */
+      .paso::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -4.4mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        margin-top: -1.2mm;
+        border-top: 0.8mm solid var(--c);
+        border-right: 0.8mm solid var(--c);
+        transform: rotate(45deg);
+      }
+
+      .paso__numero {
+        position: absolute;
+        top: -2.4mm;
+        left: -2.4mm;
+        display: grid;
+        place-items: center;
+        width: 8.5mm;
+        height: 8.5mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1;
+      }
+
+      .paso img,
+      .paso svg {
+        width: var(--picto);
+        height: var(--picto);
+      }
+
+      .paso p {
+        margin: 1.4mm 0 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+        text-wrap: balance;
+      }
+
+      .fin {
+        flex: 0 0 27mm;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 2mm;
+        margin: 0 0 0 5.5mm;
+        border: 0.7mm solid var(--amarillo);
+        border-radius: 3.5mm;
+        background: var(--amarillo-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .fin svg {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .tira__pie {
+        display: flex;
+        justify-content: space-between;
+        gap: 4mm;
+        margin: 1.2mm 0 0;
+        font-size: 8.5pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      /* El tamaño del pictograma depende de cuántos pasos tiene la tira */
+      .n4 {
+        --picto: 36mm;
+      }
+      .n5 {
+        --picto: 29mm;
+      }
+      .n6 {
+        --picto: 25mm;
+      }
+
+      /* ---------- Plantilla ---------- */
+      .tira__icono--vacio {
+        border-style: dashed;
+        box-shadow: none;
+      }
+
+      .renglon {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        font-size: 11pt;
+      }
+
+      .renglon .linea {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .renglon--titulo {
+        flex: 1.6;
+      }
+
+      .renglon--donde {
+        flex: 1;
+      }
+
+      .hueco-picto {
+        width: var(--picto);
+        height: var(--picto);
+        border: 0.5mm dashed var(--suave);
+        border-radius: 2.5mm;
+      }
+
+      .lineas {
+        align-self: stretch;
+        margin: 1mm 1.5mm 0;
+      }
+
+      .lineas span {
+        display: block;
+        height: 7.5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      /* ---------- Panel del tiempo ---------- */
+      .panel__bloque {
+        margin: 0 0 4mm;
+        padding: 4mm 4mm 5mm;
+        border-radius: 5mm;
+        background: var(--t);
+        border: 0.6mm solid var(--c);
+      }
+
+      .panel__titulo {
+        display: flex;
+        align-items: center;
+        gap: 3.5mm;
+        margin: 0 0 3.5mm;
+        font-size: 28pt;
+        line-height: 1.05;
+      }
+
+      .panel__titulo img {
+        width: 17mm;
+        height: 17mm;
+        padding: 0.8mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .panel__cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: start;
+        gap: 4mm;
+      }
+
+      .panel__cabeza > img {
+        width: 30mm;
+        height: auto;
+        margin-top: 2mm;
+      }
+
+      .huecos {
+        display: grid;
+        grid-auto-rows: 54mm;
+        justify-content: center;
+        gap: 4mm;
+      }
+
+      .huecos--2 {
+        grid-template-columns: repeat(2, 54mm);
+        column-gap: 14mm;
+      }
+
+      .huecos--6 {
+        grid-template-columns: repeat(3, 54mm);
+      }
+
+      .hueco-velcro {
+        display: grid;
+        place-items: center;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .hueco-velcro span {
+        width: 20mm;
+        height: 20mm;
+        border: 0.4mm solid #9aa3bd;
+        border-radius: 50%;
+        background: #d9dde8;
+      }
+
+      .leyenda {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .leyenda svg {
+        flex: none;
+        width: 8mm;
+        height: 8mm;
+      }
+
+      /* ---------- Tarjetas de velcro ---------- */
+      .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(3, 50mm);
+        grid-auto-rows: 50mm;
+        gap: 9.5mm 14mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tarjeta {
+        position: relative;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 4mm 2mm 2.6mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .tarjeta::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.4mm;
+        background: var(--c);
+      }
+
+      .tarjeta img {
+        width: 28mm;
+        height: 28mm;
+      }
+
+      .tarjeta p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      .tarjeta .hueco-dibujo {
+        width: 28mm;
+        height: 26mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2.4mm;
+      }
+
+      .tarjeta .renglon-tarjeta {
+        width: 40mm;
+        height: 7mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .seccion-tarjetas {
+        display: flex;
+        align-items: baseline;
+        gap: 3mm;
+        margin: 0 0 3mm;
+        font-size: 14pt;
+      }
+
+      /* ---------- Historia social ---------- */
+      .historia__cabeza {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 5mm;
+      }
+
+      .historia__icono {
+        display: grid;
+        place-items: center;
+        width: 21mm;
+        height: 21mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+      }
+
+      .historia__icono img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .historia__cabeza .antetitulo {
+        margin: 0 0 1mm;
+        font-size: 11pt;
+        color: var(--tx);
+      }
+
+      .historia__cabeza h1 {
+        margin: 0;
+        font-size: 26pt;
+        line-height: 1.05;
+      }
+
+      .historia__cabeza > img {
+        width: 30mm;
+        height: auto;
+      }
+
+      .franja {
+        height: 1.6mm;
+        margin: 3.5mm 0 3.5mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      .frases {
+        position: relative;
+        display: grid;
+        gap: 3.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frases::before {
+        content: '';
+        position: absolute;
+        left: 11.5mm;
+        top: 10mm;
+        bottom: 10mm;
+        border-left: 1mm dotted var(--c);
+      }
+
+      .frase {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        min-height: 24mm;
+        margin: 0;
+      }
+
+      .marco-picto {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4.4mm;
+        background: #fff;
+      }
+
+      .marco-picto img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .frase p {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.25;
+      }
+
+      .frase p > span {
+        display: block;
+      }
+
+      /* ---------- ¿A qué juego hoy? ---------- */
+      .juegos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 47mm;
+        gap: 4mm 5mm;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .juego {
+        display: grid;
+        grid-template-columns: 37mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 3mm 4mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 4.5mm;
+        background: #fff;
+      }
+
+      .juego:nth-child(4n + 2),
+      .juego:nth-child(4n + 3) {
+        background: var(--t);
+      }
+
+      .juego img {
+        width: 37mm;
+        height: 37mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .juego p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 21pt;
+        line-height: 1.12;
+      }
+
+      .recuerda {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .recuerda li {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 2.4mm 4mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 4mm;
+      }
+
+      .recuerda img {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .recuerda p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 19pt;
+        line-height: 1.15;
+      }
+
+      /* ---------- Cartel de objetos perdidos ---------- */
+      .perdidos {
+        text-align: center;
+      }
+
+      .perdidos h1 {
+        margin: 3mm 0 0;
+        font-size: 50pt;
+        line-height: 1;
+      }
+
+      .perdidos__lema {
+        margin: 2mm 0 5mm;
+        font-size: 18pt;
+        color: var(--suave);
+      }
+
+      .perdidos__caja {
+        position: relative;
+        height: 84mm;
+        margin: 0 auto 6mm;
+        width: 160mm;
+      }
+
+      .perdidos__caja img {
+        position: absolute;
+      }
+
+      .perdidos__filas {
+        display: grid;
+        gap: 4mm;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+        max-width: 160mm;
+      }
+
+      .perdidos__filas li {
+        display: grid;
+        grid-template-columns: 30mm minmax(0, 1fr);
+        align-items: center;
+        gap: 6mm;
+        margin: 0;
+        padding: 3mm 5mm;
+        border-radius: 5mm;
+        background: var(--t);
+        border: 0.6mm solid var(--c);
+      }
+
+      .perdidos__filas img {
+        width: 30mm;
+        height: 30mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .perdidos__filas p {
+        margin: 0;
+        font-size: 22pt;
+        line-height: 1.2;
+      }
+
+      .perdidos__filas strong {
+        display: block;
+      }
+
+      .perdidos__revision {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 2mm;
+        margin: 6mm 0 0;
+        font-size: 12pt;
+      }
+
+      .perdidos__revision span {
+        width: 60mm;
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.4em;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.2mm 6mm;
+        margin: 1.5mm 0 1mm;
+        padding: 0;
+        list-style: none;
+        font-size: 12pt;
+      }
+
+      .casillas li {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .casillas li::before {
+        content: '';
+        flex: none;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+        background: #fff;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 1mm;
+        font-size: 12pt;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        height: 6.5mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.8em;
+        margin-bottom: 0.35em;
+      }
+
+      .guia h3 {
+        font-size: 12pt;
+        margin: 0.7em 0 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.55em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.55em;
+      }
+
+      .guia li {
+        margin-bottom: 0.7mm;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+        line-height: 1.36;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.7em 0 0.3em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.8mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 70mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -32mm; top: 112mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Autonomía en invierno</p>
+        <h1 class="portada__titulo">Rutinas<br />de invierno<br />en el cole</h1>
+        <p class="portada__subtitulo">
+          Lo que trae el invierno, paso a paso y con pictogramas: del perchero al recreo con lluvia.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="perchero" aria-hidden="true" id="perchero"></div>
+      <div class="pegatina" aria-hidden="true"><div><span data-icono="estrella"></span>Con el truco del abrigo</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Cada pieza va en un sitio de la clase, junto a su rutina. Empieza por una sola: la que más os cueste o la que más se
+        repite. Cuando le salga, añade otra.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Antes, mira las normas de tu cole.</strong> En algunos, el alumnado de Infantil no trae paraguas ni bufanda.
+          En otros, nadie se cambia de calzado al entrar. Usa solo las tiras y las tarjetas que encajen y cambia los pasos
+          que no con la plantilla de la página <span data-pagina="plantilla"></span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ETIQUETAS GRANDES
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el perchero · Tamaño grande</p>
+          <h1>Etiquetas para las perchas</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Una para cada percha, justo encima del gancho. Antes de plastificar, escribe el nombre con letra grande y el número
+        de lista, y pega su foto o su símbolo de la página <span data-pagina="simbolos"></span>. Imprime al 100 %: el hueco
+        mide 3,2 × 3,8 cm, lo justo para una foto de carnet.
+      </p>
+      <div class="etiquetas-g" id="etiquetas-g"></div>
+    </section>
+
+    <!-- ======================================================================
+         ETIQUETAS PEQUEÑAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el perchero · Tamaño pequeño</p>
+          <h1>Etiquetas pequeñas</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Para la bolsa de muda, el sitio de las botas, el paragüero o su cajón. Lleva el mismo símbolo que su percha: así
+        reconoce lo suyo en todas partes, aunque todavía no lea su nombre.
+      </p>
+      <div class="etiquetas-p" id="etiquetas-p"></div>
+    </section>
+
+    <!-- ======================================================================
+         SÍMBOLOS
+         ====================================================================== -->
+    <section class="hoja simbolos">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para las etiquetas · Para recortar</p>
+          <h1>Un símbolo para cada peque</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Elige un símbolo distinto para cada alumno o alumna y usa el mismo en todas sus etiquetas. Los grandes van en la
+        etiqueta de la percha y los pequeños, en las demás. Recórtalos y pégalos antes de plastificar.
+      </p>
+      <h2>Grandes, de 2,6 cm</h2>
+      <ul class="simbolos-g" id="simbolos-g"></ul>
+      <h2>Pequeños, de 1,6 cm</h2>
+      <ul class="simbolos-p" id="simbolos-p"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- Las tres hojas de las secuencias se generan con el guion del final, a partir de la lista RUTINAS -->
+    <div id="rutinas"></div>
+
+    <!-- ======================================================================
+         PLANTILLA EN BLANCO (apaisada)
+         ====================================================================== -->
+    <section class="rutina c-amarillo">
+      <p class="rutina__aviso">
+        <span><strong>Plantilla</strong> · Dos tiras, de 4 y de 6 pasos. Escribe y pega los pictogramas o las fotos antes de plastificar.</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <div id="plantillas"></div>
+    </section>
+
+    <!-- ======================================================================
+         PANEL DEL TIEMPO
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="panel__cabeza">
+        <p class="antetitulo" style="margin: 1mm 0 2.5mm">Panel para la asamblea · Con velcro</p>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="panel__bloque c-azul">
+        <h1 class="panel__titulo"><img src="pictogramas/2798.png" alt="" />¿Qué tiempo hace hoy?</h1>
+        <div class="huecos huecos--2" aria-hidden="true">
+          <div class="hueco-velcro"><span></span></div>
+          <div class="hueco-velcro"><span></span></div>
+        </div>
+      </div>
+      <div class="panel__bloque c-naranja">
+        <h2 class="panel__titulo"><img src="pictogramas/8122.png" alt="" />¿Qué me pongo?</h2>
+        <div class="huecos huecos--6" aria-hidden="true">
+          <div class="hueco-velcro"><span></span></div>
+          <div class="hueco-velcro"><span></span></div>
+          <div class="hueco-velcro"><span></span></div>
+          <div class="hueco-velcro"><span></span></div>
+          <div class="hueco-velcro"><span></span></div>
+          <div class="hueco-velcro"><span></span></div>
+        </div>
+      </div>
+      <p class="leyenda">
+        <span data-icono="velcro"></span>
+        <span>Un círculo de velcro <strong>rugoso</strong> en cada círculo gris. El <strong>suave</strong> va detrás de cada tarjeta.</span>
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DEL TIEMPO Y DE LA ROPA (dos hojas)
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el panel · Para recortar</p>
+          <h1>Tarjetas del tiempo y de la ropa</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">Las azules dicen qué tiempo hace y las naranjas, qué ropa toca. Detrás de cada una, un círculo de velcro suave.</p>
+      <ul class="tarjetas" id="tarjetas-1"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <section class="hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el panel · Para recortar</p>
+          <h1>Más tarjetas de la ropa</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Las cuatro en blanco son para lo que falte en vuestra clase, como el babi o unas botas de nieve: dibújalo o pega una
+        foto, y escribe su nombre.
+      </p>
+      <ul class="tarjetas" id="tarjetas-2"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         HISTORIA SOCIAL: HOY LLUEVE
+         ====================================================================== -->
+    <section class="hoja c-azul">
+      <div class="historia__cabeza">
+        <div class="historia__icono"><img src="pictogramas/3123.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Historia social · Para leer antes del recreo</p>
+          <h1>Hoy llueve: el recreo es en clase</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="franja"></div>
+      <ol class="frases" id="frases"></ol>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         ¿A QUÉ JUEGO HOY?
+         ====================================================================== -->
+    <section class="hoja c-verde">
+      <div class="historia__cabeza">
+        <div class="historia__icono"><img src="pictogramas/30510.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Para el recreo en clase</p>
+          <h1>¿A qué juego hoy?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="franja"></div>
+      <ul class="juegos" id="juegos"></ul>
+      <ul class="recuerda" id="recuerda"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL DE OBJETOS PERDIDOS
+         ====================================================================== -->
+    <section class="hoja perdidos c-naranja">
+      <div class="rayos"></div>
+      <h1>Objetos perdidos</h1>
+      <p class="perdidos__lema">Todo lo que encontramos en el cole espera aquí.</p>
+      <div class="perdidos__caja" id="perdidos-caja" aria-hidden="true"></div>
+      <ul class="perdidos__filas">
+        <li>
+          <img src="pictogramas/37238.png" alt="" />
+          <p><strong>¿Has perdido algo?</strong>Busca aquí.</p>
+        </li>
+        <li>
+          <img src="pictogramas/5514.png" alt="" />
+          <p><strong>¿Has encontrado algo?</strong>Déjalo aquí.</p>
+        </li>
+        <li>
+          <img src="pictogramas/37269.png" alt="" />
+          <p><strong>Si lleva nombre,</strong>vuelve antes a casa.</p>
+        </li>
+      </ul>
+      <p class="perdidos__revision">Revisamos la caja cada<span></span></p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja familias">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>El invierno en el cole</h1>
+      <p>
+        En clase aprendemos a ponernos el abrigo y a colgarlo sin ayuda. Cada peque tiene su percha, con su nombre y su
+        símbolo. Desde casa podéis ayudar mucho.
+      </p>
+
+      <h2><img src="pictogramas/37269.png" alt="" />Su nombre, en todo</h2>
+      <p>
+        Escribid su nombre en el abrigo, el gorro, los guantes y la bufanda. También en el babi, si en el cole lo usamos.
+        Sirve un rotulador para tela o una etiqueta. Si algo se pierde, con su nombre vuelve antes a casa.
+      </p>
+
+      <h2><img src="pictogramas/37895.png" alt="" />Una cinta para colgar</h2>
+      <p>
+        Coser en el cuello del abrigo y del babi un lazo de cinta de unos 15 cm. Con el lazo, lo cuelga sin ayuda en su
+        percha.
+      </p>
+
+      <h2><img src="pictogramas/16897.png" alt="" />Ropa fácil de poner</h2>
+      <p>
+        Mejor una cremallera grande o velcro que botones pequeños. Poned una anilla o una cinta en el tirador de la
+        cremallera: así la coge mejor. Para los más pequeños, las manoplas son más fáciles que los guantes de dedos.
+      </p>
+
+      <h2><img src="pictogramas/38135.png" alt="" />La bolsa de muda</h2>
+      <p>
+        Si el cole os la pide, es una bolsa de tela con su nombre. Dentro va una muda: ropa interior, calcetines, pantalón y
+        camiseta, todo con su nombre. La bolsa se queda en el cole. Si la usamos, os damos la ropa sucia y al día siguiente
+        traéis otra muda. Cuando llegue el frío o el calor, cambiad la muda.
+      </p>
+
+      <h2><img src="pictogramas/27052.png" alt="" />En casa, el truco del abrigo</h2>
+      <p>
+        Poned el abrigo en el suelo, abierto y con la capucha junto a sus pies. Mete las manos en las mangas y lo pasa por
+        encima de la cabeza. La tira con los pasos está en la página <span data-pagina="abrigo"></span>.
+      </p>
+
+      <h2><img src="pictogramas/2287.png" alt="" />Los días de lluvia</h2>
+      <p>
+        Chubasquero y botas de agua, si las tiene. Preguntad en el cole si se puede traer paraguas: en algunos coles, los más
+        pequeños no lo traen.
+      </p>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p style="margin: 0">Os pedimos:</p>
+        <ul class="casillas">
+          <li>Marcar la ropa con su nombre</li>
+          <li>Coser una cinta para colgar</li>
+          <li>Una bolsa con una muda</li>
+          <li>Unas zapatillas para clase</li>
+          <li>Una caja de pañuelos de papel</li>
+          <li>Botas de agua los días de lluvia</li>
+        </ul>
+        <p class="renglon-etiqueta">Otra cosa:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Rutinas de invierno en el cole.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los
+          símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+          ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Rutinas de invierno: cómo enseñarlas</h1>
+      <p>
+        En invierno, entrar en clase y salir al patio lleva muchos más pasos: el abrigo, el gorro, los guantes, las botas de
+        agua y el paraguas. Para muchos niños y niñas de Infantil y del primer ciclo de Primaria es la primera vez que lo
+        hacen sin ayuda. Este material divide cada rutina en pasos cortos con pictogramas y da a cada peque un sitio propio
+        para sus cosas.
+      </p>
+
+      <h2>Lo que hacen muchos coles</h2>
+      <p>Lo hemos visto en las normas de Infantil que publican varios colegios públicos (página <span data-pagina="fuentes"></span>):</p>
+      <ul>
+        <li>
+          Cada percha lleva el nombre y la foto o el símbolo del alumno o la alumna. El babi y el abrigo llevan su nombre y
+          una cinta de 15 a 20 cm para colgarlos.
+        </li>
+        <li>Muchos piden una bolsa de tela con una muda marcada, que se queda en el aula y se cambia con la temporada.</li>
+        <li>
+          Con lluvia, en unos coles un alumno o una alumna encargada sube el paragüero a clase. En otros, el alumnado de
+          Infantil no trae paraguas, gorro, bufanda ni guantes, y en invierno puede traer una braga de cuello.
+        </li>
+        <li>
+          Los días de lluvia, el recreo de Infantil se hace en el aula con el tutor o la tutora, a veces con el apoyo de
+          especialistas o en el gimnasio.
+        </li>
+        <li>
+          Lo que aparece en el patio se guarda en una caja. Al final del trimestre se avisa a las familias y lo que nadie
+          recoge se dona.
+        </li>
+      </ul>
+      <p>Usad solo lo que encaje con vuestras normas. Lo demás, cambiadlo con la plantilla.</p>
+
+      <h2>Antes de empezar: el perchero</h2>
+      <ol>
+        <li>Pon las perchas a una altura a la que llegue sin ponerse de puntillas, y la etiqueta grande justo encima.</li>
+        <li>Ordénalas por número de lista: así cada cual encuentra la suya y tú ves de un vistazo si falta algo.</li>
+        <li>
+          Usa el mismo símbolo en todas sus cosas: la percha, la bolsa de muda, el sitio de las botas y el paragüero. Quien
+          todavía no lee su nombre reconoce lo suyo por el símbolo.
+        </li>
+        <li>Si pones fotos, pide permiso a la familia y no las subas a internet.</li>
+        <li>Deja libre el espacio delante del perchero: el truco del abrigo necesita sitio para los brazos.</li>
+      </ol>
+
+      <h2>Cómo enseñar cada secuencia</h2>
+      <p>
+        Cuelga cada tira junto a su rutina, a la altura de sus ojos. Las primeras veces, hazla tú delante señalando cada
+        paso. Después, ayuda lo justo: espera, señala la tira y, solo si hace falta, díselo o ayúdale con tus manos.
+      </p>
+      <p>
+        Empieza por quitarse el abrigo, que es más fácil que ponérselo. Hacia los 4 años, muchos niños y niñas ya se ponen
+        un abrigo abierto, aunque todavía les cuesten los botones y la cremallera (Aneurin Bevan University Health Board,
+        2023).
+      </p>
+      <p>
+        Si un paso cuesta mucho, enséñalo empezando por el final. Con la cremallera, encaja tú la pieza de abajo y deja que
+        suba el tirador. Cuando le salga, que la encaje también (West Suffolk NHS Foundation Trust, 2022). Es el
+        encadenamiento hacia atrás: primero se enseña el último paso (Sam y AFIRM Team, 2024).
+      </p>
+      <p>
+        Celebra el final de cada tira, en la estrella «¡Hecho!». Para ponerse el abrigo, el mejor premio es salir al patio:
+        es el ejemplo que pone el propio módulo AFIRM (Sam y AFIRM Team, 2024).
+      </p>
+
+      <h2 class="salto">El truco del abrigo</h2>
+      <p>
+        Lo explica, por ejemplo, el servicio de Infantil del Ayuntamiento de Wokingham, en Inglaterra: el abrigo en el suelo
+        con las mangas estiradas y la capucha hacia el niño o la niña, las manos dentro de las mangas y los brazos por
+        encima de la cabeza (Wokingham Borough Council, 2024).
+      </p>
+      <ul>
+        <li>
+          El abrigo va abierto y con el forro hacia arriba, y la capucha, junto a sus pies. Si acaba con el abrigo del revés,
+          casi siempre es porque la capucha estaba en el otro lado.
+        </li>
+        <li>
+          Practicadlo primero con un abrigo grande, por ejemplo el tuyo: la ropa holgada es más fácil y así es más divertido
+          (Aneurin Bevan University Health Board, 2023).
+        </li>
+        <li>
+          Hay otras formas. El abrigo en el respaldo de una silla, con el forro hacia fuera: se sienta, mete los brazos y se
+          levanta. O primero la capucha y después los brazos (West Suffolk NHS Foundation Trust, 2022).
+        </li>
+      </ul>
+
+      <h2>El panel del tiempo, en la asamblea</h2>
+      <ol>
+        <li>El encargado o la encargada del tiempo mira por la ventana y pega una o dos tarjetas en «¿Qué tiempo hace hoy?».</li>
+        <li>Entre todos, decidís qué ropa toca y la pegáis en «¿Qué me pongo?». Antes del patio, cada cual lo comprueba en su percha.</li>
+        <li>Hablad de los días de sol y frío: el sol no siempre quiere decir calor.</li>
+      </ol>
+      <p>
+        Conecta con dos saberes del currículo de Infantil de la Región de Murcia para el segundo ciclo (Decreto 196/2022):
+        «Fenómenos naturales: identificación y repercusión en la vida de las personas», del área Descubrimiento y
+        Exploración del Entorno (BORM, pág. 33096), y «Rutinas: planificación secuenciada de las acciones para resolver una
+        tarea», del área Crecimiento en Armonía (pág. 33084).
+      </p>
+
+      <h2>Sonarse la nariz</h2>
+      <p>
+        Pon los pañuelos y la papelera a su alcance, junto a la tira. En sus medidas para centros educativos, el Ministerio
+        de Sanidad pedía usar pañuelos desechables, tirarlos tras su uso a una papelera con bolsa, mejor con tapa y pedal, y
+        lavarse las manos después (Ministerio de Sanidad, 2021). Su documento de diciembre de 2025 sobre las infecciones
+        respiratorias sigue recomendando la higiene respiratoria y el lavado de manos frecuente. La Asociación Española de
+        Pediatría (AEP) cuenta «después de sonarse los mocos» entre los momentos de lavarse las manos.
+      </p>
+      <p>
+        Para aprender a soplar por la nariz, jugad a mover una bolita de papel sobre la mesa soplando solo por la nariz, con
+        la boca cerrada.
+      </p>
+
+      <h2>El recreo en clase, los días de lluvia</h2>
+      <p>
+        Lee la historia «Hoy llueve: el recreo es en clase» (página <span data-pagina="historia"></span>) en cuanto sepáis
+        que no se sale. Después, enseña el tablero «¿A qué juego hoy?» (página <span data-pagina="juegos"></span>): cada
+        cual señala o dice lo que elige.
+      </p>
+      <ul>
+        <li>Reserva un rincón tranquilo con cojines y cuentos: con todo el grupo dentro hay más ruido.</li>
+        <li>
+          Si necesitan moverse, haced dos o tres pausas activas, de pie o sentados: están en «Pausas activas para todos». Los
+          juegos de «Ya he terminado» también sirven.
+        </li>
+        <li>Quién vigila y dónde lo dicen las normas de cada centro: revisadlas antes del primer día de lluvia.</li>
+      </ul>
+
+      <h2>El cajón de objetos perdidos</h2>
+      <p>
+        Pon el cartel (página <span data-pagina="perdidos"></span>) sobre una caja a la vista y a su altura. Una vez por
+        semana, mirad juntos lo que hay: quien reconoce lo suyo, se lo lleva. Si algo lleva nombre, avisa a su familia.
+      </p>
+
+      <h2 class="salto">Ideas para adaptarlo (DUA)</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone ofrecer desde el principio varias formas de presentar la
+        información y de participar (CAST, 2024).
+      </p>
+      <ul>
+        <li><strong>Con fotos:</strong> pega sobre los pictogramas fotos de vuestra percha o vuestro paragüero, sin niños ni niñas.</li>
+        <li><strong>Con objetos:</strong> antes de la tira, enséñale el abrigo o el pañuelo de verdad.</li>
+        <li><strong>Más pasos o menos:</strong> con la plantilla, divide un paso que cueste o junta los que ya hace sin ayuda.</li>
+        <li><strong>Para responder:</strong> en el panel, puede señalar la tarjeta, decir su nombre o pegarla.</li>
+        <li><strong>Encargos:</strong> el encargado del tiempo o el del paragüero dan a cada cual un papel en la rutina.</li>
+        <li><strong>Más reto en Primaria:</strong> que dibuje sus propias tarjetas en blanco o que cuente qué ropa toca y por qué.</li>
+      </ul>
+
+      <h2>Alumnado con trastorno del espectro del autismo (TEA)</h2>
+      <p>
+        Muchos niños y niñas con TEA notan las sensaciones de otra forma: a unos les molestan mucho y otros apenas las notan
+        (Ben-Sasson y otros, 2009). En invierno se nota con la ropa: la lana que pica, una etiqueta, una costura o un gorro
+        que aprieta.
+      </p>
+      <ul>
+        <li>Pregunta a la familia qué prendas lleva bien. Si una le molesta, buscad juntos otra que sirva para lo mismo.</li>
+        <li>
+          Para la ropa que pica, el sistema de salud inglés (NHS) propone quitar las etiquetas, poner los calcetines del
+          revés, usar ropa interior sin costuras y lavar con detergente sin perfume (East of England Community Health and
+          Care NHS Trust, 2023).
+        </li>
+        <li>Hay alternativas: la capucha en lugar del gorro o la braga de cuello en lugar de la bufanda.</li>
+        <li>
+          Anticipa los cambios. El primer día de abrigo o de recreo en clase, enséñale antes la tira o la historia, y usad
+          siempre las mismas palabras.
+        </li>
+      </ul>
+
+      <h2>Dificultades motoras</h2>
+      <ul>
+        <li>
+          Si un brazo se mueve menos, ese brazo entra el primero al ponerse el abrigo y sale el último al quitárselo (The
+          Hospital for Sick Children, 2008).
+        </li>
+        <li>
+          Si le cuesta agacharse hasta el suelo, prueba el método de la silla. En silla de ruedas, buscad con su
+          fisioterapeuta o su terapeuta ocupacional la forma que mejor le vaya.
+        </li>
+        <li>
+          Una anilla o una cinta en el tirador de la cremallera le da algo más grande que agarrar (West Suffolk NHS
+          Foundation Trust, 2022). El velcro y los botones grandes también ayudan.
+        </li>
+        <li>
+          Para quitarse las botas, que se siente: sentado o sentada mantiene mejor el equilibrio (East of England Community
+          Health and Care NHS Trust, 2023).
+        </li>
+        <li>Pon su percha en un extremo, a su alcance y con espacio libre a los lados.</li>
+      </ul>
+
+      <h2>Discapacidad intelectual</h2>
+      <ul>
+        <li>Empieza con menos pasos: con la plantilla, deja a la vista solo los que está aprendiendo.</li>
+        <li>Usa fotos de sus cosas: su abrigo, su percha y su paragüero.</li>
+        <li>Repetid la rutina cada día en el mismo orden, con las mismas palabras y la misma tira.</li>
+        <li>Enseña empezando por el último paso y celebra cada avance (Sam y AFIRM Team, 2024).</li>
+        <li>Para anotar cómo avanza cada paso, usa el registro de pasos del material «Paso a paso».</li>
+      </ul>
+
+      <div class="caja caja--azul">
+        <h2>Qué dice la evidencia</h2>
+        <p>
+          Dividir una tarea en pasos (análisis de tareas) y mostrarlos con imágenes (apoyos visuales) figuran entre las
+          prácticas basadas en la evidencia para el alumnado con TEA (Hume y otros, 2021). Esos estudios son con alumnado con
+          TEA; en clase, una tira con pasos puede ayudar también a cualquiera que esté aprendiendo una rutina.
+        </p>
+      </div>
+
+      <h2>Cómo están escritos los textos</h2>
+      <p>
+        Los textos para el alumnado van en primera persona y en presente, con una acción por paso y palabras de uso diario,
+        siguiendo las pautas de lectura fácil de la norma UNE 153101:2018 EX. Aún no los hemos validado con personas
+        lectoras.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Rutinas de invierno en el cole.</strong> Equipo IdEducando, noviembre de 2026. Ficha y novedades:
+        <span class="url">ideducando.es/material-gratuito/rutinas-invierno-cole</span>. Fuentes consultadas el 4 de noviembre
+        de 2026.
+      </p>
+
+      <h2>Vestirse y desvestirse</h2>
+      <ul class="referencias">
+        <li>Wokingham Borough Council (2024). <em>Children Ready for School Success. Dressing and undressing: Top Tips</em>. wsh.wokingham.gov.uk</li>
+        <li>West Suffolk NHS Foundation Trust (2022). <em>Worksheet I: Dressing</em>. Paediatric Occupational Therapy Service. wsh.nhs.uk</li>
+        <li>East of England Community Health and Care NHS Trust (2023). <em>Getting dressed</em>. cambspborochildrenshealth.nhs.uk</li>
+        <li>Aneurin Bevan University Health Board (2023). <em>Dressing</em>. Occupational Therapy Service for Children and Young People. abuhb.nhs.wales</li>
+        <li>The Hospital for Sick Children (2008). <em>I Can Do It Myself! Dressing and other daily living skills for children with one-arm weakness</em>. Toronto.</li>
+      </ul>
+
+      <h2>Salud</h2>
+      <ul class="referencias">
+        <li>
+          Ministerio de Sanidad (2021). <em>Medidas de prevención, higiene y promoción de la salud frente a COVID-19 para
+          centros educativos en el curso 2021-2022</em>. Medidas de prevención personal, punto 4. sanidad.gob.es
+        </li>
+        <li>Ministerio de Sanidad (2025). <em>Documento marco para el control de las infecciones respiratorias agudas</em>. Diciembre de 2025. sanidad.gob.es</li>
+        <li>Asociación Española de Pediatría (AEP). <em>En Familia: Lavado de manos</em>. aeped.es/enfamilia</li>
+      </ul>
+
+      <h2>Currículo y evidencia</h2>
+      <ul class="referencias">
+        <li>
+          Decreto 196/2022, de 3 de noviembre, del currículo de Educación Infantil en la Región de Murcia. BORM n.º 255, de 4
+          de noviembre de 2022, págs. 33083, 33084 y 33096.
+        </li>
+        <li>Sam, A. y AFIRM Team (2024). <em>Task Analysis</em> (actualización). Universidad de Carolina del Norte, Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu</li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
+          generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032.
+        </li>
+        <li>
+          Ben-Sasson, A. y otros (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum
+          disorders. <em>Journal of Autism and Developmental Disorders</em>, 39(1), 1-11.
+        </li>
+        <li>CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. udlguidelines.cast.org</li>
+        <li>UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Asociación Española de Normalización.</li>
+      </ul>
+
+      <h2>Cómo lo hacen los coles</h2>
+      <p>
+        Normas y listas de material de Infantil de los colegios públicos La Cala (Benidorm), María Moliner, El Trinquet,
+        Cristo de la Paz y Antonio García López (Comunitat Valenciana), Libertad, María del Mar Camarena y José María del
+        Moral (Castilla-La Mancha) y Calvo Sotelo (Madrid), publicadas en sus webs.
+      </p>
+
+      <h2>Pictogramas y dibujos</h2>
+      <p>
+        Los pictogramas son de ARASAAC. Su licencia pide citar este texto: «Los símbolos pictográficos utilizados son
+        propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los
+        distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el material, mantén la cita. Con pictogramas de
+        ARASAAC, este material no se puede vender. Los dibujos del truco del abrigo, el perchero de la portada, la percha de
+        las etiquetas, la estrella «¡Hecho!» y las tijeras son de IdEducando.
+      </p>
+
+      <h2>Fotos y licencia</h2>
+      <p>
+        Si usas fotos del niño o la niña, pide permiso a la familia, no las subas a internet y no hagas fotos en las que
+        salgan otros niños o niñas. Licencia CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando,
+        sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        etiquetas: 4,
+        pequenas: 5,
+        simbolos: 6,
+        abrigo: 7,
+        colgar: 8,
+        nariz: 9,
+        plantilla: 10,
+        panel: 11,
+        tarjetas: 12,
+        historia: 14,
+        juegos: 15,
+        perdidos: 16,
+        familias: 17,
+        guia: 18,
+        fuentes: 21,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las cuatro secuencias. Cada paso: [pictograma de ARASAAC o dibujo de IdEducando, texto].
+      // Los dibujos van como 'd:nombre' (ver DIBUJOS más abajo).
+      // ---------------------------------------------------------------------
+      const RUTINAS = {
+        abrigo: {
+          color: 'azul',
+          titulo: 'Me pongo el abrigo',
+          icono: 27052,
+          donde: 'junto al perchero',
+          pasos: [
+            ['d:suelo', 'Pongo el abrigo en el suelo'],
+            ['d:pies', 'Me pongo junto a la capucha'],
+            ['d:manos', 'Meto las manos en las mangas'],
+            ['d:cabeza', 'Lo paso por encima de la cabeza'],
+            [16897, 'Subo la cremallera'],
+          ],
+          pie: 'Dibujos de los pasos 1 a 4: IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.',
+        },
+        colgar: {
+          color: 'verde',
+          titulo: 'Me quito el abrigo y lo cuelgo',
+          icono: 37895,
+          donde: 'junto al perchero',
+          pasos: [
+            [6937, 'Guardo el gorro y los guantes'],
+            [37414, 'Bajo la cremallera'],
+            [27049, 'Me quito el abrigo'],
+            [3286, 'Busco mi percha'],
+            [37895, 'Cuelgo el abrigo'],
+          ],
+        },
+        lluvia: {
+          color: 'naranja',
+          titulo: 'Llego con lluvia',
+          icono: 2500,
+          donde: 'en la entrada',
+          pasos: [
+            [37456, 'Cierro el paraguas'],
+            [3285, 'Lo dejo en el paragüero'],
+            [2287, 'Me quito las botas'],
+            [2621, 'Me pongo las zapatillas'],
+            [39546, 'Dejo las botas en mi sitio'],
+          ],
+        },
+        nariz: {
+          color: 'morado',
+          titulo: 'Me sueno la nariz',
+          icono: 37943,
+          donde: 'junto a los pañuelos',
+          pasos: [
+            [39900, 'Cojo un pañuelo'],
+            [7256, 'Me sueno la nariz'],
+            [37051, 'Tiro el pañuelo a la papelera'],
+            [8975, 'Me lavo las manos'],
+          ],
+        },
+      };
+
+      // Las tres hojas apaisadas de las secuencias: [tiras, aviso].
+      const HOJAS = [
+        {
+          color: 'azul',
+          tiras: ['abrigo', 'abrigo'],
+          aviso: '<strong>Secuencia 1 de 4</strong> · Dos tiras iguales: una para el perchero y otra para practicar en casa.',
+        },
+        {
+          color: 'verde',
+          tiras: ['colgar', 'lluvia'],
+          aviso: '<strong>Secuencias 2 y 3 de 4</strong> · Una tira para el perchero y otra para la entrada, junto al paragüero.',
+        },
+        {
+          color: 'morado',
+          tiras: ['nariz', 'nariz'],
+          aviso: '<strong>Secuencia 4 de 4</strong> · Dos tiras iguales: una junto a los pañuelos y otra para el baño o para casa.',
+        },
+      ];
+
+      // Tarjetas del panel: [pictograma, texto]. null = tarjeta en blanco.
+      const TIEMPO = [
+        [2798, 'Sol'],
+        [2883, 'Nubes'],
+        [3123, 'Lluvia'],
+        [35583, 'Frío'],
+        [7259, 'Viento'],
+        [3135, 'Nieve'],
+      ];
+      const ROPA = [
+        [8122, 'Abrigo'],
+        [4927, 'Chubasquero'],
+        [4872, 'Chaqueta'],
+        [2436, 'Jersey'],
+        [2290, 'Bufanda'],
+        [36687, 'Braga de cuello'],
+        [2412, 'Gorro'],
+        [2415, 'Guantes'],
+        [2287, 'Botas de agua'],
+        [2500, 'Paraguas'],
+        [2411, 'Gorra'],
+        [3330, 'Gafas de sol'],
+        [2309, 'Camiseta'],
+        [2621, 'Zapatillas'],
+      ];
+
+      // 25 símbolos para las etiquetas: uno por alumno o alumna.
+      const SIMBOLOS = [
+        3102, 3057, 2462, 2400, 2530, 2561, 8303, 3247, 2525, 2619, 8328, 2339, 6932, 2344, 8313, 3241, 2317, 2517, 2520,
+        2465, 2596, 2351, 2563, 2372, 2924,
+      ];
+
+      // Historia social: [pictograma, frases].
+      const HISTORIA = [
+        [3123, ['Hoy llueve mucho y el patio está mojado.', 'Con el suelo mojado, es fácil resbalar.']],
+        [33072, ['Por eso, hoy el recreo es en clase.', 'Mi maestra o mi maestro está con nosotros.']],
+        [28206, ['Primero, almorzamos, como otros días.']],
+        [32580, ['Después, jugamos en clase.', 'Hay construcciones, cuentos, puzles y plastilina.']],
+        [30510, ['Puedo elegir a qué juego.', 'También puedo descansar en el rincón tranquilo.']],
+        [9037, ['En clase hablamos bajito.', 'Así, el ruido no molesta.']],
+        [8680, ['Al terminar el recreo, recogemos los juegos.']],
+        [33064, ['Otro día, cuando el patio esté seco, volvemos a salir.']],
+      ];
+
+      // ¿A qué juego hoy?
+      const JUEGOS = [
+        [4935, 'Construcciones'],
+        [6469, 'Cuentos'],
+        [8088, 'Dibujar'],
+        [2529, 'Plastilina'],
+        [26403, 'Puzles'],
+        [32580, 'Juegos de mesa'],
+        [35747, 'Bailar'],
+        [32826, 'Descansar en el rincón tranquilo'],
+      ];
+      const RECUERDA = [
+        [9037, 'Hablo bajito'],
+        [8680, 'Recojo al terminar'],
+      ];
+
+      // De un vistazo: [color, pictograma, título, dónde, páginas].
+      const MAPA = [
+        ['coral', 3286, 'Etiquetas y símbolos', 'Sobre cada percha y en sus cosas: la bolsa de muda, las botas o el paragüero.', 'etiquetas', 'simbolos'],
+        ['azul', 27052, 'Me pongo el abrigo, con el truco', 'Junto al perchero. La segunda tira, para practicar en casa.', 'abrigo'],
+        ['verde', 37895, 'Me quito el abrigo y lo cuelgo', 'Junto al perchero.', 'colgar'],
+        ['naranja', 2500, 'Llego con lluvia', 'En la entrada, junto al paragüero.', 'colgar'],
+        ['morado', 37943, 'Me sueno la nariz', 'Junto a los pañuelos y la papelera. La segunda tira, en el baño o en casa.', 'nariz'],
+        ['amarillo', 37407, 'Plantilla', 'Para cambiar pasos o hacer otra rutina, como la del babi.', 'plantilla'],
+        ['azul', 2798, '¿Qué tiempo hace hoy? ¿Qué me pongo?', 'El panel y sus 24 tarjetas, en la asamblea.', 'panel', 'tarjetas+1'],
+        ['verde', 3123, 'Hoy llueve: el recreo es en clase', 'Para leer antes del recreo, el día que no se sale, con el tablero «¿A qué juego hoy?».', 'historia', 'juegos'],
+        ['naranja', 7054, 'Objetos perdidos', 'Sobre la caja o el cajón donde se guarda lo que aparece.', 'perdidos'],
+        ['coral', 2317, 'Nota para las familias', 'Una copia para cada casa.', 'familias'],
+        ['morado', 7141, 'Guía para el docente y fuentes', 'Para leer antes de empezar.', 'guia', 'fuentes'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const AZUL = '#2f6fd6';
+      const FORRO = '#e4edfb';
+      const PIEL = '#f6d7c3';
+      const CREMA = '#fff6e6';
+      const LINEA = '#ead9bb';
+      const NARANJA = '#f5961f';
+      const CORAL = '#e8553e';
+      const T = `stroke="${M}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"`;
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+
+      // El abrigo abierto en el suelo, visto desde arriba: el forro hacia arriba y la capucha abajo.
+      const SUELO = `<rect x="3" y="3" width="94" height="94" rx="9" fill="${CREMA}" stroke="${LINEA}" stroke-width="1.6"/>
+        <path d="M3 36H97M3 68H97M36 3V97M68 3V97" stroke="${LINEA}" stroke-width="1.1"/>`;
+      const ABRIGO_ABIERTO = `
+        <path d="M31 46 L12 41 Q9 40.4 9 43.8 L9 57.4 Q9 60.6 12 60.4 L31 61 Z" fill="${AZUL}" ${T}/>
+        <path d="M69 46 L88 41 Q91 40.4 91 43.8 L91 57.4 Q91 60.6 88 60.4 L69 61 Z" fill="${AZUL}" ${T}/>
+        <path d="M14.2 41.7 V60.3 M85.8 41.7 V60.3" stroke="${M}" stroke-width="1.6"/>
+        <path d="M19 10 H81 L72 63 H28 Z" fill="${FORRO}" ${T}/>
+        <path d="M20.2 11.3 H79.8" stroke="${AZUL}" stroke-width="3.4"/>
+        <path d="M23.4 15 L30.6 59 M76.6 15 L69.4 59" stroke="${M}" stroke-width="1.3" stroke-dasharray="1.5 1.7"/>
+        <path d="M38 63 Q38 85 50 85 Q62 85 62 63 Z" fill="${FORRO}" ${T}/>
+        <path d="M41.2 63.6 Q41.6 81.6 50 81.6 Q58.4 81.6 58.8 63.6" fill="none" stroke="${AZUL}" stroke-width="2.6"/>`;
+      const PIES = `<ellipse cx="44" cy="92.6" rx="4.4" ry="5.6" fill="${M}"/><ellipse cx="56" cy="92.6" rx="4.4" ry="5.6" fill="${M}"/>`;
+      const MANOS = `
+        <path d="M28 53.5 H17 M20.4 50.2 L16.6 53.5 L20.4 56.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M72 53.5 H83 M79.6 50.2 L83.4 53.5 L79.6 56.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse cx="6.2" cy="50.7" rx="3.8" ry="5.4" fill="${PIEL}" ${T}/>
+        <ellipse cx="93.8" cy="50.7" rx="3.8" ry="5.4" fill="${PIEL}" ${T}/>`;
+
+      // De lado: los brazos suben y el abrigo pasa por encima de la cabeza hacia la espalda.
+      const CABEZA = `
+        <ellipse cx="51" cy="95" rx="24" ry="3" fill="${LINEA}"/>
+        <path d="M77 46 C80 16 60 4 38 8" fill="none" stroke="${NARANJA}" stroke-width="4.2" stroke-linecap="round"/>
+        <path d="M44.6 2.6 L36.4 8.4 L44.2 13.6" fill="none" stroke="${NARANJA}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M36 15 C20 19 18 45 27 61 L37 57 C32 45 33 27 45 21 Z" fill="${AZUL}" ${T}/>
+        <path d="M47 77 V91 M56 77 V91" stroke="${M}" stroke-width="6.4" stroke-linecap="round"/>
+        <path d="M47 92 h6 M56 92 h6" stroke="${M}" stroke-width="5" stroke-linecap="round"/>
+        <rect x="40.5" y="54" width="21" height="25" rx="6" fill="${CORAL}" ${T}/>
+        <path d="M48 59 L41.5 21" stroke="${M}" stroke-width="9.4" stroke-linecap="round"/>
+        <path d="M48 59 L41.5 21" stroke="${AZUL}" stroke-width="5.8" stroke-linecap="round"/>
+        <circle cx="41" cy="16.8" r="3.8" fill="${PIEL}" ${T}/>
+        <circle cx="54" cy="43" r="10.4" fill="${PIEL}" ${T}/>
+        <path d="M43.8 41.4 Q44.4 31.8 54 32.2 Q61.4 32.6 63.6 39.2 Q57.4 36.4 51 38 Q46.6 39.2 43.8 41.4 Z" fill="${M}"/>
+        <circle cx="59" cy="43.2" r="1.5" fill="${M}"/>
+        <path d="M57.4 48.2 Q60 49.8 62.2 47.6" fill="none" stroke="${M}" stroke-width="1.6" stroke-linecap="round"/>`;
+
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const DIBUJOS = {
+        suelo: SUELO + ABRIGO_ABIERTO,
+        pies: SUELO + ABRIGO_ABIERTO + PIES,
+        manos: SUELO + ABRIGO_ABIERTO + MANOS + PIES,
+        cabeza: CABEZA,
+        estrella: `<path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M40 40 l4 -9" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`,
+        tijeras: `
+          <circle cx="24" cy="30" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <circle cx="24" cy="70" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <path d="M35 38 L92 72 M35 62 L92 28" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>`,
+        // Percha de las etiquetas
+        percha: `<path d="M50 18 a7 7 0 1 1 7 7 q-7 1 -7 8 L10 58 q-5 3.5 0.5 5.5 H89.5 q5.5 -2 0.5 -5.5 L50 33" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`,
+        // Círculo de velcro, para la leyenda del panel
+        velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
+          <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
+        // Gancho del perchero de la portada
+        gancho: `<path d="M50 4 V60 a18 18 0 1 0 -24 -16" fill="none" stroke="${M}" stroke-width="12" stroke-linecap="round"/>`,
+        // Nube con lluvia de la portada
+        nube: `<path d="M38 66 H150 a26 26 0 0 0 -6 -51 a36 36 0 0 0 -66 -4 a28 28 0 0 0 -40 55 Z" fill="#fff" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M60 84 l-7 14 M96 84 l-7 14 M132 84 l-7 14 M78 100 l-6 12 M114 100 l-6 12" stroke="${AZUL}" stroke-width="6" stroke-linecap="round"/>`,
+      };
+      const dibujo = (nombre, clase = '', vista) => svg(DIBUJOS[nombre], clase, vista);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const imagen = (p) => (typeof p === 'string' && p.startsWith('d:') ? dibujo(p.slice(2)) : picto(p));
+      const logo = (clase = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+      const fin = `<p class="fin">${dibujo('estrella')}¡Hecho!</p>`;
+      const corte = `<div class="corte" aria-hidden="true">${dibujo('tijeras')}</div>`;
+      const ATRIBUCION = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const COLORES = ['azul', 'verde', 'amarillo', 'coral', 'morado', 'naranja'];
+
+      // ---------------------------------------------------------------------
+      // Hojas de las secuencias
+      // ---------------------------------------------------------------------
+      function tira(id) {
+        const r = RUTINAS[id];
+        const pasos = r.pasos
+          .map(
+            ([p, texto], j) =>
+              `<li class="paso"><span class="paso__numero" aria-hidden="true">${j + 1}</span>${imagen(p)}<p>${texto}</p></li>`,
+          )
+          .join('');
+        return `<div class="tira c-${r.color} n${r.pasos.length}">
+            <div class="tira__cabecera">
+              <div class="tira__icono">${picto(r.icono)}</div>
+              <h2 class="tira__titulo">${r.titulo}</h2>
+              <p class="tira__donde">Dónde: ${r.donde}</p>
+              ${logo('tira__logo')}
+            </div>
+            <div class="tira__cuerpo"><ol class="pasos">${pasos}</ol>${fin}</div>
+            <p class="tira__pie"><span>${r.pie ?? ATRIBUCION}</span><span>IdEducando · ideducando.es · CC BY-NC-SA 4.0</span></p>
+          </div>`;
+      }
+
+      document.getElementById('rutinas').outerHTML = HOJAS.map(
+        (h) => `<section class="rutina c-${h.color}">
+          <p class="rutina__aviso"><span>${h.aviso}</span><span>Corta por la línea de puntos</span></p>
+          ${tira(h.tiras[0])}${corte}${tira(h.tiras[1])}
+        </section>`,
+      ).join('');
+
+      // Plantilla: una tira de 4 pasos y otra de 6
+      function tiraEnBlanco(n) {
+        const pasos = Array.from(
+          { length: n },
+          (_, j) =>
+            `<li class="paso"><span class="paso__numero" aria-hidden="true">${j + 1}</span><div class="hueco-picto"></div><div class="lineas"><span></span><span></span></div></li>`,
+        ).join('');
+        return `<div class="tira c-amarillo n${n}">
+            <div class="tira__cabecera">
+              <div class="tira__icono tira__icono--vacio"></div>
+              <p class="renglon renglon--titulo"><span>Título:</span><span class="linea"></span></p>
+              <p class="renglon renglon--donde"><span>Dónde:</span><span class="linea"></span></p>
+            </div>
+            <div class="tira__cuerpo"><ol class="pasos">${pasos}</ol>${fin}</div>
+            <p class="tira__pie"><span>Si pegas pictogramas de ARASAAC, cita: Sergio Palao. ARASAAC (arasaac.org). CC BY-NC-SA.</span><span>Plantilla de IdEducando · ideducando.es · CC BY-NC-SA 4.0</span></p>
+          </div>`;
+      }
+      document.getElementById('plantillas').outerHTML = tiraEnBlanco(4) + corte + tiraEnBlanco(6);
+
+      // ---------------------------------------------------------------------
+      // Etiquetas y símbolos
+      // ---------------------------------------------------------------------
+      document.getElementById('etiquetas-g').innerHTML = Array.from(
+        { length: 6 },
+        (_, i) => `<div class="etq c-${COLORES[i % 6]}">
+          <div class="etq__banda"></div>
+          <div class="etq__cuerpo">
+            <div class="etq__foto">Foto o símbolo</div>
+            <div class="etq__derecha">
+              <p class="etq__num" style="margin:0">Nº<span></span></p>
+              ${dibujo('percha', 'etq__percha', '0 0 100 70')}
+            </div>
+            <p class="etq__nombre" style="margin:0">Nombre:<span></span></p>
+          </div>
+        </div>`,
+      ).join('');
+
+      document.getElementById('etiquetas-p').innerHTML = Array.from(
+        { length: 21 },
+        (_, i) => `<div class="etp c-${COLORES[i % 6]}">
+          <span class="etp__banda"></span><span class="etp__hueco"></span><span class="etp__linea"></span><span class="etp__num">Nº</span>
+        </div>`,
+      ).join('');
+
+      document.getElementById('simbolos-g').innerHTML = SIMBOLOS.map((n) => `<li class="simbolo">${picto(n)}</li>`).join('');
+      document.getElementById('simbolos-p').innerHTML = SIMBOLOS.map((n) => `<li class="simbolo">${picto(n)}</li>`).join('');
+
+      // ---------------------------------------------------------------------
+      // Tarjetas del panel
+      // ---------------------------------------------------------------------
+      const tarjeta = (color) => (t) =>
+        t
+          ? `<li class="tarjeta c-${color}">${picto(t[0])}<p>${t[1]}</p></li>`
+          : `<li class="tarjeta c-${color}"><div class="hueco-dibujo"></div><div class="renglon-tarjeta"></div></li>`;
+      document.getElementById('tarjetas-1').innerHTML =
+        TIEMPO.map(tarjeta('azul')).join('') + ROPA.slice(0, 6).map(tarjeta('naranja')).join('');
+      document.getElementById('tarjetas-2').innerHTML =
+        ROPA.slice(6).map(tarjeta('naranja')).join('') + [null, null, null, null].map(tarjeta('naranja')).join('');
+
+      // ---------------------------------------------------------------------
+      // Historia social y tablero de juegos
+      // ---------------------------------------------------------------------
+      document.getElementById('frases').innerHTML = HISTORIA.map(
+        ([n, frases]) =>
+          `<li class="frase"><div class="marco-picto">${picto(n)}</div><p>${frases.map((f) => `<span>${f}</span>`).join('')}</p></li>`,
+      ).join('');
+
+      document.getElementById('juegos').innerHTML = JUEGOS.map(
+        ([n, texto]) => `<li class="juego">${picto(n)}<p>${texto}</p></li>`,
+      ).join('');
+      document.getElementById('recuerda').innerHTML = RECUERDA.map(
+        ([n, texto]) => `<li>${picto(n)}<p>${texto}</p></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Objetos perdidos: la caja con la ropa que espera a su dueño
+      // ---------------------------------------------------------------------
+      document.getElementById('perdidos-caja').innerHTML = [
+        [7054, 46, 22, 68],
+        [2412, 4, 6, 34],
+        [2415, 24, 46, 32],
+        [2290, 114, 4, 34],
+        [4872, 122, 44, 36],
+      ]
+        .map(([n, x, y, t]) => `<img src="pictogramas/${n}.png" alt="" style="left:${x}mm;top:${y}mm;width:${t}mm;height:${t}mm">`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      const pagina = (clave) => {
+        const [nombre, mas] = clave.split('+');
+        return PAGINAS[nombre] + Number(mas ?? 0);
+      };
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, donde, ...claves]) => {
+        const pags = claves.map(pagina);
+        const texto = pags.length > 1 ? `Págs. ${pags[0]} a ${pags[pags.length - 1]}` : `Pág. ${pags[0]}`;
+        return `<li class="c-${color}">${picto(n)}<div><h2>${titulo}</h2><p>${donde}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: el perchero de la clase
+      // ---------------------------------------------------------------------
+      const GANCHOS = [44, 86, 128, 170]; // centro de cada gancho, en mm
+      const ETIQUETAS_PORTADA = [
+        ['azul', 2520],
+        ['verde', 3102],
+        ['coral', 2339],
+        ['morado', 2924],
+      ];
+      const PRENDAS = [
+        [4927, 38],
+        [8701, 38],
+        [2290, 34],
+        [2412, 30],
+      ];
+      let perchero = `<div class="perchero__nube">${dibujo('nube', '', '0 0 180 120')}</div>`;
+      perchero += GANCHOS.map(
+        (x, i) =>
+          `<div class="perchero__etiqueta c-${ETIQUETAS_PORTADA[i][0]}" style="left:${x - 15}mm">${picto(ETIQUETAS_PORTADA[i][1])}<span></span></div>`,
+      ).join('');
+      perchero += '<div class="perchero__tabla"></div>';
+      perchero += GANCHOS.map((x) => `<div class="perchero__gancho" style="left:${x - 4}mm">${dibujo('gancho', '', '0 0 70 100')}</div>`).join('');
+      perchero += GANCHOS.map(
+        (x, i) =>
+          `<img class="perchero__prenda" src="pictogramas/${PRENDAS[i][0]}.png" alt="" style="left:${x - PRENDAS[i][1] / 2}mm;width:${PRENDAS[i][1]}mm;height:${PRENDAS[i][1]}mm">`,
+      ).join('');
+      perchero += '<div class="perchero__suelo"></div>';
+      perchero += `<img src="pictogramas/2287.png" alt="" style="left:52mm;top:80mm;width:30mm;height:30mm">`;
+      perchero += `<img src="pictogramas/3285.png" alt="" style="left:146mm;top:72mm;width:38mm;height:38mm">`;
+      document.getElementById('perchero').innerHTML = perchero;
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

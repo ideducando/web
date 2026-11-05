@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mañana en clase: fichas rápidas por necesidad · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Sin pictogramas de ARASAAC: todos los derechos reservados. */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Solo dos familias de letra: Outfit para los títulos y Atkinson Hyperlegible para el texto.
+         Ningún texto baja de 11 pt. */
+      body {
+        line-height: 1.4;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      /* Cada necesidad, con su color de src/data/taxonomias.ts. El color va en franjas y bordes;
+         el texto siempre en marino. */
+      .ficha--tea {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .ficha--tdah {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .ficha--tdl {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .ficha--di {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        margin-bottom: 3mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 20pt;
+        line-height: 1.2;
+        margin: 0 0 6mm;
+      }
+
+      .portada__para {
+        font-size: 13pt;
+        line-height: 1.45;
+        max-width: 120mm;
+        margin: 0 0 10mm;
+      }
+
+      .portada__logo {
+        margin-bottom: 18mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__fichas {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7mm 8mm;
+        max-width: 166mm;
+      }
+
+      .portada__fichas li {
+        margin: 0;
+        background: #fff;
+        border-radius: 3mm;
+        border-top: 4mm solid var(--c);
+        padding: 4mm 5mm 4.5mm;
+        box-shadow:
+          0 0.6mm 0 rgb(30 43 85 / 0.08),
+          0 8mm 14mm -8mm rgb(30 43 85 / 0.4);
+        min-height: 40mm;
+      }
+
+      .portada__fichas li:nth-child(1) {
+        transform: rotate(-2deg);
+      }
+      .portada__fichas li:nth-child(2) {
+        transform: rotate(1.5deg);
+      }
+      .portada__fichas li:nth-child(3) {
+        transform: rotate(1deg);
+      }
+      .portada__fichas li:nth-child(4) {
+        transform: rotate(-1.5deg);
+      }
+
+      .portada__fichas .etiqueta {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+        margin-bottom: 1mm;
+      }
+
+      .portada__fichas b {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 26pt;
+        line-height: 1.05;
+        margin-bottom: 1.5mm;
+      }
+
+      .portada__fichas b.largo {
+        font-size: 19pt;
+      }
+
+      .portada__fichas .nombre {
+        display: block;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      /* ---------- Cómo usar ---------- */
+      .uso h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .entradilla {
+        font-size: 12pt;
+        margin-bottom: 3mm;
+      }
+
+      .indice {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 3mm;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.5mm;
+      }
+
+      .indice li {
+        margin: 0;
+        padding: 2mm 2.5mm;
+        border-radius: 2mm;
+        background: var(--t, #eef0f6);
+        border-top: 1.4mm solid var(--c, var(--suave));
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .indice b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+      }
+
+      .uso h2 {
+        font-size: 14pt;
+        margin: 4mm 0 2mm;
+      }
+
+      .principios {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2.5mm;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+      }
+
+      .principios li {
+        margin: 0;
+        padding: 2.5mm 3mm;
+        border: 0.35mm solid var(--linea);
+        border-radius: 2mm;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .principios b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        color: var(--morado-texto);
+        margin-bottom: 0.5mm;
+      }
+
+      .pasos-previos {
+        margin: 0 0 3mm;
+      }
+
+      .pasos-previos li {
+        margin-bottom: 0.8mm;
+      }
+
+      .uso .caja {
+        padding: 3mm 4.5mm;
+        margin-bottom: 3mm;
+      }
+
+      .uso .caja h3 {
+        font-size: 13pt;
+        margin-bottom: 1mm;
+      }
+
+      .uso p {
+        margin-bottom: 2mm;
+      }
+
+      /* ---------- Fichas ---------- */
+      .cabecera {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        margin: 0 0 1mm;
+        padding: 0 0 2.5mm;
+        border-bottom: 1.2mm solid var(--c);
+      }
+
+      .cabecera__sigla {
+        margin: 0;
+        min-width: 30mm;
+        padding: 2mm 4mm;
+        border-radius: 2.5mm;
+        background: var(--t);
+        border-left: 2mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .cabecera__sigla.largo {
+        font-size: 13pt;
+        line-height: 1.15;
+        min-width: 0;
+      }
+
+      .cabecera .antetitulo {
+        margin-bottom: 0.5mm;
+        font-size: 11pt;
+      }
+
+      .cabecera h1 {
+        font-size: 19pt;
+        line-height: 1.12;
+        margin: 0;
+      }
+
+      .cabecera-mini {
+        display: flex;
+        justify-content: space-between;
+        gap: 4mm;
+        margin: 0 0 1mm;
+        padding: 0 0 2mm;
+        border-bottom: 1.2mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .ficha h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        font-size: 13.5pt;
+        margin: 3.5mm 0 1.8mm;
+      }
+
+      .n {
+        flex: none;
+        display: inline-grid;
+        place-items: center;
+        width: 6.5mm;
+        height: 6.5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-size: 11pt;
+      }
+
+      .que-es {
+        padding: 2.5mm 4mm;
+        border-radius: 2.5mm;
+        background: var(--t);
+        border-left: 1.6mm solid var(--c);
+      }
+
+      .que-es p {
+        margin: 0 0 1mm;
+      }
+
+      .que-es .cita {
+        margin: 0;
+        color: var(--suave);
+      }
+
+      .senales {
+        columns: 2;
+        column-gap: 7mm;
+        margin: 0 0 1.5mm;
+        padding-left: 4.5mm;
+      }
+
+      .senales li {
+        break-inside: avoid;
+        margin-bottom: 1mm;
+      }
+
+      .nota-diag {
+        margin: 0;
+        padding: 1.5mm 3mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .intro-ajustes {
+        margin: 0 0 1.5mm;
+      }
+
+      .ajustes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .ajustes li {
+        margin: 0 0 1.4mm;
+        padding: 0 0 1.4mm 3mm;
+        border-left: 1.2mm solid var(--c);
+        border-bottom: 0.3mm solid var(--linea);
+        break-inside: avoid;
+      }
+
+      .ajustes li:last-child {
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      .apoyo {
+        color: var(--suave);
+      }
+
+      .apoyo b {
+        font-family: var(--titulos);
+        font-weight: 600;
+        color: var(--morado-texto);
+      }
+
+      table.errores {
+        font-size: 11pt;
+        table-layout: fixed;
+        margin-bottom: 0;
+      }
+
+      table.errores th,
+      table.errores td {
+        padding: 1.4mm 2.2mm;
+        line-height: 1.32;
+      }
+
+      table.errores tbody tr:nth-child(odd) {
+        background: #fbf7ef;
+      }
+
+      .frases {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5mm;
+      }
+
+      .frases li {
+        position: relative;
+        margin: 0 0 1.5mm;
+        padding: 2mm 3mm;
+        border-radius: 2.5mm;
+        background: var(--t);
+        font-size: 11.5pt;
+        line-height: 1.3;
+      }
+
+      /* Cola del bocadillo: solo decoración */
+      .frases li::after {
+        content: '';
+        position: absolute;
+        left: 5mm;
+        bottom: -1.8mm;
+        border-left: 1.8mm solid transparent;
+        border-right: 1.8mm solid transparent;
+        border-top: 2mm solid var(--t);
+      }
+
+      .ayuda {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.5mm;
+      }
+
+      .ayuda > div {
+        padding: 2mm 3mm;
+        border: 0.35mm solid var(--linea);
+        border-radius: 2.2mm;
+        break-inside: avoid;
+      }
+
+      .ayuda h3 {
+        font-size: 11.5pt;
+        margin: 0 0 0.6mm;
+      }
+
+      .ayuda p {
+        margin: 0;
+        line-height: 1.33;
+      }
+
+      .ayuda .familias {
+        background: var(--t);
+        border-color: var(--t);
+      }
+
+      /* ---------- Fuentes ---------- */
+      .fuentes h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .fuentes h2 {
+        font-size: 13.5pt;
+        margin: 4mm 0 1.5mm;
+        color: var(--marino);
+      }
+
+      .fuentes h3 {
+        font-size: 12pt;
+        margin: 2.5mm 0 1mm;
+      }
+
+      .lista-fuentes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .lista-fuentes li {
+        margin: 0 0 1.4mm;
+        padding-left: 4mm;
+        text-indent: -4mm;
+        line-height: 1.33;
+      }
+
+      .lista-fuentes .donde {
+        color: var(--suave);
+      }
+
+      .vigencia {
+        margin: 1.5mm 0 0;
+      }
+
+      .creditos {
+        font-size: 11pt;
+      }
+
+      .creditos p {
+        margin-bottom: 1.5mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 140mm; height: 140mm; right: -48mm; top: -40mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -30mm; bottom: 40mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 24mm; height: 24mm; right: 22mm; bottom: 62mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Guía para docentes · Infantil y Primaria</p>
+        <h1 class="portada__titulo">Mañana en clase</h1>
+        <p class="portada__subtitulo">Fichas rápidas por necesidad</p>
+        <p class="portada__para">
+          Para la seño o el profe que mañana recibe a un alumno o una alumna con una necesidad que conoce poco.
+        </p>
+        <ul class="portada__fichas" aria-label="Las cuatro fichas">
+          <li class="ficha--tea">
+            <span class="etiqueta">Ficha 1 · páginas 3 y 4</span>
+            <b>TEA</b>
+            <span class="nombre">Trastorno del espectro del autismo</span>
+          </li>
+          <li class="ficha--tdah">
+            <span class="etiqueta">Ficha 2 · páginas 5 y 6</span>
+            <b>TDAH</b>
+            <span class="nombre">Trastorno por déficit de atención e hiperactividad</span>
+          </li>
+          <li class="ficha--tdl">
+            <span class="etiqueta">Ficha 3 · páginas 7 y 8</span>
+            <b>TDL</b>
+            <span class="nombre">Trastorno del desarrollo del lenguaje</span>
+          </li>
+          <li class="ficha--di">
+            <span class="etiqueta">Ficha 4 · páginas 9 y 10</span>
+            <b class="largo">Discapacidad intelectual</b>
+            <span class="nombre">Apoyos para aprender con su clase</span>
+          </li>
+        </ul>
+        <div class="portada__pie">
+          <p>Fuentes comprobadas el 4 de noviembre de 2026<br />Con a quién pedir ayuda en la Región de Murcia</p>
+          <p>Todos los derechos reservados<br />ideducando.es</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CÓMO USAR ESTAS FICHAS
+         ====================================================================== -->
+    <section class="hoja uso">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>Cómo usar estas fichas</h1>
+      <p class="entradilla">
+        Hay una ficha de dos páginas para cada necesidad. Todas tienen los mismos seis apartados: qué es, señales que
+        puedes ver en clase, ajustes que funcionan, errores frecuentes, frases que ayudan y a quién pedir ayuda en la
+        Región de Murcia. Léela antes de que llegue y tenla a mano las primeras semanas.
+      </p>
+      <ul class="indice" aria-label="Índice">
+        <li class="ficha--tea"><b>TEA</b>Trastorno del espectro del autismo. Págs. 3 y 4</li>
+        <li class="ficha--tdah"><b>TDAH</b>Trastorno por déficit de atención e hiperactividad. Págs. 5 y 6</li>
+        <li class="ficha--tdl"><b>TDL</b>Trastorno del desarrollo del lenguaje. Págs. 7 y 8</li>
+        <li class="ficha--di"><b>Discapacidad intelectual</b>Págs. 9 y 10</li>
+        <li><b>Fuentes</b>Normas, guías y revisiones. Págs. 11 y 12</li>
+      </ul>
+
+      <h2>La base: el Diseño Universal para el Aprendizaje (DUA)</h2>
+      <p>
+        El DUA propone diseñar las clases desde el principio para toda la diversidad del grupo, en lugar de adaptarlas
+        después. Lo pide la Ley Orgánica de Educación (LOE) en su artículo 4.3, y en la Región de Murcia lo recogen los
+        currículos de Infantil y de Primaria. Sus pautas, del centro de investigación CAST, parten de tres principios:
+      </p>
+      <ul class="principios">
+        <li><b>Implicación</b>Ofrece opciones para que quiera participar y siga intentándolo. Por ejemplo, que elija con qué material empieza.</li>
+        <li><b>Representación</b>Presenta la información de más de una forma. Por ejemplo, dilo en voz alta y enséñalo con una imagen.</li>
+        <li><b>Acción y expresión</b>Deja varias formas de responder y de mostrar lo que sabe. Por ejemplo, señalar en lugar de escribir.</li>
+      </ul>
+      <p>
+        Muchos ajustes de estas fichas sirven para toda la clase: una agenda con imágenes o una instrucción cada vez
+        ayudan a todo el grupo. Si los usas con todos, nadie tiene que destacar.
+      </p>
+
+      <h2>Antes de mañana</h2>
+      <ol class="pasos-previos">
+        <li>Pide a orientación o a jefatura de estudios su informe psicopedagógico y su plan de actuación, si los tiene.</li>
+        <li>Habla con la familia: qué le gusta y qué le ayuda a estar en calma.</li>
+        <li>Elige 2 o 3 ajustes de su ficha para empezar.</li>
+        <li>Anota lo que veas las primeras semanas. Te servirá en la reunión con orientación.</li>
+      </ol>
+
+      <div class="caja caja--coral">
+        <h3>Cada peque es distinto</h3>
+        <p>
+          Dos niños con el mismo diagnóstico pueden necesitar cosas muy diferentes. Estas fichas son un punto de
+          partida y no sustituyen al informe psicopedagógico ni al plan de su orientador o su orientadora. Si algo de
+          aquí no encaja con su informe, manda lo que dice el informe.
+        </p>
+      </div>
+
+      <p>
+        Ajustar cómo enseñas es una medida ordinaria y forma parte del trabajo de cada docente (Resolución de 30 de
+        mayo de 2024, resuelvo cuarto.4). Para las dificultades de aprendizaje, entre ellas el TDAH y el TDL, la norma
+        de Murcia pide aplicar estas medidas en cuanto se detectan, sin esperar a la evaluación psicopedagógica
+        (Resolución de 30 de julio de 2019, resuelvo cuarto.1).
+      </p>
+      <p>Cada ajuste dice en qué se apoya. Las referencias completas están en las páginas de fuentes.</p>
+    </section>
+
+    <!-- ======================================================================
+         FICHA 1 · TEA
+         ====================================================================== -->
+    <section class="hoja ficha ficha--tea">
+      <header class="cabecera">
+        <p class="cabecera__sigla" aria-hidden="true">TEA</p>
+        <div>
+          <p class="antetitulo">Ficha 1 de 4 · Página 1 de 2</p>
+          <h1>Trastorno del espectro del autismo (TEA)</h1>
+        </div>
+      </header>
+
+      <h2><span class="n">1</span> Qué es</h2>
+      <div class="que-es">
+        <p>
+          El TEA es un trastorno del neurodesarrollo. La Organización Mundial de la Salud (OMS) lo describe por
+          dificultades persistentes para iniciar y mantener la interacción social y la comunicación, y por intereses y
+          conductas repetitivos y poco flexibles. Empieza en la infancia, aunque a veces se nota más tarde, cuando
+          crecen las exigencias sociales. Es un espectro: el lenguaje y la capacidad intelectual varían mucho de una
+          persona a otra.
+        </p>
+        <p class="cita">Fuente: Clasificación Internacional de Enfermedades de la OMS (CIE-11), código 6A02.</p>
+      </div>
+
+      <h2><span class="n">2</span> Señales que puedes ver en clase</h2>
+      <ul class="senales">
+        <li>Le cuesta empezar o seguir una conversación, o habla sobre todo de su tema.</li>
+        <li>Mira poco a la cara o usa pocos gestos para señalar y mostrar.</li>
+        <li>Entiende al pie de la letra las bromas y los dobles sentidos.</li>
+        <li>Se altera con los cambios de rutina o de sitio.</li>
+        <li>Tiene intereses muy intensos o rituales que repite.</li>
+        <li>Reacciona de forma poco habitual a algunos ruidos o texturas.</li>
+        <li>Prefiere jugar solo o sola, o le cuesta entrar en el juego del grupo.</li>
+      </ul>
+      <p class="nota-diag">
+        Estas señales no sirven para diagnosticar: el diagnóstico lo hacen los profesionales. Si ves varias, anótalas
+        y habla con orientación. Fuentes: OMS, nota descriptiva «Autismo» (2025), y anexo I de la Resolución de 30 de
+        mayo de 2024.
+      </p>
+
+      <h2><span class="n">3</span> Ajustes que funcionan</h2>
+      <p class="intro-ajustes">
+        Todos se apoyan en prácticas basadas en la evidencia de la revisión de Hume y otros (2021), que identificó 28.
+      </p>
+      <ul class="ajustes">
+        <li>
+          <strong>Anticipa con imágenes.</strong> Usa una agenda del día con imágenes y avisa antes de cada cambio.
+          <span class="apoyo"><b>Apoyo:</b> apoyos visuales e intervenciones sobre los antecedentes.</span>
+        </li>
+        <li>
+          <strong>Da instrucciones cortas y con modelo.</strong> Una cada vez. Enséñale cómo se hace y ayúdale lo justo.
+          <span class="apoyo"><b>Apoyo:</b> modelado y ayudas (en inglés, <i lang="en">prompting</i>).</span>
+        </li>
+        <li>
+          <strong>Divide la tarea en pasos.</strong> Una tira con los pasos en orden, que pueda ir tachando.
+          <span class="apoyo"><b>Apoyo:</b> análisis de tareas.</span>
+        </li>
+        <li>
+          <strong>Refuerza en el momento.</strong> Dile qué ha hecho bien y usa lo que le motiva.
+          <span class="apoyo"><b>Apoyo:</b> refuerzo.</span>
+        </li>
+        <li>
+          <strong>Dale una forma de pedir.</strong> Enséñale a pedir ayuda o un descanso con una tarjeta o una palabra.
+          Si usa comunicación aumentativa y alternativa (CAA), tenla siempre a mano.
+          <span class="apoyo"><b>Apoyo:</b> entrenamiento en comunicación funcional y CAA.</span>
+        </li>
+        <li>
+          <strong>Prepara el entorno.</strong> Siéntale lejos del ruido y ten un sitio tranquilo al que pueda ir.
+          <span class="apoyo"><b>Apoyo:</b> intervenciones sobre los antecedentes.</span>
+        </li>
+        <li>
+          <strong>Organiza el juego con compañeros.</strong> En el recreo o en grupo, con compañeros que sepan cómo
+          ayudar. <span class="apoyo"><b>Apoyo:</b> intervención con iguales.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hoja ficha ficha--tea">
+      <p class="cabecera-mini"><span>Ficha 1 · Trastorno del espectro del autismo (TEA)</span><span>Página 2 de 2</span></p>
+
+      <h2><span class="n">4</span> Errores frecuentes</h2>
+      <table class="errores">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 42%">En lugar de…</th>
+            <th scope="col">Prueba a…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pedirle que te mire a los ojos para saber si atiende.</td>
+            <td>Comprobar que ha entendido: que te lo enseñe o haga el primer paso.</td>
+          </tr>
+          <tr>
+            <td>Cambiar la rutina sin avisar.</td>
+            <td>Avisar antes y mostrar el cambio en su agenda.</td>
+          </tr>
+          <tr>
+            <td>Dar órdenes con ironías o frases hechas.</td>
+            <td>Decir lo que quieres que haga: «Guarda el lápiz en el estuche».</td>
+          </tr>
+          <tr>
+            <td>Ver una conducta difícil como mala educación y castigarla sin más.</td>
+            <td>
+              Buscar qué la provoca, como un ruido o un cambio. Anótalo en un registro ABC (antes, conducta y después) y
+              habla con orientación.
+            </td>
+          </tr>
+          <tr>
+            <td>Hablar de él o de ella delante, como si no estuviera.</td>
+            <td>Hablar con él o con ella. Acordad con la familia qué contáis a la clase.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2><span class="n">5</span> Frases que ayudan</h2>
+      <ul class="frases">
+        <li>«Primero, ficha. Después, ordenador.»</li>
+        <li>«Faltan 2 minutos para recoger.»</li>
+        <li>«Hoy hay un cambio: vamos al patio en vez de a Música.»</li>
+        <li>«Si necesitas descansar, enséñame tu tarjeta.»</li>
+        <li>«Mira cómo se hace. Ahora tú.»</li>
+        <li>«¡Muy bien! Has esperado tu turno.»</li>
+      </ul>
+
+      <h2><span class="n">6</span> A quién pedir ayuda en la Región de Murcia</h2>
+      <div class="ayuda">
+        <div>
+          <h3>En tu cole</h3>
+          <p>
+            Pide a orientación su informe psicopedagógico y su plan de actuación. El profesorado de Pedagogía
+            Terapéutica (PT) y de Audición y Lenguaje (AL) es apoyo específico del centro (Decreto 359/2009, art. 34.4).
+          </p>
+        </div>
+        <div>
+          <h3>Orientación: el EOEP de sector</h3>
+          <p>
+            En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
+            algunos colegios, un orientador o una orientadora del centro. Hace la evaluación psicopedagógica y el
+            dictamen de escolarización, y sigue su proceso (Decreto 359/2009, art. 31). Para pedir su intervención,
+            rellena el anexo I de la Resolución de 30 de mayo de 2024 y dáselo a la tutora o al tutor.
+          </p>
+        </div>
+        <div>
+          <h3>EOEP específico de Autismo y otros Trastornos Graves del Desarrollo</h3>
+          <p>
+            Da apoyo especializado al EOEP de sector y a los colegios. Lo pide orientación con su protocolo de
+            derivación: el profesorado no lo pide directamente (Resolución de 30 de mayo de 2024, resuelvo quinto.8).
+          </p>
+        </div>
+        <div class="familias">
+          <h3>Asociaciones de familias</h3>
+          <p>
+            La Federación de Autismo de la Región de Murcia (FAUM) reúne a las asociaciones de familias de la Región.
+            Si la familia lo pide, puedes darle el contacto.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FICHA 2 · TDAH
+         ====================================================================== -->
+    <section class="hoja ficha ficha--tdah">
+      <header class="cabecera">
+        <p class="cabecera__sigla" aria-hidden="true">TDAH</p>
+        <div>
+          <p class="antetitulo">Ficha 2 de 4 · Página 1 de 2</p>
+          <h1>Trastorno por déficit de atención e hiperactividad (TDAH)</h1>
+        </div>
+      </header>
+
+      <h2><span class="n">1</span> Qué es</h2>
+      <div class="que-es">
+        <p>
+          El TDAH es un trastorno del neurodesarrollo. Según la Organización Mundial de la Salud (OMS), es un patrón
+          persistente, de al menos 6 meses, de falta de atención o de hiperactividad e impulsividad, que afecta al
+          rendimiento escolar o a las relaciones. Aparece antes de los 12 años y se nota en más de un entorno, como el
+          cole y la casa. Cuesta sobre todo mantener la atención en tareas poco estimulantes o sin recompensas
+          frecuentes.
+        </p>
+        <p class="cita">Fuente: Clasificación Internacional de Enfermedades de la OMS (CIE-11), código 6A05.</p>
+      </div>
+
+      <h2><span class="n">2</span> Señales que puedes ver en clase</h2>
+      <ul class="senales">
+        <li>Se distrae con facilidad y deja tareas a medias.</li>
+        <li>Pierde el material y le cuesta organizarse.</li>
+        <li>Se mueve mucho o le cuesta seguir sentado, sobre todo en actividades que piden estar quieto.</li>
+        <li>Contesta antes de que acabes la pregunta o le cuesta esperar su turno.</li>
+        <li>Atiende mejor en lo que le motiva mucho o le da una respuesta rápida.</li>
+        <li>En unos niños y niñas se nota más la falta de atención; en otros, el movimiento y la impulsividad.</li>
+      </ul>
+      <p class="nota-diag">
+        Estas señales no sirven para diagnosticar: el diagnóstico lo hacen los profesionales. Si ves varias, anótalas
+        y habla con orientación. Fuentes: CIE-11, código 6A05, y anexo I de la Resolución de 30 de mayo de 2024.
+      </p>
+
+      <h2><span class="n">3</span> Ajustes que funcionan</h2>
+      <p class="intro-ajustes">
+        La Resolución de 30 de julio de 2019 es la norma de Murcia sobre dificultades de aprendizaje, entre ellas el TDAH.
+      </p>
+      <ul class="ajustes">
+        <li>
+          <strong>Pocas normas, claras y a la vista.</strong> Escribe 3 o 4 normas en positivo y elogia en el momento
+          cuando las cumple. <span class="apoyo"><b>Apoyo:</b> el manejo de la conducta en el aula es un tratamiento
+          bien establecido (Wolraich y otros, 2019, guía de la Academia Americana de Pediatría).</span>
+        </li>
+        <li>
+          <strong>Tarjeta diaria cole-casa.</strong> Tres objetivos al día que marcáis en clase y van a casa. En
+          ideducando.es tienes «Mi tarjeta de ida y vuelta».
+          <span class="apoyo"><b>Apoyo:</b> metaanálisis de Pyle y Fabiano (2017).</span>
+        </li>
+        <li>
+          <strong>Enséñale a organizarse.</strong> Agenda y revisión de la mochila al final del día, con tu ayuda al
+          principio. <span class="apoyo"><b>Apoyo:</b> el entrenamiento en organización es un tratamiento bien
+          establecido (Wolraich y otros, 2019); Resolución de 30/07/2019, resuelvo séptimo.4.</span>
+        </li>
+        <li>
+          <strong>Tareas por partes y movimiento con permiso.</strong> Divide las tareas largas y deja pausas breves con
+          movimiento, como repartir las hojas.
+          <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, resuelvo séptimo.4 y anexo IV.</span>
+        </li>
+        <li>
+          <strong>Una señal discreta.</strong> Siéntale cerca de ti y pactad un gesto para volver a la tarea sin que lo
+          note la clase. <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, resuelvo séptimo.4 y anexo IV.</span>
+        </li>
+        <li>
+          <strong>Exámenes adaptados.</strong> Más tiempo y un sitio con pocas distracciones.
+          <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, resuelvo séptimo.4; Decreto 209/2022, art. 23.8.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hoja ficha ficha--tdah">
+      <p class="cabecera-mini">
+        <span>Ficha 2 · Trastorno por déficit de atención e hiperactividad (TDAH)</span><span>Página 2 de 2</span>
+      </p>
+
+      <h2><span class="n">4</span> Errores frecuentes</h2>
+      <table class="errores">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 42%">En lugar de…</th>
+            <th scope="col">Prueba a…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quitarle el recreo como castigo.</td>
+            <td>
+              Usar consecuencias pequeñas y pactadas. La Academia Americana de Pediatría pide no quitar el recreo como
+              castigo ni para acabar tareas (Murray y otros, 2013).
+            </td>
+          </tr>
+          <tr>
+            <td>Pensar que «si quiere, puede», porque a veces sí se concentra.</td>
+            <td>
+              Recordar que le cuesta más atender cuando la tarea motiva poco (CIE-11). Ponle metas cortas y dale una
+              respuesta rápida.
+            </td>
+          </tr>
+          <tr>
+            <td>Dar muchas instrucciones seguidas y desde lejos.</td>
+            <td>Acercarte y dar una instrucción cada vez. Después, pide que te la repita.</td>
+          </tr>
+          <tr>
+            <td>Llamarle la atención delante de todos.</td>
+            <td>Usar vuestra señal discreta y elogiar en público lo que hace bien.</td>
+          </tr>
+          <tr>
+            <td>Bajarle la nota por cómo se porta.</td>
+            <td>
+              Evaluar lo que sabe. En Murcia, la conducta no puede bajar la nota de otros criterios de evaluación
+              (Resolución de 30/07/2019, anexo IV).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2><span class="n">5</span> Frases que ayudan</h2>
+      <ul class="frases">
+        <li>«Mírame un momento. Saca el cuaderno rojo.»</li>
+        <li>«¿Qué tienes que hacer ahora? Dímelo tú.»</li>
+        <li>«Haz estas 3 y me las enseñas.»</li>
+        <li>«Has empezado enseguida. ¡Bien hecho!»</li>
+        <li>«¿Me ayudas a repartir las hojas?»</li>
+        <li>«Respira. Luego lo hablamos tú y yo.»</li>
+      </ul>
+
+      <h2><span class="n">6</span> A quién pedir ayuda en la Región de Murcia</h2>
+      <div class="ayuda">
+        <div>
+          <h3>En tu cole</h3>
+          <p>
+            Pide a orientación su informe psicopedagógico y su plan de actuación. El profesorado de Pedagogía
+            Terapéutica (PT) y de Audición y Lenguaje (AL) es apoyo específico del centro (Decreto 359/2009, art. 34.4).
+          </p>
+        </div>
+        <div>
+          <h3>Orientación: el EOEP de sector</h3>
+          <p>
+            En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
+            algunos colegios, un orientador o una orientadora del centro. Identifica sus necesidades y te asesora. Para
+            pedir su intervención, rellena el anexo I de la Resolución de 30 de mayo de 2024 y dáselo a la tutora o al
+            tutor.
+          </p>
+        </div>
+        <div>
+          <h3>EOEP específico de Dificultades Específicas del Aprendizaje y TDAH</h3>
+          <p>
+            Asesora a orientación y a los colegios, y les facilita materiales (Orden de 24 de marzo de 2015). Lo pide
+            orientación con su protocolo de derivación. Orientación tiene también un modelo de informe para derivar a
+            los servicios de salud (carm.es).
+          </p>
+        </div>
+        <div class="familias">
+          <h3>Asociaciones de familias</h3>
+          <p>
+            ADAHI (Asociación de Ayuda al Déficit de Atención con Más o Menos Hiperactividad), en Cartagena: adahi.es.
+            Es de la Federación Española de Asociaciones de Ayuda al Déficit de Atención e Hiperactividad (FEAADAH).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FICHA 3 · TDL
+         ====================================================================== -->
+    <section class="hoja ficha ficha--tdl">
+      <header class="cabecera">
+        <p class="cabecera__sigla" aria-hidden="true">TDL</p>
+        <div>
+          <p class="antetitulo">Ficha 3 de 4 · Página 1 de 2</p>
+          <h1>Trastorno del desarrollo del lenguaje (TDL)</h1>
+        </div>
+      </header>
+
+      <h2><span class="n">1</span> Qué es</h2>
+      <div class="que-es">
+        <p>
+          El TDL es una dificultad persistente para aprender, comprender o usar el lenguaje, que no se explica por otra
+          causa, como una pérdida auditiva o una lesión cerebral. Afecta a la comunicación del día a día y al
+          aprendizaje, y si sigue presente a partir de los 5 años es probable que dure. El nombre lo acordó en 2017 el
+          consenso internacional CATALISE, y es el que usa la Organización Mundial de la Salud (OMS). Antes se llamaba
+          trastorno específico del lenguaje, y así aparece aún en la norma de Murcia de 2019 sobre dificultades de
+          aprendizaje.
+        </p>
+        <p class="cita">
+          Fuentes: Bishop y otros (2017), consenso CATALISE; Clasificación Internacional de Enfermedades de la OMS
+          (CIE-11), código 6A01.2.
+        </p>
+      </div>
+
+      <h2><span class="n">2</span> Señales que puedes ver en clase</h2>
+      <ul class="senales">
+        <li>Hace frases más cortas o con más errores que sus compañeros.</li>
+        <li>Le cuesta encontrar la palabra: dice «eso» o da rodeos.</li>
+        <li>Aprende las palabras nuevas más despacio.</li>
+        <li>Se pierde con instrucciones largas o de varios pasos.</li>
+        <li>Le cuesta contar en orden lo que ha pasado.</li>
+        <li>Puede costarle aprender a leer o entender lo que lee.</li>
+      </ul>
+      <p class="nota-diag">
+        Estas señales no sirven para diagnosticar: el diagnóstico lo hacen los profesionales. Si ves varias, anótalas
+        y habla con orientación. En general, hablar varias lenguas no causa problemas de lenguaje: solo se piensa en
+        TDL si le cuesta en todas sus lenguas (Bishop y otros, 2017).
+      </p>
+
+      <h2><span class="n">3</span> Ajustes que funcionan</h2>
+      <p class="intro-ajustes">
+        La Resolución de 30 de julio de 2019, anexo V, es la norma de Murcia con medidas para las dificultades del
+        lenguaje oral.
+      </p>
+      <ul class="ajustes">
+        <li>
+          <strong>Habla despacio y con frases cortas.</strong> Da una instrucción cada vez. Si no responde, espera al
+          menos 10 segundos antes de repetirla. <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, anexo V.</span>
+        </li>
+        <li>
+          <strong>Apoya lo que dices con lo visual.</strong> Escribe las palabras clave en la pizarra y usa dibujos o
+          gestos. <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, anexo V.</span>
+        </li>
+        <li>
+          <strong>Presenta antes el vocabulario.</strong> Enseña las palabras nuevas del tema, con imagen, antes de
+          empezar. <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, anexo V.</span>
+        </li>
+        <li>
+          <strong>Reformula sin corregir.</strong> Repite su frase bien dicha, con naturalidad, y sigue la conversación.
+          <span class="apoyo"><b>Apoyo:</b> una revisión con metaanálisis la respalda, aunque la evidencia aún es
+          limitada (Cleave y otros, 2015).</span>
+        </li>
+        <li>
+          <strong>Comprueba que ha entendido.</strong> Pide que te lo enseñe o que lo diga con sus palabras.
+          <span class="apoyo"><b>Apoyo:</b> Resolución de 30/07/2019, anexo V.</span>
+        </li>
+        <li>
+          <strong>Trabaja con el profesorado de Audición y Lenguaje (AL).</strong> Pide ideas para el aula y cuéntale
+          qué funciona. <span class="apoyo"><b>Apoyo:</b> lo que se hace en el cole puede funcionar si el profesorado
+          está formado y acompañado (Ebbels y otros, 2019).</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hoja ficha ficha--tdl">
+      <p class="cabecera-mini">
+        <span>Ficha 3 · Trastorno del desarrollo del lenguaje (TDL)</span><span>Página 2 de 2</span>
+      </p>
+
+      <h2><span class="n">4</span> Errores frecuentes</h2>
+      <table class="errores">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 42%">En lugar de…</th>
+            <th scope="col">Prueba a…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pedirle que repita la frase bien.</td>
+            <td>Repetir tú su frase bien dicha y seguir hablando.</td>
+          </tr>
+          <tr>
+            <td>Pensar que ha entendido porque dice «sí».</td>
+            <td>Comprobarlo: que te lo enseñe o lo haga.</td>
+          </tr>
+          <tr>
+            <td>Terminar sus frases o hablar por él o por ella.</td>
+            <td>Esperar. Si se atasca, ofrécele dos opciones: «¿Fue en el parque o en la playa?».</td>
+          </tr>
+          <tr>
+            <td>Juzgar lo que sabe solo por cómo lo dice.</td>
+            <td>Dejar que lo muestre de otras formas, como señalar o dibujar.</td>
+          </tr>
+          <tr>
+            <td>Esperar a que «ya hablará» sin pedir ayuda.</td>
+            <td>
+              Hablar con orientación y con AL. Si a partir de los 5 años sigue con dificultades, es probable que duren
+              (Bishop y otros, 2017).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2><span class="n">5</span> Frases que ayudan</h2>
+      <ul class="frases">
+        <li>«Tómate tu tiempo. Te espero.»</li>
+        <li>«¡Ah, fuiste al parque con tu tío! ¿Y qué hicisteis?»</li>
+        <li>«Primero, abre el libro. Después, busca la página 10.»</li>
+        <li>«Enséñamelo con el dibujo.»</li>
+        <li>«Esta palabra es nueva: volcán. Mira el dibujo.»</li>
+        <li>«Dímelo otra vez, con calma. Te escucho.»</li>
+      </ul>
+
+      <h2><span class="n">6</span> A quién pedir ayuda en la Región de Murcia</h2>
+      <div class="ayuda">
+        <div>
+          <h3>En tu cole</h3>
+          <p>
+            Pide a orientación su informe psicopedagógico y su plan de actuación. El profesorado de Audición y Lenguaje
+            y el de Pedagogía Terapéutica (PT) son apoyo específico del centro (Decreto 359/2009, art. 34.4).
+          </p>
+        </div>
+        <div>
+          <h3>Orientación: el EOEP de sector</h3>
+          <p>
+            En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
+            algunos colegios, un orientador o una orientadora del centro. Identifica sus necesidades y te asesora. Para
+            pedir su intervención, rellena el anexo I de la Resolución de 30 de mayo de 2024 y dáselo a la tutora o al
+            tutor.
+          </p>
+        </div>
+        <div>
+          <h3>Equipo específico</h3>
+          <p>
+            No hay un EOEP específico de lenguaje. La norma de Murcia incluye el TDL entre las dificultades de
+            aprendizaje y prevé que orientación pida asesoramiento al EOEP específico de Dificultades Específicas del
+            Aprendizaje y TDAH (Resolución de 30/07/2019, resuelvo tercero).
+          </p>
+        </div>
+        <div class="familias">
+          <h3>Asociaciones de familias</h3>
+          <p>
+            AMUTELHA, la asociación murciana de familias de niños con trastornos del lenguaje y del habla, figura en el
+            catálogo de asociaciones de murciasalud.es. Firmó con la Consejería de Educación un convenio de
+            colaboración, prorrogado en 2022.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FICHA 4 · DISCAPACIDAD INTELECTUAL
+         ====================================================================== -->
+    <section class="hoja ficha ficha--di">
+      <header class="cabecera">
+        <p class="cabecera__sigla largo" aria-hidden="true">Ficha<br />4</p>
+        <div>
+          <p class="antetitulo">Ficha 4 de 4 · Página 1 de 2</p>
+          <h1>Discapacidad intelectual</h1>
+        </div>
+      </header>
+
+      <h2><span class="n">1</span> Qué es</h2>
+      <div class="que-es">
+        <p>
+          La discapacidad intelectual se caracteriza por limitaciones significativas en el funcionamiento intelectual y
+          en la conducta adaptativa, que se originan antes de los 22 años. La conducta adaptativa es lo que se aprende y
+          se usa en la vida diaria: por ejemplo, comunicarse o cuidar de uno mismo. En cada persona, las limitaciones
+          conviven con capacidades, y su funcionamiento mejora con apoyos personalizados y mantenidos en el tiempo. En
+          los informes de salud puede aparecer como «trastorno del desarrollo intelectual», el nombre que usa la OMS.
+        </p>
+        <p class="cita">
+          Fuentes: Asociación Americana de Discapacidades Intelectuales y del Desarrollo (AAIDD), definición de
+          2021; Organización Mundial de la Salud (OMS), CIE-11, código 6A00.
+        </p>
+      </div>
+
+      <h2><span class="n">2</span> Señales que puedes ver en clase</h2>
+      <ul class="senales">
+        <li>Necesita más tiempo y más repeticiones para aprender algo nuevo.</li>
+        <li>Entiende mejor con objetos reales que con ideas abstractas, como la hora o el dinero.</li>
+        <li>Le cuesta recordar instrucciones de varios pasos.</li>
+        <li>Necesita más ayuda que sus compañeros para vestirse u organizar sus cosas.</li>
+        <li>Puede ser ingenuo o ingenua con los demás y confiar en quien no debe.</li>
+        <li>Le cuesta mucho más que a su clase leer y escribir.</li>
+      </ul>
+      <p class="nota-diag">
+        Estas señales no sirven para diagnosticar: el diagnóstico lo hacen los profesionales. Si ves varias, anótalas
+        y habla con orientación. Fuentes: definición de la AAIDD y anexo I de la Resolución de 30 de mayo de 2024.
+      </p>
+
+      <h2><span class="n">3</span> Ajustes que funcionan</h2>
+      <ul class="ajustes">
+        <li>
+          <strong>Divide la tarea en pasos.</strong> Enseña un paso cada vez, con una tira de pasos con imágenes.
+          <span class="apoyo"><b>Apoyo:</b> el análisis de tareas es una práctica basada en la evidencia (Spooner y
+          otros, 2012).</span>
+        </li>
+        <li>
+          <strong>Da ayuda y ve retirándola.</strong> Al principio, dale la respuesta enseguida. Después, espera unos
+          segundos antes de ayudar, para que responda sin ayuda.
+          <span class="apoyo"><b>Apoyo:</b> demora de tiempo, práctica basada en la evidencia (Spooner y otros, 2012).</span>
+        </li>
+        <li>
+          <strong>Enseña dentro de la actividad del grupo.</strong> Mismo tema que la clase, con sus objetivos y
+          momentos cortos de enseñanza dentro de la actividad.
+          <span class="apoyo"><b>Apoyo:</b> instrucción integrada en el aula ordinaria (Hudson y otros, 2013).</span>
+        </li>
+        <li>
+          <strong>Objetivos a su medida.</strong> En Primaria, si tiene una adaptación curricular significativa, se
+          evalúa con los criterios de su adaptación. <span class="apoyo"><b>Apoyo:</b> Decreto 209/2022, art. 24.5.</span>
+        </li>
+        <li>
+          <strong>Textos fáciles de leer.</strong> Frases cortas, una idea por frase y apoyo de imágenes o pictogramas.
+          <span class="apoyo"><b>Apoyo:</b> la ley de derechos de las personas con discapacidad pide accesibilidad
+          cognitiva con lectura fácil y pictogramas (Real Decreto Legislativo 1/2013, art. 2.k).</span>
+        </li>
+        <li>
+          <strong>Piensa en apoyos.</strong> Pregúntate qué apoyo necesita para participar en cada actividad.
+          <span class="apoyo"><b>Apoyo:</b> definición de la AAIDD; ajustes razonables (Convención sobre los derechos
+          de las personas con discapacidad, art. 24).</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hoja ficha ficha--di">
+      <p class="cabecera-mini"><span>Ficha 4 · Discapacidad intelectual</span><span>Página 2 de 2</span></p>
+
+      <h2><span class="n">4</span> Errores frecuentes</h2>
+      <table class="errores">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 42%">En lugar de…</th>
+            <th scope="col">Prueba a…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hablarle como a un niño más pequeño.</td>
+            <td>Hablarle según su edad, con frases cortas y claras.</td>
+          </tr>
+          <tr>
+            <td>Hacerle las cosas para ir más rápido.</td>
+            <td>Esperar y dar solo la ayuda que necesita. Luego, ve retirándola.</td>
+          </tr>
+          <tr>
+            <td>Darle una ficha aparte mientras la clase hace otra cosa.</td>
+            <td>Que trabaje el mismo tema que la clase, con un objetivo a su medida.</td>
+          </tr>
+          <tr>
+            <td>Fijarte solo en lo que no sabe hacer.</td>
+            <td>Empezar por lo que sí sabe: en cada persona, las limitaciones conviven con capacidades (AAIDD).</td>
+          </tr>
+          <tr>
+            <td>Explicarlo todo solo de palabra.</td>
+            <td>Enseñarlo con el modelo y con objetos reales.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2><span class="n">5</span> Frases que ayudan</h2>
+      <ul class="frases">
+        <li>«Mira cómo lo hago. Ahora tú.»</li>
+        <li>«Vamos paso a paso. Primero, esto.»</li>
+        <li>«¿Qué necesitas para hacerlo?»</li>
+        <li>«¡Lo has conseguido tú!»</li>
+        <li>«Te ayudo con este. El siguiente lo haces tú.»</li>
+        <li>«Enséñame cómo lo harías.»</li>
+      </ul>
+
+      <h2><span class="n">6</span> A quién pedir ayuda en la Región de Murcia</h2>
+      <div class="ayuda">
+        <div>
+          <h3>En tu cole</h3>
+          <p>
+            Pide a orientación su informe psicopedagógico y su plan de actuación. El profesorado de Pedagogía
+            Terapéutica (PT) y de Audición y Lenguaje (AL) es apoyo específico del centro (Decreto 359/2009, art. 34.4).
+          </p>
+        </div>
+        <div>
+          <h3>Orientación: el EOEP de sector</h3>
+          <p>
+            En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
+            algunos colegios, un orientador o una orientadora del centro. Hace la evaluación psicopedagógica y el
+            dictamen de escolarización, y sigue su proceso (Decreto 359/2009, art. 31). Para pedir su intervención,
+            rellena el anexo I de la Resolución de 30 de mayo de 2024 y dáselo a la tutora o al tutor.
+          </p>
+        </div>
+        <div>
+          <h3>Equipo específico</h3>
+          <p>
+            No hay un EOEP específico de discapacidad intelectual: la atiende el EOEP de sector. Si además tiene una
+            discapacidad sensorial o motora, hay equipos específicos que pide orientación (Resolución de 30 de mayo de
+            2024, resuelvo tercero.3).
+          </p>
+        </div>
+        <div class="familias">
+          <h3>Asociaciones de familias</h3>
+          <p>
+            Plena inclusión Región de Murcia es la federación de asociaciones de familias de personas con discapacidad
+            intelectual o del desarrollo. En plenainclusionmurcia.org puedes buscar la asociación de tu zona.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">De dónde sale cada dato</p>
+      <h1>Fuentes</h1>
+      <p>
+        Hemos comprobado todas las fuentes en su origen el 4 de noviembre de 2026: el Boletín Oficial del Estado (BOE),
+        el Boletín Oficial de la Región de Murcia (BORM), la web de la Comunidad Autónoma (carm.es), PubMed y la web de
+        cada organismo. De cada artículo damos su doi, el identificador digital que lo localiza.
+      </p>
+
+      <h2>Normativa estatal</h2>
+      <ul class="lista-fuentes">
+        <li>
+          Ley Orgánica 2/2006, de 3 de mayo, de Educación (LOE), con la redacción de la Ley Orgánica 3/2020, de 29 de
+          diciembre (LOMLOE, ley orgánica que modifica la LOE): artículos 4.3, 71.2, 73 y 74.
+          <span class="donde">Texto consolidado del BOE, BOE-A-2006-7899.</span>
+        </li>
+        <li>
+          Instrumento de Ratificación de la Convención sobre los derechos de las personas con discapacidad, hecha en
+          Nueva York el 13 de diciembre de 2006: artículos 2 y 24. <span class="donde">BOE n.º 96, de 21/04/2008.</span>
+        </li>
+        <li>
+          Real Decreto Legislativo 1/2013, de 29 de noviembre, Texto Refundido de la Ley General de derechos de las
+          personas con discapacidad y de su inclusión social: artículo 2, letras k y m.
+          <span class="donde">Texto consolidado del BOE, BOE-A-2013-12632.</span>
+        </li>
+      </ul>
+
+      <h2>Normativa de la Región de Murcia</h2>
+      <ul class="lista-fuentes">
+        <li>
+          Decreto n.º 359/2009, de 30 de octubre, por el que se establece y regula la respuesta educativa a la
+          diversidad del alumnado en la Comunidad Autónoma de la Región de Murcia: artículos 6, 12, 30, 31 y 34.
+          <span class="donde">BORM n.º 254, de 03/11/2009.</span>
+        </li>
+        <li>
+          Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación
+          Infantil en la Comunidad Autónoma de la Región de Murcia: artículos 4.6, 16 y 17.3.
+          <span class="donde">BORM n.º 255, de 04/11/2022.</span>
+        </li>
+        <li>
+          Decreto n.º 209/2022, de 17 de noviembre, por el que se establece la ordenación y el currículo de la
+          Educación Primaria en la Comunidad Autónoma de la Región de Murcia: artículos 4.5, 23 y 24.
+          <span class="donde">BORM n.º 267, de 18/11/2022.</span>
+        </li>
+        <li>
+          Orden de 24 de marzo de 2015, de la Consejería de Educación, Cultura y Universidades, por la que se crea el
+          Equipo de Orientación Educativa y Psicopedagógica Específico de Dificultades Específicas del Aprendizaje y
+          TDAH. <span class="donde">BORM n.º 80, de 09/04/2015.</span>
+        </li>
+        <li>
+          Resolución de 30 de julio de 2019, de la Dirección General de Atención a la Diversidad y Calidad Educativa,
+          por la que se dictan instrucciones para la identificación y la respuesta educativa a las necesidades del
+          alumnado que presenta dificultades de aprendizaje: resuelvos tercero, cuarto y séptimo, y anexos IV y V.
+          <span class="donde">BORM n.º 184, de 10/08/2019.</span>
+        </li>
+        <li>
+          Resolución de 30 de mayo de 2024, de la Dirección General de Atención a la Diversidad, por la que se regula la
+          solicitud de intervención de los servicios de orientación educativa: resuelvos tercero a quinto y anexo I.
+          <span class="donde">carm.es, «Protocolos de derivación a EOEPs específicos u otros servicios».</span>
+        </li>
+        <li>
+          Consejería de Educación. Directorio de los equipos de orientación educativa y psicopedagógica de la Región de
+          Murcia (marzo de 2025) y protocolos de derivación a los equipos específicos.
+          <span class="donde">carm.es, apartado «Orientación educativa».</span>
+        </li>
+      </ul>
+      <p class="vigencia">
+        <strong>Vigencia del Decreto 359/2009.</strong> Sigue vigente: no hemos encontrado ninguna norma que lo derogue,
+        y la Consejería lo aplica en 2026, por ejemplo en la Resolución de 4 de febrero de 2026 sobre escolarización
+        (BORM n.º 33, de 10/02/2026).
+      </p>
+
+      <h2>Organismos y asociaciones</h2>
+      <ul class="lista-fuentes">
+        <li>
+          Federación de Autismo de la Región de Murcia (FAUM). <span class="donde">autismomurcia.org</span>
+        </li>
+        <li>
+          ADAHI, en Cartagena, y Federación Española de Asociaciones de Ayuda al Déficit de Atención e Hiperactividad
+          (FEAADAH). <span class="donde">adahi.es y feaadah.org</span>
+        </li>
+        <li>
+          AMUTELHA: ficha en el catálogo de asociaciones de murciasalud.es y convenio de colaboración en carm.es,
+          apartado «Convenios de colaboración» de Atención a la Diversidad.
+        </li>
+        <li>Plena inclusión Región de Murcia. <span class="donde">plenainclusionmurcia.org</span></li>
+      </ul>
+
+      <h2>Clasificaciones, guías y revisiones</h2>
+      <ul class="lista-fuentes">
+        <li>
+          Organización Mundial de la Salud (2026). Clasificación Internacional de Enfermedades, 11.ª revisión (CIE-11),
+          versión 2026-01 en español: códigos 6A00, 6A01.2, 6A02 y 6A05.
+          <span class="donde">icd.who.int</span>
+        </li>
+        <li>
+          Organización Mundial de la Salud (2025). Autismo. Nota descriptiva, 17 de septiembre de 2025.
+          <span class="donde">who.int/es</span>
+        </li>
+        <li>
+          Asociación Americana de Discapacidades Intelectuales y del Desarrollo (AAIDD). Definición de discapacidad
+          intelectual. <span class="donde">aaidd.org</span> Y Schalock, R. L., Luckasson, R. y Tassé, M. J. (2021). An
+          overview of intellectual disability: Definition, diagnosis, classification, and systems of supports (12th
+          ed.). <i>American Journal on Intellectual and Developmental Disabilities</i>, 126(6), 439-442.
+          <span class="donde">doi: 10.1352/1944-7558-126.6.439</span>
+        </li>
+        <li>
+          Bishop, D. V. M., Snowling, M. J., Thompson, P. A., Greenhalgh, T. y CATALISE-2 consortium (2017). Phase 2
+          of CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language
+          development: Terminology. <i>Journal of Child Psychology and Psychiatry</i>, 58(10), 1068-1080.
+          <span class="donde">doi: 10.1111/jcpp.12721</span>
+        </li>
+        <li>
+          CAST (2024). <i>Universal Design for Learning Guidelines version 3.0</i>.
+          <span class="donde">udlguidelines.cast.org</span>
+        </li>
+        <li>
+          Cleave, P. L., Becker, S. D., Curran, M. K., Owen Van Horne, A. J. y Fey, M. E. (2015). The efficacy of
+          recasts in language intervention: A systematic review and meta-analysis. <i>American Journal of
+          Speech-Language Pathology</i>, 24(2), 237-255. <span class="donde">doi: 10.1044/2015_AJSLP-14-0105</span>
+        </li>
+        <li>
+          Ebbels, S. H., McCartney, E., Slonims, V., Dockrell, J. E. y Norbury, C. F. (2019). Evidence-based pathways
+          to intervention for children with language disorders. <i>International Journal of Language and
+          Communication Disorders</i>, 54(1), 3-19. <span class="donde">doi: 10.1111/1460-6984.12387</span>
+        </li>
+        <li>
+          Evans, S. W., Owens, J. S., Wymbs, B. T. y Ray, A. R. (2018). Evidence-based psychosocial treatments for
+          children and adolescents with attention deficit/hyperactivity disorder. <i>Journal of Clinical Child and
+          Adolescent Psychology</i>, 47(2), 157-198. Es la revisión en la que se apoya la guía de Wolraich y otros.
+          <span class="donde">doi: 10.1080/15374416.2017.1390757</span>
+        </li>
+        <li>
+          Hudson, M. E., Browder, D. M. y Wood, L. A. (2013). Review of experimental research on academic learning by
+          students with moderate and severe intellectual disability in general education. <i>Research and Practice
+          for Persons with Severe Disabilities</i>, 38(1), 17-29. <span class="donde">doi: 10.2511/027494813807046926</span>
+        </li>
+        <li>
+          Hume, K., Steinbrenner, J. R., Odom, S. L. y otros (2021). Evidence-based practices for children, youth, and
+          young adults with autism: Third generation review. <i>Journal of Autism and Developmental Disorders</i>,
+          51(11), 4013-4032. <span class="donde">doi: 10.1007/s10803-020-04844-2</span>
+        </li>
+        <li>
+          Murray, R., Ramstetter, C. y Council on School Health (2013). The crucial role of recess in school.
+          <i>Pediatrics</i>, 131(1), 183-188. Declaración de la Academia Americana de Pediatría.
+          <span class="donde">doi: 10.1542/peds.2012-2993</span>
+        </li>
+        <li>
+          Pyle, K. y Fabiano, G. A. (2017). Daily report card intervention and attention deficit hyperactivity
+          disorder: A meta-analysis of single-case studies. <i>Exceptional Children</i>, 83(4), 378-395.
+          <span class="donde">doi: 10.1177/0014402917706370</span>
+        </li>
+        <li>
+          Spooner, F., Knight, V. F., Browder, D. M. y Smith, B. R. (2012). Evidence-based practice for teaching
+          academics to students with severe developmental disabilities. <i>Remedial and Special Education</i>, 33(6),
+          374-387. <span class="donde">doi: 10.1177/0741932511421634</span>
+        </li>
+        <li>
+          Wolraich, M. L. y otros (2019). Clinical practice guideline for the diagnosis, evaluation, and treatment of
+          attention-deficit/hyperactivity disorder in children and adolescents. <i>Pediatrics</i>, 144(4), e20192528.
+          Guía de la Academia Americana de Pediatría. <span class="donde">doi: 10.1542/peds.2019-2528</span>
+        </li>
+      </ul>
+
+      <div class="creditos">
+        <p>
+          <strong>Mañana en clase: fichas rápidas por necesidad.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/manana-en-clase</span>
+        </p>
+        <p>
+          Estas fichas orientan y no sustituyen al informe psicopedagógico, al plan de actuación del alumno o la alumna
+          ni a la normativa vigente.
+        </p>
+        <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirla, rellenarla y adaptarla para tu alumnado. No se puede compartir el archivo, subirlo a otra web ni venderlo: para recomendarla, comparte el enlace de su ficha en ideducando.es.</p>
+      </div>
+    </section>
+  </body>
+</html>

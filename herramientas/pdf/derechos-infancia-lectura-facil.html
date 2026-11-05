@@ -1,0 +1,1844 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mis derechos: los derechos de la infancia en lectura fácil · IdEducando</title>
+    <meta name="author" content="Equipo IdEducando" />
+    <meta
+      name="description"
+      content="Doce derechos de la Convención sobre los Derechos del Niño en lectura fácil, con pictogramas de ARASAAC, preguntas en tres niveles, un mural para la clase y guía para el docente."
+    />
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Pie de todas las hojas: licencia y crédito de los pictogramas (la cita completa va en la guía). */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Licencia CC BY-NC-SA 4.0 · Pictogramas de ARASAAC · ideducando.es';
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Hojas del mural: A4 apaisado con 10 mm de margen (lo que muchas impresoras no imprimen). */
+      @page mural {
+        size: A4 landscape;
+        margin: 10mm 10mm 14mm;
+
+        @bottom-left {
+          padding-top: 3mm;
+        }
+
+        @bottom-right {
+          padding-top: 3mm;
+        }
+      }
+
+      /* Hoja de las tarjetas de la clase: A4 vertical con 10 mm de margen. */
+      @page tarjetas {
+        margin: 10mm 10mm 14mm;
+
+        @bottom-left {
+          padding-top: 3mm;
+        }
+
+        @bottom-right {
+          padding-top: 3mm;
+        }
+      }
+
+      /* ---------- Un color para cada derecho ----------
+         --c: color de la marca para bordes y franjas · --t: tinte para fondos.
+         El texto va siempre en marino: así cumple el contraste AA sobre blanco y sobre los tintes. */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+
+      img {
+        display: block;
+      }
+
+      /* ---------- Hojas para el alumnado: A4, con el texto a 16 pt o más ---------- */
+      .hoja {
+        break-after: page;
+        width: 178mm;
+        height: 258mm;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .cabecera {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        gap: 5mm;
+        align-items: center;
+      }
+
+      .cabecera--sin-numero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .numero {
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        border-radius: 50%;
+        border: 1.2mm solid var(--c);
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 25pt;
+        line-height: 1;
+      }
+
+      .antetitulo-nino {
+        margin: 0 0 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 16pt;
+        line-height: 1.1;
+      }
+
+      .titulo-nino {
+        margin: 0;
+        font-size: 32pt;
+        line-height: 1.05;
+      }
+
+      .franja {
+        flex: none;
+        height: 1.8mm;
+        margin: 4mm 0;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      .panel {
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6mm;
+        height: var(--alto, 62mm);
+        margin: 0 0 4mm;
+        border-radius: 6mm;
+        background: var(--t);
+      }
+
+      .panel img {
+        width: calc(var(--alto, 62mm) - 10mm);
+        height: calc(var(--alto, 62mm) - 10mm);
+        padding: 2.5mm;
+        border-radius: 5mm;
+        background: #fff;
+      }
+
+      .frases {
+        flex: none;
+        display: grid;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frases li {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        min-height: 22mm;
+        margin: 0;
+      }
+
+      .frases li.doble {
+        grid-template-columns: 41mm minmax(0, 1fr);
+      }
+
+      .marco {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1mm;
+        height: 22mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .marco img {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .frases p {
+        margin: 0;
+        font-size: 20pt;
+        line-height: 1.25;
+        text-wrap: pretty;
+      }
+
+      .palabra {
+        flex: none;
+        margin: 4mm 0 0;
+        padding: 2.4mm 4mm;
+        border: 0.6mm dashed var(--c);
+        border-radius: 3mm;
+        font-size: 16pt;
+        line-height: 1.3;
+      }
+
+      .palabra strong {
+        font-family: var(--titulos);
+      }
+
+      .hablamos {
+        flex: none;
+        display: grid;
+        grid-template-columns: 19mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 4mm 0 0;
+        padding: 3mm 4mm;
+        border-left: 1.8mm solid var(--c);
+        border-radius: 4mm;
+        background: var(--crema);
+      }
+
+      .hablamos img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .hablamos__titulo {
+        margin: 0 0 0.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 16pt;
+        line-height: 1.1;
+      }
+
+      .hablamos__pregunta {
+        margin: 0;
+        font-size: 20pt;
+        line-height: 1.25;
+        text-wrap: pretty;
+      }
+
+      /* Nota para el docente al pie de cada derecho: el artículo de la Convención */
+      .docente {
+        flex: none;
+        margin: auto 0 0;
+        padding-top: 2.5mm;
+        border-top: 0.3mm solid var(--linea);
+        font-size: 10pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .docente strong {
+        color: var(--marino);
+      }
+
+      /* ---------- ¿Qué es un derecho? ---------- */
+      .ejemplo {
+        flex: none;
+        margin: 6mm 0 0;
+        padding: 4mm 5mm 5mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 5mm;
+      }
+
+      .ejemplo h2 {
+        margin: 0 0 3mm;
+        font-size: 20pt;
+      }
+
+      .ejemplo__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+      }
+
+      .caso {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4mm;
+        padding: 4mm;
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      .caso img {
+        width: 42mm;
+        height: 42mm;
+        margin: 0 auto 1mm;
+        padding: 2mm;
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .caso p {
+        margin: 0;
+        font-size: 19pt;
+        line-height: 1.25;
+      }
+
+      .caso .conclusion {
+        margin-top: 1.5mm;
+        padding: 2mm 3mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 3mm;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .asi-es {
+        flex: none;
+        margin: 5mm 0 0;
+        padding: 3mm 4mm;
+        border-radius: 4mm;
+        background: var(--crema);
+      }
+
+      .asi-es h2 {
+        margin: 0 0 2mm;
+        font-size: 18pt;
+      }
+
+      .asi-es .frases li {
+        min-height: 16mm;
+      }
+
+      .asi-es .marco {
+        height: 16mm;
+      }
+
+      .asi-es .marco img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .asi-es .frases p {
+        font-size: 18pt;
+      }
+
+      /* ---------- Preguntas de comprensión ---------- */
+      .nombre-linea {
+        display: flex;
+        align-items: flex-end;
+        gap: 2.5mm;
+        margin: 0;
+        font-size: 16pt;
+        line-height: 1.2;
+      }
+
+      .nombre-linea .linea {
+        flex: 1;
+        height: 8mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .cabecera-preguntas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 70mm;
+        gap: 8mm;
+        align-items: end;
+      }
+
+      .consigna {
+        flex: none;
+        margin: 0 0 4mm;
+        font-size: 19pt;
+        line-height: 1.3;
+      }
+
+      .elecciones {
+        flex: none;
+        display: grid;
+        gap: 3.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .eleccion {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 3mm 4mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 4mm;
+      }
+
+      .eleccion__numero,
+      .vf__numero {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 16pt;
+        line-height: 1;
+      }
+
+      .eleccion p {
+        margin: 0;
+        font-size: 19pt;
+        line-height: 1.25;
+      }
+
+      .opciones {
+        display: flex;
+        gap: 2.6mm;
+      }
+
+      .opcion {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8mm;
+        width: 28mm;
+        padding: 2mm 1mm 1.4mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .opcion img {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .opcion span {
+        font-size: 16pt;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      /* Verdadero o falso: una tabla para que el lector de pantalla lea cada frase con sus columnas */
+      .vf {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 2.4mm;
+        margin: 0;
+        font-size: 18pt;
+      }
+
+      .vf thead th {
+        padding: 0 1mm 1mm;
+        background: none;
+        color: var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 16pt;
+        text-align: center;
+        border: 0;
+      }
+
+      .vf thead th:first-child,
+      .vf thead th:nth-child(2) {
+        text-align: left;
+      }
+
+      .vf td {
+        padding: 2.2mm 2mm;
+        border: 0;
+        border-top: 0.4mm solid var(--linea);
+        border-bottom: 0.4mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .vf td:first-child {
+        width: 15mm;
+        border-left: 0.4mm solid var(--linea);
+        border-radius: 4mm 0 0 4mm;
+      }
+
+      .vf td:last-child {
+        border-right: 0.4mm solid var(--linea);
+        border-radius: 0 4mm 4mm 0;
+      }
+
+      .vf__frase {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        line-height: 1.25;
+      }
+
+      .vf__frase img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .vf__respuesta {
+        width: 25mm;
+        text-align: center;
+      }
+
+      .vf__circulo {
+        display: inline-grid;
+        place-items: center;
+        width: 16mm;
+        height: 16mm;
+        border: 0.6mm solid var(--suave);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .vf__circulo img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .vf__cabecera {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.6mm;
+      }
+
+      .vf__cabecera img {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .formas {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2mm 6mm;
+        margin: 0 0 4mm;
+        font-size: 18pt;
+        line-height: 1.25;
+      }
+
+      .formas span {
+        display: inline-flex;
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .formas img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .abierta {
+        flex: none;
+        margin: 0 0 4mm;
+        padding: 3mm 5mm 4mm;
+        border: 0.5mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 4mm;
+      }
+
+      .abierta p {
+        display: flex;
+        gap: 3mm;
+        margin: 0 0 1mm;
+        font-size: 19pt;
+        line-height: 1.25;
+      }
+
+      .abierta p b {
+        font-family: var(--titulos);
+      }
+
+      .renglon {
+        height: 11mm;
+        border-bottom: 0.35mm solid var(--suave);
+      }
+
+      /* ---------- Mural ---------- */
+      .plano {
+        flex: none;
+        margin: 2mm 0 4mm;
+      }
+
+      .plano svg {
+        display: block;
+        width: 178mm;
+        height: auto;
+      }
+
+      .hoja--docente {
+        font-size: 11pt;
+        line-height: 1.45;
+      }
+
+      .hoja--docente h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .hoja--docente h2 {
+        font-size: 14pt;
+        margin: 4mm 0 2mm;
+      }
+
+      .hoja--docente ul,
+      .hoja--docente ol {
+        margin-bottom: 2mm;
+      }
+
+      .piezas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+      }
+
+      .titulo-mural {
+        page: mural;
+        break-after: page;
+        width: 277mm;
+        height: 184mm;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .consigna-mural {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 3mm;
+        font-size: 16pt;
+        line-height: 1.2;
+      }
+
+      .consigna-mural svg {
+        flex: none;
+        width: 9mm;
+        height: 9mm;
+        color: var(--suave);
+      }
+
+      .tira {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0.5mm dashed var(--suave);
+        overflow: hidden;
+      }
+
+      .tira .rayos {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 5mm;
+      }
+
+      /* Letras huecas para colorear: texto de verdad, con el borde en marino */
+      .letras {
+        margin: 0 0 6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 178pt;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        color: #fff;
+        -webkit-text-stroke: 1.6mm var(--marino);
+        paint-order: stroke fill;
+      }
+
+      .hoja-tarjetas {
+        page: mural;
+        break-after: page;
+        width: 277mm;
+        height: 184mm;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12mm;
+        overflow: hidden;
+      }
+
+      .tarjeta {
+        display: flex;
+        flex-direction: column;
+        gap: 4mm;
+        min-width: 0;
+        padding: 5mm;
+        border: 0.5mm dashed var(--suave);
+      }
+
+      .tarjeta__cabecera {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3.5mm;
+        padding: 3mm 4mm;
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      .tarjeta__numero {
+        display: grid;
+        place-items: center;
+        width: 17mm;
+        height: 17mm;
+        border: 1mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 21pt;
+        line-height: 1;
+      }
+
+      .tarjeta h2 {
+        margin: 0;
+        font-size: 22pt;
+        line-height: 1.05;
+      }
+
+      .tarjeta__picto {
+        flex: 1;
+        display: grid;
+        place-items: center;
+        min-height: 0;
+        border: 1mm solid var(--c);
+        border-radius: 6mm;
+      }
+
+      .tarjeta__picto img {
+        width: 88mm;
+        height: 88mm;
+      }
+
+      .tarjeta__frase {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.25;
+      }
+
+      .tarjeta__articulo {
+        margin: -2mm 0 0;
+        font-size: 10pt;
+        color: var(--suave);
+      }
+
+      .hoja-clase {
+        page: tarjetas;
+        break-after: page;
+        width: 190mm;
+        height: 271mm;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        overflow: hidden;
+      }
+
+      .mi-tarjeta {
+        display: flex;
+        flex-direction: column;
+        gap: 2.4mm;
+        min-width: 0;
+        min-height: 0;
+        padding: 4mm 5mm 5mm;
+        border: 0.5mm dashed var(--suave);
+      }
+
+      .mi-tarjeta h2 {
+        margin: 0;
+        font-size: 19pt;
+        line-height: 1.1;
+      }
+
+      .mi-tarjeta .rayos {
+        height: 2mm;
+        margin: 0 0 0.5mm;
+        border-radius: 1mm;
+      }
+
+      .mi-tarjeta__consigna {
+        margin: 1mm 0 0;
+        font-size: 16pt;
+        line-height: 1.2;
+      }
+
+      .minis {
+        display: grid;
+        grid-template-columns: repeat(4, 16mm);
+        gap: 2.2mm;
+        justify-content: start;
+      }
+
+      .minis span {
+        display: grid;
+        place-items: center;
+        width: 16mm;
+        height: 16mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 2.6mm;
+        background: #fff;
+      }
+
+      .minis img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .dibujo {
+        flex: 1;
+        margin-top: 1mm;
+        padding: 2mm 3mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        font-size: 16pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 62pt;
+        line-height: 0.98;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 150mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 8.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .mosaico {
+        position: absolute;
+        left: 24mm;
+        right: 24mm;
+        bottom: 36mm;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6mm;
+      }
+
+      .mosaico span {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1;
+        border: 1.2mm solid var(--c);
+        border-radius: 6mm;
+        background: #fff;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.14);
+        transform: rotate(-2.5deg);
+      }
+
+      .mosaico span:nth-child(3n + 2) {
+        transform: rotate(2deg);
+      }
+
+      .mosaico span:nth-child(3n) {
+        transform: rotate(-0.5deg) translateY(1.5mm);
+      }
+
+      .mosaico img {
+        width: 82%;
+        height: 82%;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 15mm;
+        top: 112mm;
+        display: grid;
+        place-content: center;
+        width: 46mm;
+        height: 46mm;
+        padding: 4mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        line-height: 1.05;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 26pt;
+      }
+
+      .pegatina span {
+        display: block;
+        font-size: 12pt;
+      }
+
+      .pegatina small {
+        display: block;
+        margin-top: 1.4mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 8.5pt;
+        line-height: 1.15;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        width: 178mm;
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.9em;
+      }
+
+      .guia h3 {
+        font-size: 11pt;
+        margin: 0.6em 0 0.3em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja ul,
+      .guia .caja ol {
+        margin-bottom: 1.5mm;
+      }
+
+      .guia .dos-columnas ul {
+        margin: 0;
+      }
+
+      .guia .creditos {
+        margin-top: 3mm;
+        font-size: 8pt;
+        line-height: 1.35;
+      }
+
+      .guia .creditos p {
+        margin-bottom: 1.2mm;
+      }
+
+      .soluciones {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr);
+        gap: 4mm;
+      }
+
+      .soluciones p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Lectura fácil · Con pictogramas · Primaria</p>
+        <h1 class="portada__titulo">Mis derechos</h1>
+        <p class="portada__subtitulo">
+          Los derechos de la infancia en lectura fácil, con preguntas y un mural para montar entre toda la clase.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="mosaico" id="mosaico" aria-hidden="true"></div>
+      <div class="pegatina"><b>20</b><span>de noviembre</span><small>Día Mundial de la Infancia</small></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         ¿QUÉ ES UN DERECHO?
+         ====================================================================== -->
+    <section class="hoja c-amarillo">
+      <header class="cabecera cabecera--sin-numero">
+        <div>
+          <p class="antetitulo-nino">Para empezar</p>
+          <h1 class="titulo-nino">¿Qué es un derecho?</h1>
+        </div>
+      </header>
+      <div class="franja"></div>
+      <ul class="frases">
+        <li>
+          <span class="marco"><img src="pictogramas/11247.png" alt="" /></span>
+          <p>Un derecho es algo que necesito para vivir bien.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/20401.png" alt="" /></span>
+          <p>Todos los niños y las niñas tenemos derechos.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/6886.png" alt="" /></span>
+          <p>Los adultos tienen que respetar nuestros derechos.</p>
+        </li>
+      </ul>
+      <div class="ejemplo">
+        <h2>Un ejemplo</h2>
+        <div class="ejemplo__columnas">
+          <div class="caso c-azul">
+            <img src="pictogramas/7273.png" alt="" />
+            <p>Tengo sed.</p>
+            <p>Necesito beber agua.</p>
+            <p class="conclusion">Beber agua es un derecho.</p>
+          </div>
+          <div class="caso c-coral">
+            <img src="pictogramas/35209.png" alt="" />
+            <p>Quiero un helado.</p>
+            <p>Me gusta, pero no lo necesito.</p>
+            <p class="conclusion">Un helado es un deseo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hablamos">
+        <img src="pictogramas/6517.png" alt="" />
+        <div>
+          <p class="hablamos__titulo">Hablamos</p>
+          <p class="hablamos__pregunta">¿Qué más necesitas para vivir bien?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         EL 20 DE NOVIEMBRE
+         ====================================================================== -->
+    <section class="hoja c-azul">
+      <header class="cabecera cabecera--sin-numero">
+        <div>
+          <p class="antetitulo-nino">Para empezar</p>
+          <h1 class="titulo-nino">El 20 de noviembre</h1>
+        </div>
+      </header>
+      <div class="franja"></div>
+      <ul class="frases">
+        <li>
+          <span class="marco"><img src="pictogramas/32488.png" alt="" /></span>
+          <p>El 20 de noviembre de 1989 pasó algo importante.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/9079.png" alt="" /></span>
+          <p>Los países de las Naciones Unidas aprobaron un acuerdo.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/30207.png" alt="" /></span>
+          <p>El acuerdo es una lista de derechos para los niños y las niñas.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/11473.png" alt="" /></span>
+          <p>Se llama Convención sobre los Derechos del Niño.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/8108.png" alt="" /></span>
+          <p>En 1990, España prometió cumplir este acuerdo.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/31843.png" alt="" /></span>
+          <p>Soy niño o niña hasta los 18 años.</p>
+        </li>
+        <li>
+          <span class="marco"><img src="pictogramas/6969.png" alt="" /></span>
+          <p>Cada 20 de noviembre celebramos el Día Mundial de la Infancia.</p>
+        </li>
+      </ul>
+      <div class="asi-es">
+        <h2>Así es este libro</h2>
+        <ul class="frases">
+          <li>
+            <span class="marco"><img src="pictogramas/11247.png" alt="" /></span>
+            <p>En cada página hay un derecho.</p>
+          </li>
+          <li>
+            <span class="marco"><img src="pictogramas/6517.png" alt="" /></span>
+            <p>Al final hay una pregunta para hablar en clase.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Los 12 derechos se generan con el guion del final -->
+    <div id="derechos"></div>
+
+    <!-- ======================================================================
+         PREGUNTAS DE COMPRENSIÓN · NIVEL 1
+         ====================================================================== -->
+    <section class="hoja c-verde">
+      <div class="cabecera-preguntas">
+        <div>
+          <p class="antetitulo-nino">Preguntas · Nivel 1</p>
+          <h1 class="titulo-nino">Mira y rodea</h1>
+        </div>
+        <p class="nombre-linea">Me llamo:<span class="linea"></span></p>
+      </div>
+      <div class="franja"></div>
+      <p class="consigna">Lee la pregunta. Rodea el dibujo que responde.</p>
+      <ol class="elecciones" id="nivel-1"></ol>
+    </section>
+
+    <!-- ======================================================================
+         NIVEL 2 · VERDADERO O FALSO
+         ====================================================================== -->
+    <section class="hoja c-morado">
+      <div class="cabecera-preguntas">
+        <div>
+          <p class="antetitulo-nino">Preguntas · Nivel 2</p>
+          <h1 class="titulo-nino">¿Verdadero o falso?</h1>
+        </div>
+        <p class="nombre-linea">Me llamo:<span class="linea"></span></p>
+      </div>
+      <div class="franja"></div>
+      <p class="consigna">Lee cada frase. Si es verdad, rodea Verdadero. Si no es verdad, rodea Falso.</p>
+      <table class="vf">
+        <thead>
+          <tr>
+            <th scope="col"><span class="vf__cabecera">N.º</span></th>
+            <th scope="col">Frase</th>
+            <th scope="col">
+              <span class="vf__cabecera"><img src="pictogramas/5584.png" alt="" />Verdadero</span>
+            </th>
+            <th scope="col"><span class="vf__cabecera"><img src="pictogramas/5526.png" alt="" />Falso</span></th>
+          </tr>
+        </thead>
+        <tbody id="nivel-2"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         NIVEL 3 · PREGUNTA ABIERTA
+         ====================================================================== -->
+    <section class="hoja c-coral">
+      <div class="cabecera-preguntas">
+        <div>
+          <p class="antetitulo-nino">Preguntas · Nivel 3</p>
+          <h1 class="titulo-nino">Pienso y respondo</h1>
+        </div>
+        <p class="nombre-linea">Me llamo:<span class="linea"></span></p>
+      </div>
+      <div class="franja"></div>
+      <div class="formas">
+        <span><img src="pictogramas/2380.png" alt="" /><img src="pictogramas/8088.png" alt="" />Puedes escribir o dibujar.</span>
+        <span><img src="pictogramas/6517.png" alt="" />También puedes contarlo en voz alta.</span>
+      </div>
+      <div class="abierta">
+        <p><b>1</b>¿Qué derecho te parece más importante? ¿Por qué?</p>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+      <div class="abierta">
+        <p><b>2</b>Una niña no puede ir a la escuela. ¿Qué derecho le falta? ¿Cómo crees que se siente?</p>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+      <div class="abierta">
+        <p><b>3</b>¿Qué podemos hacer en clase para cuidar los derechos de todos?</p>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MURAL «NUESTROS DERECHOS»: CÓMO QUEDA
+         ====================================================================== -->
+    <section class="hoja hoja--docente c-naranja">
+      <p class="antetitulo">Mural «Nuestros derechos» · Para el docente</p>
+      <h1>Así queda el mural</h1>
+      <p>
+        Un mural de 180 × 100 cm para montar entre toda la clase. Los pasos, con lo que necesitas y qué imprimir, están en
+        la página 2.
+      </p>
+      <figure class="plano">
+        <svg
+          viewBox="0 0 1800 1000"
+          role="img"
+          aria-label="Plano del mural: el título arriba, en el centro; debajo, las 12 tarjetas de los derechos en 2 filas de 6; a los lados y abajo, las tarjetas de la clase."
+          id="plano"
+        ></svg>
+      </figure>
+      <div class="piezas">
+        <div>
+          <h2>Las piezas</h2>
+          <ul>
+            <li><strong>Título</strong>, páginas 21 y 22: una palabra en cada hoja, con letras para colorear.</li>
+            <li><strong>Los 12 derechos</strong>, páginas 23 a 28: dos tarjetas en cada hoja.</li>
+            <li>
+              <strong>Tarjetas de la clase</strong>, página 29: cuatro en cada hoja, una para cada alumno o alumna.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2>Entre toda la clase</h2>
+          <ul>
+            <li>Haced 6 grupos. Cada grupo recorta 2 tarjetas, lee sus derechos y los explica al resto.</li>
+            <li>Quien no recorta puede colorear, pegar o decidir dónde va cada pieza.</li>
+            <li>La tarjeta de la clase se rellena escribiendo, rodeando un pictograma o dictando a un adulto.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         MURAL: TÍTULO (2 HOJAS APAISADAS)
+         ====================================================================== -->
+    <section class="titulo-mural">
+      <p class="consigna-mural">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="6" cy="6.5" r="3" /><circle cx="6" cy="17.5" r="3" /><path d="M8.6 8.2L20 18M8.6 15.8L20 6" />
+        </svg>
+        Título del mural, hoja 1 de 2. Colorea las letras. Después, recorta por la línea de puntos.
+      </p>
+      <div class="tira">
+        <p class="letras">Nuestros</p>
+        <div class="rayos"></div>
+      </div>
+    </section>
+
+    <section class="titulo-mural">
+      <p class="consigna-mural">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <circle cx="6" cy="6.5" r="3" /><circle cx="6" cy="17.5" r="3" /><path d="M8.6 8.2L20 18M8.6 15.8L20 6" />
+        </svg>
+        Título del mural, hoja 2 de 2. Colorea las letras. Después, recorta por la línea de puntos.
+      </p>
+      <div class="tira">
+        <p class="letras">derechos</p>
+        <div class="rayos"></div>
+      </div>
+    </section>
+
+    <!-- Las tarjetas de los derechos (6 hojas) y las de la clase se generan con el guion del final -->
+    <div id="tarjetas"></div>
+    <div id="clase"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Hablar de derechos con toda la clase</h1>
+      <p>
+        El 20 de noviembre de 1989, la Asamblea General de las Naciones Unidas aprobó la Convención sobre los Derechos del
+        Niño. España la ratificó en 1990 y entró en vigor para nuestro país el 5 de enero de 1991. Este material presenta 12
+        de sus derechos en lectura fácil, con un pictograma en cada frase, para leerlos en voz alta y hablar de ellos en
+        clase. Sirve para el 20 de noviembre y para cualquier otro día del curso.
+      </p>
+      <p>
+        Está pensado para Primaria y, en especial, para el alumnado que necesita apoyos para leer: con discapacidad
+        intelectual, con trastorno del desarrollo del lenguaje (TDL) o que todavía está aprendiendo castellano.
+      </p>
+      <p>
+        La Ley Orgánica de Educación (LOE) pide atender la diversidad «conforme a los principios del Diseño universal de
+        aprendizaje, garantizando en todo caso los derechos de la infancia» (artículo 4.3). En el currículo de Primaria, los
+        derechos de la infancia están en Conocimiento del Medio Natural, Social y Cultural y en Educación en Valores Cívicos
+        y Éticos (Real Decreto 157/2022, anexo II).
+      </p>
+
+      <h2>Qué incluye</h2>
+      <ul>
+        <li><strong>Para empezar</strong> (páginas 3 y 4): qué es un derecho, con un ejemplo, y qué pasó el 20 de noviembre.</li>
+        <li>
+          <strong>12 derechos</strong> (páginas 5 a 16), uno por página: frases con pictogramas, una pregunta para hablar y,
+          abajo, el artículo de la Convención.
+        </li>
+        <li>
+          <strong>Preguntas de comprensión</strong> en tres niveles (páginas 17 a 19): con dibujos para elegir, de
+          verdadero o falso y abiertas.
+        </li>
+        <li><strong>Mural «Nuestros derechos»</strong> (páginas 20 a 29), para recortar y montar entre toda la clase.</li>
+        <li><strong>Esta guía</strong>, con las soluciones y las fuentes.</li>
+      </ul>
+
+      <h2>Una propuesta en tres sesiones</h2>
+      <ol>
+        <li>
+          <strong>Primera sesión</strong>, de unos 45 minutos: leed juntos «¿Qué es un derecho?» y «El 20 de noviembre».
+          Después, los derechos 1 a 4.
+        </li>
+        <li>
+          <strong>Segunda sesión</strong>: los derechos 5 a 12. Podéis repartirlos por grupos: cada grupo lee 2 y los cuenta
+          al resto.
+        </li>
+        <li>
+          <strong>Tercera sesión</strong>: las preguntas, en el nivel que elija cada alumno o alumna, y el mural.
+        </li>
+      </ol>
+      <p>Si a tu grupo le cansa leer mucho seguido, leed 2 o 3 derechos al día durante una semana.</p>
+
+      <h2>Cómo leerlo en voz alta</h2>
+      <ol>
+        <li>Antes de leer, enseña el recuadro de colores de la página y pregunta qué ven en los pictogramas.</li>
+        <li>Lee el título y después cada frase, despacio, señalando su pictograma.</li>
+        <li>Cuando salga una palabra difícil, lee su cuadro «Palabra nueva».</li>
+        <li>Lee tú primero. Después, leed en eco: tú dices una frase y la clase la repite.</li>
+        <li>
+          Deja tiempo para pensar la pregunta de «Hablamos». Vale responder hablando, con signos, señalando pictogramas o
+          con un dibujo.
+        </li>
+        <li>No hace falta leer los 12 derechos el mismo día.</li>
+      </ol>
+
+      <h2>Cómo está escrito</h2>
+      <p>
+        Hemos seguido las pautas de lectura fácil de la norma UNE 153101:2018 EX: frases cortas, una idea por frase,
+        palabras de uso diario, letra grande y texto alineado a la izquierda. Todavía no lo hemos validado con personas
+        lectoras, como prevé la norma UNE 153102:2018 EX. Por eso no lleva el logotipo de lectura fácil: si lo usas,
+        cuéntanos qué tal funciona.
+      </p>
+      <p>
+        Las frases son una adaptación de IdEducando a partir del texto oficial en castellano, el que publicó el Boletín
+        Oficial del Estado (BOE) con la ratificación de España. No sustituyen al texto oficial: si alguien quiere saber más,
+        leed juntos el artículo en el BOE.
+      </p>
+
+      <h2 class="salto">Ideas para adaptarlo</h2>
+      <p>Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de acceder y de responder:</p>
+      <div class="dos-columnas">
+        <ul>
+          <li><strong>Si aún no lee:</strong> el adulto lee y el niño o la niña señala el pictograma de cada frase.</li>
+          <li>
+            <strong>Con discapacidad intelectual:</strong> empieza por 4 derechos cercanos: el nombre, la familia, la escuela
+            y el juego. Usa objetos reales o fotos de su entorno.
+          </li>
+          <li>
+            <strong>Con TDL:</strong> presenta antes las palabras nuevas y da un modelo: «Tengo derecho a…». Si responde
+            con una palabra, amplía tú: «Sí, tienes derecho a jugar».
+          </li>
+          <li>
+            <strong>Si usa un tablero de comunicación:</strong> buscad en su tablero los pictogramas del derecho del día.
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <strong>Con otra lengua en casa:</strong> escribid debajo de cada título cómo se dice en la lengua de la
+            familia. El derecho 10 habla de esto.
+          </li>
+          <li>
+            <strong>Para dar más reto:</strong> comparad una frase con su artículo en el BOE. ¿Qué dice el texto oficial que
+            aquí no está?
+          </li>
+          <li>
+            <strong>Para toda la clase:</strong> elegid un derecho cada semana y buscad dónde se cumple en el cole.
+          </li>
+          <li>
+            <strong>Con el mural:</strong> agrupad las tarjetas de la clase por el derecho elegido y contad cuántas hay. Es
+            una gráfica de la clase.
+          </li>
+        </ul>
+      </div>
+
+      <div class="caja caja--amarilla">
+        <h3>Derechos que tocan de cerca</h3>
+        <p>
+          Algunos derechos pueden tocar la vida de alguien de la clase: un niño o una niña que vive con una familia de
+          acogida, que pasa necesidad en casa, que tiene una discapacidad o que llegó hace poco de otro país. Las preguntas de
+          «Hablamos» son generales a propósito. No pidas a nadie que cuente su caso delante del grupo y respeta a quien
+          prefiera no hablar.
+        </p>
+      </div>
+
+      <div class="caja caja--coral">
+        <h3>Si un niño o una niña cuenta algo preocupante</h3>
+        <p>
+          Hablar de derechos puede hacer que alguien cuente algo que le está pasando. La Ley Orgánica 8/2021, de protección
+          integral a la infancia y la adolescencia frente a la violencia, dice qué hacer.
+        </p>
+        <p><strong>En el momento</strong></p>
+        <ul>
+          <li>Escúchale con calma y dale las gracias por contártelo.</li>
+          <li>
+            No le hagas preguntas para averiguar qué ha pasado: la ley quiere que su testimonio lo recojan profesionales
+            preparados (artículo 11.2).
+          </li>
+          <li>
+            No le prometas guardar el secreto. Dile que se lo vas a contar a personas que le pueden ayudar: es tu deber
+            (artículos 15 y 16).
+          </li>
+          <li>Apunta cuanto antes lo que te ha contado, con sus palabras, y la fecha y la hora.</li>
+        </ul>
+        <p><strong>A quién avisar</strong></p>
+        <ul>
+          <li>
+            Ese mismo día, al coordinador o la coordinadora de bienestar y protección de tu centro y a la dirección. Todos
+            los centros deben tener esta figura, que es la referencia para estos casos (artículo 35).
+          </li>
+          <li>
+            Seguid el protocolo de vuestra administración educativa. Todos los centros deben aplicarlo, y se pone en marcha
+            también cuando es el propio niño o niña quien cuenta los hechos (artículo 34.1).
+          </li>
+          <li>
+            El personal de los centros escolares tiene que comunicarlo de forma inmediata a los servicios sociales. Si su
+            salud o su seguridad están en peligro, también a las Fuerzas y Cuerpos de Seguridad o al Ministerio Fiscal
+            (artículo 16.2). Avisar a la coordinación no quita este deber (artículo 35.2.b).
+          </li>
+          <li>Si hay un peligro inmediato, llama al 112.</li>
+        </ul>
+        <p>
+          <strong>Para orientarte</strong>, la Fundación ANAR (Ayuda a Niños y Adolescentes en Riesgo) tiene un teléfono
+          gratuito para docentes y familias: 600 50 51 52. El alumnado puede llamar gratis al 900 20 20 10 desde toda
+          España: es confidencial y responde un psicólogo o una psicóloga.
+        </p>
+      </div>
+
+      <h2>Soluciones</h2>
+      <div class="soluciones">
+        <p>
+          <strong>Nivel 1, «Mira y rodea»:</strong> 1, el colegio. 2, el médico. 3, jugar. 4, lo cuento. 5, la rampa.
+        </p>
+        <p>
+          <strong>Nivel 2, «¿Verdadero o falso?»:</strong> verdaderas, la 1, la 3, la 5 y la 7. Falsas, la 2, la 4, la 6 y
+          la 8.
+        </p>
+        <p>
+          <strong>Nivel 3, «Pienso y respondo»:</strong> las respuestas son libres. Valora que explique su idea y la una a
+          un derecho. En la 2, el derecho a ir a la escuela.
+        </p>
+      </div>
+
+      <h2>El Día Mundial de la Infancia</h2>
+      <p>
+        En 1954, la Asamblea General de las Naciones Unidas recomendó que todos los países celebraran, a partir de 1956, un
+        Día Universal del Niño, en la fecha que eligiera cada gobierno (resolución 836 (IX)). Hoy las Naciones Unidas lo
+        llaman Día Mundial de la Infancia y lo celebran el 20 de noviembre: ese día se aprobaron la Declaración de los
+        Derechos del Niño, en 1959, y la Convención, en 1989.
+      </p>
+
+      <div class="creditos">
+        <p>
+          <strong>Mis derechos: los derechos de la infancia en lectura fácil.</strong> IdEducando, noviembre de 2026. Ficha y
+          novedades: <span class="url">ideducando.es/material-gratuito/derechos-infancia-lectura-facil</span>
+        </p>
+        <p>
+          Fuentes, consultadas el 4 de noviembre de 2026: Convención sobre los Derechos del Niño, aprobada por la Asamblea
+          General de las Naciones Unidas en su resolución 44/25, de 20 de noviembre de 1989, y su estado en la Colección de
+          Tratados de las Naciones Unidas (treaties.un.org); Instrumento de Ratificación de la Convención sobre los Derechos
+          del Niño, de 30 de noviembre de 1990, «BOE» núm. 313, de 31 de diciembre de 1990, páginas 38897 a 38904
+          (BOE-A-1990-31312); resolución 836 (IX) de la Asamblea General, de 14 de diciembre de 1954, «Día Universal del
+          Niño», y la página «Día Mundial de la Infancia» de las Naciones Unidas (un.org); Ley Orgánica 8/2021, de 4 de
+          junio, de protección integral a la infancia y la adolescencia frente a la violencia, artículos 11, 15, 16, 34 y
+          35; Ley Orgánica 2/2006, de 3 de mayo, de Educación, artículo 4.3; Real Decreto 157/2022, de 1 de marzo, de
+          enseñanzas mínimas de la Educación Primaria, anexo II; UNE 153101:2018 EX, <em>Lectura Fácil. Pautas y
+          recomendaciones para la elaboración de documentos</em>, y UNE 153102:2018 EX, <em>Guía en Lectura Fácil para
+          validadores de documentos</em>; Real Decreto 903/1997, de 16 de junio, del número de urgencias 112; Fundación
+          ANAR, líneas de ayuda (anar.org).
+        </p>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+          adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender: es gratis
+          siempre. El plano del mural, las letras y el diseño son de IdEducando.
+        </p>
+        <p>Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales.</p>
+      </div>
+    </section>
+
+    <script>
+      // Los 12 derechos. Cada frase: [pictogramas, texto]. El primer pictograma del recuadro (panel)
+      // es también el de la tarjeta del mural y el de la tarjeta de la clase.
+      const DERECHOS = [
+        {
+          titulo: 'Los mismos derechos',
+          color: 'azul',
+          panel: [31983, 6975],
+          frases: [
+            [[20401], 'Todos los niños y las niñas tenemos los mismos derechos.'],
+            [[35431], 'Da igual de dónde vengo.'],
+            [[7116], 'Da igual cómo soy.'],
+            [[12321], 'Nadie me puede discriminar.'],
+          ],
+          palabra: ['Discriminar', 'Tratar peor a alguien por ser diferente.'],
+          pregunta: '¿Qué podemos hacer si alguien deja fuera del juego a un compañero o a una compañera?',
+          articulo: 'Artículo 2',
+          docente: 'no discriminación.',
+          tarjeta: 'Todos tenemos los mismos derechos.',
+        },
+        {
+          titulo: 'Un nombre',
+          color: 'verde',
+          panel: [27357, 12338],
+          frases: [
+            [[27357], 'Tengo derecho a tener un nombre.'],
+            [[37407], 'Cuando nací, apuntaron mi nombre en un registro.'],
+            [[12338], 'También tengo derecho a una nacionalidad.'],
+          ],
+          palabra: ['Nacionalidad', 'Dice de qué país soy.'],
+          pregunta: '¿Cómo te gusta que te llamen?',
+          articulo: 'Artículos 7 y 8',
+          docente: 'nombre, nacionalidad e identidad.',
+          tarjeta: 'Tengo derecho a tener un nombre.',
+        },
+        {
+          titulo: 'Una familia',
+          color: 'coral',
+          panel: [24515, 11731, 11733],
+          frases: [
+            [[2392], 'Tengo derecho a vivir con mi familia.'],
+            [[11735], 'Hay muchos tipos de familias.'],
+            [[11691], 'Mi familia me cuida y me ayuda a crecer.'],
+            [[39677], 'Si mi familia no puede cuidarme, otras personas me cuidan.'],
+          ],
+          pregunta: '¿Todas las familias son iguales?',
+          articulo: 'Artículos 9, 18 y 20',
+          docente:
+            'vivir con la familia, responsabilidad de madres y padres y protección de quien no puede vivir con su familia.',
+          tarjeta: 'Tengo derecho a vivir con mi familia.',
+        },
+        {
+          titulo: 'Cuidado y protección',
+          color: 'morado',
+          panel: [6192, 4550],
+          frases: [
+            [[4550], 'Tengo derecho a que me cuiden bien.'],
+            [[30620], 'Nadie me puede hacer daño.'],
+            [[26611], 'Nadie me puede insultar.'],
+            [[39668], 'Si algo me da miedo, pido ayuda.'],
+            [[3345], 'Se lo cuento a un adulto de confianza.'],
+          ],
+          palabra: ['Adulto de confianza', 'Una persona mayor que me escucha y me ayuda, en casa o en el cole.'],
+          pregunta: '¿A quién se lo puedes contar si algo te preocupa?',
+          articulo: 'Artículo 19',
+          docente:
+            'protección contra la violencia, los malos tratos y el descuido. Si alguien cuenta algo preocupante, lee la guía (página 31).',
+          tarjeta: 'Tengo derecho a que me cuiden y me protejan.',
+        },
+        {
+          titulo: 'Lo necesario para vivir',
+          color: 'amarillo',
+          panel: [2317, 4610],
+          frases: [
+            [[2317], 'Tengo derecho a vivir en una casa.'],
+            [[4610, 7233], 'También necesito comida y ropa.'],
+            [[2392], 'Mi familia me da lo que necesito.'],
+            [[33998], 'Si a mi familia le falta dinero, el país tiene que ayudarla.'],
+          ],
+          pregunta: '¿Qué necesitas de verdad para vivir?',
+          articulo: 'Artículo 27',
+          docente: 'nivel de vida adecuado.',
+          tarjeta: 'Tengo derecho a tener lo necesario para vivir.',
+        },
+        {
+          titulo: 'La salud',
+          color: 'naranja',
+          panel: [36591, 12293],
+          frases: [
+            [[36591], 'Tengo derecho a la salud.'],
+            [[2467, 8263], 'Si me encuentro mal, me atiende un médico o una médica.'],
+            [[24499], 'Necesito beber agua limpia.'],
+            [[28339], 'Necesito comer sano.'],
+          ],
+          pregunta: '¿Qué haces tú para cuidar tu salud?',
+          articulo: 'Artículo 24',
+          docente: 'salud y servicios sanitarios.',
+          tarjeta: 'Tengo derecho a la salud.',
+        },
+        {
+          titulo: 'La escuela',
+          color: 'azul',
+          panel: [3082, 8029],
+          frases: [
+            [[3082], 'Tengo derecho a ir a la escuela.'],
+            [[8029], 'En la escuela aprendo cosas nuevas.'],
+            [[24711], 'En la escuela me tratan con respeto.'],
+            [[6975], 'La escuela es para todos los niños y las niñas.'],
+          ],
+          pregunta: '¿Qué te gustaría aprender este curso?',
+          articulo: 'Artículos 28 y 29',
+          docente: 'educación.',
+          tarjeta: 'Tengo derecho a ir a la escuela.',
+        },
+        {
+          titulo: 'El juego y el descanso',
+          color: 'verde',
+          panel: [2439, 35717],
+          frases: [
+            [[2439], 'Tengo derecho a jugar.'],
+            [[31937], 'Tengo derecho a descansar.'],
+            [[24791, 2348], 'También puedo hacer música y pintar.'],
+            [[2255], 'Puedo jugar con otros niños y niñas.'],
+          ],
+          pregunta: '¿A qué te gusta jugar en el recreo?',
+          articulo: 'Artículo 31',
+          docente: 'descanso, juego, cultura y arte.',
+          tarjeta: 'Tengo derecho a jugar y a descansar.',
+        },
+        {
+          titulo: 'Mi opinión',
+          color: 'coral',
+          panel: [28421, 37861],
+          frases: [
+            [[28421], 'Tengo derecho a dar mi opinión.'],
+            [[31847], 'Mi opinión es lo que yo pienso.'],
+            [[9692, 11754], 'Puedo decirla con la voz o con signos.'],
+            [[31882], 'También la puedo decir con pictogramas.'],
+            [[2381], 'Los adultos me escuchan cuando deciden cosas sobre mí.'],
+          ],
+          pregunta: '¿Qué cosas de la clase podemos decidir entre todos?',
+          articulo: 'Artículos 12 y 13',
+          docente: 'derecho a ser escuchado y libertad de expresión.',
+          tarjeta: 'Tengo derecho a dar mi opinión.',
+        },
+        {
+          titulo: 'Mi lengua y mi cultura',
+          color: 'morado',
+          panel: [39433, 7099],
+          frases: [
+            [[39433], 'Tengo derecho a hablar la lengua de mi familia.'],
+            [[7099], 'Puedo celebrar las fiestas de mi familia.'],
+            [[39773], 'En el cole respetamos todas las culturas.'],
+          ],
+          palabra: ['Cultura', 'La forma de vivir de un grupo de personas, como su música o sus comidas.'],
+          pregunta: '¿Qué palabras sabes decir en otra lengua?',
+          articulo: 'Artículos 29 y 30',
+          docente: 'identidad cultural, lengua y religión propias.',
+          tarjeta: 'Tengo derecho a hablar la lengua de mi familia.',
+        },
+        {
+          titulo: 'Apoyos si tengo una discapacidad',
+          color: 'amarillo',
+          panel: [24513, 32648],
+          frases: [
+            [[32648], 'Si tengo una discapacidad, tengo derecho a recibir apoyos.'],
+            [[2542], 'Un apoyo puede ser una rampa.'],
+            [[31882], 'Un apoyo también puede ser un tablero de comunicación.'],
+            [[35717], 'Con apoyos, aprendo y juego con los demás.'],
+          ],
+          palabra: ['Apoyo', 'Algo o alguien que me ayuda a hacer las cosas.'],
+          pregunta: '¿Qué apoyos hay en nuestro cole?',
+          articulo: 'Artículo 23',
+          docente: 'niños y niñas con discapacidad.',
+          tarjeta: 'Si tengo una discapacidad, tengo derecho a recibir apoyos.',
+        },
+        {
+          titulo: 'Conocer mis derechos',
+          color: 'naranja',
+          panel: [11247, 28003],
+          frases: [
+            [[11247], 'Tengo derecho a conocer mis derechos.'],
+            [[28003], 'Los adultos tienen que explicarme mis derechos.'],
+            [[7141], 'Por eso leemos este libro.'],
+            [[3345], 'Puedo contar mis derechos a otras personas.'],
+          ],
+          pregunta: '¿Qué derecho le vas a contar a tu familia?',
+          articulo: 'Artículo 42',
+          docente: 'dar a conocer la Convención a los adultos y a los niños.',
+          tarjeta: 'Tengo derecho a conocer mis derechos.',
+        },
+      ];
+
+      // Preguntas del nivel 1: [pregunta, opciones [pictograma, nombre]].
+      const NIVEL_1 = [
+        ['¿Dónde aprendo cosas nuevas?', [[3142, 'piscina'], [3082, 'colegio'], [3389, 'tienda']]],
+        ['¿Quién me atiende si me encuentro mal?', [[2467, 'médico'], [6066, 'bombero'], [30526, 'cocinero']]],
+        ['¿Cuál es un derecho?', [[2354, 'consola'], [35209, 'helado'], [2439, 'jugar']]],
+        ['Si algo me da miedo, ¿qué hago?', [[5936, 'me callo'], [3345, 'lo cuento']]],
+        ['¿Qué ayuda a un niño que va en silla de ruedas?', [[3241, 'pelota'], [2542, 'rampa'], [25498, 'tele']]],
+      ];
+
+      // Frases del nivel 2: [pictograma, frase]. Las soluciones están en la guía.
+      const NIVEL_2 = [
+        [20401, 'Todos los niños y las niñas tenemos derechos.'],
+        [11247, 'Solo tienen derechos los niños que se portan bien.'],
+        [2439, 'Jugar es un derecho.'],
+        [2354, 'Una consola es un derecho.'],
+        [3345, 'Si algo me da miedo, se lo puedo contar a un adulto de confianza.'],
+        [24513, 'Los niños y las niñas con discapacidad no pueden ir a la escuela.'],
+        [31843, 'Soy niño o niña hasta los 18 años.'],
+        [2381, 'Los adultos no tienen que escuchar mi opinión.'],
+      ];
+
+      const img = (id, alt = '') => `<img src="pictogramas/${id}.png" alt="${alt}">`;
+      const total = DERECHOS.length;
+
+      // Altura del recuadro de colores según lo que hay en la página: así todo cabe en una hoja.
+      function altoPanel(d) {
+        const extra = Math.max(0, d.frases.length - 3);
+        return Math.max(34, 66 - extra * 13 - (d.palabra ? 16 : 0));
+      }
+
+      // ---------- Páginas de los derechos ----------
+      const paginas = DERECHOS.map((d, i) => {
+        const frases = d.frases
+          .map(([pictos, texto]) => `<li class="${pictos.length > 1 ? 'doble' : ''}"><span class="marco">${pictos.map((p) => img(p)).join('')}</span><p>${texto}</p></li>`)
+          .join('');
+        const palabra = d.palabra
+          ? `<p class="palabra"><strong>Palabra nueva. ${d.palabra[0]}:</strong> ${d.palabra[1]}</p>`
+          : '';
+        return `<section class="hoja derecho c-${d.color}" style="--alto:${altoPanel(d)}mm" data-alto="${altoPanel(d)}">
+          <header class="cabecera">
+            <span class="numero" aria-hidden="true">${i + 1}</span>
+            <div><p class="antetitulo-nino">Derecho ${i + 1} de ${total}</p><h1 class="titulo-nino">${d.titulo}</h1></div>
+          </header>
+          <div class="franja"></div>
+          <div class="panel">${d.panel.map((p) => img(p)).join('')}</div>
+          <ul class="frases">${frases}</ul>
+          ${palabra}
+          <div class="hablamos">${img(6517)}<div><p class="hablamos__titulo">Hablamos</p><p class="hablamos__pregunta">${d.pregunta}</p></div></div>
+          <p class="docente"><strong>Para el docente.</strong> Convención sobre los Derechos del Niño, ${d.articulo.toLowerCase()}: ${d.docente}</p>
+        </section>`;
+      });
+      document.getElementById('derechos').innerHTML = paginas.join('');
+
+      // ---------- Nivel 1 ----------
+      document.getElementById('nivel-1').innerHTML = NIVEL_1.map(
+        ([pregunta, opciones], i) => `<li class="eleccion c-verde"><span class="eleccion__numero" aria-hidden="true">${i + 1}</span><p>${pregunta}</p>
+          <div class="opciones">${opciones.map(([p, nombre]) => `<span class="opcion">${img(p)}<span>${nombre}</span></span>`).join('')}</div></li>`,
+      ).join('');
+
+      // ---------- Nivel 2 ----------
+      document.getElementById('nivel-2').innerHTML = NIVEL_2.map(
+        ([p, frase], i) => `<tr><td><span class="vf__numero">${i + 1}</span></td><td><span class="vf__frase">${img(p)}<span>${frase}</span></span></td>
+          <td class="vf__respuesta"><span class="vf__circulo">${img(5584, 'Verdadero')}</span></td>
+          <td class="vf__respuesta"><span class="vf__circulo">${img(5526, 'Falso')}</span></td></tr>`,
+      ).join('');
+
+      // ---------- Tarjetas del mural: dos por hoja apaisada ----------
+      const tarjetas = DERECHOS.map(
+        (d, i) => `<article class="tarjeta c-${d.color}">
+          <div class="tarjeta__cabecera"><span class="tarjeta__numero" aria-hidden="true">${i + 1}</span><h2>${d.titulo}</h2></div>
+          <div class="tarjeta__picto">${img(d.panel[0])}</div>
+          <p class="tarjeta__frase">${d.tarjeta}</p>
+          <p class="tarjeta__articulo">Derecho ${i + 1} · ${d.articulo} de la Convención</p>
+        </article>`,
+      );
+      let hojas = '';
+      for (let i = 0; i < tarjetas.length; i += 2) hojas += `<section class="hoja-tarjetas">${tarjetas[i]}${tarjetas[i + 1]}</section>`;
+      document.getElementById('tarjetas').innerHTML = hojas;
+
+      // ---------- Tarjetas de la clase: cuatro por hoja ----------
+      const minis = DERECHOS.map((d) => `<span class="c-${d.color}">${img(d.panel[0], d.titulo)}</span>`).join('');
+      const miTarjeta = `<article class="mi-tarjeta">
+          <div class="rayos"></div>
+          <h2>Mi derecho favorito</h2>
+          <p class="nombre-linea">Me llamo:<span class="linea"></span></p>
+          <p class="mi-tarjeta__consigna">Rodea mi derecho favorito.</p>
+          <div class="minis">${minis}</div>
+          <div class="dibujo">Lo dibujo aquí:</div>
+        </article>`;
+      document.getElementById('clase').innerHTML = `<section class="hoja-clase">${miTarjeta.repeat(4)}</section>`;
+
+      // ---------- Portada: los 12 pictogramas en mosaico ----------
+      document.getElementById('mosaico').innerHTML = DERECHOS.map((d) => `<span class="c-${d.color}">${img(d.panel[0])}</span>`).join('');
+
+      // ---------- Plano del mural (unidades: milímetros del mural de 1800 × 1000) ----------
+      (function plano() {
+        const colores = { azul: '#2f6fd6', verde: '#1fa67a', coral: '#e8553e', morado: '#8c4fb8', amarillo: '#f6c12e', naranja: '#f5961f' };
+        const tintes = { azul: '#e4edfb', verde: '#dcf3ea', coral: '#fde5e0', morado: '#efe5f7', amarillo: '#fdf0c7', naranja: '#fde8cf' };
+        let s = `<rect x="4" y="4" width="1792" height="992" rx="10" fill="#fffdf8" stroke="#46578c" stroke-width="5"/>`;
+        // Título: 2 hojas apaisadas
+        const tituloX = [612, 908];
+        ['Nuestros', 'derechos'].forEach((palabra, i) => {
+          s += `<rect x="${tituloX[i]}" y="40" width="280" height="175" rx="6" fill="#fff" stroke="#1e2b55" stroke-width="4"/>`;
+          s += `<text x="${tituloX[i] + 140}" y="148" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="62" fill="#1e2b55">${palabra}</text>`;
+        });
+        // 12 tarjetas en 2 filas de 6
+        const ancho = 132, alto = 182, hueco = 20;
+        const x0 = (1800 - (6 * ancho + 5 * hueco)) / 2;
+        DERECHOS.forEach((d, i) => {
+          const x = x0 + (i % 6) * (ancho + hueco);
+          const y = 250 + Math.floor(i / 6) * (alto + hueco);
+          s += `<rect x="${x}" y="${y}" width="${ancho}" height="${alto}" rx="8" fill="${tintes[d.color]}" stroke="${colores[d.color]}" stroke-width="6"/>`;
+          s += `<text x="${x + ancho / 2}" y="${y + 108}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="64" fill="#1e2b55">${i + 1}</text>`;
+        });
+        // Tarjetas de la clase: a los lados y abajo
+        const clase = [];
+        for (const xBase of [40, 1800 - 40 - 3 * 93 - 2 * 18]) {
+          for (let f = 0; f < 4; f++) for (let c = 0; c < 3; c++) clase.push([xBase + c * (93 + 18), 250 + f * (129 + 22)]);
+        }
+        for (let c = 0; c < 7; c++) clase.push([x0 + 22 + c * (93 + 34), 668]);
+        clase.forEach(([x, y]) => {
+          s += `<rect x="${x}" y="${y}" width="93" height="129" rx="6" fill="#fff" stroke="#46578c" stroke-width="3" stroke-dasharray="10 7"/>`;
+          s += `<circle cx="${x + 46.5}" cy="${y + 52}" r="20" fill="none" stroke="#46578c" stroke-width="3"/><path d="M${x + 18} ${y + 112} q28.5 -38 57 0" fill="none" stroke="#46578c" stroke-width="3"/>`;
+        });
+        // Rótulos
+        s += `<text x="900" y="880" text-anchor="middle" font-family="Atkinson Hyperlegible" font-size="38" fill="#1e2b55">Tarjetas de la clase a los lados y abajo</text>`;
+        s += `<text x="900" y="950" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="36" fill="#46578c">Papel continuo de 180 × 100 cm</text>`;
+        document.getElementById('plano').innerHTML = s;
+      })();
+
+      // Si una página de derecho no cabe, se encoge el recuadro de colores hasta que quepa.
+      function ajustar() {
+        for (const hoja of document.querySelectorAll('.derecho')) {
+          let alto = parseFloat(hoja.dataset.alto);
+          while (hoja.scrollHeight > hoja.clientHeight + 1 && alto > 30) {
+            alto -= 2;
+            hoja.style.setProperty('--alto', `${alto}mm`);
+          }
+        }
+      }
+      document.fonts.ready.then(ajustar);
+    </script>
+  </body>
+</html>

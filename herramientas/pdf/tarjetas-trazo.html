@@ -1,0 +1,1704 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tarjetas de trazo: trazos previos, números y letras · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Dibujos propios, sin pictogramas de ARASAAC: todos los derechos reservados. */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         dibujos, y la portada sale corrida. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* El mismo margen arriba y abajo, para que en las hojas de tarjetas la línea de corte caiga
+         justo en la mitad del folio y cada mitad quepa en una funda A5. (Con una página con nombre,
+         como @page hoja, Chromium parte la hoja y deja de pintar los dibujos: por eso va aquí.) */
+      @page {
+        margin-bottom: 17mm;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .oculto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      /* ---------- Colores de cada grupo de tarjetas ---------- */
+      .s-previos {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --b: #bcd0f2;
+      }
+
+      .s-numeros {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --b: #f6cd98;
+      }
+
+      .s-letras {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --b: #d8c4ec;
+      }
+
+      /* ---------- Cómo montarlo, con letra de 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montaje__columnas {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada__titulo {
+        font-size: 52pt;
+        line-height: 0.98;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 120mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 9.5pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .pegatina {
+        position: absolute;
+        right: 20mm;
+        top: 24mm;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(9deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .portada .pegatina b {
+        display: block;
+        font-size: 28pt;
+        line-height: 1;
+      }
+
+      .portada__ilustracion {
+        position: absolute;
+        left: 0;
+        top: 122mm;
+        width: 210mm;
+        height: 150mm;
+        z-index: 1;
+      }
+
+      /* ---------- Así son las tarjetas ---------- */
+      .indice {
+        break-after: page;
+      }
+
+      .indice h1 {
+        font-size: 22pt;
+      }
+
+      .indice h2 {
+        font-size: 14pt;
+        margin: 5mm 0 2mm;
+      }
+
+      table.paginas th,
+      table.paginas td {
+        font-size: 11pt;
+        padding: 1.8mm 2.5mm;
+      }
+
+      table.paginas td:not(:first-child) {
+        white-space: nowrap;
+      }
+
+      .muestra {
+        width: 178mm;
+        height: 77mm;
+        overflow: hidden;
+        margin: 1mm 0 3mm;
+      }
+
+      .muestra > .tarjeta {
+        transform: scale(0.6);
+        transform-origin: 0 0;
+        width: 178mm;
+      }
+
+      .partes {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2mm 6mm;
+      }
+
+      .partes li {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr);
+        gap: 2.5mm;
+        align-items: start;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .partes b {
+        font-family: var(--titulos);
+      }
+
+      .partes svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .orden {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin-top: 2mm;
+      }
+
+      .orden p {
+        margin: 0 0 1.5mm;
+        font-size: 11pt;
+      }
+
+      .orden__cajas {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.5mm;
+      }
+
+      .orden__cajas span {
+        display: grid;
+        place-items: center;
+        height: 11mm;
+        border-radius: 2mm;
+        border: 0.4mm solid var(--linea);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 10.5pt;
+        text-align: center;
+        line-height: 1.1;
+      }
+
+      .orden__cajas .es-modelo {
+        background: var(--crema);
+        border-color: var(--marino);
+        border-width: 0.6mm;
+      }
+
+      /* ---------- Hojas de tarjetas: 2 por folio ---------- */
+      .hoja {
+        position: relative;
+        height: 263mm;
+        display: grid;
+        grid-template-rows: 125.5mm 12mm 125.5mm;
+        break-after: page;
+        break-inside: avoid;
+      }
+
+      .corte {
+        position: relative;
+        margin: 0 -16mm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .corte::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        border-top: 0.45mm dashed #8a95b5;
+      }
+
+      .corte span {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 1.5mm;
+        padding: 0 2.5mm;
+        background: #fff;
+        font-size: 8pt;
+        color: var(--suave);
+      }
+
+      .corte svg {
+        width: 5mm;
+        height: 5mm;
+      }
+
+      .tarjeta {
+        position: relative;
+        display: grid;
+        grid-template-rows: 13mm 106mm 1fr;
+        row-gap: 2.5mm;
+        height: 125.5mm;
+      }
+
+      .tarjeta--vacia {
+        visibility: hidden;
+      }
+
+      .cabecera {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        min-width: 0;
+      }
+
+      .chip {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 1.4mm;
+        margin: 0;
+        padding: 0.9mm 2.8mm 0.9mm 2mm;
+        border-radius: 99px;
+        border: 0.45mm solid var(--c);
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        line-height: 1.1;
+        color: var(--marino);
+      }
+
+      .chip svg {
+        width: 5.5mm;
+        height: 5.5mm;
+      }
+
+      .chip--mano {
+        margin-left: auto;
+        border-color: var(--marino);
+        background: #fff;
+      }
+
+      .tarjeta__titulo {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .tarjeta__titulo small {
+        display: block;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        line-height: 1.2;
+        margin-top: 0.6mm;
+      }
+
+      .tarjeta__pie {
+        margin: 0;
+        align-self: end;
+        font-size: 8pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .zurdos .tarjeta__pie {
+        text-align: right;
+      }
+
+      /* Cajas en fila: modelo y 3 niveles (letras, números, verticales e inclinadas) */
+      .cajas {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+      }
+
+      .caja {
+        display: flex;
+        flex-direction: column;
+        border: 0.4mm solid var(--b);
+        border-radius: 3mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .caja--modelo {
+        background: var(--crema);
+        border: 0.6mm solid var(--marino);
+      }
+
+      .etiqueta {
+        margin: 0;
+        padding: 1.6mm 2.4mm 0;
+        height: 20.5mm;
+        flex: none;
+      }
+
+      .etiqueta__adulto {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0 0 0.6mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .etiqueta__nino {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+        color: var(--marino);
+      }
+
+      .puntos {
+        display: inline-flex;
+        gap: 0.9mm;
+      }
+
+      .puntos i {
+        width: 2.4mm;
+        height: 2.4mm;
+        border-radius: 50%;
+        border: 0.35mm solid var(--marino);
+      }
+
+      .puntos i.lleno {
+        background: var(--marino);
+      }
+
+      .caja svg {
+        margin-top: auto;
+      }
+
+      /* Filas: modelo a un lado y los 3 niveles uno debajo de otro (trazos que van de lado a lado) */
+      .filas {
+        display: grid;
+        grid-template-columns: 42.25mm minmax(0, 1fr);
+        gap: 3mm;
+      }
+
+      .zurdos .filas {
+        grid-template-columns: minmax(0, 1fr) 42.25mm;
+      }
+
+      .filas__niveles {
+        display: grid;
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        min-width: 0;
+      }
+
+      .fila {
+        display: flex;
+        flex-direction: column;
+        border: 0.4mm solid var(--b);
+        border-radius: 3mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .fila .etiqueta {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        height: 8.6mm;
+        padding: 1mm 2.6mm 0;
+      }
+
+      .fila .etiqueta__adulto {
+        margin: 0;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin: 4.5mm 0 1.6mm;
+      }
+
+      .guia p,
+      .guia li {
+        font-size: 11pt;
+        line-height: 1.42;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 2mm;
+      }
+
+      .guia li {
+        margin-bottom: 1mm;
+      }
+
+      .guia .caja h3 {
+        font-size: 12pt;
+      }
+
+      .reglas {
+        list-style: none;
+        padding: 0;
+      }
+
+      .reglas li {
+        display: grid;
+        grid-template-columns: 7mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: start;
+      }
+
+      .reglas svg {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .creditos {
+        font-size: 9pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -58mm; top: 100mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 72mm; height: 72mm; left: -30mm; top: 124mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 46mm; height: 46mm; left: 40mm; top: 252mm; background: var(--naranja-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Fichas de trabajo · Grafomotricidad</p>
+        <h1 class="portada__titulo">Tarjetas<br />de trazo</h1>
+        <p class="portada__subtitulo">Trazos previos, números y letras para repasar con rotulador y borrar. Con versión para zurdos.</p>
+        <div class="portada__pie">
+          <p>Dibujos de IdEducando.<br />Sin pictogramas.</p>
+          <p style="text-align: right">© IdEducando, 2026<br />Todos los derechos reservados<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>3</b>niveles en<br />cada tarjeta</div>
+      <svg class="portada__ilustracion" id="portada-ilustracion" viewBox="0 0 210 150" aria-hidden="true"></svg>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         ASÍ SON LAS TARJETAS
+         ====================================================================== -->
+    <section class="indice">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Antes de imprimir</p>
+      <h1>Así son las tarjetas</h1>
+      <p>
+        Hay 3 grupos de tarjetas. Cada grupo está 2 veces: una para quien escribe con la mano derecha y otra para quien
+        escribe con la izquierda. Imprime solo la de su mano.
+      </p>
+      <table class="paginas">
+        <thead>
+          <tr>
+            <th scope="col">Grupo</th>
+            <th scope="col">Tarjetas</th>
+            <th scope="col">Para diestros</th>
+            <th scope="col">Para zurdos</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-paginas"></tbody>
+      </table>
+
+      <h2>Cada tarjeta tiene 4 cajas</h2>
+      <div class="muestra" id="muestra" aria-hidden="true"></div>
+      <ul class="partes" id="partes"></ul>
+
+      <h2>Diestros y zurdos</h2>
+      <div class="orden">
+        <div>
+          <p><strong>Para diestros:</strong> el modelo, a la izquierda.</p>
+          <div class="orden__cajas" aria-hidden="true">
+            <span class="es-modelo">Mira</span><span>Nivel 1</span><span>Nivel 2</span><span>Nivel 3</span>
+          </div>
+        </div>
+        <div>
+          <p><strong>Para zurdos:</strong> el modelo, a la derecha.</p>
+          <div class="orden__cajas" aria-hidden="true">
+            <span>Nivel 1</span><span>Nivel 2</span><span>Nivel 3</span><span class="es-modelo">Mira</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 3mm">
+        Así la mano no tapa el modelo mientras escribe. Cada tarjeta lo dice arriba, a la derecha: «Para diestros» o «Para
+        zurdos». La guía para el docente y la familia está al final, en las páginas <span data-pagina-guia></span>.
+      </p>
+    </section>
+
+    <!-- Tarjetas: las crea el programa del final de este archivo -->
+    <div id="tarjetas"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE Y LA FAMILIA
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente y la familia</p>
+      <h1>Cómo usar las tarjetas de trazo</h1>
+      <p>
+        Las tarjetas sirven para practicar el movimiento de la escritura: dónde se empieza, hacia dónde se va y en qué
+        orden se hacen los trazos. Primero, los trazos previos. Después, los números y las letras minúsculas de imprenta.
+        Están pensadas para toda la clase, con el Diseño Universal para el Aprendizaje (DUA), y para el alumnado con
+        discapacidad motora, discapacidad intelectual o dificultades de aprendizaje, que suele necesitar más práctica y
+        ayudas que se retiran poco a poco.
+      </p>
+
+      <h2>Paso a paso, con la funda y el rotulador</h2>
+      <ol>
+        <li>Dale la tarjeta plastificada y un rotulador de pizarra blanca. Ponla recta delante del peque, o inclinada si es zurdo (mira la página siguiente).</li>
+        <li>
+          Mirad juntos la caja <strong>«Mira»</strong>. Haced el trazo en el aire con el dedo y decid en voz alta por dónde
+          va: «empiezo en el punto verde y bajo».
+        </li>
+        <li>
+          <strong>Nivel 1, «Repasa»:</strong> repasa la línea de puntos desde el punto verde, en la dirección de la
+          flecha. Primero con el dedo y después con el rotulador. Si hay varios puntos, el 1 va primero.
+        </li>
+        <li><strong>Nivel 2, «Empieza en el punto»:</strong> hace el trazo desde cada punto, mirando el modelo.</li>
+        <li><strong>Nivel 3, «Ahora, tú»:</strong> lo hace sin ayudas, en el renglón.</li>
+        <li>Borra con el trapo y vuelve a empezar. Al final, guarda la tarjeta limpia.</li>
+      </ol>
+      <div class="caja caja--verde">
+        <h3>Cuándo pasar de nivel</h3>
+        <p>
+          Cuando le salga bien 3 veces seguidas, pasa al nivel siguiente. Fíjate sobre todo en el movimiento: que empiece
+          en el punto y vaya en la dirección de la flecha. Que quede bonito importa menos. Si un nivel se le atraganta,
+          vuelve un rato al anterior.
+        </p>
+      </div>
+
+      <h2>Cuánto rato</h2>
+      <p>
+        Ratos cortos, muchos días. El servicio de terapia ocupacional infantil de Cambridgeshire, del servicio público de
+        salud del Reino Unido (NHS, por sus siglas en inglés), propone de 5 a 10 minutos al día, en casa o en el cole.
+        Para cuando todavía tiene ganas y termina con algo que le salga bien.
+      </p>
+
+      <h2>Por qué practicar el trazo de verdad</h2>
+      <p>
+        Una revisión de 11 estudios con escolares con dificultades en la letra encontró que no mejoraban las
+        intervenciones sin práctica de escritura, como los ejercicios sensoriales sin escribir. Tampoco las de menos de
+        20 sesiones de práctica. Su conclusión: para mejorar la letra hay que practicar la escritura, y lo suficiente
+        (Hoy, Egan y Feder, 2011).
+      </p>
+      <p>
+        Repasar ayuda a empezar, pero no basta. El NHS avisa de que las letras no se aprenden calcando o copiando: el peque
+        tiene que hacer el movimiento sin calcar. Por eso cada tarjeta termina en el nivel 3, con el renglón vacío.
+      </p>
+
+      <h2 class="salto">La forma de trazar que siguen las tarjetas</h2>
+      <ul class="reglas" id="reglas"></ul>
+      <div class="caja caja--amarilla">
+        <h3>En cada cole se puede hacer distinto</h3>
+        <p>
+          El orden de los trazos puede cambiar de un centro a otro. Puede que en vuestro colegio la a se haga de una vez,
+          sin levantar el rotulador, o que el 4 vaya cerrado. Si es así, seguid la forma del cole, para que en casa y en
+          clase se haga igual. Para eso están las tarjetas libres: dibuja en ellas el modelo como lo hacen en el cole.
+        </p>
+      </div>
+
+      <h2>Para zurdos</h2>
+      <p>
+        En sus tarjetas, el modelo va a la derecha y la mano izquierda no lo tapa. El NHS da además estos consejos para
+        la postura y el papel:
+      </p>
+      <ul>
+        <li>La tarjeta, en el lado izquierdo del cuerpo, que es el de la mano que escribe, e inclinada hacia la derecha. Como mucho, 45 grados.</li>
+        <li>Que sujete el rotulador a unos 3 cm de la punta, para ver lo que escribe.</li>
+        <li>Con el brazo apoyado en la mesa. Si hace falta, que suba la tarjeta en vez de bajar el brazo.</li>
+        <li>En la mesa, a la izquierda de un compañero diestro, para que no choquen los codos.</li>
+        <li>Es normal que emborrone un poco. No se lo tengas en cuenta y valora su esfuerzo.</li>
+      </ul>
+
+      <h2>Ideas para adaptarlas (DUA)</h2>
+      <ul>
+        <li>
+          <strong>Si cuesta sujetar el rotulador</strong>, prueba uno más grueso o con un adaptador de goma. Pega la
+          tarjeta a la mesa con cinta de carrocero, o ponla sobre una carpeta de anillas para que quede inclinada.
+        </li>
+        <li><strong>Si necesita más tiempo</strong>, una tarjeta cada vez y muchos días en el nivel 1. Di siempre las mismas palabras para cada trazo, como «arriba» y «abajo».</li>
+        <li><strong>Si confunde la b y la d</strong>, recuérdale cómo empieza cada una: la b, por el palo; la d, por el redondel, como la c.</li>
+        <li><strong>Para toda la clase</strong>, en un rincón con las tarjetas por grupos. Cada cual elige su nivel.</li>
+        <li><strong>Más reto:</strong> en el nivel 3, la letra varias veces seguidas. En una tarjeta libre, su nombre o palabras cortas.</li>
+      </ul>
+
+      <div class="creditos">
+        <p>
+          <strong>Tarjetas de trazo.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/tarjetas-trazo</span>
+        </p>
+        <p>
+          Fuentes: Hoy, M. M. P., Egan, M. Y. y Feder, K. P. (2011). A systematic review of interventions to improve
+          handwriting. <em>Canadian Journal of Occupational Therapy</em>, 78(1), 13-25.
+          <span class="url">https://doi.org/10.2182/cjot.2011.78.1.3</span>
+        </p>
+        <p>
+          East of England Community Health and Care NHS Trust. <em>Handwriting and typing</em>. Página del servicio de
+          salud infantil de Cambridgeshire y Peterborough, <span class="url">cambspborochildrenshealth.nhs.uk</span>.
+          Consultada el 4 de noviembre de 2026.
+        </p>
+        <p>
+          Servicio de Terapia Ocupacional Infantil de Cambridgeshire, NHS (2025). <em>Handwriting</em>. Hoja de estrategias
+          para casa y el cole, <span class="url">cambspborochildrenshealth.nhs.uk</span>.
+        </p>
+        <p>Los dibujos y el diseño de las tarjetas son de IdEducando. No llevan pictogramas.</p>
+        <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirlas, rellenarlas y adaptarlas para tu alumnado. No se puede compartir el archivo, subirlo a otra web ni venderlo: para recomendarlas, comparte el enlace de su ficha en ideducando.es.</p>
+      </div>
+    </section>
+
+    <script>
+      // ===========================================================================
+      // Tarjetas de trazo de IdEducando. Todos los dibujos son propios y se hacen aquí,
+      // en SVG. Las medidas van en milímetros: en cada dibujo, 1 unidad = 1 mm de la hoja.
+      // Estilo del trazo, el mismo que en el resto de IdEducando: carril de color, línea de
+      // puntos, punto de salida verde con su número y flecha al lado del camino.
+      // ===========================================================================
+      const NS = 'http://www.w3.org/2000/svg';
+      const T = '#1e2b55';
+      const SUAVE = '#46578c';
+      const LINEA = '#9aa5c4';
+      const VERDE = '#1fa67a';
+      const COLOR = { azul: '#2f6fd6', verde: '#1fa67a', coral: '#e8553e', morado: '#8c4fb8', amarillo: '#f6c12e', naranja: '#f5961f' };
+      const TINTE = { azul: '#e4edfb', verde: '#dcf3ea', coral: '#fde5e0', morado: '#efe5f7', amarillo: '#fdf0c7', naranja: '#fde8cf' };
+      const BORDE = { azul: '#bcd0f2', verde: '#b2e1cf', coral: '#f6c3b8', morado: '#d8c4ec', amarillo: '#f2d98c', naranja: '#f6cd98' };
+      const SECCION = { previos: 'azul', numeros: 'naranja', letras: 'morado' };
+
+      const n2 = (v) => Math.round(v * 100) / 100;
+      const xy = (p) => `${n2(p[0])} ${n2(p[1])}`;
+      const rad = (g) => (g * Math.PI) / 180;
+      const contorno = (ancho = 0.9) => `stroke="${T}" stroke-width="${ancho}" stroke-linecap="round" stroke-linejoin="round"`;
+
+      // ---------------------------------------------------------------- Medir caminos
+      const medidor = document.createElementNS(NS, 'svg');
+      medidor.setAttribute('width', '1');
+      medidor.setAttribute('height', '1');
+      medidor.setAttribute('aria-hidden', 'true');
+      medidor.style.cssText = 'position:absolute;left:-60px;top:0;overflow:hidden';
+      document.body.appendChild(medidor);
+      const medidas = new Map();
+      function medir(d) {
+        if (medidas.has(d)) return medidas.get(d);
+        const p = document.createElementNS(NS, 'path');
+        p.setAttribute('d', d);
+        medidor.appendChild(p);
+        const L = p.getTotalLength();
+        const en = (s) => {
+          const q = p.getPointAtLength(Math.max(0, Math.min(L, s)));
+          return [q.x, q.y];
+        };
+        const m = { L, en };
+        medidas.set(d, m);
+        return m;
+      }
+
+      // ---------------------------------------------------------------- Caminos
+      const linea = (...pts) => 'M' + pts.map(xy).join(' L');
+      /** Puntos de un arco de elipse. Con a1 > a0 gira hacia la izquierda, al revés que el reloj. */
+      function arco(cx, cy, rx, ry, a0, a1, paso = 3) {
+        const n = Math.max(2, Math.ceil(Math.abs(a1 - a0) / paso));
+        return Array.from({ length: n + 1 }, (_, i) => {
+          const a = rad(a0 + ((a1 - a0) * i) / n);
+          return [cx + rx * Math.cos(a), cy - ry * Math.sin(a)];
+        });
+      }
+      const camino = (pts) => 'M' + pts.map(xy).join(' L');
+      /** Redondel entero que empieza en el ángulo a0 y gira hacia la izquierda. */
+      const redondel = (cx, cy, r, a0) => camino(arco(cx, cy, r, r, a0, a0 + 360));
+      const muestrear = (f, t0, t1, n) => Array.from({ length: n + 1 }, (_, i) => f(t0 + ((t1 - t0) * i) / n));
+      /** Mueve un camino escrito con números: suma dx a las x y dy a las y. */
+      function mover(d, dx, dy) {
+        let i = 0;
+        return d.replace(/-?\d+(?:\.\d+)?/g, (v) => n2(+v + (i++ % 2 === 0 ? dx : dy)));
+      }
+
+      // ---------------------------------------------------------------- Piezas del trazo
+      function salida(p, num) {
+        return (
+          `<g class="salida"><circle cx="${n2(p[0])}" cy="${n2(p[1])}" r="3.75" fill="${VERDE}" stroke="#fff" stroke-width="0.8"/>` +
+          `<text x="${n2(p[0])}" y="${n2(p[1] + 2.32)}" font-family="Outfit, sans-serif" font-weight="700" font-size="6.6" fill="#fff" text-anchor="middle">${num}</text></g>`
+        );
+      }
+
+      /** Flecha junto al camino: va de «desde» a «desde + largo» (en mm por el camino), separada «sep» mm.
+       *  lado 1 = a la derecha de quien camina por el trazo; lado -1 = a su izquierda. */
+      function flecha(d, { desde = 5, largo = 10, lado = 1, sep = 6.2 }) {
+        const { L, en } = medir(d);
+        const pts = [];
+        const N = 16;
+        for (let k = 0; k <= N; k++) {
+          const s0 = Math.min(L - 0.4, desde + (largo * k) / N);
+          const a = en(s0);
+          const b = en(s0 + 0.4);
+          let tx = b[0] - a[0];
+          let ty = b[1] - a[1];
+          const m = Math.hypot(tx, ty) || 1;
+          tx /= m;
+          ty /= m;
+          pts.push([a[0] - ty * sep * lado, a[1] + tx * sep * lado]);
+        }
+        const p1 = pts[pts.length - 4];
+        const p2 = pts[pts.length - 1];
+        const ang = Math.atan2(p2[1] - p1[1], p2[0] - p1[0]);
+        const k = 2.5;
+        const h1 = [p2[0] - k * Math.cos(ang - 0.6), p2[1] - k * Math.sin(ang - 0.6)];
+        const h2 = [p2[0] - k * Math.cos(ang + 0.6), p2[1] - k * Math.sin(ang + 0.6)];
+        return `<path d="${camino(pts)}" fill="none" ${contorno(1.05)}/><path d="M${xy(h1)} L${xy(p2)} L${xy(h2)}" fill="none" ${contorno(1.05)}/>`;
+      }
+
+      const carril = (d, color, ancho = 8.4) =>
+        `<path d="${d}" fill="none" stroke="${BORDE[color]}" stroke-width="${ancho + 1.1}" stroke-linecap="round" stroke-linejoin="round"/>` +
+        `<path d="${d}" fill="none" stroke="${TINTE[color]}" stroke-width="${ancho}" stroke-linecap="round" stroke-linejoin="round"/>`;
+      const deTrazos = (d) => `<path d="${d}" fill="none" stroke="${T}" stroke-width="1.55" stroke-dasharray="0.01 3.1" stroke-linecap="round" stroke-linejoin="round"/>`;
+      const macizo = (d) => `<path d="${d}" fill="none" stroke="${T}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>`;
+
+      /**
+       * Dibuja los trazos de un modelo según el modo:
+       *   modelo  = trazo seguido, flechas y puntos de salida (caja «Mira»)
+       *   repasa  = carril, línea de puntos, flechas y puntos de salida (nivel 1)
+       *   punto   = solo los puntos de salida (nivel 2)
+       *   nada    = nada (nivel 3: solo el renglón)
+       * Cada trazo: { d, flechas: [{desde, largo, lado}], salida: [dx, dy] (si el punto va desplazado),
+       * punto: [x, y] (un punto que se pone, como el de la i) }.
+       */
+      function trazos(lista, modo, color, sepModelo = 4.4) {
+        if (modo === 'nada') return '';
+        let fondo = '';
+        let lineas = '';
+        let flechas = '';
+        let puntos = '';
+        lista.forEach((t, i) => {
+          const num = i + 1;
+          if (t.punto) {
+            puntos = salida(t.punto, num) + puntos;
+            return;
+          }
+          if (modo === 'repasa') {
+            fondo += carril(t.d, color);
+            lineas += deTrazos(t.d);
+          } else if (modo === 'modelo') {
+            lineas += macizo(t.d);
+          }
+          if (modo !== 'punto') for (const f of t.flechas ?? []) flechas += flecha(t.d, { ...f, sep: f.sep ?? (modo === 'repasa' ? 6.3 : sepModelo) });
+          const inicio = medir(t.d).en(0);
+          const p = t.salida ? [inicio[0] + t.salida[0], inicio[1] + t.salida[1]] : inicio;
+          puntos = salida(p, num) + puntos;
+        });
+        return fondo + lineas + flechas + puntos;
+      }
+
+      // ---------------------------------------------------------------- Renglones
+      const RENGLON = { alto: 19, x: 24, bajo: 17 }; // zona alta, zona de la x y zona baja (mm)
+
+      function renglonLetras(ancho, base, color) {
+        const arriba = base - RENGLON.x - RENGLON.alto;
+        const medio = base - RENGLON.x;
+        const abajo = base + RENGLON.bajo;
+        return (
+          `<rect x="1.5" y="${medio}" width="${n2(ancho - 3)}" height="${RENGLON.x}" fill="${TINTE[color]}" opacity="0.55"/>` +
+          `<path d="M1.5 ${arriba} H${n2(ancho - 1.5)} M1.5 ${abajo} H${n2(ancho - 1.5)}" stroke="${LINEA}" stroke-width="0.35"/>` +
+          `<path d="M1.5 ${medio} H${n2(ancho - 1.5)}" stroke="${LINEA}" stroke-width="0.4" stroke-dasharray="2 1.4"/>` +
+          `<path d="M1.5 ${base} H${n2(ancho - 1.5)}" stroke="${T}" stroke-width="0.6"/>`
+        );
+      }
+
+      function renglonNumeros(ancho, arriba, alto) {
+        const medio = arriba + alto / 2;
+        const base = arriba + alto;
+        return (
+          `<path d="M1.5 ${arriba} H${n2(ancho - 1.5)}" stroke="${LINEA}" stroke-width="0.4"/>` +
+          `<path d="M1.5 ${medio} H${n2(ancho - 1.5)}" stroke="${LINEA}" stroke-width="0.4" stroke-dasharray="2 1.4"/>` +
+          `<path d="M1.5 ${base} H${n2(ancho - 1.5)}" stroke="${T}" stroke-width="0.6"/>`
+        );
+      }
+
+      // ===========================================================================
+      // LETRAS minúsculas de imprenta. Origen en la línea de base, a la izquierda de la letra.
+      // La x mide 24 mm; los palos altos suben 19 mm más y los bajos bajan 17.
+      // Convención: se empieza arriba (la e, en el medio); palos de arriba abajo; rayas de
+      // izquierda a derecha; redondeles hacia la izquierda, al revés que las agujas del reloj.
+      // a, d, g, q: primero el redondel y después el palo. b, p, h, n, m, r: primero el palo y
+      // después la barriga o el puente, que sale del palo. Puntos, rayas y virgulilla, al final.
+      // ===========================================================================
+      const X = -24; // línea de la x
+      const ALTA = -43; // línea de arriba
+      const BAJA = 17; // línea de abajo
+      const SALE = -15; // altura a la que salen del palo el puente y la barriga
+
+      const PUENTE = (x0, ancho) =>
+        `M${x0} ${SALE} C${n2(x0 + 2)} -21, ${n2(x0 + 0.27 * ancho)} -24, ${n2(x0 + 0.5 * ancho)} -24 C${n2(x0 + 0.82 * ancho)} -24, ${n2(x0 + ancho)} -20.5, ${n2(x0 + ancho)} -14 L${n2(x0 + ancho)} 0`;
+      const BARRIGA = `M0 ${SALE} C1.6 -21, 5.6 -24, 11 -24 C18 -24, 23 -19, 23 -12 C23 -5, 18 0, 11 0 C6.6 0, 2.6 -1, 0 -3`;
+      const REDONDEL_A = redondel(12, -12, 12, 80);
+
+      const LETRAS = {
+        a: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, de arriba abajo', trazos: [
+          { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+          { d: linea([24, X], [24, 0]), flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
+        ] },
+        b: { ancho: 23, desc: '2 trazos: 1, el palo largo, de arriba abajo; 2, la barriga, que sale del palo hacia la derecha', trazos: [
+          { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 12, lado: 1 }] },
+          { d: BARRIGA, flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        ] },
+        c: { ancho: 21, desc: '1 trazo: empieza arriba a la derecha y gira hacia la izquierda', trazos: [
+          { d: camino(arco(12, -12, 12, 12, 48, 312)), flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+        ] },
+        d: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo largo, de arriba abajo', trazos: [
+          { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+          { d: linea([24, ALTA], [24, 0]), flechas: [{ desde: 5, largo: 12, lado: -1 }] },
+        ] },
+        e: { ancho: 24, desc: '1 trazo: empieza en el medio, va hacia la derecha y gira hacia la izquierda por arriba', trazos: [
+          { d: camino([[1, -12], ...arco(12, -12, 11, 12, 0, 322)]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 3.4 }, { desde: 26, largo: 11, lado: 1 }] },
+        ] },
+        f: { ancho: 18, desc: '2 trazos: 1, el bastón, que empieza arriba a la derecha y baja; 2, la raya, de izquierda a derecha', trazos: [
+          { d: 'M18 -39 C16.4 -42, 14 -43, 11.5 -43 C8 -43, 6 -40.6, 6 -36.6 L6 0', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
+          { d: linea([0, X], [13, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
+        ] },
+        g: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, que baja y se curva hacia la izquierda', trazos: [
+          { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+          { d: 'M24 -24 L24 9 C24 14.6, 20 17, 14.6 17 C10 17, 6 15.4, 3.6 12.8', flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
+        ] },
+        h: { ancho: 19.5, desc: '2 trazos: 1, el palo largo, de arriba abajo; 2, el puente, que sale del palo', trazos: [
+          { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 12, lado: 1 }] },
+          { d: PUENTE(0, 19.5), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        ] },
+        i: { ancho: 1, desc: '2 trazos: 1, el palo, de arriba abajo; 2, el punto, arriba', trazos: [
+          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { punto: [0, -33] },
+        ] },
+        j: { ancho: 15, desc: '2 trazos: 1, el palo, que baja y se curva hacia la izquierda; 2, el punto, arriba', trazos: [
+          { d: 'M15 -24 L15 9 C15 14.6, 11.5 17, 7 17 C4 17, 1.5 15.6, 0 13.2', flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
+          { punto: [15, -33] },
+        ] },
+        k: { ancho: 17, desc: '2 trazos: 1, el palo largo, de arriba abajo; 2, la punta, que entra hasta el palo y vuelve a salir', trazos: [
+          { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 12, lado: 1 }] },
+          { d: linea([16, X], [1.2, -10.5], [17, 0]), flechas: [{ desde: 4.5, largo: 9, lado: -1 }] },
+        ] },
+        l: { ancho: 1, desc: '1 trazo: el palo largo, de arriba abajo', trazos: [
+          { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 13, lado: 1 }] },
+        ] },
+        m: { ancho: 29, desc: '3 trazos: 1, el palo, de arriba abajo; 2, el primer puente, que sale del palo; 3, el segundo puente', trazos: [
+          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: PUENTE(0, 14.5), flechas: [{ desde: 4.5, largo: 8, lado: -1 }] },
+          { d: PUENTE(14.5, 14.5), flechas: [{ desde: 4.5, largo: 8, lado: -1 }] },
+        ] },
+        n: { ancho: 19.5, desc: '2 trazos: 1, el palo, de arriba abajo; 2, el puente, que sale del palo', trazos: [
+          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: PUENTE(0, 19.5), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        ] },
+        ñ: { ancho: 19.5, desc: '3 trazos: 1, el palo, de arriba abajo; 2, el puente, que sale del palo; 3, la virgulilla, de izquierda a derecha', trazos: [
+          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: PUENTE(0, 19.5), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+          { d: 'M1.5 -33.5 C4 -37.2, 7.2 -37.2, 9.6 -34 C12 -30.8, 15.2 -30.8, 18 -34.6', flechas: [{ desde: 4.5, largo: 8, lado: -1, sep: 5.6 }] },
+        ] },
+        o: { ancho: 24, desc: '1 trazo: empieza arriba y gira hacia la izquierda hasta cerrar', trazos: [
+          { d: redondel(12, -12, 12, 90), flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+        ] },
+        p: { ancho: 23, desc: '2 trazos: 1, el palo, que baja hasta la línea de abajo; 2, la barriga, que sale del palo hacia la derecha', trazos: [
+          { d: linea([0, X], [0, BAJA]), flechas: [{ desde: 4.5, largo: 12, lado: 1 }] },
+          { d: BARRIGA, flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        ] },
+        q: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, que baja hasta la línea de abajo', trazos: [
+          { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+          { d: linea([24, X], [24, BAJA]), flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
+        ] },
+        r: { ancho: 16, desc: '2 trazos: 1, el palo, de arriba abajo; 2, la rama, que sale del palo hacia la derecha', trazos: [
+          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: 'M0 -15 C2 -21, 5.6 -24, 10 -24 C12.5 -24, 14.5 -23.2, 16 -21.4', flechas: [{ desde: 4.5, largo: 8, lado: -1 }] },
+        ] },
+        s: { ancho: 20, desc: '1 trazo: empieza arriba a la derecha, gira hacia la izquierda y después hacia la derecha', trazos: [
+          { d: 'M19.5 -20 C17.5 -23, 14.5 -24, 11 -24 C6 -24, 3 -21.5, 3 -18 C3 -14, 7 -13, 11 -12 C16 -11, 20 -9, 20 -5.5 C20 -2, 16 0, 11 0 C7 0, 3.5 -1.5, 1.5 -4.5', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
+        ] },
+        t: { ancho: 16, desc: '2 trazos: 1, el palo, que baja y se curva hacia la derecha; 2, la raya, de izquierda a derecha', trazos: [
+          { d: 'M6 -35 L6 -5.5 C6 -2, 8 0, 11 0 C13 0, 14.8 -1, 16 -2.8', flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([0, X], [13, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
+        ] },
+        u: { ancho: 19.5, desc: '2 trazos: 1, la cuna, que baja, gira y sube; 2, el palo, de arriba abajo', trazos: [
+          { d: 'M0 -24 L0 -9 C0 -3.4, 4 0, 9.75 0 C15.5 0, 19.5 -3.4, 19.5 -9 L19.5 -24', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
+          { d: linea([19.5, X], [19.5, 0]), flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
+        ] },
+        v: { ancho: 20, desc: '1 trazo: baja inclinada hasta la línea de base y vuelve a subir', trazos: [
+          { d: linea([0, X], [10, 0], [20, X]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+        ] },
+        w: { ancho: 29, desc: '1 trazo: baja, sube, baja y sube, sin levantar el rotulador', trazos: [
+          { d: linea([0, X], [7, 0], [14.5, X], [22, 0], [29, X]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+        ] },
+        x: { ancho: 19, desc: '2 trazos: 1, la raya que baja hacia la derecha; 2, la raya que baja hacia la izquierda', trazos: [
+          { d: linea([0, X], [19, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([19, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
+        ] },
+        y: { ancho: 21, desc: '2 trazos: 1, la raya corta, que baja hacia la derecha; 2, la raya larga, que baja hacia la izquierda hasta la línea de abajo', trazos: [
+          { d: linea([0, X], [10.5, 0]), flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
+          { d: linea([21, X], [3, BAJA]), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        ] },
+        z: { ancho: 19.5, desc: '1 trazo: una raya hacia la derecha, otra que baja hacia la izquierda y otra hacia la derecha', trazos: [
+          { d: linea([0, X], [19, X], [0, 0], [19.5, 0]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5.4 }] },
+        ] },
+      };
+
+      // ===========================================================================
+      // NÚMEROS del 0 al 9. Origen arriba a la izquierda: miden 40 mm de alto.
+      // ===========================================================================
+      const ALTO_N = 40;
+      const NUMEROS = {
+        0: { ancho: 23, desc: '1 trazo: empieza arriba y gira hacia la izquierda hasta cerrar', trazos: [
+          { d: camino(arco(11.5, 20, 11.5, 20, 90, 450)), flechas: [{ desde: 4.5, largo: 12, lado: 1 }] },
+        ] },
+        1: { ancho: 14, desc: '1 trazo: sube en diagonal hasta arriba y baja recto', trazos: [
+          { d: linea([1.5, 10.5], [13.5, 0], [13.5, ALTO_N]), flechas: [{ desde: 3.5, largo: 8.5, lado: 1, sep: 5.4 }, { desde: 21, largo: 12, lado: -1 }] },
+        ] },
+        2: { ancho: 23, desc: '1 trazo: empieza arriba a la izquierda, hace la curva, baja en diagonal y termina con una raya hacia la derecha', trazos: [
+          { d: 'M1.5 10 C2 4, 6.5 0, 12 0 C18.5 0, 22.5 4.5, 22.5 10.5 C22.5 17, 16.5 23, 1.5 40 L23 40', flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
+        ] },
+        3: { ancho: 22.5, desc: '1 trazo: empieza arriba a la izquierda, hace una curva hasta el medio y otra hasta abajo', trazos: [
+          { d: 'M2 6.5 C4.5 2.5, 8.5 0, 12.5 0 C18.5 0, 22 4, 22 9.5 C22 15, 17.5 19, 10.5 19 C18 19, 23.5 23.5, 23.5 29.5 C23.5 36, 18.5 40, 12 40 C7 40, 3 37.5, 1 34', flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
+        ] },
+        4: { ancho: 24, desc: '2 trazos: 1, baja y sigue con una raya hacia la derecha; 2, el palo largo, de arriba abajo', trazos: [
+          { d: linea([5.5, 0], [1.5, 27], [24, 27]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([17, 0], [17, ALTO_N]), flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
+        ] },
+        5: { ancho: 23, desc: '2 trazos: 1, el palo corto y la barriga; 2, el gorro, de izquierda a derecha', trazos: [
+          { d: 'M4.5 0 L4 17 C7 15, 10 14, 13 14 C19 14, 23.5 19, 23.5 26.5 C23.5 34.5, 18.5 40, 12 40 C7.5 40, 3.5 38, 1.5 34.5', flechas: [{ desde: 4.5, largo: 9, lado: 1 }], salida: [0.3, -5.4] },
+          { d: linea([4.5, 0], [22, 0]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5 }], salida: [-5.4, 0] },
+        ] },
+        6: { ancho: 22.5, desc: '1 trazo: empieza arriba a la derecha, baja girando hacia la izquierda y cierra la barriga', trazos: [
+          { d: 'M20 3.5 C17.6 1.2, 15.2 0, 12.4 0 C5.5 0, 1.2 8, 1.2 21 C1.2 33, 5.6 40, 12 40 C18.6 40, 23 35.5, 23 29 C23 22.6, 18.6 18.2, 12.2 18.2 C6.8 18.2, 2.8 21.6, 1.6 26', flechas: [{ desde: 4.5, largo: 12, lado: 1 }] },
+        ] },
+        7: { ancho: 22.5, desc: '1 trazo: una raya hacia la derecha y después baja en diagonal', trazos: [
+          { d: linea([1.5, 0], [22.5, 0], [8, ALTO_N]), flechas: [{ desde: 4.5, largo: 10, lado: -1, sep: 5 }] },
+        ] },
+        8: { ancho: 21, desc: '1 trazo: empieza arriba, gira hacia la izquierda, cruza por el medio, da la vuelta abajo y sube hasta cerrar', trazos: [
+          { d: 'M18.6 5 C17 2, 14.6 0, 11 0 C6 0, 2.6 3.5, 2.6 9 C2.6 14.5, 7 17.4, 11 19.4 C16 21.9, 21 25.4, 21 31 C21 36.5, 16.6 40, 11 40 C5.5 40, 1 36.5, 1 31 C1 25.4, 6 21.9, 11 19.4 C15 17.4, 19.4 14.5, 19.4 9 C19.4 7.6, 19.1 6.2, 18.6 5', flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
+        ] },
+        9: { ancho: 22, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, de arriba abajo', trazos: [
+          { d: redondel(11, 10.5, 10.5, 80), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([21.5, 0], [21.5, ALTO_N]), flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
+        ] },
+      };
+
+      // ===========================================================================
+      // DIBUJOS propios (todos miran hacia la derecha, hacia donde va el trazo)
+      // ===========================================================================
+      const en = (x, y, s, contenido) => `<g transform="translate(${n2(x)} ${n2(y)}) scale(${s})">${contenido}</g>`;
+      const ojo = (x, y, r = 1.05) =>
+        `<circle cx="${x}" cy="${y}" r="${r}" fill="${T}"/><circle cx="${n2(x + r * 0.35)}" cy="${n2(y - r * 0.35)}" r="${n2(r * 0.35)}" fill="#fff"/>`;
+
+      /** Nube de ancho w (centrada en x) con la base en y. */
+      function nube(x, y, w) {
+        const h = w * 0.42;
+        const x0 = x - w / 2;
+        const d =
+          `M${n2(x0 + 0.14 * w)} ${n2(y)} C${n2(x0 - 0.04 * w)} ${n2(y)}, ${n2(x0 - 0.03 * w)} ${n2(y - 0.52 * h)}, ${n2(x0 + 0.16 * w)} ${n2(y - 0.5 * h)} ` +
+          `C${n2(x0 + 0.16 * w)} ${n2(y - 0.98 * h)}, ${n2(x0 + 0.46 * w)} ${n2(y - 1.12 * h)}, ${n2(x0 + 0.55 * w)} ${n2(y - 0.72 * h)} ` +
+          `C${n2(x0 + 0.64 * w)} ${n2(y - 1.06 * h)}, ${n2(x0 + 0.9 * w)} ${n2(y - 0.92 * h)}, ${n2(x0 + 0.86 * w)} ${n2(y - 0.5 * h)} ` +
+          `C${n2(x0 + 1.04 * w)} ${n2(y - 0.5 * h)}, ${n2(x0 + 1.05 * w)} ${n2(y)}, ${n2(x0 + 0.86 * w)} ${n2(y)} Z`;
+        const ojos = ojo(n2(x - 0.1 * w), n2(y - 0.42 * h), 0.95) + ojo(n2(x + 0.1 * w), n2(y - 0.42 * h), 0.95);
+        const boca = `<path d="M${n2(x - 0.06 * w)} ${n2(y - 0.22 * h)} q${n2(0.06 * w)} ${n2(0.1 * h)} ${n2(0.12 * w)} 0" fill="none" ${contorno(0.7)}/>`;
+        return `<path d="${d}" fill="#fff" ${contorno(0.9)}/>` + ojos + boca;
+      }
+
+      /** Maceta con un brote, centrada en x y apoyada en y (mide unos 12 × 17 mm). */
+      function maceta(x, y) {
+        return (
+          `<path d="M${x} ${y - 9.5} V${y - 15}" ${contorno(0.9)} fill="none"/>` +
+          `<path d="M${x} ${y - 13.2} C${x - 1.5} ${y - 16.6}, ${x - 5.2} ${y - 17}, ${x - 6.2} ${y - 15.6} C${x - 5.2} ${y - 13}, ${x - 2} ${y - 12.4}, ${x} ${y - 13.2} Z" fill="${COLOR.verde}" ${contorno(0.8)}/>` +
+          `<path d="M${x} ${y - 14.4} C${x + 1.5} ${y - 17.8}, ${x + 5.2} ${y - 18.2}, ${x + 6.2} ${y - 16.8} C${x + 5.2} ${y - 14.2}, ${x + 2} ${y - 13.6}, ${x} ${y - 14.4} Z" fill="${COLOR.verde}" ${contorno(0.8)}/>` +
+          `<path d="M${x - 5} ${y - 7.6} L${x - 4} ${y} H${x + 4} L${x + 5} ${y - 7.6} Z" fill="${COLOR.naranja}" ${contorno(0.9)}/>` +
+          `<rect x="${x - 6.2}" y="${y - 10}" width="12.4" height="2.8" rx="1" fill="${COLOR.naranja}" ${contorno(0.9)}/>`
+        );
+      }
+
+      /** Pingüino sobre un bloque de hielo, centrado en x con los pies en y (unos 12 × 17 mm). */
+      function pinguino(x, y) {
+        return (
+          `<rect x="${x - 6.4}" y="${y}" width="12.8" height="3.2" rx="1.2" fill="${TINTE.azul}" ${contorno(0.8)}/>` +
+          `<ellipse cx="${x}" cy="${y - 7}" rx="5" ry="6.8" fill="${T}"/>` +
+          `<path d="M${x - 4.6} ${y - 8} q-2.4 2.2 -1.6 5.4 q1.6 -0.6 2.4 -2.8 Z" fill="${T}"/>` +
+          `<ellipse cx="${x + 0.4}" cy="${y - 6}" rx="3.4" ry="5" fill="#fff"/>` +
+          `<circle cx="${x + 0.6}" cy="${y - 10.2}" r="1.05" fill="#fff"/><circle cx="${x + 2.6}" cy="${y - 10.2}" r="1.05" fill="#fff"/>` +
+          `<circle cx="${x + 0.9}" cy="${y - 10.1}" r="0.55" fill="${T}"/><circle cx="${x + 2.9}" cy="${y - 10.1}" r="0.55" fill="${T}"/>` +
+          `<path d="M${x + 1.2} ${y - 8.6} L${x + 4.8} ${y - 8} L${x + 1.4} ${y - 7.2} Z" fill="${COLOR.naranja}" ${contorno(0.5)}/>` +
+          `<ellipse cx="${x - 1.8}" cy="${y - 0.3}" rx="1.8" ry="0.8" fill="${COLOR.naranja}" ${contorno(0.5)}/>` +
+          `<ellipse cx="${x + 2}" cy="${y - 0.3}" rx="1.8" ry="0.8" fill="${COLOR.naranja}" ${contorno(0.5)}/>`
+        );
+      }
+
+      /** Agujero en el hielo con agua, centrado en (x, y). */
+      function agua(x, y, w = 20) {
+        return (
+          `<ellipse cx="${x}" cy="${y}" rx="${w / 2}" ry="${n2(w * 0.2)}" fill="${COLOR.azul}" ${contorno(0.9)}/>` +
+          `<path d="M${n2(x - w * 0.28)} ${n2(y - 0.4)} q${n2(w * 0.07)} -1.4 ${n2(w * 0.14)} 0 t${n2(w * 0.14)} 0" fill="none" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>` +
+          `<path d="M${n2(x - w * 0.02)} ${n2(y + 1.6)} q${n2(w * 0.07)} -1.4 ${n2(w * 0.14)} 0 t${n2(w * 0.14)} 0" fill="none" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/>`
+        );
+      }
+
+      /** Pájaro volando hacia la derecha, centrado en (x, y), de unos 16 × 12 mm. */
+      function pajaro(x, y) {
+        return (
+          `<path d="M${x - 5} ${y - 0.6} L${x - 9.6} ${y - 3.6} L${x - 9} ${y + 0.6} L${x - 9.8} ${y + 3.4} L${x - 4.6} ${y + 1.8} Z" fill="${COLOR.azul}" ${contorno(0.8)}/>` +
+          `<ellipse cx="${x}" cy="${y}" rx="6" ry="5" fill="${COLOR.azul}" ${contorno(0.9)}/>` +
+          `<ellipse cx="${x + 0.8}" cy="${y + 1.8}" rx="3.6" ry="2.4" fill="${TINTE.azul}"/>` +
+          `<path d="M${x - 2.6} ${y - 0.8} C${x - 1.4} ${y - 6.6}, ${x + 2.6} ${y - 8}, ${x + 3.6} ${y - 6} C${x + 2.6} ${y - 3}, ${x + 0.6} ${y - 1}, ${x - 2.6} ${y - 0.8} Z" fill="${TINTE.azul}" ${contorno(0.8)}/>` +
+          ojo(x + 3, y - 1.4, 0.95) +
+          `<path d="M${x + 5.6} ${y - 1.2} L${x + 8.8} ${y - 0.2} L${x + 5.6} ${y + 0.9} Z" fill="${COLOR.amarillo}" ${contorno(0.6)}/>`
+        );
+      }
+
+      /** Nido con 2 huevos, centrado en x con la base en y (unos 17 × 10 mm). */
+      function nido(x, y) {
+        return (
+          `<ellipse cx="${x - 2.4}" cy="${y - 7}" rx="2.8" ry="3.4" fill="#fff" ${contorno(0.8)}/>` +
+          `<ellipse cx="${x + 2.4}" cy="${y - 7.2}" rx="2.8" ry="3.4" fill="${TINTE.amarillo}" ${contorno(0.8)}/>` +
+          `<path d="M${x - 8.6} ${y - 6.4} C${x - 8} ${y + 0.6}, ${x + 8} ${y + 0.6}, ${x + 8.6} ${y - 6.4} Z" fill="${COLOR.naranja}" ${contorno(0.9)}/>` +
+          `<path d="M${x - 7.4} ${y - 4.4} q3.7 1.6 7.4 0 t7.4 0 M${x - 5.6} ${y - 2} q2.8 1.2 5.6 0 t5.6 0" fill="none" stroke="${T}" stroke-width="0.55" stroke-linecap="round"/>`
+        );
+      }
+
+      /** Pelota de playa de radio r, centrada en (x, y). */
+      function pelota(x, y, r = 5.6) {
+        return (
+          `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/>` +
+          `<path d="M${x} ${y - r} C${n2(x - r * 0.9)} ${n2(y - r * 0.4)}, ${n2(x - r * 0.9)} ${n2(y + r * 0.4)}, ${x} ${y + r} C${n2(x - r * 1.5)} ${n2(y + r * 0.6)}, ${n2(x - r * 1.5)} ${n2(y - r * 0.6)}, ${x} ${y - r} Z" fill="${COLOR.coral}"/>` +
+          `<path d="M${x} ${y - r} C${n2(x + r * 0.9)} ${n2(y - r * 0.4)}, ${n2(x + r * 0.9)} ${n2(y + r * 0.4)}, ${x} ${y + r} C${n2(x + r * 1.5)} ${n2(y + r * 0.6)}, ${n2(x + r * 1.5)} ${n2(y - r * 0.6)}, ${x} ${y - r} Z" fill="${COLOR.azul}"/>` +
+          `<path d="M${x} ${y - r} C${n2(x - r * 0.25)} ${n2(y - r * 0.4)}, ${n2(x - r * 0.25)} ${n2(y + r * 0.4)}, ${x} ${y + r} C${n2(x + r * 0.25)} ${n2(y + r * 0.4)}, ${n2(x + r * 0.25)} ${n2(y - r * 0.4)}, ${x} ${y - r} Z" fill="${COLOR.amarillo}"/>` +
+          `<circle cx="${x}" cy="${y}" r="${r}" fill="none" ${contorno(0.9)}/>` +
+          `<circle cx="${n2(x - r * 0.35)}" cy="${n2(y - r * 0.45)}" r="${n2(r * 0.16)}" fill="#fff" opacity="0.9"/>`
+        );
+      }
+
+      /** Portería vista de lado, con la red, apoyada en y y empezando en x (unos 16 × 14 mm). */
+      function porteria(x, y) {
+        let red = '';
+        for (let k = 1; k < 4; k++) red += `M${n2(x + 1 + k * 3.6)} ${n2(y - 13.2)} V${y}`;
+        for (let k = 1; k < 4; k++) red += `M${x + 1} ${n2(y - k * 3.3)} H${x + 15}`;
+        return (
+          `<path d="M${x + 1} ${y - 13.2} H${x + 15} V${y}" fill="none" stroke="${LINEA}" stroke-width="0.5"/>` +
+          `<path d="${red}" fill="none" stroke="${LINEA}" stroke-width="0.4"/>` +
+          `<path d="M${x + 1} ${y} V${y - 13.6} H${x + 15}" fill="none" ${contorno(1.4)}/>` +
+          `<path d="M${x - 2} ${y + 0.4} H${x + 17}" ${contorno(0.8)} fill="none"/>`
+        );
+      }
+
+      /** Pez nadando hacia la derecha, centrado en (x, y), de unos 17 × 10 mm. */
+      function pez(x, y) {
+        return (
+          `<path d="M${x - 5.4} ${y} L${x - 9.4} ${y - 4.2} L${x - 9.4} ${y + 4.2} Z" fill="${COLOR.naranja}" ${contorno(0.8)}/>` +
+          `<path d="M${x - 1.6} ${y - 4.2} q2 -2.6 4.6 -1.4 l-1 1.8 Z" fill="${COLOR.naranja}" ${contorno(0.7)}/>` +
+          `<ellipse cx="${x}" cy="${y}" rx="6.6" ry="4.4" fill="${COLOR.amarillo}" ${contorno(0.9)}/>` +
+          `<path d="M${x - 1.6} ${y - 4} q1.6 4 0 8" fill="none" stroke="${COLOR.naranja}" stroke-width="1.2" stroke-linecap="round"/>` +
+          ojo(x + 3, y - 1.2, 1) +
+          `<path d="M${x + 4.4} ${y + 1.6} q0.9 0.6 1.6 0" fill="none" ${contorno(0.6)}/>`
+        );
+      }
+
+      /** Algas sobre una piedra, centradas en x y apoyadas en y (unos 14 × 18 mm). */
+      function algas(x, y) {
+        const fronda = (bx, alto, curva, color) =>
+          `<path d="M${bx - 1.3} ${y - 1} C${n2(bx - 1.3 + curva)} ${n2(y - alto * 0.4)}, ${n2(bx - 1.5 - curva)} ${n2(y - alto * 0.7)}, ${n2(bx + curva * 0.3)} ${n2(y - alto)} C${n2(bx + 1.5 - curva)} ${n2(y - alto * 0.7)}, ${n2(bx + 1.3 + curva)} ${n2(y - alto * 0.4)}, ${bx + 1.3} ${y - 1} Z" fill="${color}" ${contorno(0.7)}/>`;
+        return (
+          fronda(x - 4, 13, 2, COLOR.verde) +
+          fronda(x + 0.6, 17, -2.2, COLOR.verde) +
+          fronda(x + 4.8, 11, 1.6, TINTE.verde) +
+          `<path d="M${x - 7.4} ${y} C${x - 7} ${y - 3.2}, ${x - 3} ${y - 4}, ${x} ${y - 3.4} C${x + 3.6} ${y - 4.2}, ${x + 7.6} ${y - 3}, ${x + 7.6} ${y} Z" fill="${TINTE.azul}" ${contorno(0.8)}/>`
+        );
+      }
+
+      /** Mariposa volando hacia la derecha, centrada en (x, y), de unos 15 × 14 mm. */
+      function mariposa(x, y) {
+        return (
+          `<path d="M${x} ${y - 0.5} C${x - 3} ${y - 8.4}, ${x - 8.4} ${y - 7.4}, ${x - 7.2} ${y - 3.4} C${x - 6.4} ${y - 0.6}, ${x - 3} ${y}, ${x} ${y - 0.5} Z" fill="${COLOR.morado}" ${contorno(0.8)}/>` +
+          `<path d="M${x} ${y + 0.3} C${x - 2.4} ${y + 6.6}, ${x - 7} ${y + 6}, ${x - 6.4} ${y + 2.8} C${x - 5.8} ${y + 0.8}, ${x - 2.6} ${y + 0.4}, ${x} ${y + 0.3} Z" fill="${COLOR.morado}" ${contorno(0.8)}/>` +
+          `<path d="M${x + 0.6} ${y - 0.5} C${x + 3} ${y - 8}, ${x + 7.8} ${y - 7}, ${x + 6.8} ${y - 3.2} C${x + 6} ${y - 0.6}, ${x + 3} ${y}, ${x + 0.6} ${y - 0.5} Z" fill="${TINTE.morado}" ${contorno(0.8)}/>` +
+          `<path d="M${x + 0.6} ${y + 0.3} C${x + 2.6} ${y + 6}, ${x + 6.6} ${y + 5.6}, ${x + 6} ${y + 2.6} C${x + 5.4} ${y + 0.8}, ${x + 2.6} ${y + 0.4}, ${x + 0.6} ${y + 0.3} Z" fill="${TINTE.morado}" ${contorno(0.8)}/>` +
+          `<circle cx="${x - 4.4}" cy="${y - 3.8}" r="1.2" fill="${COLOR.amarillo}"/><circle cx="${x + 4.2}" cy="${y - 3.6}" r="1.1" fill="${COLOR.amarillo}"/>` +
+          `<ellipse cx="${x + 0.3}" cy="${y}" rx="1.1" ry="4.2" fill="${T}"/>` +
+          `<path d="M${x + 0.2} ${y - 4} q0.6 -3 2.6 -3.6 M${x + 0.6} ${y - 4} q1.6 -2.4 3.8 -2.2" fill="none" ${contorno(0.6)}/>` +
+          `<circle cx="${x + 2.8}" cy="${y - 7.6}" r="0.55" fill="${T}"/><circle cx="${x + 4.4}" cy="${y - 6.2}" r="0.55" fill="${T}"/>`
+        );
+      }
+
+      /** Tulipán centrado en x y apoyado en y (unos 12 × 19 mm). */
+      function flor(x, y) {
+        return (
+          `<path d="M${x} ${y} V${y - 11}" ${contorno(1.1)} fill="none"/>` +
+          `<path d="M${x} ${y - 2.6} C${x - 1.4} ${y - 6.4}, ${x - 5} ${y - 7.4}, ${x - 6} ${y - 6} C${x - 4.8} ${y - 3}, ${x - 2} ${y - 2}, ${x} ${y - 2.6} Z" fill="${COLOR.verde}" ${contorno(0.8)}/>` +
+          `<path d="M${x} ${y - 4.6} C${x + 1.4} ${y - 8.2}, ${x + 5} ${y - 9.2}, ${x + 6} ${y - 7.8} C${x + 4.8} ${y - 4.8}, ${x + 2} ${y - 4}, ${x} ${y - 4.6} Z" fill="${COLOR.verde}" ${contorno(0.8)}/>` +
+          `<path d="M${x - 4.6} ${y - 18.6} L${x - 2.3} ${y - 16} L${x} ${y - 19.2} L${x + 2.3} ${y - 16} L${x + 4.6} ${y - 18.6} C${x + 5} ${y - 13.6}, ${x + 3} ${y - 10.6}, ${x} ${y - 10.6} C${x - 3} ${y - 10.6}, ${x - 5} ${y - 13.6}, ${x - 4.6} ${y - 18.6} Z" fill="${COLOR.coral}" ${contorno(0.9)}/>`
+        );
+      }
+
+      /** Coche hacia la derecha, centrado en x con las ruedas en y (unos 18 × 11 mm). */
+      function coche(x, y) {
+        return (
+          `<path d="M${x - 8.6} ${y - 2.4} V${y - 5.6} Q${x - 8.6} ${y - 6.6}, ${x - 7.6} ${y - 6.8} L${x - 4.6} ${y - 7.2} L${x - 2} ${y - 10.6} H${x + 3.4} L${x + 6} ${y - 7.2} Q${x + 8.8} ${y - 7}, ${x + 9} ${y - 5} V${y - 2.4} Z" fill="${COLOR.azul}" ${contorno(0.9)}/>` +
+          `<path d="M${x - 3.6} ${y - 7.2} L${x - 1.6} ${y - 9.4} H${x + 0.4} V${y - 7.2} Z M${x + 1.6} ${y - 7.2} V${y - 9.4} H${x + 3} L${x + 4.6} ${y - 7.2} Z" fill="${TINTE.azul}" ${contorno(0.6)}/>` +
+          `<circle cx="${x + 8}" cy="${y - 5}" r="0.8" fill="${COLOR.amarillo}"/>` +
+          `<circle cx="${x - 4.6}" cy="${y - 2}" r="2.4" fill="${T}"/><circle cx="${x - 4.6}" cy="${y - 2}" r="0.9" fill="#fff"/>` +
+          `<circle cx="${x + 4.8}" cy="${y - 2}" r="2.4" fill="${T}"/><circle cx="${x + 4.8}" cy="${y - 2}" r="0.9" fill="#fff"/>`
+        );
+      }
+
+      /** Casa centrada en x y apoyada en y (unos 15 × 16 mm). */
+      function casa(x, y) {
+        return (
+          `<rect x="${x + 2.8}" y="${y - 15.2}" width="2.4" height="4" fill="${COLOR.coral}" ${contorno(0.7)}/>` +
+          `<rect x="${x - 5.8}" y="${y - 9.6}" width="11.6" height="9.6" fill="${TINTE.amarillo}" ${contorno(0.9)}/>` +
+          `<path d="M${x - 7.6} ${y - 9.2} L${x} ${y - 15.6} L${x + 7.6} ${y - 9.2} Z" fill="${COLOR.coral}" ${contorno(0.9)}/>` +
+          `<rect x="${x - 4.4}" y="${y - 6.2}" width="3.4" height="6.2" rx="0.6" fill="${COLOR.azul}" ${contorno(0.7)}/>` +
+          `<rect x="${x + 0.8}" y="${y - 7.2}" width="3.6" height="3.4" fill="#fff" ${contorno(0.7)}/>` +
+          `<path d="M${x + 2.6} ${y - 7.2} V${y - 3.8} M${x + 0.8} ${y - 5.5} H${x + 4.4}" stroke="${T}" stroke-width="0.5"/>`
+        );
+      }
+
+      /** Hueco punteado para que el peque dibuje (tarjeta libre de trazos). */
+      const hueco = (x, y, r = 8.5) =>
+        `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${LINEA}" stroke-width="0.5" stroke-dasharray="1.6 1.4"/>`;
+
+      // ===========================================================================
+      // TRAZOS PREVIOS
+      // Los de arriba abajo van en cajas, como las letras. Los que van de lado a lado, en filas.
+      // ===========================================================================
+      const FILA_W = 131.95; // ancho útil de una fila
+      const FILA_H = 24.4; // alto del dibujo de una fila
+      const CAJA_W = 41.45; // ancho útil de una caja
+      const CAJA_H = 82.6; // alto del dibujo de una caja
+
+      /** Banda de una fila: las 2 líneas entre las que se hace el trazo. */
+      const banda = (x0, x1, y0, y1) =>
+        `<path d="M${x0} ${y0} H${x1} M${x0} ${y1} H${x1}" stroke="${LINEA}" stroke-width="0.4"/>`;
+
+      const X0 = 27; // donde empieza el trazo en las filas
+      const X1 = 106; // donde termina
+
+      const PREVIOS = [
+        {
+          id: 'verticales',
+          tipo: 'cajas',
+          titulo: 'La lluvia cae en las macetas.',
+          nombre: 'Líneas verticales',
+          desc: 'Dos líneas verticales que bajan de la nube a las macetas, numeradas 1 y 2',
+          caja(modo) {
+            const lineas = [13.2, 28.2].map((x) => ({ d: linea([x, 22], [x, 64]), flechas: [{ desde: 5, largo: 13, lado: 1 }] }));
+            return (
+              banda(2, CAJA_W - 2, 22, 64) +
+              nube(CAJA_W / 2, 17, 35) +
+              maceta(13.2, 81.6) +
+              maceta(28.2, 81.6) +
+              trazos(lineas, modo, 'azul')
+            );
+          },
+        },
+        {
+          id: 'horizontales',
+          tipo: 'filas',
+          titulo: 'El pájaro vuela al nido.',
+          nombre: 'Líneas horizontales',
+          desc: 'Una línea recta de izquierda a derecha, del pájaro al nido',
+          fila(modo) {
+            const y = 12.6;
+            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + pajaro(13.4, 11.6) + nido(119, 19.4) + trazos([{ d: linea([X0, y], [X1, y]), flechas: [{ desde: 5, largo: 15, lado: -1 }] }], modo, 'azul');
+          },
+          modelo() {
+            return trazos([{ d: linea([7, 46], [35, 46]), flechas: [{ desde: 5, largo: 15, lado: -1 }] }], 'modelo', 'azul');
+          },
+        },
+        {
+          id: 'inclinadas',
+          tipo: 'cajas',
+          titulo: 'Los pingüinos bajan al agua.',
+          nombre: 'Líneas inclinadas',
+          desc: 'Dos líneas inclinadas que bajan desde cada pingüino hasta el agua, numeradas 1 y 2',
+          caja(modo) {
+            const lineas = [
+              { d: linea([7.6, 25.5], [19.6, 66.6]), flechas: [{ desde: 5, largo: 13, lado: 1 }] },
+              { d: linea([33.8, 25.5], [21.8, 66.6]), flechas: [{ desde: 5, largo: 13, lado: -1 }] },
+            ];
+            return banda(2, CAJA_W - 2, 25.5, 66.6) + pinguino(7.6, 20.4) + pinguino(33.8, 20.4) + agua(20.7, 73.6, 23) + trazos(lineas, modo, 'azul');
+          },
+        },
+        {
+          id: 'curvas',
+          tipo: 'filas',
+          titulo: 'La pelota bota hasta la portería.',
+          nombre: 'Curvas',
+          desc: 'Tres curvas como puentes, de la pelota a la portería',
+          fila(modo) {
+            const base = 20.6;
+            const n = 3;
+            const w = (X1 - X0) / n;
+            const pts = muestrear((x) => [x, base - 14 * Math.sin((Math.PI * ((x - X0) % w)) / w)], X0, X1 - 0.001, 210);
+            pts.push([X1, base]);
+            return (
+              banda(X0 - 2, X1 + 2, 3.6, 21.6) +
+              pelota(17.4, 15.4) +
+              porteria(110.4, 21.6) +
+              trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1 }] }], modo, 'azul')
+            );
+          },
+          modelo() {
+            const x0 = 6, x1 = 36, base = 56, w = 15;
+            const pts = muestrear((x) => [x, base - 13 * Math.sin((Math.PI * ((x - x0) % w)) / w)], x0, x1 - 0.001, 120);
+            pts.push([x1, base]);
+            return trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1 }] }], 'modelo', 'azul');
+          },
+        },
+        {
+          id: 'ondas',
+          tipo: 'filas',
+          titulo: 'El pez nada hasta las algas.',
+          nombre: 'Ondas',
+          desc: 'Una línea ondulada, del pez a las algas',
+          fila(modo) {
+            const yc = 12.6;
+            const pts = muestrear((x) => [x, yc - 6.8 * Math.sin((2 * Math.PI * (x - X0)) / ((X1 - X0) / 2.5))], X0, X1, 240);
+            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + pez(13.4, 12.4) + algas(119.6, 22) + trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1, sep: 6.6 }] }], modo, 'azul');
+          },
+          modelo() {
+            const x0 = 5, x1 = 37, yc = 46;
+            const pts = muestrear((x) => [x, yc - 7 * Math.sin((2 * Math.PI * (x - x0)) / ((x1 - x0) / 1.5))], x0, x1, 160);
+            return trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1, sep: 5 }] }], 'modelo', 'azul');
+          },
+        },
+        {
+          id: 'bucles',
+          tipo: 'filas',
+          titulo: 'La mariposa vuela a la flor.',
+          nombre: 'Bucles',
+          desc: 'Una línea con tres bucles, de la mariposa a la flor',
+          fila(modo) {
+            const n = 3;
+            const a = (X1 - X0) / (2 * Math.PI * n);
+            const b = 6.2;
+            const yc = 12.4;
+            const c = 8.4;
+            const pts = muestrear((t) => [X0 + a * (t - Math.PI) - b * Math.sin(t), yc - c * Math.cos(t)], Math.PI, Math.PI + 2 * Math.PI * n, 420);
+            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + mariposa(14, 12) + flor(119.4, 22.6) + trazos([{ d: camino(pts), flechas: [{ desde: 4.5, largo: 9, lado: 1, sep: 6 }] }], modo, 'azul');
+          },
+          modelo() {
+            const n = 2;
+            const x0 = 7, x1 = 35;
+            const a = (x1 - x0) / (2 * Math.PI * n);
+            const pts = muestrear((t) => [x0 + a * (t - Math.PI) - 5.6 * Math.sin(t), 46 - 9 * Math.cos(t)], Math.PI, Math.PI + 2 * Math.PI * n, 300);
+            return trazos([{ d: camino(pts), flechas: [{ desde: 4.5, largo: 9, lado: 1, sep: 4.6 }] }], 'modelo', 'azul');
+          },
+        },
+        {
+          id: 'zigzag',
+          tipo: 'filas',
+          titulo: 'El coche cruza las montañas.',
+          nombre: 'Zigzag',
+          desc: 'Una línea en zigzag que sube y baja, del coche a la casa',
+          fila(modo) {
+            const pts = [];
+            for (let k = 0; k <= 8; k++) pts.push([X0 + ((X1 - X0) * k) / 8, k % 2 ? 4.4 : 20.6]);
+            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + coche(13.4, 21.4) + casa(119.4, 21.8) + trazos([{ d: linea(...pts), flechas: [{ desde: 4.5, largo: 9, lado: -1 }] }], modo, 'azul');
+          },
+          modelo() {
+            const pts = [];
+            for (let k = 0; k <= 4; k++) pts.push([6 + (30 * k) / 4, k % 2 ? 36 : 56]);
+            return trazos([{ d: linea(...pts), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5 }] }], 'modelo', 'azul');
+          },
+        },
+        {
+          id: 'libre-trazos',
+          tipo: 'filas',
+          libre: true,
+          titulo: 'Tarjeta libre de trazos.',
+          nombre: 'Tarjeta libre',
+          subtitulo: 'Para el adulto: dibuja con el rotulador un trazo en cada caja y 2 dibujos en los círculos.',
+          desc: 'Filas vacías con un círculo en cada extremo para dibujar',
+          fila() {
+            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + hueco(13.4, 12.6) + hueco(118.6, 12.6);
+          },
+          modelo() {
+            return '';
+          },
+        },
+      ];
+
+      // ===========================================================================
+      // TARJETAS
+      // ===========================================================================
+      const ICONOS = {
+        previos: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15 C6 7, 9 7, 12 12 S18 17, 21 9" fill="none" stroke="${T}" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="0.01 3"/><circle cx="3.5" cy="15" r="3" fill="${VERDE}"/></svg>`,
+        numeros: `<svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" font-family="Outfit, sans-serif" font-weight="700" font-size="12" fill="${T}" text-anchor="middle">123</text></svg>`,
+        letras: `<svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="17" font-family="Outfit, sans-serif" font-weight="700" font-size="12.5" fill="${T}" text-anchor="middle">abc</text></svg>`,
+        tijeras: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6.5" r="3" fill="none" stroke="${SUAVE}" stroke-width="1.6"/><circle cx="6" cy="17.5" r="3" fill="none" stroke="${SUAVE}" stroke-width="1.6"/><path d="M8.6 8.2L20 18M8.6 15.8L20 6" stroke="${SUAVE}" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+      };
+
+      /** Mano abierta, para «Para diestros» y «Para zurdos». La izquierda es la misma, vista en espejo. */
+      function mano(izquierda) {
+        const dibujo =
+          `<path d="M8.2 21.4 C5.8 19.6, 3.6 16.6, 2.6 13.8 C2.1 12.4, 3.6 11.4, 4.8 12.4 L7 14.6 V5.4 C7 3.8, 9.4 3.8, 9.4 5.4 V11 V3.4 C9.4 1.8, 11.8 1.8, 11.8 3.4 V11 V4 C11.8 2.4, 14.2 2.4, 14.2 4 V11.2 V6 C14.2 4.4, 16.6 4.4, 16.6 6 V14.4 C16.6 18.2, 15.2 20.4, 13.6 21.4 Z" fill="${TINTE.amarillo}" stroke="${T}" stroke-width="1.3" stroke-linejoin="round"/>`;
+        return `<svg viewBox="0 0 19 24" aria-hidden="true">${izquierda ? `<g transform="translate(19 0) scale(-1 1)">${dibujo}</g>` : dibujo}</svg>`;
+      }
+
+      const ETIQUETAS = {
+        modelo: { adulto: 'Modelo', nino: 'Mira.' },
+        repasa: { adulto: 'Nivel 1', nivel: 1, nino: 'Repasa.' },
+        punto: { adulto: 'Nivel 2', nivel: 2, nino: 'Empieza en el punto.' },
+        nada: { adulto: 'Nivel 3', nivel: 3, nino: 'Ahora, tú.' },
+      };
+
+      function etiqueta(modo) {
+        const e = ETIQUETAS[modo];
+        const puntos = e.nivel
+          ? `<span class="puntos" aria-hidden="true">${[1, 2, 3].map((i) => `<i class="${i <= e.nivel ? 'lleno' : ''}"></i>`).join('')}</span>`
+          : '';
+        return `<p class="etiqueta"><span class="etiqueta__adulto">${e.adulto}${puntos}</span><span class="etiqueta__nino">${e.nino}</span></p>`;
+      }
+
+      const ALT = {
+        modelo: (c) => `Modelo: ${c}.`,
+        repasa: (c) => `Nivel 1: ${c}, con línea de puntos para repasar, puntos de salida y flechas.`,
+        punto: (c) => `Nivel 2: renglón con los puntos de salida de ${c}.`,
+        nada: (c) => `Nivel 3: renglón vacío para hacer ${c} sin ayudas.`,
+      };
+
+      const svg = (ancho, alto, contenido, alt) =>
+        `<svg width="${ancho}mm" height="${alto}mm" viewBox="0 0 ${ancho} ${alto}" ${alt ? `role="img" aria-label="${alt}"` : 'aria-hidden="true"'}>${contenido}</svg>`;
+
+      const MODOS = { diestros: ['modelo', 'repasa', 'punto', 'nada'], zurdos: ['repasa', 'punto', 'nada', 'modelo'] };
+
+      /** Cabecera, cuerpo y pie de una tarjeta. */
+      function tarjeta({ seccion, titulo, subtitulo, version, cuerpo, conTitulo = true }) {
+        const nombreSeccion = { previos: 'Trazos previos', numeros: 'Números', letras: 'Letras' }[seccion];
+        const etiquetaTitulo = conTitulo ? 'h2' : 'p';
+        const sufijo = conTitulo ? `<span class="oculto"> (${version === 'zurdos' ? 'para zurdos' : 'para diestros'})</span>` : '';
+        return `<article class="tarjeta s-${seccion} ${version}">
+          <header class="cabecera">
+            <p class="chip">${ICONOS[seccion]}${nombreSeccion}</p>
+            <${etiquetaTitulo} class="tarjeta__titulo">${titulo}${sufijo}${subtitulo ? `<small>${subtitulo}</small>` : ''}</${etiquetaTitulo}>
+            <p class="chip chip--mano">${mano(version === 'zurdos')}Para ${version}</p>
+          </header>
+          ${cuerpo}
+          <p class="tarjeta__pie">© IdEducando · ideducando.es</p>
+        </article>`;
+      }
+
+      /** Cuerpo en 4 cajas: modelo y niveles 1, 2 y 3 (o 1, 2, 3 y modelo para zurdos). */
+      function cuerpoCajas(version, dibujar, nombreAlt) {
+        return `<div class="cajas">${MODOS[version]
+          .map(
+            (modo) =>
+              `<div class="caja${modo === 'modelo' ? ' caja--modelo' : ''}">${etiqueta(modo)}${svg(CAJA_W, CAJA_H, dibujar(modo), nombreAlt ? ALT[modo](nombreAlt) : '')}</div>`,
+          )
+          .join('')}</div>`;
+      }
+
+      /** Cuerpo en filas: el modelo a un lado y los 3 niveles uno debajo de otro. */
+      function cuerpoFilas(version, item) {
+        const modelo = `<div class="caja caja--modelo">${etiqueta('modelo')}${svg(CAJA_W, CAJA_H, item.modelo(), item.libre ? '' : `Modelo: ${item.desc.toLowerCase()}, con su punto de salida y su flecha.`)}</div>`;
+        const niveles = ['repasa', 'punto', 'nada']
+          .map(
+            (modo) =>
+              `<div class="fila">${etiqueta(modo)}${svg(FILA_W, FILA_H, item.fila(modo), item.libre ? '' : ALT[modo](item.desc.charAt(0).toLowerCase() + item.desc.slice(1)))}</div>`,
+          )
+          .join('');
+        const col = `<div class="filas__niveles">${niveles}</div>`;
+        return `<div class="filas">${version === 'zurdos' ? col + modelo : modelo + col}</div>`;
+      }
+
+      // ---------------------------------------------------------------- Letras y números en su caja
+      function cajaLetra(car, modo) {
+        const L = LETRAS[car];
+        const base = 59;
+        const x0 = (CAJA_W - L.ancho) / 2;
+        const lista = L.trazos.map((t) => ({ ...t, d: t.d ? mover(t.d, x0, base) : undefined, punto: t.punto ? [t.punto[0] + x0, t.punto[1] + base] : undefined }));
+        return renglonLetras(CAJA_W, base, 'morado') + trazos(lista, modo, 'morado');
+      }
+
+      function cajaNumero(num, modo) {
+        const N = NUMEROS[num];
+        const arriba = 22;
+        const x0 = (CAJA_W - N.ancho) / 2;
+        const lista = N.trazos.map((t) => ({ ...t, d: mover(t.d, x0, arriba) }));
+        return renglonNumeros(CAJA_W, arriba, ALTO_N) + trazos(lista, modo, 'naranja');
+      }
+
+      function cajaLibreLetras() {
+        return renglonLetras(CAJA_W, 59, 'morado');
+      }
+
+      // ---------------------------------------------------------------- Lista de tarjetas
+      const ORDEN_LETRAS = 'abcdefghijklmnñopqrstuvwxyz'.split('');
+      const ORDEN_NUMEROS = '0123456789'.split('');
+
+      function tarjetasDe(version) {
+        const previos = PREVIOS.map((p) =>
+          tarjeta({
+            seccion: 'previos',
+            titulo: p.titulo,
+            subtitulo: p.subtitulo,
+            version,
+            cuerpo: p.tipo === 'cajas' ? cuerpoCajas(version, (modo) => p.caja(modo), p.desc.charAt(0).toLowerCase() + p.desc.slice(1)) : cuerpoFilas(version, p),
+          }),
+        );
+        const numeros = ORDEN_NUMEROS.map((n) =>
+          tarjeta({
+            seccion: 'numeros',
+            titulo: `El ${n}`,
+            version,
+            cuerpo: cuerpoCajas(version, (modo) => cajaNumero(n, modo), `el ${n}, ${NUMEROS[n].desc}`),
+          }),
+        );
+        const letras = ORDEN_LETRAS.map((l) =>
+          tarjeta({
+            seccion: 'letras',
+            titulo: `La ${l}`,
+            version,
+            cuerpo: cuerpoCajas(version, (modo) => cajaLetra(l, modo), `la ${l}, ${LETRAS[l].desc}`),
+          }),
+        );
+        letras.push(
+          tarjeta({
+            seccion: 'letras',
+            titulo: 'Tarjeta libre de letras.',
+            subtitulo: 'Para el adulto: escribe con el rotulador el modelo en «Mira» y la letra de puntos en el nivel 1.',
+            version,
+            cuerpo: cuerpoCajas(version, () => cajaLibreLetras(), ''),
+          }),
+        );
+        return { previos, numeros, letras };
+      }
+
+      /** Junta las tarjetas de 2 en 2 en cada folio, con la línea de corte en medio. */
+      function hojas(lista, encabezado = '') {
+        const corte = `<div class="corte"><span>${ICONOS.tijeras}Corta por la línea</span></div>`;
+        const out = [];
+        for (let i = 0; i < lista.length; i += 2) {
+          const segunda = lista[i + 1] ?? '<div class="tarjeta tarjeta--vacia"></div>';
+          out.push(`<section class="hoja">${i === 0 ? encabezado : ''}${lista[i]}${corte}${segunda}</section>`);
+        }
+        return out;
+      }
+
+      const PRIMERA = 4; // página de la primera tarjeta: después de la portada, «Cómo montarlo» y «Así son las tarjetas»
+      const grupos = [];
+      let html = '';
+      let pagina = PRIMERA;
+      for (const version of ['diestros', 'zurdos']) {
+        const t = tarjetasDe(version);
+        const encabezado = `<h1 class="oculto">Tarjetas para ${version}</h1>`;
+        let primera = true;
+        for (const [clave, lista] of Object.entries(t)) {
+          const hs = hojas(lista, primera ? encabezado : '');
+          primera = false;
+          grupos.push({ version, clave, desde: pagina, hasta: pagina + hs.length - 1, tarjetas: lista.length });
+          pagina += hs.length;
+          html += hs.join('');
+        }
+      }
+      document.getElementById('tarjetas').innerHTML = html;
+
+      // ---------------------------------------------------------------- Así son las tarjetas
+      const NOMBRES = {
+        previos: ['Trazos previos', '7 y 1 libre'],
+        numeros: ['Números del 0 al 9', '10'],
+        letras: ['Letras minúsculas', '27 y 1 libre'],
+      };
+      const rango = (g) => `páginas ${g.desde} a ${g.hasta}`;
+      document.getElementById('tabla-paginas').innerHTML = Object.keys(NOMBRES)
+        .map((clave) => {
+          const d = grupos.find((g) => g.version === 'diestros' && g.clave === clave);
+          const z = grupos.find((g) => g.version === 'zurdos' && g.clave === clave);
+          return `<tr><th scope="row">${NOMBRES[clave][0]}</th><td>${NOMBRES[clave][1]}</td><td>${rango(d)}</td><td>${rango(z)}</td></tr>`;
+        })
+        .join('');
+      document.querySelectorAll('[data-pagina-guia]').forEach((el) => (el.textContent = `${pagina} y ${pagina + 1}`));
+
+      // Tarjeta de muestra, más pequeña
+      document.getElementById('muestra').innerHTML = tarjeta({
+        seccion: 'letras',
+        titulo: 'La a',
+        version: 'diestros',
+        conTitulo: false,
+        cuerpo: cuerpoCajas('diestros', (modo) => cajaLetra('a', modo), ''),
+      });
+
+      const miniatura = (modo) => {
+        const lista = [{ d: 'M3 16 C7 6, 12 6, 15 11 S22 17, 25 8', flechas: [{ desde: 4, largo: 8, lado: -1, sep: 4.2 }] }];
+        const dentro = modo === 'nada' ? `<path d="M1 21 H27 M1 3 H27" stroke="${LINEA}" stroke-width="0.6"/>` : '';
+        return `<svg viewBox="0 0 28 24" aria-hidden="true">${dentro}${trazos(lista, modo === 'modelo' ? 'modelo' : modo, 'morado', 3.6)
+          .replace(/r="3.75"/g, 'r="3.2"')
+          .replace(/font-size="6.6"/g, 'font-size="5.4"')}</svg>`;
+      };
+      document.getElementById('partes').innerHTML = [
+        ['modelo', 'Mira', 'El modelo. Los números dicen el orden de los trazos y las flechas, hacia dónde ir.'],
+        ['repasa', 'Nivel 1 · Repasa', 'Punto de salida, flechas y línea de puntos entera, para repasar.'],
+        ['punto', 'Nivel 2 · Empieza en el punto', 'Solo el punto de salida. El resto lo hace mirando el modelo.'],
+        ['nada', 'Nivel 3 · Ahora, tú', 'Solo el renglón, para hacerlo sin ayudas.'],
+      ]
+        .map(([modo, t, texto]) => `<li>${miniatura(modo)}<span><b>${t}.</b> ${texto}</span></li>`)
+        .join('');
+
+      // ---------------------------------------------------------------- Reglas de la guía
+      const minimodelo = (d, flechas) => `<svg viewBox="-4 -4 32 32" aria-hidden="true">${trazos([{ d, flechas }], 'modelo', 'morado', 3.4).replace(/r="3.75"/g, 'r="3.6"')}</svg>`;
+      document.getElementById('reglas').innerHTML = [
+        [minimodelo(linea([12, 2], [12, 24]), [{ desde: 4, largo: 9, lado: 1, sep: 4 }]), 'Se empieza arriba. Solo la e empieza en el medio.'],
+        [minimodelo(linea([2, 12], [24, 12]), [{ desde: 4, largo: 9, lado: -1, sep: 4 }]), 'Los palos van de arriba abajo y las rayas, de izquierda a derecha.'],
+        [minimodelo(redondel(12, 12, 10, 80), [{ desde: 4, largo: 9, lado: 1, sep: 3.8 }]), 'Los redondeles empiezan arriba y giran hacia la izquierda, al revés que las agujas del reloj: c, o, a, d, g, q, e y s, y el 0, el 6, el 8 y el 9.'],
+        ['', 'La a, la d, la g, la q y el 9 se hacen en 2 trazos: primero el redondel y después el palo. La b y la p empiezan por el palo y después hacen la barriga. Así la b y la d empiezan distinto.'],
+        ['', 'La h, la m, la n y la r empiezan por el palo. Después, el puente sale del palo.'],
+        ['', 'El punto de la i y de la j, la raya de la t y de la f y la virgulilla de la ñ van al final.'],
+        ['', 'El 1 sube en diagonal y baja recto. El 4 y el 5 van en 2 trazos: el 4 queda abierto arriba y el gorro del 5 va al final.'],
+      ]
+        .map(([icono, texto]) => `<li>${icono || '<span></span>'}<span>${texto}</span></li>`)
+        .join('');
+
+      // ===========================================================================
+      // PORTADA: dos tarjetas, un rotulador y un trapo, todo dibujado aquí
+      // ===========================================================================
+      (function portada() {
+        let s = '';
+        // Tarjeta de atrás: el pájaro y el nido
+        s += `<g transform="translate(22 30) rotate(-7)">`;
+        s += `<rect x="0" y="0" width="104" height="66" rx="5" fill="#fff" ${contorno(0.9)}/>`;
+        s += `<rect x="5" y="5" width="94" height="56" rx="3.5" fill="none" stroke="${BORDE.azul}" stroke-width="0.6"/>`;
+        s += en(16, 34, 1.15, pajaro(0, 0));
+        s += en(88, 44, 1.15, nido(0, 0));
+        s += trazos([{ d: linea([30, 36], [74, 36]), flechas: [{ desde: 5, largo: 15, lado: -1 }] }], 'repasa', 'azul');
+        s += `</g>`;
+        // Tarjeta de delante: la a, con sus niveles
+        s += `<g transform="translate(88 48) rotate(6)">`;
+        s += `<rect x="0" y="0" width="96" height="82" rx="5" fill="#fff" ${contorno(0.9)}/>`;
+        s += `<g transform="translate(4 10)">${renglonLetras(42, 59, 'morado').replace(/opacity="0.55"/, 'opacity="0.7"')}</g>`;
+        const letraA = LETRAS.a.trazos.map((t) => ({ ...t, d: mover(t.d, 13, 69) }));
+        s += trazos(letraA, 'repasa', 'morado');
+        s += `<g transform="translate(48 10)">${renglonLetras(44, 59, 'morado').replace(/opacity="0.55"/, 'opacity="0.7"')}</g>`;
+        const puntosA = LETRAS.a.trazos.map((t) => ({ ...t, d: mover(t.d, 58, 69) }));
+        s += trazos(puntosA, 'punto', 'morado');
+        s += `</g>`;
+        // Rotulador de pizarra
+        s += `<g transform="translate(30 118) rotate(-24)">`;
+        s += `<rect x="0" y="0" width="62" height="11" rx="3" fill="${COLOR.azul}" ${contorno(1)}/>`;
+        s += `<rect x="44" y="-0.6" width="22" height="12.2" rx="3.4" fill="${T}"/>`;
+        s += `<path d="M0 2.4 L-7 4.2 V6.8 L0 8.6 Z" fill="#fff" ${contorno(0.9)}/>`;
+        s += `<path d="M-7 4.2 L-10 5 V6 L-7 6.8 Z" fill="${COLOR.azul}" ${contorno(0.8)}/>`;
+        s += `<rect x="8" y="3.4" width="30" height="4.2" rx="2.1" fill="#fff" opacity="0.85"/>`;
+        s += `</g>`;
+        // Trapo
+        s += `<path d="M150 120 C158 112, 176 114, 184 122 C190 128, 186 140, 176 142 C166 144, 152 140, 148 132 C146 127, 147 123, 150 120 Z" fill="${COLOR.amarillo}" ${contorno(1)}/>`;
+        s += `<path d="M154 126 C162 122, 172 124, 178 130 M156 133 C163 130, 170 132, 175 136" fill="none" stroke="${T}" stroke-width="0.7" stroke-linecap="round"/>`;
+        document.getElementById('portada-ilustracion').innerHTML = s;
+      })();
+    </script>
+  </body>
+</html>
