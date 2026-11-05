@@ -10,9 +10,9 @@ formato: "PDF imprimible (A4), 2 tarjetas por hoja"
 paginas: 51
 archivo: /descargas/tarjetas-trazo.pdf
 portada: /portadas/tarjetas-trazo.webp
-portada_alt: "Portada de las tarjetas de trazo: una tarjeta con un pájaro que vuela por una línea de puntos hasta su nido, otra con la letra a para repasar desde el punto verde, un rotulador de pizarra y un trapo"
+portada_alt: "Portada de las tarjetas de trazo: una tarjeta con un pájaro que vuela por una línea de puntos hasta su nido, otra con la letra a para repasar desde sus puntos verdes numerados, un rotulador de pizarra y un trapo"
 vistas: [1, 3, 4, 8, 13, 36]
-tiempo: "1 hora y cuarto para imprimir, cortar y plastificar las 46 tarjetas de una versión"
+tiempo: "1 hora y cuarto para preparar las 46 tarjetas de una versión"
 necesitas:
   - "23 folios A4 de 80 g, para las 46 tarjetas de una versión"
   - "46 fundas de plastificar A5 de 125 micras, una por tarjeta, y una plastificadora"

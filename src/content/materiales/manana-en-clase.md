@@ -71,13 +71,13 @@ Además, una página para empezar, con el Diseño Universal para el Aprendizaje 
 1. Pide a orientación su informe psicopedagógico y su plan de actuación, si los tiene.
 2. Lee su ficha y elige unos pocos ajustes para empezar.
 3. Habla con la familia: qué le gusta y qué le ayuda a estar en calma.
-4. Anota lo que veas las primeras semanas. Si una conducta se repite, el [registro ABC](/material-gratuito/registro-observacion-abc/) te ayuda a observarla.
+4. Anota lo que veas las primeras semanas. Si una conducta se repite, el [registro ABC](/material-gratuito/registro-observacion-abc/), de antes, conducta y después, te ayuda a observarla.
 
 Si hay TDAH, la [tarjeta de ida y vuelta](/material-gratuito/tarjeta-cole-casa-tdah/) es uno de los ajustes de su ficha.
 
 ## En qué se apoya
 
-Las definiciones salen de la Clasificación Internacional de Enfermedades de la Organización Mundial de la Salud (CIE-11). Para el TDL se suma el consenso internacional CATALISE, y para la discapacidad intelectual, la Asociación Americana de Discapacidades Intelectuales y del Desarrollo (AAIDD).
+Las definiciones salen de la Clasificación Internacional de Enfermedades de la Organización Mundial de la Salud (CIE-11). Para el TDL se suma el consenso internacional CATALISE (en inglés, «criterios y terminología de los trastornos del lenguaje: síntesis de la evidencia»), y para la discapacidad intelectual, la Asociación Americana de Discapacidades Intelectuales y del Desarrollo (AAIDD).
 
 Cada ajuste dice en qué se apoya: en la evidencia, con revisiones de estudios y guías clínicas, o en la normativa de la Región de Murcia, como el Decreto 359/2009 de atención a la diversidad.
 
