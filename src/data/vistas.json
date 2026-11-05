@@ -179,6 +179,59 @@
       }
     ]
   },
+  "dialogos-para-completar": {
+    "total": 40,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diálogo 1 de 12 · saludar y despedirse · en el cole"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diálogo 1 · detrás · pienso y siento"
+      },
+      {
+        "pagina": 29,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas del nivel 1 Con pictograma · turnos 1A a 6A"
+      },
+      {
+        "pagina": 34,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para el adulto · para imprimir"
+      }
+    ]
+  },
   "dias-distintos-historias-sociales": {
     "total": 14,
     "fotos": [
