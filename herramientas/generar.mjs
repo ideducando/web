@@ -293,6 +293,18 @@ for (const doc of DOCUMENTOS) {
     throw new Error(`${doc.id}: el HTML tiene el hueco de montaje y la ficha no tiene pasos`);
   }
 
+  // Marcadores del PDF: Chromium los saca de los títulos y, donde un título salta de línea, junta las dos
+  // palabras («Tarjetasde trazo»). Se guarda el texto de cada título para que metadatos.py devuelva el espacio.
+  const titulos = await pagina.evaluate(() =>
+    [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')].map((titulo) => {
+      const copia = titulo.cloneNode(true);
+      for (const br of copia.querySelectorAll('br')) br.replaceWith(' ');
+      return copia.textContent.replace(/\s+/g, ' ').trim();
+    }),
+  );
+  const archivoTitulos = join(temporal, `${doc.id}-titulos.json`);
+  writeFileSync(archivoTitulos, JSON.stringify(titulos));
+
   const destino = join(descargas, `${doc.id}.pdf`);
   await pagina.pdf({
     path: destino,
@@ -302,7 +314,7 @@ for (const doc of DOCUMENTOS) {
     outline: true,
   });
 
-  completarMetadatos(destino, doc);
+  completarMetadatos(destino, doc, archivoTitulos);
 
   // Miniatura de la primera página: con pdftoppm (Poppler) si está instalado, que la pinta igual que el PDF.
   const miniatura = join(temporal, doc.id);
@@ -375,9 +387,10 @@ if (!salidaAparte && !process.env.IDE_SIN_VISTAS) {
 // ---------------------------------------------------------------------------
 
 /** Título, autoría y palabras clave en el PDF, y que el visor muestre el título. Usa Python con pypdf. */
-function completarMetadatos(ruta, doc) {
+function completarMetadatos(ruta, doc, titulos) {
   try {
-    execFileSync('python3', ['-I', join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras], { stdio: 'inherit' });
+    const argumentos = [join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras, ...(titulos ? [titulos] : [])];
+    execFileSync('python3', ['-I', ...argumentos], { stdio: 'inherit' });
   } catch {
     console.warn(`Aviso: no se han podido completar los metadatos de ${doc.id} (¿falta Python con pypdf?).`);
   }

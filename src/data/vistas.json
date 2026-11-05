@@ -383,6 +383,59 @@
       }
     ]
   },
+  "estaciones-matematicas-invierno": {
+    "total": 32,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Versión"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "De un vistazo · Infantil, de 3 a 6 años"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 14,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "1 Bufanda 1 · blanco, tapón"
+      },
+      {
+        "pagina": 21,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 22,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas de pasos Cada mesa, con sus pasos"
+      }
+    ]
+  },
   "estaciones-matematicas-otono": {
     "total": 32,
     "fotos": [
@@ -1439,6 +1492,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Pictogramas para recortar"
+      }
+    ]
+  },
+  "tarjetas-trazo": {
+    "total": 51,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "niveles"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de imprimir"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Trazos previos"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Modelo"
+      },
+      {
+        "pagina": 13,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "abc Letras"
+      },
+      {
+        "pagina": 36,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "abc Letras"
       }
     ]
   },

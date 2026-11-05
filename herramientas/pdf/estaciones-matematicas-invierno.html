@@ -251,6 +251,21 @@
         height: 10mm;
       }
 
+      /* Dentro de un párrafo, la marca va algo más pequeña para no separar las líneas. */
+      .paso-org .nv,
+      .leyenda-registro .nv {
+        width: 5.4mm;
+        height: 5.4mm;
+        vertical-align: -1.1mm;
+      }
+
+      .paso-org .nv.n3,
+      .leyenda-registro .nv.n3 {
+        width: 6.8mm;
+        height: 6.8mm;
+        vertical-align: -1.8mm;
+      }
+
       /* ---------- Portada ---------- */
       .portada__logo {
         margin-bottom: 15mm;
@@ -2047,6 +2062,14 @@
         font-weight: 700;
       }
 
+      /* El visto y el círculo van dibujados: no están en las letras de la marca. */
+      .signo {
+        display: inline-block;
+        width: 3.8mm;
+        height: 3.8mm;
+        vertical-align: -0.7mm;
+      }
+
       .tabla-registro {
         table-layout: fixed;
       }
@@ -3196,8 +3219,8 @@
         </p>
       </div>
       <p class="leyenda-registro">
-        <span><strong>Cómo apuntar:</strong> <span class="marcas">✓</span> sin ayuda · <span class="marcas">A</span> con ayuda · <span class="marcas">○</span> todavía no.</span>
-        <span>Al lado, el nivel: <span class="nv n1">1</span> <span class="nv n2">2</span> <span class="nv n3">3</span>. Por ejemplo, ✓2.</span>
+        <span><strong>Cómo apuntar:</strong> <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="visto bueno"><path d="M1.5 5.4 L4 8 L8.8 2" fill="none" stroke="#1e2b55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> sin ayuda · <span class="marcas">A</span> con ayuda · <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="círculo"><circle cx="5" cy="5.2" r="3.6" fill="none" stroke="#1e2b55" stroke-width="1.3"/></svg> todavía no.</span>
+        <span>Al lado, el nivel: <span class="nv n1">1</span> <span class="nv n2">2</span> <span class="nv n3">3</span>. Por ejemplo, <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="visto bueno"><path d="M1.5 5.4 L4 8 L8.8 2" fill="none" stroke="#1e2b55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>2.</span>
         <span>Grupo: ______________ Fecha: ____________</span>
       </p>
       <table class="tabla-registro">
@@ -4097,7 +4120,6 @@
 
       // Rueda de la rotación: seis mesas en círculo y flechas en el sentido del cambio.
       (function () {
-        const colores = ['#2f6fd6', '#e8553e', '#8c4fb8', '#f6c12e', '#1fa67a', '#f5961f'];
         let flechas = '';
         let mesas = '';
         for (let i = 0; i < 6; i++) {
@@ -4109,7 +4131,6 @@
           const giro = i * 60 + 30;
           flechas += `<path d="M${f(xf - 2)} ${f(yf - 1.5)} L${f(xf + 1.9)} ${f(yf)} L${f(xf - 2)} ${f(yf + 1.5)} Z" fill="#46578c" transform="rotate(${giro} ${f(xf)} ${f(yf)})"/>`;
         }
-        void colores;
         document.getElementById('rueda').innerHTML = `<svg viewBox="0 0 42 40" aria-hidden="true">${flechas}</svg>${mesas}<p class="centro">4 o 5 por grupo</p>`;
       })();
 
@@ -4119,7 +4140,7 @@
         const burbujas = [
           [munecoGorro(), 146, 84, 48],
           ['<img src="pictogramas/3243.png" alt="">', 108, 160, 42],
-          [gorro('morado' in COLOR ? 'morado' : 'rojo'), 160, 152, 34],
+          [gorro('rojo'), 160, 152, 34],
           [manopla('azul'), 62, 198, 38],
           ['<img src="pictogramas/2290.png" alt="">', 116, 212, 36],
           [taza(), 22, 190, 32],
