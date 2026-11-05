@@ -7,7 +7,7 @@ etapas: [infantil, primaria]
 necesidades: [tea, tdah, tdl, discapacidad-intelectual]
 edades: "Para docentes de Infantil y Primaria, con alumnado de 3 a 12 años"
 formato: "PDF imprimible (A4)"
-paginas: 12
+paginas: 11
 archivo: /descargas/manana-en-clase.pdf
 portada: /portadas/manana-en-clase.webp
 portada_alt: "Portada de la guía: el título «Mañana en clase» y cuatro fichas de colores, una para el TEA, otra para el TDAH, otra para el TDL y otra para la discapacidad intelectual"
@@ -64,7 +64,7 @@ Cada ficha tiene los mismos seis apartados:
 5. **Frases que ayudan**, para decirlas tal cual.
 6. **A quién pedir ayuda en la Región de Murcia**: los equipos de orientación educativa y psicopedagógica (EOEP) y las asociaciones de familias.
 
-Además, una página para empezar, con el Diseño Universal para el Aprendizaje (DUA) como base, y dos páginas con todas las fuentes.
+Además, una página para empezar, con el Diseño Universal para el Aprendizaje (DUA) como base, y una página final con todas las fuentes.
 
 ## Cómo usarla
 

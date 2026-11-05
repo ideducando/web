@@ -956,8 +956,8 @@
           { d: camino([[1, -12], ...arco(12, -12, 11, 12, 0, 322)]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 3.4 }, { desde: 26, largo: 11, lado: 1 }] },
         ] },
         f: { ancho: 18, desc: '2 trazos: 1, el bastón, que empieza arriba a la derecha y baja; 2, la raya, de izquierda a derecha', trazos: [
-          { d: 'M18 -39 C16.4 -42, 14 -43, 11.5 -43 C8 -43, 6 -40.6, 6 -36.6 L6 0', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
-          { d: linea([-0.5, X], [13.5, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
+          { d: 'M18 -39 C16.4 -42, 14 -43, 11.5 -43 C8 -43, 6 -40.6, 6 -36.6 L6 0', flechas: [{ desde: 4.5, largo: 9, lado: 1 }, { desde: 33, largo: 9, lado: 1 }] },
+          { d: linea([-0.5, X], [14.5, X]), flechas: [{ desde: 10, largo: 5, lado: 1, sep: 4.8 }] },
         ] },
         g: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, que baja y se curva hacia la izquierda', trazos: [
           { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
@@ -1339,7 +1339,7 @@
         {
           id: 'curvas',
           tipo: 'filas',
-          titulo: 'La pelota bota hasta la portería.',
+          titulo: 'La pelota bota a la portería.',
           desc: 'Tres curvas como puentes, de la pelota a la portería',
           fila(modo) {
             return bandaFila() + pelota(17.6, 14.8, 5.4) + porteria(110.6, 20.6) + trazos([{ d: puentes(X0, X1, 3, 19.2, 12), flechas: [{ desde: 5, largo: 11, lado: -1 }] }], modo, 'azul');
