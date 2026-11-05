@@ -8,6 +8,7 @@ necesidades: [tea, tdah, tdl, discapacidad-intelectual]
 edades: "Para docentes de Infantil y Primaria, con alumnado de 3 a 12 años"
 formato: "PDF imprimible (A4)"
 paginas: 11
+vistas: [1, 2, 3, 5, 7, 9]
 archivo: /descargas/manana-en-clase.pdf
 portada: /portadas/manana-en-clase.webp
 portada_alt: "Portada de la guía: el título «Mañana en clase» y cuatro fichas de colores, una para el TEA, otra para el TDAH, otra para el TDL y otra para la discapacidad intelectual"

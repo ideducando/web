@@ -600,6 +600,59 @@
       }
     ]
   },
+  "manana-en-clase": {
+    "total": 11,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para docentes · Infantil y Primaria"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ficha"
+      }
+    ]
+  },
   "me-llamo-bocadillo-pictogramas": {
     "total": 26,
     "fotos": [
