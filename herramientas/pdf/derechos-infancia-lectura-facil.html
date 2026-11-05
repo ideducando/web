@@ -133,10 +133,12 @@
         line-height: 1.1;
       }
 
+      /* pre-wrap: así, cuando el título ocupa dos líneas, el marcador del PDF no junta las dos palabras del corte */
       .titulo-nino {
         margin: 0;
         font-size: 32pt;
         line-height: 1.05;
+        white-space: pre-wrap;
       }
 
       .franja {
@@ -750,6 +752,7 @@
         margin: 0;
         font-size: 22pt;
         line-height: 1.05;
+        white-space: pre-wrap;
       }
 
       .tarjeta__picto {
@@ -800,8 +803,10 @@
         border: 0.5mm dashed var(--suave);
       }
 
-      .mi-tarjeta h2 {
+      .mi-tarjeta__titulo {
         margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
         font-size: 19pt;
         line-height: 1.1;
       }
@@ -867,8 +872,11 @@
         text-transform: none;
       }
 
+      /* El subtítulo también lo lee el alumnado: Atkinson Hyperlegible, como el resto del texto */
       .portada__subtitulo {
         max-width: 128mm;
+        font-family: var(--texto);
+        font-weight: 700;
         font-size: 16pt;
       }
 
@@ -1885,7 +1893,7 @@
       const minis = DERECHOS.map((d) => `<span class="c-${d.color}">${img(d.panel[0], d.titulo)}</span>`).join('');
       const miTarjeta = `<article class="mi-tarjeta">
           <div class="rayos"></div>
-          <h2>Mi derecho favorito</h2>
+          <p class="mi-tarjeta__titulo">Mi derecho favorito</p>
           <p class="nombre-linea">Me llamo:<span class="linea"></span></p>
           <p class="mi-tarjeta__consigna">Rodea mi derecho favorito.</p>
           <div class="minis">${minis}</div>

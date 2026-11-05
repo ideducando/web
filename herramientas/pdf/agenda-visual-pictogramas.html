@@ -489,16 +489,19 @@
         break-inside: avoid;
       }
 
-      .carta-dia img,
-      .dia__cabecera img {
+      /* Tira «L M X J V S D» del pictograma del día: el dibujo ocupa la franja central de la imagen
+         cuadrada, así que se enseña como fondo, centrado y al ancho de la caja, sin recortar el dibujo. */
+      .tira-dia {
+        display: block;
         width: 100%;
-        object-fit: cover;
-        object-position: center;
-        background: #fff;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% auto;
         border-radius: 1mm;
       }
 
-      .carta-dia img {
+      .carta-dia .tira-dia {
         height: 9.4mm;
       }
 
@@ -572,8 +575,10 @@
         line-height: 1;
       }
 
-      .dia__cabecera img {
+      /* La tira dibujada ocupa el 21,6 % del alto de la imagen: a 38 mm de ancho mide 8,2 mm y cabe entera. */
+      .dia__cabecera .tira-dia {
         height: 8.4mm;
+        background-size: 38mm auto;
       }
 
       .dia__casillas {
@@ -1074,8 +1079,15 @@
       .cabecera-tarjetas {
         display: flex;
         align-items: center;
-        gap: 4mm;
-        margin-bottom: 2mm;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 2.4mm;
+      }
+
+      .cabecera-tarjetas .atribucion {
+        margin: 0;
+        max-width: 98mm;
+        text-align: right;
       }
 
       .cabecera-tarjetas h1 {
@@ -1140,25 +1152,25 @@
       /* ---------- Lista de pictogramas (última página) ---------- */
       .indice {
         columns: 4;
-        column-gap: 5mm;
+        column-gap: 3mm;
         list-style: none;
         margin: 1mm 0 2mm;
         padding: 0;
       }
 
       .indice li {
-        display: flex;
-        align-items: baseline;
-        gap: 1.6mm;
         margin: 0 0 0.6mm;
+        padding-left: 4.2mm;
+        text-indent: -4.2mm;
         break-inside: avoid;
       }
 
       .indice li::before {
         content: '';
-        flex: none;
+        display: inline-block;
         width: 2.6mm;
         height: 2.6mm;
+        margin-right: 1.6mm;
         border-radius: 50%;
         background: var(--c);
       }
@@ -1258,7 +1270,7 @@
         margin-top: 3mm;
         padding-top: 2.5mm;
         font-size: 11pt;
-        line-height: 1.35;
+        line-height: 1.4;
       }
 
       .guia .creditos p {
@@ -1554,21 +1566,18 @@
 
       <h2>Qué incluye</h2>
       <ul class="incluye">
-        <li><b>P. 3</b><span><strong>Mi semana:</strong> cinco días con cinco casillas.</span></li>
-        <li><b>P. 4</b><span><strong>Mi día:</strong> siete pasos y su columna de «Terminado».</span></li>
-        <li><b>P. 5</b><span><strong>Primero y después:</strong> para una sola transición.</span></li>
-        <li><b>P. 6</b><span><strong>Si hay un cambio:</strong> lo que estaba previsto y lo que toca ahora.</span></li>
-        <li><b>P. 7</b><span><strong>¿Qué necesito?:</strong> para pedir ayuda, descanso, agua, ir al baño o parar.</span></li>
-        <li><b>P. 8</b><span><strong>Preparo la mochila:</strong> para ir al cole y para volver a casa.</span></li>
-        <li><b>P. 9</b><span><strong>¿Cómo ha ido el día?:</strong> para contarlo en casa.</span></li>
-        <li><b>P. 10</b><span><strong>Ayer, hoy y mañana:</strong> con los siete días para recortar.</span></li>
-        <li><b>P. 11</b><span><strong>Tarjetas pequeñas:</strong> 80 de 44 × 21 mm, en dos hojas.</span></li>
-        <li><b>P. 13</b><span><strong>Tarjetas grandes:</strong> 12 de 8 × 8 cm, en dos hojas.</span></li>
+        <li><b>P. 3</b><span>Mi semana</span></li>
+        <li><b>P. 4</b><span>Mi día, con su columna de «Terminado»</span></li>
+        <li><b>P. 5</b><span>Primero y después</span></li>
+        <li><b>P. 6</b><span>Si hay un cambio</span></li>
+        <li><b>P. 7</b><span>¿Qué necesito?, con su tira para la mesa</span></li>
+        <li><b>P. 8</b><span>Preparo la mochila</span></li>
+        <li><b>P. 9</b><span>¿Cómo ha ido el día?, para casa</span></li>
+        <li><b>P. 10</b><span>Ayer, hoy y mañana, con los 7 días</span></li>
+        <li><b>P. 11</b><span>80 tarjetas pequeñas, de 44 × 21 mm</span></li>
+        <li><b>P. 13</b><span>12 tarjetas grandes, de 8 × 8 cm</span></li>
+        <li><b>P. 17</b><span>Los pictogramas, con su número en ARASAAC</span></li>
       </ul>
-      <p>
-        Las tarjetas pequeñas caben también en las casillas de la agenda en blanco de IdEducando, que sigue en el
-        catálogo para quien prefiera sus propios pictogramas.
-      </p>
 
       <h2>Antes de empezar</h2>
       <ol>
@@ -1592,33 +1601,26 @@
       <h2>Los tableros nuevos</h2>
       <ul>
         <li>
-          <strong>Si hay un cambio.</strong> Pon en «Antes» la tarjeta de lo que estaba previsto y en «Ahora», la nueva.
-          Explícalo con pocas palabras y delante de él o de ella. Las ideas para calmarse de abajo se practican un día
-          tranquilo, antes de necesitarlas.
+          <strong>Si hay un cambio.</strong> En «Antes», lo que estaba previsto; en «Ahora», lo nuevo. Las ideas para
+          calmarse se practican un día tranquilo.
         </li>
         <li>
           <strong>¿Qué necesito?</strong> Enséñalo en el momento justo: cuando tenga sed, señala «Agua» y dilo. Responde
-          siempre, también cuando lo pide sin hablar. La tira va en su mesa.
+          siempre, también si lo pide sin hablar.
         </li>
+        <li><strong>Preparo la mochila.</strong> Una columna se usa en casa y la otra, en el cole.</li>
         <li>
-          <strong>Preparo la mochila.</strong> Marca cada cosa con el rotulador al meterla. Una columna se usa en casa y la
-          otra, en el cole.
+          <strong>¿Cómo ha ido el día?</strong> Viaja en la mochila: en casa, la familia pregunta y el niño o la niña rodea
+          la respuesta.
         </li>
-        <li>
-          <strong>¿Cómo ha ido el día?</strong> Viaja en la mochila. En casa, la familia pregunta y el niño o la niña
-          rodea la respuesta.
-        </li>
-        <li>
-          <strong>Ayer, hoy y mañana.</strong> Cada mañana, los días se mueven una casilla. Debajo de cada día va lo más
-          importante que pasa.
-        </li>
+        <li><strong>Ayer, hoy y mañana.</strong> Cada mañana, los días se mueven una casilla.</li>
       </ul>
     </section>
 
     <!-- ======================================================================
          GUÍA 2: ADAPTARLA A CADA PEQUE
          ====================================================================== -->
-    <section class="guia">
+    <section class="guia hoja">
       <div class="rayos" style="margin-bottom: 4mm"></div>
       <p class="antetitulo">Guía para docentes y familias</p>
       <h1>Adaptarla a cada peque</h1>
@@ -1627,7 +1629,10 @@
       <h2>Cuánta información</h2>
       <ul>
         <li>Empieza con 2 o 3 tarjetas y añade más cuando las entienda.</li>
-        <li>Si el día entero es mucho, enseña solo la mañana. Si aún cuesta, usa solo «Primero y después».</li>
+        <li>
+          Si el día entero es mucho, enseña solo la mañana: tapa los últimos pasos de «Mi día» con una cartulina. Si aún
+          cuesta, usa solo «Primero y después».
+        </li>
         <li>Cuando el día ya está claro, pasad a la semana.</li>
       </ul>
 
@@ -1674,6 +1679,24 @@
         Vuelve al paso anterior sin darle importancia. Después de unas vacaciones o de una temporada difícil, es normal
         necesitar otra vez más apoyo.
       </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA 3: LOS PICTOGRAMAS Y LOS CRÉDITOS
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Guía para docentes y familias</p>
+      <h1>Los pictogramas, uno a uno</h1>
+      <p>
+        Cada tarjeta lleva un pictograma de ARASAAC, con su número al lado. Para verlo, escribe
+        <span class="url">arasaac.org/pictograms/es/</span> y el número: <span class="url">arasaac.org/pictograms/es/2317</span>
+        es «casa». Desde allí se descarga en blanco y negro, tachado o en alta resolución.
+      </p>
+      <ul class="indice" id="indice"></ul>
+      <p>
+        Días de la semana: lunes 6554, martes 6557, miércoles 6563, jueves 6536, viernes 6629, sábado 6605 y domingo 6478.
+      </p>
 
       <div class="creditos">
         <p>
@@ -1681,8 +1704,8 @@
           <span class="url">ideducando.es/material-gratuito/agenda-visual-pictogramas</span>
         </p>
         <p>
-          Las páginas 6 a 10 se inspiran en «Mi agenda diaria», de Montse Navarro, publicada en ARASAAC (material 8137).
-          Los tableros y el diseño son de IdEducando. La agenda en blanco sigue en
+          Las páginas 6 a 10 se inspiran en «Mi agenda diaria», de Montse Navarro (ARASAAC, material 8137). Los tableros y
+          el diseño son de IdEducando. La agenda en blanco, para usar tus propios pictogramas, sigue en
           <span class="url">ideducando.es/material-gratuito/agenda-visual-semanal</span>.
         </p>
         <p>
@@ -1712,7 +1735,6 @@
       // ===========================================================================
 
       const P = (n) => `pictogramas/${n}.png`;
-      const LOGO = '<img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">';
       const ATRIBUCION =
         '<p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>';
 
@@ -1734,7 +1756,7 @@
         [2599, 'Trabajar en la mesa', 'dia'],
         [32176, 'Rincones', 'dia'],
         [2439, 'Jugar', 'dia'],
-        [6483, 'Cuento', 'dia'],
+        [8346, 'Cuento', 'dia'],
         [7141, 'Leer', 'dia'],
         [2380, 'Escribir', 'dia'],
         [7207, 'Pintar', 'dia'],
@@ -1751,7 +1773,7 @@
         [31880, 'Lavarse los dientes', 'dia'],
         [2276, 'Beber agua', 'dia'],
         [34494, 'Ponerse el abrigo', 'dia'],
-        [37047, 'Salir', 'dia'],
+        [28689, 'Salir', 'dia'],
         [10258, 'Educación Física', 'areas'],
         [32552, 'Psico', 'areas'],
         [35434, 'Música', 'areas'],
@@ -1774,10 +1796,10 @@
         [7099, 'Fiesta', 'distintos'],
         [3087, 'Cumpleaños', 'distintos'],
         [36342, 'Simulacro', 'distintos'],
-        [12293, 'Médico', 'distintos'],
+        [2467, 'Médico', 'distintos'],
         [32412, 'Teatro', 'distintos'],
         [4772, 'Visita', 'distintos'],
-        [25736, 'Cambio', 'distintos'],
+        [8053, 'Cambio', 'distintos'],
         [8517, 'Sorpresa', 'distintos'],
         [3166, 'No hay cole', 'distintos'],
         [2317, 'Casa', 'volver'],
@@ -1785,7 +1807,7 @@
         [38917, 'Ruta', 'volver'],
         [2339, 'Coche', 'volver'],
         [32214, 'Andando', 'volver'],
-        [2392, 'Me recogen', 'volver'],
+        [37047, 'Me recogen', 'volver'],
         [2859, 'Parque', 'volver'],
       ];
       const POR_NUMERO = Object.fromEntries(TARJETAS.map((t) => [t[0], t]));
@@ -1797,7 +1819,7 @@
       const EN_BLANCO = 4;
 
       // Las 12 grandes, para «Primero y después» y «Si hay un cambio»
-      const GRANDES = [27575, 2599, 8680, 8975, 38603, 28206, 33064, 2439, 6483, 7190, 5970, 2317];
+      const GRANDES = [27575, 2599, 8680, 8975, 38603, 28206, 33064, 2439, 8346, 7190, 5970, 2317];
 
       // Días de la semana: [número de ARASAAC, nombre, color]
       const DIAS = [
@@ -1821,7 +1843,7 @@
         return `<div class="grande ${GRUPOS[grupo].clase}"><span class="grande__picto"><img src="${P(num)}" alt=""></span><span class="grande__texto">${palabra}</span></div>`;
       };
       const cartaDia = ([num, nombre, clase]) =>
-        `<div class="carta-dia ${clase}"><img src="${P(num)}" alt=""><b>${nombre}</b></div>`;
+        `<div class="carta-dia ${clase}"><span class="tira-dia" style="background-image: url('${P(num)}')"></span><b>${nombre}</b></div>`;
       const casillas = (n, clase = '') => Array.from({ length: n }, () => `<div class="casilla ${clase}"></div>`).join('');
 
       // ---------------------------------------------------------------- Portada
@@ -1833,7 +1855,7 @@
       document.getElementById('semana').innerHTML = DIAS.slice(0, 5)
         .map(
           ([num, nombre, clase]) =>
-            `<div class="dia ${clase}"><div class="dia__cabecera"><h2>${nombre}</h2><img src="${P(num)}" alt=""></div><div class="dia__casillas">${casillas(5)}</div></div>`,
+            `<div class="dia ${clase}"><div class="dia__cabecera"><h2>${nombre}</h2><span class="tira-dia" style="background-image: url('${P(num)}')"></span></div><div class="dia__casillas">${casillas(5)}</div></div>`,
         )
         .join('');
 
@@ -1857,7 +1879,7 @@
       ).join('');
 
       // ---------------------------------------------------------------- ¿Cómo ha ido el día?
-      const HECHO = [27575, 2599, 32176, 33064, 28206, 5970, 6483, 10258, 35434];
+      const HECHO = [27575, 2599, 32176, 33064, 28206, 5970, 8346, 10258, 35434];
       document.getElementById('hecho').innerHTML =
         HECHO.map((n) => `<li><img src="${P(n)}" alt="">${POR_NUMERO[n][1]}</li>`).join('') + '<li class="otra"><i></i>Otra cosa</li>';
       const SENTIDO = [
@@ -1885,31 +1907,26 @@
       const LEYENDA = `<ul class="leyenda">${Object.values(GRUPOS)
         .map((g) => `<li class="${g.clase}"><i></i>${g.nombre}</li>`)
         .join('')}</ul>`;
-      const hojaPequenas = (titulo, texto, piezas) =>
-        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><div><h1>${titulo}</h1><p>${texto}</p></div>${LOGO}</div>${LEYENDA}<div class="rejilla-pequenas">${piezas.join('')}</div>${ATRIBUCION}</section>`;
-      const hojaGrandes = (titulo, texto, piezas) =>
-        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><div><h1>${titulo}</h1><p>${texto}</p></div>${LOGO}</div><div class="rejilla-grandes">${piezas.join('')}</div>${ATRIBUCION}</section>`;
+      const hojaPequenas = (titulo, piezas) =>
+        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><h1>${titulo}</h1>${ATRIBUCION}</div>${LEYENDA}<div class="rejilla-pequenas">${piezas.join('')}</div></section>`;
+      const hojaGrandes = (titulo, piezas) =>
+        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><h1>${titulo}</h1>${ATRIBUCION}</div><div class="rejilla-grandes">${piezas.join('')}</div></section>`;
 
       const unicas = TARJETAS.map((t) => carta(t[0]));
       const copias = COPIAS.flatMap((n) => Array.from({ length: VECES }, () => carta(n)));
       const blancas = Array.from({ length: EN_BLANCO }, cartaBlanca);
       const pequenas2 = [...unicas.slice(40), ...copias, ...blancas];
-      const texto =
-        'Tarjetas de 44 × 21 mm para «Mi semana», «Mi día» y los tableros. Caben también en la agenda en blanco.';
 
       document.getElementById('hojas-tarjetas').outerHTML =
-        hojaPequenas('Tarjetas pequeñas (1 de 2)', texto, unicas.slice(0, 40)) +
-        hojaPequenas(
-          'Tarjetas pequeñas (2 de 2)',
-          'Con 4 copias más de asamblea, almuerzo, recreo y casa, y 4 en blanco para dibujar o escribir.',
-          pequenas2,
-        ) +
-        hojaGrandes(
-          'Tarjetas grandes (1 de 2)',
-          'Tarjetas de 8 × 8 cm para «Primero y después» y «Si hay un cambio».',
-          GRANDES.slice(0, 6).map(grande),
-        ) +
-        hojaGrandes('Tarjetas grandes (2 de 2)', 'Tarjetas de 8 × 8 cm para «Primero y después» y «Si hay un cambio».', GRANDES.slice(6).map(grande));
+        hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 1 de 2', unicas.slice(0, 40)) +
+        hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 2 de 2', pequenas2) +
+        hojaGrandes('Tarjetas grandes<br>8 × 8 cm · hoja 1 de 2', GRANDES.slice(0, 6).map(grande)) +
+        hojaGrandes('Tarjetas grandes<br>8 × 8 cm · hoja 2 de 2', GRANDES.slice(6).map(grande));
+
+      // ---------------------------------------------------------------- Lista de pictogramas (página 17)
+      document.getElementById('indice').innerHTML = TARJETAS.map(
+        ([num, palabra, grupo]) => `<li class="${GRUPOS[grupo].clase}">${palabra} <span>${num}</span></li>`,
+      ).join('');
 
       // Comprobación: 80 tarjetas pequeñas, 12 grandes y 7 días (lo que dice la ficha)
       console.assert(unicas.length === 60 && unicas.length + copias.length + blancas.length === 80, 'Faltan o sobran tarjetas pequeñas');

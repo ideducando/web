@@ -1,6 +1,6 @@
 ---
 titulo: "Mañana en clase: fichas rápidas por necesidad"
-resumen: "Cuatro fichas de dos páginas para recibir a un alumno o una alumna con TEA, TDAH, TDL o discapacidad intelectual: señales, ajustes con su apoyo y a quién pedir ayuda en Murcia."
+resumen: "Cuatro fichas de dos páginas para recibir a un alumno o una alumna con TEA, TDAH, TDL o discapacidad intelectual: ajustes que funcionan, con su apoyo, y a quién pedir ayuda en Murcia."
 seccion: aula
 tipo: guia
 etapas: [infantil, primaria]
@@ -62,14 +62,14 @@ Cada ficha tiene los mismos seis apartados:
 3. **Ajustes que funcionan**, cada uno con su apoyo en la evidencia o en la norma.
 4. **Errores frecuentes**, con lo que puedes hacer en su lugar.
 5. **Frases que ayudan**, para decirlas tal cual.
-6. **A quién pedir ayuda en la Región de Murcia**: orientación, los equipos de orientación educativa y psicopedagógica (EOEP) y las asociaciones de familias.
+6. **A quién pedir ayuda en la Región de Murcia**: los equipos de orientación educativa y psicopedagógica (EOEP) y las asociaciones de familias.
 
 Además, una página para empezar, con el Diseño Universal para el Aprendizaje (DUA) como base, y dos páginas con todas las fuentes.
 
 ## Cómo usarla
 
 1. Pide a orientación su informe psicopedagógico y su plan de actuación, si los tiene.
-2. Lee su ficha y elige 2 o 3 ajustes para empezar.
+2. Lee su ficha y elige unos pocos ajustes para empezar.
 3. Habla con la familia: qué le gusta y qué le ayuda a estar en calma.
 4. Anota lo que veas las primeras semanas. Si una conducta se repite, el [registro ABC](/material-gratuito/registro-observacion-abc/) te ayuda a observarla.
 
@@ -77,7 +77,9 @@ Si hay TDAH, la [tarjeta de ida y vuelta](/material-gratuito/tarjeta-cole-casa-t
 
 ## En qué se apoya
 
-Las definiciones salen de la Clasificación Internacional de Enfermedades de la Organización Mundial de la Salud (CIE-11), del consenso internacional CATALISE para el TDL y de la Asociación Americana de Discapacidades Intelectuales y del Desarrollo (AAIDD). Los ajustes se apoyan en revisiones de estudios, en guías clínicas y en la normativa de la Región de Murcia, como el Decreto 359/2009 de atención a la diversidad.
+Las definiciones salen de la Clasificación Internacional de Enfermedades de la Organización Mundial de la Salud (CIE-11). Para el TDL se suma el consenso internacional CATALISE, y para la discapacidad intelectual, la Asociación Americana de Discapacidades Intelectuales y del Desarrollo (AAIDD).
+
+Cada ajuste dice en qué se apoya: en la evidencia, con revisiones de estudios y guías clínicas, o en la normativa de la Región de Murcia, como el Decreto 359/2009 de atención a la diversidad.
 
 Hemos comprobado todas las fuentes en su origen el 4 de noviembre de 2026.
 

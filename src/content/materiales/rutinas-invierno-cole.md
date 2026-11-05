@@ -50,7 +50,7 @@ fuentes:
   - "Ministerio de Sanidad (2021). Medidas de prevención, higiene y promoción de la salud frente a COVID-19 para centros educativos en el curso 2021-2022. Medidas de prevención personal, punto 4"
   - "Ministerio de Sanidad (2025). Documento marco para el control de las infecciones respiratorias agudas. Diciembre de 2025"
   - "Asociación Española de Pediatría (AEP). En Familia: Lavado de manos. aeped.es/enfamilia"
-  - "Decreto 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022, págs. 33083, 33084 y 33096"
+  - "Decreto 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022, págs. 33083, 33084 y 33096"
   - "Sam, A. y AFIRM Team (2024). Task Analysis (actualización). Universidad de Carolina del Norte en Chapel Hill, Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu"
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
   - "Ben-Sasson, A. y otros (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum disorders. Journal of Autism and Developmental Disorders, 39(1), 1-11"
@@ -96,7 +96,7 @@ Lo hemos visto en las normas de Infantil que publican varios colegios públicos 
 
 El truco del abrigo lo explica el servicio de Infantil del Ayuntamiento de Wokingham, en Inglaterra: el abrigo en el suelo, la capucha hacia el niño o la niña, las manos en las mangas y los brazos por encima de la cabeza. Los servicios de terapia ocupacional infantil del sistema público de salud británico (NHS) recomiendan empezar por quitarse la ropa, que es más fácil, y proponen otras formas de ponerse el abrigo. Los pasos de «Me sueno la nariz» siguen al Ministerio de Sanidad y a la Asociación Española de Pediatría (AEP): el pañuelo desechable va a la papelera y después toca lavarse las manos. Dividir una tarea en pasos y mostrarlos con imágenes figuran entre las prácticas basadas en la evidencia para el alumnado con TEA.
 
-## Ideas para adaptarlo (DUA)
+## Ideas para adaptarlo
 
 El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de presentar la información y de participar. Algunas ideas:
 
@@ -108,4 +108,4 @@ El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de 
 
 ## Sobre los dibujos y los pictogramas
 
-Los dibujos del truco del abrigo, el perchero de la portada, la estrella «¡Hecho!» y las tijeras son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org) y su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender.
+Los dibujos del truco del abrigo, el perchero de la portada, la estrella «¡Hecho!» y las tijeras son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org), el Centro Aragonés para la Comunicación Aumentativa y Alternativa, y su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender.

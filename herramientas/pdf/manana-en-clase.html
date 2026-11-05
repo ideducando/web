@@ -166,6 +166,10 @@
       }
 
       /* ---------- Cómo usar ---------- */
+      .uso .antetitulo {
+        font-size: 11pt;
+      }
+
       .uso h1 {
         font-size: 24pt;
         margin-bottom: 2mm;
@@ -489,7 +493,16 @@
         font-weight: 600;
       }
 
-      /* ---------- Fuentes ---------- */
+      /* ---------- Fuentes ----------
+         Página propia con 12 mm de margen arriba (el manual pide 10 mm como mínimo) para que quepa en una hoja. */
+      @page fuentes {
+        margin-top: 12mm;
+      }
+
+      .fuentes {
+        page: fuentes;
+      }
+
       .fuentes h1 {
         font-size: 22pt;
         margin-bottom: 1.5mm;
@@ -629,7 +642,7 @@
       <ol class="pasos-previos">
         <li>Pide a orientación o a jefatura de estudios su informe psicopedagógico y su plan de actuación, si los tiene.</li>
         <li>Habla con la familia: qué le gusta y qué le ayuda a estar en calma.</li>
-        <li>Elige 2 o 3 ajustes de su ficha para empezar.</li>
+        <li>Elige unos pocos ajustes de su ficha para empezar.</li>
         <li>Anota lo que veas las primeras semanas. Te servirá en la reunión con orientación.</li>
       </ol>
 
@@ -784,7 +797,7 @@
           </p>
         </div>
         <div>
-          <h3>Orientación: el EOEP de sector</h3>
+          <h3>Orientación</h3>
           <p>
             En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
             algunos colegios, un orientador o una orientadora del centro. Hace la evaluación psicopedagógica y el
@@ -801,8 +814,8 @@
         <div class="familias">
           <h3>Asociaciones de familias</h3>
           <p>
-            La Federación de Autismo de la Región de Murcia (FAUM) reúne a las asociaciones de familias de la Región.
-            Si la familia lo pide, puedes darle el contacto.
+            La Federación de Autismo de la Región de Murcia (FAUM) agrupa a las asociaciones de autismo de la Región,
+            muchas de ellas de familias. Si la familia lo pide, puedes darle el contacto.
           </p>
         </div>
       </div>
@@ -854,7 +867,7 @@
       <p class="intro-ajustes">La Resolución de 30/07/2019 es la norma de Murcia para las dificultades de aprendizaje.</p>
       <ul class="ajustes">
         <li>
-          <strong>Pocas normas, claras y a la vista.</strong> Escribe 3 o 4 normas en positivo y elogia en el momento
+          <strong>Normas claras y a la vista.</strong> Escribe pocas normas, en positivo, y elogia en el momento
           cuando las cumple. <span class="apoyo"><b>Apoyo:</b> tratamiento bien establecido, según la guía de la
           Academia Americana de Pediatría (Wolraich y otros, 2019).</span>
         </li>
@@ -950,7 +963,7 @@
           </p>
         </div>
         <div>
-          <h3>Orientación: el EOEP de sector</h3>
+          <h3>Orientación</h3>
           <p>
             En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
             algunos colegios, un orientador o una orientadora del centro. Identifica sus necesidades y te asesora.
@@ -993,8 +1006,8 @@
       <h2><span class="n">1</span> Qué es</h2>
       <div class="que-es">
         <p>
-          El TDL es una dificultad persistente para aprender, comprender o usar el lenguaje, que no se explica por otra
-          causa, como una pérdida auditiva o una lesión cerebral. Afecta a la comunicación del día a día y al
+          El TDL es una dificultad persistente para adquirir, comprender, producir o usar el lenguaje, que no se explica
+          por otra causa, como una pérdida auditiva o una lesión cerebral. Afecta a la comunicación del día a día y al
           aprendizaje, y si sigue presente a partir de los 5 años es probable que dure. El nombre lo acordó en 2017 el
           consenso internacional CATALISE (en inglés, «criterios y terminología de los trastornos del lenguaje: síntesis
           de la evidencia»), y es el que usa la Organización Mundial de la Salud (OMS). Antes se llamaba
@@ -1117,7 +1130,7 @@
           </p>
         </div>
         <div>
-          <h3>Orientación: el EOEP de sector</h3>
+          <h3>Orientación</h3>
           <p>
             En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
             algunos colegios, un orientador o una orientadora del centro. Identifica sus necesidades y te asesora.
@@ -1128,7 +1141,8 @@
           <p>
             No hay un EOEP específico de lenguaje. La norma de Murcia incluye el TDL entre las dificultades de
             aprendizaje y prevé que orientación pida asesoramiento al EOEP específico de Dificultades Específicas del
-            Aprendizaje y TDAH (Resolución de 30/07/2019, resuelvo tercero).
+            Aprendizaje y TDAH, el trastorno por déficit de atención e hiperactividad (Resolución de 30/07/2019,
+            resuelvo tercero).
           </p>
         </div>
         <div class="familias">
@@ -1162,8 +1176,8 @@
       <div class="que-es">
         <p>
           La discapacidad intelectual se caracteriza por limitaciones significativas en el funcionamiento intelectual y
-          en la conducta adaptativa, que se originan antes de los 22 años. La conducta adaptativa es lo que se aprende y
-          se usa en la vida diaria: por ejemplo, comunicarse o cuidar de uno mismo. En cada persona, las limitaciones
+          en la conducta adaptativa, que se originan antes de los 22 años. La conducta adaptativa es lo que se aprende
+          para la vida diaria, como comunicarse o cuidar de uno mismo. En cada persona, las limitaciones
           conviven con capacidades, y su funcionamiento mejora con apoyos personalizados y mantenidos en el tiempo. En
           los informes de salud puede aparecer como «trastorno del desarrollo intelectual», su nombre en la
           clasificación de la Organización Mundial de la Salud (OMS).
@@ -1210,7 +1224,7 @@
           evalúa con los criterios de su adaptación. <span class="apoyo"><b>Apoyo:</b> Decreto 209/2022, art.&nbsp;24.5.</span>
         </li>
         <li>
-          <strong>Textos fáciles de leer.</strong> Frases cortas, una idea por frase y apoyo de imágenes o pictogramas.
+          <strong>Textos fáciles de leer.</strong> Frases cortas, con una idea cada una, y apoyo de imágenes o pictogramas.
           <span class="apoyo"><b>Apoyo:</b> la ley pide accesibilidad cognitiva con lectura fácil y pictogramas (Real
           Decreto Legislativo 1/2013, art.&nbsp;2.k).</span>
         </li>
@@ -1277,7 +1291,7 @@
           </p>
         </div>
         <div>
-          <h3>Orientación: el EOEP de sector</h3>
+          <h3>Orientación</h3>
           <p>
             En Infantil y Primaria la da el equipo de orientación educativa y psicopedagógica (EOEP) de sector o, en
             algunos colegios, un orientador o una orientadora del centro. Hace la evaluación psicopedagógica y el
@@ -1296,7 +1310,7 @@
           <h3>Asociaciones de familias</h3>
           <p>
             Plena inclusión Región de Murcia es la federación de asociaciones de familias de personas con discapacidad
-            intelectual o del desarrollo. En plenainclusionmurcia.org puedes buscar la asociación de tu zona.
+            intelectual y del desarrollo. En plenainclusionmurcia.org puedes buscar la asociación de tu zona.
           </p>
         </div>
       </div>
@@ -1321,7 +1335,7 @@
           <li>
             Ley Orgánica 2/2006, de 3 de mayo, de Educación (LOE), modificada por la Ley Orgánica 3/2020: arts.&nbsp;4.3,
             71.2, 73 y 74.
-            <span class="donde">BOE-A-2006-7899.</span>
+            <span class="donde url">BOE-A-2006-7899.</span>
           </li>
           <li>
             Convención sobre los derechos de las personas con discapacidad: arts.&nbsp;2 y 24.
@@ -1329,15 +1343,15 @@
           </li>
           <li>
             Real Decreto Legislativo 1/2013, de derechos de las personas con discapacidad: art.&nbsp;2.k y 2.m.
-            <span class="donde">BOE-A-2013-12632.</span>
+            <span class="donde url">BOE-A-2013-12632.</span>
           </li>
         </ul>
 
         <h2>Normativa de la Región de Murcia</h2>
         <ul class="lista-fuentes">
           <li>
-            Decreto n.º 359/2009, de 30 de octubre, por el que se establece y regula la respuesta educativa a la
-            diversidad del alumnado: arts.&nbsp;6, 12, 30, 31 y 34.
+            Decreto n.º 359/2009, de 30 de octubre, de respuesta educativa a la diversidad del alumnado:
+            arts.&nbsp;6, 12, 30, 31 y 34.
             <span class="donde">BORM n.º 254, de 03/11/2009.</span> Vigente: lo aplica la Resolución de 04/02/2026
             (BORM n.º 33, de 10/02/2026).
           </li>
@@ -1374,7 +1388,7 @@
           </li>
         </ul>
 
-        <h2>Clasificaciones, guías y revisiones</h2>
+        <h2>Referencias científicas y guías</h2>
         <ul class="lista-fuentes">
           <li>
             OMS (2026). CIE-11, versión 2026-01: 6A00, 6A01.2, 6A02 y 6A05. <span class="donde">icd.who.int</span>

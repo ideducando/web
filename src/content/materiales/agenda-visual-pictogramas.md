@@ -7,38 +7,38 @@ etapas: [infantil, primaria]
 necesidades: [tea, tdl, discapacidad-intelectual, toda-la-clase]
 edades: "De 3 a 10 años"
 formato: "PDF imprimible (A4; la semana y dos tableros van en horizontal)"
-paginas: 16
+paginas: 17
 archivo: /descargas/agenda-visual-pictogramas.pdf
 portada: /portadas/agenda-visual-pictogramas.webp
 portada_alt: "Portada de la agenda visual con pictogramas: una tira con las tarjetas de llegar al cole, asamblea, trabajar en la mesa y recreo, y una tarjeta grande del recreo"
 vistas: [1, 3, 4, 6, 7, 11]
 tiempo: "2 horas y media para imprimir, plastificar, recortar y pegar el velcro. Se puede hacer por partes"
 necesitas:
-  - "12 hojas de cartulina blanca A4 de 160 g (o folios normales, si tu impresora no admite cartulina)"
+  - "12 hojas de cartulina blanca A4 de 160 g"
   - "12 fundas de plastificar A4 de 125 micras y una plastificadora"
-  - "135 círculos de velcro adhesivo de 1,5 cm: 48 rugosos para las casillas y 87 suaves para las tarjetas pequeñas y los días"
-  - "16 círculos de velcro adhesivo de 2 cm: 4 rugosos para «Primero y después» y «Si hay un cambio» y 12 suaves para las tarjetas grandes"
+  - "135 círculos de velcro adhesivo de 1,5 cm: 48 rugosos y 87 suaves"
+  - "16 círculos de velcro adhesivo de 2 cm: 4 rugosos y 12 suaves"
   - "1 rotulador de pizarra blanca de punta fina"
-  - "1 rollo de celo, para pegar la tira de «¿Qué necesito?» en la mesa"
+  - "1 rollo de celo"
   - "Tijeras o una guillotina"
-  - "Impresora, mejor a color: cada día y cada grupo de tarjetas tiene su color"
+  - "Impresora, mejor a color"
 imprimir:
   - "Páginas 3 a 14, en cartulina y a color. La 3, la 5 y la 6 son apaisadas: la impresora las gira sola."
-  - "Imprime al 100 % («Tamaño real»), sin «Ajustar a la página»: así las tarjetas pequeñas miden 44 × 21 mm y caben en las casillas, también en las de la agenda en blanco."
-  - "Las páginas 15 y 16 (guía) se pueden leer en pantalla."
+  - "Al 100 % («Tamaño real»), sin «Ajustar a la página»: así cada tarjeta pequeña mide 44 × 21 mm y cabe en su casilla."
+  - "Las páginas 15 a 17 (guía) se pueden leer en pantalla."
 pasos:
   - "Imprime las páginas 3 a 14 en cartulina, a color y al 100 %."
   - "Plastifica cada hoja en su funda."
-  - "Recorta por la línea de puntos las 80 tarjetas pequeñas, las 12 grandes y los 7 días, y redondea las esquinas. Recorta también la tira de «¿Qué necesito?»."
+  - "Recorta por la línea de puntos las 80 tarjetas pequeñas, las 12 grandes, los 7 días y la tira de «¿Qué necesito?». Redondea las esquinas."
   - "Pega un círculo de velcro rugoso de 1,5 cm en cada círculo gris pequeño: 25 en «Mi semana», 14 en «Mi día» y 9 en «Ayer, hoy y mañana»."
-  - "Pega un círculo de velcro rugoso de 2 cm en los 4 círculos grandes de «Primero y después» y «Si hay un cambio»."
-  - "Pega un círculo de velcro suave en el centro de cada tarjeta, por detrás: de 1,5 cm en las pequeñas y en los días, y de 2 cm en las grandes."
-  - "Cuelga la agenda a la altura de los ojos del alumno o la alumna, siempre en el mismo sitio, y pega con celo la tira de «¿Qué necesito?» en su mesa."
-resultado: "la semana, el día y 3 tableros con velcro, el tablero de «¿Qué necesito?» con su tira, 2 hojas para usar con rotulador y 99 tarjetas: 80 pequeñas, 12 grandes y 7 días, todo plastificado"
+  - "Pega un círculo de velcro rugoso de 2 cm en cada círculo grande: 2 en «Primero y después» y 2 en «Si hay un cambio»."
+  - "Pega un círculo de velcro suave detrás de cada tarjeta, en el centro: de 1,5 cm en las pequeñas y en los días, y de 2 cm en las grandes."
+  - "Cuelga la agenda a la altura de sus ojos, siempre en el mismo sitio, y pega con celo la tira en su mesa."
+resultado: "la semana, el día y 4 tableros plastificados, 2 hojas para usar con rotulador y 99 tarjetas listas para mover: 80 pequeñas, 12 grandes y 7 días"
 cuidados:
   - "Con las esquinas redondeadas, las tarjetas no pinchan. Guarda las que no uses por colores, en un sobre o una caja."
   - "Las tarjetas y el velcro son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
-  - "Para limpiarla, basta un paño con agua y jabón. El rotulador de pizarra se borra con un pañuelo de papel."
+  - "Para limpiarla, basta un paño con agua y jabón. El rotulador se borra con un pañuelo de papel."
 fuentes:
   - "Navarro, M. (2026). Mi agenda diaria. ARASAAC, material 8137. arasaac.org/materials/es/8137"
   - "Knight, V., Sartini, E. y Spriggs, A. D. (2015). Evaluating visual activity schedules as evidence-based practice for individuals with autism spectrum disorders. Journal of Autism and Developmental Disorders, 45(1), 157-178"

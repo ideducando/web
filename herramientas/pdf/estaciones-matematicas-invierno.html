@@ -612,6 +612,7 @@
       .decreto ul {
         margin: 0;
         padding-left: 4mm;
+        list-style: disc;
       }
 
       .decreto li {
@@ -1679,7 +1680,7 @@
         top: 12.5mm;
         display: grid;
         grid-template-columns: repeat(5, 50mm);
-        gap: 2.6mm;
+        gap: 2mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -3160,7 +3161,7 @@
       </header>
       <p class="pista">Plastifica la hoja, recorta con 2 o 3 mm de borde y pon cada tarjeta de pie en su mesa.</p>
       <ul class="pasos-tarjetas" id="pasos" aria-label="Seis tarjetas de pasos, una por estación, con cuatro pasos y pictogramas cada una"></ul>
-      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Los muñecos y las bufandas son de IdEducando.</p>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
     </section>
 
     <section class="imp-ap">
@@ -3171,7 +3172,7 @@
       <div class="panel" id="panel" role="img" aria-label="Panel con las seis estaciones en fila, de la 1 a la 6, cada una con su color, su dibujo, su nombre y un círculo para el velcro"></div>
       <div class="panel-flecha" id="panel-flecha"></div>
       <ul class="grupos" id="grupos" aria-label="Seis tarjetas de grupo: pingüinos, osos polares, focas, copos, muñecos y gorros, con líneas para escribir los nombres"></ul>
-      <p class="atribucion">Velcro rugoso en los círculos del panel y suave detrás de cada tarjeta de grupo. Escribe los nombres, nunca fotos. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+      <p class="atribucion">Velcro rugoso en los círculos del panel y suave detrás de cada tarjeta de grupo. Escribe los nombres, nunca fotos. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Los demás dibujos son de IdEducando.</p>
     </section>
 
     <!-- ======================================================================
@@ -3363,13 +3364,12 @@
         <h2>Mensaje del cole</h2>
         <div class="renglon"></div>
         <div class="renglon"></div>
-        <div class="renglon"></div>
       </div>
 
       <div class="creditos">
         <p>
           <strong>Estaciones de matemáticas de invierno.</strong> IdEducando, 2026. Licencia CC BY-NC-SA 4.0. Pictogramas: Sergio
-          Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+          Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La manopla es de IdEducando.
         </p>
       </div>
     </section>
@@ -3473,6 +3473,8 @@
         azul: { r: '#2f6fd6', o: '#1b4a9c', luz: '#7ea8ec', marca: 'copo', nombre: 'azul' },
         rojo: { r: '#e8553e', o: '#a8321f', luz: '#f39a8b', marca: 'corazon', nombre: 'rojo' },
         amarillo: { r: '#f6c12e', o: '#a87a00', luz: '#fbe08c', marca: 'estrella', nombre: 'amarillo' },
+        // Solo para las manoplas de medir de la estación 5: así no se mezclan con la ropa de la estación 4.
+        verde: { r: '#1fa67a', o: '#127055', luz: '#8fdcc0', marca: null, nombre: 'verde' },
       };
 
       const f = (n) => Number(n.toFixed(2));
@@ -3653,7 +3655,7 @@
         const grande = nivel === 1;
         const cabeza = { cy: grande ? 15 : 14, r: grande ? 10.5 : 9.6 };
         const cuerpo = { cy: grande ? 45.5 : 44, r: grande ? 18 : 17 };
-        const botones = posicionesBotones(n, nivel, cx, cuerpo.cy + 1)
+        const botones = posicionesBotones(n, nivel, cx, cuerpo.cy + 2)
           .map(([x, y, r]) => `<circle cx="${f(x)}" cy="${f(y)}" r="${r}" fill="${M}"/>`)
           .join('');
         const cuello = cabeza.cy + cabeza.r - 0.5;
@@ -3666,7 +3668,7 @@
           <path d="M${f(cx - 0.3)} ${f(cabeza.cy + 0.6)} L${f(cx + 6.6)} ${f(cabeza.cy + 1.9)} L${f(cx - 0.3)} ${f(cabeza.cy + 3)} Z" fill="#f5961f" stroke="${M}" stroke-width="0.45" stroke-linejoin="round"/>
           <path d="M${f(cx - 3.6)} ${f(cabeza.cy + 4.6)} Q${cx} ${f(cabeza.cy + 6.8)} ${f(cx + 3.6)} ${f(cabeza.cy + 4.6)}" stroke="${M}" stroke-width="0.6" fill="none" stroke-linecap="round"/>
           <path d="M${f(cx - 9.6)} ${f(cuello - 1.6)} Q${cx} ${f(cuello + 2.6)} ${f(cx + 9.6)} ${f(cuello - 1.6)} L${f(cx + 9.6)} ${f(cuello + 2.2)} Q${cx} ${f(cuello + 6.4)} ${f(cx - 9.6)} ${f(cuello + 2.2)} Z" fill="#e8553e" stroke="${M}" stroke-width="0.5" stroke-linejoin="round"/>
-          <path d="M${f(cx + 4.5)} ${f(cuello + 3)} L${f(cx + 7.6)} ${f(cuello + 11)} L${f(cx + 11)} ${f(cuello + 9.6)} L${f(cx + 7.8)} ${f(cuello + 2.2)} Z" fill="#e8553e" stroke="${M}" stroke-width="0.5" stroke-linejoin="round"/>
+          <path d="M${f(cx + 4.5)} ${f(cuello + 3)} L${f(cx + 7.4)} ${f(cuello + 7.4)} L${f(cx + 10.6)} ${f(cuello + 6.4)} L${f(cx + 7.8)} ${f(cuello + 2.2)} Z" fill="#e8553e" stroke="${M}" stroke-width="0.5" stroke-linejoin="round"/>
           ${botones}</svg>`;
       }
 
@@ -3722,7 +3724,8 @@
           defs = `<pattern id="p-${id}" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#1fa67a"/><path d="M3 0 V6 M0 3 H6" stroke="#bfeedd" stroke-width="1.1"/></pattern>`;
           fondo = `url(#p-${id})`;
         } else {
-          defs = `<pattern id="p-${id}" width="10" height="${alto}" patternUnits="userSpaceOnUse"><rect width="10" height="${alto}" fill="#8c4fb8"/><path d="${trazosCopo(5, alto / 2, Math.min(3.6, alto / 4))}" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/></pattern>`;
+          const paso = f(ancho / Math.max(1, Math.round(ancho / 11)));
+          defs = `<pattern id="p-${id}" width="${paso}" height="${alto}" patternUnits="userSpaceOnUse"><rect width="${paso}" height="${alto}" fill="#8c4fb8"/><path d="${trazosCopo(paso / 2, alto / 2, Math.min(3.6, alto / 4))}" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/></pattern>`;
           fondo = `url(#p-${id})`;
         }
         return `<defs>${defs}</defs><rect x="0.4" y="0.4" width="${f(ancho - 0.8)}" height="${f(alto - 0.8)}" rx="1.6" fill="${fondo}" stroke="${TINTA}" stroke-width="0.8"/>`;
@@ -3917,7 +3920,7 @@
         <div class="tabla-medir" role="img" aria-label="Tabla para medir: una casilla para escribir cuántas manoplas mide cada bufanda">
           <div class="rot arriba izq"><span class="nv n3 grande">3</span>Mido…</div>
           ${['rayas', 'lunares', 'cuadros', 'copos'].map(miniBufanda).join('')}
-          <div class="rot izq">${manopla('azul', { estilo: 'width:11mm;height:11mm;flex:none' })}¿Cuántas?</div>
+          <div class="rot izq">${manopla('verde', { estilo: 'width:11mm;height:11mm;flex:none' })}¿Cuántas?</div>
           ${'<div class="escribe"></div>'.repeat(4)}
         </div>`;
 
@@ -3925,7 +3928,7 @@
 
       function tempano(desde) {
         const W = 272, H = 76;
-        const hielo = `M5 12 L30 9 L58 11 L84 8.5 L118 10 L150 7.5 L182 9.5 L214 7.5 L244 10 L267 8 L268 36 L266 64 L240 67 L206 65 L172 67.5 L138 65 L104 67.5 L70 65 L36 67.5 L8 65 L4 40 Z`;
+        const hielo = `M5 12 L30 9 L58 11 L84 8.5 L118 10 L150 7.5 L182 9.5 L214 7.5 L244 10 L268 8 L269 36 L267 64 L240 67 L206 65 L172 67.5 L138 65 L104 67.5 L70 65 L36 67.5 L8 65 L4 40 Z`;
         const sitios = [0, 1, 2, 3, 4]
           .map((i) => `<li class="sitio"><span class="cifra">${desde + i}</span></li>`)
           .join('');
@@ -4024,9 +4027,9 @@
             repetir(4, () => fichaSimple(pompon('blanco', { clase: 'g' }), 'pompón blanco')) +
             repetir(4, () => fichaSimple(tapon({ clase: 'g' }), 'tapón')) +
             repetir(4, () => fichaSimple(pompon('rojo', { clase: 'g' }), 'pompón rojo')) +
-            repetir(8, () => fichaSimple(manopla('azul', { clase: 'g' }), 'manopla para medir')),
+            repetir(8, () => fichaSimple(manopla('verde', { clase: 'g' }), 'manopla verde para medir')),
           leyenda:
-            '<strong>En esta hoja:</strong> 4 pompones blancos, 4 tapones y 4 pompones rojos para la estación 3, en la versión segura. 8 manoplas iguales para medir en la estación 5, en las dos versiones.',
+            '<strong>En esta hoja:</strong> 4 pompones blancos, 4 tapones y 4 pompones rojos para la estación 3, en la versión segura. 8 manoplas verdes, todas iguales, para medir en la estación 5, en las dos versiones.',
           atribucion: 'Los pompones, los tapones y las manoplas son dibujos de IdEducando.',
         },
         {

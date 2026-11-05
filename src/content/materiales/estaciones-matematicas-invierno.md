@@ -21,7 +21,8 @@ necesitas:
   - "6 cuencos o cajas: 3 para las piezas y 3 para guardar la ropa"
   - "1 temporizador visual o un reloj de arena, y 1 rotulador de pizarra"
   - "Tijeras o una guillotina, e impresora, mejor a color"
-  - "Para la versión de clase y casa: 16 pompones blancos y 6 rojos de 2,5 cm y 26 tapones de agua o leche"
+  - "16 pompones blancos y 6 rojos de 2,5 cm, para la versión de clase y casa"
+  - "26 tapones de botellas de agua o leche, para la versión de clase y casa"
 imprimir:
   - "En cartulina, a color y al 100 % («Tamaño real»), para que todo encaje: páginas 8, 9, 11, 12, 14, 15, 17, 19 y 21 a 27."
   - "La página 24 solo hace falta para la versión segura."

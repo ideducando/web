@@ -11,7 +11,7 @@ paginas: 32
 archivo: /descargas/derechos-infancia-lectura-facil.pdf
 portada: /portadas/derechos-infancia-lectura-facil.webp
 portada_alt: "Portada del material: el título «Mis derechos» y doce pictogramas de colores, uno por derecho, con una pegatina amarilla del 20 de noviembre"
-vistas: [1, 3, 9, 17, 18, 23]
+vistas: [1, 3, 6, 12, 17, 23]
 tiempo: "30 minutos para imprimir y preparar, y una sesión de unos 50 minutos para montar el mural con la clase"
 necesitas:
   - "8 folios A4 de 80 g para el mural: 2 del título y 6 de los derechos"
