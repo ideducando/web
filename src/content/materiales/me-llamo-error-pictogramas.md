@@ -57,4 +57,4 @@ Ver el error como parte de aprender y aguantar la frustración cuando algo no sa
 
 Los dibujos del cuento y los símbolos de los personajes son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org), el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender: es gratis siempre.
 
-Algunas palabras van sin pictograma porque ARASAAC no tiene uno claro para lo que quieren decir en el cuento, como «sale» en «no sale bien». Para el garabato, la placa del laboratorio y el pósit que se despega hemos dibujado un símbolo propio.
+Algunas palabras van sin pictograma porque ARASAAC no tiene uno claro para lo que quieren decir en el cuento, como «sale» en «no sale bien». Para palabras como «garabato» o «placa» hemos dibujado un símbolo propio.

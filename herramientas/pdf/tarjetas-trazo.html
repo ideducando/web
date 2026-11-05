@@ -304,9 +304,9 @@
         break-inside: avoid;
       }
 
+      /* La línea de corte no sale del ancho del contenido: si sobresale, Chromium encoge la portada. */
       .corte {
         position: relative;
-        margin: 0 -16mm;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -340,7 +340,7 @@
       .tarjeta {
         position: relative;
         display: grid;
-        grid-template-rows: 13mm 106mm 1fr;
+        grid-template-rows: 13mm 104mm 1fr;
         row-gap: 2.5mm;
         height: 125.5mm;
       }
@@ -413,14 +413,15 @@
         text-align: right;
       }
 
-      /* Cajas en fila: modelo y 3 niveles (letras, números, verticales e inclinadas) */
-      .cajas {
+      /* Celdas en fila: modelo y 3 niveles (letras, números, verticales e inclinadas).
+         Se llaman «celda» porque comun.css ya usa «caja» para los recuadros de color. */
+      .celdas {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 3mm;
       }
 
-      .caja {
+      .celda {
         display: flex;
         flex-direction: column;
         border: 0.4mm solid var(--b);
@@ -429,9 +430,9 @@
         overflow: hidden;
       }
 
-      .caja--modelo {
+      .celda--modelo {
         background: var(--crema);
-        border: 0.6mm solid var(--marino);
+        border-color: var(--marino);
       }
 
       .etiqueta {
@@ -476,7 +477,7 @@
         background: var(--marino);
       }
 
-      .caja svg {
+      .celda svg {
         margin-top: auto;
       }
 
@@ -494,7 +495,7 @@
       .filas__niveles {
         display: grid;
         grid-template-rows: repeat(3, minmax(0, 1fr));
-        gap: 3mm;
+        gap: 2mm;
         min-width: 0;
       }
 
@@ -511,7 +512,7 @@
         display: flex;
         align-items: center;
         gap: 3mm;
-        height: 8.6mm;
+        height: 8.4mm;
         padding: 1mm 2.6mm 0;
       }
 
@@ -548,25 +549,9 @@
         font-size: 12pt;
       }
 
-      .reglas {
-        list-style: none;
-        padding: 0;
-      }
-
-      .reglas li {
-        display: grid;
-        grid-template-columns: 7mm minmax(0, 1fr);
-        gap: 2mm;
-        align-items: start;
-      }
-
-      .reglas svg {
-        width: 7mm;
-        height: 7mm;
-      }
-
       .creditos {
         font-size: 9pt;
+        line-height: 1.4;
       }
     </style>
   </head>
@@ -583,7 +568,7 @@
         <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
         <p class="antetitulo portada__antetitulo">Fichas de trabajo · Grafomotricidad</p>
         <h1 class="portada__titulo">Tarjetas<br />de trazo</h1>
-        <p class="portada__subtitulo">Trazos previos, números y letras para repasar con rotulador y borrar. Con versión para zurdos.</p>
+        <p class="portada__subtitulo">Para repasar con rotulador y borrar, desde los primeros trazos hasta las letras. Con versión para zurdos.</p>
         <div class="portada__pie">
           <p>Dibujos de IdEducando.<br />Sin pictogramas.</p>
           <p style="text-align: right">© IdEducando, 2026<br />Todos los derechos reservados<br />ideducando.es</p>
@@ -651,23 +636,23 @@
          GUÍA PARA EL DOCENTE Y LA FAMILIA
          ====================================================================== -->
     <section class="guia">
-      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <div class="rayos" style="margin-bottom: 4mm"></div>
       <p class="antetitulo">Guía para el docente y la familia</p>
       <h1>Cómo usar las tarjetas de trazo</h1>
       <p>
-        Las tarjetas sirven para practicar el movimiento de la escritura: dónde se empieza, hacia dónde se va y en qué
-        orden se hacen los trazos. Primero, los trazos previos. Después, los números y las letras minúsculas de imprenta.
-        Están pensadas para toda la clase, con el Diseño Universal para el Aprendizaje (DUA), y para el alumnado con
-        discapacidad motora, discapacidad intelectual o dificultades de aprendizaje, que suele necesitar más práctica y
-        ayudas que se retiran poco a poco.
+        Las tarjetas sirven para practicar el movimiento de la escritura: dónde empieza cada trazo y hacia dónde va. Si
+        hay varios trazos, su número dice el orden. Con 3 y 4 años, mejor los trazos previos; los números y las letras,
+        cuando empiecen con ellos en clase. Están pensadas para toda la clase, con el Diseño Universal para el
+        Aprendizaje (DUA), y para el alumnado con discapacidad motora, discapacidad intelectual o dificultades de
+        aprendizaje, que suele necesitar más práctica y ayudas que se retiran poco a poco.
       </p>
 
       <h2>Paso a paso, con la funda y el rotulador</h2>
       <ol>
-        <li>Dale la tarjeta plastificada y un rotulador de pizarra blanca. Ponla recta delante del peque, o inclinada si es zurdo (mira la página siguiente).</li>
+        <li>Pon la tarjeta delante del peque, con un rotulador de pizarra blanca y un trapo. Si es zurdo, mira los consejos de la página siguiente.</li>
         <li>
-          Mirad juntos la caja <strong>«Mira»</strong>. Haced el trazo en el aire con el dedo y decid en voz alta por dónde
-          va: «empiezo en el punto verde y bajo».
+          Mirad juntos la caja <strong>«Mira»</strong>. Haced el trazo en el aire con el dedo y decid por dónde va:
+          «empiezo en el punto verde y bajo».
         </li>
         <li>
           <strong>Nivel 1, «Repasa»:</strong> repasa la línea de puntos desde el punto verde, en la dirección de la
@@ -675,14 +660,13 @@
         </li>
         <li><strong>Nivel 2, «Empieza en el punto»:</strong> hace el trazo desde cada punto, mirando el modelo.</li>
         <li><strong>Nivel 3, «Ahora, tú»:</strong> lo hace sin ayudas, en el renglón.</li>
-        <li>Borra con el trapo y vuelve a empezar. Al final, guarda la tarjeta limpia.</li>
+        <li>Borra con el trapo y vuelve a empezar.</li>
       </ol>
       <div class="caja caja--verde">
         <h3>Cuándo pasar de nivel</h3>
         <p>
-          Cuando le salga bien 3 veces seguidas, pasa al nivel siguiente. Fíjate sobre todo en el movimiento: que empiece
-          en el punto y vaya en la dirección de la flecha. Que quede bonito importa menos. Si un nivel se le atraganta,
-          vuelve un rato al anterior.
+          Cuando le salga bien 3 veces seguidas. Fíjate sobre todo en el movimiento: que empiece en el punto y siga la
+          flecha. Que quede bonito importa menos. Si un nivel se le atraganta, vuelve un rato al anterior.
         </p>
       </div>
 
@@ -690,7 +674,7 @@
       <p>
         Ratos cortos, muchos días. El servicio de terapia ocupacional infantil de Cambridgeshire, del servicio público de
         salud del Reino Unido (NHS, por sus siglas en inglés), propone de 5 a 10 minutos al día, en casa o en el cole.
-        Para cuando todavía tiene ganas y termina con algo que le salga bien.
+        Parad cuando todavía tenga ganas, con algo que le salga bien.
       </p>
 
       <h2>Por qué practicar el trazo de verdad</h2>
@@ -705,8 +689,15 @@
         tiene que hacer el movimiento sin calcar. Por eso cada tarjeta termina en el nivel 3, con el renglón vacío.
       </p>
 
-      <h2 class="salto">La forma de trazar que siguen las tarjetas</h2>
-      <ul class="reglas" id="reglas"></ul>
+      <h2>La forma de trazar que siguen las tarjetas</h2>
+      <ul>
+        <li>Se empieza arriba; solo la e empieza en el medio. Los palos van de arriba abajo y las rayas, de izquierda a derecha.</li>
+        <li>Los redondeles empiezan arriba y giran hacia la izquierda, al revés que las agujas del reloj: c, o, a, d, g, q, e y s, y el 0, el 6, el 8 y el 9.</li>
+        <li>La a, la d, la g, la q y el 9 llevan 2 trazos: primero el redondel y después el palo.</li>
+        <li>La b, la h, la m, la n, la p y la r bajan por el palo y vuelven a subir por el mismo camino, sin levantar el rotulador, para hacer la barriga o el puente. Así la b empieza por el palo y la d, por el redondel.</li>
+        <li>Van al final el punto de la i y de la j, la raya de la t y de la f y la virgulilla de la ñ.</li>
+        <li>El 1 sube en diagonal y baja recto. El 4 y el 5 llevan 2 trazos: el 4 queda abierto arriba y el gorro del 5 va al final.</li>
+      </ul>
       <div class="caja caja--amarilla">
         <h3>En cada cole se puede hacer distinto</h3>
         <p>
@@ -717,50 +708,37 @@
       </div>
 
       <h2>Para zurdos</h2>
-      <p>
-        En sus tarjetas, el modelo va a la derecha y la mano izquierda no lo tapa. El NHS da además estos consejos para
-        la postura y el papel:
-      </p>
+      <p>En sus tarjetas, el modelo va a la derecha y la mano izquierda no lo tapa. El NHS aconseja además:</p>
       <ul>
-        <li>La tarjeta, en el lado izquierdo del cuerpo, que es el de la mano que escribe, e inclinada hacia la derecha. Como mucho, 45 grados.</li>
-        <li>Que sujete el rotulador a unos 3 cm de la punta, para ver lo que escribe.</li>
-        <li>Con el brazo apoyado en la mesa. Si hace falta, que suba la tarjeta en vez de bajar el brazo.</li>
+        <li>La tarjeta, en el lado izquierdo del cuerpo, el de la mano que escribe, e inclinada hacia la derecha: 45 grados como mucho.</li>
+        <li>El rotulador, cogido al menos a 3 cm de la punta, para ver lo que escribe. El brazo, apoyado en la mesa: mejor subir la tarjeta que bajar el brazo.</li>
         <li>En la mesa, a la izquierda de un compañero diestro, para que no choquen los codos.</li>
-        <li>Es normal que emborrone un poco. No se lo tengas en cuenta y valora su esfuerzo.</li>
+        <li>Si emborrona un poco, no se lo tengas en cuenta y valora su esfuerzo.</li>
       </ul>
 
       <h2>Ideas para adaptarlas (DUA)</h2>
       <ul>
-        <li>
-          <strong>Si cuesta sujetar el rotulador</strong>, prueba uno más grueso o con un adaptador de goma. Pega la
-          tarjeta a la mesa con cinta de carrocero, o ponla sobre una carpeta de anillas para que quede inclinada.
-        </li>
-        <li><strong>Si necesita más tiempo</strong>, una tarjeta cada vez y muchos días en el nivel 1. Di siempre las mismas palabras para cada trazo, como «arriba» y «abajo».</li>
-        <li><strong>Si confunde la b y la d</strong>, recuérdale cómo empieza cada una: la b, por el palo; la d, por el redondel, como la c.</li>
-        <li><strong>Para toda la clase</strong>, en un rincón con las tarjetas por grupos. Cada cual elige su nivel.</li>
-        <li><strong>Más reto:</strong> en el nivel 3, la letra varias veces seguidas. En una tarjeta libre, su nombre o palabras cortas.</li>
+        <li><strong>Si cuesta sujetar el rotulador</strong>, prueba uno más grueso o un adaptador de goma. Fija la tarjeta con cinta de carrocero o inclínala sobre una carpeta de anillas.</li>
+        <li><strong>Si necesita más tiempo</strong>, una tarjeta cada vez y muchos días en el nivel 1, con las mismas palabras para cada trazo: «arriba», «abajo».</li>
+        <li><strong>Si confunde la b y la d</strong>, recuérdale cómo empiezan: la b, por el palo; la d, por el redondel, como la c.</li>
+        <li><strong>Para toda la clase</strong>, en un rincón con las tarjetas por grupos. Más reto: en una tarjeta libre, su nombre o palabras cortas.</li>
       </ul>
 
       <div class="creditos">
         <p>
           <strong>Tarjetas de trazo.</strong> IdEducando, noviembre de 2026. Ficha:
-          <span class="url">ideducando.es/material-gratuito/tarjetas-trazo</span>
+          <span class="url">ideducando.es/material-gratuito/tarjetas-trazo</span>. Dibujos y diseño de IdEducando, sin
+          pictogramas.
         </p>
         <p>
           Fuentes: Hoy, M. M. P., Egan, M. Y. y Feder, K. P. (2011). A systematic review of interventions to improve
           handwriting. <em>Canadian Journal of Occupational Therapy</em>, 78(1), 13-25.
-          <span class="url">https://doi.org/10.2182/cjot.2011.78.1.3</span>
+          <span class="url">https://doi.org/10.2182/cjot.2011.78.1.3</span>. East of England Community Health and Care NHS
+          Trust. <em>Handwriting and typing</em>, servicio de salud infantil de Cambridgeshire y Peterborough
+          (<span class="url">cambspborochildrenshealth.nhs.uk</span>), consultada el 5 de noviembre de 2026.
+          Servicio de Terapia Ocupacional Infantil de Cambridgeshire, NHS (2025). <em>Handwriting</em>, hoja de estrategias
+          para casa y el cole.
         </p>
-        <p>
-          East of England Community Health and Care NHS Trust. <em>Handwriting and typing</em>. Página del servicio de
-          salud infantil de Cambridgeshire y Peterborough, <span class="url">cambspborochildrenshealth.nhs.uk</span>.
-          Consultada el 4 de noviembre de 2026.
-        </p>
-        <p>
-          Servicio de Terapia Ocupacional Infantil de Cambridgeshire, NHS (2025). <em>Handwriting</em>. Hoja de estrategias
-          para casa y el cole, <span class="url">cambspborochildrenshealth.nhs.uk</span>.
-        </p>
-        <p>Los dibujos y el diseño de las tarjetas son de IdEducando. No llevan pictogramas.</p>
         <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirlas, rellenarlas y adaptarlas para tu alumnado. No se puede compartir el archivo, subirlo a otra web ni venderlo: para recomendarlas, comparte el enlace de su ficha en ideducando.es.</p>
       </div>
     </section>
@@ -842,6 +820,7 @@
        *  lado 1 = a la derecha de quien camina por el trazo; lado -1 = a su izquierda. */
       function flecha(d, { desde = 5, largo = 10, lado = 1, sep = 6.2 }) {
         const { L, en } = medir(d);
+        if (desde < 0) desde = L + desde; // contada desde el final del trazo
         const pts = [];
         const N = 16;
         for (let k = 0; k <= N; k++) {
@@ -877,7 +856,8 @@
        *   punto   = solo los puntos de salida (nivel 2)
        *   nada    = nada (nivel 3: solo el renglón)
        * Cada trazo: { d, flechas: [{desde, largo, lado}], salida: [dx, dy] (si el punto va desplazado),
-       * punto: [x, y] (un punto que se pone, como el de la i) }.
+       * punto: [x, y] (un punto que se pone, como el de la i), dib (el dibujo, si el trazo vuelve por
+       * el mismo camino: así la línea de puntos no se pinta 2 veces), ancho (del carril) }.
        */
       function trazos(lista, modo, color, sepModelo = 4.4) {
         if (modo === 'nada') return '';
@@ -891,13 +871,14 @@
             puntos = salida(t.punto, num) + puntos;
             return;
           }
+          const dibujo = t.dib ?? t.d;
           if (modo === 'repasa') {
-            fondo += carril(t.d, color);
-            lineas += deTrazos(t.d);
+            fondo += carril(dibujo, color, t.ancho);
+            lineas += deTrazos(dibujo);
           } else if (modo === 'modelo') {
-            lineas += macizo(t.d);
+            lineas += macizo(dibujo);
           }
-          if (modo !== 'punto') for (const f of t.flechas ?? []) flechas += flecha(t.d, { ...f, sep: f.sep ?? (modo === 'repasa' ? 6.3 : sepModelo) });
+          if (modo !== 'punto') for (const f of t.flechas ?? []) flechas += flecha(f.d ?? t.d, { ...f, sep: f.sep ?? (modo === 'repasa' ? 6.3 : sepModelo) });
           const inicio = medir(t.d).en(0);
           const p = t.salida ? [inicio[0] + t.salida[0], inicio[1] + t.salida[1]] : inicio;
           puntos = salida(p, num) + puntos;
@@ -935,27 +916,31 @@
       // La x mide 24 mm; los palos altos suben 19 mm más y los bajos bajan 17.
       // Convención: se empieza arriba (la e, en el medio); palos de arriba abajo; rayas de
       // izquierda a derecha; redondeles hacia la izquierda, al revés que las agujas del reloj.
-      // a, d, g, q: primero el redondel y después el palo. b, p, h, n, m, r: primero el palo y
-      // después la barriga o el puente, que sale del palo. Puntos, rayas y virgulilla, al final.
+      // a, d, g, q: primero el redondel y después el palo. b, h, m, n, p, r: bajan por el palo y
+      // vuelven a subir por el mismo camino, sin levantar, para hacer la barriga o el puente.
+      // Los puntos, las rayas de cruzar y la virgulilla, al final.
       // ===========================================================================
       const X = -24; // línea de la x
       const ALTA = -43; // línea de arriba
       const BAJA = 17; // línea de abajo
       const SALE = -15; // altura a la que salen del palo el puente y la barriga
 
+      /** Puente que sale del palo en x0, a la altura SALE, y baja hasta la línea de base. */
       const PUENTE = (x0, ancho) =>
-        `M${x0} ${SALE} C${n2(x0 + 2)} -21, ${n2(x0 + 0.27 * ancho)} -24, ${n2(x0 + 0.5 * ancho)} -24 C${n2(x0 + 0.82 * ancho)} -24, ${n2(x0 + ancho)} -20.5, ${n2(x0 + ancho)} -14 L${n2(x0 + ancho)} 0`;
-      const BARRIGA = `M0 ${SALE} C1.6 -21, 5.6 -24, 11 -24 C18 -24, 23 -19, 23 -12 C23 -5, 18 0, 11 0 C6.6 0, 2.6 -1, 0 -3`;
+        `C${n2(x0 + 2)} -21, ${n2(x0 + 0.27 * ancho)} -24, ${n2(x0 + 0.5 * ancho)} -24 C${n2(x0 + 0.82 * ancho)} -24, ${n2(x0 + ancho)} -20.5, ${n2(x0 + ancho)} -14 L${n2(x0 + ancho)} 0`;
+      const BARRIGA = 'C1.6 -21, 5.6 -24, 11 -24 C18 -24, 23 -19, 23 -12 C23 -5, 18 0, 11 0 C6.6 0, 2.6 -1, 0 -3';
+      const RAMA = 'C2 -21, 5.6 -24, 10 -24 C12.5 -24, 14.5 -23.2, 16 -21.4';
       const REDONDEL_A = redondel(12, -12, 12, 80);
+      /** Palo que baja desde y0 hasta y1, vuelve a subir hasta SALE y sigue con «resto». */
+      const vuelta = (y0, y1, resto) => ({ d: `M0 ${y0} L0 ${y1} L0 ${SALE} ${resto}`, dib: `M0 ${y0} L0 ${y1} M0 ${SALE} ${resto}` });
 
       const LETRAS = {
         a: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, de arriba abajo', trazos: [
           { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
           { d: linea([24, X], [24, 0]), flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
         ] },
-        b: { ancho: 23, desc: '2 trazos: 1, el palo largo, de arriba abajo; 2, la barriga, que sale del palo hacia la derecha', trazos: [
-          { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 12, lado: 1 }] },
-          { d: BARRIGA, flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        b: { ancho: 23, desc: '1 trazo: baja por el palo largo, vuelve a subir por el mismo camino sin levantar el rotulador y hace la barriga hacia la derecha', trazos: [
+          { ...vuelta(ALTA, 0, BARRIGA), flechas: [{ desde: 5, largo: 12, lado: 1 }, { desde: 46, largo: 7, lado: 1 }, { desde: 61, largo: 10, lado: -1 }] },
         ] },
         c: { ancho: 21, desc: '1 trazo: empieza arriba a la derecha y gira hacia la izquierda', trazos: [
           { d: camino(arco(12, -12, 12, 12, 48, 312)), flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
@@ -969,23 +954,22 @@
         ] },
         f: { ancho: 18, desc: '2 trazos: 1, el bastón, que empieza arriba a la derecha y baja; 2, la raya, de izquierda a derecha', trazos: [
           { d: 'M18 -39 C16.4 -42, 14 -43, 11.5 -43 C8 -43, 6 -40.6, 6 -36.6 L6 0', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
-          { d: linea([0, X], [13, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
+          { d: linea([-0.5, X], [13.5, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
         ] },
         g: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, que baja y se curva hacia la izquierda', trazos: [
           { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
           { d: 'M24 -24 L24 9 C24 14.6, 20 17, 14.6 17 C10 17, 6 15.4, 3.6 12.8', flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
         ] },
-        h: { ancho: 19.5, desc: '2 trazos: 1, el palo largo, de arriba abajo; 2, el puente, que sale del palo', trazos: [
-          { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 12, lado: 1 }] },
-          { d: PUENTE(0, 19.5), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        h: { ancho: 19.5, desc: '1 trazo: baja por el palo largo, vuelve a subir por el mismo camino sin levantar el rotulador y hace el puente', trazos: [
+          { ...vuelta(ALTA, 0, PUENTE(0, 19.5)), flechas: [{ desde: 5, largo: 12, lado: 1 }, { desde: 46, largo: 7, lado: 1 }, { desde: 61, largo: 10, lado: -1 }] },
         ] },
         i: { ancho: 1, desc: '2 trazos: 1, el palo, de arriba abajo; 2, el punto, arriba', trazos: [
           { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { punto: [0, -33] },
+          { punto: [0, -35] },
         ] },
         j: { ancho: 15, desc: '2 trazos: 1, el palo, que baja y se curva hacia la izquierda; 2, el punto, arriba', trazos: [
           { d: 'M15 -24 L15 9 C15 14.6, 11.5 17, 7 17 C4 17, 1.5 15.6, 0 13.2', flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
-          { punto: [15, -33] },
+          { punto: [15, -35] },
         ] },
         k: { ancho: 17, desc: '2 trazos: 1, el palo largo, de arriba abajo; 2, la punta, que entra hasta el palo y vuelve a salir', trazos: [
           { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 12, lado: 1 }] },
@@ -994,62 +978,65 @@
         l: { ancho: 1, desc: '1 trazo: el palo largo, de arriba abajo', trazos: [
           { d: linea([0, ALTA], [0, 0]), flechas: [{ desde: 5, largo: 13, lado: 1 }] },
         ] },
-        m: { ancho: 29, desc: '3 trazos: 1, el palo, de arriba abajo; 2, el primer puente, que sale del palo; 3, el segundo puente', trazos: [
-          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { d: PUENTE(0, 14.5), flechas: [{ desde: 4.5, largo: 8, lado: -1 }] },
-          { d: PUENTE(14.5, 14.5), flechas: [{ desde: 4.5, largo: 8, lado: -1 }] },
+        m: { ancho: 29, desc: '1 trazo: baja por el palo, vuelve a subir por el mismo camino y hace un puente; vuelve a subir y hace el segundo puente', trazos: [
+          {
+            d: `M0 ${X} L0 0 L0 ${SALE} ${PUENTE(0, 14.5)} L14.5 ${SALE} ${PUENTE(14.5, 14.5)}`,
+            dib: `M0 ${X} L0 0 M0 ${SALE} ${PUENTE(0, 14.5)} M14.5 ${SALE} ${PUENTE(14.5, 14.5)}`,
+            flechas: [
+              { desde: 4.5, largo: 10, lado: 1 },
+              { desde: 27, largo: 7, lado: 1, sep: 5.4 },
+              { desde: 41.5, largo: 6, lado: -1 },
+              { d: `M14.5 ${SALE} ${PUENTE(14.5, 14.5)}`, desde: 2.5, largo: 6, lado: -1 },
+            ],
+          },
         ] },
-        n: { ancho: 19.5, desc: '2 trazos: 1, el palo, de arriba abajo; 2, el puente, que sale del palo', trazos: [
-          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { d: PUENTE(0, 19.5), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        n: { ancho: 19.5, desc: '1 trazo: baja por el palo, vuelve a subir por el mismo camino sin levantar el rotulador y hace el puente', trazos: [
+          { ...vuelta(X, 0, PUENTE(0, 19.5)), flechas: [{ desde: 4.5, largo: 10, lado: 1 }, { desde: 27, largo: 7, lado: 1 }, { desde: 42, largo: 10, lado: -1 }] },
         ] },
-        ñ: { ancho: 19.5, desc: '3 trazos: 1, el palo, de arriba abajo; 2, el puente, que sale del palo; 3, la virgulilla, de izquierda a derecha', trazos: [
-          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { d: PUENTE(0, 19.5), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
-          { d: 'M1.5 -33.5 C4 -37.2, 7.2 -37.2, 9.6 -34 C12 -30.8, 15.2 -30.8, 18 -34.6', flechas: [{ desde: 4.5, largo: 8, lado: -1, sep: 5.6 }] },
+        ñ: { ancho: 19.5, desc: '2 trazos: 1, baja por el palo, vuelve a subir por el mismo camino y hace el puente; 2, la virgulilla, de izquierda a derecha', trazos: [
+          { ...vuelta(X, 0, PUENTE(0, 19.5)), flechas: [{ desde: 4.5, largo: 10, lado: 1 }, { desde: 27, largo: 7, lado: 1 }, { desde: 42, largo: 10, lado: -1 }] },
+          { d: 'M1.5 -34 C4 -37.7, 7.2 -37.7, 9.6 -34.5 C12 -31.3, 15.2 -31.3, 18 -35.1', flechas: [{ desde: 4.5, largo: 8, lado: -1, sep: 5.4 }] },
         ] },
         o: { ancho: 24, desc: '1 trazo: empieza arriba y gira hacia la izquierda hasta cerrar', trazos: [
           { d: redondel(12, -12, 12, 90), flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
         ] },
-        p: { ancho: 23, desc: '2 trazos: 1, el palo, que baja hasta la línea de abajo; 2, la barriga, que sale del palo hacia la derecha', trazos: [
-          { d: linea([0, X], [0, BAJA]), flechas: [{ desde: 4.5, largo: 12, lado: 1 }] },
-          { d: BARRIGA, flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
+        p: { ancho: 23, desc: '1 trazo: baja por el palo hasta la línea de abajo, vuelve a subir por el mismo camino sin levantar el rotulador y hace la barriga', trazos: [
+          { ...vuelta(X, BAJA, BARRIGA), flechas: [{ desde: 4.5, largo: 12, lado: 1 }, { desde: 44, largo: 8, lado: 1 }, { desde: 76, largo: 10, lado: -1 }] },
         ] },
         q: { ancho: 24, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, que baja hasta la línea de abajo', trazos: [
           { d: REDONDEL_A, flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
           { d: linea([24, X], [24, BAJA]), flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
         ] },
-        r: { ancho: 16, desc: '2 trazos: 1, el palo, de arriba abajo; 2, la rama, que sale del palo hacia la derecha', trazos: [
-          { d: linea([0, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { d: 'M0 -15 C2 -21, 5.6 -24, 10 -24 C12.5 -24, 14.5 -23.2, 16 -21.4', flechas: [{ desde: 4.5, largo: 8, lado: -1 }] },
+        r: { ancho: 16, desc: '1 trazo: baja por el palo, vuelve a subir por el mismo camino sin levantar el rotulador y hace la rama hacia la derecha', trazos: [
+          { ...vuelta(X, 0, RAMA), flechas: [{ desde: 4.5, largo: 10, lado: 1 }, { desde: 27, largo: 7, lado: 1 }, { desde: 42, largo: 8, lado: -1 }] },
         ] },
         s: { ancho: 20, desc: '1 trazo: empieza arriba a la derecha, gira hacia la izquierda y después hacia la derecha', trazos: [
           { d: 'M19.5 -20 C17.5 -23, 14.5 -24, 11 -24 C6 -24, 3 -21.5, 3 -18 C3 -14, 7 -13, 11 -12 C16 -11, 20 -9, 20 -5.5 C20 -2, 16 0, 11 0 C7 0, 3.5 -1.5, 1.5 -4.5', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
         ] },
         t: { ancho: 16, desc: '2 trazos: 1, el palo, que baja y se curva hacia la derecha; 2, la raya, de izquierda a derecha', trazos: [
           { d: 'M6 -35 L6 -5.5 C6 -2, 8 0, 11 0 C13 0, 14.8 -1, 16 -2.8', flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { d: linea([0, X], [13, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
+          { d: linea([-1, X], [14, X]), flechas: [{ desde: 4.5, largo: 7, lado: 1 }] },
         ] },
         u: { ancho: 19.5, desc: '2 trazos: 1, la cuna, que baja, gira y sube; 2, el palo, de arriba abajo', trazos: [
-          { d: 'M0 -24 L0 -9 C0 -3.4, 4 0, 9.75 0 C15.5 0, 19.5 -3.4, 19.5 -9 L19.5 -24', flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
+          { d: 'M0 -24 L0 -9 C0 -3.4, 4 0, 9.75 0 C15.5 0, 19.5 -3.4, 19.5 -9 L19.5 -24', flechas: [{ desde: 4.5, largo: 9, lado: 1 }, { desde: 21, largo: 8, lado: 1 }] },
           { d: linea([19.5, X], [19.5, 0]), flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
         ] },
         v: { ancho: 20, desc: '1 trazo: baja inclinada hasta la línea de base y vuelve a subir', trazos: [
-          { d: linea([0, X], [10, 0], [20, X]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([0, X], [10, 0], [20, X]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }, { desde: -13, largo: 9, lado: 1 }] },
         ] },
         w: { ancho: 29, desc: '1 trazo: baja, sube, baja y sube, sin levantar el rotulador', trazos: [
-          { d: linea([0, X], [7, 0], [14.5, X], [22, 0], [29, X]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([0, X], [7, 0], [14.5, X], [22, 0], [29, X]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }, { desde: -12, largo: 8, lado: 1 }] },
         ] },
         x: { ancho: 19, desc: '2 trazos: 1, la raya que baja hacia la derecha; 2, la raya que baja hacia la izquierda', trazos: [
-          { d: linea([0, X], [19, 0]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
-          { d: linea([19, X], [0, 0]), flechas: [{ desde: 4.5, largo: 10, lado: -1 }] },
+          { d: linea([0, X], [19, 0]), flechas: [{ desde: 3.5, largo: 8, lado: 1 }] },
+          { d: linea([19, X], [0, 0]), flechas: [{ desde: 3.5, largo: 8, lado: -1 }] },
         ] },
         y: { ancho: 21, desc: '2 trazos: 1, la raya corta, que baja hacia la derecha; 2, la raya larga, que baja hacia la izquierda hasta la línea de abajo', trazos: [
           { d: linea([0, X], [10.5, 0]), flechas: [{ desde: 4.5, largo: 9, lado: 1 }] },
           { d: linea([21, X], [3, BAJA]), flechas: [{ desde: 4.5, largo: 11, lado: -1 }] },
         ] },
         z: { ancho: 19.5, desc: '1 trazo: una raya hacia la derecha, otra que baja hacia la izquierda y otra hacia la derecha', trazos: [
-          { d: linea([0, X], [19, X], [0, 0], [19.5, 0]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5.4 }] },
+          { d: linea([0, X], [19, X], [0, 0], [19.5, 0]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5.4 }, { desde: -15, largo: 9, lado: 1, sep: 5.4 }] },
         ] },
       };
 
@@ -1062,33 +1049,33 @@
           { d: camino(arco(11.5, 20, 11.5, 20, 90, 450)), flechas: [{ desde: 4.5, largo: 12, lado: 1 }] },
         ] },
         1: { ancho: 14, desc: '1 trazo: sube en diagonal hasta arriba y baja recto', trazos: [
-          { d: linea([1.5, 10.5], [13.5, 0], [13.5, ALTO_N]), flechas: [{ desde: 3.5, largo: 8.5, lado: 1, sep: 5.4 }, { desde: 21, largo: 12, lado: -1 }] },
+          { d: linea([1.5, 10.5], [13.5, 0], [13.5, ALTO_N]), flechas: [{ desde: 4, largo: 8, lado: -1, sep: 5 }, { desde: 21, largo: 12, lado: -1 }] },
         ] },
         2: { ancho: 23, desc: '1 trazo: empieza arriba a la izquierda, hace la curva, baja en diagonal y termina con una raya hacia la derecha', trazos: [
-          { d: 'M1.5 10 C2 4, 6.5 0, 12 0 C18.5 0, 22.5 4.5, 22.5 10.5 C22.5 17, 16.5 23, 1.5 40 L23 40', flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
+          { d: 'M1.5 10 C2 4, 6.5 0, 12 0 C18.5 0, 22.5 4.5, 22.5 10.5 C22.5 17, 16.5 23, 1.5 40 L23 40', flechas: [{ desde: 4.5, largo: 12, lado: -1 }, { desde: -15, largo: 10, lado: 1, sep: 5 }] },
         ] },
         3: { ancho: 22.5, desc: '1 trazo: empieza arriba a la izquierda, hace una curva hasta el medio y otra hasta abajo', trazos: [
           { d: 'M2 6.5 C4.5 2.5, 8.5 0, 12.5 0 C18.5 0, 22 4, 22 9.5 C22 15, 17.5 19, 10.5 19 C18 19, 23.5 23.5, 23.5 29.5 C23.5 36, 18.5 40, 12 40 C7 40, 3 37.5, 1 34', flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
         ] },
         4: { ancho: 24, desc: '2 trazos: 1, baja y sigue con una raya hacia la derecha; 2, el palo largo, de arriba abajo', trazos: [
-          { d: linea([5.5, 0], [1.5, 27], [24, 27]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: linea([5.5, 0], [1.5, 27], [24, 27]), flechas: [{ desde: 4.5, largo: 10, lado: 1 }, { desde: -10, largo: 7, lado: 1, sep: 5 }] },
           { d: linea([17, 0], [17, ALTO_N]), flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
         ] },
         5: { ancho: 23, desc: '2 trazos: 1, el palo corto y la barriga; 2, el gorro, de izquierda a derecha', trazos: [
           { d: 'M4.5 0 L4 17 C7 15, 10 14, 13 14 C19 14, 23.5 19, 23.5 26.5 C23.5 34.5, 18.5 40, 12 40 C7.5 40, 3.5 38, 1.5 34.5', flechas: [{ desde: 4.5, largo: 9, lado: 1 }], salida: [0.3, -5.4] },
-          { d: linea([4.5, 0], [22, 0]), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5 }], salida: [-5.4, 0] },
+          { d: linea([4.5, 0], [22, 0]), flechas: [{ desde: 5, largo: 9, lado: 1, sep: 4.6 }], salida: [-5.4, 0] },
         ] },
         6: { ancho: 22.5, desc: '1 trazo: empieza arriba a la derecha, baja girando hacia la izquierda y cierra la barriga', trazos: [
           { d: 'M20 3.5 C17.6 1.2, 15.2 0, 12.4 0 C5.5 0, 1.2 8, 1.2 21 C1.2 33, 5.6 40, 12 40 C18.6 40, 23 35.5, 23 29 C23 22.6, 18.6 18.2, 12.2 18.2 C6.8 18.2, 2.8 21.6, 1.6 26', flechas: [{ desde: 4.5, largo: 12, lado: 1 }] },
         ] },
         7: { ancho: 22.5, desc: '1 trazo: una raya hacia la derecha y después baja en diagonal', trazos: [
-          { d: linea([1.5, 0], [22.5, 0], [8, ALTO_N]), flechas: [{ desde: 4.5, largo: 10, lado: -1, sep: 5 }] },
+          { d: linea([1.5, 0], [22.5, 0], [8, ALTO_N]), flechas: [{ desde: 4.5, largo: 10, lado: -1, sep: 5 }, { desde: 26, largo: 11, lado: 1, sep: 5.4 }] },
         ] },
         8: { ancho: 21, desc: '1 trazo: empieza arriba, gira hacia la izquierda, cruza por el medio, da la vuelta abajo y sube hasta cerrar', trazos: [
           { d: 'M18.6 5 C17 2, 14.6 0, 11 0 C6 0, 2.6 3.5, 2.6 9 C2.6 14.5, 7 17.4, 11 19.4 C16 21.9, 21 25.4, 21 31 C21 36.5, 16.6 40, 11 40 C5.5 40, 1 36.5, 1 31 C1 25.4, 6 21.9, 11 19.4 C15 17.4, 19.4 14.5, 19.4 9 C19.4 7.6, 19.1 6.2, 18.6 5', flechas: [{ desde: 4.5, largo: 11, lado: 1 }] },
         ] },
         9: { ancho: 22, desc: '2 trazos: 1, el redondel, que empieza arriba y gira hacia la izquierda; 2, el palo, de arriba abajo', trazos: [
-          { d: redondel(11, 10.5, 10.5, 80), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
+          { d: redondel(11, 10.5, 10.5, 96), flechas: [{ desde: 4.5, largo: 10, lado: 1 }] },
           { d: linea([21.5, 0], [21.5, ALTO_N]), flechas: [{ desde: 4.5, largo: 12, lado: -1 }] },
         ] },
       };
@@ -1273,147 +1260,124 @@
 
       // ===========================================================================
       // TRAZOS PREVIOS
-      // Los de arriba abajo van en cajas, como las letras. Los que van de lado a lado, en filas.
+      // Los de arriba abajo van en celdas, como las letras. Los que van de lado a lado, en filas.
       // ===========================================================================
       const FILA_W = 131.95; // ancho útil de una fila
-      const FILA_H = 24.4; // alto del dibujo de una fila
-      const CAJA_W = 41.45; // ancho útil de una caja
-      const CAJA_H = 82.6; // alto del dibujo de una caja
+      const FILA_H = 24; // alto del dibujo de una fila
+      const CAJA_W = 41.45; // ancho útil de una celda
+      const CAJA_H = 82.6; // alto del dibujo de una celda
 
-      /** Banda de una fila: las 2 líneas entre las que se hace el trazo. */
+      /** Renglón de los trazos previos: las 2 líneas entre las que se hace el trazo. */
       const banda = (x0, x1, y0, y1) =>
         `<path d="M${x0} ${y0} H${x1} M${x0} ${y1} H${x1}" stroke="${LINEA}" stroke-width="0.4"/>`;
 
       const X0 = 27; // donde empieza el trazo en las filas
       const X1 = 106; // donde termina
+      const B0 = 3.4; // línea de arriba del renglón de las filas
+      const B1 = 20.6; // línea de abajo
+      const bandaFila = () => banda(X0 - 2, X1 + 2, B0, B1);
+
+      /** En el modelo de las filas: el dibujo de salida arriba a la izquierda y el de llegada abajo a la derecha. */
+      const extremos = (a, b) => en(10.4, 16, 0.85, a) + en(31.4, 70, 0.85, b);
+
+      /** Bucles: una cicloide que da vueltas hacia arriba. */
+      const bucles = (x0, x1, n, b, c, yc) => {
+        const a = (x1 - x0) / (2 * Math.PI * n);
+        return camino(muestrear((t) => [x0 + a * (t - Math.PI) - b * Math.sin(t), yc - c * Math.cos(t)], Math.PI, Math.PI + 2 * Math.PI * n, 160 * n));
+      };
+      /** Puentes seguidos, como los botes de una pelota. */
+      const puentes = (x0, x1, n, base, alto) => {
+        const w = (x1 - x0) / n;
+        const pts = muestrear((x) => [x, base - alto * Math.sin((Math.PI * ((x - x0) % w)) / w)], x0, x1 - 0.001, 70 * n);
+        pts.push([x1, base]);
+        return camino(pts);
+      };
+      const ondas = (x0, x1, periodos, yc, alto) =>
+        camino(muestrear((x) => [x, yc - alto * Math.sin((2 * Math.PI * (x - x0)) / ((x1 - x0) / periodos))], x0, x1, 90 * periodos));
+      const zigzag = (x0, x1, tramos, arriba, abajo) => linea(...Array.from({ length: tramos + 1 }, (_, k) => [x0 + ((x1 - x0) * k) / tramos, k % 2 ? arriba : abajo]));
 
       const PREVIOS = [
         {
           id: 'verticales',
           tipo: 'cajas',
           titulo: 'La lluvia cae en las macetas.',
-          nombre: 'Líneas verticales',
           desc: 'Dos líneas verticales que bajan de la nube a las macetas, numeradas 1 y 2',
           caja(modo) {
-            const lineas = [13.2, 28.2].map((x) => ({ d: linea([x, 22], [x, 64]), flechas: [{ desde: 5, largo: 13, lado: 1 }] }));
-            return (
-              banda(2, CAJA_W - 2, 22, 64) +
-              nube(CAJA_W / 2, 17, 35) +
-              maceta(13.2, 81.6) +
-              maceta(28.2, 81.6) +
-              trazos(lineas, modo, 'azul')
-            );
+            const lineas = [13.2, 28.2].map((x) => ({ d: linea([x, 22.5], [x, 64]), flechas: [{ desde: 5, largo: 13, lado: 1 }] }));
+            return banda(2, CAJA_W - 2, 22.5, 64) + nube(CAJA_W / 2, 17, 35) + maceta(13.2, 81.6) + maceta(28.2, 81.6) + trazos(lineas, modo, 'azul');
           },
         },
         {
           id: 'horizontales',
           tipo: 'filas',
           titulo: 'El pájaro vuela al nido.',
-          nombre: 'Líneas horizontales',
           desc: 'Una línea recta de izquierda a derecha, del pájaro al nido',
           fila(modo) {
-            const y = 12.6;
-            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + pajaro(13.4, 11.6) + nido(119, 19.4) + trazos([{ d: linea([X0, y], [X1, y]), flechas: [{ desde: 5, largo: 15, lado: -1 }] }], modo, 'azul');
+            return bandaFila() + pajaro(13.4, 11.4) + nido(119, 19) + trazos([{ d: linea([X0, 12], [X1, 12]), flechas: [{ desde: 5, largo: 15, lado: -1 }] }], modo, 'azul');
           },
           modelo() {
-            return trazos([{ d: linea([7, 46], [35, 46]), flechas: [{ desde: 5, largo: 15, lado: -1 }] }], 'modelo', 'azul');
+            return extremos(pajaro(0, 0), nido(0, 4)) + trazos([{ d: linea([6.5, 44], [35, 44]), flechas: [{ desde: 5, largo: 14, lado: -1 }] }], 'modelo', 'azul');
           },
         },
         {
           id: 'inclinadas',
           tipo: 'cajas',
           titulo: 'Los pingüinos bajan al agua.',
-          nombre: 'Líneas inclinadas',
           desc: 'Dos líneas inclinadas que bajan desde cada pingüino hasta el agua, numeradas 1 y 2',
           caja(modo) {
             const lineas = [
-              { d: linea([7.6, 25.5], [19.6, 66.6]), flechas: [{ desde: 5, largo: 13, lado: 1 }] },
-              { d: linea([33.8, 25.5], [21.8, 66.6]), flechas: [{ desde: 5, largo: 13, lado: -1 }] },
+              { d: linea([7.6, 28], [19.6, 66.6]), flechas: [{ desde: 5, largo: 13, lado: 1 }] },
+              { d: linea([33.8, 28], [21.8, 66.6]), flechas: [{ desde: 5, largo: 13, lado: -1 }] },
             ];
-            return banda(2, CAJA_W - 2, 25.5, 66.6) + pinguino(7.6, 20.4) + pinguino(33.8, 20.4) + agua(20.7, 73.6, 23) + trazos(lineas, modo, 'azul');
+            return banda(2, CAJA_W - 2, 28, 66.6) + pinguino(7.6, 20.4) + pinguino(33.8, 20.4) + agua(20.7, 73.8, 23) + trazos(lineas, modo, 'azul');
           },
         },
         {
           id: 'curvas',
           tipo: 'filas',
           titulo: 'La pelota bota hasta la portería.',
-          nombre: 'Curvas',
           desc: 'Tres curvas como puentes, de la pelota a la portería',
           fila(modo) {
-            const base = 20.6;
-            const n = 3;
-            const w = (X1 - X0) / n;
-            const pts = muestrear((x) => [x, base - 14 * Math.sin((Math.PI * ((x - X0) % w)) / w)], X0, X1 - 0.001, 210);
-            pts.push([X1, base]);
-            return (
-              banda(X0 - 2, X1 + 2, 3.6, 21.6) +
-              pelota(17.4, 15.4) +
-              porteria(110.4, 21.6) +
-              trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1 }] }], modo, 'azul')
-            );
+            return bandaFila() + pelota(17.6, 14.8, 5.4) + porteria(110.6, 20.6) + trazos([{ d: puentes(X0, X1, 3, 19.2, 12), flechas: [{ desde: 5, largo: 11, lado: -1 }] }], modo, 'azul');
           },
           modelo() {
-            const x0 = 6, x1 = 36, base = 56, w = 15;
-            const pts = muestrear((x) => [x, base - 13 * Math.sin((Math.PI * ((x - x0) % w)) / w)], x0, x1 - 0.001, 120);
-            pts.push([x1, base]);
-            return trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1 }] }], 'modelo', 'azul');
+            return extremos(pelota(0, 0, 5.4), porteria(-8, 6)) + trazos([{ d: puentes(6.5, 35, 2, 50, 12), flechas: [{ desde: 5, largo: 11, lado: -1 }] }], 'modelo', 'azul');
           },
         },
         {
           id: 'ondas',
           tipo: 'filas',
           titulo: 'El pez nada hasta las algas.',
-          nombre: 'Ondas',
           desc: 'Una línea ondulada, del pez a las algas',
           fila(modo) {
-            const yc = 12.6;
-            const pts = muestrear((x) => [x, yc - 6.8 * Math.sin((2 * Math.PI * (x - X0)) / ((X1 - X0) / 2.5))], X0, X1, 240);
-            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + pez(13.4, 12.4) + algas(119.6, 22) + trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1, sep: 6.6 }] }], modo, 'azul');
+            return bandaFila() + pez(13.4, 12) + algas(119.6, 21.6) + trazos([{ d: ondas(X0, X1, 2.5, 12, 5.4), flechas: [{ desde: 5, largo: 11, lado: -1, sep: 6.4 }] }], modo, 'azul');
           },
           modelo() {
-            const x0 = 5, x1 = 37, yc = 46;
-            const pts = muestrear((x) => [x, yc - 7 * Math.sin((2 * Math.PI * (x - x0)) / ((x1 - x0) / 1.5))], x0, x1, 160);
-            return trazos([{ d: camino(pts), flechas: [{ desde: 5, largo: 12, lado: -1, sep: 5 }] }], 'modelo', 'azul');
+            return extremos(pez(0, 0), algas(0, 8)) + trazos([{ d: ondas(6.5, 35, 1.5, 44, 6.4), flechas: [{ desde: 5, largo: 11, lado: -1, sep: 5 }] }], 'modelo', 'azul');
           },
         },
         {
           id: 'bucles',
           tipo: 'filas',
           titulo: 'La mariposa vuela a la flor.',
-          nombre: 'Bucles',
           desc: 'Una línea con tres bucles, de la mariposa a la flor',
           fila(modo) {
-            const n = 3;
-            const a = (X1 - X0) / (2 * Math.PI * n);
-            const b = 6.2;
-            const yc = 12.4;
-            const c = 8.4;
-            const pts = muestrear((t) => [X0 + a * (t - Math.PI) - b * Math.sin(t), yc - c * Math.cos(t)], Math.PI, Math.PI + 2 * Math.PI * n, 420);
-            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + mariposa(14, 12) + flor(119.4, 22.6) + trazos([{ d: camino(pts), flechas: [{ desde: 4.5, largo: 9, lado: 1, sep: 6 }] }], modo, 'azul');
+            return bandaFila() + mariposa(14, 11.6) + flor(119.4, 22.4) + trazos([{ d: bucles(X0, X1, 3, 11, 6.8, 12), ancho: 6, flechas: [{ desde: 4.5, largo: 8, lado: -1, sep: 5.2 }] }], modo, 'azul');
           },
           modelo() {
-            const n = 2;
-            const x0 = 7, x1 = 35;
-            const a = (x1 - x0) / (2 * Math.PI * n);
-            const pts = muestrear((t) => [x0 + a * (t - Math.PI) - 5.6 * Math.sin(t), 46 - 9 * Math.cos(t)], Math.PI, Math.PI + 2 * Math.PI * n, 300);
-            return trazos([{ d: camino(pts), flechas: [{ desde: 4.5, largo: 9, lado: 1, sep: 4.6 }] }], 'modelo', 'azul');
+            return extremos(mariposa(0, 0), flor(0, 9)) + trazos([{ d: bucles(6.5, 35, 2, 7.2, 6.8, 44), flechas: [{ desde: 4.5, largo: 8, lado: -1, sep: 4.6 }] }], 'modelo', 'azul');
           },
         },
         {
           id: 'zigzag',
           tipo: 'filas',
           titulo: 'El coche cruza las montañas.',
-          nombre: 'Zigzag',
           desc: 'Una línea en zigzag que sube y baja, del coche a la casa',
           fila(modo) {
-            const pts = [];
-            for (let k = 0; k <= 8; k++) pts.push([X0 + ((X1 - X0) * k) / 8, k % 2 ? 4.4 : 20.6]);
-            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + coche(13.4, 21.4) + casa(119.4, 21.8) + trazos([{ d: linea(...pts), flechas: [{ desde: 4.5, largo: 9, lado: -1 }] }], modo, 'azul');
+            return bandaFila() + coche(13.4, 21) + casa(119.4, 21.4) + trazos([{ d: zigzag(X0, X1, 8, 6.2, 19.2), flechas: [{ desde: 4.5, largo: 8, lado: -1 }] }], modo, 'azul');
           },
           modelo() {
-            const pts = [];
-            for (let k = 0; k <= 4; k++) pts.push([6 + (30 * k) / 4, k % 2 ? 36 : 56]);
-            return trazos([{ d: linea(...pts), flechas: [{ desde: 4.5, largo: 9, lado: -1, sep: 5 }] }], 'modelo', 'azul');
+            return extremos(coche(0, 5), casa(0, 8)) + trazos([{ d: zigzag(6.5, 35, 4, 35, 53), flechas: [{ desde: 4.5, largo: 8, lado: -1, sep: 5 }] }], 'modelo', 'azul');
           },
         },
         {
@@ -1421,11 +1385,10 @@
           tipo: 'filas',
           libre: true,
           titulo: 'Tarjeta libre de trazos.',
-          nombre: 'Tarjeta libre',
-          subtitulo: 'Para el adulto: dibuja con el rotulador un trazo en cada caja y 2 dibujos en los círculos.',
+          subtitulo: 'Para el adulto: dibuja tú el trazo y los dibujos.',
           desc: 'Filas vacías con un círculo en cada extremo para dibujar',
           fila() {
-            return banda(X0 - 2, X1 + 2, 3.6, 21.6) + hueco(13.4, 12.6) + hueco(118.6, 12.6);
+            return bandaFila() + hueco(13.4, 12) + hueco(118.6, 12);
           },
           modelo() {
             return '';
@@ -1495,17 +1458,17 @@
 
       /** Cuerpo en 4 cajas: modelo y niveles 1, 2 y 3 (o 1, 2, 3 y modelo para zurdos). */
       function cuerpoCajas(version, dibujar, nombreAlt) {
-        return `<div class="cajas">${MODOS[version]
+        return `<div class="celdas">${MODOS[version]
           .map(
             (modo) =>
-              `<div class="caja${modo === 'modelo' ? ' caja--modelo' : ''}">${etiqueta(modo)}${svg(CAJA_W, CAJA_H, dibujar(modo), nombreAlt ? ALT[modo](nombreAlt) : '')}</div>`,
+              `<div class="celda${modo === 'modelo' ? ' celda--modelo' : ''}">${etiqueta(modo)}${svg(CAJA_W, CAJA_H, dibujar(modo), nombreAlt ? ALT[modo](nombreAlt) : '')}</div>`,
           )
           .join('')}</div>`;
       }
 
       /** Cuerpo en filas: el modelo a un lado y los 3 niveles uno debajo de otro. */
       function cuerpoFilas(version, item) {
-        const modelo = `<div class="caja caja--modelo">${etiqueta('modelo')}${svg(CAJA_W, CAJA_H, item.modelo(), item.libre ? '' : `Modelo: ${item.desc.toLowerCase()}, con su punto de salida y su flecha.`)}</div>`;
+        const modelo = `<div class="celda celda--modelo">${etiqueta('modelo')}${svg(CAJA_W, CAJA_H, item.modelo(), item.libre ? '' : `Modelo: ${item.desc.toLowerCase()}, con su punto de salida y su flecha.`)}</div>`;
         const niveles = ['repasa', 'punto', 'nada']
           .map(
             (modo) =>
@@ -1517,11 +1480,20 @@
       }
 
       // ---------------------------------------------------------------- Letras y números en su caja
+      /** Copia de un trazo movida dx, dy: su camino, su dibujo, las flechas con camino propio y el punto. */
+      const moverTrazo = (t, dx, dy) => ({
+        ...t,
+        d: t.d ? mover(t.d, dx, dy) : undefined,
+        dib: t.dib ? mover(t.dib, dx, dy) : undefined,
+        flechas: (t.flechas ?? []).map((f) => (f.d ? { ...f, d: mover(f.d, dx, dy) } : f)),
+        punto: t.punto ? [t.punto[0] + dx, t.punto[1] + dy] : undefined,
+      });
+
       function cajaLetra(car, modo) {
         const L = LETRAS[car];
         const base = 59;
         const x0 = (CAJA_W - L.ancho) / 2;
-        const lista = L.trazos.map((t) => ({ ...t, d: t.d ? mover(t.d, x0, base) : undefined, punto: t.punto ? [t.punto[0] + x0, t.punto[1] + base] : undefined }));
+        const lista = L.trazos.map((t) => moverTrazo(t, x0, base));
         return renglonLetras(CAJA_W, base, 'morado') + trazos(lista, modo, 'morado');
       }
 
@@ -1529,7 +1501,7 @@
         const N = NUMEROS[num];
         const arriba = 22;
         const x0 = (CAJA_W - N.ancho) / 2;
-        const lista = N.trazos.map((t) => ({ ...t, d: mover(t.d, x0, arriba) }));
+        const lista = N.trazos.map((t) => moverTrazo(t, x0, arriba));
         return renglonNumeros(CAJA_W, arriba, ALTO_N) + trazos(lista, modo, 'naranja');
       }
 
@@ -1571,7 +1543,7 @@
           tarjeta({
             seccion: 'letras',
             titulo: 'Tarjeta libre de letras.',
-            subtitulo: 'Para el adulto: escribe con el rotulador el modelo en «Mira» y la letra de puntos en el nivel 1.',
+            subtitulo: 'Para el adulto: escribe el modelo como en el cole.',
             version,
             cuerpo: cuerpoCajas(version, () => cajaLibreLetras(), ''),
           }),
@@ -1649,20 +1621,6 @@
         .map(([modo, t, texto]) => `<li>${miniatura(modo)}<span><b>${t}.</b> ${texto}</span></li>`)
         .join('');
 
-      // ---------------------------------------------------------------- Reglas de la guía
-      const minimodelo = (d, flechas) => `<svg viewBox="-4 -4 32 32" aria-hidden="true">${trazos([{ d, flechas }], 'modelo', 'morado', 3.4).replace(/r="3.75"/g, 'r="3.6"')}</svg>`;
-      document.getElementById('reglas').innerHTML = [
-        [minimodelo(linea([12, 2], [12, 24]), [{ desde: 4, largo: 9, lado: 1, sep: 4 }]), 'Se empieza arriba. Solo la e empieza en el medio.'],
-        [minimodelo(linea([2, 12], [24, 12]), [{ desde: 4, largo: 9, lado: -1, sep: 4 }]), 'Los palos van de arriba abajo y las rayas, de izquierda a derecha.'],
-        [minimodelo(redondel(12, 12, 10, 80), [{ desde: 4, largo: 9, lado: 1, sep: 3.8 }]), 'Los redondeles empiezan arriba y giran hacia la izquierda, al revés que las agujas del reloj: c, o, a, d, g, q, e y s, y el 0, el 6, el 8 y el 9.'],
-        ['', 'La a, la d, la g, la q y el 9 se hacen en 2 trazos: primero el redondel y después el palo. La b y la p empiezan por el palo y después hacen la barriga. Así la b y la d empiezan distinto.'],
-        ['', 'La h, la m, la n y la r empiezan por el palo. Después, el puente sale del palo.'],
-        ['', 'El punto de la i y de la j, la raya de la t y de la f y la virgulilla de la ñ van al final.'],
-        ['', 'El 1 sube en diagonal y baja recto. El 4 y el 5 van en 2 trazos: el 4 queda abierto arriba y el gorro del 5 va al final.'],
-      ]
-        .map(([icono, texto]) => `<li>${icono || '<span></span>'}<span>${texto}</span></li>`)
-        .join('');
-
       // ===========================================================================
       // PORTADA: dos tarjetas, un rotulador y un trapo, todo dibujado aquí
       // ===========================================================================
@@ -1680,10 +1638,10 @@
         s += `<g transform="translate(88 48) rotate(6)">`;
         s += `<rect x="0" y="0" width="96" height="82" rx="5" fill="#fff" ${contorno(0.9)}/>`;
         s += `<g transform="translate(4 10)">${renglonLetras(42, 59, 'morado').replace(/opacity="0.55"/, 'opacity="0.7"')}</g>`;
-        const letraA = LETRAS.a.trazos.map((t) => ({ ...t, d: mover(t.d, 13, 69) }));
+        const letraA = LETRAS.a.trazos.map((t) => moverTrazo(t, 13, 69));
         s += trazos(letraA, 'repasa', 'morado');
         s += `<g transform="translate(48 10)">${renglonLetras(44, 59, 'morado').replace(/opacity="0.55"/, 'opacity="0.7"')}</g>`;
-        const puntosA = LETRAS.a.trazos.map((t) => ({ ...t, d: mover(t.d, 58, 69) }));
+        const puntosA = LETRAS.a.trazos.map((t) => moverTrazo(t, 58, 69));
         s += trazos(puntosA, 'punto', 'morado');
         s += `</g>`;
         // Rotulador de pizarra

@@ -39,7 +39,7 @@ cuidados:
   - "Si no tienes plastificadora, prueba con fundas transparentes A4 de archivador, de las lisas. Mete la hoja entera, sin cortar."
 fuentes:
   - "Hoy, M. M. P., Egan, M. Y. y Feder, K. P. (2011). A systematic review of interventions to improve handwriting. Canadian Journal of Occupational Therapy, 78(1), 13-25. https://doi.org/10.2182/cjot.2011.78.1.3"
-  - "East of England Community Health and Care NHS Trust. Handwriting and typing. Servicio de salud infantil de Cambridgeshire y Peterborough, cambspborochildrenshealth.nhs.uk. Consultada el 4 de noviembre de 2026"
+  - "East of England Community Health and Care NHS Trust. Handwriting and typing. Servicio de salud infantil de Cambridgeshire y Peterborough, cambspborochildrenshealth.nhs.uk. Consultada el 5 de noviembre de 2026"
   - "Servicio de Terapia Ocupacional Infantil de Cambridgeshire, NHS (2025). Handwriting. Hoja de estrategias para casa y el cole, cambspborochildrenshealth.nhs.uk"
 autoria: "Equipo IdEducando"
 licencia: "Todos los derechos reservados"
@@ -50,7 +50,7 @@ borrador: false
 
 ## Para qué sirven
 
-Estas tarjetas sirven para practicar el movimiento de la escritura: dónde se empieza, hacia dónde se va y en qué orden se hacen los trazos. Se meten en su funda plastificada, se repasan con un rotulador de pizarra blanca y se borran con un trapo, tantas veces como haga falta.
+Estas tarjetas sirven para practicar el movimiento de la escritura: dónde empieza cada trazo y hacia dónde va. Si hay varios trazos, su número dice el orden. Van plastificadas: se repasan con un rotulador de pizarra blanca y se borran con un trapo, tantas veces como haga falta. Con 3 y 4 años, mejor los trazos previos; los números y las letras, cuando empiecen con ellos en clase.
 
 Están pensadas para toda la clase, con el Diseño Universal para el Aprendizaje (DUA), y para el alumnado con discapacidad motora, discapacidad intelectual o dificultades de aprendizaje, que suele necesitar más práctica y ayudas que se retiran poco a poco.
 
@@ -81,13 +81,15 @@ Una revisión de 11 estudios con escolares con dificultades en la letra encontr�
 
 ## La forma de trazar que siguen
 
-Se empieza arriba, salvo la e, que empieza en el medio. Los palos van de arriba abajo, las rayas de izquierda a derecha y los redondeles giran hacia la izquierda, al revés que las agujas del reloj. La a, la d, la g y la q se hacen en 2 trazos, primero el redondel y después el palo, y la b y la p empiezan por el palo. Los puntos, las rayas de cruzar y la virgulilla de la ñ van al final.
+Se empieza arriba, salvo la e, que empieza en el medio. Los palos van de arriba abajo y las rayas, de izquierda a derecha. Los redondeles empiezan arriba y giran hacia la izquierda, al revés que las agujas del reloj.
+
+La a, la d, la g y la q se hacen en 2 trazos: primero el redondel y después el palo. La b, la h, la m, la n, la p y la r bajan por el palo y vuelven a subir por el mismo camino, sin levantar el rotulador, para hacer la barriga o el puente. Así la b empieza por el palo y la d, por el redondel. Los puntos y las rayas de cruzar van al final, como la virgulilla de la ñ.
 
 El orden de los trazos puede cambiar de un centro a otro. Si en vuestro colegio se hace de otra forma, seguid la del cole: para eso están las tarjetas libres, donde puedes dibujar el modelo con el rotulador.
 
 ## Para zurdos
 
-En sus tarjetas, el modelo va a la derecha. La guía recoge los consejos del NHS sobre la postura y el papel: la tarjeta en el lado izquierdo del cuerpo e inclinada hacia la derecha, el rotulador cogido a unos 3 cm de la punta y el peque sentado a la izquierda de un compañero diestro, para que no choquen los codos.
+En sus tarjetas, el modelo va a la derecha, para que la mano no lo tape. La guía recoge los consejos del NHS sobre la postura y el papel. Por ejemplo, la tarjeta va en el lado izquierdo del cuerpo, inclinada hacia la derecha, y el rotulador se coge al menos a 3 cm de la punta para ver lo que se escribe.
 
 ## Sobre los dibujos
 

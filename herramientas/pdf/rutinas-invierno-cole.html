@@ -378,7 +378,7 @@
 
       .mapa {
         display: grid;
-        gap: 1.8mm;
+        gap: 1.4mm;
         margin: 0 0 4mm;
         padding: 0;
         list-style: none;
@@ -386,11 +386,11 @@
 
       .mapa li {
         display: grid;
-        grid-template-columns: 15mm minmax(0, 1fr) 20mm;
+        grid-template-columns: 12mm minmax(0, 1fr) 27mm;
         align-items: center;
         gap: 4mm;
         margin: 0;
-        padding: 1.6mm 3mm;
+        padding: 1.1mm 3mm;
         border: 0.4mm solid var(--linea);
         border-left: 1.8mm solid var(--c);
         border-radius: 3mm;
@@ -398,8 +398,8 @@
       }
 
       .mapa img {
-        width: 15mm;
-        height: 15mm;
+        width: 12mm;
+        height: 12mm;
       }
 
       .mapa h2 {
@@ -416,6 +416,7 @@
 
       .mapa .mapa__pagina {
         margin: 0;
+        white-space: nowrap;
         text-align: right;
         font-family: var(--titulos);
         font-weight: 700;
@@ -434,8 +435,8 @@
       .etiquetas-g {
         display: grid;
         grid-template-columns: repeat(2, 85mm);
-        grid-auto-rows: 70mm;
-        gap: 8mm;
+        grid-auto-rows: 66mm;
+        gap: 7mm 8mm;
         justify-content: space-between;
       }
 
@@ -457,8 +458,8 @@
         display: grid;
         grid-template-columns: 32mm minmax(0, 1fr);
         grid-template-rows: 38mm minmax(0, 1fr);
-        gap: 3mm 4mm;
-        padding: 3mm 4mm;
+        gap: 2mm 4mm;
+        padding: 2.6mm 4mm 2.4mm;
       }
 
       .etq__foto {
@@ -514,24 +515,24 @@
       }
 
       .etq__nombre span {
-        height: 12mm;
+        height: 10mm;
         border-bottom: 0.5mm solid var(--marino);
       }
 
       .etiquetas-p {
         display: grid;
         grid-template-columns: repeat(3, 56mm);
-        grid-auto-rows: 30mm;
-        gap: 4.6mm 5mm;
+        grid-auto-rows: 28mm;
+        gap: 4mm 5mm;
         justify-content: space-between;
       }
 
       .etp {
         display: grid;
-        grid-template-columns: 2.6mm 20mm minmax(0, 1fr) 11mm;
+        grid-template-columns: 2.6mm 18mm minmax(0, 1fr);
         align-items: center;
         gap: 0 2.4mm;
-        padding-right: 2.4mm;
+        padding-right: 2.6mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 3mm;
         overflow: hidden;
@@ -544,37 +545,47 @@
       }
 
       .etp__hueco {
-        width: 20mm;
-        height: 20mm;
+        width: 18mm;
+        height: 18mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 2mm;
       }
 
-      .etp__linea {
-        align-self: end;
-        height: 0;
-        margin-bottom: 8mm;
-        border-bottom: 0.45mm solid var(--marino);
+      .etp__derecha {
+        align-self: stretch;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        padding: 1.8mm 0 4.6mm;
       }
 
       .etp__num {
+        justify-self: end;
         display: grid;
-        grid-template-rows: auto minmax(0, 1fr);
-        justify-items: center;
-        height: 17mm;
-        padding-top: 0.6mm;
-        border: 0.45mm solid var(--marino);
-        border-radius: 1.6mm;
+        grid-template-columns: auto 12mm;
+        align-items: center;
+        gap: 1.4mm;
         font-family: var(--titulos);
         font-weight: 700;
         font-size: 11pt;
         line-height: 1;
       }
 
+      .etp__num span {
+        height: 8mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1.6mm;
+      }
+
+      .etp__linea {
+        align-self: end;
+        height: 0;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
       /* ---------- Símbolos ---------- */
       .simbolos h2 {
-        font-size: 14pt;
-        margin: 1mm 0 2.5mm;
+        font-size: 13pt;
+        margin: 0 0 2mm;
       }
 
       .simbolos-g,
@@ -587,15 +598,15 @@
       }
 
       .simbolos-g {
-        grid-template-columns: repeat(5, 26mm);
-        grid-auto-rows: 26mm;
-        gap: 4.5mm 7mm;
+        grid-template-columns: repeat(5, 24mm);
+        grid-auto-rows: 24mm;
+        gap: 3.6mm 8mm;
       }
 
       .simbolos-p {
         grid-template-columns: repeat(9, 16mm);
         grid-auto-rows: 16mm;
-        gap: 4mm 3.5mm;
+        gap: 3mm 3.5mm;
       }
 
       .simbolo {
@@ -608,8 +619,8 @@
       }
 
       .simbolos-g img {
-        width: 22mm;
-        height: 22mm;
+        width: 20.5mm;
+        height: 20.5mm;
       }
 
       .simbolos-p img {
@@ -681,8 +692,8 @@
         display: flex;
         align-items: center;
         gap: 3mm;
-        height: 13mm;
-        margin: 0 0 2.2mm;
+        height: 12mm;
+        margin: 0 0 1.8mm;
       }
 
       .tira__icono {
@@ -725,7 +736,7 @@
       .tira__cuerpo {
         display: flex;
         align-items: stretch;
-        height: 59mm;
+        height: 58mm;
       }
 
       .pasos {
@@ -817,6 +828,11 @@
         height: 14mm;
       }
 
+      .tira__pie span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
       .tira__pie {
         display: flex;
         justify-content: space-between;
@@ -832,10 +848,10 @@
         --picto: 36mm;
       }
       .n5 {
-        --picto: 29mm;
+        --picto: 30mm;
       }
       .n6 {
-        --picto: 25mm;
+        --picto: 24mm;
       }
 
       /* ---------- Plantilla ---------- */
@@ -875,6 +891,7 @@
 
       .lineas {
         align-self: stretch;
+        justify-self: stretch;
         margin: 1mm 1.5mm 0;
       }
 
@@ -886,8 +903,8 @@
 
       /* ---------- Panel del tiempo ---------- */
       .panel__bloque {
-        margin: 0 0 4mm;
-        padding: 4mm 4mm 5mm;
+        margin: 0 0 3.5mm;
+        padding: 3.5mm 4mm 4mm;
         border-radius: 5mm;
         background: var(--t);
         border: 0.6mm solid var(--c);
@@ -897,14 +914,14 @@
         display: flex;
         align-items: center;
         gap: 3.5mm;
-        margin: 0 0 3.5mm;
-        font-size: 28pt;
+        margin: 0 0 3mm;
+        font-size: 27pt;
         line-height: 1.05;
       }
 
       .panel__titulo img {
-        width: 17mm;
-        height: 17mm;
+        width: 14mm;
+        height: 14mm;
         padding: 0.8mm;
         border-radius: 3mm;
         background: #fff;
@@ -925,18 +942,19 @@
 
       .huecos {
         display: grid;
-        grid-auto-rows: 54mm;
+        grid-auto-rows: 52mm;
         justify-content: center;
         gap: 4mm;
       }
 
       .huecos--2 {
-        grid-template-columns: repeat(2, 54mm);
+        grid-template-columns: repeat(2, 52mm);
         column-gap: 14mm;
       }
 
       .huecos--6 {
-        grid-template-columns: repeat(3, 54mm);
+        grid-template-columns: repeat(3, 52mm);
+        column-gap: 6mm;
       }
 
       .hueco-velcro {
@@ -973,9 +991,9 @@
       /* ---------- Tarjetas de velcro ---------- */
       .tarjetas {
         display: grid;
-        grid-template-columns: repeat(3, 50mm);
-        grid-auto-rows: 50mm;
-        gap: 9.5mm 14mm;
+        grid-template-columns: repeat(3, 48mm);
+        grid-auto-rows: 48mm;
+        gap: 8.5mm 14mm;
         justify-content: center;
         margin: 0;
         padding: 0;
@@ -989,7 +1007,7 @@
         justify-items: center;
         align-items: center;
         margin: 0;
-        padding: 4mm 2mm 2.6mm;
+        padding: 3.6mm 1.6mm 2.2mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 4mm;
         overflow: hidden;
@@ -1005,8 +1023,8 @@
       }
 
       .tarjeta img {
-        width: 28mm;
-        height: 28mm;
+        width: 26mm;
+        height: 26mm;
       }
 
       .tarjeta p {
@@ -1019,8 +1037,8 @@
       }
 
       .tarjeta .hueco-dibujo {
-        width: 28mm;
-        height: 26mm;
+        width: 27mm;
+        height: 24mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 2.4mm;
       }
@@ -1144,8 +1162,8 @@
       .juegos {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-auto-rows: 47mm;
-        gap: 4mm 5mm;
+        grid-auto-rows: 42mm;
+        gap: 3.6mm 5mm;
         margin: 0 0 4mm;
         padding: 0;
         list-style: none;
@@ -1153,7 +1171,7 @@
 
       .juego {
         display: grid;
-        grid-template-columns: 37mm minmax(0, 1fr);
+        grid-template-columns: 34mm minmax(0, 1fr);
         align-items: center;
         gap: 4mm;
         margin: 0;
@@ -1169,8 +1187,8 @@
       }
 
       .juego img {
-        width: 37mm;
-        height: 37mm;
+        width: 34mm;
+        height: 34mm;
         border-radius: 3mm;
         background: #fff;
       }
@@ -1193,18 +1211,18 @@
 
       .recuerda li {
         display: grid;
-        grid-template-columns: 24mm minmax(0, 1fr);
+        grid-template-columns: 22mm minmax(0, 1fr);
         align-items: center;
         gap: 4mm;
         margin: 0;
-        padding: 2.4mm 4mm;
+        padding: 2mm 4mm;
         border: 0.5mm dashed var(--suave);
         border-radius: 4mm;
       }
 
       .recuerda img {
-        width: 24mm;
-        height: 24mm;
+        width: 22mm;
+        height: 22mm;
       }
 
       .recuerda p {
@@ -1226,14 +1244,14 @@
       }
 
       .perdidos__lema {
-        margin: 2mm 0 5mm;
+        margin: 2mm 0 3mm;
         font-size: 18pt;
         color: var(--suave);
       }
 
       .perdidos__caja {
         position: relative;
-        height: 84mm;
+        height: 74mm;
         margin: 0 auto 6mm;
         width: 160mm;
       }
@@ -1254,19 +1272,19 @@
 
       .perdidos__filas li {
         display: grid;
-        grid-template-columns: 30mm minmax(0, 1fr);
+        grid-template-columns: 28mm minmax(0, 1fr);
         align-items: center;
         gap: 6mm;
         margin: 0;
-        padding: 3mm 5mm;
+        padding: 2.4mm 5mm;
         border-radius: 5mm;
         background: var(--t);
         border: 0.6mm solid var(--c);
       }
 
       .perdidos__filas img {
-        width: 30mm;
-        height: 30mm;
+        width: 28mm;
+        height: 28mm;
         border-radius: 3mm;
         background: #fff;
       }
@@ -1286,7 +1304,7 @@
         align-items: flex-end;
         justify-content: center;
         gap: 2mm;
-        margin: 6mm 0 0;
+        margin: 4mm 0 0;
         font-size: 12pt;
       }
 
@@ -1310,14 +1328,14 @@
       .familias h2 {
         display: flex;
         align-items: center;
-        gap: 2.6mm;
+        gap: 2.4mm;
         font-size: 14pt;
-        margin: 3mm 0 1mm;
+        margin: 2.4mm 0 0.6mm;
       }
 
       .familias h2 img {
-        width: 10mm;
-        height: 10mm;
+        width: 9mm;
+        height: 9mm;
       }
 
       .familias p {
@@ -1438,7 +1456,7 @@
 
       .fuentes h2 {
         font-size: 13pt;
-        margin: 0.7em 0 0.3em;
+        margin: 0.55em 0 0.25em;
       }
 
       .fuentes p {
@@ -1554,7 +1572,7 @@
         Elige un símbolo distinto para cada alumno o alumna y usa el mismo en todas sus etiquetas. Los grandes van en la
         etiqueta de la percha y los pequeños, en las demás. Recórtalos y pégalos antes de plastificar.
       </p>
-      <h2>Grandes, de 2,6 cm</h2>
+      <h2>Grandes, de 2,4 cm</h2>
       <ul class="simbolos-g" id="simbolos-g"></ul>
       <h2>Pequeños, de 1,6 cm</h2>
       <ul class="simbolos-p" id="simbolos-p"></ul>
@@ -1656,7 +1674,7 @@
         <div class="historia__icono"><img src="pictogramas/3123.png" alt="" /></div>
         <div>
           <p class="antetitulo">Historia social · Para leer antes del recreo</p>
-          <h1>Hoy llueve: el recreo es en clase</h1>
+          <h1>Hoy llueve:<br />el recreo es en clase</h1>
         </div>
         <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </div>
@@ -1729,27 +1747,24 @@
 
       <h2><img src="pictogramas/37269.png" alt="" />Su nombre, en todo</h2>
       <p>
-        Escribid su nombre en el abrigo, el gorro, los guantes y la bufanda. También en el babi, si en el cole lo usamos.
-        Sirve un rotulador para tela o una etiqueta. Si algo se pierde, con su nombre vuelve antes a casa.
+        Escribid su nombre en el abrigo, el gorro, los guantes y la bufanda. También en el babi, si lo usamos. Sirve un
+        rotulador para tela. Si algo se pierde, con su nombre vuelve antes a casa.
       </p>
 
       <h2><img src="pictogramas/37895.png" alt="" />Una cinta para colgar</h2>
-      <p>
-        Coser en el cuello del abrigo y del babi un lazo de cinta de unos 15 cm. Con el lazo, lo cuelga sin ayuda en su
-        percha.
-      </p>
+      <p>Cosed un lazo de cinta de unos 15 cm en el cuello del abrigo y del babi. Con el lazo, lo cuelga sin ayuda.</p>
 
       <h2><img src="pictogramas/16897.png" alt="" />Ropa fácil de poner</h2>
       <p>
-        Mejor una cremallera grande o velcro que botones pequeños. Poned una anilla o una cinta en el tirador de la
-        cremallera: así la coge mejor. Para los más pequeños, las manoplas son más fáciles que los guantes de dedos.
+        Mejor cremallera o velcro que botones pequeños. Con una anilla o una cinta en el tirador, la cremallera se coge
+        mejor. Las manoplas son más fáciles que los guantes de dedos.
       </p>
 
       <h2><img src="pictogramas/38135.png" alt="" />La bolsa de muda</h2>
       <p>
         Si el cole os la pide, es una bolsa de tela con su nombre. Dentro va una muda: ropa interior, calcetines, pantalón y
-        camiseta, todo con su nombre. La bolsa se queda en el cole. Si la usamos, os damos la ropa sucia y al día siguiente
-        traéis otra muda. Cuando llegue el frío o el calor, cambiad la muda.
+        camiseta, todo con su nombre. La bolsa se queda en el cole. Si la usamos, os damos la ropa sucia. Al día siguiente,
+        traed otra muda.
       </p>
 
       <h2><img src="pictogramas/27052.png" alt="" />En casa, el truco del abrigo</h2>
@@ -1759,10 +1774,7 @@
       </p>
 
       <h2><img src="pictogramas/2287.png" alt="" />Los días de lluvia</h2>
-      <p>
-        Chubasquero y botas de agua, si las tiene. Preguntad en el cole si se puede traer paraguas: en algunos coles, los más
-        pequeños no lo traen.
-      </p>
+      <p>Chubasquero y botas de agua, si las tiene. Preguntad en el cole si se puede traer paraguas.</p>
 
       <div class="recuadro">
         <h2>Mensaje del cole</h2>
@@ -1795,44 +1807,42 @@
       <p class="antetitulo">Guía para el docente</p>
       <h1>Rutinas de invierno: cómo enseñarlas</h1>
       <p>
-        En invierno, entrar en clase y salir al patio lleva muchos más pasos: el abrigo, el gorro, los guantes, las botas de
-        agua y el paraguas. Para muchos niños y niñas de Infantil y del primer ciclo de Primaria es la primera vez que lo
-        hacen sin ayuda. Este material divide cada rutina en pasos cortos con pictogramas y da a cada peque un sitio propio
-        para sus cosas.
+        En invierno, entrar en clase y salir al patio lleva muchos más pasos. Para muchos niños y niñas de Infantil y del
+        primer ciclo de Primaria es la primera vez que se ponen el abrigo o se suenan la nariz sin ayuda. Este material
+        divide cada rutina en pasos cortos con pictogramas y da a cada peque un sitio propio para sus cosas.
       </p>
 
       <h2>Lo que hacen muchos coles</h2>
-      <p>Lo hemos visto en las normas de Infantil que publican varios colegios públicos (página <span data-pagina="fuentes"></span>):</p>
+      <p>
+        Lo hemos visto en las normas de Infantil que publican varios colegios públicos y en una propuesta de docentes para el
+        periodo de adaptación (página <span data-pagina="fuentes"></span>):
+      </p>
       <ul>
         <li>
-          Cada percha lleva el nombre y la foto o el símbolo del alumno o la alumna. El babi y el abrigo llevan su nombre y
-          una cinta de 15 a 20 cm para colgarlos.
+          Cada percha lleva el nombre y la foto o el símbolo de su dueño. El babi y el abrigo llevan su nombre y una cinta de
+          15 a 20 cm para colgarlos.
         </li>
         <li>Muchos piden una bolsa de tela con una muda marcada, que se queda en el aula y se cambia con la temporada.</li>
         <li>
-          Con lluvia, en unos coles un alumno o una alumna encargada sube el paragüero a clase. En otros, el alumnado de
-          Infantil no trae paraguas, gorro, bufanda ni guantes, y en invierno puede traer una braga de cuello.
+          Con lluvia, en unos coles un alumno o una alumna sube el paragüero a clase. En otros, en Infantil no se traen
+          paraguas, gorros, bufandas ni guantes, y en invierno vale la braga de cuello.
         </li>
         <li>
           Los días de lluvia, el recreo de Infantil se hace en el aula con el tutor o la tutora, a veces con el apoyo de
           especialistas o en el gimnasio.
         </li>
         <li>
-          Lo que aparece en el patio se guarda en una caja. Al final del trimestre se avisa a las familias y lo que nadie
-          recoge se dona.
+          Lo que aparece en el patio va a una caja. Al final del trimestre se avisa a las familias y lo que nadie recoge se
+          dona.
         </li>
       </ul>
-      <p>Usad solo lo que encaje con vuestras normas. Lo demás, cambiadlo con la plantilla.</p>
+      <p>Usad lo que encaje con vuestras normas y cambiad lo demás con la plantilla.</p>
 
       <h2>Antes de empezar: el perchero</h2>
       <ol>
         <li>Pon las perchas a una altura a la que llegue sin ponerse de puntillas, y la etiqueta grande justo encima.</li>
         <li>Ordénalas por número de lista: así cada cual encuentra la suya y tú ves de un vistazo si falta algo.</li>
-        <li>
-          Usa el mismo símbolo en todas sus cosas: la percha, la bolsa de muda, el sitio de las botas y el paragüero. Quien
-          todavía no lee su nombre reconoce lo suyo por el símbolo.
-        </li>
-        <li>Si pones fotos, pide permiso a la familia y no las subas a internet.</li>
+        <li>Usa el mismo símbolo en todas sus cosas. Quien todavía no lee su nombre reconoce lo suyo por el símbolo.</li>
         <li>Deja libre el espacio delante del perchero: el truco del abrigo necesita sitio para los brazos.</li>
       </ol>
 
@@ -1842,49 +1852,48 @@
         paso. Después, ayuda lo justo: espera, señala la tira y, solo si hace falta, díselo o ayúdale con tus manos.
       </p>
       <p>
-        Empieza por quitarse el abrigo, que es más fácil que ponérselo. Hacia los 4 años, muchos niños y niñas ya se ponen
-        un abrigo abierto, aunque todavía les cuesten los botones y la cremallera (Aneurin Bevan University Health Board,
-        2023).
+        Empieza por quitarse el abrigo, que es más fácil. Hacia los 4 años, muchos niños y niñas ya se ponen un abrigo
+        abierto, aunque les cuesten los botones y la cremallera (Aneurin Bevan University Health Board, 2023).
       </p>
       <p>
-        Si un paso cuesta mucho, enséñalo empezando por el final. Con la cremallera, encaja tú la pieza de abajo y deja que
-        suba el tirador. Cuando le salga, que la encaje también (West Suffolk NHS Foundation Trust, 2022). Es el
-        encadenamiento hacia atrás: primero se enseña el último paso (Sam y AFIRM Team, 2024).
+        Si un paso cuesta mucho, enséñalo empezando por el final: es el encadenamiento hacia atrás (Sam y AFIRM Team,
+        2024). Con la cremallera, encaja tú la pieza de abajo y deja que suba el tirador. Cuando le salga, que la encaje
+        también (West Suffolk NHS Foundation Trust, 2022).
       </p>
       <p>
-        Celebra el final de cada tira, en la estrella «¡Hecho!». Para ponerse el abrigo, el mejor premio es salir al patio:
-        es el ejemplo que pone el propio módulo AFIRM (Sam y AFIRM Team, 2024).
+        Celebra el final, en la estrella «¡Hecho!». Para ponerse el abrigo, el mejor premio es salir al patio: es el ejemplo
+        que pone el propio módulo AFIRM.
       </p>
 
-      <h2 class="salto">El truco del abrigo</h2>
+      <h2>El truco del abrigo</h2>
       <p>
         Lo explica, por ejemplo, el servicio de Infantil del Ayuntamiento de Wokingham, en Inglaterra: el abrigo en el suelo
-        con las mangas estiradas y la capucha hacia el niño o la niña, las manos dentro de las mangas y los brazos por
-        encima de la cabeza (Wokingham Borough Council, 2024).
+        con las mangas estiradas y la capucha hacia el niño o la niña, las manos en las mangas y los brazos por encima de la
+        cabeza (Wokingham Borough Council, 2024).
       </p>
       <ul>
         <li>
-          El abrigo va abierto y con el forro hacia arriba, y la capucha, junto a sus pies. Si acaba con el abrigo del revés,
-          casi siempre es porque la capucha estaba en el otro lado.
+          El abrigo va abierto, con el forro hacia arriba y la capucha junto a sus pies. Si acaba del revés, casi siempre es
+          porque la capucha estaba en el otro lado.
         </li>
         <li>
-          Practicadlo primero con un abrigo grande, por ejemplo el tuyo: la ropa holgada es más fácil y así es más divertido
-          (Aneurin Bevan University Health Board, 2023).
-        </li>
-        <li>
-          Hay otras formas. El abrigo en el respaldo de una silla, con el forro hacia fuera: se sienta, mete los brazos y se
-          levanta. O primero la capucha y después los brazos (West Suffolk NHS Foundation Trust, 2022).
+          Practicadlo primero con un abrigo grande, por ejemplo el tuyo: la ropa holgada es más fácil (Aneurin Bevan
+          University Health Board, 2023).
         </li>
       </ul>
+      <p>
+        Hay otras formas. Con el abrigo en el respaldo de una silla y el forro hacia fuera, se sienta, mete los brazos y se
+        levanta. O se pone primero la capucha y después mete los brazos (West Suffolk NHS Foundation Trust, 2022).
+      </p>
 
       <h2>El panel del tiempo, en la asamblea</h2>
-      <ol>
-        <li>El encargado o la encargada del tiempo mira por la ventana y pega una o dos tarjetas en «¿Qué tiempo hace hoy?».</li>
-        <li>Entre todos, decidís qué ropa toca y la pegáis en «¿Qué me pongo?». Antes del patio, cada cual lo comprueba en su percha.</li>
-        <li>Hablad de los días de sol y frío: el sol no siempre quiere decir calor.</li>
-      </ol>
       <p>
-        Conecta con dos saberes del currículo de Infantil de la Región de Murcia para el segundo ciclo (Decreto 196/2022):
+        Quien tiene el encargo del tiempo mira por la ventana y pega una o dos tarjetas en «¿Qué tiempo hace hoy?». Entre
+        todos, decidís qué ropa toca, y antes del patio cada cual lo comprueba en su percha. Hablad de los días de sol y
+        frío: el sol no siempre quiere decir calor.
+      </p>
+      <p>
+        Conecta con dos saberes del segundo ciclo del currículo de Infantil de la Región de Murcia (Decreto 196/2022):
         «Fenómenos naturales: identificación y repercusión en la vida de las personas», del área Descubrimiento y
         Exploración del Entorno (BORM, pág. 33096), y «Rutinas: planificación secuenciada de las acciones para resolver una
         tarea», del área Crecimiento en Armonía (pág. 33084).
@@ -1893,30 +1902,21 @@
       <h2>Sonarse la nariz</h2>
       <p>
         Pon los pañuelos y la papelera a su alcance, junto a la tira. En sus medidas para centros educativos, el Ministerio
-        de Sanidad pedía usar pañuelos desechables, tirarlos tras su uso a una papelera con bolsa, mejor con tapa y pedal, y
-        lavarse las manos después (Ministerio de Sanidad, 2021). Su documento de diciembre de 2025 sobre las infecciones
-        respiratorias sigue recomendando la higiene respiratoria y el lavado de manos frecuente. La Asociación Española de
-        Pediatría (AEP) cuenta «después de sonarse los mocos» entre los momentos de lavarse las manos.
-      </p>
-      <p>
-        Para aprender a soplar por la nariz, jugad a mover una bolita de papel sobre la mesa soplando solo por la nariz, con
-        la boca cerrada.
+        de Sanidad pedía tirar los pañuelos desechables a una papelera con bolsa, mejor con tapa y pedal, y lavarse las
+        manos después (Ministerio de Sanidad, 2021). Su documento de diciembre de 2025 sobre las infecciones respiratorias
+        sigue recomendando la higiene respiratoria y el lavado de manos. La Asociación Española de Pediatría (AEP) cuenta
+        «después de sonarse los mocos» entre los momentos de lavarse las manos. Para aprender a soplar por la nariz, jugad a
+        mover una bolita de papel soplando solo por la nariz, con la boca cerrada.
       </p>
 
       <h2>El recreo en clase, los días de lluvia</h2>
       <p>
         Lee la historia «Hoy llueve: el recreo es en clase» (página <span data-pagina="historia"></span>) en cuanto sepáis
         que no se sale. Después, enseña el tablero «¿A qué juego hoy?» (página <span data-pagina="juegos"></span>): cada
-        cual señala o dice lo que elige.
+        cual señala o dice lo que elige. Reserva un rincón tranquilo, porque con todo el grupo dentro hay más ruido. Si
+        necesitan moverse, haced dos o tres pausas de «Pausas activas para todos». Quién vigila y dónde lo dicen las normas
+        de cada centro.
       </p>
-      <ul>
-        <li>Reserva un rincón tranquilo con cojines y cuentos: con todo el grupo dentro hay más ruido.</li>
-        <li>
-          Si necesitan moverse, haced dos o tres pausas activas, de pie o sentados: están en «Pausas activas para todos». Los
-          juegos de «Ya he terminado» también sirven.
-        </li>
-        <li>Quién vigila y dónde lo dicen las normas de cada centro: revisadlas antes del primer día de lluvia.</li>
-      </ul>
 
       <h2>El cajón de objetos perdidos</h2>
       <p>
@@ -1924,7 +1924,7 @@
         semana, mirad juntos lo que hay: quien reconoce lo suyo, se lo lleva. Si algo lleva nombre, avisa a su familia.
       </p>
 
-      <h2 class="salto">Ideas para adaptarlo (DUA)</h2>
+      <h2>Ideas para adaptarlo (DUA)</h2>
       <p>
         El Diseño Universal para el Aprendizaje (DUA) propone ofrecer desde el principio varias formas de presentar la
         información y de participar (CAST, 2024).
@@ -1933,9 +1933,8 @@
         <li><strong>Con fotos:</strong> pega sobre los pictogramas fotos de vuestra percha o vuestro paragüero, sin niños ni niñas.</li>
         <li><strong>Con objetos:</strong> antes de la tira, enséñale el abrigo o el pañuelo de verdad.</li>
         <li><strong>Más pasos o menos:</strong> con la plantilla, divide un paso que cueste o junta los que ya hace sin ayuda.</li>
-        <li><strong>Para responder:</strong> en el panel, puede señalar la tarjeta, decir su nombre o pegarla.</li>
-        <li><strong>Encargos:</strong> el encargado del tiempo o el del paragüero dan a cada cual un papel en la rutina.</li>
-        <li><strong>Más reto en Primaria:</strong> que dibuje sus propias tarjetas en blanco o que cuente qué ropa toca y por qué.</li>
+        <li><strong>Para responder:</strong> en el panel, puede señalar la tarjeta o decir su nombre en voz alta.</li>
+        <li><strong>Más reto en Primaria:</strong> que dibuje sus propias tarjetas o que explique qué ropa toca y por qué.</li>
       </ul>
 
       <h2>Alumnado con trastorno del espectro del autismo (TEA)</h2>
@@ -1945,15 +1944,15 @@
         que aprieta.
       </p>
       <ul>
-        <li>Pregunta a la familia qué prendas lleva bien. Si una le molesta, buscad juntos otra que sirva para lo mismo.</li>
+        <li>Pregunta a la familia qué prendas lleva bien.</li>
+        <li>Si una prenda le molesta, buscad juntos otra que sirva para lo mismo, como la capucha en lugar del gorro.</li>
         <li>
           Para la ropa que pica, el sistema de salud inglés (NHS) propone quitar las etiquetas, poner los calcetines del
           revés, usar ropa interior sin costuras y lavar con detergente sin perfume (East of England Community Health and
           Care NHS Trust, 2023).
         </li>
-        <li>Hay alternativas: la capucha en lugar del gorro o la braga de cuello en lugar de la bufanda.</li>
         <li>
-          Anticipa los cambios. El primer día de abrigo o de recreo en clase, enséñale antes la tira o la historia, y usad
+          Anticipa los cambios: el primer día de abrigo o de recreo en clase, enséñale antes la tira o la historia, y usad
           siempre las mismas palabras.
         </li>
       </ul>
@@ -1965,27 +1964,28 @@
           Hospital for Sick Children, 2008).
         </li>
         <li>
-          Si le cuesta agacharse hasta el suelo, prueba el método de la silla. En silla de ruedas, buscad con su
-          fisioterapeuta o su terapeuta ocupacional la forma que mejor le vaya.
+          Si le cuesta agacharse, prueba el método de la silla. En silla de ruedas, buscad con su fisioterapeuta o su
+          terapeuta ocupacional la forma que mejor le vaya.
         </li>
         <li>
-          Una anilla o una cinta en el tirador de la cremallera le da algo más grande que agarrar (West Suffolk NHS
-          Foundation Trust, 2022). El velcro y los botones grandes también ayudan.
+          Una anilla o una cinta en el tirador de la cremallera da algo más grande que agarrar (West Suffolk NHS Foundation
+          Trust, 2022). El velcro también ayuda.
         </li>
         <li>
-          Para quitarse las botas, que se siente: sentado o sentada mantiene mejor el equilibrio (East of England Community
-          Health and Care NHS Trust, 2023).
+          Para quitarse las botas, que se siente: así mantiene mejor el equilibrio (East of England Community Health and Care
+          NHS Trust, 2023). Pon su percha en un extremo del perchero, con sitio libre a los lados.
         </li>
-        <li>Pon su percha en un extremo, a su alcance y con espacio libre a los lados.</li>
       </ul>
 
       <h2>Discapacidad intelectual</h2>
       <ul>
         <li>Empieza con menos pasos: con la plantilla, deja a la vista solo los que está aprendiendo.</li>
-        <li>Usa fotos de sus cosas: su abrigo, su percha y su paragüero.</li>
-        <li>Repetid la rutina cada día en el mismo orden, con las mismas palabras y la misma tira.</li>
-        <li>Enseña empezando por el último paso y celebra cada avance (Sam y AFIRM Team, 2024).</li>
-        <li>Para anotar cómo avanza cada paso, usa el registro de pasos del material «Paso a paso».</li>
+        <li>Usa fotos de sus cosas, como su abrigo o su percha.</li>
+        <li>Repetid la rutina cada día en el mismo orden y con las mismas palabras.</li>
+        <li>
+          Enseña empezando por el último paso y celebra cada avance. Para anotar cómo avanza, usa el registro de pasos de
+          «Paso a paso».
+        </li>
       </ul>
 
       <div class="caja caja--azul">
@@ -1996,12 +1996,9 @@
           TEA; en clase, una tira con pasos puede ayudar también a cualquiera que esté aprendiendo una rutina.
         </p>
       </div>
-
-      <h2>Cómo están escritos los textos</h2>
       <p>
-        Los textos para el alumnado van en primera persona y en presente, con una acción por paso y palabras de uso diario,
-        siguiendo las pautas de lectura fácil de la norma UNE 153101:2018 EX. Aún no los hemos validado con personas
-        lectoras.
+        Los textos para el alumnado siguen las pautas de lectura fácil de la norma UNE 153101:2018 EX. Aún no los hemos
+        validado con personas lectoras.
       </p>
     </section>
 
@@ -2013,17 +2010,16 @@
       <p class="antetitulo">Fuentes y créditos</p>
       <h1>De dónde sale este material</h1>
       <p>
-        <strong>Rutinas de invierno en el cole.</strong> Equipo IdEducando, noviembre de 2026. Ficha y novedades:
-        <span class="url">ideducando.es/material-gratuito/rutinas-invierno-cole</span>. Fuentes consultadas el 4 de noviembre
-        de 2026.
+        <strong>Rutinas de invierno en el cole.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/rutinas-invierno-cole</span>. Fuentes consultadas el 4/11/2026.
       </p>
 
       <h2>Vestirse y desvestirse</h2>
       <ul class="referencias">
-        <li>Wokingham Borough Council (2024). <em>Children Ready for School Success. Dressing and undressing: Top Tips</em>. wsh.wokingham.gov.uk</li>
-        <li>West Suffolk NHS Foundation Trust (2022). <em>Worksheet I: Dressing</em>. Paediatric Occupational Therapy Service. wsh.nhs.uk</li>
+        <li>Wokingham Borough Council (2024). <em>Dressing and undressing: Top Tips</em>. wsh.wokingham.gov.uk</li>
+        <li>West Suffolk NHS Foundation Trust (2022). <em>Worksheet I: Dressing</em>. wsh.nhs.uk</li>
         <li>East of England Community Health and Care NHS Trust (2023). <em>Getting dressed</em>. cambspborochildrenshealth.nhs.uk</li>
-        <li>Aneurin Bevan University Health Board (2023). <em>Dressing</em>. Occupational Therapy Service for Children and Young People. abuhb.nhs.wales</li>
+        <li>Aneurin Bevan University Health Board (2023). <em>Dressing</em>. abuhb.nhs.wales</li>
         <li>The Hospital for Sick Children (2008). <em>I Can Do It Myself! Dressing and other daily living skills for children with one-arm weakness</em>. Toronto.</li>
       </ul>
 
@@ -2031,52 +2027,38 @@
       <ul class="referencias">
         <li>
           Ministerio de Sanidad (2021). <em>Medidas de prevención, higiene y promoción de la salud frente a COVID-19 para
-          centros educativos en el curso 2021-2022</em>. Medidas de prevención personal, punto 4. sanidad.gob.es
+          centros educativos en el curso 2021-2022</em>, medidas de prevención personal, punto 4.
         </li>
-        <li>Ministerio de Sanidad (2025). <em>Documento marco para el control de las infecciones respiratorias agudas</em>. Diciembre de 2025. sanidad.gob.es</li>
+        <li>Ministerio de Sanidad (2025). <em>Documento marco para el control de las infecciones respiratorias agudas</em>.</li>
         <li>Asociación Española de Pediatría (AEP). <em>En Familia: Lavado de manos</em>. aeped.es/enfamilia</li>
       </ul>
 
       <h2>Currículo y evidencia</h2>
       <ul class="referencias">
-        <li>
-          Decreto 196/2022, de 3 de noviembre, del currículo de Educación Infantil en la Región de Murcia. BORM n.º 255, de 4
-          de noviembre de 2022, págs. 33083, 33084 y 33096.
-        </li>
-        <li>Sam, A. y AFIRM Team (2024). <em>Task Analysis</em> (actualización). Universidad de Carolina del Norte, Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu</li>
-        <li>
-          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
-          generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032.
-        </li>
-        <li>
-          Ben-Sasson, A. y otros (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum
-          disorders. <em>Journal of Autism and Developmental Disorders</em>, 39(1), 1-11.
-        </li>
+        <li>Decreto 196/2022, de 3 de noviembre, currículo de Educación Infantil de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022, págs. 33083, 33084 y 33096.</li>
+        <li>Sam, A. y AFIRM Team (2024). <em>Task Analysis</em>. Universidad de Carolina del Norte. afirm.fpg.unc.edu</li>
+        <li>Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032.</li>
+        <li>Ben-Sasson, A. y otros (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum disorders. <em>Journal of Autism and Developmental Disorders</em>, 39(1), 1-11.</li>
         <li>CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. udlguidelines.cast.org</li>
-        <li>UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Asociación Española de Normalización.</li>
+        <li>UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>.</li>
       </ul>
 
       <h2>Cómo lo hacen los coles</h2>
       <p>
         Normas y listas de material de Infantil de los colegios públicos La Cala (Benidorm), María Moliner, El Trinquet,
         Cristo de la Paz y Antonio García López (Comunitat Valenciana), Libertad, María del Mar Camarena y José María del
-        Moral (Castilla-La Mancha) y Calvo Sotelo (Madrid), publicadas en sus webs.
+        Moral (Castilla-La Mancha) y Calvo Sotelo (Madrid), publicadas en sus webs. Molina, M. T. y otras (2009). Propuesta
+        de actividades para el período de adaptación en Educación Infantil. <em>Innovación y Experiencias Educativas</em>, 22.
       </p>
 
-      <h2>Pictogramas y dibujos</h2>
+      <h2>Pictogramas, dibujos y licencia</h2>
       <p>
-        Los pictogramas son de ARASAAC. Su licencia pide citar este texto: «Los símbolos pictográficos utilizados son
+        Los pictogramas son de ARASAAC y su licencia pide citar este texto: «Los símbolos pictográficos utilizados son
         propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los
         distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el material, mantén la cita. Con pictogramas de
-        ARASAAC, este material no se puede vender. Los dibujos del truco del abrigo, el perchero de la portada, la percha de
-        las etiquetas, la estrella «¡Hecho!» y las tijeras son de IdEducando.
-      </p>
-
-      <h2>Fotos y licencia</h2>
-      <p>
-        Si usas fotos del niño o la niña, pide permiso a la familia, no las subas a internet y no hagas fotos en las que
-        salgan otros niños o niñas. Licencia CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando,
-        sin fines comerciales y con la misma licencia.
+        ARASAAC, este material no se puede vender. Los dibujos del truco del abrigo, el perchero de la portada, la percha,
+        la estrella y las tijeras son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a
+        IdEducando, sin fines comerciales y con la misma licencia.
       </p>
     </section>
 
@@ -2120,7 +2102,7 @@
             ['d:cabeza', 'Lo paso por encima de la cabeza'],
             [16897, 'Subo la cremallera'],
           ],
-          pie: 'Dibujos de los pasos 1 a 4: IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.',
+          pie: 'Dibujos 1 a 4: IdEducando. Pictograma 5: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.',
         },
         colgar: {
           color: 'verde',
@@ -2143,9 +2125,9 @@
           pasos: [
             [37456, 'Cierro el paraguas'],
             [3285, 'Lo dejo en el paragüero'],
-            [2287, 'Me quito las botas'],
+            [25082, 'Me siento y me quito las botas'],
             [2621, 'Me pongo las zapatillas'],
-            [39546, 'Dejo las botas en mi sitio'],
+            [2287, 'Dejo las botas en mi sitio'],
           ],
         },
         nariz: {
@@ -2218,7 +2200,7 @@
         [3123, ['Hoy llueve mucho y el patio está mojado.', 'Con el suelo mojado, es fácil resbalar.']],
         [33072, ['Por eso, hoy el recreo es en clase.', 'Mi maestra o mi maestro está con nosotros.']],
         [28206, ['Primero, almorzamos, como otros días.']],
-        [32580, ['Después, jugamos en clase.', 'Hay construcciones, cuentos, puzles y plastilina.']],
+        [32580, ['Después, jugamos en clase.', 'Hay bloques, cuentos, puzles y plastilina.']],
         [30510, ['Puedo elegir a qué juego.', 'También puedo descansar en el rincón tranquilo.']],
         [9037, ['En clase hablamos bajito.', 'Así, el ruido no molesta.']],
         [8680, ['Al terminar el recreo, recogemos los juegos.']],
@@ -2227,14 +2209,14 @@
 
       // ¿A qué juego hoy?
       const JUEGOS = [
-        [4935, 'Construcciones'],
+        [4935, 'Bloques'],
         [6469, 'Cuentos'],
         [8088, 'Dibujar'],
         [2529, 'Plastilina'],
         [26403, 'Puzles'],
         [32580, 'Juegos de mesa'],
         [35747, 'Bailar'],
-        [32826, 'Descansar en el rincón tranquilo'],
+        [32826, 'Rincón tranquilo'],
       ];
       const RECUERDA = [
         [9037, 'Hablo bajito'],
@@ -2243,7 +2225,7 @@
 
       // De un vistazo: [color, pictograma, título, dónde, páginas].
       const MAPA = [
-        ['coral', 3286, 'Etiquetas y símbolos', 'Sobre cada percha y en sus cosas: la bolsa de muda, las botas o el paragüero.', 'etiquetas', 'simbolos'],
+        ['coral', 3286, 'Etiquetas y símbolos', 'Sobre cada percha y en sus cosas, como la bolsa de muda o el sitio de las botas.', 'etiquetas', 'simbolos'],
         ['azul', 27052, 'Me pongo el abrigo, con el truco', 'Junto al perchero. La segunda tira, para practicar en casa.', 'abrigo'],
         ['verde', 37895, 'Me quito el abrigo y lo cuelgo', 'Junto al perchero.', 'colgar'],
         ['naranja', 2500, 'Llego con lluvia', 'En la entrada, junto al paragüero.', 'colgar'],
@@ -2283,12 +2265,14 @@
         <path d="M23.4 15 L30.6 59 M76.6 15 L69.4 59" stroke="${M}" stroke-width="1.3" stroke-dasharray="1.5 1.7"/>
         <path d="M38 63 Q38 85 50 85 Q62 85 62 63 Z" fill="${FORRO}" ${T}/>
         <path d="M41.2 63.6 Q41.6 81.6 50 81.6 Q58.4 81.6 58.8 63.6" fill="none" stroke="${AZUL}" stroke-width="2.6"/>`;
-      const PIES = `<ellipse cx="44" cy="92.6" rx="4.4" ry="5.6" fill="${M}"/><ellipse cx="56" cy="92.6" rx="4.4" ry="5.6" fill="${M}"/>`;
+      const PIES = `<path d="M37.6 98 Q37 86 42.8 86 Q48.4 86 47.8 98 Z" fill="${CORAL}" ${T}/><path d="M52.2 98 Q51.6 86 57.2 86 Q63 86 62.4 98 Z" fill="${CORAL}" ${T}/>`;
       const MANOS = `
-        <path d="M28 53.5 H17 M20.4 50.2 L16.6 53.5 L20.4 56.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M72 53.5 H83 M79.6 50.2 L83.4 53.5 L79.6 56.8" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <ellipse cx="6.2" cy="50.7" rx="3.8" ry="5.4" fill="${PIEL}" ${T}/>
-        <ellipse cx="93.8" cy="50.7" rx="3.8" ry="5.4" fill="${PIEL}" ${T}/>`;
+        <path d="M29 53.5 H18 M22 49.6 L17.6 53.5 L22 57.4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M71 53.5 H82 M78 49.6 L82.4 53.5 L78 57.4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M7 46.4 Q5.6 41.6 3 42.6 Q1.6 43.4 3.4 46.8" fill="${PIEL}" ${T}/>
+        <path d="M9.4 45.6 Q2.4 44.6 2.6 50.7 Q2.4 56.8 9.4 55.8 Z" fill="${PIEL}" ${T}/>
+        <path d="M93 46.4 Q94.4 41.6 97 42.6 Q98.4 43.4 96.6 46.8" fill="${PIEL}" ${T}/>
+        <path d="M90.6 45.6 Q97.6 44.6 97.4 50.7 Q97.6 56.8 90.6 55.8 Z" fill="${PIEL}" ${T}/>`;
 
       // De lado: los brazos suben y el abrigo pasa por encima de la cabeza hacia la espalda.
       const CABEZA = `
@@ -2409,7 +2393,7 @@
       document.getElementById('etiquetas-p').innerHTML = Array.from(
         { length: 21 },
         (_, i) => `<div class="etp c-${COLORES[i % 6]}">
-          <span class="etp__banda"></span><span class="etp__hueco"></span><span class="etp__linea"></span><span class="etp__num">Nº</span>
+          <span class="etp__banda"></span><span class="etp__hueco"></span><span class="etp__derecha"><span class="etp__num">Nº<span></span></span><span class="etp__linea"></span></span>
         </div>`,
       ).join('');
 
@@ -2465,7 +2449,9 @@
       };
       document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, donde, ...claves]) => {
         const pags = claves.map(pagina);
-        const texto = pags.length > 1 ? `Págs. ${pags[0]} a ${pags[pags.length - 1]}` : `Pág. ${pags[0]}`;
+        const ultima = pags[pags.length - 1];
+        const texto =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
         return `<li class="c-${color}">${picto(n)}<div><h2>${titulo}</h2><p>${donde}</p></div><p class="mapa__pagina">${texto}</p></li>`;
       }).join('');
 
@@ -2497,7 +2483,7 @@
           `<img class="perchero__prenda" src="pictogramas/${PRENDAS[i][0]}.png" alt="" style="left:${x - PRENDAS[i][1] / 2}mm;width:${PRENDAS[i][1]}mm;height:${PRENDAS[i][1]}mm">`,
       ).join('');
       perchero += '<div class="perchero__suelo"></div>';
-      perchero += `<img src="pictogramas/2287.png" alt="" style="left:52mm;top:80mm;width:30mm;height:30mm">`;
+      perchero += `<img src="pictogramas/2287.png" alt="" style="left:52mm;top:82mm;width:28mm;height:28mm">`;
       perchero += `<img src="pictogramas/3285.png" alt="" style="left:146mm;top:72mm;width:38mm;height:38mm">`;
       document.getElementById('perchero').innerHTML = perchero;
 

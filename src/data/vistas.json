@@ -441,6 +441,165 @@
       }
     ]
   },
+  "me-llamo-bocadillo-pictogramas": {
+    "total": 26,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me llamo"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Pienso"
+      },
+      {
+        "pagina": 10,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 19,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "¡Dilo!"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Así es mi Bocadillo"
+      },
+      {
+        "pagina": 24,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Guía para el adulto"
+      }
+    ]
+  },
+  "me-llamo-error-pictogramas": {
+    "total": 25,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me llamo"
+      },
+      {
+        "pagina": 2,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Hola. Me llamo"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Pablo se levantó y lo intentó otra vez. ¡Pum! Y otra vez"
+      },
+      {
+        "pagina": 12,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "El libro de la seño"
+      },
+      {
+        "pagina": 22,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Así es mi Error"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Guía para el adulto"
+      }
+    ]
+  },
+  "me-llamo-valor-pictogramas": {
+    "total": 26,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me llamo"
+      },
+      {
+        "pagina": 2,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Hola. Me llamo"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Esa noche"
+      },
+      {
+        "pagina": 19,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Lo cuido igual"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Así brilla mi Valor"
+      },
+      {
+        "pagina": 24,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Guía para el adulto"
+      }
+    ]
+  },
   "panel-conducta-recreo": {
     "total": 14,
     "fotos": [

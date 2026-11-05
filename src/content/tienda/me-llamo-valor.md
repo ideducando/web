@@ -36,7 +36,8 @@ incluye:
   - "Idea para clase: el tarro de los brillos"
   - "Guía para el adulto: de qué va, preguntas para la lectura y la rutina «Lo cuido igual»"
   - "Las fuentes de lo que cuenta el libro"
-gratis: "La versión con pictogramas será gratis siempre, en Material gratuito."
+gratis: "La versión con pictogramas es gratis siempre, con el mismo texto y los mismos dibujos."
+relacionado: me-llamo-valor-pictogramas
 orden: 11
 fecha: 2026-11-04
 borrador: false

@@ -28,7 +28,7 @@ destacado: false
 borrador: false
 ---
 
-Valor es el brillito que tienen las cosas cuando alguien las quiere. En la clase de Hugo se rompen muchas cosas y a nadie parece importarle. Cuando Hugo rompe el coche de madera de Lucía, Valor se apaga y se va, y fuera descubre lo que vale cuidar las cosas.
+Valor es el brillito que tienen las cosas cuando alguien las quiere. En la clase de Hugo se rompen muchas cosas y a nadie parece importarle. Cuando Hugo rompe el coche de madera de Lucía, Valor se apaga y se va. Fuera descubre lo que vale cuidar las cosas.
 
 Esta es la versión con pictogramas del cuento: el mismo texto y los mismos dibujos, con el pictograma encima de cada palabra con contenido. Está pensada para quien se apoya en imágenes para leer o para entender lo que oye, como el alumnado con trastorno del espectro del autismo (TEA), con trastorno del desarrollo del lenguaje (TDL) o con discapacidad intelectual. También sirve a cualquier peque que empieza a leer.
 
@@ -57,4 +57,4 @@ Cuidar las cosas propias y las de los demás, y ponerse en el lugar de quien pie
 
 Los dibujos del cuento y los símbolos de los personajes son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org), el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender: es gratis siempre.
 
-Algunas palabras van sin pictograma porque ARASAAC no tiene uno claro para lo que quieren decir en el cuento, como «presume» o «se encogió». Para el brillo, la grieta y el hatillo hemos dibujado un símbolo propio.
+Algunas palabras van sin pictograma porque ARASAAC no tiene uno claro para lo que quieren decir en el cuento, como «presume» o «se encogió». Para palabras como «brillo» o «grieta» hemos dibujado un símbolo propio.

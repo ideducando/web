@@ -11,7 +11,7 @@ paginas: 30
 archivo: /descargas/cartilla-trabadas.pdf
 portada: /portadas/cartilla-trabadas.webp
 portada_alt: "Portada del material: doce bloques de colores apilados en pirámide, cada uno con una trabada, de pl a tr"
-vistas: [1, 3, 4, 13, 27, 28]
+vistas: [1, 3, 4, 15, 27, 28]
 tiempo: "1 hora para imprimir, plastificar y montar la cartilla; después, sesiones de 10 a 15 minutos"
 necesitas:
   - "12 folios A4 de 80 g para la cartilla"
@@ -30,10 +30,10 @@ imprimir:
   - "Páginas 28 a 30 (guía): basta con leerlas en pantalla."
 pasos:
   - "Imprime las páginas 3 a 26 a doble cara: salen 12 hojas, una por grupo."
-  - "Mete cada hoja en una funda y plastifícala."
+  - "Plastifica cada hoja en una funda."
   - "Recorta el plástico dejando 2 o 3 mm alrededor de la hoja y redondea las esquinas con la tijera."
   - "Con la perforadora, haz 2 agujeros en el borde izquierdo de cada hoja, a 1 cm del borde: uno a 6 cm de arriba y otro a 6 cm de abajo."
-  - "Ordena las hojas de pl a tr, con la cartilla hacia arriba, y pásalas por las 2 anillas."
+  - "Pasa las 2 anillas por los agujeros, con las hojas en orden, de pl a tr, y la cartilla hacia arriba."
   - "Imprime un registro por niño o niña y guárdalo junto a la cartilla, sin plastificar."
 resultado: "una cartilla de 12 hojas plastificadas y unidas con anillas, una por grupo, para leer por delante y jugar por detrás, y un registro de avance para cada niño o niña"
 cuidados:
@@ -70,25 +70,32 @@ Esta cartilla las practica una a una. Está pensada para el último curso de Inf
 3. **Registro de avance**, una hoja por niño o niña.
 4. **Guía para el docente y la familia**: el orden aconsejado, cómo es una sesión, cuándo pasar al grupo siguiente, qué hacer con los errores más habituales, ideas para adaptarlo, consejos para casa y la lista de todas las palabras.
 
-En todas las hojas, la trabada va en negrita y subrayada. Así se ve también en blanco y negro.
+En las sílabas, las palabras y las frases, la trabada va en negrita y subrayada, y así se ve también en blanco y negro. En la tira de lectura no va marcada: así se fija en cada sílaba y no adivina.
 
 ## Cómo usarlo
 
 1. Imprime las hojas de los grupos a doble cara, plastifícalas y únelas con anillas. Si no tienes plastificadora, mete cada hoja en una funda con agujeros, en una carpeta de anillas.
 2. Trabaja un grupo cada vez, de 10 a 15 minutos, tres o cuatro días por semana.
-3. Empieza por los juegos de detrás, de oído. Después, «Oye la diferencia»: tápate la boca con una hoja y di una palabra de la pareja para que señale la que ha oído.
-4. Leed las sílabas, las palabras con una palmada en cada sílaba y las frases.
+3. Empieza por los juegos de detrás, de oído. Después, «Oye la diferencia»: tápate la boca con una hoja y di una de las dos de la pareja para que señale la que ha oído.
+4. Leed las sílabas y las palabras, con una palmada en cada sílaba. Después, las frases.
 5. Termina con la tira de lectura, de izquierda a derecha y sin prisa.
 
 ## El orden y cuándo pasar al grupo siguiente
 
 La cartilla empieza por las trabadas con l y deja las de r para después. La l se puede alargar («plllato»), y así es más fácil fijarse en ella. La r de «pra» es un toque muy rápido de la lengua. Al hablar, la l también suele llegar antes que la r.
 
-Se pasa al grupo siguiente cuando, en dos días distintos, acierta casi siempre en «Oye la diferencia», lee la tira sin quitar ni añadir sonidos y lee las palabras y las frases, aunque sea despacio. El registro de avance ayuda a apuntarlo.
+Se pasa al grupo siguiente cuando, en dos días distintos:
+
+- en «Oye la diferencia» acierta 4 de cada 5 veces;
+- lee la tira sin quitar ni añadir sonidos;
+- lee sin ayuda todas las palabras, o todas menos una;
+- lee las frases, aunque sea despacio.
+
+El registro de avance sirve para apuntarlo.
 
 En los grupos que no tienen una pareja de palabras clara y conocida por un peque, la cartilla usa sílabas, como pa y pra.
 
-## Ideas para adaptarlo (DUA)
+## Ideas para adaptarlo
 
 El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de presentar la información y de responder:
 

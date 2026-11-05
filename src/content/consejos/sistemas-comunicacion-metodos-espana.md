@@ -3,7 +3,7 @@ titulo: "Pictogramas, signos y métodos: lo que se usa en España y qué respald
 resumen: "ARASAAC, SPC, Widgit, Mulberry, habla signada, bimodal, PECS o TEACCH: qué es cada uno, qué licencia tiene y qué dice la investigación. También para el TDAH, y los métodos de moda sin respaldo."
 seccion: aula
 fecha: 2026-10-19
-actualizado: 2026-10-19
+actualizado: 2026-11-05
 autoria: "Equipo IdEducando"
 lectura: "12 minutos"
 borrador: false
@@ -46,11 +46,11 @@ En IdEducando, todo el material con pictogramas de ARASAAC es gratis y lleva su 
 
 ## Métodos para el alumnado con TEA
 
-El trabajo de referencia es la revisión de Hume y otros (2021). Analizó 972 estudios y encontró 28 prácticas basadas en la evidencia para personas autistas de 0 a 22 años. Entre ellas están la CAA, los apoyos visuales, como las agendas y los sistemas de trabajo, y las narrativas sociales.
+El trabajo de referencia es la revisión de Hume y otros (2021). Analizó 972 estudios y encontró 28 prácticas basadas en la evidencia para personas autistas de 0 a 22 años. Entre ellas están la CAA, los apoyos visuales y las narrativas sociales.
 
 - **Modelar con el tablero.** El adulto señala los pictogramas mientras habla, sin pedir nada a cambio. Las intervenciones que lo incluyen son muy eficaces, tanto para entender como para expresarse (O'Neill, Light y Pope, 2018; Biggs, Carter y Gilson, 2018). Nuestro [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/) trae una guía para hacerlo.
 - **PECS** (sistema de comunicación por intercambio de imágenes), de la empresa Pyramid, con formación oficial de pago. Enseña a iniciar la comunicación entregando una imagen. Un metaanálisis encuentra mejoras pequeñas o moderadas en la comunicación y muy pocas en el habla (Flippin, Reszka y Watson, 2010). En un ensayo con 84 niños y niñas, la mejora no se mantuvo al acabar la intervención (Howlin y otros, 2007).
-- **TEACCH** (enseñanza estructurada), de la Universidad de Carolina del Norte. Como programa completo, un metaanálisis le da un apoyo limitado, con mejoras en la conducta social y en las conductas que preocupan (Virués-Ortega, Julio y Pastor-Barriuso, 2013). Sus piezas sueltas, como las agendas y los sistemas de trabajo, sí son prácticas basadas en la evidencia.
+- **TEACCH** (enseñanza estructurada), de la Universidad de Carolina del Norte. Como programa completo, un metaanálisis le da un apoyo limitado, con mejoras en la conducta social y en las conductas que preocupan (Virués-Ortega, Julio y Pastor-Barriuso, 2013). Sus piezas sueltas tienen estudios propios: con un sistema de trabajo, el alumnado con autismo pasó más tiempo en la tarea y necesitó menos ayuda del adulto (Hume y Odom, 2007; Hume, Plavnick y Odom, 2012).
 - **Historias sociales**, ideadas por Carol Gray, que mantiene sus criterios en su web con la marca Social Stories. Un metaanálisis les da una eficacia baja o dudosa en general, mejor para reducir conductas que para enseñar habilidades sociales (Kokina y Kern, 2010). Sirven como un apoyo más dentro de un plan.
 - **Apoyo conductual positivo:** una forma de trabajar que busca entender para qué sirve una conducta y cambiar el entorno para prevenirla. Plena inclusión publicó en 2025 una guía práctica. Sus piezas, como la evaluación funcional de la conducta, son prácticas basadas en la evidencia (Hume y otros, 2021).
 
@@ -108,6 +108,8 @@ Estudios:
 - Evans, S. W., Owens, J. S. y Bunford, N. (2014). Evidence-based psychosocial treatments for children and adolescents with attention-deficit/hyperactivity disorder. *Journal of Clinical Child and Adolescent Psychology*, 43(4), 527-551. [doi:10.1080/15374416.2013.850700](https://doi.org/10.1080/15374416.2013.850700)
 - Flippin, M., Reszka, S. y Watson, L. R. (2010). Effectiveness of the Picture Exchange Communication System (PECS) on communication and speech for children with autism spectrum disorders: a meta-analysis. *American Journal of Speech-Language Pathology*, 19(2), 178-195. [doi:10.1044/1058-0360(2010/09-0022)](https://doi.org/10.1044/1058-0360(2010/09-0022))
 - Howlin, P., Gordon, R. K., Pasco, G., Wade, A. y Charman, T. (2007). The effectiveness of Picture Exchange Communication System (PECS) training for teachers of children with autism: a pragmatic, group randomised controlled trial. *Journal of Child Psychology and Psychiatry*, 48(5), 473-481. [doi:10.1111/j.1469-7610.2006.01707.x](https://doi.org/10.1111/j.1469-7610.2006.01707.x)
+- Hume, K. y Odom, S. L. (2007). Effects of an individual work system on the independent functioning of students with autism. *Journal of Autism and Developmental Disorders*, 37(6), 1166-1180. [doi:10.1007/s10803-006-0260-5](https://doi.org/10.1007/s10803-006-0260-5)
+- Hume, K., Plavnick, J. y Odom, S. L. (2012). Promoting task accuracy and independence in students with autism across educational setting through the use of individual work systems. *Journal of Autism and Developmental Disorders*, 42(10), 2084-2099. [doi:10.1007/s10803-012-1457-4](https://doi.org/10.1007/s10803-012-1457-4)
 - Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: third generation review. *Journal of Autism and Developmental Disorders*, 51(11), 4013-4032. [doi:10.1007/s10803-020-04844-2](https://doi.org/10.1007/s10803-020-04844-2)
 - Hyatt, K. J. (2007). Brain Gym: building stronger brains or wishful thinking? *Remedial and Special Education*, 28(2), 117-124. [doi:10.1177/07419325070280020201](https://doi.org/10.1177/07419325070280020201)
 - Iznardo, M., Rogers, M. A., Volpe, R. J., Labelle, P. R. y Robaey, P. (2020). The effectiveness of daily behavior report cards for children with ADHD: a meta-analysis. *Journal of Attention Disorders*, 24(12), 1623-1636. [doi:10.1177/1087054717734646](https://doi.org/10.1177/1087054717734646)

@@ -67,6 +67,10 @@
         height: 266mm;
       }
 
+      .hoja > * {
+        flex: none;
+      }
+
       /* ---------- Portada ---------- */
       .portada__titulo {
         font-size: 44pt;
@@ -169,7 +173,7 @@
         display: flex;
         align-items: center;
         gap: 4mm;
-        margin-bottom: 3mm;
+        margin-bottom: 2mm;
       }
 
       .cabecera h1 {
@@ -201,8 +205,8 @@
 
       .apartado img,
       .apartado svg {
-        width: 8.5mm;
-        height: 8.5mm;
+        width: 7mm;
+        height: 7mm;
         flex: none;
       }
 
@@ -225,13 +229,13 @@
         display: flex;
         align-items: center;
         gap: 5mm;
-        margin-bottom: 3.5mm;
+        margin-bottom: 3mm;
       }
 
       .trabada {
         flex: none;
         width: 42mm;
-        height: 34mm;
+        height: 32mm;
         margin: 0;
         display: grid;
         place-items: center;
@@ -257,7 +261,7 @@
 
       .silabas li {
         margin: 0;
-        height: 24mm;
+        height: 23mm;
         display: grid;
         place-items: center;
         border-radius: 3mm;
@@ -278,17 +282,24 @@
         gap: 2.6mm 3.5mm;
       }
 
+      .palabras.de-5 {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .palabras.de-5 li {
+        grid-column: span 2;
+      }
+
       .palabras.de-5 li:nth-child(4) {
-        grid-column: 1 / span 1;
+        grid-column: 2 / span 2;
       }
 
       .palabras li {
         margin: 0;
-        height: 37mm;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        height: 35mm;
+        display: grid;
+        justify-items: center;
+        align-content: center;
         gap: 1mm;
         border-radius: 3mm;
         border: 0.35mm solid var(--suave);
@@ -296,8 +307,8 @@
       }
 
       .palabras img {
-        width: 23mm;
-        height: 23mm;
+        width: 22mm;
+        height: 22mm;
         object-fit: contain;
       }
 
@@ -308,15 +319,23 @@
         white-space: nowrap;
       }
 
+      .partida.larga {
+        font-size: 21pt;
+      }
+
+      .partida.muy-larga {
+        font-size: 19pt;
+      }
+
       .guion {
-        padding: 0 0.1em;
+        padding: 0 0.06em;
         color: var(--suave);
       }
 
       /* ---------- Cartilla: oye la diferencia ---------- */
       .oye {
-        margin: 0 0 3.5mm;
-        padding: 2.4mm 4mm 3mm;
+        margin: 0 0 3mm;
+        padding: 2mm 4mm 2.6mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 4mm;
       }
@@ -336,7 +355,7 @@
         align-items: center;
         justify-content: center;
         gap: 3mm;
-        min-height: 32mm;
+        min-height: 29mm;
         border-radius: 3mm;
         background: var(--crema);
       }
@@ -351,8 +370,8 @@
       }
 
       .pareja figure img {
-        width: 20mm;
-        height: 20mm;
+        width: 19mm;
+        height: 19mm;
         object-fit: contain;
         background: #fff;
         border-radius: 2mm;
@@ -365,10 +384,16 @@
       }
 
       .pareja .o {
-        font-family: var(--titulos);
-        font-weight: 600;
-        font-size: 13pt;
+        align-self: flex-end;
+        margin-bottom: 1.2mm;
+        font-size: 18pt;
+        line-height: 1.1;
         color: var(--suave);
+      }
+
+      .pareja.de-silabas .o {
+        align-self: center;
+        margin-bottom: 0;
       }
 
       .silaba-sola {
@@ -426,7 +451,7 @@
         grid-template-columns: 21mm repeat(10, minmax(0, 1fr));
         height: 17mm;
         border: 0.5mm solid var(--marino);
-        border-radius: 8.5mm;
+        border-radius: 4.5mm;
         overflow: hidden;
         background: #fff;
       }
@@ -440,13 +465,14 @@
         border-right: 0.5mm solid var(--marino);
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 10pt;
+        font-size: 18pt;
         line-height: 1;
       }
 
       .tira__inicio svg {
-        width: 5mm;
-        height: 5mm;
+        width: 5.5mm;
+        height: 5.5mm;
+        flex: none;
       }
 
       .tira span {
@@ -492,7 +518,7 @@
 
       .palmas li {
         margin: 0;
-        height: 30mm;
+        height: 27mm;
         display: grid;
         grid-template-columns: 24mm minmax(0, 1fr);
         align-items: center;
@@ -503,8 +529,8 @@
       }
 
       .palmas img {
-        width: 24mm;
-        height: 24mm;
+        width: 22mm;
+        height: 22mm;
         object-fit: contain;
       }
 
@@ -540,18 +566,18 @@
 
       .cambios li {
         margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.4mm;
-        padding: 2mm 2mm 2.6mm;
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 1.2mm;
+        padding: 1.6mm 2mm 2.2mm;
         border-radius: 3mm;
         border: 0.35mm solid var(--suave);
       }
 
       .cambios img {
-        width: 20mm;
-        height: 20mm;
+        width: 18mm;
+        height: 18mm;
         object-fit: contain;
       }
 
@@ -744,11 +770,11 @@
 
       .guia h2 {
         font-size: 13.5pt;
-        margin-top: 0.8em;
+        margin-top: 0.7em;
       }
 
       .guia .caja {
-        padding: 3mm 4mm;
+        padding: 2.4mm 4mm;
       }
 
       .guia .caja h3 {
@@ -758,7 +784,7 @@
 
       .guia ol li,
       .guia ul li {
-        margin-bottom: 0.9mm;
+        margin-bottom: 0.5mm;
       }
 
       .errores td:first-child {
@@ -885,8 +911,8 @@
         <tbody id="filas-registro"></tbody>
       </table>
       <p class="nota-registro">
-        Rellena un círculo cada día que lo observes: el primero, un día; el segundo, otro día distinto. Cuando los
-        cuatro tengan los dos círculos llenos, pasad al grupo siguiente. La estrella la colorea el niño o la niña.
+        Cada círculo es un día distinto: rellénalo como en la leyenda de arriba. Cuando en las cuatro columnas los dos
+        círculos estén llenos, pasad al grupo siguiente. La estrella la colorea el niño o la niña.
       </p>
     </section>
 
@@ -894,7 +920,7 @@
          GUÍA PARA EL DOCENTE Y LA FAMILIA
          ====================================================================== -->
     <section class="guia">
-      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <div class="rayos" style="margin-bottom: 3.5mm"></div>
       <p class="antetitulo">Guía para el docente y la familia</p>
       <h1>Cómo usar la cartilla</h1>
       <p>
@@ -904,9 +930,7 @@
       </p>
       <p>
         La cartilla tiene doce grupos: cinco con l (pl, bl, fl, cl y gl) y siete con r (pr, br, fr, cr, gr, dr y tr).
-        Cada grupo ocupa una hoja. Por delante, para leer: la trabada con sus cinco sílabas, palabras de uso diario con
-        pictograma, parejas para oír la diferencia, frases cortas y una tira de lectura. Por detrás, juegos para oír
-        los sonidos sin leer.
+        Cada grupo ocupa una hoja: por delante, para leer; por detrás, juegos para oír los sonidos sin leer.
       </p>
       <p>
         Está pensada para el último curso de Infantil y el primer ciclo de Primaria, de 5 a 8 años, cuando ya se leen
@@ -922,7 +946,8 @@
         Proponemos empezar por las trabadas con l. La l se puede alargar («plllato»), y así es más fácil fijarse en
         ella. La r de «pra» es un toque muy rápido de la lengua que no se puede alargar. Al hablar, la l también suele
         llegar antes: en un estudio con niños y niñas de México, la l apareció antes que la r, y en los grupos de dos
-        consonantes lo habitual era perder la segunda, como en «pancha» por «plancha» (Oropeza Escobar, 2017).
+        consonantes la segunda se cambiaba por otra o se perdía, como en «pancha» por «plancha» (Oropeza Escobar,
+        2017).
       </p>
       <p>
         Dentro de cada familia, la cartilla va de los sonidos que se hacen con los labios (p, b y f) a los que se hacen
@@ -931,15 +956,15 @@
       </p>
 
       <h2>Una sesión, paso a paso</h2>
-      <p>Mejor poco y a menudo: de 10 a 15 minutos, tres o cuatro días por semana, con un solo grupo cada vez.</p>
+      <p>Mejor poco y a menudo: de 10 a 15 minutos, tres o cuatro días por semana. Un solo grupo cada vez.</p>
       <ol>
         <li>
           <strong>Jugad con los sonidos.</strong> Empezad por los juegos de la parte de detrás. Se juegan de oído: el
           niño o la niña no tiene que leer.
         </li>
         <li>
-          <strong>Oye la diferencia.</strong> Tápate la boca con una hoja y di una de las dos palabras de la pareja.
-          Que señale la que ha oído. Cambia el orden sin avisar.
+          <strong>Oye la diferencia.</strong> Tápate la boca con una hoja y di una de las dos de la pareja. Que señale
+          la que ha oído. Cambia el orden sin avisar.
         </li>
         <li>
           <strong>Lee las sílabas.</strong> Léelas tú primero, señalando con el dedo. Después, que las lea sin tu
@@ -973,20 +998,10 @@
 
       <h2>Los juegos de detrás</h2>
       <p>
-        Se juegan de oído y en voz alta. Entre barras va el sonido: /l/ es el sonido de la l, sin decir «ele». Las
-        soluciones están al pie de cada hoja.
+        Se juegan de oído y en voz alta, y cada hoja trae las soluciones al pie. Entre barras va el sonido: /l/ es el
+        sonido de la l, sin decir «ele». Al quitar un sonido, a veces sale una palabra conocida, como «pato», y otras
+        una inventada, como «panta». Las dos valen.
       </p>
-      <ul>
-        <li>
-          <strong>Palmas:</strong> una palmada en cada sílaba y un círculo en cada palmada. Después, rodead el círculo
-          en el que suena la trabada.
-        </li>
-        <li>
-          <strong>Quita un sonido:</strong> di la palabra sin la l o sin la r. A veces sale una palabra conocida, como
-          «pato»; otras, una inventada, como «panta». Las dos valen.
-        </li>
-        <li><strong>Cambia la palabra:</strong> añade el sonido y di la palabra nueva: «pato» con /l/ es «plato».</li>
-      </ul>
 
       <h2>Si se equivoca</h2>
       <table class="errores">
@@ -1023,7 +1038,7 @@
         señala: que elija bien el pictograma o la sílaba. Coméntalo con el especialista de Audición y Lenguaje (AL).
       </p>
 
-      <h2>Ideas para adaptarlo (DUA)</h2>
+      <h2>Ideas para adaptarlo</h2>
       <p>
         El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de presentar la información y de
         responder (CAST, 2024).
@@ -1104,8 +1119,9 @@
           Primaria, anexo II.
         </p>
         <p>
-          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
-          Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+          Pictogramas de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa: «Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
           Si adaptas el material, mantén este texto. Con pictogramas de ARASAAC, el material no se puede vender: es
           gratis siempre. La portada, los iconos y el diseño de las hojas son de IdEducando.
         </p>
@@ -1265,6 +1281,9 @@
 
       const img = (id, alt = '') => `<img src="pictogramas/${id}.png" alt="${alt}" />`;
 
+      // Las palabras con muchas letras y guiones bajan un poco de tamaño para caber en su tarjeta
+      const largo = (p) => (p.length >= 14 ? ' muy-larga' : p.length >= 12 ? ' larga' : '');
+
       // Iconos de IdEducando para los juegos de quitar y añadir, y la flecha
       const ICONO_MENOS = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="var(--t)" stroke="#1e2b55" stroke-width="1.6"/><path d="M7 12h10" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round"/></svg>`;
       const ICONO_MAS = `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="var(--t)" stroke="#1e2b55" stroke-width="1.6"/><path d="M7 12h10M12 7v10" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round"/></svg>`;
@@ -1293,24 +1312,24 @@
       // ---------------------------------------------------------------- La cartilla (por delante)
 
       function figuraPareja([texto, id], t) {
-        if (!id) return `<span class="silaba-sola">${marcar(texto, t)}</span>`;
+        if (!id) return `<span class="silaba-sola"><span>${marcar(texto, t)}</span></span>`;
         return `<figure>${img(id)}<figcaption>${marcar(texto, t)}</figcaption></figure>`;
       }
 
       function cartilla(g, n) {
         const familia = g.t[1] === 'l' ? 'Familia de la l' : 'Familia de la r';
-        const silabas = VOCALES.map((v) => `<li><b class="tr">${g.t}</b>${v}</li>`).join('');
+        const silabas = VOCALES.map((v) => `<li><span><b class="tr">${g.t}</b>${v}</span></li>`).join('');
         const palabras = g.palabras
-          .map(([p, id]) => `<li>${img(id)}<p class="partida">${partida(p, g.t)}</p></li>`)
+          .map(([p, id]) => `<li>${img(id)}<p class="partida${largo(p)}">${partida(p, g.t)}</p></li>`)
           .join('');
         const deSilabas = g.parejas.every(([a]) => !a[1]);
         const pista = deSilabas
           ? 'Tápate la boca con una hoja y di una sílaba de una pareja. ¿Cuál ha oído? Que la señale.'
           : 'Tápate la boca con una hoja y di una palabra de una pareja. ¿Cuál ha oído? Que la señale.';
         const parejas = g.parejas
-          .map(([a, b]) => `<div class="pareja">${figuraPareja(a, g.t)}<span class="o">o</span>${figuraPareja(b, g.t)}</div>`)
+          .map(([a, b]) => `<div class="pareja${a[1] ? '' : ' de-silabas'}">${figuraPareja(a, g.t)}<span class="o">o</span>${figuraPareja(b, g.t)}</div>`)
           .join('');
-        const frases = g.frases.map((f) => `<li>${marcar(f, g.t)}</li>`).join('');
+        const frases = g.frases.map((f) => `<li><span>${marcar(f, g.t)}</span></li>`).join('');
         return `<section class="hoja cartilla ${g.color}">
           <div class="cabecera">
             <div><h1>Trabadas con ${g.t}</h1><p class="cabecera__dato">Grupo ${n + 1} de 12 · ${familia}</p></div>
@@ -1374,13 +1393,14 @@
         const resultado = ([, , , r, conocida]) => (conocida ? `<strong>${r}</strong>` : r);
         const solQuita = g.quita.map(([, r, conocida]) => (conocida ? `<strong>${r}</strong>` : r)).join(', ');
         const solCambia = g.cambia.map(resultado).join(', ');
+        const hayConocidas = g.quita.some(([, , c]) => c) || g.cambia.some(([, , , , c]) => c);
 
         return `<section class="hoja juegos ${g.color}">
           <div class="cabecera">
             <div><h1>Juegos con ${g.t}</h1><p class="cabecera__dato">Grupo ${n + 1} de 12 · Para jugar de oído, sin leer</p></div>
             ${LOGO}
           </div>
-          <p class="intro-juegos">Di tú las palabras, despacio y en voz alta. Entre barras va el sonido: /${sonido}/ es el sonido de la ${sonido}, sin decir su nombre. Con rotulador de pizarra se marca y se borra.</p>
+          <p class="intro-juegos">Di tú las palabras, despacio y en voz alta. Entre barras va el sonido: /${sonido}/ es el sonido de la ${sonido}, sin decir «${sonido === 'l' ? 'ele' : 'erre'}».</p>
           <div class="juego">
             <h2 class="apartado">${img(4563)}Palmas</h2>
             <p class="pista">Di la palabra con una palmada en cada sílaba y rellena un círculo en cada palmada. Después, rodea el círculo en el que suena /${g.t}/.</p>
@@ -1396,7 +1416,7 @@
             <p class="pista">Añade el sonido de la ficha y di la palabra nueva.</p>
             <ul class="cambios">${cambia}</ul>
           </div>
-          <p class="clave"><strong>Soluciones.</strong> Palmas: ${solPalmas}. Sin /${sonido}/: ${solQuita}. Con el sonido nuevo: ${solCambia}. En negrita, las que salen palabras conocidas.</p>
+          <p class="clave"><strong>Soluciones.</strong> Palmas: ${solPalmas}. Sin /${sonido}/: ${solQuita}. Con el sonido nuevo: ${solCambia}.${hayConocidas ? ' En negrita, las que salen palabras conocidas.' : ''}</p>
           <p class="atribucion">${ATRIBUCION}</p>
         </section>`;
       }
@@ -1427,9 +1447,9 @@
       // ---------------------------------------------------------------- Portada: la pirámide de bloques
 
       const filas = [
-        { y: 216, grupos: GRUPOS.slice(0, 5) },
-        { y: 186, grupos: GRUPOS.slice(5, 9) },
-        { y: 156, grupos: GRUPOS.slice(9, 12) },
+        { y: 219.5, grupos: GRUPOS.slice(0, 5) },
+        { y: 189.5, grupos: GRUPOS.slice(5, 9) },
+        { y: 159.5, grupos: GRUPOS.slice(9, 12) },
       ];
       const giros = [-4, 3, -2, 5, -3, 2, -5, 4, -2, 3, -4, 2];
       let k = 0;

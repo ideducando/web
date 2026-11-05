@@ -231,6 +231,7 @@
       }
 
       .portada__pie {
+        display: block;
         position: relative;
         z-index: 5;
         font-size: 11pt;
@@ -238,7 +239,7 @@
       }
 
       .portada__pie p {
-        margin: 0;
+        margin: 0 0 1.2mm;
       }
 
       .portada .pegatina {
@@ -307,12 +308,12 @@
         display: flex;
         align-items: center;
         gap: 4mm;
-        margin-bottom: 3mm;
+        margin-bottom: 2.5mm;
       }
 
       .encabezado__picto {
-        width: 15mm;
-        height: 15mm;
+        width: 13mm;
+        height: 13mm;
         flex: none;
       }
 
@@ -418,7 +419,7 @@
         width: 44mm;
         height: 21mm;
         display: grid;
-        grid-template-columns: 19.4mm minmax(0, 1fr);
+        grid-template-columns: 18.4mm minmax(0, 1fr);
         border: 0.35mm dashed var(--suave);
         border-radius: 2.4mm;
         overflow: hidden;
@@ -426,6 +427,7 @@
         break-inside: avoid;
       }
 
+      /* El pictograma mide 17,6 mm: así «Matemáticas» y «Cumpleaños» caben a 11 puntos sin partirse. */
       .carta__picto {
         display: grid;
         place-items: center;
@@ -434,14 +436,14 @@
       }
 
       .carta__picto img {
-        width: 18.4mm;
-        height: 18.4mm;
+        width: 17.6mm;
+        height: 17.6mm;
       }
 
       .carta__texto {
         display: flex;
         align-items: center;
-        padding: 0 0.9mm 0 1.1mm;
+        padding: 0 0.5mm 0 0.9mm;
         font-weight: 700;
         font-size: 11pt;
         line-height: 1.08;
@@ -558,27 +560,27 @@
       }
 
       .dia__cabecera {
-        padding: 1.6mm 2.4mm 2mm;
+        padding: 1.2mm 2.4mm 1.4mm;
         background: var(--t);
         text-align: center;
       }
 
       .dia__cabecera h2 {
-        margin: 0 0 1.3mm;
+        margin: 0 0 1mm;
         font-family: var(--texto);
-        font-size: 16pt;
+        font-size: 15pt;
         line-height: 1;
       }
 
       .dia__cabecera img {
-        height: 9.4mm;
+        height: 8.4mm;
       }
 
       .dia__casillas {
         display: grid;
         justify-items: center;
-        gap: 2.1mm;
-        padding: 2.4mm 0;
+        gap: 1.6mm;
+        padding: 2mm 0;
       }
 
       /* ---------- Mi día ---------- */
@@ -586,7 +588,7 @@
         display: grid;
         grid-template-columns: 9mm 45.6mm 11mm 45.6mm;
         column-gap: 3mm;
-        row-gap: 3mm;
+        row-gap: 2.4mm;
         align-items: center;
         justify-content: center;
         width: max-content;
@@ -970,7 +972,7 @@
       .gusto {
         display: grid;
         grid-template-rows: auto minmax(0, 1fr);
-        height: 52mm;
+        height: 40mm;
         border-radius: 2.5mm;
         background: #fff;
         overflow: hidden;
@@ -1124,7 +1126,7 @@
         grid-template-columns: repeat(4, 44mm);
         grid-auto-rows: 21mm;
         justify-content: space-between;
-        row-gap: 3.4mm;
+        row-gap: 2.8mm;
       }
 
       .rejilla-grandes {
@@ -1132,7 +1134,37 @@
         grid-template-columns: repeat(2, 80mm);
         grid-auto-rows: 80mm;
         justify-content: space-evenly;
-        row-gap: 4.5mm;
+        row-gap: 3.5mm;
+      }
+
+      /* ---------- Lista de pictogramas (última página) ---------- */
+      .indice {
+        columns: 4;
+        column-gap: 5mm;
+        list-style: none;
+        margin: 1mm 0 2mm;
+        padding: 0;
+      }
+
+      .indice li {
+        display: flex;
+        align-items: baseline;
+        gap: 1.6mm;
+        margin: 0 0 0.6mm;
+        break-inside: avoid;
+      }
+
+      .indice li::before {
+        content: '';
+        flex: none;
+        width: 2.6mm;
+        height: 2.6mm;
+        border-radius: 50%;
+        background: var(--c);
+      }
+
+      .indice span {
+        color: var(--suave);
       }
 
       /* ---------- Guía ---------- */
@@ -1242,15 +1274,14 @@
       <div class="rayos portada__rayos"></div>
       <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 104mm; background: var(--verde-tinte)"></div>
       <div class="circulo" style="width: 74mm; height: 74mm; left: -30mm; top: 122mm; background: var(--amarillo-tinte)"></div>
-      <div class="circulo" style="width: 46mm; height: 46mm; left: 120mm; top: 250mm; background: var(--azul-tinte)"></div>
       <div class="portada__cuerpo">
         <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
         <p class="antetitulo portada__antetitulo">Apoyo visual · En el cole y en casa</p>
         <h1 class="portada__titulo">Agenda visual<br />con pictogramas</h1>
         <p class="portada__subtitulo">La semana, el día y los cambios, con pictogramas de ARASAAC listos para recortar.</p>
         <div class="portada__pie">
-          <p>Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org).<br />Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
-          <p>Material gratuito · CC BY-NC-SA 4.0<br />ideducando.es</p>
+          <p>Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+          <p><strong>Material gratuito</strong> · Licencia CC BY-NC-SA 4.0 · ideducando.es</p>
         </div>
       </div>
       <div class="pegatina" aria-hidden="true"><b>60</b>pictogramas<br />para recortar</div>
@@ -1264,7 +1295,7 @@
          MI SEMANA
          ====================================================================== -->
     <section class="apaisada">
-      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="rayos" style="margin-bottom: 2mm"></div>
       <div class="encabezado">
         <img class="encabezado__picto" src="pictogramas/37732.png" alt="" />
         <h1>Mi semana</h1>
@@ -1272,9 +1303,11 @@
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </div>
       <div class="semana" id="semana"></div>
-      <p class="pista">
+      <p class="pista" style="margin-top: 2mm">
         Pega un círculo de velcro rugoso en cada círculo gris. Encima van las tarjetas pequeñas, con velcro suave detrás.
-        Si en tu centro cada día ya tiene su color, usa el vuestro.
+      </p>
+      <p class="atribucion" style="margin-top: 0.6mm">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
       </p>
     </section>
 
@@ -1290,9 +1323,8 @@
       </div>
       <p class="frase">Cuando acabo algo, paso su tarjeta a «Terminado».</p>
       <div class="mi-dia" id="mi-dia"></div>
-      <p class="pista">
-        Pon las tarjetas de hoy en orden, de arriba abajo. Al terminar cada actividad, el alumno o la alumna mueve su
-        tarjeta a la derecha, a la misma fila. Si siete pasos son muchos, tapa los últimos con una cartulina.
+      <p class="atribucion" style="margin-top: 3mm">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
       </p>
     </section>
 
@@ -1322,6 +1354,9 @@
         Para una sola transición: en «Primero», lo que toca; en «Después», algo que le guste. Cumple siempre lo que pones
         en «Después». Valen las tarjetas grandes y las pequeñas: las dos se pegan en el mismo círculo.
       </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
     </section>
 
     <!-- ======================================================================
@@ -1330,7 +1365,7 @@
     <section class="apaisada">
       <div class="rayos" style="margin-bottom: 3mm"></div>
       <div class="encabezado">
-        <img class="encabezado__picto" src="pictogramas/25736.png" alt="" />
+        <img class="encabezado__picto" src="pictogramas/8053.png" alt="" />
         <h1>Si hay un cambio</h1>
         <p class="frase" style="margin: 0 0 0 4mm">Lo de «Antes» ya no toca. Hacemos lo de «Ahora».</p>
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
@@ -1349,11 +1384,14 @@
         </div>
       </div>
       <div class="calma">
-        <p>Si me pongo<br />nervioso, puedo:</p>
-        <figure><img src="pictogramas/7258.png" alt="" /><figcaption>Respirar despacio</figcaption></figure>
+        <p>Si me pongo<br />nervioso o nerviosa,<br />puedo:</p>
+        <figure><img src="pictogramas/34508.png" alt="" /><figcaption>Respirar despacio</figcaption></figure>
         <figure><img src="pictogramas/4570.png" alt="" /><figcaption>Pedir ayuda</figcaption></figure>
         <figure><img src="pictogramas/5898.png" alt="" /><figcaption>Mirar mi agenda</figcaption></figure>
       </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
     </section>
 
     <!-- ======================================================================
@@ -1362,7 +1400,7 @@
     <section class="hoja">
       <div class="rayos" style="margin-bottom: 3mm"></div>
       <div class="encabezado">
-        <img class="encabezado__picto" src="pictogramas/8194.png" alt="" />
+        <img class="encabezado__picto" src="pictogramas/5441.png" alt="" />
         <h1>¿Qué necesito?</h1>
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </div>
@@ -1392,6 +1430,9 @@
         Cuelga el tablero cerca de su sitio. Cada vez que lo pida, señalando o con palabras, responde enseguida y di la
         palabra en voz alta.
       </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
     </section>
 
     <!-- ======================================================================
@@ -1410,6 +1451,9 @@
         Plastifica la hoja y usa un rotulador de pizarra blanca: se borra con un pañuelo de papel. «Para ir al cole» se
         usa en casa, por la mañana, y «Para volver a casa», en clase, antes de salir. En la última fila, dibuja o escribe
         lo que necesite ese día.
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
       </p>
     </section>
 
@@ -1448,6 +1492,9 @@
         <strong>Para la familia:</strong> plastificada, se usa con rotulador de pizarra blanca y se borra con un pañuelo
         de papel. Preguntad de una en una y esperad la respuesta: puede señalar, rodear o dibujar. Si hoy no quiere
         contarlo, no pasa nada. Lo intentáis otro día.
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
       </p>
     </section>
 

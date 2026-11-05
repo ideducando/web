@@ -12,7 +12,7 @@ archivo: /descargas/estaciones-matematicas-invierno.pdf
 portada: /portadas/estaciones-matematicas-invierno.webp
 portada_alt: "Portada del material: el título «Estaciones de matemáticas de invierno» sobre fondo crema, con un muñeco de nieve, un pingüino, un gorro, una manopla, una bufanda y una taza de chocolate en círculos blancos, y copos que caen"
 vistas: [1, 3, 11, 14, 21, 22]
-tiempo: "2 horas y media para imprimir, recortar y plastificar (menos con guillotina); juntar los tapones, unos días antes"
+tiempo: "2 horas y media para imprimir, recortar y plastificar; juntar los tapones lleva unos días"
 necesitas:
   - "15 hojas de cartulina blanca A4 de 160 g"
   - "15 fundas de plastificar A4 de 125 micras y una plastificadora"
@@ -21,15 +21,15 @@ necesitas:
   - "6 cuencos o cajas: 3 para las piezas y 3 para guardar la ropa"
   - "1 temporizador visual o un reloj de arena, y 1 rotulador de pizarra"
   - "Tijeras o una guillotina, e impresora, mejor a color"
-  - "Para la versión de clase y casa: 16 pompones blancos y 6 rojos, de 2,5 cm, y 26 tapones de botellas de agua o de leche"
+  - "Para la versión de clase y casa: 16 pompones blancos y 6 rojos de 2,5 cm y 26 tapones de agua o leche"
 imprimir:
-  - "En cartulina, a color y al 100 % («Tamaño real»): páginas 8, 9, 11, 12, 14, 15, 17, 19 y 21 a 27. Así las fichas encajan en las tiras y en los témpanos."
+  - "En cartulina, a color y al 100 % («Tamaño real»), para que todo encaje: páginas 8, 9, 11, 12, 14, 15, 17, 19 y 21 a 27."
   - "La página 24 solo hace falta para la versión segura."
-  - "En folio: el registro (página 28), una autoevaluación por niño o niña (29) y una nota por familia (31). Las hojas del docente se pueden leer en pantalla."
+  - "En folio: el registro (página 28), una autoevaluación por niño o niña (29) y una nota por familia (31). El resto se lee en pantalla."
 pasos:
-  - "Imprime en cartulina las páginas de «Qué imprimir», a color y al 100 %. Las hojas en horizontal salen giradas sin hacer nada."
+  - "Imprime en cartulina las páginas de «Qué imprimir», a color y al 100 %."
   - "Recorta por la línea de puntos las 80 fichas de las páginas 24 a 27, antes de plastificar."
-  - "Plastifica las demás hojas enteras y, aparte, las fichas, con 5 mm entre ficha y ficha: caben 20 en cada funda."
+  - "Plastifica las demás hojas enteras y, aparte, las fichas, con 5 mm entre una y otra: 20 en cada funda."
   - "Recorta cada pieza dejando 2 o 3 mm de plástico alrededor y redondea las esquinas."
   - "Pega un círculo de velcro rugoso en cada estación del panel y uno suave detrás de cada tarjeta de grupo. Escribe los nombres."
   - "Guarda cada nivel de cada estación en su sobre, con lo que dice la tabla de la página 5."

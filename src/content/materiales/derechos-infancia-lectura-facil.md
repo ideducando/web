@@ -1,6 +1,6 @@
 ---
 titulo: "Mis derechos: los derechos de la infancia en lectura fácil"
-resumen: "Doce derechos de la Convención sobre los Derechos del Niño en lectura fácil y con pictogramas, con una pregunta para hablar en cada uno, preguntas en tres niveles y un mural para montar entre toda la clase."
+resumen: "Doce derechos de la Convención sobre los Derechos del Niño en lectura fácil y con pictogramas, cada uno con una pregunta para hablar en clase. Con preguntas en tres niveles y un mural para toda la clase."
 seccion: aula
 tipo: cuento
 etapas: [primaria]
@@ -36,7 +36,7 @@ pasos:
   - "Pega el título arriba, en el centro. Debajo, pega las 12 tarjetas de los derechos en 2 filas de 6, del 1 al 12."
   - "Pega las tarjetas de la clase a los lados y abajo."
   - "Cuelga el mural con cinta de carrocero, a la altura de los ojos del alumnado."
-resultado: "un mural de 180 × 100 cm con el título, los 12 derechos y la tarjeta de cada alumno o alumna"
+resultado: "un mural de 180 × 100 cm con los 12 derechos bajo el título y, alrededor, la tarjeta de cada alumno o alumna"
 cuidados:
   - "Recortad sentados y con tijeras de punta redonda."
   - "Pega con barra: la cola líquida arruga el folio."
@@ -63,19 +63,19 @@ borrador: false
 
 El 20 de noviembre de 1989, la Asamblea General de las Naciones Unidas aprobó la Convención sobre los Derechos del Niño. España la ratificó en 1990. Este material presenta 12 de sus derechos en lectura fácil, con un pictograma en cada frase, para leerlos en voz alta y hablar de ellos en clase.
 
-Sirve para el 20 de noviembre, el Día Mundial de la Infancia, y para cualquier otro día del curso. Está pensado para toda la clase de Primaria y, en especial, para el alumnado que necesita apoyos para leer: con discapacidad intelectual, con trastorno del desarrollo del lenguaje (TDL) o que todavía está aprendiendo castellano.
+Sirve para el 20 de noviembre, el Día Mundial de la Infancia, y para cualquier otro día del curso. Está pensado para toda la clase de Primaria y, en especial, para el alumnado que necesita apoyos para leer, como el que tiene discapacidad intelectual o trastorno del desarrollo del lenguaje (TDL). También ayuda a quien todavía está aprendiendo castellano.
 
 ## Qué incluye
 
 1. **Para empezar**: qué es un derecho, con un ejemplo cercano, y qué pasó el 20 de noviembre.
-2. **12 derechos**, uno por página: el nombre, la familia, la protección, la salud, la escuela, el juego, la opinión, los apoyos si tienes una discapacidad y otros cuatro. Cada uno trae frases con pictogramas, una pregunta para hablar en clase y el artículo de la Convención para el docente.
-3. **Preguntas de comprensión en tres niveles**: con dibujos para elegir, de verdadero o falso y abiertas, que se pueden responder escribiendo, dibujando o en voz alta.
-4. **Mural «Nuestros derechos»**: el título con letras para colorear, 12 tarjetas grandes y una tarjeta para cada alumno o alumna, para montarlo entre toda la clase.
+2. **12 derechos**, uno por página: el nombre, la familia, la protección, la salud, la escuela, el juego, la opinión, los apoyos si tienes una discapacidad y otros cuatro. Cada uno trae frases con pictogramas y una pregunta para hablar en clase. Abajo va el artículo de la Convención, para el docente.
+3. **Preguntas de comprensión en tres niveles**: con dibujos para elegir, de verdadero o falso y abiertas. Las abiertas también se pueden responder en voz alta.
+4. **Mural «Nuestros derechos»**: 12 tarjetas grandes y el título para colorear, para montarlo entre toda la clase. Además, cada alumno o alumna rellena una tarjeta con su derecho favorito.
 5. **Guía para el docente**: cómo leerlo en voz alta, ideas para adaptarlo, qué hacer si un niño o una niña cuenta algo preocupante, soluciones y fuentes.
 
 ## Cómo está escrito
 
-Hemos seguido las pautas de lectura fácil de la norma UNE 153101:2018 EX: frases cortas, una idea por frase, palabras de uso diario, letra grande y texto alineado a la izquierda. Las palabras difíciles se explican en un cuadro de «Palabra nueva». Todavía no lo hemos validado con personas lectoras, como prevé la norma UNE 153102:2018 EX, y por eso no lleva el logotipo de lectura fácil.
+Hemos seguido las pautas de lectura fácil de la norma UNE 153101:2018 EX, de la Asociación Española de Normalización (UNE): frases cortas, una idea por frase, palabras de uso diario, letra grande y texto alineado a la izquierda. Las palabras difíciles se explican en un cuadro de «Palabra nueva». Todavía no lo hemos validado con personas lectoras, como prevé la norma UNE 153102:2018 EX, y por eso no lleva el logotipo de lectura fácil.
 
 Las frases son una adaptación propia del texto oficial de la Convención en castellano, el que publicó el Boletín Oficial del Estado (BOE) en 1990.
 
@@ -92,6 +92,6 @@ Hablar de derechos puede hacer que alguien cuente algo que le está pasando. La 
 
 ## Sobre los pictogramas
 
-El plano del mural, las letras del título y el diseño son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org), el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+El plano del mural y el diseño son de IdEducando. Los pictogramas son de [ARASAAC](https://arasaac.org), el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
 
 Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre: el primer fin de IdEducando es ayudar a quien acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no permite venderlo.

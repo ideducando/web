@@ -7,38 +7,38 @@ etapas: [infantil, primaria]
 necesidades: [tdl, tea, toda-la-clase]
 edades: "De 5 a 9 años"
 formato: "PDF imprimible (A4)"
-paginas: 39
+paginas: 40
 archivo: /descargas/dialogos-para-completar.pdf
 portada: /portadas/dialogos-para-completar.webp
 portada_alt: "Portada del material: una niña y un niño con gorro y bufanda hablan mientras nieva. Ella dice «¡Hola, Omar!» y el bocadillo de él está en blanco, para completarlo."
 vistas: [1, 3, 5, 6, 29, 34]
 tiempo: "1 hora y media para imprimir, plastificar, recortar y poner el velcro; luego, sesiones de 10 a 15 minutos"
 necesitas:
-  - "17 hojas de cartulina blanca A4 de 160 g: 12 para los diálogos y 5 para las tarjetas (o folios, si tu impresora no admite cartulina)"
+  - "17 hojas de cartulina blanca A4 de 160 g: 12 para los diálogos y 5 para las tarjetas"
   - "17 fundas de plastificar A4 de 125 micras y una plastificadora"
-  - "96 círculos de velcro adhesivo de 1,5 cm: 16 rugosos para los turnos en blanco y 80 suaves para las tarjetas"
-  - "1 rotulador de pizarra blanca de punta fina y 1 paño, para escribir y rodear sobre el plástico"
+  - "96 círculos de velcro adhesivo de 1,5 cm: 16 rugosos y 80 suaves"
+  - "1 rotulador de pizarra blanca de punta fina y 1 paño"
   - "12 bolsitas con cierre de 10 × 15 cm, una por diálogo"
-  - "1 folio A4 de 80 g por alumno o alumna para el registro, y otro por familia para su nota"
+  - "2 folios A4 de 80 g por alumno o alumna: el registro y la nota para casa"
   - "Tijeras o una guillotina"
-  - "Impresora a doble cara, mejor a color (también se entiende en blanco y negro)"
+  - "Impresora a doble cara, mejor a color"
 imprimir:
-  - "Páginas 5 a 28 (los 12 diálogos, con sus preguntas detrás): en cartulina y a doble cara, girando por el borde largo."
+  - "Páginas 5 a 28 (los diálogos, con sus preguntas detrás): en cartulina y a doble cara, girando por el borde largo."
   - "Sin doble cara: imprime cada página aparte y mete las dos hojas de cada diálogo en la misma funda, espalda con espalda."
-  - "Páginas 29 a 33 (tarjetas): en cartulina, a una cara y al 100 % («Tamaño real»), para que quepan en los turnos en blanco."
-  - "En folio, la 34 (registro) para cada alumno o alumna y la 38 para cada familia. Las demás páginas se pueden leer en pantalla."
+  - "Páginas 29 a 33 (tarjetas): en cartulina, a una cara y al 100 % («Tamaño real»)."
+  - "En folio: la 34 (registro) y la 39 (nota para casa). Las demás se pueden leer en pantalla."
 pasos:
   - "Imprime los diálogos y las tarjetas en cartulina, como dice «Qué imprimir»."
   - "Plastifica cada diálogo en su funda."
-  - "Recorta las 80 tarjetas por la línea de puntos. Colócalas en 5 fundas, con 5 mm entre una y otra, y plastifícalas."
+  - "Recorta las 80 tarjetas por la línea de puntos, colócalas en 5 fundas con 5 mm entre una y otra y plastifícalas."
   - "Recorta cada tarjeta con 2 o 3 mm de plástico alrededor y redondea las esquinas."
   - "Pega un círculo de velcro rugoso en el círculo de puntos de cada turno en blanco: 16 en total."
   - "Pega un círculo de velcro suave detrás de cada tarjeta, en el lado izquierdo."
   - "Guarda las tarjetas de cada diálogo en su bolsita, con el número escrito por fuera."
-resultado: "12 diálogos plastificados, con sus preguntas detrás y un círculo de velcro en cada turno en blanco, y 80 tarjetas con velcro ordenadas en 12 bolsitas"
+resultado: "12 diálogos plastificados, con sus preguntas detrás y velcro en cada turno en blanco, y 80 tarjetas con velcro en 12 bolsitas"
 cuidados:
-  - "Deja 2 o 3 mm de plástico alrededor y redondea las esquinas: así las tarjetas no cortan y duran más."
-  - "Las tarjetas y los círculos de velcro son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
+  - "Deja 2 o 3 mm de plástico alrededor y redondea las esquinas: así no cortan y duran más."
+  - "Las tarjetas y el velcro son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
   - "Escribe y rodea solo con rotulador de pizarra blanca. Se borra con un paño seco."
 fuentes:
   - "Bishop, D. V. M., Snowling, M. J., Thompson, P. A., Greenhalgh, T. y CATALISE-2 consortium (2017). Phase 2 of CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development: Terminology. Journal of Child Psychology and Psychiatry, 58(10), 1068-1080. doi.org/10.1111/jcpp.12721"
@@ -60,7 +60,7 @@ borrador: false
 
 La pragmática es cómo usamos el lenguaje para conversar: saludar, pedir algo, responder a lo que nos preguntan, esperar el turno o pedir perdón. Hay niños y niñas que saben muchas palabras y aun así se quedan atascados en la conversación.
 
-Este material propone doce diálogos cortos de invierno, en el cole y en casa, con un turno en blanco que el niño o la niña completa. Sirve en Audición y Lenguaje (AL), en Pedagogía Terapéutica (PT) y en el aula, sobre todo con alumnado con trastorno del desarrollo del lenguaje (TDL) o con trastorno del espectro del autismo (TEA).
+Este material propone doce diálogos cortos de invierno, en el cole y en casa, con un turno en blanco que el niño o la niña completa. Está pensado para las sesiones de Audición y Lenguaje (AL) y de Pedagogía Terapéutica (PT), sobre todo con alumnado con trastorno del desarrollo del lenguaje (TDL) o con trastorno del espectro del autismo (TEA). También sirve para toda la clase.
 
 ## Qué incluye
 
@@ -75,7 +75,7 @@ Este material propone doce diálogos cortos de invierno, en el cole y en casa, c
 3. **Detrás de cada diálogo**, las preguntas «¿Qué crees que siente?», con cuatro caritas para elegir, y «¿Qué haría yo?», con dos ideas y un hueco para la suya.
 4. **80 tarjetas de respuesta** para recortar: 32 del nivel 1, con pictograma, y 48 del nivel 2, solo con texto. Si se plastifican, llevan velcro: el rugoso en el turno en blanco y el suave en la tarjeta.
 5. **Un registro de avance** por niveles, para una hoja por alumno o alumna.
-6. **Una guía para el docente** y **una nota para la familia**: cómo modelar, cómo dar pistas y cómo retirarlas, con las soluciones.
+6. **Una guía para el docente**, con las soluciones, y **una nota para la familia**. Explican cómo modelar y cómo dar pistas que después se retiran poco a poco.
 
 ## Cómo usarlo
 
@@ -83,11 +83,11 @@ Este material propone doce diálogos cortos de invierno, en el cole y en casa, c
 2. Mirad la viñeta y leed el diálogo con dos voces: tú haces de un personaje y el niño o la niña, del otro.
 3. En el turno en blanco, ofrece las tarjetas de su nivel o espera su respuesta. Si hace falta, dale una pista pequeña.
 4. Leed el diálogo entero, ya completo, y dad la vuelta a la hoja para hablar de lo que siente cada personaje.
-5. Busca un momento real para usar la frase ese mismo día: al llegar a clase, en la merienda o en el recreo.
+5. Busca un momento real para usar la frase ese mismo día, como al llegar a clase o en la merienda.
 
 ## Lo que dice la investigación
 
-El consenso internacional CATALISE incluye la pragmática entre las áreas del lenguaje que pueden estar afectadas en el TDL, y recuerda que estas dificultades también son propias del TEA (Bishop y otros, 2017). En la revisión de prácticas para el alumnado con TEA de Hume y otros (2021), los guiones escritos forman parte de los apoyos visuales, y el modelado, las ayudas y la demora para retirarlas también tienen evidencia.
+El consenso internacional CATALISE incluye la pragmática entre las áreas del lenguaje que pueden estar afectadas en el TDL, y recuerda que estas dificultades también son propias del TEA (Bishop y otros, 2017). En la revisión de prácticas para el alumnado con TEA de Hume y otros (2021), los guiones escritos forman parte de los apoyos visuales. El modelado y las ayudas también tienen evidencia, y la demora sirve para retirarlas.
 
 En un ensayo con 88 niños y niñas de 5 a 10 años con dificultades pragmáticas, una intervención de hasta 20 sesiones mejoró cómo conversaban, según evaluadores que no sabían quién la había recibido y según sus familias y docentes (Adams y otros, 2012). Las revisiones avisan de que aún se sabe poco de si lo aprendido se usa fuera de las sesiones (Fletcher-Watson y otros, 2014; Parsons y otros, 2017). Por eso cada diálogo termina con un momento real para practicar.
 
@@ -97,12 +97,12 @@ El currículo también lo pide: en Infantil, los turnos de diálogo y las fórmu
 
 El Diseño Universal para el Aprendizaje (DUA) propone usar varios medios para comunicarse y dar apoyos que se retiran con la práctica:
 
-- **Si habla poco o nada**: que señale la tarjeta, use su tablero, como [Comunicación en el bolsillo](/material-gratuito/tablero-comunicacion-basico/), o haga el gesto. También es una respuesta.
+- **Si habla poco o nada**: que señale la tarjeta o use su tablero, como [Comunicación en el bolsillo](/material-gratuito/tablero-comunicacion-basico/). Un gesto también es una respuesta.
 - **Si aún no lee**: lee tú los dos papeles y las tarjetas. En el nivel 1 se guía por el pictograma.
-- **Con TDL**: frases cortas, ritmo lento y tiempo para responder. Repite el modelo sin pedirle que lo repita enseguida.
-- **Con TEA**: anticipa qué vais a hacer, mantén siempre el mismo orden y explica las frases hechas, como «¡Qué susto!».
-- **Más reto**: inventad otro final, representad el diálogo sin la hoja o escribid uno nuevo con un momento suyo.
+- **Con TDL**: habla despacio y dale tiempo para responder. Repite el modelo sin pedirle que lo repita enseguida.
+- **Con TEA**: anticipa qué vais a hacer y explica las frases hechas, como «¡Qué susto!».
+- **Más reto**: inventad otro final o escribid un diálogo nuevo con un momento suyo.
 
 ## Sobre los dibujos y los pictogramas
 
-Los personajes, las viñetas, los iconos y la portada son de IdEducando. Los pictogramas de las tarjetas, de las caritas y de las ideas son de [ARASAAC](https://arasaac.org). Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender.
+Los personajes, las viñetas, los iconos y la portada son de IdEducando. Los pictogramas de las tarjetas y de las preguntas de detrás son de [ARASAAC](https://arasaac.org). Su licencia (CC BY-NC-SA) pide citar este texto, que ya va en el material: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Por esa licencia, este material no se puede vender.

@@ -14,32 +14,30 @@ portada_alt: "Portada del material: un perchero de clase con etiquetas de nombre
 vistas: [1, 4, 7, 8, 11, 14]
 tiempo: "1 hora y media para imprimir, escribir los nombres, plastificar, recortar y pegar el velcro (las fotos, aparte)"
 necesitas:
-  - "17 hojas de cartulina blanca A4 de 160 g, para una clase de 25 (o folios, si tu impresora no admite cartulina)"
+  - "17 hojas de cartulina blanca A4 de 160 g, para una clase de 25"
   - "17 fundas de plastificar A4 de 125 micras y una plastificadora"
-  - "1 folio A4 de 80 g para los símbolos y 1 por familia para la nota"
-  - "32 círculos de velcro adhesivo de 2 cm: 8 rugosos para el panel y 24 suaves para las tarjetas"
+  - "1 folio A4 de 80 g para los símbolos y 1 por familia"
+  - "32 círculos de velcro adhesivo de 2 cm: 8 rugosos y 24 suaves"
   - "1 rotulador negro permanente y 1 barra de pegamento"
-  - "Tijeras o guillotina, cinta de doble cara para las etiquetas y masilla adhesiva para las tiras y los carteles"
-  - "1 caja de pañuelos de papel y 1 papelera con bolsa, mejor con tapa y pedal"
-  - "1 caja o 1 cajón para los objetos perdidos"
-  - "Impresora, mejor a color: cada secuencia tiene su color, aunque también se entiende en blanco y negro"
+  - "1 rollo de cinta de doble cara y masilla adhesiva: 4 bolitas por tira o cartel"
+  - "1 caja de pañuelos de papel y 1 papelera con bolsa"
+  - "1 caja para los objetos perdidos"
+  - "Tijeras y una impresora, mejor a color"
 imprimir:
-  - "Páginas 4 y 5 (etiquetas): en cartulina, a color y al 100 % («Tamaño real»). Para 25, la 4 cinco veces y la 5 dos veces."
-  - "Página 6 (símbolos): en folio, a color y al 100 %."
-  - "Páginas 7 a 16 (secuencias, plantilla, panel, tarjetas, historia, juegos y cartel): en cartulina, a color. De la 7 a la 10 van en horizontal."
-  - "Páginas 17 a 21 (familias, guía y fuentes): basta con leerlas en pantalla. Imprime la 17 para cada familia."
+  - "Páginas 4 y 5 (etiquetas): en cartulina, al 100 % («Tamaño real»). Para 25, la 4 cinco veces y la 5 dos."
+  - "Página 6 (símbolos): en folio, al 100 %."
+  - "Páginas 7 a 16: en cartulina, a color. De la 7 a la 10 van en horizontal."
+  - "Páginas 17 a 21: en pantalla. Imprime la 17 para cada familia."
 pasos:
   - "Antes de plastificar, escribe en cada etiqueta el nombre y el número de lista, y pega su foto o su símbolo."
-  - "Recorta por la línea de puntos las etiquetas, las tiras y las tarjetas."
-  - "Mételo todo en las fundas, con 5 mm de separación entre las piezas, y plastifícalo. El panel y los carteles van enteros."
+  - "Recorta por la línea de puntos todas las piezas que van sueltas."
+  - "Mételo todo en las fundas, con 5 mm entre pieza y pieza, y plastifícalo. El panel y los carteles van enteros."
   - "Recorta cada pieza dejando 3 mm de plástico alrededor y redondea las esquinas."
   - "Pega un círculo de velcro rugoso en cada círculo gris del panel y uno suave detrás de cada tarjeta."
-  - "Pega cada etiqueta grande sobre su percha con cinta de doble cara, y las pequeñas en su bolsa de muda, su sitio de las botas o el paragüero."
-  - "Cuelga con masilla las tiras junto al perchero, la entrada y los pañuelos; el panel, en la asamblea, y el cartel, sobre la caja de objetos perdidos."
-  - "Guarda la historia y el tablero de juegos para el primer día de lluvia."
+  - "Pega cada etiqueta grande sobre su percha con cinta de doble cara, y las pequeñas en su bolsa de muda o su sitio de las botas."
+  - "Cuelga con masilla cada tira y cada cartel en su sitio. Guarda la historia y los juegos para el primer día de lluvia."
 resultado: "etiquetas con nombre y símbolo en cada percha, cuatro secuencias colgadas en su sitio, un panel del tiempo con 24 tarjetas de velcro, la historia del recreo con lluvia y el cartel de objetos perdidos"
 cuidados:
-  - "Deja 3 mm de plástico alrededor y redondea las esquinas: así no cortan y no se abren."
   - "Los círculos de velcro y la masilla son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca."
   - "Deja libre el espacio delante del perchero: el truco del abrigo necesita sitio para los brazos."
   - "Si usas fotos, pide permiso a la familia y no las subas a internet."
@@ -57,6 +55,8 @@ fuentes:
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
   - "Ben-Sasson, A. y otros (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum disorders. Journal of Autism and Developmental Disorders, 39(1), 1-11"
   - "CAST (2024). Universal Design for Learning Guidelines version 3.0. udlguidelines.cast.org"
+  - "Molina, M. T. y otras (2009). Propuesta de actividades para el período de adaptación en Educación Infantil. Innovación y Experiencias Educativas, 22. CSIF Andalucía"
+  - "Normas y listas de material de Infantil de los colegios públicos La Cala, María Moliner, El Trinquet, Cristo de la Paz, Antonio García López, Libertad, María del Mar Camarena, José María del Moral y Calvo Sotelo, publicadas en sus webs"
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"
 fecha: 2026-11-04
@@ -77,7 +77,7 @@ Está pensado para toda la clase y también para el alumnado con trastorno del e
 3. **Panel «¿Qué tiempo hace hoy? ¿Qué me pongo?»** con 24 tarjetas de velcro para el tiempo y la ropa, cuatro de ellas en blanco.
 4. **Historia social «Hoy llueve: el recreo es en clase»** y un tablero con ocho juegos para elegir.
 5. **Cartel del cajón de objetos perdidos.**
-6. **Nota para las familias**, sobre marcar la ropa, la ropa fácil de poner y la bolsa de muda.
+6. **Nota para las familias** sobre la ropa y la bolsa de muda.
 7. **Guía para el docente**: cómo se organizan muchos coles y cómo enseñar cada rutina, con adaptaciones para cada necesidad.
 
 ## Cómo usarlo
@@ -90,11 +90,11 @@ Está pensado para toda la clase y también para el alumnado con trastorno del e
 
 ## Cómo lo hacen muchos coles
 
-Lo hemos visto en las normas de Infantil que publican varios colegios públicos: perchas con el nombre y la foto o el símbolo; babis y abrigos marcados, con una cinta para colgarlos; una bolsa de tela con una muda que se queda en el aula, y una caja para lo que aparece en el patio. Con lluvia, el recreo de Infantil suele hacerse en el aula con el tutor o la tutora. En algunos coles el alumnado de Infantil no trae paraguas ni bufanda: por eso las tiras y las tarjetas se usan por separado y la plantilla deja cambiar los pasos.
+Lo hemos visto en las normas de Infantil que publican varios colegios públicos y en propuestas de docentes para el periodo de adaptación: perchas con el nombre y la foto o el símbolo; babis y abrigos marcados, con una cinta para colgarlos; una bolsa de tela con una muda que se queda en el aula, y una caja para lo que aparece en el patio. Con lluvia, el recreo de Infantil suele hacerse en el aula con el tutor o la tutora. En algunos coles el alumnado de Infantil no trae paraguas ni bufanda: por eso las tiras y las tarjetas se usan por separado y la plantilla deja cambiar los pasos.
 
 ## Qué dicen las fuentes
 
-El truco del abrigo lo explica el servicio de Infantil del Ayuntamiento de Wokingham, en Inglaterra: el abrigo en el suelo, la capucha hacia el niño o la niña, las manos en las mangas y los brazos por encima de la cabeza. Los servicios de terapia ocupacional infantil del sistema de salud inglés (NHS) recomiendan empezar por quitarse la ropa, que es más fácil, y proponen otras formas de ponerse el abrigo. Los pasos de «Me sueno la nariz» siguen al Ministerio de Sanidad y a la Asociación Española de Pediatría (AEP): el pañuelo desechable va a la papelera y después toca lavarse las manos. Dividir una tarea en pasos y mostrarlos con imágenes figuran entre las prácticas basadas en la evidencia para el alumnado con TEA.
+El truco del abrigo lo explica el servicio de Infantil del Ayuntamiento de Wokingham, en Inglaterra: el abrigo en el suelo, la capucha hacia el niño o la niña, las manos en las mangas y los brazos por encima de la cabeza. Los servicios de terapia ocupacional infantil del sistema público de salud británico (NHS) recomiendan empezar por quitarse la ropa, que es más fácil, y proponen otras formas de ponerse el abrigo. Los pasos de «Me sueno la nariz» siguen al Ministerio de Sanidad y a la Asociación Española de Pediatría (AEP): el pañuelo desechable va a la papelera y después toca lavarse las manos. Dividir una tarea en pasos y mostrarlos con imágenes figuran entre las prácticas basadas en la evidencia para el alumnado con TEA.
 
 ## Ideas para adaptarlo (DUA)
 
