@@ -30,7 +30,9 @@ const carpetaPdf = join(aqui, 'pdf');
 const salidaAparte = process.env.IDE_SALIDA;
 const descargas = salidaAparte ?? join(raiz, 'public', 'descargas');
 const portadas = join(raiz, 'public', 'portadas');
-const temporal = salidaAparte ? join(salidaAparte, '.temporal') : join(aqui, '.temporal');
+// Carpeta temporal propia de cada ejecución: así se pueden generar varios documentos a la vez
+// sin que una ejecución borre los archivos de otra.
+const temporal = join(salidaAparte ?? aqui, `.temporal-${process.pid}-${Date.now()}`);
 const sharp = createRequire(join(raiz, 'package.json'))('sharp');
 const { parse: leerYaml } = createRequire(join(raiz, 'package.json'))('yaml');
 const { hojaMontaje, tieneMontaje } = await import(pathToFileURL(join(raiz, 'src', 'lib', 'montaje.mjs')).href);
@@ -187,6 +189,72 @@ const DOCUMENTOS = [
       'Ya he terminado: rincón de juegos tranquilos para cuando el alumnado acaba antes, con tablero de elección con pictogramas de ARASAAC, siete juegos en tres niveles, tarjetas de pasos, temporizador visual, guía y nota para las familias',
     palabras: 'ya he terminado, early finishers, rincón, juegos tranquilos, tiempos de espera, autonomía, tablero de elección, DUA, pictogramas, ARASAAC, TEA, TDAH, Infantil, Primaria',
   },
+  {
+    id: 'rutinas-invierno-cole',
+    asunto:
+      'Rutinas de invierno en el cole: el perchero con nombres, ponerse y quitarse el abrigo, botas y paraguas, qué me pongo según el tiempo, sonarse la nariz y el recreo con lluvia, con pictogramas de ARASAAC, guía y nota para las familias',
+    palabras: 'invierno, rutinas, autonomía, abrigo, perchero, perchas, botas de agua, paraguas, lluvia, ropa, el tiempo, higiene, pictogramas, ARASAAC, TEA, Infantil, Primaria',
+  },
+  {
+    id: 'estaciones-matematicas-invierno',
+    asunto:
+      'Estaciones de matemáticas de invierno: seis estaciones con material de clase y de casa, tarjetas en tres niveles, versión segura con piezas grandes, tarjetas de pasos con pictogramas de ARASAAC y guía',
+    palabras: 'invierno, matemáticas, estaciones, rincones, cantidad, conteo, series, clasificación, medida, DUA, pictogramas, ARASAAC, Infantil',
+  },
+  {
+    id: 'agenda-visual-pictogramas',
+    asunto:
+      'Agenda visual con pictogramas de ARASAAC listos para recortar: semana, día, primero y después, si hay un cambio, qué necesito, preparo la mochila y cómo ha ido el día, con guía para adaptarla',
+    palabras: 'agenda visual, anticipación, pictogramas, ARASAAC, TEA, rutinas, cambios, comunicación, autonomía, Infantil, Primaria',
+  },
+  {
+    id: 'cartilla-trabadas',
+    asunto:
+      'Cartilla de sílabas trabadas: pl, bl, fl, cl, gl, pr, br, fr, cr, gr, dr y tr, con palabras de uso diario, parejas que solo cambian en un sonido, pictogramas de ARASAAC y guía',
+    palabras: 'trabadas, sílabas trabadas, lectoescritura, conciencia fonológica, pares mínimos, lectura, TDL, dificultades de aprendizaje, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'tarjetas-trazo',
+    asunto:
+      'Tarjetas de trazo con punto de salida, flecha y número: trazos previos, números y letras en imprenta, con versión para zurdos, ayudas que se retiran y guía',
+    palabras: 'grafomotricidad, trazo, preescritura, letras, números, zurdos, motricidad fina, rotulador de pizarra, Infantil, Primaria',
+  },
+  {
+    id: 'me-llamo-error-pictogramas',
+    asunto:
+      'Me llamo Error, versión con pictogramas de ARASAAC: el cuento ilustrado para equivocarse y aprender, con cada frase apoyada en pictogramas, y guía para el adulto',
+    palabras: 'cuento, pictogramas, ARASAAC, lectura con apoyos, errores, frustración, TEA, TDL, comunicación aumentativa, Infantil, Primaria',
+  },
+  {
+    id: 'me-llamo-valor-pictogramas',
+    asunto:
+      'Me llamo Valor, versión con pictogramas de ARASAAC: el cuento ilustrado para cuidar lo tuyo y lo de los demás, con cada frase apoyada en pictogramas, y guía para el adulto',
+    palabras: 'cuento, pictogramas, ARASAAC, lectura con apoyos, cuidar las cosas, empatía, reparar, TEA, TDL, comunicación aumentativa, Infantil, Primaria',
+  },
+  {
+    id: 'me-llamo-bocadillo-pictogramas',
+    asunto:
+      'Me llamo Bocadillo, versión con pictogramas de ARASAAC: el cuento ilustrado para atreverse a preguntar y a contar, con cada frase apoyada en pictogramas, y guía para el adulto',
+    palabras: 'cuento, pictogramas, ARASAAC, lectura con apoyos, comunicación, preguntar, emociones, TEA, TDL, comunicación aumentativa, Infantil, Primaria',
+  },
+  {
+    id: 'manana-en-clase',
+    asunto:
+      'Mañana en clase: fichas rápidas para el TEA, el TDAH, el TDL y la discapacidad intelectual, con señales, ajustes que funcionan, errores frecuentes, frases que ayudan y a quién pedir ayuda en la Región de Murcia',
+    palabras: 'TEA, TDAH, TDL, discapacidad intelectual, atención a la diversidad, ajustes razonables, inclusión, DUA, orientación, Región de Murcia, docentes',
+  },
+  {
+    id: 'derechos-infancia-lectura-facil',
+    asunto:
+      'Mis derechos: los derechos de la infancia en lectura fácil, con pictogramas de ARASAAC, preguntas en tres niveles, un mural para la clase y guía para el 20 de noviembre',
+    palabras: 'derechos de la infancia, Convención sobre los Derechos del Niño, 20 de noviembre, lectura fácil, pictogramas, ARASAAC, valores, comprensión lectora, Primaria',
+  },
+  {
+    id: 'dialogos-para-completar',
+    asunto:
+      'Diálogos para completar: conversaciones cortas de invierno con huecos, respuestas con y sin pictogramas de ARASAAC y preguntas sobre lo que piensan y sienten, en tres niveles',
+    palabras: 'pragmática, diálogos, conversación, inferencias, emociones, lenguaje, TDL, TEA, pictogramas, ARASAAC, Audición y Lenguaje, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
@@ -225,6 +293,18 @@ for (const doc of DOCUMENTOS) {
     throw new Error(`${doc.id}: el HTML tiene el hueco de montaje y la ficha no tiene pasos`);
   }
 
+  // Marcadores del PDF: Chromium los saca de los títulos y, donde un título salta de línea, junta las dos
+  // palabras («Tarjetasde trazo»). Se guarda el texto de cada título para que metadatos.py devuelva el espacio.
+  const titulos = await pagina.evaluate(() =>
+    [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')].map((titulo) => {
+      const copia = titulo.cloneNode(true);
+      for (const br of copia.querySelectorAll('br')) br.replaceWith(' ');
+      return copia.textContent.replace(/\s+/g, ' ').trim();
+    }),
+  );
+  const archivoTitulos = join(temporal, `${doc.id}-titulos.json`);
+  writeFileSync(archivoTitulos, JSON.stringify(titulos));
+
   const destino = join(descargas, `${doc.id}.pdf`);
   await pagina.pdf({
     path: destino,
@@ -234,7 +314,7 @@ for (const doc of DOCUMENTOS) {
     outline: true,
   });
 
-  completarMetadatos(destino, doc);
+  completarMetadatos(destino, doc, archivoTitulos);
 
   // Miniatura de la primera página: con pdftoppm (Poppler) si está instalado, que la pinta igual que el PDF.
   const miniatura = join(temporal, doc.id);
@@ -263,6 +343,16 @@ for (const archivo of readdirSync(carpetaMateriales).filter((a) => a.endsWith('.
   const datos = leerFrontmatter(readFileSync(join(carpetaMateriales, archivo), 'utf8'));
   const color = COLORES[datos.seccion] ?? COLORES.aula;
   const miniatura = join(temporal, `${id}.png`);
+  // Si el PDF no se ha hecho en esta ejecución pero ya existe (por ejemplo, uno que no sale de pdf/),
+  // la portada se saca de ese PDF: así nunca se cambia una portada buena por la de «Próximamente».
+  const pdfExistente = join(descargas, `${id}.pdf`);
+  if (!existsSync(miniatura) && existsSync(pdfExistente)) {
+    try {
+      execFileSync('pdftoppm', ['-png', '-r', '110', '-f', '1', '-l', '1', '-singlefile', pdfExistente, join(temporal, id)]);
+    } catch {
+      // Sin Poppler se queda la portada de «Próximamente».
+    }
+  }
   const html = existsSync(miniatura)
     ? portadaProducto(miniatura, color)
     : portadaProximamente(datos.titulo, datos.tipo, color);
@@ -286,7 +376,8 @@ rmSync(temporal, { recursive: true, force: true });
 // 5. Fotos de la galería de cada ficha, con los PDF recién hechos (vistas.mjs)
 // ---------------------------------------------------------------------------
 
-if (!salidaAparte) {
+// IDE_SIN_VISTAS=1 se las salta, por ejemplo cuando se generan varios PDF a la vez.
+if (!salidaAparte && !process.env.IDE_SIN_VISTAS) {
   const hechos = DOCUMENTOS.map((d) => d.id).filter((id) => !elegidos.length || elegidos.includes(id));
   if (hechos.length) execFileSync('node', [join(aqui, 'vistas.mjs'), ...hechos], { stdio: 'inherit' });
 }
@@ -296,9 +387,10 @@ if (!salidaAparte) {
 // ---------------------------------------------------------------------------
 
 /** Título, autoría y palabras clave en el PDF, y que el visor muestre el título. Usa Python con pypdf. */
-function completarMetadatos(ruta, doc) {
+function completarMetadatos(ruta, doc, titulos) {
   try {
-    execFileSync('python3', ['-I', join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras], { stdio: 'inherit' });
+    const argumentos = [join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras, ...(titulos ? [titulos] : [])];
+    execFileSync('python3', ['-I', ...argumentos], { stdio: 'inherit' });
   } catch {
     console.warn(`Aviso: no se han podido completar los metadatos de ${doc.id} (¿falta Python con pypdf?).`);
   }

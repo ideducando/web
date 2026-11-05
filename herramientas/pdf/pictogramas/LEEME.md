@@ -4,7 +4,7 @@ Esta carpeta guarda los pictogramas que usan los PDF del material gratuito. Cada
 
 ## De dónde salen
 
-Se descargaron entre el 15 y el 20 de octubre de 2026 de la web de ARASAAC, en tamaño de 500 píxeles. Los 38 de «Ya he terminado» se añadieron el 4 de noviembre de 2026, de la misma forma:
+Se descargaron entre el 15 y el 20 de octubre de 2026 de la web de ARASAAC, en tamaño de 500 píxeles. Los 38 de «Ya he terminado» se añadieron el 4 de noviembre de 2026, y los de la oleada del 4 y 5 de noviembre (rincón del invierno, matemáticas de invierno, agenda visual, cartilla de trabadas, diálogos, «Mis derechos» y los tres «Me llamo…» con pictogramas), también de la misma forma:
 
 ```
 https://static.arasaac.org/pictograms/NÚMERO/NÚMERO_500.png
@@ -23,5 +23,6 @@ Un material con estos pictogramas **no se puede vender nunca**, aunque el resto 
 ## Añadir uno nuevo
 
 1. Busca el pictograma en arasaac.org y apunta su número.
+   Antes de usarlo, mira qué palabra tiene en ARASAAC: a veces el dibujo parece una cosa y es otra. Se ve en `https://api.arasaac.org/v1/pictograms/es/NÚMERO`, en «keywords».
 2. Descárgalo en 500 píxeles con la dirección de arriba y guárdalo aquí con el nombre `NÚMERO.png`.
 3. Úsalo en el HTML del material con `pictogramas/NÚMERO.png` y comprueba que el material lleva la cita de ARASAAC.

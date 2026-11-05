@@ -1,0 +1,4161 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Estaciones de matemáticas de invierno: seis mesas en tres niveles y con fichas seguras · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar: márgenes de 10 mm, el mínimo del manual de estilo. */
+      @page fichas {
+        margin: 10mm 10mm 16mm 10mm;
+      }
+
+      @page tiras {
+        size: A4 landscape;
+        margin: 9mm 10mm 14mm 10mm;
+      }
+
+      /* ---------- Color de cada estación (siempre con número, nombre y dibujo) ---------- */
+      .e1 {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .e2 {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .e3 {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .e4 {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .e5 {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .e6 {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .imp {
+        page: fichas;
+        break-after: page;
+      }
+
+      .imp-ap {
+        page: tiras;
+        break-after: page;
+      }
+
+      .final {
+        break-after: auto;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      /* Las dos columnas se reparten en una rejilla: lo que necesitas y qué imprimir a la izquierda,
+         los pasos y el resultado a la derecha, y el criterio del velcro a todo lo ancho. */
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8mm;
+        height: 8mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      /* Dentro de un párrafo, la marca va algo más pequeña para no separar las líneas. */
+      .paso-org .nv,
+      .leyenda-registro .nv {
+        width: 5.4mm;
+        height: 5.4mm;
+        vertical-align: -1.1mm;
+      }
+
+      .paso-org .nv.n3,
+      .leyenda-registro .nv.n3 {
+        width: 6.8mm;
+        height: 6.8mm;
+        vertical-align: -1.8mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 15mm;
+      }
+
+      .portada__titulo {
+        font-size: 42pt;
+        line-height: 1.02;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 112mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .ilustracion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .burbuja {
+        position: absolute;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow:
+          0 0.8mm 0 rgb(30 43 85 / 0.1),
+          0 6mm 12mm -6mm rgb(30 43 85 / 0.4);
+        display: grid;
+        place-items: center;
+      }
+
+      .burbuja img,
+      .burbuja svg {
+        display: block;
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+
+      .cae {
+        position: absolute;
+        display: block;
+      }
+
+      .pegatina {
+        position: absolute;
+        right: 17mm;
+        top: 27mm;
+        width: 42mm;
+        height: 42mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(-8deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+      }
+
+      /* ---------- Cabecera de las hojas de texto ---------- */
+      .cabecera {
+        margin-bottom: 3mm;
+      }
+
+      .cabecera .rayos {
+        margin-bottom: 3.2mm;
+      }
+
+      .cabecera h1 {
+        font-size: 21pt;
+        margin-bottom: 1.4mm;
+      }
+
+      .cabecera .entradilla {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.34;
+        color: var(--suave);
+      }
+
+      .codigo {
+        display: inline-block;
+        padding: 0 1.6mm;
+        border-radius: 1.2mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.45;
+        white-space: nowrap;
+      }
+
+      .num-mini {
+        display: inline-grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.6mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .datos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .datos li {
+        margin: 0;
+        padding: 2mm 2.8mm;
+        border-left: 1.2mm solid var(--linea);
+        background: var(--crema);
+        border-radius: 0 2mm 2mm 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .datos li strong {
+        display: block;
+        margin-bottom: 0.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--morado-texto);
+      }
+
+      .aprender {
+        margin: 0 0 3mm;
+      }
+
+      .aprender h2,
+      .subtitulo-hoja {
+        margin: 0 0 1.4mm;
+        font-size: 13pt;
+      }
+
+      .aprender ol {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8mm 6mm;
+        margin: 0;
+        padding-left: 5mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .aprender li {
+        margin: 0;
+      }
+
+      .mapa-estaciones {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa-estaciones li {
+        display: grid;
+        grid-template-columns: 12mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.4mm 2mm;
+        border-radius: 2.4mm;
+        background: var(--t);
+        border-left: 1.6mm solid var(--c);
+        font-size: 11pt;
+        line-height: 1.2;
+      }
+
+      .mapa-estaciones .icono {
+        display: block;
+        width: 12mm;
+        height: 12mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .mapa-estaciones b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+        line-height: 1.15;
+      }
+
+      .fila-dos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 3mm;
+        margin: 0;
+      }
+
+      .caja-mini {
+        padding: 2.4mm 3.2mm;
+        border-radius: 2.6mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .caja-mini h2 {
+        margin: 0 0 1.2mm;
+        font-size: 12pt;
+      }
+
+      .caja-mini p {
+        margin: 0 0 1.2mm;
+      }
+
+      .caja-mini ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caja-mini li {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        gap: 1.4mm;
+        align-items: center;
+        margin: 0 0 1mm;
+      }
+
+      .niveles-caja {
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+      }
+
+      .versiones-caja {
+        background: #fff;
+        border: 0.35mm solid var(--linea);
+      }
+
+      .chip {
+        display: inline-block;
+        padding: 0 1.6mm;
+        border-radius: 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .chip.casa {
+        background: var(--naranja-tinte);
+        border: 0.35mm solid var(--naranja);
+      }
+
+      .chip.segura {
+        background: var(--verde-tinte);
+        border: 0.35mm solid var(--verde);
+      }
+
+      /* ---------- Currículo ---------- */
+      .curriculo-cols {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .curriculo-cols h2 {
+        margin: 0 0 1.6mm;
+        font-size: 12.5pt;
+      }
+
+      .curriculo-cols ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .curriculo-cols li {
+        margin: 0 0 1.8mm;
+      }
+
+      .donde {
+        color: var(--suave);
+      }
+
+      .grupo-saberes {
+        margin: 2.6mm 0 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .decreto {
+        margin-top: 3mm;
+        padding: 2.4mm 3.4mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border-left: 1.6mm solid var(--amarillo);
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .decreto h2 {
+        margin: 0 0 1.2mm;
+        font-size: 12pt;
+      }
+
+      .decreto ul {
+        margin: 0;
+        padding-left: 4mm;
+        list-style: disc;
+      }
+
+      .decreto li {
+        margin-bottom: 0.8mm;
+      }
+
+      /* ---------- Seguridad y material ---------- */
+      .tabla-material {
+        line-height: 1.27;
+        margin-bottom: 3mm;
+      }
+
+      .tabla-material th,
+      .tabla-material td {
+        padding: 1.3mm 2mm;
+      }
+
+      .tabla-material tbody th {
+        width: 40mm;
+        border-left: 1.6mm solid var(--c);
+        line-height: 1.2;
+      }
+
+      .tabla-material thead th.casa {
+        background: #8a4a12;
+      }
+
+      .tabla-material thead th.segura {
+        background: #127055;
+      }
+
+      .aviso {
+        padding: 2.6mm 3.6mm;
+        border-radius: 3mm;
+        background: var(--coral-tinte);
+        border-left: 1.8mm solid var(--coral);
+        font-size: 11pt;
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+
+      .aviso h2 {
+        margin: 0 0 1.4mm;
+        font-size: 12.5pt;
+      }
+
+      .aviso ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .aviso li {
+        margin-bottom: 1mm;
+      }
+
+      .nota-pie {
+        margin: 2mm 0 0;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Cómo organizarlas ---------- */
+      .rueda-fila {
+        display: grid;
+        grid-template-columns: 42mm minmax(0, 1fr);
+        gap: 4mm;
+        align-items: center;
+        margin: 0 0 2.6mm;
+      }
+
+      .rueda {
+        position: relative;
+        width: 42mm;
+        height: 40mm;
+      }
+
+      .rueda svg {
+        position: absolute;
+        inset: 0;
+        width: 42mm;
+        height: 40mm;
+      }
+
+      .rueda .mesa {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 10mm;
+        height: 10mm;
+        margin: -5mm 0 0 -5mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.6mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1;
+      }
+
+      .rueda .centro {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16mm;
+        margin: 0;
+        transform: translate(-50%, -50%);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .organizar-rejilla {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.2mm 5mm;
+        margin: 0 0 2.6mm;
+      }
+
+      .paso-org {
+        font-size: 11pt;
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+
+      .paso-org h2 {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0 0 0.6mm;
+        font-size: 12pt;
+      }
+
+      .paso-org h2 img {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .paso-org p {
+        margin: 0;
+      }
+
+      .investigacion,
+      .dua {
+        padding: 2.2mm 3.4mm;
+        border-radius: 3mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .investigacion {
+        background: var(--azul-tinte);
+        border-left: 1.6mm solid var(--azul);
+        margin-bottom: 2.4mm;
+      }
+
+      .dua {
+        background: var(--morado-tinte);
+        border-left: 1.6mm solid var(--morado);
+      }
+
+      .investigacion h2,
+      .dua h2 {
+        margin: 0 0 0.8mm;
+        font-size: 12pt;
+      }
+
+      .investigacion p,
+      .dua p {
+        margin: 0 0 0.8mm;
+      }
+
+      .dua ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .dua li {
+        margin-bottom: 0.3mm;
+      }
+
+      /* ---------- Hoja del docente de cada estación ---------- */
+      .docente {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .cab-estacion {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr) 20mm;
+        align-items: center;
+        gap: 4mm;
+        padding: 2.2mm 4mm;
+        margin-bottom: 2.2mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-left: 2.2mm solid var(--c);
+      }
+
+      .num-estacion {
+        display: grid;
+        place-items: center;
+        width: 14mm;
+        height: 14mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 1.2mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .cab-estacion .antetitulo {
+        margin: 0 0 0.6mm;
+        color: var(--marino);
+      }
+
+      .cab-estacion h1 {
+        margin: 0;
+        font-size: 23pt;
+      }
+
+      .cab-estacion > .icono {
+        display: block;
+        width: 20mm;
+        height: 20mm;
+        background: #fff;
+        border-radius: 2.6mm;
+      }
+
+      .para-que {
+        margin: 0 0 1.6mm;
+      }
+
+      .curriculo-linea {
+        margin: 0 0 1.8mm;
+        color: var(--suave);
+      }
+
+      .curriculo-linea .codigo {
+        margin-right: 0.6mm;
+      }
+
+      .material-dos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin-bottom: 1.6mm;
+      }
+
+      .version {
+        padding: 1.6mm 2.6mm;
+        border-radius: 2.4mm;
+      }
+
+      .version h3 {
+        margin: 0 0 0.4mm;
+        font-size: 11.5pt;
+      }
+
+      .version p {
+        margin: 0;
+      }
+
+      .version--casa {
+        background: var(--naranja-tinte);
+        border-top: 1.2mm solid var(--naranja);
+      }
+
+      .version--segura {
+        background: var(--verde-tinte);
+        border-top: 1.2mm solid var(--verde);
+      }
+
+      .version--ambas {
+        background: var(--crema);
+        border-top: 1.2mm solid var(--marino);
+      }
+
+      .version--sol {
+        background: var(--azul-tinte);
+        border-top: 1.2mm solid var(--azul);
+      }
+
+      .imprimibles {
+        margin: 0 0 1.6mm;
+      }
+
+      .aviso-corto {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: center;
+        margin: 0 0 2mm;
+        padding: 1.2mm 2.6mm;
+        border-radius: 2mm;
+        background: var(--coral-tinte);
+        border-left: 1.4mm solid var(--coral);
+      }
+
+      .aviso-corto.tranquilo {
+        background: var(--verde-tinte);
+        border-left-color: var(--verde);
+      }
+
+      .aviso-corto img {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .aviso-corto p {
+        margin: 0;
+      }
+
+      .docente h2 {
+        font-size: 12.5pt;
+        margin: 0 0 1mm;
+      }
+
+      .pasos-juego {
+        counter-reset: paso;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.8mm;
+        display: grid;
+        gap: 0.8mm;
+      }
+
+      .pasos-juego li {
+        counter-increment: paso;
+        display: grid;
+        grid-template-columns: 6.4mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: start;
+        margin: 0;
+      }
+
+      .pasos-juego li::before {
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .preguntas {
+        margin: 0 0 2mm;
+        padding: 1.4mm 2.8mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+      }
+
+      .niveles3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.2mm;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2mm;
+      }
+
+      .niveles3 li {
+        margin: 0;
+        padding: 1.6mm 2.4mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+        line-height: 1.27;
+      }
+
+      .niveles3 h3 {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0 0 0.8mm;
+        font-size: 11.5pt;
+      }
+
+      .niveles3 p {
+        margin: 0;
+      }
+
+      .niveles3 .reto {
+        margin-top: 0.8mm;
+        color: var(--suave);
+      }
+
+      .pie-docente {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4mm;
+      }
+
+      .pie-docente > div {
+        padding: 1.6mm 2.6mm;
+        border-radius: 2.4mm;
+        line-height: 1.27;
+      }
+
+      .pie-docente h3 {
+        margin: 0 0 0.6mm;
+        font-size: 11.5pt;
+      }
+
+      .pie-docente ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .pie-docente li {
+        margin-bottom: 0.5mm;
+      }
+
+      .observar {
+        background: var(--amarillo-tinte);
+      }
+
+      .ajustes {
+        background: var(--azul-tinte);
+      }
+
+      .ajustes b {
+        font-family: var(--titulos);
+        font-weight: 600;
+      }
+
+      /* ---------- Cabecera de los imprimibles ---------- */
+      .cab-imp {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0 0 1.4mm;
+      }
+
+      .cab-imp .num-estacion {
+        width: 10mm;
+        height: 10mm;
+        border-width: 1mm;
+        font-size: 14pt;
+        flex: none;
+      }
+
+      .cab-imp h1 {
+        margin: 0;
+        font-size: 16pt;
+      }
+
+      .cab-imp h1 small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+        margin-left: 1.5mm;
+      }
+
+      .cab-imp .logo {
+        margin-left: auto;
+        width: 30mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 1.6mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .rotulo-nivel {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 1.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .rotulo-nivel .desc {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      /* Marca de nivel dentro de una pieza, para saber en qué sobre va */
+      .marca {
+        position: absolute;
+        left: 2mm;
+        top: 3.4mm;
+        z-index: 2;
+      }
+
+      .pieza {
+        position: relative;
+        margin: 0;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .pieza.con-franja::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.2mm;
+        background: var(--c);
+      }
+
+      /* Las cifras que leen los niños van en Outfit: su cero no lleva barra. */
+      .cifra {
+        font-family: var(--titulos);
+        font-weight: 700;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      /* ---------- Estación 1: manoplas ---------- */
+      .manoplas {
+        list-style: none;
+        margin: 0 0 3mm;
+        padding: 0;
+        display: grid;
+        justify-content: center;
+        gap: 6mm;
+      }
+
+      .manoplas.m1 {
+        grid-template-columns: repeat(3, 58mm);
+        grid-auto-rows: 80mm;
+      }
+
+      .manoplas.m2 {
+        grid-template-columns: repeat(3, 58mm);
+        grid-auto-rows: 62mm;
+      }
+
+      .manoplas.m3 {
+        grid-template-columns: repeat(5, 33mm);
+        grid-auto-rows: 56mm;
+        gap: 6mm 6mm;
+      }
+
+      .manopla-carta svg.fondo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .manopla-carta .cifra {
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+
+      .manopla-diez {
+        position: relative;
+        width: 190mm;
+        height: 96mm;
+        margin: 0 auto;
+      }
+
+      .manopla-diez svg {
+        position: absolute;
+        inset: 0;
+        width: 190mm;
+        height: 96mm;
+      }
+
+      /* ---------- Estación 2: muñecos de nieve ---------- */
+      .munecos {
+        list-style: none;
+        margin: 0 0 2.6mm;
+        padding: 0;
+        display: grid;
+        justify-content: center;
+        gap: 6mm;
+      }
+
+      .munecos.u12 {
+        grid-template-columns: repeat(3, 58mm);
+        grid-auto-rows: 70mm;
+      }
+
+      .munecos.u3 {
+        grid-template-columns: repeat(4, 42mm);
+        grid-auto-rows: 70mm;
+      }
+
+      .munecos svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ---------- Estación 3: bufandas de series ---------- */
+      .tejer {
+        display: grid;
+        gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tira-tejer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 272mm;
+        height: 52mm;
+        margin: 0;
+        padding: 5.5mm 4mm 1.5mm 11mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .tira-tejer .banda {
+        position: absolute;
+        left: 6mm;
+        right: 3mm;
+        top: 10.5mm;
+        height: 35mm;
+        border-radius: 3mm;
+        background: var(--t);
+      }
+
+      .tira-tejer .flecos {
+        position: absolute;
+        left: 1.6mm;
+        top: 12.5mm;
+        width: 5mm;
+        height: 31mm;
+      }
+
+      .tira-tejer .etiqueta {
+        position: absolute;
+        left: 11mm;
+        top: 1.4mm;
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1;
+      }
+
+      .tira-tejer .etiqueta .desc {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .tira-tejer .raya {
+        position: relative;
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 30mm;
+        height: 30mm;
+        background: #fff;
+        border: 0.45mm solid #d9c9e8;
+        border-left-width: 0;
+      }
+
+      .tira-tejer .raya.primera {
+        border-left-width: 0.45mm;
+        border-radius: 2.4mm 0 0 2.4mm;
+      }
+
+      .tira-tejer .raya.ultima {
+        border-radius: 0 2.4mm 2.4mm 0;
+      }
+
+      .tira-tejer .raya.sola {
+        border-left-width: 0.45mm;
+        border-radius: 2.4mm;
+      }
+
+      .tira-tejer .raya svg {
+        display: block;
+        width: 25mm;
+        height: 25mm;
+      }
+
+      .tira-tejer .vacia {
+        position: relative;
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        margin-left: 10mm;
+        border: 0.6mm dashed var(--c);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .tira-tejer .vacia + .raya {
+        margin-left: 10mm;
+      }
+
+      .tira-tejer .raya + .vacia {
+        margin-left: 6mm;
+      }
+
+      .tira-tejer .vacia span {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 30pt;
+        color: rgb(30 43 85 / 0.2);
+      }
+
+      /* ---------- Estación 4: etiquetas y tabla de doble entrada ---------- */
+      .e4-rejilla {
+        display: grid;
+        grid-template-columns: 182mm 88mm;
+        gap: 6mm;
+        align-items: start;
+      }
+
+      .tabla-doble {
+        border: 0.35mm dashed var(--suave);
+        border-radius: 4mm;
+        padding: 2.4mm 3mm 3mm;
+        background: #fff;
+      }
+
+      .tabla-doble__cab {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .tabla-doble__cab .desc {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .doble {
+        display: grid;
+        grid-template-columns: 38mm 66mm 66mm;
+        grid-template-rows: 22mm 60mm 60mm;
+        gap: 1.8mm;
+      }
+
+      .doble > div {
+        border-radius: 2.4mm;
+        text-align: center;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .doble .cab {
+        background: var(--t);
+        border: 0.45mm solid #e0b419;
+      }
+
+      .doble .col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2mm;
+      }
+
+      .doble .fila {
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 1.4mm;
+      }
+
+      .doble .cab img,
+      .doble .cab svg {
+        display: block;
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .doble .esquina {
+        background: transparent;
+        border: 0;
+      }
+
+      .doble .casilla {
+        border: 0.45mm solid #e3d6bd;
+        background: #fffcf6;
+      }
+
+      .etiquetas {
+        display: grid;
+        gap: 3.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .etiqueta-caja {
+        position: relative;
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        gap: 2.6mm;
+        align-items: center;
+        height: 28mm;
+        margin: 0;
+        padding: 0 2.6mm 0 4mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .etiqueta-caja::before {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 2.2mm;
+        background: var(--c);
+      }
+
+      .etiqueta-caja .dibujo {
+        position: relative;
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .etiqueta-caja .dibujo svg {
+        display: block;
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .etiqueta-caja p {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .etiqueta-caja p svg {
+        flex: none;
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .etiqueta-caja .nv {
+        position: absolute;
+        right: 2mm;
+        top: 2mm;
+      }
+
+      /* ---------- Estación 5: bufandas para medir ---------- */
+      .medir-fila {
+        display: flex;
+        align-items: center;
+        gap: 6mm;
+        margin: 0 0 3.5mm;
+      }
+
+      .tira-bufanda {
+        flex: none;
+        padding: 1.6mm 1.5mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .tira-bufanda svg {
+        display: block;
+        height: 16mm;
+      }
+
+      .tarjeta-cmp {
+        display: grid;
+        grid-template-columns: 20mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: center;
+        flex: none;
+        width: 60mm;
+        height: 24mm;
+        padding: 0 2.4mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      .tarjeta-cmp img {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .tarjeta-cmp p {
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .tabla-medir {
+        display: grid;
+        grid-template-columns: 54mm repeat(4, 52mm);
+        grid-template-rows: 22mm 20mm;
+        width: 264mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tabla-medir > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.6mm;
+        border-left: 0.35mm solid var(--linea);
+        border-top: 0.35mm solid var(--linea);
+      }
+
+      .tabla-medir > div.arriba {
+        border-top: 0;
+      }
+
+      .tabla-medir > div.izq {
+        border-left: 0;
+      }
+
+      .tabla-medir .rot {
+        justify-content: flex-start;
+        padding: 0 2mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+        background: var(--t);
+      }
+
+      .tabla-medir .rot img {
+        width: 11mm;
+        height: 11mm;
+        flex: none;
+      }
+
+      /* Bloque normal: con flex en columna y un SVG dentro, Chromium mandaba la tabla a la hoja siguiente. */
+      .tabla-medir .mini {
+        display: block;
+        padding-top: 2.6mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .tabla-medir .mini svg {
+        display: block;
+        width: 34mm;
+        height: 6.5mm;
+        margin: 0 auto 1.2mm;
+      }
+
+      .tabla-medir .rot.arriba {
+        border-top-left-radius: 3mm;
+      }
+
+      .tabla-medir .rot.izq:not(.arriba) {
+        border-bottom-left-radius: 3mm;
+      }
+
+      .tabla-medir .escribe::after {
+        content: '';
+        width: 26mm;
+        height: 12mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      /* ---------- Estación 6: témpanos ---------- */
+      .tempanos {
+        display: grid;
+        gap: 7mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tempano {
+        position: relative;
+        width: 272mm;
+        height: 76mm;
+        margin: 0;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .tempano > svg {
+        position: absolute;
+        inset: 0;
+        width: 272mm;
+        height: 76mm;
+      }
+
+      .tempano .rotulo {
+        position: absolute;
+        left: 5mm;
+        top: 1.2mm;
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1;
+      }
+
+      .tempano .rotulo .desc {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .tempano .sitios {
+        position: absolute;
+        left: 8mm;
+        top: 12.5mm;
+        display: grid;
+        grid-template-columns: repeat(5, 50mm);
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tempano .sitio {
+        position: relative;
+        width: 50mm;
+        height: 50mm;
+        margin: 0;
+        border: 0.6mm dashed #7fa9e8;
+        border-radius: 4mm;
+        background: rgb(255 255 255 / 0.85);
+      }
+
+      .tempano .sitio .cifra {
+        position: absolute;
+        left: 50%;
+        bottom: -10.6mm;
+        display: grid;
+        place-items: center;
+        width: 10mm;
+        height: 10mm;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid var(--marino);
+        font-size: 18pt;
+      }
+
+      /* ---------- Tarjetas de pasos ---------- */
+      .pasos-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 92mm);
+        grid-auto-rows: 75mm;
+        gap: 4mm 6mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tarjeta-pasos {
+        position: relative;
+        display: grid;
+        grid-template-rows: 12.5mm minmax(0, 1fr) 11mm;
+        margin: 0;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .tarjeta-pasos__cab {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0 3mm;
+        background: var(--t);
+        border-bottom: 1.2mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .tarjeta-pasos__cab .num-estacion {
+        width: 9mm;
+        height: 9mm;
+        border-width: 0.8mm;
+        font-size: 13pt;
+        flex: none;
+      }
+
+      .tarjeta-pasos ol {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        margin: 0;
+        padding: 0.6mm 1.6mm 0;
+        list-style: none;
+        counter-reset: pp;
+      }
+
+      .tarjeta-pasos ol li {
+        counter-increment: pp;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4mm;
+        margin: 0;
+        padding: 0 1mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 0.98;
+        text-align: center;
+      }
+
+      .tarjeta-pasos ol li::before {
+        content: counter(pp);
+        position: absolute;
+        left: 1.6mm;
+        top: 1.4mm;
+        display: grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 11pt;
+      }
+
+      .tarjeta-pasos ol img {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .tarjeta-pasos__pie {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0 3mm;
+        border-top: 0.35mm solid var(--linea);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .tarjeta-pasos__pie img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      /* ---------- Panel de rotación ---------- */
+      .panel {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2.6mm;
+        width: 277mm;
+        padding: 3mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .panel__estacion {
+        display: grid;
+        grid-template-rows: 13mm 26mm 22mm 24mm;
+        justify-items: center;
+        align-items: center;
+        padding: 0 1.2mm 1.6mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 2.4mm solid var(--c);
+        text-align: center;
+      }
+
+      .panel__estacion .num-estacion {
+        width: 11mm;
+        height: 11mm;
+        border-width: 1mm;
+        font-size: 15pt;
+      }
+
+      .panel__estacion > .icono {
+        display: block;
+        width: 25mm;
+        height: 25mm;
+        background: #fff;
+        border-radius: 2.4mm;
+      }
+
+      .panel__estacion p {
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .velcro {
+        display: grid;
+        place-items: center;
+        width: 22mm;
+        height: 22mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid #d9cdb6;
+        font-size: 11pt;
+        line-height: 1.05;
+        color: var(--suave);
+        text-align: center;
+      }
+
+      .panel-flecha {
+        position: relative;
+        width: 277mm;
+        height: 13mm;
+        margin: 1mm 0 1.4mm;
+      }
+
+      .panel-flecha svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 277mm;
+        height: 5mm;
+      }
+
+      .panel-flecha p {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 6mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+        text-align: center;
+      }
+
+      .grupos {
+        display: grid;
+        grid-template-columns: repeat(6, 42mm);
+        gap: 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .grupo {
+        display: grid;
+        grid-template-rows: 15mm minmax(0, 1fr);
+        height: 46mm;
+        margin: 0;
+        padding: 1.6mm;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .grupo__cab {
+        display: flex;
+        align-items: center;
+        gap: 1.2mm;
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .grupo__cab .icono {
+        display: block;
+        width: 10mm;
+        height: 10mm;
+        flex: none;
+      }
+
+      .grupo__lineas {
+        display: grid;
+        grid-template-rows: repeat(5, 1fr);
+      }
+
+      .grupo__lineas i {
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      /* ---------- Fichas de 4,7 cm ---------- */
+      .fichas {
+        display: grid;
+        grid-template-columns: repeat(4, 47mm);
+        grid-auto-rows: 47mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ficha {
+        position: relative;
+        display: grid;
+        place-items: center;
+        margin: -0.18mm 0 0 -0.18mm;
+        border: 0.35mm dashed var(--suave);
+        background: #fff;
+      }
+
+      .ficha .g {
+        display: block;
+        width: 39mm;
+        height: 39mm;
+      }
+
+      .ficha .p {
+        display: block;
+        width: 22mm;
+        height: 22mm;
+      }
+
+      /* La ropa grande deja sitio a la marca de color, arriba a la derecha. */
+      .ficha .r {
+        display: block;
+        width: 35mm;
+        height: 35mm;
+      }
+
+      .ficha .marca-color {
+        position: absolute;
+        right: 1.6mm;
+        top: 1.6mm;
+        display: block;
+        width: 8.5mm;
+        height: 8.5mm;
+      }
+
+      .ficha .nv {
+        position: absolute;
+        left: 1.6mm;
+        bottom: 1.6mm;
+      }
+
+      .ficha .cifra-gorro {
+        position: absolute;
+        left: 50%;
+        top: 22.5mm;
+        display: grid;
+        place-items: center;
+        width: 15mm;
+        height: 15mm;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: #fff;
+        border: 0.6mm solid var(--marino);
+        font-size: 26pt;
+      }
+
+      .leyenda-fichas {
+        margin: 1.6mm 0 0;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      /* ---------- Registro ---------- */
+      .leyenda-registro {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.2mm 5mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .leyenda-registro .marcas {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* El visto y el círculo van dibujados: no están en las letras de la marca. */
+      .signo {
+        display: inline-block;
+        width: 3.8mm;
+        height: 3.8mm;
+        vertical-align: -0.7mm;
+      }
+
+      .tabla-registro {
+        table-layout: fixed;
+      }
+
+      .tabla-registro thead th {
+        text-align: center;
+        vertical-align: bottom;
+        padding: 1.2mm 0.4mm;
+        line-height: 1.1;
+      }
+
+      .tabla-registro thead th .num-mini {
+        display: grid;
+        margin: 0 auto 0.6mm;
+      }
+
+      .tabla-registro thead th small {
+        display: block;
+        margin-top: 0.6mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+      }
+
+      .tabla-registro tbody td {
+        height: 7.6mm;
+        padding: 0 1mm;
+        border-left: 0.3mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .tabla-registro tbody td:first-child {
+        border-left: 0;
+        text-align: right;
+        color: var(--suave);
+      }
+
+      /* ---------- Autoevaluación: una rejilla por fila, para que no se parta al imprimir ---------- */
+      .me-llamo {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 2.4mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .me-llamo span {
+        flex: 1;
+        height: 9mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .para-adulto {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .auto-fila {
+        display: grid;
+        grid-template-columns: 80mm repeat(3, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0 0 2mm;
+        break-inside: avoid;
+      }
+
+      /* Bloque normal (sin flex): con flex en columna, Chromium mandaba el contenido a la hoja siguiente. */
+      .auto-fila .cabeza {
+        display: block;
+        height: 42mm;
+        padding: 2.2mm 1mm 1.2mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .auto-fila .cabeza img {
+        display: block;
+        width: 19mm;
+        height: 19mm;
+        margin: 0 auto 1.4mm;
+      }
+
+      .auto-fila .que {
+        display: grid;
+        grid-template-columns: 9mm 17mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: center;
+        height: 27mm;
+        padding: 0 2mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-left: 1.6mm solid var(--c);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .auto-fila .que .num-estacion {
+        width: 9mm;
+        height: 9mm;
+        border-width: 0.8mm;
+        font-size: 13pt;
+      }
+
+      .auto-fila .que > .icono {
+        display: block;
+        width: 17mm;
+        height: 17mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .auto-fila .rodea {
+        display: grid;
+        place-items: center;
+        height: 27mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+      }
+
+      .auto-fila .rodea img {
+        width: 15mm;
+        height: 15mm;
+        opacity: 0.85;
+      }
+
+      /* ---------- Atención a la diversidad ---------- */
+      .tabla-diversidad {
+        line-height: 1.26;
+      }
+
+      .tabla-diversidad th[scope='row'] {
+        width: 38mm;
+        line-height: 1.18;
+      }
+
+      .tabla-diversidad td {
+        padding: 1.1mm 2mm;
+      }
+
+      .tabla-diversidad ul {
+        margin: 0;
+        padding-left: 3.6mm;
+      }
+
+      .tabla-diversidad li {
+        margin-bottom: 0.3mm;
+      }
+
+      .detectar {
+        margin-top: 2.4mm;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .detectar h3 {
+        font-size: 12pt;
+      }
+
+      .detectar ul {
+        columns: 2;
+        column-gap: 6mm;
+        margin: 0 0 1mm;
+      }
+
+      .detectar li {
+        break-inside: avoid;
+      }
+
+      /* ---------- Familias (lectura fácil) ---------- */
+      .familias {
+        font-size: 13pt;
+        line-height: 1.4;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2.4mm;
+      }
+
+      .familias h2 {
+        font-size: 16pt;
+        margin: 4mm 0 1.8mm;
+      }
+
+      .familias p {
+        margin-bottom: 1.8mm;
+      }
+
+      .juegos-casa,
+      .normas-casa {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 2mm;
+      }
+
+      .juegos-casa li {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.8mm 3mm 1.8mm 2mm;
+        border-radius: 3mm;
+        background: var(--crema);
+      }
+
+      .juegos-casa img {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .normas-casa li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        margin: 0;
+      }
+
+      .normas-casa img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .recuadro {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 2.4mm 4mm 3mm;
+        margin-top: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin: 0 0 1mm !important;
+        font-size: 14pt !important;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos,
+      .final .creditos {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .final .creditos {
+        border-top: 0;
+        padding-top: 0;
+        margin-top: 0;
+        color: var(--marino);
+        break-inside: auto;
+      }
+
+      .final .creditos p {
+        margin-bottom: 1.2mm;
+      }
+
+      .final .creditos h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1mm;
+      }
+
+      .final .creditos ul {
+        margin: 0 0 1mm;
+        padding-left: 4mm;
+      }
+
+      .final .creditos li {
+        margin-bottom: 1mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -62mm; top: 118mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -26mm; top: 168mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 22mm; height: 22mm; left: 92mm; top: 150mm; background: var(--amarillo-tinte)"></div>
+      <div class="ilustracion" aria-hidden="true" id="ilustracion"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Matemáticas para tocar · Infantil · Seis mesas</p>
+        <h1 class="portada__titulo">Estaciones<br />de matemáticas<br />de invierno</h1>
+        <p class="portada__subtitulo">Seis mesas de matemáticas con copos, gorros, bufandas y pingüinos.</p>
+        <div class="portada__pie">
+          <p>
+            Pensado desde el Diseño Universal para el Aprendizaje (DUA), con tres niveles en cada estación. Pictogramas de Sergio
+            Palao para ARASAAC (Gobierno de Aragón), licencia CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true">Versión<b>segura</b>con piezas<br />grandes</div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">De un vistazo · Infantil, de 3 a 6 años</p>
+        <h1>Estaciones de matemáticas de invierno</h1>
+        <p class="entradilla">
+          Seis mesas para aprender matemáticas moviendo piezas con las manos, con la ropa y los animales del invierno. Cada mesa
+          tiene tres niveles. Se monta con piezas de clase o de casa, o en su versión segura, de fichas grandes.
+        </p>
+      </div>
+
+      <ul class="datos">
+        <li>
+          <strong>Para quién</strong>La clase entera, de 3 a 6 años, y los apoyos en pequeño grupo de Pedagogía Terapéutica (PT)
+          o de Audición y Lenguaje (AL).
+        </li>
+        <li>
+          <strong>Cuánto dura</strong>Entre 10 y 15 minutos por mesa. Tres mesas por día, o una sola mesa abierta como rincón. Da
+          juego todo el invierno.
+        </li>
+        <li>
+          <strong>Cómo se evalúa</strong>Observando a cada niño o niña mientras juega, con el registro (página 28). Cada cual se
+          evalúa en la hoja de la página 29.
+        </li>
+      </ul>
+
+      <div class="aprender">
+        <h2>Qué van a aprender</h2>
+        <ol>
+          <li>Poner tantos copos como dice un número, hasta 3, 6 o 10.</li>
+          <li>Contar botones dibujados y buscar su número, también el 0.</li>
+          <li>Seguir series de dos y de tres piezas y descubrir la que falta.</li>
+          <li>Clasificar ropa por tipo, por color o con dos criterios a la vez.</li>
+          <li>Comparar bufandas y medirlas con manoplas puestas en fila.</li>
+          <li>Contar pingüinos de uno en uno y decir cuántos hay.</li>
+        </ol>
+      </div>
+
+      <h2 class="subtitulo-hoja">Las seis estaciones</h2>
+      <ol class="mapa-estaciones" id="mapa"></ol>
+
+      <div class="fila-dos">
+        <div class="caja-mini niveles-caja">
+          <h2>Tres niveles en cada mesa</h2>
+          <p>Todo el grupo juega a lo mismo en la misma mesa. Lo que cambia es la ayuda y el número de piezas.</p>
+          <ul>
+            <li><span class="nv n1">1</span><span><b>Con más apoyo:</b> menos piezas y el adulto hace de modelo.</span></li>
+            <li><span class="nv n2">2</span><span><b>Base:</b> lo esperable a esa edad.</span></li>
+            <li><span class="nv n3">3</span><span><b>Con más reto:</b> números más altos o explicar cómo lo ha hecho.</span></li>
+          </ul>
+        </div>
+        <div class="caja-mini versiones-caja">
+          <h2>Dos versiones de material</h2>
+          <p>
+            <span class="chip casa">De clase y casa</span> Pompones y tapones de botella. A partir de 3 años, siempre con un adulto al
+            lado y lejos de quien todavía se mete objetos en la boca.
+          </p>
+          <p style="margin: 0">
+            <span class="chip segura">Segura</span> En lugar de pompones y tapones, fichas plastificadas de 5 cm de lado. Para la clase
+            de 3 años y para quien todavía se mete objetos en la boca.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CURRÍCULO
+         ====================================================================== -->
+    <section class="hoja curriculo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Currículo de Infantil de la Región de Murcia</p>
+        <h1>Qué trabaja del Decreto 196/2022</h1>
+        <p class="entradilla">
+          Texto literal del decreto, con su página en el Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de
+          2022. DEE es el área Descubrimiento y Exploración del Entorno, y CA, Crecimiento en Armonía.
+        </p>
+      </div>
+
+      <div class="curriculo-cols">
+        <div>
+          <h2>Criterios de evaluación del segundo ciclo</h2>
+          <ul>
+            <li>
+              <span class="codigo">DEE 1.1</span> «Establecer distintas relaciones entre los objetos a partir de sus cualidades o
+              atributos, mostrando curiosidad e interés». <span class="donde">Estaciones 3, 4 y 5. Pág. 33094.</span>
+            </li>
+            <li>
+              <span class="codigo">DEE 1.2</span> «Emplear los cuantificadores básicos más significativos en el contexto del juego y
+              en la interacción con los demás». <span class="donde">Estaciones 1, 2 y 6. Pág. 33094.</span>
+            </li>
+            <li>
+              <span class="codigo">DEE 1.4</span> «Identificar las situaciones cotidianas en las que es preciso medir, utilizando el
+              cuerpo u otros materiales y herramientas para efectuar las medidas». <span class="donde">Estación 5. Pág. 33094.</span>
+            </li>
+            <li>
+              <span class="codigo">CA 1.3</span> «Manejar diferentes objetos, útiles y herramientas en situaciones de juego y en la
+              realización de tareas cotidianas, mostrando un control progresivo y de coordinación de movimientos de carácter fino».
+              <span class="donde">Todas. Pág. 33083.</span>
+            </li>
+            <li>
+              <span class="codigo">CA 4.1</span> «Participar con iniciativa en juegos y actividades colectivas relacionándose con otras
+              personas con actitudes de afecto y de empatía, respetando los distintos ritmos individuales y evitando todo tipo de
+              discriminación». <span class="donde">El trabajo en grupo y en pareja. Pág. 33083.</span>
+            </li>
+          </ul>
+          <h2 style="margin-top: 3mm">Otros saberes que aparecen</h2>
+          <p class="grupo-saberes" style="margin-top: 0"><span class="codigo">DEE-C</span> Pág. 33096</p>
+          <ul>
+            <li>«Fenómenos naturales: identificación y repercusión en la vida de las personas». <span class="donde">La ropa de abrigo, estación 4.</span></li>
+          </ul>
+          <p class="grupo-saberes"><span class="codigo">CA-C</span> Pág. 33084</p>
+          <ul>
+            <li>«Identificación de situaciones peligrosas, en escenarios de la vida cotidiana, y prevención de accidentes». <span class="donde">La norma de no llevarse nada a la boca.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Saberes básicos del segundo ciclo</h2>
+          <p class="grupo-saberes" style="margin-top: 0"><span class="codigo">DEE-A</span> Pág. 33095</p>
+          <ul>
+            <li>«Cuantificadores básicos contextualizados: muchos-pocos, unos-algunos-varios, más que-menos que, todos-ninguno...». <span class="donde">1, 2 y 6.</span></li>
+            <li>«Funcionalidad de los números en la vida cotidiana». <span class="donde">1, 2 y 6.</span></li>
+            <li>«Cualidades o atributos de objetos y materiales. Relaciones de orden, correspondencia, clasificación y comparación». <span class="donde">3 a 6.</span></li>
+            <li>«Discriminación de algunos atributos de objetos y materias: color, forma, función... Percepción de semejanzas y diferencias entre los objetos». <span class="donde">3 y 4.</span></li>
+            <li>«Clasificación de elementos. Relaciones de pertenencia y no pertenencia». <span class="donde">4.</span></li>
+            <li>«Identificación de cualidades (tamaño, cantidad...) y sus grados (pocos, muchos, pequeño, mediano, grande...)». <span class="donde">4 y 5.</span></li>
+            <li>«Situaciones en que se hace necesario medir. Diferentes herramientas de medida convencionales (regla, metro, balanzas, recipientes...) y no convencionales (pasos, pies, cuerdas, piedras...)». <span class="donde">5.</span></li>
+            <li>«El tiempo y su organización: día-noche, estaciones, ciclos, calendario...». <span class="donde">El invierno.</span></li>
+          </ul>
+          <div class="decreto">
+            <h2>Lo que pide el decreto</h2>
+            <ul>
+              <li>Las medidas «se regirán por los principios del Diseño Universal de Aprendizaje» (art. 4.6, pág. 33056): aquí, tres niveles y dos versiones.</li>
+              <li>«La observación directa y sistemática constituirá la técnica principal del proceso de evaluación» (art. 14.1, pág. 33060): de ahí el registro.</li>
+              <li>Para el aula, «material desestructurado y de reciclaje con usos no preestablecidos» (área DEE, pág. 33088), como los tapones.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SEGURIDAD Y MATERIAL
+         ====================================================================== -->
+    <section class="hoja seguridad">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Seguridad y material</p>
+        <h1>Dos versiones para las mismas mesas</h1>
+        <p class="entradilla">
+          Con cualquiera de las dos se aprende lo mismo. Cuando alguien del grupo necesita la segura, el grupo entero juega con ella y
+          nadie se queda aparte.
+        </p>
+      </div>
+
+      <table class="tabla-material">
+        <thead>
+          <tr>
+            <th scope="col">Estación</th>
+            <th scope="col" class="casa">De clase y casa</th>
+            <th scope="col" class="segura">Segura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="e1">
+            <th scope="row">1 · Copos en la manopla</th>
+            <td>10 pompones blancos de 2,5 cm, en un cuenco.</td>
+            <td>10 fichas de copo (página 24).</td>
+          </tr>
+          <tr class="e2">
+            <th scope="row">2 · Cada muñeco, su gorro</th>
+            <td colspan="2">Las mismas tarjetas en las dos: 20 muñecos (páginas 11 y 12) y 20 gorros (página 25). Los botones van dibujados.</td>
+          </tr>
+          <tr class="e3">
+            <th scope="row">3 · Teje la bufanda</th>
+            <td>6 pompones blancos, 6 tapones y 6 pompones rojos.</td>
+            <td>12 fichas: 4 pompones blancos, 4 tapones y 4 pompones rojos (página 26).</td>
+          </tr>
+          <tr class="e4">
+            <th scope="row">4 · Ropa a su caja</th>
+            <td colspan="2">En las dos: 20 fichas de ropa (página 27) o ropa de verdad, y 3 cajas o cestos. La ropa, sin botones ni pompones que se suelten.</td>
+          </tr>
+          <tr class="e5">
+            <th scope="row">5 · Bufandas largas y cortas</th>
+            <td colspan="2">En las dos: 4 bufandas de papel (página 19) y 8 fichas de manopla para medir (página 26). Si quieres, también bufandas de verdad. Para el más reto, 10 tapones.</td>
+          </tr>
+          <tr class="e6">
+            <th scope="row">6 · Pingüinos en el témpano</th>
+            <td>10 tapones en un cuenco: cada tapón es un pingüino.</td>
+            <td>10 fichas de pingüino (página 24).</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="aviso">
+        <h2>Aviso de seguridad: léelo antes de montar las mesas</h2>
+        <ul>
+          <li>
+            <strong>Piezas pequeñas.</strong> Un tapón o un pompón puede atascarse en la garganta. La norma de seguridad de los
+            juguetes exige que lo pensado para menores de 3 años no tenga piezas que se puedan tragar o inhalar (Real Decreto
+            1205/2011, anexo II). La Asociación Española de Pediatría (AEP) aconseja intentar evitarlas hasta los 3 a 5 años y
+            recuerda: «La mejor medida preventiva es la supervisión constante» (AEP, 2024).
+          </li>
+          <li>
+            <strong>Así que la versión de clase y casa</strong> es para mayores de 3 años, con un adulto sentado junto al grupo y lejos
+            de quien todavía se mete objetos en la boca. Si solo hay un adulto, las piezas pequeñas van en una sola mesa. Con la clase
+            de 3 años, usa primero la versión segura.
+          </li>
+          <li>
+            <strong>Sin botones.</strong> La AEP pide «No permitir que jueguen con bolsas de plástico o de embalaje, monedas o
+            botones» (AEP, 2024). En este material, los botones solo están dibujados.
+          </li>
+          <li>
+            <strong>Tapones limpios.</strong> Solo de botellas de agua, leche o zumo, nunca de productos de limpieza ni de medicinas.
+            Lávalos con agua y jabón y sécalos bien.
+          </li>
+          <li>
+            <strong>Fichas y ropa.</strong> Las fichas miden unos 5 cm de lado y no pasan por un hueco de 3 cm, la medida que da la
+            AEP para las piezas de los juguetes de menores de 3 años. Cambia la que se despegue o se rompa. La ropa de verdad, sin
+            botones ni adornos que se suelten. Las bufandas se miden en la mesa, nunca al cuello.
+          </li>
+          <li>
+            <strong>Si alguien se atraganta.</strong> Si tose, anímale a seguir tosiendo y no le des golpes. Si la tos es débil o le
+            cuesta mucho respirar, llama al 112 (AEP, 2024).
+          </li>
+          <li><strong>Manos.</strong> Al recoger, agua y jabón para todas las manos.</li>
+        </ul>
+      </div>
+      <p class="nota-pie">Las fuentes, completas, están en la página 32.</p>
+    </section>
+
+    <!-- ======================================================================
+         CÓMO ORGANIZARLAS
+         ====================================================================== -->
+    <section class="hoja organizar">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Cómo organizarlas</p>
+        <h1>Cada grupo pasa por todas las mesas</h1>
+      </div>
+
+      <div class="rueda-fila">
+        <div class="rueda" id="rueda" role="img" aria-label="Las seis mesas en círculo, de la 1 a la 6, con flechas: cada grupo pasa a la mesa siguiente y de la 6 vuelve a la 1"></div>
+        <div class="paso-org">
+          <h2><img src="pictogramas/37659.png" alt="" />La rotación</h2>
+          <p>
+            Monta cada estación en una mesa y deja a la vista su tarjeta de pasos (página 22). Forma grupos de 4 o 5, de ritmos
+            distintos. En el panel (página 23), la tarjeta de cada grupo va con velcro debajo de su mesa. Con cada señal, el grupo
+            avanza a la mesa siguiente, y la 6 enlaza con la 1. Seis mesas seguidas cansan: tres un día y tres otro, o una sola mesa
+            abierta cada día.
+          </p>
+        </div>
+      </div>
+
+      <div class="organizar-rejilla">
+        <div class="paso-org">
+          <h2>Antes de empezar</h2>
+          <p>
+            Enseña en la asamblea una o dos estaciones nuevas cada día. Juega tú delante, pensando en voz alta, y practicad la tarjeta
+            de pasos. La <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a> de IdEducando
+            ayuda a anunciar los cambios.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>La señal de cambio</h2>
+          <p>
+            Un reloj de arena o un temporizador visual, a la vista. Un minuto antes, avisa: «Se acaba el tiempo». Luego, una señal
+            para ojos y oídos, como bajar la luz y cantar algo corto. El paseo a la otra mesa puede ser una
+            <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">pausa activa</a>.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>Dónde se sienta el adulto</h2>
+          <p>
+            En la mesa con tapones y pompones, o en la que el grupo aún no conoce. Pon palabras a lo que hacen, cambia el nivel si
+            hace falta y apunta lo que ves (página 28). Si solo hay un adulto, las demás mesas van con fichas.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>Los niveles en la mesa</h2>
+          <p>
+            Un sobre por nivel, cada uno con su forma: el 1 es un círculo <span class="nv n1">1</span>, el 2, un cuadrado
+            <span class="nv n2">2</span> y el 3, un rombo <span class="nv n3">3</span>. Se empieza donde le ves y se cambia de sobre
+            cuando hace falta.
+          </p>
+        </div>
+        <div class="paso-org" style="grid-column: 1 / -1">
+          <h2><img src="pictogramas/27575.png" alt="" />Para cerrar</h2>
+          <p>
+            Cinco minutos en la asamblea: ¿qué mesa os ha gustado más?, ¿qué habéis descubierto? Enseñad una bufanda tejida o un
+            témpano lleno. La autoevaluación (página 29), cada semana.
+          </p>
+        </div>
+      </div>
+
+      <div class="investigacion">
+        <h2>Lo que dice la investigación</h2>
+        <p>
+          Un metaanálisis de 55 estudios, desde el último curso de Infantil hasta la universidad, comparó aprender matemáticas con
+          objetos y aprenderlas solo con símbolos. Los objetos ayudaron y el efecto fue entre pequeño y moderado, según cómo se
+          enseñaba (Carbonneau, Marley y Selig, 2013). De ahí que cada pieza vaya unida a un número, a una palabra o a una pregunta.
+        </p>
+      </div>
+
+      <div class="dua">
+        <h2>El DUA en estas mesas, según el centro de investigación CAST (versión 3.0, 2024)</h2>
+        <ul>
+          <li><b>8.2 Optimizar los desafíos y el apoyo:</b> tres niveles por mesa.</li>
+          <li><b>2.5 Ilustrar a través de múltiples medios:</b> piezas, dibujos y números dicen lo mismo.</li>
+          <li><b>4.1 Variar y valorar los métodos de respuesta, navegación y movimiento:</b> se responde colocando, señalando o hablando.</li>
+          <li><b>8.3 Fomentar la colaboración, la interdependencia y el aprendizaje colectivo:</b> en las mesas 1 y 6, uno hace y su pareja comprueba.</li>
+          <li><b>6.4 Ampliar la capacidad para dar seguimiento al progreso:</b> se comprueban solos con la manopla de 10 y el témpano.</li>
+          <li><b>7.3 Fomentar la alegría y el juego:</b> muñecos y pingüinos lo convierten en juego.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         LAS SEIS ESTACIONES: hoja del docente e imprimibles
+         ====================================================================== -->
+
+    <!-- ESTACIÓN 1 · COPOS EN LA MANOPLA -->
+    <section class="hoja docente e1">
+      <header class="cab-estacion">
+        <span class="num-estacion">1</span>
+        <div>
+          <p class="antetitulo">Estación 1 · Cantidad</p>
+          <h1>Copos en la manopla</h1>
+        </div>
+        <img class="icono" src="pictogramas/8314.png" alt="Pictograma de una manopla verde" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> hacer una colección a partir de un número. La manopla dice cuántos copos lleva y el niño o la niña
+        los pone, de uno en uno.
+      </p>
+      <p class="curriculo-linea"><span class="codigo">DEE 1.2</span> Saberes de los cuantificadores y de para qué sirven los números (página 4).</p>
+      <div class="material-dos">
+        <div class="version version--casa"><h3>De clase y casa</h3><p>10 pompones blancos de 2,5 cm, que son los copos, en un cuenco.</p></div>
+        <div class="version version--segura"><h3>Segura</h3><p>10 fichas de copo (página 24). Son grandes: van al lado de la manopla, en fila.</p></div>
+      </div>
+      <p class="imprimibles"><strong>Imprimibles:</strong> manoplas de los niveles 1 y 2 (página 8), manoplas del nivel 3 y manopla de 10 (página 9).</p>
+      <div class="aviso-corto">
+        <img src="pictogramas/8674.png" alt="" />
+        <p>Los pompones son piezas pequeñas: un adulto se queda en esta mesa. Si alguien todavía se mete objetos en la boca, mejor fichas.</p>
+      </div>
+      <h2>Cómo se juega, en parejas</h2>
+      <ol class="pasos-juego">
+        <li>Cada niño o niña coge una manopla del sobre de su nivel y dice su número en voz alta.</li>
+        <li>«¡Nieva!»: pone tantos copos como dice el número, de uno en uno y contando.</li>
+        <li>Cambia su manopla por la de su pareja.</li>
+        <li>Cuenta los copos de la manopla de su pareja y dice si está bien.</li>
+        <li>Los copos vuelven al cuenco y cada cual coge otra manopla.</li>
+      </ol>
+      <p class="preguntas"><strong>Preguntas que ayudan:</strong> «¿Cuántos copos lleva?», «¿Cómo lo sabes?», «¿Caben más?», «¿Qué manopla tiene más copos, la tuya o la mía?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Números 1, 2 y 3 con puntos bien grandes: un copo sobre cada punto, y el adulto cuenta a la vez.</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>Números del 1 al 6, cada uno con los puntos del dado.</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Números del 1 al 10, sin puntos. Para comprobar, la manopla de 10.</p><p class="reto">Más reto: «Si cae un copo más, ¿cuántos habrá?».</p></li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Dice un número por copo, sin dejarse ninguno ni contar uno dos veces.</li>
+            <li>A «¿cuántos hay?» responde sin volver a contar.</li>
+            <li>Ve 1, 2 o 3 copos de un golpe, sin contar.</li>
+            <li>Usa «más», «menos» y «ninguno».</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si le cuesta coger piezas:</b> mejor las fichas, que se arrastran, en una bandeja baja. También vale que señale y que su pareja coloque.</li>
+            <li><b>Si ve poco:</b> puntos repasados con cola blanca, para notarlos con el dedo, y fondo oscuro.</li>
+            <li><b>Si habla poco:</b> cuenta tú despacio, en voz alta, y vale que conteste enseñando los dedos.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp e1">
+      <header class="cab-imp">
+        <span class="num-estacion">1</span>
+        <h1>Copos en la manopla <small>Manoplas de los niveles 1 y 2</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja entera y recorta cada manopla con un borde de plástico de 2 o 3 mm por fuera de la línea de puntos. Cada nivel va en su propio sobre.</p>
+      <p class="rotulo-nivel"><span class="nv n1 grande">1</span>Nivel 1 <span class="desc">· Números 1, 2 y 3, con puntos grandes: un copo en cada punto.</span></p>
+      <ul class="manoplas m1" id="e1-n1" aria-label="Tres manoplas con los números del 1 al 3 y sus puntos grandes"></ul>
+      <p class="rotulo-nivel"><span class="nv n2 grande">2</span>Nivel 2 <span class="desc">· Números del 1 al 6, con los puntos del dado.</span></p>
+      <ul class="manoplas m2" id="e1-n2" aria-label="Seis manoplas con los números del 1 al 6 y sus puntos"></ul>
+      <p class="atribucion">Las manoplas son dibujos de IdEducando.</p>
+    </section>
+
+    <section class="imp e1">
+      <header class="cab-imp">
+        <span class="num-estacion">1</span>
+        <h1>Copos en la manopla <small>Nivel 3 y manopla de 10</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja entera y recorta con un borde de plástico de 2 o 3 mm. La manopla de 10 sirve para comprobar: cinco copos arriba y los demás abajo.</p>
+      <p class="rotulo-nivel"><span class="nv n3 grande">3</span>Nivel 3 <span class="desc">· Números del 1 al 10, sin puntos.</span></p>
+      <ul class="manoplas m3" id="e1-n3" aria-label="Diez manoplas con los números del 1 al 10"></ul>
+      <p class="rotulo-nivel" style="margin-top: 1mm">Manopla de 10 <span class="desc">· Un pompón en cada círculo. Con fichas, haced dos filas de 5 en la mesa.</span></p>
+      <div class="manopla-diez" id="e1-diez" role="img" aria-label="Una manopla grande con diez círculos en dos filas de cinco"></div>
+      <p class="atribucion">Las manoplas son dibujos de IdEducando.</p>
+    </section>
+
+    <!-- ESTACIÓN 2 · CADA MUÑECO, SU GORRO -->
+    <section class="hoja docente e2">
+      <header class="cab-estacion">
+        <span class="num-estacion">2</span>
+        <div>
+          <p class="antetitulo">Estación 2 · Cantidad y número</p>
+          <h1>Cada muñeco, su gorro</h1>
+        </div>
+        <span class="icono" data-dibujo="muneco-gorro" data-alt="Dibujo de un muñeco de nieve con gorro"></span>
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> contar los botones de un muñeco de nieve y buscar el gorro que lleva ese número. Es pasar de una
+        cantidad que se ve a su número escrito.
+      </p>
+      <p class="curriculo-linea"><span class="codigo">DEE 1.2</span> Saberes de los cuantificadores, también «ninguno», y de los números (página 4).</p>
+      <div class="material-dos">
+        <div class="version version--ambas"><h3>En las dos versiones</h3><p>Solo tarjetas: 20 muñecos (páginas 11 y 12) y 20 gorros (página 25). Los botones van dibujados.</p></div>
+        <div class="version version--sol"><h3>Soluciones</h3><p>Cada gorro lleva el número de botones de su muñeco. El muñeco sin botones lleva el gorro del 0.</p></div>
+      </div>
+      <p class="imprimibles"><strong>Imprimibles:</strong> muñecos de los niveles 1 y 2 (página 11), muñecos del nivel 3 (página 12) y gorros (página 25).</p>
+      <div class="aviso-corto tranquilo">
+        <img src="pictogramas/8674.png" alt="" />
+        <p>Todo son tarjetas plastificadas: sirve también para quien todavía se mete objetos en la boca, con el adulto cerca.</p>
+      </div>
+      <h2>Cómo se juega</h2>
+      <ol class="pasos-juego">
+        <li>Pon los muñecos en fila y los gorros a un lado, con el dibujo hacia arriba.</li>
+        <li>El niño o la niña elige un muñeco y cuenta sus botones, tocando cada uno.</li>
+        <li>Busca el gorro que lleva ese número.</li>
+        <li>Se lo pone en la cabeza, justo encima de la tarjeta.</li>
+        <li>Cuando todos tienen gorro, los revisáis juntos: «¿Cada uno lleva el suyo?».</li>
+      </ol>
+      <p class="preguntas"><strong>Preguntas que ayudan:</strong> «¿Cuántos botones tiene?», «¿Qué número buscas?», «¿Quién tiene más botones?», «¿Y este, que no tiene ninguno?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>3 muñecos, con 1, 2 y 3 botones grandes. Sus gorros llevan el número y un punto por cada botón.</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>6 muñecos, del 1 al 6. Los gorros llevan solo el número.</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>11 muñecos, del 0 al 10, con los botones de 5 en 5.</p><p class="reto">Más reto: ponlos en fila, del 0 al 10.</p></li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Toca cada botón una sola vez al contar.</li>
+            <li>Reconoce el número escrito y lo dice.</li>
+            <li>Entiende que sin botones es «ninguno» y que se escribe 0.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si se pierde al contar:</b> que tape con un dedo cada botón ya contado.</li>
+            <li><b>Si aún no reconoce los números:</b> gorros del nivel 1, con puntos, aunque juegue en otro nivel.</li>
+            <li><b>Si le cuesta coger tarjetas:</b> los gorros en una bandeja con borde, para arrastrarlos hasta el muñeco.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp e2">
+      <header class="cab-imp">
+        <span class="num-estacion">2</span>
+        <h1>Cada muñeco, su gorro <small>Muñecos de los niveles 1 y 2</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja entera y recorta cada muñeco con un borde de plástico de 2 o 3 mm. Los gorros están en la página 25.</p>
+      <p class="rotulo-nivel"><span class="nv n1 grande">1</span>Nivel 1 <span class="desc">· 1, 2 y 3 botones grandes.</span></p>
+      <ul class="munecos u12" id="e2-n1" aria-label="Tres muñecos de nieve con 1, 2 y 3 botones"></ul>
+      <p class="rotulo-nivel"><span class="nv n2 grande">2</span>Nivel 2 <span class="desc">· Del 1 al 6 botones.</span></p>
+      <ul class="munecos u12" id="e2-n2" aria-label="Seis muñecos de nieve con 1 a 6 botones"></ul>
+      <p class="atribucion">Los muñecos son dibujos de IdEducando.</p>
+    </section>
+
+    <section class="imp e2">
+      <header class="cab-imp">
+        <span class="num-estacion">2</span>
+        <h1>Cada muñeco, su gorro <small>Muñecos del nivel 3, del 0 al 10</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja entera y recorta con un borde de plástico de 2 o 3 mm. Los botones van de 5 en 5: una fila llena y otra que empieza.</p>
+      <p class="rotulo-nivel"><span class="nv n3 grande">3</span>Nivel 3 <span class="desc">· Del 0 al 10 botones. El muñeco sin botones lleva el gorro del 0.</span></p>
+      <ul class="munecos u3" id="e2-n3" aria-label="Once muñecos de nieve con 0 a 10 botones"></ul>
+      <p class="atribucion">Los muñecos son dibujos de IdEducando.</p>
+    </section>
+
+    <!-- ESTACIÓN 3 · TEJE LA BUFANDA -->
+    <section class="hoja docente e3">
+      <header class="cab-estacion">
+        <span class="num-estacion">3</span>
+        <div>
+          <p class="antetitulo">Estación 3 · Series</p>
+          <h1>Teje la bufanda</h1>
+        </div>
+        <img class="icono" src="pictogramas/2290.png" alt="Pictograma de una bufanda verde" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> descubrir qué se repite en las rayas de la bufanda y seguir tejiéndola. Seguir una serie es adivinar
+        qué viene después.
+      </p>
+      <p class="curriculo-linea"><span class="codigo">DEE 1.1</span> Saberes de los atributos de los objetos y de las relaciones de orden (página 4).</p>
+      <div class="material-dos">
+        <div class="version version--casa"><h3>De clase y casa</h3><p>6 pompones blancos, 6 tapones de botella y 6 pompones rojos, en un cuenco.</p></div>
+        <div class="version version--segura"><h3>Segura</h3><p>12 fichas: 4 pompones blancos, 4 tapones y 4 pompones rojos (página 26).</p></div>
+      </div>
+      <p class="imprimibles"><strong>Imprimibles:</strong> 6 bufandas, 2 por nivel (páginas 14 y 15).</p>
+      <div class="aviso-corto">
+        <img src="pictogramas/8674.png" alt="" />
+        <p>Tapones y pompones son piezas pequeñas: un adulto se queda en esta mesa. Para quien todavía se mete objetos en la boca, fichas.</p>
+      </div>
+      <h2>Cómo se juega</h2>
+      <ol class="pasos-juego">
+        <li>Coloca una bufanda en la mesa y las piezas a su lado.
+        <li>Leed juntos las rayas, tocándolas: «blanco, tapón, blanco, tapón…».</li>
+        <li>El niño o la niña pone en cada raya vacía la pieza que toca.</li>
+        <li>Leed otra vez la bufanda entera, de una punta a la otra.</li>
+        <li>Puede seguir tejiendo con más piezas después de la última raya.</li>
+      </ol>
+      <p class="preguntas"><strong>Preguntas que ayudan:</strong> «¿Qué pieza toca?», «¿Por qué esa?», «¿Qué se repite?», «¿Qué iría en este hueco?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Dos piezas que se turnan (bufandas 1 y 2): blanco, tapón; blanco, tapón. Una palmada en cada raya.</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>Una pieza se repite dos veces (bufandas 3 y 4): blanco, blanco, tapón.</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Tres piezas (bufanda 5) y una raya vacía en medio (bufanda 6).</p><p class="reto">Más reto: teje una bufanda nueva para que la siga otra persona.</p></li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Recita la bufanda con ritmo hasta el final.</li>
+            <li>Elige la pieza siguiente y sabe decir el motivo.</li>
+            <li>Descubre qué falta en la raya vacía del medio.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si confunde colores:</b> en los niveles 1 y 2, pompón y tapón se distinguen por la forma. En el 3, el pompón blanco es claro y el rojo, oscuro.</li>
+            <li><b>Si se dispersa:</b> deja a la vista pocas rayas y cubre el resto con un papel.</li>
+            <li><b>Si habla poco:</b> una palmada para el pompón y un golpe en la mesa para el tapón.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp-ap e3">
+      <header class="cab-imp">
+        <span class="num-estacion">3</span>
+        <h1>Teje la bufanda <small>Bufandas 1 a 3: niveles 1 y 2</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <ul class="tejer" id="e3-a" aria-label="Tres bufandas con una serie para seguir"></ul>
+      <p class="atribucion">Plastifica la hoja entera y recorta con un borde de plástico de 2 o 3 mm. Los pompones y los tapones son dibujos de IdEducando.</p>
+    </section>
+
+    <section class="imp-ap e3">
+      <header class="cab-imp">
+        <span class="num-estacion">3</span>
+        <h1>Teje la bufanda <small>Bufandas 4 a 6: niveles 2 y 3</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <ul class="tejer" id="e3-b" aria-label="Tres bufandas con una serie para seguir, una con un hueco en medio"></ul>
+      <p class="atribucion">Plastifica la hoja entera y recorta con un borde de plástico de 2 o 3 mm. Los pompones y los tapones son dibujos de IdEducando.</p>
+    </section>
+
+    <!-- ESTACIÓN 4 · ROPA A SU CAJA -->
+    <section class="hoja docente e4">
+      <header class="cab-estacion">
+        <span class="num-estacion">4</span>
+        <div>
+          <p class="antetitulo">Estación 4 · Clasificación</p>
+          <h1>Ropa a su caja</h1>
+        </div>
+        <img class="icono" src="pictogramas/37361.png" alt="Pictograma de clasificar: una persona reparte piezas en grupos" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> ordenar la ropa de invierno en cajas según cómo es y explicar la regla que se ha seguido.
+      </p>
+      <p class="curriculo-linea"><span class="codigo">DEE 1.1</span> Saberes de los atributos, de la clasificación y de los fenómenos naturales: en invierno nos abrigamos (página 4).</p>
+      <div class="material-dos">
+        <div class="version version--ambas"><h3>En las dos versiones</h3><p>20 fichas de ropa (página 27) y 3 cajas, cestos o aros con su etiqueta (página 17).</p></div>
+        <div class="version version--casa"><h3>Con ropa de verdad</h3><p>Gorros, manoplas y calcetines sin botones ni adornos que se suelten. Para el nivel 3, de adulto y de niño.</p></div>
+      </div>
+      <p class="imprimibles"><strong>Imprimibles:</strong> etiquetas y tabla de doble entrada (página 17) y fichas de ropa (página 27).</p>
+      <h2>Cómo se juega</h2>
+      <ol class="pasos-juego">
+        <li>Pon cada etiqueta en su caja y leedlas juntos.</li>
+        <li>El niño o la niña saca una prenda del sobre y dice qué es y cómo es: «una manopla azul».</li>
+        <li>La guarda en la caja que le toca.</li>
+        <li>Con el sobre vacío, revisad cada caja: «¿Hay alguna prenda que no va aquí?».</li>
+        <li>Se mezcla todo para quien viene después.</li>
+      </ol>
+      <p class="preguntas"><strong>Preguntas que ayudan:</strong> «¿Por qué la guardas aquí?», «¿Cuál no va con las demás?», «¿Dónde irá esta?», «¿Y si las ordenamos por otra cosa?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Dos cajas, una de gorros y otra de manoplas. 6 fichas.</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>Por color, con 3 cajas: azul, rojo y amarillo. 6 fichas. Cada color lleva su marca: copo, corazón o estrella.</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Tipo y tamaño juntos, con la tabla de doble entrada. 8 fichas.</p><p class="reto">Más reto: busca en el perchero de clase una prenda para cada caja.</p></li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Sigue la misma regla con todas las prendas.</li>
+            <li>Dice la regla con sus palabras: «son gorros», «son amarillas».</li>
+            <li>En la tabla, piensa en el tipo y en el tamaño de cada prenda: «manopla grande».</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si confunde colores:</b> que siga las marcas de las fichas, sin comentarlo delante del grupo.</li>
+            <li><b>Si le cuesta coger piezas:</b> ropa de verdad, que se agarra mejor, y cajas grandes en el suelo.</li>
+            <li><b>Si habla poco:</b> la frase «Va aquí porque es…», y vale que señale la etiqueta.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp-ap e4">
+      <header class="cab-imp">
+        <span class="num-estacion">4</span>
+        <h1>Ropa a su caja <small>Etiquetas para las cajas y tabla de doble entrada</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <div class="e4-rejilla">
+        <div class="tabla-doble">
+          <p class="tabla-doble__cab"><span class="nv n3 grande">3</span>Tabla de doble entrada <span class="desc">· Busca la casilla de su tipo y de su tamaño.</span></p>
+          <div class="doble" id="e4-tabla" role="img" aria-label="Tabla de doble entrada: en las filas, gorros y manoplas; en las columnas, grandes y pequeños"></div>
+        </div>
+        <ul class="etiquetas" id="e4-etiquetas" aria-label="Cinco etiquetas: gorros, manoplas, azul, rojo y amarillo"></ul>
+      </div>
+      <p class="atribucion">Plastifica la hoja entera y recorta con un borde de plástico de 2 o 3 mm. Pictogramas de grande y pequeño: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La ropa es de IdEducando.</p>
+    </section>
+
+    <!-- ESTACIÓN 5 · BUFANDAS LARGAS Y CORTAS -->
+    <section class="hoja docente e5">
+      <header class="cab-estacion">
+        <span class="num-estacion">5</span>
+        <div>
+          <p class="antetitulo">Estación 5 · Medida y comparación</p>
+          <h1>Bufandas largas y cortas</h1>
+        </div>
+        <span class="icono" data-dibujo="dos-bufandas" data-alt="Dibujo de dos bufandas, una larga y otra corta"></span>
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> ver cuál es más larga juntando las puntas y medir las bufandas con manoplas iguales, una detrás de
+        otra.
+      </p>
+      <p class="curriculo-linea"><span class="codigo">DEE 1.4</span> <span class="codigo">DEE 1.1</span> Saberes de la medida y del tamaño (página 4).</p>
+      <div class="material-dos">
+        <div class="version version--ambas"><h3>En las dos versiones</h3><p>4 bufandas de papel, 2 tarjetas y la tabla (página 19), y 8 fichas de manopla (página 26). Si quieres, bufandas de verdad.</p></div>
+        <div class="version version--sol"><h3>Soluciones</h3><p>Bufanda de rayas, 4 manoplas. De lunares, 2. De cuadros, 5. De copos, 3.</p></div>
+      </div>
+      <p class="imprimibles"><strong>Imprimible:</strong> las 4 bufandas, las tarjetas de comparar y la tabla (página 19). Para la tabla, un rotulador de pizarra.</p>
+      <div class="aviso-corto">
+        <img src="pictogramas/8674.png" alt="" />
+        <p>Las manoplas de papel no tienen peligro. Los tapones del más reto, solo con el adulto en la mesa. Las bufandas de verdad se miden en la mesa, nunca al cuello.</p>
+      </div>
+      <h2>Cómo se juega</h2>
+      <ol class="pasos-juego">
+        <li>Pon dos bufandas en la mesa, una debajo de la otra.</li>
+        <li>Junta una punta de las dos, bien a la par.</li>
+        <li>Mira la otra punta: la que llega más lejos es la más larga. Ponle su tarjeta.</li>
+        <li>Para medir, pon manoplas en fila encima de la bufanda, sin huecos y sin montarlas, y cuéntalas.</li>
+        <li>Recoge las bufandas y las manoplas.</li>
+      </ol>
+      <p class="preguntas"><strong>Preguntas que ayudan:</strong> «¿Qué bufanda llega más lejos?», «¿Cómo lo sabes?», «¿Cuántas manoplas mide?», «¿Queda algún hueco?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Junta dos bufandas, de papel o de verdad, y pone la tarjeta «más larga».</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>Ordena las 4 bufandas de papel, de la más corta a la más larga, y mide una con manoplas.</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Mide las 4 y anota cada medida en la tabla: número, puntos o palitos.</p><p class="reto">Más reto: mide una bufanda con tapones. ¿Por qué sale otro número?</p></li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Antes de comparar, pone las puntas a la par.</li>
+            <li>Pone las manoplas seguidas, sin huecos ni montadas.</li>
+            <li>Dice la medida con su unidad: «mide 4 manoplas».</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si le cuesta coger piezas:</b> la bufanda sujeta a la mesa con cinta, y arrastra las manoplas.</li>
+            <li><b>Si ve poco:</b> bordes de las bufandas repasados con cola blanca, para notarlos con el dedo.</li>
+            <li><b>Si necesita más reto:</b> medir con manoplas la mesa, la puerta o su propio brazo.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp-ap e5">
+      <header class="cab-imp">
+        <span class="num-estacion">5</span>
+        <h1>Bufandas largas y cortas <small>Bufandas, tarjetas y tabla para medir</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <div id="e5-contenido"></div>
+      <p class="atribucion">Plastifica la hoja entera y recorta con un borde de plástico de 2 o 3 mm. Mide con las fichas de manopla de la página 26, ya plastificadas. Pictogramas de largo y corto: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las bufandas son de IdEducando.</p>
+    </section>
+
+    <!-- ESTACIÓN 6 · PINGÜINOS EN EL TÉMPANO -->
+    <section class="hoja docente e6">
+      <header class="cab-estacion">
+        <span class="num-estacion">6</span>
+        <div>
+          <p class="antetitulo">Estación 6 · Conteo</p>
+          <h1>Pingüinos en el témpano</h1>
+        </div>
+        <img class="icono" src="pictogramas/3243.png" alt="Pictograma de un pingüino" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> contar pingüinos de uno en uno, subiéndolos a un témpano, y decir cuántos hay. El témpano ordena el
+        conteo y el número del último sitio lo confirma.
+      </p>
+      <p class="curriculo-linea"><span class="codigo">DEE 1.2</span> Saberes de los cuantificadores y de para qué sirven los números (página 4).</p>
+      <div class="material-dos">
+        <div class="version version--casa"><h3>De clase y casa</h3><p>10 tapones de botella en un cuenco, que es el mar. Cada tapón es un pingüino.</p></div>
+        <div class="version version--segura"><h3>Segura</h3><p>10 fichas de pingüino (página 24), también en un cuenco.</p></div>
+      </div>
+      <p class="imprimibles"><strong>Imprimible:</strong> el témpano, en dos tiras: del 1 al 5 y del 6 al 10 (página 21).</p>
+      <div class="aviso-corto">
+        <img src="pictogramas/8674.png" alt="" />
+        <p>Los tapones son piezas pequeñas: un adulto se queda en esta mesa. Para quien todavía se mete objetos en la boca, fichas.</p>
+      </div>
+      <h2>Cómo se juega, en parejas</h2>
+      <ol class="pasos-juego">
+        <li>Pon el témpano en la mesa y, a su lado, el cuenco con los pingüinos: es el mar.</li>
+        <li>El niño o la niña coge un puñado de pingüinos del mar.</li>
+        <li>Los sube al témpano de uno en uno, contando en voz alta: uno en cada sitio, de izquierda a derecha.</li>
+        <li>Dice cuántos hay. Debajo del último pingüino, el número lo confirma.</li>
+        <li>Los pingüinos vuelven al mar y le toca a su pareja.</li>
+      </ol>
+      <p class="preguntas"><strong>Preguntas que ayudan:</strong> «¿Cuántos hay?», «¿Cuántos crees que hay antes de contar?», «¿Cuántos sitios quedan libres?», «Si uno se tira al agua, ¿cuántos quedan?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li><h3><span class="nv n1">1</span>Con más apoyo</h3><p>Témpano del 1 al 5. El adulto le da de 1 a 5 pingüinos y cuenta a su lado.</p></li>
+        <li><h3><span class="nv n2">2</span>Base</h3><p>Las dos tiras, una debajo de la otra: del 1 al 10. Coge un puñado y cuenta.</p></li>
+        <li><h3><span class="nv n3">3</span>Con más reto</h3><p>Antes de contar, dice cuántos cree que hay. Cuenta señalando, sin moverlos, y comprueba en el témpano.</p><p class="reto">Más reto: «¿Cuántos faltan para llenarlo?».</p></li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Dice un número para cada pingüino, sin saltarse ninguno.</li>
+            <li>Sabe que el último número que dice es el total.</li>
+            <li>Ve sin contar que la fila de arriba tiene 5.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si se pierde al contar:</b> solo la tira del 1 al 5, y después la otra.</li>
+            <li><b>Si le cuesta coger piezas:</b> fichas, que se pueden arrastrar hasta su sitio.</li>
+            <li><b>Si habla poco:</b> puede contar con los dedos o señalar el número del témpano.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp-ap e6">
+      <header class="cab-imp">
+        <span class="num-estacion">6</span>
+        <h1>Pingüinos en el témpano <small>Témpano en dos tiras: del 1 al 5 y del 6 al 10</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja entera y recorta cada tira con un borde de plástico de 2 o 3 mm. Para el 10, pon la segunda tira debajo de la primera.</p>
+      <ul class="tempanos" id="e6-tempanos" aria-label="Témpano en dos tiras de cinco sitios, numerados del 1 al 5 y del 6 al 10"></ul>
+      <p class="atribucion">El témpano es un dibujo de IdEducando.</p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE PASOS Y PANEL DE ROTACIÓN
+         ====================================================================== -->
+    <section class="imp">
+      <header class="cab-imp">
+        <h1>Tarjetas de pasos <small>Cada mesa, con sus pasos</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja, recórtala con un borde de plástico de 2 o 3 mm y pon cada tarjeta de pie en su mesa.</p>
+      <ul class="pasos-tarjetas" id="pasos" aria-label="Seis tarjetas de pasos, una por estación, con cuatro pasos y pictogramas cada una"></ul>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <section class="imp-ap">
+      <header class="cab-imp">
+        <h1>Panel de rotación <small>¿A qué mesa vamos ahora?</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <div class="panel" id="panel" role="img" aria-label="Panel con las seis estaciones en fila, de la 1 a la 6, cada una con su color, su dibujo, su nombre y un círculo para el velcro"></div>
+      <div class="panel-flecha" id="panel-flecha"></div>
+      <ul class="grupos" id="grupos" aria-label="Seis tarjetas de grupo: pingüinos, osos polares, focas, copos, muñecos y gorros, con líneas para escribir los nombres"></ul>
+      <p class="atribucion">En el panel, el velcro rugoso; detrás de cada tarjeta de grupo, el suave. En las tarjetas, solo nombres escritos, sin fotos. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Los demás dibujos son de IdEducando.</p>
+    </section>
+
+    <!-- ======================================================================
+         FICHAS (cuatro hojas de 20)
+         ====================================================================== -->
+    <div id="hojas-fichas"></div>
+
+    <!-- ======================================================================
+         REGISTRO DE OBSERVACIÓN
+         ====================================================================== -->
+    <section class="imp registro">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Evaluación · Registro de observación</p>
+        <h1>Estaciones de invierno: lo que veo en cada mesa</h1>
+        <p class="entradilla">
+          En Infantil, «La observación directa y sistemática constituirá la técnica principal del proceso de evaluación» (Decreto
+          196/2022, art. 14.1, pág. 33060). Basta con el nombre o las iniciales, y la hoja se queda en el centro.
+        </p>
+      </div>
+      <p class="leyenda-registro">
+        <span><strong>Cómo apuntar:</strong> <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="visto bueno"><path d="M1.5 5.4 L4 8 L8.8 2" fill="none" stroke="#1e2b55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> sin ayuda · <span class="marcas">A</span> con ayuda · <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="círculo"><circle cx="5" cy="5.2" r="3.6" fill="none" stroke="#1e2b55" stroke-width="1.3"/></svg> todavía no.</span>
+        <span>Al lado, el nivel: <span class="nv n1">1</span> <span class="nv n2">2</span> <span class="nv n3">3</span>. Por ejemplo, <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="visto bueno"><path d="M1.5 5.4 L4 8 L8.8 2" fill="none" stroke="#1e2b55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>2.</span>
+        <span>Grupo: ______________ Fecha: ____________</span>
+      </p>
+      <table class="tabla-registro">
+        <colgroup>
+          <col style="width: 9mm" />
+          <col style="width: 38mm" />
+          <col span="6" style="width: 21mm" />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">N.º</th>
+            <th scope="col" style="text-align: left">Nombre</th>
+            <th scope="col" class="e1"><span class="num-mini">1</span>Copos<small>DEE 1.2</small></th>
+            <th scope="col" class="e2"><span class="num-mini">2</span>Gorros<small>DEE 1.2</small></th>
+            <th scope="col" class="e3"><span class="num-mini">3</span>Bufanda<small>DEE 1.1</small></th>
+            <th scope="col" class="e4"><span class="num-mini">4</span>Ropa<small>DEE 1.1</small></th>
+            <th scope="col" class="e5"><span class="num-mini">5</span>Medir<small>DEE 1.4</small></th>
+            <th scope="col" class="e6"><span class="num-mini">6</span>Pingüinos<small>DEE 1.2</small></th>
+            <th scope="col">Notas</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         AUTOEVALUACIÓN
+         ====================================================================== -->
+    <section class="imp autoevaluacion">
+      <header class="cab-imp">
+        <h1>Mi autoevaluación <small>Estaciones de matemáticas de invierno</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="me-llamo">Me llamo <span></span></p>
+      <p class="para-adulto">
+        Para el adulto: di en voz alta el nombre de cada mesa y señala las tres opciones. Cada niño o niña marca la suya con un
+        círculo o con color; si lo prefiere, la señala y tú la marcas. «Quiero repetir» también es una buena respuesta: dice qué
+        quiere practicar.
+      </p>
+      <div id="auto"></div>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         ATENCIÓN A LA DIVERSIDAD
+         ====================================================================== -->
+    <section class="hoja diversidad">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Atención a la diversidad</p>
+        <h1>Ideas para cada necesidad</h1>
+        <p class="entradilla">Medidas de este material, explicadas por lo que ayudan. Muchas sirven a toda la clase.</p>
+      </div>
+      <table class="tabla-diversidad">
+        <thead>
+          <tr>
+            <th scope="col">Alumnado con…</th>
+            <th scope="col">En estas mesas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Trastorno del espectro del autismo (TEA)</th>
+            <td>
+              <ul>
+                <li>El panel y la agenda visual le dicen qué mesa toca y cuándo se cambia.</li>
+                <li>Un final que se ve: «Témpano lleno, he terminado». Si no le gusta tocar pompones, que use fichas de papel.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Trastorno por déficit de atención e hiperactividad (TDAH)</th>
+            <td>
+              <ul>
+                <li>Darle encargos que impliquen moverse, como llevar el reloj de arena o repartir sobres.</li>
+                <li>Tareas cortas con final claro, como una bufanda. Cambiar de mesa le sirve de pausa.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Trastorno del desarrollo del lenguaje (TDL)</th>
+            <td>
+              <ul>
+                <li>Frases cortas que se repiten: «Un copo. Otro copo. ¡Tres copos!».</li>
+                <li>Vale responder señalando o con las tarjetas. Ten cerca el <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a>.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad intelectual</th>
+            <td>
+              <ul>
+                <li>Empieza en el nivel 1, con pocas piezas, y haz tú cada paso antes. Repetid la misma mesa varios días.</li>
+                <li>Ayuda con tu mano, que se retira poco a poco. Celebra cada logro.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad motora</th>
+            <td>
+              <ul>
+                <li>Fichas, que se arrastran mejor, y tiras sujetas con cinta o en un atril.</li>
+                <li>Indica la pieza mirándola o señalándola, y su pareja la coloca.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad visual</th>
+            <td>Ropa y bufandas de verdad para tocar. Bordes repasados con cola blanca y fondo oscuro y mate.</td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad auditiva</th>
+            <td>Háblale mirándole a la cara, con buena luz y el material a la vista. La señal de cambio, también con luz.</td>
+          </tr>
+          <tr>
+            <th scope="row">Altas capacidades</th>
+            <td>Retos abiertos: inventar bufandas o medir la clase con manoplas. Que explique su regla a otra persona sin hacerlo por ella.</td>
+          </tr>
+          <tr>
+            <th scope="row">Incorporación tardía, sin castellano aún</th>
+            <td>Las piezas, los gestos y los pictogramas le dan el mensaje sin necesidad de palabras. Contad también en su lengua, con ayuda de la familia, y usad el <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="caja caja--amarilla detectar">
+        <h3>Señales que conviene apuntar</h3>
+        <p>Sin poner etiquetas: cuando algo se repite durante semanas, apúntalo con la fecha. Fíjate, por ejemplo, en quien:</p>
+        <ul>
+          <li>no logra contar de uno en uno ni con tu modelo;</li>
+          <li>no compara dos bufandas muy distintas;</li>
+          <li>se acerca mucho o busca las piezas tocando;</li>
+          <li>coge y suelta piezas con mucho esfuerzo;</li>
+          <li>no responde si le hablas sin que te vea;</li>
+          <li>no sigue una consigna corta con pictograma.</li>
+        </ul>
+        <p>Compártelo con la familia y también con el equipo de orientación educativa y psicopedagógica (EOEP) que atiende tu centro. Tus notas ayudan a decidir qué hacer.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja familias">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Matemáticas con la ropa de invierno</h1>
+      <p>En el cole hacemos matemáticas de invierno en seis mesas de juego. Contamos copos y pingüinos. Ordenamos ropa y medimos bufandas.</p>
+      <p>En casa podéis jugar con la ropa de abrigo. Se hace en un momento, al vestiros o al recoger.</p>
+
+      <h2>3 juegos para casa</h2>
+      <ol class="juegos-casa">
+        <li><img src="pictogramas/8339.png" alt="Pictograma de un calcetín" /><span><strong>Parejas de calcetines.</strong> Al recoger la ropa, buscad juntos las parejas. ¿Sobra algún calcetín?</span></li>
+        <li><img src="pictogramas/2287.png" alt="Pictograma de unas botas" /><span><strong>En fila por tamaño.</strong> Poned en fila los zapatos de la familia, del más pequeño al más grande.</span></li>
+        <li><img src="pictogramas/2714.png" alt="Pictograma de contar" /><span><strong>¿Cuántos botones?</strong> Al abrochar el abrigo, contad los botones. Tocad cada botón al contar.</span></li>
+      </ol>
+
+      <h2>En casa, las mismas normas que en el cole</h2>
+      <ul class="normas-casa">
+        <li><img src="pictogramas/8674.png" alt="Pictograma de nada a la boca" /><span>Las piezas pequeñas no se meten en la boca. Por ejemplo, tapones, pompones, monedas o botones sueltos.</span></li>
+        <li><span data-dibujo="manopla-azul" data-alt="Dibujo de una manopla azul"></span><span>Si vuestro peque todavía se lleva objetos a la boca, usad solo ropa y zapatos para jugar.</span></li>
+        <li><img src="pictogramas/8975.png" alt="Pictograma de lavarse las manos" /><span>Al terminar, lavaos las manos.</span></li>
+      </ul>
+      <p style="margin-top: 2.4mm">Si os pedimos tapones para clase, que sean de botellas de agua o de leche. Nunca de productos de limpieza ni de medicinas.</p>
+
+      <div class="recuadro">
+        <h2>Nota del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Estaciones de matemáticas de invierno.</strong> IdEducando, 2026. Licencia CC BY-NC-SA 4.0. Pictogramas: Sergio
+          Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La manopla es de IdEducando.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja final">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Fuentes y créditos</p>
+        <h1>Fuentes, licencia y créditos</h1>
+      </div>
+      <div class="creditos">
+        <p>
+          <strong>Estaciones de matemáticas de invierno: seis mesas en tres niveles y con fichas seguras.</strong> IdEducando,
+          noviembre de 2026. Ficha del material:
+          <a class="url" href="https://www.ideducando.es/material-gratuito/estaciones-matematicas-invierno/">ideducando.es/material-gratuito/estaciones-matematicas-invierno</a>.
+          Todas las fuentes se consultaron en su origen el 4 de noviembre de 2026.
+        </p>
+
+        <h2>Currículo</h2>
+        <ul>
+          <li>
+            Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación
+            Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056),
+            art. 14.1 (pág. 33060) y art. 17.3 (pág. 33061); Crecimiento en Armonía, criterios del segundo ciclo (pág. 33083) y
+            saberes (pág. 33084); Descubrimiento y Exploración del Entorno, orientaciones (pág. 33088), criterios del segundo ciclo
+            (pág. 33094) y saberes (págs. 33095 y 33096).
+          </li>
+        </ul>
+
+        <h2>Diseño Universal para el Aprendizaje</h2>
+        <ul>
+          <li>CAST (2024). Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0: consideraciones 2.5, 4.1, 6.4, 7.3, 8.2 y 8.3. udlguidelines.cast.org/es</li>
+        </ul>
+
+        <h2>Matemáticas con las manos</h2>
+        <ul>
+          <li>
+            Carbonneau, K. J., Marley, S. C. y Selig, J. P. (2013). A meta-analysis of the efficacy of teaching mathematics with
+            concrete manipulatives. <em>Journal of Educational Psychology</em>, 105(2), 380-400. Identificador digital (DOI):
+            10.1037/a0031084. Resumen en ERIC (Education Resources Information Center), eric.ed.gov, registro EJ1007941.
+          </li>
+        </ul>
+
+        <h2>Seguridad</h2>
+        <ul>
+          <li>
+            Real Decreto 1205/2011, de 26 de agosto, sobre la seguridad de los juguetes. Boletín Oficial del Estado (BOE) n.º 209, de 31
+            de agosto de 2011, texto consolidado con la actualización del 28 de agosto de 2026: anexo II, parte I, punto 4 d), y anexo
+            V, parte B, punto 1 («No conviene para niños menores de 36 meses»).
+          </li>
+          <li>
+            Asociación Española de Pediatría (AEP), Comité de Soporte Vital (diciembre de 2024). <em>Atragantamiento</em>: medidas de
+            prevención con juguetes y qué hacer ante un atragantamiento.
+            <span class="url">static.aeped.es/atragantamiento_csvaep_final_6bd02592cf.pdf</span>
+          </li>
+        </ul>
+
+        <h2>Materiales de IdEducando que usa</h2>
+        <p>
+          La <a href="https://www.ideducando.es/material-gratuito/agenda-visual-semanal/">agenda visual</a>, las
+          <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">pausas activas</a>, el
+          <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">tablero de comunicación</a> y el
+          <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>, todos
+          en ideducando.es/material-gratuito.
+        </p>
+
+        <h2>Pictogramas, dibujos y licencia</h2>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao
+          para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si cambias el material,
+          deja este texto.
+        </p>
+        <p>
+          Los demás dibujos son de IdEducando: copos, pompones, tapones, ropa, bufandas, muñecos de nieve, témpano y taza de chocolate.
+        </p>
+        <p>
+          Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre: IdEducando nace para ayudar a quien
+          acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no deja venderlo. La licencia CC
+          BY-NC-SA 4.0 deja copiarlo y adaptarlo siempre que se cite a IdEducando, no se use para ganar dinero y se comparta con la
+          misma licencia.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------------------------------
+      // Datos y dibujos del material. Los dibujos propios son SVG; los pictogramas de ARASAAC están
+      // en pictogramas/NÚMERO.png.
+      // Medidas: las fichas se imprimen de 47 mm y, plastificadas con 2 o 3 mm de borde, miden unos 52 mm.
+      // Por eso los sitios del témpano miden 50 mm y las bufandas de medir, 52 mm por cada manopla.
+      // ------------------------------------------------------------------------------------------
+      const M = '#1e2b55';
+      const TINTA = '#1d1d1b';
+      const LOGO = '<img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">';
+      const ATRIB_ARASAAC = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // Colores de la ropa y su marca, para no depender solo del color (estación 4).
+      const COLOR = {
+        azul: { r: '#2f6fd6', o: '#1b4a9c', luz: '#7ea8ec', marca: 'copo', nombre: 'azul' },
+        rojo: { r: '#e8553e', o: '#a8321f', luz: '#f39a8b', marca: 'corazon', nombre: 'rojo' },
+        amarillo: { r: '#f6c12e', o: '#a87a00', luz: '#fbe08c', marca: 'estrella', nombre: 'amarillo' },
+        // Solo para las manoplas de medir de la estación 5: así no se mezclan con la ropa de la estación 4.
+        verde: { r: '#1fa67a', o: '#127055', luz: '#8fdcc0', marca: null, nombre: 'verde' },
+      };
+
+      const f = (n) => Number(n.toFixed(2));
+
+      function svg(contenido, { vb = '0 0 100 100', clase = '', estilo = '', etiqueta = '' } = {}) {
+        const accesible = etiqueta ? `role="img" aria-label="${etiqueta}"` : 'aria-hidden="true"';
+        return `<svg class="${clase}" style="${estilo}" viewBox="${vb}" ${accesible}>${contenido}</svg>`;
+      }
+
+      // ---------------------------------------------------------------- Dibujos propios
+
+      // Copo de nieve de seis brazos, azul claro con contorno oscuro.
+      function trazosCopo(cx, cy, R) {
+        let d = '';
+        for (let i = 0; i < 6; i++) {
+          const a = ((-90 + i * 60) * Math.PI) / 180;
+          const p = (r) => [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
+          const [x1, y1] = p(R);
+          d += `M${f(cx)} ${f(cy)} L${f(x1)} ${f(y1)} `;
+          for (const [r, l] of [[R * 0.52, R * 0.3], [R * 0.8, R * 0.19]]) {
+            const [bx, by] = p(r);
+            for (const s of [-1, 1]) {
+              const b = a + (s * 48 * Math.PI) / 180;
+              d += `M${f(bx)} ${f(by)} L${f(bx + Math.cos(b) * l)} ${f(by + Math.sin(b) * l)} `;
+            }
+          }
+        }
+        return d;
+      }
+
+      function copo(opc = {}) {
+        const d = trazosCopo(50, 50, 41);
+        return svg(
+          `<path d="${d}" stroke="${TINTA}" stroke-width="10" stroke-linecap="round" fill="none"/>
+           <path d="${d}" stroke="#a9d0f8" stroke-width="5" stroke-linecap="round" fill="none"/>
+           <circle cx="50" cy="50" r="7.5" fill="#a9d0f8" stroke="${TINTA}" stroke-width="2.6"/>`,
+          opc,
+        );
+      }
+
+      // Pompón: bola de borde rizado, blanca o roja.
+      function pompon(tipo = 'blanco', opc = {}) {
+        const relleno = tipo === 'rojo' ? '#e8553e' : '#f7f9fd';
+        const fibra = tipo === 'rojo' ? '#b13a26' : '#b9c6dd';
+        let d = '';
+        for (let g = 0; g <= 360; g += 3) {
+          const a = (g * Math.PI) / 180;
+          const r = 38 + 3.4 * Math.sin(17 * a);
+          d += `${g ? 'L' : 'M'}${f(50 + Math.cos(a) * r)} ${f(51 + Math.sin(a) * r)} `;
+        }
+        const fibras = [
+          [33, 36, 43, 31], [55, 28, 65, 34], [27, 55, 31, 64], [61, 58, 70, 52], [44, 68, 54, 72], [45, 46, 55, 48], [36, 49, 40, 44],
+        ]
+          .map(([x1, y1, x2, y2]) => `M${x1} ${y1} Q${(x1 + x2) / 2} ${(y1 + y2) / 2 - 4} ${x2} ${y2}`)
+          .join(' ');
+        return svg(
+          `<path d="${d}Z" fill="${relleno}" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+           <path d="${fibras}" stroke="${fibra}" stroke-width="2.6" stroke-linecap="round" fill="none"/>`,
+          opc,
+        );
+      }
+
+      // Tapón de botella visto un poco desde arriba, con estrías en el borde.
+      function tapon(opc = {}) {
+        let estrias = '';
+        for (let x = 21; x <= 79; x += 6) {
+          const fondo = 64 + 11 * Math.sqrt(Math.max(0, 1 - ((x - 50) / 34) ** 2)) - 2.5;
+          estrias += `M${x} 42 V${f(fondo)} `;
+        }
+        return svg(
+          `<path d="M16 38 V64 A34 11 0 0 0 84 64 V38 Z" fill="#2f6fd6" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+           <path d="${estrias}" stroke="#1b4a9c" stroke-width="2.4"/>
+           <ellipse cx="50" cy="38" rx="34" ry="11" fill="#7ea8ec" stroke="${TINTA}" stroke-width="2.8"/>
+           <ellipse cx="50" cy="38" rx="23" ry="6.4" fill="none" stroke="#1b4a9c" stroke-width="1.8"/>`,
+          opc,
+        );
+      }
+
+      // Manopla de frente: pulgar, mano y puño de punto.
+      function manoplaDibujo(c, { puno } = {}) {
+        let estrias = '';
+        for (let x = 33; x <= 72; x += 6) estrias += `M${x} 74 V86 `;
+        return `<g transform="translate(5 1)">
+          <path d="M33 61 C17 63 9 51 13 41 C16 33 27 34 32 43 Z" fill="${c.r}" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+          <path d="M30 72 V36 C30 18 40 10 52 10 C64 10 74 18 74 36 V72 Z" fill="${c.r}" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+          <path d="M38 26 C40 20 45 17 50 17" stroke="${c.luz}" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+          <rect x="27" y="70" width="50" height="18" rx="4" fill="${puno ?? c.o}" stroke="${TINTA}" stroke-width="2.8"/>
+          <path d="${estrias}" stroke="${c.luz}" stroke-width="1.8"/></g>`;
+      }
+
+      function manopla(color = 'azul', opc = {}) {
+        return svg(manoplaDibujo(COLOR[color]), opc);
+      }
+
+      // Gorro de lana con pompón y borde de punto.
+      function gorroDibujo(c, { pomponColor = '#f7f9fd' } = {}) {
+        let estrias = '';
+        for (let x = 19; x <= 83; x += 6) estrias += `M${x} 67 V82 `;
+        let bola = '';
+        for (let g = 0; g <= 360; g += 6) {
+          const a = (g * Math.PI) / 180;
+          const r = 11 + 1.3 * Math.sin(9 * a);
+          bola += `${g ? 'L' : 'M'}${f(50 + Math.cos(a) * r)} ${f(18 + Math.sin(a) * r)} `;
+        }
+        return `<path d="M18 70 C18 40 32 27 50 27 C68 27 82 40 82 70 Z" fill="${c.r}" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+          <path d="M26 52 C38 46 62 46 74 52" stroke="${c.luz}" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <rect x="13" y="64" width="74" height="21" rx="5" fill="${c.o}" stroke="${TINTA}" stroke-width="2.8"/>
+          <path d="${estrias}" stroke="${c.luz}" stroke-width="1.8"/>
+          <path d="${bola}Z" fill="${pomponColor}" stroke="${TINTA}" stroke-width="2.6" stroke-linejoin="round"/>`;
+      }
+
+      function gorro(color = 'azul', opc = {}) {
+        return svg(gorroDibujo(COLOR[color]), opc);
+      }
+
+      // Calcetín con puño, talón y punta.
+      function calcetin(color = 'azul', opc = {}) {
+        const c = COLOR[color];
+        return svg(
+          `<path d="M38 12 H64 V56 C64 63 69 66 77 67 C91 69 93 87 80 89 H47 C33 89 29 78 33 69 L38 59 Z" fill="${c.r}" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+           <path d="M38 12 H64 V24 H38 Z" fill="${c.o}" stroke="${TINTA}" stroke-width="2.6" stroke-linejoin="round"/>
+           <path d="M33 69 C36 76 43 79 50 77 L47 89 C33 89 29 78 33 69 Z" fill="${c.o}" stroke="${TINTA}" stroke-width="2.2" stroke-linejoin="round"/>
+           <path d="M80 89 C88 87 90 76 82 70 C78 76 76 83 80 89 Z" fill="${c.o}" stroke="${TINTA}" stroke-width="2.2" stroke-linejoin="round"/>
+           <path d="M43 16 V20 M49 16 V20 M55 16 V20 M60 16 V20" stroke="${c.luz}" stroke-width="1.8"/>`,
+          opc,
+        );
+      }
+
+      // Marca de cada color: copo (azul), corazón (rojo) y estrella (amarillo).
+      function formaMarca(tipo, cx, cy, r, c) {
+        if (tipo === 'copo') {
+          return `<path d="${trazosCopo(cx, cy, r)}" stroke="${c.o}" stroke-width="${f(r * 0.3)}" stroke-linecap="round" fill="none"/>`;
+        }
+        if (tipo === 'corazon') {
+          const s = r / 10;
+          return `<path d="M${cx} ${cy + 7 * s} C${cx - 7 * s} ${cy + 2 * s} ${cx - 9.4 * s} ${cy - 2.4 * s} ${cx - 6.6 * s} ${cy - 5.6 * s} C${cx - 4 * s} ${cy - 8.4 * s} ${cx - 1 * s} ${cy - 6.6 * s} ${cx} ${cy - 4.2 * s} C${cx + 1 * s} ${cy - 6.6 * s} ${cx + 4 * s} ${cy - 8.4 * s} ${cx + 6.6 * s} ${cy - 5.6 * s} C${cx + 9.4 * s} ${cy - 2.4 * s} ${cx + 7 * s} ${cy + 2 * s} ${cx} ${cy + 7 * s} Z" fill="${c.r}" stroke="${TINTA}" stroke-width="${f(r * 0.16)}" stroke-linejoin="round"/>`;
+        }
+        let d = '';
+        for (let i = 0; i < 10; i++) {
+          const a = ((-90 + i * 36) * Math.PI) / 180;
+          const rr = i % 2 ? r * 0.44 : r;
+          d += `${i ? 'L' : 'M'}${f(cx + Math.cos(a) * rr)} ${f(cy + 0.5 + Math.sin(a) * rr)} `;
+        }
+        return `<path d="${d}Z" fill="${c.r}" stroke="${TINTA}" stroke-width="${f(r * 0.14)}" stroke-linejoin="round"/>`;
+      }
+
+      function marcaColor(color, opc = {}) {
+        const c = COLOR[color];
+        return svg(
+          `<circle cx="10" cy="10" r="9.2" fill="#fff" stroke="${TINTA}" stroke-width="0.9"/>${formaMarca(c.marca, 10, 10.2, 6.6, c)}`,
+          { vb: '0 0 20 20', ...opc },
+        );
+      }
+
+      // Muñeco de nieve con bufanda y botones (n botones dibujados), en una tarjeta de ancho W y alto H (mm).
+      function posicionesBotones(n, nivel, cx, cy) {
+        if (!n) return [];
+        if (nivel === 1) return Array.from({ length: n }, (_, i) => [cx, cy + (i - (n - 1) / 2) * 9.6, 3.4]);
+        if (nivel === 2) {
+          if (n <= 3) return Array.from({ length: n }, (_, i) => [cx, cy + (i - (n - 1) / 2) * 8.4, 2.9]);
+          const filas = Math.ceil(n / 2);
+          return Array.from({ length: n }, (_, i) => {
+            const col = i < filas ? 0 : 1;
+            const fila = col ? i - filas : i;
+            return [cx + (col ? 4.8 : -4.8), cy + (fila - (filas - 1) / 2) * 8.4, 2.9];
+          });
+        }
+        // Nivel 3: de 5 en 5, como un marco de 10 puesto de pie.
+        return Array.from({ length: n }, (_, i) => {
+          const col = i < 5 ? 0 : 1;
+          const fila = i % 5;
+          return [cx + (col ? 4.4 : -4.4), cy + (fila - 2) * 5.9, 2.25];
+        });
+      }
+
+      function munecoTarjeta(n, nivel, W, H) {
+        const cx = W / 2;
+        const grande = nivel === 1;
+        const cabeza = { cy: grande ? 15 : 14, r: grande ? 10.5 : 9.6 };
+        const cuerpo = { cy: grande ? 45.5 : 44, r: grande ? 18 : 17 };
+        const botones = posicionesBotones(n, nivel, cx, cuerpo.cy + 2)
+          .map(([x, y, r]) => `<circle cx="${f(x)}" cy="${f(y)}" r="${r}" fill="${M}"/>`)
+          .join('');
+        const cuello = cabeza.cy + cabeza.r - 0.5;
+        return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">
+          <ellipse cx="${cx}" cy="${H - 4.5}" rx="${W / 2 - 3}" ry="3.2" fill="#e4edfb"/>
+          <circle cx="${cx}" cy="${cuerpo.cy}" r="${cuerpo.r}" fill="#fff" stroke="${M}" stroke-width="0.8"/>
+          <circle cx="${cx}" cy="${cabeza.cy}" r="${cabeza.r}" fill="#fff" stroke="${M}" stroke-width="0.8"/>
+          <circle cx="${f(cx - 3.4)}" cy="${f(cabeza.cy - 1.6)}" r="1.15" fill="${M}"/>
+          <circle cx="${f(cx + 3.4)}" cy="${f(cabeza.cy - 1.6)}" r="1.15" fill="${M}"/>
+          <path d="M${f(cx - 0.3)} ${f(cabeza.cy + 0.6)} L${f(cx + 6.6)} ${f(cabeza.cy + 1.9)} L${f(cx - 0.3)} ${f(cabeza.cy + 3)} Z" fill="#f5961f" stroke="${M}" stroke-width="0.45" stroke-linejoin="round"/>
+          <path d="M${f(cx - 3.6)} ${f(cabeza.cy + 4.6)} Q${cx} ${f(cabeza.cy + 6.8)} ${f(cx + 3.6)} ${f(cabeza.cy + 4.6)}" stroke="${M}" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+          <path d="M${f(cx - 9.6)} ${f(cuello - 1.6)} Q${cx} ${f(cuello + 2.6)} ${f(cx + 9.6)} ${f(cuello - 1.6)} L${f(cx + 9.6)} ${f(cuello + 2.2)} Q${cx} ${f(cuello + 6.4)} ${f(cx - 9.6)} ${f(cuello + 2.2)} Z" fill="#e8553e" stroke="${M}" stroke-width="0.5" stroke-linejoin="round"/>
+          <path d="M${f(cx + 4.5)} ${f(cuello + 3)} L${f(cx + 7.4)} ${f(cuello + 7.4)} L${f(cx + 10.6)} ${f(cuello + 6.4)} L${f(cx + 7.8)} ${f(cuello + 2.2)} Z" fill="#e8553e" stroke="${M}" stroke-width="0.5" stroke-linejoin="round"/>
+          ${botones}</svg>`;
+      }
+
+      // Muñeco de nieve con gorro (icono, portada y tarjeta de grupo).
+      function munecoGorro(opc = {}) {
+        return svg(
+          `<ellipse cx="50" cy="92" rx="34" ry="5" fill="#e4edfb"/>
+           <circle cx="50" cy="67" r="23" fill="#fff" stroke="${TINTA}" stroke-width="2.4"/>
+           <circle cx="50" cy="34" r="15" fill="#fff" stroke="${TINTA}" stroke-width="2.4"/>
+           <circle cx="45" cy="32" r="1.9" fill="${TINTA}"/><circle cx="55" cy="32" r="1.9" fill="${TINTA}"/>
+           <path d="M50 36 L61 38 L50 40 Z" fill="#f5961f" stroke="${TINTA}" stroke-width="1" stroke-linejoin="round"/>
+           <path d="M36 47 Q50 54 64 47 L64 52 Q50 59 36 52 Z" fill="#e8553e" stroke="${TINTA}" stroke-width="1.4" stroke-linejoin="round"/>
+           <path d="M56 53 L60 66 L65 64 L61 51 Z" fill="#e8553e" stroke="${TINTA}" stroke-width="1.4" stroke-linejoin="round"/>
+           <circle cx="50" cy="63" r="2.6" fill="${TINTA}"/><circle cx="50" cy="72" r="2.6" fill="${TINTA}"/><circle cx="50" cy="81" r="2.6" fill="${TINTA}"/>
+           <g transform="translate(29 1) scale(0.42)">${gorroDibujo(COLOR.azul)}</g>`,
+          opc,
+        );
+      }
+
+      // Taza de chocolate caliente.
+      function taza(opc = {}) {
+        return svg(
+          `<path d="M40 22 C34 16 44 12 38 6 M52 22 C46 16 56 12 50 6 M64 22 C58 16 68 12 62 6" stroke="#9aa6c4" stroke-width="3" stroke-linecap="round" fill="none"/>
+           <path d="M78 42 C94 42 94 68 76 68" stroke="${TINTA}" stroke-width="9" fill="none" stroke-linecap="round"/>
+           <path d="M78 42 C94 42 94 68 76 68" stroke="#8c4fb8" stroke-width="5" fill="none" stroke-linecap="round"/>
+           <path d="M20 32 H80 V72 C80 84 70 90 60 90 H40 C30 90 20 84 20 72 Z" fill="#8c4fb8" stroke="${TINTA}" stroke-width="2.8" stroke-linejoin="round"/>
+           <ellipse cx="50" cy="32" rx="30" ry="7" fill="#7a4a22" stroke="${TINTA}" stroke-width="2.6"/>
+           <path d="M30 56 C40 52 60 52 70 56" stroke="#c8a6e2" stroke-width="3.6" stroke-linecap="round" fill="none"/>`,
+          opc,
+        );
+      }
+
+      // Bufandas de medir: cada una con su dibujo (rayas, lunares, cuadros o copos), de largo exacto.
+      const UNIDAD = 52; // mm: una ficha de manopla plastificada
+      const BUFANDAS = {
+        rayas: { n: 4, nombre: 'rayas', alt: 'Bufanda de rayas' },
+        lunares: { n: 2, nombre: 'lunares', alt: 'Bufanda de lunares' },
+        cuadros: { n: 5, nombre: 'cuadros', alt: 'Bufanda de cuadros' },
+        copos: { n: 3, nombre: 'copos', alt: 'Bufanda de copos' },
+      };
+
+      function dibujoBufanda(tipo, ancho, alto) {
+        const id = `${tipo}-${ancho}`;
+        let defs = '';
+        let fondo = '';
+        if (tipo === 'rayas') {
+          defs = `<pattern id="p-${id}" width="12" height="${alto}" patternUnits="userSpaceOnUse"><rect width="6" height="${alto}" fill="#e8553e"/><rect x="6" width="6" height="${alto}" fill="#f6c12e"/></pattern>`;
+          fondo = `url(#p-${id})`;
+        } else if (tipo === 'lunares') {
+          defs = `<pattern id="p-${id}" width="7" height="6" patternUnits="userSpaceOnUse"><rect width="7" height="6" fill="#2f6fd6"/><circle cx="3.5" cy="3" r="1.4" fill="#fff"/></pattern>`;
+          fondo = `url(#p-${id})`;
+        } else if (tipo === 'cuadros') {
+          defs = `<pattern id="p-${id}" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#1fa67a"/><path d="M3 0 V6 M0 3 H6" stroke="#bfeedd" stroke-width="1.1"/></pattern>`;
+          fondo = `url(#p-${id})`;
+        } else {
+          const paso = f(ancho / Math.max(1, Math.round(ancho / 11)));
+          defs = `<pattern id="p-${id}" width="${paso}" height="${alto}" patternUnits="userSpaceOnUse"><rect width="${paso}" height="${alto}" fill="#8c4fb8"/><path d="${trazosCopo(paso / 2, alto / 2, Math.min(3.6, alto / 4))}" stroke="#fff" stroke-width="0.8" stroke-linecap="round"/></pattern>`;
+          fondo = `url(#p-${id})`;
+        }
+        return `<defs>${defs}</defs><rect x="0.4" y="0.4" width="${f(ancho - 0.8)}" height="${f(alto - 0.8)}" rx="1.6" fill="${fondo}" stroke="${TINTA}" stroke-width="0.8"/>`;
+      }
+
+      function bufandaMedir(tipo) {
+        const b = BUFANDAS[tipo];
+        const ancho = UNIDAD * b.n;
+        return `<div class="tira-bufanda" role="img" aria-label="${b.alt}"><svg viewBox="0 0 ${ancho} 16" style="width:${ancho}mm" aria-hidden="true">${dibujoBufanda(tipo, ancho, 16)}</svg></div>`;
+      }
+
+      function dosBufandas(opc = {}) {
+        return svg(
+          `<g transform="translate(8 22)">${dibujoBufanda('rayas', 84, 20)}</g><g transform="translate(8 56)">${dibujoBufanda('lunares', 48, 20)}</g>`,
+          opc,
+        );
+      }
+
+      // ---------------------------------------------------------------- Estaciones (para el mapa, el panel y la autoevaluación)
+
+      const ESTACIONES = [
+        [1, 'Copos en la manopla', 'Cantidad', () => '<img class="icono" src="pictogramas/8314.png" alt="">'],
+        [2, 'Cada muñeco, su gorro', 'Cantidad y número', () => munecoGorro({ clase: 'icono' })],
+        [3, 'Teje la bufanda', 'Series', () => '<img class="icono" src="pictogramas/2290.png" alt="">'],
+        [4, 'Ropa a su caja', 'Clasificación', () => '<img class="icono" src="pictogramas/37361.png" alt="">'],
+        [5, 'Bufandas largas y cortas', 'Medida y comparación', () => dosBufandas({ clase: 'icono' })],
+        [6, 'Pingüinos en el témpano', 'Conteo', () => '<img class="icono" src="pictogramas/3243.png" alt="">'],
+      ];
+
+      document.getElementById('mapa').innerHTML = ESTACIONES.map(
+        ([n, nombre, idea, icono]) => `<li class="e${n}">${icono()}<span><b>${n} · ${nombre}</b>${idea}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Estación 1: manoplas con número
+
+      function manoplaCarta(W, H, { cifra, tam, puntos = [] }) {
+        const x1 = 0.24 * W, x2 = 0.92 * W, P = x2 - x1, R = P / 2;
+        const ytop = 0.05 * H, yb = 0.8 * H;
+        const forma = `M${f(x1)} ${f(yb)} V${f(ytop + R)} A${f(R)} ${f(R)} 0 0 1 ${f(x2)} ${f(ytop + R)} V${f(yb)} Z`;
+        const pulgar = `M${f(x1 + 0.5)} ${f(0.68 * H)} C${f(x1 - 0.24 * W)} ${f(0.7 * H)} ${f(x1 - 0.24 * W)} ${f(0.42 * H)} ${f(x1 + 0.5)} ${f(0.46 * H)} Z`;
+        let estrias = '';
+        for (let x = x1 + 3; x < x2 - 1; x += 4) estrias += `M${f(x)} ${f(yb + 1.4)} V${f(yb + 0.15 * H - 1.4)} `;
+        const dots = puntos.map(([x, y, r]) => `<circle cx="${f(x)}" cy="${f(y)}" r="${r}" fill="${M}"/>`).join('');
+        return {
+          cx: (x1 + x2) / 2,
+          dibujo: `<svg class="fondo" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+            <path d="${pulgar}" fill="#e4edfb" stroke="#2f6fd6" stroke-width="0.7" stroke-linejoin="round"/>
+            <path d="${forma}" fill="#e4edfb" stroke="#2f6fd6" stroke-width="0.7"/>
+            <rect x="${f(x1 - 1)}" y="${f(yb)}" width="${f(P + 2)}" height="${f(0.15 * H)}" rx="2" fill="#2f6fd6"/>
+            <path d="${estrias}" stroke="#a9c6f2" stroke-width="0.5"/>${dots}</svg>`,
+        };
+      }
+
+      function puntosGrandes(n, cx, cy) {
+        const pos = { 1: [[0, 0]], 2: [[-9, 0], [9, 0]], 3: [[0, -8], [-9, 7], [9, 7]] }[n];
+        return pos.map(([dx, dy]) => [cx + dx, cy + dy, 5.6]);
+      }
+
+      function puntosDado(n, cx, cy) {
+        const A = -8.4, B = 0, C = 8.4;
+        const pos = {
+          1: [[B, B]], 2: [[A, A], [C, C]], 3: [[A, A], [B, B], [C, C]], 4: [[A, A], [C, A], [A, C], [C, C]],
+          5: [[A, A], [C, A], [B, B], [A, C], [C, C]], 6: [[A, A], [A, B], [A, C], [C, A], [C, B], [C, C]],
+        }[n];
+        return pos.map(([dx, dy]) => [cx + dx, cy + dy, 2.9]);
+      }
+
+      // En las tarjetas estrechas (nivel 3), la marca va en pequeño para no tapar el dibujo.
+      const marcaNivel = (n, chica = false) => `<span class="nv n${n}${chica ? '' : ' grande'} marca">${n}</span>`;
+
+      function cartaManopla(n, nivel) {
+        const [W, H] = { 1: [58, 80], 2: [58, 62], 3: [33, 56] }[nivel];
+        const cx = (0.24 * W + 0.92 * W) / 2;
+        const puntos = nivel === 1 ? puntosGrandes(n, cx, 46) : nivel === 2 ? puntosDado(n, cx, 36) : [];
+        const { dibujo } = manoplaCarta(W, H, { puntos });
+        const cifra = { 1: ['58pt', '6mm'], 2: ['40pt', '5mm'], 3: ['46pt', '13mm'] }[nivel];
+        const izq = f(cx - W / 2);
+        const texto = n === 1 ? '1 copo' : `${n} copos`;
+        return `<li class="pieza manopla-carta" style="width:${W}mm;height:${H}mm" aria-label="Manopla del ${n}${nivel < 3 ? `, con ${n} punto${n > 1 ? 's' : ''}` : ''}: ${texto}">${dibujo}${marcaNivel(nivel, nivel === 3)}<span class="cifra" style="font-size:${cifra[0]};top:${cifra[1]};left:${izq}mm;right:${-izq}mm">${n}</span></li>`;
+      }
+
+      document.getElementById('e1-n1').innerHTML = [1, 2, 3].map((n) => cartaManopla(n, 1)).join('');
+      document.getElementById('e1-n2').innerHTML = [1, 2, 3, 4, 5, 6].map((n) => cartaManopla(n, 2)).join('');
+      document.getElementById('e1-n3').innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => cartaManopla(n, 3)).join('');
+
+      // Manopla de 10: una manopla tumbada con dos filas de cinco círculos de 27 mm.
+      (function () {
+        const W = 190, H = 96;
+        let circulos = '';
+        for (let fila = 0; fila < 2; fila++) {
+          for (let col = 0; col < 5; col++) {
+            circulos += `<circle cx="${f(44 + col * 29)}" cy="${f(46.5 + fila * 30)}" r="13.5" fill="#fff" stroke="#2f6fd6" stroke-width="0.7" stroke-dasharray="2 1.4"/>`;
+          }
+        }
+        let estrias = '';
+        for (let y = 33; y <= 88; y += 4) estrias += `M8 ${y} H25 `;
+        document.getElementById('e1-diez').innerHTML = `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">
+          <rect x="0.4" y="0.4" width="${W - 0.8}" height="${H - 0.8}" rx="4" fill="#fff" stroke="#46578c" stroke-width="0.35" stroke-dasharray="1.6 1.2"/>
+          <path d="M46 31 C47 17 60 8 74 10 C86 12 88 24 80 31 Z" fill="#e4edfb" stroke="#2f6fd6" stroke-width="0.8" stroke-linejoin="round"/>
+          <path d="M28 30 H152 C172 30 184 44 184 61.5 C184 79 172 93 152 93 H28 Z" fill="#e4edfb" stroke="#2f6fd6" stroke-width="0.8" stroke-linejoin="round"/>
+          <rect x="6" y="29" width="22" height="64" rx="3" fill="#2f6fd6"/>
+          <path d="${estrias}" stroke="#a9c6f2" stroke-width="0.5"/>
+          ${circulos}</svg>`;
+      })();
+
+      // ---------------------------------------------------------------- Estación 2: muñecos de nieve
+
+      function cartaMuneco(n, nivel) {
+        const [W, H] = nivel === 3 ? [42, 70] : [58, 70];
+        const texto = n === 0 ? 'sin botones' : n === 1 ? 'con 1 botón' : `con ${n} botones`;
+        return `<li class="pieza" style="width:${W}mm;height:${H}mm" aria-label="Muñeco de nieve ${texto}">${munecoTarjeta(n, nivel, W, H)}${marcaNivel(nivel, nivel === 3)}</li>`;
+      }
+
+      document.getElementById('e2-n1').innerHTML = [1, 2, 3].map((n) => cartaMuneco(n, 1)).join('');
+      document.getElementById('e2-n2').innerHTML = [1, 2, 3, 4, 5, 6].map((n) => cartaMuneco(n, 2)).join('');
+      document.getElementById('e2-n3').innerHTML = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => cartaMuneco(n, 3)).join('');
+
+      // ---------------------------------------------------------------- Estación 3: bufandas para tejer
+
+      const PIEZA = {
+        blanco: { dibujo: (o) => pompon('blanco', o), nombre: 'pompón blanco' },
+        rojo: { dibujo: (o) => pompon('rojo', o), nombre: 'pompón rojo' },
+        tapon: { dibujo: (o) => tapon(o), nombre: 'tapón' },
+      };
+
+      // Cada bufanda: rayas con la pieza dibujada (30 mm) y rayas vacías (44 mm), donde van las piezas. null = vacía.
+      const SERIES = [
+        [1, 'Bufanda 1', 'blanco, tapón', ['blanco', 'tapon', 'blanco', 'tapon', 'blanco', null, null]],
+        [1, 'Bufanda 2', 'tapón, rojo', ['tapon', 'rojo', 'tapon', 'rojo', 'tapon', null, null]],
+        [2, 'Bufanda 3', 'blanco, blanco, tapón', ['blanco', 'blanco', 'tapon', 'blanco', 'blanco', null, null]],
+        [2, 'Bufanda 4', 'tapón, rojo, rojo', ['tapon', 'rojo', 'rojo', 'tapon', 'rojo', null, null]],
+        [3, 'Bufanda 5', 'blanco, tapón, rojo', ['blanco', 'tapon', 'rojo', 'blanco', 'tapon', null, null]],
+        [3, 'Bufanda 6', '¿qué falta en medio?', ['rojo', 'blanco', 'tapon', 'rojo', null, 'tapon', null]],
+      ];
+
+      const flecos = `<svg class="flecos" viewBox="0 0 5 31" aria-hidden="true"><path d="M5 2 H0.6 M5 6.5 H0.6 M5 11 H0.6 M5 15.5 H0.6 M5 20 H0.6 M5 24.5 H0.6 M5 29 H0.6" stroke="#8c4fb8" stroke-width="1.1" stroke-linecap="round"/></svg>`;
+
+      function tiraTejer([nivel, nombre, pista, rayas]) {
+        const celdas = rayas
+          .map((tipo, i) => {
+            if (!tipo) return '<div class="vacia"><span>?</span></div>';
+            const antes = rayas[i - 1], despues = rayas[i + 1];
+            const clase = !antes && !despues ? 'sola' : !antes ? 'primera' : !despues ? 'ultima' : '';
+            return `<div class="raya ${clase}">${PIEZA[tipo].dibujo({ etiqueta: PIEZA[tipo].nombre })}</div>`;
+          })
+          .join('');
+        const texto = rayas.map((t) => (t ? PIEZA[t].nombre : 'raya vacía')).join(', ');
+        return `<li class="tira-tejer" aria-label="${nombre}, nivel ${nivel}: ${texto}"><div class="banda"></div>${flecos}<p class="etiqueta"><span class="nv n${nivel}">${nivel}</span>${nombre} <span class="desc">· ${pista}</span></p>${celdas}</li>`;
+      }
+
+      document.getElementById('e3-a').innerHTML = SERIES.slice(0, 3).map(tiraTejer).join('');
+      document.getElementById('e3-b').innerHTML = SERIES.slice(3).map(tiraTejer).join('');
+
+      // ---------------------------------------------------------------- Estación 4: tabla y etiquetas
+
+      document.getElementById('e4-tabla').innerHTML = `
+        <div class="esquina"></div>
+        <div class="cab col"><img src="pictogramas/4658.png" alt=""><span>grandes</span></div>
+        <div class="cab col"><img src="pictogramas/4716.png" alt=""><span>pequeños</span></div>
+        <div class="cab fila">${gorro('rojo')}<span>gorros</span></div>
+        <div class="casilla"></div><div class="casilla"></div>
+        <div class="cab fila">${manopla('azul')}<span>manoplas</span></div>
+        <div class="casilla"></div><div class="casilla"></div>`;
+
+      const muestraColor = (color) => {
+        const c = COLOR[color];
+        return svg(`<circle cx="50" cy="50" r="42" fill="${c.r}" stroke="${TINTA}" stroke-width="3"/>`);
+      };
+
+      const ETIQUETAS = [
+        [1, `<span style="position:relative;display:block;width:22mm;height:22mm">${gorro('amarillo', { estilo: 'position:absolute;left:0;top:0;width:15mm;height:15mm' })}${gorro('azul', { estilo: 'position:absolute;left:7mm;top:7mm;width:15mm;height:15mm' })}</span>`, 'gorros', ''],
+        [1, `<span style="position:relative;display:block;width:22mm;height:22mm">${manopla('rojo', { estilo: 'position:absolute;left:0;top:0;width:15mm;height:15mm' })}${manopla('amarillo', { estilo: 'position:absolute;left:7mm;top:7mm;width:15mm;height:15mm' })}</span>`, 'manoplas', ''],
+        [2, muestraColor('azul'), 'azul', 'azul'],
+        [2, muestraColor('rojo'), 'rojo', 'rojo'],
+        [2, muestraColor('amarillo'), 'amarillo', 'amarillo'],
+      ];
+      document.getElementById('e4-etiquetas').innerHTML = ETIQUETAS.map(
+        ([nivel, dibujo, texto, color]) =>
+          `<li class="etiqueta-caja e4"><span class="dibujo">${dibujo}</span><p>${texto}${color ? marcaColor(color) : ''}</p><span class="nv n${nivel}">${nivel}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Estación 5: bufandas, tarjetas y tabla
+
+      const tarjetaCmp = (id, texto, alt) => `<div class="tarjeta-cmp"><img src="pictogramas/${id}.png" alt="${alt}"><p>${texto}</p></div>`;
+      const miniBufanda = (tipo) => `<div class="mini arriba">${svg(dibujoBufanda(tipo, 34 * 4, 26), { vb: '0 0 136 26' })}<span>${BUFANDAS[tipo].nombre}</span></div>`;
+
+      document.getElementById('e5-contenido').innerHTML = `
+        <div class="medir-fila">${bufandaMedir('cuadros')}</div>
+        <div class="medir-fila">${bufandaMedir('rayas')}</div>
+        <div class="medir-fila">${bufandaMedir('copos')}</div>
+        <div class="medir-fila">${bufandaMedir('lunares')}${tarjetaCmp(4675, 'más<br>larga', 'Pictograma de largo')}${tarjetaCmp(4615, 'más<br>corta', 'Pictograma de corto')}</div>
+        <div class="tabla-medir" role="img" aria-label="Tabla para medir: una casilla para escribir cuántas manoplas mide cada bufanda">
+          <div class="rot arriba izq"><span class="nv n3 grande">3</span>Mido…</div>
+          ${['rayas', 'lunares', 'cuadros', 'copos'].map(miniBufanda).join('')}
+          <div class="rot izq">${manopla('verde', { estilo: 'width:11mm;height:11mm;flex:none' })}¿Cuántas?</div>
+          ${'<div class="escribe"></div>'.repeat(4)}
+        </div>`;
+
+      // ---------------------------------------------------------------- Estación 6: témpanos
+
+      function tempano(desde) {
+        const W = 272, H = 76;
+        const hielo = `M5 12 L30 9 L58 11 L84 8.5 L118 10 L150 7.5 L182 9.5 L214 7.5 L244 10 L268 8 L269 36 L267 64 L240 67 L206 65 L172 67.5 L138 65 L104 67.5 L70 65 L36 67.5 L8 65 L4 40 Z`;
+        const sitios = [0, 1, 2, 3, 4]
+          .map((i) => `<li class="sitio"><span class="cifra">${desde + i}</span></li>`)
+          .join('');
+        return `<li class="tempano" aria-label="Témpano con cinco sitios, del ${desde} al ${desde + 4}">
+          <svg viewBox="0 0 ${W} ${H}" aria-hidden="true">
+            <path d="${hielo}" fill="#e4edfb" stroke="#2f6fd6" stroke-width="0.8" stroke-linejoin="round"/>
+            <path d="M16 11.4 L52 11 M196 10.4 L236 11.2" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <p class="rotulo">${desde === 1 ? '<span class="nv n1">1</span>' : '<span class="nv n2">2</span>'}Tira ${desde === 1 ? '1' : '2'} <span class="desc">· ${desde === 1 ? 'Del 1 al 5' : 'Del 6 al 10, debajo de la tira 1'}</span></p>
+          <ol class="sitios">${sitios}</ol></li>`;
+      }
+
+      document.getElementById('e6-tempanos').innerHTML = tempano(1) + tempano(6);
+
+      // ---------------------------------------------------------------- Tarjetas de pasos y panel
+
+      const P = (id) => `<img src="pictogramas/${id}.png" alt="">`;
+      const PASOS = {
+        1: [[2474, 'Mira el número'], [6989, 'Pon los copos'], [2714, 'Cuenta'], [5514, 'Guarda']],
+        2: [[2714, 'Cuenta los botones'], [6947, 'Busca el gorro'], [6989, 'Pónselo'], [5514, 'Guarda']],
+        3: [[2474, 'Mira la bufanda'], [9692, 'Di la serie'], [6989, 'Pon lo que sigue'], [6998, 'Comprueba']],
+        4: [[10148, 'Coge una prenda'], [9692, 'Di cómo es'], [6989, 'Ponla en su caja'], [6998, 'Comprueba']],
+        5: [[26817, 'Junta las puntas'], [2474, 'Mira cuál es más larga'], [38712, 'Mide con manoplas'], [2714, 'Cuenta']],
+        6: [[10148, 'Coge pingüinos'], [6989, 'Súbelos al témpano'], [2714, 'Cuenta'], [9692, 'Di cuántos hay']],
+      };
+      document.getElementById('pasos').innerHTML = ESTACIONES.map(
+        ([n, nombre]) => `<li class="tarjeta-pasos e${n}">
+          <p class="tarjeta-pasos__cab"><span class="num-estacion">${n}</span>${nombre}</p>
+          <ol>${PASOS[n].map(([id, txt]) => `<li>${P(id)}${txt}</li>`).join('')}</ol>
+          <p class="tarjeta-pasos__pie"><img src="pictogramas/8674.png" alt="">Nada a la boca.</p></li>`,
+      ).join('');
+
+      document.getElementById('panel').innerHTML = ESTACIONES.map(
+        ([n, nombre, , icono]) => `<div class="panel__estacion e${n}"><span class="num-estacion">${n}</span>${icono()}<p>${nombre}</p><span class="velcro">velcro<br>rugoso</span></div>`,
+      ).join('');
+
+      document.getElementById('panel-flecha').innerHTML = `<svg viewBox="0 0 277 5" aria-hidden="true">
+        <path d="M24 2.5 H249" stroke="${M}" stroke-width="0.8" stroke-dasharray="2 1.6"/><path d="M249 0 L254.5 2.5 L249 5 Z" fill="${M}"/></svg>
+        <p>Con cada señal, cada grupo pasa a la mesa de la derecha. Desde la 6, se vuelve a la 1.</p>`;
+
+      const GRUPOS = [
+        ['Los pingüinos', '<img class="icono" src="pictogramas/3243.png" alt="">'],
+        ['Los osos polares', '<img class="icono" src="pictogramas/2868.png" alt="">'],
+        ['Las focas', '<img class="icono" src="pictogramas/2397.png" alt="">'],
+        ['Los copos', copo({ clase: 'icono' })],
+        ['Los muñecos', munecoGorro({ clase: 'icono' })],
+        ['Los gorros', gorro('rojo', { clase: 'icono' })],
+      ];
+      document.getElementById('grupos').innerHTML = GRUPOS.map(
+        ([nombre, dib]) => `<li class="grupo"><p class="grupo__cab">${dib}<span>${nombre}</span></p><div class="grupo__lineas"><i></i><i></i><i></i><i></i><i></i></div></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Fichas (4 hojas de 20)
+
+      function fichaGorro(n, nivel) {
+        const puntos =
+          nivel === 1
+            ? { 1: [50], 2: [42, 58], 3: [34, 50, 66] }[n].map((x) => `<circle cx="${x}" cy="74.5" r="4.4" fill="#fff" stroke="${TINTA}" stroke-width="1.4"/>`).join('')
+            : '';
+        const dibujo = svg(`${gorroDibujo({ r: '#e8553e', o: '#a8321f', luz: '#f39a8b' })}${puntos}`, { clase: 'g' });
+        return `<li class="ficha" aria-label="Gorro del ${n}">${dibujo}<span class="cifra cifra-gorro">${n}</span><span class="nv n${nivel}">${nivel}</span></li>`;
+      }
+
+      function fichaRopa(tipo, color, tam, nivel) {
+        const dib = { gorro, manopla, calcetin }[tipo];
+        const nombre = { gorro: 'gorro', manopla: 'manopla', calcetin: 'calcetín' }[tipo];
+        const generoColor = tipo === 'manopla' ? { azul: 'azul', rojo: 'roja', amarillo: 'amarilla' }[color] : COLOR[color].nombre;
+        const tamTexto = tam === 'p' ? (tipo === 'manopla' ? ' pequeña' : ' pequeño') : tam === 'g' && nivel === 3 ? (tipo === 'manopla' ? ' grande' : ' grande') : '';
+        return `<li class="ficha" aria-label="${nombre} ${generoColor}${tamTexto}">${dib(color, { clase: tam === 'p' ? 'p' : 'r' })}${marcaColor(color, { clase: 'marca-color' })}<span class="nv n${nivel}">${nivel}</span></li>`;
+      }
+
+      const fichaSimple = (dibujo, nombre) => `<li class="ficha" aria-label="${nombre}">${dibujo}</li>`;
+      const repetir = (n, fn) => Array.from({ length: n }, (_, i) => fn(i)).join('');
+
+      const HOJAS = [
+        {
+          titulo: 'Hoja 1 de 4 · Versión segura de las estaciones 1 y 6',
+          fichas: repetir(10, () => fichaSimple(copo({ clase: 'g' }), 'copo')) + repetir(10, () => fichaSimple('<img class="g" src="pictogramas/3243.png" alt="">', 'pingüino')),
+          leyenda:
+            '<strong>En esta hoja:</strong> 10 copos para la estación 1 y 10 pingüinos para la estación 6. Solo hacen falta en la versión segura. Imprímela al 100 %, para que cada ficha mida 4,7 cm, y recórtalas antes de plastificar.',
+          atribucion: `${ATRIB_ARASAAC} Los copos son de IdEducando.`,
+        },
+        {
+          titulo: 'Hoja 2 de 4 · Gorros de la estación 2',
+          fichas:
+            [1, 2, 3].map((n) => fichaGorro(n, 1)).join('') +
+            [1, 2, 3, 4, 5, 6].map((n) => fichaGorro(n, 2)).join('') +
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => fichaGorro(n, 3)).join(''),
+          leyenda:
+            '<strong>En esta hoja:</strong> 20 gorros para la estación 2, en las dos versiones: 3 del nivel 1, con puntos, 6 del nivel 2 y 11 del nivel 3, del 0 al 10. La marca de abajo dice en qué sobre va cada uno.',
+          atribucion: 'Los gorros son dibujos de IdEducando.',
+        },
+        {
+          titulo: 'Hoja 3 de 4 · Estaciones 3 y 5',
+          fichas:
+            repetir(4, () => fichaSimple(pompon('blanco', { clase: 'g' }), 'pompón blanco')) +
+            repetir(4, () => fichaSimple(tapon({ clase: 'g' }), 'tapón')) +
+            repetir(4, () => fichaSimple(pompon('rojo', { clase: 'g' }), 'pompón rojo')) +
+            repetir(8, () => fichaSimple(manopla('verde', { clase: 'g' }), 'manopla verde para medir')),
+          leyenda:
+            '<strong>En esta hoja:</strong> 4 pompones blancos, 4 tapones y 4 pompones rojos para la estación 3, en la versión segura. 8 manoplas verdes, todas iguales, para medir en la estación 5, en las dos versiones.',
+          atribucion: 'Los pompones, los tapones y las manoplas son dibujos de IdEducando.',
+        },
+        {
+          titulo: 'Hoja 4 de 4 · Ropa de la estación 4',
+          fichas:
+            [['gorro', 'azul'], ['gorro', 'rojo'], ['gorro', 'amarillo'], ['manopla', 'azul'], ['manopla', 'rojo'], ['manopla', 'amarillo']]
+              .map(([t, c]) => fichaRopa(t, c, 'g', 1))
+              .join('') +
+            [['gorro', 'azul'], ['calcetin', 'azul'], ['manopla', 'rojo'], ['calcetin', 'rojo'], ['gorro', 'amarillo'], ['manopla', 'amarillo']]
+              .map(([t, c]) => fichaRopa(t, c, 'g', 2))
+              .join('') +
+            [['gorro', 'azul', 'g'], ['gorro', 'rojo', 'g'], ['gorro', 'amarillo', 'p'], ['gorro', 'azul', 'p'], ['manopla', 'amarillo', 'g'], ['manopla', 'rojo', 'g'], ['manopla', 'azul', 'p'], ['manopla', 'rojo', 'p']]
+              .map(([t, c, tam]) => fichaRopa(t, c, tam, 3))
+              .join(''),
+          leyenda:
+            '<strong>En esta hoja:</strong> 20 prendas para la estación 4, en las dos versiones: 6 del nivel 1, 6 del nivel 2 y 8 del nivel 3, grandes y pequeñas. Cada color lleva su marca: copo el azul, corazón el rojo y estrella el amarillo.',
+          atribucion: 'La ropa es de IdEducando.',
+        },
+      ];
+
+      document.getElementById('hojas-fichas').outerHTML = HOJAS.map(
+        (h) => `<section class="imp">
+          <header class="cab-imp"><h1>Fichas <small>${h.titulo}</small></h1>${LOGO}</header>
+          <ul class="fichas" aria-label="${h.titulo}">${h.fichas}</ul>
+          <p class="leyenda-fichas">${h.leyenda}</p>
+          <p class="atribucion">${h.atribucion}</p>
+        </section>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Registro y autoevaluación
+
+      document.getElementById('filas-registro').innerHTML = Array.from(
+        { length: 22 },
+        (_, i) => `<tr><td>${i + 1}</td><td></td>${'<td></td>'.repeat(6)}<td></td></tr>`,
+      ).join('');
+
+      const RESPUESTAS = [
+        [2617, 'Lo sé hacer', 'Pictograma de yo: un niño se señala a sí mismo'],
+        [4570, 'Me ayudan', 'Pictograma de ayudar: dos manos que se ayudan'],
+        [37163, 'Quiero repetir', 'Pictograma de otra vez: dos flechas en círculo'],
+      ];
+      document.getElementById('auto').innerHTML =
+        `<div class="auto-fila"><div></div>${RESPUESTAS.map(([id, txt, alt]) => `<div class="cabeza"><img src="pictogramas/${id}.png" alt="${alt}">${txt}</div>`).join('')}</div>` +
+        ESTACIONES.map(
+          ([n, nombre, , icono]) =>
+            `<div class="auto-fila e${n}"><div class="que"><span class="num-estacion">${n}</span>${icono()}<span>${nombre}</span></div>` +
+            RESPUESTAS.map(([id, txt]) => `<div class="rodea" aria-label="${txt}"><img src="pictogramas/${id}.png" alt=""></div>`).join('') +
+            '</div>',
+        ).join('');
+
+      // ---------------------------------------------------------------- Dibujos sueltos, rueda y portada
+
+      const DIBUJOS = {
+        'muneco-gorro': (o) => munecoGorro(o),
+        'dos-bufandas': (o) => dosBufandas(o),
+        'manopla-azul': (o) => manopla('azul', o),
+      };
+      for (const el of document.querySelectorAll('[data-dibujo]')) {
+        el.outerHTML = DIBUJOS[el.dataset.dibujo]({ clase: el.className, etiqueta: el.dataset.alt, estilo: el.closest('.normas-casa') ? 'width:13mm;height:13mm' : '' });
+      }
+
+      // Rueda de la rotación: seis mesas en círculo y flechas en el sentido del cambio.
+      (function () {
+        let flechas = '';
+        let mesas = '';
+        for (let i = 0; i < 6; i++) {
+          const a = ((-90 + i * 60) * Math.PI) / 180;
+          const x = 21 + Math.cos(a) * 15.5, y = 20 + Math.sin(a) * 15.5;
+          mesas += `<span class="mesa e${i + 1}" style="left:${f(x)}mm;top:${f(y)}mm">${i + 1}</span>`;
+          const a2 = ((-90 + i * 60 + 30) * Math.PI) / 180;
+          const xf = 21 + Math.cos(a2) * 16.2, yf = 20 + Math.sin(a2) * 16.2;
+          const giro = i * 60 + 30;
+          flechas += `<path d="M${f(xf - 2)} ${f(yf - 1.5)} L${f(xf + 1.9)} ${f(yf)} L${f(xf - 2)} ${f(yf + 1.5)} Z" fill="#46578c" transform="rotate(${giro} ${f(xf)} ${f(yf)})"/>`;
+        }
+        document.getElementById('rueda').innerHTML = `<svg viewBox="0 0 42 40" aria-hidden="true">${flechas}</svg>${mesas}<p class="centro">4 o 5 por grupo</p>`;
+      })();
+
+      // Portada: dibujos de invierno en círculos blancos y copos que caen.
+      (function () {
+        const ilu = document.getElementById('ilustracion');
+        const burbujas = [
+          [munecoGorro(), 146, 84, 48],
+          ['<img src="pictogramas/3243.png" alt="">', 108, 160, 42],
+          [gorro('rojo'), 160, 152, 34],
+          [manopla('azul'), 62, 198, 38],
+          ['<img src="pictogramas/2290.png" alt="">', 116, 212, 36],
+          [taza(), 22, 190, 32],
+        ];
+        for (const [dib, x, y, d] of burbujas) {
+          ilu.insertAdjacentHTML('beforeend', `<div class="burbuja" style="left:${x}mm;top:${y}mm;width:${d}mm;height:${d}mm">${dib}</div>`);
+        }
+        const caen = [
+          [134, 64, 10], [188, 80, 8], [128, 140, 12], [182, 136, 9], [92, 174, 8], [20, 232, 11], [168, 202, 12], [88, 246, 9],
+          [160, 234, 9], [192, 246, 7], [44, 168, 7], [6, 150, 9],
+        ];
+        for (const [x, y, d] of caen) {
+          ilu.insertAdjacentHTML('beforeend', copo({ clase: 'cae', estilo: `left:${x}mm;top:${y}mm;width:${d}mm;height:${d}mm` }));
+        }
+      })();
+    </script>
+  </body>
+</html>
