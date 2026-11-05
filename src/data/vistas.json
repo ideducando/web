@@ -179,6 +179,59 @@
       }
     ]
   },
+  "derechos-infancia-lectura-facil": {
+    "total": 32,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Lectura fácil · Con pictogramas"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para empezar"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Derecho 2 de 12"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Derecho 8 de 12"
+      },
+      {
+        "pagina": 17,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Preguntas · Nivel 1"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Todos tenemos los mismos derechos"
+      }
+    ]
+  },
   "dialogos-para-completar": {
     "total": 40,
     "fotos": [
