@@ -36,6 +36,59 @@
       }
     ]
   },
+  "cartilla-trabadas": {
+    "total": 30,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Fichas · lectura"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Trabadas con pl"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Juegos con pl"
+      },
+      {
+        "pagina": 15,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Trabadas con br"
+      },
+      {
+        "pagina": 27,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro de avance"
+      },
+      {
+        "pagina": 28,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
+      }
+    ]
+  },
   "checklist-programacion-murcia": {
     "total": 9,
     "fotos": [
