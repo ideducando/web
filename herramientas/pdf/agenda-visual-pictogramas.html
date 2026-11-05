@@ -1139,7 +1139,13 @@
         grid-template-columns: repeat(4, 44mm);
         grid-auto-rows: 21mm;
         justify-content: space-between;
-        row-gap: 2.8mm;
+        row-gap: 2.6mm;
+      }
+
+      .siglas {
+        margin: -1.4mm 0 2.4mm;
+        font-size: 11pt;
+        line-height: 1.3;
       }
 
       .rejilla-grandes {
@@ -1503,7 +1509,7 @@
       </div>
       <p class="familia-nota">
         <strong>Para la familia:</strong> plastificada, se usa con rotulador de pizarra blanca y se borra con un pañuelo
-        de papel. Preguntad de una en una y esperad la respuesta: puede señalar, rodear o dibujar. Si hoy no quiere
+        de papel. Preguntad de una en una y esperad la respuesta: puede señalarla o rodearla. Si hoy no quiere
         contarlo, no pasa nada. Lo intentáis otro día.
       </p>
       <p class="atribucion">
@@ -1664,13 +1670,12 @@
       </p>
       <h3>Cuándo</h3>
       <p>
-        Cuando mira la agenda sin que se lo digas, sabe qué viene después y lleva bien los cambios. Espera a verlo varias
-        semanas seguidas.
+        Cuando mira la agenda sin que se lo digas y lleva bien los cambios durante varias semanas seguidas.
       </p>
       <h3>Cómo, paso a paso</h3>
       <ol>
         <li>Retira primero tu ayuda, de más a menos: guiar su mano, señalar la agenda, decir una palabra y, al final, nada.</li>
-        <li>Enseña menos de una vez: de la semana al día, del día a la mañana y de la mañana a lo siguiente.</li>
+        <li>Enseña menos de una vez: primero, solo la mañana; después, solo lo que viene ahora.</li>
         <li>Cambia el formato: de la agenda de la pared a una tira en su mesa o a una agenda de papel.</li>
         <li>Pasa del dibujo a la palabra con las tarjetas en blanco.</li>
         <li>Cambia una sola cosa cada vez y espera a que esté asentada.</li>
@@ -1692,7 +1697,7 @@
       <p>
         Cada tarjeta lleva un pictograma de ARASAAC, con su número al lado. Para verlo, escribe
         <span class="url">arasaac.org/pictograms/es/</span> y el número: <span class="url">arasaac.org/pictograms/es/2317</span>
-        es «casa». Desde allí se descarga en blanco y negro, tachado o en alta resolución.
+        es «casa». Desde allí se puede descargar, por ejemplo, en blanco y negro o tachado.
       </p>
       <ul class="indice" id="indice"></ul>
       <p>
@@ -1908,8 +1913,10 @@
       const LEYENDA = `<ul class="leyenda">${Object.values(GRUPOS)
         .map((g) => `<li class="${g.clase}"><i></i>${g.nombre}</li>`)
         .join('')}</ul>`;
-      const hojaPequenas = (titulo, piezas) =>
-        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><h1>${titulo}</h1>${ATRIBUCION}</div>${LEYENDA}<div class="rejilla-pequenas">${piezas.join('')}</div></section>`;
+      const hojaPequenas = (titulo, piezas, nota = '') =>
+        `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><h1>${titulo}</h1>${ATRIBUCION}</div>${LEYENDA}${nota}<div class="rejilla-pequenas">${piezas.join('')}</div></section>`;
+      const SIGLAS =
+        '<p class="siglas"><strong>PT:</strong> Pedagogía Terapéutica. <strong>AL:</strong> Audición y Lenguaje. <strong>Psico:</strong> psicomotricidad.</p>';
       const hojaGrandes = (titulo, piezas) =>
         `<section class="hoja-tarjetas"><div class="cabecera-tarjetas"><h1>${titulo}</h1>${ATRIBUCION}</div><div class="rejilla-grandes">${piezas.join('')}</div></section>`;
 
@@ -1919,7 +1926,7 @@
       const pequenas2 = [...unicas.slice(40), ...copias, ...blancas];
 
       document.getElementById('hojas-tarjetas').outerHTML =
-        hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 1 de 2', unicas.slice(0, 40)) +
+        hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 1 de 2', unicas.slice(0, 40), SIGLAS) +
         hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 2 de 2', pequenas2) +
         hojaGrandes('Tarjetas grandes<br>8 × 8 cm · hoja 1 de 2', GRANDES.slice(0, 6).map(grande)) +
         hojaGrandes('Tarjetas grandes<br>8 × 8 cm · hoja 2 de 2', GRANDES.slice(6).map(grande));

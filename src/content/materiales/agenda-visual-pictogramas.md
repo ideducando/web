@@ -69,11 +69,11 @@ Está pensada para el alumnado con trastorno del espectro del autismo (TEA), tra
 7. **¿Cómo ha ido el día?**: para contar en casa qué ha hecho y cómo se ha sentido.
 8. **Ayer, hoy y mañana**: con los siete días de la semana para recortar.
 9. **80 tarjetas pequeñas y 12 grandes** con los momentos y los lugares del cole: la asamblea, el recreo, el comedor, las áreas, PT (Pedagogía Terapéutica) y AL (Audición y Lenguaje), la excursión, el simulacro, la ruta y muchos más.
-10. **Guía** para usarla y adaptarla a cada peque, con cuándo y cómo retirar los apoyos.
+10. **Guía** para usarla y adaptarla a cada peque, con cuándo y cómo retirar los apoyos, y la lista de pictogramas con su número en ARASAAC.
 
 ## Las tarjetas
 
-- Las pequeñas miden 44 × 21 mm, con el pictograma de casi 2 cm y la palabra al lado. Caben en las casillas de «Mi semana» y «Mi día», también en las de la agenda en blanco.
+- Las pequeñas miden 44 × 21 mm, con el pictograma de 1,8 cm y la palabra al lado, en letra de 11 puntos. Caben en las casillas de «Mi semana» y «Mi día», también en las de la agenda en blanco.
 - Las grandes miden 8 × 8 cm y van en «Primero y después» y «Si hay un cambio».
 - Cada grupo tiene su color: azul para los momentos del día, verde para las áreas y los sitios, morado para los apoyos, amarillo para los días distintos y naranja para ir y volver. El dibujo y la palabra dicen lo mismo sin color.
 - Hay 4 copias más de asamblea, almuerzo, recreo y casa, para tenerlas de lunes a viernes, y 4 tarjetas en blanco para dibujar o escribir.
