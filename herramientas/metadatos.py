@@ -7,11 +7,12 @@ documento en lugar del nombre del archivo (una recomendación de PDF/UA, la norm
 ISO 14289 de PDF accesibles).
 
 Con titulos.json (los títulos h1 a h6 del HTML, en orden, que prepara generar.mjs)
-corrige también el texto de los marcadores, el índice lateral del lector de PDF que
+arregla también el texto de los marcadores, el índice lateral del lector de PDF que
 usan también los lectores de pantalla. Chromium los escribe con las letras que pinta:
-pierde el espacio de cada salto de línea («El rincónde la calma») y a veces repite el
-título. Antes de cambiar nada comprueba que cada marcador es el de su título; si no
-cuadran, lo explica y sale con el código 3 sin tocar el PDF.
+junta dos palabras donde un título salta de línea («Tarjetasde trazo») o donde un
+margen las separa («5Exploto»), y a veces repite el título. Antes de cambiar nada
+comprueba que cada marcador es el de su título. Si no cuadran, avisa y solo devuelve
+los espacios que faltan, sin tocar nada más.
 """
 
 import json
@@ -43,16 +44,36 @@ def es_su_titulo(de_chromium, del_html):
     return all(letra in quedan for letra in titulo) and len(marcador) <= 2 * len(titulo)
 
 
-def corregir_marcadores(raiz, titulos):
+def sin_espacios(texto: str) -> str:
+    return "".join(texto.split())
+
+
+def devolver_espacios(lista, titulos) -> None:
+    """Plan B: pone a cada marcador el texto de su título si solo se diferencian en los espacios."""
+    buenos: dict[str, str] = {}
+    for titulo in titulos:
+        buenos.setdefault(sin_espacios(titulo), titulo)
+    for marcador in lista:
+        bueno = buenos.get(sin_espacios(str(marcador.get("/Title", ""))))
+        if bueno:
+            marcador[NameObject("/Title")] = TextStringObject(bueno)
+
+
+def corregir_marcadores(raiz, titulos) -> None:
     indice = raiz.get("/Outlines")
     lista = list(marcadores(indice.get_object().get("/First"))) if indice is not None else []
+    problema = None
     if len(lista) != len(titulos):
-        print(f"El PDF tiene {len(lista)} marcadores y el HTML, {len(titulos)} títulos.", file=sys.stderr)
-        sys.exit(3)
-    for marcador, titulo in zip(lista, titulos):
-        if not es_su_titulo(str(marcador.get("/Title", "")), titulo):
-            print(f"El marcador «{marcador.get('/Title')}» no es el del título «{titulo}».", file=sys.stderr)
-            sys.exit(3)
+        problema = f"el PDF tiene {len(lista)} marcadores y el HTML, {len(titulos)} títulos"
+    else:
+        for marcador, titulo in zip(lista, titulos):
+            if not es_su_titulo(str(marcador.get("/Title", "")), titulo):
+                problema = f"el marcador «{marcador.get('/Title')}» no es el del título «{titulo}»"
+                break
+    if problema:
+        print(f"Aviso: {problema}. Solo se devuelven los espacios que faltan.", file=sys.stderr)
+        devolver_espacios(lista, titulos)
+        return
     for marcador, titulo in zip(lista, titulos):
         marcador[NameObject("/Title")] = TextStringObject(titulo)
 

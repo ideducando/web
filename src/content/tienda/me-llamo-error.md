@@ -35,7 +35,8 @@ incluye:
   - "«Así es mi Error»: una hoja para dibujar el suyo y escribir qué ha aprendido"
   - "Guía para el adulto: de qué va, preguntas para antes, durante y después, y la rutina «Mírame bien»"
   - "Las fuentes de lo que cuenta el libro"
-gratis: "La versión con pictogramas será gratis siempre, en Material gratuito."
+gratis: "La versión con pictogramas es gratis siempre, con el mismo texto y los mismos dibujos."
+relacionado: me-llamo-error-pictogramas
 orden: 10
 fecha: 2026-11-04
 borrador: false

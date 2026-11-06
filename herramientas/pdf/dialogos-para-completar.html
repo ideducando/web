@@ -1,0 +1,2951 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Diálogos para completar: conversaciones de invierno en tres niveles · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Las hojas de tarjetas aprovechan un poco más el papel */
+      @page tarjetas {
+        margin: 12mm 14mm 16mm 14mm;
+      }
+
+      /* ---------- Un color para cada habilidad ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .h-saludar {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--marino);
+      }
+      .h-pedir {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .h-responder {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .h-turno {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+      .h-perdon {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .h-sentir {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Cómo montarlo: con letra de 11 puntos, como el resto del texto para el adulto ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      /* Lo que necesitas y qué imprimir a la izquierda; los pasos a la derecha; el criterio del velcro debajo, a lo ancho */
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        grid-template-columns: 6.5mm 7mm minmax(0, 1fr);
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 118mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 9pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .escena-portada {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        bottom: 34mm;
+        width: 210mm;
+        height: 118mm;
+      }
+
+      .escena-portada svg {
+        width: 210mm;
+        height: 118mm;
+      }
+
+      .portada .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 20mm;
+        top: 26mm;
+        display: grid;
+        place-content: center;
+        width: 40mm;
+        height: 40mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+        transform: rotate(9deg);
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .portada .pegatina b {
+        display: block;
+        font-size: 27pt;
+        line-height: 1;
+      }
+
+      /* ---------- Cabecera de las hojas de diálogo y de preguntas ---------- */
+      .dialogo,
+      .inferencia {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 257mm;
+        break-after: page;
+      }
+
+      .cabecera {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr) 30mm;
+        align-items: center;
+        gap: 4mm;
+      }
+
+      .numero {
+        display: grid;
+        place-items: center;
+        width: 17mm;
+        height: 17mm;
+        border: 1.1mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 1.1mm var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 21pt;
+        line-height: 1;
+      }
+
+      .cabecera .antetitulo {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0 0 1mm;
+        font-size: 9pt;
+        color: var(--tx);
+      }
+
+      .cabecera .antetitulo svg {
+        flex: none;
+        width: 4.8mm;
+        height: 4.8mm;
+      }
+
+      .cabecera h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabecera > img {
+        justify-self: end;
+        width: 30mm;
+        height: auto;
+      }
+
+      .franja {
+        height: 1.6mm;
+        margin: 2.6mm 0 3mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      /* ---------- Diálogo ---------- */
+      .vineta {
+        flex: none;
+        align-self: center;
+        width: 178mm;
+        margin: 0;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        overflow: hidden;
+        line-height: 0;
+      }
+
+      .vineta svg {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Con dos turnos en blanco, la viñeta es un poco más pequeña para que quepa todo */
+      .dialogo--largo .vineta {
+        width: 150mm;
+      }
+
+      .turnos {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin: 2mm 0 2.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .turno {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+      }
+
+      .turno--der {
+        grid-template-columns: minmax(0, 1fr) 17mm;
+      }
+
+      .turno--der .cabeza {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .turno--der .bocadillo {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: end;
+      }
+
+      .turno--izq .bocadillo {
+        justify-self: start;
+      }
+
+      .cabeza svg {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .bocadillo {
+        position: relative;
+        max-width: 142mm;
+        margin: 0;
+        padding: 2mm 4mm 2.3mm;
+        border: 0.7mm solid var(--p);
+        border-radius: 4mm;
+        background: #fff;
+        font-size: 19pt;
+        line-height: 1.2;
+        text-wrap: pretty;
+      }
+
+      /* Pico del bocadillo, hacia quien habla */
+      .bocadillo::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 3.4mm;
+        height: 3.4mm;
+        background: #fff;
+        border-left: 0.7mm solid var(--p);
+        border-bottom: 0.7mm solid var(--p);
+      }
+
+      .turno--izq .bocadillo::before {
+        left: -2.15mm;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .turno--der .bocadillo::before {
+        right: -2.15mm;
+        transform: translateY(-50%) rotate(225deg);
+      }
+
+      .quien {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      /* Turno en blanco: aquí va la tarjeta, o lo que diga o escriba el niño o la niña */
+      .turno--blanco .bocadillo {
+        width: 100mm;
+        padding: 2mm 3mm;
+        border: 0.7mm dashed var(--marino);
+      }
+
+      .turno--blanco .bocadillo::before {
+        border-color: var(--marino);
+        border-left-style: dashed;
+        border-bottom-style: dashed;
+      }
+
+      .hueco {
+        display: grid;
+        grid-template-columns: 18mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        height: 29mm;
+      }
+
+      .hueco__izq {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2mm;
+      }
+
+      .velcro {
+        display: block;
+        width: 15mm;
+        height: 15mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 50%;
+      }
+
+      .lineas span {
+        display: block;
+        height: 11.5mm;
+        border-bottom: 0.4mm solid var(--suave);
+      }
+
+      .etiqueta-hueco {
+        position: absolute;
+        top: -3.4mm;
+        right: 5mm;
+        padding: 0.3mm 2mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10pt;
+        line-height: 1.2;
+      }
+
+      .solo-lector {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      .para-adulto {
+        display: grid;
+        grid-template-columns: 6mm minmax(0, 1fr);
+        gap: 2.4mm;
+        align-items: start;
+        margin: 0;
+        padding: 2mm 3mm;
+        border-radius: 2.5mm;
+        background: var(--crema);
+        font-size: 10.5pt;
+        line-height: 1.3;
+      }
+
+      .para-adulto svg {
+        width: 6mm;
+        height: 6mm;
+        color: var(--marino);
+      }
+
+      .para-adulto p {
+        margin: 0;
+      }
+
+      .atribucion {
+        margin: 1.4mm 0 0;
+        font-size: 7.5pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Detrás: ¿qué siente? y ¿qué haría yo? ---------- */
+      .recuerdo {
+        display: grid;
+        grid-template-columns: 84mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        margin: 0 0 3.5mm;
+      }
+
+      .recuerdo .mini {
+        border: 0.5mm solid var(--linea);
+        border-radius: 2.5mm;
+        overflow: hidden;
+        line-height: 0;
+      }
+
+      .recuerdo .mini svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .recuerdo p {
+        margin: 0;
+        font-size: 19pt;
+        line-height: 1.25;
+      }
+
+      .pregunta {
+        margin: 0 0 3.5mm;
+        padding: 3mm 4mm 3.5mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 4mm;
+      }
+
+      .pregunta h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0 0 1mm;
+        font-size: 21pt;
+        line-height: 1.12;
+      }
+
+      .pregunta h2 svg {
+        flex: none;
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .indicacion {
+        margin: 0 0 2.5mm;
+        font-size: 18pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .caritas,
+      .opciones {
+        display: grid;
+        gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caritas {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .caritas li,
+      .opciones li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2mm;
+        margin: 0;
+        padding: 2.4mm 1.5mm 2mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        text-align: center;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .caritas img {
+        width: 27mm;
+        height: 27mm;
+      }
+
+      .porque {
+        display: flex;
+        align-items: flex-end;
+        gap: 3mm;
+        margin: 3mm 0 0;
+        font-size: 18pt;
+      }
+
+      .porque .linea {
+        flex: 1;
+        height: 9mm;
+        border-bottom: 0.4mm solid var(--suave);
+      }
+
+      .opciones {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .opciones img {
+        width: 25mm;
+        height: 25mm;
+      }
+
+      .opciones .otra {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 1.6mm;
+        border: 0.5mm dashed var(--suave);
+        color: var(--suave);
+      }
+
+      .opciones .otra svg {
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+        color: var(--suave);
+      }
+
+      /* ---------- Guía corta ---------- */
+      .corta {
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .corta h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .corta h2 {
+        font-size: 14pt;
+        margin: 3mm 0 1.6mm;
+      }
+
+      .corta .intro {
+        margin: 0 0 2mm;
+      }
+
+      .habilidades {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .habilidades li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 1.6mm 2.4mm;
+        border-left: 1.4mm solid var(--c);
+        border-radius: 2.5mm;
+        background: var(--t);
+        line-height: 1.2;
+      }
+
+      .habilidades svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .habilidades strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+      }
+
+      .niveles {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .niveles li {
+        margin: 0;
+        padding: 2.4mm 3mm 2.8mm;
+        border: 0.45mm solid var(--linea);
+        border-top: 1.6mm solid var(--marino);
+        border-radius: 3mm;
+        line-height: 1.3;
+      }
+
+      .niveles svg {
+        width: 100%;
+        height: 15mm;
+        margin: 0 0 1.2mm;
+      }
+
+      .niveles strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12.5pt;
+      }
+
+      .pasos-sesion {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .pasos-sesion li {
+        display: grid;
+        grid-template-columns: 7mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0;
+        padding: 1.2mm 2.6mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        counter-increment: paso;
+        line-height: 1.3;
+      }
+
+      .pasos-sesion li::before {
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .corta .caja {
+        padding: 2.6mm 4mm;
+        line-height: 1.35;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo {
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .vistazo h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .vistazo h2 {
+        font-size: 14pt;
+        margin: 3mm 0 2mm;
+      }
+
+      .reparto {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .reparto li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 1.5mm 0 1.2mm;
+        border-radius: 2.5mm;
+        background: var(--crema);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1.1;
+      }
+
+      .reparto svg {
+        width: 17mm;
+        height: 27mm;
+        margin-bottom: 0.8mm;
+      }
+
+      .tabla-dialogos {
+        table-layout: fixed;
+      }
+
+      .tabla-dialogos td,
+      .tabla-dialogos th {
+        padding: 1mm 2mm;
+        vertical-align: middle;
+        font-size: 10pt;
+        line-height: 1.25;
+      }
+
+      .tabla-dialogos td.num,
+      .tabla-dialogos th.num {
+        text-align: center;
+        white-space: normal;
+      }
+
+      .hab {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.4mm;
+      }
+
+      .hab svg {
+        flex: none;
+        width: 5.4mm;
+        height: 5.4mm;
+      }
+
+      .vistazo .caja {
+        margin-top: 3mm;
+        padding: 2.6mm 4mm;
+      }
+
+      /* ---------- Tarjetas ---------- */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .encabezado {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        margin: 0 0 1.5mm;
+      }
+
+      .encabezado h1 {
+        margin: 0;
+        font-size: 20pt;
+      }
+
+      .encabezado h1 small {
+        margin-left: 2mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .encabezado img {
+        flex: none;
+        width: 32mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 10.5pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .rejilla {
+        display: grid;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .rejilla--n1 {
+        grid-template-columns: repeat(2, 88mm);
+        grid-auto-rows: 27mm;
+        gap: 3mm 6mm;
+      }
+
+      .rejilla--n2 {
+        grid-template-columns: repeat(3, 57mm);
+        grid-auto-rows: 28mm;
+        gap: 4.5mm 5.5mm;
+      }
+
+      .tarjeta {
+        position: relative;
+        margin: 0;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .tarjeta::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1.8mm;
+        background: var(--c);
+      }
+
+      .tarjeta p {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.1;
+        text-wrap: balance;
+      }
+
+      .tarjeta--n1 {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        padding: 2mm 3mm 2mm 4.4mm;
+      }
+
+      .tarjeta--n1 img {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .tarjeta--n1 p {
+        padding-top: 2.4mm;
+      }
+
+      .tarjeta--n2 {
+        display: flex;
+        align-items: center;
+        padding: 4mm 3mm 2mm 4.6mm;
+      }
+
+      .tarjeta .num {
+        position: absolute;
+        top: 1.2mm;
+        right: 1.8mm;
+        padding: 0.5mm 1.2mm;
+        border: 0.3mm solid var(--suave);
+        border-radius: 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .clave-tarjetas {
+        margin: 3mm 0 0;
+        font-size: 9pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      /* ---------- Registro ---------- */
+      .registro {
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .registro h1 {
+        font-size: 22pt;
+        margin-bottom: 2mm;
+      }
+
+      .datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .datos li {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .datos li span {
+        flex: 1;
+        height: 6mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2mm 7mm;
+        margin: 0 0 2.5mm;
+        font-size: 10.5pt;
+      }
+
+      .leyenda span {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.8mm;
+      }
+
+      .circulito {
+        display: inline-block;
+        flex: none;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.4mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+        vertical-align: middle;
+      }
+
+      .circulito.medio {
+        background: linear-gradient(90deg, var(--marino) 0 50%, #fff 50% 100%);
+      }
+
+      .circulito.lleno {
+        background: var(--marino);
+      }
+
+      .tabla-registro {
+        table-layout: fixed;
+        font-size: 9.5pt;
+      }
+
+      .tabla-registro thead th {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 1.2;
+        padding: 1.4mm 1mm;
+        font-size: 9.5pt;
+      }
+
+      .tabla-registro tbody th,
+      .tabla-registro tbody td {
+        height: 14.5mm;
+        padding: 1mm 1.6mm;
+        border: 0.3mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .tabla-registro tbody th {
+        font-family: var(--texto);
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      .tabla-registro tbody th b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .tabla-registro td.nivel {
+        text-align: center;
+      }
+
+      .tabla-registro td.nivel .circulito {
+        width: 5.4mm;
+        height: 5.4mm;
+        border-color: var(--suave);
+      }
+
+      .tabla-registro td.nivel i {
+        display: block;
+        margin: 1mm auto 0;
+        width: 13mm;
+        height: 3.6mm;
+        border-bottom: 0.3mm solid var(--suave);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.42;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.85em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+        line-height: 1.36;
+      }
+
+      .guia .caja h2,
+      .guia .caja h3 {
+        margin-top: 0;
+        font-size: 12.5pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .guia ol li,
+      .guia ul li {
+        margin-bottom: 0.9mm;
+      }
+
+      .escalera {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 9mm;
+        gap: 0 3mm;
+        margin: 1mm 0 3mm;
+        break-inside: avoid;
+      }
+
+      .escalera ol {
+        display: grid;
+        gap: 1.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: pista;
+      }
+
+      .escalera li {
+        display: grid;
+        grid-template-columns: 7mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 1.5mm 2.6mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        counter-increment: pista;
+        line-height: 1.3;
+      }
+
+      .escalera li::before {
+        content: counter(pista);
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid var(--marino);
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* Flecha que va de menos ayuda (arriba) a más ayuda (abajo) */
+      .escalera .flecha {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 8pt;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .escalera .flecha svg {
+        flex: 1;
+        width: 6mm;
+        margin: 1mm 0;
+      }
+
+      .soluciones {
+        table-layout: fixed;
+      }
+
+      .soluciones th,
+      .soluciones td {
+        padding: 1mm 1.6mm;
+        font-size: 9.5pt;
+        line-height: 1.25;
+      }
+
+      .soluciones tbody th {
+        white-space: nowrap;
+      }
+
+      .lista-sienten {
+        columns: 3;
+        column-gap: 6mm;
+        margin: 0 0 2mm;
+        padding-left: 6mm;
+        font-size: 10pt;
+      }
+
+      .lista-sienten li {
+        break-inside: avoid;
+      }
+
+      .dos-columnas-lista {
+        columns: 2;
+        column-gap: 7mm;
+      }
+
+      .dos-columnas-lista li {
+        break-inside: avoid;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 11.5pt;
+        line-height: 1.35;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2.5mm;
+      }
+
+      .familias h2 {
+        font-size: 15pt;
+        margin-top: 0.55em;
+        margin-bottom: 0.3em;
+      }
+
+      .familias ol,
+      .familias ul {
+        padding-left: 6mm;
+      }
+
+      .familias li {
+        margin-bottom: 0.6mm;
+      }
+
+      .marco-familias {
+        width: 84mm;
+        margin: 1mm auto 2mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        overflow: hidden;
+        line-height: 0;
+      }
+
+      .marco-familias svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 5mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 1.5mm;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 8pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 10.5pt;
+        line-height: 1.38;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 14pt;
+        margin-top: 0.7em;
+      }
+
+      .fuentes .referencias li {
+        margin-bottom: 0.9mm;
+        font-size: 10pt;
+        line-height: 1.32;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -66mm; top: 30mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -30mm; top: 104mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 30mm; height: 30mm; left: 120mm; top: 120mm; background: var(--coral-tinte)"></div>
+      <div class="escena-portada" id="escena-portada" aria-hidden="true"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Fichas · Pragmática · Invierno</p>
+        <h1 class="portada__titulo">Diálogos<br />para completar</h1>
+        <p class="portada__subtitulo">
+          Doce conversaciones de invierno, en el cole y en casa, para practicar cómo hablamos con los demás.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><b>3</b>niveles</div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         GUÍA CORTA
+         ====================================================================== -->
+    <section class="hoja corta">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>Cómo se usa</h1>
+      <p class="intro">
+        En cada diálogo hablan dos personajes y falta lo que dice uno de ellos. El niño o la niña lo completa. Así
+        practica la pragmática, que es cómo usamos el lenguaje para conversar. Está pensado para las sesiones de Audición y
+        Lenguaje (AL) y de Pedagogía Terapéutica (PT), sobre todo con alumnado con trastorno del desarrollo del lenguaje
+        (TDL) o con trastorno del espectro del autismo (TEA). También sirve para toda la clase.
+      </p>
+
+      <h2>Seis habilidades, dos diálogos para cada una</h2>
+      <ul class="habilidades" id="lista-habilidades"></ul>
+
+      <h2>Tres niveles con los mismos diálogos</h2>
+      <ol class="niveles" id="lista-niveles"></ol>
+      <p>
+        Empieza por el nivel en el que acierta casi siempre con poca ayuda. Cuando lo haga sin ayuda, pasa al siguiente.
+        La página <span data-pagina="pistas"></span> explica cómo dar pistas y cómo retirarlas.
+      </p>
+
+      <h2>Una sesión, paso a paso</h2>
+      <ol class="pasos-sesion">
+        <li>Mirad juntos la viñeta. Pregunta: «¿Dónde están? ¿Qué pasa?».</li>
+        <li>Lee el diálogo con dos voces. Tú haces de un personaje y el niño o la niña, del otro.</li>
+        <li>En el turno en blanco, ofrece las tarjetas de su nivel o espera su respuesta.</li>
+        <li>Leed otra vez el diálogo entero, ya completo. Si queréis, representadlo con muñecos.</li>
+        <li>Dad la vuelta a la hoja: «¿Qué crees que siente?» y «¿Qué haría yo?».</li>
+        <li>Busca un momento real para usar la frase ese mismo día.</li>
+      </ol>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Poco tiempo y a menudo.</strong> De 10 a 15 minutos, con uno o dos diálogos cada vez. Si se cansa o se
+          frustra, termina con un diálogo que ya le sale bien.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <h2>Los personajes</h2>
+      <ul class="reparto" id="reparto"></ul>
+      <h2>Los doce diálogos</h2>
+      <table class="tabla-dialogos" id="tabla-dialogos"></table>
+      <div class="caja caja--azul">
+        <p>
+          <strong>Las tarjetas.</strong> Las del nivel 1 están en las páginas <span data-pagina="n1"></span> y
+          <span data-pagina="n1b"></span>, y las del nivel 2, de la <span data-pagina="n2"></span> a la
+          <span data-pagina="n2c"></span>. Cada una lleva el número de su diálogo y la letra de su turno: 3A, 3B… Detrás de
+          cada diálogo están sus preguntas: imprime a doble cara.
+        </p>
+      </div>
+    </section>
+
+    <!-- Los doce diálogos, cada uno con sus preguntas detrás, salen del guion del final (lista DIALOGOS) -->
+    <div id="dialogos"></div>
+
+    <!-- Tarjetas de los niveles 1 y 2 -->
+    <div id="tarjetas"></div>
+
+    <!-- ======================================================================
+         REGISTRO DE AVANCE
+         ====================================================================== -->
+    <section class="hoja registro">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para el adulto · Para imprimir</p>
+      <h1>Registro de avance</h1>
+      <ul class="datos">
+        <li>Iniciales:<span></span></li>
+        <li>Curso:<span></span></li>
+        <li>Empieza el:<span></span></li>
+      </ul>
+      <p class="leyenda">
+        <span><i class="circulito"></i>Todavía no</span>
+        <span><i class="circulito medio"></i>Con pistas</span>
+        <span><i class="circulito lleno"></i>Sin pistas</span>
+        <span>Debajo, la fecha.</span>
+      </p>
+      <table class="tabla-registro">
+        <colgroup>
+          <col style="width: 49mm" />
+          <col style="width: 20mm" />
+          <col style="width: 20mm" />
+          <col style="width: 20mm" />
+          <col style="width: 20mm" />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Diálogo</th>
+            <th scope="col">Nivel 1: 2 tarjetas</th>
+            <th scope="col">Nivel 2: 3 tarjetas</th>
+            <th scope="col">Nivel 3: con sus palabras</th>
+            <th scope="col">¿Qué siente?</th>
+            <th scope="col">Lo hace en la vida real: cuándo y con quién</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <p style="margin-top: 2.5mm; font-size: 10pt">
+        Escribe solo las iniciales, nunca el nombre completo, y guarda la hoja en el centro o en casa. La columna de la
+        vida real es la que más importa: anota cuándo lo hace sin la hoja.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia" id="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente y la familia</p>
+      <h1>Cómo enseñar a conversar con estos diálogos</h1>
+
+      <h2>Qué es la pragmática</h2>
+      <p>
+        La pragmática es cómo usamos el lenguaje en cada situación: cómo saludamos, cómo pedimos algo, cuándo nos toca
+        hablar o qué decimos si alguien está triste. Hay niños y niñas que saben muchas palabras y frases y aun así tienen
+        dificultades para usarlas al conversar.
+      </p>
+      <p>
+        El consenso internacional CATALISE incluye la pragmática entre las áreas del lenguaje que pueden estar afectadas en
+        el trastorno del desarrollo del lenguaje (TDL). Pone como ejemplos dar demasiada o muy poca información a quien
+        escucha, no captar las señales sociales de la conversación, entender las frases de forma demasiado literal o
+        no entender el lenguaje figurado.
+        Añade que estas dificultades son muy propias del trastorno del espectro del autismo (TEA) y que también se ven en
+        niños y niñas sin autismo (Bishop y otros, 2017).
+      </p>
+      <p>
+        El currículo lo recoge. En el segundo ciclo de Infantil, entre los saberes básicos están «atención, escucha activa,
+        turnos de diálogo y alternancia» y las «Fórmulas de cortesía e interacción social positiva» (Real Decreto 95/2022,
+        anexo II). En el primer ciclo de Primaria, el alumnado participa en conversaciones «incorporando estrategias
+        elementales de escucha activa y de cortesía lingüística» (Real Decreto 157/2022, anexo II).
+      </p>
+
+      <div class="caja caja--azul">
+        <h2>Por qué diálogos con un turno en blanco</h2>
+        <p>
+          Un diálogo escrito funciona como un guion: enseña qué se dice en un momento concreto y se puede practicar antes de
+          que llegue. En la revisión de prácticas basadas en la evidencia para el alumnado con TEA de Hume y otros (2021),
+          los guiones forman parte de los apoyos visuales, una de las 28 prácticas con evidencia. En la misma lista están el
+          modelado y las ayudas. También está la demora, que sirve para retirar las ayudas poco a poco.
+        </p>
+        <p>
+          En un ensayo con 88 niños y niñas de 5 a 10 años con dificultades pragmáticas, con o sin TEA, una intervención de
+          hasta 20 sesiones mejoró cómo conversaban. Lo vieron evaluadores que no sabían quién la había recibido, y también
+          sus familias y docentes. Sus puntuaciones en las pruebas de lenguaje no cambiaron (Adams y otros, 2012).
+        </p>
+      </div>
+
+      <h2 id="modelar">Cómo modelar</h2>
+      <p>
+        Modelar es hacerlo tú primero, para que lo vea y lo pueda copiar. Hume y otros (2021) lo definen como mostrar la
+        conducta que se quiere enseñar.
+      </p>
+      <ol>
+        <li>Lee el diálogo entero con dos voces, o con dos muñecos: uno para cada personaje.</li>
+        <li>
+          En el turno en blanco, piensa en voz alta: «La profe me dice "buenos días". Cuando alguien me saluda, yo también
+          saludo».
+        </li>
+        <li>Di la respuesta con la entonación y con el gesto: «¡Buenos días, profe!», mientras saludas con la mano.</li>
+        <li>Cambiad los papeles. Ahora tú haces de profe y el niño o la niña, de Leo.</li>
+      </ol>
+      <p>Con TDL, habla despacio y con frases cortas. Repite el modelo sin pedirle que lo repita enseguida.</p>
+
+      <h2 id="pistas">Cómo dar pistas</h2>
+      <p>
+        Una pista es la ayuda que le das para que lo consiga, como un gesto o el principio de la frase. Hume y otros
+        (2021) la llaman «prompting». Empieza por la pista más pequeña y sube un escalón solo si hace falta. Si está
+        aprendiendo algo nuevo o se frustra con los errores, empieza por abajo, con más ayuda.
+      </p>
+      <div class="escalera">
+        <ol>
+          <li><span><strong>Espera</strong> 5 segundos, mirándole con cara de «te toca».</span></li>
+          <li><span><strong>Pregunta:</strong> «¿Qué le dices a la profe?».</span></li>
+          <li><span><strong>Señala</strong> la cara del personaje en la viñeta, o la tarjeta buena.</span></li>
+          <li><span><strong>Empieza la frase:</strong> «Bue…».</span></li>
+          <li><span><strong>Di la frase entera</strong> para que la repita: «¡Buenos días, profe!».</span></li>
+          <li><span><strong>Acompaña su mano</strong> hasta la tarjeta, solo si acepta el contacto.</span></li>
+        </ol>
+        <div class="flecha" aria-hidden="true">
+          <span>Menos ayuda</span>
+          <svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M5 2 V92" stroke="#1e2b55" stroke-width="2" /><path d="M1 86 L5 98 L9 86 Z" fill="#1e2b55" /></svg>
+          <span>Más ayuda</span>
+        </div>
+      </div>
+
+      <h2>Cómo retirarlas</h2>
+      <p>El objetivo es que lo haga sin ayuda, también fuera de la hoja. Retira las pistas poco a poco:</p>
+      <ul>
+        <li>Da cada vez una pista un poco más pequeña: de la frase entera a la primera sílaba, y de ahí a señalar.</li>
+        <li>
+          Deja pasar unos segundos antes de dar la pista y alarga la espera poco a poco. Es la demora, una técnica para ir
+          retirando las ayudas (Hume y otros, 2021).
+        </li>
+        <li>
+          Cuando acierte sin pistas en casi todos los diálogos de un nivel, pasa al siguiente. Por ejemplo, 4 de cada 5
+          diálogos en dos sesiones seguidas.
+        </li>
+        <li>Si un día le cuesta más, vuelve a dar más ayuda sin darle importancia.</li>
+        <li>Di qué ha hecho bien, con detalle: «Has saludado a la profe mirándola a la cara».</li>
+      </ul>
+
+      <h2>Los tres niveles</h2>
+      <ul>
+        <li>
+          <strong>Nivel 1.</strong> Pon las 2 tarjetas con pictograma y léelas en voz alta, señalando cada una. Que elija una
+          y la pegue en el turno en blanco. Después, leed juntos el diálogo con su respuesta.
+        </li>
+        <li>
+          <strong>Nivel 2.</strong> Pon las 3 tarjetas sin pictograma. Si aún no lee, léelas tú. Cambia su orden cada vez.
+        </li>
+        <li>
+          <strong>Nivel 3.</strong> Sin tarjetas. Que lo diga con sus palabras o lo escriba en el hueco con el rotulador de
+          pizarra. Vale cualquier respuesta que encaje, aunque no sea la de la tarjeta.
+        </li>
+      </ul>
+      <p>
+        Si elige una tarjeta que no encaja, no le digas «mal». Leed el diálogo con esa respuesta y preguntad: «¿Cómo se
+        siente ahora la profe?». Después, probad con otra tarjeta.
+      </p>
+
+      <h2>Detrás de cada diálogo</h2>
+      <ul>
+        <li>Mirad la cara y el cuerpo del personaje en la viñeta, y recordad qué ha dicho.</li>
+        <li>
+          Que rodee una carita. Puede haber más de una buena: lo que importa es que explique por qué. Las respuestas
+          esperadas están en la página <span data-pagina="soluciones"></span>.
+        </li>
+        <li>
+          En «¿Qué haría yo?», que elija una idea o dibuje la suya. Después, pregunta por un momento suyo: «¿Te ha pasado a
+          ti?».
+        </li>
+        <li>Si no sabe qué siente el personaje, dilo tú y señala la pista: «Creo que está triste. Mira su boca».</li>
+      </ul>
+      <p>
+        Se puede enseñar a reconocer emociones al alumnado con TEA, pero hay poca evidencia de que lo aprendido se mantenga y
+        se use en otras situaciones (Fletcher-Watson y otros, 2014). Por eso conviene llevarlo a la vida real.
+      </p>
+
+      <h2>Llevarlo a la vida real</h2>
+      <ul>
+        <li>Practica el diálogo justo antes del momento: el 1 antes de entrar en clase o el 8 en un recreo con lluvia.</li>
+        <li>Cuenta a quien estará en ese momento qué frase estáis practicando, como la familia o el monitor del comedor.</li>
+        <li>Cuando lo haga en la vida real, díselo: «Has pedido ayuda con la cremallera. ¡Así te he podido ayudar!».</li>
+        <li>Si un día no le sale, no insistas en ese momento. Practicad otra vez con la hoja.</li>
+      </ul>
+      <p>
+        Una revisión de 22 estudios sobre intervenciones de lenguaje pragmático en el TEA encontró que funcionaban mejor las
+        que contaban de forma activa con el niño o la niña y con su familia. También avisa de que casi no se sabe si lo
+        aprendido se usa en otros contextos (Parsons y otros, 2017). La nota de la página
+        <span data-pagina="familias"></span> es para casa.
+      </p>
+
+      <h2>Ideas para adaptarlo</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone, entre otras cosas, usar varios medios para comunicarse y dar
+        apoyos que se retiran con la práctica (CAST, 2024, consideraciones 5.1 y 5.3):
+      </p>
+      <ul class="dos-columnas-lista">
+        <li>
+          <strong>Si habla poco o nada:</strong> que señale la tarjeta o use su tablero de comunicación. Un gesto también es
+          una respuesta.
+        </li>
+        <li><strong>Si aún no lee:</strong> lee tú los dos papeles y las tarjetas. En el nivel 1 se guía por el pictograma.</li>
+        <li><strong>Con TDL:</strong> habla despacio y dale tiempo para contestar.</li>
+        <li>
+          <strong>Con TEA:</strong> anticipa qué vais a hacer y explica las frases hechas, como «¡Qué susto!».
+        </li>
+        <li>
+          <strong>Si le cuesta moverse:</strong> que elija con la mirada o diciendo «esta». Sirven tarjetas más grandes o con
+          imán.
+        </li>
+        <li><strong>Más reto:</strong> inventad otro final o escribid un diálogo nuevo con un momento suyo.</li>
+        <li>
+          <strong>Para toda la clase:</strong> por parejas, cada una con un diálogo. Después, dos voluntarios lo representan
+          en la asamblea.
+        </li>
+        <li><strong>Sin plastificar:</strong> sin velcro, basta con poner la tarjeta encima del hueco.</li>
+      </ul>
+
+      <div class="caja caja--coral">
+        <h2>Cuándo hablar con el especialista de AL</h2>
+        <p>
+          Practicad primero unas semanas. Después, habla con el maestro o la maestra de AL y con el equipo de orientación si,
+          con práctica, le sigue costando mucho conversar, si casi nunca contesta cuando le hablan, si su forma de hablar le
+          deja fuera del juego o si te preocupa cómo entiende lo que oye. Este material sirve para practicar y para observar. El diagnóstico corresponde a los
+          profesionales.
+        </p>
+      </div>
+
+      <h2 id="soluciones" class="salto">Soluciones</h2>
+      <p>
+        En el nivel 3 vale cualquier respuesta que encaje con lo que pregunta o siente el otro personaje. Estas son algunas.
+      </p>
+      <table class="soluciones" id="tabla-soluciones"></table>
+      <h3>¿Qué crees que siente?</h3>
+      <p style="margin-bottom: 1mm">Las caritas esperadas. Si da otra y sabe explicar por qué, también vale.</p>
+      <ol class="lista-sienten" id="lista-sienten"></ol>
+
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="familias salto" id="familias">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Practicar en casa</h1>
+      <p>En el cole practicamos cómo hablar con los demás. Lo hacemos con diálogos cortos de invierno.</p>
+      <div class="marco-familias" id="vineta-familias"></div>
+      <p>Por ejemplo, practicamos:</p>
+      <ul class="dos-columnas-lista">
+        <li>saludar y despedirse;</li>
+        <li>pedir las cosas;</li>
+        <li>responder a lo que nos preguntan;</li>
+        <li>esperar el turno;</li>
+        <li>pedir perdón;</li>
+        <li>pensar en lo que siente el otro.</li>
+      </ul>
+
+      <h2>Cómo podéis ayudar</h2>
+      <ol>
+        <li>Dad ejemplo. Decid vosotros la frase primero: «¡Buenos días!».</li>
+        <li>Esperad un poco. Contad hasta 5 antes de ayudar.</li>
+        <li>Dad una pista pequeña. Por ejemplo, empezad la frase: «Por fa…».</li>
+        <li>Decid lo que ha hecho bien: «¡Qué bien has pedido el chocolate!».</li>
+      </ol>
+
+      <h2>Momentos de invierno para practicar</h2>
+      <ul>
+        <li>Cuando llega o se va alguien de casa: «¡Hola!» y «¡Hasta mañana!».</li>
+        <li>En la merienda: pedir con «por favor» y dar las gracias.</li>
+        <li>Al vestirse para salir: «¿Dónde está tu gorro?».</li>
+        <li>Con un juego de mesa: «Te toca a ti».</li>
+      </ul>
+
+      <h2>Es importante</h2>
+      <ul>
+        <li>Jugad un rato corto. Parad antes de que se canse.</li>
+        <li>Felicitad lo que intenta, aunque no le salga perfecto.</li>
+        <li>No le corrijáis delante de otras personas.</li>
+        <li>Si os preocupa cómo habla, contadlo en el cole.</li>
+      </ul>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p class="renglon-etiqueta">Esta semana practicamos el diálogo:<span></span></p>
+        <p class="renglon-etiqueta">Una frase para usar en casa:<span></span></p>
+        <p class="renglon-etiqueta">Contadnos cómo va:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Diálogos para completar.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Diálogos para completar: conversaciones de invierno en tres niveles.</strong> Equipo IdEducando, noviembre
+        de 2026. Ficha y novedades: <span class="url">ideducando.es/material-gratuito/dialogos-para-completar</span>
+      </p>
+
+      <h2>Fuentes</h2>
+      <p style="font-size: 9.5pt; color: var(--suave)">Consultadas en su origen el 4 de noviembre de 2026.</p>
+      <ul class="referencias">
+        <li>
+          Adams, C., Lockton, E., Freed, J., Gaile, J., Earl, G., McBean, K., Nash, M., Green, J., Vail, A. y Law, J.
+          (2012). The Social Communication Intervention Project: a randomized controlled trial of the effectiveness of speech
+          and language therapy for school-age children who have pragmatic and social communication problems with or without
+          autism spectrum disorder. <em>International Journal of Language &amp; Communication Disorders</em>, 47(3), 233-244.
+          <span class="url">doi.org/10.1111/j.1460-6984.2011.00146.x</span>
+        </li>
+        <li>
+          Bishop, D. V. M., Snowling, M. J., Thompson, P. A., Greenhalgh, T. y CATALISE-2 consortium (2017). Phase 2 of
+          CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development:
+          Terminology. <em>Journal of Child Psychology and Psychiatry</em>, 58(10), 1068-1080.
+          <span class="url">doi.org/10.1111/jcpp.12721</span>
+        </li>
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. Consideraciones 5.1 y 5.3.
+          <span class="url">udlguidelines.cast.org</span>
+        </li>
+        <li>
+          Fletcher-Watson, S., McConnell, F., Manola, E. y McConachie, H. (2014). Interventions based on the Theory of Mind
+          cognitive model for autism spectrum disorder (ASD). <em>Cochrane Database of Systematic Reviews</em>, 3, CD008785.
+          <span class="url">doi.org/10.1002/14651858.CD008785.pub2</span>
+        </li>
+        <li>
+          Hume, K., Steinbrenner, J. R., Odom, S. L. y otros (2021). Evidence-based practices for children, youth, and young
+          adults with autism: Third generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11),
+          4013-4032. <span class="url">doi.org/10.1007/s10803-020-04844-2</span>
+        </li>
+        <li>
+          Parsons, L., Cordier, R., Munro, N., Joosten, A. y Speyer, R. (2017). A systematic review of pragmatic language
+          interventions for children with autism spectrum disorder. <em>PLoS ONE</em>, 12(4), e0172242.
+          <span class="url">doi.org/10.1371/journal.pone.0172242</span>
+        </li>
+        <li>
+          Real Decreto 95/2022, de 1 de febrero, por el que se establece la ordenación y las enseñanzas mínimas de la
+          Educación Infantil. <em>Boletín Oficial del Estado (BOE)</em> n.º 28, de 2 de febrero de 2022, anexo II.
+        </li>
+        <li>
+          Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la
+          Educación Primaria. <em>BOE</em> n.º 52, de 2 de marzo de 2022, anexo II.
+        </li>
+      </ul>
+
+      <h2>Pictogramas</h2>
+      <p>
+        Los pictogramas de las tarjetas y de las preguntas de detrás son de ARASAAC, el Centro Aragonés para la
+        Comunicación Aumentativa y Alternativa. Su licencia pide citar este texto: «Los símbolos pictográficos utilizados son
+        propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org), que los
+        distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el material, mantén la cita. Con pictogramas de
+        ARASAAC, este material no se puede vender.
+      </p>
+
+      <h2>Dibujos y licencia</h2>
+      <p>
+        Los personajes, las viñetas, la portada y los iconos son de IdEducando. Los nombres de los personajes son
+        inventados. Licencia CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando, sin fines
+        comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------------------------------
+      // Colores de la marca (los mismos de comun.css)
+      // ---------------------------------------------------------------------------------------------
+      const M = '#1e2b55';
+      const C = {
+        azul: '#2f6fd6', verde: '#1fa67a', coral: '#e8553e', morado: '#8c4fb8', amarillo: '#f6c12e', naranja: '#f5961f',
+        crema: '#fff6e6', suave: '#46578c', verdeTexto: '#127055', linea: '#ead9bb',
+        azulT: '#e4edfb', verdeT: '#dcf3ea', coralT: '#fde5e0', moradoT: '#efe5f7', amarilloT: '#fdf0c7', naranjaT: '#fde8cf',
+      };
+      const PANTALON = '#3d4f7a';
+
+      // ---------------------------------------------------------------------------------------------
+      // Personajes (dibujos de IdEducando). color: el de su ropa y su bocadillo.
+      // ---------------------------------------------------------------------------------------------
+      const PERSONAS = {
+        leo: { nombre: 'Leo', papel: 'Leo', adulto: false, f: false, piel: '#f3c6a0', pelo: '#6b3b1f', peinado: 'corto', color: C.azul, tinte: C.azulT },
+        nora: { nombre: 'Nora', papel: 'Nora', adulto: false, f: true, piel: '#f7d8bd', pelo: '#c55a2c', peinado: 'coletas', color: C.coral, tinte: C.coralT },
+        omar: { nombre: 'Omar', papel: 'Omar', adulto: false, f: false, piel: '#a66a43', pelo: '#241a16', peinado: 'rizos', color: C.verde, tinte: C.verdeT },
+        vega: { nombre: 'Vega', papel: 'Vega', adulto: false, f: true, piel: '#d9a179', pelo: '#2b1c15', peinado: 'melena', color: C.morado, tinte: C.moradoT },
+        profe: { nombre: 'Profe', papel: 'profe', adulto: true, f: true, piel: '#f1c8a6', pelo: '#8a5a2b', peinado: 'mono', gafas: true, color: C.naranja, tinte: C.naranjaT },
+        mama: { nombre: 'Mamá', papel: 'mamá', adulto: true, f: true, piel: '#eeb88f', pelo: '#3b2418', peinado: 'larga', color: C.amarillo, tinte: C.amarilloT },
+        papa: { nombre: 'Papá', papel: 'papá', adulto: true, f: false, piel: '#c9895b', pelo: '#241a16', peinado: 'adulto', barba: true, color: C.verdeTexto, tinte: C.verdeT },
+        abuelo: { nombre: 'Abuelo', papel: 'abuelo', adulto: true, f: false, piel: '#f3d2b4', pelo: '#e4e4e4', peinado: 'calvo', gafas: true, bigote: true, color: C.suave, tinte: C.azulT },
+      };
+      const ORDEN_REPARTO = ['leo', 'nora', 'omar', 'vega', 'profe', 'mama', 'papa', 'abuelo'];
+
+      // ---------------------------------------------------------------------------------------------
+      // Habilidades. Iconos de IdEducando (24 × 24, trazo marino).
+      // ---------------------------------------------------------------------------------------------
+      const HABILIDADES = {
+        saludar: { nombre: 'Saludar y despedirse', corto: 'Saludar y despedirse', clase: 'h-saludar', color: C.azul },
+        pedir: { nombre: 'Pedir algo', corto: 'Pedir algo', clase: 'h-pedir', color: C.naranja },
+        responder: { nombre: 'Responder a lo que me preguntan', corto: 'Responder', clase: 'h-responder', color: C.verde },
+        turno: { nombre: 'Respetar el turno', corto: 'Respetar el turno', clase: 'h-turno', color: C.amarillo },
+        perdon: { nombre: 'Disculparse', corto: 'Disculparse', clase: 'h-perdon', color: C.coral },
+        sentir: { nombre: 'Adivinar qué piensa o siente el otro', corto: 'Pensar en el otro', clase: 'h-sentir', color: C.morado },
+      };
+
+      const ICONOS = {
+        saludar: `<path d="M8.5 13.5V6.8a1.4 1.4 0 0 1 2.8 0v5.2M11.3 11.2V4.6a1.4 1.4 0 0 1 2.8 0v6.6M14.1 11.4V5.8a1.4 1.4 0 0 1 2.8 0v7.4M8.5 12.6 7.2 10.9a1.5 1.5 0 0 0-2.4 1.8l3.4 4.9a6 6 0 0 0 4.9 2.6h.6a4.2 4.2 0 0 0 4.2-4.2V9.6a1.4 1.4 0 0 1 2.8 0v3"/><path d="M3.5 5.5 5 7M2.5 9H4.5M19.8 3.6l-1 1.6"/>`,
+        pedir: `<path d="M3 15.5h3.6l3.4 2.3h4.2a1.6 1.6 0 0 0 0-3.2h-3"/><path d="M6.6 15.5 9.6 13a3 3 0 0 1 2-.8h2.8l4.6-2.6a1.5 1.5 0 0 1 1.6 2.5l-6 4.8"/><path d="M14.6 3.4a2.2 2.2 0 0 1 3.4 2.4c-.5 1.6-3 3.1-3 3.1s-2.5-1.5-3-3.1a2.2 2.2 0 0 1 3.4-2.4z" fill="currentColor" stroke="none"/>`,
+        responder: `<path d="M3 4.5h11a1.5 1.5 0 0 1 1.5 1.5v5a1.5 1.5 0 0 1-1.5 1.5H8l-3.2 2.6V12.5H3A1.5 1.5 0 0 1 1.5 11V6A1.5 1.5 0 0 1 3 4.5z"/><path d="M7 7.4a1.6 1.6 0 1 1 2.2 1.5c-.4.2-.6.5-.6.9v.2"/><circle cx="8.6" cy="11" r=".3" fill="currentColor"/><path d="M17.5 9.5H21a1.5 1.5 0 0 1 1.5 1.5v5A1.5 1.5 0 0 1 21 17.5h-1v2.6l-3.2-2.6H12a1.5 1.5 0 0 1-1.5-1.5v-1"/><path d="M14 14.3l1.6 1.5 3-3.2"/>`,
+        turno: `<circle cx="6" cy="8" r="2.6"/><path d="M2 17.5a4 4 0 0 1 8 0"/><circle cx="18" cy="8" r="2.6"/><path d="M14 17.5a4 4 0 0 1 8 0"/><path d="M9.5 4.2a5 5 0 0 1 5 0M13.3 2.9l1.3 1.3-1.6.9"/><path d="M14.5 20.6a5 5 0 0 1-5 0M10.7 21.9 9.4 20.6l1.6-.9"/>`,
+        perdon: `<path d="M12 20.5S3.5 15.6 3.5 9.6A4.6 4.6 0 0 1 12 7.2a4.6 4.6 0 0 1 8.5 2.4c0 6-8.5 10.9-8.5 10.9z"/><path d="m8.2 13.6 7.6-5.2M9.4 15.4l7.6-5.2" /><path d="m7.6 12.6 1.8 2.8M14.6 7.6l1.8 2.8"/>`,
+        sentir: `<path d="M6.5 15.5a5.5 5.5 0 0 1 .4-9.6 6 6 0 0 1 10.8 1.2 4.5 4.5 0 0 1 .3 8.4z"/><circle cx="5" cy="19" r="1.3"/><circle cx="2.8" cy="22" r=".8"/><path d="M12 13.4s-3-1.7-3-3.6a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 1.9-3 3.6-3 3.6z" fill="currentColor" stroke="none"/>`,
+        adulto: `<circle cx="9" cy="5.5" r="2.8"/><path d="M4.5 22v-8a4.5 4.5 0 0 1 9 0v8"/><circle cx="18" cy="11.5" r="2"/><path d="M15 22v-4.5a3 3 0 0 1 6 0V22"/>`,
+        lapiz: `<path d="M15 4.5 19.5 9 9 19.5H4.5V15z"/><path d="m13 6.5 4.5 4.5"/>`,
+      };
+      const icono = (nombre, clase = '', color = M) =>
+        `<svg class="${clase}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" style="color:${color}">${ICONOS[nombre]}</svg>`;
+
+      // ---------------------------------------------------------------------------------------------
+      // Emociones: pictogramas de ARASAAC (caritas). f = en femenino.
+      // ---------------------------------------------------------------------------------------------
+      const EMOCIONES = [
+        { clave: 'contento', picto: 35547, m: 'contento', f: 'contenta' },
+        { clave: 'triste', picto: 35545, m: 'triste', f: 'triste' },
+        { clave: 'enfadado', picto: 35539, m: 'enfadado', f: 'enfadada' },
+        { clave: 'miedo', picto: 39248, m: 'con miedo', f: 'con miedo' },
+      ];
+
+      // ---------------------------------------------------------------------------------------------
+      // LOS DOCE DIÁLOGOS
+      //   a: quien habla a la izquierda (lo lee el adulto) · b: quien completa el niño o la niña
+      //   turnos: { q: 'a' | 'b', t: texto } o { q: 'b', hueco: 'A' } · cara: gesto de su cabeza en ese turno
+      //   huecos: n1 = [correcta, otra] con pictograma; n2 = [correcta, otra, otra] sin pictograma
+      //   siente: la pregunta de detrás y las caritas esperadas · haria: dos ideas para «¿Qué haría yo?»
+      // ---------------------------------------------------------------------------------------------
+      const DIALOGOS = [
+        {
+          titulo: 'Llego al cole', hab: 'saludar', lugar: 'En el cole', a: 'profe', b: 'leo',
+          resumen: 'Leo llega al cole. La profe le saluda.',
+          descripcion: 'La puerta del cole por la mañana, con sol y frío. La profe saluda con la mano a Leo, que llega con gorro, bufanda y mochila.',
+          turnos: [
+            { q: 'a', t: '¡Buenos días, Leo!', cara: 'habla' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Qué frío hace hoy! Pasa a clase.' },
+            { q: 'b', t: '¡Sí! Llevo gorro y bufanda.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'responder al saludo con otro saludo',
+              n1: [['¡Buenos días, profe!', 6944], ['¡Adiós, profe!', 6028]],
+              n2: ['¡Buenos días, profe!', '¡Adiós, profe!', '¡Buenas noches!'],
+              valen: '«¡Hola, profe!», «¡Buenos días!» o saludar con la mano.',
+            },
+          },
+          siente: {
+            quien: 'la profe', f: true, pregunta: '¿Qué crees que siente la profe cuando Leo la saluda?', bien: ['contento'],
+            pista: 'Mira su sonrisa: Leo le ha devuelto el saludo.',
+            ysi: '¿Y si Leo entra sin decir nada? ¿Cómo se sentiría la profe?',
+          },
+          haria: [['Digo «¡Buenos días!»', 6944], ['Saludo con la mano', 6522]],
+        },
+        {
+          titulo: 'El abuelo se va', hab: 'saludar', lugar: 'En casa', a: 'abuelo', b: 'vega',
+          resumen: 'Es de noche. El abuelo se va a su casa.',
+          descripcion: 'La puerta de casa por la noche, con la luna en la ventana. El abuelo, con abrigo y gorra, se despide con la mano de Vega.',
+          turnos: [
+            { q: 'a', t: 'Vega, me voy a mi casa. ¡Ya es de noche!', cara: 'habla' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Hasta mañana! Que duermas bien.' },
+            { q: 'b', t: '¡Tú también! Abrígate, que hace frío.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'despedirse cuando alguien se va',
+              n1: [['¡Adiós, abuelo! ¡Hasta mañana!', 6028], ['¡Buenos días, abuelo!', 6944]],
+              n2: ['¡Adiós, abuelo! ¡Hasta mañana!', '¡Buenos días, abuelo!', '¡Hola, abuelo! ¿Qué tal?'],
+              valen: '«¡Adiós!», «¡Hasta mañana!» o decir adiós con la mano.',
+            },
+          },
+          siente: {
+            quien: 'el abuelo', f: false, pregunta: '¿Qué crees que siente el abuelo cuando Vega se despide?', bien: ['contento'],
+            otra: 'triste, porque se separan hasta mañana',
+            pista: 'Vega se despide con cariño. Si dice «triste, porque se va», también vale: pregunta por qué.',
+            ysi: '¿Y si Vega sigue viendo la tele y no le dice adiós?',
+          },
+          haria: [['Digo «¡Hasta mañana!»', 6028], ['Le doy un abrazo', 6023]],
+        },
+        {
+          titulo: 'La merienda', hab: 'pedir', lugar: 'En casa', a: 'papa', b: 'nora', largo: true,
+          resumen: 'Nora quiere merendar un chocolate caliente.',
+          descripcion: 'La cocina de casa, con nieve en la ventana. Papá está junto al cazo del chocolate y Nora espera en la mesa, con una taza que humea.',
+          turnos: [
+            { q: 'a', t: '¡Qué frío hace! ¿Quieres merendar algo?', cara: 'habla' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Claro! Ya está. Cuidado, que quema.' },
+            { q: 'b', hueco: 'B' },
+            { q: 'a', t: '¡De nada, Nora!' },
+          ],
+          huecos: {
+            A: {
+              busca: 'pedir lo que quiere, con «por favor»',
+              n1: [['¿Me haces un chocolate, por favor?', 8194], ['¡Chocolate ya!', 31127]],
+              n2: ['¿Me haces un chocolate, por favor?', '¡Chocolate ya!', 'Hoy he pintado un dibujo.'],
+              valen: '«Sí, un chocolate, por favor» o «¿Me das un chocolate caliente?».',
+            },
+            B: {
+              busca: 'dar las gracias',
+              n1: [['¡Gracias, papá!', 31206], ['¡Dame más!', 32753]],
+              n2: ['¡Gracias, papá!', '¡Dame más!', 'Mi gato se llama Copo.'],
+              valen: '«¡Gracias!» o «¡Qué rico! Gracias».',
+            },
+          },
+          siente: {
+            quien: 'papá', f: false, pregunta: '¿Qué crees que siente papá cuando Nora pide «por favor»?', bien: ['contento'],
+            pista: 'Nora ha pedido con «por favor» y después ha dado las gracias.',
+            ysi: '¿Y si Nora grita «¡Chocolate ya!»? ¿Cómo se sentiría papá?',
+          },
+          haria: [['Pido por favor', 8194], ['Doy las gracias', 31206]],
+        },
+        {
+          titulo: 'La cremallera', hab: 'pedir', lugar: 'En el cole', a: 'profe', b: 'omar',
+          resumen: 'La cremallera del abrigo de Omar no sube.',
+          descripcion: 'El perchero de la clase. La profe espera en la puerta para salir al patio y Omar, con cara de enfado, tira de la cremallera de su abrigo.',
+          turnos: [
+            { q: 'a', t: 'Omar, ponte el abrigo. ¡Salimos al patio!', cara: 'habla' },
+            { q: 'b', hueco: 'A', cara: 'enfadado' },
+            { q: 'a', t: 'Claro. Mira: se juntan abajo y se sube despacio.' },
+            { q: 'b', t: '¡Ya está! ¡Gracias, profe!' },
+          ],
+          huecos: {
+            A: {
+              busca: 'pedir ayuda cuando algo no le sale',
+              n1: [['Profe, ¿me ayudas, por favor?', 4570], ['¡No quiero el abrigo!', 6156]],
+              n2: ['Profe, ¿me ayudas, por favor?', '¡Hazlo tú!', '¡No quiero el abrigo!'],
+              valen: '«No puedo, ¿me ayudas?», «Ayuda, por favor» o «La cremallera no sube».',
+            },
+          },
+          siente: {
+            quien: 'Omar', f: false, pregunta: '¿Qué crees que siente Omar cuando la cremallera no sube?', bien: ['enfadado', 'triste'],
+            pista: 'Mira su cara y sus manos: le cuesta, y por eso pide ayuda.',
+            ysi: '¿Y cómo se siente cuando ya ha subido la cremallera?',
+          },
+          haria: [['Pido ayuda', 4570], ['Respiro y lo intento otra vez', 34508]],
+        },
+        {
+          titulo: '¿Dónde está tu gorro?', hab: 'responder', lugar: 'En casa', a: 'mama', b: 'leo', largo: true,
+          resumen: 'Leo y mamá se preparan para salir.',
+          descripcion: 'La entrada de casa. Mamá, con las llaves en la mano, habla con Leo. En el suelo está la mochila de Leo y asoma un gorro.',
+          turnos: [
+            { q: 'a', t: 'Hace mucho frío. ¿Dónde está tu gorro?', cara: 'habla' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: 'Muy bien. ¿Y qué más te pones para no tener frío?' },
+            { q: 'b', hueco: 'B' },
+            { q: 'a', t: '¡Perfecto! Ya podemos salir.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'responder a «¿dónde?» con un sitio',
+              n1: [['Está en mi mochila.', 2475], ['Es de color azul.', 4869]],
+              n2: ['Está en mi mochila.', 'Es de color azul.', 'El domingo.'],
+              valen: '«En la mochila», «Aquí» o, si no lo sabe, «No lo sé».',
+            },
+            B: {
+              busca: 'responder a «¿qué?» con una cosa',
+              n1: [['La bufanda y los guantes.', 2290], ['En mi mochila.', 2475]],
+              n2: ['La bufanda y los guantes.', 'En mi mochila.', 'Con mi abuela.'],
+              valen: '«Los guantes», «La bufanda» o «El abrigo».',
+            },
+          },
+          siente: {
+            quien: 'mamá', f: true, pregunta: '¿Qué crees que siente mamá cuando Leo le contesta?', bien: ['contento'],
+            pista: 'Leo ha contestado justo lo que mamá le preguntaba.',
+            ysi: '¿Y si Leo contesta «Es de color azul»? ¿Sabría mamá dónde está el gorro?',
+          },
+          haria: [['Lo busco', 32156], ['Digo «No lo sé»', 7180]],
+        },
+        {
+          titulo: 'El tiempo de hoy', hab: 'responder', lugar: 'En clase', a: 'profe', b: 'vega',
+          resumen: 'Vega mira el tiempo en la asamblea. Suena un trueno.',
+          descripcion: 'La clase, con el panel del tiempo en la pared. Por la ventana llueve y cae un rayo. La profe señala el panel y Vega mira la ventana con cara de susto.',
+          turnos: [
+            { q: 'a', t: 'Vega, hoy eres la encargada del tiempo. ¿Qué tiempo hace?', cara: 'habla' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Muy bien! ¡Uy! ¿Has oído eso?', cara: 'sorpresa' },
+            { q: 'b', t: '¡Un trueno! ¡Qué susto!', cara: 'miedo' },
+          ],
+          huecos: {
+            A: {
+              busca: 'responder a lo que pregunta: el tiempo, y no el día',
+              n1: [['Hoy llueve mucho.', 7148], ['Hoy es lunes.', 37723]],
+              n2: ['Hoy llueve mucho.', 'Hoy es lunes.', 'Me llamo Vega.'],
+              valen: '«Llueve», «Está lloviendo y hace frío» o «Hay tormenta».',
+            },
+          },
+          siente: {
+            quien: 'Vega', f: true, pregunta: '¿Qué crees que siente Vega cuando oye el trueno?', bien: ['miedo'],
+            pista: 'Dice «¡Qué susto!». Si dice «sorprendida», también vale.',
+            ysi: '¿Qué le puede ayudar a estar tranquila?',
+          },
+          haria: [['Respiro despacio', 34409], ['Me acerco a la profe', 28003]],
+        },
+        {
+          titulo: 'El domingo', hab: 'turno', lugar: 'En clase', a: 'omar', b: 'nora',
+          resumen: 'Omar le cuenta a Nora qué hizo el domingo.',
+          descripcion: 'El rincón de la clase. Omar cuenta con los brazos abiertos que fue a la nieve: en su bocadillo de pensar hay una montaña y un muñeco de nieve. Nora le escucha.',
+          turnos: [
+            { q: 'a', t: '¿Sabes qué? El domingo fui a la nieve.', cara: 'habla' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Hice un muñeco enorme! ¿Y tú qué hiciste?' },
+            { q: 'b', t: 'Yo fui al parque con mi tía.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'escuchar y seguir el tema del otro antes de hablar de lo suyo',
+              n1: [['¡Qué bien! ¿Y qué hiciste?', 36159], ['¡Calla! Ahora hablo yo.', 25453]],
+              n2: ['¡Qué bien! ¿Y qué hiciste?', '¡Calla! Ahora hablo yo.', 'Mi color favorito es el verde.'],
+              valen: '«¡Qué chulo! ¿Con quién fuiste?» o «¿Había mucha nieve?».',
+            },
+          },
+          siente: {
+            quien: 'Omar', f: false, pregunta: '¿Qué crees que siente Omar cuando Nora le pregunta?', bien: ['contento'],
+            pista: 'Nora le escucha y le pregunta: así Omar sabe que le interesa.',
+            ysi: '¿Y si Nora le dice «¡Calla! Ahora hablo yo»?',
+          },
+          haria: [['Escucho a Omar', 25355], ['Le pregunto algo', 36159]],
+        },
+        {
+          titulo: 'Jugamos a la oca', hab: 'turno', lugar: 'Recreo con lluvia', a: 'vega', b: 'leo',
+          resumen: 'Llueve. Vega y Leo juegan a la oca en clase.',
+          descripcion: 'La clase en un recreo con lluvia. En la mesa hay un tablero de la oca. Vega alarga la mano y Leo tiene el dado.',
+          turnos: [
+            { q: 'a', t: 'Llueve y no salimos al patio. ¿Jugamos a la oca?', cara: 'habla' },
+            { q: 'b', t: '¡Vale! Empiezo yo… ¡Un tres!' },
+            { q: 'a', t: '¡Bien! ¿Me das el dado?' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Gracias! ¡Un seis!' },
+          ],
+          huecos: {
+            A: {
+              busca: 'dejar el turno al otro',
+              n1: [['Toma. Ahora te toca a ti.', 34713], ['¡No! Tiro otra vez yo.', 31071]],
+              n2: ['Toma. Ahora te toca a ti.', '¡No! Tiro otra vez yo.', 'Me gustan los trenes.'],
+              valen: '«Te toca», «Toma, tira tú» o «Vale, ahora tú».',
+            },
+          },
+          siente: {
+            quien: 'Vega', f: true, pregunta: '¿Qué crees que siente Vega si Leo no le da el dado?', bien: ['enfadado', 'triste'],
+            pista: 'Es su turno y se queda sin jugar.',
+            ysi: '¿Y si Leo le da el dado? ¿Cómo se siente entonces?',
+          },
+          haria: [['Espero mi turno', 36914], ['Digo «Te toca»', 34713]],
+        },
+        {
+          titulo: 'El charco', hab: 'perdon', lugar: 'De camino al cole', a: 'nora', b: 'omar', largo: true,
+          resumen: 'Omar salta en un charco y moja a Nora sin querer.',
+          descripcion: 'La calle con lluvia. Omar salta en un charco y salpica a Nora, que levanta los brazos enfadada y con los pantalones mojados.',
+          turnos: [
+            { q: 'a', t: '¡Ay! ¡Me has mojado los pantalones!', cara: 'enfadado' },
+            { q: 'b', hueco: 'A', cara: 'sorpresa' },
+            { q: 'a', t: 'Vale… Pero ahora estoy mojada y tengo frío.', cara: 'triste' },
+            { q: 'b', hueco: 'B' },
+            { q: 'a', t: 'Sí, gracias.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'pedir perdón',
+              n1: [['¡Perdón! Ha sido sin querer.', 38361], ['¡Ha sido culpa tuya!', 30642]],
+              n2: ['¡Perdón! Ha sido sin querer.', '¡Ha sido culpa tuya!', '¡Mira, un pájaro!'],
+              valen: '«Lo siento» o «Perdona, no te había visto».',
+            },
+            B: {
+              busca: 'ofrecer ayuda para arreglarlo',
+              n1: [['¿Te ayudo a secarte?', 2566], ['¡Voy a saltar otra vez!', 28447]],
+              n2: ['¿Te ayudo a secarte?', '¡Voy a saltar otra vez!', 'Yo no estoy mojado.'],
+              valen: '«¿Te ayudo?», «Toma mi pañuelo» o «Vamos a buscar una toalla».',
+            },
+          },
+          siente: {
+            quien: 'Nora', f: true, pregunta: '¿Qué crees que siente Nora cuando Omar la moja?', bien: ['enfadado'],
+            pista: 'Mira su cara y sus brazos. Dice «¡Ay!».',
+            ysi: '¿Y cómo se siente cuando Omar le pide perdón y le ayuda?',
+          },
+          haria: [['Pido perdón', 38361], ['Le ayudo a secarse', 2566]],
+        },
+        {
+          titulo: 'La torre', hab: 'perdon', lugar: 'Recreo con lluvia', a: 'leo', b: 'vega',
+          resumen: 'Vega tira sin querer la torre de Leo.',
+          descripcion: 'La clase en un recreo con lluvia. En el suelo están los bloques de una torre que se ha caído. Leo los mira triste y Vega se tapa la boca.',
+          turnos: [
+            { q: 'a', t: '¡Oh, no! ¡Mi torre se ha caído!', cara: 'triste' },
+            { q: 'b', hueco: 'A', cara: 'sorpresa' },
+            { q: 'a', t: 'Vale. ¡Esta vez la hacemos más alta!' },
+            { q: 'b', t: '¡Sí! Yo pongo los bloques rojos.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'pedir perdón y ofrecerse a arreglarlo',
+              n1: [['Lo siento. ¿Te ayudo a hacerla?', 38360], ['¡Yo no he sido!', 34341]],
+              n2: ['Lo siento. ¿Te ayudo a hacerla?', '¡Yo no he sido!', 'Tu torre era muy fea.'],
+              valen: '«Perdón, ha sido sin querer» o «Lo siento, te ayudo».',
+            },
+          },
+          siente: {
+            quien: 'Leo', f: false, pregunta: '¿Qué crees que siente Leo cuando se cae su torre?', bien: ['triste', 'enfadado'],
+            pista: 'Dice «¡Oh, no!» y mira los bloques en el suelo.',
+            ysi: '¿Y cuando Vega le ayuda a hacerla otra vez?',
+          },
+          haria: [['Digo «Lo siento»', 38360], ['Le ayudo con la torre', 4935]],
+        },
+        {
+          titulo: 'El hielo', hab: 'sentir', lugar: 'En el patio', a: 'omar', b: 'nora', largo: true,
+          resumen: 'Omar se resbala en el hielo y se cae.',
+          descripcion: 'El patio en un día de mucho frío, con un charco helado. Omar está sentado en el suelo, se agarra la rodilla y le duele. Nora se acerca preocupada.',
+          turnos: [
+            { q: 'a', t: '¡Ay! Me he resbalado en el hielo.', cara: 'dolor' },
+            { q: 'b', hueco: 'A', cara: 'preocupado' },
+            { q: 'a', t: 'Me duele la rodilla.', cara: 'triste' },
+            { q: 'b', hueco: 'B', cara: 'preocupado' },
+            { q: 'a', t: 'Gracias, Nora.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'darse cuenta de que le duele y preguntarle',
+              n1: [['¿Estás bien? ¿Te has hecho daño?', 30620], ['¡Ja, ja! ¡Qué caída!', 38792]],
+              n2: ['¿Estás bien? ¿Te has hecho daño?', '¡Ja, ja! ¡Qué caída!', '¿Me dejas tu pelota?'],
+              valen: '«¿Te duele?» o «¿Qué te pasa?».',
+            },
+            B: {
+              busca: 'buscar ayuda',
+              n1: [['Voy a avisar a la profe.', 28003], ['Pues yo me voy a jugar.', 2439]],
+              n2: ['Voy a avisar a la profe.', 'Pues yo me voy a jugar.', 'A mí no me duele nada.'],
+              valen: '«¡Profe, ven!» o «Te ayudo a levantarte».',
+            },
+          },
+          siente: {
+            quien: 'Omar', f: false, pregunta: '¿Qué crees que siente Omar cuando se cae?', bien: ['triste', 'miedo'],
+            pista: 'Se ha hecho daño en la rodilla y le duele.',
+            ysi: '¿Y si Nora se ríe? ¿Cómo se sentiría Omar?',
+          },
+          haria: [['Le ayudo a levantarse', 32648], ['Aviso a la profe', 28003]],
+        },
+        {
+          titulo: 'Sin guantes', hab: 'sentir', lugar: 'En el patio', a: 'vega', b: 'leo',
+          resumen: 'Hace mucho frío y Vega no tiene guantes.',
+          descripcion: 'El patio con nieve. Vega se sopla las manos y tiembla de frío. Leo lleva gorro y unos guantes rojos.',
+          turnos: [
+            { q: 'a', t: '¡Uf, uf! Me he dejado los guantes en casa.', cara: 'triste' },
+            { q: 'b', hueco: 'A' },
+            { q: 'a', t: '¡Sí! ¡Gracias, Leo! Mañana te los devuelvo.' },
+            { q: 'b', t: '¡Vale! Así jugamos sin frío.' },
+          ],
+          huecos: {
+            A: {
+              busca: 'adivinar lo que siente por lo que dice y lo que hace, y ofrecerle ayuda',
+              n1: [['¿Tienes frío? Toma mis guantes.', 35583], ['¡Mira mis guantes nuevos!', 2474]],
+              n2: ['¿Tienes frío? Toma mis guantes.', '¡Mira mis guantes nuevos!', 'A mí me gusta el verano.'],
+              valen: '«¿Quieres mis guantes?» o «¿Tienes las manos frías?».',
+            },
+          },
+          siente: {
+            quien: 'Vega', f: true, pregunta: '¿Qué crees que siente Vega cuando Leo le deja sus guantes?', bien: ['contento'],
+            pista: 'Ya no tiene frío y Leo ha pensado en ella.',
+            ysi: '¿Cómo se sentía antes, sin guantes?',
+          },
+          haria: [['Le presto mis guantes', 15361], ['Le pregunto si tiene frío', 35583]],
+        },
+      ];
+
+      // ---------------------------------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas, hay que cambiarlos aquí y en la ficha
+      // («Qué imprimir»). Diálogo 1 en la 5: la 1 es la portada, la 2 «Cómo montarlo», la 3 y la 4 la guía corta.
+      // ---------------------------------------------------------------------------------------------
+      const PRIMER_DIALOGO = 5;
+      const POR_HOJA_N1 = 8; // turnos por hoja de tarjetas del nivel 1 (2 tarjetas cada uno)
+      const POR_HOJA_N2 = 6; // turnos por hoja de tarjetas del nivel 2 (3 tarjetas cada uno)
+      const PAG_N1 = PRIMER_DIALOGO + DIALOGOS.length * 2; // 29
+      const PAG_N2 = PAG_N1 + 2; // 31
+      const PAGINAS = {
+        n1: PAG_N1, n1b: PAG_N1 + 1, n2: PAG_N2, n2c: PAG_N2 + 2,
+        registro: PAG_N2 + 3, guia: PAG_N2 + 4, pistas: PAG_N2 + 5, soluciones: PAG_N2 + 7, familias: PAG_N2 + 8,
+      };
+
+      // ---------------------------------------------------------------------------------------------
+      // Dibujo de los personajes (IdEducando). Origen en los pies; mira = 1 (a la derecha) o -1.
+      // ---------------------------------------------------------------------------------------------
+      let contador = 0;
+      const nuevoId = (p) => `${p}${++contador}`;
+
+      const NINO = { cy: -84, r: 18, hom: -64, cad: -28, an: 15, fa: 18, pierna: 8 };
+      const ADULTO = { cy: -118, r: 17, hom: -99, cad: -48, an: 18, fa: 21, pierna: 8.6 };
+
+      function cara(tipo, fx, cy, r) {
+        const ex = r * 0.34;
+        const ey = cy - r * 0.02;
+        const my = cy + r * 0.43;
+        const ojo = (x, rr = r * 0.11) => `<circle cx="${x}" cy="${ey}" r="${rr}" fill="${M}"/>`;
+        const ojos = ojo(fx - ex) + ojo(fx + ex);
+        const mejillas = `<circle cx="${fx - r * 0.56}" cy="${cy + r * 0.3}" r="${r * 0.15}" fill="${C.coral}" opacity=".3"/><circle cx="${fx + r * 0.56}" cy="${cy + r * 0.3}" r="${r * 0.15}" fill="${C.coral}" opacity=".3"/>`;
+        const trazo = `stroke="${M}" stroke-width="${r * 0.1}" stroke-linecap="round" fill="none"`;
+        const cejas = (dentro, fuera) => {
+          const y = ey - r * 0.3;
+          return `<path d="M${fx - ex - r * 0.2} ${y + fuera} L${fx - ex + r * 0.17} ${y + dentro} M${fx + ex - r * 0.17} ${y + dentro} L${fx + ex + r * 0.2} ${y + fuera}" ${trazo}/>`;
+        };
+        switch (tipo) {
+          case 'habla':
+            return ojos + mejillas + `<path d="M${fx - r * 0.26} ${my - r * 0.06} Q${fx} ${my + r * 0.4} ${fx + r * 0.26} ${my - r * 0.06} Z" fill="${M}"/><path d="M${fx - r * 0.13} ${my + r * 0.14} Q${fx} ${my + r * 0.06} ${fx + r * 0.13} ${my + r * 0.14}" stroke="#e8553e" stroke-width="${r * 0.07}" fill="none"/>`;
+          case 'triste':
+            return ojos + cejas(-r * 0.12, r * 0.04) + `<path d="M${fx - r * 0.24} ${my + r * 0.12} Q${fx} ${my - r * 0.14} ${fx + r * 0.24} ${my + r * 0.12}" ${trazo}/>`;
+          case 'enfadado':
+            return ojos + cejas(r * 0.12, -r * 0.06) + `<path d="M${fx - r * 0.22} ${my + r * 0.1} Q${fx} ${my - r * 0.06} ${fx + r * 0.22} ${my + r * 0.1}" ${trazo}/>`;
+          case 'miedo':
+            return `<circle cx="${fx - ex}" cy="${ey}" r="${r * 0.19}" fill="#fff" stroke="${M}" stroke-width="${r * 0.07}"/><circle cx="${fx + ex}" cy="${ey}" r="${r * 0.19}" fill="#fff" stroke="${M}" stroke-width="${r * 0.07}"/>` +
+              ojo(fx - ex, r * 0.09) + ojo(fx + ex, r * 0.09) + cejas(-r * 0.16, -r * 0.05) +
+              `<ellipse cx="${fx}" cy="${my + r * 0.04}" rx="${r * 0.13}" ry="${r * 0.17}" fill="${M}"/>`;
+          case 'sorpresa':
+            return ojos + mejillas + cejas(-r * 0.1, -r * 0.1) + `<ellipse cx="${fx}" cy="${my + r * 0.03}" rx="${r * 0.12}" ry="${r * 0.14}" fill="${M}"/>`;
+          case 'dolor':
+            return `<path d="M${fx - ex - r * 0.13} ${ey - r * 0.11} L${fx - ex + r * 0.1} ${ey} L${fx - ex - r * 0.13} ${ey + r * 0.11} M${fx + ex + r * 0.13} ${ey - r * 0.11} L${fx + ex - r * 0.1} ${ey} L${fx + ex + r * 0.13} ${ey + r * 0.11}" ${trazo}/>` +
+              cejas(-r * 0.12, r * 0.04) +
+              `<path d="M${fx - r * 0.26} ${my + r * 0.08} q${r * 0.09} ${-r * 0.1} ${r * 0.17} 0 t${r * 0.17} 0 t${r * 0.17} 0" ${trazo}/>` +
+              `<path d="M${fx + ex + r * 0.05} ${ey + r * 0.2} q${-r * 0.1} ${r * 0.16} 0 ${r * 0.24} q${r * 0.1} ${-r * 0.08} 0 ${-r * 0.24} Z" fill="${C.azul}"/>`;
+          case 'preocupado':
+            return ojos + cejas(-r * 0.12, r * 0.03) + `<path d="M${fx - r * 0.16} ${my + r * 0.05} L${fx + r * 0.16} ${my + r * 0.05}" ${trazo}/>`;
+          case 'neutro':
+            return ojos + mejillas + `<path d="M${fx - r * 0.15} ${my + r * 0.02} Q${fx} ${my + r * 0.1} ${fx + r * 0.15} ${my + r * 0.02}" ${trazo}/>`;
+          default:
+            return ojos + mejillas + `<path d="M${fx - r * 0.29} ${my - r * 0.05} Q${fx} ${my + r * 0.3} ${fx + r * 0.29} ${my - r * 0.05}" ${trazo}/>`;
+        }
+      }
+
+      // Pelo que va detrás de la cabeza (melenas y coletas)
+      function peloDetras(p, cy, r) {
+        const borde = `stroke="${M}" stroke-width="${r * 0.08}" stroke-linejoin="round"`;
+        if (p.peinado === 'melena')
+          return `<path d="M${-r * 1.02} ${cy - r * 0.25} Q${-r * 1.16} ${cy + r * 0.8} ${-r * 1.02} ${cy + r * 1.32} Q${0} ${cy + r * 1.45} ${r * 1.02} ${cy + r * 1.32} Q${r * 1.16} ${cy + r * 0.8} ${r * 1.02} ${cy - r * 0.25} Z" fill="${p.pelo}" ${borde}/>`;
+        if (p.peinado === 'larga')
+          return `<path d="M${-r * 1.0} ${cy - r * 0.3} C${-r * 1.3} ${cy + r * 0.4} ${-r * 0.9} ${cy + r * 0.8} ${-r * 1.15} ${cy + r * 1.3} Q${0} ${cy + r * 1.5} ${r * 1.15} ${cy + r * 1.3} C${r * 0.9} ${cy + r * 0.8} ${r * 1.3} ${cy + r * 0.4} ${r * 1.0} ${cy - r * 0.3} Z" fill="${p.pelo}" ${borde}/>`;
+        if (p.peinado === 'coletas')
+          return [-1, 1]
+            .map((l) => `<circle cx="${l * r * 1.14}" cy="${cy + r * 0.1}" r="${r * 0.4}" fill="${p.pelo}" ${borde}/><circle cx="${l * r * 0.9}" cy="${cy}" r="${r * 0.14}" fill="${C.amarillo}" stroke="${M}" stroke-width="${r * 0.06}"/>`)
+            .join('');
+        if (p.peinado === 'mono')
+          return `<circle cx="0" cy="${cy - r * 1.08}" r="${r * 0.42}" fill="${p.pelo}" ${borde}/>`;
+        return '';
+      }
+
+      // Pelo que va delante (encima de la frente)
+      function peloDelante(p, cy, r, mira) {
+        const borde = `stroke="${M}" stroke-width="${r * 0.08}" stroke-linejoin="round"`;
+        const f = (x) => x * mira; // flequillo hacia donde mira
+        switch (p.peinado) {
+          case 'corto':
+            return `<path d="M${-r * 0.99} ${cy + r * 0.08} C${-r * 1.1} ${cy - r * 1.22} ${r * 1.1} ${cy - r * 1.22} ${r * 0.99} ${cy + r * 0.08} C${r * 0.92} ${cy - r * 0.3} ${f(r * 0.62)} ${cy - r * 0.46} ${f(r * 0.4)} ${cy - r * 0.5} L${f(r * 0.18)} ${cy - r * 0.34} L${f(-r * 0.04)} ${cy - r * 0.54} L${f(-r * 0.3)} ${cy - r * 0.38} C${-r * 0.7} ${cy - r * 0.48} ${-r * 0.92} ${cy - r * 0.3} ${-r * 0.99} ${cy + r * 0.08} Z" fill="${p.pelo}" ${borde}/>`;
+          case 'rizos': {
+            let s = `<path d="M${-r * 0.98} ${cy + r * 0.05} C${-r * 1.05} ${cy - r * 1.2} ${r * 1.05} ${cy - r * 1.2} ${r * 0.98} ${cy + r * 0.05} C${r * 0.8} ${cy - r * 0.45} ${-r * 0.8} ${cy - r * 0.45} ${-r * 0.98} ${cy + r * 0.05} Z" fill="${p.pelo}" ${borde}/>`;
+            for (let a = 196; a <= 344; a += 21) {
+              const x = Math.cos((a * Math.PI) / 180) * r * 0.9;
+              const y = cy + Math.sin((a * Math.PI) / 180) * r * 0.9;
+              s += `<circle cx="${x}" cy="${y}" r="${r * 0.3}" fill="${p.pelo}" ${borde}/>`;
+            }
+            return s;
+          }
+          case 'coletas':
+            return `<path d="M${-r * 0.99} ${cy + r * 0.05} C${-r * 1.06} ${cy - r * 1.18} ${r * 1.06} ${cy - r * 1.18} ${r * 0.99} ${cy + r * 0.05} C${r * 0.82} ${cy - r * 0.5} ${r * 0.22} ${cy - r * 0.62} 0 ${cy - r * 0.48} C${-r * 0.22} ${cy - r * 0.62} ${-r * 0.82} ${cy - r * 0.5} ${-r * 0.99} ${cy + r * 0.05} Z" fill="${p.pelo}" ${borde}/>`;
+          case 'melena':
+            return `<path d="M${-r * 1.02} ${cy + r * 0.12} C${-r * 1.08} ${cy - r * 1.2} ${r * 1.08} ${cy - r * 1.2} ${r * 1.02} ${cy + r * 0.12} L${r * 0.84} ${cy - r * 0.34} L${-r * 0.84} ${cy - r * 0.34} Z" fill="${p.pelo}" ${borde}/>`;
+          case 'mono':
+          case 'larga':
+            return `<path d="M${-r * 1.0} ${cy + r * 0.1} C${-r * 1.06} ${cy - r * 1.18} ${r * 1.06} ${cy - r * 1.18} ${r * 1.0} ${cy + r * 0.1} C${r * 0.9} ${cy - r * 0.4} ${f(r * 0.4)} ${cy - r * 0.58} ${f(-r * 0.15)} ${cy - r * 0.55} C${-r * 0.7} ${cy - r * 0.5} ${-r * 0.92} ${cy - r * 0.3} ${-r * 1.0} ${cy + r * 0.1} Z" fill="${p.pelo}" ${borde}/>`;
+          case 'adulto':
+            return `<path d="M${-r * 0.99} ${cy - r * 0.05} C${-r * 1.04} ${cy - r * 1.18} ${r * 1.04} ${cy - r * 1.18} ${r * 0.99} ${cy - r * 0.05} C${r * 0.85} ${cy - r * 0.6} ${-r * 0.85} ${cy - r * 0.6} ${-r * 0.99} ${cy - r * 0.05} Z" fill="${p.pelo}" ${borde}/>`;
+          case 'calvo':
+            return [-1, 1]
+              .map((l) => `<path d="M${l * r * 0.72} ${cy - r * 0.55} q${l * r * 0.5} ${r * 0.05} ${l * r * 0.36} ${r * 0.55} q${l * r * 0.12} ${r * 0.25} ${-l * r * 0.1} ${r * 0.4} q${-l * r * 0.12} ${-r * 0.4} ${-l * r * 0.26} ${-r * 0.95} Z" fill="${p.pelo}" ${borde}/>`)
+              .join('');
+          default:
+            return '';
+        }
+      }
+
+      // Cabeza completa: orejas, cara, pelo, gafas, barba y gorro
+      function cabeza(p, cy, r, mira, gesto, { gorro = null, gorra = null } = {}) {
+        const fx = mira * r * 0.16;
+        let s = peloDetras(p, cy, r);
+        if (!['melena', 'larga'].includes(p.peinado))
+          s += [-1, 1].map((l) => `<circle cx="${l * r * 0.98}" cy="${cy + r * 0.12}" r="${r * 0.2}" fill="${p.piel}" stroke="${M}" stroke-width="${r * 0.08}"/>`).join('');
+        s += `<circle cx="0" cy="${cy}" r="${r}" fill="${p.piel}" stroke="${M}" stroke-width="${r * 0.09}"/>`;
+        if (p.barba)
+          s += `<path d="M${-r * 0.9} ${cy + r * 0.12} Q${-r * 0.86} ${cy + r * 1.12} 0 ${cy + r * 1.1} Q${r * 0.86} ${cy + r * 1.12} ${r * 0.9} ${cy + r * 0.12} Q${r * 0.55} ${cy + r * 0.62} ${fx} ${cy + r * 0.62} Q${-r * 0.55} ${cy + r * 0.62} ${-r * 0.9} ${cy + r * 0.12} Z" fill="${p.pelo}" stroke="${M}" stroke-width="${r * 0.07}"/>`;
+        s += cara(gesto, fx, cy, r);
+        if (p.bigote)
+          s += `<path d="M${fx - r * 0.34} ${cy + r * 0.36} Q${fx - r * 0.16} ${cy + r * 0.18} ${fx} ${cy + r * 0.3} Q${fx + r * 0.16} ${cy + r * 0.18} ${fx + r * 0.34} ${cy + r * 0.36} Q${fx + r * 0.16} ${cy + r * 0.46} ${fx} ${cy + r * 0.38} Q${fx - r * 0.16} ${cy + r * 0.46} ${fx - r * 0.34} ${cy + r * 0.36} Z" fill="${p.pelo}" stroke="${M}" stroke-width="${r * 0.05}"/>`;
+        if (!gorro) s += peloDelante(p, cy, r, mira);
+        if (p.gafas) {
+          const ex = r * 0.34;
+          s += `<g fill="#fff" fill-opacity=".25" stroke="${M}" stroke-width="${r * 0.07}"><circle cx="${fx - ex}" cy="${cy - r * 0.02}" r="${r * 0.23}"/><circle cx="${fx + ex}" cy="${cy - r * 0.02}" r="${r * 0.23}"/></g><path d="M${fx - ex + r * 0.23} ${cy - r * 0.04} H${fx + ex - r * 0.23}" stroke="${M}" stroke-width="${r * 0.07}"/>`;
+        }
+        if (gorro)
+          s += `<path d="M${-r * 1.05} ${cy - r * 0.2} C${-r * 1.1} ${cy - r * 1.42} ${r * 1.1} ${cy - r * 1.42} ${r * 1.05} ${cy - r * 0.2} Z" fill="${gorro}" stroke="${M}" stroke-width="${r * 0.08}" stroke-linejoin="round"/>
+            <rect x="${-r * 1.1}" y="${cy - r * 0.46}" width="${r * 2.2}" height="${r * 0.36}" rx="${r * 0.18}" fill="#fff" stroke="${M}" stroke-width="${r * 0.08}"/>
+            <circle cx="0" cy="${cy - r * 1.2}" r="${r * 0.26}" fill="#fff" stroke="${M}" stroke-width="${r * 0.08}"/>`;
+        if (gorra)
+          s += `<path d="M${-r * 1.0} ${cy - r * 0.42} C${-r * 0.96} ${cy - r * 1.18} ${r * 0.96} ${cy - r * 1.18} ${r * 1.0} ${cy - r * 0.42} Z" fill="${gorra}" stroke="${M}" stroke-width="${r * 0.08}" stroke-linejoin="round"/>
+            <path d="M${mira * r * 0.4} ${cy - r * 0.46} Q${mira * r * 1.2} ${cy - r * 0.5} ${mira * r * 1.5} ${cy - r * 0.34} Q${mira * r * 1.1} ${cy - r * 0.24} ${mira * r * 0.3} ${cy - r * 0.3} Z" fill="${gorra}" stroke="${M}" stroke-width="${r * 0.08}" stroke-linejoin="round"/>`;
+        return s;
+      }
+
+      // Brazo: trazo grueso con borde marino y una mano redonda al final
+      function brazo(sx, sy, hx, hy, color, mano, codo = null) {
+        const ex = codo ? codo[0] : (sx + hx) / 2 + Math.sign(sx || 1) * 3;
+        const ey = codo ? codo[1] : (sy + hy) / 2;
+        const d = `M${sx} ${sy} Q${ex} ${ey} ${hx} ${hy}`;
+        return `<path d="${d}" stroke="${M}" stroke-width="9.6" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${color}" stroke-width="6.6" fill="none" stroke-linecap="round"/><circle cx="${hx}" cy="${hy}" r="4.1" fill="${mano}" stroke="${M}" stroke-width="1.4"/>`;
+      }
+
+      function persona(id, o = {}) {
+        const p = PERSONAS[id];
+        const {
+          x = 0, y = 0, s = 1, mira = 1, gesto = 'contento', pose = 'pie', ropa = p.color,
+          gorro = null, gorra = null, bufanda = null, mochila = null, guantes = null, botas = M, objeto = '',
+        } = o;
+        const g = pose === 'sentado' ? { ...NINO, cy: -70, hom: -50, cad: -14 } : p.adulto ? ADULTO : NINO;
+        const { cy, r, hom, cad, an, fa, pierna } = g;
+        const mano = guantes ?? p.piel;
+        const t = mira;
+        let dib = '';
+
+        // Mochila, detrás del cuerpo
+        if (mochila)
+          dib += `<rect x="${-t * (an + 6) - 9}" y="${hom + 5}" width="18" height="${cad - hom - 4}" rx="5" fill="${mochila}" stroke="${M}" stroke-width="1.5"/><rect x="${-t * (an + 6) - 6}" y="${cad - 14}" width="12" height="8" rx="2" fill="#fff" fill-opacity=".5" stroke="${M}" stroke-width="1.1"/>`;
+
+        // Piernas y zapatos
+        if (pose === 'sentado') {
+          dib += `<rect x="0" y="-12" width="34" height="9" rx="3" fill="${PANTALON}" stroke="${M}" stroke-width="1.5"/>
+            <rect x="31" y="-15" width="8.5" height="14" rx="3" fill="${botas}" stroke="${M}" stroke-width="1.4"/>
+            <path d="M3 -9 L19 -25 L31 -6" stroke="${M}" stroke-width="10.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 -9 L19 -25 L31 -6" stroke="${PANTALON}" stroke-width="7.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="29" y="-9" width="10" height="8" rx="3" fill="${botas}" stroke="${M}" stroke-width="1.4"/>`;
+        } else {
+          const alto = -7 - (cad - 1);
+          dib += `<rect x="${-pierna - 1.2}" y="${cad - 1}" width="${pierna}" height="${alto}" rx="2.6" fill="${PANTALON}" stroke="${M}" stroke-width="1.5"/>
+            <rect x="1.2" y="${cad - 1}" width="${pierna}" height="${alto}" rx="2.6" fill="${PANTALON}" stroke="${M}" stroke-width="1.5"/>`;
+          const zapato = (x0) => `<rect x="${x0 + (t < 0 ? -3.5 : 0)}" y="-9" width="${pierna + 3.5}" height="9" rx="3.2" fill="${botas}" stroke="${M}" stroke-width="1.4"/>`;
+          dib += zapato(-pierna - 1.6) + zapato(0.8);
+        }
+
+        // Posición de las manos según la postura
+        const hombro = (l) => [l * (an - 2.5), hom + 6];
+        const abajo = (l) => [l * (fa + 3), cad + 1];
+        let manoAt = abajo(-t);
+        let manoAd = abajo(t);
+        let codoAt = null;
+        let codoAd = null;
+        if (pose === 'saluda') manoAd = [t * (an + 12), hom - 17];
+        if (pose === 'ofrece') manoAd = [t * (an + 17), hom + 15];
+        if (pose === 'senala') manoAd = [t * (an + 17), hom + 6];
+        if (pose === 'soplar') {
+          manoAd = [t * 8, cy + r * 0.95];
+          manoAt = [t * 1, cy + r * 1.05];
+          codoAd = [t * (an + 8), hom + 14];
+          codoAt = [-t * (an + 4), hom + 16];
+        }
+        if (pose === 'cremallera') {
+          manoAd = [t * 2.5, hom + 15];
+          manoAt = [-t * 2, hom + 23];
+          codoAd = [t * (an + 7), hom + 18];
+          codoAt = [-t * (an + 7), hom + 22];
+        }
+        if (pose === 'arriba') {
+          manoAd = [t * (an + 11), hom - 12];
+          manoAt = [-t * (an + 11), hom - 12];
+        }
+        if (pose === 'boca') {
+          manoAd = [t * 6, cy + r * 0.72];
+          codoAd = [t * (an + 9), hom + 14];
+        }
+        if (pose === 'abiertos') {
+          manoAd = [t * (an + 15), hom + 1];
+          manoAt = [-t * (an + 15), hom + 1];
+        }
+        if (pose === 'sentado') {
+          manoAd = [19 * t, -27];
+          manoAt = [-15 * t, -4];
+          codoAd = [t * (an + 6), hom + 18];
+          codoAt = [-t * (an + 6), hom + 20];
+        }
+
+        const ladoAt = -t;
+        dib += brazo(...hombro(ladoAt), ...manoAt, ropa, mano, codoAt);
+
+        // Cuerpo (abrigo o jersey)
+        dib += `<path d="M${-an + 5} ${hom} H${an - 5} Q${an + 1} ${hom} ${an + 1.6} ${hom + 6} L${fa} ${cad - 3} Q${fa + 0.4} ${cad + 2} ${fa - 4} ${cad + 2} H${-fa + 4} Q${-fa - 0.4} ${cad + 2} ${-fa} ${cad - 3} L${-an - 1.6} ${hom + 6} Q${-an - 1} ${hom} ${-an + 5} ${hom} Z" fill="${ropa}" stroke="${M}" stroke-width="1.6" stroke-linejoin="round"/>`;
+        if (p.adulto) dib += `<path d="M-6 ${hom + 1} L0 ${hom + 11} L6 ${hom + 1}" fill="#fff" stroke="${M}" stroke-width="1.2"/>`;
+        dib += `<path d="M0 ${hom + (p.adulto ? 11 : 6)} V${cad + 1}" stroke="${M}" stroke-width="1.1"/>`;
+        // Cuello
+        dib += `<rect x="-4.5" y="${hom - 6}" width="9" height="8" fill="${p.piel}" stroke="${M}" stroke-width="1.2"/>`;
+
+        dib += brazo(...hombro(t), ...manoAd, ropa, mano, codoAd);
+        dib += objeto;
+
+        // Bufanda
+        if (bufanda)
+          dib += `<rect x="${-r * 0.8}" y="${hom - 4}" width="${r * 1.6}" height="7.5" rx="3.7" fill="${bufanda}" stroke="${M}" stroke-width="1.4"/>
+            <rect x="${-t * r * 0.45 - 3}" y="${hom + 2}" width="6.5" height="15" rx="2" fill="${bufanda}" stroke="${M}" stroke-width="1.4"/>`;
+
+        dib += cabeza(p, cy, r, t, gesto, { gorro, gorra });
+        return `<g transform="translate(${x} ${y}) scale(${s})">${dib}</g>`;
+      }
+
+      // Cabeza dentro de un círculo, para los turnos del diálogo
+      function cabezaIcono(id, gesto = 'contento', mira = 0) {
+        const p = PERSONAS[id];
+        const r = 18;
+        const clip = nuevoId('cab');
+        const hombros = `<path d="M-24 40 Q-24 21 -7 21 H7 Q24 21 24 40 Z" fill="${p.color}" stroke="${M}" stroke-width="1.6"/>`;
+        return `<svg viewBox="-27 -27 54 54" aria-hidden="true" focusable="false">
+          <defs><clipPath id="${clip}"><circle r="25.4"/></clipPath></defs>
+          <circle r="25.4" fill="${p.tinte}"/>
+          <g clip-path="url(#${clip})">${hombros}<rect x="-4.5" y="13" width="9" height="9" fill="${p.piel}" stroke="${M}" stroke-width="1.2"/>${cabeza(p, -1, r, mira, gesto)}</g>
+          <circle r="25.4" fill="none" stroke="${p.color}" stroke-width="2.2"/>
+        </svg>`;
+      }
+
+      // ---------------------------------------------------------------------------------------------
+      // Piezas de los decorados (IdEducando)
+      // ---------------------------------------------------------------------------------------------
+      function azar(semilla) {
+        let s = semilla;
+        return () => {
+          s = (s * 9301 + 49297) % 233280;
+          return s / 233280;
+        };
+      }
+
+      const pared = (color = C.crema) => `<rect width="320" height="125" fill="${color}"/><rect y="108" width="320" height="17" fill="${C.naranjaT}"/><path d="M0 108 H320" stroke="${M}" stroke-width="1.2"/>`;
+      const cielo = (suelo = C.verdeT, cieloColor = C.azulT) => `<rect width="320" height="125" fill="${cieloColor}"/><rect y="108" width="320" height="17" fill="${suelo}"/><path d="M0 108 H320" stroke="${M}" stroke-width="1.2"/>`;
+
+      function lluvia(x0, y0, x1, y1, n, semilla = 3) {
+        const a = azar(semilla);
+        let s = '';
+        for (let i = 0; i < n; i++) {
+          const x = x0 + a() * (x1 - x0);
+          const y = y0 + a() * (y1 - y0);
+          s += `<path d="M${x.toFixed(1)} ${y.toFixed(1)} l-1.8 5.6" stroke="${C.azul}" stroke-width="1.5" stroke-linecap="round"/>`;
+        }
+        return s;
+      }
+
+      function copos(x0, y0, x1, y1, n, semilla = 5, color = C.suave, evitar = []) {
+        const a = azar(semilla);
+        let s = '';
+        for (let i = 0, intentos = 0; i < n && intentos < n * 20; intentos++) {
+          const x = x0 + a() * (x1 - x0);
+          const y = y0 + a() * (y1 - y0);
+          if (evitar.some(([ax, ay, bx, by]) => x > ax && x < bx && y > ay && y < by)) continue;
+          i++;
+          const l = 2.2 + a() * 1.2;
+          s += `<g stroke="${color}" stroke-width=".9" stroke-linecap="round"><path d="M${x - l} ${y} H${x + l}"/><path d="M${x - l * 0.5} ${y - l * 0.87} L${x + l * 0.5} ${y + l * 0.87}"/><path d="M${x + l * 0.5} ${y - l * 0.87} L${x - l * 0.5} ${y + l * 0.87}"/></g>`;
+        }
+        return s;
+      }
+
+      const nube = (x, y, k = 1, color = '#fff') =>
+        `<path transform="translate(${x} ${y}) scale(${k})" d="M-22 8 a10 10 0 0 1 4 -18 a13 13 0 0 1 24 -3 a10 10 0 0 1 16 9 a9 9 0 0 1 -2 12 Z" fill="${color}" stroke="${M}" stroke-width="1.3" stroke-linejoin="round"/>`;
+
+      function sol(x, y, rr = 10) {
+        let rayos = '';
+        for (let i = 0; i < 8; i++) {
+          const a = (i * Math.PI) / 4;
+          rayos += `<path d="M${x + Math.cos(a) * (rr + 3)} ${y + Math.sin(a) * (rr + 3)} L${x + Math.cos(a) * (rr + 8)} ${y + Math.sin(a) * (rr + 8)}" stroke="${C.naranja}" stroke-width="2" stroke-linecap="round"/>`;
+        }
+        return `${rayos}<circle cx="${x}" cy="${y}" r="${rr}" fill="${C.amarillo}" stroke="${M}" stroke-width="1.4"/>`;
+      }
+
+      const luna = (x, y, rr = 9) =>
+        `<path d="M${x} ${y - rr} a${rr} ${rr} 0 1 0 ${rr * 0.9} ${rr * 1.45} a${rr * 0.85} ${rr * 0.85} 0 1 1 ${-rr * 0.9} ${-rr * 1.45} Z" fill="${C.amarillo}" stroke="${M}" stroke-width="1.2"/>`;
+
+      const estrella = (x, y, k = 1) =>
+        `<path transform="translate(${x} ${y}) scale(${k})" d="M0 -4 L1.1 -1.1 L4 0 L1.1 1.1 L0 4 L-1.1 1.1 L-4 0 L-1.1 -1.1 Z" fill="${C.amarillo}"/>`;
+
+      const rayo = (x, y, k = 1) =>
+        `<path transform="translate(${x} ${y}) scale(${k})" d="M4 0 L-5 15 L1 15 L-4 29 L9 11 L2.5 11 L8 0 Z" fill="${C.amarillo}" stroke="${M}" stroke-width="1.3" stroke-linejoin="round"/>`;
+
+      function ventana(x, y, w, h, interior = '', fondo = C.azulT) {
+        const id = nuevoId('ven');
+        return `<defs><clipPath id="${id}"><rect x="${x}" y="${y}" width="${w}" height="${h}"/></clipPath></defs>
+          <rect x="${x - 3}" y="${y - 3}" width="${w + 6}" height="${h + 6}" rx="2.5" fill="#fff" stroke="${M}" stroke-width="1.5"/>
+          <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fondo}"/>
+          <g clip-path="url(#${id})">${interior}</g>
+          <path d="M${x + w / 2} ${y} V${y + h} M${x} ${y + h / 2} H${x + w}" stroke="${M}" stroke-width="1.5"/>
+          <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="${M}" stroke-width="1.2"/>`;
+      }
+
+      function arbol(x, y) {
+        return `<path d="M${x} ${y} V${y - 46} M${x} ${y - 30} L${x - 12} ${y - 42} M${x} ${y - 38} L${x + 11} ${y - 52} M${x - 7} ${y - 37} L${x - 9} ${y - 49} M${x + 6} ${y - 45} L${x + 15} ${y - 47}" stroke="#8a5a2b" stroke-width="3.2" stroke-linecap="round" fill="none"/>`;
+      }
+
+      const taza = (x, y, color = C.coral) =>
+        `<path d="M${x - 6} ${y - 12} h12 v9 a4 4 0 0 1 -4 4 h-4 a4 4 0 0 1 -4 -4 Z" fill="${color}" stroke="${M}" stroke-width="1.3"/>
+         <path d="M${x + 6} ${y - 9.5} a3 3 0 0 1 0 6" fill="none" stroke="${M}" stroke-width="1.3"/>
+         <path d="M${x - 2.5} ${y - 15} q-2 -3 0 -6 M${x + 2} ${y - 15} q-2 -3 0 -6" stroke="${C.suave}" stroke-width="1.1" fill="none" stroke-linecap="round"/>`;
+
+      const dado = (x, y, k = 1) =>
+        `<g transform="translate(${x} ${y}) scale(${k})"><rect x="-5" y="-5" width="10" height="10" rx="2" fill="#fff" stroke="${M}" stroke-width="1.2"/><circle cx="-2.3" cy="-2.3" r="1" fill="${M}"/><circle cx="0" cy="0" r="1" fill="${M}"/><circle cx="2.3" cy="2.3" r="1" fill="${M}"/></g>`;
+
+      function bocadilloPensar(x, y, w, h, contenido, cola) {
+        const [cx, cy2] = cola;
+        return `<ellipse cx="${x + w / 2}" cy="${y + h / 2}" rx="${w / 2}" ry="${h / 2}" fill="#fff" stroke="${M}" stroke-width="1.3"/>
+          <circle cx="${cx}" cy="${cy2}" r="2.6" fill="#fff" stroke="${M}" stroke-width="1.1"/>
+          <circle cx="${cx + (x + w / 2 - cx) * 0.4}" cy="${cy2 + (y + h - cy2) * 0.45}" r="3.6" fill="#fff" stroke="${M}" stroke-width="1.1"/>
+          ${contenido}`;
+      }
+
+      function munecoNieve(x, y, k = 1) {
+        return `<g transform="translate(${x} ${y}) scale(${k})">
+          <circle cx="0" cy="-7" r="7" fill="#fff" stroke="${M}" stroke-width="1.2"/>
+          <circle cx="0" cy="-18.5" r="5" fill="#fff" stroke="${M}" stroke-width="1.2"/>
+          <circle cx="-1.7" cy="-19.5" r=".8" fill="${M}"/><circle cx="1.7" cy="-19.5" r=".8" fill="${M}"/>
+          <path d="M0 -18 l4 1 l-4 1 Z" fill="${C.naranja}"/>
+          <path d="M-4 -23.5 h8 v-5 h-8 Z M-6 -23.5 h12" fill="${M}" stroke="${M}" stroke-width="1"/>
+          <path d="M-4.5 -14 h9" stroke="${C.coral}" stroke-width="2"/>
+        </g>`;
+      }
+
+      // ---------------------------------------------------------------------------------------------
+      // Las doce viñetas (320 × 125). El personaje a, a la izquierda; b, a la derecha.
+      // ---------------------------------------------------------------------------------------------
+      const ESCENAS = [
+        // 1. Llego al cole
+        () =>
+          cielo(C.linea) +
+          sol(284, 24, 9) +
+          `<rect x="10" y="26" width="166" height="82" fill="#fff" stroke="${M}" stroke-width="1.5"/>
+           <path d="M4 28 L93 6 L182 28 Z" fill="${C.coral}" stroke="${M}" stroke-width="1.5" stroke-linejoin="round"/>
+           <rect x="116" y="32" width="48" height="13" rx="2" fill="${C.azulT}" stroke="${M}" stroke-width="1.2"/>
+           <text x="140" y="42.4" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="11.5" fill="${M}" letter-spacing="1">COLE</text>
+           <path d="M124 108 V64 a16 16 0 0 1 32 0 V108 Z" fill="${C.amarilloT}" stroke="${M}" stroke-width="1.5"/>
+           <path d="M140 48 V108" stroke="${M}" stroke-width="1.2"/>` +
+          ventana(20, 48, 22, 22) +
+          `<path d="M10 108 H176" stroke="${M}" stroke-width="1.5"/>` +
+          persona('profe', { x: 76, y: 118, s: 0.77, mira: 1, gesto: 'habla', pose: 'saluda' }) +
+          persona('leo', { x: 238, y: 118, s: 0.86, mira: -1, gesto: 'contento', gorro: C.amarillo, bufanda: C.coral, mochila: C.amarillo }) +
+          `<g fill="#fff" stroke="${C.suave}" stroke-width=".8"><circle cx="219" cy="53.5" r="1.7"/><circle cx="214" cy="52" r="2.4"/><circle cx="207.5" cy="50" r="3.1"/></g>`,
+
+        // 2. El abuelo se va
+        () =>
+          pared() +
+          `<rect x="22" y="24" width="52" height="84" fill="${M}" stroke="${M}" stroke-width="1.5"/>
+           ${estrella(36, 36, 0.8)}${estrella(58, 48, 0.6)}${estrella(44, 62, 0.7)}
+           <path d="M74 24 L96 30 V112 L74 108 Z" fill="${C.naranja}" stroke="${M}" stroke-width="1.5" stroke-linejoin="round"/>
+           <circle cx="91" cy="72" r="1.8" fill="${M}"/>` +
+          ventana(238, 22, 60, 44, luna(258, 36, 8) + estrella(280, 32, 0.7) + estrella(286, 52, 0.6), M) +
+          `<rect x="146" y="30" width="36" height="27" rx="1.5" fill="#fff" stroke="${M}" stroke-width="1.5"/>
+           <path d="M150 53 L159 41 L165 47 L171 40 L178 53 Z" fill="${C.verdeT}" stroke="${M}" stroke-width="1" stroke-linejoin="round"/>
+           <circle cx="172" cy="36" r="3" fill="${C.amarillo}" stroke="${M}" stroke-width=".9"/>` +
+          persona('abuelo', { x: 110, y: 118, s: 0.77, mira: 1, gesto: 'habla', pose: 'saluda', gorra: M, bufanda: C.amarillo }) +
+          persona('vega', { x: 230, y: 118, s: 0.86, mira: -1, gesto: 'contento' }),
+
+        // 3. La merienda
+        () =>
+          pared() +
+          `<rect x="0" y="62" width="120" height="46" fill="#fff" stroke="${M}" stroke-width="1.4"/>
+           <path d="M0 70 H120" stroke="${M}" stroke-width="1.2"/>
+           <rect x="18" y="49" width="30" height="14" rx="3" fill="${M}"/>
+           <path d="M14 51 h4 M48 51 h6" stroke="${M}" stroke-width="2" stroke-linecap="round"/>
+           <path d="M25 45 q-3 -5 0 -10 M33 45 q-3 -5 0 -10 M41 45 q-3 -5 0 -10" stroke="${C.suave}" stroke-width="1.3" fill="none" stroke-linecap="round"/>` +
+          ventana(52, 14, 50, 32, copos(52, 14, 102, 46, 10, 7)) +
+          `<rect x="150" y="80" width="80" height="6" rx="2" fill="${C.naranja}" stroke="${M}" stroke-width="1.3"/>
+           <path d="M158 86 V108 M222 86 V108" stroke="${M}" stroke-width="3" stroke-linecap="round"/>` +
+          persona('papa', { x: 86, y: 118, s: 0.77, mira: 1, gesto: 'habla' }) +
+          persona('nora', { x: 252, y: 118, s: 0.86, mira: -1, gesto: 'contento' }) +
+          taza(196, 80, C.coral),
+
+        // 4. La cremallera
+        () =>
+          pared() +
+          `<path d="M150 30 H240" stroke="${M}" stroke-width="3" stroke-linecap="round"/>
+           ${[160, 182, 204, 226].map((x) => `<path d="M${x} 30 v5 a3 3 0 0 0 6 0" stroke="${M}" stroke-width="1.5" fill="none"/>`).join('')}
+           <path d="M178 38 h18 l4 32 h-26 Z" fill="${C.azul}" stroke="${M}" stroke-width="1.3"/>
+           <path d="M200 38 h18 l4 32 h-26 Z" fill="${C.coral}" stroke="${M}" stroke-width="1.3"/>
+           <rect x="20" y="20" width="44" height="88" fill="${C.amarilloT}" stroke="${M}" stroke-width="1.5"/>
+           <circle cx="56" cy="66" r="2" fill="${M}"/>` +
+          ventana(100, 22, 34, 28, nube(118, 38, 0.6, '#fff') + nube(104, 30, 0.4, '#fff')) +
+          persona('profe', { x: 88, y: 118, s: 0.77, mira: 1, gesto: 'habla', pose: 'senala' }) +
+          persona('omar', { x: 236, y: 118, s: 0.86, mira: -1, gesto: 'enfadado', pose: 'cremallera', bufanda: null }),
+
+        // 5. ¿Dónde está tu gorro?
+        () =>
+          pared() +
+          `<rect x="268" y="20" width="44" height="88" fill="${C.naranja}" stroke="${M}" stroke-width="1.5"/>
+           <circle cx="276" cy="66" r="2" fill="${M}"/>
+           <path d="M120 30 H190" stroke="${M}" stroke-width="3" stroke-linecap="round"/>
+           <path d="M132 30 v5 a3 3 0 0 0 6 0 M160 30 v5 a3 3 0 0 0 6 0" stroke="${M}" stroke-width="1.5" fill="none"/>
+           <path d="M132 37 h6 l2 34 h-4 l-1 -24 l-1 24 h-4 Z" fill="${C.verde}" stroke="${M}" stroke-width="1.2" stroke-linejoin="round"/>
+           <path d="M158 37 h10 l1 12 h-12 Z" fill="${C.coral}" stroke="${M}" stroke-width="1.2"/>
+           <rect x="146" y="88" width="30" height="24" rx="6" fill="${C.amarillo}" stroke="${M}" stroke-width="1.5"/>
+           <path d="M150 96 h22" stroke="${M}" stroke-width="1.2"/>
+           <path d="M152 88 C152 76 170 76 170 88 Z" fill="${C.naranja}" stroke="${M}" stroke-width="1.3"/>
+           <circle cx="161" cy="77" r="3" fill="#fff" stroke="${M}" stroke-width="1.1"/>` +
+          persona('mama', { x: 82, y: 118, s: 0.77, mira: 1, gesto: 'habla', objeto: `<path d="M38 -46 l5 6 M40 -43 l3 -2" stroke="${M}" stroke-width="1.6" stroke-linecap="round"/><circle cx="37" cy="-48" r="3" fill="none" stroke="${M}" stroke-width="1.4"/>` }) +
+          persona('leo', { x: 228, y: 118, s: 0.86, mira: -1, gesto: 'contento', pose: 'senala' }),
+
+        // 6. El tiempo de hoy
+        () =>
+          pared() +
+          `<rect x="14" y="16" width="58" height="50" rx="3" fill="#fff" stroke="${M}" stroke-width="1.4"/>
+           <rect x="14" y="16" width="58" height="10" rx="3" fill="${C.verdeT}" stroke="${M}" stroke-width="1.4"/>
+           <circle cx="22" cy="21" r="2" fill="${C.coral}"/><circle cx="64" cy="21" r="2" fill="${C.coral}"/>
+           ${sol(28, 40, 5)}${nube(48, 41, 0.36)}
+           ${nube(62, 39, 0.3)}<path d="M58 46 l-1.5 4 M62 46 l-1.5 4 M66 46 l-1.5 4" stroke="${C.azul}" stroke-width="1.4" stroke-linecap="round"/>
+           <rect x="22" y="53" width="40" height="9" rx="2" fill="none" stroke="${C.suave}" stroke-width="1" stroke-dasharray="2 1.5"/>` +
+          ventana(232, 14, 72, 54, nube(262, 30, 0.9, '#c9d3e6') + rayo(276, 34, 0.9) + lluvia(232, 34, 304, 68, 22, 11), '#d9e2f1') +
+          persona('profe', { x: 104, y: 118, s: 0.77, mira: 1, gesto: 'habla', pose: 'senala' }) +
+          persona('vega', { x: 222, y: 118, s: 0.86, mira: -1, gesto: 'miedo', pose: 'boca' }),
+
+        // 7. El domingo
+        () =>
+          pared() +
+          `<ellipse cx="160" cy="116" rx="120" ry="6" fill="${C.moradoT}"/>
+           <rect x="262" y="30" width="44" height="78" fill="#fff" stroke="${M}" stroke-width="1.4"/>
+           <path d="M262 56 H306 M262 82 H306" stroke="${M}" stroke-width="1.2"/>
+           <rect x="268" y="42" width="5" height="14" fill="${C.azul}"/><rect x="274" y="44" width="5" height="12" fill="${C.amarillo}"/><rect x="280" y="41" width="5" height="15" fill="${C.coral}"/>
+           <rect x="270" y="69" width="12" height="13" rx="2" fill="${C.verde}"/>` +
+          bocadilloPensar(18, 6, 76, 46,
+            `<path d="M30 44 L48 18 L58 30 L64 22 L82 44 Z" fill="#fff" stroke="${M}" stroke-width="1.2" stroke-linejoin="round"/>
+             <path d="M43 25 L48 18 L53 25 L50 23 L47 26 Z" fill="${C.azulT}" stroke="${M}" stroke-width=".8"/>` + munecoNieve(70, 46, 0.75), [82, 60]) +
+          persona('omar', { x: 104, y: 118, s: 0.86, mira: 1, gesto: 'habla', pose: 'abiertos' }) +
+          persona('nora', { x: 226, y: 118, s: 0.86, mira: -1, gesto: 'contento' }),
+
+        // 8. Jugamos a la oca
+        () =>
+          pared() +
+          ventana(118, 12, 84, 40, lluvia(118, 12, 202, 52, 26, 17) + nube(150, 22, 0.7, '#fff'), '#d9e2f1') +
+          persona('vega', { x: 84, y: 118, s: 0.86, mira: 1, gesto: 'contento', pose: 'ofrece' }) +
+          persona('leo', { x: 236, y: 118, s: 0.86, mira: -1, gesto: 'contento', pose: 'ofrece', objeto: dado(-34, -51, 1.1) }) +
+          `<rect x="104" y="76" width="112" height="7" rx="2" fill="${C.naranja}" stroke="${M}" stroke-width="1.3"/>
+           <path d="M114 83 V110 M206 83 V110" stroke="${M}" stroke-width="3.4" stroke-linecap="round"/>
+           <path d="M128 76 L136 64 H184 L192 76 Z" fill="${C.amarilloT}" stroke="${M}" stroke-width="1.3" stroke-linejoin="round"/>
+           <path d="M140 72 h40 M146 68 h28" stroke="${C.coral}" stroke-width="2.2" stroke-dasharray="3 2"/>
+           <circle cx="160" cy="70" r="2.2" fill="${C.verde}" stroke="${M}" stroke-width=".8"/>`,
+
+        // 9. El charco
+        () =>
+          cielo(C.linea, '#e1e8f4') +
+          nube(70, 20, 0.9, '#fff') + nube(250, 16, 1, '#fff') +
+          lluvia(0, 28, 320, 100, 34, 23) +
+          `<ellipse cx="214" cy="116" rx="40" ry="6" fill="${C.azulT}" stroke="${C.azul}" stroke-width="1.4"/>
+           <path d="M180 108 q-8 -8 -16 -4 M174 112 q-12 -6 -22 0 M186 102 q-4 -10 -12 -12" stroke="${C.azul}" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+           <circle cx="150" cy="98" r="1.8" fill="${C.azul}"/><circle cx="142" cy="106" r="1.5" fill="${C.azul}"/><circle cx="160" cy="92" r="1.6" fill="${C.azul}"/>
+           <circle cx="96" cy="100" r="1.5" fill="${C.azul}"/><circle cx="102" cy="94" r="1.3" fill="${C.azul}"/><circle cx="90" cy="92" r="1.2" fill="${C.azul}"/>` +
+          persona('nora', { x: 96, y: 118, s: 0.86, mira: 1, gesto: 'enfadado', pose: 'arriba', botas: C.coral }) +
+          persona('omar', { x: 214, y: 116, s: 0.86, mira: -1, gesto: 'sorpresa', pose: 'arriba', botas: C.amarillo }),
+
+        // 10. La torre
+        () =>
+          pared() +
+          ventana(130, 12, 70, 38, lluvia(130, 12, 200, 50, 20, 29), '#d9e2f1') +
+          persona('leo', { x: 92, y: 118, s: 0.86, mira: 1, gesto: 'triste', pose: 'abiertos' }) +
+          persona('vega', { x: 236, y: 118, s: 0.86, mira: -1, gesto: 'sorpresa', pose: 'boca' }) +
+          `<g stroke="${M}" stroke-width="1.2" stroke-linejoin="round">
+            <rect x="140" y="104" width="16" height="10" rx="1" fill="${C.coral}" transform="rotate(-12 148 109)"/>
+            <rect x="160" y="106" width="16" height="10" rx="1" fill="${C.azul}" transform="rotate(8 168 111)"/>
+            <rect x="178" y="102" width="10" height="14" rx="1" fill="${C.amarillo}" transform="rotate(-20 183 109)"/>
+            <rect x="150" y="96" width="12" height="9" rx="1" fill="${C.verde}" transform="rotate(25 156 100)"/>
+            <rect x="126" y="108" width="12" height="8" rx="1" fill="${C.morado}" transform="rotate(-5 132 112)"/>
+            <rect x="190" y="108" width="14" height="8" rx="1" fill="${C.naranja}" transform="rotate(14 197 112)"/>
+           </g>
+           <path d="M136 92 l-4 -4 M146 88 l-1 -6 M170 90 l3 -5 M184 94 l5 -3" stroke="${M}" stroke-width="1.2" stroke-linecap="round"/>`,
+
+        // 11. El hielo
+        () =>
+          cielo('#f4f8fd') +
+          arbol(30, 108) + arbol(292, 108) +
+          nube(120, 18, 0.7, '#fff') +
+          `<ellipse cx="96" cy="116" rx="52" ry="6.5" fill="#d6e8fb" stroke="${C.azul}" stroke-width="1.4"/>
+           <path d="M62 115 l10 -2 M80 118 l14 -3 M112 115 l12 -2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>` +
+          persona('omar', { x: 84, y: 118, s: 0.9, mira: 1, gesto: 'dolor', pose: 'sentado', gorro: C.coral, bufanda: C.amarillo }) +
+          `<path d="M118 70 l4 -6 M124 76 l7 -3 M112 66 l0 -7" stroke="${C.coral}" stroke-width="1.6" stroke-linecap="round"/>` +
+          persona('nora', { x: 228, y: 118, s: 0.86, mira: -1, gesto: 'preocupado', pose: 'ofrece', gorro: C.azul, bufanda: C.morado }),
+
+        // 12. Sin guantes
+        () =>
+          cielo('#f4f8fd') +
+          copos(0, 4, 320, 104, 20, 43, C.suave, [[66, 16, 128, 120], [204, 16, 266, 120], [146, 80, 202, 110]]) +
+          `<rect x="150" y="84" width="48" height="5" rx="2" fill="${C.naranja}" stroke="${M}" stroke-width="1.2"/>
+           <path d="M156 89 V108 M192 89 V108" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/>` +
+          persona('vega', { x: 96, y: 118, s: 0.86, mira: 1, gesto: 'triste', pose: 'soplar', gorro: C.verde, bufanda: C.amarillo }) +
+          `<path d="M70 52 q-4 4 0 8 M66 48 q-6 8 0 16 M124 52 q4 4 0 8 M128 48 q6 8 0 16" stroke="${C.suave}" stroke-width="1.3" fill="none" stroke-linecap="round"/>` +
+          persona('leo', { x: 234, y: 118, s: 0.86, mira: -1, gesto: 'neutro', gorro: C.amarillo, bufanda: C.coral, guantes: C.coral }),
+      ];
+
+      function vineta(i, etiqueta = null) {
+        const accesible = etiqueta ? `role="img" aria-label="${etiqueta}"` : 'aria-hidden="true"';
+        return `<svg viewBox="0 0 320 125" ${accesible} focusable="false">${ESCENAS[i]()}</svg>`;
+      }
+
+      // ---------------------------------------------------------------------------------------------
+      // Turnos en blanco, en orden: dan el número de las tarjetas (3A, 3B…) y su página
+      // ---------------------------------------------------------------------------------------------
+      const HUECOS = [];
+      DIALOGOS.forEach((d, i) =>
+        d.turnos.forEach((tr) => {
+          if (tr.hueco) HUECOS.push({ n: i + 1, letra: tr.hueco, d, h: d.huecos[tr.hueco] });
+        }),
+      );
+      HUECOS.forEach((h, k) => {
+        h.pagN1 = PAG_N1 + Math.floor(k / POR_HOJA_N1);
+        h.pagN2 = PAG_N2 + Math.floor(k / POR_HOJA_N2);
+      });
+      const huecosDe = (n) => HUECOS.filter((h) => h.n === n);
+
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const LOGO = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
+      const ATRIBUCION = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const primeraMayuscula = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+      const lista = (partes, y = 'y') => (partes.length < 2 ? partes.join('') : `${partes.slice(0, -1).join(', ')} ${y} ${partes.at(-1)}`);
+
+      // ---------------------------------------------------------------------------------------------
+      // Hojas de los diálogos y de sus preguntas
+      // ---------------------------------------------------------------------------------------------
+      const contenedor = document.getElementById('dialogos');
+      DIALOGOS.forEach((d, i) => {
+        const n = i + 1;
+        const h = HABILIDADES[d.hab];
+        const pa = PERSONAS[d.a];
+        const pb = PERSONAS[d.b];
+        const cabecera = (ante) => `<div class="cabecera">
+            <div class="numero" aria-hidden="true">${n}</div>
+            <div>
+              <p class="antetitulo">${icono(d.hab, '', h.color === C.amarillo || h.color === C.naranja ? M : h.color)}${ante}</p>
+              <h1>${d.titulo}</h1>
+            </div>
+            ${LOGO}
+          </div>
+          <div class="franja"></div>`;
+
+        const turnos = d.turnos
+          .map((tr) => {
+            const id = tr.q === 'a' ? d.a : d.b;
+            const p = PERSONAS[id];
+            const lado = tr.q === 'a' ? 'izq' : 'der';
+            const gesto = tr.cara ?? (tr.hueco ? 'neutro' : 'contento');
+            const cab = `<span class="cabeza">${cabezaIcono(id, gesto, tr.q === 'a' ? 1 : -1)}</span>`;
+            const estilo = `style="--p:${p.color}"`;
+            if (!tr.hueco) return `<li class="turno turno--${lado}" ${estilo}>${cab}<p class="bocadillo"><span class="quien">${p.nombre}:</span> ${tr.t}</p></li>`;
+            return `<li class="turno turno--${lado} turno--blanco" ${estilo}>${cab}<div class="bocadillo">
+                <span class="etiqueta-hueco">${n}${tr.hueco}</span>
+                <span class="hueco"><span class="hueco__izq"><span class="quien">${p.nombre}:</span><span class="velcro"></span></span><span class="lineas"><span></span><span></span></span></span>
+                <span class="solo-lector">Turno en blanco para completar.</span>
+              </div></li>`;
+          })
+          .join('');
+
+        const suyos = huecosDe(n);
+        const busca = suyos.map((x) => `turno ${n}${x.letra}, ${x.h.busca}`).join('; ');
+        const paginasN1 = [...new Set(suyos.map((x) => x.pagN1))].join(' y ');
+        const paginasN2 = [...new Set(suyos.map((x) => x.pagN2))].join(' y ');
+        const nota = `<div class="para-adulto">${icono('adulto')}<p><strong>Para el adulto.</strong> Tú haces de ${pa.papel}; el niño o la niña, de ${pb.papel}. Se busca: ${busca}. Tarjetas del nivel 1 en la página ${paginasN1} y del nivel 2 en la ${paginasN2}. En el nivel 3 lo dice o lo escribe.</p></div>`;
+
+        contenedor.insertAdjacentHTML(
+          'beforeend',
+          `<section class="dialogo ${h.clase}${d.largo ? ' dialogo--largo' : ''}">
+            ${cabecera(`Diálogo ${n} de ${DIALOGOS.length} · ${h.corto} · ${d.lugar}`)}
+            <figure class="vineta">${vineta(i, d.descripcion)}</figure>
+            <ol class="turnos">${turnos}</ol>
+            ${nota}
+          </section>`,
+        );
+
+        // Detrás: ¿qué siente? y ¿qué haría yo?
+        const s = d.siente;
+        const caritas = EMOCIONES.map((e) => `<li>${picto(e.picto)}<span>${s.f ? e.f : e.m}</span></li>`).join('');
+        const ideas = d.haria.map(([texto, pic]) => `<li>${picto(pic)}<span>${texto}</span></li>`).join('');
+        const esperadas = lista(s.bien.map((b) => EMOCIONES.find((e) => e.clave === b)[s.f ? 'f' : 'm']), 'o');
+        contenedor.insertAdjacentHTML(
+          'beforeend',
+          `<section class="inferencia ${h.clase}">
+            ${cabecera(`Diálogo ${n} · Detrás · Pienso y siento`)}
+            <div class="recuerdo"><div class="mini">${vineta(i)}</div><p>${d.resumen}</p></div>
+            <div class="pregunta">
+              <h2>${icono('sentir', '', C.morado)}${s.pregunta}</h2>
+              <p class="indicacion">Rodea una carita.</p>
+              <ul class="caritas">${caritas}</ul>
+              <p class="porque">¿Por qué lo sabes?<span class="linea"></span></p>
+            </div>
+            <div class="pregunta">
+              <h2>${icono('pedir', '', C.naranja)}¿Qué haría yo?</h2>
+              <p class="indicacion">Elige una idea o dibuja la tuya.</p>
+              <ul class="opciones">${ideas}<li class="otra">${icono('lapiz', '', C.suave)}<span>Otra idea</span></li></ul>
+            </div>
+            <div class="para-adulto">${icono('adulto')}<p><strong>Para el adulto.</strong> Se espera: ${esperadas}. ${s.pista} <strong>Para seguir:</strong> ${s.ysi}</p></div>
+            <p class="atribucion">${ATRIBUCION}</p>
+          </section>`,
+        );
+      });
+
+      // ---------------------------------------------------------------------------------------------
+      // Tarjetas: nivel 1 (2 por turno, con pictograma) y nivel 2 (3 por turno, sin pictograma)
+      // La buena cambia de sitio para que no esté siempre en el mismo.
+      // ---------------------------------------------------------------------------------------------
+      function ordenar(opciones, k) {
+        const giro = k % opciones.length;
+        return opciones.map((o, j) => [o, j === 0]).slice(giro).concat(opciones.map((o, j) => [o, j === 0]).slice(0, giro));
+      }
+
+      const hojasTarjetas = [];
+      for (let pag = 0; pag * POR_HOJA_N1 < HUECOS.length; pag++) {
+        const grupo = HUECOS.slice(pag * POR_HOJA_N1, (pag + 1) * POR_HOJA_N1);
+        const tarjetas = grupo
+          .flatMap((x, k) =>
+            ordenar(x.h.n1, pag * POR_HOJA_N1 + k).map(
+              ([[texto, pic]]) =>
+                `<li class="tarjeta tarjeta--n1 ${HABILIDADES[x.d.hab].clase}"><span class="num">${x.n}${x.letra}</span>${picto(pic)}<p>${texto}</p></li>`,
+            ),
+          )
+          .join('');
+        const desde = grupo[0];
+        const hasta = grupo.at(-1);
+        hojasTarjetas.push(`<section class="hoja-tarjetas">
+          <div class="encabezado"><h1>Tarjetas del nivel 1 <small>Con pictograma · turnos ${desde.n}${desde.letra} a ${hasta.n}${hasta.letra}</small></h1>${LOGO}</div>
+          <p class="pista">Cada fila es un turno en blanco: una tarjeta encaja y la otra no. Recorta por la línea de puntos. Si plastificas, pega detrás un círculo de velcro suave, a la izquierda.</p>
+          <ul class="rejilla rejilla--n1" aria-label="Tarjetas del nivel 1, de la ${desde.n}${desde.letra} a la ${hasta.n}${hasta.letra}">${tarjetas}</ul>
+          <p class="atribucion" style="margin-top: 2.5mm">${ATRIBUCION}</p>
+        </section>`);
+      }
+      for (let pag = 0; pag * POR_HOJA_N2 < HUECOS.length; pag++) {
+        const grupo = HUECOS.slice(pag * POR_HOJA_N2, (pag + 1) * POR_HOJA_N2);
+        const tarjetas = grupo
+          .flatMap((x, k) =>
+            ordenar(x.h.n2, pag * POR_HOJA_N2 + k + 1).map(
+              ([texto]) => `<li class="tarjeta tarjeta--n2 ${HABILIDADES[x.d.hab].clase}"><span class="num">${x.n}${x.letra}</span><p>${texto}</p></li>`,
+            ),
+          )
+          .join('');
+        const desde = grupo[0];
+        const hasta = grupo.at(-1);
+        hojasTarjetas.push(`<section class="hoja-tarjetas">
+          <div class="encabezado"><h1>Tarjetas del nivel 2 <small>Sin pictograma · turnos ${desde.n}${desde.letra} a ${hasta.n}${hasta.letra}</small></h1>${LOGO}</div>
+          <p class="pista">Cada fila es un turno en blanco: una tarjeta encaja y las otras dos no. Recorta por la línea de puntos. Si plastificas, pega detrás un círculo de velcro suave, a la izquierda.</p>
+          <ul class="rejilla rejilla--n2" aria-label="Tarjetas del nivel 2, de la ${desde.n}${desde.letra} a la ${hasta.n}${hasta.letra}">${tarjetas}</ul>
+          <p class="clave-tarjetas">Las respuestas que encajan están en la página ${PAGINAS.soluciones}.</p>
+        </section>`);
+      }
+      document.getElementById('tarjetas').outerHTML = hojasTarjetas.join('');
+
+      // ---------------------------------------------------------------------------------------------
+      // Guía corta: habilidades y niveles
+      // ---------------------------------------------------------------------------------------------
+      document.getElementById('lista-habilidades').innerHTML = Object.entries(HABILIDADES)
+        .map(([clave, h]) => {
+          const numeros = DIALOGOS.map((d, i) => [d, i + 1]).filter(([d]) => d.hab === clave).map(([, n]) => n);
+          return `<li class="${h.clase}">${icono(clave, '', h.color === C.amarillo || h.color === C.naranja ? M : h.color)}<span><strong>${h.nombre}</strong>Diálogos ${numeros.join(' y ')}</span></li>`;
+        })
+        .join('');
+
+      const tarjetita = (x, y, w, conPicto) =>
+        `<rect x="${x}" y="${y}" width="${w}" height="18" rx="3" fill="#fff" stroke="${M}" stroke-width="1.2" stroke-dasharray="3 2"/>` +
+        (conPicto ? `<rect x="${x + 3}" y="${y + 3}" width="12" height="12" rx="2" fill="${C.azulT}" stroke="${M}" stroke-width="1"/><circle cx="${x + 9}" cy="${y + 8}" r="2.4" fill="none" stroke="${M}" stroke-width="1"/><path d="M${x + 5} ${y + 14} q4 -4 8 0" fill="none" stroke="${M}" stroke-width="1"/>` : '') +
+        `<path d="M${x + (conPicto ? 19 : 5)} ${y + 7} H${x + w - 5} M${x + (conPicto ? 19 : 5)} ${y + 12} H${x + w - 12}" stroke="${C.suave}" stroke-width="1.6" stroke-linecap="round"/>`;
+      const NIVELES = [
+        ['Nivel 1', 'Elige entre 2 tarjetas con pictograma.', `${tarjetita(4, 12, 56, true)}${tarjetita(70, 12, 56, true)}`],
+        ['Nivel 2', 'Elige entre 3 tarjetas sin pictograma.', `${tarjetita(2, 12, 40, false)}${tarjetita(45, 12, 40, false)}${tarjetita(88, 12, 40, false)}`],
+        ['Nivel 3', 'Lo dice o lo escribe con sus palabras.',
+          `<path d="M10 6 H84 a6 6 0 0 1 6 6 V30 a6 6 0 0 1 -6 6 H40 L28 44 L30 36 H10 a6 6 0 0 1 -6 -6 V12 a6 6 0 0 1 6 -6 Z" fill="#fff" stroke="${M}" stroke-width="1.3" stroke-dasharray="3 2"/>
+           <path d="M14 18 H80 M14 27 H64" stroke="${C.suave}" stroke-width="1.6" stroke-linecap="round"/>
+           <g transform="translate(98 8) rotate(30)"><rect x="0" y="0" width="7" height="30" rx="1.2" fill="${C.amarillo}" stroke="${M}" stroke-width="1.2"/><path d="M0 30 L3.5 37 L7 30 Z" fill="${C.crema}" stroke="${M}" stroke-width="1.2"/></g>`],
+      ];
+      document.getElementById('lista-niveles').innerHTML = NIVELES.map(
+        ([nombre, texto, dibujo]) => `<li><svg viewBox="0 0 130 46" aria-hidden="true">${dibujo}</svg><strong>${nombre}</strong>${texto}</li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------------------------------
+      // De un vistazo: personajes y tabla de diálogos
+      // ---------------------------------------------------------------------------------------------
+      document.getElementById('reparto').innerHTML = ORDEN_REPARTO.map((id) => {
+        const p = PERSONAS[id];
+        const extra = id === 'abuelo' ? { gorra: M } : {};
+        return `<li><svg viewBox="-34 ${p.adulto ? -146 : -146} 68 150" aria-hidden="true">${persona(id, { x: 0, y: 0, s: p.adulto ? 1 : 1.08, mira: 1, gesto: 'contento', ...extra })}</svg>${p.nombre}</li>`;
+      }).join('');
+
+      document.getElementById('tabla-dialogos').innerHTML = `<colgroup><col style="width: 9mm"><col style="width: 42mm"><col style="width: 52mm"><col><col style="width: 17mm"><col style="width: 15mm"></colgroup>
+        <thead><tr><th scope="col" class="num">N.º</th><th scope="col">Diálogo</th><th scope="col">Se practica</th><th scope="col">Personajes y lugar</th><th scope="col" class="num">Turnos en blanco</th><th scope="col" class="num">Pág.</th></tr></thead>
+        <tbody>${DIALOGOS.map((d, i) => {
+          const h = HABILIDADES[d.hab];
+          return `<tr><td class="num"><strong>${i + 1}</strong></td><th scope="row">${d.titulo}</th><td><span class="hab">${icono(d.hab, '', h.color === C.amarillo || h.color === C.naranja ? M : h.color)}${h.nombre}</span></td>
+            <td>${PERSONAS[d.a].nombre} y ${PERSONAS[d.b].nombre}. ${d.lugar}.</td><td class="num">${huecosDe(i + 1).length}</td><td class="num">${PRIMER_DIALOGO + i * 2}</td></tr>`;
+        }).join('')}</tbody>`;
+
+      // ---------------------------------------------------------------------------------------------
+      // Registro y soluciones
+      // ---------------------------------------------------------------------------------------------
+      const celdaNivel = '<td class="nivel"><i class="circulito"></i><i></i></td>';
+      document.getElementById('filas-registro').innerHTML = DIALOGOS.map(
+        (d, i) => `<tr><th scope="row"><b>${i + 1}. ${d.titulo}</b><br>${HABILIDADES[d.hab].corto}</th>${celdaNivel.repeat(4)}<td></td></tr>`,
+      ).join('');
+
+      document.getElementById('tabla-soluciones').innerHTML = `<colgroup><col style="width: 12mm"><col style="width: 44mm"><col style="width: 48mm"><col></colgroup>
+        <thead><tr><th scope="col">Turno</th><th scope="col">Se busca</th><th scope="col">Tarjeta que encaja</th><th scope="col">También vale, en el nivel 3</th></tr></thead>
+        <tbody>${HUECOS.map((x) => `<tr><th scope="row">${x.n}${x.letra}</th><td>${primeraMayuscula(x.h.busca)}.</td><td>«${x.h.n1[0][0]}»</td><td>${x.h.valen}</td></tr>`).join('')}</tbody>`;
+
+      document.getElementById('lista-sienten').innerHTML = DIALOGOS.map((d) => {
+        const s = d.siente;
+        const caritasBien = lista(s.bien.map((b) => EMOCIONES.find((e) => e.clave === b)[s.f ? 'f' : 'm']), 'o');
+        return `<li>${primeraMayuscula(s.quien)}: ${caritasBien}${s.otra ? `; también ${s.otra}` : ''}.</li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------------------------------
+      // Portada y nota para las familias
+      // ---------------------------------------------------------------------------------------------
+      document.getElementById('escena-portada').innerHTML = `<svg viewBox="0 0 210 118" aria-hidden="true" focusable="false">
+        ${copos(0, 8, 210, 96, 24, 61, '#9fb0d6', [[28, 24, 94, 112], [116, 24, 180, 112], [176, 66, 210, 110], [7, 2, 97, 39], [119, 4, 199, 39]])}
+        <path d="M0 103 Q52 96 105 100 T210 99 V118 H0 Z" fill="#fff"/>
+        <path d="M0 103 Q52 96 105 100 T210 99" fill="none" stroke="${M}" stroke-width=".8"/>
+        ${persona('nora', { x: 60, y: 111, s: 0.72, mira: 1, gesto: 'habla', pose: 'saluda', gorro: C.azul, bufanda: C.amarillo })}
+        ${persona('omar', { x: 148, y: 111, s: 0.72, mira: -1, gesto: 'neutro', gorro: C.coral, bufanda: C.morado, guantes: C.amarillo })}
+        ${munecoNieve(193, 107, 1.1)}
+        <path d="M16 4 H88 a7 7 0 0 1 7 7 V20 a7 7 0 0 1 -7 7 H66 L58 35 L56 27 H16 a7 7 0 0 1 -7 -7 V11 a7 7 0 0 1 7 -7 Z" fill="#fff" stroke="${M}" stroke-width="1.3" stroke-linejoin="round"/>
+        <text x="52" y="19.5" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="11" fill="${M}">¡Hola, Omar!</text>
+        <path d="M128 6 H190 a7 7 0 0 1 7 7 V22 a7 7 0 0 1 -7 7 H156 L150 37 L149 29 H128 a7 7 0 0 1 -7 -7 V13 a7 7 0 0 1 7 -7 Z" fill="#fff" stroke="${M}" stroke-width="1.3" stroke-dasharray="3.5 2.5" stroke-linejoin="round"/>
+        <path d="M132 23 H186" stroke="${C.suave}" stroke-width="1" stroke-dasharray="1 2.2" stroke-linecap="round"/>
+        <text x="159" y="20" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="12" fill="${C.suave}">?</text>
+      </svg>`;
+
+      document.getElementById('vineta-familias').innerHTML = vineta(2, 'Papá prepara un chocolate caliente y Nora espera en la mesa de la cocina.');
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

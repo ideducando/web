@@ -2,7 +2,7 @@
 titulo: "Para familias"
 entradilla: "Material para trabajar en casa con tu hijo o tu hija, sobre todo si tiene alguna necesidad específica de apoyo. Es el mismo que usan las seños en clase."
 descripcion: "Material gratuito de PT e Infantil para usar en casa: agendas visuales, tableros de comunicación, historias sociales y juegos, con su hoja para montarlo."
-actualizado: 2026-10-28
+actualizado: 2026-11-05
 borrador: false
 ---
 
@@ -79,7 +79,7 @@ Si vivís en otra comunidad, el camino es parecido: preguntad en el cole por su 
 
 Orientan, acompañan y os ponen en contacto con la entidad más cercana:
 
-- **Autismo:** [Confederación Autismo España](https://autismo.org.es/) y, en la Región, la [Federación de Autismo de la Región de Murcia](https://autismomurcia.org/).
+- **Autismo:** [Confederación Autismo España](https://autismo.org.es/) y, en la Región, la Federación de Autismo de la Región de Murcia (FAUM).
 - **Discapacidad intelectual:** [Plena inclusión](https://www.plenainclusion.org/familias/informacion-orientacion-y-asesoramiento/) y [Plena inclusión Región de Murcia](https://plenainclusionmurcia.org/).
 - **TDAH:** [FEAADAH](https://www.feaadah.org/), la federación española de asociaciones de TDAH, y en Cartagena, [ADAHI](https://www.adahi.es/).
 - **Sordera:** [FIAPAS](https://fiapas.es/redes-de-trabajo/atencion-y-apoyo-a-familias/), con servicios de atención y apoyo a familias.

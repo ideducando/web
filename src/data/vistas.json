@@ -1,4 +1,57 @@
 {
+  "agenda-visual-pictogramas": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "pictogr"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Mi semana"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Mi día"
+      },
+      {
+        "pagina": 6,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Si hay un cambio"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "¿Qué necesito?"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas pequeñas"
+      }
+    ]
+  },
   "agenda-visual-semanal": {
     "total": 5,
     "fotos": [
@@ -33,6 +86,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Guía para el docente"
+      }
+    ]
+  },
+  "cartilla-trabadas": {
+    "total": 30,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Fichas · lectura"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Trabadas con pl"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Juegos con pl"
+      },
+      {
+        "pagina": 15,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Trabadas con br"
+      },
+      {
+        "pagina": 27,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro de avance"
+      },
+      {
+        "pagina": 28,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
       }
     ]
   },
@@ -126,6 +232,112 @@
       }
     ]
   },
+  "derechos-infancia-lectura-facil": {
+    "total": 32,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Lectura fácil · Con pictogramas"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para empezar"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Derecho 2 de 12"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Derecho 8 de 12"
+      },
+      {
+        "pagina": 17,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Preguntas · Nivel 1"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Todos tenemos los mismos derechos"
+      }
+    ]
+  },
+  "dialogos-para-completar": {
+    "total": 40,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diálogo 1 de 12 · saludar y despedirse · en el cole"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diálogo 1 · detrás · pienso y siento"
+      },
+      {
+        "pagina": 29,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas del nivel 1 Con pictograma · turnos 1A a 6A"
+      },
+      {
+        "pagina": 34,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para el adulto · para imprimir"
+      }
+    ]
+  },
   "dias-distintos-historias-sociales": {
     "total": 14,
     "fotos": [
@@ -168,6 +380,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Historia 4 de 6 · para leer antes del día"
+      }
+    ]
+  },
+  "estaciones-matematicas-invierno": {
+    "total": 32,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Versión"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "De un vistazo · Infantil, de 3 a 6 años"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 14,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "1 Bufanda 1 · blanco, tapón"
+      },
+      {
+        "pagina": 21,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 22,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas de pasos Cada mesa, con sus pasos"
       }
     ]
   },
@@ -441,6 +706,218 @@
       }
     ]
   },
+  "manana-en-clase": {
+    "total": 11,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para docentes · Infantil y Primaria"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ficha"
+      }
+    ]
+  },
+  "me-llamo-bocadillo-pictogramas": {
+    "total": 26,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me llamo"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Pienso"
+      },
+      {
+        "pagina": 10,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 19,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "¡Dilo!"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Así es mi Bocadillo"
+      },
+      {
+        "pagina": 24,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Guía para el adulto"
+      }
+    ]
+  },
+  "me-llamo-error-pictogramas": {
+    "total": 25,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me llamo"
+      },
+      {
+        "pagina": 2,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Hola. Me llamo"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Pablo se levantó y lo intentó otra vez. ¡Pum! Y otra vez"
+      },
+      {
+        "pagina": 12,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "El libro de la seño"
+      },
+      {
+        "pagina": 22,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Así es mi Error"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Guía para el adulto"
+      }
+    ]
+  },
+  "me-llamo-valor-pictogramas": {
+    "total": 26,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me llamo"
+      },
+      {
+        "pagina": 2,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Hola. Me llamo"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Esa noche"
+      },
+      {
+        "pagina": 19,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Lo cuido igual"
+      },
+      {
+        "pagina": 23,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Así brilla mi Valor"
+      },
+      {
+        "pagina": 24,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Guía para el adulto"
+      }
+    ]
+  },
   "panel-conducta-recreo": {
     "total": 14,
     "fotos": [
@@ -692,6 +1169,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Ideas para volver a la calma"
+      }
+    ]
+  },
+  "rutinas-invierno-cole": {
+    "total": 21,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Con el t"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para el perchero · tamaño grande"
+      },
+      {
+        "pagina": 7,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 8,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Panel para la asamblea · con velcro"
+      },
+      {
+        "pagina": 14,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia social · para leer antes del recreo"
       }
     ]
   },
@@ -962,6 +1492,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Pictogramas para recortar"
+      }
+    ]
+  },
+  "tarjetas-trazo": {
+    "total": 51,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "niveles"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de imprimir"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Trazos previos"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Modelo"
+      },
+      {
+        "pagina": 13,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "abc Letras"
+      },
+      {
+        "pagina": 36,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "abc Letras"
       }
     ]
   },
