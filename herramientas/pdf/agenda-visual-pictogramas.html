@@ -1296,7 +1296,7 @@
       <div class="portada__cuerpo">
         <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
         <p class="antetitulo portada__antetitulo">Apoyo visual · En el cole y en casa</p>
-        <h1 class="portada__titulo">Agenda visual<br />con pictogramas</h1>
+        <h1 class="portada__titulo">Agenda visual&nbsp;<br />con pictogramas</h1>
         <p class="portada__subtitulo">La semana, el día y los cambios, con pictogramas de ARASAAC listos para recortar.</p>
         <div class="portada__pie">
           <p>Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
@@ -1926,10 +1926,10 @@
       const pequenas2 = [...unicas.slice(40), ...copias, ...blancas];
 
       document.getElementById('hojas-tarjetas').outerHTML =
-        hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 1 de 2', unicas.slice(0, 40), SIGLAS) +
-        hojaPequenas('Tarjetas pequeñas<br>44 × 21 mm · hoja 2 de 2', pequenas2) +
-        hojaGrandes('Tarjetas grandes<br>8 × 8 cm · hoja 1 de 2', GRANDES.slice(0, 6).map(grande)) +
-        hojaGrandes('Tarjetas grandes<br>8 × 8 cm · hoja 2 de 2', GRANDES.slice(6).map(grande));
+        hojaPequenas('Tarjetas pequeñas&nbsp;<br>44 × 21 mm · hoja 1 de 2', unicas.slice(0, 40), SIGLAS) +
+        hojaPequenas('Tarjetas pequeñas&nbsp;<br>44 × 21 mm · hoja 2 de 2', pequenas2) +
+        hojaGrandes('Tarjetas grandes&nbsp;<br>8 × 8 cm · hoja 1 de 2', GRANDES.slice(0, 6).map(grande)) +
+        hojaGrandes('Tarjetas grandes&nbsp;<br>8 × 8 cm · hoja 2 de 2', GRANDES.slice(6).map(grande));
 
       // ---------------------------------------------------------------- Lista de pictogramas (página 17)
       document.getElementById('indice').innerHTML = TARJETAS.map(
