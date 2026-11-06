@@ -783,7 +783,7 @@
       <div class="portada__cuerpo">
         <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
         <p class="antetitulo portada__antetitulo">Situación de aprendizaje · 3 años · 8 sesiones</p>
-        <h1 class="portada__titulo">Así<br />me siento</h1>
+        <h1 class="portada__titulo">Así&nbsp;<br />me siento</h1>
         <p class="portada__subtitulo">Ponemos nombre a lo que sentimos y construimos juntos el rincón de la calma de la clase.</p>
         <div class="portada__pie">
           <p>
@@ -2218,6 +2218,8 @@
         <p class="antetitulo">Imprimible · sesión 6</p>
       </div>
       <div class="cartel-rincon">
+        <!-- Sin &nbsp; antes del <br />: el cartel va centrado y el espacio duro correría la primera línea.
+             El marcador del PDF lo deja bien herramientas/generar.mjs. -->
         <h1>Nuestro rincón<br />de la calma</h1>
         <img src="pictogramas/32826.png" alt="Pictograma del rincón de la calma: un niño sentado tranquilo en un rincón con cojín" />
         <p>Un sitio para sentirnos mejor.</p>

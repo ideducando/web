@@ -10,7 +10,7 @@ npm install
 npx playwright install chromium webkit   # los navegadores que imprimen los PDF y revisan la web
 ```
 
-También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa.
+También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF y dejar bien sus marcadores, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa.
 
 ## Generar los PDF y las portadas
 
@@ -23,7 +23,10 @@ npm run pdf -- agenda-visual-semanal # solo uno
 - Los pictogramas de ARASAAC que usan los materiales están en `pdf/pictogramas/`, con su licencia y cómo añadir más en el `LEEME.md` de esa carpeta. Algunos materiales generan sus casillas a partir de una lista de palabras escrita al final del HTML: para cambiar una palabra, se cambia en esa lista.
 - Si un documento empieza con portada, su HTML lleva la regla `@page :first` con margen cero. Sin ella, Chromium descoloca la portada cuando lleva imágenes.
 - La lista de comprobación de la programación se construye a partir de `src/data/programacion.json`, el mismo archivo que usa la versión interactiva de la web.
-- Los PDF salen en `public/descargas/`, etiquetados para lectores de pantalla, con título, idioma, autoría y marcadores. Chromium junta dos palabras en el marcador cuando un título salta de línea; `metadatos.py` devuelve ese espacio con el texto de los títulos del HTML, sin tocar las páginas.
+- Los PDF salen en `public/descargas/`, etiquetados para lectores de pantalla, con título, idioma, autoría y marcadores.
+- Los marcadores (el índice lateral del lector de PDF, que usan también los lectores de pantalla) salen de los títulos `h1` a `h6`. Chromium los escribe con las letras que pinta: junta dos palabras donde un título salta de línea («Tarjetasde trazo») o donde un margen las separa («5Exploto»), y a veces repite el título. `generar.mjs` lee cada título como se ve en la hoja y `metadatos.py` corrige su marcador, sin tocar las páginas. Si un marcador no cuadra con su título, avisa y solo devuelve los espacios que faltan.
+- En los títulos con `<br />` se pone `&nbsp;` antes del salto, salvo si el título va centrado: ahí el espacio duro correría la línea.
+- Chromium se abre sin «hinting» (el ajuste de las letras a los píxeles), como se hicieron los PDF publicados. Con él, el texto se corre y algunos PDF ganan una página.
 - Las portadas (1200 × 900) salen en `public/portadas/`. Si una ficha no tiene PDF todavía, su portada lleva el aviso «Próximamente».
 
 ## Las fotos de la galería

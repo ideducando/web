@@ -8,7 +8,7 @@
 //
 // Qué hace:
 //   1. Abre cada documento HTML de pdf/ en Chromium y lo imprime como PDF etiquetado
-//      (accesible para lectores de pantalla) en public/descargas/.
+//      (accesible para lectores de pantalla) en public/descargas/, con un marcador por título.
 //   2. Saca una miniatura de la primera página.
 //   3. Crea la portada de cada ficha del catálogo (1200 × 900 px) en public/portadas/.
 //   4. Crea la imagen para compartir en redes (public/og-imagen.png), con el lema de src/data/sitio.json.
@@ -258,7 +258,10 @@ const DOCUMENTOS = [
 ];
 
 const elegidos = process.argv.slice(2);
-const navegador = await chromium.launch();
+// Sin «hinting» (el ajuste de cada letra a la cuadrícula de píxeles), como se hicieron los PDF publicados.
+// El Chromium sin ventana que Playwright usa por defecto lo activa en Linux: las letras se corren unas
+// décimas, cambian los saltos de línea y algunos PDF ganan una página.
+const navegador = await chromium.launch({ args: ['--font-render-hinting=none'] });
 
 // ---------------------------------------------------------------------------
 // 1 y 2. PDF y miniaturas
@@ -293,15 +296,44 @@ for (const doc of DOCUMENTOS) {
     throw new Error(`${doc.id}: el HTML tiene el hueco de montaje y la ficha no tiene pasos`);
   }
 
-  // Marcadores del PDF: Chromium los saca de los títulos y, donde un título salta de línea, junta las dos
-  // palabras («Tarjetasde trazo»). Se guarda el texto de cada título para que metadatos.py devuelva el espacio.
-  const titulos = await pagina.evaluate(() =>
-    [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')].map((titulo) => {
-      const copia = titulo.cloneNode(true);
-      for (const br of copia.querySelectorAll('br')) br.replaceWith(' ');
-      return copia.textContent.replace(/\s+/g, ' ').trim();
-    }),
-  );
+  // Texto de cada título para su marcador. Chromium escribe los marcadores del PDF con las letras que
+  // pinta: pierde el espacio en cada salto de línea (un <br />, un salto automático: «Tarjetasde trazo»)
+  // y entre piezas que separa un margen (un número en un círculo: «5Exploto»), y a veces repite el
+  // título. Aquí se lee el título letra a letra y se pone un espacio donde dos letras seguidas están
+  // separadas en la hoja. metadatos.py corrige los marcadores con esta lista.
+  await pagina.emulateMedia({ media: 'print' });
+  const titulos = await pagina.evaluate(() => {
+    const rango = document.createRange();
+    const leer = (titulo) => {
+      let texto = '';
+      let antes = null; // la caja de la letra anterior y su espaciado entre letras
+      const nodos = document.createTreeWalker(titulo, NodeFilter.SHOW_TEXT);
+      for (let nodo = nodos.nextNode(); nodo; nodo = nodos.nextNode()) {
+        const estilo = getComputedStyle(nodo.parentElement);
+        if (estilo.visibility === 'hidden') continue;
+        const espaciado = parseFloat(estilo.letterSpacing) || 0;
+        let i = 0;
+        for (const letra of nodo.data) {
+          rango.setStart(nodo, i);
+          rango.setEnd(nodo, (i += letra.length));
+          const caja = rango.getBoundingClientRect();
+          if (!caja.width && !caja.height) continue; // un espacio de sobra, que no se pinta
+          if (antes) {
+            const otraLinea = (caja.top + caja.bottom) / 2 > antes.caja.bottom;
+            const hueco = Math.max(caja.left - antes.caja.right, antes.caja.left - caja.right) - antes.espaciado;
+            if (otraLinea || hueco > 0.15 * parseFloat(estilo.fontSize)) texto += ' ';
+          }
+          texto += estilo.textTransform === 'uppercase' ? letra.toLocaleUpperCase('es') : letra;
+          antes = { caja, espaciado };
+        }
+      }
+      return texto.replace(/\s+/g, ' ').trim();
+    };
+    return [...document.querySelectorAll('h1, h2, h3, h4, h5, h6')]
+      .filter((h) => h.getClientRects().length > 0 && getComputedStyle(h).visibility !== 'hidden')
+      .map(leer);
+  });
+  await pagina.emulateMedia({ media: null });
   const archivoTitulos = join(temporal, `${doc.id}-titulos.json`);
   writeFileSync(archivoTitulos, JSON.stringify(titulos));
 
@@ -386,13 +418,18 @@ if (!salidaAparte && !process.env.IDE_SIN_VISTAS) {
 // Ayudas
 // ---------------------------------------------------------------------------
 
-/** Título, autoría y palabras clave en el PDF, y que el visor muestre el título. Usa Python con pypdf. */
+/**
+ * Título, autoría y palabras clave en el PDF, que el visor muestre el título y que cada marcador diga
+ * su título con los espacios bien puestos. Usa Python con pypdf.
+ */
 function completarMetadatos(ruta, doc, titulos) {
   try {
     const argumentos = [join(aqui, 'metadatos.py'), ruta, doc.asunto, doc.palabras, ...(titulos ? [titulos] : [])];
     execFileSync('python3', ['-I', ...argumentos], { stdio: 'inherit' });
   } catch {
-    console.warn(`Aviso: no se han podido completar los metadatos de ${doc.id} (¿falta Python con pypdf?).`);
+    console.warn(
+      `Aviso: no se han podido completar los metadatos ni corregir los marcadores de ${doc.id} (¿falta Python con pypdf?).`,
+    );
   }
 }
 

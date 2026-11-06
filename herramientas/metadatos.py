@@ -6,45 +6,76 @@ Añade autoría, asunto y palabras clave, y pide al visor que muestre el título
 documento en lugar del nombre del archivo (una recomendación de PDF/UA, la norma
 ISO 14289 de PDF accesibles).
 
-Si recibe titulos.json (la lista con el texto de cada título del HTML), arregla los
-marcadores: Chromium junta dos palabras cuando un título salta de línea
-(«Tarjetasde trazo»). Solo se devuelven los espacios que faltan; nada más cambia.
+Con titulos.json (los títulos h1 a h6 del HTML, en orden, que prepara generar.mjs)
+arregla también el texto de los marcadores, el índice lateral del lector de PDF que
+usan también los lectores de pantalla. Chromium los escribe con las letras que pinta:
+junta dos palabras donde un título salta de línea («Tarjetasde trazo») o donde un
+margen las separa («5Exploto»), y a veces repite el título. Antes de cambiar nada
+comprueba que cada marcador es el de su título. Si no cuadran, avisa y solo devuelve
+los espacios que faltan, sin tocar nada más.
 """
 
 import json
 import sys
+import unicodedata
 
 from pypdf import PdfReader, PdfWriter
 from pypdf.generic import BooleanObject, DictionaryObject, NameObject, TextStringObject
+
+
+def marcadores(nodo):
+    """Recorre los marcadores en orden de lectura: cada uno y, después, los que cuelgan de él."""
+    while nodo is not None:
+        nodo = nodo.get_object()
+        yield nodo
+        yield from marcadores(nodo.get("/First"))
+        nodo = nodo.get("/Next")
+
+
+def letras(texto):
+    """Solo letras y cifras, en minúscula: lo que no cambia aunque falten o sobren espacios."""
+    return "".join(c for c in unicodedata.normalize("NFC", texto).casefold() if c.isalnum())
+
+
+def es_su_titulo(de_chromium, del_html):
+    """Las letras del título del HTML están, en orden, en el marcador, que como mucho las repite."""
+    marcador, titulo = letras(de_chromium), letras(del_html)
+    quedan = iter(marcador)
+    return all(letra in quedan for letra in titulo) and len(marcador) <= 2 * len(titulo)
 
 
 def sin_espacios(texto: str) -> str:
     return "".join(texto.split())
 
 
-def arreglar_marcadores(raiz: DictionaryObject, titulos: list[str]) -> int:
-    """Pone a cada marcador el texto de su título, si solo se diferencian en los espacios."""
+def devolver_espacios(lista, titulos) -> None:
+    """Plan B: pone a cada marcador el texto de su título si solo se diferencian en los espacios."""
     buenos: dict[str, str] = {}
     for titulo in titulos:
         buenos.setdefault(sin_espacios(titulo), titulo)
+    for marcador in lista:
+        bueno = buenos.get(sin_espacios(str(marcador.get("/Title", ""))))
+        if bueno:
+            marcador[NameObject("/Title")] = TextStringObject(bueno)
+
+
+def corregir_marcadores(raiz, titulos) -> None:
     indice = raiz.get("/Outlines")
-    if indice is None:
-        return 0
-    cambiados = 0
-    pendientes = [indice.get_object().get("/First")]
-    while pendientes:
-        nodo = pendientes.pop()
-        while nodo is not None:
-            marcador = nodo.get_object()
-            actual = str(marcador.get("/Title", ""))
-            bueno = buenos.get(sin_espacios(actual))
-            if bueno and bueno != actual:
-                marcador[NameObject("/Title")] = TextStringObject(bueno)
-                cambiados += 1
-            if marcador.get("/First") is not None:
-                pendientes.append(marcador["/First"])
-            nodo = marcador.get("/Next")
-    return cambiados
+    lista = list(marcadores(indice.get_object().get("/First"))) if indice is not None else []
+    problema = None
+    if len(lista) != len(titulos):
+        problema = f"el PDF tiene {len(lista)} marcadores y el HTML, {len(titulos)} títulos"
+    else:
+        for marcador, titulo in zip(lista, titulos):
+            if not es_su_titulo(str(marcador.get("/Title", "")), titulo):
+                problema = f"el marcador «{marcador.get('/Title')}» no es el del título «{titulo}»"
+                break
+    if problema:
+        print(f"Aviso: {problema}. Solo se devuelven los espacios que faltan.", file=sys.stderr)
+        devolver_espacios(lista, titulos)
+        return
+    for marcador, titulo in zip(lista, titulos):
+        marcador[NameObject("/Title")] = TextStringObject(titulo)
 
 
 def main() -> None:
@@ -69,7 +100,7 @@ def main() -> None:
     preferencias[NameObject("/DisplayDocTitle")] = BooleanObject(True)
     if len(sys.argv) > 4:
         with open(sys.argv[4], encoding="utf-8") as archivo:
-            arreglar_marcadores(raiz, json.load(archivo))
+            corregir_marcadores(raiz, json.load(archivo))
     with open(ruta, "wb") as archivo:
         escritor.write(archivo)
 
