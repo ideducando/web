@@ -89,6 +89,59 @@
       }
     ]
   },
+  "carta-de-deseos": {
+    "total": 18,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "3 nivel"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "1 Nivel 1 · Con pictogramas"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "2 Nivel 2 · Frases para completar"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "1 Nivel 1 · Con pictogramas"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "1 Nivel 1 · Con pictogramas"
+      },
+      {
+        "pagina": 13,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para recortar · hoja 1 de 3"
+      }
+    ]
+  },
   "cartilla-trabadas": {
     "total": 30,
     "fotos": [
@@ -1230,6 +1283,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Guía de uso"
+      }
+    ]
+  },
+  "retos-diciembre": {
+    "total": 19,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "retos en"
+      },
+      {
+        "pagina": 5,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Para la pared de la clase"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "El reto de hoy"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Retos 1 a 4 · convivencia"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Retos 17 a 20 · movimiento"
+      },
+      {
+        "pagina": 14,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Versión opcional · para el centro que celebra el adviento"
       }
     ]
   },

@@ -11,7 +11,7 @@ paginas: 19
 archivo: /descargas/retos-diciembre.pdf
 portada: /portadas/retos-diciembre.webp
 portada_alt: "Portada del material: el título «Retos de diciembre» sobre fondo crema, con un calendario de diciembre con días coloreados y tachados y dos tarjetas de retos, «Saludos para todos» y «Como un pingüino», con sus tres niveles"
-vistas: [1, 3, 5, 7, 8, 14]
+vistas: [1, 5, 7, 8, 12, 14]
 tiempo: "1 hora para imprimir, plastificar, recortar y pegar el velcro"
 necesitas:
   - "8 hojas de cartulina blanca A4 de 160 g"

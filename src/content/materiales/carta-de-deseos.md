@@ -11,7 +11,7 @@ paginas: 18
 archivo: /descargas/carta-de-deseos.pdf
 portada: /portadas/carta-de-deseos.webp
 portada_alt: "Portada del material: el título «Carta de deseos» sobre fondo crema, con una carta en la que hay pegados tres pictogramas, abrazos, ir al parque y aprender a nadar, y un sobre con un sello de corazón"
-vistas: [1, 4, 5, 6, 8, 13]
+vistas: [1, 4, 5, 7, 10, 13]
 tiempo: "30 minutos para imprimir y recortar los pictogramas"
 necesitas:
   - "25 folios A4 de 80 g para las cartas de una clase de 25"
