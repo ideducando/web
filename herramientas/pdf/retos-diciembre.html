@@ -831,8 +831,8 @@
       }
 
       .mi-cal .cal-dias p {
-        font-size: 16pt;
-        padding: 1.2mm 0;
+        font-size: 18pt;
+        padding: 1mm 0;
       }
 
       .mi-cal .cal-rejilla {
@@ -1029,7 +1029,7 @@
         font-size: 11pt;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: var(--tx);
+        color: var(--marino);
       }
 
       .reto__familia img {
@@ -1138,10 +1138,17 @@
 
       .tira-recortable h2 {
         display: flex;
-        align-items: center;
-        gap: 2.4mm;
+        align-items: baseline;
+        gap: 3mm;
         margin: 0 0 2mm;
-        font-size: 14pt;
+        font-size: 18pt;
+      }
+
+      .nota-tira {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
       }
 
       .caras {
@@ -1515,7 +1522,7 @@
       <div class="circulo" style="width: 74mm; height: 74mm; left: -34mm; top: 118mm; background: var(--morado-tinte)"></div>
       <div class="portada__cuerpo">
         <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
-        <p class="antetitulo portada__antetitulo">Juego · Convivencia, emociones y autonomía</p>
+        <p class="antetitulo portada__antetitulo">Juego · Un reto para cada día de clase</p>
         <h1 class="portada__titulo">Retos<br />de diciembre</h1>
         <p class="portada__subtitulo">
           Un reto amable para cada día de clase hasta las vacaciones, en tres niveles y con pictogramas.
@@ -1545,8 +1552,8 @@
       <ol class="cada-dia" id="cada-dia"></ol>
       <div class="niveles-vistazo">
         <h2>Tres niveles en cada reto</h2>
-        <p><span><span class="nv n1 grande">1</span></span><span><strong>Con mucho apoyo.</strong> Lo hace con un adulto, que le enseña cómo y le ayuda. Vale responder con un gesto, señalando o con su tablero de comunicación.</span></p>
-        <p><span><span class="nv n2 grande">2</span></span><span><strong>Con algo de apoyo.</strong> Le basta una pista, un ejemplo o una pregunta.</span></p>
+        <p><span><span class="nv n1 grande">1</span></span><span><strong>Con mucho apoyo.</strong> Lo hace con un adulto, que le enseña cómo y le ayuda. Vale responder con la voz, con un gesto, señalando o con su tablero de comunicación.</span></p>
+        <p><span><span class="nv n2 grande">2</span></span><span><strong>Con algo de apoyo.</strong> Le basta una pista o un ejemplo.</span></p>
         <p><span><span class="nv n3 grande">3</span></span><span><strong>Sin apoyo.</strong> Lo hace solo o sola y, a veces, lo enseña a los demás.</span></p>
         <p><span></span><span>Los niveles describen la tarea, nunca al niño o la niña. Cada día se puede cambiar de nivel.</span></p>
       </div>
@@ -1669,11 +1676,11 @@
       </p>
       <ul class="tarjetas" id="tarjetas-blanco"></ul>
       <div class="tira-recortable">
-        <h2>¿Cómo me siento? <span class="fuente">Para los retos 5 y 7</span></h2>
+        <h2>¿Cómo me siento? <span class="nota-tira">Para los retos 5 y 7</span></h2>
         <ul class="caras caras--tira" id="caras"></ul>
       </div>
       <div class="tira-recortable">
-        <h2>¿Cómo lo hago hoy? <span class="fuente">Para señalar el nivel</span></h2>
+        <h2>¿Cómo lo hago hoy? <span class="nota-tira">Para señalar el nivel</span></h2>
         <ul class="niveles-tira">
           <li><span><span class="nv n1 enorme">1</span></span>Con mucho apoyo</li>
           <li><span><span class="nv n2 enorme">2</span></span>Con algo de apoyo</li>
@@ -1796,7 +1803,7 @@
       <p class="antetitulo">Guía para el docente</p>
       <h1>Retos de diciembre: cómo usarlos</h1>
       <p>
-        Diciembre trae ensayos, fiestas y ganas de vacaciones. Estos retos dan a cada día de clase un momento corto y amable
+        Diciembre llega con fiestas y con ganas de vacaciones. Estos retos dan a cada día de clase un momento corto y amable
         para convivir, poner nombre a lo que se siente, hacer cosas sin ayuda, hablar y moverse. Toda la clase hace el mismo
         reto a la vez, y cada peque elige su nivel.
       </p>
@@ -1805,7 +1812,7 @@
       <ol>
         <li>Al empezar la mañana, alguien saca una tarjeta de la caja y la pega en el cartel del reto de hoy (página <span data-pagina="cartel"></span>).</li>
         <li>Leed el reto en voz alta y señala el pictograma. Haz tú el reto delante, como ejemplo.</li>
-        <li>Cada peque elige su nivel: lo dice, lo señala en la tira de los niveles o se lo propones tú.</li>
+        <li>Cada peque elige su nivel: lo dice o lo señala en la tira de los niveles. Si le cuesta, propónselo tú.</li>
         <li>Haced el reto a lo largo del día. Al terminar, colorea el día en el calendario de la clase, y cada cual en el suyo.</li>
       </ol>
 
@@ -1820,13 +1827,14 @@
 
       <h2>Tres niveles para toda la clase</h2>
       <p>
-        El Diseño Universal para el Aprendizaje (DUA) propone pensar desde el principio en toda la clase. Una de sus pautas es
-        «Ofrecer opciones con distintos niveles de complejidad o dificultad» (CAST, 2024, consideración 8.2). Aquí, cada reto
+        El Diseño Universal para el Aprendizaje (DUA) propone pensar desde el principio en toda la clase. CAST, el centro de
+        investigación que publica sus pautas, recomienda «Ofrecer opciones con distintos niveles de complejidad o dificultad»
+        (CAST, 2024, consideración 8.2). Aquí, cada reto
         tiene tres:
       </p>
       <ul class="lista-niveles">
-        <li><span><span class="nv n1">1</span></span><span><strong>Con mucho apoyo.</strong> El adulto lo hace a la vez y ayuda con sus manos si hace falta. Vale cualquier respuesta: un gesto, señalar o el tablero de comunicación.</span></li>
-        <li><span><span class="nv n2">2</span></span><span><strong>Con algo de apoyo.</strong> Basta una pista, un ejemplo o una pregunta.</span></li>
+        <li><span><span class="nv n1">1</span></span><span><strong>Con mucho apoyo.</strong> El adulto lo hace a la vez y ayuda con sus manos si hace falta. Vale cualquier respuesta: la voz, un gesto, señalar o el tablero de comunicación.</span></li>
+        <li><span><span class="nv n2">2</span></span><span><strong>Con algo de apoyo.</strong> Basta una pista o un ejemplo.</span></li>
         <li><span><span class="nv n3">3</span></span><span><strong>Sin apoyo.</strong> Lo hace solo o sola y, a veces, lo enseña a los demás.</span></li>
       </ul>
       <p>
@@ -1861,7 +1869,7 @@
         </li>
         <li>
           <strong>Trastorno del desarrollo del lenguaje (TDL) y alumnado con un sistema de comunicación.</strong> Señala el
-          pictograma mientras lees el reto. Vale responder señalando, con un gesto o con su tablero.
+          pictograma mientras lees el reto. Vale responder señalando o con su tablero.
         </li>
         <li><strong>Discapacidad auditiva.</strong> En «Baila y para», cambia el silencio por una señal que se vea, como levantar una tarjeta.</li>
         <li><strong>Discapacidad visual.</strong> Lee el reto en voz alta, describe el pictograma y usa objetos de verdad.</li>
@@ -1999,11 +2007,11 @@
         ['emociones', 11476, '¿Cómo me siento?', ['Señalo la cara de cómo me siento.', 'Digo cómo me siento y por qué.', 'Cuento un momento de hoy que me ha hecho sentir bien.']],
         ['emociones', 34409, 'Respiro despacio', ['Respiro despacio con un adulto, con la mano en la barriga.', 'Cojo aire por la nariz y lo suelto despacio por la boca.', 'Enseño a un compañero o una compañera cómo me calmo.']],
         ['emociones', 9843, '¿Y tú, cómo estás?', ['Miro una cara y señalo si está contenta o triste.', 'Pregunto a alguien cómo está.', 'Si alguien está triste, pienso qué puedo hacer y lo hago.']],
-        ['emociones', 8128, 'Palabras bonitas', ['Doy las gracias con la voz, con un gesto o con mi tablero.', 'Le digo a alguien algo que hace bien.', 'Escribo o dibujo un mensaje bonito para alguien de la clase.']],
+        ['emociones', 8128, 'Palabras bonitas', ['Doy las gracias con un gesto o con mi tablero.', 'Le digo a alguien algo que hace bien.', 'Escribo o dibujo un mensaje bonito para alguien de la clase.']],
         ['autonomia', 27052, 'Me pongo el abrigo', ['Meto los brazos en las mangas, con ayuda.', 'Me pongo el abrigo mirando los pasos.', 'Me pongo el abrigo y subo la cremallera sin ayuda.']],
         ['autonomia', 5514, 'Cada cosa en su sitio', ['Guardo un material en su caja, con ayuda.', 'Ordeno mi mesa al terminar.', 'Preparo mi mochila sin que me lo recuerden.']],
         ['autonomia', 8975, 'Manos limpias', ['Me lavo las manos con un adulto, paso a paso.', 'Me lavo las manos mirando los pasos.', 'Me froto las manos con jabón mientras cuento hasta 20.']],
-        ['autonomia', 28420, 'Pido ayuda', ['Pido ayuda con un gesto, con una tarjeta o con mi tablero.', 'Levanto la mano cuando algo me cuesta.', 'Lo intento primero y, si hace falta, explico qué necesito.']],
+        ['autonomia', 28420, 'Pido ayuda', ['Pido ayuda con un gesto o con mi tablero.', 'Levanto la mano cuando algo me cuesta.', 'Lo intento primero y, si hace falta, explico qué necesito.']],
         ['lenguaje', 5493, 'Palabras de invierno', ['Señalo una cosa de invierno: el gorro o la bufanda.', 'Digo dos palabras de invierno.', 'Invento una frase con la palabra «frío».']],
         ['lenguaje', 3135, 'Rimas con nieve', ['Doy una palmada cuando oigo «nieve».', 'Busco una palabra que rime con «nieve».', 'Invento una rima corta con «nieve».']],
         ['lenguaje', 3345, 'Te cuento', ['Señalo en la agenda algo que hemos hecho hoy.', 'Cuento con dos frases qué he hecho hoy.', 'Cuento lo que hice el fin de semana: primero, después y al final.']],

@@ -1,6 +1,6 @@
 ---
 titulo: "Carta de deseos con pictogramas"
-resumen: "Para que cada peque diga qué desea escribiendo, dibujando o pegando pictogramas, también si usa un sistema de comunicación. Tres niveles, 44 deseos para recortar y versiones para los Reyes Magos o Papá Noel."
+resumen: "Para que cada peque diga qué desea escribiendo, dibujando o pegando pictogramas, también si usa un sistema de comunicación. En tres niveles, con versiones opcionales para los Reyes Magos y Papá Noel."
 seccion: aula
 tipo: plantilla
 etapas: [infantil, primaria]
@@ -19,7 +19,7 @@ necesitas:
   - "6 sobres para guardar los pictogramas, uno por grupo"
   - "1 barra de pegamento por mesa"
   - "Tijeras de punta redonda"
-  - "Lápices de colores, ceras o rotuladores"
+  - "Ceras o rotuladores de colores"
   - "Impresora, mejor a color"
 imprimir:
   - "Una carta por peque, en folio: elige el nivel y la versión (páginas 4 a 12)."
@@ -52,7 +52,7 @@ borrador: false
 
 ## Para qué sirve
 
-En diciembre, muchas familias escriben una carta de deseos. Estas plantillas dejan que cada peque diga qué desea a su manera: escribiendo, dibujando o pegando pictogramas. También quien todavía no escribe o se comunica con un tablero, un comunicador o pictogramas.
+En diciembre, muchas familias escriben una carta de deseos. Estas plantillas dejan que cada peque diga qué desea a su manera: escribiendo, dibujando o pegando pictogramas. También quien todavía no escribe o se comunica con un tablero o un comunicador.
 
 La Convención sobre los Derechos del Niño reconoce el derecho de los niños y las niñas a expresarse de palabra, por escrito, con arte o por cualquier otro medio que elijan. La carta es una ocasión para ponerlo en práctica en clase y en casa.
 
@@ -69,18 +69,18 @@ La Convención sobre los Derechos del Niño reconoce el derecho de los niños y 
 2. **Frases para completar**: cuatro frases con un hueco para pegar o dibujar y renglones para escribir una palabra.
 3. **Con mis palabras**: la carta escrita, con el principio de algunas frases y un recuadro para dibujar.
 
-El nivel describe la tarea, nunca al niño o la niña, y cada peque puede elegir el suyo. El Diseño Universal para el Aprendizaje (DUA) propone dejar claro que todas las formas de expresarse valen lo mismo: una carta con pictogramas vale igual que una escrita.
+El nivel describe la tarea, nunca al niño o la niña, y cada peque puede elegir el suyo. El currículo de Infantil de la Región de Murcia pide, para el alumnado con dificultades de comunicación, «la búsqueda de técnicas e instrumentos que faciliten su comunicación, como es el uso de pictogramas» (Decreto 196/2022, pág. 33100). El Diseño Universal para el Aprendizaje (DUA) propone dejar claro que todas las formas de expresarse valen lo mismo: una carta con pictogramas vale igual que una escrita.
 
 ## Deseos que no se compran
 
-Los pictogramas empiezan por los deseos que no se compran: con quién quiero jugar, adónde quiero ir, qué quiero aprender y qué deseo para los demás, como salud, paz, abrazos o tiempo libre. Después vienen algunas cosas, como un cuento, una pelota o un puzle. Si falta alguien importante para ese peque, se dibuja en una casilla en blanco.
+Los pictogramas empiezan por los deseos que no se compran: con quién quiero jugar, adónde quiero ir, qué quiero aprender y qué deseo para los demás, como salud, paz, abrazos o tiempo libre. Después vienen algunas cosas, como un cuento o una pelota. Si falta alguien importante para ese peque, se dibuja en una casilla en blanco.
 
 ## Cómo usarla
 
 1. Manda antes la nota para las familias (página 17): cada casa marca qué versión prefiere.
 2. Elige con cada peque el nivel y prepara los pictogramas en sobres.
 3. Habla y señala a la vez: «¿Con quién quieres jugar?», mientras señalas los pictogramas. Ofrece pocas opciones a la vez y espera sin prisa.
-4. Acepta cualquier forma de elegir: señalar con el dedo o con la mirada, tocar o decir. Si lo dicta, escribe tú sus palabras debajo, sin cambiarlas.
+4. Acepta cualquier forma de elegir: señalar con el dedo, mirar, tocar o decir. Si lo dicta, escribe tú sus palabras debajo, sin cambiarlas.
 5. En Infantil, su letra vale tal como sea: no corrijas la carta.
 6. La carta se va a casa. En clase no se comparan cartas ni se habla de qué regalos llegarán.
 

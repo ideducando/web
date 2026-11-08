@@ -728,6 +728,12 @@
         padding-left: 4mm;
       }
 
+      .dua ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.6mm 6mm;
+      }
+
       .dua li,
       .seguridad li {
         margin-bottom: 0.3mm;
@@ -1130,7 +1136,7 @@
       /* ---------- Bandeja 2: cazapalabras ---------- */
       .cazas {
         display: grid;
-        gap: 4mm;
+        gap: 3mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1138,8 +1144,8 @@
 
       .caza {
         display: grid;
-        grid-template-rows: 22mm minmax(0, 1fr) 7mm;
-        height: 79mm;
+        grid-template-rows: 22mm minmax(0, 1fr) 6mm;
+        height: 74mm;
         margin: 0;
         padding: 2.6mm 4mm 1.6mm;
       }
@@ -1194,11 +1200,11 @@
 
       .caza__campo {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         grid-auto-rows: minmax(0, 1fr);
         align-items: center;
         justify-items: center;
-        margin: 1.4mm 0 0;
+        margin: 0.6mm 0 0;
         padding: 0;
         list-style: none;
       }
@@ -1208,10 +1214,6 @@
         font-size: 22pt;
         line-height: 1;
         letter-spacing: 0.02em;
-      }
-
-      .caza__campo.n3 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .caza__pie {
@@ -1227,8 +1229,8 @@
       .faltas {
         display: grid;
         grid-template-columns: repeat(2, 92mm);
-        grid-auto-rows: 58mm;
-        gap: 4mm 6mm;
+        grid-auto-rows: 57mm;
+        gap: 3mm 6mm;
         justify-content: center;
         margin: 0;
         padding: 0;
@@ -1238,7 +1240,7 @@
       .falta {
         position: relative;
         display: grid;
-        grid-template-rows: 30mm 15mm minmax(0, 1fr);
+        grid-template-rows: 25mm 15mm minmax(0, 1fr);
         margin: 0;
         padding: 2mm 2.4mm 0;
         overflow: hidden;
@@ -1246,14 +1248,14 @@
 
       .falta__arriba {
         display: grid;
-        grid-template-columns: 30mm minmax(0, 1fr) auto;
+        grid-template-columns: 25mm minmax(0, 1fr) auto;
         align-items: center;
         gap: 2mm;
       }
 
       .falta__arriba img {
-        width: 29mm;
-        height: 29mm;
+        width: 24mm;
+        height: 24mm;
       }
 
       .falta__modelo {
@@ -1311,7 +1313,19 @@
         align-self: end;
         display: flex;
         justify-content: center;
+        align-items: end;
         gap: 2.4mm;
+        padding-top: 2mm;
+        border-top: 0.35mm dashed var(--linea);
+      }
+
+      .opciones .pinza {
+        width: 4.6mm;
+        height: 12mm;
+        margin-right: 1mm;
+        padding: 0;
+        border: 0;
+        background: none;
       }
 
       .opciones span {
@@ -1550,8 +1564,8 @@
       .palmadas {
         display: grid;
         grid-template-columns: repeat(4, 46mm);
-        grid-auto-rows: 46mm;
-        gap: 3mm 1.8mm;
+        grid-auto-rows: 45mm;
+        gap: 2.6mm 1.8mm;
         justify-content: center;
         margin: 0;
         padding: 0;
@@ -2261,20 +2275,7 @@
         </li>
       </ul>
 
-      <div class="aprender">
-        <h2>Qué van a aprender</h2>
-        <ol>
-          <li>Nombrar y reconocer 24 palabras del invierno.</li>
-          <li>Encontrar una palabra o una sílaba entre otras parecidas.</li>
-          <li>Descubrir qué sílaba le falta a una palabra.</li>
-          <li>Formar palabras ordenando sus sílabas.</li>
-          <li>Oír con qué sonido empieza una palabra.</li>
-          <li>Contar las sílabas de una palabra con palmadas.</li>
-          <li>Contar una historia con personaje, lugar y problema.</li>
-        </ol>
-      </div>
-
-      <h2 class="subtitulo-hoja">Las siete bandejas</h2>
+      <h2 class="subtitulo-hoja">Las siete bandejas y lo que aprenden</h2>
       <ol class="mapa-bandejas" id="mapa"></ol>
 
       <div class="fila-dos">
@@ -2299,6 +2300,20 @@
           </p>
         </div>
       </div>
+      <div class="seguridad" style="margin-top: 3mm">
+        <h2>Seguridad</h2>
+        <ul>
+          <li>
+            Las pinzas, los encuadernadores y el velcro son piezas pequeñas. La Asociación Española de Pediatría (AEP) recuerda que
+            «La mejor medida preventiva es la supervisión constante» y aconseja intentar evitar las piezas pequeñas en menores de 3 a
+            5 años (AEP, 2024). Con la clase de 3 años, mejor sin pinzas: que señalen o pongan una tarjeta.
+          </li>
+          <li>
+            Si lleváis castañas o fruta de verdad para mirarlas y olerlas, preguntad antes a las familias por las alergias. En el
+            rincón no se comen.
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- ======================================================================
@@ -2321,9 +2336,9 @@
           <ul class="propone">
             <li>
               «Dentro de los espacios del aula podrá diseñarse un rincón de lenguaje, en el que los niños puedan jugar con todo tipo de
-              letras, componer palabras, crear sus carteles y sus propios libros, practicar grafías en soportes diferentes, hacer juegos
-              para trabajar procesos preparatorios para el acceso al lenguaje escrito: lotos de observación, atención, percepción,
-              semejanzas-diferencias o memoria visual y auditiva». <span class="donde">Todo el rincón. Pág. 33100.</span>
+              letras, componer palabras […], hacer juegos para trabajar procesos preparatorios para el acceso al lenguaje escrito:
+              lotos de observación, atención, percepción, semejanzas-diferencias o memoria visual y auditiva». <span class="donde">Todo
+              el rincón. Pág. 33100.</span>
             </li>
             <li>
               Para el alumnado con dificultades comunicativas, «el uso de pictogramas e identificadores que faciliten la comprensión de
@@ -2335,8 +2350,8 @@
             </li>
             <li>
               «Los materiales y recursos para trabajar la conciencia fonológica de palabras, sílabas y fonemas, tales como: alfabetos de
-              letras móviles, puzles silábicos, dominós de sílabas, juegos de mesa lingüísticos o autodictados, ayudarán al alumnado a
-              aproximarse al lenguaje escrito». <span class="donde">Bandejas 3 y 4. Pág. 33101.</span>
+              letras móviles, puzles silábicos, dominós de sílabas […] ayudarán al alumnado a aproximarse al lenguaje escrito».
+              <span class="donde">Bandejas 3 a 6. Pág. 33101.</span>
             </li>
             <li>
               Después del nombre propio, «el vocabulario básico que van descubriendo de los centros de interés que se estén
@@ -2345,6 +2360,10 @@
             <li>
               «La adquisición del código escrito no es un objetivo que se deba alcanzar en esta etapa». <span class="donde">Por eso
               leer y escribir van siempre en el nivel 3, como reto. Pág. 33099.</span>
+            </li>
+            <li>
+              Las medidas «se regirán por los principios del Diseño Universal de Aprendizaje». <span class="donde">Los tres niveles.
+              Art. 4.6, pág. 33056.</span>
             </li>
           </ul>
         </div>
@@ -2371,13 +2390,9 @@
             </li>
           </ul>
           <h2 style="margin-top: 2.6mm">Saberes básicos del segundo ciclo</h2>
-          <p class="grupo-saberes" style="margin-top: 0"><span class="codigo">CRR-C</span> Págs. 33108 y 33109</p>
+          <p class="grupo-saberes" style="margin-top: 0"><span class="codigo">CRR-C</span> Pág. 33109</p>
           <ul>
             <li>«Discriminación auditiva y conciencia fonológica». <span class="donde">Bandejas 3 a 6.</span></li>
-            <li>
-              «El lenguaje oral en situaciones cotidianas: conversaciones, juegos de interacción social y expresión de vivencias».
-              <span class="donde">Bandeja 7.</span>
-            </li>
           </ul>
           <p class="grupo-saberes"><span class="codigo">CRR-D</span> y <span class="codigo">CRR-E</span> Pág. 33109</p>
           <ul>
@@ -2385,13 +2400,6 @@
             <li>«Otros códigos de representación gráfica: imágenes, símbolos, números…». <span class="donde">Los pictogramas.</span></li>
             <li>«La poesía y los juegos de palabras como elementos de aprendizaje y disfrute». <span class="donde">Todas.</span></li>
           </ul>
-          <div class="decreto">
-            <h2>Lo que pide el decreto</h2>
-            <ul>
-              <li>Las medidas «se regirán por los principios del Diseño Universal de Aprendizaje» (art. 4.6, pág. 33056): aquí, tres niveles.</li>
-              <li>«La observación directa y sistemática constituirá la técnica principal del proceso de evaluación» (art. 14.1, pág. 33060): de ahí el registro.</li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
@@ -2452,19 +2460,12 @@
         </div>
       </div>
 
-      <h2 class="subtitulo-hoja">De lo grande a lo pequeño</h2>
-      <p class="pista" style="color: var(--marino)">
-        La conciencia fonológica es darse cuenta de que las palabras se parten en trozos: sílabas y sonidos. El rincón va de lo grande
-        a lo pequeño.
-      </p>
-      <ol class="escalera">
-        <li><b>1. Palabras</b>Bandejas 1, 2 y 7: qué es, cómo se dice y cómo se escribe.</li>
-        <li><b>2. Sílabas</b>Bandejas 3, 4 y 6: los trozos que se oyen al dar palmadas.</li>
-        <li><b>3. Sonidos</b>Bandeja 5: el primer sonido de cada palabra.</li>
-      </ol>
-
       <div class="investigacion">
-        <h2>Lo que dice la investigación</h2>
+        <h2>De lo grande a lo pequeño: lo que dice la investigación</h2>
+        <p>
+          La conciencia fonológica es darse cuenta de que las palabras se parten en trozos: sílabas y sonidos. El rincón va de lo
+          grande a lo pequeño: primero palabras (bandejas 1, 2 y 7), después sílabas (3, 4 y 6) y al final el primer sonido (5).
+        </p>
         <p>
           Un metaanálisis del National Reading Panel reunió 52 estudios sobre enseñar a fijarse en los sonidos de las palabras.
           Ayudó a aprender a leer y a escribir, también en Infantil y al alumnado con riesgo de dificultades. Funcionó mejor con
@@ -2493,20 +2494,6 @@
         </ul>
       </div>
 
-      <div class="seguridad">
-        <h2>Seguridad</h2>
-        <ul>
-          <li>
-            Las pinzas, los encuadernadores y el velcro son piezas pequeñas. La Asociación Española de Pediatría (AEP) recuerda que
-            «La mejor medida preventiva es la supervisión constante» y aconseja intentar evitar las piezas pequeñas en menores de 3 a
-            5 años (AEP, 2024). Con la clase de 3 años, mejor sin pinzas: que señalen o pongan una tarjeta.
-          </li>
-          <li>
-            Si lleváis castañas o fruta de verdad para mirarlas y olerlas, preguntad antes a las familias por las alergias. En el
-            rincón no se comen.
-          </li>
-        </ul>
-      </div>
     </section>
 
     <!-- ======================================================================
@@ -3117,7 +3104,7 @@
         <h1>¿Cuántas sílabas? <small>20 tarjetas con su marca de nivel</small></h1>
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </header>
-      <p class="pista">Plastifica la hoja y recorta por la línea de puntos. La marca de la esquina dice desde qué nivel entra cada tarjeta.</p>
+      <p class="pista">Recorta por la línea de puntos. La marca de la esquina dice desde qué nivel entra cada tarjeta.</p>
       <ul class="palmadas" id="palmadas"></ul>
       <p class="atribucion" data-atribucion></p>
     </section>
@@ -3610,13 +3597,13 @@
       // ---------------------------------------------------------------- Las siete bandejas
       // [número, nombre, pictograma, qué se hace, primera y última página]
       const BANDEJAS = [
-        [1, 'Palabras del invierno', 28643, 'Tarjetas de dibujo y palabra para un loto.', 'b1', 'palabras'],
-        [2, 'Cazapalabras', 27391, 'Rodear palabras y sílabas escritas.', 'b2', 'caza2'],
-        [3, 'La sílaba que falta', 15816, 'Completar palabras con su sílaba.', 'b3', 'falta3'],
-        [4, 'Puzles de sílabas', 2540, 'Ordenar las sílabas de una palabra.', 'b4', 'puzle3'],
-        [5, '¿Cómo empieza?', 2381, 'Discos de sonidos con pinzas.', 'b5', 'disco3'],
-        [6, '¿Cuántas sílabas?', 4563, 'Palmadas y un tapete para clasificar.', 'b6', 'palmadas'],
-        [7, 'La ruleta de las historias', 6461, 'Quién, dónde y qué pasa.', 'b7', 'ruleta2'],
+        [1, 'Palabras del invierno', 28643, 'Nombrar y reconocer 24 palabras del invierno.', 'b1', 'palabras'],
+        [2, 'Cazapalabras', 27391, 'Encontrar una palabra o una sílaba entre otras parecidas.', 'b2', 'caza2'],
+        [3, 'La sílaba que falta', 15816, 'Descubrir qué sílaba le falta a una palabra.', 'b3', 'falta3'],
+        [4, 'Puzles de sílabas', 2540, 'Formar palabras ordenando sus sílabas.', 'b4', 'puzle3'],
+        [5, '¿Cómo empieza?', 2381, 'Oír con qué sonido empieza una palabra.', 'b5', 'disco3'],
+        [6, '¿Cuántas sílabas?', 4563, 'Contar las sílabas de una palabra con palmadas.', 'b6', 'palmadas'],
+        [7, 'La ruleta de las historias', 6461, 'Contar una historia con personaje, lugar y problema.', 'b7', 'ruleta2'],
       ];
 
       document.getElementById('mapa').innerHTML = BANDEJAS.map(
@@ -3706,7 +3693,7 @@
             html += `<div class="colgado" style="left:${f(x - w / 2)}mm;top:${f(y + 1.5)}mm;width:${w}mm;height:${h}mm;transform:rotate(${f(angulo)}deg)">${contenido}</div>`;
           } else {
             // La manopla cuelga sola, como la ropa de verdad.
-            html += `<img src="pictogramas/8314.png" alt="" style="left:${f(x - w / 2)}mm;top:${f(y - 1)}mm;width:${w}mm;height:${h}mm;transform:rotate(${f(angulo + 180)}deg) scaleX(-1);transform-origin:50% 0">`;
+            html += `<img src="pictogramas/8314.png" alt="" style="left:${f(x - w / 2)}mm;top:${f(y - 1)}mm;width:${w}mm;height:${h}mm;transform:rotate(${f(angulo + 180)}deg);transform-origin:50% 50%">`;
           }
           html += `<div style="left:${f(x - 3.6)}mm;top:${f(y - 9)}mm;width:7.2mm;height:19mm;transform:rotate(${f(inclinacion)}deg)">${PINZA}</div>`;
         }
@@ -3826,7 +3813,7 @@
           .map((s, i) => (i === t.falta ? '<span class="hueco" aria-label="hueco"></span>' : `<span>${s}</span>`))
           .join('');
         const abajo = t.opciones
-          ? `<div class="opciones peque">${t.opciones.map((o) => `<span>${o}</span>`).join('')}</div>`
+          ? `<div class="opciones peque"><span class="pinza" aria-hidden="true">${PINZA}</span>${t.opciones.map((o) => `<span>${o}</span>`).join('')}</div>`
           : '<p class="escribe-aqui">Escribe la sílaba que falta.</p>';
         return `<li class="falta corte" aria-label="Tarjeta ${t.id}: ${palabra}, falta una sílaba">
             <div class="falta__arriba">
@@ -4062,7 +4049,7 @@
           const a2 = i * 60 + 30;
           const [x1, y1] = enRuleta(C - 0.6, a1);
           const [x2, y2] = enRuleta(C - 0.6, a2);
-          svg += `<path d="M${C} ${C} L${x1} ${y1} A${C - 0.6} ${C - 0.6} 0 0 0 ${x2} ${y2} Z" fill="${i % 2 ? '#fff' : tinte}" stroke="${color}" stroke-width="0.5"/>`;
+          svg += `<path d="M${C} ${C} L${x1} ${y1} A${C - 0.6} ${C - 0.6} 0 0 1 ${x2} ${y2} Z" fill="${i % 2 ? '#fff' : tinte}" stroke="${color}" stroke-width="0.5"/>`;
         });
         svg += `<circle cx="${C}" cy="${C}" r="7" fill="#fff" stroke="${color}" stroke-width="0.8"/>`;
         svg += `<path d="M${C - 2.4} ${C} H${C + 2.4} M${C} ${C - 2.4} V${C + 2.4}" stroke="${M}" stroke-width="0.5"/>`;
@@ -4130,7 +4117,7 @@
       const tarjetaNormas = `<li class="tarjeta-pasos normas">
           <p class="tarjeta-pasos__cab">Normas del rincón</p>
           <ol>${NORMAS.map(([p, t]) => `<li>${picto(p)}<span>${t}</span></li>`).join('')}</ol>
-          <p class="tarjeta-pasos__pie">${picto(4570)}Si lo necesito, pido ayuda.</p></li>`;
+          <p class="tarjeta-pasos__pie">${picto(4570)}Pido ayuda.</p></li>`;
       document.getElementById('pasos-1').innerHTML = [1, 2, 3, 4, 5, 6].map(tarjetaPasos).join('');
       document.getElementById('pasos-2').innerHTML = tarjetaPasos(7) + tarjetaNormas;
 

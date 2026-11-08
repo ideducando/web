@@ -1,6 +1,6 @@
 ---
 titulo: "Retos de diciembre en tres niveles"
-resumen: "Un reto amable para cada día de clase hasta las vacaciones: convivencia, emociones, autonomía, lenguaje y movimiento, en tres niveles. Con calendario para colorear, tarjetas y versión de Adviento opcional."
+resumen: "Un reto amable para cada día de clase hasta las vacaciones: convivencia, emociones, autonomía, lenguaje y movimiento, en tres niveles. Con un calendario para colorear y una versión de Adviento opcional."
 seccion: aula
 tipo: juego
 etapas: [infantil, primaria]
@@ -54,7 +54,7 @@ borrador: false
 
 ## Para qué sirve
 
-Diciembre trae ensayos, fiestas y ganas de vacaciones. Este material da a cada día de clase un momento corto y amable: un reto para convivir, para poner nombre a lo que se siente, para hacer cosas sin ayuda, para hablar o para moverse. Lleva unos cinco minutos.
+Diciembre llega con fiestas y con ganas de vacaciones. Este material da a cada día de clase un momento corto y amable: un reto para convivir, para poner nombre a lo que se siente, para hacer cosas sin ayuda, para hablar o para moverse. Lleva unos cinco minutos.
 
 Toda la clase hace el mismo reto a la vez, y cada peque elige cómo hacerlo: con mucho apoyo, con algo de apoyo o sin apoyo. Está pensado para Infantil y el primer ciclo de Primaria, con toda la clase o en los apoyos.
 
@@ -75,7 +75,7 @@ Toda la clase hace el mismo reto a la vez, y cada peque elige cómo hacerlo: con
 1. Antes de empezar, escribe en el calendario el número de cada día con clase y tacha los festivos y los días no lectivos.
 2. Cada mañana, alguien saca una tarjeta de la caja y la pega en el cartel del reto de hoy.
 3. Leed el reto, enseña el pictograma y hazlo tú delante como ejemplo.
-4. Cada peque elige su nivel. Puede decirlo, señalarlo en la tira o seguir tu propuesta.
+4. Cada peque elige su nivel: puede decirlo o señalarlo en la tira.
 5. Al terminar, coloread el día en el calendario de la clase y cada cual en el suyo.
 6. El último día, rellenad la hoja «¿Qué tal los retos?».
 
@@ -93,7 +93,7 @@ Ningún reto lleva comida ni pide comprar o traer nada de casa.
 
 El Diseño Universal para el Aprendizaje (DUA) propone pensar desde el principio en toda la clase. Una de sus pautas es ofrecer opciones con distintos niveles de dificultad, y otra, dejar elegir. Aquí cada reto tiene tres niveles, marcados con un número dentro de un círculo, un cuadrado o un rombo, y cada peque elige el suyo cada día. Los niveles describen la tarea, nunca al niño o la niña.
 
-En el primer nivel vale responder con un gesto, señalando o con el [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/). La guía trae ideas para el alumnado con trastorno del espectro del autismo (TEA), trastorno por déficit de atención e hiperactividad (TDAH), trastorno del desarrollo del lenguaje (TDL), discapacidad intelectual, motora, auditiva o visual, y para quien acaba de llegar.
+En el primer nivel vale responder con un gesto o señalando, también en el [tablero de comunicación](/material-gratuito/tablero-comunicacion-basico/). La guía trae ideas para el alumnado con trastorno del espectro del autismo (TEA), trastorno por déficit de atención e hiperactividad (TDAH), trastorno del desarrollo del lenguaje (TDL), discapacidad intelectual, motora, auditiva o visual, y para quien acaba de llegar.
 
 ## ¿Cuántos días hay?
 

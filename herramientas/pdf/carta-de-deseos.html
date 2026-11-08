@@ -598,7 +598,7 @@
       /* Saludo y nombre en la misma fila */
       .fila-saludo {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
         gap: 6mm;
         align-items: end;
         margin: 3.5mm 0 0;
@@ -609,7 +609,17 @@
       }
 
       .fila-saludo .saludo {
-        font-size: 20pt;
+        font-size: 19pt;
+      }
+
+      /* En la versión neutra, «Para:» necesita menos sitio y el nombre, más */
+      .fila-saludo--para {
+        grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+      }
+
+      .fila-saludo .renglon-carta img {
+        width: 10mm;
+        height: 10mm;
       }
 
       .renglon-carta img {
@@ -648,7 +658,7 @@
         bottom: 2mm;
         text-align: center;
         font-size: 11pt;
-        color: #6a7799;
+        color: var(--suave);
       }
 
       /* Nivel 1: frases con pictogramas, como en un tablero de comunicación */
@@ -716,7 +726,7 @@
         border: 0.6mm dashed var(--suave);
         border-radius: 3.5mm;
         font-size: 11pt;
-        color: #6a7799;
+        color: var(--suave);
       }
 
       /* Nivel 2: cuatro frases para completar */
@@ -835,7 +845,7 @@
         border: 0.6mm dashed var(--suave);
         border-radius: 3.5mm;
         font-size: 11pt;
-        color: #6a7799;
+        color: var(--suave);
       }
 
       .despedida {
@@ -1042,7 +1052,7 @@
 
       .guia h2 {
         font-size: 14pt;
-        margin-top: 0.65em;
+        margin-top: 0.55em;
         margin-bottom: 0.3em;
       }
 
@@ -1193,7 +1203,7 @@
       <h1>Carta de deseos: cómo usarla</h1>
       <p>
         Con estas plantillas, cada peque dice qué desea a su manera. También quien todavía no escribe o se comunica con un
-        tablero, un comunicador o pictogramas.
+        tablero o un comunicador.
       </p>
 
       <h2>Un derecho de cada peque</h2>
@@ -1224,8 +1234,7 @@
           Light y McNaughton, 2016). Si tiene su propio tablero, usa sus símbolos.
         </li>
         <li>
-          <strong>Te proponemos</strong> ofrecer de dos a cuatro opciones, esperar sin prisa y aceptar cualquier forma de
-          elegir: con el dedo, con la mirada o con la voz. Si lo dicta, escribe sus palabras sin cambiarlas.
+          <strong>Te proponemos</strong> ofrecer de dos a cuatro opciones y aceptar cualquier forma de elegir: con el dedo, con la mirada, tocando o con la voz. Si lo dicta, escribe sus palabras sin cambiarlas.
         </li>
         <li>
           <strong>Su letra vale.</strong> El currículo de Infantil de la Región de Murcia incluye la «Aproximación al código
@@ -1251,7 +1260,7 @@
         <ul>
           <li><strong>5.1 Usar múltiples medios para la comunicación:</strong> escribir, dibujar o pegar pictogramas.</li>
           <li><strong>5.4 Abordar sesgos relacionados con los modos de expresión y comunicación:</strong> todas las cartas valen igual.</li>
-          <li><strong>7.1 Optimizar la elección y la autonomía:</strong> cada peque elige sus deseos y para quién es la carta.</li>
+          <li><strong>7.1 Optimizar la elección y la autonomía:</strong> cada peque elige sus deseos.</li>
           <li><strong>8.2 Optimizar los desafíos y el apoyo:</strong> tres niveles con la misma carta.</li>
         </ul>
       </div>
@@ -1328,7 +1337,8 @@
       <ul class="referencias">
         <li>
           Instrumento de Ratificación de la Convención sobre los Derechos del Niño, adoptada por la Asamblea General de las
-          Naciones Unidas el 20 de noviembre de 1989. BOE núm. 313, de 31 de diciembre de 1990, artículos 13 y 14.
+          Naciones Unidas el 20 de noviembre de 1989. Boletín Oficial del Estado (BOE) núm. 313, de 31 de diciembre de 1990,
+          artículos 13 y 14.
         </li>
         <li>
           Instrumento de Ratificación de la Convención sobre los derechos de las personas con discapacidad, hecho en Nueva York
@@ -1352,7 +1362,8 @@
       <ul class="referencias">
         <li>
           Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la
-          Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022, págs. 33084, 33100 y 33109.
+          Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre
+          de 2022, págs. 33084, 33100 y 33109.
         </li>
       </ul>
 
@@ -1514,7 +1525,7 @@
           ([palabras, huecos]) =>
             `<li>${palabras.map(([n, t]) => `<div class="palabra">${picto(n)}<span>${t}</span></div>`).join('')}${FLECHA}${'<div class="hueco"></div>'.repeat(huecos)}</li>`,
         ).join('');
-        return `<div class="fila-saludo">${saludo(v)}${meLlamo}</div><ol class="frases-n1">${frases}</ol>${final}`;
+        return `<div class="fila-saludo${v.saludo ? '' : ' fila-saludo--para'}">${saludo(v)}${meLlamo}</div><ol class="frases-n1">${frases}</ol>${final}`;
       }
 
       function nivel2(v) {
@@ -1524,7 +1535,7 @@
             <div class="bloque__cuerpo"><div class="hueco"></div><div class="escribir"><span></span><span></span><span></span></div></div>
           </div>`,
         ).join('');
-        return `<div class="fila-saludo">${saludo(v)}${meLlamo}</div><div class="bloques">${bloques}</div>${final}`;
+        return `<div class="fila-saludo${v.saludo ? '' : ' fila-saludo--para'}">${saludo(v)}${meLlamo}</div><div class="bloques">${bloques}</div>${final}`;
       }
 
       function nivel3(v) {
