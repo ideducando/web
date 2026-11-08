@@ -38,6 +38,37 @@ const {
 
 const esInicio = Astro.url.pathname === ruta('/');
 const tituloCompleto = esInicio ? `${sitio.nombre} · ${sitio.subtitulo}` : `${titulo} · ${sitio.nombre}`;
+// Datos estructurados de la portada: le dicen a Google cómo se llama la web y quién la hace,
+// para que la reconozca al buscar «IdEducando» aunque se escriba de otra forma.
+// https://developers.google.com/search/docs/appearance/site-names
+const inicio = new URL(ruta('/'), Astro.site).href;
+// Perfiles de la marca en redes: se añaden solos cuando se rellenan en src/data/sitio.json.
+const redes = [sitio.instagram, sitio.pinterest].filter(Boolean);
+const datosEstructurados = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${inicio}#web`,
+      url: inicio,
+      name: sitio.nombre,
+      alternateName: ['Id Educando', 'ideducando.es'],
+      description: sitio.descripcion,
+      inLanguage: 'es-ES',
+      publisher: { '@id': `${inicio}#organizacion` },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${inicio}#organizacion`,
+      name: sitio.nombre,
+      url: inicio,
+      logo: new URL(ruta('/apple-touch-icon.png'), Astro.site).href,
+      email: sitio.correo,
+      description: sitio.descripcion,
+      ...(redes.length ? { sameAs: redes } : {}),
+    },
+  ],
+};
 const canonica = new URL(Astro.url.pathname, Astro.site);
 const imagenAbsoluta = new URL(ruta(imagen), Astro.site);
 ---
@@ -54,6 +85,7 @@ const imagenAbsoluta = new URL(ruta(imagen), Astro.site);
     <meta name="description" content={descripcion} />
     {sitio.borrador && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonica} />
+    {esInicio && <script type="application/ld+json" set:html={JSON.stringify(datosEstructurados)} />}
     <link rel="icon" href={ruta('/favicon.svg')} type="image/svg+xml" />
     <link rel="icon" href={ruta('/favicon.ico')} sizes="32x32" />
     <link rel="apple-touch-icon" href={ruta('/apple-touch-icon.png')} />

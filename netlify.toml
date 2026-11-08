@@ -54,6 +54,14 @@
   status = 301
   force = true
 
+# Muchos buscadores y herramientas buscan el mapa de la web en /sitemap.xml, pero Astro lo
+# llama /sitemap-index.xml. Esta regla sirve el mismo archivo en las dos direcciones (sin
+# redirección: el 200 entrega el contenido tal cual), así ninguna da error.
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 200
+
 # «Mi bolsa» pasó a llamarse «Mi mochila» el 20/10/2026. Quien tenga guardada la dirección
 # antigua llega a la nueva.
 [[redirects]]
