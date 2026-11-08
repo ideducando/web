@@ -3974,3 +3974,201 @@
         '<strong>Soluciones:</strong> ' +
         DISCOS.map((d) => `${d.letra[1]}: ${d.dibujos.filter((x) => x[2]).map((x) => x[1]).join(', ')}`).join(' · ') +
         '.';
+
+      // ---------------------------------------------------------------- Bandeja 6: tapete y tarjetas de palmadas
+      // [número de palmadas, nivel desde el que se usa la columna]
+      document.getElementById('tapete').innerHTML = [
+        [1, 2],
+        [2, 1],
+        [3, 1],
+        [4, 3],
+      ]
+        .map(
+          ([n, nivel]) => `<div class="columna">
+            <div class="columna__cab">${nv(nivel, 'grande')}<span class="columna__num">${n}</span><span class="columna__puntos">${repetir(n, () => '<i></i>')}</span></div>
+            <div class="columna__sitio"></div>
+          </div>`,
+        )
+        .join('');
+
+      // [pictograma, palabra, sílabas, nivel]
+      const PALMADAS = [
+        [2412, 'GORRO', 2, 1],
+        [2883, 'NUBE', 2, 1],
+        [2573, 'SOPA', 2, 1],
+        [2459, 'MANTA', 2, 1],
+        [2290, 'BUFANDA', 3, 1],
+        [2522, 'PIJAMA', 3, 1],
+        [2483, 'NARANJA', 3, 1],
+        [8302, 'CASTAÑA', 3, 1],
+        [2798, 'SOL', 1, 2],
+        [29802, 'TÉ', 1, 2],
+        [2494, 'PAN', 1, 2],
+        [2287, 'BOTAS', 2, 2],
+        [8122, 'ABRIGO', 3, 2],
+        [2389, 'ESTUFA', 3, 2],
+        [11298, 'MANDARINA', 4, 3],
+        [6448, 'CHOCOLATE', 4, 3],
+        [2298, 'CALCETINES', 4, 3],
+        [3135, 'NIEVE', 2, 3],
+        [2415, 'GUANTES', 2, 3],
+        [3123, 'LLUVIA', 2, 3],
+      ];
+      document.getElementById('palmadas').innerHTML = PALMADAS.map(
+        ([p, palabra, , nivel]) => `<li class="corte" aria-label="${palabra.toLowerCase()}, nivel ${nivel}">${nv(nivel)}${picto(p)}<span class="may peque">${palabra}</span></li>`,
+      ).join('');
+      document.getElementById('soluciones-6').innerHTML =
+        '<strong>Soluciones:</strong> ' +
+        [1, 2, 3, 4]
+          .map((n) => `${n} ${n === 1 ? 'palmada' : 'palmadas'}: ${PALMADAS.filter((x) => x[2] === n).map((x) => x[1].toLowerCase()).join(', ')}`)
+          .join(' · ') +
+        '.';
+
+      // ---------------------------------------------------------------- Bandeja 7: ruletas y tablero
+      const RULETAS = [
+        {
+          pregunta: '¿Quién?',
+          icono: 10276,
+          items: [[3243, 'un pingüino'], [27509, 'una niña'], [2868, 'un oso polar'], [23710, 'una abuela'], [3131, 'un muñeco de nieve'], [7176, 'un niño']],
+        },
+        {
+          pregunta: '¿Dónde?',
+          icono: 7764,
+          items: [[2317, 'en casa'], [2666, 'en el bosque'], [3082, 'en el cole'], [2909, 'en la montaña'], [2859, 'en el parque'], [8137, 'en un iglú']],
+        },
+        {
+          pregunta: '¿Qué pasa?',
+          icono: 22620,
+          items: [[35583, 'tiene mucho frío'], [34892, 'hay una tormenta'], [9028, 'se resbala'], [36295, 'se pierde'], [26384, 'tiene catarro'], [7272, 'tiene hambre']],
+        },
+      ];
+      // Cada sector se dibuja hacia abajo y se gira: así se lee bien cuando la flecha apunta hacia quien juega.
+      const enRuleta = (r, grados) => {
+        const a = (grados * Math.PI) / 180;
+        return [f(C - r * Math.sin(a)), f(C + r * Math.cos(a))];
+      };
+      function ruleta(r, arriba) {
+        const [color, tinte] = COLOR.b7;
+        let svg = `<circle cx="${C}" cy="${C}" r="${C - 0.3}" fill="#fff" stroke="${SUAVE}" stroke-width="0.35" stroke-dasharray="1.6 1.2"/>`;
+        r.items.forEach((_, i) => {
+          const a1 = i * 60 - 30;
+          const a2 = i * 60 + 30;
+          const [x1, y1] = enRuleta(C - 0.6, a1);
+          const [x2, y2] = enRuleta(C - 0.6, a2);
+          svg += `<path d="M${C} ${C} L${x1} ${y1} A${C - 0.6} ${C - 0.6} 0 0 0 ${x2} ${y2} Z" fill="${i % 2 ? '#fff' : tinte}" stroke="${color}" stroke-width="0.5"/>`;
+        });
+        svg += `<circle cx="${C}" cy="${C}" r="7" fill="#fff" stroke="${color}" stroke-width="0.8"/>`;
+        svg += `<path d="M${C - 2.4} ${C} H${C + 2.4} M${C} ${C - 2.4} V${C + 2.4}" stroke="${M}" stroke-width="0.5"/>`;
+        const sectores = r.items
+          .map(([p, texto], i) => `<div class="sector" style="transform:rotate(${i * 60}deg)">${picto(p)}<span class="peque">${texto}</span></div>`)
+          .join('');
+        // La flecha: un círculo para el encuadernador, el palo con la pregunta y la punta.
+        const flecha = `<svg viewBox="0 0 66 18" aria-hidden="true">
+            <path d="M8 1 A8 8 0 0 0 8 17 H50 V18 L66 9 L50 0 V1 Z" fill="${M}"/>
+            <circle cx="8" cy="9" r="2.4" fill="#fff"/><path d="M6.2 9 H9.8 M8 7.2 V10.8" stroke="${M}" stroke-width="0.5"/>
+          </svg>`;
+        const lista = r.items.map((x) => x[1]).join(', ');
+        return `<div class="ruleta-fila">
+            <div class="ruleta" role="img" aria-label="Ruleta ${r.pregunta} con seis casillas: ${lista}">
+              <svg viewBox="0 0 ${D} ${D}" aria-hidden="true">${svg}</svg>${sectores}
+            </div>
+            <div class="flecha-pieza" style="top:${arriba}mm">${flecha}<span class="peque">${r.pregunta}</span></div>
+            <p class="ruleta-nota" style="top:${arriba + 24}mm"><b>Flecha de la ruleta ${r.pregunta}</b>Recorta la flecha por su borde. Haz un agujero en la cruz de la flecha y en la del centro de la ruleta, y únelas con un encuadernador.</p>
+          </div>`;
+      }
+      document.getElementById('ruletas-1').innerHTML = ruleta(RULETAS[0], 30) + '<div style="height:6mm"></div>' + ruleta(RULETAS[1], 30);
+      document.getElementById('ruletas-2').innerHTML = ruleta(RULETAS[2], 30);
+
+      const TABLERO = [
+        [10276, '¿Quién?', 'Había una vez…'],
+        [7764, '¿Dónde?', 'Estaba en…'],
+        [22620, '¿Qué pasa?', 'Un día…'],
+        [6019, '¿Qué hacen?', 'Entonces…'],
+        [5358, '¿Cómo acaba?', 'Al final…'],
+      ];
+      document.getElementById('tablero').innerHTML = TABLERO.map(
+        ([p, pregunta, empieza], i) =>
+          `<li class="b7"><span class="num-mini">${i + 1}</span>${picto(p)}<span><span class="pregunta peque">${pregunta}</span><span class="empieza">${empieza}</span></span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Tarjetas de pasos, normas y grupos
+      const PASOS = {
+        1: [[10148, 'Coge una tarjeta'], [9692, 'Di qué es'], [27391, 'Busca su sitio'], [6989, 'Ponla encima']],
+        2: [[2474, 'Mira la palabra'], [27391, 'Búscala'], [6285, 'Rodéala'], [2714, 'Cuenta']],
+        3: [[9692, 'Di la palabra'], [4563, 'Da palmadas'], [27391, 'Busca la sílaba'], [8466, 'Pon la pinza']],
+        4: [[10148, 'Coge las piezas'], [9692, 'Di la palabra'], [26817, 'Júntalas'], [28643, 'Léela']],
+        5: [[9692, 'Di la palabra'], [2381, 'Escucha'], [8466, 'Pon la pinza'], [6998, 'Comprueba']],
+        6: [[10148, 'Coge una tarjeta'], [4563, 'Da palmadas'], [2714, 'Cuenta'], [6989, 'Ponla en su sitio']],
+        7: [[6006, 'Gira la flecha'], [2474, 'Mira'], [6019, 'Inventa'], [6461, 'Cuenta la historia']],
+      };
+      const NOMBRE_CORTO = {
+        1: 'Palabras',
+        2: 'Cazapalabras',
+        3: 'La sílaba que falta',
+        4: 'Puzles',
+        5: '¿Cómo empieza?',
+        6: '¿Cuántas sílabas?',
+        7: 'La ruleta',
+      };
+      const tarjetaPasos = (n) => `<li class="tarjeta-pasos b${n}">
+          <p class="tarjeta-pasos__cab"><span class="num-bandeja">${n}</span>${NOMBRE_CORTO[n]}</p>
+          <ol>${PASOS[n].map(([p, t]) => `<li>${picto(p)}<span>${t}</span></li>`).join('')}</ol>
+          <p class="tarjeta-pasos__pie">${picto(5514)}Al terminar, guarda.</p></li>`;
+      const NORMAS = [
+        [9037, 'Hablo bajito'],
+        [7158, 'Espero mi turno'],
+        [8674, 'Nada a la boca'],
+        [8680, 'Recojo al terminar'],
+      ];
+      const tarjetaNormas = `<li class="tarjeta-pasos normas">
+          <p class="tarjeta-pasos__cab">Normas del rincón</p>
+          <ol>${NORMAS.map(([p, t]) => `<li>${picto(p)}<span>${t}</span></li>`).join('')}</ol>
+          <p class="tarjeta-pasos__pie">${picto(4570)}Si lo necesito, pido ayuda.</p></li>`;
+      document.getElementById('pasos-1').innerHTML = [1, 2, 3, 4, 5, 6].map(tarjetaPasos).join('');
+      document.getElementById('pasos-2').innerHTML = tarjetaPasos(7) + tarjetaNormas;
+
+      const GRUPOS = [
+        ['Los pingüinos', picto(3243, 'icono')],
+        ['Los osos polares', picto(2868, 'icono')],
+        ['Las focas', picto(2397, 'icono')],
+        ['Los copos', copo('icono')],
+        ['Los muñecos', picto(3131, 'icono')],
+        ['Los gorros', picto(2412, 'icono')],
+        ['Las bufandas', picto(2290, 'icono')],
+      ];
+      document.getElementById('grupos').innerHTML = GRUPOS.map(
+        ([nombre, dibujo]) =>
+          `<li class="grupo corte">${dibujo}<p class="grupo__nombre peque">${nombre}</p><div class="grupo__lineas"><i></i><i></i><i></i></div></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Panel de rotación
+      document.getElementById('panel').innerHTML =
+        BANDEJAS.map(
+          ([n, nombre, icono]) =>
+            `<li class="b${n}"><span class="num-bandeja">${n}</span>${picto(icono, 'icono')}<span class="nombre peque">${nombre}</span><span class="velcro">velcro<br>rugoso</span></li>`,
+        ).join('') +
+        `<li class="panel-flecha" aria-hidden="true"><svg viewBox="0 0 10 200" preserveAspectRatio="none">
+          <path d="M5 2 V188" stroke="${M}" stroke-width="0.8" stroke-dasharray="3 2" vector-effect="non-scaling-stroke"/>
+          <path d="M1 186 L5 198 L9 186 Z" fill="${M}"/></svg></li>`;
+
+      // ---------------------------------------------------------------- Registro
+      const COLUMNAS_REGISTRO = [
+        [1, 'Palabras', 'CRR 3.1'],
+        [2, 'Cazar', 'CRR 4.1'],
+        [3, 'Sílaba', 'CRR-C'],
+        [4, 'Puzles', 'CRR-C'],
+        [5, 'Sonidos', 'CRR-C'],
+        [6, 'Palmadas', 'CRR-C'],
+        [7, 'Historias', 'CRR 3.3'],
+      ];
+      document.getElementById('cabeza-registro').innerHTML = `<tr><th scope="col">N.º</th><th scope="col" style="text-align:left">Nombre</th>${COLUMNAS_REGISTRO.map(
+        ([n, nombre, codigo]) => `<th scope="col" class="b${n}"><span class="num-mini">${n}</span>${nombre}<small>${codigo}</small></th>`,
+      ).join('')}<th scope="col">Notas</th></tr>`;
+      document.getElementById('filas-registro').innerHTML = repetir(22, (i) => `<tr><td>${i + 1}</td><td></td>${'<td></td>'.repeat(7)}<td></td></tr>`);
+
+      // ---------------------------------------------------------------- Créditos y números de página
+      for (const el of document.querySelectorAll('[data-atribucion]')) el.textContent = ATRIB + ' Los demás dibujos son de IdEducando.';
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>
