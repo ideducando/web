@@ -918,6 +918,59 @@
       }
     ]
   },
+  "misiones-invierno": {
+    "total": 16,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Misiones de"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "NIVEL 1 · 2 PASOS · Forma de círculo"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "NIVEL 3 · 4 PASOS · Forma de rombo"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tablero · con velcro"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Temporizador visual · para recortar"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro semanal · una hoja por semana"
+      }
+    ]
+  },
   "panel-conducta-recreo": {
     "total": 14,
     "fotos": [

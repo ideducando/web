@@ -883,8 +883,8 @@
         height: 18mm;
       }
 
-      .pase h3,
-      .pide h3 {
+      .pase h2,
+      .pide h2 {
         margin: 0;
         font-family: var(--titulos);
         font-weight: 700;
@@ -944,7 +944,7 @@
         background: #fff;
       }
 
-      .pide h3 {
+      .pide h2 {
         align-self: center;
         font-size: 22pt;
       }
@@ -1826,8 +1826,7 @@
       </div>
       <div class="caja caja--amarilla">
         <p>
-          <strong>Antes, habla con tu centro.</strong> Decidid qué recados se pueden hacer fuera del aula, a qué sitios y quién
-          los recibe. En Infantil, mejor en pareja o con un adulto. La guía de la página <span data-pagina="guia"></span>
+          <strong>Antes, habla con tu centro.</strong> Decidid qué recados se pueden hacer fuera del aula y quién los recibe. En Infantil, mejor en pareja o con un adulto. La guía de la página <span data-pagina="guia"></span>
           explica cómo dar cada misión y cómo retirar las ayudas.
         </p>
       </div>
@@ -2040,8 +2039,9 @@
       <ul>
         <li>
           <strong>Gestión de la conducta en el aula.</strong> Es un tratamiento bien establecido para el TDAH en Primaria (Evans
-          y otros, 2014): el docente cambia lo que pasa después de cada conducta, con elogios, recompensas o una tarjeta diaria
-          (CDC, 2026a). La Academia Americana de Pediatría (AAP) recomienda, como parte del tratamiento, la formación de las
+          y otros, 2014): el docente cambia lo que pasa después de cada conducta. Los Centros para el Control y la Prevención
+          de Enfermedades de Estados Unidos (CDC) ponen como ejemplo un sistema de recompensas o una tarjeta diaria (CDC,
+          2026a). La Academia Americana de Pediatría (AAP) recomienda, como parte del tratamiento, la formación de las
           familias o las intervenciones de conducta en el aula desde los 4 años, y de los 6 a los 11, mejor las dos (Wolraich y
           otros, 2019).
         </li>
@@ -2059,8 +2059,8 @@
         </li>
         <li>
           <strong>Un reloj a la vista.</strong> Con 44 niños y niñas de 7 a 9 años, un reloj visual redujo la ansiedad antes de
-          una prueba y la desatención durante ella, sobre todo con más rasgos de TDAH. Las notas no cambiaron (Hallez y Vallier,
-          2025).
+          una prueba. También redujo la desatención durante ella, sobre todo en quienes tenían más rasgos de TDAH. Las notas no
+          cambiaron (Hallez y Vallier, 2025).
         </li>
         <li>
           <strong>Lo que no sabemos.</strong> Las misiones, como conjunto, no se han estudiado: juntan apoyos con respaldo. Lo
@@ -2069,10 +2069,7 @@
       </ul>
 
       <h2>Cómo dar una misión</h2>
-      <p>
-        Con los pasos que proponen los Centros para el Control y la Prevención de Enfermedades de Estados Unidos (CDC) para dar
-        indicaciones (CDC, 2026b):
-      </p>
+      <p>Con los pasos que proponen los CDC para dar indicaciones (CDC, 2026b):</p>
       <ol>
         <li>Acércate, di su nombre y busca su mirada. Con los más pequeños, ponte a su altura.</li>
         <li>
@@ -2378,7 +2375,7 @@
         ['coral', 37659, 'Reloj de misión', 'Dos discos que se encajan para ver el tiempo de la misión.', 'reloj'],
         ['morado', 31408, 'Mi semana de misiones', 'Una hoja por semana: una estrella por misión y una meta.', 'semana'],
         ['naranja', 6998, 'Registro y escalera de las ayudas', 'Para el adulto: qué ayuda necesita y cuándo retirarla.', 'registro'],
-        ['verde', 11251, 'Guía para el docente y fuentes', 'Cómo dar una misión, cuándo darla y cómo retirar las ayudas.', 'guia', 'fuentes'],
+        ['verde', 11251, 'Guía para el docente y fuentes', 'Cómo dar una misión y cómo retirar las ayudas, con sus fuentes.', 'guia', 'fuentes'],
         ['coral', 5549, 'Nota para las familias', 'Con misiones de invierno para casa. Una copia para cada familia.', 'familias'],
       ];
 
@@ -2559,13 +2556,13 @@
 
       const pase = () => `<li class="pieza pase c-azul">
           <div class="pase__icono">${picto(32214)}</div>
-          <h3>Voy de misión</h3>
+          <h2>Voy de misión</h2>
           <p class="pase__dato">Voy a:<span></span></p>
           <p class="pase__dato pase__dato--adulto">Clase:<span></span></p>
         </li>`;
       const pide = () => `<li class="pieza pide c-morado">
           ${picto(9034)}
-          <h3>¿Me das una misión?</h3>
+          <h2>¿Me das una misión?</h2>
           <p>La deja en su mesa cuando necesita moverse. Si no es el momento, dile cuándo: «Al acabar esta ficha».</p>
         </li>`;
       document.getElementById('plantilla').innerHTML =
@@ -2616,7 +2613,7 @@
           return `<text x="${f1(60 + 53.4 * Math.sin(a))}" y="${f1(60 - 53.4 * Math.cos(a) + tam * 0.36)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${tam}" fill="${M}">${texto}</text>`;
         };
         for (let n = 1; n <= 9; n++) s += numero(n, n * 36, 8.4);
-        s += numero('0', 10, 6.4) + numero('10', -12, 6.4);
+        s += numero('0', 11, 7.8) + numero('10', -13.5, 7.8);
         // Corte: del borde al centro
         s += `<path d="M60 ${60 - R}V60" stroke="${M}" stroke-width="1.2"/>`;
         s += `<circle cx="60" cy="60" r="1.4" fill="${M}"/>`;
@@ -2636,7 +2633,7 @@
         // Flecha curva: se gira hacia la derecha
         s += `<path d="M58 9.5A41 41 0 0 1 84 24" fill="none" stroke="${M}" stroke-width="1.3" stroke-linecap="round"/>`;
         s += `<path d="M79.8 24.6L84.4 24.6L83.6 19.9" fill="none" stroke="${M}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>`;
-        s += `<text x="63" y="38" font-family="Outfit" font-weight="700" font-size="6.4" fill="${M}">Gira</text>`;
+        s += `<text x="61" y="39" font-family="Outfit" font-weight="700" font-size="7.6" fill="${M}">Gira</text>`;
         // Su radio cubre justo el color del otro disco (46,5 de 120 a 100 mm) y deja ver los números.
         const lado = f1((((46.5 + 1.2) * 100) / 120 / r) * 100);
         return `<svg viewBox="0 0 100 100" width="${lado}mm" height="${lado}mm" role="img" aria-label="Disco blanco del reloj de misión, con un copo de nieve, la palabra «Gira» y una línea gruesa para cortar">${s}</svg>`;
@@ -2707,7 +2704,7 @@
       // Portada: tres tarjetas de verdad en abanico, el reloj y copos
       // ---------------------------------------------------------------------
       const ABANICO = [
-        [0, 17, 152, -9, 0.63],
+        [0, 21, 152, -9, 0.63],
         [4, 74, 143, -1, 0.68],
         [8, 134, 154, 8, 0.63],
       ];
