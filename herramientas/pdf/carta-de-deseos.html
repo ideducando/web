@@ -519,13 +519,12 @@
 
       /* ---------- Plantillas de la carta ---------- */
       .carta__cabeza {
-        position: relative;
         display: grid;
-        grid-template-columns: 24mm minmax(0, 1fr) auto;
+        grid-template-columns: 22mm minmax(0, 1fr) auto;
         align-items: center;
         gap: 4mm;
-        min-height: 31mm;
-        padding: 3mm 4mm;
+        min-height: 27mm;
+        padding: 2.4mm 4mm;
         border: 0.7mm solid var(--c);
         border-radius: 5mm;
         background: var(--t);
@@ -534,21 +533,21 @@
       .carta__icono {
         display: grid;
         place-items: center;
-        width: 24mm;
-        height: 24mm;
+        width: 22mm;
+        height: 22mm;
         border: 0.6mm solid var(--c);
         border-radius: 50%;
         background: #fff;
       }
 
       .carta__icono img {
-        width: 19mm;
-        height: 19mm;
+        width: 17.5mm;
+        height: 17.5mm;
       }
 
       .carta__cabeza h1 {
         margin: 0;
-        font-size: 30pt;
+        font-size: 28pt;
         line-height: 1;
       }
 
@@ -568,14 +567,15 @@
         height: 11mm;
       }
 
+      /* Etiqueta del nivel, para el adulto: va en el flujo, encima de la cabecera. Si sobresaliera
+         por arriba, Chromium la pintaría también al pie de la hoja anterior. */
       .carta__nivel {
-        position: absolute;
-        right: 4mm;
-        top: -3.2mm;
         display: flex;
         align-items: center;
         gap: 1.6mm;
-        padding: 0.6mm 2.6mm 0.6mm 1.4mm;
+        width: fit-content;
+        margin: 0 0 1.6mm auto;
+        padding: 0.5mm 2.6mm 0.5mm 1.2mm;
         border: 0.45mm solid var(--marino);
         border-radius: 99mm;
         background: #fff;
@@ -593,6 +593,23 @@
         font-weight: 700;
         font-size: 20pt;
         line-height: 1.1;
+      }
+
+      /* Saludo y nombre en la misma fila */
+      .fila-saludo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        align-items: end;
+        margin: 3.5mm 0 0;
+      }
+
+      .fila-saludo > * {
+        margin: 0;
+      }
+
+      .fila-saludo .saludo {
+        font-size: 20pt;
       }
 
       .renglon-carta img {
@@ -617,7 +634,7 @@
       .hueco {
         position: relative;
         width: 46mm;
-        height: 52mm;
+        height: 50mm;
         border: 0.6mm dashed var(--suave);
         border-radius: 3.5mm;
         background: #fff;
@@ -637,8 +654,8 @@
       /* Nivel 1: frases con pictogramas, como en un tablero de comunicación */
       .frases-n1 {
         display: grid;
-        gap: 3.6mm;
-        margin: 4.5mm 0 0;
+        gap: 3mm;
+        margin: 4mm 0 0;
         padding: 0;
         list-style: none;
       }
@@ -648,7 +665,7 @@
         align-items: center;
         gap: 4mm;
         margin: 0;
-        padding: 2mm 4mm;
+        padding: 1.6mm 4mm;
         border: 0.45mm solid var(--linea);
         border-radius: 4mm;
       }
@@ -687,9 +704,14 @@
         margin: 4mm 0 0;
       }
 
+      .carta__final .palabra img {
+        width: 18mm;
+        height: 18mm;
+      }
+
       .carta__final .firma {
         flex: 1;
-        height: 30mm;
+        height: 24mm;
         padding: 2mm 3mm;
         border: 0.6mm dashed var(--suave);
         border-radius: 3.5mm;
@@ -838,7 +860,7 @@
 
       /* ---------- Hojas de pictogramas para recortar ---------- */
       .grupo {
-        margin: 0 0 4mm;
+        margin: 0 0 3mm;
         break-inside: avoid;
       }
 
@@ -865,7 +887,7 @@
       .deseos {
         display: grid;
         grid-template-columns: repeat(4, 42mm);
-        grid-auto-rows: 48mm;
+        grid-auto-rows: 46mm;
         gap: 3mm;
         justify-content: space-between;
         margin: 0;
@@ -876,11 +898,11 @@
       .deseo {
         position: relative;
         display: grid;
-        grid-template-rows: 29mm minmax(0, 1fr);
+        grid-template-rows: 27mm minmax(0, 1fr);
         justify-items: center;
         align-items: center;
         margin: 0;
-        padding: 3mm 1.2mm 1.6mm;
+        padding: 3mm 1.2mm 1.4mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 3mm;
         overflow: hidden;
@@ -896,8 +918,8 @@
       }
 
       .deseo img {
-        width: 28mm;
-        height: 28mm;
+        width: 26mm;
+        height: 26mm;
       }
 
       .deseo span {
@@ -1170,8 +1192,8 @@
       <p class="antetitulo">Guía para el docente</p>
       <h1>Carta de deseos: cómo usarla</h1>
       <p>
-        En diciembre, muchas familias escriben una carta de deseos. Con estas plantillas, cada peque dice qué desea a su
-        manera. También quien todavía no escribe o se comunica con un tablero, un comunicador o pictogramas.
+        Con estas plantillas, cada peque dice qué desea a su manera. También quien todavía no escribe o se comunica con un
+        tablero, un comunicador o pictogramas.
       </p>
 
       <h2>Un derecho de cada peque</h2>
@@ -1184,45 +1206,42 @@
 
       <h2>Tres niveles, la misma carta</h2>
       <ul class="lista-niveles">
-        <li><span><span class="nv n1">1</span></span><span><strong>Con pictogramas.</strong> Frases con pictogramas, como en un tablero: «quiero jugar con…». Pega o señala.</span></li>
-        <li><span><span class="nv n2">2</span></span><span><strong>Frases para completar.</strong> Pega o dibuja su deseo y escribe una palabra, o la copia.</span></li>
+        <li><span><span class="nv n1">1</span></span><span><strong>Con pictogramas.</strong> Frases con pictogramas, como en un tablero: pega o señala su deseo.</span></li>
+        <li><span><span class="nv n2">2</span></span><span><strong>Frases para completar.</strong> Pega o dibuja su deseo y escribe o copia una palabra.</span></li>
         <li><span><span class="nv n3">3</span></span><span><strong>Con mis palabras.</strong> Escribe la carta, con el principio de algunas frases.</span></li>
       </ul>
       <p>
-        El nivel describe la tarea, nunca al niño o la niña. CAST, el centro de investigación que publica las pautas del
-        Diseño Universal para el Aprendizaje (DUA), propone «Comunicar de diversas maneras que todos los modos de expresión
-        alineados con la meta son igualmente valiosos» (consideración 5.4): una carta con pictogramas vale lo mismo que una
-        escrita.
+        El nivel describe la tarea, nunca al niño o la niña. CAST, que publica las pautas del Diseño Universal para el
+        Aprendizaje (DUA), propone «Comunicar de diversas maneras que todos los modos de expresión alineados con la meta son
+        igualmente valiosos» (consideración 5.4).
       </p>
 
       <h2>Cómo acompañar</h2>
       <ul>
         <li>
-          <strong>Habla y señala a la vez.</strong> «¿Con quién quieres jugar?», y señala los pictogramas mientras lo dices.
-          Con quien usa comunicación aumentativa, que el adulto use sus símbolos al hablar le ayuda a avanzar en el lenguaje
-          (Sennott, Light y McNaughton, 2016).
+          <strong>Habla y señala a la vez:</strong> «¿Con quién quieres jugar?», mientras señalas los pictogramas. Con quien
+          usa comunicación aumentativa, que el adulto use sus símbolos al hablar le ayuda a avanzar en el lenguaje (Sennott,
+          Light y McNaughton, 2016). Si tiene su propio tablero, usa sus símbolos.
         </li>
         <li>
-          <strong>Te proponemos</strong> ofrecer pocas opciones a la vez, de dos a cuatro, esperar sin prisa y aceptar
-          cualquier forma de elegir: señalar con el dedo o con la mirada, tocar o decir.
+          <strong>Te proponemos</strong> ofrecer de dos a cuatro opciones, esperar sin prisa y aceptar cualquier forma de
+          elegir: con el dedo, con la mirada o con la voz. Si lo dicta, escribe sus palabras sin cambiarlas.
         </li>
         <li>
-          <strong>Su letra vale.</strong> En Infantil, el currículo de la Región de Murcia incluye la «Aproximación al código
+          <strong>Su letra vale.</strong> El currículo de Infantil de la Región de Murcia incluye la «Aproximación al código
           escrito desde las escrituras indeterminadas» (Decreto 196/2022, pág. 33109). No corrijas la carta.
         </li>
-        <li><strong>Si lo dicta o lo señala,</strong> escribe tú debajo sus palabras, sin cambiarlas.</li>
-        <li><strong>Si usa su propio tablero</strong> o fotos, usa sus símbolos en lugar de estos.</li>
       </ul>
 
       <h2>Con cuidado</h2>
       <ul>
         <li>
           <strong>Sin comparar.</strong> En clase no se comparan cartas ni se habla de qué regalos llegarán: no todas las
-          familias pueden o quieren hacer regalos. Por eso hay tantos deseos que no se compran.
+          familias pueden o quieren hacer regalos.
         </li>
         <li>
-          <strong>Todas las familias.</strong> Si falta alguien importante para ese peque, dibujadlo en una casilla en blanco.
-          El currículo de Infantil cuenta «La diversidad familiar» entre sus saberes (pág. 33084).
+          <strong>Todas las familias.</strong> Si falta alguien importante, se dibuja en una casilla en blanco. El currículo
+          de Infantil incluye «La diversidad familiar» entre sus saberes (pág. 33084).
         </li>
         <li><strong>La carta es suya.</strong> Se la lleva a casa y no se publica en redes ni en la web del cole.</li>
       </ul>
@@ -1392,9 +1411,9 @@
       // Nivel 3: el principio de cada frase y los renglones que lleva detrás.
       const COMIENZOS = [
         ['Me llamo', 0],
-        ['Este año he aprendido', 1],
-        ['Me gustaría', 2],
-        ['Para los demás deseo', 1],
+        ['Este año he aprendido', 2],
+        ['Me gustaría', 3],
+        ['Para los demás deseo', 2],
       ];
 
       // ---------------------------------------------------------------------
@@ -1473,11 +1492,11 @@
       // Plantillas
       // ---------------------------------------------------------------------
       function cabecera(v, nivel) {
-        return `<header class="carta__cabeza">
+        return `<p class="carta__nivel">${marca(nivel)}Nivel ${nivel} · ${NIVELES[nivel - 1]}</p>
+          <header class="carta__cabeza">
             <div class="carta__icono">${picto(v.picto)}</div>
             <h1>${v.titulo}</h1>
             <div class="carta__adorno">${v.adorno.map((a) => adorno(a)).join('')}</div>
-            <p class="carta__nivel">${marca(nivel)}${NIVELES[nivel - 1]}</p>
           </header>`;
       }
 
@@ -1495,7 +1514,7 @@
           ([palabras, huecos]) =>
             `<li>${palabras.map(([n, t]) => `<div class="palabra">${picto(n)}<span>${t}</span></div>`).join('')}${FLECHA}${'<div class="hueco"></div>'.repeat(huecos)}</li>`,
         ).join('');
-        return `${saludo(v)}${meLlamo}<ol class="frases-n1">${frases}</ol>${final}`;
+        return `<div class="fila-saludo">${saludo(v)}${meLlamo}</div><ol class="frases-n1">${frases}</ol>${final}`;
       }
 
       function nivel2(v) {
@@ -1505,7 +1524,7 @@
             <div class="bloque__cuerpo"><div class="hueco"></div><div class="escribir"><span></span><span></span><span></span></div></div>
           </div>`,
         ).join('');
-        return `${saludo(v)}${meLlamo}<div class="bloques">${bloques}</div>${final}`;
+        return `<div class="fila-saludo">${saludo(v)}${meLlamo}</div><div class="bloques">${bloques}</div>${final}`;
       }
 
       function nivel3(v) {
@@ -1539,7 +1558,7 @@
       }
 
       document.getElementById('hojas-deseos').outerHTML = HOJAS_DESEOS.map(
-        (indices, h) => `<section class="hoja">
+        (indices, h) => `<section class="hoja ancha">
           <div class="cabeza">
             <div>
               <p class="antetitulo">Para recortar · Hoja ${h + 1} de 3</p>
@@ -1547,7 +1566,7 @@
             </div>
             <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
           </div>
-          <p class="pista">Recorta por la línea de puntos y pega cada deseo en el hueco de tu carta. ${h === 2 ? 'En las casillas en blanco, dibuja otro deseo y escribe su nombre.' : 'Si señala, recórtalo tú y que lo pegue.'}</p>
+          <p class="pista">${h === 2 ? 'Recorta por la línea de puntos. En las casillas en blanco, dibuja otro deseo y escribe su nombre.' : 'Recorta por la línea de puntos y pega cada deseo en un hueco de tu carta.'}</p>
           ${indices.map((i) => grupo(GRUPOS[i])).join('')}
           <p class="atribucion">${ATRIBUCION}</p>
         </section>`,

@@ -10,7 +10,7 @@ formato: "PDF imprimible (A4)"
 paginas: 20
 archivo: /descargas/fiestas-sin-sobresaltos.pdf
 portada: /portadas/fiestas-sin-sobresaltos.webp
-portada_alt: "Portada del material: un escenario con telón rojo y banderines de colores; en el centro, un niño aplaude con las manos en alto, a su lado bailan dos peques, uno en silla de ruedas, y hay instrumentos de música"
+portada_alt: "Portada del material: un escenario con telón rojo y banderines de colores. En el centro, un niño aplaude con las manos en alto; a un lado baila una pareja, ella en silla de ruedas, y al otro hay instrumentos de música. Abajo, unos cascos y un niño que descansa en un sillón"
 vistas: [1, 4, 6, 9, 11, 13]
 tiempo: "1 hora y cuarto para imprimir, plastificar, recortar y pegar el velcro (la foto del rincón, aparte)"
 necesitas:
@@ -61,7 +61,7 @@ borrador: false
 
 Un festival o una fiesta de fin de trimestre cambian el horario, el sitio, el ruido y la gente de un día normal. Para el alumnado que lleva mal los cambios, el ruido, las luces o las multitudes, pueden ser un mal trago. Sobre todo para muchos niños y niñas con trastorno del espectro del autismo (TEA).
 
-Este material ayuda a contar la fiesta antes de que llegue, a elegir cómo participa cada peque y a tener preparado un plan de descanso. Vale para el festival de Navidad o de invierno, el fin de trimestre, el carnaval y la fiesta de fin de curso, y le viene bien a toda la clase.
+Con este material, contáis la fiesta antes de que llegue y preparáis un plan: cómo participa cada peque y dónde descansa si lo necesita. Vale para el festival de Navidad o de invierno, el fin de trimestre, el carnaval y la fiesta de fin de curso, y le viene bien a toda la clase.
 
 ## Qué incluye
 
@@ -94,7 +94,7 @@ Muchas personas con TEA llevan mal sonidos que a la mayoría no le molestan, y l
 
 ## Ideas para adaptarlo (DUA)
 
-El Diseño Universal para el Aprendizaje (DUA) propone avisar antes de los cambios, ofrecer pausas y dejar elegir. Algunas ideas:
+El Diseño Universal para el Aprendizaje (DUA) propone avisar antes de los cambios y dejar elegir. Algunas ideas:
 
 - **Si aún no lee**: lee el adulto y el alumno o la alumna señala cada pictograma.
 - **Con menos tarjetas**: en la agenda, solo los momentos clave.
@@ -104,7 +104,7 @@ El Diseño Universal para el Aprendizaje (DUA) propone avisar antes de los cambi
 
 ## Seguridad
 
-Si hay comida, preguntad antes por alergias e intolerancias y evitad que se comparta. En Navidad, cuidado con los caramelos duros, las peladillas y el turrón con frutos secos enteros entre los más pequeños. Los globos pueden atragantar y son un problema para el alumnado alérgico al látex. Los círculos de velcro y la anilla son piezas pequeñas.
+Si hay comida, preguntad antes por alergias e intolerancias y evitad que se comparta. En Navidad, cuidado con los caramelos duros, las peladillas, las palomitas y el turrón con frutos secos enteros entre los más pequeños. Los globos pueden atragantar y son un problema para el alumnado alérgico al látex. Los círculos de velcro y la anilla son piezas pequeñas.
 
 ## Sobre los dibujos y los pictogramas
 
