@@ -17,12 +17,12 @@ necesitas:
   - "23 hojas de cartulina blanca A4 de 160 g"
   - "23 fundas de plastificar A4 de 125 micras y una plastificadora"
   - "12 pinzas de la ropa de madera"
-  - "3 encuadernadores de 2 cm, para las ruletas"
+  - "3 encuadernadores de 2 cm"
   - "14 círculos de velcro adhesivo de 2 cm: 7 rugosos y 7 suaves"
   - "4 rotuladores de pizarra blanca y 1 paño"
   - "7 bandejas, cajas o cestas, una por juego"
-  - "11 bolsas con cierre de unos 18 × 24 cm"
-  - "1 rollo de cinta adhesiva y 1 punzón para los agujeros de las ruletas"
+  - "11 bolsas con cierre de 18 × 24 cm"
+  - "1 rollo de cinta adhesiva y 1 punzón"
   - "1 reloj de arena o un temporizador visual"
   - "Impresora, mejor a color, y tijeras o guillotina"
 imprimir:
@@ -35,7 +35,7 @@ pasos:
   - "Recorta por la línea de puntos y redondea las esquinas. Los puzles, siguiendo la forma de cada unión."
   - "Ruletas: haz un agujero en la cruz del centro de cada ruleta y en la de su flecha, y únelas con un encuadernador. Dobla las patas por detrás y tápalas con cinta."
   - "Velcro: rugoso en cada círculo gris del panel y suave detrás de cada tarjeta de grupo, con los nombres ya escritos."
-  - "Prepara las 7 bandejas: en cada una, su tarjeta de pasos y una bolsa por nivel. La marca de cada pieza dice su nivel."
+  - "Prepara las 7 bandejas, cada una con su tarjeta de pasos. Piezas pequeñas: una bolsa por nivel, según su marca."
 resultado: "7 bandejas de juego con sus piezas en tres niveles, 7 tarjetas de pasos, las normas del rincón y un panel de rotación con 7 tarjetas de grupo"
 cuidados:
   - "Las pinzas, los encuadernadores y el velcro son piezas pequeñas: lejos de quien todavía se lleva cosas a la boca, y con un adulto cerca."
@@ -102,7 +102,7 @@ Se puede responder hablando, señalando, con una pinza o colocando una tarjeta. 
 
 El currículo de Infantil de la Región de Murcia propone diseñar en el aula un rincón de lenguaje para jugar con letras y palabras, y usar pictogramas para que se entiendan los mensajes y las instrucciones. También nombra los puzles silábicos entre los materiales para trabajar la conciencia fonológica.
 
-Un metaanálisis de 52 estudios encontró que enseñar a fijarse en los sonidos de las palabras ayuda a aprender a leer, también en Infantil, y que funciona mejor con letras, en grupos pequeños y con una o dos habilidades a la vez. En castellano, la conciencia de las sílabas ayuda a desarrollar la de los sonidos. Por eso el rincón va de las palabras a las sílabas y de las sílabas a los sonidos.
+Un metaanálisis de 52 estudios encontró que enseñar a fijarse en los sonidos de las palabras ayuda a aprender a leer, también en Infantil. Funciona mejor con letras y en grupos pequeños, trabajando una o dos habilidades a la vez. En castellano, la conciencia de las sílabas ayuda a desarrollar la de los sonidos. Por eso el rincón va de las palabras a las sílabas y de las sílabas a los sonidos.
 
 ## Seguridad
 
