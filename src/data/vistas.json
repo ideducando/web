@@ -481,6 +481,59 @@
       }
     ]
   },
+  "fiestas-sin-sobresaltos": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Con plan"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Historia social · 1 de 2 · antes de la fiesta"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Agenda de la fiesta · con velcro"
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para elegir juntos"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para recortar · tamaño de tarjeta de crédito"
+      },
+      {
+        "pagina": 13,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartel para la entrada de la fiesta"
+      }
+    ]
+  },
   "guia-oposiciones-murcia-pt-infantil": {
     "total": 14,
     "fotos": [
