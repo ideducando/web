@@ -173,8 +173,8 @@ export const TIPOS_TIENDA = {
     color: 'azul',
   },
   cuaderno: {
-    nombre: 'Cuaderno y planificador',
-    descripcion: 'Para organizar el curso, las sesiones de apoyo o el estudio de la oposición.',
+    nombre: 'Cuaderno',
+    descripcion: 'Cuadernos de trabajo para el alumnado, y para organizar el curso, las sesiones de apoyo o el estudio de la oposición.',
     color: 'morado',
   },
   manipulativo: {

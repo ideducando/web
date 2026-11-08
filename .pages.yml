@@ -262,7 +262,7 @@ content:
           values:
             - { name: libro, label: Libro ilustrado }
             - { name: historias, label: Historias sociales }
-            - { name: cuaderno, label: Cuaderno y planificador }
+            - { name: cuaderno, label: Cuaderno }
             - { name: manipulativo, label: Material manipulativo }
             - { name: montaje, label: Kits y montaje }
             - { name: asesoria, label: Asesoría }
