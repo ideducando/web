@@ -1,0 +1,2553 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fiestas sin sobresaltos: anticipar las fiestas del cole · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar: márgenes de 10 mm, el mínimo del manual de estilo. */
+      @page fichas {
+        margin: 10mm 10mm 16mm 10mm;
+      }
+
+      /* ---------- Un color para cada pieza ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .imp {
+        page: fichas;
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 124mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .escenario {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 150mm;
+        width: 210mm;
+        height: 116mm;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 26mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        padding: 5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1.08;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+        color: var(--tx, var(--morado-texto));
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .franja {
+        height: 1.6mm;
+        margin: 3mm 0 3.5mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      /* Hueco para escribir con rotulador de pizarra, encima del plástico */
+      .hueco {
+        display: inline-block;
+        height: 1.05em;
+        vertical-align: -0.18em;
+        border-bottom: 0.5mm solid var(--marino);
+      }
+
+      .hueco--s {
+        width: 34mm;
+      }
+
+      .hueco--m {
+        width: 62mm;
+      }
+
+      .hueco--l {
+        width: 92mm;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.3mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 25mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 1mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img,
+      .mapa svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      .cuando {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 3.5mm;
+      }
+
+      .cuando > div {
+        padding: 2.4mm 3mm 2.6mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 1.4mm solid var(--c);
+      }
+
+      .cuando h3 {
+        margin: 0 0 1.2mm;
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+
+      .cuando ul {
+        margin: 0;
+        padding-left: 4mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .cuando li {
+        margin-bottom: 0.8mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      /* ---------- Historia social ---------- */
+      .historia__cabeza {
+        display: grid;
+        grid-template-columns: 20mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 5mm;
+      }
+
+      .historia__icono {
+        display: grid;
+        place-items: center;
+        width: 20mm;
+        height: 20mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+      }
+
+      .historia__icono img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .historia__cabeza .antetitulo {
+        margin: 0 0 1mm;
+        color: var(--tx);
+      }
+
+      .historia__cabeza h1 {
+        margin: 0;
+        font-size: 26pt;
+        line-height: 1.05;
+      }
+
+      .historia__cabeza > img {
+        width: 30mm;
+        height: auto;
+      }
+
+      .frases {
+        position: relative;
+        display: grid;
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frases::before {
+        content: '';
+        position: absolute;
+        left: 11.5mm;
+        top: 10mm;
+        bottom: 10mm;
+        border-left: 1mm dotted var(--c);
+      }
+
+      .frase {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        min-height: 24mm;
+        margin: 0;
+      }
+
+      .marco-picto {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4.4mm;
+        background: #fff;
+      }
+
+      .marco-picto img,
+      .marco-picto svg {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .frase p {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.32;
+      }
+
+      .frase p > span {
+        display: block;
+      }
+
+      .frase .frase__pista {
+        margin-top: 0.6mm;
+        font-size: 11pt;
+        line-height: 1.25;
+        color: var(--suave);
+      }
+
+      .cierre {
+        display: grid;
+        grid-template-columns: 16mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 4mm 0 0;
+        padding: 3mm 5mm;
+        border-radius: 4mm;
+        background: var(--t);
+        border: 0.6mm solid var(--c);
+        font-size: 18pt;
+        line-height: 1.28;
+        break-inside: avoid;
+      }
+
+      .cierre img,
+      .cierre svg {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .cierre p {
+        margin: 0;
+      }
+
+      /* ---------- Agenda de la fiesta ---------- */
+      .agenda {
+        display: grid;
+        grid-template-columns: 10mm 66mm 12mm 66mm;
+        column-gap: 3mm;
+        row-gap: 2mm;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        margin: 1mm auto 0;
+        padding: 3mm 7mm 3.5mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+      }
+
+      .agenda__titulo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2.4mm;
+        margin: 0 0 0.6mm;
+        padding: 1.4mm 0;
+        border-radius: 2mm;
+        background: var(--t);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .agenda__titulo img {
+        width: 12mm;
+        height: 12mm;
+        border-radius: 1.5mm;
+        background: #fff;
+      }
+
+      .numero {
+        display: grid;
+        place-items: center;
+        width: 10mm;
+        height: 10mm;
+        border-radius: 50%;
+        background: var(--amarillo-tinte);
+        border: 0.5mm solid var(--amarillo);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .casilla {
+        position: relative;
+        width: 66mm;
+        height: 26.5mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .casilla::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 15mm;
+        height: 15mm;
+        margin: -7.5mm 0 0 -7.5mm;
+        border-radius: 50%;
+        border: 0.4mm solid #9aa3bd;
+        background: #d9dde8;
+      }
+
+      .casilla--hecho {
+        background: var(--verde-tinte);
+      }
+
+      .flecha {
+        width: 12mm;
+        height: 8mm;
+        color: var(--marino);
+      }
+
+      .leyenda {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .leyenda svg {
+        flex: none;
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .leyenda.pista {
+        margin: 0 0 3mm;
+      }
+
+      /* ---------- Tarjetas de la agenda (62 × 25 mm). La línea discontinua es la de corte. ---------- */
+      .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(3, 62mm);
+        grid-auto-rows: 25mm;
+        justify-content: space-between;
+        row-gap: 2.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tarjeta {
+        display: grid;
+        grid-template-columns: 19mm minmax(0, 1fr);
+        margin: 0;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 2.6mm;
+        overflow: hidden;
+        background: var(--t);
+        break-inside: avoid;
+      }
+
+      .tarjeta__picto {
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border-right: 0.8mm solid var(--c);
+      }
+
+      .tarjeta__picto img,
+      .tarjeta__picto svg {
+        width: 17.5mm;
+        height: 17.5mm;
+      }
+
+      .tarjeta p {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0 1mm 0 2mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+        hyphens: manual;
+      }
+
+      .tarjeta--blanca .tarjeta__picto {
+        padding: 2mm;
+      }
+
+      .tarjeta--blanca .tarjeta__picto i {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 1.6mm;
+      }
+
+      .tarjeta--blanca p {
+        align-items: flex-end;
+        padding-bottom: 6mm;
+        padding-right: 3mm;
+      }
+
+      .tarjeta--blanca p i {
+        display: block;
+        width: 100%;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .grupo-tarjetas {
+        display: flex;
+        align-items: baseline;
+        gap: 3mm;
+        margin: 3mm 0 1.8mm;
+        font-size: 13pt;
+      }
+
+      .grupo-tarjetas small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .grupo-tarjetas:first-of-type {
+        margin-top: 0;
+      }
+
+      /* ---------- Así quiero participar ---------- */
+      .eleccion {
+        display: grid;
+        gap: 2.4mm;
+      }
+
+      .eleccion section {
+        break-inside: avoid;
+      }
+
+      .eleccion h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+        font-size: 19pt;
+        line-height: 1.1;
+      }
+
+      .eleccion h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .opciones {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .opcion {
+        position: relative;
+        display: grid;
+        grid-template-rows: 21mm auto;
+        justify-items: center;
+        align-content: center;
+        gap: 1mm;
+        height: 37.5mm;
+        margin: 0;
+        padding: 2mm 2mm 1.6mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .opcion:nth-child(2) {
+        background: var(--t);
+      }
+
+      .opcion img,
+      .opcion svg {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .opcion p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+        text-wrap: balance;
+      }
+
+      /* Círculo para marcar lo que elige */
+      .opcion::after {
+        content: '';
+        position: absolute;
+        right: 2.2mm;
+        top: 2.2mm;
+        width: 7mm;
+        height: 7mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      /* ---------- Plan de descanso ---------- */
+      .plan {
+        display: grid;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .paso-plan {
+        display: grid;
+        grid-template-columns: 9mm 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 1.8mm 4mm;
+        border-radius: 4mm;
+        border: 0.6mm solid var(--c);
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .paso-plan:nth-child(even) {
+        background: var(--t);
+      }
+
+      .paso-plan__numero {
+        display: grid;
+        place-items: center;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .paso-plan > img,
+      .paso-plan > svg,
+      .paso-plan__picto {
+        width: 22mm;
+        height: 22mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .paso-plan p {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.3;
+      }
+
+      .paso-plan p > span:not(.hueco) {
+        display: block;
+      }
+
+      .paso-plan .frase__pista {
+        margin-top: 0.6mm;
+        font-size: 11pt;
+        line-height: 1.25;
+        color: var(--suave);
+      }
+
+      .paso-plan--foto {
+        grid-template-columns: 9mm 22mm minmax(0, 1fr) 52mm;
+      }
+
+      .foto {
+        display: grid;
+        place-items: center;
+        height: 36mm;
+        padding: 2mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.25;
+        color: var(--suave);
+      }
+
+      .paso-plan--opciones {
+        grid-template-columns: 9mm minmax(0, 1fr);
+        row-gap: 2mm;
+      }
+
+      .puedo {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .puedo li {
+        display: grid;
+        grid-template-rows: 18mm auto;
+        justify-items: center;
+        align-content: center;
+        gap: 1mm;
+        height: 33mm;
+        margin: 0;
+        padding: 1.4mm 2mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .puedo img {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .puedo p {
+        text-align: center;
+        font-weight: 700;
+        line-height: 1.06;
+        text-wrap: balance;
+      }
+
+      /* ---------- Tarjetas para llevar (86 × 54 mm, como una tarjeta de crédito) ---------- */
+      .llevar {
+        display: grid;
+        grid-template-columns: repeat(2, 86mm);
+        grid-auto-rows: 54mm;
+        justify-content: space-between;
+        row-gap: 3.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .llevar li {
+        position: relative;
+        display: grid;
+        grid-template-rows: 8mm minmax(0, 1fr);
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .llevar__banda {
+        background: var(--c);
+      }
+
+      /* Agujero para la anilla */
+      .llevar__banda::before {
+        content: '';
+        position: absolute;
+        left: 4mm;
+        top: 1.6mm;
+        width: 4.8mm;
+        height: 4.8mm;
+        border-radius: 50%;
+        border: 0.4mm dashed var(--marino);
+        background: #fff;
+      }
+
+      .llevar__cuerpo {
+        display: grid;
+        grid-template-columns: 33mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        padding: 2mm 3.4mm 2.4mm;
+      }
+
+      .llevar__cuerpo img {
+        width: 33mm;
+        height: 33mm;
+      }
+
+      .llevar p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 21pt;
+        line-height: 1.08;
+      }
+
+      /* ---------- Carteles ---------- */
+      .cartel .rayos {
+        margin-bottom: 4mm;
+      }
+
+      .cartel__cabeza {
+        display: grid;
+        grid-template-columns: 52mm minmax(0, 1fr);
+        align-items: center;
+        gap: 7mm;
+        margin: 0 0 5mm;
+      }
+
+      .cartel__cabeza > img {
+        width: 52mm;
+        height: 52mm;
+        padding: 2mm;
+        border: 1mm solid var(--c);
+        border-radius: 6mm;
+        background: #fff;
+      }
+
+      .cartel h1 {
+        margin: 0 0 2mm;
+        font-size: 40pt;
+        line-height: 1;
+      }
+
+      .cartel__lema {
+        margin: 0;
+        font-size: 22pt;
+        line-height: 1.2;
+      }
+
+      .normas {
+        display: grid;
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .normas li {
+        display: grid;
+        grid-template-columns: 25mm minmax(0, 1fr);
+        align-items: center;
+        gap: 6mm;
+        margin: 0;
+        padding: 2.2mm 5mm;
+        border-radius: 5mm;
+        background: var(--t);
+        border: 0.6mm solid var(--c);
+        break-inside: avoid;
+      }
+
+      .normas img,
+      .normas svg {
+        width: 25mm;
+        height: 25mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .normas p {
+        margin: 0;
+        font-size: 21pt;
+        line-height: 1.22;
+      }
+
+      .cartel__hueco {
+        margin: 5mm 0 0;
+        font-size: 20pt;
+        line-height: 1.4;
+      }
+
+      .cartel--fiesta h1 {
+        font-size: 44pt;
+        margin-bottom: 1mm;
+      }
+
+      .cartel--fiesta .cartel__lema {
+        margin-bottom: 5mm;
+      }
+
+      .cartel--fiesta .normas {
+        gap: 2.4mm;
+      }
+
+      .cartel--fiesta .normas li {
+        grid-template-columns: 21mm minmax(0, 1fr);
+        padding: 1.8mm 5mm;
+      }
+
+      .cartel--fiesta .normas img,
+      .cartel--fiesta .normas svg {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .cartel--fiesta .normas p {
+        font-size: 20pt;
+      }
+
+      /* ---------- Tarjetas de aviso ---------- */
+      .avisos {
+        display: grid;
+        grid-template-columns: repeat(2, 92mm);
+        grid-auto-rows: 72mm;
+        justify-content: space-between;
+        row-gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .aviso {
+        display: grid;
+        grid-template-rows: 7mm 42mm minmax(0, 1fr);
+        justify-items: center;
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 5mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .aviso__banda {
+        justify-self: stretch;
+        background: var(--c);
+      }
+
+      .aviso img,
+      .aviso svg {
+        width: 40mm;
+        height: 40mm;
+        margin-top: 2mm;
+      }
+
+      .aviso svg {
+        width: 37mm;
+        height: 37mm;
+        margin-top: 4mm;
+      }
+
+      .aviso p {
+        align-self: center;
+        margin: 0;
+        padding: 0 4mm;
+        text-align: center;
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1.06;
+        text-wrap: balance;
+      }
+
+      /* ---------- Ficha para el equipo ---------- */
+      .equipo {
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .equipo h2 {
+        font-size: 13pt;
+        margin: 2.8mm 0 1mm;
+      }
+
+      .campos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2mm 8mm;
+      }
+
+      .campo {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        font-size: 11.5pt;
+      }
+
+      .campo span {
+        flex: 1;
+        height: 6.5mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1mm 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .casillas li {
+        display: flex;
+        align-items: flex-start;
+        gap: 2mm;
+        margin: 0;
+        line-height: 1.22;
+      }
+
+      .casillas li::before {
+        content: '';
+        flex: none;
+        width: 4.2mm;
+        height: 4.2mm;
+        margin-top: 0.2mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+        background: #fff;
+      }
+
+      .renglon {
+        height: 7mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .tabla-dia th {
+        width: 52mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        background: var(--t);
+      }
+
+      .tabla-dia td {
+        height: 8.5mm;
+      }
+
+      .sino {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1mm 6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .sino li {
+        display: contents;
+      }
+
+      .sino span:last-child {
+        white-space: nowrap;
+      }
+
+      .marca {
+        display: inline-block;
+        width: 4.2mm;
+        height: 4.2mm;
+        margin: 0 1.2mm 0 3mm;
+        vertical-align: -0.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .nota-privada {
+        margin: 3mm 0 0;
+        padding: 2mm 3mm;
+        border-radius: 2mm;
+        background: var(--amarillo-tinte);
+        font-size: 11pt;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.75em;
+        margin-bottom: 0.35em;
+      }
+
+      .guia h3 {
+        font-size: 12pt;
+        margin: 0.6em 0 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.55em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.55em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+        line-height: 1.36;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      /* ---------- Familias (lectura fácil) ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.36;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        font-size: 14pt;
+        margin: 2.6mm 0 1.2mm;
+      }
+
+      .familias p {
+        margin-bottom: 1.6mm;
+      }
+
+      .lista-casa {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-casa li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+      }
+
+      .lista-casa img,
+      .lista-casa svg {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .lista-casa--dos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.8mm 6mm;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 2.4mm 4mm 3mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin: 0 0 1mm !important;
+        font-size: 14pt !important;
+      }
+
+      .recuadro .casillas {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        font-size: 12pt;
+        margin: 1.4mm 0;
+      }
+
+      .recuadro .casillas li::before {
+        width: 4.6mm;
+        height: 4.6mm;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 1mm;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.5em 0 0.2em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -64mm; top: 64mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -32mm; top: 104mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Anticipación · Infantil y Primaria</p>
+        <h1 class="portada__titulo">Fiestas<br />sin sobresaltos</h1>
+        <p class="portada__subtitulo">
+          Para preparar con tiempo el festival de Navidad o de invierno, el fin de trimestre y las demás fiestas del cole.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA. Los demás dibujos son de IdEducando.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escenario" aria-hidden="true" id="escenario"></div>
+      <div class="pegatina" aria-hidden="true"><div>Con plan de descanso</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Una fiesta cambia el horario, el sitio, el ruido y la gente de un día normal. Con este material, contáis la fiesta antes
+        de que llegue y preparáis un plan: cómo participa cada peque y dónde descansa si lo necesita. Empieza por la historia y
+        la agenda, y añade lo demás según lo que necesite cada alumno o alumna.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+      <h2 style="font-size: 14pt; margin: 0 0 2mm">Cuándo usar cada pieza</h2>
+      <div class="cuando" id="cuando"></div>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Vale para cualquier cole.</strong> Escribe el nombre de vuestra fiesta en los huecos: el festival de Navidad,
+          el festival de invierno, la fiesta de fin de trimestre o la de carnaval. Las tarjetas de Navidad van en un grupo
+          aparte, en la página <span data-pagina="tarjetas2"></span>: úsalas solo si vuestro cole la celebra.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         HISTORIA SOCIAL (dos hojas)
+         ====================================================================== -->
+    <section class="hoja c-azul">
+      <div class="historia__cabeza">
+        <div class="historia__icono"><img src="pictogramas/7099.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Historia social · 1 de 2 · Antes de la fiesta</p>
+          <h1>La fiesta del cole</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="franja"></div>
+      <ol class="frases" id="historia-1"></ol>
+      <p class="atribucion">
+        Escribe en los huecos con rotulador de pizarra: se borra y la historia sirve para la próxima fiesta. Pictogramas: Sergio
+        Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <section class="hoja c-azul">
+      <div class="historia__cabeza">
+        <div class="historia__icono"><img src="pictogramas/25103.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Historia social · 2 de 2 · El día de la fiesta</p>
+          <h1>En la fiesta</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="franja"></div>
+      <ol class="frases" id="historia-2"></ol>
+      <div class="cierre"><img src="pictogramas/31923.png" alt="" /><p>Las fiestas son días distintos. Después, vuelven los días de siempre.</p></div>
+      <p class="atribucion">
+        El aplauso con las manos en alto es un dibujo de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org).
+        Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         AGENDA DE LA FIESTA
+         ====================================================================== -->
+    <section class="imp c-verde">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Agenda de la fiesta · Con velcro</p>
+          <h1>Mi fiesta, paso a paso</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="leyenda pista">
+        <span data-icono="velcro"></span>
+        <span>
+          Pon las tarjetas en orden, de arriba abajo. Cuando termina un momento, su tarjeta pasa a «Terminado». Velcro
+          <strong>rugoso</strong> en cada círculo gris y <strong>suave</strong> detrás de cada tarjeta.
+        </span>
+      </p>
+      <div class="agenda" id="agenda"></div>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE LA AGENDA (dos hojas)
+         ====================================================================== -->
+    <section class="imp">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para la agenda · Para recortar</p>
+          <h1>Tarjetas de la fiesta</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Miden 6,2 × 2,5 cm. Recorta solo las de los momentos que tendrá vuestra fiesta y pega un círculo de velcro suave
+        detrás de cada una.
+      </p>
+      <ul class="tarjetas" id="tarjetas-1"></ul>
+      <p class="atribucion">El aplauso con las manos en alto es un dibujo de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <section class="imp">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para la agenda · Para recortar</p>
+          <h1>Más tarjetas de la fiesta</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div id="tarjetas-2"></div>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         ASÍ QUIERO PARTICIPAR
+         ====================================================================== -->
+    <section class="hoja c-morado">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para elegir juntos</p>
+          <h1>Así quiero participar</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Leed cada fila juntos. Marca en el círculo lo que elige o rodéalo con rotulador. Puede elegir más de una cosa y
+        cambiar de idea. Pasad lo que elija a la ficha del equipo (página <span data-pagina="equipo"></span>).
+      </p>
+      <div class="eleccion" id="eleccion"></div>
+      <p class="atribucion">El aplauso con las manos en alto es un dibujo de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         MI PLAN DE DESCANSO
+         ====================================================================== -->
+    <section class="hoja c-coral">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Plan de descanso · Para leer y practicar antes</p>
+          <h1>Cuando necesito descansar</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ol class="plan" id="plan"></ol>
+      <p class="atribucion">
+        La tarjeta es un dibujo de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA.
+        Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS PARA LLEVAR
+         ====================================================================== -->
+    <section class="imp">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para recortar · Tamaño de tarjeta de crédito</p>
+          <h1>Tarjetas para pedir lo que necesito</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Miden 8,6 × 5,4 cm: caben en una funda de tarjeta. Perfora el círculo y únelas con una anilla. Una tarjeta «Necesito
+        descansar» la lleva el alumno o la alumna, y la otra, su adulto de referencia.
+      </p>
+      <ul class="llevar" id="llevar"></ul>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL DEL RINCÓN DE DESCANSO
+         ====================================================================== -->
+    <section class="hoja cartel c-coral">
+      <div class="rayos"></div>
+      <div class="cartel__cabeza">
+        <img src="pictogramas/39269.png" alt="" />
+        <div>
+          <p class="antetitulo">Cartel para la puerta</p>
+          <h1>Rincón de descanso</h1>
+          <p class="cartel__lema">Aquí se descansa.</p>
+        </div>
+      </div>
+      <ul class="normas" id="normas-rincon"></ul>
+      <p class="cartel__hueco">Hoy, el rincón está en: <span class="hueco hueco--l"></span></p>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL PARA LA ENTRADA DE LA FIESTA
+         ====================================================================== -->
+    <section class="hoja cartel cartel--fiesta c-naranja">
+      <div class="rayos"></div>
+      <p class="antetitulo">Cartel para la entrada de la fiesta</p>
+      <h1>En esta fiesta</h1>
+      <p class="cartel__lema">cuidamos a quien lleva mal el ruido, las luces, los cambios o la gente.</p>
+      <ul class="normas" id="normas-fiesta"></ul>
+      <p class="atribucion">
+        El aplauso con las manos en alto es un dibujo de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org).
+        Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE AVISO PARA QUIEN PRESENTA
+         ====================================================================== -->
+    <section class="imp">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para quien presenta · Para recortar</p>
+          <h1>Tarjetas de aviso</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Quien presenta, o cada tutor y tutora delante de su clase, enseña la tarjeta justo antes de cada momento. Así nadie
+        se lleva un susto.
+      </p>
+      <ul class="avisos" id="avisos"></ul>
+      <p class="atribucion">El aplauso con las manos en alto es un dibujo de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         FICHA PARA EL EQUIPO
+         ====================================================================== -->
+    <section class="hoja equipo c-azul">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el equipo · Rellenadla con la familia</p>
+          <h1>Lo que le ayuda en la fiesta</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="campos">
+        <p class="campo">Nombre:<span></span></p>
+        <p class="campo">Fiesta y fecha:<span></span></p>
+      </div>
+
+      <h2>Lo que le cuesta</h2>
+      <ul class="casillas" id="cuesta"></ul>
+      <p class="campo" style="margin-top: 1mm">Otra cosa:<span></span></p>
+
+      <h2>Señales de que necesita descansar</h2>
+      <div class="renglon"></div>
+      <div class="renglon"></div>
+
+      <h2>Lo que le ayuda</h2>
+      <ul class="casillas" id="ayuda"></ul>
+
+      <h2>Cómo participa (página <span data-pagina="participar"></span>)</h2>
+      <div class="renglon"></div>
+
+      <h2>Ese día</h2>
+      <table class="tabla-dia">
+        <tbody>
+          <tr><th scope="row">Su adulto de referencia</th><td></td></tr>
+          <tr><th scope="row">El rincón de descanso</th><td></td></tr>
+          <tr><th scope="row">Dónde están sus cascos</th><td></td></tr>
+          <tr><th scope="row">Si quiere irse antes</th><td></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Salud y fotos</h2>
+      <ul class="sino">
+        <li><span>Alergia o intolerancia a algún alimento o al látex. Si la hay, se sigue su plan.</span><span><i class="marca"></i>Sí<i class="marca"></i>No</span></li>
+        <li><span>Epilepsia o molestias con las luces que parpadean.</span><span><i class="marca"></i>Sí<i class="marca"></i>No</span></li>
+        <li><span>La familia autoriza fotos y vídeos del cole.</span><span><i class="marca"></i>Sí<i class="marca"></i>No</span></li>
+      </ul>
+
+      <h2>Después de la fiesta: qué fue bien y qué cambiamos</h2>
+      <div class="renglon"></div>
+      <div class="renglon"></div>
+
+      <p class="nota-privada">
+        Lleva datos personales: guardadla con su expediente y no la colguéis a la vista.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Fiestas sin sobresaltos: cómo prepararlas</h1>
+      <p>
+        Una fiesta cambia el horario, el sitio, el ruido y la gente de un día normal. Para el alumnado que lleva mal los
+        cambios, el ruido, las luces o las multitudes, puede ser un día muy difícil, sobre todo para muchos niños y niñas con
+        trastorno del espectro del autismo (TEA). Con este material, le contáis antes cómo será la fiesta y preparáis juntos un
+        plan: cómo participa y dónde descansa si lo necesita. Lo que le ayuda a él o a ella suele venir bien a toda la clase.
+      </p>
+
+      <h2>Antes de la fiesta</h2>
+      <h3>Dos semanas antes</h3>
+      <ol>
+        <li>Habla con la familia y rellenad juntos la ficha de la página <span data-pagina="equipo"></span>.</li>
+        <li>
+          Decide con el equipo dónde estará el rincón de descanso y quién le acompaña. Que sea un sitio tranquilo cerca de la
+          fiesta, como una clase vacía o la biblioteca, y que sea siempre el mismo.
+        </li>
+        <li>Haz una foto del rincón, sin alumnado, y pégala en el plan de descanso antes de plastificarlo.</li>
+      </ol>
+      <h3>La semana de la fiesta</h3>
+      <ol>
+        <li>
+          Leed la historia de la fiesta una vez al día, en un momento tranquilo. Rellena antes los huecos con rotulador de
+          pizarra.
+        </li>
+        <li>Elegid juntos cómo participa, con la hoja «Así quiero participar».</li>
+        <li>
+          Ensayad en el sitio real y con la ropa de la fiesta. La música, primero baja y después un poco más alta.
+        </li>
+        <li>Practicad el aplauso con las manos en alto y el plan de descanso: enseña la tarjeta, vais juntos al rincón y volvéis.</li>
+        <li>Pide a la familia que pruebe la ropa o el disfraz en casa, varios días antes.</li>
+      </ol>
+      <h3>El día de la fiesta</h3>
+      <ul>
+        <li>Repasad la agenda por la mañana. Cuando termina un momento, su tarjeta pasa a «Terminado».</li>
+        <li>Que lleve su tarjeta y, si los usa, sus cascos. Su adulto de referencia lleva la otra tarjeta.</li>
+        <li>
+          Si pide descansar, acompáñale enseguida, sin preguntas ni reproches. Cuando esté bien, puede volver a la fiesta o
+          quedarse con su adulto. Descansar es parte del plan, nunca un castigo.
+        </li>
+      </ul>
+      <h3>Después</h3>
+      <ul>
+        <li>Comentad la fiesta con la agenda y celebrad lo que salió bien.</li>
+        <li>Apunta en la ficha qué funcionó y qué cambiaríais: os servirá para la próxima fiesta.</li>
+      </ul>
+
+      <h2>Una fiesta pensada para todos</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone pensar desde el principio en todo el alumnado (CAST, 2024). En una
+        fiesta, se nota en decisiones como estas:
+      </p>
+      <ul>
+        <li>
+          <strong>Avisar antes.</strong> Las Directrices del DUA recomiendan alertas y anticipaciones que ayuden a prepararse
+          para los cambios de horario y los eventos novedosos, y variar el nivel de estimulación sensorial: el ruido de fondo,
+          los elementos que amortiguan el ruido y las pausas (consideración 7.4).
+        </li>
+        <li>
+          <strong>Elegir cómo participar.</strong> Salir al escenario es una forma de participar. Ayudar desde abajo o mirar
+          desde el sitio, también. El DUA pide ofrecer elecciones, porque las personas difieren en cuánto y en qué quieren elegir (7.1), y
+          variar las exigencias de exposición en público (7.4).
+        </li>
+        <li>
+          <strong>Sitios flexibles.</strong> Reservad sitios cerca de la puerta y lejos de los altavoces, con espacio para una
+          silla de ruedas. El DUA habla de una ubicación flexible de los asientos y del control de la iluminación (4.1).
+        </li>
+        <li>
+          <strong>Lo que suena, también se ve.</strong> El aplauso con las manos en alto y las tarjetas de aviso son señales
+          visuales. El DUA propone equivalentes visuales para los sonidos y las alertas, y usar la lengua de signos (1.2). Así se
+          entera también el alumnado con discapacidad auditiva.
+        </li>
+      </ul>
+
+      <h2>Ruidos, luces y aplausos</h2>
+      <ul>
+        <li>
+          <strong>El aplauso con las manos en alto.</strong> En la lengua de signos española (LSE), una forma de aplaudir es
+          «alzar las manos y agitarlas», según el diccionario de la Fundación CNSE, de la Confederación Estatal de Personas
+          Sordas. No hace ruido y se ve desde lejos. Enseñadlo en todas las clases y anunciadlo con el cartel de la página
+          <span data-pagina="cartel"></span>.
+        </li>
+        <li>
+          <strong>La música.</strong> Probad el volumen en el ensayo, desde las primeras filas. Si alguien se tapa los oídos,
+          bajadlo. Antes de un ruido fuerte, como un micrófono que pita o unos platillos, enseñad la tarjeta de aviso.
+        </li>
+        <li>
+          <strong>Los globos, mejor fuera.</strong> Al explotar, dan un buen susto. Además, la Asociación Española de Pediatría
+          (AEP) avisa de que un niño puede atragantarse al hinchar un globo o con los trozos de uno roto (AEP, 2024). Para el
+          alumnado alérgico al látex, el documento de consenso de los ministerios de Educación y de Sanidad aconseja globos
+          metalizados en lugar de los de látex (2013, pág. 35).
+        </li>
+        <li>
+          <strong>Las luces.</strong> Evitad las luces que parpadean deprisa, como las estroboscópicas. Los destellos pueden
+          provocar crisis epilépticas en hasta 1 de cada 4000 personas, y la sensibilidad a la luz es más frecuente en la
+          infancia y la juventud (Fisher y otros, 2022). Avisad antes de apagar las luces de la sala.
+        </li>
+        <li>
+          <strong>Las fotos.</strong> Pedid que se hagan sin flash. La Agencia Española de Protección de Datos (AEPD) considera
+          una buena práctica avisar con carteles de que la grabación es solo para uso doméstico. Subir esas imágenes a internet en
+          abierto necesita el consentimiento de las personas que salen (AEPD). El cartel de la página
+          <span data-pagina="cartel"></span> ya lo dice.
+        </li>
+      </ul>
+
+      <h2>Cascos, escenario y disfraz</h2>
+      <p>
+        Según un metaanálisis, unas 4 de cada 10 personas con TEA llevan mal en este momento sonidos que a la mayoría no le
+        molestan, y unas 6 de cada 10 lo han vivido alguna vez (Williams y otros, 2021). En un estudio con entrevistas a 10
+        madres y padres y a 5 docentes de niños y niñas con TEA de 6 a 12 años, los cascos que reducen el ruido les ayudaban a
+        participar en casa, en la calle y en el cole. Prepararse antes facilitaba usarlos, y muchos aprendieron a pedirlos (Pfeiffer y otros, 2019).
+        Que los pruebe en clase antes de la fiesta. Si el cole tiene cascos para prestar, apunta en el cartel dónde están.
+      </p>
+      <ul>
+        <li>
+          <strong>El escenario.</strong> Si sale, que esté en un extremo de la fila, cerca de su adulto. Si prefiere no salir,
+          puede ayudar desde abajo, por ejemplo repartiendo el programa o tocando un instrumento. Mirar desde su sitio también es
+          participar.
+        </li>
+        <li>
+          <strong>El disfraz.</strong> Que sea cómodo y fácil de quitar, sin etiquetas ni costuras que piquen. Vale una parte,
+          como un gorro o una camiseta de color. Antes de maquillar la cara, pregunta a la familia: a algunos peques les molesta mucho.
+        </li>
+      </ul>
+
+      <h2>El plan de descanso</h2>
+      <ul>
+        <li>
+          El rincón de descanso tiene poca luz, un cojín, agua y algún cuento. Cuelga en la puerta el cartel de la página
+          <span data-pagina="rincon"></span>. Si ya tenéis un rincón de la calma en clase, puede servir.
+        </li>
+        <li>
+          Fíjate en las señales que ya conoces de ese alumno o alumna, como taparse los oídos o quedarse muy quieto.
+          Ofrécele el descanso antes de que lo pase mal.
+        </li>
+      </ul>
+
+      <h2>Comida y seguridad</h2>
+      <ul>
+        <li>
+          Si hay comida, pregunta antes por alergias e intolerancias. El documento de consenso de los ministerios de Educación y
+          de Sanidad pide organizar los cumpleaños y las fiestas con la familia, con los alimentos y materiales adecuados (2013,
+          pág. 18), y evitar que se compartan comidas (pág. 55). Propone, además, una caja con su nombre y alimentos sin
+          alérgenos para las celebraciones de clase (pág. 54).
+        </li>
+        <li>
+          En Navidad aumenta el riesgo de atragantamiento. La AEP cuenta los caramelos duros, las peladillas, las gominolas y las
+          palomitas entre los alimentos con alto riesgo hasta los 3 a 6 años, y aconseja evitar el turrón duro y el que lleva
+          frutos secos enteros (AEP, 2024).
+        </li>
+        <li>
+          Los círculos de velcro y la anilla son piezas pequeñas: guárdalos lejos de quien todavía se lleva cosas a la boca.
+        </li>
+      </ul>
+
+      <h2>Ideas para cada alumno o alumna</h2>
+      <ul>
+        <li>
+          <strong>TEA.</strong> Usa siempre las mismas palabras para hablar de la fiesta. Si hay un cambio de última hora,
+          cuéntaselo con la agenda en cuanto lo sepas. Puede llevar un objeto suyo que le dé tranquilidad.
+        </li>
+        <li>
+          <strong>Trastorno por déficit de atención e hiperactividad (TDAH).</strong> Dale un encargo durante la fiesta, como
+          repartir el programa o sostener una tarjeta de aviso, y que pueda moverse entre actuación y actuación.
+        </li>
+        <li>
+          <strong>Discapacidad auditiva.</strong> Un sitio cerca del escenario y de quien interpreta en lengua de signos, si lo
+          hay. Si lleva audífonos o implante coclear, pregunta a la familia cómo le afecta el ruido fuerte.
+        </li>
+        <li>
+          <strong>Discapacidad visual.</strong> Visitad antes el escenario y tocad el decorado. Durante la fiesta, su adulto le
+          cuenta en voz baja lo que pasa.
+        </li>
+        <li>
+          <strong>Discapacidad motora.</strong> Que pueda subir al escenario por una rampa o que su clase actúe a pie de sala.
+          Reserva su sitio con espacio para la silla.
+        </li>
+        <li>
+          <strong>Discapacidad intelectual.</strong> Pon en la agenda solo los momentos clave y leed la historia por partes, una
+          hoja cada vez.
+        </li>
+      </ul>
+
+      <div class="caja caja--azul">
+        <h2>Qué dice la evidencia</h2>
+        <p>
+          Contar antes la fiesta con una historia, ordenarla con una agenda y preparar el sitio antes de que aparezca el
+          problema se apoyan en tres de las 28 prácticas basadas en la evidencia para la infancia y la juventud con TEA: las
+          narrativas sociales, los apoyos visuales y las intervenciones basadas en los antecedentes (Hume y otros, 2021). La
+          mayoría de esos estudios son de caso único, con muy pocos participantes: de los 21 sobre narrativas sociales, 20.
+          Por eso conviene observar si a cada alumno o alumna le ayuda y ajustar el plan. «Social Stories» es una marca de
+          Carol Gray, que no ha revisado este material.
+        </p>
+      </div>
+
+      <h2>Para coles con y sin fiestas religiosas</h2>
+      <p>
+        El material sirve igual para un festival de Navidad que para un festival de invierno o una fiesta de fin de trimestre:
+        los huecos de la historia y de los carteles llevan el nombre de vuestra fiesta. Las tarjetas de Navidad, villancicos,
+        Reyes Magos y Papá Noel van en un grupo aparte: usadlas solo si en vuestro cole se celebran.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>La fiesta del cole, sin sobresaltos</h1>
+      <p>
+        En el cole preparamos la fiesta con tiempo. Así, vuestro peque sabe antes qué va a pasar y dónde. Desde casa podéis
+        ayudar mucho.
+      </p>
+
+      <h2>Antes de la fiesta</h2>
+      <ul class="lista-casa lista-casa--dos" id="familia-antes"></ul>
+
+      <h2>El día de la fiesta</h2>
+      <p>
+        Está bien no salir al escenario: mirar también es participar. Si necesita descansar, irá con su adulto a un rincón
+        tranquilo. Después vuelve a la fiesta, si quiere.
+      </p>
+
+      <h2>Si venís a la fiesta</h2>
+      <ul class="lista-casa" id="familia-fiesta"></ul>
+
+      <h2>Después</h2>
+      <p>Una tarde tranquila ayuda a descansar. Hablad de lo que salió bien.</p>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p class="renglon-etiqueta">La fiesta es el día<span></span>a las<span style="flex: 0.5"></span></p>
+        <p class="renglon-etiqueta">en<span></span></p>
+        <ul class="casillas">
+          <li>Las familias podéis venir</li>
+          <li>Es solo para el alumnado</li>
+          <li>Traed ropa cómoda</li>
+          <li>Traed el disfraz</li>
+          <li>Traed sus cascos</li>
+          <li>Contadnos qué le ayuda</li>
+        </ul>
+        <p class="renglon-etiqueta">Otra cosa:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Fiestas sin sobresaltos.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Fiestas sin sobresaltos: anticipar las fiestas del cole.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/fiestas-sin-sobresaltos</span>. Todas las fuentes se consultaron en su
+        origen el 8 de noviembre de 2026.
+      </p>
+
+      <h2>Evidencia, lectura fácil y Diseño Universal para el Aprendizaje</h2>
+      <ul class="referencias">
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation
+          review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. Identificador digital
+          (DOI): 10.1007/s10803-020-04844-2, tabla 2.
+        </li>
+        <li>
+          CAST (2024). <em>Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0</em>: consideraciones 1.2, 4.1,
+          7.1 y 7.4. udlguidelines.cast.org/es
+        </li>
+        <li>
+          UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Los textos
+          para el alumnado siguen sus pautas. Aún no los hemos validado con personas lectoras.
+        </li>
+      </ul>
+
+      <h2>Ruido y luz</h2>
+      <ul class="referencias">
+        <li>
+          Williams, Z. J., Suzman, E. y Woynaroski, T. G. (2021). Prevalence of decreased sound tolerance (hyperacusis) in
+          individuals with autism spectrum disorder: A meta-analysis. <em>Ear and Hearing</em>, 42(5), 1137-1150. DOI:
+          10.1097/AUD.0000000000001005.
+        </li>
+        <li>
+          Pfeiffer, B., Erb, S. R. y Slugg, L. (2019). Impact of noise-attenuating headphones on participation in the home,
+          community, and school for children with autism spectrum disorder. <em>Physical &amp; Occupational Therapy in
+          Pediatrics</em>, 39(1), 60-76. DOI: 10.1080/01942638.2018.1496963.
+        </li>
+        <li>
+          Fisher, R. S. y otros (2022). Visually sensitive seizures: An updated review by the Epilepsy Foundation.
+          <em>Epilepsia</em>, 63(4), 739-768. DOI: 10.1111/epi.17175.
+        </li>
+        <li>
+          Fundación CNSE. <em>Diccionario de la Lengua de Signos Española</em> (DILSE), entrada «aplaudir».
+          fundacioncnse-dilse.org
+        </li>
+      </ul>
+
+      <h2>Salud, seguridad y fotos</h2>
+      <ul class="referencias">
+        <li>
+          Ministerio de Educación, Cultura y Deporte y Ministerio de Sanidad, Servicios Sociales e Igualdad (2013).
+          <em>Documento de consenso sobre recomendaciones para una escolarización segura del alumnado alérgico a alimentos y/o
+          látex</em>, págs. 18, 35, 54 y 55. sanidad.gob.es
+        </li>
+        <li>
+          Asociación Española de Pediatría (AEP), Comité de Soporte Vital (diciembre de 2024). <em>Atragantamiento</em>.
+          <span class="url">static.aeped.es/atragantamiento_csvaep_final_6bd02592cf.pdf</span>
+        </li>
+        <li>
+          Agencia Española de Protección de Datos (AEPD). Preguntas frecuentes: «¿Se pueden tomar imágenes o grabar vídeos en
+          eventos escolares?». aepd.es
+        </li>
+      </ul>
+
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+        cambias el material, deja este texto.
+      </p>
+      <p>
+        El aplauso con las manos en alto, la tarjeta del plan de descanso, el escenario de la portada y las notas de música son
+        dibujos de IdEducando.
+      </p>
+      <p>
+        Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre: IdEducando nace para ayudar a
+        quien acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no deja venderlo. La
+        licencia CC BY-NC-SA 4.0 deja copiarlo y adaptarlo siempre que se cite a IdEducando, no se use para ganar dinero y se
+        comparta con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        historia: 4,
+        agenda: 6,
+        tarjetas: 7,
+        tarjetas2: 8,
+        participar: 9,
+        descanso: 10,
+        llevar: 11,
+        rincon: 12,
+        cartel: 13,
+        avisos: 14,
+        equipo: 15,
+        guia: 16,
+        familias: 19,
+        fuentes: 20,
+      };
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const AZUL = '#2f6fd6';
+      const VERDE = '#1fa67a';
+      const CORAL = '#e8553e';
+      const MORADO = '#8c4fb8';
+      const AMARILLO = '#f6c12e';
+      const NARANJA = '#f5961f';
+      const PIEL = '#f6d7c3';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+
+      // Una mano abierta, con los dedos hacia arriba, centrada en (x, y).
+      function mano(x, y, giro = 0) {
+        const dedos = [
+          [-5, -4, -7.6, -15],
+          [-1.7, -6, -2.4, -18],
+          [1.7, -6, 2.4, -18],
+          [5, -4, 7.4, -14.5],
+          [-6, 2, -12.4, -3.6],
+        ];
+        const trazo = (color, ancho) =>
+          dedos
+            .map(([a, b, c, d]) => `<path d="M${a} ${b} L${c} ${d}" stroke="${color}" stroke-width="${ancho}" stroke-linecap="round"/>`)
+            .join('');
+        return `<g transform="translate(${x} ${y}) rotate(${giro})">${trazo(M, 5.6)}
+          <ellipse cx="0" cy="0" rx="7.4" ry="7.8" fill="${PIEL}" stroke="${M}" stroke-width="1.8"/>${trazo(PIEL, 3.4)}</g>`;
+      }
+
+      // El aplauso con las manos en alto: un peque con los brazos arriba y las manos que se agitan.
+      const APLAUSO = `
+        <path d="M8 12 Q3 22 8 32 M14 8 Q8 22 14 36" fill="none" stroke="${NARANJA}" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M92 12 Q97 22 92 32 M86 8 Q92 22 86 36" fill="none" stroke="${NARANJA}" stroke-width="2.8" stroke-linecap="round"/>
+        <path d="M37 84 L28.5 38" stroke="${M}" stroke-width="10.4" stroke-linecap="round"/>
+        <path d="M63 84 L71.5 38" stroke="${M}" stroke-width="10.4" stroke-linecap="round"/>
+        <path d="M37 84 L28.5 38" stroke="${AZUL}" stroke-width="6.8" stroke-linecap="round"/>
+        <path d="M63 84 L71.5 38" stroke="${AZUL}" stroke-width="6.8" stroke-linecap="round"/>
+        <path d="M27 101 Q27 80 50 78 Q73 80 73 101 Z" fill="${AZUL}" stroke="${M}" stroke-width="2.2" stroke-linejoin="round"/>
+        ${mano(27, 27, -10)}${mano(73, 27, 10)}
+        <circle cx="50" cy="61" r="13" fill="${PIEL}" stroke="${M}" stroke-width="2.2"/>
+        <path d="M37.6 59 Q38 47 50 47.4 Q61.6 47.8 62.4 59 Q57 53.6 50 54.4 Q42.6 55.2 37.6 59 Z" fill="${M}"/>
+        <circle cx="45.4" cy="61.6" r="1.6" fill="${M}"/>
+        <circle cx="54.6" cy="61.6" r="1.6" fill="${M}"/>
+        <path d="M44.6 66.4 Q50 71.6 55.4 66.4 Z" fill="#fff" stroke="${M}" stroke-width="1.6" stroke-linejoin="round"/>`;
+
+      // La tarjeta «Necesito descansar», en pequeño
+      const TARJETA = `
+        <rect x="7" y="22" width="86" height="58" rx="7" fill="#fff" stroke="${M}" stroke-width="3"/>
+        <path d="M7 34 V29 Q7 22 14 22 H86 Q93 22 93 29 V34 Z" fill="${CORAL}" stroke="${M}" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="16" cy="28" r="3" fill="#fff" stroke="${M}" stroke-width="1.4"/>
+        <image href="pictogramas/31937.png" x="12" y="38" width="36" height="36"/>
+        <path d="M54 48 H85 M54 59 H80 M54 70 H72" stroke="${M}" stroke-width="4" stroke-linecap="round"/>`;
+
+      // Nota de música
+      const NOTA = `<path d="M34 76 V22 L78 12 V64" fill="none" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>
+        <ellipse cx="25" cy="77" rx="11" ry="8.4" fill="${M}" transform="rotate(-18 25 77)"/>
+        <ellipse cx="69" cy="66" rx="11" ry="8.4" fill="${M}" transform="rotate(-18 69 66)"/>`;
+
+      const DIBUJOS = {
+        aplauso: APLAUSO,
+        tarjeta: TARJETA,
+        nota: NOTA,
+        // Círculo de velcro, para la leyenda de la agenda
+        velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
+          <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
+        flecha: `<path d="M4 20 H62 M48 7 L64 20 L48 33" fill="none" stroke="currentColor" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+      };
+      const dibujo = (nombre, clase = '', vista) => svg(DIBUJOS[nombre], clase, vista);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const imagen = (p) => (typeof p === 'string' && p.startsWith('d:') ? dibujo(p.slice(2)) : picto(p));
+      const huecos = (texto) => texto.replace(/___([sml])?/g, (_, t) => `<span class="hueco hueco--${t ?? 'm'}"></span>`);
+
+      // ---------------------------------------------------------------------
+      // Historia social: [pictograma o dibujo, frases, pista para el adulto]. ___ es un hueco para escribir.
+      // ---------------------------------------------------------------------
+      const HISTORIA_1 = [
+        [7099, ['En el cole hacemos una fiesta.', 'Se llama ___.'], 'Por ejemplo: el festival de invierno o la fiesta de Navidad.'],
+        [38276, ['La fiesta es el día ___s.', 'Empieza a las ___s.'], 'Escribe el día de la semana, el número y la hora.'],
+        [9913, ['La fiesta es en ___.'], 'Por ejemplo: el salón de actos o el gimnasio.'],
+        [6012, ['Ese día, el horario es distinto.', 'Algunas clases de siempre no se hacen.']],
+        [24783, ['A la fiesta vienen ___.', 'Hay más gente que otros días.'], 'Por ejemplo: otras clases o las familias.'],
+        [10318, ['Hay adornos y luces de colores.', 'Algunas personas se disfrazan.', 'Debajo del disfraz están las personas de siempre.']],
+        [24791, ['En la fiesta se oye ___.', 'A veces, el ruido es fuerte.'], 'Por ejemplo: música, canciones, aplausos o un micrófono.'],
+      ];
+      const HISTORIA_2 = [
+        [35709, ['Mi clase ___.', 'Lo ensayamos antes en el sitio de la fiesta.'], 'Por ejemplo: canta una canción o hace un teatro.'],
+        [25103, ['Cada clase sale al escenario a su hora.', 'Las demás miran desde su sitio.']],
+        ['d:aplauso', ['Al final de cada actuación, la gente aplaude.', 'Yo puedo aplaudir con las manos en alto.']],
+        [37857, ['Si el ruido me molesta, puedo ponerme los cascos.', 'También puedo taparme los oídos.']],
+        [31937, ['Si necesito descansar, enseño mi tarjeta.', 'Voy con ___s a ___s.'], 'Quién le acompaña y a qué rincón tranquilo.'],
+        [28003, ['Los adultos del cole conocen mi plan.', 'Me ayudan si lo necesito.']],
+        [28429, ['Al final, la fiesta termina.', 'Después, ___.'], 'Por ejemplo: volvemos a clase o nos vamos a casa.'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Tarjetas de la agenda: [pictograma o dibujo, texto]. null = tarjeta en blanco.
+      // ---------------------------------------------------------------------
+      const TARJETAS_1 = [
+        [7099, 'Hay fiesta'],
+        [3082, 'Llego al cole'],
+        [5985, 'Me disfrazo'],
+        [7233, 'Ropa de fiesta'],
+        [38596, 'En fila'],
+        [9913, 'Al salón'],
+        [33076, 'Al gimnasio'],
+        [33064, 'Al patio'],
+        [25082, 'Me siento'],
+        [8109, 'Espero'],
+        [25103, 'Miramos'],
+        [35709, 'Mi clase actúa'],
+        [32015, 'Cantamos'],
+        [31434, 'Bailamos'],
+        [32412, 'Teatro'],
+        [4563, 'Aplausos'],
+        ['d:aplauso', 'Manos en alto'],
+        [24791, 'Música'],
+        [25904, 'Fotos'],
+        [28206, 'Almuerzo'],
+        [6929, 'Baño'],
+        [31937, 'Descanso'],
+        [37857, 'Cascos'],
+        [33072, 'A clase'],
+      ];
+      const TARJETAS_2 = [
+        {
+          titulo: 'Para cualquier fiesta',
+          color: 'naranja',
+          tarjetas: [
+            [39269, 'Rincón tranquilo'],
+            [7157, 'Ruido fuerte'],
+            [8027, 'Luz apagada'],
+            [5514, 'Recogemos'],
+            [28429, 'Fin de la fiesta'],
+            [2317, 'A casa'],
+          ],
+        },
+        {
+          titulo: 'Para la Navidad o el invierno',
+          nota: 'Elegid solo las que tengan sentido en vuestro cole.',
+          color: 'azul',
+          tarjetas: [
+            [5493, 'Fiesta de invierno'],
+            [3092, 'Navidad'],
+            [2778, 'Villancicos'],
+            [3124, 'Reyes Magos'],
+            [3139, 'Papá Noel'],
+            [6448, 'Chocolate'],
+          ],
+        },
+        {
+          titulo: 'Para carnaval y fin de curso',
+          color: 'morado',
+          tarjetas: [
+            [36663, 'Desfile'],
+            [24165, 'Máscaras'],
+            [8626, 'Maquillaje'],
+            [38043, 'Graduación'],
+            [21793, 'Me despido'],
+            [39446, 'Vacaciones'],
+          ],
+        },
+        {
+          titulo: 'En blanco',
+          nota: 'Dibuja o pega un pictograma y escribe la palabra.',
+          color: 'amarillo',
+          tarjetas: [null, null, null],
+        },
+      ];
+
+      // ---------------------------------------------------------------------
+      // Así quiero participar: [título, pictograma del título, color, opciones]
+      // ---------------------------------------------------------------------
+      const ELECCION = [
+        ['En el escenario', 9913, 'morado', [[35709, 'Salgo con mi clase'], [8608, 'Ayudo desde abajo'], [24783, 'Miro desde mi sitio']]],
+        ['Mi sitio', 25082, 'azul', [[3244, 'Cerca de la puerta'], [28003, 'Al lado de mi adulto'], [8336, 'Lejos de los altavoces']]],
+        ['Lo que me pongo', 2411, 'verde', [[7233, 'Mi ropa de siempre'], [5985, 'Una parte del disfraz'], [37857, 'Mis cascos']]],
+        ['Cómo aplaudo', 4563, 'naranja', [['d:aplauso', 'Con las manos en alto'], [4563, 'Con palmas suaves'], [31923, 'Con una sonrisa']]],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Plan de descanso
+      // ---------------------------------------------------------------------
+      const PUEDO = [
+        [34409, 'Respiro despacio'],
+        [2276, 'Bebo agua'],
+        [37857, 'Mis cascos'],
+        [6469, 'Miro un cuento'],
+        [3264, 'Aprieto un cojín'],
+        [5936, 'Estoy en silencio'],
+      ];
+
+      // Tarjetas para llevar: [pictograma, texto, color]
+      const LLEVAR = [
+        [31937, 'Necesito descansar', 'coral'],
+        [31937, 'Necesito descansar', 'coral'],
+        [7157, 'Me molesta el ruido', 'naranja'],
+        [37857, 'Quiero mis cascos', 'naranja'],
+        [7171, 'Necesito ayuda', 'morado'],
+        [6929, 'Quiero ir al baño', 'azul'],
+        [2276, 'Quiero agua', 'azul'],
+        [31923, 'Estoy bien', 'verde'],
+      ];
+
+      // Carteles: [pictograma o dibujo, texto]
+      const NORMAS_RINCON = [
+        [13024, 'Vengo con un adulto.'],
+        [5936, 'Aquí hablamos bajito.'],
+        [3264, 'Me siento o me tumbo.'],
+        [37857, 'Puedo ponerme los cascos.'],
+        [6630, 'Vuelvo a la fiesta cuando estoy bien.'],
+      ];
+      const NORMAS_FIESTA = [
+        ['d:aplauso', 'Aplaudimos con las manos en alto.'],
+        [38215, 'La música suena suave.'],
+        [38383, 'Hacemos las fotos sin flash.'],
+        [2392, 'Las fotos y los vídeos son para la familia. No se suben a internet.'],
+        [39269, 'Si alguien necesita descansar, hay un rincón tranquilo en ___s.'],
+        [3244, 'Se puede salir y volver cuando haga falta.'],
+      ];
+
+      // Tarjetas de aviso: [pictograma o dibujo, texto, color]
+      const AVISOS = [
+        [24791, 'Ahora, música', 'azul'],
+        ['d:aplauso', 'Aplauso con las manos en alto', 'naranja'],
+        [7157, 'Ahora, un ruido fuerte', 'coral'],
+        [8027, 'Se apagan las luces', 'morado'],
+        [31937, 'Un descanso', 'verde'],
+        [28429, 'La fiesta termina', 'amarillo'],
+      ];
+
+      // Ficha para el equipo
+      const CUESTA = [
+        'El ruido fuerte',
+        'Los aplausos',
+        'La música alta',
+        'Las luces que parpadean',
+        'Estar a oscuras',
+        'Mucha gente',
+        'Los disfraces o las máscaras',
+        'El maquillaje',
+        'La ropa nueva o que pica',
+        'Esperar mucho rato sentado',
+        'Los cambios de última hora',
+        'Salir al escenario',
+      ];
+      const AYUDA = [
+        'Sus cascos',
+        'Su tarjeta «Necesito descansar»',
+        'Su adulto de referencia',
+        'Un objeto suyo',
+        'Moverse o caminar',
+        'Beber agua',
+        'Un sitio cerca de la puerta',
+        'Ver la agenda de la fiesta',
+        'Saber cuánto falta',
+      ];
+
+      // Nota para las familias: [pictograma o dibujo, texto]
+      const FAMILIA_ANTES = [
+        [6469, 'Leed juntos la historia de la fiesta. Os la damos en papel.'],
+        ['d:aplauso', 'Practicad el aplauso con las manos en alto.'],
+        [5985, 'Probad la ropa o el disfraz en casa, unos días antes.'],
+        [37857, 'Si usa cascos, que los traiga ese día con su nombre.'],
+        [2392, 'Contadnos qué le molesta y qué le ayuda.'],
+      ];
+      const FAMILIA_FIESTA = [
+        ['d:aplauso', 'Aplaudid con las manos en alto.'],
+        [38383, 'Haced las fotos sin flash.'],
+        [2317, 'Las fotos y los vídeos, solo para casa. En ellos salen otros niños y niñas: no los subáis a internet.'],
+      ];
+
+      // De un vistazo: [color, pictograma o dibujo, título, para qué, páginas]
+      const MAPA = [
+        ['azul', 7099, 'La fiesta del cole', 'Historia social en dos hojas, con huecos para escribir vuestra fiesta.', 'historia', 'historia+1'],
+        ['verde', 6012, 'Mi fiesta, paso a paso', 'Agenda con velcro y 45 tarjetas, de «Llego al cole» a «A casa».', 'agenda', 'tarjetas2'],
+        ['morado', 35709, 'Así quiero participar', 'Para elegir juntos el escenario, el sitio, la ropa y el aplauso.', 'participar'],
+        ['coral', 31937, 'Cuando necesito descansar', 'El plan de descanso y ocho tarjetas para pedir lo que necesita.', 'descanso', 'llevar'],
+        ['coral', 39269, 'Rincón de descanso', 'Cartel para la puerta del sitio tranquilo.', 'rincon'],
+        ['naranja', 'd:aplauso', 'En esta fiesta', 'Cartel para la entrada y seis tarjetas de aviso para quien presenta.', 'cartel', 'avisos'],
+        ['azul', 28003, 'Lo que le ayuda en la fiesta', 'Ficha para el equipo, para rellenar con la familia.', 'equipo'],
+        ['verde', 2392, 'Guía para el docente y nota para las familias', 'Para leer antes de empezar.', 'guia', 'familias'],
+      ];
+
+      // Cuándo usar cada pieza: [color, título, tareas]
+      const CUANDO = [
+        ['amarillo', 'Dos semanas antes', ['Habla con la familia y rellenad juntos la ficha.', 'Elige el rincón de descanso y su adulto.']],
+        ['azul', 'La semana de la fiesta', ['Leed la historia cada día.', 'Elegid cómo participa.', 'Ensayad en el sitio real.']],
+        ['coral', 'El día', ['Repasad la agenda.', 'Colgad los carteles.', 'Su tarjeta y sus cascos, a mano.']],
+        ['verde', 'Después', ['Comentad cómo fue.', 'Apunta qué funcionó.']],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Pintar las hojas
+      // ---------------------------------------------------------------------
+      const pagina = (clave) => {
+        const [nombre, mas] = clave.split('+');
+        return PAGINAS[nombre] + Number(mas ?? 0);
+      };
+
+      const frase = ([p, lineas, pista]) =>
+        `<li class="frase"><div class="marco-picto">${imagen(p)}</div><div><p>${lineas
+          .map((l) => `<span>${huecos(l)}</span>`)
+          .join('')}</p>${pista ? `<p class="frase__pista">${pista}</p>` : ''}</div></li>`;
+      document.getElementById('historia-1').innerHTML = HISTORIA_1.map(frase).join('');
+      document.getElementById('historia-2').innerHTML = HISTORIA_2.map(frase).join('');
+
+      // Agenda: siete filas, con «Hoy» y «Terminado»
+      let filas = `<span></span><p class="agenda__titulo c-verde">${picto(38276)}Hoy</p><span></span><p class="agenda__titulo c-amarillo">${picto(28429)}Terminado</p>`;
+      for (let i = 1; i <= 7; i++) {
+        filas += `<b class="numero">${i}</b><div class="casilla"></div>${dibujo('flecha', 'flecha', '0 0 68 40')}<div class="casilla casilla--hecho"></div>`;
+      }
+      document.getElementById('agenda').innerHTML = filas;
+
+      const tarjeta = (color) => (t) =>
+        t
+          ? `<li class="tarjeta c-${color}"><span class="tarjeta__picto">${imagen(t[0])}</span><p>${t[1]}</p></li>`
+          : `<li class="tarjeta tarjeta--blanca c-${color}"><span class="tarjeta__picto"><i></i></span><p><i></i></p></li>`;
+      document.getElementById('tarjetas-1').innerHTML = TARJETAS_1.map(tarjeta('verde')).join('');
+      document.getElementById('tarjetas-2').innerHTML = TARJETAS_2.map(
+        (g) =>
+          `<h2 class="grupo-tarjetas">${g.titulo}${g.nota ? ` <small>${g.nota}</small>` : ''}</h2><ul class="tarjetas">${g.tarjetas
+            .map(tarjeta(g.color))
+            .join('')}</ul>`,
+      ).join('');
+
+      document.getElementById('eleccion').innerHTML = ELECCION.map(
+        ([titulo, p, color, opciones]) =>
+          `<section class="c-${color}"><h2>${picto(p)}${titulo}</h2><ul class="opciones">${opciones
+            .map(([o, texto]) => `<li class="opcion">${imagen(o)}<p>${texto}</p></li>`)
+            .join('')}</ul></section>`,
+      ).join('');
+
+      document.getElementById('plan').innerHTML = [
+        `<li class="paso-plan"><span class="paso-plan__numero">1</span>${dibujo('tarjeta', 'paso-plan__picto')}<p><span>Enseño mi tarjeta o digo:</span><span>«Necesito descansar».</span></p></li>`,
+        `<li class="paso-plan"><span class="paso-plan__numero">2</span>${picto(13024, 'paso-plan__picto')}<div><p>Voy con ${huecos('___')}.</p><p class="frase__pista">Escribe el nombre de su adulto de referencia.</p></div></li>`,
+        `<li class="paso-plan paso-plan--foto"><span class="paso-plan__numero">3</span>${picto(39269, 'paso-plan__picto')}<div><p>Vamos a ${huecos('___s')}.</p><p class="frase__pista">Escribe dónde está el rincón de descanso.</p></div><div class="foto">Pega aquí una foto del rincón, sin alumnado</div></li>`,
+        `<li class="paso-plan paso-plan--opciones"><span class="paso-plan__numero">4</span><p>Allí puedo:</p><ul class="puedo">${PUEDO.map(
+          ([n, texto]) => `<li>${picto(n)}<p>${texto}</p></li>`,
+        ).join('')}</ul></li>`,
+        `<li class="paso-plan"><span class="paso-plan__numero">5</span>${picto(6630, 'paso-plan__picto')}<p><span>Cuando estoy bien, vuelvo a la fiesta.</span><span>Si no, me quedo con mi adulto.</span></p></li>`,
+      ].join('');
+
+      document.getElementById('llevar').innerHTML = LLEVAR.map(
+        ([n, texto, color]) =>
+          `<li class="c-${color}"><span class="llevar__banda"></span><span class="llevar__cuerpo">${picto(n)}<p>${texto}</p></span></li>`,
+      ).join('');
+
+      const normas = (lista) => lista.map(([p, texto]) => `<li>${imagen(p)}<p>${huecos(texto)}</p></li>`).join('');
+      document.getElementById('normas-rincon').innerHTML = normas(NORMAS_RINCON);
+      document.getElementById('normas-fiesta').innerHTML = normas(NORMAS_FIESTA);
+
+      document.getElementById('avisos').innerHTML = AVISOS.map(
+        ([p, texto, color]) => `<li class="aviso c-${color}"><span class="aviso__banda"></span>${imagen(p)}<p>${texto}</p></li>`,
+      ).join('');
+
+      document.getElementById('cuesta').innerHTML = CUESTA.map((c) => `<li>${c}</li>`).join('');
+      document.getElementById('ayuda').innerHTML = AYUDA.map((c) => `<li>${c}</li>`).join('');
+
+      const lista = (items) => items.map(([p, texto]) => `<li>${imagen(p)}<span>${texto}</span></li>`).join('');
+      document.getElementById('familia-antes').innerHTML = lista(FAMILIA_ANTES);
+      document.getElementById('familia-fiesta').innerHTML = lista(FAMILIA_FIESTA);
+
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, texto, ...claves]) => {
+        const pags = claves.map(pagina);
+        const ultima = pags[pags.length - 1];
+        const etiqueta =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        return `<li class="c-${color}">${imagen(n)}<div><h2>${titulo}</h2><p>${texto}</p></div><p class="mapa__pagina">${etiqueta}</p></li>`;
+      }).join('');
+
+      document.getElementById('cuando').innerHTML = CUANDO.map(
+        ([color, titulo, tareas]) =>
+          `<div class="c-${color}"><h3>${titulo}</h3><ul>${tareas.map((t) => `<li>${t}</li>`).join('')}</ul></div>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: el escenario de la fiesta (dibujo de IdEducando con pictogramas de ARASAAC)
+      // ---------------------------------------------------------------------
+      const COLORES = [AZUL, VERDE, AMARILLO, CORAL, MORADO, NARANJA];
+      // Banderines a lo largo de una cuerda curva (curva de Bézier cuadrática)
+      const punto = (t, a, b, c) => (1 - t) ** 2 * a + 2 * (1 - t) * t * b + t ** 2 * c;
+      let banderines = '';
+      for (let i = 0; i < 13; i++) {
+        const t = (i + 0.5) / 13;
+        const x = punto(t, 28, 105, 182);
+        const y = punto(t, 21, 38, 21);
+        banderines += `<path d="M${x - 4.6} ${y - 0.4} L${x + 4.6} ${y - 0.4} L${x} ${y + 8.6} Z" fill="${COLORES[i % 6]}" stroke="${M}" stroke-width="0.6" stroke-linejoin="round"/>`;
+      }
+      let ondas = 'M6 4 H204 V15';
+      for (let x = 204; x > 6; x -= 11) ondas += ` Q${x - 5.5} 22 ${x - 11} 15`;
+      ondas += ' Z';
+      const telon = `<path d="M8 6 H54 C47 30 41 52 47 72 C50 82 45 89 40 93 H8 Z" fill="${CORAL}" stroke="${M}" stroke-width="0.9" stroke-linejoin="round"/>
+        <path d="M18 12 C16 40 16 68 18 93 M28 12 C26 40 26 68 28 93 M38 12 C35 40 34 62 36 86" fill="none" stroke="#b63a26" stroke-width="0.8"/>`;
+      const burbuja = (cx, cy, r, n) => `<circle cx="${cx}" cy="${cy + 1.2}" r="${r}" fill="${M}" opacity=".16"/>
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff" stroke="${M}" stroke-width="0.7"/>
+        <image href="pictogramas/${n}.png" x="${cx - r * 0.72}" y="${cy - r * 0.72}" width="${r * 1.44}" height="${r * 1.44}"/>`;
+      const nota = (x, y, t) => `<svg x="${x}" y="${y}" width="${t}" height="${t}" viewBox="0 0 100 100">${NOTA}</svg>`;
+      document.getElementById('escenario').innerHTML = svg(
+        `<rect x="22" y="12" width="166" height="82" fill="#e4edfb"/>
+         <path d="M70 12 L50 94 H100 Z M140 12 L112 94 H160 Z" fill="#fdf0c7" opacity=".95"/>
+         <path d="M28 21 Q105 55 182 21" fill="none" stroke="${M}" stroke-width="0.7"/>
+         ${banderines}
+         ${telon}
+         <g transform="translate(210 0) scale(-1 1)">${telon}</g>
+         <path d="${ondas}" fill="${MORADO}" stroke="${M}" stroke-width="0.9" stroke-linejoin="round"/>
+         <rect x="10" y="93" width="190" height="16" rx="2.4" fill="${NARANJA}" stroke="${M}" stroke-width="0.9"/>
+         <path d="M10 101 H200" stroke="${M}" stroke-width="0.5" opacity=".45"/>
+         <image href="pictogramas/31434.png" x="44" y="54" width="40" height="40"/>
+         <svg x="80" y="38" width="54" height="56" viewBox="0 0 100 104">${APLAUSO}</svg>
+         <image href="pictogramas/8608.png" x="134" y="62" width="32" height="32"/>
+         ${nota(60, 34, 11)}${nota(146, 38, 9)}
+         ${burbuja(28, 104, 13, 37857)}${burbuja(182, 104, 13, 31937)}`,
+        '',
+        '0 0 210 116',
+      );
+      document.querySelector('#escenario svg').style.cssText = 'width:100%;height:100%';
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

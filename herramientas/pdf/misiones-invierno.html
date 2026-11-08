@@ -1,0 +1,2737 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Misiones de invierno: tarjetas de encargos con pasos, reloj y registro · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar: cuatro tarjetas o dieciséis fichas por hoja, con márgenes de 11 y 12 mm. */
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Un color para cada nivel (siempre con su forma, su número y su texto) ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      /* Las dos columnas se reparten en una rejilla: lo que necesitas y qué imprimir a la izquierda,
+         los pasos y el resultado a la derecha, y el criterio del velcro a todo lo ancho. */
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 52pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 120mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 26mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.6mm 0;
+      }
+
+      /* El abanico de tarjetas de la portada: tarjetas de verdad, reducidas y giradas. */
+      .abanico {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .abanico > * {
+        position: absolute;
+      }
+
+      .abanico .tm {
+        transform-origin: 0 0;
+        box-shadow: 0 2mm 5mm -1mm rgb(30 43 85 / 0.28);
+        border-style: solid;
+        border-color: var(--c);
+        border-width: 0.6mm;
+      }
+
+      .copo {
+        position: absolute;
+        z-index: 1;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8.4mm;
+        height: 8.4mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.3mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 27mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 1mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      .vistazo__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: start;
+        margin: 0 0 3.5mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.6mm;
+        font-size: 13pt;
+      }
+
+      .lista-niveles {
+        display: grid;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 10.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .lista-niveles .nv {
+        justify-self: center;
+      }
+
+      .vistazo ol.cuatro {
+        margin: 0;
+        padding-left: 5mm;
+      }
+
+      .vistazo ol.cuatro li {
+        margin-bottom: 0.8mm;
+      }
+
+      /* ---------- Hojas de tarjetas (cuatro por hoja) ---------- */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        height: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      .rejilla-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 121mm;
+        gap: 4mm 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* La tarjeta de misión: banda de color, cabecera, tiempo y nivel, pasos y «¡Hecho!».
+         Al imprimir, Chromium descoloca las cajas flexibles en columna: aquí las filas son de una rejilla
+         con las alturas en milímetros. */
+      .tm {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.6mm 17.5mm 10.5mm minmax(0, 1fr) 13mm;
+        width: 90mm;
+        height: 121mm;
+        margin: 0;
+        padding: 0 3mm 2.6mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tm__banda {
+        margin: 0 -3mm;
+        background: var(--c);
+      }
+
+      .tm__agujero {
+        position: absolute;
+        top: 5.4mm;
+        right: 3.2mm;
+        width: 4.8mm;
+        height: 4.8mm;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 50%;
+      }
+
+      .tm__cabeza {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.8mm;
+        padding: 1.2mm 7mm 0 0;
+      }
+
+      .tm__icono {
+        display: grid;
+        place-items: center;
+        width: 15mm;
+        height: 15mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.9mm var(--t);
+      }
+
+      .tm__icono img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .tm__titulo {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+        text-wrap: balance;
+      }
+
+      .tm__tiempo {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2.2mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .tm__tiempo svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .tm__minutos {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .tm__nivel {
+        display: flex;
+        align-items: center;
+        gap: 1.5mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--tx);
+        white-space: nowrap;
+      }
+
+      .tm__pasos {
+        display: grid;
+        grid-auto-rows: minmax(0, 1fr);
+        gap: 1.2mm;
+        min-height: 0;
+        margin: 1.6mm 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tm__paso {
+        display: grid;
+        grid-template-columns: 7mm var(--picto) minmax(0, 1fr);
+        align-items: center;
+        gap: 2.2mm;
+        min-height: 0;
+        margin: 0;
+        padding: 0.5mm 1.6mm 0.5mm 1.2mm;
+        border: 0.35mm solid var(--linea);
+        border-radius: 2.6mm;
+      }
+
+      .tm__numero {
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1;
+      }
+
+      .tm__paso > img,
+      .tm__paso > .mini-tarjeta,
+      .tm__paso > .hueco-picto {
+        width: var(--picto);
+        height: var(--picto);
+      }
+
+      .tm__paso p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+
+      .tm__linea {
+        display: block;
+        height: 6.5mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .tm.p2 {
+        --picto: 30mm;
+      }
+      .tm.p3 {
+        --picto: 20mm;
+      }
+      .tm.p4 {
+        --picto: 15mm;
+      }
+
+      /* La tarjeta del tiempo del paso «Pongo la tarjeta del tiempo»: un pictograma dentro de un marco. */
+      .mini-tarjeta {
+        display: grid;
+        place-items: center;
+        padding: 1.6mm;
+        border: 0.6mm solid var(--marino);
+        border-top-width: 2.4mm;
+        border-top-color: var(--azul);
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      .mini-tarjeta img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .tm__hecho {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 10mm;
+        align-items: center;
+        gap: 3mm;
+        padding: 0 3mm;
+        border: 0.6mm solid var(--amarillo);
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+      }
+
+      .tm__casilla {
+        width: 11mm;
+        height: 11mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .tm__hecho p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .tm__hecho svg {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      /* Tarjeta en blanco */
+      .tm--blanca .tm__icono {
+        border-style: dashed;
+        box-shadow: none;
+      }
+
+      .tm--blanca .tm__titulo {
+        display: grid;
+        gap: 1mm;
+        font-size: 11pt;
+        font-family: var(--texto);
+        font-weight: 400;
+        color: var(--suave);
+      }
+
+      .renglon {
+        display: block;
+        height: 6.4mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .hueco-picto {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .tm--blanca .tm__paso {
+        grid-template-columns: 7mm var(--picto) minmax(0, 1fr);
+      }
+
+      .tm--blanca .tm__minutos {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.6mm;
+      }
+
+      .tm--blanca .tm__minutos span {
+        width: 11mm;
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .lineas2 {
+        display: grid;
+        gap: 0.4mm;
+      }
+
+      .lineas2 span {
+        display: block;
+        height: 6.4mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .formas-nivel {
+        display: flex;
+        align-items: center;
+        gap: 1.2mm;
+      }
+
+      .forma-vacia {
+        width: 7.4mm;
+        height: 7.4mm;
+      }
+
+      .forma-vacia.n3 {
+        width: 8.6mm;
+        height: 8.6mm;
+      }
+
+      /* ---------- Plantilla: pases y «¿Me das una misión?» ---------- */
+      .rejilla-plantilla {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-template-rows: 121mm 58mm 58mm;
+        gap: 4mm 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pieza {
+        position: relative;
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .pase {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        align-content: center;
+        row-gap: 3.6mm;
+        column-gap: 4mm;
+        padding: 5mm 5mm 3mm 4mm;
+      }
+
+      .pase::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.6mm;
+        background: var(--c);
+      }
+
+      .pase__icono {
+        grid-row: 1 / span 3;
+        align-self: center;
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        box-shadow: inset 0 0 0 0.9mm var(--t);
+      }
+
+      .pase__icono img {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .pase h2,
+      .pide h2 {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 21pt;
+        line-height: 1.02;
+      }
+
+      .pase__dato {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 1.6mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .pase__dato span {
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .pase__dato--adulto {
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .pase__dato--adulto span {
+        height: 5mm;
+      }
+
+      .pide {
+        display: grid;
+        grid-template-columns: 26mm minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto;
+        column-gap: 3.5mm;
+        padding: 4.6mm 4mm 3mm;
+        background: var(--t);
+      }
+
+      .pide::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.6mm;
+        background: var(--c);
+      }
+
+      .pide > img {
+        grid-row: 1 / span 2;
+        align-self: center;
+        width: 26mm;
+        height: 26mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .pide h2 {
+        align-self: center;
+        font-size: 22pt;
+      }
+
+      .pide p {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      /* ---------- Tablero «Misiones de hoy» ---------- */
+      .tablero__cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2mm;
+      }
+
+      .tablero__cabeza h1 {
+        margin: 0;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      .tablero__cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .hoy {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 3mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .hoy span {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .tablero__titulos,
+      .tablero__fila {
+        display: grid;
+        grid-template-columns: 38mm minmax(0, 1fr) 7mm 38mm;
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .tablero__titulos {
+        margin: 0 0 1.5mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .tablero__titulos span:nth-child(2) {
+        text-align: left;
+      }
+
+      .tablero__filas {
+        display: grid;
+        gap: 2.2mm;
+        margin: 0 0 2.6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tablero__fila {
+        height: 39mm;
+        margin: 0;
+      }
+
+      .hueco {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 38mm;
+        height: 38mm;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .hueco--hecho {
+        border-style: solid;
+        border-color: var(--amarillo);
+        background: var(--amarillo-tinte);
+      }
+
+      .hueco svg.estrella-fondo {
+        position: absolute;
+        inset: 2.5mm;
+        width: 33mm;
+        height: 33mm;
+      }
+
+      .velcro {
+        position: relative;
+        width: 20mm;
+        height: 20mm;
+        border: 0.4mm solid #9aa3bd;
+        border-radius: 50%;
+        background: #d9dde8;
+      }
+
+      .datos-fila {
+        display: grid;
+        gap: 5mm;
+      }
+
+      .datos-fila p {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .datos-fila span {
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .flecha {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .asi-es {
+        padding: 2.4mm 3.5mm 3mm;
+        border: 0.6mm solid var(--azul);
+        border-radius: 4mm;
+        background: var(--azul-tinte);
+        break-inside: avoid;
+      }
+
+      .asi-es h2 {
+        margin: 0 0 1.8mm;
+        font-size: 14pt;
+      }
+
+      .asi-es ol {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.8mm 6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .asi-es li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0;
+      }
+
+      .asi-es img,
+      .asi-es svg {
+        width: 13mm;
+        height: 13mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .asi-es p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+      }
+
+      .leyenda {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .leyenda svg {
+        flex: none;
+        width: 8mm;
+        height: 8mm;
+      }
+
+      /* ---------- Fichas del tablero ---------- */
+      .fichas {
+        display: grid;
+        grid-template-columns: repeat(4, 42mm);
+        grid-auto-rows: 42mm;
+        gap: 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ficha {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.4mm minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 0 1.2mm 1.8mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .ficha__banda {
+        justify-self: stretch;
+        align-self: stretch;
+        margin: 0 -1.2mm;
+        background: var(--c);
+      }
+
+      .ficha img,
+      .ficha .hueco-picto {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .ficha p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+        text-wrap: balance;
+      }
+
+      .ficha .nv {
+        position: absolute;
+        top: 4mm;
+        right: 2.2mm;
+      }
+
+      .ficha .renglon {
+        justify-self: stretch;
+        margin: 0 1.5mm;
+      }
+
+      .seccion-fichas {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      /* ---------- Reloj de misión ---------- */
+      .reloj {
+        display: grid;
+        grid-template-columns: 102mm minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        column-gap: 6mm;
+        row-gap: 2mm;
+        align-items: center;
+      }
+
+      .reloj__disco {
+        justify-self: center;
+      }
+
+      .reloj h2 {
+        margin: 0 0 1.6mm;
+        font-size: 14pt;
+      }
+
+      .reloj ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .usar li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 2.4mm;
+      }
+
+      .usar img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .usar p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.06;
+      }
+
+      .montar {
+        counter-reset: paso;
+      }
+
+      .montar li {
+        position: relative;
+        margin: 0 0 1.6mm;
+        padding-left: 7mm;
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .montar li::before {
+        counter-increment: paso;
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: 0.2mm;
+        display: grid;
+        place-items: center;
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      .reloj + .caja {
+        margin: 3mm 0 0;
+        padding: 2.4mm 3.6mm;
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      /* ---------- Mi semana de misiones ---------- */
+      .semana__cabeza {
+        display: grid;
+        grid-template-columns: 20mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .semana__cabeza > img:first-child {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .semana__cabeza h1 {
+        margin: 0;
+        font-size: 26pt;
+        line-height: 1;
+      }
+
+      .semana__cabeza > img:last-child {
+        width: 30mm;
+        height: auto;
+      }
+
+      .semana__datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 2.6mm;
+      }
+
+      .semana__datos p,
+      .linea-dato {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .semana__datos span,
+      .linea-dato span {
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .clave {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .clave li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+      }
+
+      .clave svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .dias {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .dia {
+        display: grid;
+        grid-template-columns: 30mm repeat(4, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 2mm;
+        height: 23mm;
+        margin: 0;
+      }
+
+      .dia__nombre {
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 0.6mm;
+        border-radius: 3mm;
+        background: var(--azul-tinte);
+      }
+
+      .dia__nombre img {
+        width: 24mm;
+        height: 10mm;
+        object-fit: cover;
+      }
+
+      .dia__nombre span {
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .dia__casilla {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 9mm;
+        align-items: center;
+        padding: 1.6mm 2mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+      }
+
+      .dia__casilla svg:first-child {
+        width: 16.5mm;
+        height: 16.5mm;
+        justify-self: center;
+      }
+
+      .dia__casilla svg:last-child {
+        width: 8.5mm;
+        height: 8.5mm;
+        align-self: end;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 5mm;
+        align-items: start;
+      }
+
+      .meta .caja {
+        margin: 0;
+        padding: 3mm 3.6mm;
+      }
+
+      .meta h2 {
+        margin: 0 0 2mm;
+        font-size: 18pt;
+      }
+
+      .elijo {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .elijo li {
+        display: grid;
+        grid-template-columns: 12mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+      }
+
+      .elijo img {
+        width: 12mm;
+        height: 12mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .elijo .renglon {
+        height: 8mm;
+      }
+
+      .meta .linea-dato + .linea-dato {
+        margin-top: 3mm;
+      }
+
+      .linea-dato--arriba {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+      }
+
+      /* ---------- Registro y escalera de ayudas ---------- */
+      .registro {
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .registro__datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .registro__datos p {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+        font-size: 11pt;
+      }
+
+      .registro__datos span {
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .registro__datos .fechas {
+        grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+      }
+
+      .escalera {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: end;
+        gap: 2mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .escalera li {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        margin: 0;
+        padding: 2mm 2.4mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3mm;
+        background: var(--t);
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .escalera li:nth-child(1) {
+        height: 37mm;
+      }
+      .escalera li:nth-child(2) {
+        height: 39.5mm;
+      }
+      .escalera li:nth-child(3) {
+        height: 42mm;
+      }
+      .escalera li:nth-child(4) {
+        height: 44.5mm;
+      }
+      .escalera li:nth-child(5) {
+        height: 47mm;
+      }
+
+      .escalera strong {
+        display: flex;
+        align-items: center;
+        gap: 1.4mm;
+        margin: 0 0 1mm;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.05;
+      }
+
+      .escalera b {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-size: 11pt;
+      }
+
+      .escalera__ejes {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 3mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .regla {
+        margin: 0 0 3mm;
+      }
+
+      .registro table th,
+      .registro table td {
+        padding: 1.2mm 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .registro tbody td {
+        height: 8.4mm;
+      }
+
+      .registro thead th {
+        font-size: 11pt;
+        line-height: 1.15;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.6em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.8mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+        break-inside: auto;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .familias ol {
+        margin-bottom: 0.4em;
+      }
+
+      .misiones-casa {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 5mm;
+        margin: 1mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .misiones-casa li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 1.4mm 2.4mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.25;
+      }
+
+      .misiones-casa img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: tarjetas;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.45em 0 0.15em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 168mm; height: 168mm; right: -64mm; top: 124mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 74mm; height: 74mm; left: -30mm; top: 176mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 24mm; height: 24mm; left: 98mm; top: 128mm; background: var(--amarillo-tinte)"></div>
+      <div id="copos-portada" aria-hidden="true"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Para toda la clase</p>
+        <h1 class="portada__titulo">Misiones<br />de invierno</h1>
+        <p class="portada__subtitulo">
+          Encargos cortos y útiles para el alumnado con trastorno por déficit de atención e hiperactividad (TDAH) y para
+          toda la clase.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="abanico" id="abanico" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>Tres niveles<b>2, 3 o 4</b>pasos</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Una misión es un encargo corto y útil para la clase, como regar la planta o llevar un recado. Cada tarjeta enseña los
+        pasos con pictogramas y el tiempo, y tiene una casilla para marcar «¡Hecho!». Las misiones son de toda la clase, por
+        turnos. Al alumnado con TDAH le dan, además, un motivo para levantarse y una tarea que empieza y acaba.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+      <div class="vistazo__fila">
+        <div class="caja caja--azul">
+          <h2>Tres niveles: 2, 3 o 4 pasos</h2>
+          <ul class="lista-niveles" id="lista-niveles"></ul>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Una misión, en cuatro pasos</h2>
+          <ol class="cuatro">
+            <li>Elige la misión y el momento.</li>
+            <li>Dásela de cerca, con la tarjeta y una frase corta.</li>
+            <li>Pon el reloj de misión.</li>
+            <li>Al volver, «¡Hecho!» y dile qué ha hecho bien.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Antes, habla con tu centro.</strong> Decidid qué recados se pueden hacer fuera del aula y quién los recibe. En Infantil, mejor en pareja o con un adulto. La guía de la página <span data-pagina="guia"></span>
+          explica cómo dar cada misión y cómo retirar las ayudas.
+        </p>
+      </div>
+    </section>
+
+    <!-- Las tres hojas de tarjetas se generan con el guion del final, a partir de la lista MISIONES -->
+    <div id="hojas-misiones"></div>
+
+    <!-- ======================================================================
+         PLANTILLAS, PASES Y «¿ME DAS UNA MISIÓN?»
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <h1 class="solo-lector">Plantillas en blanco, pases de misión y tarjetas para pedir una misión</h1>
+      <p class="aviso">
+        <span><strong>Plantillas y pases</strong> · Para inventar misiones y para salir del aula</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <ul class="rejilla-plantilla" id="plantilla"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Si
+        pegas otros pictogramas de ARASAAC en las tarjetas en blanco, cítalos igual.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TABLERO «MISIONES DE HOY»
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="tablero__cabeza">
+        <div>
+          <p class="antetitulo" style="margin: 0 0 1mm">Tablero · Con velcro</p>
+          <h1>Misiones de hoy</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="hoy">Hoy es:<span></span></p>
+      <p class="tablero__titulos" aria-hidden="true"><span>Misión</span><span>¿Quién? ¿Cuándo?</span><span></span><span>¡Hecho!</span></p>
+      <ol class="tablero__filas" id="filas"></ol>
+      <div class="asi-es">
+        <h2>Así es una misión</h2>
+        <ol id="asi-es"></ol>
+      </div>
+      <p class="leyenda">
+        <span data-icono="velcro"></span>
+        <span>Un círculo de velcro <strong>rugoso</strong> en cada círculo gris. El <strong>suave</strong> va detrás de cada ficha. «¿Quién?» y «¿Cuándo?» se escriben con rotulador de pizarra.</span>
+      </p>
+      <p class="atribucion" style="margin-top: 1.4mm">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Los
+        demás dibujos son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         FICHAS DEL TABLERO
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el tablero · Para recortar</p>
+          <h1>Fichas de las misiones</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Una ficha por misión, con un círculo de velcro suave detrás. La forma de la esquina dice su nivel. Las cuatro en blanco
+        son para vuestras misiones: dibuja o pega un pictograma y escribe el nombre antes de plastificar.
+      </p>
+      <ul class="fichas" id="fichas"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         RELOJ DE MISIÓN
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Temporizador visual · Para recortar</p>
+          <h1>Reloj de misión</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Dos discos que se encajan. Al girar el blanco, el color enseña los minutos de la misión, hasta 10. Imprime en
+        cartulina y plastifica cada disco por separado.
+      </p>
+      <div class="reloj">
+        <div class="reloj__disco" id="disco-color"></div>
+        <div>
+          <h2>Cómo se usa</h2>
+          <ol class="usar">
+            <li><img src="pictogramas/37659.png" alt="" /><p>Giro el disco blanco hasta mis minutos.</p></li>
+            <li><img src="pictogramas/32214.png" alt="" /><p>Hago mi misión.</p></li>
+            <li><img src="pictogramas/11359.png" alt="" /><p>Si queda color, llego a tiempo.</p></li>
+          </ol>
+        </div>
+        <div class="reloj__disco" id="disco-blanco"></div>
+        <div>
+          <h2>Cómo se monta</h2>
+          <ol class="montar">
+            <li>Recorta los dos discos por la línea de puntos y plastifícalos.</li>
+            <li>Corta cada disco por su línea gruesa, desde el borde hasta el punto del centro.</li>
+            <li>Pon el blanco encima del de color, con los cortes juntos. Pasa el lado derecho del corte de color por encima del blanco.</li>
+            <li>Gira el blanco hacia la derecha: el color aparece a partir del 0. Si sale por el otro lado, encájalos al revés.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="caja caja--amarilla">
+        <p>
+          El reloj de papel no avanza solo: gíralo tú cada minuto o al volver. Para medir el tiempo, usa el reloj de la clase, un
+          reloj de arena o el temporizador de la pizarra digital.
+        </p>
+      </div>
+      <p class="atribucion">
+        Los discos son dibujos de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA.
+        Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI SEMANA DE MISIONES (para el alumno o la alumna)
+         ====================================================================== -->
+    <section class="hoja semana">
+      <div class="semana__cabeza">
+        <img src="pictogramas/31408.png" alt="" />
+        <div>
+          <p class="antetitulo" style="margin: 0 0 1mm">Registro semanal · Una hoja por semana</p>
+          <h1>Mi semana de misiones</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="semana__datos">
+        <p>Me llamo:<span></span></p>
+        <p>Semana del:<span></span></p>
+      </div>
+      <ul class="clave" id="clave"></ul>
+      <ol class="dias" id="dias"></ol>
+      <div class="meta">
+        <div class="caja caja--amarilla">
+          <h2>Mi meta</h2>
+          <p class="linea-dato">Estrellas:<span></span></p>
+          <p class="linea-dato">Lo mejor:<span></span></p>
+          <p class="linea-dato linea-dato--arriba">La familia lo ha visto:<span></span></p>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Si llego a mi meta, elijo</h2>
+          <ul class="elijo" id="elijo"></ul>
+        </div>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las
+        estrellas y los relojes son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DEL ADULTO Y ESCALERA DE LAS AYUDAS
+         ====================================================================== -->
+    <section class="hoja registro">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el adulto · Una hoja cada dos semanas</p>
+          <h1>Registro de misiones y ayudas</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="registro__datos">
+        <p>Iniciales:<span></span></p>
+        <p class="fechas">Del<span></span>al<span></span></p>
+      </div>
+      <h2 style="font-size: 13pt; margin: 0 0 1.6mm">La escalera de las ayudas</h2>
+      <ol class="escalera" id="escalera"></ol>
+      <p class="escalera__ejes" aria-hidden="true"><span>← Más ayuda</span><span>Más autonomía →</span></p>
+      <p class="regla">
+        <strong>Cuándo subir un peldaño:</strong> cuando le salga con la misma ayuda en 4 de sus 5 últimas misiones. Si deja de
+        salir, vuelve al peldaño anterior sin darle importancia. Apunta la letra de la ayuda que ha necesitado.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" style="width: 17mm">Día</th>
+            <th scope="col" style="width: 42mm">Misión</th>
+            <th scope="col" style="width: 14mm">Nivel</th>
+            <th scope="col" style="width: 16mm">Ayuda (A a E)</th>
+            <th scope="col" style="width: 17mm">¿A tiempo?</th>
+            <th scope="col">Lo que ha hecho bien</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <p class="atribucion">Solo iniciales, sin el diagnóstico. Guarda el registro en el centro y no le hagas fotos con tu móvil.</p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Misiones de invierno: cómo darlas y cómo retirar las ayudas</h1>
+      <p>
+        Una misión es un encargo corto y útil para la clase, con pocos pasos, un tiempo y una casilla para marcar «¡Hecho!». Al
+        alumnado con trastorno por déficit de atención e hiperactividad (TDAH) le da un motivo para moverse con permiso y una
+        tarea que empieza y acaba. Como las misiones son de toda la clase, quien más las necesita no destaca.
+      </p>
+
+      <h2>Por qué ayudan</h2>
+      <ul>
+        <li>
+          <strong>Gestión de la conducta en el aula.</strong> Es un tratamiento bien establecido para el TDAH en Primaria (Evans
+          y otros, 2014): el docente cambia lo que pasa después de cada conducta. Los Centros para el Control y la Prevención
+          de Enfermedades de Estados Unidos (CDC) ponen como ejemplo un sistema de recompensas o una tarjeta diaria (CDC,
+          2026a). La Academia Americana de Pediatría (AAP) recomienda, como parte del tratamiento, la formación de las
+          familias o las intervenciones de conducta en el aula desde los 4 años, y de los 6 a los 11, mejor las dos (Wolraich y
+          otros, 2019).
+        </li>
+        <li>
+          <strong>Moverse con permiso.</strong> La Región de Murcia pide aplicar «estrategias que legitimen el movimiento», como
+          rutinas breves en el pasillo o en el patio, y propone darle tareas de apoyo durante las explicaciones, como encargarse
+          de los materiales audiovisuales (Resolución de 30 de julio de 2019, anexo IV). El Instituto Nacional para la
+          Excelencia en la Salud y la Atención del Reino Unido (NICE) pone como ejemplo los ratos de atención más cortos, con
+          pausas para moverse, y las indicaciones orales apoyadas por escrito (NICE, 2018).
+        </li>
+        <li>
+          <strong>Moverse no siempre distrae.</strong> En un estudio de laboratorio con 29 chicos con TDAH de 8 a 12 años, los
+          ratos en que más se movían hacían mejor una tarea de memoria de trabajo. En los chicos sin TDAH pasaba un poco lo
+          contrario (Sarver y otros, 2015).
+        </li>
+        <li>
+          <strong>Un reloj a la vista.</strong> Con 44 niños y niñas de 7 a 9 años, un reloj visual redujo la ansiedad antes de
+          una prueba. También redujo la desatención durante ella, sobre todo en quienes tenían más rasgos de TDAH. Las notas no
+          cambiaron (Hallez y Vallier, 2025).
+        </li>
+        <li>
+          <strong>Lo que no sabemos.</strong> Las misiones, como conjunto, no se han estudiado: juntan apoyos con respaldo. Lo
+          que no lleva fuente en esta guía es propuesta de IdEducando.
+        </li>
+      </ul>
+
+      <h2>Cómo dar una misión</h2>
+      <p>Con los pasos que proponen los CDC para dar indicaciones (CDC, 2026b):</p>
+      <ol>
+        <li>Acércate, di su nombre y busca su mirada. Con los más pequeños, ponte a su altura.</li>
+        <li>
+          Dale la tarjeta y dile la misión en una frase: «Riega la planta, por favor». Mejor que una pregunta como «¿Quieres
+          regar?». Si puede ser, que elija entre dos misiones.
+        </li>
+        <li>Comprueba que lo ha entendido: que te diga o te señale los pasos (CDC, 2026a). Después, gira el reloj de misión.</li>
+        <li>
+          Al volver, que marque «¡Hecho!» y dile qué ha hecho bien: «Has dejado un estuche en cada mesa». En los estudios que
+          revisaron Royer y otros (2019), el elogio que nombra la conducta aumentó el tiempo dedicado a la tarea y redujo las
+          conductas inadecuadas.
+        </li>
+      </ol>
+
+      <h2>Cuándo darla</h2>
+      <ul>
+        <li>
+          <strong>Antes de que cueste.</strong> Si tras un rato sentado empieza a moverse mucho, planifica la misión para ese
+          momento y apúntala en «¿Cuándo?». Murcia pide cambiarle de tarea más a menudo y permitir breves descansos.
+        </li>
+        <li>
+          <strong>Entre dos tareas y con aviso:</strong> «Primero acabas estas sumas y después riegas la planta». Los CDC
+          aconsejan avisar antes de cada cambio de actividad (CDC, 2026a).
+        </li>
+        <li>
+          <strong>Cuando la pide</strong> con su tarjeta «¿Me das una misión?». NICE pone como ejemplo unas tarjetas parecidas
+          para pedir un descanso. Si no es el momento, dile cuándo.
+        </li>
+        <li>
+          <strong>Nunca como salida.</strong> Si la misión llega justo después de una rabieta o de negarse a trabajar, puede
+          aprender que así sale de la tarea.
+        </li>
+        <li>
+          <strong>Si es toda la clase la que necesita moverse,</strong> mejor una pausa activa. La conducta en el aula mejoró
+          tras pausas intensas de unos 5 minutos o moderadas de más de 10 (Daly-Smith y otros, 2018).
+        </li>
+      </ul>
+
+      <h2>Tres niveles para toda la clase</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone ajustar el reto y el apoyo, y dar opciones para elegir (CAST,
+        2024, consideraciones 8.2 y 7.1). Nivel 1, círculo, 2 pasos; nivel 2, cuadrado, 3 pasos; nivel 3, rombo, 4 pasos.
+      </p>
+      <ul>
+        <li>Empieza por un nivel que le salga casi siempre. Sube cuando haga sus misiones solo con la tarjeta.</li>
+        <li>
+          En pareja, uno lleva la tarjeta y otro el pase: sirve para los recados en Infantil y para aprender juntos
+          (consideración 8.3).
+        </li>
+        <li>
+          Para quien aún no lee, los pictogramas: la primera vez, leed la tarjeta juntos. Con más reto, que invente una misión
+          con la plantilla y la explique a la clase.
+        </li>
+      </ul>
+
+      <h2>Cómo retirar las ayudas</h2>
+      <p>
+        El cambio se mantiene cuando se retiran poco a poco las ayudas añadidas y entran en juego las consecuencias naturales
+        (Evans y otros, 2014). Aquí, el «gracias» de la clase o la planta que sigue verde.
+      </p>
+      <ul>
+        <li>
+          <strong>La escalera</strong> de la página <span data-pagina="registro"></span> va de «Lo hacemos juntos» a «Sin
+          apoyo». El criterio de 4 de 5 misiones es propuesta nuestra: ajústalo a cada peque.
+        </li>
+        <li><strong>El tiempo:</strong> primero giras tú el reloj, después lo gira él o ella, y al final basta el reloj de la clase.</li>
+        <li>
+          <strong>El registro</strong> pasa de tus manos a las suyas. En un estudio con cuatro alumnos de Primaria, la mejora se
+          mantuvo al cambiar el registro del docente por el suyo propio (Miller y otros, 2015).
+        </li>
+        <li><strong>El elogio:</strong> primero en cada misión, después en algunas.</li>
+      </ul>
+
+      <div class="dos-columnas">
+        <div class="caja caja--coral">
+          <h2>Seguridad</h2>
+          <ul>
+            <li>Recados, solo dentro del colegio, a sitios que conoce y con el pase. Avisa a quien lo recibe.</li>
+            <li>Nada de productos de limpieza ni de cosas calientes, y nadie se sube a una silla. La bayeta, solo con agua.</li>
+          </ul>
+        </div>
+        <div class="caja caja--azul">
+          <h2>Convivencia y privacidad</h2>
+          <ul>
+            <li>Las misiones rotan por toda la clase y nunca se quitan como castigo.</li>
+            <li>El tablero y la hoja semanal no hablan del diagnóstico. El registro, solo con iniciales.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Con otros materiales de IdEducando</h2>
+      <p>
+        Con
+        <a href="https://www.ideducando.es/material-gratuito/tarjeta-cole-casa-tdah/">Mi tarjeta de ida y vuelta</a>, una
+        misión puede entrar en uno de sus tres objetivos, como «Sigo con mi tarea hasta el final», y la familia lo celebra en
+        casa. En
+        <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">Rutinas de invierno en el cole</a> están
+        el panel del tiempo y el cartel de objetos perdidos que usan dos misiones. Si es toda la clase la que necesita moverse,
+        <a href="https://www.ideducando.es/material-gratuito/pausas-activas-de-pie-y-sentados/">Pausas activas para todos</a>.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Misiones de invierno, también en casa</h1>
+      <p>
+        En clase hacemos misiones: encargos cortos y útiles, como regar la planta o repartir el material. Cada misión tiene sus
+        pasos con dibujos, un tiempo y una casilla para marcar «¡Hecho!». Las hace toda la clase, por turnos.
+      </p>
+      <p>
+        Una misión da un motivo para moverse y una tarea que empieza y acaba. Puede ayudar a muchos niños y niñas, también a
+        quienes tienen trastorno por déficit de atención e hiperactividad (TDAH).
+      </p>
+
+      <h2><img src="pictogramas/11251.png" alt="" />Cómo dar una misión en casa</h2>
+      <ol>
+        <li>Acercaos, decid su nombre y buscad su mirada.</li>
+        <li>Decid la misión en una frase corta: «Pon las servilletas, por favor».</li>
+        <li>Pedidle que os cuente los pasos, o enseñadle una tarjeta.</li>
+        <li>Al terminar, decidle qué ha hecho bien: «Has puesto una servilleta en cada sitio».</li>
+      </ol>
+
+      <h2><img src="pictogramas/2412.png" alt="" />Misiones de invierno para casa</h2>
+      <ul class="misiones-casa" id="misiones-casa"></ul>
+
+      <h2><img src="pictogramas/31408.png" alt="" />La hoja «Mi semana de misiones»</h2>
+      <p>
+        Los viernes la llevará a casa. Miradla juntos, celebrad las estrellas y firmad en «La familia lo ha visto». Si un día
+        no sale una misión, probad con menos pasos o hacedla juntos. Mañana, otra oportunidad.
+      </p>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Misiones de invierno.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Misiones de invierno.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/misiones-invierno</span>. Fuentes consultadas el 8/11/2026.
+      </p>
+
+      <h2>El TDAH en el aula</h2>
+      <ul class="referencias">
+        <li>
+          Evans, S. W., Owens, J. S. y Bunford, N. (2014). Evidence-based psychosocial treatments for children and adolescents
+          with attention-deficit/hyperactivity disorder. <em>Journal of Clinical Child and Adolescent Psychology</em>, 43(4),
+          527-551. DOI: 10.1080/15374416.2013.850700
+        </li>
+        <li>
+          Wolraich, M. L. y otros (2019). Clinical practice guideline for the diagnosis, evaluation, and treatment of
+          attention-deficit/hyperactivity disorder in children and adolescents. <em>Pediatrics</em>, 144(4), e20192528. DOI:
+          10.1542/peds.2019-2528
+        </li>
+        <li>
+          National Institute for Health and Care Excellence (2018, actualizada en 2019). <em>Attention deficit hyperactivity
+          disorder: diagnosis and management</em> (NG87). Apartado «Terms used in this guideline». nice.org.uk
+        </li>
+        <li>
+          Resolución de 30 de julio de 2019 de la Dirección General de Atención a la Diversidad y Calidad Educativa, por la
+          que se dictan instrucciones para la identificación y la respuesta educativa a las necesidades del alumnado que
+          presenta dificultades de aprendizaje. Boletín Oficial de la Región de Murcia (BORM) n.º 184, de 10 de agosto de 2019,
+          anexo IV, págs. 25060 y 25061.
+        </li>
+        <li>
+          Centers for Disease Control and Prevention (2026a). <em>ADHD in the Classroom</em>. Actualizada el 21 de octubre de
+          2026. cdc.gov/adhd
+        </li>
+        <li>
+          Centers for Disease Control and Prevention (2026b). <em>Steps for Giving Good Directions</em>. Actualizada el 30 de
+          abril de 2026. cdc.gov/parenting-toddlers
+        </li>
+      </ul>
+
+      <h2>Movimiento y tiempo</h2>
+      <ul class="referencias">
+        <li>
+          Sarver, D. E. y otros (2015). Hyperactivity in attention-deficit/hyperactivity disorder (ADHD): Impairing deficit or
+          compensatory behavior? <em>Journal of Abnormal Child Psychology</em>, 43(7), 1219-1232. DOI: 10.1007/s10802-015-0011-1
+        </li>
+        <li>
+          Daly-Smith, A. J. y otros (2018). Systematic review of acute physically active learning and classroom movement breaks
+          on children's physical activity, cognition, academic performance and classroom behaviour: understanding critical
+          design features. <em>BMJ Open Sport &amp; Exercise Medicine</em>, 4(1), e000341. DOI: 10.1136/bmjsem-2018-000341
+        </li>
+        <li>
+          Hallez, Q. y Vallier, V. (2025). Time on their side: How visual timers affect anticipatory anxiety, performance, and
+          on-task behavior in elementary math assessments. <em>European Journal of Investigation in Health, Psychology and
+          Education</em>, 15(12), 243. DOI: 10.3390/ejihpe15120243
+        </li>
+      </ul>
+
+      <h2>Elogio, autonomía y DUA</h2>
+      <ul class="referencias">
+        <li>
+          Royer, D. J., Lane, K. L., Dunlap, K. D. y Ennis, R. P. (2019). A systematic review of teacher-delivered
+          behavior-specific praise on K-12 student performance. <em>Remedial and Special Education</em>, 40(2), 112-128. DOI:
+          10.1177/0741932517751054
+        </li>
+        <li>
+          Miller, L. M. y otros (2015). Self-monitoring as a viable fading option in check-in/check-out. <em>Journal of School
+          Psychology</em>, 53(2), 121-135. DOI: 10.1016/j.jsp.2014.12.004
+        </li>
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>, consideraciones 7.1, 8.2 y 8.3.
+          udlguidelines.cast.org
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
+        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Los demás dibujos y el diseño
+        son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y
+        con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        nivel1: 4,
+        nivel2: 5,
+        nivel3: 6,
+        plantilla: 7,
+        tablero: 8,
+        fichas: 9,
+        reloj: 10,
+        semana: 11,
+        registro: 12,
+        guia: 13,
+        familias: 15,
+        fuentes: 16,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las doce misiones. Cada paso: [pictograma de ARASAAC, texto, 'linea' si lleva un renglón para escribir].
+      // 'tarjeta:2798' pinta el pictograma dentro de una tarjeta, como las del panel del tiempo.
+      // ---------------------------------------------------------------------
+      const NIVELES = {
+        1: { color: 'verde', pasos: 2, nombre: 'Nivel 1', forma: 'círculo' },
+        2: { color: 'azul', pasos: 3, nombre: 'Nivel 2', forma: 'cuadrado' },
+        3: { color: 'morado', pasos: 4, nombre: 'Nivel 3', forma: 'rombo' },
+      };
+
+      const MISIONES = [
+        { nivel: 1, titulo: 'Riego la planta', icono: 2816, minutos: 2, ficha: 'La planta',
+          pasos: [[2817, 'Cojo la regadera'], [2816, 'Riego un poquito']] },
+        { nivel: 1, titulo: 'Borro la pizarra', icono: 11195, minutos: 2, ficha: 'La pizarra',
+          pasos: [[16341, 'Cojo el borrador'], [11195, 'Borro de arriba abajo']] },
+        { nivel: 1, titulo: 'Pongo el tiempo de hoy', icono: 7223, minutos: 2, ficha: 'El tiempo',
+          pasos: [[37487, 'Miro por la ventana'], ['tarjeta:2798', 'Pongo la tarjeta del tiempo']] },
+        { nivel: 1, titulo: 'Recojo los papeles', icono: 39034, minutos: 2, ficha: 'Los papeles',
+          pasos: [[8349, 'Recojo los papeles del suelo'], [7278, 'Los tiro a la papelera']] },
+        { nivel: 2, titulo: 'Reparto el material', icono: 34153, minutos: 3, ficha: 'El material',
+          pasos: [[7054, 'Cojo la caja del material'], [3129, 'Dejo uno en cada mesa'], [5514, 'Guardo la caja en su sitio']] },
+        { nivel: 2, titulo: 'Recojo el rincón', icono: 8680, minutos: 5, ficha: 'El rincón',
+          pasos: [[8680, 'Guardo los juguetes en su caja'], [27514, 'Pongo las cajas en su sitio'], [2575, 'Miro que el suelo quede libre']] },
+        { nivel: 2, titulo: 'Ordeno la biblioteca', icono: 6474, minutos: 5, ficha: 'La biblioteca',
+          pasos: [[6469, 'Recojo los cuentos'], [6474, 'Los pongo en la estantería'], [3264, 'Coloco los cojines']] },
+        { nivel: 2, titulo: 'Llevo un recado', icono: 37340, minutos: 3, ficha: 'Un recado',
+          pasos: [[37340, 'Cojo la nota y el pase'], [17038, 'Doy la nota en:', 'linea'], [31748, 'Vuelvo andando a clase']] },
+        { nivel: 3, titulo: 'Devuelvo la ropa perdida', icono: 2415, minutos: 5, ficha: 'Ropa perdida',
+          pasos: [[2412, 'Recojo gorros y guantes'], [37269, 'Busco su nombre'], [17038, 'Se lo doy a su dueño'], [7054, 'Lo demás, a la caja']] },
+        { nivel: 3, titulo: 'Traigo una respuesta', icono: 11251, minutos: 5, ficha: 'Una respuesta',
+          pasos: [[37340, 'Cojo la nota y el pase'], [32214, 'Voy andando a:', 'linea'], [8109, 'Espero la respuesta'], [31748, 'Vuelvo con la respuesta']] },
+        { nivel: 3, titulo: 'Saco punta a los lápices', icono: 8685, minutos: 5, ficha: 'Los lápices',
+          pasos: [[2440, 'Cojo los lápices sin punta'], [8685, 'Saco punta a cada uno'], [7278, 'Tiro las virutas'], [5514, 'Los guardo en su bote']] },
+        { nivel: 3, titulo: 'Paso la bayeta', icono: 17269, minutos: 5, ficha: 'La bayeta',
+          pasos: [[15343, 'Mojo la bayeta'], [17231, 'La escurro bien'], [17269, 'Limpio cada mesa'], [5593, 'La tiendo a secar']] },
+      ];
+
+      // De un vistazo: [color, pictograma, título, dónde, páginas].
+      const MAPA = [
+        ['verde', 2816, 'Doce misiones en tres niveles', 'Cuatro de cada nivel, en una anilla junto al tablero.', 'nivel1', 'nivel3'],
+        ['amarillo', 37340, 'Plantillas, pases y «¿Me das una misión?»', 'Para inventar misiones, salir del aula con permiso y pedir una misión sin interrumpir.', 'plantilla'],
+        ['azul', 34153, 'Tablero «Misiones de hoy» y sus fichas', 'A la altura de sus ojos. Cada ficha pasa de «Misión» a «¡Hecho!».', 'tablero', 'fichas'],
+        ['coral', 37659, 'Reloj de misión', 'Dos discos que se encajan para ver el tiempo de la misión.', 'reloj'],
+        ['morado', 31408, 'Mi semana de misiones', 'Una hoja por semana: una estrella por misión y una meta.', 'semana'],
+        ['naranja', 6998, 'Registro y escalera de las ayudas', 'Para el adulto: qué ayuda necesita y cuándo retirarla.', 'registro'],
+        ['verde', 11251, 'Guía para el docente y fuentes', 'Cómo dar una misión y cómo retirar las ayudas, con sus fuentes.', 'guia', 'fuentes'],
+        ['coral', 5549, 'Nota para las familias', 'Con misiones de invierno para casa. Una copia para cada familia.', 'familias'],
+      ];
+
+      // Tablero: «Así es una misión»
+      const ASI_ES = [
+        [11251, 'Me dan la misión'],
+        [37659, 'Pongo el reloj'],
+        ['d:tarjetita', 'Hago los pasos'],
+        ['d:marcada', 'Marco «¡Hecho!»'],
+      ];
+
+      // Mi semana
+      const DIAS = [
+        [6554, 'Lunes'],
+        [6557, 'Martes'],
+        [6563, 'Miércoles'],
+        [6536, 'Jueves'],
+        [6629, 'Viernes'],
+      ];
+      const ELIJO = [
+        [30510, 'Mi próxima misión'],
+        [11251, 'Soy jefe o jefa de misiones'],
+        [24791, 'La canción de la salida'],
+      ];
+
+      // Escalera de las ayudas: [letra, nombre, qué haces tú]
+      const ESCALERA = [
+        ['A', 'Lo hacemos juntos', 'Haces la misión a su lado y nombras cada paso.'],
+        ['B', 'Le acompaño de lejos', 'Va con la tarjeta. Tú le miras desde la puerta.'],
+        ['C', 'Solo la tarjeta', 'Va con la tarjeta y lo compruebas al volver.'],
+        ['D', 'Solo la ficha', 'La ficha del tablero le basta para recordar los pasos.'],
+        ['E', 'Sin apoyo', 'Se lo pides con una frase y lo hace.'],
+      ];
+      const COLORES_ESCALERA = ['coral', 'naranja', 'amarillo', 'verde', 'azul'];
+
+      // Familias: misiones de invierno para casa
+      const CASA = [
+        [37938, 'Preparo mi ropa de mañana: el abrigo, el gorro y los guantes.'],
+        [5549, 'Pongo la mesa: los platos y los vasos.'],
+        [37895, 'Cuelgo mi abrigo al llegar a casa.'],
+        [2816, 'Riego las plantas con un vaso de agua.'],
+        [8680, 'Recojo mis juguetes antes de cenar.'],
+        [2415, 'Guardo los guantes y el gorro en su sitio.'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const AZUL = '#2f6fd6';
+      const CORAL = '#e8553e';
+      const AMARILLO = '#f6c12e';
+      const VERDE_TX = '#127055';
+      const LINEA = '#ead9bb';
+      const f1 = (n) => Number(n.toFixed(2));
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const copo = (color = AZUL, grosor = 5) =>
+        `<g fill="none" stroke="${color}" stroke-width="${grosor}" stroke-linecap="round" stroke-linejoin="round">${[0, 60, 120]
+          .map((a) => `<g transform="rotate(${a} 50 50)"><path d="M50 6V94"/><path d="M38 15L50 27L62 15M38 85L50 73L62 85"/></g>`)
+          .join('')}</g>`;
+
+      const DIBUJOS = {
+        estrella: `<path d="${ESTRELLA}" fill="${AMARILLO}" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M40 40 l4 -9" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`,
+        // Estrella vacía para colorear
+        estrellaVacia: `<path d="${ESTRELLA}" fill="#fff" stroke="${M}" stroke-width="4" stroke-linejoin="round"/>`,
+        // Reloj de aguja para rodear («a tiempo»)
+        relojito: `<circle cx="50" cy="50" r="42" fill="#fff" stroke="${M}" stroke-width="6"/>
+          <path d="M50 50V24M50 50L68 60" stroke="${M}" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="50" cy="50" r="5" fill="${M}"/>`,
+        // Tarjeta con pasos («Hago los pasos»)
+        tarjetita: `<rect x="20" y="8" width="60" height="84" rx="8" fill="#fff" stroke="${M}" stroke-width="5"/>
+          <rect x="20" y="8" width="60" height="12" rx="6" fill="${AZUL}"/>
+          ${[34, 54, 74].map((y, i) => `<circle cx="34" cy="${y}" r="6" fill="${['#dcf3ea', '#e4edfb', '#efe5f7'][i]}" stroke="${M}" stroke-width="3"/><path d="M46 ${y}H70" stroke="${M}" stroke-width="5" stroke-linecap="round"/>`).join('')}`,
+        // Casilla marcada («¡Hecho!»)
+        marcada: `<rect x="12" y="12" width="76" height="76" rx="12" fill="#fff" stroke="${M}" stroke-width="7"/>
+          <path d="M28 52L44 67L73 33" fill="none" stroke="${VERDE_TX}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
+        // Círculo de velcro, para la leyenda del tablero
+        velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
+          <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
+        // Flecha del tablero
+        flecha: `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        copo: copo(),
+      };
+      const dibujo = (nombre, clase = '', vista) => svg(DIBUJOS[nombre], clase, vista);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const imagen = (p) => {
+        if (typeof p === 'string' && p.startsWith('d:')) return dibujo(p.slice(2));
+        if (typeof p === 'string' && p.startsWith('tarjeta:')) return `<div class="mini-tarjeta">${picto(p.slice(8))}</div>`;
+        return picto(p);
+      };
+      const logo = (clase = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+      const marcaNivel = (nivel, clase = '') => `<span class="nv n${nivel} ${clase}" aria-hidden="true">${nivel}</span>`;
+      // Formas de nivel en blanco, para rodear la que toca en las tarjetas en blanco.
+      const formaVacia = (nivel) => {
+        const forma = {
+          1: `<circle cx="50" cy="50" r="44" fill="#fff" stroke="${M}" stroke-width="7"/>`,
+          2: `<rect x="7" y="7" width="86" height="86" rx="12" fill="#fff" stroke="${M}" stroke-width="7"/>`,
+          3: `<path d="M50 4L96 50L50 96L4 50Z" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`,
+        }[nivel];
+        return `<svg class="forma-vacia n${nivel}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">${forma}<text x="50" y="${nivel === 3 ? 66 : 69}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${nivel === 3 ? 46 : 54}" fill="${M}">${nivel}</text></svg>`;
+      };
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // Reloj pequeño de las tarjetas: el sector de color son los minutos de la misión, sobre 10.
+      function discoMini(minutos) {
+        const a = (minutos / 10) * 2 * Math.PI;
+        const x = 50 + 40 * Math.sin(a);
+        const y = 50 - 40 * Math.cos(a);
+        const sector =
+          minutos >= 10
+            ? `<circle cx="50" cy="50" r="40" fill="${CORAL}"/>`
+            : `<path d="M50 50L50 10A40 40 0 ${minutos > 5 ? 1 : 0} 1 ${f1(x)} ${f1(y)}Z" fill="${CORAL}"/>`;
+        const marcas = Array.from(
+          { length: 10 },
+          (_, i) => `<path transform="rotate(${i * 36} 50 50)" d="M50 4.5V11" stroke="${M}" stroke-width="3.2" stroke-linecap="round"/>`,
+        ).join('');
+        return svg(
+          `<circle cx="50" cy="50" r="46" fill="#fff" stroke="${M}" stroke-width="5"/>${sector}${marcas}<circle cx="50" cy="50" r="4.5" fill="${M}"/>`,
+        );
+      }
+
+      // ---------------------------------------------------------------------
+      // Tarjetas de misión
+      // ---------------------------------------------------------------------
+      function tarjeta(m, etiqueta = 'li') {
+        const n = NIVELES[m.nivel];
+        const pasos = m.pasos
+          .map(
+            ([p, texto, extra], j) =>
+              `<li class="tm__paso"><span class="tm__numero" aria-hidden="true">${j + 1}</span>${imagen(p)}<p>${texto}${extra === 'linea' ? '<span class="tm__linea"></span>' : ''}</p></li>`,
+          )
+          .join('');
+        return `<${etiqueta} class="tm c-${n.color} p${n.pasos}">
+            <div class="tm__banda"></div>
+            <span class="tm__agujero" aria-hidden="true"></span>
+            <div class="tm__cabeza"><div class="tm__icono">${picto(m.icono)}</div><h2 class="tm__titulo">${m.titulo}</h2></div>
+            <div class="tm__tiempo">${discoMini(m.minutos)}<p class="tm__minutos">${m.minutos} minutos</p><p class="tm__nivel">${marcaNivel(m.nivel)}${n.nombre} · ${n.pasos} pasos</p></div>
+            <ol class="tm__pasos">${pasos}</ol>
+            <div class="tm__hecho"><span class="tm__casilla" aria-hidden="true"></span><p>¡Hecho!</p>${dibujo('estrella')}</div>
+          </${etiqueta}>`;
+      }
+
+      document.getElementById('hojas-misiones').outerHTML = [1, 2, 3]
+        .map((nivel) => {
+          const n = NIVELES[nivel];
+          const lista = MISIONES.filter((m) => m.nivel === nivel).map((m) => tarjeta(m)).join('');
+          return `<section class="hoja-tarjetas c-${n.color}">
+            <h1 class="solo-lector">Misiones de nivel ${nivel}, de ${n.pasos} pasos</h1>
+            <p class="aviso"><span><strong>${n.nombre} · ${n.pasos} pasos</strong> · Forma de ${n.forma}</span><span>Corta por la línea de puntos</span></p>
+            <ul class="rejilla-tarjetas">${lista}</ul>
+            <p class="atribucion">${ATRIBUCION} El diseño de las tarjetas, los relojes y las estrellas son de IdEducando.</p>
+          </section>`;
+        })
+        .join('');
+
+      // Plantilla en blanco: cuatro filas; para 2 o 3 pasos se dejan vacías las que sobran.
+      function tarjetaEnBlanco() {
+        const pasos = Array.from(
+          { length: 4 },
+          (_, j) =>
+            `<li class="tm__paso"><span class="tm__numero" aria-hidden="true">${j + 1}</span><span class="hueco-picto"></span><span class="lineas2"><span></span><span></span></span></li>`,
+        ).join('');
+        return `<li class="tm tm--blanca c-amarillo p4">
+            <div class="tm__banda"></div>
+            <span class="tm__agujero" aria-hidden="true"></span>
+            <div class="tm__cabeza"><div class="tm__icono"></div><p class="tm__titulo">Misión:<span class="renglon"></span></p></div>
+            <div class="tm__tiempo">${svg(`<circle cx="50" cy="50" r="46" fill="#fff" stroke="${M}" stroke-width="5"/>${Array.from({ length: 10 }, (_, i) => `<path transform="rotate(${i * 36} 50 50)" d="M50 4.5V11" stroke="${M}" stroke-width="3.2" stroke-linecap="round"/>`).join('')}<circle cx="50" cy="50" r="4.5" fill="${M}"/>`)}<p class="tm__minutos"><span></span>minutos</p><p class="tm__nivel formas-nivel">${formaVacia(1)}${formaVacia(2)}${formaVacia(3)}</p></div>
+            <ol class="tm__pasos">${pasos}</ol>
+            <div class="tm__hecho"><span class="tm__casilla" aria-hidden="true"></span><p>¡Hecho!</p>${dibujo('estrella')}</div>
+          </li>`;
+      }
+
+      const pase = () => `<li class="pieza pase c-azul">
+          <div class="pase__icono">${picto(32214)}</div>
+          <h2>Voy de misión</h2>
+          <p class="pase__dato">Voy a:<span></span></p>
+          <p class="pase__dato pase__dato--adulto">Clase:<span></span></p>
+        </li>`;
+      const pide = () => `<li class="pieza pide c-morado">
+          ${picto(9034)}
+          <h2>¿Me das una misión?</h2>
+          <p>La deja en su mesa cuando necesita moverse. Si no es el momento, dile cuándo: «Al acabar esta ficha».</p>
+        </li>`;
+      document.getElementById('plantilla').innerHTML =
+        tarjetaEnBlanco() + tarjetaEnBlanco() + pase() + pide() + pase() + pide();
+
+      // ---------------------------------------------------------------------
+      // Tablero y fichas
+      // ---------------------------------------------------------------------
+      document.getElementById('filas').innerHTML = Array.from(
+        { length: 4 },
+        (_, i) => `<li class="tablero__fila">
+            <div class="hueco"><span class="velcro"></span></div>
+            <div class="datos-fila"><p>¿Quién?<span></span></p><p>¿Cuándo?<span></span></p></div>
+            ${dibujo('flecha', 'flecha')}
+            <div class="hueco hueco--hecho">${svg(`<path d="${ESTRELLA}" fill="#fff" stroke="${AMARILLO}" stroke-width="3" stroke-linejoin="round"/>`, 'estrella-fondo')}<span class="velcro"></span></div>
+          </li>`,
+      ).join('');
+
+      document.getElementById('asi-es').innerHTML = ASI_ES.map(
+        ([p, texto]) => `<li>${imagen(p)}<p>${texto}</p></li>`,
+      ).join('');
+
+      document.getElementById('fichas').innerHTML =
+        MISIONES.map(
+          (m) =>
+            `<li class="ficha c-${NIVELES[m.nivel].color}"><span class="ficha__banda"></span>${marcaNivel(m.nivel)}${picto(m.icono)}<p>${m.ficha}</p></li>`,
+        ).join('') +
+        Array.from(
+          { length: 4 },
+          () => `<li class="ficha c-amarillo"><span class="ficha__banda"></span><span class="hueco-picto"></span><span class="renglon"></span></li>`,
+        ).join('');
+
+      // ---------------------------------------------------------------------
+      // Reloj de misión: el disco de color (con los minutos) y el disco blanco (con el copo)
+      // ---------------------------------------------------------------------
+      function discoColor() {
+        const R = 58;
+        const r = 46.5;
+        let s = `<circle cx="60" cy="60" r="${R + 1.2}" fill="none" stroke="${SUAVE}" stroke-width="0.4" stroke-dasharray="2 1.6"/>`;
+        s += `<circle cx="60" cy="60" r="${R}" fill="#fff" stroke="${M}" stroke-width="0.7"/>`;
+        s += `<circle cx="60" cy="60" r="${r}" fill="${CORAL}" stroke="${M}" stroke-width="0.5"/>`;
+        for (let i = 0; i < 20; i++) {
+          const largo = i % 2 === 0 ? 4 : 2;
+          s += `<path transform="rotate(${i * 18} 60 60)" d="M60 ${f1(60 - r - 0.4)}V${f1(60 - r - 0.4 - largo)}" stroke="${M}" stroke-width="${i % 2 ? 0.45 : 0.8}"/>`;
+        }
+        const numero = (texto, grados, tam = 7) => {
+          const a = (grados * Math.PI) / 180;
+          return `<text x="${f1(60 + 53.4 * Math.sin(a))}" y="${f1(60 - 53.4 * Math.cos(a) + tam * 0.36)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${tam}" fill="${M}">${texto}</text>`;
+        };
+        for (let n = 1; n <= 9; n++) s += numero(n, n * 36, 8.4);
+        s += numero('0', 11, 7.8) + numero('10', -13.5, 7.8);
+        // Corte: del borde al centro
+        s += `<path d="M60 ${60 - R}V60" stroke="${M}" stroke-width="1.2"/>`;
+        s += `<circle cx="60" cy="60" r="1.4" fill="${M}"/>`;
+        s += `<rect x="61.6" y="23.4" width="15" height="6.4" rx="1.6" fill="#fff"/>`;
+        s += `<text x="62.6" y="28.4" font-family="Atkinson Hyperlegible" font-size="4.7" fill="${M}" font-weight="700">Corta</text>`;
+        return `<svg viewBox="0 0 120 120" width="100mm" height="100mm" role="img" aria-label="Disco de color del reloj de misión: los minutos del 0 al 10 alrededor y una línea gruesa para cortar del borde al centro">${s}</svg>`;
+      }
+
+      function discoBlanco() {
+        const r = 47.5;
+        let s = `<circle cx="50" cy="50" r="${r + 1.2}" fill="none" stroke="${SUAVE}" stroke-width="0.4" stroke-dasharray="2 1.6"/>`;
+        s += `<circle cx="50" cy="50" r="${r}" fill="#fff" stroke="${M}" stroke-width="0.7"/>`;
+        s += `<g transform="translate(34 50) scale(0.32)">${copo(AZUL, 6)}</g>`;
+        s += `<path d="M50 ${50 - r}V50" stroke="${M}" stroke-width="1.2"/>`;
+        s += `<circle cx="50" cy="50" r="1.4" fill="${M}"/>`;
+        s += `<text x="52.4" y="17" font-family="Atkinson Hyperlegible" font-size="4.7" fill="${M}" font-weight="700">Corta</text>`;
+        // Flecha curva: se gira hacia la derecha
+        s += `<path d="M58 9.5A41 41 0 0 1 84 24" fill="none" stroke="${M}" stroke-width="1.3" stroke-linecap="round"/>`;
+        s += `<path d="M79.8 24.6L84.4 24.6L83.6 19.9" fill="none" stroke="${M}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>`;
+        s += `<text x="61" y="39" font-family="Outfit" font-weight="700" font-size="7.6" fill="${M}">Gira</text>`;
+        // Su radio cubre justo el color del otro disco (46,5 de 120 a 100 mm) y deja ver los números.
+        const lado = f1((((46.5 + 1.2) * 100) / 120 / r) * 100);
+        return `<svg viewBox="0 0 100 100" width="${lado}mm" height="${lado}mm" role="img" aria-label="Disco blanco del reloj de misión, con un copo de nieve, la palabra «Gira» y una línea gruesa para cortar">${s}</svg>`;
+      }
+      document.getElementById('disco-color').innerHTML = discoColor();
+      document.getElementById('disco-blanco').innerHTML = discoBlanco();
+
+      // ---------------------------------------------------------------------
+      // Mi semana de misiones
+      // ---------------------------------------------------------------------
+      document.getElementById('clave').innerHTML =
+        `<li>${dibujo('estrellaVacia')}<span>Coloreo una estrella por misión.</span></li>` +
+        `<li>${dibujo('relojito')}<span>Rodeo el reloj si llego a tiempo.</span></li>`;
+      document.getElementById('dias').innerHTML = DIAS.map(
+        ([n, dia]) =>
+          `<li class="dia"><div class="dia__nombre">${picto(n)}<span>${dia}</span></div>${Array.from(
+            { length: 4 },
+            () => `<div class="dia__casilla">${dibujo('estrellaVacia')}${dibujo('relojito')}</div>`,
+          ).join('')}</li>`,
+      ).join('');
+      document.getElementById('elijo').innerHTML =
+        ELIJO.map(([n, texto]) => `<li>${picto(n)}<span>${texto}</span></li>`).join('') +
+        `<li><span></span><p class="linea-dato">Otra:<span></span></p></li>`;
+
+      // ---------------------------------------------------------------------
+      // Registro y escalera
+      // ---------------------------------------------------------------------
+      document.getElementById('escalera').innerHTML = ESCALERA.map(
+        ([letra, nombre, texto], i) =>
+          `<li class="c-${COLORES_ESCALERA[i]}"><strong><b>${letra}</b>${nombre}</strong><span>${texto}</span></li>`,
+      ).join('');
+      document.getElementById('filas-registro').innerHTML = Array.from(
+        { length: 14 },
+        () => '<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>',
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Familias
+      // ---------------------------------------------------------------------
+      document.getElementById('misiones-casa').innerHTML = CASA.map(
+        ([n, texto]) => `<li>${picto(n)}<span>${texto}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('lista-niveles').innerHTML = [1, 2, 3]
+        .map((nivel) => {
+          const n = NIVELES[nivel];
+          const textos = {
+            1: 'Dos pasos. Para empezar, en Infantil o con quien aprende a seguir dos indicaciones seguidas.',
+            2: 'Tres pasos. Algo que coger, algo que hacer y dejarlo en su sitio.',
+            3: 'Cuatro pasos. Misiones más largas o fuera del aula.',
+          };
+          return `<li>${marcaNivel(nivel, 'grande')}<span><strong>${n.nombre}, ${n.forma}.</strong> ${textos[nivel]}</span></li>`;
+        })
+        .join('');
+
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, donde, ...claves]) => {
+        const pags = claves.map((c) => PAGINAS[c]);
+        const ultima = pags[pags.length - 1];
+        const texto =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        return `<li class="c-${color}">${picto(n)}<div><h2>${titulo}</h2><p>${donde}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: tres tarjetas de verdad en abanico, el reloj y copos
+      // ---------------------------------------------------------------------
+      const ABANICO = [
+        [0, 21, 152, -9, 0.63],
+        [4, 74, 143, -1, 0.68],
+        [8, 134, 154, 8, 0.63],
+      ];
+      document.getElementById('abanico').innerHTML = ABANICO.map(
+        ([i, x, y, giro, escala]) =>
+          `<div style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg)">${tarjeta(MISIONES[i], 'div').replace('class="tm ', `style="transform:scale(${escala})" class="tm `)}</div>`,
+      ).join('');
+      const COPOS = [
+        [150, 78, 14, AZUL],
+        [178, 100, 9, M],
+        [188, 128, 12, '#8c4fb8'],
+        [12, 141, 9, '#8c4fb8'],
+        [196, 172, 7, AZUL],
+        [112, 240, 9, AZUL],
+        [54, 245, 13, M],
+        [178, 246, 8, '#8c4fb8'],
+      ];
+      document.getElementById('copos-portada').innerHTML = COPOS.map(
+        ([x, y, t, color]) =>
+          `<div class="copo" style="left:${x}mm;top:${y}mm;width:${t}mm;height:${t}mm">${svg(copo(color, 6))}</div>`,
+      ).join('');
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

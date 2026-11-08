@@ -1,0 +1,2299 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Retos de diciembre en tres niveles: un reto amable para cada día de clase, con pictogramas · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Hojas de tarjetas y calendarios: márgenes más estrechos (nunca menos de 10 mm) para que
+         quepan cuatro tarjetas grandes por hoja. */
+      @page ancha {
+        margin: 11mm 12mm 15mm 12mm;
+      }
+
+      /* ---------- Un color para cada familia de retos ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA).
+         El color nunca va solo: cada familia lleva también su nombre y su pictograma. */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .ancha {
+        page: ancha;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Cómo montarlo, con letra de 11 puntos como el resto del texto para el adulto ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ----------
+         Las mismas que en las estaciones de matemáticas: se distinguen por la forma, también en blanco y negro. */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8mm;
+        height: 8mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      .nv.enorme {
+        width: 13mm;
+        height: 13mm;
+        font-size: 20pt;
+      }
+
+      .nv.n3.enorme {
+        width: 16.5mm;
+        height: 16.5mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 54pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 120mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 9pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 20mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        padding: 4.5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+        transform: rotate(9deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 26pt;
+        line-height: 1;
+      }
+
+      /* La escena de la portada: el calendario de la clase y tres tarjetas en abanico */
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 146mm;
+        width: 210mm;
+        height: 122mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .cal-portada {
+        left: 16mm;
+        top: 6mm;
+        width: 96mm;
+        padding: 0 0 4mm;
+        border: 0.8mm solid var(--marino);
+        border-radius: 4mm;
+        background: #fff;
+        transform: rotate(-3deg);
+        box-shadow: 0 1.6mm 0 rgb(30 43 85 / 0.16);
+        overflow: hidden;
+      }
+
+      .cal-portada__cabeza {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2mm 4mm;
+        background: var(--azul);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 17pt;
+      }
+
+      .cal-portada__cabeza span {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .cal-portada__dias,
+      .cal-portada__rejilla {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1.6mm;
+        padding: 0 4mm;
+      }
+
+      .cal-portada__dias {
+        margin: 2mm 0 1.4mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .cal-portada__rejilla div {
+        position: relative;
+        height: 15mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .cal-portada__rejilla svg {
+        position: absolute;
+        inset: 2mm;
+        width: auto;
+        height: auto;
+      }
+
+      .tarjeta-portada {
+        width: 50mm;
+        height: 70mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 3.5mm;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.16);
+      }
+
+      .tarjeta-portada__banda {
+        height: 6mm;
+        background: var(--c);
+      }
+
+      .tarjeta-portada img {
+        display: block;
+        width: 32mm;
+        height: 32mm;
+        margin: 3.5mm auto 1.5mm;
+      }
+
+      .tarjeta-portada p {
+        margin: 0 5mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1.08;
+      }
+
+      .tarjeta-portada__niveles {
+        display: flex;
+        justify-content: center;
+        gap: 2mm;
+        margin-top: 2.5mm;
+      }
+
+      .copo-portada {
+        width: 11mm;
+        height: 11mm;
+        color: var(--azul);
+      }
+
+      /* ---------- Cabecera de las hojas verticales ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 4mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 3mm 0 0;
+        font-size: 9pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .cada-dia {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: dia;
+      }
+
+      .cada-dia li {
+        position: relative;
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 1.2mm;
+        margin: 0;
+        padding: 2.6mm 2mm 2.2mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        background: var(--crema);
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .cada-dia li::before {
+        counter-increment: dia;
+        content: counter(dia);
+        position: absolute;
+        top: -2mm;
+        left: -2mm;
+        display: grid;
+        place-items: center;
+        width: 6.5mm;
+        height: 6.5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 10.5pt;
+      }
+
+      .cada-dia img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .cada-dia .formas {
+        display: flex;
+        gap: 1.4mm;
+        height: 16mm;
+        align-items: center;
+      }
+
+      .niveles-vistazo {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0 0 3.5mm;
+        padding: 3mm 4mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border-left: 1.6mm solid var(--amarillo);
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .niveles-vistazo h2 {
+        margin: 0 0 0.5mm;
+        font-size: 13pt;
+      }
+
+      .niveles-vistazo p {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .niveles-vistazo p > span:first-child {
+        display: grid;
+        place-items: center;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.2mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 10mm minmax(0, 1fr) 24mm;
+        align-items: center;
+        gap: 3.5mm;
+        margin: 0;
+        padding: 0.9mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      /* ---------- Lista de los 20 retos ---------- */
+      .lista-retos {
+        font-size: 11pt;
+      }
+
+      .lista-retos table {
+        font-size: 11pt;
+        margin: 0;
+      }
+
+      .lista-retos th,
+      .lista-retos td {
+        padding: 1.05mm 2mm;
+        vertical-align: middle;
+      }
+
+      .lista-retos td:first-child {
+        width: 11mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .lista-retos .familia {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        white-space: nowrap;
+      }
+
+      .lista-retos .familia img {
+        width: 7.5mm;
+        height: 7.5mm;
+      }
+
+      .lista-retos .familia span {
+        display: inline-block;
+        width: 2.4mm;
+        height: 7.5mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      .lista-retos .hueco-fecha {
+        width: 34mm;
+      }
+
+      .lista-retos .hueco-hecho {
+        width: 16mm;
+      }
+
+      .casilla {
+        display: inline-block;
+        width: 5mm;
+        height: 5mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+        vertical-align: middle;
+      }
+
+      .lista-retos tbody tr:nth-child(even) td {
+        background: #fffbf3;
+      }
+
+      /* ---------- Calendarios ---------- */
+      .calendario {
+        page: apaisada;
+        break-after: page;
+        break-inside: avoid;
+      }
+
+      .cal-cabeza {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 2.6mm;
+      }
+
+      .cal-cabeza > img:first-child {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .cal-cabeza .antetitulo {
+        margin: 0 0 0.6mm;
+      }
+
+      .cal-cabeza h1 {
+        margin: 0;
+        font-size: 26pt;
+        line-height: 1;
+      }
+
+      .cal-cabeza > img:last-child {
+        width: 30mm;
+        height: auto;
+      }
+
+      .cal-dias,
+      .cal-rejilla {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.2mm;
+      }
+
+      .cal-dias {
+        margin: 0 0 1.6mm;
+      }
+
+      .cal-dias p {
+        margin: 0;
+        padding: 1mm 0;
+        border-radius: 2mm;
+        background: var(--marino);
+        color: #fff;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .cal-rejilla {
+        grid-auto-rows: 28mm;
+      }
+
+      .celda {
+        position: relative;
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 1mm 2mm;
+        padding: 2mm 2.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .celda__dia {
+        width: 10.5mm;
+        height: 10.5mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 50%;
+      }
+
+      .celda__reto {
+        grid-column: 1;
+        align-self: end;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.1;
+        color: var(--suave);
+      }
+
+      .celda__reto span {
+        display: block;
+        height: 6mm;
+        margin-top: 0.6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .celda svg {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        justify-self: center;
+        align-self: center;
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .cal-leyenda {
+        display: flex;
+        justify-content: center;
+        gap: 9mm;
+        margin: 2.6mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cal-leyenda li {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .cal-leyenda img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .cal-pie {
+        display: flex;
+        justify-content: space-between;
+        gap: 6mm;
+        margin: 2mm 0 0;
+        font-size: 9pt;
+        line-height: 1.25;
+        color: var(--suave);
+      }
+
+      /* Mi calendario (vertical, para cada peque) */
+      .mi-cal .cal-cabeza {
+        grid-template-columns: 16mm minmax(0, 1fr) auto;
+      }
+
+      .mi-cal .cal-cabeza > img:first-child {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .me-llamo {
+        display: flex;
+        align-items: flex-end;
+        gap: 3mm;
+        margin: 0 0 3mm;
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .me-llamo span {
+        flex: 1;
+        height: 9mm;
+        border-bottom: 0.5mm solid var(--marino);
+      }
+
+      .mi-cal .cal-dias p {
+        font-size: 18pt;
+        padding: 1mm 0;
+      }
+
+      .mi-cal .cal-rejilla {
+        grid-auto-rows: 47mm;
+        gap: 2.6mm 2mm;
+      }
+
+      .mi-cal .celda {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 11mm minmax(0, 1fr);
+        padding: 2mm;
+      }
+
+      .mi-cal .celda__dia {
+        width: 10.5mm;
+        height: 10.5mm;
+      }
+
+      .mi-cal .celda svg {
+        grid-column: 1;
+        grid-row: 2;
+        width: 27mm;
+        height: 27mm;
+      }
+
+      .mi-cal .cal-leyenda {
+        gap: 6mm;
+        margin-top: 3.5mm;
+      }
+
+      /* ---------- Cartel «El reto de hoy» ---------- */
+      .cartel {
+        text-align: center;
+      }
+
+      .cartel__titulo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5mm;
+        margin: 2mm 0 2mm;
+        font-size: 40pt;
+        line-height: 1;
+      }
+
+      .cartel__titulo img {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .cartel .me-llamo {
+        justify-content: center;
+        margin: 0 auto 4mm;
+        max-width: 130mm;
+      }
+
+      .cartel__marco {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 98mm;
+        height: 134mm;
+        margin: 0 auto 4mm;
+        border: 0.9mm dashed var(--suave);
+        border-radius: 5mm;
+        background: var(--crema);
+      }
+
+      .cartel__marco span {
+        width: 22mm;
+        height: 22mm;
+        border: 0.4mm solid #9aa3bd;
+        border-radius: 50%;
+        background: #d9dde8;
+      }
+
+      .cartel__marco small {
+        position: absolute;
+        bottom: 4mm;
+        left: 0;
+        right: 0;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .cartel__niveles {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cartel__niveles li {
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 2mm;
+        margin: 0;
+        padding: 3mm 2mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 4mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .cartel__niveles .forma {
+        display: grid;
+        place-items: center;
+        height: 17mm;
+      }
+
+      .cartel__pregunta {
+        margin: 0 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+      }
+
+      .cartel__final {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .cartel__final img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      /* ---------- Tarjetas de los retos (cuatro por hoja) ---------- */
+      .hoja-tarjetas__aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2.4mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .hoja-tarjetas__aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--tx);
+      }
+
+      .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 121mm;
+        gap: 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .reto {
+        display: grid;
+        grid-template-rows: 11mm auto minmax(0, 1fr);
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .reto__cabeza {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2mm;
+        padding: 0 3mm 0 1.6mm;
+        background: var(--t);
+        border-bottom: 0.6mm solid var(--c);
+      }
+
+      .reto__familia {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .reto__familia img {
+        width: 8.4mm;
+        height: 8.4mm;
+        padding: 0.5mm;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .reto__num {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        color: var(--marino);
+      }
+
+      .reto__titulo {
+        display: grid;
+        grid-template-columns: 31mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        padding: 2.6mm 3.4mm 2mm;
+      }
+
+      .reto__picto {
+        display: grid;
+        place-items: center;
+        width: 31mm;
+        height: 31mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .reto__picto img {
+        width: 27mm;
+        height: 27mm;
+      }
+
+      .reto__titulo h2 {
+        margin: 0;
+        font-size: 20pt;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      .reto__niveles {
+        display: grid;
+        align-content: space-evenly;
+        margin: 0;
+        padding: 0 3.4mm 1.5mm;
+        list-style: none;
+      }
+
+      .reto__niveles li {
+        display: grid;
+        grid-template-columns: 10.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 1.5mm 0;
+        border-top: 0.35mm solid var(--linea);
+      }
+
+      .reto__niveles li > span:first-child {
+        display: grid;
+        place-items: center;
+      }
+
+      .reto__niveles p {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      /* Tarjetas en blanco */
+      .reto--blanco .reto__picto {
+        border-style: dashed;
+      }
+
+      .reto--blanco .reto__titulo h2 {
+        font-size: 18pt;
+        color: var(--suave);
+      }
+
+      .renglones {
+        display: grid;
+        gap: 0;
+      }
+
+      .renglones span {
+        display: block;
+        height: 8.5mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      /* Tira de las emociones y tira de los niveles */
+      .tira-recortable {
+        margin: 5mm 0 0;
+        padding: 2.6mm 3mm 3mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        break-inside: avoid;
+      }
+
+      .tira-recortable h2 {
+        display: flex;
+        align-items: baseline;
+        gap: 3mm;
+        margin: 0 0 2mm;
+        font-size: 18pt;
+      }
+
+      .nota-tira {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .caras {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caras li {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .caras img {
+        width: 25mm;
+        height: 25mm;
+      }
+
+      /* En la tira, dos filas de tres: la cara a la izquierda y la palabra al lado, para que quepa a 18 puntos. */
+      .caras--tira {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.4mm 5mm;
+      }
+
+      .caras--tira li {
+        grid-template-columns: 22mm minmax(0, 1fr);
+        justify-items: start;
+        align-items: center;
+        gap: 3mm;
+        text-align: left;
+      }
+
+      .caras--tira img {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .niveles-tira {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .niveles-tira li {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 2mm 2.4mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 3mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+      }
+
+      .niveles-tira li > span:first-child {
+        display: grid;
+        place-items: center;
+      }
+
+      /* ---------- Adviento (opcional) ---------- */
+      .adviento .cabeza h1 {
+        font-size: 24pt;
+      }
+
+      .adviento__arriba {
+        display: grid;
+        grid-template-columns: 74mm minmax(0, 1fr);
+        gap: 6mm;
+        align-items: center;
+        margin: 0 0 3.5mm;
+      }
+
+      .corona {
+        width: 74mm;
+        height: 46mm;
+      }
+
+      .adviento__arriba ul {
+        display: grid;
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .adviento__arriba li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .adviento__arriba li img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .ventanas {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-auto-rows: 37mm;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ventana {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        justify-items: center;
+        margin: 0;
+        padding: 1.4mm 1mm 1.6mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .ventana:nth-child(4n + 1) {
+        background: var(--crema);
+      }
+
+      .ventana b {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .ventana svg {
+        align-self: center;
+        width: 21mm;
+        height: 21mm;
+      }
+
+      /* ---------- ¿Qué tal los retos? ---------- */
+      .cierre h1 {
+        font-size: 28pt;
+        margin: 0 0 3mm;
+      }
+
+      .pregunta {
+        margin: 0 0 4mm;
+        break-inside: avoid;
+      }
+
+      .pregunta h2 {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 2mm;
+        font-size: 20pt;
+      }
+
+      .pregunta h2 .numero {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 10mm;
+        height: 10mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-size: 15pt;
+      }
+
+      .recuadro-dibujo {
+        height: 62mm;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 4mm;
+      }
+
+      .recuadro-dibujo--bajo {
+        height: 46mm;
+      }
+
+      .cierre .caras {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4mm;
+      }
+
+      .cierre .caras li {
+        padding: 2mm 1mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 4mm;
+      }
+
+      .cierre .caras img {
+        width: 30mm;
+        height: 30mm;
+      }
+
+      .nota-adulto {
+        margin: 2mm 0 0;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 0.8mm;
+      }
+
+      .familias h2 img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.5em;
+      }
+
+      .retos-casa {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 5mm;
+        margin: 1.5mm 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .retos-casa li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 1.4mm 2.4mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        background: var(--crema);
+      }
+
+      .retos-casa img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.7em;
+        margin-bottom: 0.35em;
+      }
+
+      .guia p {
+        margin-bottom: 0.55em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.55em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+        line-height: 1.36;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .lista-niveles {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2mm;
+      }
+
+      .lista-niveles li > span:first-child {
+        display: grid;
+        place-items: center;
+        padding-top: 0.4mm;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.5em 0 0.2em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.6mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -64mm; top: 74mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 74mm; height: 74mm; left: -34mm; top: 118mm; background: var(--morado-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego · Un reto para cada día de clase</p>
+        <h1 class="portada__titulo">Retos<br />de diciembre</h1>
+        <p class="portada__subtitulo">
+          Un reto amable para cada día de clase hasta las vacaciones, en tres niveles y con pictogramas.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" aria-hidden="true" id="escena"></div>
+      <div class="pegatina" aria-hidden="true"><div><b>20</b>retos en 3 niveles</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Cada día de clase, la clase hace un reto corto: de convivencia, de emociones, de autonomía, de lenguaje o de
+        movimiento. Todo el grupo hace el mismo reto, y cada peque elige cómo hacerlo. Lleva cinco minutos.
+      </p>
+      <ol class="cada-dia" id="cada-dia"></ol>
+      <div class="niveles-vistazo">
+        <h2>Tres niveles en cada reto</h2>
+        <p><span><span class="nv n1 grande">1</span></span><span><strong>Con mucho apoyo.</strong> Lo hace con un adulto, que le enseña cómo y le ayuda. Vale responder con la voz, con un gesto, señalando o con su tablero de comunicación.</span></p>
+        <p><span><span class="nv n2 grande">2</span></span><span><strong>Con algo de apoyo.</strong> Le basta una pista o un ejemplo.</span></p>
+        <p><span><span class="nv n3 grande">3</span></span><span><strong>Sin apoyo.</strong> Lo hace solo o sola y, a veces, lo enseña a los demás.</span></p>
+        <p><span></span><span>Los niveles describen la tarea, nunca al niño o la niña. Cada día se puede cambiar de nivel.</span></p>
+      </div>
+      <ol class="mapa" id="mapa"></ol>
+    </section>
+
+    <!-- ======================================================================
+         LISTA DE LOS 20 RETOS (para planificar y anotar)
+         ====================================================================== -->
+    <section class="hoja lista-retos">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el docente · Para planificar y anotar</p>
+          <h1>Los 20 retos</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Elige los que encajen con tu grupo y apunta el día en que hacéis cada uno. Los que no os dé tiempo, guardadlos para
+        enero. Las dos tarjetas en blanco son para los retos que invente la clase.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">N.º</th>
+            <th scope="col">Familia</th>
+            <th scope="col">Reto</th>
+            <th scope="col">Día</th>
+            <th scope="col">Hecho</th>
+          </tr>
+        </thead>
+        <tbody id="filas-retos"></tbody>
+      </table>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CALENDARIO DE LA CLASE (apaisado)
+         ====================================================================== -->
+    <section class="calendario">
+      <div class="cal-cabeza">
+        <img src="pictogramas/3071.png" alt="" />
+        <div>
+          <p class="antetitulo">Para la pared de la clase</p>
+          <h1>Nuestro calendario de retos</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="cal-dias" id="dias-clase"></div>
+      <div class="cal-rejilla" id="rejilla-clase"></div>
+      <ul class="cal-leyenda">
+        <li><img src="pictogramas/2348.png" alt="" />Reto hecho: coloreamos el dibujo.</li>
+        <li><img src="pictogramas/30851.png" alt="" />Sin cole: tachamos el día.</li>
+      </ul>
+      <p class="cal-pie">
+        <span>Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</span>
+        <span>Dibujos para colorear: IdEducando</span>
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MI CALENDARIO (uno para cada peque)
+         ====================================================================== -->
+    <section class="hoja ancha mi-cal">
+      <div class="cal-cabeza">
+        <img src="pictogramas/3071.png" alt="" />
+        <div>
+          <p class="antetitulo">Para cada peque</p>
+          <h1>Mi calendario de retos</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="me-llamo">Me llamo<span></span></p>
+      <div class="cal-dias" id="dias-mio"></div>
+      <div class="cal-rejilla" id="rejilla-mia"></div>
+      <ul class="cal-leyenda">
+        <li><img src="pictogramas/2348.png" alt="" />Hecho: lo coloreo.</li>
+        <li><img src="pictogramas/30851.png" alt="" />Sin cole: lo tacho.</li>
+      </ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Dibujos para colorear: IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL «EL RETO DE HOY»
+         ====================================================================== -->
+    <section class="hoja cartel">
+      <div class="rayos"></div>
+      <h1 class="cartel__titulo"><img src="pictogramas/38276.png" alt="" />El reto de hoy</h1>
+      <p class="me-llamo">Hoy es<span></span></p>
+      <div class="cartel__marco" aria-hidden="true">
+        <span></span>
+        <small>Velcro rugoso: aquí se pega la tarjeta del día</small>
+      </div>
+      <p class="cartel__pregunta">¿Cómo lo hago hoy?</p>
+      <ul class="cartel__niveles">
+        <li><span class="forma"><span class="nv n1 enorme">1</span></span>Con mucho apoyo</li>
+        <li><span class="forma"><span class="nv n2 enorme">2</span></span>Con algo de apoyo</li>
+        <li><span class="forma"><span class="nv n3 enorme">3</span></span>Sin apoyo</li>
+      </ul>
+      <p class="cartel__final"><img src="pictogramas/2348.png" alt="" />Después, coloreamos el día en el calendario.</p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- Las cinco hojas de tarjetas se generan con el guion del final, a partir de la lista RETOS -->
+    <div id="hojas-tarjetas"></div>
+
+    <!-- ======================================================================
+         TARJETAS EN BLANCO, TIRA DE LAS EMOCIONES Y TIRA DE LOS NIVELES
+         ====================================================================== -->
+    <section class="hoja ancha c-naranja">
+      <p class="hoja-tarjetas__aviso">
+        <span><strong>Tarjetas en blanco y tiras</strong> · Para los retos que invente la clase y para señalar.</span>
+        <span>Plastifica y recorta</span>
+      </p>
+      <ul class="tarjetas" id="tarjetas-blanco"></ul>
+      <div class="tira-recortable">
+        <h2>¿Cómo me siento? <span class="nota-tira">Para los retos 5 y 7</span></h2>
+        <ul class="caras caras--tira" id="caras"></ul>
+      </div>
+      <div class="tira-recortable">
+        <h2>¿Cómo lo hago hoy? <span class="nota-tira">Para señalar el nivel</span></h2>
+        <ul class="niveles-tira">
+          <li><span><span class="nv n1 enorme">1</span></span>Con mucho apoyo</li>
+          <li><span><span class="nv n2 enorme">2</span></span>Con algo de apoyo</li>
+          <li><span><span class="nv n3 enorme">3</span></span>Sin apoyo</li>
+        </ul>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         VERSIÓN DE ADVIENTO (OPCIONAL)
+         ====================================================================== -->
+    <section class="hoja adviento">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Versión opcional · Para el centro que celebra el Adviento</p>
+          <h1>Calendario de Adviento de los retos</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="adviento__arriba">
+        <div id="corona" aria-hidden="true"></div>
+        <ul>
+          <li><img src="pictogramas/37174.png" alt="" />Cada semana, coloreo una vela.</li>
+          <li><img src="pictogramas/5935.png" alt="" />Día de cole: el reto de la clase.</li>
+          <li><img src="pictogramas/27329.png" alt="" />Fin de semana o fiesta: un reto en casa.</li>
+        </ul>
+      </div>
+      <ol class="ventanas" id="ventanas"></ol>
+      <p class="atribucion">
+        Del 1 al 24 de diciembre: cada día, coloread su ventana. Los retos para casa están en la nota para las familias (página
+        <span data-pagina="familias"></span>). Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA.
+        Propiedad: Gobierno de Aragón. Corona y dibujos: IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         ¿QUÉ TAL LOS RETOS? (para el último día)
+         ====================================================================== -->
+    <section class="hoja cierre">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el último día antes de las vacaciones</p>
+          <h1>¿Qué tal los retos?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="me-llamo">Me llamo<span></span></p>
+      <div class="pregunta">
+        <h2><span class="numero">1</span>El reto que más me ha gustado</h2>
+        <div class="recuadro-dibujo"></div>
+      </div>
+      <div class="pregunta">
+        <h2><span class="numero">2</span>¿Cómo me he sentido?</h2>
+        <ul class="caras" id="caras-cierre"></ul>
+      </div>
+      <div class="pregunta">
+        <h2><span class="numero">3</span>En enero quiero repetir</h2>
+        <div class="recuadro-dibujo recuadro-dibujo--bajo"></div>
+      </div>
+      <p class="nota-adulto">
+        Para el adulto: puede dibujar, pegar la foto de la tarjeta o escribir el número del reto. Si señala, anota tú lo que
+        elige y rodea la cara que te indique.
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Retos de diciembre en el cole</h1>
+      <p>
+        Este mes, cada día de clase hacemos un reto corto. Hay retos para convivir, para hablar de cómo nos sentimos, para
+        hacer cosas sin ayuda, para hablar y para movernos.
+      </p>
+
+      <h2><img src="pictogramas/5935.png" alt="" />Cómo lo hacemos</h2>
+      <p>
+        Sacamos una tarjeta de una caja. Todo el grupo hace el mismo reto, y cada peque elige cómo: con mucho apoyo, con algo
+        de apoyo o sin apoyo. Después coloreamos el día en el calendario.
+      </p>
+
+      <h2><img src="pictogramas/2317.png" alt="" />No hace falta traer nada</h2>
+      <p>Ningún reto lleva comida ni cosas de casa. No tenéis que comprar nada.</p>
+
+      <h2><img src="pictogramas/3345.png" alt="" />En casa podéis preguntar</h2>
+      <p>«¿Qué reto has hecho hoy?». Si no lo cuenta con palabras, puede señalar o enseñaros cómo lo ha hecho.</p>
+
+      <h2><img src="pictogramas/2392.png" alt="" />Retos para hacer en casa</h2>
+      <p>Para los fines de semana y los días de fiesta, si os apetece:</p>
+      <ul class="retos-casa" id="retos-casa"></ul>
+
+      <h2><img src="pictogramas/37174.png" alt="" />Si celebráis el Adviento</h2>
+      <p>
+        Algunos coles usan una versión de Adviento, con una ventana para cada día hasta el 24. Es opcional. Los días sin cole,
+        podéis hacer en casa uno de estos retos.
+      </p>
+
+      <div class="creditos">
+        <p>
+          <strong>Retos de diciembre en tres niveles.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los
+          símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+          ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Retos de diciembre: cómo usarlos</h1>
+      <p>
+        Diciembre llega con fiestas y con ganas de vacaciones. Estos retos dan a cada día de clase un momento corto y amable
+        para convivir, poner nombre a lo que se siente, hacer cosas sin ayuda, hablar y moverse. Toda la clase hace el mismo
+        reto a la vez, y cada peque elige su nivel.
+      </p>
+
+      <h2>Cada día, en cinco minutos</h2>
+      <ol>
+        <li>Al empezar la mañana, alguien saca una tarjeta de la caja y la pega en el cartel del reto de hoy (página <span data-pagina="cartel"></span>).</li>
+        <li>Leed el reto en voz alta y señala el pictograma. Haz tú el reto delante, como ejemplo.</li>
+        <li>Cada peque elige su nivel: lo dice o lo señala en la tira de los niveles. Si le cuesta, propónselo tú.</li>
+        <li>Haced el reto a lo largo del día. Al terminar, colorea el día en el calendario de la clase, y cada cual en el suyo.</li>
+      </ol>
+
+      <h2>¿Cuántos días tiene vuestro diciembre?</h2>
+      <p>
+        Depende del año, de la comunidad autónoma y del municipio. Escribe en el calendario el número de cada día con clase
+        hasta las vacaciones y tacha los demás. En diciembre de 2026, el lunes 7 y el martes 8 son festivos en toda la Región
+        de Murcia (Boletín Oficial del Estado, BOE, 2025). Las vacaciones y los días no lectivos de cada municipio están en el
+        calendario escolar del curso, en el Boletín Oficial de la Región de Murcia (BORM). Con 20 retos y dos en blanco puedes
+        elegir y guardar alguno para enero.
+      </p>
+
+      <h2>Tres niveles para toda la clase</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone pensar desde el principio en toda la clase. CAST, el centro de
+        investigación que publica sus pautas, recomienda «Ofrecer opciones con distintos niveles de complejidad o dificultad»
+        (CAST, 2024, consideración 8.2). Aquí, cada reto
+        tiene tres:
+      </p>
+      <ul class="lista-niveles">
+        <li><span><span class="nv n1">1</span></span><span><strong>Con mucho apoyo.</strong> El adulto lo hace a la vez y ayuda con sus manos si hace falta. Vale cualquier respuesta: la voz, un gesto, señalar o el tablero de comunicación.</span></li>
+        <li><span><span class="nv n2">2</span></span><span><strong>Con algo de apoyo.</strong> Basta una pista o un ejemplo.</span></li>
+        <li><span><span class="nv n3">3</span></span><span><strong>Sin apoyo.</strong> Lo hace solo o sola y, a veces, lo enseña a los demás.</span></li>
+      </ul>
+      <p>
+        Los niveles describen la tarea, nunca al niño o la niña, y cada día se puede cambiar. Dejar elegir es otra pauta del
+        DUA: «Optimizar la elección y la autonomía» (consideración 7.1).
+      </p>
+
+      <h2>Para que nadie se quede fuera</h2>
+      <ul>
+        <li>
+          <strong>Movimiento, de pie o sentados.</strong> Los retos de movimiento se pueden hacer en una silla o en una silla
+          de ruedas. Hay más ideas en el material <em>Pausas activas para todos</em>.
+        </li>
+        <li><strong>Sin eliminar a nadie.</strong> En «Baila y para», quien se mueve al parar la música sigue jugando.</li>
+        <li><strong>Sin comida y sin compras.</strong> Ningún reto lleva comida ni pide traer nada de casa.</li>
+        <li><strong>La bolsa misteriosa</strong> (reto 16), con objetos grandes de clase: nada que quepa en la boca.</li>
+        <li>
+          <strong>Manos limpias.</strong> Los Centros para el Control y la Prevención de Enfermedades de Estados Unidos (CDC)
+          piden frotar con jabón al menos 20 segundos (CDC, 2024): contad despacio.
+        </li>
+      </ul>
+
+      <h2>Ideas para cada necesidad</h2>
+      <ul>
+        <li>
+          <strong>Trastorno del espectro del autismo (TEA).</strong> Anticipa el reto en la agenda visual. Si sacar una
+          tarjeta sin verla le inquieta, que elija entre dos. Para las emociones, usad siempre la misma tira de caras.
+        </li>
+        <li>
+          <strong>Trastorno por déficit de atención e hiperactividad (TDAH).</strong> Que saque la tarjeta o la pegue en el
+          cartel. Los retos de movimiento vienen bien después de un rato sentados.
+        </li>
+        <li>
+          <strong>Trastorno del desarrollo del lenguaje (TDL) y alumnado con un sistema de comunicación.</strong> Señala el
+          pictograma mientras lees el reto. Vale responder señalando o con su tablero.
+        </li>
+        <li><strong>Discapacidad auditiva.</strong> En «Baila y para», cambia el silencio por una señal que se vea, como levantar una tarjeta.</li>
+        <li><strong>Discapacidad visual.</strong> Lee el reto en voz alta, describe el pictograma y usa objetos de verdad.</li>
+        <li><strong>Discapacidad intelectual.</strong> Empieza por los retos más sencillos y repite el mismo varios días.</li>
+        <li><strong>Alumnado que acaba de llegar.</strong> En «Saludos para todos», aprended a saludar en su lengua.</li>
+        <li><strong>Para quien pide más.</strong> Que invente los retos de las tarjetas en blanco, con sus tres niveles.</li>
+      </ul>
+
+      <h2>La versión de Adviento, solo si la queréis</h2>
+      <p>
+        El material de base sirve para cualquier centro y cualquier familia, crea lo que crea. La Convención sobre los
+        Derechos del Niño pide respetar «el derecho del niño a la libertad de pensamiento, de conciencia y de religión»
+        (art. 14). Si tu centro celebra el Adviento, usa el calendario de la página <span data-pagina="adviento"></span>, con una
+        ventana para cada día del 1 al 24 y una corona con una vela para cada semana.
+      </p>
+
+      <h2>Qué trabaja del currículo</h2>
+      <p>
+        En Infantil, conecta con saberes del currículo de la Región de Murcia (Decreto 196/2022, BORM n.º 255): «Progresiva
+        autonomía en la realización de tareas» y «Estrategias de ayuda y cooperación en contextos de juego y rutinas» (pág.
+        33084); «Fórmulas de cortesía e interacción social positiva. Actitud de ayuda y cooperación» (pág. 33085);
+        «Repertorio comunicativo y elementos de comunicación no verbal» (pág. 33108), y «La poesía y los juegos de palabras
+        como elementos de aprendizaje y disfrute» (pág. 33109).
+      </p>
+
+      <div class="caja caja--azul">
+        <h2>El DUA en estos retos, según CAST (versión 3.0, 2024)</h2>
+        <ul>
+          <li><strong>8.2 Optimizar los desafíos y el apoyo:</strong> tres niveles en cada reto.</li>
+          <li><strong>7.1 Optimizar la elección y la autonomía:</strong> cada peque elige su nivel.</li>
+          <li><strong>4.1 Variar y valorar los métodos de respuesta, navegación y movimiento:</strong> se responde hablando, señalando, con un gesto o con el tablero.</li>
+          <li><strong>8.4 Fomentar la pertenencia y la comunidad:</strong> toda la clase hace el mismo reto.</li>
+          <li><strong>9.2 Desarrollar la conciencia de sí mismo y de los demás:</strong> los retos de emociones.</li>
+          <li><strong>7.3 Fomentar la alegría y el juego:</strong> retos cortos, para disfrutar.</li>
+          <li><strong>9.3 Promover la reflexión individual y colectiva:</strong> la hoja «¿Qué tal los retos?» (página <span data-pagina="cierre"></span>), el último día.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Retos de diciembre en tres niveles.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/retos-diciembre</span>. Fuentes consultadas entre el 5 y el 8 de
+        noviembre de 2026. Los retos y sus niveles son una propuesta de IdEducando.
+      </p>
+
+      <h2>Diseño Universal para el Aprendizaje</h2>
+      <ul class="referencias">
+        <li>
+          CAST (2024). <em>Directrices del Diseño Universal para el Aprendizaje, versión 3.0</em>: consideraciones 4.1, 7.1,
+          7.3, 8.2, 8.4, 9.2 y 9.3. udlguidelines.cast.org/es
+        </li>
+      </ul>
+
+      <h2>Currículo y calendario</h2>
+      <ul class="referencias">
+        <li>
+          Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la
+          Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022, págs. 33084, 33085, 33108 y 33109.
+        </li>
+        <li>
+          Resolución de 17 de octubre de 2025, de la Dirección General de Trabajo, por la que se publica la relación de fiestas
+          laborales para el año 2026. BOE núm. 259, de 28 de octubre de 2025, pág. 140543 (BOE-A-2025-21667).
+        </li>
+      </ul>
+
+      <h2>Salud y derechos</h2>
+      <ul class="referencias">
+        <li>Centers for Disease Control and Prevention, CDC (2024). <em>About Handwashing</em>. Clean Hands. cdc.gov/clean-hands</li>
+        <li>
+          Instrumento de Ratificación de la Convención sobre los Derechos del Niño, adoptada por la Asamblea General de las
+          Naciones Unidas el 20 de noviembre de 1989. BOE núm. 313, de 31 de diciembre de 1990, artículo 14.
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Los
+        dibujos para colorear, la corona, el calendario de la portada y las estrellas son de IdEducando.
+      </p>
+      <p>
+        Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre. Licencia CC BY-NC-SA 4.0:
+        puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        vistazo: 3,
+        lista: 4,
+        calendario: 5,
+        micalendario: 6,
+        cartel: 7,
+        tarjetas: 8,
+        blanco: 13,
+        adviento: 14,
+        cierre: 15,
+        familias: 16,
+        guia: 17,
+        fuentes: 19,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las cinco familias de retos: color, pictograma de ARASAAC y nombre.
+      // ---------------------------------------------------------------------
+      const FAMILIAS = {
+        convivencia: { color: 'azul', picto: 2255, nombre: 'Convivencia' },
+        emociones: { color: 'morado', picto: 31923, nombre: 'Emociones' },
+        autonomia: { color: 'verde', picto: 17026, nombre: 'Autonomía' },
+        lenguaje: { color: 'amarillo', picto: 27685, nombre: 'Lenguaje' },
+        movimiento: { color: 'coral', picto: 28447, nombre: 'Movimiento' },
+      };
+
+      // ---------------------------------------------------------------------
+      // Los 20 retos: [familia, pictograma, título, [con mucho apoyo, con algo de apoyo, sin apoyo]].
+      // Nada de comida ni de compras. Los de movimiento, siempre de pie o sentados.
+      // ---------------------------------------------------------------------
+      const RETOS = [
+        ['convivencia', 6009, 'Saludos para todos', ['Saludo con la mano a quien llega.', 'Saludo a tres personas por su nombre.', 'Saludo a alguien con quien casi no juego y le pregunto qué tal.']],
+        ['convivencia', 16125, 'Echo una mano', ['Ayudo a guardar un juguete, con un adulto.', 'Ayudo a recoger la mesa de mi grupo.', 'Busco a quien necesita ayuda y le echo una mano.']],
+        ['convivencia', 32580, 'Por turnos', ['Paso la pelota y espero a que vuelva.', 'Juego a un juego de mesa y espero mi turno.', 'Juego por turnos y animo a los demás.']],
+        ['convivencia', 39103, 'Compartimos', ['Paso los rotuladores a quien está a mi lado.', 'Comparto mis rotuladores en la mesa.', 'Hacemos un dibujo en pareja, por turnos.']],
+        ['emociones', 11476, '¿Cómo me siento?', ['Señalo la cara de cómo me siento.', 'Digo cómo me siento y por qué.', 'Cuento un momento de hoy que me ha hecho sentir bien.']],
+        ['emociones', 34409, 'Respiro despacio', ['Respiro despacio con un adulto, con la mano en la barriga.', 'Cojo aire por la nariz y lo suelto despacio por la boca.', 'Enseño a un compañero o una compañera cómo me calmo.']],
+        ['emociones', 9843, '¿Y tú, cómo estás?', ['Miro una cara y señalo si está contenta o triste.', 'Pregunto a alguien cómo está.', 'Si alguien está triste, pienso qué puedo hacer y lo hago.']],
+        ['emociones', 8128, 'Palabras bonitas', ['Doy las gracias con un gesto o con mi tablero.', 'Le digo a alguien algo que hace bien.', 'Escribo o dibujo un mensaje bonito para alguien de la clase.']],
+        ['autonomia', 27052, 'Me pongo el abrigo', ['Meto los brazos en las mangas, con ayuda.', 'Me pongo el abrigo mirando los pasos.', 'Me pongo el abrigo y subo la cremallera sin ayuda.']],
+        ['autonomia', 5514, 'Cada cosa en su sitio', ['Guardo un material en su caja, con ayuda.', 'Ordeno mi mesa al terminar.', 'Preparo mi mochila sin que me lo recuerden.']],
+        ['autonomia', 8975, 'Manos limpias', ['Me lavo las manos con un adulto, paso a paso.', 'Me lavo las manos mirando los pasos.', 'Me froto las manos con jabón mientras cuento hasta 20.']],
+        ['autonomia', 28420, 'Pido ayuda', ['Pido ayuda con un gesto o con mi tablero.', 'Levanto la mano cuando algo me cuesta.', 'Lo intento primero y, si hace falta, explico qué necesito.']],
+        ['lenguaje', 5493, 'Palabras de invierno', ['Señalo una cosa de invierno: el gorro o la bufanda.', 'Digo dos palabras de invierno.', 'Invento una frase con la palabra «frío».']],
+        ['lenguaje', 3135, 'Rimas con nieve', ['Doy una palmada cuando oigo «nieve».', 'Busco una palabra que rime con «nieve».', 'Invento una rima corta con «nieve».']],
+        ['lenguaje', 3345, 'Te cuento', ['Señalo en la agenda algo que hemos hecho hoy.', 'Cuento con dos frases qué he hecho hoy.', 'Cuento lo que hice el fin de semana: primero, después y al final.']],
+        ['lenguaje', 24829, 'Adivina, adivinanza', ['Toco un objeto escondido en una bolsa y digo o señalo qué es.', 'Adivino una adivinanza con pistas.', 'Invento una adivinanza para la clase.']],
+        ['movimiento', 31435, 'Baila y para', ['Muevo los brazos con la música.', 'Bailo y, cuando para la música, me quedo como una estatua.', 'Invento un paso de baile y la clase lo copia.']],
+        ['movimiento', 3243, 'Como un pingüino', ['Me balanceo como un pingüino, de pie o en mi silla.', 'Me muevo como un pingüino y como un oso polar.', 'Me muevo como un animal del frío y la clase adivina cuál es.']],
+        ['movimiento', 38027, 'Copos de nieve', ['Subo los brazos y los bajo despacio, como la nieve.', 'Giro despacio como un copo y bajo poco a poco.', 'Invento un baile de copos y lo enseño a mi grupo.']],
+        ['movimiento', 2385, 'El espejo', ['Copio un movimiento del adulto.', 'Juego al espejo con un compañero o una compañera.', 'Invento movimientos y mi pareja los copia.']],
+      ];
+
+      // Caras para la tira de las emociones y para la hoja final.
+      const CARAS = [
+        [31923, 'Contento'],
+        [31939, 'Triste'],
+        [31884, 'Enfadado'],
+        [31896, 'Con miedo'],
+        [38932, 'Tranquilo'],
+        [31925, 'Cansado'],
+      ];
+      const CARAS_CIERRE = [
+        [31923, 'Contento'],
+        [38932, 'Tranquilo'],
+        [31925, 'Cansado'],
+        [31939, 'Triste'],
+      ];
+
+      // Retos para hacer en casa (nota para las familias).
+      const RETOS_CASA = [
+        [6009, 'Saludad a quien llega a casa.'],
+        [5514, 'Recoged juntos los juguetes.'],
+        [31435, 'Bailad una canción y parad cuando pare la música.'],
+        [34409, 'Respirad despacio antes de dormir.'],
+        [3345, 'Contaos qué ha pasado hoy.'],
+        [8128, 'Dad las gracias a alguien de la familia.'],
+      ];
+
+      // De un vistazo: [color, pictograma, título, para qué, páginas].
+      const MAPA = [
+        ['naranja', 7141, 'Los 20 retos', 'La lista para elegir y apuntar el día de cada uno.', 'lista'],
+        ['azul', 3071, 'Nuestro calendario de retos', 'Para la pared de la clase. Va en horizontal.', 'calendario'],
+        ['verde', 3071, 'Mi calendario de retos', 'Uno para cada peque: colorea su día al terminar el reto.', 'micalendario'],
+        ['morado', 38276, 'El reto de hoy', 'El cartel donde se pega la tarjeta del día, con los tres niveles.', 'cartel'],
+        ['coral', 5935, 'Tarjetas de los retos', 'Veinte tarjetas para sacar de una caja, dos en blanco y las tiras de emociones y de niveles.', 'tarjetas', 'blanco'],
+        ['verde', 37174, 'Calendario de Adviento', 'Opcional, para el centro que lo celebra.', 'adviento'],
+        ['azul', 2348, '¿Qué tal los retos?', 'Para el último día: el reto favorito y cómo me he sentido.', 'cierre'],
+        ['coral', 2392, 'Nota para las familias', 'Con retos para hacer en casa. Una copia para cada familia.', 'familias'],
+        ['morado', 6556, 'Guía para el docente y fuentes', 'Cómo usarlos, ideas para cada necesidad y currículo.', 'guia', 'fuentes'],
+      ];
+
+      // Cada día, en cuatro pasos: [pictograma o 'niveles', texto].
+      const CADA_DIA = [
+        [5935, 'Sacamos una tarjeta de la caja.'],
+        [3345, 'Leemos el reto y vemos un ejemplo.'],
+        ['niveles', 'Cada peque elige su nivel.'],
+        [2348, 'Hecho: coloreamos el día.'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC): motivos para colorear, corona y portada.
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const T = `fill="#fff" stroke="${M}" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"`;
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+
+      // Copo de nieve: tres líneas que se cruzan y dos ramitas en cada punta.
+      function copo(trazo = M, grosor = 4) {
+        let d = '';
+        for (let i = 0; i < 6; i++) {
+          const a = (i * Math.PI) / 3;
+          const x = (r) => (50 + r * Math.sin(a)).toFixed(1);
+          const y = (r) => (50 - r * Math.cos(a)).toFixed(1);
+          d += `M50 50 L${x(40)} ${y(40)} `;
+          for (const lado of [-1, 1]) {
+            const b = a + (lado * Math.PI) / 4;
+            d += `M${x(26)} ${y(26)} L${(50 + 26 * Math.sin(a) + 11 * Math.sin(b)).toFixed(1)} ${(50 - 26 * Math.cos(a) - 11 * Math.cos(b)).toFixed(1)} `;
+          }
+        }
+        return `<path d="${d}" fill="none" stroke="${trazo}" stroke-width="${grosor}" stroke-linecap="round"/><circle cx="50" cy="50" r="6" fill="#fff" stroke="${trazo}" stroke-width="${grosor}"/>`;
+      }
+
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const MOTIVOS = [
+        copo(),
+        `<path d="${ESTRELLA}" ${T}/>`,
+        // Gorro de lana con pompón
+        `<path d="M18 72 Q18 28 50 28 Q82 28 82 72 Z" ${T}/><rect x="13" y="66" width="74" height="17" rx="5" ${T}/><circle cx="50" cy="19" r="9" ${T}/><path d="M30 66 V74 M44 66 V75 M58 66 V75 M72 66 V74" fill="none" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/>`,
+        // Manopla
+        `<path d="M34 90 V52 Q34 20 56 20 Q76 20 76 46 V90 Z" ${T}/><path d="M34 60 Q16 58 17 43 Q18 31 30 36 L34 40" ${T}/><path d="M34 76 H76" fill="none" stroke="${M}" stroke-width="3.6"/>`,
+        // Luna
+        `<path d="M60 12 A39 39 0 1 0 88 72 A31 31 0 1 1 60 12 Z" ${T}/>`,
+        // Nube
+        `<path d="M22 74 H78 A17 17 0 0 0 74 40 A23 23 0 0 0 33 35 A19 19 0 0 0 22 74 Z" ${T}/>`,
+        // Corazón
+        `<path d="M50 86 L17 53 A18 18 0 0 1 50 27 A18 18 0 0 1 83 53 Z" ${T}/>`,
+        // Árbol de invierno
+        `<path d="M50 9 L80 48 H64 L86 78 H14 L36 48 H20 Z" ${T}/><rect x="43" y="78" width="14" height="13" rx="2" ${T}/>`,
+      ];
+      const motivo = (i, clase = '') => svg(MOTIVOS[i % MOTIVOS.length], clase);
+
+      // Corona de Adviento para colorear: una corona de hojas vista un poco desde arriba y cuatro velas
+      // numeradas encima. Se pinta de atrás adelante: así las hojas de delante tapan el pie de las velas.
+      function corona() {
+        const [cx, cy, rx, ry] = [120, 108, 92, 26];
+        const piezas = [];
+        const n = 28;
+        for (let i = 0; i < n; i++) {
+          const a = (i / n) * 2 * Math.PI;
+          const x = cx + rx * Math.cos(a);
+          const y = cy + ry * Math.sin(a);
+          piezas.push([y, `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="12.5" fill="#fff" stroke="${M}" stroke-width="2.6"/>`]);
+        }
+        // Dos velas detrás y dos delante, repartidas por la corona
+        [235, 305, 145, 35].forEach((grados, i) => {
+          const a = (grados * Math.PI) / 180;
+          const x = cx + rx * 0.8 * Math.cos(a);
+          const base = cy + ry * 0.8 * Math.sin(a) + 4;
+          const numero = [2, 3, 1, 4][i];
+          piezas.push([
+            base - 6,
+            `<rect x="${(x - 9).toFixed(1)}" y="${(base - 58).toFixed(1)}" width="18" height="58" rx="2.5" fill="#fff" stroke="${M}" stroke-width="3"/>
+            <path d="M${x.toFixed(1)} ${(base - 84).toFixed(1)} Q${(x + 8).toFixed(1)} ${(base - 71).toFixed(1)} ${x.toFixed(1)} ${(base - 63).toFixed(1)} Q${(x - 8).toFixed(1)} ${(base - 71).toFixed(1)} ${x.toFixed(1)} ${(base - 84).toFixed(1)} Z" fill="#fff" stroke="${M}" stroke-width="2.4"/>
+            <path d="M${x.toFixed(1)} ${(base - 63).toFixed(1)} V${(base - 58).toFixed(1)}" stroke="${M}" stroke-width="2.4"/>
+            <text x="${x.toFixed(1)}" y="${(base - 32).toFixed(1)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="17" fill="${M}">${numero}</text>`,
+          ]);
+        });
+        piezas.sort((p, q) => p[0] - q[0]);
+        return svg(piezas.map((p) => p[1]).join(''), 'corona', '0 0 240 150');
+      }
+
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const logo = (clase = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+      const marca = (nivel, clase = 'grande') => `<span class="nv n${nivel} ${clase}">${nivel}</span>`;
+      const ATRIBUCION = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // ---------------------------------------------------------------------
+      // Tarjetas de los retos: una hoja por familia, cuatro tarjetas en cada hoja
+      // ---------------------------------------------------------------------
+      function tarjeta([familia, n, titulo, niveles], numero) {
+        const f = FAMILIAS[familia];
+        return `<li class="reto c-${f.color}">
+            <div class="reto__cabeza"><span class="reto__familia">${picto(f.picto)}${f.nombre}</span><span class="reto__num">Reto ${numero}</span></div>
+            <div class="reto__titulo"><div class="reto__picto">${picto(n)}</div><h2>${titulo}</h2></div>
+            <ol class="reto__niveles">${niveles
+              .map((texto, i) => `<li><span>${marca(i + 1)}</span><p>${texto}</p></li>`)
+              .join('')}</ol>
+          </li>`;
+      }
+
+      document.getElementById('hojas-tarjetas').outerHTML = Object.keys(FAMILIAS)
+        .map((clave, h) => {
+          const f = FAMILIAS[clave];
+          const desde = h * 4 + 1;
+          const tarjetas = RETOS.slice(h * 4, h * 4 + 4)
+            .map((r, i) => tarjeta(r, desde + i))
+            .join('');
+          return `<section class="hoja ancha c-${f.color}">
+            <p class="hoja-tarjetas__aviso"><span><strong>Retos ${desde} a ${desde + 3} · ${f.nombre}</strong></span><span>Plastifica, recorta con 3 mm de plástico y pon velcro suave detrás</span></p>
+            <ul class="tarjetas">${tarjetas}</ul>
+            <p class="atribucion">${ATRIBUCION}</p>
+          </section>`;
+        })
+        .join('');
+
+      // Tarjetas en blanco
+      document.getElementById('tarjetas-blanco').innerHTML = [21, 22]
+        .map(
+          (numero) => `<li class="reto reto--blanco c-naranja">
+            <div class="reto__cabeza"><span class="reto__familia">Nuestro reto</span><span class="reto__num">Reto ${numero}</span></div>
+            <div class="reto__titulo"><div class="reto__picto"></div><div class="renglones"><span></span><span></span><span></span></div></div>
+            <ol class="reto__niveles">${[1, 2, 3]
+              .map((i) => `<li><span>${marca(i)}</span><div class="renglones"><span></span><span></span></div></li>`)
+              .join('')}</ol>
+          </li>`,
+        )
+        .join('');
+
+      // Caras
+      const cara = ([n, texto]) => `<li>${picto(n)}${texto}</li>`;
+      document.getElementById('caras').innerHTML = CARAS.map(cara).join('');
+      document.getElementById('caras-cierre').innerHTML = CARAS_CIERRE.map(cara).join('');
+
+      // ---------------------------------------------------------------------
+      // Lista de los 20 retos
+      // ---------------------------------------------------------------------
+      document.getElementById('filas-retos').innerHTML = RETOS.map(([familia, n, titulo], i) => {
+        const f = FAMILIAS[familia];
+        return `<tr class="c-${f.color}"><td>${i + 1}</td><td><span class="familia"><span></span>${picto(f.picto)}${f.nombre}</span></td><td>${titulo}</td><td class="hueco-fecha"></td><td class="hueco-hecho"><span class="casilla"></span></td></tr>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Calendarios: cinco días de clase por semana y cuatro semanas. Sirven para cualquier año:
+      // se escribe el número de cada día y se tachan los días sin clase.
+      // ---------------------------------------------------------------------
+      const DIAS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
+      for (const id of ['dias-clase', 'dias-mio']) {
+        document.getElementById(id).innerHTML = DIAS.map((d) => `<p>${d}</p>`).join('');
+      }
+      document.getElementById('rejilla-clase').innerHTML = Array.from(
+        { length: 20 },
+        (_, i) => `<div class="celda"><span class="celda__dia"></span><p class="celda__reto">Reto<span></span></p>${motivo(i)}</div>`,
+      ).join('');
+      document.getElementById('rejilla-mia').innerHTML = Array.from(
+        { length: 20 },
+        (_, i) => `<div class="celda"><span class="celda__dia"></span>${motivo(i + 3)}</div>`,
+      ).join('');
+
+      // Adviento: 24 ventanas y la corona
+      document.getElementById('ventanas').innerHTML = Array.from(
+        { length: 24 },
+        (_, i) => `<li class="ventana"><b>${i + 1}</b>${motivo(i * 3)}</li>`,
+      ).join('');
+      document.getElementById('corona').innerHTML = corona();
+
+      // Retos para casa
+      document.getElementById('retos-casa').innerHTML = RETOS_CASA.map(([n, texto]) => `<li>${picto(n)}<span>${texto}</span></li>`).join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('cada-dia').innerHTML = CADA_DIA.map(([n, texto]) =>
+        n === 'niveles'
+          ? `<li><span class="formas">${marca(1)}${marca(2)}${marca(3)}</span>${texto}</li>`
+          : `<li>${picto(n)}${texto}</li>`,
+      ).join('');
+
+      const pagina = (clave) => {
+        const [nombre, menos] = clave.split('-');
+        return PAGINAS[nombre] - Number(menos ?? 0);
+      };
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, donde, ...claves]) => {
+        const pags = claves.map(pagina);
+        const ultima = pags[pags.length - 1];
+        const texto =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        return `<li class="c-${color}">${picto(n)}<div><h2>${titulo}</h2><p>${donde}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: el calendario de la clase y tres tarjetas en abanico
+      // ---------------------------------------------------------------------
+      const HECHOS = [0, 1, 2, 3, 6, 7, 8]; // casillas ya coloreadas en el dibujo
+      const TACHADAS = [4, 5];
+      const COLORES_MOTIVO = ['#f6c12e', '#8c4fb8', '#1fa67a', '#e8553e', '#2f6fd6', '#f5961f', '#e8553e', '#1fa67a'];
+      let celdas = '';
+      for (let i = 0; i < 15; i++) {
+        let dentro = '';
+        if (HECHOS.includes(i)) {
+          dentro = svg(MOTIVOS[i % MOTIVOS.length].replaceAll('fill="#fff"', `fill="${COLORES_MOTIVO[i % 8]}"`));
+        } else if (TACHADAS.includes(i)) {
+          dentro = svg(`<path d="M18 18 L82 82 M82 18 L18 82" stroke="${M}" stroke-width="9" stroke-linecap="round"/>`);
+        }
+        celdas += `<div>${dentro}</div>`;
+      }
+      const TARJETAS_PORTADA = [
+        ['azul', 6009, 'Saludos para todos', 103, 16, -7],
+        ['coral', 3243, 'Como un pingüino', 150, 38, 8],
+      ];
+      document.getElementById('escena').innerHTML =
+        `<div class="cal-portada">
+          <div class="cal-portada__cabeza">Diciembre<span>${svg(copo('#fff', 7))}</span></div>
+          <div class="cal-portada__dias"><span>L</span><span>M</span><span>X</span><span>J</span><span>V</span></div>
+          <div class="cal-portada__rejilla">${celdas}</div>
+        </div>` +
+        TARJETAS_PORTADA.map(
+          ([color, n, titulo, x, y, giro]) =>
+            `<div class="tarjeta-portada c-${color}" style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg)">
+              <div class="tarjeta-portada__banda"></div>${picto(n)}<p>${titulo}</p>
+              <div class="tarjeta-portada__niveles">${marca(1, '')}${marca(2, '')}${marca(3, '')}</div>
+            </div>`,
+        ).join('') +
+        [
+          [120, -8, 12],
+          [186, 6, 10],
+          [98, 104, 10],
+          [128, 100, 8],
+        ]
+          .map(([x, y, t]) => `<div class="copo-portada" style="left:${x}mm;top:${y}mm;width:${t}mm;height:${t}mm">${svg(copo('#2f6fd6', 6))}</div>`)
+          .join('');
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>
