@@ -1,0 +1,3976 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rincón de lenguaje de invierno: siete bandejas en tres niveles · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar: márgenes de 10 mm, el mínimo del manual de estilo. */
+      @page fichas {
+        margin: 10mm 10mm 16mm 10mm;
+      }
+
+      @page tiras {
+        size: A4 landscape;
+        margin: 9mm 10mm 14mm 10mm;
+      }
+
+      /* ---------- Color de cada bandeja (siempre con número, nombre y dibujo) ----------
+         --c: color · --t: tinte para fondos */
+      .b1 {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .b2 {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+      .b3 {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .b4 {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .b5 {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .b6 {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .b7 {
+        --c: var(--marino);
+        --t: #e6e9f2;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .imp {
+        page: fichas;
+        break-after: page;
+      }
+
+      .imp-ap {
+        page: tiras;
+        break-after: page;
+      }
+
+      .final {
+        break-after: auto;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      /* Las dos columnas se reparten en una rejilla: lo que necesitas y qué imprimir a la izquierda,
+         los pasos y el resultado a la derecha, y el criterio del velcro a todo lo ancho. */
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 0.9mm;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+        padding: 0.8mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8mm;
+        height: 8mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      /* Dentro de un párrafo, la marca va algo más pequeña para no separar las líneas. */
+      .paso-org .nv,
+      .leyenda-registro .nv,
+      .caja-mini p .nv {
+        width: 5.4mm;
+        height: 5.4mm;
+        vertical-align: -1.1mm;
+      }
+
+      .paso-org .nv.n3,
+      .leyenda-registro .nv.n3,
+      .caja-mini p .nv.n3 {
+        width: 6.8mm;
+        height: 6.8mm;
+        vertical-align: -1.8mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 15mm;
+      }
+
+      .portada__titulo {
+        font-size: 44pt;
+        line-height: 1.02;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 118mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .ilustracion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .ilustracion > * {
+        position: absolute;
+      }
+
+      .colgado {
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 0.7mm solid var(--marino);
+        border-radius: 2.6mm;
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.16);
+        transform-origin: 50% 0;
+      }
+
+      .colgado img {
+        width: 82%;
+        height: 82%;
+      }
+
+      .colgado span {
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 30pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .pegatina {
+        position: absolute;
+        right: 17mm;
+        top: 27mm;
+        width: 42mm;
+        height: 42mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        display: grid;
+        place-content: center;
+        text-align: center;
+        transform: rotate(-8deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.12;
+        box-shadow: 0 1.2mm 0 rgb(30 43 85 / 0.18);
+        z-index: 4;
+      }
+
+      .pegatina b {
+        font-size: 22pt;
+      }
+
+      /* ---------- Cabecera de las hojas de texto ---------- */
+      .cabecera {
+        margin-bottom: 3mm;
+      }
+
+      .cabecera .rayos {
+        margin-bottom: 3.2mm;
+      }
+
+      .cabecera h1 {
+        font-size: 21pt;
+        margin-bottom: 1.4mm;
+      }
+
+      .cabecera .entradilla {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.34;
+        color: var(--suave);
+      }
+
+      .codigo {
+        display: inline-block;
+        padding: 0 1.6mm;
+        border-radius: 1.2mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.45;
+        white-space: nowrap;
+      }
+
+      .num-mini {
+        display: inline-grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.6mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .datos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .datos li {
+        margin: 0;
+        padding: 2mm 2.8mm;
+        border-left: 1.2mm solid var(--linea);
+        background: var(--crema);
+        border-radius: 0 2mm 2mm 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .datos li strong {
+        display: block;
+        margin-bottom: 0.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--morado-texto);
+      }
+
+      .aprender {
+        margin: 0 0 3mm;
+      }
+
+      .aprender h2,
+      .subtitulo-hoja {
+        margin: 0 0 1.4mm;
+        font-size: 13pt;
+      }
+
+      .aprender ol {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8mm 6mm;
+        margin: 0;
+        padding-left: 5mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .aprender li {
+        margin: 0;
+      }
+
+      .mapa-bandejas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 3mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa-bandejas li {
+        display: grid;
+        grid-template-columns: 7mm 12mm minmax(0, 1fr) auto;
+        gap: 2mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.3mm 2.2mm;
+        border-radius: 2.4mm;
+        background: var(--t);
+        border-left: 1.6mm solid var(--c);
+        font-size: 11pt;
+        line-height: 1.2;
+      }
+
+      .mapa-bandejas .icono {
+        display: block;
+        width: 12mm;
+        height: 12mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .mapa-bandejas b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa-bandejas .pags {
+        font-family: var(--titulos);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .fila-dos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 3mm;
+        margin: 0;
+      }
+
+      .caja-mini {
+        padding: 2.4mm 3.2mm;
+        border-radius: 2.6mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .caja-mini h2 {
+        margin: 0 0 1.2mm;
+        font-size: 12pt;
+      }
+
+      .caja-mini p {
+        margin: 0 0 1.2mm;
+      }
+
+      .caja-mini ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caja-mini li {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        gap: 1.4mm;
+        align-items: center;
+        margin: 0 0 1mm;
+      }
+
+      .niveles-caja {
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+      }
+
+      .letra-caja {
+        background: #fff;
+        border: 0.35mm solid var(--linea);
+      }
+
+      .muestra-letra {
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      /* ---------- Currículo ---------- */
+      .curriculo-cols {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .curriculo-cols h2 {
+        margin: 0 0 1.6mm;
+        font-size: 12.5pt;
+      }
+
+      .curriculo-cols ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .curriculo-cols li {
+        margin: 0 0 1.7mm;
+      }
+
+      .donde {
+        color: var(--suave);
+      }
+
+      .grupo-saberes {
+        margin: 2.4mm 0 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .decreto {
+        margin-top: 2.6mm;
+        padding: 2.4mm 3.4mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border-left: 1.6mm solid var(--amarillo);
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .decreto h2 {
+        margin: 0 0 1.2mm;
+        font-size: 12pt;
+      }
+
+      .decreto ul {
+        margin: 0;
+        padding-left: 4mm;
+        list-style: disc;
+      }
+
+      .decreto li {
+        margin-bottom: 0.8mm;
+      }
+
+      .propone li {
+        padding-left: 3mm;
+        border-left: 1mm solid var(--linea);
+      }
+
+      /* ---------- Cómo organizarlo ---------- */
+      .organizar-rejilla {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 5mm;
+        margin: 0 0 2.4mm;
+      }
+
+      .paso-org {
+        font-size: 11pt;
+        line-height: 1.28;
+        break-inside: avoid;
+      }
+
+      .paso-org h2 {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0 0 0.6mm;
+        font-size: 12pt;
+      }
+
+      .paso-org h2 img {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .paso-org p {
+        margin: 0;
+      }
+
+      .investigacion,
+      .dua,
+      .seguridad {
+        padding: 2.2mm 3.4mm;
+        border-radius: 3mm;
+        font-size: 11pt;
+        line-height: 1.28;
+        break-inside: avoid;
+      }
+
+      .investigacion {
+        background: var(--azul-tinte);
+        border-left: 1.6mm solid var(--azul);
+        margin-bottom: 2.4mm;
+      }
+
+      .dua {
+        background: var(--morado-tinte);
+        border-left: 1.6mm solid var(--morado);
+        margin-bottom: 2.4mm;
+      }
+
+      .seguridad {
+        background: var(--coral-tinte);
+        border-left: 1.6mm solid var(--coral);
+      }
+
+      .investigacion h2,
+      .dua h2,
+      .seguridad h2 {
+        margin: 0 0 0.8mm;
+        font-size: 12pt;
+      }
+
+      .investigacion p,
+      .dua p,
+      .seguridad p {
+        margin: 0 0 0.8mm;
+      }
+
+      .dua ul,
+      .seguridad ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .dua li,
+      .seguridad li {
+        margin-bottom: 0.3mm;
+      }
+
+      .escalera {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .escalera li {
+        margin: 0;
+        padding: 1.6mm 2.4mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+      }
+
+      .escalera b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+      }
+
+      /* ---------- Hoja del docente de cada bandeja ---------- */
+      .docente {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .cab-bandeja {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr) 20mm;
+        align-items: center;
+        gap: 4mm;
+        padding: 2.2mm 4mm;
+        margin-bottom: 2.2mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-left: 2.2mm solid var(--c);
+      }
+
+      .num-bandeja {
+        display: grid;
+        place-items: center;
+        width: 14mm;
+        height: 14mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 1.2mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .cab-bandeja .antetitulo {
+        margin: 0 0 0.6mm;
+        color: var(--marino);
+      }
+
+      .cab-bandeja h1 {
+        margin: 0;
+        font-size: 23pt;
+      }
+
+      .cab-bandeja > .icono {
+        display: block;
+        width: 20mm;
+        height: 20mm;
+        background: #fff;
+        border-radius: 2.6mm;
+      }
+
+      .para-que {
+        margin: 0 0 1.6mm;
+      }
+
+      .curriculo-linea {
+        margin: 0 0 1.6mm;
+        color: var(--suave);
+      }
+
+      .curriculo-linea .codigo {
+        margin-right: 0.6mm;
+      }
+
+      .material {
+        margin: 0 0 1.8mm;
+        padding: 1.6mm 2.6mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border-top: 1.2mm solid var(--c);
+      }
+
+      .aviso-corto {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: center;
+        margin: 0 0 2mm;
+        padding: 1.2mm 2.6mm;
+        border-radius: 2mm;
+        background: var(--coral-tinte);
+        border-left: 1.4mm solid var(--coral);
+      }
+
+      .aviso-corto img {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .aviso-corto p {
+        margin: 0;
+      }
+
+      .docente h2 {
+        font-size: 12.5pt;
+        margin: 0 0 1mm;
+      }
+
+      .pasos-juego {
+        counter-reset: paso;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.8mm;
+        display: grid;
+        gap: 0.8mm;
+      }
+
+      .pasos-juego li {
+        counter-increment: paso;
+        display: grid;
+        grid-template-columns: 6.4mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: start;
+        margin: 0;
+      }
+
+      .pasos-juego li::before {
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .preguntas {
+        margin: 0 0 2mm;
+        padding: 1.4mm 2.8mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+      }
+
+      .niveles3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.2mm;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2mm;
+      }
+
+      .niveles3 li {
+        margin: 0;
+        padding: 1.6mm 2.4mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        border: 0.35mm solid var(--linea);
+        line-height: 1.27;
+      }
+
+      .niveles3 h3 {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0 0 0.8mm;
+        font-size: 11.5pt;
+      }
+
+      .niveles3 p {
+        margin: 0;
+      }
+
+      .niveles3 .reto {
+        margin-top: 0.8mm;
+        color: var(--suave);
+      }
+
+      .pie-docente {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4mm;
+      }
+
+      .pie-docente > div {
+        padding: 1.6mm 2.6mm;
+        border-radius: 2.4mm;
+        line-height: 1.27;
+      }
+
+      .pie-docente h3 {
+        margin: 0 0 0.6mm;
+        font-size: 11.5pt;
+      }
+
+      .pie-docente ul {
+        margin: 0;
+        padding-left: 4mm;
+      }
+
+      .pie-docente li {
+        margin-bottom: 0.5mm;
+      }
+
+      .observar {
+        background: var(--amarillo-tinte);
+      }
+
+      .ajustes {
+        background: var(--azul-tinte);
+      }
+
+      .ajustes b {
+        font-family: var(--titulos);
+        font-weight: 600;
+      }
+
+      .soluciones {
+        margin: 2mm 0 0;
+        padding: 1.4mm 2.6mm;
+        border-radius: 2.4mm;
+        border: 0.35mm dashed var(--suave);
+        line-height: 1.27;
+      }
+
+      /* ---------- Cabecera de los imprimibles ---------- */
+      .cab-imp {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0 0 1.4mm;
+      }
+
+      .cab-imp .num-bandeja {
+        width: 10mm;
+        height: 10mm;
+        border-width: 1mm;
+        font-size: 14pt;
+        flex: none;
+      }
+
+      .cab-imp h1 {
+        margin: 0;
+        font-size: 16pt;
+      }
+
+      .cab-imp h1 small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+        margin-left: 1.5mm;
+      }
+
+      .cab-imp .logo {
+        margin-left: auto;
+        width: 30mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .atribucion {
+        margin: 1.6mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* Lo que lee el peque: Atkinson Hyperlegible en negrita, a 18 puntos o más. */
+      .peque {
+        font-family: var(--texto);
+        font-weight: 700;
+        color: var(--marino);
+      }
+
+      .corte {
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      /* ---------- Bandeja 1: tarjetas de vocabulario ---------- */
+      .vocab {
+        display: grid;
+        grid-template-columns: repeat(3, 60mm);
+        grid-auto-rows: 56mm;
+        gap: 4mm 5mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .vocab li {
+        position: relative;
+        display: grid;
+        grid-template-rows: 33mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 2.6mm 1.5mm 1.6mm;
+        overflow: hidden;
+      }
+
+      .vocab li::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 1.8mm;
+        background: var(--c);
+      }
+
+      .vocab img {
+        width: 31mm;
+        height: 31mm;
+      }
+
+      .vocab .palabras {
+        display: grid;
+        justify-items: center;
+        gap: 0.6mm;
+        text-align: center;
+        line-height: 1;
+      }
+
+      .vocab .may {
+        font-size: 20pt;
+        letter-spacing: 0.02em;
+      }
+
+      .vocab .min {
+        font-size: 18pt;
+      }
+
+      .palabras-sueltas {
+        display: grid;
+        grid-template-columns: repeat(3, 60mm);
+        grid-auto-rows: 28mm;
+        gap: 2.6mm 5mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .palabras-sueltas li {
+        position: relative;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 1mm;
+        margin: 0;
+        padding: 0 2mm 0 4mm;
+        overflow: hidden;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .palabras-sueltas li::before {
+        content: '';
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 1.8mm;
+        background: var(--c);
+      }
+
+      /* ---------- Bandeja 2: cazapalabras ---------- */
+      .cazas {
+        display: grid;
+        gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caza {
+        display: grid;
+        grid-template-rows: 22mm minmax(0, 1fr) 7mm;
+        height: 79mm;
+        margin: 0;
+        padding: 2.6mm 4mm 1.6mm;
+      }
+
+      .caza__arriba {
+        display: grid;
+        grid-template-columns: 10mm auto minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .caza__busca {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
+        gap: 2.4mm;
+        height: 20mm;
+        padding: 0 4mm 0 2mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 3mm;
+        background: var(--t);
+      }
+
+      .caza__busca img {
+        width: 16mm;
+        height: 16mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .caza__busca span {
+        font-size: 28pt;
+        line-height: 1;
+        letter-spacing: 0.03em;
+      }
+
+      .caza__cuenta {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1.6mm;
+        font-size: 18pt;
+      }
+
+      .caza__cuenta i {
+        display: block;
+        width: 8mm;
+        height: 8mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 50%;
+      }
+
+      .caza__campo {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-auto-rows: minmax(0, 1fr);
+        align-items: center;
+        justify-items: center;
+        margin: 1.4mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caza__campo li {
+        margin: 0;
+        font-size: 22pt;
+        line-height: 1;
+        letter-spacing: 0.02em;
+      }
+
+      .caza__campo.n3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .caza__pie {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      /* ---------- Bandeja 3: la sílaba que falta ---------- */
+      .faltas {
+        display: grid;
+        grid-template-columns: repeat(2, 92mm);
+        grid-auto-rows: 58mm;
+        gap: 4mm 6mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .falta {
+        position: relative;
+        display: grid;
+        grid-template-columns: 32mm minmax(0, 1fr);
+        gap: 2mm;
+        margin: 0;
+        padding: 2.4mm 2.4mm 0;
+        overflow: hidden;
+      }
+
+      .falta__dibujo {
+        display: grid;
+        grid-template-rows: 9mm 30mm minmax(0, 1fr);
+        justify-items: center;
+      }
+
+      .falta__dibujo img {
+        width: 30mm;
+        height: 30mm;
+      }
+
+      .falta__id {
+        align-self: end;
+        justify-self: start;
+        padding-bottom: 1.4mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .falta__derecha {
+        display: grid;
+        grid-template-rows: 11mm 17mm minmax(0, 1fr);
+        align-items: center;
+      }
+
+      .modelo {
+        justify-self: center;
+        font-size: 18pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .silabas {
+        display: flex;
+        justify-content: center;
+        gap: 1.2mm;
+      }
+
+      .silabas span {
+        display: grid;
+        place-items: center;
+        min-width: 11mm;
+        height: 13mm;
+        padding: 0 1.4mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 2mm;
+        font-size: 21pt;
+        line-height: 1;
+      }
+
+      .silabas .hueco {
+        min-width: 14mm;
+        border: 0.6mm dashed var(--c);
+        background: var(--t);
+      }
+
+      .silabas.escribe .hueco {
+        min-width: 19mm;
+      }
+
+      /* Las opciones van pegadas al borde de abajo: ahí se engancha la pinza. */
+      .opciones {
+        align-self: end;
+        display: flex;
+        justify-content: center;
+        gap: 2.4mm;
+      }
+
+      .opciones span {
+        display: grid;
+        place-items: center;
+        min-width: 15mm;
+        height: 12mm;
+        padding: 0 2mm 1.4mm;
+        border: 0.5mm solid var(--marino);
+        border-bottom: 0;
+        border-radius: 2.4mm 2.4mm 0 0;
+        background: var(--t);
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .escribe-aqui {
+        align-self: end;
+        justify-self: center;
+        padding-bottom: 2.4mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .marca-nivel {
+        position: absolute;
+        right: 2.4mm;
+        top: 2.4mm;
+      }
+
+      /* ---------- Bandeja 4: puzles ---------- */
+      .puzles-1 {
+        display: grid;
+        grid-template-columns: repeat(2, 88mm);
+        grid-auto-rows: 74mm;
+        gap: 6mm 8mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .puzles-largos {
+        display: grid;
+        justify-content: center;
+        gap: 6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .puzle {
+        position: relative;
+        margin: 0;
+      }
+
+      .puzle > svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .puzle > * {
+        position: absolute;
+      }
+
+      .puzle .sil {
+        transform: translate(-50%, -50%);
+        font-size: 26pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .puzle .simbolo {
+        width: 5mm;
+        height: 5mm;
+      }
+
+      /* ---------- Bandeja 5: discos de sonidos ---------- */
+      .discos {
+        display: grid;
+        gap: 7mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .disco-fila {
+        position: relative;
+        height: 112mm;
+        margin: 0;
+      }
+
+      .disco-fila .rotulo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 34mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.25;
+      }
+
+      .disco-fila .rotulo .desc {
+        display: block;
+        margin-top: 1mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .disco {
+        position: absolute;
+        left: 39mm;
+        top: 0;
+        width: 112mm;
+        height: 112mm;
+      }
+
+      .disco > * {
+        position: absolute;
+      }
+
+      .disco > svg {
+        inset: 0;
+        width: 112mm;
+        height: 112mm;
+      }
+
+      .disco .centro {
+        left: 50%;
+        top: 50%;
+        display: grid;
+        justify-items: center;
+        gap: 0.6mm;
+        transform: translate(-50%, -50%);
+        line-height: 1;
+      }
+
+      .disco .centro img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .disco .letras {
+        font-size: 28pt;
+        white-space: nowrap;
+      }
+
+      .disco .letras.sola {
+        font-size: 40pt;
+      }
+
+      /* ---------- Bandeja 6: tapete y tarjetas de palmadas ---------- */
+      .tapete-cab {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 3mm;
+      }
+
+      .tapete-cab img.icono {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .tapete-cab h1 {
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 26pt;
+      }
+
+      .tapete-cab .logo {
+        margin-left: auto;
+        width: 32mm;
+      }
+
+      .tapete {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 4mm;
+        height: 150mm;
+        padding: 3mm;
+      }
+
+      .columna {
+        display: grid;
+        grid-template-rows: 36mm minmax(0, 1fr);
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 2.4mm solid var(--c);
+        overflow: hidden;
+      }
+
+      .columna__cab {
+        position: relative;
+        display: grid;
+        grid-template-rows: 18mm 10mm;
+        justify-items: center;
+        align-items: center;
+        padding-top: 2mm;
+      }
+
+      .columna__num {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 40pt;
+        line-height: 1;
+      }
+
+      .columna__puntos {
+        display: flex;
+        gap: 2.4mm;
+      }
+
+      .columna__puntos i {
+        display: block;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: var(--marino);
+      }
+
+      .columna__cab .nv {
+        position: absolute;
+        left: 2.6mm;
+        top: 2.6mm;
+      }
+
+      .columna__sitio {
+        margin: 0 3mm 3mm;
+        border: 0.5mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .palmadas {
+        display: grid;
+        grid-template-columns: repeat(4, 46mm);
+        grid-auto-rows: 46mm;
+        gap: 3mm 1.8mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .palmadas li {
+        position: relative;
+        display: grid;
+        grid-template-rows: 30mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 2.4mm 1mm 1mm;
+      }
+
+      .palmadas img {
+        width: 28mm;
+        height: 28mm;
+      }
+
+      .palmadas .may {
+        font-size: 18pt;
+        line-height: 1;
+        letter-spacing: -0.005em;
+        white-space: nowrap;
+      }
+
+      .palmadas .nv {
+        position: absolute;
+        left: 1.8mm;
+        top: 1.8mm;
+        width: 5mm;
+        height: 5mm;
+        font-size: 9pt;
+      }
+
+      .palmadas .nv.n3 {
+        width: 6.6mm;
+        height: 6.6mm;
+        left: 1.2mm;
+        top: 1.2mm;
+      }
+
+      /* ---------- Bandeja 7: ruletas y tablero ---------- */
+      .ruleta-fila {
+        position: relative;
+        height: 112mm;
+        margin: 0;
+      }
+
+      .ruleta {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 112mm;
+        height: 112mm;
+      }
+
+      .ruleta > * {
+        position: absolute;
+      }
+
+      .ruleta > svg {
+        inset: 0;
+        width: 112mm;
+        height: 112mm;
+      }
+
+      .sector {
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+      }
+
+      .sector img {
+        position: absolute;
+        left: -10mm;
+        top: 11mm;
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .sector span {
+        position: absolute;
+        left: -20mm;
+        top: 32mm;
+        width: 40mm;
+        font-size: 18pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .flecha-pieza {
+        position: absolute;
+        left: 122mm;
+        width: 66mm;
+        height: 18mm;
+      }
+
+      .flecha-pieza svg {
+        position: absolute;
+        inset: 0;
+        width: 66mm;
+        height: 18mm;
+      }
+
+      .flecha-pieza span {
+        position: absolute;
+        left: 16mm;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      .ruleta-nota {
+        position: absolute;
+        left: 122mm;
+        width: 66mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .ruleta-nota b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        color: var(--marino);
+      }
+
+      .tablero {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 6mm 0 0;
+        padding: 3mm;
+        list-style: none;
+      }
+
+      .tablero li {
+        position: relative;
+        display: grid;
+        grid-template-rows: 9mm 24mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        min-height: 58mm;
+        margin: 0;
+        padding: 1.6mm 1mm 2mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-top: 1.6mm solid var(--c);
+        text-align: center;
+      }
+
+      .tablero li img {
+        width: 22mm;
+        height: 22mm;
+        background: #fff;
+        border-radius: 2mm;
+      }
+
+      .tablero li .pregunta {
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .tablero li .empieza {
+        display: block;
+        margin-top: 1.4mm;
+        font-size: 11pt;
+        line-height: 1.15;
+        color: var(--suave);
+      }
+
+      .tablero .num-mini {
+        border-color: var(--marino);
+      }
+
+      /* ---------- Tarjetas de pasos ---------- */
+      .pasos-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 92mm);
+        grid-auto-rows: 75mm;
+        gap: 4mm 6mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tarjeta-pasos {
+        position: relative;
+        display: grid;
+        grid-template-rows: 12.5mm minmax(0, 1fr) 11mm;
+        margin: 0;
+        border: 0.35mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .tarjeta-pasos__cab {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0 3mm;
+        background: var(--t);
+        border-bottom: 1.2mm solid var(--c);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .tarjeta-pasos__cab .num-bandeja {
+        width: 9mm;
+        height: 9mm;
+        border-width: 0.8mm;
+        font-size: 13pt;
+        flex: none;
+      }
+
+      .tarjeta-pasos ol {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        margin: 0;
+        padding: 0.6mm 1.6mm 0;
+        list-style: none;
+        counter-reset: pp;
+      }
+
+      .tarjeta-pasos ol li {
+        counter-increment: pp;
+        position: relative;
+        display: grid;
+        grid-template-rows: 13mm auto;
+        justify-items: center;
+        align-content: center;
+        gap: 0.4mm;
+        margin: 0;
+        padding: 0 1mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 0.98;
+        text-align: center;
+      }
+
+      .tarjeta-pasos ol li::before {
+        content: counter(pp);
+        position: absolute;
+        left: 1.6mm;
+        top: 1.4mm;
+        display: grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 11pt;
+      }
+
+      .tarjeta-pasos ol img {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .tarjeta-pasos__pie {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0 3mm;
+        border-top: 0.35mm solid var(--linea);
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 18pt;
+      }
+
+      .tarjeta-pasos__pie img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .normas ol li::before {
+        content: none;
+      }
+
+      .normas .tarjeta-pasos__cab {
+        background: var(--crema);
+        border-bottom-color: var(--marino);
+      }
+
+      .grupos {
+        display: grid;
+        grid-template-columns: repeat(4, 44mm);
+        gap: 4mm 4mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .grupo {
+        display: grid;
+        grid-template-rows: 22mm minmax(0, 1fr);
+        height: 50mm;
+        margin: 0;
+        padding: 1.6mm 2mm;
+      }
+
+      .grupo__cab {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.4mm;
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .grupo__cab .icono {
+        display: block;
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .grupo__lineas {
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+      }
+
+      .grupo__lineas i {
+        border-bottom: 0.3mm solid var(--linea);
+      }
+
+      .subtitulo-imp {
+        margin: 5mm 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      /* ---------- Panel de rotación ---------- */
+      .panel {
+        position: relative;
+        display: grid;
+        gap: 3mm;
+        margin: 0 0 0 14mm;
+        padding: 3mm;
+        list-style: none;
+      }
+
+      .panel li {
+        display: grid;
+        grid-template-columns: 12mm 24mm minmax(0, 1fr) 26mm;
+        align-items: center;
+        gap: 4mm;
+        height: 28mm;
+        margin: 0;
+        padding: 0 3mm 0 4mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-left: 2.4mm solid var(--c);
+      }
+
+      .panel .num-bandeja {
+        width: 12mm;
+        height: 12mm;
+        border-width: 1mm;
+        font-size: 16pt;
+      }
+
+      .panel .icono {
+        display: block;
+        width: 24mm;
+        height: 24mm;
+        background: #fff;
+        border-radius: 2.4mm;
+      }
+
+      .panel .nombre {
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .velcro {
+        display: grid;
+        place-items: center;
+        width: 22mm;
+        height: 22mm;
+        border-radius: 50%;
+        background: #fff;
+        border: 0.5mm solid #d9cdb6;
+        font-size: 11pt;
+        line-height: 1.05;
+        color: var(--suave);
+        text-align: center;
+      }
+
+      .panel-flecha {
+        position: absolute;
+        left: -13mm;
+        top: 12mm;
+        bottom: 12mm;
+        width: 10mm;
+      }
+
+      .panel-flecha svg {
+        width: 10mm;
+        height: 100%;
+      }
+
+      .panel-nota {
+        margin: 3mm 0 0 14mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Registro ---------- */
+      .leyenda-registro {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.2mm 5mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .leyenda-registro .marcas {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* El visto y el círculo van dibujados: no están en las letras de la marca. */
+      .signo {
+        display: inline-block;
+        width: 3.8mm;
+        height: 3.8mm;
+        vertical-align: -0.7mm;
+      }
+
+      .tabla-registro {
+        table-layout: fixed;
+      }
+
+      .tabla-registro thead th {
+        text-align: center;
+        vertical-align: bottom;
+        padding: 1.2mm 0.4mm;
+        line-height: 1.1;
+      }
+
+      .tabla-registro thead th .num-mini {
+        display: grid;
+        margin: 0 auto 0.6mm;
+      }
+
+      .tabla-registro thead th small {
+        display: block;
+        margin-top: 0.6mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+      }
+
+      .tabla-registro tbody td {
+        height: 7.6mm;
+        padding: 0 1mm;
+        border-left: 0.3mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .tabla-registro tbody td:first-child {
+        border-left: 0;
+        text-align: right;
+        color: var(--suave);
+      }
+
+      /* ---------- Atención a la diversidad ---------- */
+      .tabla-diversidad {
+        line-height: 1.24;
+      }
+
+      .tabla-diversidad th[scope='row'] {
+        width: 38mm;
+        line-height: 1.18;
+      }
+
+      .tabla-diversidad td {
+        padding: 1.1mm 2mm;
+      }
+
+      .tabla-diversidad ul {
+        margin: 0;
+        padding-left: 3.6mm;
+      }
+
+      .tabla-diversidad li {
+        margin-bottom: 0.3mm;
+      }
+
+      .detectar {
+        margin-top: 2.4mm;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .detectar h3 {
+        font-size: 12pt;
+      }
+
+      .detectar ul {
+        columns: 2;
+        column-gap: 6mm;
+        margin: 0 0 1mm;
+      }
+
+      .detectar li {
+        break-inside: avoid;
+      }
+
+      /* ---------- Familias (lectura fácil) ---------- */
+      .familias {
+        font-size: 13pt;
+        line-height: 1.4;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2.4mm;
+      }
+
+      .familias h2 {
+        font-size: 16pt;
+        margin: 4mm 0 1.8mm;
+      }
+
+      .familias p {
+        margin-bottom: 1.8mm;
+      }
+
+      .juegos-casa {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 2mm;
+      }
+
+      .juegos-casa li {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.8mm 3mm 1.8mm 2mm;
+        border-radius: 3mm;
+        background: var(--crema);
+      }
+
+      .juegos-casa img {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .consejos-casa {
+        margin: 0;
+        padding-left: 5mm;
+      }
+
+      .consejos-casa li {
+        margin-bottom: 1.2mm;
+      }
+
+      .recuadro {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        padding: 2.4mm 4mm 3mm;
+        margin-top: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin: 0 0 1mm !important;
+        font-size: 14pt !important;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos,
+      .final .creditos {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .final .creditos {
+        border-top: 0;
+        padding-top: 0;
+        margin-top: 0;
+        color: var(--marino);
+        break-inside: auto;
+      }
+
+      .final .creditos p {
+        margin-bottom: 1.2mm;
+      }
+
+      .final .creditos h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1mm;
+      }
+
+      .final .creditos ul {
+        margin: 0 0 1mm;
+        padding-left: 4mm;
+      }
+
+      .final .creditos li {
+        margin-bottom: 1mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -64mm; top: 112mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 74mm; height: 74mm; left: -28mm; top: 176mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 22mm; height: 22mm; left: 96mm; top: 136mm; background: var(--amarillo-tinte)"></div>
+      <div class="ilustracion" aria-hidden="true" id="ilustracion"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Lenguaje · Infantil · Siete bandejas</p>
+        <h1 class="portada__titulo">Rincón<br />de lenguaje<br />de invierno</h1>
+        <p class="portada__subtitulo">Siete juegos con las palabras del invierno, de las sílabas a las historias.</p>
+        <div class="portada__pie">
+          <p>
+            Pensado desde el Diseño Universal para el Aprendizaje (DUA), con tres niveles en cada juego. Pictogramas de Sergio
+            Palao para ARASAAC (Gobierno de Aragón), licencia CC BY-NC-SA.
+          </p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><span><b>7</b> juegos<br />en <b>3</b> niveles</span></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">De un vistazo · Infantil, de 3 a 6 años</p>
+        <h1>Rincón de lenguaje de invierno</h1>
+        <p class="entradilla">
+          Siete bandejas para jugar con las palabras del invierno. Cada una tiene un juego en tres niveles y una tarjeta de
+          pasos con pictogramas. Completa las Rutinas de invierno en el cole y las Estaciones de matemáticas de invierno: usa
+          el mismo vocabulario y los mismos grupos.
+        </p>
+      </div>
+
+      <ul class="datos">
+        <li>
+          <strong>Para quién</strong>La clase entera de Infantil, de 3 a 6 años, y los apoyos en pequeño grupo de Pedagogía
+          Terapéutica (PT) y de Audición y Lenguaje (AL).
+        </li>
+        <li>
+          <strong>Cuánto dura</strong>De 10 a 15 minutos por bandeja. Da juego todo el invierno: abre una o dos bandejas nuevas
+          cada semana.
+        </li>
+        <li>
+          <strong>Cómo se evalúa</strong>Observando a cada niño o niña mientras juega, con el registro de la página
+          <span data-pagina="registro"></span>.
+        </li>
+      </ul>
+
+      <div class="aprender">
+        <h2>Qué van a aprender</h2>
+        <ol>
+          <li>Nombrar y reconocer 24 palabras del invierno.</li>
+          <li>Encontrar una palabra o una sílaba entre otras parecidas.</li>
+          <li>Descubrir qué sílaba le falta a una palabra.</li>
+          <li>Formar palabras ordenando sus sílabas.</li>
+          <li>Oír con qué sonido empieza una palabra.</li>
+          <li>Contar las sílabas de una palabra con palmadas.</li>
+          <li>Contar una historia con personaje, lugar y problema.</li>
+        </ol>
+      </div>
+
+      <h2 class="subtitulo-hoja">Las siete bandejas</h2>
+      <ol class="mapa-bandejas" id="mapa"></ol>
+
+      <div class="fila-dos">
+        <div class="caja-mini niveles-caja">
+          <h2>Tres niveles en cada bandeja</h2>
+          <p>Todo el grupo juega a lo mismo. Lo que cambia es la ayuda y la dificultad.</p>
+          <ul>
+            <li><span class="nv n1">1</span><span><b>Con más apoyo:</b> pocas piezas, un modelo para comparar y el adulto al lado.</span></li>
+            <li><span class="nv n2">2</span><span><b>Base:</b> lo esperable a esa edad.</span></li>
+            <li><span class="nv n3">3</span><span><b>Con más reto:</b> palabras más largas y algo de lectura o de escritura.</span></li>
+          </ul>
+        </div>
+        <div class="caja-mini letra-caja">
+          <h2>Mayúscula y minúscula</h2>
+          <p>
+            Las palabras van en letra de imprenta, en mayúscula y en minúscula: <span class="muestra-letra">NIEVE nieve</span>.
+            Empieza por la que uséis en clase.
+          </p>
+          <p style="margin: 0">
+            La letra distingue bien la l minúscula de la I mayúscula. Si en tu cole usáis letra ligada, escribe la palabra a mano
+            debajo, antes de plastificar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CURRÍCULO
+         ====================================================================== -->
+    <section class="hoja curriculo">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Currículo de Infantil de la Región de Murcia</p>
+        <h1>Qué trabaja del Decreto 196/2022</h1>
+        <p class="entradilla">
+          Texto literal del decreto, con su página en el Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de
+          2022. CRR es el área Comunicación y Representación de la Realidad.
+        </p>
+      </div>
+
+      <div class="curriculo-cols">
+        <div>
+          <h2>Lo que propone para el aula</h2>
+          <ul class="propone">
+            <li>
+              «Dentro de los espacios del aula podrá diseñarse un rincón de lenguaje, en el que los niños puedan jugar con todo tipo de
+              letras, componer palabras, crear sus carteles y sus propios libros, practicar grafías en soportes diferentes, hacer juegos
+              para trabajar procesos preparatorios para el acceso al lenguaje escrito: lotos de observación, atención, percepción,
+              semejanzas-diferencias o memoria visual y auditiva». <span class="donde">Todo el rincón. Pág. 33100.</span>
+            </li>
+            <li>
+              Para el alumnado con dificultades comunicativas, «el uso de pictogramas e identificadores que faciliten la comprensión de
+              mensajes e instrucciones». <span class="donde">Tarjetas de pasos, normas y panel. Pág. 33100.</span>
+            </li>
+            <li>
+              Una enseñanza de la lectura «donde se desarrolle la conciencia fonológica, conciencia silábica y léxica de nuestro
+              lenguaje oral». <span class="donde">Bandejas 3 a 6. Pág. 33100.</span>
+            </li>
+            <li>
+              «Los materiales y recursos para trabajar la conciencia fonológica de palabras, sílabas y fonemas, tales como: alfabetos de
+              letras móviles, puzles silábicos, dominós de sílabas, juegos de mesa lingüísticos o autodictados, ayudarán al alumnado a
+              aproximarse al lenguaje escrito». <span class="donde">Bandejas 3 y 4. Pág. 33101.</span>
+            </li>
+            <li>
+              Después del nombre propio, «el vocabulario básico que van descubriendo de los centros de interés que se estén
+              trabajando». <span class="donde">Bandeja 1: el invierno. Pág. 33101.</span>
+            </li>
+            <li>
+              «La adquisición del código escrito no es un objetivo que se deba alcanzar en esta etapa». <span class="donde">Por eso
+              leer y escribir van siempre en el nivel 3, como reto. Pág. 33099.</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h2>Criterios de evaluación del segundo ciclo</h2>
+          <ul>
+            <li>
+              <span class="codigo">CRR 3.1</span> «Hacer un uso funcional del lenguaje oral, aumentando su repertorio lingüístico y
+              construyendo progresivamente un discurso más eficaz, organizado y coherente en contextos formales e informales».
+              <span class="donde">Bandejas 1 y 7. Pág. 33107.</span>
+            </li>
+            <li>
+              <span class="codigo">CRR 3.2</span> «Utilizar el lenguaje oral como instrumento regulador de la acción en las
+              interacciones con los demás con seguridad y confianza respetando los hábitos sociales básicos como el turno de palabra y
+              actitud de escucha». <span class="donde">Todas. Pág. 33107.</span>
+            </li>
+            <li>
+              <span class="codigo">CRR 3.3</span> «Evocar y expresar espontáneamente ideas a través del relato oral».
+              <span class="donde">Bandeja 7. Pág. 33107.</span>
+            </li>
+            <li>
+              <span class="codigo">CRR 4.1</span> «Mostrar interés por comunicarse a través de códigos escritos, convencionales o no,
+              valorando su función comunicativa». <span class="donde">Bandejas 1 a 4. Pág. 33108.</span>
+            </li>
+          </ul>
+          <h2 style="margin-top: 2.6mm">Saberes básicos del segundo ciclo</h2>
+          <p class="grupo-saberes" style="margin-top: 0"><span class="codigo">CRR-C</span> Págs. 33108 y 33109</p>
+          <ul>
+            <li>«Discriminación auditiva y conciencia fonológica». <span class="donde">Bandejas 3 a 6.</span></li>
+            <li>
+              «El lenguaje oral en situaciones cotidianas: conversaciones, juegos de interacción social y expresión de vivencias».
+              <span class="donde">Bandeja 7.</span>
+            </li>
+          </ul>
+          <p class="grupo-saberes"><span class="codigo">CRR-D</span> y <span class="codigo">CRR-E</span> Pág. 33109</p>
+          <ul>
+            <li>«Las propiedades del sistema de escritura: hipótesis cuantitativas y cualitativas». <span class="donde">Bandejas 2 a 4.</span></li>
+            <li>«Otros códigos de representación gráfica: imágenes, símbolos, números…». <span class="donde">Los pictogramas.</span></li>
+            <li>«La poesía y los juegos de palabras como elementos de aprendizaje y disfrute». <span class="donde">Todas.</span></li>
+          </ul>
+          <div class="decreto">
+            <h2>Lo que pide el decreto</h2>
+            <ul>
+              <li>Las medidas «se regirán por los principios del Diseño Universal de Aprendizaje» (art. 4.6, pág. 33056): aquí, tres niveles.</li>
+              <li>«La observación directa y sistemática constituirá la técnica principal del proceso de evaluación» (art. 14.1, pág. 33060): de ahí el registro.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CÓMO ORGANIZARLO
+         ====================================================================== -->
+    <section class="hoja organizar">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Cómo organizarlo</p>
+        <h1>Una bandeja para cada juego</h1>
+      </div>
+
+      <div class="organizar-rejilla">
+        <div class="paso-org">
+          <h2>Como rincón</h2>
+          <p>
+            Las siete bandejas, en una estantería a su altura. Cada día juega en el rincón un grupo de 3 o 4 y hace la bandeja que
+            marca el panel (página <span data-pagina="panel"></span>). Al día siguiente, su tarjeta baja una fila.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>Como estaciones</h2>
+          <p>
+            Toda la clase a la vez: una bandeja en cada mesa y un grupo en cada una. Con la señal, cada grupo pasa a la bandeja
+            siguiente. Mejor tres o cuatro bandejas por sesión.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>Antes de empezar</h2>
+          <p>
+            Presenta cada bandeja en la asamblea. Juega tú delante, pensando en voz alta, con su tarjeta de pasos (página
+            <span data-pagina="pasos"></span>). Nombrad juntos los dibujos: así todos usan la misma palabra.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>Los niveles</h2>
+          <p>
+            Cada nivel va en su bolsa, con su marca: el 1, un círculo <span class="nv n1">1</span>, el 2, un cuadrado
+            <span class="nv n2">2</span> y el 3, un rombo <span class="nv n3">3</span>. Empieza donde lo ves y cambia de bolsa
+            cuando haga falta.
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>Dónde se sienta el adulto</h2>
+          <p>
+            En la ruleta de las historias o en la bandeja nueva. Pon palabras a lo que hacen y repite bien lo que dicen, sin pedir
+            que lo repitan. Apunta lo que ves (página <span data-pagina="registro"></span>).
+          </p>
+        </div>
+        <div class="paso-org">
+          <h2>La señal de cambio</h2>
+          <p>
+            Un reloj de arena o un temporizador visual, a la vista. Un minuto antes, avisa: «Se acaba el tiempo». Luego, una señal
+            para ojos y oídos, como bajar la luz y cantar algo corto.
+          </p>
+        </div>
+      </div>
+
+      <h2 class="subtitulo-hoja">De lo grande a lo pequeño</h2>
+      <p class="pista" style="color: var(--marino)">
+        La conciencia fonológica es darse cuenta de que las palabras se parten en trozos: sílabas y sonidos. El rincón va de lo grande
+        a lo pequeño.
+      </p>
+      <ol class="escalera">
+        <li><b>1. Palabras</b>Bandejas 1, 2 y 7: qué es, cómo se dice y cómo se escribe.</li>
+        <li><b>2. Sílabas</b>Bandejas 3, 4 y 6: los trozos que se oyen al dar palmadas.</li>
+        <li><b>3. Sonidos</b>Bandeja 5: el primer sonido de cada palabra.</li>
+      </ol>
+
+      <div class="investigacion">
+        <h2>Lo que dice la investigación</h2>
+        <p>
+          Un metaanálisis del National Reading Panel reunió 52 estudios sobre enseñar a fijarse en los sonidos de las palabras.
+          Ayudó a aprender a leer y a escribir, también en Infantil y al alumnado con riesgo de dificultades. Funcionó mejor con
+          letras que sin ellas, con una o dos habilidades a la vez, en grupos pequeños y con un total de entre 5 y 18 horas (Ehri y
+          otros, 2001). Por eso cada bandeja trabaja una sola cosa, en grupo pequeño, y casi todas llevan letras.
+        </p>
+        <p>
+          En castellano, un estudio con 136 niños y niñas de 5 y 6 años que aún no leían encontró que la conciencia de las sílabas
+          ayuda a desarrollar la de los sonidos y se relaciona pronto con la lectura (Jiménez González y Ortiz González, 2000). Por
+          eso las sílabas van antes que los sonidos.
+        </p>
+        <p style="margin: 0">
+          Para las historias, una revisión de 40 estudios con alumnado de Infantil y Primaria encontró que las intervenciones de
+          narración mejoran cómo cuentan y cómo entienden las historias. Muchas usan apoyos visuales y enseñan las partes de una
+          historia (Pico y otros, 2021).
+        </p>
+      </div>
+
+      <div class="dua">
+        <h2>El DUA en este rincón, según CAST, el centro que publica sus pautas (versión 3.0, 2024)</h2>
+        <ul>
+          <li><b>2.1 Aclarar vocabulario, símbolos y estructuras del lenguaje:</b> cada palabra lleva su pictograma.</li>
+          <li><b>4.1 Variar y valorar los métodos de respuesta, navegación y movimiento:</b> vale decir, señalar, poner una pinza o colocar una tarjeta.</li>
+          <li><b>6.4 Ampliar la capacidad para dar seguimiento al progreso:</b> los puzles y las tarjetas de palabras sirven para comprobar.</li>
+          <li><b>8.2 Optimizar los desafíos y el apoyo:</b> tres niveles en cada bandeja.</li>
+        </ul>
+      </div>
+
+      <div class="seguridad">
+        <h2>Seguridad</h2>
+        <ul>
+          <li>
+            Las pinzas, los encuadernadores y el velcro son piezas pequeñas. La Asociación Española de Pediatría (AEP) recuerda que
+            «La mejor medida preventiva es la supervisión constante» y aconseja intentar evitar las piezas pequeñas en menores de 3 a
+            5 años (AEP, 2024). Con la clase de 3 años, mejor sin pinzas: que señalen o pongan una tarjeta.
+          </li>
+          <li>
+            Si lleváis castañas o fruta de verdad para mirarlas y olerlas, preguntad antes a las familias por las alergias. En el
+            rincón no se comen.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 1 · PALABRAS DEL INVIERNO
+         ====================================================================== -->
+    <section class="hoja docente b1">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">1</span>
+        <div>
+          <p class="antetitulo">Bandeja 1 · Vocabulario</p>
+          <h1>Palabras del invierno</h1>
+        </div>
+        <img class="icono" src="pictogramas/28643.png" alt="Pictograma de leer: una niña con un libro abierto" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> conocer y usar 24 palabras del invierno, y descubrir que una palabra se escribe siempre igual.
+      </p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR 3.1</span> <span class="codigo">CRR 4.1</span> Y el vocabulario de los centros de interés (página
+        <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> 24 tarjetas de dibujo y palabra (páginas <span data-pagina="vocab1"></span> y
+        <span data-pagina="vocab2"></span>), impresas dos veces: una hoja entera hace de tablero y la otra se recorta. Y 24 tarjetas de
+        palabras (página <span data-pagina="palabras"></span>).
+      </p>
+      <h2>Cómo se juega, en parejas</h2>
+      <ol class="pasos-juego">
+        <li>Cada pareja tiene un tablero y un montón de tarjetas boca abajo.</li>
+        <li>Por turnos, cada cual coge una tarjeta y dice en voz alta qué es.</li>
+        <li>Busca en el tablero la casilla igual y pone la tarjeta encima.</li>
+        <li>Su pareja comprueba si es igual.</li>
+        <li>Con el tablero lleno, decid juntos todas las palabras.</li>
+      </ol>
+      <p class="preguntas">
+        <strong>Frases que ayudan:</strong> «¿Qué es?», «¿Para qué sirve?», «¿Cuándo te lo pones?», «Es una bufanda. La bufanda abriga
+        el cuello».
+      </p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p>
+            <b>Iguales.</b> La tarjeta de dibujo va sobre su casilla. Empieza con 6: tapa medio tablero con un folio. Tú dices el nombre
+            y lo repiten.
+          </p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p><b>La palabra igual.</b> Con las tarjetas de palabras: se fija en las letras y busca la casilla con la misma palabra.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p>
+            <b>Lee y busca.</b> Coge una tarjeta de palabras, intenta leerla y dice qué es antes de buscarla. El tablero sirve para
+            comprobar.
+          </p>
+          <p class="reto">Más reto: que la escriba con letras móviles.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Nombra cada dibujo.</li>
+            <li>Usa la palabra en una frase.</li>
+            <li>Se fija en la primera letra o en lo larga que es la palabra.</li>
+            <li>Reconoce alguna palabra escrita sin su dibujo.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si habla poco:</b> vale señalar o enseñar la tarjeta. Tú dices la palabra.</li>
+            <li><b>Si ve poco:</b> pon al lado un objeto de verdad, como un guante o una bufanda.</li>
+            <li><b>Si aún no habla castellano:</b> que diga la palabra en su lengua y después en castellano.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp b1">
+      <header class="cab-imp">
+        <span class="num-bandeja">1</span>
+        <h1>Palabras del invierno <small>Tarjetas 1 a 12</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Imprime esta hoja dos veces. Una se queda entera: es el tablero. La otra se recorta por la línea de puntos.</p>
+      <ul class="vocab" id="vocab-1" aria-label="Doce tarjetas con dibujo y palabra: ropa y tiempo de invierno"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b1">
+      <header class="cab-imp">
+        <span class="num-bandeja">1</span>
+        <h1>Palabras del invierno <small>Tarjetas 13 a 24</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Imprime esta hoja dos veces. Una se queda entera: es el tablero. La otra se recorta por la línea de puntos.</p>
+      <ul class="vocab" id="vocab-2" aria-label="Doce tarjetas con dibujo y palabra: comida, casa y animales de invierno"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b1">
+      <header class="cab-imp">
+        <span class="num-bandeja">1</span>
+        <h1>Palabras del invierno <small>Tarjetas de palabras, para los niveles 2 y 3</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Las mismas 24 palabras, sin dibujo. Recorta por la línea de puntos.</p>
+      <ul class="palabras-sueltas" id="palabras" aria-label="Veinticuatro tarjetas con las palabras del invierno en mayúscula y en minúscula"></ul>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 2 · CAZAPALABRAS
+         ====================================================================== -->
+    <section class="hoja docente b2">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">2</span>
+        <div>
+          <p class="antetitulo">Bandeja 2 · Palabras y sílabas escritas</p>
+          <h1>Cazapalabras</h1>
+        </div>
+        <img class="icono" src="pictogramas/27391.png" alt="Pictograma de buscar: una lupa" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> encontrar una palabra o una sílaba escrita entre otras parecidas, fijándose en todas sus letras.
+      </p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR 4.1</span> <span class="codigo">CRR-D</span> Y los «lotos de observación, atención, percepción,
+        semejanzas-diferencias» del rincón de lenguaje (página <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> 6 tarjetas de caza, 2 por nivel (páginas <span data-pagina="caza1"></span> y
+        <span data-pagina="caza2"></span>), 4 rotuladores de pizarra blanca y un paño.
+      </p>
+      <h2>Cómo se juega, cada cual con su tarjeta</h2>
+      <ol class="pasos-juego">
+        <li>Mira la palabra de arriba y di qué es.</li>
+        <li>Busca la misma palabra, fila a fila, de izquierda a derecha.</li>
+        <li>Rodéala con el rotulador cada vez que la encuentres.</li>
+        <li>Cuenta cuántas has cazado y rellena un círculo por cada una.</li>
+        <li>Borra con el paño para quien venga después.</li>
+      </ol>
+      <p class="preguntas">
+        <strong>Frases que ayudan:</strong> «¿Empieza igual?», «¿Tiene las mismas letras?», «¿Es igual de larga?», «Mira el final».
+      </p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p><b>Palabras muy distintas.</b> SOL y NUBE, en mayúscula, entre palabras que no se parecen nada.</p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p><b>Palabras parecidas.</b> GORRO entre GORRA, PERRO o ZORRO, y nube, en minúscula, entre nudo, nuez o nave.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p><b>Caza la sílaba.</b> Rodea ma o NA dentro de cada palabra. Algunas palabras no la tienen.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Recorre la tarjeta con orden.</li>
+            <li>Mira todas las letras, no solo la primera.</li>
+            <li>Distingue ma de am y NA de AN.</li>
+            <li>Cuenta bien las que ha rodeado.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si se pierde:</b> tapa con un folio las filas que no mira o que siga la fila con el dedo.</li>
+            <li><b>Si le cuesta el rotulador:</b> uno grueso, o una ficha encima de cada palabra.</li>
+            <li><b>Si ve poco:</b> amplía la tarjeta a A3.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="soluciones" id="soluciones-2"></p>
+    </section>
+
+    <section class="imp b2">
+      <header class="cab-imp">
+        <span class="num-bandeja">2</span>
+        <h1>Cazapalabras <small>Niveles 1 y 2</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja, recorta por la línea de puntos y rodea con rotulador de pizarra blanca.</p>
+      <ul class="cazas" id="cazas-1"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b2">
+      <header class="cab-imp">
+        <span class="num-bandeja">2</span>
+        <h1>Cazapalabras <small>Niveles 2 y 3</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja, recorta por la línea de puntos y rodea con rotulador de pizarra blanca.</p>
+      <ul class="cazas" id="cazas-2"></ul>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 3 · LA SÍLABA QUE FALTA
+         ====================================================================== -->
+    <section class="hoja docente b3">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">3</span>
+        <div>
+          <p class="antetitulo">Bandeja 3 · Sílabas</p>
+          <h1>La sílaba que falta</h1>
+        </div>
+        <img class="icono" src="pictogramas/15816.png" alt="Pictograma de completar: una serie de formas con un hueco" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> descubrir qué trozo le falta a una palabra y unir lo que suena con lo que se escribe.
+      </p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR-C</span> <span class="codigo">CRR 4.1</span> Discriminación auditiva y conciencia fonológica
+        (página <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> 24 tarjetas, 8 por nivel (páginas <span data-pagina="falta1"></span> a
+        <span data-pagina="falta3"></span>), 4 pinzas de la ropa y rotuladores de pizarra blanca.
+      </p>
+      <h2>Cómo se juega, en parejas</h2>
+      <ol class="pasos-juego">
+        <li>Mira el dibujo y di la palabra.</li>
+        <li>Dila otra vez, despacio, con una palmada en cada sílaba.</li>
+        <li>Mira qué trozo falta y busca esa sílaba abajo.</li>
+        <li>Pon la pinza en la sílaba que falta.</li>
+        <li>Di la palabra entera señalando cada sílaba. Tu pareja o el adulto lo comprueban.</li>
+      </ol>
+      <p class="preguntas">
+        <strong>Frases que ayudan:</strong> «Bu… ¿bu qué?», «Dila despacio: bu-fan-da. ¿Qué trozo no está?», «¿Suena igual?».
+      </p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p>Palabras de dos sílabas, dos opciones y la palabra entera arriba, para comparar.</p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p>Palabras de tres sílabas y tres opciones, sin modelo.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p>Palabras más largas, en minúscula. Escribe la sílaba con rotulador de pizarra. Vale como sepa escribirla.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Dice la palabra entera.</li>
+            <li>Separa las sílabas con palmadas.</li>
+            <li>Encuentra la que falta al principio, en medio o al final.</li>
+            <li>Elige por cómo suena y no solo por la primera letra.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si la pinza le cuesta:</b> que rodee la sílaba con el dedo o con rotulador.</li>
+            <li><b>Si escribir le cuesta:</b> letras móviles o un abecedario para señalar.</li>
+            <li><b>Con TDL:</b> di tú la palabra despacio y alarga un poco el trozo que falta.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="soluciones" id="soluciones-3"></p>
+    </section>
+
+    <section class="imp b3">
+      <header class="cab-imp">
+        <span class="num-bandeja">3</span>
+        <h1>La sílaba que falta <small>Nivel 1 · Dos sílabas, con modelo</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta por la línea de puntos. La pinza se engancha en la sílaba de abajo.</p>
+      <ul class="faltas" id="faltas-1"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b3">
+      <header class="cab-imp">
+        <span class="num-bandeja">3</span>
+        <h1>La sílaba que falta <small>Nivel 2 · Tres sílabas, sin modelo</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta por la línea de puntos. La pinza se engancha en la sílaba de abajo.</p>
+      <ul class="faltas" id="faltas-2"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b3">
+      <header class="cab-imp">
+        <span class="num-bandeja">3</span>
+        <h1>La sílaba que falta <small>Nivel 3 · Para escribir la sílaba</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta por la línea de puntos. Se escribe con rotulador de pizarra blanca y se borra con un paño.</p>
+      <ul class="faltas" id="faltas-3"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 4 · PUZLES DE SÍLABAS
+         ====================================================================== -->
+    <section class="hoja docente b4">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">4</span>
+        <div>
+          <p class="antetitulo">Bandeja 4 · Sílabas</p>
+          <h1>Puzles de sílabas</h1>
+        </div>
+        <img class="icono" src="pictogramas/2540.png" alt="Pictograma de puzle: piezas de colores encajadas" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> formar palabras uniendo sus sílabas en orden, y ver que cada trozo que se dice tiene su trozo escrito.
+      </p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR-C</span> <span class="codigo">CRR 4.1</span> El decreto nombra los «puzles silábicos» (página
+        <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> 17 puzles: 6 de dos piezas (página <span data-pagina="puzle1"></span>), 6 de tres sílabas (página
+        <span data-pagina="puzle2"></span>) y 5 de cuatro sílabas (página <span data-pagina="puzle3"></span>). Las piezas de un mismo
+        puzle llevan el mismo símbolo, para no mezclarlas.
+      </p>
+      <h2>Cómo se juega</h2>
+      <ol class="pasos-juego">
+        <li>Coge las piezas que tienen el mismo símbolo.</li>
+        <li>Pon delante el dibujo y di la palabra.</li>
+        <li>Dila despacio, trozo a trozo, y busca cada trozo.</li>
+        <li>Junta las piezas en orden, de izquierda a derecha.</li>
+        <li>Lee la palabra pasando el dedo por debajo.</li>
+      </ol>
+      <p class="preguntas"><strong>Frases que ayudan:</strong> «¿Por qué trozo empieza?», «¿Y después?», «¿Qué palabra sale?».</p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p>Dos piezas y el dibujo partido entre las dos: si el dibujo sale entero, está bien.</p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p>Tres sílabas y el dibujo en su pieza. Cada unión tiene una forma, y solo encaja la buena.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p>Cuatro sílabas con cortes rectos: solo ayudan el oído y las letras.</p>
+          <p class="reto">Más reto: mezclar las piezas de dos puzles.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Dice la palabra antes de montarla.</li>
+            <li>Coloca las sílabas de izquierda a derecha.</li>
+            <li>Nota cuando la palabra no suena bien y lo arregla.</li>
+            <li>Lee alguna sílaba.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si le cuesta mover piezas:</b> velcro detrás y una tira de cartulina donde pegarlas, o una bandeja con borde.</li>
+            <li><b>Con TEA:</b> empieza siempre por el mismo puzle y deja a la vista uno terminado, como modelo.</li>
+            <li><b>Si ve poco:</b> repasa las letras con cola blanca, para notarlas con el dedo.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp b4">
+      <header class="cab-imp">
+        <span class="num-bandeja">4</span>
+        <h1>Puzles de sílabas <small>Nivel 1 · Dos piezas, con el dibujo partido</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja. Recorta cada puzle por el borde y después por la línea ondulada.</p>
+      <ul class="puzles-1" id="puzles-1"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b4">
+      <header class="cab-imp">
+        <span class="num-bandeja">4</span>
+        <h1>Puzles de sílabas <small>Nivel 2 · Tres sílabas, con uniones que encajan</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja. Recorta cada puzle por el borde y después por cada línea de puntos, siguiendo su forma.</p>
+      <ul class="puzles-largos" id="puzles-2"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b4">
+      <header class="cab-imp">
+        <span class="num-bandeja">4</span>
+        <h1>Puzles de sílabas <small>Nivel 3 · Cuatro sílabas, con cortes rectos</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja. Recorta cada puzle por el borde y después por cada línea de puntos.</p>
+      <ul class="puzles-largos" id="puzles-3"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 5 · ¿CÓMO EMPIEZA?
+         ====================================================================== -->
+    <section class="hoja docente b5">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">5</span>
+        <div>
+          <p class="antetitulo">Bandeja 5 · Sonidos</p>
+          <h1>¿Cómo empieza?</h1>
+        </div>
+        <img class="icono" src="pictogramas/2381.png" alt="Pictograma de escuchar: un niño con la mano en la oreja" />
+      </header>
+      <p class="para-que"><strong>Para qué:</strong> oír el primer sonido de una palabra y encontrar otras que empiezan igual.</p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR-C</span> La conciencia fonológica «de palabras, sílabas y fonemas» (página
+        <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> 6 discos, 2 por nivel (páginas <span data-pagina="disco1"></span> a
+        <span data-pagina="disco3"></span>), y 8 pinzas de la ropa. En el disco de la s no hay palabras con z ni con c: así sirve
+        también donde se sesea o se cecea.
+      </p>
+      <div class="aviso-corto">
+        <img src="pictogramas/8466.png" alt="" />
+        <p>Las pinzas son piezas pequeñas y pueden pellizcar: un adulto cerca. Con la clase de 3 años, mejor que señalen o pongan una tarjeta.</p>
+      </div>
+      <h2>Cómo se juega, en parejas</h2>
+      <ol class="pasos-juego">
+        <li>Di el nombre del dibujo del centro alargando el primer sonido: «mmmuñeco».</li>
+        <li>Di el nombre de cada dibujo del borde.</li>
+        <li>Si empieza igual, pon una pinza en el borde, junto al dibujo.</li>
+        <li>Al terminar, comprobad juntos con el adulto.</li>
+      </ol>
+      <p class="preguntas">
+        <strong>Frases que ayudan:</strong> «¿Mmmanta empieza como mmmuñeco?», «Escucha: sss… ¿qué sonido es?», «¿Y nube? ¿Empieza
+        como mmmanta?».
+      </p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p>m y s, sonidos que se pueden alargar. 6 dibujos y 3 empiezan igual. En el centro, dibujo y letra.</p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p>n y p. 8 dibujos y 4 empiezan igual. Hay sonidos parecidos: mandarina está en el disco de la n.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p>f y l, con 8 dibujos y solo la letra en el centro.</p>
+          <p class="reto">Ojo con sol: termina en l, pero no empieza por l.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Alarga el primer sonido.</li>
+            <li>Distingue la m de la n y la p de la b.</li>
+            <li>No se fija en el final de la palabra.</li>
+            <li>Relaciona el sonido con su letra.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si las pinzas le cuestan:</b> una ficha o un gomet que se despegue, o que señale.</li>
+            <li><b>Si oye poco:</b> que vea tu boca, con buena luz. Empieza por la m y la p, que se ven en los labios.</li>
+            <li><b>Con TDL:</b> exagera un poco el primer sonido y repite la palabra las veces que haga falta.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="soluciones" id="soluciones-5"></p>
+    </section>
+
+    <section class="imp b5">
+      <header class="cab-imp">
+        <span class="num-bandeja">5</span>
+        <h1>¿Cómo empieza? <small>Nivel 1 · Discos de la m y de la s</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta cada disco por la línea de puntos. La pinza se engancha en el borde, junto al dibujo.</p>
+      <ul class="discos" id="discos-1"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b5">
+      <header class="cab-imp">
+        <span class="num-bandeja">5</span>
+        <h1>¿Cómo empieza? <small>Nivel 2 · Discos de la n y de la p</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta cada disco por la línea de puntos. La pinza se engancha en el borde, junto al dibujo.</p>
+      <ul class="discos" id="discos-2"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b5">
+      <header class="cab-imp">
+        <span class="num-bandeja">5</span>
+        <h1>¿Cómo empieza? <small>Nivel 3 · Discos de la f y de la l</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta cada disco por la línea de puntos. La pinza se engancha en el borde, junto al dibujo.</p>
+      <ul class="discos" id="discos-3"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 6 · ¿CUÁNTAS SÍLABAS?
+         ====================================================================== -->
+    <section class="hoja docente b6">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">6</span>
+        <div>
+          <p class="antetitulo">Bandeja 6 · Sílabas</p>
+          <h1>¿Cuántas sílabas?</h1>
+        </div>
+        <img class="icono" src="pictogramas/4563.png" alt="Pictograma de aplaudir: dos manos que dan palmas" />
+      </header>
+      <p class="para-que"><strong>Para qué:</strong> partir las palabras en sílabas dando palmadas y comparar palabras cortas y largas.</p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR-C</span> La «conciencia silábica» de las orientaciones del área (página
+        <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> el tapete de cuatro columnas (página <span data-pagina="tapete"></span>) y 20 tarjetas (página
+        <span data-pagina="palmadas"></span>). Cada tarjeta lleva la marca del nivel en el que entra.
+      </p>
+      <h2>Cómo se juega, en grupo</h2>
+      <ol class="pasos-juego">
+        <li>Coge una tarjeta y di qué es.</li>
+        <li>Dilo otra vez con una palmada en cada sílaba: «go-rro».</li>
+        <li>Cuenta las palmadas.</li>
+        <li>Pon la tarjeta en la columna de ese número.</li>
+        <li>Al final, decid juntos las palabras de cada columna.</li>
+      </ol>
+      <p class="preguntas">
+        <strong>Frases que ayudan:</strong> «¿Cuántas palmadas?», «¿Cuál es más larga, sol o mandarina?», «El sol es muy grande,
+        pero su palabra es corta».
+      </p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p>8 tarjetas de dos y tres sílabas. Solo las columnas 2 y 3, y palmadas a la vez con el adulto.</p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p>6 tarjetas más, entre ellas sol, té y pan, que tienen una sílaba.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p>Las 20 tarjetas, con palabras de cuatro sílabas y otras como nie-ve o guan-tes, que llevan dos palmadas.</p>
+          <p class="reto">Si dice ni-e-ve, dilo tú despacio: nie-ve.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Da una palmada por sílaba.</li>
+            <li>No se salta sílabas en las palabras largas.</li>
+            <li>Compara palabras cortas y largas.</li>
+            <li>Ve que algo muy grande puede tener una palabra corta.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si no puede dar palmadas:</b> golpes en la mesa, pasos o un dedo por sílaba. También puede hacerlo su pareja.</li>
+            <li><b>Si oye poco:</b> marca las sílabas con golpecitos en su hombro, a la vista.</li>
+            <li><b>Con TEA:</b> si le molesta el ruido, golpecitos suaves en la mesa.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="soluciones" id="soluciones-6"></p>
+    </section>
+
+    <section class="imp-ap b6">
+      <div class="tapete-cab">
+        <img class="icono" src="pictogramas/4563.png" alt="" />
+        <h1>¿Cuántas palmadas?</h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="tapete corte" id="tapete" role="img" aria-label="Tapete con cuatro columnas: una, dos, tres y cuatro palmadas, cada una con su número y sus puntos"></div>
+      <p class="atribucion">
+        Bandeja 6 · Tapete. Pon cada tarjeta en la columna de sus palmadas. Las columnas 2 y 3 llevan el círculo: son las del nivel 1.
+        Pictograma: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <section class="imp b6">
+      <header class="cab-imp">
+        <span class="num-bandeja">6</span>
+        <h1>¿Cuántas sílabas? <small>20 tarjetas con su marca de nivel</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta por la línea de puntos. La marca de la esquina dice desde qué nivel entra cada tarjeta.</p>
+      <ul class="palmadas" id="palmadas"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         BANDEJA 7 · LA RULETA DE LAS HISTORIAS
+         ====================================================================== -->
+    <section class="hoja docente b7">
+      <header class="cab-bandeja">
+        <span class="num-bandeja">7</span>
+        <div>
+          <p class="antetitulo">Bandeja 7 · Contar historias</p>
+          <h1>La ruleta de las historias</h1>
+        </div>
+        <img class="icono" src="pictogramas/6461.png" alt="Pictograma de narrar: una persona cuenta un cuento a otra" />
+      </header>
+      <p class="para-que">
+        <strong>Para qué:</strong> inventar y contar historias cortas con personaje, lugar y problema, y escuchar las de los demás.
+      </p>
+      <p class="curriculo-linea">
+        <span class="codigo">CRR 3.3</span> <span class="codigo">CRR 3.1</span> <span class="codigo">CRR 3.2</span> El relato oral y
+        el turno de palabra (página <span data-pagina="curriculo"></span>).
+      </p>
+      <p class="material">
+        <strong>Material:</strong> tres ruletas con su flecha: ¿Quién?, ¿Dónde? y ¿Qué pasa? (páginas
+        <span data-pagina="ruleta1"></span> y <span data-pagina="ruleta2"></span>), y el tablero para contar (página
+        <span data-pagina="ruleta2"></span>). Mejor con un adulto en la mesa.
+      </p>
+      <h2>Cómo se juega, en grupo de 3 o 4</h2>
+      <ol class="pasos-juego">
+        <li>Gira la flecha de «¿Quién?».</li>
+        <li>Gira después la de «¿Dónde?» y la de «¿Qué pasa?».</li>
+        <li>Pensad juntos cómo lo arreglan.</li>
+        <li>Cuenta la historia siguiendo el tablero, de izquierda a derecha.</li>
+        <li>Los demás escuchan y dicen qué les ha gustado.</li>
+      </ol>
+      <p class="preguntas">
+        <strong>Frases que ayudan:</strong> «Había una vez…», «Estaba en…», «Un día…», «Entonces…», «Al final…». Y preguntas:
+        «¿Cómo se sentía?», «¿Quién le ayudó?».
+      </p>
+      <h2>Los tres niveles</h2>
+      <ul class="niveles3">
+        <li>
+          <h3><span class="nv n1">1</span>Con más apoyo</h3>
+          <p>Solo «¿Quién?» y «¿Dónde?». Tú empiezas la frase y la termina: «El pingüino está… en el bosque».</p>
+        </li>
+        <li>
+          <h3><span class="nv n2">2</span>Base</h3>
+          <p>Las tres ruletas y el tablero: quién, dónde, qué pasa, qué hacen y cómo acaba.</p>
+        </li>
+        <li>
+          <h3><span class="nv n3">3</span>Con más reto</h3>
+          <p>Inventa también un título y otro final. Te la dicta y tú la escribes, o la dibuja.</p>
+        </li>
+      </ul>
+      <div class="pie-docente">
+        <div class="observar">
+          <h3>Qué observar</h3>
+          <ul>
+            <li>Dice quién es y dónde está.</li>
+            <li>Cuenta el problema y una solución.</li>
+            <li>Usa «después», «entonces» o «al final».</li>
+            <li>Escucha y espera su turno.</li>
+          </ul>
+        </div>
+        <div class="ajustes">
+          <h3>Ajustes</h3>
+          <ul>
+            <li><b>Si habla poco:</b> que elija la solución entre dos que le propones, o que la señale en un tablero de comunicación.</li>
+            <li><b>Con TEA:</b> cuenta tú primero una historia con las mismas ruletas, como modelo.</li>
+            <li><b>Con TDAH:</b> que gire las flechas y que pueda contarla de pie.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="imp b7">
+      <header class="cab-imp">
+        <span class="num-bandeja">7</span>
+        <h1>La ruleta de las historias <small>¿Quién? y ¿Dónde?</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja y recorta cada ruleta y su flecha. Únelas por el centro con un encuadernador.</p>
+      <div id="ruletas-1"></div>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp b7">
+      <header class="cab-imp">
+        <span class="num-bandeja">7</span>
+        <h1>La ruleta de las historias <small>¿Qué pasa? y el tablero para contar</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">La ruleta, como las otras dos. El tablero se queda entero: se cuenta de izquierda a derecha, de la casilla 1 a la 5.</p>
+      <div id="ruletas-2"></div>
+      <ol class="tablero corte" id="tablero" aria-label="Tablero para contar en cinco casillas: quién, dónde, qué pasa, qué hacen y cómo acaba"></ol>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE PASOS, NORMAS Y GRUPOS
+         ====================================================================== -->
+    <section class="imp">
+      <header class="cab-imp">
+        <h1>Tarjetas de pasos <small>Bandejas 1 a 6</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">Plastifica la hoja, recorta cada tarjeta y ponla de pie en su bandeja, a la vista.</p>
+      <ul class="pasos-tarjetas" id="pasos-1" aria-label="Seis tarjetas de pasos, una por bandeja, con cuatro pasos y pictogramas cada una"></ul>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <section class="imp">
+      <header class="cab-imp">
+        <h1>Tarjetas de pasos <small>Bandeja 7, normas del rincón y grupos</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">La tarjeta de las normas va colgada en el rincón. Escribe los nombres en las tarjetas de grupo antes de plastificar.</p>
+      <ul class="pasos-tarjetas" id="pasos-2" aria-label="Tarjeta de pasos de la bandeja 7 y tarjeta con cuatro normas del rincón"></ul>
+      <p class="subtitulo-imp">Tarjetas de grupo: velcro suave detrás</p>
+      <ul class="grupos" id="grupos" aria-label="Siete tarjetas de grupo con líneas para escribir los nombres: pingüinos, osos polares, focas, copos, muñecos, gorros y bufandas"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. El copo es un
+        dibujo de IdEducando. En las tarjetas de grupo, solo nombres escritos, sin fotos.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PANEL DE ROTACIÓN
+         ====================================================================== -->
+    <section class="imp">
+      <header class="cab-imp">
+        <h1>Panel del rincón <small>¿Qué bandeja nos toca hoy?</small></h1>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="pista">En cada círculo gris, un velcro rugoso. Cada tarjeta de grupo va en la fila de su bandeja.</p>
+      <ol class="panel corte" id="panel" aria-label="Panel con las siete bandejas en filas, de la 1 a la 7, cada una con su número, su pictograma, su nombre y un círculo para el velcro"></ol>
+      <p class="panel-nota" id="panel-nota">
+        Con cada cambio, la tarjeta de cada grupo baja a la fila siguiente. Desde la 7, vuelve a la 1.
+      </p>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE OBSERVACIÓN
+         ====================================================================== -->
+    <section class="imp registro">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Evaluación · Registro de observación</p>
+        <h1>Rincón de lenguaje: lo que veo en cada bandeja</h1>
+        <p class="entradilla">
+          En Infantil, «La observación directa y sistemática constituirá la técnica principal del proceso de evaluación» (Decreto
+          196/2022, art. 14.1, pág. 33060). Basta con el nombre o las iniciales, y la hoja se queda en el centro.
+        </p>
+      </div>
+      <p class="leyenda-registro">
+        <span><strong>Cómo apuntar:</strong> <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="visto bueno"><path d="M1.5 5.4 L4 8 L8.8 2" fill="none" stroke="#1e2b55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> sin ayuda · <span class="marcas">A</span> con ayuda · <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="círculo"><circle cx="5" cy="5.2" r="3.6" fill="none" stroke="#1e2b55" stroke-width="1.3"/></svg> todavía no.</span>
+        <span>Al lado, el nivel: <span class="nv n1">1</span> <span class="nv n2">2</span> <span class="nv n3">3</span>. Por ejemplo, <svg class="signo" viewBox="0 0 10 10" role="img" aria-label="visto bueno"><path d="M1.5 5.4 L4 8 L8.8 2" fill="none" stroke="#1e2b55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>2.</span>
+        <span>Grupo: ______________ Fecha: ____________</span>
+      </p>
+      <table class="tabla-registro">
+        <colgroup>
+          <col style="width: 8mm" />
+          <col style="width: 30mm" />
+          <col span="7" style="width: 19.5mm" />
+          <col />
+        </colgroup>
+        <thead id="cabeza-registro"></thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         ATENCIÓN A LA DIVERSIDAD
+         ====================================================================== -->
+    <section class="hoja diversidad">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Atención a la diversidad</p>
+        <h1>Ideas para cada necesidad</h1>
+        <p class="entradilla">Medidas de este rincón, explicadas por lo que ayudan. Muchas sirven a toda la clase.</p>
+      </div>
+      <table class="tabla-diversidad">
+        <thead>
+          <tr>
+            <th scope="col">Alumnado con…</th>
+            <th scope="col">En este rincón</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Trastorno del espectro del autismo (TEA)</th>
+            <td>
+              <ul>
+                <li>Las tarjetas de pasos y el panel le dicen qué toca y cuándo se cambia. Empieza por la bandeja que más le guste.</li>
+                <li>Un final que se ve: el tablero lleno o el puzle completo. Si le molesta el ruido, palmadas suaves sobre la mesa.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Trastorno por déficit de atención e hiperactividad (TDAH)</th>
+            <td>
+              <ul>
+                <li>Juegos cortos con un final claro. Encargos que impliquen moverse, como repartir las bolsas o girar las ruletas.</li>
+                <li>Cambiar de bandeja le sirve de pausa. Con el temporizador a la vista, sabe cuánto falta.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Trastorno del desarrollo del lenguaje (TDL)</th>
+            <td>
+              <ul>
+                <li>Habla despacio y alarga un poco el trozo que trabajáis. Repite bien lo que dice, sin pedirle que lo repita.</li>
+                <li>Muchos ratos cortos cada día. Vale responder señalando, con las tarjetas o con el tablero de comunicación.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad intelectual</th>
+            <td>
+              <ul>
+                <li>Nivel 1, pocas tarjetas y siempre en el mismo orden. Haz tú cada paso antes de su turno.</li>
+                <li>Repetid la misma bandeja varios días. Celebra cada acierto.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad motora</th>
+            <td>
+              <ul>
+                <li>Fichas en lugar de pinzas, tarjetas con velcro y piezas sobre una bandeja con borde.</li>
+                <li>Puede elegir mirando o señalando, y su pareja coloca. Las palmadas, con la parte del cuerpo que mueva mejor.</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad visual</th>
+            <td>Tarjetas ampliadas a A3, objetos de verdad para tocar y letras repasadas con cola blanca. Mucha luz y fondo oscuro y mate.</td>
+          </tr>
+          <tr>
+            <th scope="row">Discapacidad auditiva</th>
+            <td>Que vea tu cara cuando dices las palabras. Palmadas que se ven y se notan, con la mano en su hombro. En los sonidos, empieza por la m y la p.</td>
+          </tr>
+          <tr>
+            <th scope="row">Altas capacidades</th>
+            <td>Retos abiertos: buscar más palabras que empiecen por la f, encontrar la palabra más larga del invierno o escribir el cuento de la ruleta.</td>
+          </tr>
+          <tr>
+            <th scope="row">Incorporación tardía, sin castellano aún</th>
+            <td>
+              El dibujo de cada tarjeta da el significado. Que diga cada palabra en su lengua y después en castellano. El
+              <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a> de
+              IdEducando ayuda los primeros días.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="caja caja--amarilla detectar">
+        <h3>Señales que conviene apuntar</h3>
+        <p>Sin poner etiquetas: cuando algo se repite durante semanas, apúntalo con la fecha. Fíjate, por ejemplo, en quien:</p>
+        <ul>
+          <li>no da una palmada por sílaba ni con tu modelo;</li>
+          <li>casi no usa las palabras nuevas;</li>
+          <li>se le entiende poco al hablar;</li>
+          <li>no responde si le hablas sin que te vea;</li>
+          <li>cambia muchos sonidos al decir las palabras;</li>
+          <li>no se interesa por los cuentos ni por las letras.</li>
+        </ul>
+        <p>
+          Compártelo con la familia, con el maestro o la maestra de Audición y Lenguaje y con el equipo de orientación educativa y
+          psicopedagógica (EOEP) que atiende tu centro. Tus notas ayudan a decidir qué hacer.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja familias">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Jugamos con las palabras del invierno</h1>
+      <p>En el cole tenemos un rincón de lenguaje. Jugamos con palabras del invierno: bufanda, nieve, castaña…</p>
+      <p>Damos palmadas con las sílabas. Escuchamos cómo empiezan las palabras. Y también inventamos historias.</p>
+      <p>En casa podéis jugar también. Son juegos de 5 minutos. Se pueden hacer en el coche o mientras os vestís.</p>
+
+      <h2>4 juegos para casa</h2>
+      <ol class="juegos-casa">
+        <li>
+          <img src="pictogramas/4563.png" alt="Pictograma de aplaudir" />
+          <span><strong>Palmadas con nombres.</strong> Decid el nombre de cada persona de la familia con una palmada en cada trozo: Ma-rí-a, Pe-dro. ¿Qué nombre es más largo?</span>
+        </li>
+        <li>
+          <img src="pictogramas/2381.png" alt="Pictograma de escuchar" />
+          <span><strong>Veo, veo con sonidos.</strong> «Veo, veo una cosa que empieza por mmm…». ¿Una manta? ¿Una mandarina?</span>
+        </li>
+        <li>
+          <img src="pictogramas/6461.png" alt="Pictograma de narrar" />
+          <span><strong>Un cuento de invierno.</strong> Elegid quién, dónde y qué pasa. Por ejemplo: un pingüino, en el parque, que tiene frío. ¿Cómo lo arreglamos?</span>
+        </li>
+        <li>
+          <img src="pictogramas/27391.png" alt="Pictograma de buscar" />
+          <span><strong>Palabras por la calle.</strong> Buscad palabras en carteles y tiendas. ¿Alguna empieza como su nombre?</span>
+        </li>
+      </ol>
+
+      <h2>Para que salga bien</h2>
+      <ul class="consejos-casa">
+        <li>Jugad poco rato. Parad antes de que se canse.</li>
+        <li>Si se equivoca, decid la palabra bien, sin regañar: «¡Ah, la bufanda!».</li>
+        <li>Si en casa habláis otra lengua, jugad también en vuestra lengua.</li>
+      </ul>
+
+      <div class="recuadro">
+        <h2>Nota del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Rincón de lenguaje de invierno.</strong> IdEducando, 2026. Licencia CC BY-NC-SA 4.0. Pictogramas: Sergio Palao. Origen:
+          ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja final">
+      <div class="cabecera">
+        <div class="rayos"></div>
+        <p class="antetitulo">Fuentes y créditos</p>
+        <h1>Fuentes, licencia y créditos</h1>
+      </div>
+      <div class="creditos">
+        <p>
+          <strong>Rincón de lenguaje de invierno: siete bandejas en tres niveles.</strong> IdEducando, noviembre de 2026. Ficha del
+          material:
+          <a class="url" href="https://www.ideducando.es/material-gratuito/rincon-lenguaje-invierno/">ideducando.es/material-gratuito/rincon-lenguaje-invierno</a>.
+          Todas las fuentes se consultaron en su origen entre el 5 y el 8 de noviembre de 2026.
+        </p>
+
+        <h2>Currículo</h2>
+        <ul>
+          <li>
+            Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación
+            Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056) y
+            art. 14.1 (pág. 33060); Comunicación y Representación de la Realidad, orientaciones metodológicas (págs. 33099 a 33101),
+            criterios de evaluación del segundo ciclo (págs. 33107 y 33108) y saberes básicos (págs. 33108 y 33109).
+          </li>
+        </ul>
+
+        <h2>Conciencia fonológica</h2>
+        <ul>
+          <li>
+            Ehri, L. C., Nunes, S. R., Willows, D. M., Schuster, B. V., Yaghoub-Zadeh, Z. y Shanahan, T. (2001). Phonemic awareness
+            instruction helps children learn to read: Evidence from the National Reading Panel's meta-analysis. <em>Reading Research
+            Quarterly</em>, 36(3), 250-287. Identificador digital (DOI): 10.1598/RRQ.36.3.2.
+          </li>
+          <li>
+            Jiménez González, J. E. y Ortiz González, M. R. (2000). Metalinguistic awareness and reading acquisition in the Spanish
+            language. <em>The Spanish Journal of Psychology</em>, 3(1), 37-46. DOI: 10.1017/S1138741600005527. Resumen en PubMed,
+            registro 11761739.
+          </li>
+        </ul>
+
+        <h2>Contar historias y apoyos visuales</h2>
+        <ul>
+          <li>
+            Pico, D. L., Hessling Prahl, A., Biel, C. H., Peterson, A. K., Biel, E. J., Woods, C. y Contesse, V. A. (2021). Interventions
+            designed to improve narrative language in school-age children: A systematic review with meta-analyses. <em>Language,
+            Speech, and Hearing Services in Schools</em>, 52(4), 1109-1126. DOI: 10.1044/2021_LSHSS-20-00160.
+          </li>
+          <li>
+            Hume, K., Steinbrenner, J. R., Odom, S. L. y otros (2021). Evidence-based practices for children, youth, and young adults
+            with autism: Third generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI:
+            10.1007/s10803-020-04844-2. Los apoyos visuales están entre las 28 prácticas basadas en la evidencia.
+          </li>
+        </ul>
+
+        <h2>Diseño Universal para el Aprendizaje y seguridad</h2>
+        <ul>
+          <li>CAST (2024). Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0: consideraciones 2.1, 4.1, 6.4 y 8.2. udlguidelines.cast.org/es</li>
+          <li>
+            Asociación Española de Pediatría (AEP), Comité de Soporte Vital (diciembre de 2024). <em>Atragantamiento</em>: medidas de
+            prevención con juguetes. <span class="url">static.aeped.es/atragantamiento_csvaep_final_6bd02592cf.pdf</span>
+          </li>
+        </ul>
+
+        <h2>Lo que es propuesta nuestra</h2>
+        <p>
+          Las frases que ayudan, los ajustes, las señales que conviene apuntar y los juegos para casa son propuestas del equipo de
+          IdEducando desde la práctica en el aula. No salen de un estudio concreto.
+        </p>
+
+        <h2>Materiales de IdEducando que usa</h2>
+        <p>
+          Las <a href="https://www.ideducando.es/material-gratuito/estaciones-matematicas-invierno/">estaciones de matemáticas de
+          invierno</a>, las <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">rutinas de invierno</a>, el
+          <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">tren de las sílabas</a> y el
+          <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>, todos en
+          ideducando.es/material-gratuito.
+        </p>
+
+        <h2>Pictogramas, dibujos y licencia</h2>
+        <p>
+          Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao
+          para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». ARASAAC es el Centro
+          Aragonés para la Comunicación Aumentativa y Alternativa. Si cambias el material, deja este texto.
+        </p>
+        <p>
+          Los demás dibujos son de IdEducando: el tendedero, las pinzas, los copos, las piezas de los puzles, los discos, las ruletas
+          y sus flechas.
+        </p>
+        <p>
+          Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre: IdEducando nace para ayudar a quien
+          acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no deja venderlo. La licencia CC
+          BY-NC-SA 4.0 deja copiarlo y adaptarlo siempre que se cite a IdEducando, no se use para ganar dinero y se comparta con la
+          misma licencia.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------------------------------
+      // Datos y dibujos del material. Los dibujos propios son SVG; los pictogramas de ARASAAC están
+      // en pictogramas/NÚMERO.png. Todas las medidas van en milímetros.
+      // ------------------------------------------------------------------------------------------
+
+      // Números de página. Si cambia el orden de las hojas, hay que actualizarlos aquí y en
+      // «Qué imprimir» de la ficha (src/content/materiales/rincon-lenguaje-invierno.md).
+      const PAGINAS = {
+        curriculo: 4,
+        organizar: 5,
+        b1: 6,
+        vocab1: 7,
+        vocab2: 8,
+        palabras: 9,
+        b2: 10,
+        caza1: 11,
+        caza2: 12,
+        b3: 13,
+        falta1: 14,
+        falta2: 15,
+        falta3: 16,
+        b4: 17,
+        puzle1: 18,
+        puzle2: 19,
+        puzle3: 20,
+        b5: 21,
+        disco1: 22,
+        disco2: 23,
+        disco3: 24,
+        b6: 25,
+        tapete: 26,
+        palmadas: 27,
+        b7: 28,
+        ruleta1: 29,
+        ruleta2: 30,
+        pasos: 31,
+        pasos2: 32,
+        panel: 33,
+        registro: 34,
+        diversidad: 35,
+        familias: 36,
+        fuentes: 37,
+      };
+
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const LOGO = '<img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">';
+      const ATRIB = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const COLOR = {
+        b1: ['#2f6fd6', '#e4edfb'],
+        b2: ['#e8553e', '#fde5e0'],
+        b3: ['#8c4fb8', '#efe5f7'],
+        b4: ['#f6c12e', '#fdf0c7'],
+        b5: ['#1fa67a', '#dcf3ea'],
+        b6: ['#f5961f', '#fde8cf'],
+        b7: ['#1e2b55', '#e6e9f2'],
+      };
+      const picto = (n, clase = '', alt = '') => `<img src="pictogramas/${n}.png" alt="${alt}" class="${clase}">`;
+      const nv = (n, clase = '') => `<span class="nv n${n} ${clase}">${n}</span>`;
+      const f = (n) => Number(n.toFixed(2));
+      const repetir = (n, fn) => Array.from({ length: n }, (_, i) => fn(i)).join('');
+
+      // ---------------------------------------------------------------- Las siete bandejas
+      // [número, nombre, pictograma, qué se hace, primera y última página]
+      const BANDEJAS = [
+        [1, 'Palabras del invierno', 28643, 'Tarjetas de dibujo y palabra para un loto.', 'b1', 'palabras'],
+        [2, 'Cazapalabras', 27391, 'Rodear palabras y sílabas escritas.', 'b2', 'caza2'],
+        [3, 'La sílaba que falta', 15816, 'Completar palabras con su sílaba.', 'b3', 'falta3'],
+        [4, 'Puzles de sílabas', 2540, 'Ordenar las sílabas de una palabra.', 'b4', 'puzle3'],
+        [5, '¿Cómo empieza?', 2381, 'Discos de sonidos con pinzas.', 'b5', 'disco3'],
+        [6, '¿Cuántas sílabas?', 4563, 'Palmadas y un tapete para clasificar.', 'b6', 'palmadas'],
+        [7, 'La ruleta de las historias', 6461, 'Quién, dónde y qué pasa.', 'b7', 'ruleta2'],
+      ];
+
+      document.getElementById('mapa').innerHTML = BANDEJAS.map(
+        ([n, nombre, icono, que, desde, hasta]) =>
+          `<li class="b${n}"><span class="num-mini">${n}</span>${picto(icono, 'icono')}<div><b>${nombre}</b>${que}</div><span class="pags">Págs. ${PAGINAS[desde]} a ${PAGINAS[hasta]}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Dibujos propios
+
+      // Copo de nieve de seis brazos con ramitas: azul claro con borde marino.
+      function copo(clase = '', estilo = '') {
+        let d = '';
+        for (let i = 0; i < 6; i++) {
+          const a = ((i * 60 - 90) * Math.PI) / 180;
+          d += `M50 50 L${f(50 + 40 * Math.cos(a))} ${f(50 + 40 * Math.sin(a))} `;
+          const bx = 50 + 25 * Math.cos(a);
+          const by = 50 + 25 * Math.sin(a);
+          for (const s of [-1, 1]) {
+            const b = a + s * 0.75;
+            d += `M${f(bx)} ${f(by)} L${f(bx + 12 * Math.cos(b))} ${f(by + 12 * Math.sin(b))} `;
+          }
+        }
+        return `<svg class="${clase}" style="${estilo}" viewBox="0 0 100 100" aria-hidden="true">
+          <path d="${d}" stroke="${M}" stroke-width="11" stroke-linecap="round" fill="none"/>
+          <path d="${d}" stroke="#cfe0fb" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <circle cx="50" cy="50" r="7" fill="#cfe0fb" stroke="${M}" stroke-width="2.5"/></svg>`;
+      }
+
+      // Pinza de la ropa vista de frente: dos palas de madera y el muelle.
+      const PINZA = `<svg viewBox="0 0 30 80" aria-hidden="true">
+        <rect x="3" y="2" width="11" height="76" rx="4.5" fill="#f6c12e" stroke="${M}" stroke-width="2.2"/>
+        <rect x="16" y="2" width="11" height="76" rx="4.5" fill="#f6c12e" stroke="${M}" stroke-width="2.2"/>
+        <rect x="1.5" y="27" width="27" height="10" rx="3" fill="#d9dde8" stroke="${M}" stroke-width="2.2"/>
+        <path d="M6 32 H24" stroke="${M}" stroke-width="1.6"/></svg>`;
+
+      // Símbolos que identifican las piezas de cada puzle: se distinguen por la forma, no por el color.
+      const SIMBOLOS = {
+        estrella: `<path d="M50 6 L61.8 37.6 L95.6 38.2 L68.8 58.6 L78.6 91 L50 71.6 L21.4 91 L31.2 58.6 L4.4 38.2 L38.2 37.6 Z" fill="${M}"/>`,
+        corazon: `<path d="M50 90 C 18 66, 4 48, 4 30 C 4 15, 16 6, 28 6 C 38 6, 46 12, 50 21 C 54 12, 62 6, 72 6 C 84 6, 96 15, 96 30 C 96 48, 82 66, 50 90 Z" fill="${M}"/>`,
+        luna: `<path d="M64 6 A 44 44 0 1 0 94 70 A 36 36 0 1 1 64 6 Z" fill="${M}"/>`,
+        gota: `<path d="M50 4 C 64 30, 84 48, 84 64 A 34 34 0 0 1 16 64 C 16 48, 36 30, 50 4 Z" fill="${M}"/>`,
+        hoja: `<path d="M8 92 C 8 40, 40 8, 92 8 C 92 60, 60 92, 8 92 Z" fill="${M}"/><path d="M14 86 L74 26" stroke="#fff" stroke-width="7" stroke-linecap="round"/>`,
+        circulo: `<circle cx="50" cy="50" r="40" fill="none" stroke="${M}" stroke-width="14"/><circle cx="50" cy="50" r="12" fill="${M}"/>`,
+      };
+      const simbolo = (nombre, x, y) =>
+        `<svg class="simbolo" style="left:${x}mm;top:${y}mm" viewBox="0 0 100 100" role="img" aria-label="${nombre}">${SIMBOLOS[nombre]}</svg>`;
+      const NOMBRES_SIMBOLOS = ['estrella', 'corazon', 'luna', 'gota', 'hoja', 'circulo'];
+
+      // ---------------------------------------------------------------- Portada: el tendedero
+      (function portada() {
+        // La cuerda es una curva (Bézier cuadrática) de un lado al otro de la hoja.
+        const P0 = [-6, 154];
+        const P1 = [105, 214];
+        const P2 = [216, 146];
+        const punto = (t) => [
+          (1 - t) ** 2 * P0[0] + 2 * (1 - t) * t * P1[0] + t ** 2 * P2[0],
+          (1 - t) ** 2 * P0[1] + 2 * (1 - t) * t * P1[1] + t ** 2 * P2[1],
+        ];
+        const enX = (x) => {
+          let a = 0;
+          let b = 1;
+          for (let i = 0; i < 40; i++) {
+            const m = (a + b) / 2;
+            if (punto(m)[0] < x) a = m;
+            else b = m;
+          }
+          const t = (a + b) / 2;
+          const [, y] = punto(t);
+          const dx = 2 * (1 - t) * (P1[0] - P0[0]) + 2 * t * (P2[0] - P1[0]);
+          const dy = 2 * (1 - t) * (P1[1] - P0[1]) + 2 * t * (P2[1] - P1[1]);
+          return [y, (Math.atan2(dy, dx) * 180) / Math.PI];
+        };
+        let html = `<svg style="left:0;top:0;width:210mm;height:297mm" viewBox="0 0 210 297">
+          <path d="M${P0[0]} ${P0[1]} Q${P1[0]} ${P1[1]} ${P2[0]} ${P2[1]}" fill="none" stroke="${M}" stroke-width="1.1" stroke-linecap="round"/></svg>`;
+        // [centro en x, ancho, alto, giro extra, contenido]
+        const COLGADOS = [
+          [27, 36, 38, -4, picto(2290)],
+          [64, 27, 34, 3, '<span>BU</span>'],
+          [96, 33, 34, -2, '<span>FAN</span>'],
+          [128, 27, 34, 4, '<span>DA</span>'],
+          [168, 40, 40, -6, null],
+        ];
+        for (const [x, w, h, giro, contenido] of COLGADOS) {
+          const [y, inclinacion] = enX(x);
+          const angulo = inclinacion + giro;
+          if (contenido) {
+            html += `<div class="colgado" style="left:${f(x - w / 2)}mm;top:${f(y + 1.5)}mm;width:${w}mm;height:${h}mm;transform:rotate(${f(angulo)}deg)">${contenido}</div>`;
+          } else {
+            // La manopla cuelga sola, como la ropa de verdad.
+            html += `<img src="pictogramas/8314.png" alt="" style="left:${f(x - w / 2)}mm;top:${f(y - 1)}mm;width:${w}mm;height:${h}mm;transform:rotate(${f(angulo + 180)}deg) scaleX(-1);transform-origin:50% 0">`;
+          }
+          html += `<div style="left:${f(x - 3.6)}mm;top:${f(y - 9)}mm;width:7.2mm;height:19mm;transform:rotate(${f(inclinacion)}deg)">${PINZA}</div>`;
+        }
+        // Copos que caen: [x, y, tamaño]
+        for (const [x, y, t] of [
+          [150, 96, 10],
+          [182, 112, 14],
+          [196, 84, 7],
+          [138, 128, 7],
+          [176, 214, 9],
+          [16, 214, 8],
+          [44, 238, 12],
+          [112, 236, 8],
+          [192, 238, 11],
+          [150, 250, 7],
+        ]) {
+          html += copo('', `left:${x - t / 2}mm;top:${y - t / 2}mm;width:${t}mm;height:${t}mm`);
+        }
+        document.getElementById('ilustracion').innerHTML = html;
+      })();
+
+      // ---------------------------------------------------------------- Bandeja 1: vocabulario
+      // [pictograma, MAYÚSCULA, minúscula]
+      const VOCAB = [
+        [8122, 'ABRIGO', 'abrigo'],
+        [2290, 'BUFANDA', 'bufanda'],
+        [2412, 'GORRO', 'gorro'],
+        [2415, 'GUANTES', 'guantes'],
+        [2287, 'BOTAS', 'botas'],
+        [2500, 'PARAGUAS', 'paraguas'],
+        [3123, 'LLUVIA', 'lluvia'],
+        [3135, 'NIEVE', 'nieve'],
+        [35583, 'FRÍO', 'frío'],
+        [2883, 'NUBE', 'nube'],
+        [7259, 'VIENTO', 'viento'],
+        [2798, 'SOL', 'sol'],
+        [8302, 'CASTAÑA', 'castaña'],
+        [2483, 'NARANJA', 'naranja'],
+        [11298, 'MANDARINA', 'mandarina'],
+        [2573, 'SOPA', 'sopa'],
+        [6448, 'CHOCOLATE', 'chocolate'],
+        [8072, 'CHIMENEA', 'chimenea'],
+        [2389, 'ESTUFA', 'estufa'],
+        [2459, 'MANTA', 'manta'],
+        [2522, 'PIJAMA', 'pijama'],
+        [2298, 'CALCETINES', 'calcetines'],
+        [3243, 'PINGÜINO', 'pingüino'],
+        [2868, 'OSO POLAR', 'oso polar'],
+      ];
+      const tarjetaVocab = ([n, may, min]) =>
+        `<li class="corte" aria-label="${min}">${picto(n)}<span class="palabras peque"><span class="may">${may}</span><span class="min">${min}</span></span></li>`;
+      document.getElementById('vocab-1').innerHTML = VOCAB.slice(0, 12).map(tarjetaVocab).join('');
+      document.getElementById('vocab-2').innerHTML = VOCAB.slice(12).map(tarjetaVocab).join('');
+      document.getElementById('palabras').innerHTML = VOCAB.map(
+        ([, may, min]) => `<li class="corte peque"><span style="font-size:20pt">${may}</span><span style="font-size:18pt">${min}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------- Bandeja 2: cazapalabras
+      // La solución es cuántas veces sale la palabra, o cuántas palabras tienen la sílaba.
+      const CAZAS = [
+        { id: '2.1', nivel: 1, busca: 'SOL', dibujo: 2798, campo: ['SOL', 'BUFANDA', 'NIEVE', 'CHOCOLATE', 'SOL', 'PIJAMA', 'GUANTES', 'SOL', 'NUBE', 'MANDARINA', 'PARAGUAS', 'SOL'] },
+        { id: '2.2', nivel: 1, busca: 'NUBE', dibujo: 2883, campo: ['NUBE', 'CASTAÑA', 'SOL', 'ABRIGO', 'NUBE', 'NUBE', 'FRÍO', 'CHIMENEA', 'GORRO', 'ESTUFA', 'NUBE', 'NUBE'] },
+        { id: '2.3', nivel: 2, busca: 'GORRO', dibujo: 2412, campo: ['GORRA', 'GORRO', 'PERRO', 'ZORRO', 'CORRO', 'GORRO', 'BURRO', 'TORRE', 'GORRO', 'GOTA', 'CARRO', 'GORRO'] },
+        { id: '2.4', nivel: 2, busca: 'nube', dibujo: 2883, campo: ['nudo', 'nube', 'nuez', 'nave', 'nube', 'nata', 'duna', 'nube', 'nene', 'nuez', 'nube', 'nudo'] },
+        { id: '2.5', nivel: 3, busca: 'ma', silaba: true, campo: ['manopla', 'mesa', 'pijama', 'cama', 'mono', 'humo', 'goma', 'muñeco', 'mano', 'tomate', 'miel', 'llama'] },
+        { id: '2.6', nivel: 3, busca: 'NA', silaba: true, campo: ['NARANJA', 'NUBE', 'LUNA', 'MANO', 'LANA', 'NIEVE', 'GRANADA', 'PINO', 'NARIZ', 'NUDO', 'CUNA', 'ANTENA'] },
+      ];
+      const solucionCaza = (c) => (c.silaba ? c.campo.filter((p) => p.includes(c.busca)).length : c.campo.filter((p) => p === c.busca).length);
+      const tarjetaCaza = (c) => `<li class="caza corte" aria-label="Tarjeta ${c.id}: ${c.silaba ? 'busca la sílaba' : 'busca la palabra'} ${c.busca}">
+          <div class="caza__arriba">
+            ${nv(c.nivel, 'grande')}
+            <div class="caza__busca">${c.dibujo ? picto(c.dibujo) : ''}<span class="peque">${c.busca}</span></div>
+            <div class="caza__cuenta peque">${repetir(8, () => '<i></i>')}</div>
+          </div>
+          <ul class="caza__campo peque">${c.campo.map((p) => `<li>${p}</li>`).join('')}</ul>
+          <p class="caza__pie" style="margin:0"><span>Tarjeta ${c.id} · Nivel ${c.nivel}</span><span>Un círculo por cada una que encuentres</span></p>
+        </li>`;
+      document.getElementById('cazas-1').innerHTML = CAZAS.slice(0, 3).map(tarjetaCaza).join('');
+      document.getElementById('cazas-2').innerHTML = CAZAS.slice(3).map(tarjetaCaza).join('');
+      document.getElementById('soluciones-2').innerHTML =
+        '<strong>Soluciones:</strong> ' +
+        CAZAS.map((c) => `${c.id}, ${c.busca}: ${solucionCaza(c)}`).join(' · ') +
+        '. En las tarjetas 2.5 y 2.6, son las palabras que tienen la sílaba.';
+
+      // ---------------------------------------------------------------- Bandeja 3: la sílaba que falta
+      // [nivel, pictograma, sílabas, la que falta (posición), opciones (null: se escribe)]
+      const FALTAS = [
+        [1, 2412, ['GO', 'RRO'], 1, ['RRO', 'TA']],
+        [1, 2287, ['BO', 'TAS'], 0, ['NU', 'BO']],
+        [1, 2883, ['NU', 'BE'], 1, ['BE', 'SA']],
+        [1, 2573, ['SO', 'PA'], 0, ['SO', 'MA']],
+        [1, 2459, ['MAN', 'TA'], 1, ['GO', 'TA']],
+        [1, 2397, ['FO', 'CA'], 0, ['FO', 'LA']],
+        [1, 2948, ['LA', 'NA'], 1, ['NA', 'PI']],
+        [1, 2582, ['TA', 'ZA'], 0, ['BU', 'TA']],
+        [2, 2290, ['BU', 'FAN', 'DA'], 1, ['PA', 'FAN', 'LO']],
+        [2, 2522, ['PI', 'JA', 'MA'], 2, ['NA', 'MA', 'TO']],
+        [2, 2483, ['NA', 'RAN', 'JA'], 0, ['MA', 'LA', 'NA']],
+        [2, 8302, ['CAS', 'TA', 'ÑA'], 1, ['DA', 'TA', 'PA']],
+        [2, 2389, ['ES', 'TU', 'FA'], 2, ['FA', 'FO', 'PA']],
+        [2, 2500, ['PA', 'RA', 'GUAS'], 1, ['LA', 'MA', 'RA']],
+        [2, 8122, ['A', 'BRI', 'GO'], 2, ['TO', 'GO', 'BO']],
+        [2, 22022, ['PA', 'TI', 'NES'], 0, ['BA', 'TA', 'PA']],
+        [3, 11298, ['man', 'da', 'ri', 'na'], 2, null],
+        [3, 6448, ['cho', 'co', 'la', 'te'], 2, null],
+        [3, 2298, ['cal', 'ce', 'ti', 'nes'], 1, null],
+        [3, 8072, ['chi', 'me', 'ne', 'a'], 1, null],
+        [3, 8701, ['su', 'da', 'de', 'ra'], 3, null],
+        [3, 8314, ['ma', 'no', 'pla'], 1, null],
+        [3, 3243, ['pin', 'güi', 'no'], 2, null],
+        [3, 8710, ['tri', 'ne', 'o'], 0, null],
+      ].map(([nivel, dibujo, silabas, falta, opciones], i) => ({ id: `3.${i + 1}`, nivel, dibujo, silabas, falta, opciones }));
+
+      const tarjetaFalta = (t) => {
+        const palabra = t.silabas.join('');
+        const silabas = t.silabas
+          .map((s, i) => (i === t.falta ? '<span class="hueco" aria-label="hueco"></span>' : `<span>${s}</span>`))
+          .join('');
+        const abajo = t.opciones
+          ? `<div class="opciones peque">${t.opciones.map((o) => `<span>${o}</span>`).join('')}</div>`
+          : '<p class="escribe-aqui">Escribe la sílaba que falta.</p>';
+        return `<li class="falta corte" aria-label="Tarjeta ${t.id}: ${palabra}, falta una sílaba">
+            <div class="falta__arriba">
+              ${picto(t.dibujo)}
+              <div class="falta__modelo">${t.nivel === 1 ? `<span class="modelo peque">${palabra}</span>` : ''}</div>
+              <div class="falta__datos">${nv(t.nivel)}<span>${t.id}</span></div>
+            </div>
+            <div class="silabas peque${t.opciones ? '' : ' escribe'}">${silabas}</div>
+            ${abajo}
+          </li>`;
+      };
+      for (const nivel of [1, 2, 3]) {
+        document.getElementById(`faltas-${nivel}`).innerHTML = FALTAS.filter((t) => t.nivel === nivel).map(tarjetaFalta).join('');
+      }
+      document.getElementById('soluciones-3').innerHTML =
+        '<strong>Soluciones:</strong> ' + FALTAS.map((t) => `${t.id} ${t.silabas[t.falta]}`).join(' · ') + '.';
+
+      // ---------------------------------------------------------------- Bandeja 4: puzles de sílabas
+      const linea = (d) => `<path d="${d}" fill="none" stroke="${SUAVE}" stroke-width="0.35" stroke-dasharray="1.6 1.2"/>`;
+      const borde = (w, h) => `<rect x="0.3" y="0.3" width="${w - 0.6}" height="${h - 0.6}" rx="3.5" fill="#fff" stroke="${SUAVE}" stroke-width="0.35" stroke-dasharray="1.6 1.2"/>`;
+
+      // Nivel 1: dos piezas con el dibujo partido. Si el dibujo sale entero, el puzle está bien.
+      const PUZLES_1 = [
+        [3135, ['NIE', 'VE']],
+        [3123, ['LLU', 'VIA']],
+        [2412, ['GO', 'RRO']],
+        [2287, ['BO', 'TAS']],
+        [2397, ['FO', 'CA']],
+        [2571, ['SO', 'FÁ']],
+      ];
+      document.getElementById('puzles-1').innerHTML = PUZLES_1.map(([dibujo, sil], i) => {
+        const s = NOMBRES_SIMBOLOS[i];
+        const onda = 'M44 0 C 52 12, 36 25, 44 37 C 52 49, 36 62, 44 74';
+        return `<li class="puzle" style="width:88mm;height:74mm" aria-label="Puzle de ${sil.join('')}: ${sil.join(', ')}">
+            <svg viewBox="0 0 88 74" aria-hidden="true">${borde(88, 74)}${linea(onda)}</svg>
+            <img src="pictogramas/${dibujo}.png" alt="" style="left:24mm;top:4mm;width:40mm;height:40mm">
+            <span class="sil peque" style="left:21mm;top:59mm">${sil[0]}</span>
+            <span class="sil peque" style="left:67mm;top:59mm">${sil[1]}</span>
+            ${simbolo(s, 3, 3)}${simbolo(s, 80, 3)}${nv(1).replace('class="nv', 'style="left:3mm;top:66mm;width:5mm;height:5mm;font-size:9pt" class="nv')}
+          </li>`;
+      }).join('');
+
+      // Nivel 2: el dibujo en su pieza y tres sílabas. Cada unión tiene su forma: redonda, en pico y cuadrada.
+      const PUZLES_2 = [
+        [2290, ['BU', 'FAN', 'DA']],
+        [2522, ['PI', 'JA', 'MA']],
+        [2483, ['NA', 'RAN', 'JA']],
+        [8302, ['CAS', 'TA', 'ÑA']],
+        [2389, ['ES', 'TU', 'FA']],
+        [3243, ['PIN', 'GÜI', 'NO']],
+      ];
+      document.getElementById('puzles-2').innerHTML = PUZLES_2.map(([dibujo, sil], i) => {
+        const s = NOMBRES_SIMBOLOS[i];
+        const W = 178;
+        const H = 34;
+        const uniones = [
+          `M40 0 V12 A5 5 0 0 1 40 22 V${H}`,
+          `M86 0 V11 L93 17 L86 23 V${H}`,
+          `M132 0 V12 H137.5 V22 H132 V${H}`,
+        ];
+        const centros = [65.5, 111, 157.5];
+        return `<li class="puzle" style="width:${W}mm;height:${H}mm" aria-label="Puzle de ${sil.join('')}: ${sil.join(', ')}">
+            <svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${borde(W, H)}${uniones.map(linea).join('')}</svg>
+            <img src="pictogramas/${dibujo}.png" alt="" style="left:7mm;top:2mm;width:30mm;height:30mm">
+            ${sil.map((t, j) => `<span class="sil peque" style="left:${centros[j]}mm;top:${H / 2}mm">${t}</span>`).join('')}
+            ${[2, 42, 88, 134].map((x) => simbolo(s, x, 2)).join('')}
+            ${nv(2).replace('class="nv', 'style="left:2mm;top:27mm;width:5mm;height:5mm;font-size:9pt" class="nv')}
+          </li>`;
+      }).join('');
+
+      // Nivel 3: cuatro sílabas en minúscula, con cortes rectos.
+      const PUZLES_3 = [
+        [11298, ['man', 'da', 'ri', 'na']],
+        [6448, ['cho', 'co', 'la', 'te']],
+        [8072, ['chi', 'me', 'ne', 'a']],
+        [2298, ['cal', 'ce', 'ti', 'nes']],
+        [8701, ['su', 'da', 'de', 'ra']],
+      ];
+      document.getElementById('puzles-3').innerHTML = PUZLES_3.map(([dibujo, sil], i) => {
+        const s = NOMBRES_SIMBOLOS[i];
+        const W = 186;
+        const H = 38;
+        const xs = [38, 75, 112, 149];
+        return `<li class="puzle" style="width:${W}mm;height:${H}mm" aria-label="Puzle de ${sil.join('')}: ${sil.join(', ')}">
+            <svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${borde(W, H)}${xs.map((x) => linea(`M${x} 0 V${H}`)).join('')}</svg>
+            <img src="pictogramas/${dibujo}.png" alt="" style="left:4mm;top:4mm;width:30mm;height:30mm">
+            ${sil.map((t, j) => `<span class="sil peque" style="left:${xs[j] + 18.5}mm;top:${H / 2 + 1}mm">${t}</span>`).join('')}
+            ${[2, ...xs.map((x) => x + 2)].map((x) => simbolo(s, x, 2)).join('')}
+            ${nv(3).replace('class="nv', 'style="left:1.4mm;top:30mm;width:6.4mm;height:6.4mm;font-size:9pt" class="nv')}
+          </li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------- Bandeja 5: discos de sonidos
+      // [pictograma, palabra, empieza por ese sonido (1) o no (0)]. Los aciertos no siguen ningún patrón.
+      const DISCOS = [
+        { nivel: 1, letra: ['M', 'm'], centro: 3131, palabraCentro: 'muñeco de nieve', dibujos: [[2459, 'manta', 1], [2798, 'sol', 0], [2412, 'gorro', 0], [11298, 'mandarina', 1], [8314, 'manopla', 1], [2397, 'foca', 0]] },
+        { nivel: 1, letra: ['S', 's'], centro: 2798, palabraCentro: 'sol', dibujos: [[2573, 'sopa', 1], [2287, 'botas', 0], [2571, 'sofá', 1], [2883, 'nube', 0], [2459, 'manta', 0], [8701, 'sudadera', 1]] },
+        { nivel: 2, letra: ['N', 'n'], centro: 2883, palabraCentro: 'nube', dibujos: [[3135, 'nieve', 1], [2483, 'naranja', 1], [2573, 'sopa', 0], [11298, 'mandarina', 0], [2887, 'nariz', 1], [2412, 'gorro', 0], [2287, 'botas', 0], [2880, 'nuez', 1]] },
+        { nivel: 2, letra: ['P', 'p'], centro: 3243, palabraCentro: 'pingüino', dibujos: [[2290, 'bufanda', 0], [2500, 'paraguas', 1], [2522, 'pijama', 1], [2397, 'foca', 0], [2883, 'nube', 0], [22022, 'patines', 1], [8302, 'castaña', 0], [2494, 'pan', 1]] },
+        { nivel: 3, letra: ['F', 'f'], centro: null, dibujos: [[2573, 'sopa', 0], [2397, 'foca', 1], [2582, 'taza', 0], [4654, 'fuego', 1], [2393, 'farola', 1], [2883, 'nube', 0], [2522, 'pijama', 0], [7099, 'fiesta', 1]] },
+        { nivel: 3, letra: ['L', 'l'], centro: null, dibujos: [[2948, 'lana', 1], [2798, 'sol', 0], [2883, 'nube', 0], [2933, 'luna', 1], [2459, 'manta', 0], [2445, 'leche', 1], [2412, 'gorro', 0], [6138, 'linterna', 1]] },
+      ];
+      const D = 112;
+      const C = D / 2;
+      const enDisco = (r, grados) => {
+        const a = (grados * Math.PI) / 180;
+        return [f(C + r * Math.sin(a)), f(C - r * Math.cos(a))];
+      };
+      const cuna = (r1, r2, a1, a2, relleno) => {
+        const [x1, y1] = enDisco(r1, a1);
+        const [x2, y2] = enDisco(r2, a1);
+        const [x3, y3] = enDisco(r2, a2);
+        const [x4, y4] = enDisco(r1, a2);
+        return `<path d="M${x1} ${y1} L${x2} ${y2} A${r2} ${r2} 0 0 1 ${x3} ${y3} L${x4} ${y4} A${r1} ${r1} 0 0 0 ${x1} ${y1} Z" fill="${relleno}"/>`;
+      };
+      function disco(d) {
+        const [color, tinte] = COLOR.b5;
+        const n = d.dibujos.length;
+        const paso = 360 / n;
+        const tam = n === 6 ? 25 : 22;
+        let svg = `<circle cx="${C}" cy="${C}" r="${C - 0.3}" fill="#fff" stroke="${SUAVE}" stroke-width="0.35" stroke-dasharray="1.6 1.2"/>`;
+        for (let i = 0; i < n; i++) svg += cuna(20, C - 0.6, i * paso - paso / 2, i * paso + paso / 2, i % 2 ? '#fff' : tinte);
+        for (let i = 0; i < n; i++) {
+          const [x1, y1] = enDisco(20, i * paso - paso / 2);
+          const [x2, y2] = enDisco(C - 0.6, i * paso - paso / 2);
+          svg += `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${color}" stroke-width="0.5"/>`;
+        }
+        // Franja del borde, donde se engancha la pinza
+        svg += `<circle cx="${C}" cy="${C}" r="47.5" fill="none" stroke="${M}" stroke-width="0.3" stroke-dasharray="0.8 1.4"/>`;
+        svg += `<circle cx="${C}" cy="${C}" r="20" fill="#fff" stroke="${color}" stroke-width="1.2"/>`;
+        const dibujos = d.dibujos
+          .map(([p], i) => {
+            const [x, y] = enDisco(33.5, i * paso);
+            return `<img src="pictogramas/${p}.png" alt="" style="left:${f(x - tam / 2)}mm;top:${f(y - tam / 2)}mm;width:${tam}mm;height:${tam}mm">`;
+          })
+          .join('');
+        const centro = d.centro
+          ? `<div class="centro peque">${picto(d.centro)}<span class="letras">${d.letra[0]} ${d.letra[1]}</span></div>`
+          : `<div class="centro peque"><span class="letras sola">${d.letra[0]} ${d.letra[1]}</span></div>`;
+        const lista = d.dibujos.map(([, p]) => p).join(', ');
+        return `<li class="disco-fila">
+            <p class="rotulo">${nv(d.nivel, 'grande')}<br>Disco de la ${d.letra[1]}<span class="desc">${d.centro ? `En el centro, ${d.palabraCentro}. ` : ''}${n} dibujos y ${d.dibujos.filter((x) => x[2]).length} empiezan como su letra.</span></p>
+            <div class="disco" role="img" aria-label="Disco de la ${d.letra[1]}${d.centro ? `, con ${d.palabraCentro} en el centro` : ''}. Alrededor: ${lista}">
+              <svg viewBox="0 0 ${D} ${D}" aria-hidden="true">${svg}</svg>${dibujos}${centro}
+            </div>
+          </li>`;
+      }
+      for (const nivel of [1, 2, 3]) {
+        document.getElementById(`discos-${nivel}`).innerHTML = DISCOS.filter((d) => d.nivel === nivel).map(disco).join('');
+      }
+      document.getElementById('soluciones-5').innerHTML =
+        '<strong>Soluciones:</strong> ' +
+        DISCOS.map((d) => `${d.letra[1]}: ${d.dibujos.filter((x) => x[2]).map((x) => x[1]).join(', ')}`).join(' · ') +
+        '.';

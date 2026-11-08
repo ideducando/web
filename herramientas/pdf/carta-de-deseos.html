@@ -1,0 +1,1604 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Carta de deseos con pictogramas: escribir, dibujar o pegar lo que deseo, en tres niveles · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Plantillas de la carta: márgenes más estrechos (nunca menos de 10 mm) para que los huecos
+         sean grandes. */
+      @page ancha {
+        margin: 11mm 12mm 15mm 12mm;
+      }
+
+      /* ---------- Colores ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA).
+         El color nunca va solo: cada versión y cada grupo de deseos llevan también su nombre. */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .ancha {
+        page: ancha;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* ---------- Cómo montarlo, con letra de 11 puntos como el resto del texto para el adulto ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.6mm 0 1.4mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto 1fr;
+        padding: 1mm 2mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.4mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8mm;
+        height: 8mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 54pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 122mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 9pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 20mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        padding: 4.5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.12;
+        transform: rotate(9deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 142mm;
+        width: 210mm;
+        height: 126mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .hoja-portada {
+        left: 18mm;
+        top: 4mm;
+        width: 100mm;
+        padding: 5mm 6mm 6mm;
+        border: 0.8mm solid var(--marino);
+        border-radius: 3mm;
+        background: #fff;
+        transform: rotate(-4deg);
+        box-shadow: 0 1.6mm 0 rgb(30 43 85 / 0.16);
+      }
+
+      .hoja-portada__titulo {
+        margin: 0 0 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 17pt;
+      }
+
+      .hoja-portada__quiero {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 2mm;
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .hoja-portada__quiero img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .hoja-portada__deseos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2.6mm;
+        margin: 0 0 3mm;
+      }
+
+      .hoja-portada__deseos div {
+        display: grid;
+        justify-items: center;
+        padding: 1.6mm 1mm 1.4mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+        font-weight: 700;
+        font-size: 10.5pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .hoja-portada__deseos div:nth-child(2) {
+        transform: rotate(3deg);
+      }
+
+      .hoja-portada__deseos img {
+        width: 20mm;
+        height: 20mm;
+        margin-bottom: 1mm;
+      }
+
+      .hoja-portada__linea {
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--suave);
+      }
+
+      .sobre-portada {
+        left: 128mm;
+        top: 52mm;
+        width: 66mm;
+        height: 46mm;
+        transform: rotate(7deg);
+      }
+
+      .estrella-portada {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 9pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .formas-decir {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .formas-decir li {
+        display: grid;
+        justify-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 3mm 2mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        background: var(--crema);
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .formas-decir li > div {
+        display: flex;
+        gap: 2mm;
+      }
+
+      .formas-decir img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .formas-decir strong {
+        font-family: var(--titulos);
+        font-size: 13pt;
+      }
+
+      .tabla-cartas {
+        margin: 0 0 4mm;
+      }
+
+      .tabla-cartas th,
+      .tabla-cartas td {
+        vertical-align: middle;
+        font-size: 11pt;
+        padding: 1.8mm 2.4mm;
+      }
+
+      .tabla-cartas tbody th {
+        font-family: var(--texto);
+        font-weight: 400;
+      }
+
+      .tabla-cartas tbody th strong {
+        font-family: var(--titulos);
+      }
+
+      .tabla-cartas .nivel {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .tabla-cartas .nivel > span:first-child {
+        display: grid;
+        place-items: center;
+        width: 10.4mm;
+      }
+
+      .tabla-cartas td {
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .tabla-cartas thead th {
+        text-align: center;
+      }
+
+      .tabla-cartas thead th:first-child {
+        text-align: left;
+      }
+
+      .tabla-cartas thead img {
+        display: block;
+        width: 12mm;
+        height: 12mm;
+        margin: 0 auto 1mm;
+        padding: 0.6mm;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.4mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 24mm;
+        align-items: center;
+        gap: 3.5mm;
+        margin: 0;
+        padding: 1mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        color: var(--tx);
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      /* ---------- Plantillas de la carta ---------- */
+      .carta__cabeza {
+        position: relative;
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 4mm;
+        min-height: 31mm;
+        padding: 3mm 4mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 5mm;
+        background: var(--t);
+      }
+
+      .carta__icono {
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .carta__icono img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .carta__cabeza h1 {
+        margin: 0;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      .carta__adorno {
+        display: flex;
+        gap: 1mm;
+        align-items: flex-end;
+      }
+
+      .carta__adorno svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .carta__adorno svg:nth-child(2) {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .carta__nivel {
+        position: absolute;
+        right: 4mm;
+        top: -3.2mm;
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        padding: 0.6mm 2.6mm 0.6mm 1.4mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 99mm;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+      }
+
+      .renglon-carta {
+        display: flex;
+        align-items: flex-end;
+        gap: 3mm;
+        margin: 4mm 0 0;
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1.1;
+      }
+
+      .renglon-carta img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .renglon-carta .linea {
+        flex: 1;
+        height: 10mm;
+        border-bottom: 0.5mm solid var(--marino);
+      }
+
+      .saludo {
+        margin: 4.5mm 0 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1.1;
+      }
+
+      .hueco {
+        position: relative;
+        width: 46mm;
+        height: 52mm;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .hueco::after {
+        content: 'Pega o dibuja';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 2mm;
+        text-align: center;
+        font-size: 11pt;
+        color: #6a7799;
+      }
+
+      /* Nivel 1: frases con pictogramas, como en un tablero de comunicación */
+      .frases-n1 {
+        display: grid;
+        gap: 3.6mm;
+        margin: 4.5mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frases-n1 > li {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 2mm 4mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 4mm;
+      }
+
+      .palabra {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        width: 32mm;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .palabra img {
+        width: 22mm;
+        height: 22mm;
+        padding: 1mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 2.5mm;
+        background: #fff;
+      }
+
+      .flecha {
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+        color: var(--marino);
+      }
+
+      .carta__final {
+        display: flex;
+        align-items: center;
+        gap: 5mm;
+        margin: 4mm 0 0;
+      }
+
+      .carta__final .firma {
+        flex: 1;
+        height: 30mm;
+        padding: 2mm 3mm;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 3.5mm;
+        font-size: 11pt;
+        color: #6a7799;
+      }
+
+      /* Nivel 2: cuatro frases para completar */
+      .bloques {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 4.5mm 0 0;
+      }
+
+      .bloque {
+        padding: 2.6mm 3mm 3mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 4mm;
+        break-inside: avoid;
+      }
+
+      .bloque__frase {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        min-height: 15mm;
+        margin: 0 0 2mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+      }
+
+      .bloque__frase img {
+        flex: none;
+        width: 14mm;
+        height: 14mm;
+        padding: 0.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .bloque__cuerpo {
+        display: grid;
+        grid-template-columns: 46mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: end;
+      }
+
+      .escribir {
+        display: grid;
+      }
+
+      /* Renglón para escribir, con una línea de puntos en medio para el tamaño de la letra */
+      .escribir span {
+        display: block;
+        height: 12mm;
+        border-bottom: 0.5mm solid var(--marino);
+        background: linear-gradient(to bottom, transparent 0 calc(50% - 0.2mm), transparent calc(50% - 0.2mm));
+        position: relative;
+      }
+
+      .escribir span::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 55%;
+        border-top: 0.3mm dashed #aab3cc;
+      }
+
+      /* Nivel 3: la carta escrita, con el principio de cada frase */
+      .texto-carta {
+        margin: 3mm 0 0;
+      }
+
+      .texto-carta p {
+        margin: 3mm 0 0;
+      }
+
+      .texto-carta .comienzo {
+        display: block;
+        position: relative;
+        height: 12mm;
+        border-bottom: 0.5mm solid var(--marino);
+        font-size: 18pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .texto-carta .comienzo span {
+        position: absolute;
+        left: 0;
+        bottom: 1.2mm;
+        padding-right: 2mm;
+        background: #fff;
+        z-index: 1;
+      }
+
+      .texto-carta .comienzo::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 55%;
+        border-top: 0.3mm dashed #aab3cc;
+      }
+
+      .dibujo-carta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 62mm;
+        gap: 5mm;
+        align-items: end;
+        margin: 5mm 0 0;
+      }
+
+      .dibujo-carta .recuadro {
+        height: 54mm;
+        padding: 2mm 3mm;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 3.5mm;
+        font-size: 11pt;
+        color: #6a7799;
+      }
+
+      .despedida {
+        margin: 0;
+        font-weight: 700;
+        font-size: 20pt;
+      }
+
+      .despedida span {
+        display: block;
+        height: 13mm;
+        margin-top: 2mm;
+        border-bottom: 0.5mm solid var(--marino);
+      }
+
+      .pie-carta {
+        margin: 3mm 0 0;
+        font-size: 9pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Hojas de pictogramas para recortar ---------- */
+      .grupo {
+        margin: 0 0 4mm;
+        break-inside: avoid;
+      }
+
+      .grupo h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0 0 2mm;
+        padding: 1mm 3mm 1mm 1mm;
+        border-radius: 99mm;
+        background: var(--t);
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .grupo h2 img {
+        width: 11mm;
+        height: 11mm;
+        padding: 0.6mm;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .deseos {
+        display: grid;
+        grid-template-columns: repeat(4, 42mm);
+        grid-auto-rows: 48mm;
+        gap: 3mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .deseo {
+        position: relative;
+        display: grid;
+        grid-template-rows: 29mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 3mm 1.2mm 1.6mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .deseo::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2mm;
+        background: var(--c);
+      }
+
+      .deseo img {
+        width: 28mm;
+        height: 28mm;
+      }
+
+      .deseo span {
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+
+      .deseo--blanco .marco {
+        width: 30mm;
+        height: 26mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2.4mm;
+      }
+
+      .deseo--blanco .renglon {
+        align-self: end;
+        width: 34mm;
+        height: 7mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 0.8mm;
+      }
+
+      .familias h2 img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.5em;
+      }
+
+      .recuadro-cole {
+        margin-top: 4mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro-cole h2 {
+        margin-top: 0;
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.6mm 6mm;
+        margin: 1.5mm 0 1mm;
+        padding: 0;
+        list-style: none;
+        font-size: 12pt;
+      }
+
+      .casillas li {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .casillas li::before {
+        content: '';
+        flex: none;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+        background: #fff;
+      }
+
+      .renglon-etiqueta {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0 0 1mm;
+        font-size: 12pt;
+      }
+
+      .renglon-etiqueta span {
+        flex: 1;
+        height: 6.5mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.65em;
+        margin-bottom: 0.3em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .lista-niveles {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2mm;
+      }
+
+      .lista-niveles li > span:first-child {
+        display: grid;
+        place-items: center;
+        padding-top: 0.4mm;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.5em 0 0.2em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.6mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -62mm; top: 76mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 72mm; height: 72mm; left: -34mm; top: 116mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Plantilla · Escritura y comunicación</p>
+        <h1 class="portada__titulo">Carta<br />de deseos</h1>
+        <p class="portada__subtitulo">
+          Para decir qué deseo escribiendo, dibujando o pegando pictogramas. Con versiones para los Reyes Magos y Papá Noel.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" aria-hidden="true" id="escena"></div>
+      <div class="pegatina" aria-hidden="true"><div>3 niveles<br />y 3 versiones</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Cada peque puede decir qué desea a su manera, también quien todavía no escribe o se comunica con un tablero. Hay tres
+        niveles y tres versiones de la carta. El nivel y la versión los elegís con cada peque y con su familia.
+      </p>
+      <ul class="formas-decir">
+        <li><div><img src="pictogramas/2511.png" alt="" /><img src="pictogramas/6612.png" alt="" /></div><strong>Pego o señalo</strong>Elige pictogramas y los pega, o los señala y un adulto los pega.</li>
+        <li><div><img src="pictogramas/8088.png" alt="" /></div><strong>Dibujo</strong>Dibuja su deseo en el hueco y, si quiere, escribe una palabra.</li>
+        <li><div><img src="pictogramas/2380.png" alt="" /></div><strong>Escribo</strong>Escribe su carta con sus palabras, como sepa.</li>
+      </ul>
+      <table class="tabla-cartas">
+        <thead>
+          <tr>
+            <th scope="col">Nivel</th>
+            <th scope="col"><img src="pictogramas/2688.png" alt="" />Mi carta de deseos</th>
+            <th scope="col"><img src="pictogramas/3124.png" alt="" />Reyes Magos</th>
+            <th scope="col"><img src="pictogramas/3139.png" alt="" />Papá Noel</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-cartas"></tbody>
+      </table>
+      <ol class="mapa" id="mapa"></ol>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>La versión «Mi carta de deseos» sirve para todas las familias</strong>, crean lo que crean: cada peque decide
+          para quién es. Las de los Reyes Magos y Papá Noel son opcionales. Pregunta antes a las familias con la nota de la
+          página <span data-pagina="familias"></span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Las nueve plantillas (tres versiones en tres niveles) se generan con el guion del final -->
+    <div id="plantillas"></div>
+
+    <!-- Las tres hojas de pictogramas para recortar también se generan con el guion -->
+    <div id="hojas-deseos"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="hoja guia">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Carta de deseos: cómo usarla</h1>
+      <p>
+        En diciembre, muchas familias escriben una carta de deseos. Con estas plantillas, cada peque dice qué desea a su
+        manera. También quien todavía no escribe o se comunica con un tablero, un comunicador o pictogramas.
+      </p>
+
+      <h2>Un derecho de cada peque</h2>
+      <p>
+        La Convención sobre los Derechos del Niño reconoce su libertad de expresión, «ya sea oralmente, por escrito o
+        impresas, en forma artística o por cualquier otro medio elegido por el niño» (art. 13). La Convención sobre los
+        derechos de las personas con discapacidad añade el derecho a «recibir asistencia apropiada» para expresar su opinión
+        (art. 7) y pide aceptar los «formatos aumentativos y alternativos de comunicación» (art. 21).
+      </p>
+
+      <h2>Tres niveles, la misma carta</h2>
+      <ul class="lista-niveles">
+        <li><span><span class="nv n1">1</span></span><span><strong>Con pictogramas.</strong> Frases con pictogramas, como en un tablero: «quiero jugar con…». Pega o señala.</span></li>
+        <li><span><span class="nv n2">2</span></span><span><strong>Frases para completar.</strong> Pega o dibuja su deseo y escribe una palabra, o la copia.</span></li>
+        <li><span><span class="nv n3">3</span></span><span><strong>Con mis palabras.</strong> Escribe la carta, con el principio de algunas frases.</span></li>
+      </ul>
+      <p>
+        El nivel describe la tarea, nunca al niño o la niña. CAST, el centro de investigación que publica las pautas del
+        Diseño Universal para el Aprendizaje (DUA), propone «Comunicar de diversas maneras que todos los modos de expresión
+        alineados con la meta son igualmente valiosos» (consideración 5.4): una carta con pictogramas vale lo mismo que una
+        escrita.
+      </p>
+
+      <h2>Cómo acompañar</h2>
+      <ul>
+        <li>
+          <strong>Habla y señala a la vez.</strong> «¿Con quién quieres jugar?», y señala los pictogramas mientras lo dices.
+          Con quien usa comunicación aumentativa, que el adulto use sus símbolos al hablar le ayuda a avanzar en el lenguaje
+          (Sennott, Light y McNaughton, 2016).
+        </li>
+        <li>
+          <strong>Te proponemos</strong> ofrecer pocas opciones a la vez, de dos a cuatro, esperar sin prisa y aceptar
+          cualquier forma de elegir: señalar con el dedo o con la mirada, tocar o decir.
+        </li>
+        <li>
+          <strong>Su letra vale.</strong> En Infantil, el currículo de la Región de Murcia incluye la «Aproximación al código
+          escrito desde las escrituras indeterminadas» (Decreto 196/2022, pág. 33109). No corrijas la carta.
+        </li>
+        <li><strong>Si lo dicta o lo señala,</strong> escribe tú debajo sus palabras, sin cambiarlas.</li>
+        <li><strong>Si usa su propio tablero</strong> o fotos, usa sus símbolos en lugar de estos.</li>
+      </ul>
+
+      <h2>Con cuidado</h2>
+      <ul>
+        <li>
+          <strong>Sin comparar.</strong> En clase no se comparan cartas ni se habla de qué regalos llegarán: no todas las
+          familias pueden o quieren hacer regalos. Por eso hay tantos deseos que no se compran.
+        </li>
+        <li>
+          <strong>Todas las familias.</strong> Si falta alguien importante para ese peque, dibujadlo en una casilla en blanco.
+          El currículo de Infantil cuenta «La diversidad familiar» entre sus saberes (pág. 33084).
+        </li>
+        <li><strong>La carta es suya.</strong> Se la lleva a casa y no se publica en redes ni en la web del cole.</li>
+      </ul>
+
+      <div class="caja caja--azul">
+        <h2>El DUA en esta carta, según CAST (versión 3.0, 2024)</h2>
+        <ul>
+          <li><strong>5.1 Usar múltiples medios para la comunicación:</strong> escribir, dibujar o pegar pictogramas.</li>
+          <li><strong>5.4 Abordar sesgos relacionados con los modos de expresión y comunicación:</strong> todas las cartas valen igual.</li>
+          <li><strong>7.1 Optimizar la elección y la autonomía:</strong> cada peque elige sus deseos y para quién es la carta.</li>
+          <li><strong>8.2 Optimizar los desafíos y el apoyo:</strong> tres niveles con la misma carta.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Una carta de deseos</h1>
+      <p>
+        En clase vamos a hacer una carta de deseos. Cada peque la hace a su manera: escribiendo, dibujando o pegando
+        pictogramas.
+      </p>
+
+      <h2><img src="pictogramas/4550.png" alt="" />Deseos que no se compran</h2>
+      <p>
+        Jugar con alguien, ir a un sitio, aprender algo nuevo o desear algo bueno para la familia. También puede pedir cosas,
+        si quiere.
+      </p>
+
+      <h2><img src="pictogramas/2688.png" alt="" />¿Para quién es la carta?</h2>
+      <p>
+        Hay una carta para todas las familias, «Mi carta de deseos». Cada peque decide para quién es. Si en casa celebráis los
+        Reyes Magos o Papá Noel, decídnoslo y usará esa versión.
+      </p>
+
+      <h2><img src="pictogramas/3345.png" alt="" />En casa podéis</h2>
+      <p>
+        Preguntar qué ha deseado y por qué. Si usa pictogramas o un tablero, dejad que os lo enseñe. Cualquier forma de
+        decirlo vale.
+      </p>
+
+      <h2><img src="pictogramas/2317.png" alt="" />La carta se va a casa</h2>
+      <p>Es suya. No la publicamos en ningún sitio.</p>
+
+      <div class="recuadro-cole">
+        <h2>Para el cole</h2>
+        <p style="margin: 0">Marcad la carta que preferís:</p>
+        <ul class="casillas">
+          <li>Mi carta de deseos</li>
+          <li>Carta a los Reyes Magos</li>
+          <li>Carta a Papá Noel</li>
+          <li>Prefiero hablarlo con la maestra o el maestro</li>
+        </ul>
+        <p class="renglon-etiqueta">Nombre:<span></span></p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Carta de deseos con pictogramas.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los
+          símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+          ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Carta de deseos con pictogramas.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/carta-de-deseos</span>. Fuentes consultadas el 8 de noviembre de
+        2026. Las plantillas y los niveles son una propuesta de IdEducando.
+      </p>
+
+      <h2>Derechos</h2>
+      <ul class="referencias">
+        <li>
+          Instrumento de Ratificación de la Convención sobre los Derechos del Niño, adoptada por la Asamblea General de las
+          Naciones Unidas el 20 de noviembre de 1989. BOE núm. 313, de 31 de diciembre de 1990, artículos 13 y 14.
+        </li>
+        <li>
+          Instrumento de Ratificación de la Convención sobre los derechos de las personas con discapacidad, hecho en Nueva York
+          el 13 de diciembre de 2006. BOE núm. 96, de 21 de abril de 2008, artículos 2, 7 y 21.
+        </li>
+      </ul>
+
+      <h2>Comunicación aumentativa y Diseño Universal para el Aprendizaje</h2>
+      <ul class="referencias">
+        <li>
+          Sennott, S. C., Light, J. C. y McNaughton, D. (2016). AAC modeling intervention research review. <em>Research and
+          Practice for Persons with Severe Disabilities</em>, 41(2), 101-115. https://doi.org/10.1177/1540796916638822
+        </li>
+        <li>
+          CAST (2024). <em>Directrices del Diseño Universal para el Aprendizaje, versión 3.0</em>: consideraciones 5.1, 5.4,
+          7.1 y 8.2. udlguidelines.cast.org/es
+        </li>
+      </ul>
+
+      <h2>Currículo</h2>
+      <ul class="referencias">
+        <li>
+          Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la
+          Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022, págs. 33084, 33100 y 33109.
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Las
+        coronas, el gorro, las estrellas, los copos y el sobre son dibujos de IdEducando.
+      </p>
+      <p>
+        Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre. Licencia CC BY-NC-SA 4.0:
+        puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas, hay que actualizarlos aquí
+      // y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        vistazo: 3,
+        plantillas: 4,
+        deseos: 13,
+        guia: 16,
+        familias: 17,
+        fuentes: 18,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las tres versiones de la carta y los tres niveles
+      // ---------------------------------------------------------------------
+      const VERSIONES = [
+        { id: 'neutra', color: 'verde', picto: 2688, titulo: 'Mi carta de deseos', saludo: null, adorno: ['estrella', 'corazon'] },
+        { id: 'reyes', color: 'morado', picto: 3124, titulo: 'Carta a los Reyes Magos', saludo: 'Queridos Reyes Magos:', adorno: ['corona', 'estrella'] },
+        { id: 'noel', color: 'coral', picto: 3139, titulo: 'Carta a Papá Noel', saludo: 'Querido Papá Noel:', adorno: ['gorro', 'copo'] },
+      ];
+      const NIVELES = ['Con pictogramas', 'Frases para completar', 'Con mis palabras'];
+
+      // Nivel 1: frases con pictogramas. Cada palabra: [pictograma, texto]. Después, cuántos huecos lleva.
+      const FRASES_N1 = [
+        [[[5441, 'Quiero'], [35717, 'jugar con']], 1],
+        [[[5441, 'Quiero'], [31758, 'ir']], 1],
+        [[[5441, 'Y también quiero']], 2],
+      ];
+
+      // Nivel 2: cuatro frases para completar.
+      const FRASES_N2 = [
+        [[5441, 35717], 'Quiero jugar con…'],
+        [[5441, 31758], 'Quiero ir…'],
+        [[5441, 8029], 'Quiero aprender a…'],
+        [[2392], 'Para mi familia y los demás, deseo…'],
+      ];
+
+      // Nivel 3: el principio de cada frase y los renglones que lleva detrás.
+      const COMIENZOS = [
+        ['Me llamo', 0],
+        ['Este año he aprendido', 1],
+        ['Me gustaría', 2],
+        ['Para los demás deseo', 1],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Pictogramas para recortar: deseos que no son solo juguetes. Cada deseo: [pictograma, texto].
+      // Encajan detrás de las frases de los niveles 1 y 2: «Quiero jugar con mamá», «Quiero ir al parque»…
+      // ---------------------------------------------------------------------
+      const GRUPOS = [
+        {
+          color: 'azul', picto: 35717, titulo: '¿Con quién quiero jugar?',
+          deseos: [[2458, 'mamá'], [31146, 'papá'], [23710, 'mi abuela'], [23718, 'mi abuelo'], [2423, 'mi hermano'], [2422, 'mi hermana'], [2255, 'mis amigos'], [2392, 'mi familia']],
+        },
+        {
+          color: 'verde', picto: 31758, titulo: '¿Adónde quiero ir?',
+          deseos: [[2859, 'al parque'], [2826, 'a la playa'], [2683, 'al campo'], [3142, 'a la piscina'], [3135, 'a la nieve'], [3065, 'a la biblioteca'], [30387, 'al cine'], [4670, 'de excursión']],
+        },
+        {
+          color: 'naranja', picto: 8029, titulo: '¿Qué quiero aprender?',
+          deseos: [[39128, 'nadar'], [5517, 'montar en bici'], [28643, 'leer'], [2380, 'escribir'], [8088, 'dibujar'], [31435, 'bailar'], [28657, 'cantar'], [38041, 'tocar la guitarra']],
+        },
+        {
+          color: 'coral', picto: 2392, titulo: '¿Qué deseo para los demás?',
+          deseos: [[12293, 'salud'], [8182, 'paz'], [4550, 'abrazos'], [31923, 'estar contentos'], [11653, 'tiempo libre'], [30015, 'cuidar el mundo'], [4570, 'ayudar'], [35371, 'jugar juntos']],
+        },
+        {
+          color: 'morado', picto: 5441, titulo: 'Cosas que me gustan',
+          deseos: [[2364, 'un cuento'], [3241, 'una pelota'], [2540, 'un puzle'], [32580, 'un juego de mesa'], [16855, 'pinturas'], [4945, 'un peluche'], [2277, 'una bici'], [5985, 'un disfraz'], [26238, 'una muñeca'], [2340, 'un coche'], [8608, 'un instrumento'], [4935, 'unos bloques']],
+        },
+        { color: 'amarillo', picto: 8088, titulo: 'Para dibujar otro deseo', blancos: 4 },
+      ];
+      // Qué grupos van en cada hoja
+      const HOJAS_DESEOS = [[0, 1], [2, 3], [4, 5]];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC): adornos para colorear y el sobre de la portada
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const T = `fill="#fff" stroke="${M}" stroke-width="3.6" stroke-linejoin="round" stroke-linecap="round"`;
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+
+      function copo(trazo = M, grosor = 4) {
+        let d = '';
+        for (let i = 0; i < 6; i++) {
+          const a = (i * Math.PI) / 3;
+          const x = (r) => (50 + r * Math.sin(a)).toFixed(1);
+          const y = (r) => (50 - r * Math.cos(a)).toFixed(1);
+          d += `M50 50 L${x(40)} ${y(40)} `;
+          for (const lado of [-1, 1]) {
+            const b = a + (lado * Math.PI) / 4;
+            d += `M${x(26)} ${y(26)} L${(50 + 26 * Math.sin(a) + 11 * Math.sin(b)).toFixed(1)} ${(50 - 26 * Math.cos(a) - 11 * Math.cos(b)).toFixed(1)} `;
+          }
+        }
+        return `<path d="${d}" fill="none" stroke="${trazo}" stroke-width="${grosor}" stroke-linecap="round"/><circle cx="50" cy="50" r="6" fill="#fff" stroke="${trazo}" stroke-width="${grosor}"/>`;
+      }
+
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const ADORNOS = {
+        estrella: `<path d="${ESTRELLA}" ${T}/>`,
+        corazon: `<path d="M50 86 L17 53 A18 18 0 0 1 50 27 A18 18 0 0 1 83 53 Z" ${T}/>`,
+        copo: copo(),
+        // Corona de rey, con tres puntas y una joya en cada una
+        corona: `<path d="M14 74 L18 30 L36 52 L50 20 L64 52 L82 30 L86 74 Z" ${T}/><rect x="12" y="72" width="76" height="14" rx="3" ${T}/><circle cx="18" cy="28" r="5" ${T}/><circle cx="50" cy="17" r="5" ${T}/><circle cx="82" cy="28" r="5" ${T}/><circle cx="50" cy="79" r="3.6" ${T}/>`,
+        // Gorro de Papá Noel, con su pompón
+        gorro: `<path d="M18 74 Q24 30 58 20 Q84 14 88 46 L80 52 Q76 36 62 38 Q46 44 44 74 Z" ${T}/><rect x="10" y="70" width="56" height="16" rx="7" ${T}/><circle cx="84" cy="56" r="9" ${T}/>`,
+        // Sobre para la portada
+        sobre: `<rect x="6" y="10" width="148" height="96" rx="7" ${T}/><path d="M8 14 L80 66 L152 14" ${T}/><path d="M8 104 L60 56 M152 104 L100 56" fill="none" stroke="${M}" stroke-width="3.2" stroke-linecap="round"/><rect x="118" y="20" width="26" height="30" rx="3" fill="#fde5e0" stroke="${M}" stroke-width="3"/><path d="M131 42 L124 35 A4.5 4.5 0 0 1 131 29 A4.5 4.5 0 0 1 138 35 Z" fill="#e8553e" stroke="${M}" stroke-width="2"/>`,
+      };
+      const adorno = (nombre, clase = '', vista) => svg(ADORNOS[nombre], clase, vista);
+      const FLECHA = svg('<path d="M15 50 H78 M58 28 L80 50 L58 72" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>', 'flecha');
+
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const marca = (nivel, clase = '') => `<span class="nv n${nivel} ${clase}">${nivel}</span>`;
+      const ATRIBUCION = 'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // ---------------------------------------------------------------------
+      // Plantillas
+      // ---------------------------------------------------------------------
+      function cabecera(v, nivel) {
+        return `<header class="carta__cabeza">
+            <div class="carta__icono">${picto(v.picto)}</div>
+            <h1>${v.titulo}</h1>
+            <div class="carta__adorno">${v.adorno.map((a) => adorno(a)).join('')}</div>
+            <p class="carta__nivel">${marca(nivel)}${NIVELES[nivel - 1]}</p>
+          </header>`;
+      }
+
+      const saludo = (v) =>
+        v.saludo
+          ? `<p class="saludo">${v.saludo}</p>`
+          : `<p class="renglon-carta">Para:<span class="linea"></span></p>`;
+
+      const meLlamo = `<p class="renglon-carta">${picto(27357)}Me llamo<span class="linea"></span></p>`;
+
+      const final = `<div class="carta__final"><div class="palabra">${picto(8128)}<span>¡Gracias!</span></div><div class="firma">Mi firma o mi dibujo</div></div>`;
+
+      function nivel1(v) {
+        const frases = FRASES_N1.map(
+          ([palabras, huecos]) =>
+            `<li>${palabras.map(([n, t]) => `<div class="palabra">${picto(n)}<span>${t}</span></div>`).join('')}${FLECHA}${'<div class="hueco"></div>'.repeat(huecos)}</li>`,
+        ).join('');
+        return `${saludo(v)}${meLlamo}<ol class="frases-n1">${frases}</ol>${final}`;
+      }
+
+      function nivel2(v) {
+        const bloques = FRASES_N2.map(
+          ([pictos, frase]) => `<div class="bloque">
+            <p class="bloque__frase">${pictos.map((n) => picto(n)).join('')}<span>${frase}</span></p>
+            <div class="bloque__cuerpo"><div class="hueco"></div><div class="escribir"><span></span><span></span><span></span></div></div>
+          </div>`,
+        ).join('');
+        return `${saludo(v)}${meLlamo}<div class="bloques">${bloques}</div>${final}`;
+      }
+
+      function nivel3(v) {
+        const texto = COMIENZOS.map(
+          ([comienzo, renglones]) =>
+            `<p><span class="comienzo"><span>${comienzo}…</span></span>${'<span class="escribir"><span></span></span>'.repeat(renglones)}</p>`,
+        ).join('');
+        return `${saludo(v)}<div class="texto-carta">${texto}</div>
+          <div class="dibujo-carta"><div class="recuadro">Mi dibujo</div><p class="despedida">Un abrazo,<span></span></p></div>`;
+      }
+
+      const CUERPOS = [nivel1, nivel2, nivel3];
+      document.getElementById('plantillas').outerHTML = VERSIONES.flatMap((v) =>
+        [1, 2, 3].map(
+          (nivel) => `<section class="hoja ancha carta c-${v.color}">
+            ${cabecera(v, nivel)}
+            ${CUERPOS[nivel - 1](v)}
+            <p class="pie-carta">${nivel < 3 ? 'Los pictogramas para pegar están en las páginas 13 a 15. ' : ''}${ATRIBUCION} Dibujos: IdEducando.</p>
+          </section>`,
+        ),
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Hojas de pictogramas para recortar
+      // ---------------------------------------------------------------------
+      function grupo(g) {
+        const casillas = g.blancos
+          ? Array.from({ length: g.blancos }, () => '<li class="deseo deseo--blanco"><span class="marco"></span><span class="renglon"></span></li>').join('')
+          : g.deseos.map(([n, t]) => `<li class="deseo">${picto(n)}<span>${t}</span></li>`).join('');
+        return `<div class="grupo c-${g.color}"><h2>${picto(g.picto)}${g.titulo}</h2><ul class="deseos">${casillas}</ul></div>`;
+      }
+
+      document.getElementById('hojas-deseos').outerHTML = HOJAS_DESEOS.map(
+        (indices, h) => `<section class="hoja">
+          <div class="cabeza">
+            <div>
+              <p class="antetitulo">Para recortar · Hoja ${h + 1} de 3</p>
+              <h1>Mis deseos en pictogramas</h1>
+            </div>
+            <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+          </div>
+          <p class="pista">Recorta por la línea de puntos y pega cada deseo en el hueco de tu carta. ${h === 2 ? 'En las casillas en blanco, dibuja otro deseo y escribe su nombre.' : 'Si señala, recórtalo tú y que lo pegue.'}</p>
+          ${indices.map((i) => grupo(GRUPOS[i])).join('')}
+          <p class="atribucion">${ATRIBUCION}</p>
+        </section>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo: tabla de plantillas y mapa
+      // ---------------------------------------------------------------------
+      document.getElementById('tabla-cartas').innerHTML = [1, 2, 3]
+        .map(
+          (nivel) =>
+            `<tr><th scope="row"><span class="nivel"><span>${marca(nivel, 'grande')}</span><strong>${NIVELES[nivel - 1]}</strong></span></th>${VERSIONES.map(
+              (_, v) => `<td>Pág. ${PAGINAS.plantillas + v * 3 + nivel - 1}</td>`,
+            ).join('')}</tr>`,
+        )
+        .join('');
+
+      const MAPA = [
+        ['azul', 35717, 'Pictogramas para recortar', '44 deseos en cinco grupos y cuatro casillas para dibujar.', `Págs. ${PAGINAS.deseos} a ${PAGINAS.deseos + 2}`],
+        ['morado', 6556, 'Guía para el docente', 'Cómo acompañar a cada peque y qué cuidar.', `Pág. ${PAGINAS.guia}`],
+        ['coral', 2392, 'Nota para las familias', 'Para elegir la versión de la carta. Una para cada casa.', `Pág. ${PAGINAS.familias}`],
+      ];
+      document.getElementById('mapa').innerHTML = MAPA.map(
+        ([color, n, titulo, texto, pags]) =>
+          `<li class="c-${color}">${picto(n)}<div><h2>${titulo}</h2><p>${texto}</p></div><p class="mapa__pagina">${pags}</p></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: una carta con tres deseos pegados y el sobre
+      // ---------------------------------------------------------------------
+      document.getElementById('escena').innerHTML =
+        `<div class="hoja-portada">
+          <p class="hoja-portada__titulo">Mi carta de deseos</p>
+          <p class="hoja-portada__quiero">${picto(5441)}Quiero…</p>
+          <div class="hoja-portada__deseos">
+            <div>${picto(4550)}abrazos</div><div>${picto(2859)}ir al parque</div><div>${picto(39128)}aprender a nadar</div>
+          </div>
+          <div class="hoja-portada__linea"></div><div class="hoja-portada__linea"></div>
+        </div>
+        <div class="sobre-portada">${adorno('sobre', '', '0 0 160 116')}</div>` +
+        [
+          [124, 6, 13, 'estrella'],
+          [182, 20, 10, 'copo'],
+          [136, 104, 11, 'corazon'],
+          [188, 102, 12, 'estrella'],
+        ]
+          .map(([x, y, t, a]) => `<div class="estrella-portada" style="left:${x}mm;top:${y}mm;width:${t}mm;height:${t}mm">${adorno(a)}</div>`)
+          .join('');
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>
