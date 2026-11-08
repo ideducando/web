@@ -11,7 +11,7 @@ paginas: 37
 archivo: /descargas/rincon-lenguaje-invierno.pdf
 portada: /portadas/rincon-lenguaje-invierno.webp
 portada_alt: "Portada del material: el título «Rincón de lenguaje de invierno» sobre fondo crema y un tendedero con pinzas del que cuelgan el dibujo de una bufanda, tres tarjetas con las sílabas BU, FAN y DA y una manopla, mientras caen copos de nieve"
-vistas: [1, 7, 19, 22, 29, 33]
+vistas: [1, 7, 11, 18, 22, 29]
 tiempo: "3 horas para imprimir, plastificar y recortar; mejor en dos ratos"
 necesitas:
   - "23 hojas de cartulina blanca A4 de 160 g"

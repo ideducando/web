@@ -1320,12 +1320,19 @@
       }
 
       .opciones .pinza {
-        width: 4.6mm;
-        height: 12mm;
-        margin-right: 1mm;
+        display: block;
+        min-width: 0;
+        width: 4mm;
+        height: 10.6mm;
+        margin: 0 1mm 0.8mm 0;
         padding: 0;
         border: 0;
         background: none;
+      }
+
+      .opciones .pinza svg {
+        width: 100%;
+        height: 100%;
       }
 
       .opciones span {
@@ -1644,16 +1651,16 @@
 
       .sector img {
         position: absolute;
-        left: -8.5mm;
-        top: 19mm;
-        width: 17mm;
-        height: 17mm;
+        left: -10mm;
+        top: 17.5mm;
+        width: 20mm;
+        height: 20mm;
       }
 
       .sector span {
         position: absolute;
         left: -20mm;
-        top: 37mm;
+        top: 38mm;
         width: 40mm;
         font-size: 18pt;
         line-height: 1;
@@ -2181,7 +2188,7 @@
       .familias .creditos,
       .final .creditos {
         font-size: 11pt;
-        line-height: 1.34;
+        line-height: 1.3;
       }
 
       .familias .creditos {
@@ -2198,12 +2205,12 @@
       }
 
       .final .creditos p {
-        margin-bottom: 1.2mm;
+        margin-bottom: 1mm;
       }
 
       .final .creditos h2 {
         font-size: 12.5pt;
-        margin: 2.6mm 0 1mm;
+        margin: 2.2mm 0 0.8mm;
       }
 
       .final .creditos ul {
@@ -2212,7 +2219,7 @@
       }
 
       .final .creditos li {
-        margin-bottom: 1mm;
+        margin-bottom: 0.6mm;
       }
     </style>
   </head>
@@ -2255,19 +2262,20 @@
         <h1>Rincón de lenguaje de invierno</h1>
         <p class="entradilla">
           Siete bandejas para jugar con las palabras del invierno. Cada una tiene un juego en tres niveles y una tarjeta de
-          pasos con pictogramas. Completa las Rutinas de invierno en el cole y las Estaciones de matemáticas de invierno: usa
-          el mismo vocabulario y los mismos grupos.
+          pasos con pictogramas. Completa las
+          <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">rutinas de invierno</a> y las
+          <a href="https://www.ideducando.es/material-gratuito/estaciones-matematicas-invierno/">estaciones de matemáticas de invierno</a>:
+          usa el mismo vocabulario y los mismos grupos.
         </p>
       </div>
 
       <ul class="datos">
         <li>
-          <strong>Para quién</strong>La clase entera de Infantil, de 3 a 6 años, y los apoyos en pequeño grupo de Pedagogía
-          Terapéutica (PT) y de Audición y Lenguaje (AL).
+          <strong>Para quién</strong>La clase entera de Infantil, de 3 a 6 años, y los apoyos de Pedagogía Terapéutica (PT) y de
+          Audición y Lenguaje (AL).
         </li>
         <li>
-          <strong>Cuánto dura</strong>De 10 a 15 minutos por bandeja. Da juego todo el invierno: abre una o dos bandejas nuevas
-          cada semana.
+          <strong>Cuánto dura</strong>De 10 a 15 minutos por bandeja. Abre una o dos nuevas cada semana: da juego todo el invierno.
         </li>
         <li>
           <strong>Cómo se evalúa</strong>Observando a cada niño o niña mientras juega, con el registro de la página
@@ -2288,31 +2296,17 @@
             <li><span class="nv n3">3</span><span><b>Con más reto:</b> palabras más largas y algo de lectura o de escritura.</span></li>
           </ul>
         </div>
-        <div class="caja-mini letra-caja">
-          <h2>Mayúscula y minúscula</h2>
+        <div class="caja-mini seguridad">
+          <h2>Seguridad</h2>
           <p>
-            Las palabras van en letra de imprenta, en mayúscula y en minúscula: <span class="muestra-letra">NIEVE nieve</span>.
-            Empieza por la que uséis en clase.
-          </p>
-          <p style="margin: 0">
-            La letra distingue bien la l minúscula de la I mayúscula. Si en tu cole usáis letra ligada, escribe la palabra a mano
-            debajo, antes de plastificar.
-          </p>
-        </div>
-      </div>
-      <div class="seguridad" style="margin-top: 3mm">
-        <h2>Seguridad</h2>
-        <ul>
-          <li>
             Las pinzas, los encuadernadores y el velcro son piezas pequeñas. La Asociación Española de Pediatría (AEP) recuerda que
             «La mejor medida preventiva es la supervisión constante» y aconseja intentar evitar las piezas pequeñas en menores de 3 a
             5 años (AEP, 2024). Con la clase de 3 años, mejor sin pinzas: que señalen o pongan una tarjeta.
-          </li>
-          <li>
-            Si lleváis castañas o fruta de verdad para mirarlas y olerlas, preguntad antes a las familias por las alergias. En el
-            rincón no se comen.
-          </li>
-        </ul>
+          </p>
+          <p style="margin: 0">
+            Si lleváis castañas o fruta de verdad para mirarlas y olerlas, preguntad antes por las alergias. En el rincón no se comen.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -2573,6 +2567,14 @@
           </ul>
         </div>
       </div>
+      <div class="caja-mini letra-caja" style="margin-top: 2.4mm">
+        <h2>Mayúscula y minúscula</h2>
+        <p>
+          Las palabras van en letra de imprenta, en mayúscula y en minúscula: <span class="muestra-letra">NIEVE nieve</span>. Empieza
+          por la que uséis en clase. La letra distingue bien la l minúscula de la I mayúscula.
+        </p>
+        <p style="margin: 0">Si en tu cole usáis letra ligada, escribe la palabra a mano debajo de cada tarjeta, antes de plastificar.</p>
+      </div>
     </section>
 
     <section class="imp b1">
@@ -2798,7 +2800,7 @@
         <h1>La sílaba que falta <small>Nivel 3 · Para escribir la sílaba</small></h1>
         <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </header>
-      <p class="pista">Plastifica la hoja y recorta por la línea de puntos. Se escribe con rotulador de pizarra blanca y se borra con un paño.</p>
+      <p class="pista">Plastifica, recorta por la línea de puntos y escribe con rotulador de pizarra blanca.</p>
       <ul class="faltas" id="faltas-3"></ul>
       <p class="atribucion" data-atribucion></p>
     </section>
@@ -3300,8 +3302,11 @@
             <th scope="row">Trastorno del espectro del autismo (TEA)</th>
             <td>
               <ul>
-                <li>Las tarjetas de pasos y el panel le dicen qué toca y cuándo se cambia. Empieza por la bandeja que más le guste.</li>
-                <li>Un final que se ve: el tablero lleno o el puzle completo. Si le molesta el ruido, palmadas suaves sobre la mesa.</li>
+                <li>
+                  Las tarjetas de pasos y el panel le dicen qué toca y cuándo se cambia. Son apoyos visuales, una de las prácticas
+                  basadas en la evidencia para el alumnado con TEA (Hume y otros, 2021).
+                </li>
+                <li>Empieza por la bandeja que más le guste. Si le molesta el ruido, palmadas suaves sobre la mesa.</li>
               </ul>
             </td>
           </tr>
@@ -3309,8 +3314,8 @@
             <th scope="row">Trastorno por déficit de atención e hiperactividad (TDAH)</th>
             <td>
               <ul>
-                <li>Juegos cortos con un final claro. Encargos que impliquen moverse, como repartir las bolsas o girar las ruletas.</li>
-                <li>Cambiar de bandeja le sirve de pausa. Con el temporizador a la vista, sabe cuánto falta.</li>
+                <li>Juegos cortos con un final claro. Encargos con movimiento, como repartir las bolsas o girar las ruletas.</li>
+                <li>Cambiar de bandeja le sirve de pausa, y el temporizador a la vista le dice cuánto falta.</li>
               </ul>
             </td>
           </tr>
@@ -3319,26 +3324,22 @@
             <td>
               <ul>
                 <li>Habla despacio y alarga un poco el trozo que trabajáis. Repite bien lo que dice, sin pedirle que lo repita.</li>
-                <li>Muchos ratos cortos cada día. Vale responder señalando, con las tarjetas o con el tablero de comunicación.</li>
+                <li>Ratos cortos cada día. Vale responder señalando o con un tablero de comunicación.</li>
               </ul>
             </td>
           </tr>
           <tr>
             <th scope="row">Discapacidad intelectual</th>
             <td>
-              <ul>
-                <li>Nivel 1, pocas tarjetas y siempre en el mismo orden. Haz tú cada paso antes de su turno.</li>
-                <li>Repetid la misma bandeja varios días. Celebra cada acierto.</li>
-              </ul>
+Nivel 1, pocas tarjetas y siempre en el mismo orden. Haz tú cada paso antes de su turno y repetid la misma bandeja
+              varios días.
             </td>
           </tr>
           <tr>
             <th scope="row">Discapacidad motora</th>
             <td>
-              <ul>
-                <li>Fichas en lugar de pinzas, tarjetas con velcro y piezas sobre una bandeja con borde.</li>
-                <li>Puede elegir mirando o señalando, y su pareja coloca. Las palmadas, con la parte del cuerpo que mueva mejor.</li>
-              </ul>
+Fichas en lugar de pinzas y piezas sobre una bandeja con borde. Puede elegir mirando o señalando, y su pareja
+              coloca.
             </td>
           </tr>
           <tr>
@@ -3365,7 +3366,7 @@
       </table>
       <div class="caja caja--amarilla detectar">
         <h3>Señales que conviene apuntar</h3>
-        <p>Sin poner etiquetas: cuando algo se repite durante semanas, apúntalo con la fecha. Fíjate, por ejemplo, en quien:</p>
+        <p>Sin poner etiquetas: si algo se repite durante semanas, apúntalo con la fecha. Por ejemplo, quien:</p>
         <ul>
           <li>no da una palmada por sílaba ni con tu modelo;</li>
           <li>casi no usa las palabras nuevas;</li>
@@ -3375,8 +3376,8 @@
           <li>no se interesa por los cuentos ni por las letras.</li>
         </ul>
         <p>
-          Compártelo con la familia, con el maestro o la maestra de Audición y Lenguaje y con el equipo de orientación educativa y
-          psicopedagógica (EOEP) que atiende tu centro. Tus notas ayudan a decidir qué hacer.
+          Compártelo con la familia, con Audición y Lenguaje y con el equipo de orientación educativa y psicopedagógica (EOEP) de tu
+          centro. Tus notas ayudan a decidir qué hacer.
         </p>
       </div>
     </section>
@@ -3453,8 +3454,8 @@
         <h2>Currículo</h2>
         <ul>
           <li>
-            Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación
-            Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056) y
+            Decreto n.º 196/2022, de 3 de noviembre, de ordenación y currículo de la Educación Infantil en la Región de Murcia. BORM
+            n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056) y
             art. 14.1 (pág. 33060); Comunicación y Representación de la Realidad, orientaciones metodológicas (págs. 33099 a 33101),
             criterios de evaluación del segundo ciclo (págs. 33107 y 33108) y saberes básicos (págs. 33108 y 33109).
           </li>
@@ -3477,14 +3478,14 @@
         <h2>Contar historias y apoyos visuales</h2>
         <ul>
           <li>
-            Pico, D. L., Hessling Prahl, A., Biel, C. H., Peterson, A. K., Biel, E. J., Woods, C. y Contesse, V. A. (2021). Interventions
+            Pico, D. L., Hessling Prahl, A., Biel, C. H. y otros (2021). Interventions
             designed to improve narrative language in school-age children: A systematic review with meta-analyses. <em>Language,
             Speech, and Hearing Services in Schools</em>, 52(4), 1109-1126. DOI: 10.1044/2021_LSHSS-20-00160.
           </li>
           <li>
             Hume, K., Steinbrenner, J. R., Odom, S. L. y otros (2021). Evidence-based practices for children, youth, and young adults
             with autism: Third generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI:
-            10.1007/s10803-020-04844-2. Los apoyos visuales están entre las 28 prácticas basadas en la evidencia.
+            10.1007/s10803-020-04844-2.
           </li>
         </ul>
 
@@ -3492,8 +3493,8 @@
         <ul>
           <li>CAST (2024). Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0: consideraciones 2.1, 4.1, 6.4 y 8.2. udlguidelines.cast.org/es</li>
           <li>
-            Asociación Española de Pediatría (AEP), Comité de Soporte Vital (diciembre de 2024). <em>Atragantamiento</em>: medidas de
-            prevención con juguetes. <span class="url">static.aeped.es/atragantamiento_csvaep_final_6bd02592cf.pdf</span>
+            Asociación Española de Pediatría (AEP), Comité de Soporte Vital (diciembre de 2024). <em>Atragantamiento</em>.
+            <span class="url">static.aeped.es/atragantamiento_csvaep_final_6bd02592cf.pdf</span>
           </li>
         </ul>
 
@@ -3503,30 +3504,17 @@
           IdEducando desde la práctica en el aula. No salen de un estudio concreto.
         </p>
 
-        <h2>Materiales de IdEducando que usa</h2>
-        <p>
-          Las <a href="https://www.ideducando.es/material-gratuito/estaciones-matematicas-invierno/">estaciones de matemáticas de
-          invierno</a>, las <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">rutinas de invierno</a>, el
-          <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">tren de las sílabas</a> y el
-          <a href="https://www.ideducando.es/material-gratuito/kit-bienvenida-alumnado-recien-llegado/">kit de bienvenida</a>, todos en
-          ideducando.es/material-gratuito.
-        </p>
-
         <h2>Pictogramas, dibujos y licencia</h2>
         <p>
           Pictogramas: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao
           para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». ARASAAC es el Centro
-          Aragonés para la Comunicación Aumentativa y Alternativa. Si cambias el material, deja este texto.
-        </p>
-        <p>
-          Los demás dibujos son de IdEducando: el tendedero, las pinzas, los copos, las piezas de los puzles, los discos, las ruletas
-          y sus flechas.
+          Aragonés para la Comunicación Aumentativa y Alternativa. Si cambias el material, deja este texto. Los demás dibujos son de
+          IdEducando: el tendedero, las pinzas, los copos, las piezas de los puzles, los discos, las ruletas y sus flechas.
         </p>
         <p>
           Como todo lo que lleva pictogramas de ARASAAC, este material es gratis y lo será siempre: IdEducando nace para ayudar a quien
-          acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no deja venderlo. La licencia CC
-          BY-NC-SA 4.0 deja copiarlo y adaptarlo siempre que se cite a IdEducando, no se use para ganar dinero y se comparta con la
-          misma licencia.
+          acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no deja venderlo. Licencia CC
+          BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.
         </p>
       </div>
     </section>
