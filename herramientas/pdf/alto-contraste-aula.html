@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Carteles y bordes de alto contraste para el aula · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos y en marino: es texto que lee el adulto, y en este material va con el contraste más alto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+          color: #1e2b55;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+          color: #1e2b55;
+        }
+      }
+
+      /* Hojas de recortar: márgenes de 11 y 12 mm, para que quepan dos carteles de 186 mm de ancho. */
+      @page recorte {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Las dos versiones ----------
+         --fondo: color del cartel · --tinta: palabra y marco. Contraste medido con la fórmula de las WCAG 2.2:
+         negro sobre amarillo 12,6 : 1 · blanco sobre negro 21 : 1 · negro sobre blanco 21 : 1. */
+      .v-amarilla {
+        --fondo: #f6c12e;
+        --tinta: #000;
+      }
+
+      .v-negra {
+        --fondo: #000;
+        --tinta: #fff;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      /* Título solo para los lectores de pantalla y los marcadores. Va dentro de su hoja (position: relative en
+         la hoja), para que el marcador lleve a su página. */
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+        color: var(--marino);
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ==========================================================================
+         PIEZAS: cartel, etiqueta, recuadro del pictograma y hueco para escribir
+         ========================================================================== */
+
+      /* El recuadro blanco del pictograma, con borde negro grueso: sobre el amarillo, el blanco solo se queda en
+         1,7 : 1; el borde negro sube a 12,6 : 1. Los pictogramas «con marco» de ARASAAC ya traen un cuadrado negro:
+         se agrandan para que su marco quede debajo del nuestro y no se vean dos. */
+      .picto {
+        position: relative;
+        width: var(--lado);
+        height: var(--lado);
+        overflow: hidden;
+        border-radius: var(--radio);
+        background: #fff;
+      }
+
+      .picto::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border: var(--borde) solid #000;
+        border-radius: var(--radio);
+      }
+
+      .picto img {
+        position: absolute;
+        left: 9%;
+        top: 9%;
+        width: 82%;
+        height: 82%;
+      }
+
+      /* En los pictogramas con marco, el cuadrado va de 23 a 477 píxeles de 500. */
+      .picto img.con-marco {
+        left: -5.066%;
+        top: -5.066%;
+        width: 110.132%;
+        height: 110.132%;
+      }
+
+      .escribir {
+        display: block;
+        border: var(--borde-escribir, 1.4mm) solid #000;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      /* ---------- El cartel: 186 × 118 mm ---------- */
+      .cartel {
+        --lado: 72mm;
+        --radio: 4mm;
+        --borde: 2.6mm;
+        position: relative;
+        width: 186mm;
+        height: 118mm;
+        margin: 0;
+        padding: 3.5mm;
+        border-radius: 4mm;
+        background: var(--fondo);
+        break-inside: avoid;
+      }
+
+      .cartel__marco {
+        display: grid;
+        grid-template-rows: var(--lado) minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        height: 100%;
+        padding: 3.4mm 6mm 0;
+        border: 2.2mm solid var(--tinta);
+        border-radius: 2.4mm;
+      }
+
+      .cartel__palabra {
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 70pt;
+        line-height: 1;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+        color: var(--tinta);
+      }
+
+      .cartel__fila {
+        display: flex;
+        align-items: center;
+        gap: 6mm;
+      }
+
+      .cartel__fila .escribir {
+        width: 66mm;
+        height: 23mm;
+      }
+
+      .cartel .escribir--larga {
+        width: 150mm;
+        height: 23mm;
+      }
+
+      /* ---------- La etiqueta: 90 × 57 mm ---------- */
+      .etiqueta {
+        --lado: 30mm;
+        --radio: 2.6mm;
+        --borde: 1.6mm;
+        --borde-escribir: 1mm;
+        position: relative;
+        width: 90mm;
+        height: 57mm;
+        margin: 0;
+        padding: 2.4mm;
+        border-radius: 3mm;
+        background: var(--fondo);
+        break-inside: avoid;
+      }
+
+      .etiqueta__marco {
+        display: grid;
+        grid-template-rows: var(--lado) minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        height: 100%;
+        padding: 2mm 3mm 0;
+        border: 1.5mm solid var(--tinta);
+        border-radius: 1.8mm;
+      }
+
+      .etiqueta__palabra {
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 33pt;
+        line-height: 1;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+        color: var(--tinta);
+      }
+
+      .etiqueta .escribir {
+        width: 72mm;
+        height: 12mm;
+      }
+
+      /* ==========================================================================
+         HOJAS DE RECORTAR
+         ========================================================================== */
+      /* El milímetro de arriba evita que el acento de «VERSIÓN» se pinte al pie de la hoja anterior. */
+      .hoja-recorte {
+        page: recorte;
+        position: relative;
+        padding-top: 1mm;
+        break-after: page;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        height: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      .muestra {
+        display: inline-block;
+        width: 4.2mm;
+        height: 4.2mm;
+        margin-right: 1mm;
+        vertical-align: -0.6mm;
+        border: 0.35mm solid #000;
+        border-radius: 1mm;
+        background: var(--fondo);
+      }
+
+      .rejilla-carteles {
+        display: grid;
+        grid-template-rows: repeat(2, 118mm);
+        row-gap: 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .rejilla-etiquetas {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 57mm;
+        gap: 5mm 6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      /* ---------- Tiras y esquinas ---------- */
+      .tiras {
+        --pieza: #000;
+        display: grid;
+        grid-template-columns: repeat(4, 20mm) 60mm;
+        column-gap: 8mm;
+        justify-content: center;
+        align-items: start;
+        margin: 1mm 0 0;
+      }
+
+      .tiras.amarillas {
+        --pieza: #f6c12e;
+      }
+
+      .tira {
+        width: 20mm;
+        height: 245mm;
+        border-radius: 2mm;
+        background: var(--pieza);
+      }
+
+      .esquinas {
+        display: grid;
+        grid-auto-rows: 60mm;
+        row-gap: 1.6mm;
+      }
+
+      .esquina {
+        width: 60mm;
+        height: 60mm;
+      }
+
+      .esquina path {
+        fill: var(--pieza);
+      }
+
+      /* ==========================================================================
+         PORTADA
+         ========================================================================== */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 132mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 132mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 17mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        border: 0.9mm solid #000;
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        color: #000;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 17pt;
+        margin: 0.2mm 0 1.8mm;
+      }
+
+      .pegatina .dos {
+        display: flex;
+        justify-content: center;
+        gap: 1.6mm;
+        margin: 0 0 1.4mm;
+      }
+
+      .pegatina .dos span {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 8.5mm;
+        border: 0.6mm solid #000;
+        border-radius: 1.6mm;
+        font-family: var(--texto);
+        font-size: 13pt;
+        line-height: 1;
+      }
+
+      .pegatina .am {
+        background: #f6c12e;
+        color: #000;
+      }
+
+      .pegatina .ng {
+        background: #000;
+        color: #fff;
+      }
+
+      /* La mesa de la portada: piezas de verdad, reducidas y giradas. */
+      .mesa {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .mesa > div {
+        position: absolute;
+        transform-origin: 0 0;
+      }
+
+      .mesa .cartel,
+      .mesa .etiqueta,
+      .mesa .tira,
+      .mesa .esquina {
+        box-shadow: 0 2.4mm 5mm -1.4mm rgb(30 43 85 / 0.35);
+      }
+
+      .mesa .esquina {
+        box-shadow: none;
+        filter: drop-shadow(0 1.6mm 1.6mm rgb(30 43 85 / 0.3));
+      }
+
+      /* ==========================================================================
+         DE UN VISTAZO
+         ========================================================================== */
+      .vistazo {
+        position: relative;
+      }
+
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.3mm;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr) 40mm;
+        align-items: center;
+        gap: 3.5mm;
+        margin: 0;
+        padding: 1.1mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--marino);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa svg {
+        width: 14mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .versiones__titulo {
+        margin: 0 0 2mm;
+        font-size: 14pt;
+      }
+
+      .versiones {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        margin: 0 0 3.5mm;
+      }
+
+      .version {
+        display: grid;
+        justify-items: center;
+        gap: 1.8mm;
+        padding: 2.6mm 3mm 2.2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .version__texto {
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .version__texto h3 {
+        margin: 0 0 0.4mm;
+        font-size: 13pt;
+      }
+
+      .version__texto p {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      /* Un cartel de verdad, reducido: 186 × 118 mm al 32 %. */
+      .mini {
+        position: relative;
+        width: 59.52mm;
+        height: 37.76mm;
+      }
+
+      .mini > .cartel {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: scale(0.32);
+        transform-origin: 0 0;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.4mm;
+        font-size: 13pt;
+      }
+
+      .claves {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .claves li {
+        margin: 0;
+        padding: 2.2mm 2.8mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .claves svg {
+        width: 10mm;
+        height: 10mm;
+        margin: 0 0 1.2mm;
+      }
+
+      .claves strong {
+        display: block;
+        margin: 0 0 0.6mm;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+
+      /* ==========================================================================
+         GUÍA
+         ========================================================================== */
+      .guia {
+        position: relative;
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.7em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.8mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      .contrastes {
+        margin: 1mm 0 2mm;
+      }
+
+      .contrastes th,
+      .contrastes td {
+        vertical-align: middle;
+        padding: 1.3mm 2.2mm;
+      }
+
+      .contrastes td:first-child {
+        white-space: nowrap;
+      }
+
+      .contrastes td:last-child,
+      .contrastes th:last-child {
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .contrastes td:last-child {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .par {
+        display: inline-grid;
+        place-items: center;
+        width: 14mm;
+        height: 8mm;
+        margin-right: 2mm;
+        vertical-align: middle;
+        border: 0.35mm solid #000;
+        border-radius: 1.4mm;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1;
+      }
+
+      .lo-que-no {
+        margin-top: 2mm;
+        font-style: italic;
+      }
+
+      /* Revisión del aula: casillas para marcar con lápiz. */
+      .revision {
+        margin: 4mm 0 0;
+        padding: 3mm 4mm 2mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .revision h2 {
+        margin-top: 0;
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.6mm 6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .casillas li {
+        position: relative;
+        margin: 0;
+        padding-left: 7.5mm;
+      }
+
+      .casillas li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.3mm;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .linea-corta {
+        display: inline-block;
+        width: 14mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .linea-corta--larga {
+        width: 26mm;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        position: relative;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.6em 0 0.2em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.8mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 172mm; height: 172mm; right: -70mm; top: 118mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -34mm; top: 196mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 22mm; height: 22mm; left: 104mm; top: 124mm; background: var(--morado-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Baja visión · Para toda la clase</p>
+        <h1 class="portada__titulo">Carteles y bordes<br />de alto contraste</h1>
+        <p class="portada__subtitulo">
+          Cada sitio y cada cosa, bien a la vista, para el alumnado con baja visión y para toda la clase.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao.<br />ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="mesa" id="mesa" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true">
+        <div>Dos<b>versiones</b><span class="dos"><span class="am">Aa</span><span class="ng">Aa</span></span></div>
+      </div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Con estos carteles y etiquetas, el alumno o la alumna con baja visión encuentra cada sitio y cada cosa por su cuenta.
+        Las tiras y las esquinas marcan dónde trabaja. Todo lleva letra muy grande y mucho contraste, y sirve a toda la clase:
+        el pictograma con su palabra ayuda también a quien empieza a leer.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+
+      <h2 class="versiones__titulo">Dos versiones: probadlas antes de imprimirlo todo</h2>
+      <div class="versiones" id="versiones"></div>
+
+      <div class="caja caja--amarilla">
+        <p>
+          Imprimid la página <span data-pagina="amarilla"></span> y la <span data-pagina="negra"></span> y ponedlas donde irán
+          los carteles, con la luz de la clase. Preguntadle cuál ve mejor y desde dónde la lee. Esta prueba sirve solo para
+          elegir los colores. Su equipo de la ONCE os puede ayudar a decidir.
+        </p>
+      </div>
+
+      <ul class="claves" id="claves"></ul>
+    </section>
+
+    <!-- Las hojas de carteles, etiquetas, tiras y esquinas se generan con el guion del final -->
+    <div id="hojas-piezas"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Carteles que se ven bien</h1>
+      <p>
+        «La adaptación del espacio con señalización, iluminación y contrastes adecuados, potencia la seguridad y fomenta la
+        autonomía», dice la ONCE (2021, pág. 15). A algunas personas con discapacidad visual les cuestan las letras pequeñas y
+        los carteles con poco contraste o con poca luz (ONCE, 2026, pág. 7). Por eso estas piezas llevan letra muy grande y
+        colores de mucho contraste. Así, el alumno o la alumna con baja visión encuentra cada sitio y cada cosa por su cuenta,
+        y toda la clase lo tiene más fácil.
+      </p>
+
+      <h2>Los colores, con su contraste medido</h2>
+      <table class="contrastes">
+        <thead>
+          <tr>
+            <th scope="col">Combinación</th>
+            <th scope="col">Dónde va</th>
+            <th scope="col">Contraste</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="par" style="background: #f6c12e; color: #000" aria-hidden="true">Aa</span>Negro sobre amarillo</td>
+            <td>Versión amarilla: palabra y marco</td>
+            <td>12,6&nbsp;:&nbsp;1</td>
+          </tr>
+          <tr>
+            <td><span class="par" style="background: #000; color: #fff" aria-hidden="true">Aa</span>Blanco sobre negro</td>
+            <td>Versión negra: palabra y marco</td>
+            <td>21&nbsp;:&nbsp;1</td>
+          </tr>
+          <tr>
+            <td><span class="par" style="background: #fff; color: #000" aria-hidden="true">Aa</span>Negro sobre blanco</td>
+            <td>Borde del pictograma y lo que escribes a mano</td>
+            <td>21&nbsp;:&nbsp;1</td>
+          </tr>
+          <tr>
+            <td><span class="par" style="background: #f6c12e; color: #fff" aria-hidden="true">Aa</span>Blanco sobre amarillo</td>
+            <td>Nunca solo: el recuadro blanco lleva borde negro</td>
+            <td>1,7&nbsp;:&nbsp;1</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        El contraste va de 1&nbsp;:&nbsp;1 (dos colores iguales) a 21&nbsp;:&nbsp;1 (negro y blanco). Lo hemos calculado con la fórmula de las
+        Pautas de Accesibilidad para el Contenido Web (WCAG 2.2), que piden al menos 4,5&nbsp;:&nbsp;1 para el texto y 7&nbsp;:&nbsp;1 en su
+        nivel más alto (AAA); para los bordes y los gráficos, 3&nbsp;:&nbsp;1 (W3C, 2024). Son pautas para pantallas y aquí sirven de
+        referencia: todas las palabras de los carteles pasan de 7&nbsp;:&nbsp;1. Cada impresora cambia un poco los colores: probadlos en
+        su sitio.
+      </p>
+      <p>
+        La ONCE recomienda papel blanco o amarillo con tinta negra, que dan el mejor contraste (ONCE, s. f.-a), y recuerda que
+        la discapacidad visual es muy variada (ONCE, 2026, pág. 7). Por eso hay dos versiones: elegid la suya con él o ella y
+        con su equipo de la ONCE. El Diseño Universal para el Aprendizaje (DUA) propone eso mismo: que cada cual pueda ajustar
+        cómo se le presenta la información (CAST, 2024, consideración 1.1).
+      </p>
+
+      <h2>La letra y los pictogramas</h2>
+      <ul>
+        <li>
+          <strong>Letra Atkinson Hyperlegible.</strong> El Braille Institute la diseñó en 2019 para lectores con baja visión:
+          las letras y los números que se parecen tienen formas bien distintas, y los huecos de dentro de cada letra son amplios
+          (Braille Institute, s. f.).
+        </li>
+        <li>
+          <strong>Mayúsculas, solo en palabras cortas.</strong> La ONCE las deja para palabras cortas, títulos y señales. Para
+          leer frases, mejor en minúsculas (ONCE, s. f.-a).
+        </li>
+        <li>
+          <strong>Dibujos sencillos y sin nada detrás.</strong> La ONCE pide trazos sencillos y gruesos, con pocos detalles y
+          sobre un fondo sin imágenes (ONCE, s. f.-a). Muchos pictogramas de ARASAAC tienen partes blancas o amarillas que se
+          pierden sobre el amarillo: por eso van en un recuadro blanco con borde negro.
+        </li>
+        <li>
+          <strong>Todos iguales.</strong> La misma letra, el mismo tamaño y el mismo orden en todos los carteles. La ONCE advierte
+          de que mezclar tipografías y colores en los rótulos dificulta leerlos, y pone como ejemplo la cartelería homogénea
+          (ONCE, 2026, págs. 31 y 32).
+        </li>
+      </ul>
+
+      <h2>La luz y los reflejos</h2>
+      <ul>
+        <li>
+          <strong>Mate.</strong> La ONCE pide papel mate para los textos impresos (ONCE, s. f.-a). Plastifica con fundas mate. Si
+          no tienes, deja los carteles en cartulina sin plastificar: duran menos, pero no brillan.
+        </li>
+        <li>
+          <strong>Sin deslumbramientos.</strong> La ONCE propone evitarlos, y también los cambios bruscos de luz entre espacios,
+          porque a muchas personas les cuesta más adaptarse a cada cambio (ONCE, 2026, pág. 23).
+        </li>
+        <li>
+          <strong>Desde su sitio.</strong> Nada de carteles junto a la ventana ni bajo un foco. Míralos desde donde los verá, por
+          la mañana y a última hora. Si alguno brilla, cámbialo de sitio.
+        </li>
+      </ul>
+
+      <h2>Dónde y a qué altura</h2>
+      <ul>
+        <li>
+          <strong>A la altura de sus ojos.</strong> La ONCE aconseja poner la información a la altura de los ojos (ONCE, 2021,
+          pág. 35) y pone como mal ejemplo el cartel colocado a excesiva altura (ONCE, 2026, pág. 34). Mide la altura de sus ojos
+          cuando está de pie y pon ahí el centro de cada cartel.
+        </li>
+        <li>
+          <strong>En la pared, junto a la manilla.</strong> El cartel de una puerta va en la pared, al lado de la manilla: así
+          se ve también con la puerta abierta.
+        </li>
+        <li>
+          <strong>En una pared lisa,</strong> sin murales ni dibujos alrededor. El marco negro o blanco separa el cartel de la
+          pared, sea clara u oscura.
+        </li>
+        <li>
+          <strong>El cartel «Salida»</strong> marca la puerta de la clase. No sustituye a las señales de evacuación del centro.
+        </li>
+        <li><strong>Más grandes, si hace falta.</strong> Si le cuesta leerlos, imprime los carteles en A3, al 141&nbsp;%.</li>
+      </ul>
+
+      <h2>Siempre en el mismo sitio</h2>
+      <ul>
+        <li>
+          «Mantén el orden establecido y no dejes nada fuera de su sitio habitual», pide la ONCE, y también que se avise de los
+          cambios de lugar (ONCE, 2021, págs. 15 y 17).
+        </li>
+        <li>
+          Cada caja, con su etiqueta delante y siempre en el mismo estante. Si algo cambia de sitio, díselo y recorred juntos el
+          camino nuevo.
+        </li>
+        <li>
+          Las tiras y las esquinas marcan dónde trabaja y dónde deja sus cosas: sobre una mesa clara, las negras; sobre una
+          oscura, las amarillas. Para las piezas pequeñas, una bandeja con una cartulina que contraste: negra para lo claro y
+          amarilla para lo oscuro.
+        </li>
+        <li>Que la clase ayude: quien recoge, deja cada cosa donde dice su etiqueta.</li>
+      </ul>
+
+      <h2>Con su equipo de la ONCE</h2>
+      <p>
+        La ONCE atiende al alumnado con ceguera o deficiencia visual con 33 equipos específicos de atención educativa, que
+        trabajan con la administración educativa de cada comunidad. Asesoran al centro y al profesorado, y adaptan el puesto de
+        estudio y los materiales (ONCE, s. f.-b). Antes de colocar los carteles, preguntadles:
+      </p>
+      <ul>
+        <li>qué versión ve mejor y desde qué distancia;</li>
+        <li>si conviene ampliarlos o cambiar algún pictograma;</li>
+        <li>si hace falta añadir el braille;</li>
+        <li>dónde le conviene sentarse y qué luz le va mejor.</li>
+      </ul>
+      <p>Y preguntadle a él o a ella. La ONCE pide contar con su opinión en lo que le afecta (ONCE, 2021, pág. 15).</p>
+
+      <div class="dos-columnas">
+        <div class="caja caja--verde">
+          <h2>Para toda la clase</h2>
+          <p>
+            Los carteles son de todos: ni su nombre ni su diagnóstico van en ellos. Presentadlos en la asamblea y pedid a la
+            clase que ayude a dejar cada cosa en su sitio.
+          </p>
+        </div>
+        <div class="caja caja--azul">
+          <h2>Para casa</h2>
+          <p>
+            La familia puede usar la misma versión en casa: una tira en la mesa de los deberes o un cartel en el baño. Si os lo
+            pide, imprimid una hoja más.
+          </p>
+        </div>
+      </div>
+
+      <div class="revision">
+        <h2>Revisión del aula, desde su sitio</h2>
+        <p>Al empezar el curso y cada vez que algo cambie, recorred el aula con él o ella y marcad lo que ya está:</p>
+        <ul class="casillas">
+          <li>Desde su sitio y desde la puerta se ve cada cartel.</li>
+          <li>Ningún cartel brilla, ni por la mañana ni a última hora.</li>
+          <li>El centro de cada cartel está a la altura de sus ojos, a <span class="linea-corta"></span> cm del suelo.</li>
+          <li>Cada caja tiene su etiqueta delante y está en su estante de siempre.</li>
+          <li>Las tiras o las esquinas de su mesa siguen bien pegadas.</li>
+          <li>Lo hemos revisado con su equipo de la ONCE el día <span class="linea-corta linea-corta--larga"></span>.</li>
+        </ul>
+      </div>
+      <p class="lo-que-no">Lo que no lleva fuente en esta guía es propuesta de IdEducando.</p>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin: 7mm 0 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Carteles y bordes de alto contraste para el aula.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/alto-contraste-aula</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+
+      <h2>Baja visión y accesibilidad, de la ONCE</h2>
+      <ul class="referencias">
+        <li>
+          ONCE (s. f.-a). <em>Recomendaciones para presentar textos impresos accesibles a personas con deficiencia visual</em>.
+          once.es, apartado «La discapacidad visual».
+        </li>
+        <li>ONCE (s. f.-b). <em>Servicios de Atención a la Educación Inclusiva</em>. once.es, apartado «Educación inclusiva».</li>
+        <li>ONCE (2021). <em>¡MIRA!</em> Consejo General de la ONCE. ISBN 978-84-484-0303-4. Págs. 15, 17 y 35.</li>
+        <li>
+          ONCE, Dirección de Autonomía Personal, Tecnología y Accesibilidad (2026). <em>Accesibilidad a los mercados
+          tradicionales de abastos</em>. Madrid: ONCE. Págs. 7, 23, 31, 32 y 34.
+        </li>
+      </ul>
+
+      <h2>Contraste, letra y DUA</h2>
+      <ul class="referencias">
+        <li>
+          W3C (2024). <em>Web Content Accessibility Guidelines (WCAG) 2.2</em>. Recomendación del W3C de 12 de diciembre de
+          2024. Criterios 1.4.3, 1.4.6 y 1.4.11. <span class="url">w3.org/TR/WCAG22</span>
+        </li>
+        <li>Braille Institute (s. f.). <em>Atkinson Hyperlegible Font</em>. <span class="url">brailleinstitute.org/freefont</span></li>
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>, consideración 1.1.
+          <span class="url">udlguidelines.cast.org</span>
+        </li>
+      </ul>
+
+      <h2>Cómo medimos el contraste</h2>
+      <p>
+        Con la fórmula de la luminancia relativa de las WCAG 2.2, sobre los colores del archivo: amarillo #F6C12E, negro
+        #000000 y blanco #FFFFFF. En papel, el resultado cambia un poco con la tinta, el papel y la luz.
+      </p>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
+        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. El diseño de los carteles, las
+        etiquetas, las tiras y las esquinas es de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a
+        IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        amarilla: 4,
+        negra: 9,
+        etiquetasAmarilla: 14,
+        etiquetasNegra: 15,
+        tirasNegras: 16,
+        tirasAmarillas: 17,
+        guia: 18,
+        fuentes: 20,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las piezas. Pictograma de ARASAAC y palabra. «marco»: el pictograma trae su propio cuadrado negro.
+      // ---------------------------------------------------------------------
+      const CARTELES = [
+        { palabra: 'CLASE', picto: 9815, marco: true, nombre: true },
+        { palabra: 'BAÑO', picto: 33935, marco: true },
+        { palabra: 'SALIDA', picto: 29622 },
+        { palabra: 'BIBLIOTECA', picto: 6645 },
+        { palabra: 'CALMA', picto: 32826, marco: true },
+        { palabra: 'ASAMBLEA', picto: 27575 },
+        { palabra: 'MATERIAL', picto: 34153 },
+        { palabra: 'PAPELERA', picto: 2861 },
+        { palabra: 'PERCHAS', picto: 3286 },
+        { palabra: '' },
+      ];
+
+      const ETIQUETAS = [
+        { palabra: 'LÁPICES', picto: 2440 },
+        { palabra: 'COLORES', picto: 17016 },
+        { palabra: 'TIJERAS', picto: 6664 },
+        { palabra: 'PEGAMENTO', picto: 2510 },
+        { palabra: 'GOMAS', picto: 2409 },
+        { palabra: 'CUENTOS', picto: 8346 },
+        { palabra: 'PUZLES', picto: 2540 },
+        { palabra: '' },
+      ];
+
+      const VERSIONES = {
+        amarilla: { nombre: 'Versión amarilla', par: 'Negro sobre amarillo', contraste: '12,6\u00a0:\u00a01' },
+        negra: { nombre: 'Versión negra', par: 'Blanco sobre negro', contraste: '21\u00a0:\u00a01' },
+      };
+
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      const minusculas = (p) => p.toLocaleLowerCase('es');
+      const lista = (palabras) =>
+        palabras.length > 1 ? `${palabras.slice(0, -1).join(', ')} y ${palabras[palabras.length - 1]}` : palabras[0];
+      const frase = (texto) => texto.charAt(0).toLocaleUpperCase('es') + texto.slice(1);
+
+      // ---------------------------------------------------------------------
+      // Piezas
+      // ---------------------------------------------------------------------
+      const picto = (p) =>
+        `<div class="picto">${p.picto ? `<img src="pictogramas/${p.picto}.png" alt=""${p.marco ? ' class="con-marco"' : ''} />` : ''}</div>`;
+
+      function cartel(p, version, etiqueta = 'li') {
+        let abajo;
+        if (!p.palabra) abajo = '<span class="escribir escribir--larga"></span>';
+        else if (p.nombre) abajo = `<div class="cartel__fila"><p class="cartel__palabra">${p.palabra}</p><span class="escribir"></span></div>`;
+        else abajo = `<p class="cartel__palabra">${p.palabra}</p>`;
+        return `<${etiqueta} class="cartel v-${version}"><div class="cartel__marco">${picto(p)}${abajo}</div></${etiqueta}>`;
+      }
+
+      function etiquetaPieza(p, version, etiqueta = 'li') {
+        const abajo = p.palabra ? `<p class="etiqueta__palabra">${p.palabra}</p>` : '<span class="escribir"></span>';
+        return `<${etiqueta} class="etiqueta v-${version}"><div class="etiqueta__marco">${picto(p)}${abajo}</div></${etiqueta}>`;
+      }
+
+      // La esquina: una L de 60 × 60 mm con brazos de 20 mm y las esquinas redondeadas.
+      const ESQUINA =
+        '<svg class="esquina" viewBox="0 0 60 60" aria-hidden="true" focusable="false"><path d="M2 0H58A2 2 0 0 1 60 2V18A2 2 0 0 1 58 20H22A2 2 0 0 0 20 22V58A2 2 0 0 1 18 60H2A2 2 0 0 1 0 58V2A2 2 0 0 1 2 0Z"/></svg>';
+
+      // ---------------------------------------------------------------------
+      // Hojas: carteles (5 por versión), etiquetas (1 por versión), tiras (negras y amarillas)
+      // ---------------------------------------------------------------------
+      function hojasCarteles(version) {
+        const v = VERSIONES[version];
+        const total = Math.ceil(CARTELES.length / 2);
+        return Array.from({ length: total }, (_, i) => {
+          const par = CARTELES.slice(i * 2, i * 2 + 2);
+          const nombres = par.map((p) => (p.palabra ? minusculas(p.palabra) : 'uno en blanco'));
+          let nota = 'Corta por el borde del color.';
+          if (par.some((p) => p.nombre)) nota = 'Antes de plastificar, escribe el nombre de la clase con rotulador negro grueso.';
+          if (par.some((p) => !p.palabra)) nota = 'En el cartel en blanco, pega un pictograma y escribe la palabra con rotulador negro grueso.';
+          return `<section class="hoja-recorte v-${version}">
+            <h1 class="solo-lector">Carteles, ${v.nombre.toLowerCase()}, hoja ${i + 1} de ${total}: ${lista(nombres)}</h1>
+            <p class="aviso"><span><strong>Carteles · ${v.nombre}</strong> · Hoja ${i + 1} de ${total}</span><span><span class="muestra"></span>${v.par}, ${v.contraste}</span></p>
+            <ul class="rejilla-carteles">${par.map((p) => cartel(p, version)).join('')}</ul>
+            <p class="atribucion">${nota} ${ATRIBUCION}</p>
+          </section>`;
+        }).join('');
+      }
+
+      function hojaEtiquetas(version) {
+        const v = VERSIONES[version];
+        return `<section class="hoja-recorte v-${version}">
+            <h1 class="solo-lector">Etiquetas para cajas y bandejas, ${v.nombre.toLowerCase()}</h1>
+            <p class="aviso"><span><strong>Etiquetas · ${v.nombre}</strong> · Para cajas y bandejas</span><span><span class="muestra"></span>${v.par}, ${v.contraste}</span></p>
+            <ul class="rejilla-etiquetas">${ETIQUETAS.map((p) => etiquetaPieza(p, version)).join('')}</ul>
+            <p class="atribucion">En la etiqueta en blanco, pega un pictograma y escribe la palabra con rotulador negro grueso. ${ATRIBUCION}</p>
+          </section>`;
+      }
+
+      function hojaTiras(color) {
+        const negras = color === 'negras';
+        return `<section class="hoja-recorte">
+            <h1 class="solo-lector">Tiras y esquinas ${color}, para una mesa ${negras ? 'clara' : 'oscura'}</h1>
+            <p class="aviso"><span><strong>Tiras y esquinas ${color}</strong> · Para una mesa ${negras ? 'clara' : 'oscura'}</span><span>Tiras de 245 × 20 mm y esquinas de 60 mm</span></p>
+            <div class="tiras ${color}">
+              ${Array.from({ length: 4 }, () => '<div class="tira"></div>').join('')}
+              <div class="esquinas">${ESQUINA.repeat(4)}</div>
+            </div>
+            <p class="atribucion">Pon una esquina en cada rincón de su sitio de trabajo y, si quieres, las tiras entre ellas. Córtalas a la medida que necesites. Diseño de IdEducando.</p>
+          </section>`;
+      }
+
+      document.getElementById('hojas-piezas').outerHTML =
+        hojasCarteles('amarilla') +
+        hojasCarteles('negra') +
+        hojaEtiquetas('amarilla') +
+        hojaEtiquetas('negra') +
+        hojaTiras('negras') +
+        hojaTiras('amarillas');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const AM = '#f6c12e';
+      const icono = (contenido, vista = '0 0 140 110') =>
+        `<svg viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ICONOS = {
+        cartel: `<rect x="6" y="10" width="128" height="90" rx="8" fill="${AM}" stroke="#000" stroke-width="5"/><rect x="50" y="20" width="40" height="40" rx="5" fill="#fff" stroke="#000" stroke-width="5"/><rect x="34" y="72" width="72" height="14" rx="3" fill="#000"/>`,
+        etiqueta: `<rect x="26" y="22" width="88" height="66" rx="8" fill="#000"/><rect x="54" y="30" width="32" height="32" rx="4" fill="#fff"/><rect x="40" y="70" width="60" height="9" rx="2" fill="#fff"/>`,
+        tiras: `<rect x="10" y="12" width="120" height="86" rx="6" fill="#fff" stroke="${M}" stroke-width="3"/><path d="M18 20H58V32H30V60H18Z" fill="#000"/><path d="M122 90H82V78H110V50H122Z" fill="#000"/><rect x="40" y="44" width="60" height="26" rx="2" fill="#fff" stroke="${M}" stroke-width="3"/>`,
+        guia: `<path d="M20 18H66A6 6 0 0 1 72 24V96A6 6 0 0 0 66 90H20Z" fill="#fff" stroke="${M}" stroke-width="5" stroke-linejoin="round"/><path d="M120 18H74A6 6 0 0 0 68 24V96A6 6 0 0 1 74 90H120Z" fill="#fff" stroke="${M}" stroke-width="5" stroke-linejoin="round"/><path d="M30 36H58M30 50H58M30 64H52M82 36H110M82 50H110M82 64H104" stroke="${M}" stroke-width="5" stroke-linecap="round"/>`,
+      };
+
+      const MAPA = [
+        ['cartel', 'Diez carteles de espacios y rincones', `${frase(CARTELES.filter((p) => p.palabra).map((p) => minusculas(p.palabra)).join(', '))} y uno en blanco.`, `Amarilla: págs. ${PAGINAS.amarilla} a ${PAGINAS.amarilla + 4}<br />Negra: págs. ${PAGINAS.negra} a ${PAGINAS.negra + 4}`],
+        ['etiqueta', 'Ocho etiquetas para cajas y bandejas', `${frase(ETIQUETAS.filter((p) => p.palabra).map((p) => minusculas(p.palabra)).join(', '))} y una en blanco.`, `Amarilla: pág. ${PAGINAS.etiquetasAmarilla}<br />Negra: pág. ${PAGINAS.etiquetasNegra}`],
+        ['tiras', 'Tiras y esquinas para su mesa', 'Negras para una mesa clara y amarillas para una oscura.', `Negras: pág. ${PAGINAS.tirasNegras}<br />Amarillas: pág. ${PAGINAS.tirasAmarillas}`],
+        ['guia', 'Guía para el docente y fuentes', 'El contraste medido, la luz, la altura y el orden, y cómo coordinarte con su equipo de la ONCE.', `Págs. ${PAGINAS.guia} a ${PAGINAS.fuentes}`],
+      ];
+      document.getElementById('mapa').innerHTML = MAPA.map(
+        ([ic, titulo, texto, pags]) =>
+          `<li>${icono(ICONOS[ic])}<div><h2>${titulo}</h2><p>${texto}</p></div><p class="mapa__pagina">${pags}</p></li>`,
+      ).join('');
+
+      document.getElementById('versiones').innerHTML = ['amarilla', 'negra']
+        .map((version) => {
+          const v = VERSIONES[version];
+          const muestra = version === 'amarilla' ? CARTELES[3] : CARTELES[4];
+          return `<div class="version"><div class="mini" aria-hidden="true">${cartel(muestra, version, 'div')}</div><div class="version__texto"><h3>${v.nombre}</h3><p>${v.par}: <strong>${v.contraste}</strong><br />Págs. ${PAGINAS[version]} a ${PAGINAS[version] + 4} y ${version === 'amarilla' ? PAGINAS.etiquetasAmarilla : PAGINAS.etiquetasNegra}</p></div></div>`;
+        })
+        .join('');
+
+      const CLAVES = [
+        [
+          `<circle cx="50" cy="50" r="44" fill="#fff" stroke="${M}" stroke-width="6"/><path d="M18 50Q50 22 82 50Q50 78 18 50Z" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/><circle cx="50" cy="50" r="10" fill="${M}"/>`,
+          'A la altura de sus ojos',
+          'El centro del cartel, a la altura de sus ojos cuando está de pie.',
+        ],
+        [
+          `<rect x="22" y="12" width="56" height="76" rx="6" fill="#fff" stroke="${M}" stroke-width="6"/><path d="M60 26L64 36L74 40L64 44L60 54L56 44L46 40L56 36Z" fill="${AM}" stroke="${M}" stroke-width="3" stroke-linejoin="round"/><path d="M14 86L86 14" stroke="${M}" stroke-width="7" stroke-linecap="round"/>`,
+          'Sin brillos',
+          'Fundas mate, y lejos de la ventana y de los focos.',
+        ],
+        [
+          `<rect x="12" y="44" width="76" height="44" rx="5" fill="#fff" stroke="${M}" stroke-width="6"/><rect x="34" y="56" width="32" height="18" rx="3" fill="${AM}" stroke="${M}" stroke-width="4"/><path d="M50 8C40 8 33 15 33 24C33 35 50 48 50 48C50 48 67 35 67 24C67 15 60 8 50 8Z" fill="${M}"/><circle cx="50" cy="24" r="6" fill="#fff"/>`,
+          'Siempre en su sitio',
+          'Si algo cambia de sitio, avísale y enséñaselo.',
+        ],
+        [
+          `<path d="M10 18H62A6 6 0 0 1 68 24V50A6 6 0 0 1 62 56H32L18 68V56H10A6 6 0 0 1 4 50V24A6 6 0 0 1 10 18Z" fill="#fff" stroke="${M}" stroke-width="5" stroke-linejoin="round"/><path d="M90 40H38A6 6 0 0 0 32 46V72A6 6 0 0 0 38 78H68L82 90V78H90A6 6 0 0 0 96 72V46A6 6 0 0 0 90 40Z" fill="${AM}" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>`,
+          'Con su equipo de la ONCE',
+          'Conoce cómo ve y os puede aconsejar.',
+        ],
+      ];
+      document.getElementById('claves').innerHTML = CLAVES.map(
+        ([dibujo, titulo, texto]) => `<li>${icono(dibujo, '0 0 100 100')}<strong>${titulo}</strong>${texto}</li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: piezas de verdad sobre la mesa. [pieza, izquierda, arriba, giro, escala] en mm.
+      // ---------------------------------------------------------------------
+      // Una hoja de trabajo con dos esquinas negras que marcan su sitio.
+      const esquinaMini = (estilo) =>
+        `<div style="position:absolute;--pieza:#000;width:22mm;height:22mm;${estilo}">${ESQUINA.replace('class="esquina"', 'class="esquina" style="width:22mm;height:22mm"')}</div>`;
+      const HOJA_CON_ESQUINAS = `<div style="position:relative;width:74mm;height:48mm">
+          <div style="position:absolute;left:7.33mm;top:7.33mm;width:59.34mm;height:33.34mm;border-radius:0.8mm;background:#fff;box-shadow:0 1.6mm 3mm -1mm rgb(30 43 85 / .3)">
+            <svg viewBox="0 0 60 34" style="width:100%;height:100%" aria-hidden="true" focusable="false"><path d="M8 9H44M8 15H52M8 21H48M8 27H40" stroke="#9aa3bd" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </div>
+          ${esquinaMini('left:0;top:0')}${esquinaMini('left:52mm;top:26mm;transform:rotate(180deg)')}
+        </div>`;
+      const MESA = [
+        [cartel(CARTELES[3], 'amarilla', 'div'), 13, 147, -5, 0.5],
+        [cartel(CARTELES[4], 'negra', 'div'), 113, 158, 5, 0.44],
+        [etiquetaPieza(ETIQUETAS[2], 'amarilla', 'div'), 22, 213, 4, 0.72],
+        [HOJA_CON_ESQUINAS, 120, 215, -4, 1],
+      ];
+      document.getElementById('mesa').innerHTML = MESA.map(
+        ([html, x, y, giro, escala]) =>
+          `<div style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg) scale(${escala})">${html}</div>`,
+      ).join('');
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

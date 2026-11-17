@@ -89,6 +89,112 @@
       }
     ]
   },
+  "alto-contraste-aula": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Carteles, versión amarilla, hoja 1 de 5: clase y baño"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Carteles, versión negra, hoja 3 de 5: calma y asamblea"
+      },
+      {
+        "pagina": 14,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Etiquetas para cajas y bandejas, versión amarilla"
+      },
+      {
+        "pagina": 18,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente"
+      }
+    ]
+  },
+  "apoyos-visuales-familias": {
+    "total": 14,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía,"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué es un apoyo visual"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla: Primero y después, dos tableros"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Agenda de la mañana · con velcro"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Temporizador de papel · para recortar"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas de casa, hoja 1 de 2"
+      }
+    ]
+  },
   "carta-de-deseos": {
     "total": 18,
     "fotos": [
@@ -338,6 +444,59 @@
       }
     ]
   },
+  "detectives-letras": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tres nive"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "LA CLAVE SECRETA · Una para cada pareja · Cartulina y plastificado"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "CARNET DE DETECTIVE · Dibujo, nombre y huella antes de plastificar"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · después de los casos 1 a 20"
+      }
+    ]
+  },
   "dialogos-para-completar": {
     "total": 40,
     "fotos": [
@@ -433,6 +592,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Historia 4 de 6 · para leer antes del día"
+      }
+    ]
+  },
+  "diptongos-manipulativos": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartel para la clase · también en a3"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Taller de vocales · tablero y piezas"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "NIVEL 1 · ¿QUÉ SÍLABA FALTA? · Hoja A · Forma de círculo"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · para escribir"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Reto · diptongo o hiato"
       }
     ]
   },
@@ -587,6 +799,59 @@
       }
     ]
   },
+  "frase-y-dibujo": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tres nive"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Leo y empareja Me llamo"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 1 · Frases · 2 o 3 palabras · Forma de círculo"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 1 · Dibujos · Forma de círculo"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · Frases · 6 a 8 palabras · Forma de rombo"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · Dibujos · Forma de rombo"
+      }
+    ]
+  },
   "guia-oposiciones-murcia-pt-infantil": {
     "total": 14,
     "fotos": [
@@ -633,7 +898,7 @@
     ]
   },
   "historias-sociales-calma-y-palabras": {
-    "total": 17,
+    "total": 13,
     "fotos": [
       {
         "pagina": 1,
@@ -660,20 +925,28 @@
         "titulo": "Historia 1 de 4 · con mis emociones"
       },
       {
-        "pagina": 5,
-        "ancho": 707,
-        "alto": 1000,
-        "mini_ancho": 113,
-        "mini_alto": 160,
-        "titulo": "Historia 2 de 4 · con mis emociones"
-      },
-      {
         "pagina": 6,
         "ancho": 707,
         "alto": 1000,
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Historia 3 de 4 · con mis compañeros"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla para escribir tu propia historia"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para el adulto"
       }
     ]
   },
@@ -1021,6 +1294,59 @@
         "mini_ancho": 160,
         "mini_alto": 113,
         "titulo": "Guía para el adulto"
+      }
+    ]
+  },
+  "mercadillo-de-clase": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Monedas"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "MONEDAS DE JUEGO · Imprime esta hoja dos veces"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "ETIQUETAS DE PRECIO · Frutería y panadería"
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para quien compra · niveles 1 y 2 · uno por puesto"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para quien vende · con rotulador de pizarra · una por puesto"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "TARJETAS DE PAPELES · Una de cada en cada puesto"
       }
     ]
   },
@@ -1434,6 +1760,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": ""
+      }
+    ]
+  },
+  "ruleta-historias-invierno": {
+    "total": 18,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ruleta 1 de 3 · para recortar"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartas del personaje y del lugar"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "1 nivel 1 · se plastifica entera · para contar en voz alta"
+      },
+      {
+        "pagina": 10,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Nivel 3, y nivel 2 con más reto · se plastifica entero"
+      },
+      {
+        "pagina": 13,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · una hoja por historia · en folio"
       }
     ]
   },
@@ -1855,6 +2234,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Palabras de 2 sílabas"
+      }
+    ]
+  },
+  "turnos-visibles": {
+    "total": 15,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "En el aula"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Tablero · con velcro"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas de turno · 1 a 16"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartel para la clase"
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "ME TOCA · HE TERMINADO · Tarjetas de doble cara"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Juegos de mesa · para recortar"
       }
     ]
   },

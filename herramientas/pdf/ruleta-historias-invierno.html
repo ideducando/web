@@ -1,0 +1,2851 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ruleta para contar historias de invierno: personaje, lugar y problema en tres niveles · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar: márgenes de 11 y 12 mm, como en las tarjetas de otros materiales. */
+      @page recorte {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Un color para cada parte de la historia (siempre con su número, su pregunta y su texto) ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA)
+         --fm: fondo de las marcas con texto · --tm: texto sobre ese fondo */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+        --fm: var(--enlace);
+        --tm: #fff;
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+        --fm: var(--verde-texto);
+        --tm: #fff;
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+        --fm: var(--coral-texto);
+        --tm: #fff;
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+        --fm: var(--amarillo);
+        --tm: var(--marino);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+        --fm: var(--morado-texto);
+        --tm: #fff;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja-recorte {
+        page: recorte;
+        break-after: page;
+      }
+
+      .hoja-ap {
+        page: apaisada;
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Piezas comunes ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .cabeza--icono {
+        grid-template-columns: 17mm minmax(0, 1fr) auto;
+        align-items: center;
+      }
+
+      .cabeza__icono {
+        display: grid;
+        place-items: center;
+        width: 17mm;
+        height: 17mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 1mm var(--t);
+      }
+
+      .cabeza__icono img {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo (como en otros materiales). */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 9mm;
+        height: 9mm;
+        font-size: 15pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 11.4mm;
+        height: 11.4mm;
+      }
+
+      .marca-parte {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 8mm;
+        height: 8mm;
+        border-radius: 50%;
+        background: var(--fm);
+        color: var(--tm);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      .renglon {
+        display: block;
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .casilla {
+        display: inline-block;
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 1.4mm;
+        background: #fff;
+      }
+
+      .linea-dato {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .linea-dato span {
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 12mm;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 5mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 15pt;
+        line-height: 1.35;
+        max-width: 112mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 110mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .escena .ruleta {
+        border-radius: 50%;
+        box-shadow: 0 1.6mm 3.2mm rgb(30 43 85 / 0.28);
+      }
+
+      .escena .ruleta + svg {
+        position: absolute;
+      }
+
+      .copo {
+        position: absolute;
+        z-index: 1;
+      }
+
+      .bocadillo {
+        z-index: 4;
+        width: 74mm;
+        padding: 4mm 5mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 6mm;
+        background: #fff;
+        font-family: var(--lema);
+        font-size: 14pt;
+        line-height: 1.3;
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.15);
+      }
+
+      .bocadillo p {
+        margin: 0;
+      }
+
+      .bocadillo svg {
+        position: absolute;
+        left: 12mm;
+        bottom: -7.4mm;
+        width: 12mm;
+        height: 8mm;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 5;
+        right: 16mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 15pt;
+        margin: 0 0 0.6mm;
+        letter-spacing: 0.02em;
+      }
+
+      .pegatina strong {
+        display: block;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.3mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 27mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 1mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img,
+      .mapa svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      .vistazo__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: start;
+        margin: 0 0 3.5mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.6mm;
+        font-size: 13pt;
+      }
+
+      .lista-niveles {
+        display: grid;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 11.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .lista-niveles .nv {
+        justify-self: center;
+      }
+
+      .vistazo ol.cinco {
+        margin: 0;
+        padding-left: 5mm;
+      }
+
+      .vistazo ol.cinco li {
+        margin-bottom: 0.8mm;
+      }
+
+      /* ---------- Ruletas ----------
+         Medidas en milímetros multiplicadas por --e: 1 en la hoja de recortar y menos en la portada.
+         Así la portada usa la ruleta de verdad, más pequeña, sin escalarla con transform (al imprimir,
+         Chromium descoloca el texto de lo que se escala así). */
+      .ruleta {
+        --e: 1;
+        position: relative;
+        width: calc(180mm * var(--e));
+        height: calc(180mm * var(--e));
+        margin: 0 auto;
+      }
+
+      .ruleta > svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .ruleta__opciones {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* Cada casilla se dibuja hacia abajo, con el dibujo cerca del centro, y se gira: así se lee bien
+         cuando la flecha apunta hacia quien juega. */
+      .ruleta__opciones li {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        margin: 0;
+      }
+
+      .ruleta__opciones img {
+        position: absolute;
+        left: calc(-12mm * var(--e));
+        top: calc(33.5mm * var(--e));
+        width: calc(24mm * var(--e));
+        height: calc(24mm * var(--e));
+      }
+
+      .ruleta__texto {
+        position: absolute;
+        left: calc(-23mm * var(--e));
+        top: calc(59mm * var(--e));
+        display: grid;
+        place-items: center;
+        width: calc(46mm * var(--e));
+        height: calc(16mm * var(--e));
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: calc(18.6pt * var(--e));
+        line-height: 1;
+        text-wrap: balance;
+      }
+
+      .ruleta__num {
+        position: absolute;
+        left: calc(-4mm * var(--e));
+        top: calc(81.4mm * var(--e));
+        width: calc(8mm * var(--e));
+        height: calc(6.2mm * var(--e));
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: calc(18.6pt * var(--e));
+        line-height: calc(6.2mm * var(--e));
+        color: #fff;
+      }
+
+      .ruleta__opciones .marca-extra {
+        position: absolute;
+        left: calc(6mm * var(--e));
+        top: calc(49.5mm * var(--e));
+        width: calc(8.5mm * var(--e));
+        height: calc(8.5mm * var(--e));
+      }
+
+      .ruleta-hoja .ruleta {
+        margin-top: 1mm;
+      }
+
+      .ruleta-pie {
+        display: grid;
+        grid-template-columns: 40mm minmax(0, 1fr);
+        gap: 5mm;
+        align-items: start;
+        margin: 3mm 0 0;
+      }
+
+      .flecha-pieza {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        padding-top: 0.5mm;
+      }
+
+      .flecha-pieza svg {
+        width: 31mm;
+        height: 49mm;
+      }
+
+      .flecha-pieza p {
+        margin: 0;
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .ruleta-pie h2 {
+        margin: 0 0 1.4mm;
+        font-size: 13pt;
+      }
+
+      .montar {
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .montar li {
+        position: relative;
+        margin: 0 0 1.2mm;
+        padding-left: 7mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .montar li::before {
+        counter-increment: paso;
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: 0.2mm;
+        display: grid;
+        place-items: center;
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      .sin-encuadernador {
+        margin: 0;
+        padding: 2mm 3mm;
+        border-radius: 2.4mm;
+        background: var(--amarillo-tinte);
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      /* ---------- Cartas ---------- */
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2.4mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso h1 {
+        margin: 0;
+        font-size: 15pt;
+        line-height: 1.1;
+        color: var(--marino);
+      }
+
+      .aviso span {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      .cartas {
+        display: grid;
+        grid-template-columns: repeat(4, 45mm);
+        grid-auto-rows: 55mm;
+        gap: 2.4mm 2mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .carta {
+        position: relative;
+        display: grid;
+        grid-template-rows: 9.5mm 29mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 0 2mm 1.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .carta__banda {
+        display: grid;
+        align-items: center;
+        justify-self: stretch;
+        align-self: stretch;
+        margin: 0 -2mm;
+        padding: 0 2mm;
+        background: var(--fm);
+        color: var(--tm);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .carta__num {
+        position: absolute;
+        right: 1.6mm;
+        top: 11mm;
+        display: grid;
+        place-items: center;
+        width: 7.6mm;
+        height: 7.6mm;
+        border-radius: 50%;
+        background: var(--fm);
+        color: var(--tm);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .carta__dibujo {
+        position: relative;
+        width: 26mm;
+        height: 26mm;
+      }
+
+      .carta__dibujo img {
+        width: 26mm;
+        height: 26mm;
+      }
+
+      .carta__dibujo .marca-extra {
+        position: absolute;
+        right: -3mm;
+        bottom: -1mm;
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .carta__texto {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+
+      .carta--blanca .carta__dibujo {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2.4mm;
+      }
+
+      .carta--blanca .carta__lineas {
+        display: grid;
+        gap: 0.6mm;
+        justify-self: stretch;
+        align-self: end;
+        margin: 0 1mm 1mm;
+      }
+
+      .carta--blanca .carta__lineas span {
+        display: block;
+        height: 6.6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .cartas-pie {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        margin: 2.4mm 0 0;
+      }
+
+      .cartas-pie p {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      /* ---------- Tira para contar (apaisada) ---------- */
+      .tira {
+        display: grid;
+        grid-template-columns: 118mm minmax(0, 1fr) minmax(0, 1fr);
+        gap: 9mm;
+        margin: 0 0 4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tira__parte {
+        position: relative;
+        margin: 0;
+        padding: 2.6mm 3mm 3mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      /* Flecha entre las partes: el orden de la historia, de izquierda a derecha. */
+      .tira__parte:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -8.2mm;
+        top: 50%;
+        width: 7.4mm;
+        height: 9mm;
+        transform: translateY(-50%);
+        background: var(--marino);
+        clip-path: polygon(0 32%, 52% 32%, 52% 0, 100% 50%, 52% 100%, 52% 68%, 0 68%);
+      }
+
+      .tira__arranque {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 2.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .tira__huecos {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 53mm;
+        justify-content: center;
+        gap: 4mm;
+      }
+
+      .hueco {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        width: 53mm;
+        height: 65mm;
+        padding: 3mm 2mm 4mm;
+        border: 0.6mm dashed var(--fm);
+        border-radius: 3.6mm;
+        background: #fff;
+      }
+
+      .hueco img {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .hueco span {
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+        color: var(--tx);
+      }
+
+      .hueco--dibujo {
+        border-style: solid;
+        border-color: var(--c);
+      }
+
+      .hueco--dibujo img {
+        align-self: start;
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .ideas {
+        display: grid;
+        grid-template-columns: 38mm minmax(0, 1fr);
+        gap: 4mm;
+        align-items: center;
+        padding: 2.6mm 3mm;
+        border: 0.6mm solid var(--amarillo);
+        border-radius: 4mm;
+        background: var(--amarillo-tinte);
+      }
+
+      .ideas h2 {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .ideas__nota {
+        margin: 1.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .tira-hoja .pasos-tira {
+        margin: 3mm 0 0;
+      }
+
+      .tira-hoja .pasos-tira svg {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .ideas__lista {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2mm 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ideas__lista li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 1mm 2mm 1mm 1mm;
+        border-radius: 2.6mm;
+        background: #fff;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .ideas__lista img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      /* ---------- Plan de la historia (apaisado) ---------- */
+      .plan {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .plan__parte {
+        position: relative;
+        display: grid;
+        grid-template-rows: 12mm 38mm 28mm 64mm;
+        margin: 0;
+        border: 0.6mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+        overflow: visible;
+      }
+
+      .plan__parte:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -7.6mm;
+        top: 56mm;
+        width: 7mm;
+        height: 9mm;
+        background: var(--marino);
+        clip-path: polygon(0 32%, 52% 32%, 52% 0, 100% 50%, 52% 100%, 52% 68%, 0 68%);
+      }
+
+      .plan__cab {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0 3mm;
+        border-radius: 3.4mm 3.4mm 0 0;
+        background: var(--fm);
+        color: var(--tm);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .plan__cab b {
+        display: grid;
+        place-items: center;
+        width: 8mm;
+        height: 8mm;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--tx);
+        font-size: 14pt;
+      }
+
+      .plan__principal {
+        display: grid;
+        grid-template-rows: 22mm auto;
+        justify-items: center;
+        align-content: center;
+        gap: 1.6mm;
+        margin: 0 3mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .plan__principal div {
+        display: flex;
+        gap: 3mm;
+      }
+
+      .plan__principal img {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .plan__principal p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .plan__preguntas {
+        display: grid;
+        align-content: center;
+        gap: 1.4mm;
+        margin: 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .plan__preguntas li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .plan__preguntas img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .plan__notas {
+        display: grid;
+        grid-template-rows: auto repeat(4, minmax(0, 1fr));
+        margin: 0 3mm 3mm;
+        padding: 2mm 2.6mm 1mm;
+        border-radius: 2.6mm;
+        background: var(--t);
+      }
+
+      .plan__notas p {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .plan__notas span {
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .plan-pie {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 6mm;
+        align-items: start;
+        margin: 3mm 0 0;
+      }
+
+      .plan-pie p {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      /* ---------- Palabras para unir (tiras de conectores) ---------- */
+      .conectores {
+        margin: 0 0 3mm;
+        padding: 2mm 3mm 2.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .conectores__titulo {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .conectores__titulo svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .conectores__grupos {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .conectores__grupos > li {
+        margin: 0;
+        padding: 0 0 1.6mm;
+        border-radius: 2.8mm;
+        background: var(--t);
+      }
+
+      .grupo__cab {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0 0 1.6mm;
+        padding: 1.2mm 2mm;
+        border-radius: 2.8mm 2.8mm 0 0;
+        background: var(--fm);
+        color: var(--tm);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .grupo__cab b {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--tx);
+        font-size: 12pt;
+      }
+
+      .grupo__lista {
+        display: grid;
+        gap: 0.9mm;
+        margin: 0;
+        padding: 0 1.6mm;
+        list-style: none;
+      }
+
+      .grupo__lista li {
+        margin: 0;
+        padding: 0.7mm 1.8mm;
+        border-radius: 2mm;
+        background: #fff;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      /* ---------- Hojas para escribir ---------- */
+      .datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 3.4mm;
+      }
+
+      .pasos-picto {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-picto li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 1.2mm 2mm 1.2mm 1.2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .pasos-picto img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .frases {
+        display: grid;
+        gap: 3mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frase {
+        display: grid;
+        grid-template-columns: 50mm minmax(0, 1fr);
+        gap: 5mm;
+        margin: 0;
+        padding: 3mm 3.4mm 3mm 3mm;
+        border: 0.5mm solid var(--c);
+        border-left-width: 2mm;
+        border-radius: 3.6mm;
+        break-inside: avoid;
+      }
+
+      .frase__izq {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 2mm;
+      }
+
+      .frase__arranque {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .frase__dibujo {
+        display: grid;
+        place-items: end center;
+        height: 34mm;
+        padding: 1.2mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2.6mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .frase__renglones {
+        display: grid;
+        grid-template-rows: repeat(4, 12.2mm);
+      }
+
+      .frase__renglones span {
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .quien-escribe {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2mm 7mm;
+        margin: 0;
+        padding: 2.4mm 3.4mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .quien-escribe p {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .quien-escribe p:first-child {
+        font-family: var(--titulos);
+      }
+
+      .titulo-historia {
+        margin: 0 0 3.4mm;
+      }
+
+      .miniplan {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .miniplan li {
+        display: grid;
+        grid-template-rows: auto 8.4mm 8.4mm;
+        margin: 0;
+        padding: 1.6mm 2.4mm 1.4mm;
+        border: 0.45mm solid var(--c);
+        border-top-width: 2mm;
+        border-radius: 3mm;
+      }
+
+      .miniplan p {
+        display: flex;
+        align-items: center;
+        gap: 1.4mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .miniplan .marca-parte {
+        width: 6.6mm;
+        height: 6.6mm;
+        font-size: 12pt;
+      }
+
+      .miniplan span.r {
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .texto-renglones {
+        display: grid;
+        grid-template-rows: repeat(10, 10.2mm);
+        margin: 0 0 3.4mm;
+      }
+
+      .texto-renglones span {
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .revisar {
+        padding: 2.4mm 3.6mm 2.6mm;
+        border: 0.6mm solid var(--verde);
+        border-radius: 3.6mm;
+        background: var(--verde-tinte);
+        break-inside: avoid;
+      }
+
+      .revisar h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.8mm;
+        font-size: 18pt;
+      }
+
+      .revisar h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .revisar ul {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.6mm 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .revisar li {
+        display: grid;
+        grid-template-columns: 7mm 9mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .revisar li img,
+      .revisar li svg {
+        width: 9mm;
+        height: 9mm;
+        border-radius: 1.4mm;
+        background: #fff;
+      }
+
+      /* ---------- Autoevaluación (dos por hoja) ---------- */
+      .auto {
+        height: 123mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        break-inside: avoid;
+      }
+
+      .auto + .auto {
+        margin-top: 4mm;
+      }
+
+      .auto__cab {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 1.6mm;
+      }
+
+      .auto__cab > img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .auto__titulo {
+        margin: 0 0 1.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .auto__cab .linea-dato span {
+        height: 6.6mm;
+      }
+
+      .auto__nivel {
+        display: grid;
+        justify-items: center;
+        gap: 1.2mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.1;
+        color: var(--suave);
+      }
+
+      .auto__nivel span {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+      }
+
+      .forma-vacia {
+        width: 8.4mm;
+        height: 8.4mm;
+      }
+
+      .forma-vacia.n3 {
+        width: 9.6mm;
+        height: 9.6mm;
+      }
+
+      .auto__tabla {
+        margin: 0 0 2mm;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .auto__tabla th,
+      .auto__tabla td {
+        padding: 0.5mm 1.4mm;
+        border-bottom: 0.35mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .auto__tabla thead th {
+        padding: 0.6mm 1mm 1.2mm;
+        background: none;
+        color: var(--marino);
+        font-family: var(--texto);
+        font-size: 18pt;
+        font-weight: 700;
+        text-align: center;
+        vertical-align: bottom;
+        line-height: 1;
+      }
+
+      .auto__tabla thead th:first-child {
+        text-align: left;
+        font-family: var(--titulos);
+      }
+
+      .auto__tabla thead svg,
+      .auto__tabla thead img {
+        display: block;
+        width: 7.4mm;
+        height: 7.4mm;
+        margin: 0 auto 0.6mm;
+      }
+
+      .auto__tabla tbody th {
+        font-family: var(--texto);
+        font-weight: 700;
+      }
+
+      .auto__tabla tbody th > span {
+        display: grid;
+        grid-template-columns: 9.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .auto__tabla tbody img,
+      .auto__tabla tbody th svg {
+        width: 9.4mm;
+        height: 9.4mm;
+      }
+
+      .auto__tabla td {
+        width: 27mm;
+        text-align: center;
+      }
+
+      .redondel {
+        display: inline-block;
+        width: 8.4mm;
+        height: 8.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+
+      .auto__reto {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        padding: 1.6mm 2.6mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+      }
+
+      .auto__reto > p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .auto__reto ul {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .auto__reto li {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 0.8mm 1.4mm;
+        border-radius: 2.2mm;
+        background: #fff;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .auto__reto img,
+      .auto__reto svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.5em;
+        margin-bottom: 0.2em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.8mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2,
+      .guia .caja h3 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+        break-inside: auto;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      .modelo {
+        margin: 0 0 0.5em;
+        padding: 0;
+        list-style: none;
+      }
+
+      .modelo li {
+        margin: 0 0 1mm;
+      }
+
+      .modelo strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .reformular {
+        margin: 0 0 0.6em;
+      }
+
+      .reformular th,
+      .reformular td {
+        padding: 1.2mm 2.2mm;
+      }
+
+      .reformular td:first-child {
+        width: 47%;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .familias ol {
+        margin-bottom: 0.4em;
+      }
+
+      .ideas-casa {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 1mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ideas-casa > li {
+        margin: 0;
+        padding: 2mm 3mm;
+        border: 0.4mm solid var(--c);
+        border-top-width: 1.6mm;
+        border-radius: 3mm;
+      }
+
+      .ideas-casa h3 {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 1mm;
+        font-size: 13pt;
+      }
+
+      .ideas-casa h3 img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .ideas-casa ul {
+        margin: 0;
+        padding-left: 4.4mm;
+      }
+
+      .ideas-casa ul li {
+        margin-bottom: 0.4mm;
+      }
+
+      .ejemplo {
+        margin: 0 0 0.45em;
+        padding: 2mm 3.4mm;
+        border-left: 1.4mm solid var(--morado);
+        border-radius: 0 2.4mm 2.4mm 0;
+        background: var(--morado-tinte);
+      }
+
+      .ejemplo p {
+        margin: 0;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: recorte;
+        font-size: 11pt;
+        line-height: 1.22;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.4em 0 0.1em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.35em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -58mm; top: 132mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -34mm; top: 196mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 18mm; height: 18mm; left: 146mm; top: 92mm; background: var(--coral-tinte)"></div>
+      <div id="copos-portada" aria-hidden="true"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego de lenguaje · Para toda la clase</p>
+        <h1 class="portada__titulo">Ruleta para contar<br />historias de invierno</h1>
+        <p class="portada__subtitulo">
+          Personaje, lugar y problema al azar para contar y escribir historias en tres niveles. De 5 años a 4.º de Primaria.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" id="escena" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div><b>8 × 8 × 8</b><strong>512</strong>historias</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Tres ruletas sortean el personaje, el lugar y el problema de una historia de invierno. Cada peque inventa cómo lo
+        arregla y cómo acaba, y lo cuenta, lo dice en tres frases o lo escribe, según su nivel. Cada parte de la historia tiene
+        siempre su color, su número y su pictograma.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+      <div class="vistazo__fila">
+        <div class="caja caja--azul">
+          <h2>Tres niveles para toda la clase</h2>
+          <ul class="lista-niveles" id="lista-niveles"></ul>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Una historia, en cinco pasos</h2>
+          <ol class="cinco">
+            <li>Cuenta tú una historia, como modelo.</li>
+            <li>Girad las tres ruletas y poned sus cartas en la tira.</li>
+            <li>Pensad juntos cómo se arregla el problema.</li>
+            <li>Cada peque la cuenta, la dice o la escribe en su nivel.</li>
+            <li>Alguien dice qué le ha gustado. Después, la autoevaluación.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Sin encuadernador también se juega.</strong> Con las cartas: tres montones boca abajo, uno por ruleta, y se
+          saca una de cada. Con un dado: la ruleta sin flecha es la tabla. Pon un botón en la casilla 1, tira el dado y avanza
+          tantas casillas como puntos, siguiendo los números. Donde cae, eso sale. La guía de la página
+          <span data-pagina="guia"></span> explica cómo modelar una historia y cómo ayudar a cada peque.
+        </p>
+      </div>
+    </section>
+
+    <!-- Las tres ruletas se generan con el guion del final, a partir de la lista RULETAS -->
+    <div id="hojas-ruletas"></div>
+
+    <!-- Las dos hojas de cartas, también -->
+    <div id="hojas-cartas"></div>
+
+    <!-- ======================================================================
+         NIVEL 1 · TIRA PARA CONTAR (apaisada)
+         ====================================================================== -->
+    <section class="hoja-ap tira-hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo"><span class="nv n1">1</span> Nivel 1 · Se plastifica entera · Para contar en voz alta</p>
+          <h1>Tira para contar</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ol class="tira" id="tira"></ol>
+      <div class="ideas">
+        <div>
+          <h2>Ideas para el final</h2>
+          <p class="ideas__nota">Si se atasca, que señale una. También vale inventar otra.</p>
+        </div>
+        <ul class="ideas__lista" id="ideas"></ul>
+      </div>
+      <ol class="pasos-picto pasos-tira" id="pasos-tira" aria-label="Cómo se cuenta"></ol>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         PLAN DE LA HISTORIA (apaisado)
+         ====================================================================== -->
+    <section class="hoja-ap plan-hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo"><span class="nv n3">3</span> Nivel 3, y nivel 2 con más reto · Se plastifica entero</p>
+          <h1>El plan de mi historia</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ol class="plan" id="plan"></ol>
+      <div class="plan-pie">
+        <p>
+          Con rotulador de pizarra, palabras clave o un dibujo en cada parte. Las frases, después, en la hoja «Mi historia»
+          (página <span data-pagina="historia"></span>). Ideas para la solución: página <span data-pagina="tira"></span>.
+        </p>
+        <p class="atribucion" style="margin: 0; max-width: 112mm" data-atribucion></p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PALABRAS PARA UNIR (tres tiras de conectores)
+         ====================================================================== -->
+    <section class="hoja-recorte conectores-hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Niveles 2 y 3 · Para recortar y plastificar</p>
+          <h1>Palabras para unir</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Tres tiras iguales, una por mesa o por pareja. Cada color es una parte de la historia, como en el plan. Las palabras
+        para unir (los conectores) dicen qué va antes y qué va después.
+      </p>
+      <div id="conectores"></div>
+      <p class="atribucion">Las tiras y sus dibujos son de IdEducando.</p>
+    </section>
+
+    <!-- ======================================================================
+         NIVEL 2 · MIS TRES FRASES
+         ====================================================================== -->
+    <section class="hoja escribir">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo"><span class="nv n2">2</span> Nivel 2 · Una hoja por historia · En folio</p>
+          <h1>Mis tres frases</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos">
+        <p class="linea-dato">Me llamo:<span></span></p>
+        <p class="linea-dato">Fecha:<span></span></p>
+      </div>
+      <ol class="pasos-picto" id="pasos-frases"></ol>
+      <ol class="frases" id="frases"></ol>
+      <div class="quien-escribe">
+        <p>¿Quién escribe?</p>
+        <p><span class="casilla"></span>Yo</p>
+        <p><span class="casilla"></span>Lo digo y lo escribe un adulto</p>
+      </div>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         NIVEL 3 · MI HISTORIA
+         ====================================================================== -->
+    <section class="hoja escribir">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo"><span class="nv n3">3</span> Nivel 3 · Una hoja por historia · En folio</p>
+          <h1>Mi historia</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos">
+        <p class="linea-dato">Me llamo:<span></span></p>
+        <p class="linea-dato">Fecha:<span></span></p>
+      </div>
+      <p class="linea-dato titulo-historia">Título:<span></span></p>
+      <ol class="miniplan" id="miniplan"></ol>
+      <div class="texto-renglones" id="renglones-historia"></div>
+      <div class="revisar">
+        <h2><img src="pictogramas/6998.png" alt="" />Lista para revisar</h2>
+        <ul id="revisar"></ul>
+      </div>
+      <p class="atribucion" data-atribucion></p>
+    </section>
+
+    <!-- ======================================================================
+         AUTOEVALUACIÓN (dos por hoja)
+         ====================================================================== -->
+    <section class="hoja-recorte">
+      <div id="autoevaluacion"></div>
+      <p class="atribucion">
+        Dos por hoja: corta por la línea de puntos. Que coloree un redondel en cada fila. Pictogramas: Sergio Palao. Origen:
+        ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Guía: cómo modelar, preguntar y ayudar</h1>
+      <p>
+        Las ruletas sortean el personaje, el lugar y el problema, y el alumnado inventa qué hace y cómo acaba. Así practica las
+        cuatro partes de una historia: inicio, problema, solución y final. Sirve para toda la clase y está pensado, además, para
+        el alumnado con trastorno del desarrollo del lenguaje (TDL), con trastorno del espectro del autismo (TEA) y con
+        discapacidad intelectual. Una revisión de 40 estudios encontró que las intervenciones para contar historias mejoran
+        cómo las cuenta y las entiende el alumnado de Infantil y Primaria; muchas usan apoyos visuales y enseñan las partes de
+        la historia (Pico y otros, 2021). Cada sesión, de 15 a 20 minutos, sigue los pasos de la página
+        <span data-pagina="vistazo"></span>.
+      </p>
+
+      <div class="dos-columnas">
+        <div class="caja caja--azul">
+          <h2>Cómo modelar una historia</h2>
+          <p>Cuenta en voz alta y di a la vez lo que piensas, señalando cada carta en la tira:</p>
+          <ul class="modelo">
+            <li><strong>Giro y pienso.</strong> «Ha salido un pingüino, una cabaña y “pierde su gorro”. Pongo las cartas».</li>
+            <li><strong>1 · Inicio.</strong> «Había una vez un pingüino que vivía en una cabaña».</li>
+            <li><strong>2 · Problema.</strong> «De repente, perdió su gorro. ¡Qué frío! Estaba muy triste».</li>
+            <li><strong>3 · Solución.</strong> «Lo buscó en la nieve. Entonces, tuvo una idea: pedir ayuda a la foca».</li>
+            <li><strong>4 · Final.</strong> «Al final, lo encontraron en la cabeza del muñeco de nieve. ¡Qué risa!».</li>
+          </ul>
+          <p>
+            Usa siempre las mismas palabras para unir. Después, cuéntala con un error a propósito, como «Había una vez una
+            cueva…», y deja que te corrijan.
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h2>Preguntas guía</h2>
+          <ul class="modelo">
+            <li><strong>1 · Inicio.</strong> ¿Quién es? ¿Cómo es? ¿Dónde está? ¿Cuándo pasa?</li>
+            <li><strong>2 · Problema.</strong> ¿Qué le pasa? ¿Cómo se siente? ¿Por qué?</li>
+            <li><strong>3 · Solución.</strong> ¿Qué hace? ¿Quién le ayuda? ¿Qué pasa después?</li>
+            <li><strong>4 · Final.</strong> ¿Cómo acaba? ¿Cómo se siente ahora?</li>
+          </ul>
+          <p>
+            Si no responde, dale dos opciones: «¿Lo buscó en la cueva o en la playa?». Y espera: cuenta hasta cinco en
+            silencio antes de ayudar.
+          </p>
+        </div>
+      </div>
+
+      <h2>TDL: repite bien lo que dice</h2>
+      <p>
+        El trastorno del desarrollo del lenguaje (TDL) es el nombre que recomienda un consenso internacional para las
+        dificultades del lenguaje que afectan al día a día y no se asocian a otra causa conocida (Bishop y otros, 2017). Si
+        una frase le sale con errores, no le corrijas de forma directa: repítela bien justo después, con su misma idea, y
+        sigue con la historia. A esto se le llama reformular. Una revisión de estudios con niños y niñas con dificultades del
+        lenguaje lo encontró útil para su gramática, aunque las pruebas aún son limitadas. Sus autores lo explican así: tu
+        frase llega justo después de la suya y no tiene que repetirla, y puede fijarse en lo que cambia (Cleave y otros, 2015).
+      </p>
+      <table class="reformular">
+        <thead>
+          <tr>
+            <th scope="col">Si dice…</th>
+            <th scope="col">Puedes responder…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>«Se ha rompido el trineo».</td><td>«¡Oh, no! Se ha roto el trineo. ¿Y ahora qué hacen?»</td></tr>
+          <tr><td>«Oso cueva».</td><td>«El oso está en la cueva. ¿Y qué le pasa?»</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Cambia solo una o dos cosas cada vez. Si trabaja con el maestro o la maestra de Audición y Lenguaje (AL), pregúntale
+        qué formas está aprendiendo y repítelas más.
+      </p>
+
+      <div class="dos-columnas">
+        <div class="caja caja--morada">
+          <h2>Con alumnado con TEA</h2>
+          <ul>
+            <li>
+              Cuenta tú primero, siempre con la misma estructura. El modelado y los apoyos visuales son prácticas basadas en la
+              evidencia con alumnado con autismo (Hume y otros, 2021).
+            </li>
+            <li>
+              Pregunta qué siente y qué piensa el personaje, y por qué. Enseñar ese lenguaje mejoró las historias de cinco
+              niños y niñas con autismo de 8 a 12 años (Gillam y otros, 2015).
+            </li>
+            <li>
+              Retira las ayudas poco a poco: primero la tira, después las cartas. Con tres niños con autismo de 6 a 8 años, las
+              historias mejoraron al retirar así los apoyos (Petersen y otros, 2014).
+            </li>
+            <li>Si el azar le inquieta, que elija las cartas boca arriba. Un problema que le asusta se quita del montón.</li>
+          </ul>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Con alumnado con discapacidad intelectual</h2>
+          <ul>
+            <li>Empieza con dos ruletas, quién y dónde, y una frase: «Había una vez un oso en una cueva».</li>
+            <li>Cartas boca arriba y dos para elegir. Puede señalar o usar su sistema de comunicación.</li>
+            <li>Contad la misma historia varios días y representadla con muñecos o con objetos.</li>
+            <li>
+              Hemos encontrado pocos estudios. Con cuatro chicas con síndrome de Down de 10 a 15 años, contar sus vivencias con
+              apoyos visuales fue viable, con avances pequeños (Finestack y otros, 2017).
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Tres niveles y la escritura</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone varias formas de expresarse, ayudar a planificar y a revisar, y
+        ajustar el reto y el apoyo (CAST, 2024, consideraciones 5.1, 6.3, 6.4 y 8.2). Todo el grupo juega a lo mismo y cambia
+        la ayuda. Proponemos subir de nivel cuando le salga sin ayuda dos o tres veces seguidas. En Primaria, los textos
+        mejoraron al enseñar su estructura, preparar las ideas antes y escribir con un compañero (Graham y otros, 2012). De
+        1.º a 8.º curso, también con la opinión del docente, de un compañero o la propia (Graham, Hebert y Harris, 2015). Con
+        alumnado con dificultades de aprendizaje ayudaron, además, dictar a un adulto y ponerse metas (Gillespie y Graham,
+        2014).
+      </p>
+
+      <h2>Qué dice el currículo de la Región de Murcia</h2>
+      <ul>
+        <li>
+          <strong>Infantil.</strong> «Evocar y expresar espontáneamente ideas a través del relato oral» es un criterio de
+          evaluación del segundo ciclo (Decreto 196/2022, pág. 33107). Y «la adquisición del código escrito no es un objetivo
+          que se deba alcanzar en esta etapa» (pág. 33099): a los 5 años, la historia se cuenta, se dibuja o se dicta.
+        </li>
+        <li>
+          <strong>Primaria, primer ciclo.</strong> Textos orales «con planificación acompañada» (criterio 3.1) y escritos
+          «ajustándose a modelos dados», con estrategias de «planificación, textualización y revisión» (criterio 5.1;
+          Decreto 209/2022, pág. 40015). Entre los saberes, la narración y el plan de escritura (pág. 40017) y los conectores
+          temporales (pág. 40018).
+        </li>
+        <li>
+          <strong>Segundo ciclo.</strong> Los criterios 3.1 y 5.1, un paso más allá (pág. 40019), y «Revisar y mejorar los
+          textos propios y ajenos» (criterio 9.2, pág. 40020). Escribir implica planificar, revisar y editar: «Todo ello debe
+          trabajarse en clase» (pág. 40011).
+        </li>
+      </ul>
+
+      <h2>Seguridad, lo que no sabemos y otros materiales</h2>
+      <p>
+        El encuadernador es una pieza pequeña y el punzón pincha: monta tú las ruletas y, con quien todavía se lleva cosas a la
+        boca, jugad con las cartas o con un dado grande. Las ruletas, como conjunto, no se han estudiado: lo que no lleva
+        fuente en esta guía es propuesta de IdEducando. En Infantil de 3 y 4 años, el
+        <a href="https://www.ideducando.es/material-gratuito/rincon-lenguaje-invierno/">Rincón de lenguaje de invierno</a>
+        tiene una ruleta más sencilla, y los
+        <a href="https://www.ideducando.es/material-gratuito/dialogos-para-completar/">Diálogos para completar</a> trabajan
+        la conversación con el mismo vocabulario.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Historias de invierno, también en casa</h1>
+      <p>
+        En clase inventamos historias con tres ruletas. Una dice quién es el personaje, otra dónde está y otra qué problema
+        tiene. Después, cada peque cuenta qué hace el personaje y cómo acaba. Contar historias le ayuda a ordenar sus ideas y
+        a encontrar palabras para explicarlas.
+      </p>
+
+      <h2><img src="pictogramas/6461.png" alt="" />Cómo jugar en casa</h2>
+      <ol>
+        <li>Elegid tres cosas: quién, dónde y qué pasa. Podéis usar las ideas de abajo o inventar otras.</li>
+        <li>Contad la historia con estas palabras: «Había una vez…», «De repente…» y «Al final…».</li>
+        <li>Haced preguntas: ¿Cómo se siente? ¿Qué hace? ¿Quién le ayuda?</li>
+        <li>Si os apetece, dibujadla o escribidla juntos: él o ella lo dice y vosotros lo escribís.</li>
+        <li>Si trae a casa su hoja «Mis tres frases» o «Mi historia», pedidle que os la lea y decidle qué os ha gustado.</li>
+      </ol>
+
+      <h2><img src="pictogramas/9692.png" alt="" />Si se equivoca al hablar</h2>
+      <p>
+        Repetid la frase bien, con cariño, y seguid jugando. No hace falta decir «así no se dice» ni pedirle que la repita.
+      </p>
+      <div class="ejemplo">
+        <p>Peque: «El oso se ha caído en el agua y mojó».</p>
+        <p>Adulto: «¡Oh! El oso se cayó al agua y se mojó. ¿Y qué hizo?».</p>
+      </div>
+
+      <h2><img src="pictogramas/38796.png" alt="" />Ideas para inventar en casa</h2>
+      <ul class="ideas-casa">
+        <li class="c-azul">
+          <h3><img src="pictogramas/10276.png" alt="" />¿Quién?</h3>
+          <ul>
+            <li>el gato de la vecina</li>
+            <li>la abuela</li>
+            <li>un dragón con frío</li>
+            <li>mi peluche</li>
+          </ul>
+        </li>
+        <li class="c-verde">
+          <h3><img src="pictogramas/7764.png" alt="" />¿Dónde?</h3>
+          <ul>
+            <li>en la bañera</li>
+            <li>debajo de la cama</li>
+            <li>en el ascensor</li>
+            <li>en el mercado</li>
+          </ul>
+        </li>
+        <li class="c-coral">
+          <h3><img src="pictogramas/22620.png" alt="" />¿Qué pasa?</h3>
+          <ul>
+            <li>se acaba la leche</li>
+            <li>desaparece un calcetín</li>
+            <li>llaman a la puerta</li>
+            <li>el perro se come las galletas</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Ruleta para contar historias de invierno.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0.
+          Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+          ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Ruleta para contar historias de invierno.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/ruleta-historias-invierno</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+
+      <h2>Currículo de la Región de Murcia</h2>
+      <ul class="referencias">
+        <li>
+          Decreto n.º 209/2022, de 17 de noviembre, por el que se establece la ordenación y el currículo de la Educación
+          Primaria en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 267, de 18
+          de noviembre de 2022. Lengua Castellana y Literatura, págs. 40006 a 40027.
+        </li>
+        <li>
+          Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la
+          Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022. Área Comunicación y
+          Representación de la Realidad: págs. 33099 y 33107.
+        </li>
+      </ul>
+
+      <h2>Contar historias</h2>
+      <ul class="referencias">
+        <li>
+          Pico, D. L. y otros (2021).
+          Interventions designed to improve narrative language in school-age children: A systematic review with
+          meta-analyses. <em>Language, Speech, and Hearing Services in Schools</em>, 52(4), 1109-1126. DOI:
+          10.1044/2021_LSHSS-20-00160
+        </li>
+        <li>
+          Petersen, D. B. y otros (2014). Systematic
+          individualized narrative language intervention on the personal narratives of children with autism. <em>Language,
+          Speech, and Hearing Services in Schools</em>, 45(1), 67-86. DOI: 10.1044/2013_LSHSS-12-0099
+        </li>
+        <li>
+          Gillam, S. L. y otros (2015). Narrative intervention for children
+          with autism spectrum disorder (ASD). <em>Journal of Speech, Language, and Hearing Research</em>, 58(3), 920-933. DOI:
+          10.1044/2015_JSLHR-L-14-0295
+        </li>
+        <li>
+          Finestack, L. y otros (2017). The evaluation of a personal narrative
+          language intervention for school-age children with Down syndrome. <em>American Journal on Intellectual and
+          Developmental Disabilities</em>, 122(4), 310-332. DOI: 10.1352/1944-7558-122.4.310
+        </li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
+          generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI:
+          10.1007/s10803-020-04844-2
+        </li>
+      </ul>
+
+      <h2>Lenguaje y TDL</h2>
+      <ul class="referencias">
+        <li>
+          Bishop, D. V. M. y otros (2017). Phase 2 of
+          CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development:
+          Terminology. <em>Journal of Child Psychology and Psychiatry</em>, 58(10), 1068-1080. DOI: 10.1111/jcpp.12721
+        </li>
+        <li>
+          Cleave, P. L. y otros (2015). The efficacy of recasts in
+          language intervention: a systematic review and meta-analysis. <em>American Journal of Speech-Language
+          Pathology</em>, 24(2), 237-255. DOI: 10.1044/2015_AJSLP-14-0105
+        </li>
+      </ul>
+
+      <h2>Escribir, revisar y DUA</h2>
+      <ul class="referencias">
+        <li>
+          Graham, S. y otros (2012). A meta-analysis of writing instruction for students in
+          the elementary grades. <em>Journal of Educational Psychology</em>, 104(4), 879-896. DOI: 10.1037/a0029185
+        </li>
+        <li>
+          Gillespie, A. y Graham, S. (2014). A meta-analysis of writing interventions for students with learning disabilities.
+          <em>Exceptional Children</em>, 80(4), 454-473. DOI: 10.1177/0014402914527238
+        </li>
+        <li>
+          Graham, S., Hebert, M. y Harris, K. R. (2015). Formative assessment and writing: A meta-analysis. <em>The Elementary
+          School Journal</em>, 115(4), 523-547. DOI: 10.1086/681947
+        </li>
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>, consideraciones 5.1, 6.3, 6.4 y 8.2.
+          udlguidelines.cast.org
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa, que pide citar este
+        texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao
+        para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con pictogramas de
+        ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las ruletas, las flechas, los copos y el diseño
+        de las hojas son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines
+        comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        vistazo: 3,
+        quien: 4,
+        donde: 5,
+        que: 6,
+        cartas1: 7,
+        cartas2: 8,
+        tira: 9,
+        plan: 10,
+        conectores: 11,
+        frases: 12,
+        historia: 13,
+        autoevaluacion: 14,
+        guia: 15,
+        familias: 17,
+        fuentes: 18,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las tres ruletas: ocho casillas cada una, con [pictograma de ARASAAC, palabra, marca].
+      // La marca es un dibujo pequeño de IdEducando junto al pictograma: «?» (se ha perdido) o «roto».
+      // ---------------------------------------------------------------------
+      const RULETAS = [
+        {
+          id: 'quien', color: 'azul', numero: 1, pregunta: '¿Quién?', nombre: 'El personaje', icono: 10276, montones: 'personajes',
+          opciones: [[3243, 'un pingüino'], [2257, 'una ardilla'], [2488, 'un oso'], [2945, 'una lechuza'], [2623, 'un zorro'], [35959, 'una esquiadora'], [23718, 'un abuelo'], [2397, 'una foca']],
+        },
+        {
+          id: 'donde', color: 'verde', numero: 2, pregunta: '¿Dónde?', nombre: 'El lugar', icono: 7764, montones: 'lugares',
+          opciones: [[8049, 'en una cabaña'], [2729, 'en una cueva'], [5088, 'en la pista de hielo'], [2826, 'en la playa'], [7282, 'en un tren'], [3337, 'en la granja'], [2273, 'en un barco'], [5950, 'en un castillo']],
+        },
+        {
+          id: 'que', color: 'coral', numero: 3, pregunta: '¿Qué pasa?', nombre: 'El problema', icono: 22620, montones: 'problemas',
+          opciones: [[2412, 'pierde su gorro', 'perdido'], [8710, 'se rompe el trineo', 'roto'], [8643, 'se va la luz'], [7172, 'nieva muchísimo'], [7259, 'sopla mucho viento'], [39668, 'tiene miedo'], [32298, 'un amigo llora'], [2381, 'oye un ruido raro']],
+        },
+      ];
+
+      // Ideas para el final (tira del nivel 1)
+      const IDEAS = [
+        [27391, 'busca'],
+        [6019, 'tiene una idea'],
+        [6910, 'lo arregla'],
+        [7171, 'pide ayuda'],
+        [6023, 'le da un abrazo'],
+        [6138, 'usa una linterna'],
+        [2867, 'quita la nieve'],
+        [36914, 'espera'],
+      ];
+
+      // Las cuatro partes de la historia: color, preguntas del plan y palabras para unir.
+      const PARTES = [
+        {
+          n: 1, nombre: 'Inicio', color: 'azul', principal: [[10276, 7764], '¿Quién? ¿Dónde?'],
+          preguntas: [[32874, '¿Cuándo pasa?']], conectores: ['Había una vez…', 'Un día…', 'Hace mucho tiempo…'],
+        },
+        {
+          n: 2, nombre: 'Problema', color: 'coral', principal: [[22620], '¿Qué pasa?'],
+          preguntas: [[11476, '¿Cómo se siente?'], [24763, '¿Por qué?']], conectores: ['De repente…', 'De pronto…', 'Pero…', 'porque…'],
+        },
+        {
+          n: 3, nombre: 'Solución', color: 'amarillo', principal: [[37711], '¿Qué hace?'],
+          preguntas: [[32648, '¿Quién le ayuda?']], conectores: ['Entonces…', 'Después…', 'Luego…', 'Por eso…'],
+        },
+        {
+          n: 4, nombre: 'Final', color: 'morado', principal: [[5358], '¿Cómo acaba?'],
+          preguntas: [[11476, '¿Cómo se siente al final?']], conectores: ['Al final…', 'Por fin…', 'Desde entonces…'],
+        },
+      ];
+
+      // De un vistazo: [color, pictograma o dibujo, título, para qué, claves de página].
+      const MAPA = [
+        ['azul', 6006, 'Tres ruletas: personaje, lugar y problema', 'Ocho casillas cada una: 512 historias. Se montan con un encuadernador.', 'quien', 'que'],
+        ['verde', 'd:cartas', '32 cartas', 'Las de las ruletas, para jugar sin encuadernador, y 8 en blanco.', 'cartas1', 'cartas2'],
+        ['coral', 6461, 'Tira para contar e ideas para el final', 'Nivel 1: «Había una vez…», «De repente…» y «Al final…».', 'tira'],
+        ['amarillo', 38796, 'El plan de mi historia', 'Nivel 3: inicio, problema, solución y final, con preguntas.', 'plan'],
+        ['morado', 'd:unir', 'Palabras para unir', 'Tres tiras de conectores, con el color de cada parte.', 'conectores'],
+        ['azul', 2380, 'Mis tres frases y Mi historia', 'Hojas para escribir de los niveles 2 y 3, con lista para revisar.', 'frases', 'historia'],
+        ['verde', 6998, '¿Qué tal ha ido mi historia?', 'Autoevaluación con un reto para la próxima. Dos por hoja.', 'autoevaluacion'],
+        ['coral', 28643, 'Guía, nota para las familias y fuentes', 'Cómo modelar, qué preguntar y cómo ayudar a cada peque.', 'guia', 'fuentes'],
+      ];
+
+      // Hoja «Mis tres frases»
+      const PASOS_FRASES = [
+        [6006, 'Giro'],
+        [9692, 'Lo digo'],
+        [2380, 'Escribo'],
+        [28643, 'Lo leo'],
+      ];
+      const FRASES = [
+        ['azul', 1, 'Había una vez…'],
+        ['coral', 2, 'De repente…'],
+        ['morado', 3, 'Al final…'],
+      ];
+
+      // Lista para revisar (nivel 3): [pictograma o dibujo, texto]
+      const REVISAR = [
+        [37406, 'Tiene título.'],
+        [10276, 'Digo quién y dónde.'],
+        [22620, 'Cuento el problema.'],
+        [37711, 'Cuento qué hace.'],
+        [5358, 'Tiene un final.'],
+        ['d:unir', 'Uso palabras para unir.'],
+        ['d:mayuscula', 'Mayúscula y punto.'],
+        [28643, 'La leo en voz alta.'],
+      ];
+
+      // Autoevaluación
+      const AUTO = [
+        [10276, 'Digo quién y dónde.'],
+        [22620, 'Cuento el problema.'],
+        [5358, 'Cuento cómo acaba.'],
+        ['d:unir', 'Uso palabras para unir.'],
+        [2381, 'Escucho a los demás.'],
+      ];
+      const RETOS = [
+        [11476, 'Contar qué siente'],
+        ['d:unir', 'Otro conector'],
+        [37406, 'Poner título'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const COLORES = {
+        azul: { c: '#2f6fd6', t: '#e4edfb', fm: '#2b6cd5' },
+        verde: { c: '#1fa67a', t: '#dcf3ea', fm: '#127055' },
+        coral: { c: '#e8553e', t: '#fde5e0', fm: '#b63a26' },
+        amarillo: { c: '#f6c12e', t: '#fdf0c7', fm: '#f6c12e' },
+        morado: { c: '#8c4fb8', t: '#efe5f7', fm: '#7a3fa5' },
+      };
+      const f1 = (n) => Number(n.toFixed(2));
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const copo = (color, grosor = 5) =>
+        `<g fill="none" stroke="${color}" stroke-width="${grosor}" stroke-linecap="round" stroke-linejoin="round">${[0, 60, 120]
+          .map((a) => `<g transform="rotate(${a} 50 50)"><path d="M50 6V94"/><path d="M38 15L50 27L62 15M38 85L50 73L62 85"/></g>`)
+          .join('')}</g>`;
+
+      const DIBUJOS = {
+        // Tres cartas en abanico
+        cartas: `<g stroke="${M}" stroke-width="4" stroke-linejoin="round">
+            <rect x="12" y="26" width="38" height="52" rx="6" fill="#fff" transform="rotate(-14 31 52)"/>
+            <rect x="31" y="20" width="38" height="52" rx="6" fill="#fff"/>
+            <rect x="50" y="26" width="38" height="52" rx="6" fill="#fff" transform="rotate(14 69 52)"/>
+          </g>
+          <rect x="31" y="20" width="38" height="11" rx="5" fill="#2b6cd5"/>
+          <rect x="50" y="26" width="38" height="11" rx="5" fill="#127055" transform="rotate(14 69 52)"/>
+          <circle cx="50" cy="50" r="9" fill="#fde5e0" stroke="${M}" stroke-width="3"/>`,
+        // Dos piezas que se enganchan: «palabras para unir»
+        unir: `<rect x="8" y="30" width="44" height="40" rx="12" fill="#fff" stroke="${M}" stroke-width="6"/>
+          <rect x="48" y="30" width="44" height="40" rx="12" fill="#efe5f7" stroke="${M}" stroke-width="6"/>
+          <path d="M36 50H64" stroke="${M}" stroke-width="8" stroke-linecap="round"/>`,
+        // Mayúscula y punto
+        mayuscula: `<text x="44" y="74" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="66" fill="${M}">A</text>
+          <circle cx="80" cy="68" r="8" fill="${M}"/>`,
+        // Respuestas de la autoevaluación
+        si: `<circle cx="50" cy="50" r="42" fill="#dcf3ea" stroke="${M}" stroke-width="6"/>
+          <path d="M28 52L44 67L73 34" fill="none" stroke="#127055" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
+        brote: `<path d="M50 90V48" stroke="${M}" stroke-width="7" stroke-linecap="round"/>
+          <path d="M50 56C50 36 36 26 16 26C16 46 30 56 50 56Z" fill="#dcf3ea" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M50 48C50 30 62 20 82 20C82 38 70 48 50 48Z" fill="#dcf3ea" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M28 90H72" stroke="${M}" stroke-width="6" stroke-linecap="round"/>`,
+        copo: copo('#2f6fd6', 6),
+      };
+      const dibujo = (nombre, clase = '') => svg(DIBUJOS[nombre], clase);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const imagen = (p, clase = '') => (typeof p === 'string' && p.startsWith('d:') ? dibujo(p.slice(2), clase) : picto(p, clase));
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // Marcas pequeñas junto a un pictograma: «?» para lo perdido y una grieta para lo roto.
+      const MARCAS = {
+        perdido: `<circle cx="50" cy="50" r="44" fill="#fff" stroke="#b63a26" stroke-width="8"/>
+          <text x="50" y="72" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="62" fill="#b63a26">?</text>`,
+        roto: `<circle cx="50" cy="50" r="44" fill="#fff" stroke="#b63a26" stroke-width="8"/>
+          <path d="M36 20L56 42L40 56L62 82" fill="none" stroke="#b63a26" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`,
+      };
+      const marca = (nombre) => (nombre ? svg(MARCAS[nombre], 'marca-extra') : '');
+
+      // ---------------------------------------------------------------------
+      // La ruleta: casillas en SVG y, encima, cada pictograma y su palabra en HTML (texto de verdad).
+      // ---------------------------------------------------------------------
+      const C = 90; // centro, en milímetros
+      const enRuleta = (r, grados) => {
+        const a = (grados * Math.PI) / 180;
+        return [f1(C - r * Math.sin(a)), f1(C + r * Math.cos(a))];
+      };
+
+      function svgRuleta(colores, recortar = true) {
+        const { c, t, fm } = colores;
+        const BORDE = 88;
+        const CASILLAS = 81;
+        // En la hoja, la línea de corte; en la portada, el canto blanco de la ruleta ya recortada.
+        let s = recortar
+          ? `<circle cx="${C}" cy="${C}" r="89.6" fill="none" stroke="${SUAVE}" stroke-width="0.4" stroke-dasharray="2 1.6"/>`
+          : `<circle cx="${C}" cy="${C}" r="90" fill="#fff"/>`;
+        s += `<circle cx="${C}" cy="${C}" r="${BORDE}" fill="${fm}"/>`;
+        for (let i = 0; i < 8; i++) {
+          const [x1, y1] = enRuleta(CASILLAS, i * 45 - 22.5);
+          const [x2, y2] = enRuleta(CASILLAS, i * 45 + 22.5);
+          s += `<path d="M${C} ${C}L${x1} ${y1}A${CASILLAS} ${CASILLAS} 0 0 1 ${x2} ${y2}Z" fill="${i % 2 ? '#fff' : t}" stroke="${c}" stroke-width="0.6"/>`;
+        }
+        // Copos blancos en el borde, entre número y número
+        for (let i = 0; i < 8; i++) {
+          const [x, y] = enRuleta(84.5, i * 45 + 22.5);
+          s += `<g transform="translate(${f1(x - 2)} ${f1(y - 2)}) scale(0.04)">${copo('#fff', 10)}</g>`;
+        }
+        // Zona de la flecha y centro, con la cruz para el agujero
+        s += `<circle cx="${C}" cy="${C}" r="31" fill="none" stroke="${c}" stroke-width="0.5" stroke-dasharray="1.4 1.2"/>`;
+        s += `<circle cx="${C}" cy="${C}" r="13" fill="#fff" stroke="${c}" stroke-width="0.6"/>`;
+        s += `<path d="M${C - 3} ${C}H${C + 3}M${C} ${C - 3}V${C + 3}" stroke="${M}" stroke-width="0.6" stroke-linecap="round"/>`;
+        return `<svg viewBox="0 0 180 180" aria-hidden="true" focusable="false">${s}</svg>`;
+      }
+
+      // e: tamaño (1 en la hoja de recortar). La de la portada es decorativa y no lleva la línea de corte.
+      function ruleta(r, e = 1, hoja = true) {
+        const colores = COLORES[r.color];
+        const casillas = r.opciones
+          .map(
+            ([p, texto, extra], i) =>
+              `<li style="transform:rotate(${i * 45}deg)">${picto(p)}${marca(extra)}<p class="ruleta__texto">${texto}</p><span class="ruleta__num" aria-hidden="true">${i + 1}</span></li>`,
+          )
+          .join('');
+        const etiqueta = hoja ? ` aria-label="Ruleta ${r.pregunta} ${r.nombre.toLowerCase()}, con ocho casillas"` : '';
+        return `<div class="ruleta c-${r.color}" style="--e:${e}">${svgRuleta(colores, hoja)}<ol class="ruleta__opciones"${etiqueta}>${casillas}</ol></div>`;
+      }
+
+      // La flecha: un círculo con un copo y una punta. Gira sobre el encuadernador y señala una casilla.
+      function flecha(conCorte = true) {
+        const cuerpo = 'M11.36 5.21L0 30L-11.36 5.21A12.5 12.5 0 1 1 11.36 5.21Z';
+        const corte = 'M12.63 6.03L0 32.5L-12.63 6.03A14 14 0 1 1 12.63 6.03Z';
+        return `<svg viewBox="-15.5 -15.5 31 49" aria-hidden="true" focusable="false">
+            ${conCorte ? `<path d="${corte}" fill="none" stroke="${SUAVE}" stroke-width="0.4" stroke-dasharray="1.6 1.2"/>` : ''}
+            <path d="${cuerpo}" fill="${M}"/>
+            <g transform="translate(-9 -9) scale(0.18)">${copo('#fff', 7)}</g>
+            <circle cx="0" cy="0" r="2.4" fill="#fff"/>
+            <path d="M-1.4 0H1.4M0 -1.4V1.4" stroke="${M}" stroke-width="0.45" stroke-linecap="round"/>
+          </svg>`;
+      }
+
+      document.getElementById('hojas-ruletas').outerHTML = RULETAS.map(
+        (r) => `<section class="hoja-recorte ruleta-hoja c-${r.color}">
+            <div class="cabeza cabeza--icono">
+              <span class="cabeza__icono">${picto(r.icono)}</span>
+              <div><p class="antetitulo">Ruleta ${r.numero} de 3 · Para recortar</p><h1>${r.pregunta} ${r.nombre}</h1></div>
+              <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">
+            </div>
+            ${ruleta(r, 0.97)}
+            <div class="ruleta-pie">
+              <div class="flecha-pieza">${flecha()}<p>Flecha ${r.numero}</p></div>
+              <div>
+                <h2>Cómo se monta</h2>
+                <ol class="montar">
+                  <li>Recorta la ruleta y la flecha, plastifícalas y recórtalas con 3 mm de plástico.</li>
+                  <li>Agujerea con un punzón las dos cruces. Agranda un poco el agujero de la flecha.</li>
+                  <li>Une la flecha a la ruleta con un encuadernador. Abre sus patas por detrás sin apretar y tápalas con cinta.</li>
+                </ol>
+                <p class="sin-encuadernador"><strong>Sin encuadernador:</strong> una carta boca abajo del montón de ${r.montones} (página ${r.numero === 3 ? PAGINAS.cartas2 : PAGINAS.cartas1}), o un dado: avanza un botón tantas casillas como puntos.</p>
+              </div>
+            </div>
+            <p class="atribucion">${ATRIBUCION} ${r.id === 'que' ? 'La ruleta, la flecha, los copos y las marcas «?» (perdido) y «roto» son de IdEducando.' : 'La ruleta, la flecha y los copos son de IdEducando.'}</p>
+          </section>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Cartas: las 24 de las ruletas y 8 en blanco (3 de personaje, 3 de lugar y 2 de problema)
+      // ---------------------------------------------------------------------
+      const carta = (r, [p, texto, extra], i) =>
+        `<li class="carta c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span></p><span class="carta__num" aria-hidden="true">${i + 1}</span><div class="carta__dibujo">${picto(p)}${marca(extra)}</div><p class="carta__texto">${texto}</p></li>`;
+      const cartaBlanca = (r) =>
+        `<li class="carta carta--blanca c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span></p><div class="carta__dibujo"></div><p class="carta__lineas"><span></span><span></span></p></li>`;
+      const blancas = (r, n) => Array.from({ length: n }, () => cartaBlanca(r)).join('');
+
+      document.getElementById('hojas-cartas').outerHTML = [
+        {
+          titulo: 'Cartas del personaje y del lugar',
+          lista: RULETAS[0].opciones.map((o, i) => carta(RULETAS[0], o, i)).join('') + RULETAS[1].opciones.map((o, i) => carta(RULETAS[1], o, i)).join(''),
+          pie: [
+            '<strong>Para jugar sin encuadernador:</strong> un montón boca abajo por pregunta. Se saca una carta de cada montón.',
+            '<strong>Para la tira:</strong> después de girar las ruletas, busca las cartas que han salido y ponlas en su sitio.',
+          ],
+          dibujos: 'El diseño de las cartas es de IdEducando.',
+        },
+        {
+          titulo: 'Cartas del problema y cartas en blanco',
+          lista: RULETAS[2].opciones.map((o, i) => carta(RULETAS[2], o, i)).join('') + blancas(RULETAS[0], 3) + blancas(RULETAS[1], 3) + blancas(RULETAS[2], 2),
+          pie: [
+            '<strong>Cartas en blanco:</strong> para inventar personajes, lugares y problemas. Que dibuje y escriba antes de plastificar, o después con rotulador de pizarra.',
+            'Si pegas pictogramas de ARASAAC en las cartas en blanco, cítalos igual. Lo mejor: su propio dibujo.',
+          ],
+          dibujos: 'El diseño de las cartas y las marcas «?» (perdido) y «roto» son de IdEducando.',
+        },
+      ]
+        .map(
+          (h) => `<section class="hoja-recorte">
+            <div class="aviso"><h1>${h.titulo}</h1><span>Corta por la línea de puntos</span></div>
+            <ul class="cartas">${h.lista}</ul>
+            <div class="cartas-pie"><p>${h.pie[0]}</p><p>${h.pie[1]}</p></div>
+            <p class="atribucion">${ATRIBUCION} ${h.dibujos}</p>
+          </section>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Tira para contar y sus ideas para el final
+      // ---------------------------------------------------------------------
+      const hueco = (color, icono, texto, clase = '') =>
+        `<div class="hueco ${clase} c-${color}">${picto(icono)}<span>${texto}</span></div>`;
+      document.getElementById('tira').innerHTML =
+        `<li class="tira__parte c-azul"><p class="tira__arranque"><span class="marca-parte">1</span>Había una vez…</p><div class="tira__huecos">${hueco('azul', 10276, '¿Quién?')}${hueco('verde', 7764, '¿Dónde?')}</div></li>` +
+        `<li class="tira__parte c-coral"><p class="tira__arranque"><span class="marca-parte">2</span>De repente…</p><div class="tira__huecos">${hueco('coral', 22620, '¿Qué pasa?')}</div></li>` +
+        `<li class="tira__parte c-morado"><p class="tira__arranque"><span class="marca-parte">3</span>Al final…</p><div class="tira__huecos">${hueco('morado', 5358, '¿Qué hace? ¿Cómo acaba? Dibújalo o dilo.', 'hueco--dibujo')}</div></li>`;
+      document.getElementById('ideas').innerHTML = IDEAS.map(([p, texto]) => `<li>${picto(p)}<span>${texto}</span></li>`).join('');
+      document.getElementById('pasos-tira').innerHTML = [
+        [6006, 'Giro las ruletas'],
+        ['d:cartas', 'Pongo las cartas'],
+        [6461, 'Cuento la historia'],
+        [2381, 'Escucho a los demás'],
+      ]
+        .map(([p, t]) => `<li>${imagen(p)}<span>${t}</span></li>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Plan de la historia
+      // ---------------------------------------------------------------------
+      document.getElementById('plan').innerHTML = PARTES.map(
+        (p) => `<li class="plan__parte c-${p.color}">
+            <h2 class="plan__cab"><b>${p.n}</b>${p.nombre}</h2>
+            <div class="plan__principal"><div>${p.principal[0].map((n) => picto(n)).join('')}</div><p>${p.principal[1]}</p></div>
+            <ul class="plan__preguntas">${p.preguntas.map(([n, t]) => `<li>${picto(n)}<span>${t}</span></li>`).join('')}</ul>
+            <div class="plan__notas"><p>Palabras clave o dibujo</p><span></span><span></span><span></span><span></span></div>
+          </li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Palabras para unir: tres tiras iguales
+      // ---------------------------------------------------------------------
+      const tiraConectores = (primera) => `<div class="conectores">
+          ${primera ? '<h2 class="conectores__titulo">' : '<p class="conectores__titulo">'}${dibujo('unir')}Palabras para unir mi historia${primera ? '</h2>' : '</p>'}
+          <ol class="conectores__grupos">${PARTES.map(
+            (p) => `<li class="c-${p.color}"><p class="grupo__cab"><b aria-hidden="true">${p.n}</b>${p.nombre}</p><ul class="grupo__lista">${p.conectores.map((c) => `<li>${c}</li>`).join('')}</ul></li>`,
+          ).join('')}</ol>
+        </div>`;
+      document.getElementById('conectores').innerHTML = tiraConectores(true) + tiraConectores(false) + tiraConectores(false);
+
+      // ---------------------------------------------------------------------
+      // Hojas para escribir
+      // ---------------------------------------------------------------------
+      document.getElementById('pasos-frases').innerHTML = PASOS_FRASES.map(([p, t]) => `<li>${picto(p)}<span>${t}</span></li>`).join('');
+      document.getElementById('frases').innerHTML = FRASES.map(
+        ([color, n, arranque]) => `<li class="frase c-${color}">
+            <div class="frase__izq"><p class="frase__arranque"><span class="marca-parte">${n}</span>${arranque}</p><div class="frase__dibujo">Dibujo</div></div>
+            <div class="frase__renglones"><span></span><span></span><span></span><span></span></div>
+          </li>`,
+      ).join('');
+      document.getElementById('miniplan').innerHTML = PARTES.map(
+        (p) => `<li class="c-${p.color}"><p><span class="marca-parte">${p.n}</span>${p.nombre}</p><span class="r"></span><span class="r"></span></li>`,
+      ).join('');
+      document.getElementById('renglones-historia').innerHTML = '<span></span>'.repeat(10);
+      document.getElementById('revisar').innerHTML = REVISAR.map(
+        ([p, t]) => `<li><span class="casilla"></span>${imagen(p)}<span>${t}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Autoevaluación (dos copias)
+      // ---------------------------------------------------------------------
+      const formaVacia = (nivel) => {
+        const forma = {
+          1: `<circle cx="50" cy="50" r="44" fill="#fff" stroke="${M}" stroke-width="7"/>`,
+          2: `<rect x="7" y="7" width="86" height="86" rx="12" fill="#fff" stroke="${M}" stroke-width="7"/>`,
+          3: `<path d="M50 4L96 50L50 96L4 50Z" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`,
+        }[nivel];
+        return `<svg class="forma-vacia n${nivel}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">${forma}<text x="50" y="${nivel === 3 ? 66 : 69}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${nivel === 3 ? 46 : 54}" fill="${M}">${nivel}</text></svg>`;
+      };
+      const auto = (primera) => `<div class="auto">
+          <div class="auto__cab">
+            ${picto(31408)}
+            <div>${primera ? '<h1 class="auto__titulo">¿Qué tal ha ido mi historia?</h1>' : '<p class="auto__titulo">¿Qué tal ha ido mi historia?</p>'}<p class="linea-dato">Me llamo:<span></span></p></div>
+            <p class="auto__nivel">Rodea tu nivel<span>${formaVacia(1)}${formaVacia(2)}${formaVacia(3)}</span></p>
+          </div>
+          <table class="auto__tabla">
+            <thead><tr><th scope="col">Mi historia</th><th scope="col">${dibujo('si')}Sí</th><th scope="col">${picto(4570)}Con ayuda</th><th scope="col">${dibujo('brote')}Todavía no</th></tr></thead>
+            <tbody>${AUTO.map(([p, t]) => `<tr><th scope="row"><span>${imagen(p)}<span>${t}</span></span></th><td><span class="redondel"></span></td><td><span class="redondel"></span></td><td><span class="redondel"></span></td></tr>`).join('')}</tbody>
+          </table>
+          <div class="auto__reto"><p>Mi reto:</p><ul>${RETOS.map(([p, t]) => `<li>${imagen(p)}<span>${t}</span></li>`).join('')}</ul></div>
+        </div>`;
+      document.getElementById('autoevaluacion').innerHTML = auto(true) + auto(false);
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('lista-niveles').innerHTML = [
+        [1, 'Lo cuento.', 'En voz alta, con las tres cartas en la tira y sus arranques.'],
+        [2, 'Tres frases.', 'Dichas, escritas o dictadas, unidas con palabras para unir.'],
+        [3, 'Lo escribo con un plan.', 'Planea las cuatro partes, escribe un texto corto y lo revisa con la lista.'],
+      ]
+        .map(
+          ([n, titulo, texto]) =>
+            `<li><span class="nv n${n} grande" aria-hidden="true">${n}</span><span><strong>Nivel ${n}, ${['círculo', 'cuadrado', 'rombo'][n - 1]}. ${titulo}</strong> ${texto}</span></li>`,
+        )
+        .join('');
+
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, p, titulo, texto, ...claves]) => {
+        const pags = claves.map((c) => PAGINAS[c]);
+        const ultima = pags[pags.length - 1];
+        const pagina = pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        return `<li class="c-${color}">${imagen(p)}<div><h2>${titulo}</h2><p>${texto}</p></div><p class="mapa__pagina">${pagina}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: las tres ruletas de verdad, reducidas, con su flecha, un bocadillo y copos
+      // ---------------------------------------------------------------------
+      // [ruleta, izquierda, arriba (mm), diámetro (mm), giro]. Cada flecha señala la casilla 1:
+      // un pingüino, en una cabaña y pierde su gorro, la historia del bocadillo.
+      const ESCENA = [
+        [1, 128, 116, 76, 6],
+        [0, 8, 150, 86, -7],
+        [2, 100, 192, 72, -4],
+      ];
+      document.getElementById('escena').innerHTML =
+        ESCENA.map(([i, x, y, d, giro]) => {
+          const e = d / 180;
+          const fl = f1(31 * e);
+          const alto = f1(49 * e);
+          // El eje de la flecha (15,5 mm desde arriba y desde la izquierda de su dibujo) va en el centro de la ruleta.
+          const sitio = f1(d / 2 - 15.5 * e);
+          return `<div style="left:${x}mm;top:${y}mm;width:${d}mm;height:${d}mm;transform:rotate(${giro}deg)">
+              ${ruleta(RULETAS[i], f1(e), false)}${flecha(false).replace('<svg ', `<svg style="left:${sitio}mm;top:${sitio}mm;width:${fl}mm;height:${alto}mm" `)}
+            </div>`;
+        }).join('') +
+        `<div class="bocadillo" style="left:38mm;top:128mm"><p>«Había una vez un pingüino en una cabaña. De repente, pierde su gorro…»</p>${svg(`<path d="M2 0L14 0L4 20Z" fill="#fff" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/><path d="M1 0H15" stroke="#fff" stroke-width="4"/>`, '', '0 0 16 21')}</div>`;
+
+      const COPOS = [
+        [100, 172, 8, '#2f6fd6'],
+        [186, 200, 10, '#8c4fb8'],
+        [14, 242, 9, '#8c4fb8'],
+        [64, 250, 12, '#2f6fd6'],
+        [182, 238, 8, M],
+        [96, 166, 7, M],
+      ];
+      document.getElementById('copos-portada').innerHTML = COPOS.map(
+        ([x, y, t, color]) =>
+          `<div class="copo" style="left:${x}mm;top:${y}mm;width:${t}mm;height:${t}mm">${svg(copo(color, 6))}</div>`,
+      ).join('');
+
+      // Atribuciones y referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-atribucion]')) el.textContent = ATRIBUCION;
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

@@ -56,6 +56,16 @@
         display: block;
       }
 
+      /* Punto de la versión corta: marca las frases que forman la historia corta, para los más pequeños */
+      .punto {
+        display: inline-block;
+        width: 0.62em;
+        height: 0.62em;
+        border-radius: 50%;
+        background: var(--marino);
+        vertical-align: -0.02em;
+      }
+
       /* ---------- Portada ---------- */
       .portada .circulo {
         position: absolute;
@@ -216,7 +226,7 @@
         background: var(--coral);
       }
 
-      /* ---------- Cabecera de las hojas ---------- */
+      /* ---------- Cabecera de las hojas de las historias y de la plantilla ---------- */
       .cabecera {
         display: grid;
         grid-template-columns: 23mm minmax(0, 1fr) 34mm;
@@ -256,7 +266,7 @@
 
       .cabecera h1 {
         margin: 0;
-        font-size: 25pt;
+        font-size: 26pt;
         line-height: 1.05;
         text-wrap: balance;
       }
@@ -294,7 +304,7 @@
         gap: 1.3mm;
         margin-left: auto;
         white-space: nowrap;
-        font-size: 10pt;
+        font-size: 11pt;
         color: var(--suave);
       }
 
@@ -338,33 +348,28 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin: 1mm 0 0;
+        margin: 3mm 0 1mm;
         padding: 0;
         list-style: none;
       }
 
-      /* Camino de puntos que une las frases */
+      /* Camino de puntos que une las frases, por el centro de los pictogramas */
       .camino::before {
         content: '';
         position: absolute;
-        left: 8.5mm;
-        top: 9mm;
-        bottom: 9mm;
-        border-left: 1mm dotted var(--c);
+        left: 10.95mm;
+        top: 11.5mm;
+        bottom: 11.5mm;
+        border-left: 1.1mm dotted var(--c);
       }
 
       .frase {
         display: grid;
-        grid-template-columns: 18mm minmax(0, 1fr);
+        grid-template-columns: 23mm minmax(0, 1fr);
         align-items: center;
-        gap: 5mm;
-        min-height: 18mm;
+        gap: 6mm;
+        min-height: 23mm;
         margin: 0;
-      }
-
-      /* Un poco más de aire entre la introducción, el cuerpo y la conclusión */
-      .frase--parte {
-        margin-top: 2.2mm;
       }
 
       .marco-picto {
@@ -372,30 +377,36 @@
         z-index: 1;
         display: grid;
         place-items: center;
-        width: 18mm;
-        height: 18mm;
-        border: 0.8mm solid var(--c);
-        border-radius: 4mm;
+        width: 23mm;
+        height: 23mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4.4mm;
         background: #fff;
       }
 
       .marco-picto img {
-        width: 14.6mm;
-        height: 14.6mm;
+        width: 19.5mm;
+        height: 19.5mm;
+      }
+
+      /* Las frases de la versión corta llevan el punto en la esquina del pictograma */
+      .frase--corta .marco-picto::after {
+        content: '';
+        position: absolute;
+        top: -2.2mm;
+        left: -2.8mm;
+        width: 5.8mm;
+        height: 5.8mm;
+        border-radius: 50%;
+        background: var(--marino);
+        box-shadow: 0 0 0 0.9mm #fff;
       }
 
       .frase p {
         margin: 0;
-        font-size: 18pt;
-        line-height: 1.17;
+        font-size: 22pt;
+        line-height: 1.16;
         text-wrap: pretty;
-      }
-
-      .hueco {
-        display: inline-block;
-        min-width: 62mm;
-        border-bottom: 0.45mm solid var(--marino);
-        transform: translateY(-0.8mm);
       }
 
       .para-adulto {
@@ -404,10 +415,10 @@
         gap: 2.4mm;
         align-items: start;
         margin: 3mm 0 0;
-        padding: 2mm 3mm;
+        padding: 2.2mm 3.2mm;
         border-radius: 2.5mm;
         background: var(--crema);
-        font-size: 10pt;
+        font-size: 11pt;
         line-height: 1.3;
       }
 
@@ -430,28 +441,32 @@
       }
 
       .atribucion {
-        margin: 1.4mm 0 0;
-        font-size: 7.5pt;
+        margin: 1.6mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
         color: var(--suave);
       }
 
-      /* ---------- De un vistazo ---------- */
+      /* ---------- De un vistazo y cómo leerlas ---------- */
+      .vistazo {
+        font-size: 11.5pt;
+        line-height: 1.38;
+      }
+
       .vistazo h1 {
         font-size: 24pt;
         margin-bottom: 1.5mm;
       }
 
       .vistazo__intro {
-        margin: 0 0 2.5mm;
-        font-size: 11pt;
-        line-height: 1.4;
+        margin: 0 0 3mm;
       }
 
       .leyenda {
         display: flex;
         gap: 6mm;
-        margin: 0 0 3mm;
-        font-size: 10pt;
+        margin: 0 0 2.6mm;
+        font-size: 11pt;
       }
 
       .leyenda span {
@@ -472,7 +487,7 @@
 
       .zona {
         display: grid;
-        grid-template-columns: 21mm minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: 25mm minmax(0, 1fr) minmax(0, 1fr);
         gap: 2.6mm;
         align-items: stretch;
       }
@@ -501,30 +516,30 @@
 
       .tarjeta-historia {
         display: grid;
-        grid-template-columns: 15mm minmax(0, 1fr);
-        gap: 2.4mm;
+        grid-template-columns: 16mm minmax(0, 1fr);
+        gap: 2.6mm;
         align-items: start;
-        padding: 2.2mm 2.8mm;
+        padding: 2.4mm 3mm;
         border: 0.4mm solid var(--linea);
         border-top: 1.4mm solid var(--c);
         border-radius: 3mm;
-        font-size: 10pt;
-        line-height: 1.25;
+        font-size: 11pt;
+        line-height: 1.28;
       }
 
       .tarjeta-historia img {
-        width: 15mm;
-        height: 15mm;
+        width: 16mm;
+        height: 16mm;
       }
 
       .tarjeta-historia h2 {
-        margin: 0 0 0.8mm;
-        font-size: 12pt;
+        margin: 0 0 1mm;
+        font-size: 13pt;
         line-height: 1.1;
       }
 
       .tarjeta-historia p {
-        margin: 0 0 0.5mm;
+        margin: 0 0 0.6mm;
       }
 
       .tipo {
@@ -534,7 +549,7 @@
         margin: 0 0 0.6mm;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 8.5pt;
+        font-size: 9pt;
         letter-spacing: 0.04em;
         text-transform: uppercase;
       }
@@ -548,19 +563,36 @@
         color: var(--suave);
       }
 
-      .vistazo .caja {
-        margin: 3mm 0 0;
-        padding: 2.6mm 4mm;
-        font-size: 10.5pt;
-        line-height: 1.35;
+      .vistazo h2.leer {
+        font-size: 15pt;
+        margin: 5mm 0 1.6mm;
+      }
+
+      .vistazo ol {
+        margin-bottom: 3.5mm;
+      }
+
+      .vistazo ol li {
+        margin-bottom: 1mm;
+      }
+
+      .vistazo .dos-columnas {
+        align-items: stretch;
+      }
+
+      .vistazo .dos-columnas .caja {
+        margin: 0;
+        padding: 3mm 4mm;
+        font-size: 11pt;
+        line-height: 1.36;
       }
 
       /* ---------- Plantilla ---------- */
       .icono-titulo--vacio {
         border-style: dashed;
         box-shadow: none;
-        font-size: 7.5pt;
-        line-height: 1.15;
+        font-size: 10pt;
+        line-height: 1.1;
         text-align: center;
         color: var(--suave);
         padding: 2mm;
@@ -600,8 +632,8 @@
         border: 0.6mm dashed var(--suave);
         border-radius: 3mm;
         text-align: center;
-        font-size: 8.5pt;
-        line-height: 1.25;
+        font-size: 11pt;
+        line-height: 1.2;
         color: var(--suave);
       }
 
@@ -610,7 +642,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin: 2mm 0 0;
+        margin: 3mm 0 0;
         padding: 0;
         list-style: none;
       }
@@ -619,42 +651,55 @@
         margin: 1mm 0 0;
         font-family: var(--titulos);
         font-weight: 600;
-        font-size: 9.5pt;
+        font-size: 11pt;
         color: var(--suave);
       }
 
       .fila {
         display: grid;
         grid-template-columns: 20mm minmax(0, 1fr);
-        gap: 4mm;
-        align-items: center;
+        gap: 5mm;
+        align-items: end;
         margin: 0;
       }
 
       .fila__foto {
+        position: relative;
         display: grid;
         place-items: center;
         width: 20mm;
         height: 20mm;
-        padding: 1mm;
+        padding: 0.5mm;
         border: 0.5mm dashed var(--suave);
-        border-radius: 3mm;
+        border-radius: 3.5mm;
         text-align: center;
-        font-size: 7pt;
+        font-size: 9.5pt;
         line-height: 1.1;
         color: var(--suave);
       }
 
-      .fila__lineas span {
-        display: block;
-        height: 9mm;
-        border-bottom: 0.35mm solid var(--marino);
+      /* Círculo vacío: se colorea en las frases de la versión corta */
+      .fila__foto::before {
+        content: '';
+        position: absolute;
+        top: -2.2mm;
+        left: -2.8mm;
+        width: 5.8mm;
+        height: 5.8mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
       }
 
-      /* ---------- Cómo escribir tu historia ---------- */
+      .fila__linea {
+        height: 12mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      /* ---------- Cómo escribir tu propia historia ---------- */
       .escribir {
         font-size: 11pt;
-        line-height: 1.4;
+        line-height: 1.36;
       }
 
       .escribir h1 {
@@ -662,34 +707,16 @@
       }
 
       .escribir h2 {
-        font-size: 13pt;
-        margin-top: 0.6em;
+        font-size: 13.5pt;
+        margin: 4mm 0 1.6mm;
       }
 
       .escribir ol > li {
-        margin-bottom: 1.2mm;
-      }
-
-      .preguntas {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 2mm 4mm;
-        margin: 1.5mm 0 1mm;
-        padding: 0;
-        list-style: none;
-      }
-
-      .preguntas li {
-        margin: 0;
-        padding-bottom: 5mm;
-        border-bottom: 0.35mm solid var(--marino);
-        font-family: var(--titulos);
-        font-weight: 600;
-        font-size: 10.5pt;
+        margin-bottom: 1mm;
       }
 
       .comprobar {
-        margin-top: 2mm;
+        margin-top: 3mm;
         padding: 2.6mm 4mm;
         border: 0.6mm solid var(--amarillo);
         border-radius: 3mm;
@@ -699,10 +726,6 @@
 
       .comprobar h2 {
         margin-top: 0;
-      }
-
-      .comprobar .renglon {
-        font-size: 11pt;
       }
 
       .comprobar .renglon .linea {
@@ -737,72 +760,6 @@
         background: #fff;
       }
 
-      .ejemplo {
-        margin: 3mm 0 0;
-        padding: 2.6mm 4mm;
-      }
-
-      .ejemplo h3 {
-        margin: 0 0 1.2mm;
-        font-size: 11.5pt;
-      }
-
-      /* ---------- Guía ---------- */
-      .guia {
-        font-size: 10.5pt;
-        line-height: 1.4;
-      }
-
-      .guia h1 {
-        font-size: 22pt;
-      }
-
-      .guia h2 {
-        font-size: 14pt;
-        margin-top: 0.75em;
-      }
-
-      .guia .caja {
-        padding: 3mm 4mm;
-        line-height: 1.36;
-      }
-
-      .guia .caja h2,
-      .guia .caja h3 {
-        margin-top: 0;
-        font-size: 12pt;
-        margin-bottom: 1.5mm;
-      }
-
-      .guia ol li,
-      .guia ul li {
-        margin-bottom: 0.9mm;
-      }
-
-      .guia td,
-      .guia th {
-        font-size: 10pt;
-        padding: 1.4mm 2mm;
-      }
-
-      .tipos-frases th[scope='row'] {
-        white-space: nowrap;
-      }
-
-      .tabla-formula {
-        table-layout: fixed;
-      }
-
-      .tabla-formula td.num,
-      .tabla-formula th.num {
-        text-align: center;
-        white-space: normal;
-      }
-
-      .tabla-formula thead th {
-        font-size: 9.5pt;
-      }
-
       .dos-columnas-lista {
         columns: 2;
         column-gap: 7mm;
@@ -812,47 +769,79 @@
         break-inside: avoid;
       }
 
-      .ejemplo-preguntas {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1.6mm 3mm;
-        margin: 1.5mm 0 0;
-        padding: 0;
-        list-style: none;
+      /* ---------- Qué hacer en el momento ---------- */
+      .momento {
+        font-size: 11pt;
+        line-height: 1.32;
       }
 
-      .ejemplo-preguntas li {
-        margin: 0;
-        padding: 1.4mm 2.4mm;
-        border-radius: 2mm;
-        background: #fff;
-        font-size: 10.5pt;
-        line-height: 1.3;
+      .momento h1 {
+        font-size: 21pt;
+      }
+
+      .momento .columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4mm;
+        align-items: start;
+      }
+
+      .momento .caja {
+        margin: 0 0 3.5mm;
+        padding: 3mm 4mm;
+      }
+
+      .momento .caja h2 {
+        margin: 0 0 1.4mm;
+        font-size: 13.5pt;
+      }
+
+      .momento p,
+      .momento ol,
+      .momento ul {
+        margin-bottom: 0.45em;
+      }
+
+      .momento li {
+        margin-bottom: 0.7mm;
+      }
+
+      .fuente-caja {
+        color: var(--suave);
       }
 
       /* ---------- Hoja de seguimiento ---------- */
       .seguimiento-hoja {
         font-size: 11pt;
-        line-height: 1.4;
+        line-height: 1.36;
       }
 
       .seguimiento-hoja h1 {
         font-size: 22pt;
       }
 
+      .seguimiento-hoja ul {
+        margin-bottom: 3mm;
+      }
+
+      .seguimiento-hoja li {
+        margin-bottom: 0.8mm;
+      }
+
       .seguimiento td {
-        height: 11mm;
+        height: 11.5mm;
         border: 0.3mm solid var(--suave);
       }
 
       .seguimiento .ejemplo td {
         height: auto;
         color: var(--suave);
-        font-size: 10pt;
+        font-size: 11pt;
       }
 
       .seguimiento th {
-        font-size: 10pt;
+        font-size: 11pt;
+        line-height: 1.2;
       }
 
       /* ---------- Familias ---------- */
@@ -868,7 +857,7 @@
 
       .familias h2 {
         font-size: 15pt;
-        margin-top: 0.5em;
+        margin-top: 0.6em;
         margin-bottom: 0.35em;
       }
 
@@ -885,36 +874,8 @@
         margin-bottom: 1mm;
       }
 
-      .mini-zonas {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 3mm;
-        margin: 2.5mm 0 1mm;
-      }
-
-      .mini-zonas figure {
-        display: flex;
-        align-items: center;
-        gap: 2mm;
-        margin: 0;
-        padding: 1.6mm 2mm;
-        border-left: 1.4mm solid var(--c);
-        border-radius: 3mm;
-        background: var(--t);
-        font-family: var(--titulos);
-        font-weight: 700;
-        font-size: 11pt;
-        line-height: 1.1;
-      }
-
-      .mini-zonas svg {
-        flex: none;
-        width: 9mm;
-        height: 9mm;
-      }
-
       .recuadro {
-        margin-top: 3mm;
+        margin-top: 4mm;
         padding: 3mm 4mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 3mm;
@@ -927,6 +888,7 @@
 
       .recuadro .casillas {
         margin-bottom: 2mm;
+        font-size: 12pt;
       }
 
       .renglon-etiqueta {
@@ -939,35 +901,66 @@
 
       .renglon-etiqueta span {
         flex: 1;
-        height: 6.5mm;
+        height: 7mm;
         border-bottom: 0.35mm solid var(--linea);
       }
 
       .familias .creditos {
-        margin-top: 3mm;
+        margin-top: 4mm;
         padding-top: 2mm;
-        font-size: 8pt;
+        font-size: 11pt;
       }
 
-      /* ---------- Fuentes y créditos ---------- */
+      /* ---------- Fuentes y créditos ----------
+         Como en otros materiales, esta hoja usa márgenes algo más estrechos para que quepa entera. */
+      @page fuentes {
+        margin: 12mm 13mm 17mm 13mm;
+      }
+
       .fuentes {
-        font-size: 10.5pt;
-        line-height: 1.42;
+        page: fuentes;
+        font-size: 11pt;
+        line-height: 1.27;
       }
 
       .fuentes h1 {
-        font-size: 22pt;
+        font-size: 21pt;
+        margin-bottom: 0.35em;
       }
 
       .fuentes h2 {
-        font-size: 14pt;
-        margin-top: 0.9em;
+        font-size: 13.5pt;
+        margin: 0.6em 0 0.25em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.5em;
+      }
+
+      .fuentes .caja {
+        padding: 3mm 4mm;
+        margin-bottom: 1mm;
+      }
+
+      .fuentes .caja h2 {
+        margin-top: 0;
+      }
+
+      .fuentes .caja ul {
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes .caja li {
+        margin-bottom: 0.3mm;
+      }
+
+      .fuentes .referencias {
+        padding-left: 4mm;
+        margin-bottom: 0.4em;
       }
 
       .fuentes .referencias li {
-        margin-bottom: 1.2mm;
-        font-size: 10pt;
-        line-height: 1.35;
+        margin-bottom: 0.5mm;
       }
     </style>
   </head>
@@ -985,7 +978,8 @@
         <p class="antetitulo portada__antetitulo">Historias sociales · Emociones y compañeros</p>
         <h1 class="portada__titulo">Con calma&nbsp;<br />y con palabras</h1>
         <p class="portada__subtitulo">
-          Cuatro historias con pictogramas para los enfados fuertes, las ganas de morder, compartir y decir lo que me pasa.
+          Cuatro historias cortas con pictogramas para los enfados fuertes, las ganas de morder, compartir y decir lo que me
+          pasa.
         </p>
         <div class="portada__pie">
           <p>
@@ -995,38 +989,59 @@
         </div>
       </div>
       <div class="escena" aria-hidden="true" id="escena"></div>
-      <div class="etiqueta-kit" aria-hidden="true"><div><span data-icono="estrella"></span>Con plantilla para escribir la tuya</div></div>
+      <div class="etiqueta-kit" aria-hidden="true"><div><span data-icono="estrella"></span>Con versión corta para 3 años</div></div>
     </section>
 
     <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
     <section class="montaje" data-montaje></section>
 
     <!-- ======================================================================
-         DE UN VISTAZO
+         DE UN VISTAZO Y CÓMO LEERLAS
          ====================================================================== -->
     <section class="hoja vistazo">
       <p class="antetitulo">Antes de empezar</p>
       <h1>De un vistazo</h1>
       <p class="vistazo__intro">
-        Cuatro historias sobre dos temas: las emociones y los compañeros. En cada tema hay una historia que explica un
-        momento que cuesta y otra que celebra algo que el niño o la niña ya hace bien. Cada una trata
-        <strong>una sola conducta</strong> y se lee <strong>justo antes</strong> de ese momento.
+        Cuatro historias sociales muy cortas, de siete frases con su pictograma. Una historia social describe un momento y,
+        a veces, sugiere con suavidad qué hacer. Las creó Carol Gray (Gray y Garand, 1993) para el alumnado con trastorno
+        del espectro del autismo (TEA). Cada una trata <strong>una sola conducta</strong>.
       </p>
       <p class="leyenda" id="leyenda"></p>
       <div class="zonas" id="zonas"></div>
-      <div class="caja caja--coral">
-        <p>
-          <strong>Primero, la calma.</strong> No leas estas historias en plena rabieta, justo después de un mordisco ni como
-          castigo. La primera vez, léelas en un momento tranquilo. Después, justo antes del momento que cuesta. Qué hacer
-          cuando ya ha pasado algo está en la página <span data-pagina="en-el-momento"></span>.
-        </p>
-      </div>
-      <div class="caja caja--amarilla">
-        <p>
-          <strong>La fórmula de Carol Gray.</strong> En cada historia, las frases que describen son al menos cuatro veces
-          más que las que orientan, y como mucho una orienta al niño o la niña. El título cuenta como frase descriptiva. La
-          cuenta está al pie de cada historia y en la tabla de la página <span data-pagina="tabla-formula"></span>.
-        </p>
+
+      <h2 class="leer">Cómo leerlas</h2>
+      <ol>
+        <li>
+          <strong>La primera vez, en un momento tranquilo.</strong> Nunca en plena rabieta, justo después de un mordisco ni
+          como castigo.
+        </li>
+        <li>
+          <strong>Después, justo antes del momento que cuesta,</strong> cada día que llegue. Si la pide más veces, léela.
+        </li>
+        <li><strong>Lee despacio y señala cada pictograma.</strong> Si ya lee, que la lea él o ella.</li>
+        <li>
+          <strong>Comprueba que la entiende:</strong> «¿Qué puedes decir si te quitan un juguete?». Si no habla, que
+          señale el pictograma.
+        </li>
+        <li><strong>Colorea con él o con ella una estrella</strong> de «Lo he leído».</li>
+        <li>
+          <strong>Después del momento,</strong> di lo que salió bien: «Has dicho “¡Para!” y te he ayudado».
+        </li>
+      </ol>
+
+      <div class="dos-columnas">
+        <div class="caja caja--amarilla">
+          <p>
+            <strong>Versión corta, para 3 años.</strong> Las frases con punto <span class="punto"></span> forman una
+            historia más corta que se entiende sola. Empieza por ella y añade las demás poco a poco.
+          </p>
+        </div>
+        <div class="caja caja--coral">
+          <p>
+            <strong>Si ya ha pasado algo,</strong> lo que ayuda es la respuesta tranquila del adulto. Qué hacer si muerde o
+            si tiene una rabieta: página <span data-pagina="en-el-momento"></span>.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -1039,7 +1054,7 @@
     <section class="hoja plantilla z-plantilla">
       <span class="agujero agujero--arriba"></span><span class="agujero agujero--abajo"></span>
       <div class="cabecera">
-        <div class="icono-titulo icono-titulo--vacio">Pega un pictograma o una foto</div>
+        <div class="icono-titulo icono-titulo--vacio">Pega un pictograma</div>
         <div>
           <p class="antetitulo">Plantilla para escribir tu propia historia</p>
           <h1>Mi historia</h1>
@@ -1058,69 +1073,57 @@
       </div>
       <ol class="filas" id="filas-plantilla"></ol>
       <p class="atribucion">
-        Antes de plastificarla, comprueba la fórmula con la página <span data-pagina="escribir"></span>. Pautas basadas en los
-        criterios de Carol Gray (versión 10.4, 2023).
+        Una frase de 3 a 7 palabras en cada línea. Colorea el círculo de las frases de la versión corta. Antes de
+        plastificarla, comprueba la fórmula (página <span data-pagina="escribir"></span>).
       </p>
     </section>
 
     <!-- ======================================================================
-         CÓMO ESCRIBIR TU PROPIA HISTORIA
+         CÓMO ESCRIBIR TU PROPIA HISTORIA (Y ADAPTARLAS)
          ====================================================================== -->
     <section class="hoja escribir">
       <div class="rayos" style="margin-bottom: 5mm"></div>
       <p class="antetitulo">Para el adulto · Plantilla</p>
       <h1>Cómo escribir tu propia historia</h1>
       <p>
-        Con la plantilla de la página anterior puedes escribir una historia con el nombre y las fotos del niño o la niña.
-        Estos pasos siguen los criterios de Carol Gray (Gray y otros, 2023).
+        Con la plantilla de la página <span data-pagina="plantilla"></span> puedes escribir una historia con el nombre y las
+        fotos del niño o la niña. Estos pasos siguen los criterios 10.4 de Carol Gray (Gray y otros, 2023).
       </p>
       <ol>
         <li>
-          <strong>Observa antes de escribir.</strong> Usa el «Registro de observación ABC» de IdEducando, que recoge lo que
-          pasa antes (A), la conducta (B) y lo que pasa después (C). A veces ayuda más otra cosa, como cambiar el sitio o la
-          rutina.
+          <strong>Observa antes</strong> con el Registro de observación ABC de IdEducando: qué pasa antes (A), la conducta
+          (B) y qué pasa después (C). A veces ayuda más otra cosa, como cambiar el sitio o la rutina.
         </li>
         <li>
-          <strong>Elige una sola conducta y un solo momento.</strong> Decide si la historia explica algo que cuesta
-          (situación) o celebra algo que ya hace bien (celebra). Al menos la mitad de sus historias deberían celebrar.
+          <strong>Una sola conducta y un solo momento.</strong> Al menos la mitad de sus historias, que celebren algo que
+          ya hace bien.
+        </li>
+        <li><strong>Piensa en seis preguntas:</strong> dónde, cuándo, quién, qué, cómo y por qué.</li>
+        <li>
+          <strong>Unas 7 frases de 3 a 7 palabras,</strong> una idea por frase, en primera persona y en presente. Usa
+          «a&nbsp;veces» y «normalmente»; evita «tengo que», «no debo», «siempre» y «nunca».
         </li>
         <li>
-          <strong>Responde a las seis preguntas.</strong> Apunta las respuestas antes de escribir:
-          <ul class="preguntas">
-            <li>¿Dónde?</li>
-            <li>¿Cuándo?</li>
-            <li>¿Quién?</li>
-            <li>¿Qué pasa?</li>
-            <li>¿Cómo?</li>
-            <li>¿Por qué?</li>
-          </ul>
+          <strong>Tres partes:</strong> introducción, cuerpo y conclusión en positivo. Un pictograma o una foto en cada
+          frase, sin otros niños ni niñas.
         </li>
-        <li>
-          <strong>Escribe en primera persona y en presente,</strong> con frases cortas y palabras que ya conoce. Usa «a&nbsp;veces»
-          o «normalmente», y evita «tengo que», «no debo», «siempre» y «nunca».
-        </li>
-        <li>
-          <strong>Ordénala en tres partes:</strong> una introducción que dice de qué trata, un cuerpo con los detalles y
-          una conclusión que lo resume en positivo.
-        </li>
-        <li>
-          <strong>Pon un pictograma o una foto en cada frase.</strong> Fotos de los sitios reales y de quien protagoniza
-          la historia, sin otros niños ni niñas.
-        </li>
-        <li><strong>Cuenta las frases</strong> con este recuadro y corrige hasta que cumpla.</li>
+        <li><strong>Versión corta:</strong> 4 o 5 frases que se entiendan solas. Colorea su círculo.</li>
       </ol>
 
       <div class="comprobar">
-        <h2>Comprueba la fórmula</h2>
-        <p class="renglon"><span>Frases descriptivas (cuenta también el título):</span><span class="linea"></span></p>
-        <p class="renglon">
-          <span>Frases de orientación al niño o la niña (como mucho 1):</span><span class="linea"></span>
+        <h2>Comprueba la fórmula (criterio 8)</h2>
+        <p>
+          <strong>Describen:</strong> cuentan qué pasa, dónde, quién y qué sienten otras personas («Un mordisco hace
+          daño»). El título también describe. <strong>Orientan:</strong> sugieren qué hacer, al niño o la niña («Puedo ir
+          al rincón de la calma») o a un adulto («Mi profe viene y me ayuda»). Si dudas, cuéntala como frase que orienta.
         </p>
-        <p class="renglon"><span>Frases de orientación al equipo de adultos:</span><span class="linea"></span></p>
+        <p class="renglon"><span>Frases que describen, con el título:</span><span class="linea"></span></p>
         <p class="renglon">
-          <span>Descriptivas ÷ todas las de orientación =</span><span class="linea"></span><span>(4 o más)</span>
+          <span>Frases que orientan (como mucho 1 al niño o la niña):</span><span class="linea"></span>
         </p>
-        <p style="margin: 1mm 0 0">Si no hay ninguna frase de orientación, la historia ya cumple.</p>
+        <p class="renglon">
+          <span>Describen ÷ orientan =</span><span class="linea"></span><span>(4 o más; sin frases que orientan, ya cumple)</span>
+        </p>
         <ul class="casillas">
           <li>Todo lo que cuenta es verdad.</li>
           <li>Trata una sola conducta.</li>
@@ -1129,379 +1132,145 @@
         </ul>
       </div>
 
-      <div class="caja caja--verde ejemplo">
-        <h3>Ejemplo: las seis preguntas en «Comparto el material de clase»</h3>
-        <ul class="ejemplo-preguntas">
-          <li><strong>Dónde:</strong> en clase, en la mesa o en los rincones.</li>
-          <li><strong>Cuándo:</strong> cuando trabajamos o jugamos.</li>
-          <li><strong>Quién:</strong> mis compañeros, mis compañeras y yo.</li>
-          <li><strong>Qué:</strong> quiero algo que usa otra persona.</li>
-          <li><strong>Cómo:</strong> lo pido y espero mi turno.</li>
-          <li><strong>Por qué:</strong> las cosas de clase son de todos.</li>
-        </ul>
-      </div>
+      <h2>Ideas para adaptarlas</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone varias formas de presentar la información y de participar
+        (CAST, 2024).
+      </p>
+      <ul class="dos-columnas-lista">
+        <li><strong>Si aún no lee,</strong> lee el adulto y el niño o la niña señala.</li>
+        <li><strong>Con fotos</strong> de vuestra clase encima de los pictogramas.</li>
+        <li><strong>Grabada con tu voz,</strong> para escucharla.</li>
+        <li><strong>Con otra lengua en casa,</strong> las palabras clave también en esa lengua.</li>
+        <li><strong>Para toda la clase,</strong> las dos que celebran, en la asamblea.</li>
+        <li>
+          <strong>Si algo no es verdad</strong> en vuestra clase, cámbialo con una tira de papel: «mi sitio tranquilo», si
+          no hay rincón de la calma.
+        </li>
+        <li>
+          <strong>Si habla poco o nada,</strong> el tablero «Comunicación en el bolsillo» de IdEducando y, para «¡Para!»,
+          el gesto de la mano levantada.
+        </li>
+      </ul>
     </section>
 
     <!-- ======================================================================
-         GUÍA PARA EL ADULTO
+         CUANDO YA HA PASADO: QUÉ HACER EN EL MOMENTO
          ====================================================================== -->
-    <section class="guia">
+    <section class="hoja momento">
       <div class="rayos" style="margin-bottom: 5mm"></div>
-      <p class="antetitulo">Guía para el adulto</p>
-      <h1>Cómo usar estas historias</h1>
+      <p class="antetitulo">Para el adulto</p>
+      <h1>Cuando ya ha pasado: qué hacer en el momento</h1>
       <p>
-        Este pack tiene cuatro historias sociales sobre las emociones y los compañeros. Dos explican un momento que cuesta
-        (situación): los enfados fuertes y las ganas de morder. Las otras dos celebran algo que el niño o la niña ya hace
-        bien (celebra): decir lo que le pasa y compartir el material. Cada historia trata una sola conducta y está pensada
-        para leerla justo antes de ese momento.
-      </p>
-
-      <h2>Qué es una historia social</h2>
-      <p>
-        Es un texto corto que describe un momento concreto y, a veces, sugiere con suavidad qué puede hacer el niño o la
-        niña. Carol Gray las creó a principios de los años noventa (Gray y Garand, 1993) para alumnado con trastorno del
-        espectro del autismo (TEA). Su nombre en inglés,
-        <em>Social Stories</em>, es una marca suya. Estas historias siguen sus criterios de 2023, la versión 10.4, pero ella
-        no las ha revisado.
-      </p>
-
-      <div class="caja caja--azul">
-        <h2>Qué dice la evidencia</h2>
-        <p>
-          Las narrativas sociales, el nombre general de estas historias, figuran entre las prácticas basadas en la evidencia
-          para el alumnado con TEA, aunque casi todos sus estudios son de un solo caso (Hume y otros, 2021). Un metaanálisis
-          de esos estudios concluyó que su eficacia global es de baja a dudosa (Kokina y Kern, 2010). En ese trabajo, las
-          historias funcionaron mejor en estos casos:
-        </p>
-        <ul>
-          <li>para reducir una conducta, más que para enseñar habilidades sociales;</li>
-          <li>cuando se leían justo antes de la situación;</li>
-          <li>cuando trataban una sola conducta, y no una cadena de conductas;</li>
-          <li>cuando se comprobaba que el niño o la niña había entendido la historia.</li>
-        </ul>
-        <p>
-          El mismo estudio pide prudencia con el alumnado con dificultades importantes de lenguaje o de comprensión. Por eso
-          estas historias tratan una sola conducta y se leen justo antes. Son un apoyo sencillo: úsalas dentro de un plan
-          más amplio y observa si ayudan.
-        </p>
-      </div>
-
-      <h2>Cómo están escritas</h2>
-      <p>Siguen los criterios de Carol Gray (Gray y otros, 2023):</p>
-      <ul>
-        <li>
-          Un título que dice de qué trata la historia, y tres partes: una introducción que presenta el tema, un cuerpo con
-          los detalles y una conclusión que lo resume.
-        </li>
-        <li>Respuesta a seis preguntas: dónde, cuándo, quién, qué, cómo y por qué.</li>
-        <li>
-          Primera persona y presente, con un tono positivo y paciente. No usan «tengo que» ni «no debo». Tampoco hablan de
-          castigos ni comparan con otros niños o niñas.
-        </li>
-        <li>La mitad celebran lo que el niño o la niña ya hace bien, como pide el criterio 7: aquí, dos de cuatro.</li>
-        <li>
-          Las pautas de lectura fácil de la norma UNE 153101:2018 EX, de la Asociación Española de Normalización (UNE), con
-          frases cortas y palabras de uso diario. Aún no las hemos validado con personas lectoras.
-        </li>
-        <li>Un pictograma por frase, también en el título.</li>
-      </ul>
-
-      <p>
-        Solo hay dos tipos de frases: descriptivas y de orientación (tabla de abajo). <strong>La fórmula (criterio
-        8):</strong> las descriptivas son al menos cuatro veces más que las de orientación, y como mucho una orienta al niño
-        o la niña. Si una frase dice cómo va a ayudar un adulto en ese momento, la contamos como orientación al equipo: «Mi
-        profe viene y me ayuda». Si cuenta lo que pasa, es descriptiva: «Así, mi profe sabe que necesito ayuda». Ante la
-        duda, cuéntala como orientación: así la cuenta queda del lado seguro.
-      </p>
-
-      <table class="tipos-frases">
-        <thead>
-          <tr>
-            <th scope="col">Frases</th>
-            <th scope="col">Qué hacen</th>
-            <th scope="col">Ejemplos de este pack</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Descriptivas</th>
-            <td>
-              Cuentan qué pasa, dónde, cuándo, quién, cómo y por qué, y lo que piensan o sienten otras personas. El título
-              es siempre una de ellas.
-            </td>
-            <td>
-              «Un mordisco hace daño, y muchas veces la otra persona llora.» «Todas las personas nos enfadamos a veces,
-              también los mayores.»
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">De orientación</th>
-            <td>
-              Sugieren con suavidad una respuesta. Pueden orientar al niño o la niña («puedo…», «intento…») o al equipo de
-              adultos que le acompaña.
-            </td>
-            <td>«Cuando me enfado mucho, puedo ir al rincón de la calma.» «Mi profe viene y me ayuda.»</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>La fórmula, historia por historia</h2>
-      <p>
-        «Partes» indica cuántas frases tienen la introducción, el cuerpo y la conclusión, sin contar el título. La cuenta
-        divide las frases descriptivas entre las de orientación: cumple si da 4 o más. Si no hay frases de orientación, no
-        hay nada que dividir y la historia cumple.
-      </p>
-      <table class="tabla-formula" id="tabla-formula"></table>
-      <p id="intro-orientacion"></p>
-      <ul id="lista-orientacion"></ul>
-
-      <h2>Cuándo leerlas</h2>
-      <ul>
-        <li>
-          <strong>La primera vez, en un momento tranquilo.</strong> Nunca en plena rabieta, justo después de un mordisco
-          ni como castigo: primero, la calma.
-        </li>
-        <li>
-          <strong>Después, justo antes del momento.</strong> Por ejemplo, «Cuando tengo ganas de morder» antes de jugar en
-          los rincones o de salir al patio, y «Comparto el material de clase» antes de trabajar en la mesa.
-        </li>
-        <li>
-          <strong>Las que celebran, también después:</strong> cuando ha compartido o ha dicho lo que le pasaba, para
-          recordar lo que salió bien.
-        </li>
-      </ul>
-
-      <h2>Cómo leerlas</h2>
-      <ol>
-        <li>Siéntate a su lado en un sitio tranquilo.</li>
-        <li>
-          Lee despacio y señala cada pictograma. Si ya lee, que la lea él o ella: en el metaanálisis citado, los resultados
-          fueron mejores cuando el propio niño o niña llevaba la intervención (Kokina y Kern, 2010).
-        </li>
-        <li>
-          Comprueba que la entiende con una o dos preguntas: «¿Qué puedes decir si alguien te quita un juguete?», «¿Adónde
-          puedes ir si te enfadas mucho?». Si no habla, que señale el pictograma.
-        </li>
-        <li>Colorea con él o con ella una estrella de «Lo he leído».</li>
-        <li>Después del momento, di en una frase lo que salió bien: «Has dicho “para” con la mano y te he ayudado».</li>
-      </ol>
-
-      <h2>Cuántas veces</h2>
-      <p>
-        Léela una vez, justo antes, cada día que haya ese momento. Si la pide más veces, léela: está bien. En el
-        metaanálisis de Kokina y Kern (2010), las intervenciones breves, de 1 a 10 sesiones, se asociaron con mejores
-        resultados que las más largas. Si después de unas dos semanas no ves ningún cambio, revisa la historia con el equipo.
-      </p>
-
-      <h2>Cómo retirarlas poco a poco</h2>
-      <p>
-        Cuando la conducta salga casi siempre, por ejemplo 4 de cada 5 días durante dos semanas, no la quites de golpe:
-      </p>
-      <ol>
-        <li>Léela un día sí y otro no.</li>
-        <li>Después, déjala a su alcance para que la mire cuando quiera.</li>
-        <li>Más tarde, guárdala en su carpeta. Si la pide, se la das.</li>
-        <li>
-          Cámbiala por una historia que celebra: con la plantilla, cuenta que ya lo hace. Carol Gray propone convertir lo
-          aprendido en motivo de aplauso (criterio 10).
-        </li>
-      </ol>
-      <p>Si vuelve a costar, por ejemplo después de unas vacaciones, vuelve a leerla a diario durante un tiempo.</p>
-
-      <h2>Cómo saber si ayudan</h2>
-      <ol>
-        <li>
-          <strong>Observa antes de empezar.</strong> Durante unos días, sin la historia, usa el
-          <a href="https://www.ideducando.es/material-gratuito/registro-observacion-abc/">Registro de observación ABC</a>
-          de IdEducando: qué pasa antes (A), qué hace exactamente (B, la conducta) y qué pasa después (C). Te ayudará a ver
-          cuándo y por qué pasa.
-        </li>
-        <li><strong>Elige una medida sencilla:</strong> cuántos días sale bien, o cuántas veces pasa en una semana.</li>
-        <li>
-          <strong>Lee la historia unas dos semanas</strong> y sigue anotando igual que antes, con la hoja de la página
-          <span data-pagina="seguimiento"></span>.
-        </li>
-        <li>
-          <strong>Compara.</strong> Si mejora, sigue y después retírala poco a poco. Si no cambia, revísala: ¿la entiende?,
-          ¿es verdad todo lo que cuenta?, ¿la lees justo antes? Si sigue sin ayudar, buscad otra solución con el equipo de
-          orientación.
-        </li>
-      </ol>
-
-      <h2>El cole y la casa, a la vez</h2>
-      <p>
-        Usad las mismas palabras en el cole y en casa, sobre todo para pedir que paren y para calmarse. Compartid las
-        historias con quien esté con el niño o la niña en ese momento, como el maestro o la maestra de Pedagogía
-        Terapéutica (PT) o de Audición y Lenguaje (AL). La nota de la página <span data-pagina="familias"></span> es para
-        las familias.
-      </p>
-
-      <h2 class="salto">Cuando ya ha pasado: qué hacer en el momento</h2>
-      <p>
-        Las historias preparan el momento. Cuando el mordisco o la rabieta ya han llegado, lo que más ayuda es la respuesta
+        Las historias preparan el momento. Cuando el mordisco o la rabieta ya han llegado, lo que ayuda es la respuesta
         tranquila de las personas adultas.
       </p>
 
-      <div class="caja caja--morada">
-        <h3>Si muerde</h3>
-        <ol>
-          <li>
-            <strong>Primero, quien ha recibido el mordisco.</strong> Consuélale, lava la zona con agua y jabón y sigue el
-            protocolo de tu centro. Si la piel se ha roto, su familia debe consultarlo con su pediatra (Academia Americana
-            de Pediatría, 2016).
-          </li>
-          <li>
-            <strong>Después, quien ha mordido.</strong> Con calma y en pocas palabras: «No se muerde. No quiero que muerdas a
-            nadie, porque hace daño, y tampoco quiero que nadie te muerda a ti». Apártale un rato de la situación mientras
-            siga alterado o alterada (Illinois Early Learning Project, 2025).
-          </li>
-          <li>
-            <strong>Anota qué pasó antes</strong> con el Registro de observación ABC: el sitio, la hora, si había mucha gente
-            cerca, si le quitaron algo o si tenía sueño o hambre. Así verás cuándo suele pasar.
-          </li>
-          <li>
-            <strong>Avisa a las dos familias</strong> ese mismo día, sin decir a una familia quién era el otro niño o niña
-            (Illinois Early Learning Project, 2025).
-          </li>
-          <li>
-            <strong>Nunca</strong> le muerdas «para que vea lo que se siente» ni le grites. Tampoco le pongas la etiqueta de
-            «el que muerde» (Illinois Early Learning Project, 2025).
-          </li>
-        </ol>
-        <p>
-          <strong>Para prevenir:</strong> juguetes suficientes para no disputarlos, espacio para no estar apretados y una
-          rutina con descanso, comida y bebida. Enseña palabras para pedir que paren o para pedir ayuda, que es justo lo que
-          trabajan las historias 2 y 3 (Illinois Early Learning Project, 2025). Si un niño o una niña de más de 3 años
-          muerde a menudo, puede necesitar más apoyo: hablad con el equipo de orientación y con la familia. Comentadlo
-          también si muerde objetos a menudo o parece buscar notar algo en la boca.
-        </p>
+      <div class="columnas">
+        <div>
+          <div class="caja caja--morada">
+            <h2>Si muerde</h2>
+            <ol>
+              <li>
+                <strong>Primero, quien ha recibido el mordisco:</strong> consuélale y lava la zona con agua y jabón. Si la
+                piel se ha roto, que su familia llame a su pediatra. Sigue el protocolo de tu centro.
+              </li>
+              <li>
+                <strong>Después, quien ha mordido:</strong> con calma, «No se muerde. Hace daño». Apártale un rato mientras
+                siga alterado o alterada.
+              </li>
+              <li><strong>Avisa a las dos familias,</strong> sin decir a ninguna quién era el otro niño o niña.</li>
+              <li>
+                <strong>Anota qué pasó antes</strong> en el registro ABC: el sitio, la hora, si le quitaron algo, si tenía
+                sueño o hambre.
+              </li>
+              <li><strong>Sin etiquetas</strong> como «el que muerde».</li>
+            </ol>
+            <p>
+              <strong>Para prevenir:</strong> juguetes repetidos, sitio para no estar apretados, descanso, comida y bebida.
+              Enseña a pedir que paren o a pedir ayuda. Si con más de 3 años muerde a menudo, hablad con la familia y con el
+              equipo de orientación.
+            </p>
+            <p class="fuente-caja">
+              Fuentes: Illinois Early Learning Project (2025) y, para la herida, Academia Americana de Pediatría (2016).
+            </p>
+          </div>
+
+          <div class="caja caja--verde">
+            <h2>Para compartir y decir lo que le pasa</h2>
+            <ul>
+              <li>Varias unidades de lo que más se disputan (Illinois Early Learning Project, 2025).</li>
+              <li>Turnos a la vista, con un reloj de arena o un temporizador.</li>
+              <li>Usa tú la frase de la historia: «¿Me lo dejas cuando termines?». Si la usa, díselo: «Lo has pedido muy bien».</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="caja caja--morada">
+            <h2>Si tiene una rabieta</h2>
+            <p>
+              Son normales hacia los 2 y 3 años y van desapareciendo hacia los 5 o 6. El sueño, el hambre y el cansancio
+              las favorecen.
+            </p>
+            <ul>
+              <li><strong>Mantén la calma</strong> y habla poco.</li>
+              <li>
+                <strong>No le des lo que pedía:</strong> si unas veces lo consigue y otras no, se confunde.
+              </li>
+              <li><strong>Aparta lo que pueda hacerle daño.</strong></li>
+              <li><strong>Cuando se calme,</strong> háblale con normalidad. Fuera de las rabietas, dile lo que hace bien.</li>
+              <li>
+                <strong>Si no desaparecen con la edad</strong> o no se pueden manejar, consultad con su pediatra o con el
+                equipo de orientación.
+              </li>
+            </ul>
+            <p class="fuente-caja">Fuente: Bonet de Luna y Recuero (2009).</p>
+          </div>
+
+          <div class="caja caja--coral">
+            <h2>Una historia nunca sustituye la supervisión</h2>
+            <p>Lo dice el primer criterio de Carol Gray (Gray y otros, 2023).</p>
+            <ul>
+              <li>Más vigilancia donde y cuando suele morder. En una rabieta, un adulto cerca.</li>
+              <li>El rincón de la calma se ofrece, nunca es un castigo y está siempre a la vista de un adulto.</li>
+              <li>No leas la historia de morder delante de la clase justo después de un mordisco: suena a castigo.</li>
+              <li>Si una conducta pone en riesgo a alguien, haced un plan con el equipo de orientación y con la familia.</li>
+            </ul>
+          </div>
+        </div>
       </div>
-
-      <div class="caja caja--morada">
-        <h3>Si tiene una rabieta</h3>
-        <p>
-          Las rabietas son normales hacia los 2 y los 3 años y van desapareciendo: hacia los 5 o 6 años, la mayoría ya tiene
-          otras formas de expresar lo que siente. El sueño, el hambre y el cansancio las hacen más probables (Bonet de Luna y
-          Recuero, 2009).
-        </p>
-        <ul>
-          <li>
-            <strong>Mantén la calma</strong> y habla poco, con voz tranquila. No le des lo que pedía con la rabieta: si unas
-            veces lo consigue y otras no, le cuesta entender qué funciona (Bonet de Luna y Recuero, 2009).
-          </li>
-          <li>
-            <strong>Cuida la seguridad:</strong> aparta lo que pueda hacerle daño y quédate cerca (Bonet de Luna y Recuero,
-            2009).
-          </li>
-          <li>
-            <strong>El rincón de la calma es voluntario.</strong> Puedes ofrecérselo con una palabra o señalando el
-            pictograma, nunca como castigo.
-          </li>
-          <li><strong>Cuando se calme,</strong> vuelve a hablarle con normalidad y seguid con la actividad.</li>
-          <li>
-            <strong>Fuera de las rabietas,</strong> fíjate en lo que hace bien y díselo: así aprende otras formas de pedir
-            las cosas (Bonet de Luna y Recuero, 2009).
-          </li>
-          <li>
-            <strong>Si no desaparecen con la edad o no se pueden manejar,</strong> consultad con su pediatra o con el equipo
-            de orientación (Bonet de Luna y Recuero, 2009).
-          </li>
-        </ul>
-      </div>
-
-      <div class="caja caja--verde">
-        <h3>Para compartir y para decir lo que le pasa</h3>
-        <ul>
-          <li>
-            Ten varias unidades del material que más se disputan, como las tijeras o el juguete favorito (Illinois Early
-            Learning Project, 2025).
-          </li>
-          <li>Haz visibles los turnos con un reloj de arena, un temporizador o el pictograma de «turno».</li>
-          <li>
-            Enseña con el ejemplo la frase de la historia: «¿Me lo dejas cuando termines?». Cuando la use, díselo: «Lo has
-            pedido muy bien».
-          </li>
-          <li>
-            Si habla poco o nada, usad «Comunicación en el bolsillo», el tablero de IdEducando: tiene «no», «no me gusta»,
-            «ayudar» y «ya está». Para «¡para!», enseñad el gesto de la mano levantada.
-          </li>
-        </ul>
-      </div>
-
-      <div class="caja caja--coral">
-        <h2>Una historia nunca sustituye la supervisión</h2>
-        <p>
-          El primer criterio de Carol Gray lo deja claro: una historia social nunca sustituye el buen juicio ni la
-          supervisión de un adulto. La historia explica el momento. La seguridad depende de las personas adultas:
-        </p>
-        <ul>
-          <li>Si un niño o una niña muerde, la vigilancia es mayor en los momentos y sitios en los que suele pasar.</li>
-          <li>Durante una rabieta, un adulto se queda cerca y aparta lo que pueda hacer daño.</li>
-          <li>El rincón de la calma está siempre a la vista de un adulto.</li>
-        </ul>
-        <p>
-          Si una conducta pone en riesgo a alguien, la historia no basta: hace falta un plan con el equipo de orientación y
-          con la familia.
-        </p>
-      </div>
-
-      <h2>Errores frecuentes</h2>
-      <ul>
-        <li>
-          Leer «Cuando tengo ganas de morder» delante de toda la clase justo después de un mordisco. Suena a castigo y
-          señala al niño o la niña.
-        </li>
-        <li>Usar el rincón de la calma como castigo. Si es un castigo, deja de servir para calmarse.</li>
-        <li>Leer una historia que celebra algo que todavía no hace. Tiene que ser verdad.</li>
-        <li>
-          Escribir la historia como una norma: «No debo morder». Mejor describir: «Mis dientes son para comer, para sonreír
-          y para hablar».
-        </li>
-      </ul>
-
-      <h2>Ideas para adaptarlas</h2>
-      <p>
-        Siguiendo el Diseño Universal para el Aprendizaje (DUA), que propone varias formas de presentar la información y de
-        participar (CAST, 2024):
-      </p>
-      <ul class="dos-columnas-lista">
-        <li><strong>Si aún no lee:</strong> lee el adulto y el niño o la niña señala cada pictograma.</li>
-        <li>
-          <strong>Con fotos:</strong> pega fotos de vuestra clase o de vuestro rincón de la calma encima de los
-          pictogramas, sin otros niños ni niñas.
-        </li>
-        <li><strong>Para escucharla:</strong> grábala con tu voz y ponla justo antes.</li>
-        <li><strong>Con otra lengua en casa:</strong> escribid las palabras clave también en la lengua de la familia.</li>
-        <li>
-          <strong>Para toda la clase:</strong> «Comparto el material de clase» y «Digo lo que me pasa» se pueden leer en
-          la asamblea. Ayudan a todo el grupo y no señalan a nadie.
-        </li>
-        <li>
-          <strong>Si algo no es verdad</strong> en vuestra clase, cámbialo con una tira de papel o con la plantilla. Si no
-          tenéis rincón de la calma, escribid «mi sitio tranquilo» o montad uno con el material «Rincón de la calma» de
-          IdEducando.
-        </li>
-      </ul>
-
     </section>
 
     <!-- ======================================================================
          HOJA DE SEGUIMIENTO (para imprimir)
          ====================================================================== -->
-    <section class="seguimiento-hoja salto">
+    <section class="hoja seguimiento-hoja">
       <div class="rayos" style="margin-bottom: 5mm"></div>
       <p class="antetitulo">Para el adulto · Para imprimir</p>
       <h1>Anota cómo va</h1>
-      <p>
-        Una fila por cada día que haya ese momento. Anota también unos días antes de empezar a leer la historia: así podrás
-        comparar. Escribe solo iniciales, nunca el nombre completo, y guarda la hoja en el centro o en casa.
-      </p>
+      <ul>
+        <li><strong>Antes de empezar,</strong> anota unos días sin la historia: así podrás comparar.</li>
+        <li>
+          <strong>Después, una fila cada día</strong> que haya ese momento, durante unas dos semanas. Solo iniciales, nunca
+          el nombre completo.
+        </li>
+        <li>
+          <strong>Si sale bien casi siempre,</strong> por ejemplo 4 de cada 5 días, retírala poco a poco: un día sí y otro
+          no, después a su alcance y al final cámbiala por una historia que celebra lo que ya hace (criterio 10 de Carol
+          Gray).
+        </li>
+        <li>
+          <strong>Si no cambia,</strong> revisa: ¿la entiende?, ¿es verdad todo lo que cuenta?, ¿la lees justo antes? Si
+          sigue sin ayudar, buscad otra solución con el equipo de orientación.
+        </li>
+      </ul>
       <table class="seguimiento">
         <thead>
           <tr>
             <th scope="col" style="width: 15%">Fecha</th>
             <th scope="col" style="width: 11%">Iniciales</th>
-            <th scope="col" style="width: 20%">Historia</th>
+            <th scope="col" style="width: 19%">Historia</th>
             <th scope="col" style="width: 13%">¿Leída justo antes?</th>
             <th scope="col" style="width: 17%">¿Cómo fue? Bien, a medias o costó</th>
             <th scope="col">Notas</th>
@@ -1514,25 +1283,20 @@
     <!-- ======================================================================
          NOTA PARA LAS FAMILIAS (lectura fácil)
          ====================================================================== -->
-    <section class="familias salto">
+    <section class="hoja familias">
       <div class="rayos" style="margin-bottom: 5mm"></div>
       <p class="antetitulo">Para las familias</p>
       <h1>Historias para leer en casa</h1>
       <p>En el cole leemos historias cortas con pictogramas.</p>
-      <p>Cada historia cuenta un momento que a veces cuesta. Por ejemplo, cuando hay ganas de morder o un enfado muy fuerte.</p>
-      <p>Las historias hablan de 2 temas:</p>
-      <div class="mini-zonas" id="mini-zonas"></div>
-      <p>Hay historias de 2 tipos:</p>
-      <ul>
-        <li>Historias que explican un momento que cuesta.</li>
-        <li>Historias que celebran algo que vuestro hijo o vuestra hija ya hace bien.</li>
-      </ul>
+      <p>Algunas cuentan un momento que cuesta. Por ejemplo, cuando hay ganas de morder o un enfado muy fuerte.</p>
+      <p>Otras celebran algo que vuestro hijo o vuestra hija ya hace bien.</p>
 
       <h2>Cómo leer una historia</h2>
       <ol>
-        <li>La primera vez, leed la historia en un momento tranquilo. Nunca en pleno enfado.</li>
+        <li>La primera vez, leedla en un momento tranquilo. Nunca en pleno enfado.</li>
         <li>Después, leedla justo antes del momento que cuesta. Por ejemplo, antes de jugar con los primos.</li>
         <li>Leed despacio. Señalad cada dibujo.</li>
+        <li>Si es muy pequeño o pequeña, leed solo las frases con punto <span class="punto"></span>.</li>
         <li>Pintad una estrella cada vez que la leáis.</li>
         <li>Después, hablad de lo que salió bien.</li>
       </ol>
@@ -1540,9 +1304,9 @@
       <h2>Es importante</h2>
       <ul>
         <li>Morder y enfadarse mucho es frecuente en niños y niñas pequeños. Con calma y con ayuda, se aprende.</li>
-        <li>No uséis la historia como castigo. Leedla con calma y con cariño.</li>
+        <li>La historia nunca es un castigo. Leedla con calma y con cariño.</li>
+        <li>Usad las mismas palabras que en el cole. Por ejemplo, «¡Para!».</li>
         <li>Si muerde o tiene rabietas muy a menudo, hablad con el cole o con su pediatra.</li>
-        <li>Contad al cole qué historias leéis en casa y cómo va.</li>
       </ul>
 
       <div class="recuadro">
@@ -1555,7 +1319,7 @@
 
       <div class="creditos">
         <p>
-          <strong>Con calma y con palabras.</strong> IdEducando, octubre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          <strong>Con calma y con palabras.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
           pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
           (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
         </p>
@@ -1565,15 +1329,35 @@
     <!-- ======================================================================
          FUENTES Y CRÉDITOS
          ====================================================================== -->
-    <section class="fuentes salto">
+    <section class="fuentes">
       <div class="rayos" style="margin-bottom: 5mm"></div>
       <p class="antetitulo">Fuentes y créditos</p>
       <h1>De dónde sale este material</h1>
       <p>
-        <strong>Con calma y con palabras: cuatro historias sociales sobre emociones y compañeros.</strong> Equipo
-        IdEducando, octubre de 2026. Ficha y novedades:
-        <span class="url">ideducando.es/material-gratuito/historias-sociales-calma-y-palabras</span>
+        <strong>Con calma y con palabras.</strong> Equipo IdEducando, octubre de 2026; historias acortadas en noviembre de
+        2026. <span class="url">ideducando.es/material-gratuito/historias-sociales-calma-y-palabras</span>. Siguen los
+        criterios 10.4 de Carol Gray (Gray y otros, 2023) y las pautas de lectura fácil de la norma UNE 153101:2018 EX, de
+        la Asociación Española de Normalización (UNE), aún sin validar con personas lectoras. <em>Social Stories</em> es una
+        marca de Carol Gray, que no ha revisado este material.
       </p>
+
+      <div class="caja caja--azul">
+        <h2>Qué dice la evidencia</h2>
+        <p>
+          Las narrativas sociales, el nombre general de estas historias, figuran entre las prácticas basadas en la evidencia
+          para el alumnado con TEA, aunque casi todos sus estudios son de un solo caso (Hume y otros, 2021). En un
+          metaanálisis, su eficacia global fue de baja a dudosa (Kokina y Kern, 2010). Funcionaron mejor:
+        </p>
+        <ul>
+          <li>para reducir una conducta, más que para enseñar habilidades sociales;</li>
+          <li>con una sola conducta, leídas justo antes y comprobando que se entendían;</li>
+          <li>cuando el propio niño o niña llevaba la intervención, y en intervenciones de 1 a 10 sesiones.</li>
+        </ul>
+        <p>
+          El estudio pide prudencia si hay dificultades importantes de lenguaje o de comprensión. Úsalas como un apoyo más
+          dentro de un plan y observa si ayudan.
+        </p>
+      </div>
 
       <h2>Fuentes</h2>
       <ul class="referencias">
@@ -1593,10 +1377,12 @@
         <li>
           Gray, C. A. y Garand, J. D. (1993). Social Stories: Improving responses of students with autism with accurate
           social information. <em>Focus on Autistic Behavior</em>, 8(1), 1-10.
+          <span class="url">DOI: 10.1177/108835769300800101</span>
         </li>
         <li>
           Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
           generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032.
+          <span class="url">DOI: 10.1007/s10803-020-04844-2</span>
         </li>
         <li>
           Illinois Early Learning Project (2025). <em>Play Right, Don’t Bite!</em> Universidad de Illinois.
@@ -1605,7 +1391,7 @@
         <li>
           Kokina, A. y Kern, L. (2010). Social Story interventions for students with autism spectrum disorders: A
           meta-analysis. <em>Journal of Autism and Developmental Disorders</em>, 40(7), 812-826.
-          <span class="url">doi.org/10.1007/s10803-009-0931-0</span>
+          <span class="url">DOI: 10.1007/s10803-009-0931-0</span>
         </li>
         <li>
           UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Asociación
@@ -1613,31 +1399,14 @@
         </li>
       </ul>
 
-      <h2>Pictogramas</h2>
+      <h2>Pictogramas, dibujos y licencia</h2>
       <p>
-        Los pictogramas son de ARASAAC, el Portal Aragonés de la Comunicación Aumentativa y Alternativa. Su licencia pide
-        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
-        ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si adaptas el material,
-        mantén la cita. Con pictogramas de ARASAAC, este material no se puede vender.
-      </p>
-
-      <h2>Dibujos y marcas</h2>
-      <p>
-        El cole, el corazón y el bocadillo de la portada, los iconos de los temas, la estrella y la brújula son de
-        IdEducando.
-        <em>Social Stories</em> es una marca de Carol Gray. Este material se inspira en sus criterios y ella no lo ha
-        revisado.
-      </p>
-
-      <h2>Fotos y datos personales</h2>
-      <p>
-        Las fotos y el nombre del niño o la niña se quedan en su historia. Pide permiso a la familia, no las subas a internet
-        y no hagas fotos en las que salgan otros niños o niñas.
-      </p>
-
-      <h2>Licencia</h2>
-      <p>
-        CC BY-NC-SA 4.0: puedes copiar y adaptar este material citando a IdEducando, sin fines comerciales y con la misma
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Los
+        demás dibujos y el diseño son de IdEducando. Este material es gratis y lo será siempre: IdEducando nace para ayudar a
+        quien acompaña a un peque con necesidades específicas. Además, la licencia de los pictogramas no deja venderlo.
+        Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma
         licencia.
       </p>
     </section>
@@ -1645,9 +1414,12 @@
     <script>
       // ---------------------------------------------------------------------
       // Las cuatro historias. Cada frase: [pictograma de ARASAAC, texto, tipo].
-      // Sin tipo, la frase es descriptiva. 'n' = orientación al niño o la niña; 'e' = orientación al equipo.
+      // Sin tipo, la frase describe. 'n' = orienta al niño o la niña; 'e' = orienta al equipo de adultos.
+      // Cada frase, de 3 a 7 palabras y con una sola idea; unas 7 frases por historia.
       // partes = cuántas frases tienen la introducción, el cuerpo y la conclusión (sin el título).
-      // La fórmula se calcula sola: descriptivas (con el título) ≥ 4 × orientación, y como mucho una 'n'.
+      // corta = las frases de la versión corta (1 = la primera). Tienen que entenderse solas, en orden.
+      // La fórmula se calcula sola, también para la versión corta: frases que describen (con el título)
+      // ≥ 4 × frases que orientan, y como mucho una 'n' (criterio 8 de Carol Gray, versión 10.4).
       // portada = pictograma de su ventana en la portada (si no, el del título).
       // ---------------------------------------------------------------------
       const HISTORIAS = [
@@ -1657,20 +1429,18 @@
           titulo: 'Cuando me enfado mucho',
           picto: 31884,
           portada: 32826,
-          antes: 'un momento que suele costarle, como dejar de jugar o un cambio de planes',
+          antes: 'un momento que suele costarle, como dejar de jugar',
           conducta: 'ir al rincón de la calma cuando se enfada mucho',
-          partes: [3, 5, 2],
+          partes: [2, 4, 1],
+          corta: [2, 4, 5, 6],
           frases: [
-            [7116, 'Todas las personas nos enfadamos a veces, también los mayores.'],
+            [7116, 'Todas las personas nos enfadamos a&nbsp;veces.'],
             [31884, 'A veces, yo me enfado mucho.'],
-            [38890, 'Me enfado cuando algo no me gusta o no sale como quiero.'],
-            [31125, 'Cuando me enfado mucho, a veces grito o lloro.'],
-            [28003, 'Mi profe se queda cerca de mí para cuidarme.', 'e'],
-            [32826, 'Cuando me enfado mucho, puedo ir al rincón de la calma.', 'n'],
-            [34508, 'En el rincón de la calma hay cosas que me ayudan a respirar despacio.'],
-            [38932, 'Poco a poco, me tranquilizo.'],
-            [31923, 'Después, me siento mejor.'],
-            [8029, 'Cada día, aprendo a calmarme un poco mejor.'],
+            [31125, 'Entonces, a veces grito o lloro.'],
+            [32826, 'Puedo ir al rincón de la calma.', 'n'],
+            [34508, 'Allí, respirar despacio me ayuda.'],
+            [38932, 'Poco a poco, me siento mejor.'],
+            [8029, 'Cada día, aprendo a calmarme.'],
           ],
         },
         {
@@ -1680,18 +1450,16 @@
           picto: 9692,
           antes: 'jugar con otros niños y niñas',
           conducta: 'decir lo que le pasa con palabras, signos o pictogramas',
-          partes: [2, 6, 2],
+          partes: [2, 4, 1],
+          corta: [1, 3, 5, 7],
           frases: [
             [38890, 'A veces, algo no me gusta.'],
-            [15469, 'Por ejemplo, no me gusta que me quiten un juguete.'],
+            [15469, 'Por ejemplo, me quitan un juguete.'],
             [9692, 'Entonces, digo lo que me pasa.'],
-            [11754, 'Lo digo con palabras, con signos o con mis pictogramas.'],
-            [36021, 'Digo «para», «no me gusta» o «ayuda».'],
-            [2381, 'Normalmente, los demás me escuchan.'],
-            [11697, 'Así, me entienden mejor.'],
-            [4570, 'Si lo necesito, mi profe me ayuda.', 'e'],
-            [38564, 'Muchas veces, digo muy bien lo que me pasa.'],
-            [16647, 'Cuando nos entendemos, lo pasamos mejor.'],
+            [11754, 'Lo digo con palabras, signos o pictogramas.'],
+            [36021, 'Digo «¡Para!» o «No me gusta».'],
+            [11697, 'Así, los demás me entienden.'],
+            [38564, 'Muchas veces, lo digo muy bien.'],
           ],
         },
         {
@@ -1702,18 +1470,16 @@
           portada: 36021,
           antes: 'jugar en los rincones o salir al patio',
           conducta: 'decir «¡Para!» con la voz o con la mano',
-          partes: [2, 6, 2],
+          partes: [2, 4, 1],
+          corta: [2, 3, 4, 5, 7],
           frases: [
-            [2255, 'En clase y en el patio, juego con mis compañeros y compañeras.'],
-            [15469, 'A veces, alguien me quita un juguete o se pone muy cerca de mí.'],
-            [31884, 'Entonces, siento enfado o nervios.'],
-            [31863, 'Cuando me siento así, a veces tengo ganas de morder.'],
-            [32298, 'Un mordisco hace daño, y muchas veces la otra persona llora.'],
-            [36021, 'Si tengo ganas de morder, puedo decir «¡Para!» con la voz o con la mano.', 'n'],
+            [2255, 'En el cole, juego con mis compañeros.'],
+            [15469, 'A veces, alguien me quita un juguete.'],
+            [31863, 'Entonces, a veces tengo ganas de morder.'],
+            [32298, 'Un mordisco hace daño.'],
+            [36021, 'Puedo decir «¡Para!».', 'n'],
             [4570, 'Así, mi profe sabe que necesito ayuda.'],
-            [28003, 'Mi profe viene y me ayuda.', 'e'],
-            [2737, 'Mis dientes son para comer, para sonreír y para hablar.'],
-            [7116, 'Cuando nos cuidamos, toda la clase está a gusto.'],
+            [2737, 'Mis dientes son para comer y sonreír.'],
           ],
         },
         {
@@ -1723,18 +1489,16 @@
           picto: 15361,
           antes: 'trabajar en la mesa o jugar en los rincones',
           conducta: 'pedir el material y esperar su turno',
-          partes: [3, 5, 2],
+          partes: [2, 4, 1],
+          corta: [1, 2, 3, 4, 7],
           frases: [
             [34153, 'En clase, muchas cosas son de todos.'],
-            [16855, 'Las pinturas, los cuentos y los juguetes son para toda la clase.'],
-            [15361, 'Por eso, los compartimos.'],
-            [11251, 'A veces, quiero algo que está usando otra persona.'],
-            [9692, 'Entonces, lo pido: «¿Me lo dejas cuando termines?».'],
-            [7158, 'Mientras espero mi turno, juego con otra cosa.'],
-            [17038, 'Cuando termino, le dejo el material a otra persona.'],
-            [31923, 'A mis compañeros y compañeras les gusta cuando comparto.'],
+            [15361, 'Por eso, las compartimos.'],
+            [5441, 'A veces, alguien usa lo que quiero.'],
+            [11251, 'Entonces, pido: «¿Me lo dejas cuando termines?».'],
+            [7158, 'Mientras espero, juego con otra cosa.'],
+            [31923, 'Mis compañeros se alegran cuando comparto.'],
             [38564, 'Muchas veces, comparto muy bien.'],
-            [36481, 'Compartir hace que jugar y trabajar sea más divertido.'],
           ],
         },
       ];
@@ -1749,37 +1513,57 @@
         celebra: { nombre: 'Celebra', icono: 'estrella', explica: 'aplaude algo que ya hace bien' },
       };
 
-      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
-      // actualizarlos aquí y en «Qué imprimir» y «Paso a paso» de la ficha.
+      // Números de página. Si cambia el orden de las hojas o una hoja ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
       const PRIMERA_HISTORIA = 4; // portada = 1, montaje = 2, de un vistazo = 3
-      const PAGINAS = { escribir: 9, 'tabla-formula': 11, 'en-el-momento': 13, seguimiento: 15, familias: 16 };
+      const PAGINAS = { plantilla: 8, escribir: 9, 'en-el-momento': 10, seguimiento: 11, familias: 12 };
 
       // ---------------------------------------------------------------------
-      // La fórmula de Carol Gray (criterio 8 de la versión 10.4)
+      // Comprobaciones: la fórmula de Carol Gray (criterio 8 de la versión 10.4) y la longitud
       // ---------------------------------------------------------------------
-      function formula(h) {
-        const alNino = h.frases.filter((f) => f[2] === 'n').length;
-        const alEquipo = h.frases.filter((f) => f[2] === 'e').length;
+      function formula(frases) {
+        const alNino = frases.filter((f) => f[2] === 'n').length;
+        const alEquipo = frases.filter((f) => f[2] === 'e').length;
         const orientacion = alNino + alEquipo;
-        const descriptivas = h.frases.length - orientacion + 1; // + 1: el título
-        const partesBien =
-          h.partes.length === 3 && h.partes.every((n) => n > 0) && h.partes.reduce((a, b) => a + b, 0) === h.frases.length;
-        const cumple = alNino <= 1 && descriptivas >= 4 * orientacion && partesBien;
-        return { alNino, alEquipo, orientacion, descriptivas, partesBien, cumple };
+        const descriptivas = frases.length - orientacion + 1; // + 1: el título
+        const cumple = alNino <= 1 && descriptivas >= 4 * orientacion;
+        return { alNino, alEquipo, orientacion, descriptivas, cumple };
+      }
+
+      const fraseCorta = (h) => h.corta.map((n) => h.frases[n - 1]);
+      const palabras = (texto) =>
+        texto
+          .replace(/&nbsp;/g, ' ')
+          .replace(/[«»“”"¡!¿?.,:;]/g, ' ')
+          .split(/\s+/)
+          .filter(Boolean).length;
+
+      // Lo que no cumple sale en rojo en la hoja de la historia, para corregirlo antes de publicar.
+      function problemas(h) {
+        const lista = [];
+        if (!formula(h.frases).cumple) lista.push('la historia no cumple la fórmula de Carol Gray');
+        if (!formula(fraseCorta(h)).cumple) lista.push('la versión corta no cumple la fórmula');
+        const sumaPartes = h.partes.reduce((a, b) => a + b, 0);
+        if (h.partes.length !== 3 || h.partes.some((n) => n < 1) || sumaPartes !== h.frases.length)
+          lista.push('las partes no suman bien');
+        if (h.frases.length > 8) lista.push('tiene más de 8 frases');
+        if (h.corta.some((n, i) => n < 1 || n > h.frases.length || (i && n <= h.corta[i - 1])))
+          lista.push('la versión corta no está en orden');
+        for (const [, texto] of h.frases) {
+          const n = palabras(texto);
+          if (n < 3 || n > 7) lista.push(`«${texto}» tiene ${n} palabras`);
+        }
+        return lista;
       }
 
       const numero = (n) => String(Math.round(n * 100) / 100).replace('.', ',');
+      const cuenta = (f) => (f.orientacion ? `${f.descriptivas} ÷ ${f.orientacion} = ${numero(f.descriptivas / f.orientacion)}` : '');
 
-      function textoOrientacion(f) {
-        if (!f.orientacion) return 'ninguna de orientación';
-        if (!f.alEquipo) return `${f.alNino} de orientación al niño o la niña`;
-        if (!f.alNino) return `${f.alEquipo} de orientación al equipo`;
-        return `${f.orientacion} de orientación (${f.alNino} al niño o la niña y ${f.alEquipo} al equipo)`;
-      }
-
-      function textoCuenta(f) {
-        if (!f.orientacion) return 'Sin frases de orientación, cumple';
-        return `${f.descriptivas} ÷ ${f.orientacion} = ${numero(f.descriptivas / f.orientacion)}: es 4 o más, cumple`;
+      function textoFormula(h) {
+        const f = formula(h.frases);
+        const c = formula(fraseCorta(h));
+        if (!f.orientacion && !c.orientacion) return 'sin frases que orientan, cumple';
+        return `${cuenta(f)}; la corta, ${cuenta(c)}. Cumple`;
       }
 
       // ---------------------------------------------------------------------
@@ -1824,27 +1608,27 @@
       const estrellaVacia = svg(`<path d="${ESTRELLA}" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`);
       const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
       const logo = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
-      const conHueco = (texto) => texto.replace('{hueco}', '<span class="hueco"></span>');
       const leido = `Lo he leído: ${estrellaVacia.repeat(5)}`;
+      const punto = '<span class="punto"></span>';
 
       // ---------------------------------------------------------------------
       // Hojas de las historias
       // ---------------------------------------------------------------------
       const contenedor = document.getElementById('historias');
       HISTORIAS.forEach((h, i) => {
-        const f = formula(h);
         const inicioCuerpo = h.partes[0];
         const inicioConclusion = h.partes[0] + h.partes[1];
         const frases = h.frases
           .map(([n, texto], j) => {
-            const parte = j === inicioCuerpo || j === inicioConclusion ? ' frase--parte' : '';
-            return `<li class="frase${parte}"><div class="marco-picto">${picto(n)}</div><p>${conHueco(texto)}</p></li>`;
+            const clases = ['frase'];
+            if (h.corta.includes(j + 1)) clases.push('frase--corta');
+            if (j === inicioCuerpo || j === inicioConclusion) clases.push('frase--parte');
+            return `<li class="${clases.join(' ')}"><div class="marco-picto">${picto(n)}</div><p>${texto}</p></li>`;
           })
           .join('');
         const tipo = TIPOS[h.tipo];
-        const aviso = f.cumple
-          ? ''
-          : '<p class="aviso-formula">REVISAR: esta historia no cumple la fórmula de Carol Gray o sus partes no suman bien.</p>';
+        const fallos = problemas(h);
+        const aviso = fallos.length ? `<p class="aviso-formula">REVISAR: ${fallos.join('; ')}.</p>` : '';
         contenedor.insertAdjacentHTML(
           'beforeend',
           `<section class="hoja historia z-${h.zona}">
@@ -1860,7 +1644,7 @@
             <div class="franja"></div>
             <div class="barra"><span>Esta historia es de:</span><span class="linea"></span><span class="leido">${leido}</span></div>
             <ol class="camino">${frases}</ol>
-            <div class="para-adulto">${dibujo('adulto')}<p><strong>Para el adulto.</strong> Léela justo antes de ${h.antes}. Una sola conducta: ${h.conducta}. <strong>Fórmula de Carol Gray:</strong> ${f.descriptivas} frases descriptivas (con el título) y ${textoOrientacion(f)}. ${textoCuenta(f)}.</p></div>
+            <div class="para-adulto">${dibujo('adulto')}<p><strong>Para el adulto.</strong> Léela justo antes de ${h.antes}. Una conducta: ${h.conducta}. <strong>Versión corta:</strong> las ${h.corta.length} frases con punto ${punto}. <strong>Fórmula de Carol Gray</strong> (página ${PAGINAS.escribir}): ${textoFormula(h)}.</p></div>
             ${aviso}
             <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
           </section>`,
@@ -1884,8 +1668,7 @@
                 <p class="tipo">${dibujo(t.icono)}${t.nombre}</p>
                 <h2>${h.titulo}</h2>
                 <p><strong>Léela justo antes de</strong> ${h.antes}.</p>
-                <p><strong>Una conducta:</strong> ${h.conducta}.</p>
-                <p class="pagina">Página ${PRIMERA_HISTORIA + i}</p></div></article>`;
+                <p class="pagina">Página ${PRIMERA_HISTORIA + i} · ${h.frases.length} frases, ${h.corta.length} en la corta</p></div></article>`;
             })
             .join('');
           return `<div class="zona z-${clave}"><div class="zona__nombre">${dibujo(z.icono)}${z.nombre}</div>${tarjetas}</div>`;
@@ -1893,62 +1676,27 @@
         .join('');
 
       // ---------------------------------------------------------------------
-      // Plantilla: 8 filas en tres partes
+      // Plantilla: 7 filas en tres partes, como las historias
       // ---------------------------------------------------------------------
-      const fila = () =>
-        '<li class="fila"><div class="fila__foto">Foto o pictograma</div><div class="fila__lineas"><span></span><span></span></div></li>';
+      const fila = () => '<li class="fila"><div class="fila__foto">Foto o pictograma</div><div class="fila__linea"></div></li>';
       const etiqueta = (texto) => `<li class="etiqueta-parte">${texto}</li>`;
       document.getElementById('filas-plantilla').innerHTML =
         etiqueta('Introducción: de qué trata la historia') +
         fila().repeat(2) +
-        etiqueta('Cuerpo: dónde, cuándo, quién, qué, cómo y por qué. Como mucho una frase con «puedo» o «intento»') +
+        etiqueta('Cuerpo: qué pasa y qué puedo hacer. Como mucho una frase con «puedo» o «intento»') +
         fila().repeat(4) +
-        etiqueta('Conclusión: resume en positivo') +
-        fila().repeat(2);
+        etiqueta('Conclusión: en positivo') +
+        fila();
       document.getElementById('leido-plantilla').innerHTML = leido;
 
-      // ---------------------------------------------------------------------
-      // Guía: tabla de la fórmula y frases de orientación
-      // ---------------------------------------------------------------------
-      const filasFormula = HISTORIAS.map((h, i) => {
-        const f = formula(h);
-        const cuenta = f.orientacion ? `${f.descriptivas} ÷ ${f.orientacion} = ${numero(f.descriptivas / f.orientacion)}` : 'Sin orientación';
-        return `<tr><th scope="row">${i + 1}. ${h.titulo}</th><td>${TIPOS[h.tipo].nombre}</td><td class="num">${h.partes.join('&nbsp;+&nbsp;')}</td>
-          <td class="num">${f.descriptivas}</td><td class="num">${f.orientacion}</td><td class="num">${cuenta}: ${f.cumple ? 'cumple' : 'NO CUMPLE'}</td></tr>`;
-      }).join('');
-      document.getElementById('tabla-formula').innerHTML = `<colgroup><col style="width: 31%"><col style="width: 12%"><col style="width: 13%">
-        <col style="width: 14%"><col style="width: 12%"><col style="width: 18%"></colgroup>
-        <thead><tr><th scope="col">Historia</th><th scope="col">Tipo</th><th scope="col" class="num">Partes</th>
-        <th scope="col" class="num">Descriptivas (con el título)</th><th scope="col" class="num">Orientación</th>
-        <th scope="col" class="num">Cuenta</th></tr></thead>
-        <tbody>${filasFormula}</tbody>`;
-
-      // Frase que presenta la lista de frases de orientación, sacada de los datos
-      const todas = HISTORIAS.flatMap((h) => h.frases.filter((f) => f[2]));
-      const alNinoTodas = todas.every((f) => f[2] === 'n');
-      document.getElementById('intro-orientacion').innerHTML = `<strong>Las ${todas.length} frases de orientación</strong>${
-        alNinoTodas ? ', todas para el niño o la niña:' : ' (n: al niño o la niña; e: al equipo):'
-      }`;
-
-      document.getElementById('lista-orientacion').innerHTML = HISTORIAS.map((h, i) => [h, i])
-        .flatMap(([h, i]) =>
-          h.frases.filter((f) => f[2]).map((f) => `<li>Historia ${i + 1}: ${f[1]}${alNinoTodas ? '' : ` (${f[2]})`}</li>`),
-        )
-        .join('');
-
-      // Hoja de seguimiento: 14 filas vacías
+      // Hoja de seguimiento: una fila de ejemplo y las vacías
       document.getElementById('filas-seguimiento').innerHTML =
-        '<tr class="ejemplo"><td>Ejemplo: 12 de octubre</td><td>A. G.</td><td>Ganas de morder</td><td>Sí</td><td>Bien</td><td>En el rincón de las construcciones dijo «para» con la mano.</td></tr>' +
-        '<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>'.repeat(15);
+        '<tr class="ejemplo"><td>Ejemplo: 12 de octubre</td><td>A. G.</td><td>Ganas de morder</td><td>Sí</td><td>Bien</td><td>En el rincón de las construcciones dijo «¡Para!» con la mano.</td></tr>' +
+        '<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>'.repeat(12);
 
       // ---------------------------------------------------------------------
       // Nota para las familias
       // ---------------------------------------------------------------------
-      document.getElementById('mini-zonas').innerHTML = Object.entries(ZONAS)
-        .map(([clave, z]) => {
-          return `<figure class="z-${clave}">${dibujo(z.icono)}<figcaption>${z.nombre}</figcaption></figure>`;
-        })
-        .join('');
       document.getElementById('casillas-familias').innerHTML = HISTORIAS.map((h) => `<li>${h.titulo}</li>`).join('');
 
       // ---------------------------------------------------------------------

@@ -1,0 +1,2318 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Frase y dibujo: leo y empareja · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar y tablero: márgenes de 11 y 12 mm. */
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Un color para cada nivel (siempre con su forma, su número y su texto) ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 13mm;
+      }
+
+      .portada__titulo {
+        font-size: 56pt;
+        line-height: 0.96;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 112mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 30mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.6mm 0;
+      }
+
+      /* Las tarjetas de la portada: tarjetas de verdad, giradas un poco. */
+      .escaparate {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escaparate > * {
+        position: absolute;
+      }
+
+      .escaparate .frase,
+      .escaparate .dibujo {
+        border-style: solid;
+        border-color: var(--c);
+        border-width: 0.6mm;
+        box-shadow: 0 2mm 5mm -1mm rgb(30 43 85 / 0.28);
+      }
+
+      .escaparate .dibujo {
+        height: 48mm;
+        grid-template-rows: 48mm;
+      }
+
+      .escaparate .dibujo__pestana {
+        display: none;
+      }
+
+      .lazo {
+        position: absolute;
+        z-index: 3;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8.4mm;
+        height: 8.4mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .atribucion {
+        margin: 2.2mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Hojas de tarjetas ---------- */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 5mm;
+        margin: 0 0 2.4mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso h1 {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1.2;
+        color: var(--marino);
+      }
+
+      .aviso h1 span {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .aviso > span {
+        flex: none;
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        white-space: nowrap;
+      }
+
+      .muestra-linea {
+        display: inline-block;
+        width: 9mm;
+        height: 0.5mm;
+        vertical-align: middle;
+      }
+
+      .muestra-linea--corta {
+        background: repeating-linear-gradient(90deg, var(--suave) 0 1.6mm, transparent 1.6mm 2.6mm);
+      }
+
+      .muestra-linea--dobla {
+        background: repeating-linear-gradient(
+          90deg,
+          var(--morado-texto) 0 2.6mm,
+          transparent 2.6mm 3.4mm,
+          var(--morado-texto) 3.4mm 3.9mm,
+          transparent 3.9mm 4.7mm
+        );
+      }
+
+      /* La tarjeta de frase: banda de color, forma del nivel, la frase y su símbolo. */
+      .rejilla-frases {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 38mm;
+        gap: 3mm 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frase {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 90mm;
+        height: 38mm;
+        margin: 0;
+        padding: 3.4mm 9mm 2mm 10mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .frase::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.4mm;
+        background: var(--c);
+      }
+
+      .frase > .nv {
+        position: absolute;
+        top: 4.2mm;
+        left: 2.6mm;
+      }
+
+      .frase > .nv.n3 {
+        top: 3.6mm;
+        left: 1.8mm;
+      }
+
+      .frase .simbolo {
+        position: absolute;
+        right: 2.4mm;
+        bottom: 2.2mm;
+        width: 7.2mm;
+        height: 7.2mm;
+      }
+
+      /* La frase: cada palabra con una rayita debajo, para seguirla con el dedo al leerla. El punto final, del color del nivel. */
+      .texto {
+        margin: 0;
+        font-weight: 700;
+        line-height: 1.62;
+        text-align: left;
+        color: var(--marino);
+      }
+
+      .texto .linea {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .texto .p {
+        position: relative;
+        display: inline-block;
+      }
+
+      .texto .p::after {
+        content: '';
+        position: absolute;
+        left: 0.08em;
+        right: 0.08em;
+        bottom: 0.1em;
+        height: 0.6mm;
+        border-radius: 0.3mm;
+        background: var(--tx);
+      }
+
+      .texto .fin {
+        color: var(--tx);
+      }
+
+      .t1 {
+        font-size: 24pt;
+      }
+
+      .t1m {
+        font-size: 22pt;
+        letter-spacing: 0.02em;
+      }
+
+      .t2 {
+        font-size: 21pt;
+      }
+
+      .t3 {
+        font-size: 19pt;
+      }
+
+      /* La tarjeta de dibujo: delante el dibujo; debajo, la pestaña con el símbolo, que se dobla hacia atrás. */
+      .rejilla-dibujos {
+        display: grid;
+        grid-template-columns: repeat(3, 60mm);
+        grid-auto-rows: 59mm;
+        /* 2,4 mm entre filas: a tamaño real, con 3 mm, la última línea de la hoja pasaba a la siguiente. */
+        gap: 2.4mm 3mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .dibujo {
+        position: relative;
+        display: grid;
+        grid-template-rows: 48mm 11mm;
+        width: 60mm;
+        height: 59mm;
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .dibujo__frente {
+        position: relative;
+        width: 60mm;
+        height: 48mm;
+      }
+
+      .dibujo__frente::before {
+        content: '';
+        position: absolute;
+        z-index: 1;
+        inset: 0 0 auto;
+        height: 2.4mm;
+        background: var(--c);
+      }
+
+      .dibujo__frente > svg {
+        position: absolute;
+        inset: 0;
+        width: 60mm;
+        height: 48mm;
+      }
+
+      .dibujo__frente > .nv {
+        position: absolute;
+        z-index: 2;
+        top: 4.2mm;
+        left: 2.6mm;
+      }
+
+      .dibujo__frente > .nv.n3 {
+        top: 3.6mm;
+        left: 1.8mm;
+      }
+
+      .dibujo__pestana {
+        position: relative;
+        display: grid;
+        place-items: center;
+        background: var(--t);
+      }
+
+      /* Línea de doblar: rayas y puntos */
+      .dibujo__pestana::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 0.5mm;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--morado-texto) 0 2.6mm,
+          transparent 2.6mm 3.4mm,
+          var(--morado-texto) 3.4mm 3.9mm,
+          transparent 3.9mm 4.7mm
+        );
+      }
+
+      .dibujo__pestana .simbolo {
+        width: 7.6mm;
+        height: 7.6mm;
+        margin-top: 0.4mm;
+      }
+
+      /* Tarjetas en blanco */
+      .frase--blanca {
+        place-items: stretch;
+        padding: 4.6mm 11mm 3mm 11.5mm;
+      }
+
+      .renglones {
+        display: grid;
+        align-content: center;
+        gap: 2.6mm;
+      }
+
+      .renglones span {
+        display: block;
+        height: 9mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .formas-nivel {
+        position: absolute;
+        top: 4mm;
+        left: 2.2mm;
+        display: grid;
+        gap: 1mm;
+      }
+
+      .forma-vacia {
+        width: 6mm;
+        height: 6mm;
+      }
+
+      .hueco-simbolo {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .frase .hueco-simbolo {
+        position: absolute;
+        right: 2.4mm;
+        bottom: 2.2mm;
+        width: 7.4mm;
+        height: 7.4mm;
+      }
+
+      .dibujo__pestana .hueco-simbolo {
+        width: 8mm;
+        height: 8mm;
+        margin-top: 0.4mm;
+      }
+
+      .dibujo--blanco .marco-dibujo {
+        position: absolute;
+        inset: 5mm 3.5mm 3mm 11mm;
+        display: grid;
+        place-items: center;
+        border: 0.4mm dashed var(--linea);
+        border-radius: 2.4mm;
+      }
+
+      .dibujo--blanco .marco-dibujo svg {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .dibujo--blanco .formas-nivel {
+        z-index: 2;
+      }
+
+      .rejilla-blancas {
+        margin-bottom: 4mm;
+      }
+
+      /* ---------- Tablero para emparejar ----------
+         Cada fila mide lo que una tarjeta de dibujo ya plastificada (66 × 54 mm): así las tarjetas no se pisan.
+         Los huecos son algo más pequeños que las tarjetas, que los tapan. */
+      @page tablero {
+        margin: 8mm 12mm 15mm 12mm;
+      }
+
+      .tablero {
+        page: tablero;
+        break-after: page;
+      }
+
+      .tablero__cabeza {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 4.5mm;
+        margin: 0 0 2.4mm;
+      }
+
+      .tablero__cabeza h1 {
+        margin: 0;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .tablero__cabeza p {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .tablero__cabeza .raya {
+        flex: 1;
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .tablero__cabeza .formas {
+        display: flex;
+        gap: 1.6mm;
+        align-items: center;
+      }
+
+      .tablero__cabeza .forma-vacia {
+        width: 7.4mm;
+        height: 7.4mm;
+      }
+
+      .tablero__filas {
+        display: grid;
+        grid-auto-rows: 54.5mm;
+        margin: 0 0 2.2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tablero__fila {
+        display: grid;
+        grid-template-columns: 96mm 12mm 66mm;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        column-gap: 3mm;
+        margin: 0;
+      }
+
+      .hueco {
+        position: relative;
+        display: grid;
+        place-items: center;
+        border: 0.6mm dashed var(--suave);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .hueco--frase {
+        width: 90mm;
+        height: 38mm;
+      }
+
+      .hueco--dibujo {
+        width: 60mm;
+        height: 48mm;
+      }
+
+      .hueco svg {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .tablero__fila svg.flecha {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .rutina {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 2.2mm 3mm;
+        border: 0.6mm solid var(--azul);
+        border-radius: 4mm;
+        background: var(--azul-tinte);
+        list-style: none;
+        break-inside: avoid;
+      }
+
+      .rutina li {
+        display: grid;
+        grid-template-columns: 5.4mm 12mm minmax(0, 1fr);
+        grid-template-rows: 12mm auto;
+        column-gap: 1.6mm;
+        row-gap: 1mm;
+        align-items: center;
+        margin: 0;
+      }
+
+      .rutina .num {
+        display: grid;
+        place-items: center;
+        width: 5.4mm;
+        height: 5.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      .rutina img,
+      .rutina svg {
+        width: 12mm;
+        height: 12mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .rutina p {
+        grid-column: 1 / -1;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+      }
+
+      .tablero .atribucion {
+        margin-top: 1.6mm;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .vistazo__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: stretch;
+        margin: 0 0 3.5mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.6mm;
+        font-size: 13pt;
+      }
+
+      .lista-niveles {
+        display: grid;
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 10.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .lista-niveles .nv {
+        justify-self: center;
+      }
+
+      .comprobar {
+        display: grid;
+        /* minmax(0, 1fr): con «auto», la tercera columna pasaba 1 mm del ancho de la hoja y Chromium
+           encogía todo el PDF al 99,4 % (17/11/2026). */
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        justify-content: space-between;
+        align-items: start;
+        gap: 2mm;
+        margin: 0 0 1.6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .comprobar li {
+        display: grid;
+        justify-items: center;
+        gap: 1.2mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      .comprobar svg {
+        width: 24mm;
+        height: 19mm;
+      }
+
+      .mapa {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.3mm 4mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 10mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 1.2mm 2.6mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .mapa .mapa__titulo {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      .grupos__titulo {
+        margin: 0 0 0.8mm;
+        font-size: 13pt;
+      }
+
+      .grupos__intro {
+        margin: 0 0 1.6mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .grupos {
+        margin: 0 0 3.5mm;
+        line-height: 1.25;
+      }
+
+      .grupos th,
+      .grupos td {
+        padding: 1.1mm 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .grupos tbody th {
+        white-space: nowrap;
+      }
+
+      .grupos tbody th .nv {
+        margin-right: 1.2mm;
+      }
+
+      .solo-lector {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      /* ---------- Registro ---------- */
+      .registro {
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .registro__datos {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .registro__datos p {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .registro__datos span {
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .registro__datos .fechas {
+        grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+      }
+
+      .escalera {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: end;
+        gap: 2mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .escalera li {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        margin: 0;
+        padding: 1.8mm 2.2mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3mm;
+        background: var(--t);
+        font-size: 11pt;
+        line-height: 1.22;
+      }
+
+      .escalera li:nth-child(1) {
+        height: 33mm;
+      }
+      .escalera li:nth-child(2) {
+        height: 35.5mm;
+      }
+      .escalera li:nth-child(3) {
+        height: 38mm;
+      }
+      .escalera li:nth-child(4) {
+        height: 40.5mm;
+      }
+      .escalera li:nth-child(5) {
+        height: 43mm;
+      }
+
+      .escalera strong {
+        display: flex;
+        align-items: center;
+        gap: 1.4mm;
+        margin: 0 0 1mm;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.05;
+      }
+
+      .escalera b {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-size: 11pt;
+      }
+
+      .escalera__ejes {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 2.6mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .regla {
+        margin: 0 0 2.6mm;
+      }
+
+      .claves {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 5mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .claves li {
+        margin: 0;
+      }
+
+      .claves b {
+        display: inline-grid;
+        place-items: center;
+        min-width: 6mm;
+        height: 6mm;
+        margin-right: 1.2mm;
+        padding: 0 1mm;
+        border-radius: 1.4mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 11pt;
+      }
+
+      .registro table th,
+      .registro table td {
+        padding: 1.1mm 1.8mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .registro tbody td {
+        height: 8.6mm;
+      }
+
+      .registro thead th {
+        font-size: 11pt;
+        line-height: 1.15;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.6em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.6mm 3.6mm;
+        line-height: 1.32;
+      }
+
+      .guia .caja h2,
+      .guia .caja h3 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 3.4mm 4mm;
+        align-items: start;
+        break-inside: auto;
+        margin-bottom: 2.6mm;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      .guia .dos-columnas ul {
+        margin: 0;
+        padding-left: 4.4mm;
+      }
+
+      .escalera-guia {
+        display: grid;
+        gap: 1.2mm;
+        margin: 0 0 0.6em;
+        padding: 0;
+        list-style: none;
+      }
+
+      .escalera-guia li {
+        display: grid;
+        grid-template-columns: 6.4mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2.2mm;
+        margin: 0;
+      }
+
+      .escalera-guia b.letra {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--c);
+        color: var(--marino);
+        font-family: var(--titulos);
+        font-size: 11pt;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 2.6mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .juegos-casa {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4mm 4mm;
+        margin: 1mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .juegos-casa li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 2mm 2.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.28;
+      }
+
+      .juegos-casa img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .juegos-casa strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12.5pt;
+      }
+
+      .probar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        align-items: center;
+        gap: 4mm;
+        padding: 2.6mm 4mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .probar__instruccion {
+        margin: 0 0 1.6mm;
+        font-size: 12pt;
+        line-height: 1.3;
+      }
+
+      .probar .texto {
+        font-size: 20pt;
+        line-height: 1.55;
+      }
+
+      .probar__dibujo {
+        width: 45mm;
+        height: 36mm;
+        border: 0.45mm solid var(--suave);
+        border-radius: 3mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .probar__dibujo svg {
+        width: 45mm;
+        height: 36mm;
+      }
+
+      .recuadro {
+        margin-top: 2.6mm;
+        padding: 2.4mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: tarjetas;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.45em 0 0.15em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 172mm; height: 172mm; right: -70mm; top: 118mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 78mm; height: 78mm; left: -32mm; top: 182mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 22mm; height: 22mm; left: 112mm; top: 118mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Lectura · Para toda la clase</p>
+        <h1 class="portada__titulo">Frase<br />y dibujo</h1>
+        <p class="portada__subtitulo">
+          Leo la frase entera y busco su dibujo. Tres niveles, de 2 a 8 palabras, y un símbolo detrás para comprobarlo.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escaparate" id="escaparate" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>Tres niveles<b>2 a 8</b>palabras</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Cada frase tiene su dibujo. El peque lee la frase entera, busca el dibujo que dice lo mismo y lo pone al lado en el
+        tablero. Después da la vuelta al dibujo: si el símbolo de detrás es el mismo que el de la frase, ha acertado. Son 36
+        parejas en tres niveles, para 5 años de Infantil y para 1.º y 2.º de Primaria.
+      </p>
+      <div class="vistazo__fila">
+        <div class="caja caja--azul">
+          <h2>Tres niveles</h2>
+          <ul class="lista-niveles" id="lista-niveles"></ul>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Así se comprueba</h2>
+          <ol class="comprobar" id="comprobar"></ol>
+          <p style="margin: 0">El símbolo va escondido detrás del dibujo: así nadie empareja por el símbolo sin leer.</p>
+        </div>
+      </div>
+      <ol class="mapa" id="mapa"></ol>
+      <h2 class="grupos__titulo">Tres grupos de cuatro parejas en cada nivel</h2>
+      <p class="grupos__intro">
+        Las frases de un grupo se parecen a propósito: así hay que leerlas enteras. Empieza por uno. En las hojas van en este
+        orden.
+      </p>
+      <table class="grupos">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 21mm"><span class="solo-lector">Nivel</span></th>
+            <th scope="col">Grupo A</th>
+            <th scope="col">Grupo B</th>
+            <th scope="col">Grupo C</th>
+          </tr>
+        </thead>
+        <tbody id="grupos"></tbody>
+      </table>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Primero la frase, después el dibujo.</strong> Que lea la frase entera antes de mirar los dibujos, sin
+          adivinar por la primera letra ni por el dibujo. La guía de la página <span data-pagina="guia"></span> explica cómo
+          enseñarlo y cómo retirar la ayuda.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TABLERO PARA EMPAREJAR
+         ====================================================================== -->
+    <section class="tablero">
+      <div class="tablero__cabeza">
+        <h1>Leo y empareja</h1>
+        <p>Me llamo:<span class="raya"></span></p>
+        <p>Nivel:<span class="formas" id="formas-tablero"></span></p>
+      </div>
+      <ol class="tablero__filas" id="filas-tablero"></ol>
+      <ol class="rutina" id="rutina"></ol>
+      <p class="atribucion">Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA. La flecha y los iconos, de IdEducando.</p>
+    </section>
+
+    <!-- Las hojas de frases y de dibujos de los tres niveles se generan con el guion del final, a partir de la lista FRASES -->
+    <div id="hojas-niveles"></div>
+
+    <!-- ======================================================================
+         TARJETAS EN BLANCO
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="aviso">
+        <h1>Tarjetas en blanco <span>· Seis frases y seis dibujos</span></h1>
+        <span><i class="muestra-linea muestra-linea--corta"></i>Corta <i class="muestra-linea muestra-linea--dobla"></i>Dobla hacia atrás</span>
+      </div>
+      <ul class="rejilla-frases rejilla-blancas" id="frases-blancas"></ul>
+      <ul class="rejilla-dibujos" id="dibujos-blancos"></ul>
+      <p class="atribucion">
+        Antes de plastificar, rodea la forma del nivel, escribe la frase y haz su dibujo. Dibuja el mismo símbolo en la frase
+        y en la pestaña: un triángulo, una gota o una nube. Si pegas pictogramas de ARASAAC, cítalos igual.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO PARA EL ADULTO
+         ====================================================================== -->
+    <section class="hoja registro">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el adulto · Una hoja por peque</p>
+          <h1>Registro de lectura de frases</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="registro__datos">
+        <p>Iniciales:<span></span></p>
+        <p class="fechas">Del<span></span>al<span></span></p>
+      </div>
+      <h2 style="font-size: 13pt; margin: 0 0 1.6mm">La escalera de las ayudas</h2>
+      <ol class="escalera" id="escalera"></ol>
+      <p class="escalera__ejes" aria-hidden="true"><span>← Más ayuda</span><span>Más autonomía →</span></p>
+      <p class="regla">
+        <strong>Cuándo subir un peldaño:</strong> cuando acierte las cuatro parejas de un grupo con esa ayuda dos días
+        seguidos. Si falla más de una, vuelve al peldaño anterior sin darle importancia. Es una propuesta de IdEducando:
+        ajústala a cada peque.
+      </p>
+      <h2 style="font-size: 13pt; margin: 0 0 1.2mm">¿Dónde se equivoca? Apunta su letra</h2>
+      <ul class="claves" id="claves"></ul>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" style="width: 16mm">Día</th>
+            <th scope="col" style="width: 22mm">Nivel y grupo</th>
+            <th scope="col" style="width: 19mm">Aciertos (de 4)</th>
+            <th scope="col" style="width: 17mm">Ayuda (A a E)</th>
+            <th scope="col" style="width: 22mm">¿Dónde se equivoca?</th>
+            <th scope="col">Qué ha hecho bien</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <p class="atribucion">Solo iniciales, sin el diagnóstico. Guarda el registro en el centro y no le hagas fotos con tu móvil.</p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Frase y dibujo: cómo enseñar a leer la frase entera</h1>
+      <p>
+        Este material sirve para leer frases cortas y comprobar que se han entendido: cada frase tiene su dibujo, hecho con
+        pictogramas de ARASAAC. Es para 5 años de Infantil y para 1.º y 2.º de Primaria, con toda la clase. Ayuda sobre todo
+        al alumnado con trastorno del desarrollo del lenguaje (TDL), discapacidad intelectual, trastorno del espectro del
+        autismo (TEA) o dislexia.
+      </p>
+
+      <h2>Por qué frases con su dibujo</h2>
+      <ul>
+        <li>
+          <strong>Leer y entender son dos cosas.</strong> Para comprender lo que lee, un niño necesita leer bien las palabras
+          y comprender el lenguaje. En un estudio con 198 niños y niñas seguidos desde los 7 años y medio, esas dos capacidades
+          explicaron casi todas las diferencias en su comprensión lectora inicial (Lervåg, Hulme y Melby-Lervåg, 2018). Catts,
+          Adlof y Ellis Weismer (2006) encontraron alumnado que leía bien las palabras y comprendía mal el lenguaje, y alumnado
+          con el perfil contrario. Las tarjetas ayudan a ver cuál es el caso: si lee bien la frase y elige mal el dibujo, mira la
+          comprensión; si no llega a leerla, trabaja la lectura de palabras.
+        </li>
+        <li>
+          <strong>El TDL.</strong> Así se llama hoy el trastorno del lenguaje que no se explica por otra causa conocida (Bishop y
+          otros, 2017). Antes se llamaba trastorno específico del lenguaje (TEL). Este alumnado suele comprender peor que sus
+          compañeros las frases que oye, y la memoria parece influir en esa dificultad (Montgomery, Gillam y Evans, 2016). Por
+          eso las frases empiezan cortas y crecen poco a poco.
+        </li>
+        <li>
+          <strong>Leer bien no asegura entender.</strong> En un estudio con 41 niños y niñas con TEA, en conjunto leían las
+          palabras como se espera para su edad y comprendían peor el texto, aunque había perfiles muy distintos (Nation y otros,
+          2006). El dibujo comprueba lo que ha entendido, aunque lea la frase en voz alta sin un fallo.
+        </li>
+        <li>
+          <strong>Lo que pide el currículo.</strong> En el primer ciclo de Primaria, la comprensión se trabaja «mediante la
+          lectura silenciosa y en voz alta, acompañada de imágenes», y se comparan y transforman «palabras y enunciados» (Real
+          Decreto 157/2022). En Infantil, los peques se acercan a la lectura jugando y disfrutando, y la adquisición del código
+          escrito «no es un objetivo que se deba alcanzar en esta etapa» (Real Decreto 95/2022). Con 5 años, el nivel 1 es un reto para quien ya
+          lee, y nunca una obligación.
+        </li>
+      </ul>
+
+      <h2>Cómo enseñar a leer la frase entera</h2>
+      <ol>
+        <li>
+          <strong>Primero la frase, después los dibujos.</strong> La guía de lectura inicial de Foorman y otros (2016)
+          desaconseja que el alumnado adivine las palabras por la primera letra o por el dibujo, porque no le servirá con textos
+          más difíciles. Que lea la frase entera y después busque.
+        </li>
+        <li>
+          <strong>Un dedo para cada palabra.</strong> Debajo de cada palabra hay una rayita. Que pase el dedo por ella al leerla,
+          hasta el punto de color: ahí acaba la frase. Hacer coincidir cada palabra que dice con cada palabra escrita es un paso clave al
+          empezar a leer (Flanigan, 2007).
+        </li>
+        <li>
+          <strong>Si se equivoca, no le des la respuesta.</strong> Espera un poco y pídele que lea otra vez la frase: «¿Tiene
+          sentido con este dibujo?». Es lo que propone la misma guía para que aprenda a corregirse solo (Foorman y otros, 2016,
+          págs. 34 y 35).
+        </li>
+        <li>
+          <strong>¿Cómo lo sabes?</strong> Al acertar, pregúntale qué palabra le ha dicho cuál era el dibujo. En el nivel 3,
+          poned las dos frases de la pareja juntas y buscad la palabra que cambia. El Diseño Universal para el Aprendizaje (DUA)
+          propone resaltar lo que es clave (CAST, 2024, consideración 3.2).
+        </li>
+        <li>
+          <strong>Con el cuerpo y con objetos.</strong> Antes del nivel 3, representad las frases: un peluche en la cama y
+          debajo, un vaso lleno y otro vacío. Así se ven las palabras que deciden («en», «debajo», «sin»).
+        </li>
+      </ol>
+    </section>
+
+    <section class="guia salto">
+      <h2 style="margin-top: 0">Cómo graduar la ayuda</h2>
+      <p>
+        El DUA propone ajustar el reto y el apoyo, y dar apoyos graduados mientras se practica (CAST, 2024, consideraciones 8.2
+        y 5.3). La escalera del registro (página <span data-pagina="registro"></span>) va de más ayuda a más autonomía:
+      </p>
+      <ul class="escalera-guia" id="escalera-guia"></ul>
+      <p>
+        Retira la ayuda poco a poco y espera a que pruebe solo: en lugar de darle la palabra, pregúntale «¿Qué puedes
+        probar?» (Foorman y otros, 2016, pág. 34). El modelado, las ayudas que se van retirando y los apoyos visuales están
+        entre las prácticas con evidencia para el alumnado con TEA (Hume y otros, 2021). El símbolo de detrás le da una
+        respuesta inmediata que puede usar solo (CAST, 2024, consideración 8.5).
+      </p>
+
+      <h2>Para cada necesidad</h2>
+      <div class="dos-columnas">
+        <div class="caja caja--coral">
+          <h3>TDL</h3>
+          <ul>
+            <li>Antes de leer, dile tú la frase y que la repita. Después, que la lea.</li>
+            <li>Acompaña con un gesto «en», «debajo», «con» y «sin».</li>
+            <li>Empieza por el nivel 1 aunque lea bien: primero se entiende la frase corta.</li>
+          </ul>
+        </div>
+        <div class="caja caja--amarilla">
+          <h3>Discapacidad intelectual</h3>
+          <ul>
+            <li>Dos parejas a la vez, y después tres. Repetid el mismo grupo varios días.</li>
+            <li>Haced antes la frase con objetos de verdad y después con el dibujo.</li>
+            <li>Elige frases de su día a día con las tarjetas en blanco.</li>
+          </ul>
+        </div>
+        <div class="caja caja--azul">
+          <h3>TEA</h3>
+          <ul>
+            <li>Siempre el mismo tablero y los mismos pasos. Dile cuántas parejas hay y cuándo acaba.</li>
+            <li>
+              Si las tarjetas se le mueven y eso le altera, pon velcro: rugoso en los huecos del tablero y suave detrás de las
+              tarjetas, como en el resto de materiales de IdEducando.
+            </li>
+          </ul>
+        </div>
+        <div class="caja caja--morada">
+          <h3>Dislexia</h3>
+          <ul>
+            <li>Que lea en voz baja o a solas, sin público y sin reloj.</li>
+            <li>Si se pierde en la línea, una tira de cartulina debajo ayuda.</li>
+            <li>Valora que entienda la frase aunque la lea despacio.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>En clase</h2>
+      <ul>
+        <li>
+          <strong>En parejas:</strong> uno lee la frase en voz alta y el otro busca el dibujo. Después cambian. El DUA propone
+          aprender en colaboración (CAST, 2024, consideración 8.3).
+        </li>
+        <li>
+          <strong>Con toda la clase:</strong> enseña los dos dibujos de una pareja del nivel 3, lee una de las frases y que cada
+          cual señale el suyo. ¿Qué palabra lo ha decidido?
+        </li>
+        <li>
+          <strong>Para escribir:</strong> en 2.º, cada peque escribe una frase en una tarjeta en blanco y hace su dibujo. Otra
+          pareja la lee y la empareja.
+        </li>
+      </ul>
+
+      <h2>Con otros materiales de IdEducando</h2>
+      <p>
+        Los dibujos del tiempo del nivel 1 son los del panel de
+        <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">Rutinas de invierno en el cole</a>, que
+        el peque ya conoce. Para trabajar antes los sonidos y las sílabas, usa
+        <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>. Si quiere leer
+        algo más largo,
+        <a href="https://www.ideducando.es/material-gratuito/cuento-lectura-facil-cole-nuevo/">Mi primer día en el cole nuevo</a>
+        es un cuento en lectura fácil.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Frase y dibujo, también en casa</h1>
+      <p>
+        En clase leemos frases cortas y buscamos su dibujo, como «El gato duerme debajo de la cama». Así aprendemos a leer la
+        frase entera, hasta el punto, y a entender lo que dice: el dibujo ayuda a comprobarlo. Sirve a todos los niños y niñas,
+        también a quienes tienen más dificultades con el lenguaje o con la lectura.
+      </p>
+
+      <h2><img src="pictogramas/7141.png" alt="" />Cuando lee en casa</h2>
+      <ul>
+        <li>Que señale cada palabra con el dedo mientras la lee.</li>
+        <li>Si se equivoca, no le digáis la respuesta. Decid: «Léela otra vez. ¿Tiene sentido?».</li>
+        <li>Mejor 10 minutos con ganas que media hora con prisas. Celebrad el esfuerzo.</li>
+      </ul>
+
+      <h2><img src="pictogramas/32324.png" alt="" />Cuatro juegos para casa</h2>
+      <ul class="juegos-casa" id="juegos-casa"></ul>
+
+      <h2><img src="pictogramas/6612.png" alt="" />Para probar juntos</h2>
+      <div class="probar c-morado" id="probar"></div>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Frase y dibujo.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos pictográficos
+          utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Frase y dibujo: leo y empareja.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/frase-y-dibujo</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+
+      <h2>Comprender lo que se lee</h2>
+      <ul class="referencias">
+        <li>
+          Lervåg, A., Hulme, C. y Melby-Lervåg, M. (2018). Unpicking the developmental relationship between oral language
+          skills and reading comprehension: It's simple, but complex. <em>Child Development</em>, 89(5), 1821-1838. DOI:
+          10.1111/cdev.12861
+        </li>
+        <li>
+          Catts, H. W., Adlof, S. M. y Ellis Weismer, S. (2006). Language deficits in poor comprehenders: A case for the simple
+          view of reading. <em>Journal of Speech, Language, and Hearing Research</em>, 49(2), 278-293. DOI:
+          10.1044/1092-4388(2006/023)
+        </li>
+        <li>
+          Foorman, B. y otros (2016). <em>Foundational skills to support reading for understanding in kindergarten through 3rd
+          grade</em> (NCEE 2016-4008). National Center for Education Evaluation and Regional Assistance, Institute of
+          Education Sciences, U.S. Department of Education. Recomendación 4, págs. 32 a 37. ies.ed.gov
+        </li>
+        <li>
+          Flanigan, K. (2007). A concept of word in text: A pivotal event in early reading acquisition. <em>Journal of
+          Literacy Research</em>, 39(1), 37-70. DOI: 10.1080/10862960709336757
+        </li>
+      </ul>
+
+      <h2>TDL y TEA</h2>
+      <ul class="referencias">
+        <li>
+          Montgomery, J. W., Gillam, R. B. y Evans, J. L. (2016). Syntactic versus memory accounts of the sentence
+          comprehension deficits of specific language impairment: Looking back, looking ahead. <em>Journal of Speech,
+          Language, and Hearing Research</em>, 59(6), 1491-1504. DOI: 10.1044/2016_JSLHR-L-15-0325
+        </li>
+        <li>
+          Bishop, D. V. M., Snowling, M. J., Thompson, P. A., Greenhalgh, T. y CATALISE-2 consortium (2017). Phase 2 of
+          CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development:
+          Terminology. <em>Journal of Child Psychology and Psychiatry</em>, 58(10), 1068-1080. DOI: 10.1111/jcpp.12721
+        </li>
+        <li>
+          Nation, K., Clarke, P., Wright, B. y Williams, C. (2006). Patterns of reading ability in children with autism
+          spectrum disorder. <em>Journal of Autism and Developmental Disorders</em>, 36(7), 911-919. DOI:
+          10.1007/s10803-006-0130-1
+        </li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation
+          review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI: 10.1007/s10803-020-04844-2
+        </li>
+      </ul>
+
+      <h2>Currículo y DUA</h2>
+      <ul class="referencias">
+        <li>
+          Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación
+          Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022, anexo II, Lengua Castellana y Literatura:
+          competencia específica 4 (pág. 24460), criterios del primer ciclo 4.1 y 9.1 (págs. 24464 y 24465) y saberes básicos
+          (págs. 24465 y 24466).
+        </li>
+        <li>
+          Real Decreto 95/2022, de 1 de febrero, por el que se establece la ordenación y las enseñanzas mínimas de la Educación
+          Infantil. Boletín Oficial del Estado (BOE) n.º 28, de 2 de febrero de 2022, anexo II, área Comunicación y
+          Representación de la Realidad (págs. 14587, 14589 y 14593).
+        </li>
+        <li>
+          CAST (2024). <em>Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0</em>, consideraciones 3.2,
+          5.3, 8.2, 8.3 y 8.5. udlguidelines.cast.org/es
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Los
+        dibujos de las tarjetas se han hecho juntando pictogramas, y algunos están girados o más pequeños. Las zetas del sueño,
+        las olas, las rayas de correr, los símbolos y el diseño son de IdEducando. Con pictogramas de ARASAAC, este material
+        no se puede vender: es gratis y lo será siempre. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a
+        IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        tablero: 4,
+        frases1: 5,
+        mayusculas1: 6,
+        dibujos1: 7,
+        frases2: 8,
+        dibujos2: 9,
+        frases3: 10,
+        dibujos3: 11,
+        blancas: 12,
+        registro: 13,
+        guia: 14,
+        familias: 16,
+        fuentes: 17,
+      };
+
+      const NIVELES = {
+        1: { color: 'verde', forma: 'círculo', palabras: '2 o 3 palabras' },
+        2: { color: 'azul', forma: 'cuadrado', palabras: '4 o 5 palabras' },
+        3: { color: 'morado', forma: 'rombo', palabras: '6 a 8 palabras' },
+      };
+
+      // ---------------------------------------------------------------------
+      // Caja del dibujo de cada pictograma (píxeles con color, en su lienzo de 500 × 500).
+      // Sirve para colocar cada pictograma por su dibujo y no por su lienzo.
+      // ---------------------------------------------------------------------
+      const CAJAS = {"2798": [6, 6, 494, 494], "3123": [9, 9, 491, 491], "3135": [10, 9, 491, 491], "7259": [13, 51, 483, 489], "2520": [18, 162, 482, 338], "26270": [39, 37, 461, 463], "2406": [7, 141, 493, 359], "2517": [49, 90, 451, 410], "31680": [80, 24, 421, 468], "28643": [73, 22, 428, 477], "28447": [29, 20, 471, 478], "2804": [22, 11, 478, 487], "28647": [82, 27, 421, 473], "11959": [62, 33, 438, 467], "31923": [92, 75, 409, 422], "31884": [90, 71, 410, 420], "29716": [32, 73, 482, 467], "2276": [14, 89, 485, 411], "4652": [89, 21, 411, 479], "4583": [128, 22, 372, 481], "28414": [9, 76, 493, 450], "9016": [39, 9, 461, 491], "29738": [50, 26, 450, 474], "35727": [12, 34, 490, 446], "2658": [55, 8, 445, 494], "25900": [23, 104, 477, 396], "7114": [16, 72, 484, 428], "7176": [137, 8, 362, 492], "2412": [61, 65, 439, 435], "3129": [3, 69, 497, 431], "4768": [91, 22, 412, 478], "2610": [92, 26, 408, 474], "27509": [131, 10, 369, 490], "8313": [94, 49, 406, 449], "2500": [29, 30, 471, 469], "37456": [84, 21, 413, 476]};
+
+      // ---------------------------------------------------------------------
+      // Colores y dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const AZUL = '#2f6fd6';
+      const CORAL = '#e8553e';
+      const AMARILLO = '#f6c12e';
+      const NARANJA = '#f5961f';
+      const VERDE = '#1fa67a';
+      const MORADO = '#8c4fb8';
+      const SUELO = '#b79d72';
+      const f2 = (n) => Number(n.toFixed(2));
+
+      // Un pictograma colocado por su dibujo: w o h es el ancho o el alto del dibujo en mm; cx, su centro;
+      // b, su borde de abajo (o cy, su centro vertical). f lo pone mirando al otro lado.
+      function pic(n, { cx, b, cy, w, h, f = false }) {
+        const [x0, y0, x1, y1] = CAJAS[n];
+        const s = w ? w / (x1 - x0) : h / (y1 - y0);
+        const lado = 500 * s;
+        const x = cx - ((x0 + x1) / 2) * s;
+        const y = b !== undefined ? b - y1 * s : cy - ((y0 + y1) / 2) * s;
+        const giro = f ? ` transform="translate(${f2(2 * cx)} 0) scale(-1 1)"` : '';
+        return `<image href="pictogramas/${n}.png" x="${f2(x)}" y="${f2(y)}" width="${f2(lado)}" height="${f2(lado)}"${giro}/>`;
+      }
+
+      // Un punto del pictograma (en píxeles de su lienzo) llevado a la escena, con la misma colocación que pic().
+      function punto(n, { cx, b, cy, w, h }, px, py) {
+        const [x0, y0, x1, y1] = CAJAS[n];
+        const s = w ? w / (x1 - x0) : h / (y1 - y0);
+        const x = cx - ((x0 + x1) / 2) * s;
+        const y = b !== undefined ? b - y1 * s : cy - ((y0 + y1) / 2) * s;
+        return [f2(x + px * s), f2(y + py * s)];
+      }
+
+      // Las zetas del sueño, de menor a mayor, subiendo hacia la derecha.
+      const zetas = (x, y, t = 2.2) =>
+        [0, 1, 2]
+          .map((i) => {
+            const k = t * (0.7 + 0.25 * i);
+            const px = x + i * t * 1.05;
+            const py = y - i * t * 0.95;
+            return `<path d="M${f2(px)} ${f2(py)}h${f2(k)}l${f2(-k)} ${f2(k)}h${f2(k)}" fill="none" stroke="${M}" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+          })
+          .join('');
+
+      const olas = (y, x0 = 4, x1 = 56, color = AZUL) => {
+        let d = `M${x0} ${y}`;
+        for (let x = x0; x < x1; x += 6) d += ` q1.5 -1.3 3 0 t3 0`;
+        return `<path d="${d}" fill="none" stroke="${color}" stroke-width="0.55" stroke-linecap="round"/>`;
+      };
+
+      const rayas = (x, y, largo = 6, color = SUAVE) =>
+        [0, 1, 2]
+          .map((i) => `<path d="M${f2(x + (i === 1 ? -1.4 : 0))} ${f2(y + i * 2.2)}h${f2(largo - (i === 1 ? 0 : 1.4))}" stroke="${color}" stroke-width="0.55" stroke-linecap="round"/>`)
+          .join('');
+
+      const suelo = (y, x0 = 5, x1 = 55) => `<path d="M${x0} ${y}H${x1}" stroke="${SUELO}" stroke-width="0.6" stroke-linecap="round"/>`;
+
+      const cuerda = ([x1, y1], [x2, y2]) => {
+        const mx = (x1 + x2) / 2 + 1.6;
+        const my = (y1 + y2) / 2;
+        return `<path d="M${x1} ${y1}Q${f2(mx)} ${f2(my)} ${x2} ${y2}" fill="none" stroke="${M}" stroke-width="0.32"/>`;
+      };
+
+      const burbujas = (x, y) =>
+        [[0, 0, 0.8], [1.6, -2.4, 1.1], [0.6, -5.4, 0.7]]
+          .map(([dx, dy, r]) => `<circle cx="${f2(x + dx)}" cy="${f2(y + dy)}" r="${r}" fill="#fff" stroke="${AZUL}" stroke-width="0.35"/>`)
+          .join('');
+
+      // ---------------------------------------------------------------------
+      // Las 36 frases. Cada una: el texto (| marca el salto de línea), el símbolo de su pareja de dibujo,
+      // el dibujo (una lista de piezas) y su descripción para el lector de pantalla.
+      // ---------------------------------------------------------------------
+      const GATO_CAMA = { cx: 32, b: 44, w: 50 }; // la cama de los dos dibujos del gato
+      const NINA_PARAGUAS = { cx: 22, b: 46, h: 24 };
+      const manoParaguas = punto(27509, NINA_PARAGUAS, 356, 340);
+      const NINA_GLOBO = { cx: 22, b: 45.5, h: 34 };
+      const manoGlobo = punto(27509, NINA_GLOBO, 356, 340);
+      const NINO = { cx: 30, b: 45.5, h: 34 };
+
+      const FRASES = {
+        1: [
+          // Grupo A: el tiempo. Empiezan igual: hay que leer hasta el final.
+          { t: 'Hoy hace sol.', s: 'corazon', alt: 'Un sol amarillo en el cielo azul',
+            d: () => pic(2798, { cx: 31, cy: 25.5, w: 36 }) },
+          { t: 'Hoy llueve.', s: 'luna', alt: 'Nubes grises y lluvia sobre el campo',
+            d: () => pic(3123, { cx: 31, cy: 25.5, w: 36 }) },
+          { t: 'Hoy nieva.', s: 'flor', alt: 'Nubes y nieve sobre las montañas',
+            d: () => pic(3135, { cx: 31, cy: 25.5, w: 36 }) },
+          { t: 'Hoy hace viento.', s: 'barco', alt: 'Un árbol movido por el viento',
+            d: () => pic(7259, { cx: 31, cy: 25.5, w: 40 }) },
+          // Grupo B: animales
+          { t: 'El pez nada.', s: 'estrella', alt: 'Un pez entre olas de agua, con burbujas',
+            d: () => olas(12) + olas(40) + pic(2520, { cx: 30, cy: 26, w: 40 }) + burbujas(52, 22) },
+          { t: 'El pájaro vuela.', s: 'hoja', alt: 'Un pájaro volando con las alas abiertas',
+            d: () => pic(26270, { cx: 32, cy: 25.5, w: 36 }) },
+          { t: 'El gato duerme.', s: 'campana', alt: 'Un gato tumbado, con zetas de sueño encima',
+            d: () => suelo(40.4, 6, 54) + pic(2406, { cx: 28, b: 40, w: 40 }) + zetas(40, 18, 2.6) },
+          { t: 'El perro corre.', s: 'seta', alt: 'Un perro corriendo, con rayas de velocidad detrás',
+            d: () => suelo(41.4, 6, 56) + rayas(4, 22, 7) + pic(2517, { cx: 34, b: 41, w: 34 }) },
+          // Grupo C: el niño y la niña
+          { t: 'El niño lee.', s: 'llave', alt: 'Un niño leyendo un libro',
+            d: () => pic(31680, { cx: 31, cy: 25.5, h: 38 }) },
+          { t: 'La niña lee.', s: 'cereza', alt: 'Una niña leyendo un libro',
+            d: () => pic(28643, { cx: 31, cy: 25.5, h: 38 }) },
+          { t: 'El niño salta.', s: 'casa', alt: 'Un niño saltando',
+            d: () => pic(28447, { cx: 31, cy: 25.5, h: 38 }) },
+          { t: 'La niña salta.', s: 'corona', alt: 'Una niña saltando',
+            d: () => pic(2804, { cx: 31, cy: 25.5, h: 38 }) },
+        ],
+        2: [
+          // Grupo A: cómo está. El detalle va al final.
+          { t: 'La niña está|contenta.', s: 'hoja', alt: 'Una niña sonriendo',
+            d: () => pic(28647, { cx: 31, cy: 25.5, h: 38 }) },
+          { t: 'La niña está|triste.', s: 'corona', alt: 'Una niña triste, con lágrimas',
+            d: () => pic(11959, { cx: 31, cy: 25.5, h: 38 }) },
+          { t: 'El niño está|contento.', s: 'estrella', alt: 'Un niño sonriendo',
+            d: () => pic(31923, { cx: 31, cy: 25.5, h: 34 }) },
+          { t: 'El niño está|enfadado.', s: 'cereza', alt: 'Un niño enfadado, con el ceño fruncido',
+            d: () => pic(31884, { cx: 31, cy: 25.5, h: 34 }) },
+          // Grupo B: qué bebe o come
+          { t: 'La niña bebe|agua fría.', s: 'casa', alt: 'Una niña bebiendo y, a su lado, un vaso de agua con hielo',
+            d: () => pic(29716, { cx: 22, cy: 26, w: 32 }) + pic(4652, { cx: 48.5, b: 39, h: 22 }) },
+          { t: 'La niña bebe|chocolate caliente.', s: 'flor', alt: 'Una niña bebiendo y, a su lado, un vaso de chocolate que echa humo',
+            d: () => pic(29716, { cx: 22, cy: 26, w: 32 }) + pic(4583, { cx: 48.5, b: 39, h: 24 }) },
+          { t: 'El niño bebe|agua fría.', s: 'luna', alt: 'Un niño bebiendo y, a su lado, un vaso de agua con hielo',
+            d: () => pic(2276, { cx: 22, cy: 26, w: 32 }) + pic(4652, { cx: 48.5, b: 39, h: 22 }) },
+          { t: 'El niño come|un bocadillo.', s: 'llave', alt: 'Un niño comiendo un bocadillo',
+            d: () => pic(28414, { cx: 31, cy: 26, w: 44 }) },
+          // Grupo C: en casa
+          { t: 'La niña pasea|al perro.', s: 'barco', alt: 'Una niña paseando a un perro con correa',
+            d: () => pic(9016, { cx: 31, cy: 25.5, h: 39 }) },
+          { t: 'El niño pasea|al perro.', s: 'corazon', alt: 'Un niño paseando a un perro con correa',
+            d: () => pic(29738, { cx: 31, cy: 25.5, h: 39 }) },
+          { t: 'La niña hace|la cama.', s: 'seta', alt: 'Una niña estirando la sábana de una cama',
+            d: () => pic(35727, { cx: 31, cy: 26, w: 46 }) },
+          { t: 'El niño barre|el suelo.', s: 'campana', alt: 'Un niño barriendo con una escoba',
+            d: () => pic(2658, { cx: 31, cy: 25.5, h: 39 }) },
+        ],
+        3: [
+          // Parejas que solo cambian en un detalle. Grupo A: dónde y quién.
+          { t: 'El gato duerme|en la cama.', s: 'seta', alt: 'Un gato tumbado encima de una cama, con zetas de sueño',
+            d: () => pic(25900, GATO_CAMA) + pic(2406, { cx: 38, b: 24.9, w: 16 }) + zetas(46.5, 15.2, 2) },
+          { t: 'El gato duerme|debajo de la cama.', s: 'llave', alt: 'Un gato tumbado debajo de una cama, con zetas de sueño',
+            d: () => suelo(44.2, 3, 57) + pic(25900, GATO_CAMA) + pic(2406, { cx: 27, b: 44, w: 16 }) + zetas(36.6, 41.8, 1.5) },
+          { t: 'El perro corre|detrás del gato.', s: 'corazon', alt: 'Un gato corre delante y un perro corre detrás de él',
+            d: () => suelo(41.4, 3, 57) + rayas(2.6, 26, 5) + pic(2517, { cx: 18, b: 41, w: 25 }) + rayas(33.4, 30, 4.4) + pic(7114, { cx: 47, b: 41, w: 21 }) },
+          { t: 'El gato corre|detrás del perro.', s: 'casa', alt: 'Un perro corre delante y un gato corre detrás de él',
+            d: () => suelo(41.4, 3, 57) + rayas(2.6, 29, 5) + pic(7114, { cx: 16, b: 41, w: 21 }) + rayas(29.4, 26, 4.4) + pic(2517, { cx: 45, b: 41, w: 25 }) },
+          // Grupo B: con o sin, lleno o vacío
+          { t: 'El niño sale al patio|con gorro.', s: 'luna', alt: 'Un niño de pie con un gorro de lana',
+            d: () => suelo(45.8) + pic(7176, NINO) + pic(2412, { cx: punto(7176, NINO, 245, 0)[0], b: punto(7176, NINO, 0, 64)[1], w: 11.2 }) },
+          { t: 'El niño sale al patio|sin gorro.', s: 'campana', alt: 'Un niño de pie sin gorro',
+            d: () => suelo(45.8) + pic(7176, NINO) },
+          { t: 'Hay un vaso lleno|encima de la mesa.', s: 'flor', alt: 'Un vaso lleno de agua encima de una mesa',
+            d: () => pic(3129, { cx: 31, b: 46, w: 36 }) + pic(4768, { cx: 31, b: 19.9, h: 15.5 }) },
+          { t: 'Hay un vaso vacío|encima de la mesa.', s: 'estrella', alt: 'Un vaso vacío encima de una mesa',
+            d: () => pic(3129, { cx: 31, b: 46, w: 36 }) + pic(2610, { cx: 31, b: 19.9, h: 15.5 }) },
+          // Grupo C: cuántos y cómo
+          { t: 'La niña lleva|un globo en la mano.', s: 'cereza', alt: 'Una niña con un globo atado en la mano',
+            d: () => suelo(45.8) + pic(27509, NINA_GLOBO) + cuerda(punto(8313, { cx: 42, b: 21, w: 11 }, 244, 449), manoGlobo) + pic(8313, { cx: 42, b: 21, w: 11 }) },
+          { t: 'La niña lleva|dos globos en la mano.', s: 'barco', alt: 'Una niña con dos globos atados en la mano',
+            d: () => suelo(45.8) + pic(27509, NINA_GLOBO) +
+              cuerda(punto(8313, { cx: 38.5, b: 19, w: 11 }, 244, 449), manoGlobo) + cuerda(punto(8313, { cx: 50, b: 23, w: 11 }, 244, 449), manoGlobo) +
+              pic(8313, { cx: 38.5, b: 19, w: 11 }) + pic(8313, { cx: 50, b: 23, w: 11 }) },
+          { t: 'La niña lleva|el paraguas abierto.', s: 'corona', alt: 'Una niña con un paraguas abierto encima de la cabeza',
+            d: () => suelo(46.3) + pic(27509, NINA_PARAGUAS) + paraguasAbierto(manoParaguas) },
+          { t: 'La niña lleva|el paraguas cerrado.', s: 'hoja', alt: 'Una niña con un paraguas cerrado en la mano, apuntando hacia arriba',
+            d: () => suelo(46.3) + pic(27509, NINA_PARAGUAS) + paraguasCerrado(manoParaguas) },
+        ],
+      };
+
+      // El paraguas abierto se coloca con el puño en la mano de la niña; el cerrado, girado, con el puño abajo.
+      function paraguasAbierto([mx, my]) {
+        const s = 0.078; // mm por píxel
+        const x = mx - 249.5 * s;
+        const y = my - 432 * s;
+        return `<image href="pictogramas/2500.png" x="${f2(x)}" y="${f2(y)}" width="${f2(500 * s)}" height="${f2(500 * s)}"/>`;
+      }
+
+      function paraguasCerrado([mx, my]) {
+        const s = 0.056;
+        return `<g transform="translate(${mx} ${my}) rotate(-147.5) scale(${s}) translate(-122 -36)"><image href="pictogramas/37456.png" x="0" y="0" width="500" height="500"/></g>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Los doce símbolos para comprobar. Son dibujos de IdEducando y se reconocen aunque estén del revés.
+      // ---------------------------------------------------------------------
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const T = `stroke="${M}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"`;
+      const SIMBOLOS = {
+        corazon: { nombre: 'corazón', svg: `<path d="M50 86C22 67 9 52 9 34C9 20 19 10 32 10C40 10 46 14 50 21C54 14 60 10 68 10C81 10 91 20 91 34C91 52 78 67 50 86Z" fill="${CORAL}" ${T}/>` },
+        estrella: { nombre: 'estrella', svg: `<path d="${ESTRELLA}" fill="${AMARILLO}" ${T}/>` },
+        luna: { nombre: 'luna', svg: `<path d="M60 9A41 41 0 1 0 91 68A33 33 0 1 1 60 9Z" fill="#fde39a" ${T}/>` },
+        flor: { nombre: 'flor', svg: `${[0, 72, 144, 216, 288].map((a) => `<circle cx="50" cy="27" r="17" transform="rotate(${a} 50 50)" fill="${MORADO}" ${T}/>`).join('')}<circle cx="50" cy="50" r="13" fill="${AMARILLO}" ${T}/>` },
+        hoja: { nombre: 'hoja', svg: `<path d="M15 85C13 44 38 16 87 13C88 58 62 85 15 85Z" fill="${VERDE}" ${T}/><path d="M15 85L66 34" fill="none" ${T}/>` },
+        seta: { nombre: 'seta', svg: `<path d="M38 52L35 84Q50 91 65 84L62 52Z" fill="#fff6e6" ${T}/><path d="M8 54C8 28 27 12 50 12C73 12 92 28 92 54Z" fill="${CORAL}" ${T}/><circle cx="34" cy="34" r="6" fill="#fff"/><circle cx="60" cy="27" r="5" fill="#fff"/><circle cx="70" cy="43" r="5" fill="#fff"/>` },
+        cereza: { nombre: 'cerezas', svg: `<path d="M32 62C36 38 46 22 60 12M68 66C66 44 63 26 60 12" fill="none" ${T}/><path d="M60 12C70 8 82 12 86 22C76 26 66 22 60 12Z" fill="${VERDE}" ${T}/><circle cx="30" cy="72" r="16" fill="${CORAL}" ${T}/><circle cx="68" cy="76" r="16" fill="${CORAL}" ${T}/>` },
+        barco: { nombre: 'barco', svg: `<path d="M50 12V64" fill="none" ${T}/><path d="M55 16L84 58H55Z" fill="#fff" ${T}/><path d="M45 26V58H22Z" fill="${AMARILLO}" ${T}/><path d="M10 64H90L76 86H24Z" fill="${AZUL}" ${T}/>` },
+        corona: { nombre: 'corona', svg: `<path d="M12 80L15 30L33 52L50 20L67 52L85 30L88 80Z" fill="${AMARILLO}" ${T}/><path d="M12 80H88" fill="none" ${T}/><circle cx="50" cy="66" r="6" fill="${CORAL}" ${T}/>` },
+        llave: { nombre: 'llave', svg: `<circle cx="28" cy="50" r="18" fill="${NARANJA}" ${T}/><circle cx="28" cy="50" r="6" fill="#fff" ${T}/><path d="M46 44H90V56H84V68H74V56H66V64H56V56H46Z" fill="${NARANJA}" ${T}/>` },
+        campana: { nombre: 'campana', svg: `<circle cx="50" cy="84" r="7" fill="${M}"/><path d="M50 13C31 13 25 31 25 50C25 62 19 70 11 76H89C81 70 75 62 75 50C75 31 69 13 50 13Z" fill="${AMARILLO}" ${T}/><path d="M50 13V7" fill="none" ${T}/>` },
+        casa: { nombre: 'casa', svg: `<path d="M22 46H78V88H22Z" fill="#e4edfb" ${T}/><path d="M10 50L50 13L90 50Z" fill="${CORAL}" ${T}/><path d="M42 88V64H58V88" fill="${AZUL}" ${T}/>` },
+      };
+      const simbolo = (clave, clase = 'simbolo') =>
+        `<svg class="${clase}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">${SIMBOLOS[clave].svg}</svg>`;
+
+      // ---------------------------------------------------------------------
+      // Piezas comunes
+      // ---------------------------------------------------------------------
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const marcaNivel = (nivel, clase = '') => `<span class="nv n${nivel} ${clase}" aria-hidden="true">${nivel}</span>`;
+      const formaVacia = (nivel) => {
+        const forma = {
+          1: `<circle cx="50" cy="50" r="44" fill="#fff" stroke="${M}" stroke-width="7"/>`,
+          2: `<rect x="7" y="7" width="86" height="86" rx="12" fill="#fff" stroke="${M}" stroke-width="7"/>`,
+          3: `<path d="M50 4L96 50L50 96L4 50Z" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`,
+        }[nivel];
+        return `<svg class="forma-vacia" viewBox="0 0 100 100" aria-hidden="true" focusable="false">${forma}</svg>`;
+      };
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // La frase, palabra a palabra: cada una con su rayita y el punto final del color del nivel.
+      function textoFrase(texto, clase) {
+        const lineas = texto.split('|').map((linea) => {
+          const palabras = linea.trim().split(' ');
+          return palabras
+            .map((p) => {
+              const conPunto = p.endsWith('.');
+              const palabra = conPunto ? p.slice(0, -1) : p;
+              return `<span class="p">${palabra}</span>${conPunto ? '<span class="fin">.</span>' : ''}`;
+            })
+            .join(' ');
+        });
+        return `<p class="texto ${clase}">${lineas.map((l) => `<span class="linea">${l}</span>`).join('')}</p>`;
+      }
+
+      function tarjetaFrase(f, nivel, { mayusculas = false, etiqueta = 'li' } = {}) {
+        const texto = mayusculas ? f.t.toLocaleUpperCase('es') : f.t;
+        const clase = mayusculas ? 't1m' : `t${nivel}`;
+        return `<${etiqueta} class="frase c-${NIVELES[nivel].color}">${marcaNivel(nivel)}${textoFrase(texto, clase)}${simbolo(f.s)}</${etiqueta}>`;
+      }
+
+      function tarjetaDibujo(f, nivel, etiqueta = 'li') {
+        const descripcion = `Dibujo: ${f.alt}`;
+        return `<${etiqueta} class="dibujo c-${NIVELES[nivel].color}">
+            <div class="dibujo__frente">${marcaNivel(nivel)}<svg viewBox="0 0 60 48" role="img" aria-label="${descripcion}">${f.d()}</svg></div>
+            <div class="dibujo__pestana">${simbolo(f.s)}</div>
+          </${etiqueta}>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Hojas de cada nivel: frases (y en mayúsculas el nivel 1) y dibujos
+      // ---------------------------------------------------------------------
+      const leyenda = (dobla) =>
+        `<span><i class="muestra-linea muestra-linea--corta"></i>Corta${dobla ? ' <i class="muestra-linea muestra-linea--dobla"></i>Dobla hacia atrás' : ''}</span>`;
+
+      document.getElementById('hojas-niveles').outerHTML = [1, 2, 3]
+        .map((nivel) => {
+          const n = NIVELES[nivel];
+          const frases = FRASES[nivel];
+          const hojaFrases = (mayusculas) => `<section class="hoja-tarjetas">
+              <div class="aviso"><h1>Nivel ${nivel} · Frases${mayusculas ? ' en mayúsculas' : ''} <span>· ${n.palabras} · Forma de ${n.forma}</span></h1>${leyenda(false)}</div>
+              <ul class="rejilla-frases">${frases.map((f) => tarjetaFrase(f, nivel, { mayusculas })).join('')}</ul>
+              <p class="atribucion">Cada palabra tiene una rayita debajo para seguirla con el dedo al leer. El símbolo de abajo a la derecha es el mismo que lleva su dibujo detrás.${mayusculas ? ' Imprime esta hoja en lugar de la anterior, o las dos.' : ''}</p>
+            </section>`;
+          const hojaDibujos = `<section class="hoja-tarjetas">
+              <div class="aviso"><h1>Nivel ${nivel} · Dibujos <span>· Forma de ${n.forma}</span></h1>${leyenda(true)}</div>
+              <ul class="rejilla-dibujos">${frases.map((f) => tarjetaDibujo(f, nivel)).join('')}</ul>
+              <p class="atribucion">${ATRIBUCION} Dibujos compuestos con pictogramas, con cambios de IdEducando, que pone también las zetas, las olas, las rayas y los símbolos.</p>
+            </section>`;
+          return hojaFrases(false) + (nivel === 1 ? hojaFrases(true) : '') + hojaDibujos;
+        })
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Tarjetas en blanco
+      // ---------------------------------------------------------------------
+      const formas3 = `<span class="formas-nivel" aria-hidden="true">${formaVacia(1)}${formaVacia(2)}${formaVacia(3)}</span>`;
+      document.getElementById('frases-blancas').innerHTML = Array.from(
+        { length: 6 },
+        () => `<li class="frase frase--blanca c-amarillo">${formas3}<span class="renglones"><span></span><span></span></span><span class="hueco-simbolo"></span></li>`,
+      ).join('');
+      const iconoDibujar = svg(
+        `<path d="M64 14l22 22-46 46H18V60z" fill="#fff" stroke="${SUAVE}" stroke-width="5" stroke-linejoin="round"/><path d="M56 22l22 22" stroke="${SUAVE}" stroke-width="5"/>`,
+      );
+      document.getElementById('dibujos-blancos').innerHTML = Array.from(
+        { length: 6 },
+        () => `<li class="dibujo dibujo--blanco c-amarillo"><div class="dibujo__frente">${formas3}<span class="marco-dibujo">${iconoDibujar}</span></div><div class="dibujo__pestana"><span class="hueco-simbolo"></span></div></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Tablero
+      // ---------------------------------------------------------------------
+      const FLECHA = `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`;
+      document.getElementById('formas-tablero').innerHTML = formaVacia(1) + formaVacia(2) + formaVacia(3);
+      // Iconos de IdEducando dentro de los huecos: líneas de texto para la frase y un paisaje para el dibujo.
+      const ICONO_FRASE = `<path d="M14 34h72M14 56h56M14 78h64" stroke="#c9cfe0" stroke-width="8" stroke-linecap="round"/>`;
+      const ICONO_DIBUJO = `<rect x="10" y="16" width="80" height="68" rx="10" fill="none" stroke="#c9cfe0" stroke-width="7"/><circle cx="34" cy="38" r="8" fill="#c9cfe0"/><path d="M14 78l24-24 16 14 14-12 20 20" fill="none" stroke="#c9cfe0" stroke-width="7" stroke-linejoin="round"/>`;
+      document.getElementById('filas-tablero').innerHTML = Array.from(
+        { length: 4 },
+        () => `<li class="tablero__fila"><span class="hueco hueco--frase">${svg(ICONO_FRASE)}</span>${svg(FLECHA, 'flecha')}<span class="hueco hueco--dibujo">${svg(ICONO_DIBUJO)}</span></li>`,
+      ).join('');
+
+      // Dibujo de IdEducando: una tarjeta que se da la vuelta y enseña su símbolo.
+      const DARVUELTA = `<rect x="8" y="22" width="40" height="56" rx="6" fill="#fff" stroke="${M}" stroke-width="4"/>
+        <path d="M14 62h28" stroke="${M}" stroke-width="3"/>
+        <rect x="56" y="22" width="36" height="56" rx="6" fill="#efe5f7" stroke="${M}" stroke-width="4"/>
+        <g transform="translate(62 36) scale(0.24)">${SIMBOLOS.estrella.svg}</g>
+        <path d="M24 16C34 4 58 4 70 16" fill="none" stroke="${M}" stroke-width="4" stroke-linecap="round"/>
+        <path d="M63 13l8 4-2 8" fill="none" stroke="${M}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+      const RUTINA = [
+        [7141, 'Leo la frase entera.'],
+        [32156, 'Busco su dibujo.'],
+        [6989, 'Lo pongo al lado.'],
+        ['vuelta', 'Le doy la vuelta.'],
+      ];
+      document.getElementById('rutina').innerHTML = RUTINA.map(
+        ([p, texto], i) => `<li><span class="num" aria-hidden="true">${i + 1}</span>${p === 'vuelta' ? svg(DARVUELTA) : picto(p)}<p>${texto}</p></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      const EJEMPLOS = {
+        1: '2 o 3 palabras, como «Hoy llueve».',
+        2: '4 o 5 palabras, con un detalle al final: «La niña bebe agua fría».',
+        3: '6 a 8 palabras, en parejas que cambian en un detalle: «en la cama» o «debajo de la cama».',
+      };
+      document.getElementById('lista-niveles').innerHTML = [1, 2, 3]
+        .map(
+          (nivel) =>
+            `<li>${marcaNivel(nivel, 'grande')}<span><strong>Nivel ${nivel}, ${NIVELES[nivel].forma}.</strong> ${EJEMPLOS[nivel]}</span></li>`,
+        )
+        .join('');
+
+      // Así se comprueba: la frase con su símbolo, el dibujo y el dibujo del revés.
+      const miniFrase = `<rect x="2" y="14" width="96" height="44" rx="5" fill="#fff" stroke="${SUAVE}" stroke-width="1.4"/>
+        <rect x="2" y="14" width="96" height="4" fill="${MORADO}"/>
+        <path d="M12 30h46M12 42h62" stroke="${M}" stroke-width="4.5" stroke-linecap="round"/>
+        <g transform="translate(78 42) scale(0.13)">${SIMBOLOS.seta.svg}</g>`;
+      const miniDibujo = `<rect x="22" y="4" width="56" height="64" rx="5" fill="#fff" stroke="${SUAVE}" stroke-width="1.4"/>
+        <rect x="22" y="4" width="56" height="4" fill="${MORADO}"/>
+        <path d="M30 52h40M32 30h36" stroke="${SUELO}" stroke-width="2"/>
+        <path d="M32 30v22M68 30v22" stroke="#8a5a2b" stroke-width="3"/>
+        <path d="M30 30h40" stroke="#8a5a2b" stroke-width="4"/>
+        <ellipse cx="54" cy="26" rx="9" ry="4" fill="#dcdcdc" stroke="${M}" stroke-width="1.4"/>`;
+      const miniVuelta = `<rect x="22" y="4" width="56" height="64" rx="5" fill="#fff" stroke="${SUAVE}" stroke-width="1.4"/>
+        <rect x="22" y="50" width="56" height="18" fill="#efe5f7"/>
+        <g transform="translate(43 52) scale(0.14)">${SIMBOLOS.seta.svg}</g>
+        <path d="M30 20l10 10 22-22" fill="none" stroke="#127055" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+      document.getElementById('comprobar').innerHTML = [
+        [miniFrase, 'La frase tiene un símbolo'],
+        [miniDibujo, 'Busca su dibujo'],
+        [miniVuelta, 'Detrás, ¿el mismo?'],
+      ]
+        .map(([dibujo, texto]) => `<li>${svg(dibujo, '', '0 0 100 72')}<span>${texto}</span></li>`)
+        .join('');
+
+      // Los grupos de cada nivel, en el orden de las hojas
+      const GRUPOS = {
+        1: ['El tiempo: sol, lluvia, nieve y viento', 'Animales: el pez, el pájaro, el gato y el perro', 'El niño y la niña leen y saltan'],
+        2: ['Cómo están: contenta, triste, contento y enfadado', 'Qué beben o comen', 'En casa: pasear al perro, hacer la cama y barrer'],
+        3: ['Dónde duerme el gato y quién corre detrás', 'Con o sin gorro, y el vaso lleno o vacío', 'Uno o dos globos, y el paraguas abierto o cerrado'],
+      };
+      document.getElementById('grupos').innerHTML = [1, 2, 3]
+        .map(
+          (nivel) =>
+            `<tr class="c-${NIVELES[nivel].color}"><th scope="row">${marcaNivel(nivel)}Nivel ${nivel}</th>${GRUPOS[nivel].map((g) => `<td>${g}</td>`).join('')}</tr>`,
+        )
+        .join('');
+
+      // Mapa de páginas: [color, pictograma, título, para qué, páginas]
+      const MAPA = [
+        ['amarillo', 32324, 'Tablero', 'Para cuatro parejas.', 'tablero'],
+        ['verde', 3123, 'Nivel 1', 'Frases, en minúsculas y en mayúsculas, y dibujos.', 'frases1', 'dibujos1'],
+        ['azul', 29716, 'Nivel 2', 'Frases y dibujos.', 'frases2', 'dibujos2'],
+        ['morado', 2406, 'Nivel 3', 'Frases y dibujos.', 'frases3', 'dibujos3'],
+        ['coral', 2380, 'Tarjetas en blanco', 'Para inventar frases.', 'blancas'],
+        ['naranja', 6998, 'Registro', 'Ayudas y errores.', 'registro'],
+        ['verde', 7141, 'Guía para el docente', 'Cómo enseñarlo.', 'guia', 'guia2'],
+        ['coral', 38351, 'Familias y fuentes', 'Juegos para casa.', 'familias', 'fuentes'],
+      ];
+      PAGINAS.guia2 = PAGINAS.guia + 1;
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, para, ...claves]) => {
+        const pags = claves.map((c) => PAGINAS[c]);
+        const ultima = pags[pags.length - 1];
+        const texto =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        return `<li class="c-${color}">${picto(n)}<div><p class="mapa__titulo">${titulo}</p><p>${para}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Registro y escalera
+      // ---------------------------------------------------------------------
+      const ESCALERA = [
+        ['A', 'Lo leemos juntos', 'Lees tú la frase señalando cada palabra. Después la lee él o ella.'],
+        ['B', 'Elige entre dos', 'Una frase y dos dibujos. En el nivel 3, los dos de su pareja.'],
+        ['C', 'Cuatro parejas', 'Un grupo de cuatro en el tablero, con el símbolo para comprobar.'],
+        ['D', 'Al revés', 'Un dibujo y varias frases: hay que leerlas todas para elegir.'],
+        ['E', 'Su propia frase', 'Escribe una frase en una tarjeta en blanco y hace su dibujo.'],
+      ];
+      const COLORES_ESCALERA = ['coral', 'naranja', 'amarillo', 'verde', 'azul'];
+      document.getElementById('escalera').innerHTML = ESCALERA.map(
+        ([letra, nombre, texto], i) =>
+          `<li class="c-${COLORES_ESCALERA[i]}"><strong><b>${letra}</b>${nombre}</strong><span>${texto}</span></li>`,
+      ).join('');
+      document.getElementById('escalera-guia').innerHTML = ESCALERA.map(
+        ([letra, nombre, texto], i) =>
+          `<li class="c-${COLORES_ESCALERA[i]}"><b class="letra">${letra}</b><span><strong>${nombre}.</strong> ${texto}</span></li>`,
+      ).join('');
+      const CLAVES = [
+        ['P', 'Lee solo el principio'],
+        ['F', 'Se salta el final'],
+        ['Pq', 'Palabras pequeñas: en, de, con, sin'],
+        ['N', 'Uno o varios'],
+        ['Q', 'Quién hace qué'],
+      ];
+      document.getElementById('claves').innerHTML = CLAVES.map(([letra, texto]) => `<li><b>${letra}</b>${texto}</li>`).join('');
+      document.getElementById('filas-registro').innerHTML = Array.from(
+        { length: 13 },
+        () => '<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>',
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Familias: cuatro juegos para casa
+      // ---------------------------------------------------------------------
+      const JUEGOS = [
+        [4945, 'Frases que se hacen', 'Escribid una frase: «El oso está debajo de la silla». Que la lea y lo haga con sus juguetes.'],
+        [5439, '¿Qué ha cambiado?', 'Leed «La pelota está dentro de la caja» y hacedlo. Después cambiad una palabra: «fuera». ¿Qué cambia?'],
+        [38796, '¿Tiene sentido?', 'Decid una frase loca: «El gato lee un cuento». ¿Puede ser? ¿Cómo la arreglamos?'],
+        [2380, 'Su frase del día', 'Que os dicte una frase sobre su día. Escribidla, que la lea y hacedle juntos su dibujo.'],
+      ];
+      document.getElementById('juegos-casa').innerHTML = JUEGOS.map(
+        ([n, titulo, texto]) => `<li>${picto(n)}<span><strong>${titulo}</strong>${texto}</span></li>`,
+      ).join('');
+
+      // Para probar juntos: una frase del nivel 3 y los dos dibujos de su pareja, para rodear el bueno.
+      {
+        const [perroDetras, gatoDetras] = [FRASES[3][2], FRASES[3][3]];
+        const dibujoProbar = (f) =>
+          `<div class="probar__dibujo"><svg viewBox="0 0 60 48" role="img" aria-label="Dibujo: ${f.alt}">${f.d()}</svg></div>`;
+        document.getElementById('probar').innerHTML =
+          `<div><p class="probar__instruccion">Leed la frase y rodead su dibujo.</p>${textoFrase(gatoDetras.t, '')}</div>` +
+          dibujoProbar(perroDetras) +
+          dibujoProbar(gatoDetras);
+      }
+
+      // ---------------------------------------------------------------------
+      // Portada: dos frases del nivel 3 con sus dibujos, unidas con un lazo
+      // ---------------------------------------------------------------------
+      const [enCama, debajoCama] = FRASES[3];
+      const ESCAPARATE = [
+        // [html, izquierda, arriba, giro]
+        [tarjetaFrase(enCama, 3, { etiqueta: 'div' }), 12, 158, -4],
+        [tarjetaDibujo(enCama, 3, 'div'), 128, 148, 4],
+        [tarjetaFrase(debajoCama, 3, { etiqueta: 'div' }), 16, 214, 3],
+        [tarjetaDibujo(debajoCama, 3, 'div'), 132, 207, -3],
+      ];
+      document.getElementById('escaparate').innerHTML =
+        ESCAPARATE.map(([html, x, y, giro]) => `<div style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg)">${html}</div>`).join('') +
+        `<svg class="lazo" style="left:98mm;top:150mm;width:34mm;height:110mm" viewBox="0 0 34 110" aria-hidden="true">
+          <path d="M2 24C12 18 22 18 30 22" fill="none" stroke="${MORADO}" stroke-width="1" stroke-linecap="round" stroke-dasharray="2.2 1.8"/>
+          <path d="M26.5 18.6L30.6 22.2L25.6 24.4" fill="none" stroke="${MORADO}" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 84C13 89 22 89 31 84" fill="none" stroke="${MORADO}" stroke-width="1" stroke-linecap="round" stroke-dasharray="2.2 1.8"/>
+          <path d="M26.6 82.2L31.4 83.8L28 87.6" fill="none" stroke="${MORADO}" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

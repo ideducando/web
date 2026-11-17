@@ -282,6 +282,47 @@ const DOCUMENTOS = [
     asunto: 'Misiones de invierno: tarjetas de encargos con pasos, temporizador y registro, para el alumnado con TDAH y para toda la clase, con pictogramas de ARASAAC',
     palabras: 'TDAH, funciones ejecutivas, encargos, autonomía, organización, refuerzo, invierno, pictogramas, ARASAAC, Primaria, Infantil',
   },
+  // Oleada 4 (17/11/2026).
+  {
+    id: 'ruleta-historias-invierno',
+    asunto: 'Ruleta para contar historias de invierno: personaje, lugar y problema, en tres niveles, con plan de la historia y pictogramas de ARASAAC',
+    palabras: 'expresión oral, escritura, narración, conectores, invierno, ruleta, TDL, TEA, discapacidad intelectual, DUA, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'detectives-letras',
+    asunto: 'Detectives de letras: veinte mensajes secretos en tres niveles para descifrar con una clave de dibujos que empiezan por el sonido de su letra, con autocorrección, carnet y misión final',
+    palabras: 'correspondencia entre letras y sonidos, conciencia fonológica, lectura, dislexia, TDL, código secreto, autocorrección, DUA, pictogramas, ARASAAC, Primaria',
+  },
+  {
+    id: 'frase-y-dibujo',
+    asunto: 'Frase y dibujo: 36 frases de 2 a 8 palabras para leer y emparejar con su dibujo, en tres niveles, con el símbolo para comprobar escondido detrás del dibujo, tablero y registro, con pictogramas de ARASAAC',
+    palabras: 'comprensión lectora, lectura de frases, emparejar, autocorrección, TDL, TEA, dislexia, discapacidad intelectual, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'diptongos-manipulativos',
+    asunto: 'Diptongos manipulativos: vocales abiertas y cerradas con su forma, el taller «¿Caben en una casa?», sílabas para mover y tarjetas con pictogramas de ARASAAC en tres niveles, con un reto de hiatos',
+    palabras: 'diptongos, hiatos, sílabas, vocales abiertas y cerradas, lectura, escritura, ortografía, manipulativo, dislexia, TDL, discapacidad intelectual, DUA, pictogramas, ARASAAC, Primaria',
+  },
+  {
+    id: 'mercadillo-de-clase',
+    asunto: 'El mercadillo de clase: comprar, pagar y recibir la vuelta con dinero de juego, en tres niveles, con pictogramas de ARASAAC',
+    palabras: 'matemáticas funcionales, dinero, euro, monedas, compra, vuelta, discapacidad intelectual, TEA, DUA, pictogramas, ARASAAC, Primaria',
+  },
+  {
+    id: 'alto-contraste-aula',
+    asunto: 'Carteles y bordes de alto contraste para el aula: carteles de espacios y rincones, etiquetas para cajas y tiras para la mesa, en negro sobre amarillo o blanco sobre negro, para el alumnado con baja visión y para toda la clase, con pictogramas de ARASAAC',
+    palabras: 'baja visión, discapacidad visual, alto contraste, accesibilidad, señalización, carteles, etiquetas, ONCE, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'turnos-visibles',
+    asunto: 'Turnos visibles: bote de turnos y tablero «ahora, después, luego» con pictogramas de ARASAAC, para esperar y saber cuándo toca',
+    palabras: 'turnos, esperar, apoyos visuales, juegos de mesa, patio, TEA, TDAH, conducta, toda la clase, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'apoyos-visuales-familias',
+    asunto: 'Apoyos visuales en casa: guía para familias para empezar una agenda, un «primero y después» o un temporizador, y cuándo retirarlos, con plantillas y pictogramas de ARASAAC',
+    palabras: 'familias, apoyos visuales, agenda visual, primero y después, rutinas, tablero para elegir, cuenta atrás, TEA, TDAH, TDL, discapacidad intelectual, pictogramas, ARASAAC',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
