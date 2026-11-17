@@ -1,0 +1,2470 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Turnos visibles: bote de turnos y tablero «ahora, después, luego» · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css.
+         Las tarjetas de turno y de actividad miden 42 × 54 mm; con 3 mm de plástico alrededor, 48 × 60 mm.
+         Por eso los huecos del tablero miden 54 × 66 mm o más. */
+
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar: márgenes de 11 y 12 mm para que quepan cuatro tarjetas por fila. */
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Colores (siempre con su palabra, su forma o su número) ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos (como en «Misiones de invierno») ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 54pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 15pt;
+        line-height: 1.35;
+        max-width: 122mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 6;
+        right: 17mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 17pt;
+        margin: 0.6mm 0;
+      }
+
+      /* La escena de la portada: el tablero de verdad, reducido, con tres tarjetas; el bote y «Me toca». */
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .escena .tab-hoja {
+        width: 273mm;
+        padding: 6mm 6mm 5mm;
+        border-radius: 5mm;
+        background: #fff;
+        box-shadow: 0 3mm 7mm -1mm rgb(30 43 85 / 0.3);
+        transform-origin: 0 0;
+      }
+
+      .escena .doble {
+        transform-origin: 0 0;
+        border-style: solid;
+        border-color: var(--marino);
+        box-shadow: 0 2mm 5mm -1mm rgb(30 43 85 / 0.3);
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3.5mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 8.4mm;
+        height: 8.4mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1.2mm;
+      }
+
+      .nv.n3 {
+        width: 10.4mm;
+        height: 10.4mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.3mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 27mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 1mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa img,
+      .mapa svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--tx);
+      }
+
+      .vistazo__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: start;
+        margin: 0 0 3.5mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.6mm;
+        font-size: 13pt;
+      }
+
+      .lista-niveles {
+        display: grid;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 10.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .lista-niveles .nv {
+        justify-self: center;
+      }
+
+      .vistazo ol.cuatro {
+        margin: 0;
+        padding-left: 5mm;
+      }
+
+      .vistazo ol.cuatro li {
+        margin-bottom: 0.8mm;
+      }
+
+      /* ---------- Tablero «¿A quién le toca?» ---------- */
+      .tab-hoja {
+        position: relative;
+      }
+
+      .tab__cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .tab__cabeza .antetitulo {
+        margin: 0 0 1mm;
+      }
+
+      .tab__cabeza h1 {
+        margin: 0;
+        font-size: 32pt;
+        line-height: 1;
+      }
+
+      .tab__cabeza > img {
+        width: 36mm;
+        height: auto;
+      }
+
+      .tab {
+        display: grid;
+        grid-template-columns: 56mm 9mm 64mm 15mm 56mm 15mm 56mm;
+        grid-template-rows: 17mm 80mm 15mm;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .tab__etiqueta {
+        grid-row: 1;
+        align-self: end;
+        display: grid;
+        justify-items: center;
+        gap: 1.6mm;
+        margin: 0 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 25pt;
+        line-height: 1;
+      }
+
+      .tab__etiqueta--act {
+        font-size: 18pt;
+        color: var(--suave);
+      }
+
+      .pos {
+        width: 17mm;
+        height: 5.4mm;
+      }
+
+      .tab__hueco {
+        grid-row: 2;
+        justify-self: center;
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 56mm;
+        height: 68mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4.5mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 1.6mm var(--t);
+      }
+
+      .tab__hueco--act {
+        border-style: dashed;
+        border-color: var(--suave);
+        box-shadow: none;
+        background: #fff;
+      }
+
+      .tab__hueco--ahora {
+        width: 64mm;
+        height: 78mm;
+        border-width: 1.5mm;
+        background: var(--t);
+        box-shadow: 0 0 0 1.2mm #fff, 0 0 0 2mm var(--c);
+      }
+
+      /* Dentro de cada hueco: el círculo gris del velcro. En la portada, encima, una tarjeta de turno. */
+      .velcro {
+        position: relative;
+        width: 20mm;
+        height: 20mm;
+        border: 0.4mm solid #9aa3bd;
+        border-radius: 50%;
+        background: #d9dde8;
+      }
+
+      .tab__hueco > .tt,
+      .tab__hueco > .ta {
+        position: absolute;
+        border-style: solid;
+        border-color: var(--marino);
+        box-shadow: 0 1mm 2.5mm rgb(30 43 85 / 0.25);
+      }
+
+      .tab__flecha {
+        grid-row: 2;
+        justify-self: center;
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .tab__separa {
+        grid-row: 1 / span 3;
+        grid-column: 2;
+        justify-self: center;
+        width: 0;
+        height: 100%;
+        border-left: 0.6mm dashed var(--linea);
+      }
+
+      .tab__estado {
+        grid-row: 3;
+        align-self: start;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2mm;
+        margin: 2mm 0 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+        text-align: center;
+      }
+
+      .tab__estado img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .tab__estado--act {
+        font-weight: 400;
+        font-size: 13pt;
+        color: var(--suave);
+      }
+
+      .tab__pie {
+        display: grid;
+        grid-template-columns: 44mm repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        align-items: center;
+        margin: 3mm 0 0;
+        padding: 2.6mm 4mm;
+        border-radius: 3.5mm;
+        background: var(--crema);
+      }
+
+      .tab__pie h2 {
+        margin: 0;
+        font-size: 14pt;
+        line-height: 1.1;
+      }
+
+      .tab__pie p {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-size: 11.5pt;
+        line-height: 1.25;
+      }
+
+      .tab__pie svg {
+        width: 22mm;
+        height: 14mm;
+      }
+
+      .tab-hoja .leyenda {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 2mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .tab-hoja .leyenda svg {
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+      }
+
+      /* ---------- Tarjeta de turno (42 × 54 mm) ---------- */
+      .rejilla-turnos {
+        display: grid;
+        grid-template-columns: repeat(4, 42mm);
+        grid-auto-rows: 54mm;
+        gap: 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tt {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.4mm 32mm 11mm;
+        row-gap: 2.3mm;
+        justify-items: center;
+        width: 42mm;
+        height: 54mm;
+        margin: 0;
+        padding: 0 0 2mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tt__banda {
+        justify-self: stretch;
+        background: var(--c);
+      }
+
+      .tt__foto {
+        position: relative;
+        width: 26mm;
+        height: 32mm;
+        border: 0.4mm dashed #9aa3bd;
+        border-radius: 1.6mm;
+        overflow: hidden;
+        background: #f7f8fb;
+      }
+
+      .tt__foto > svg {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 26mm;
+        height: 26mm;
+      }
+
+      .tt__foto > span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 1.4mm;
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .tt__pie {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        width: 36mm;
+      }
+
+      .tt__num {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .tt__num--blanco {
+        border-style: dashed;
+        border-color: var(--suave);
+        background: #fff;
+      }
+
+      .tt__nombre {
+        display: block;
+        height: 8.6mm;
+        border-bottom: 0.45mm solid var(--marino);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        padding-top: 2.2mm;
+      }
+
+      /* ---------- Tarjeta de actividad (42 × 54 mm) ---------- */
+      .ta {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.4mm 31mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        width: 42mm;
+        height: 54mm;
+        margin: 0;
+        padding: 0 1.4mm 1.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .ta__banda {
+        justify-self: stretch;
+        align-self: stretch;
+        margin: 0 -1.4mm;
+        background: var(--c);
+      }
+
+      .ta img,
+      .ta .hueco-picto {
+        width: 29mm;
+        height: 29mm;
+        align-self: end;
+      }
+
+      .ta p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+        text-wrap: balance;
+      }
+
+      .ta .renglon {
+        justify-self: stretch;
+        margin: 0 2mm;
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .hueco-picto {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      /* ---------- Bote de turnos ---------- */
+      .bote-hoja .cabeza {
+        margin-bottom: 1.6mm;
+      }
+
+      .bote-hoja .cabeza h1 {
+        font-size: 22pt;
+      }
+
+      .bote-hoja .pista {
+        margin-bottom: 2.6mm;
+      }
+
+      .etiquetas {
+        display: grid;
+        grid-template-columns: repeat(2, 88mm);
+        justify-content: space-between;
+        margin: 0 0 5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .etiqueta {
+        position: relative;
+        display: grid;
+        grid-template-columns: 30mm minmax(0, 1fr);
+        align-items: center;
+        column-gap: 3mm;
+        width: 88mm;
+        height: 46mm;
+        margin: 0;
+        padding: 4.6mm 4mm 3mm 3.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: var(--t);
+      }
+
+      .etiqueta::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 2.6mm;
+        background: var(--c);
+      }
+
+      .etiqueta > img,
+      .etiqueta > svg {
+        width: 30mm;
+        height: 30mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .etiqueta h2 {
+        margin: 0 0 1.6mm;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .etiqueta p {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .rejilla-actividades {
+        display: grid;
+        grid-template-columns: repeat(4, 42mm);
+        grid-auto-rows: 54mm;
+        gap: 5mm 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* ---------- Cartel «Espero mi turno» ---------- */
+      .cartel {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .cartel__cabeza {
+        display: grid;
+        grid-template-columns: 36mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 5mm;
+        margin: 3mm 0 3mm;
+      }
+
+      .cartel__cabeza > img:first-child {
+        width: 36mm;
+        height: 36mm;
+        border: 0.8mm solid var(--amarillo);
+        border-radius: 5mm;
+        background: #fff;
+      }
+
+      .cartel__cabeza > img:last-child {
+        width: 30mm;
+        height: auto;
+        align-self: start;
+      }
+
+      .cartel h1 {
+        margin: 0 0 1.6mm;
+        font-size: 42pt;
+        line-height: 0.98;
+      }
+
+      .cartel__sub {
+        margin: 0;
+        font-family: var(--lema);
+        font-size: 21pt;
+        line-height: 1.1;
+      }
+
+      .ideas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3.6mm 4mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ideas li {
+        display: grid;
+        grid-template-columns: 33mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3.6mm;
+        height: 45mm;
+        margin: 0;
+        padding: 3mm 3.6mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 4.5mm;
+        background: var(--t);
+      }
+
+      .ideas li > img,
+      .ideas li > svg {
+        width: 33mm;
+        height: 33mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .ideas p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+
+      .ideas b {
+        display: block;
+        margin: 0 0 1.2mm;
+        font-size: 12pt;
+        letter-spacing: 0.06em;
+        color: var(--tx);
+      }
+
+      .bocadillo {
+        position: relative;
+        margin: 0 0 3.4mm 8mm;
+        padding: 3.4mm 6mm;
+        border: 0.7mm solid var(--marino);
+        border-radius: 7mm;
+        background: #fff;
+        font-family: var(--lema);
+        font-size: 20pt;
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      .bocadillo::before {
+        content: '';
+        position: absolute;
+        left: -4.2mm;
+        top: 50%;
+        width: 6mm;
+        height: 6mm;
+        border-left: 0.7mm solid var(--marino);
+        border-bottom: 0.7mm solid var(--marino);
+        background: #fff;
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .pide-ayuda {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 2.4mm 4mm;
+        border-radius: 4mm;
+        background: var(--morado-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1.05;
+      }
+
+      .pide-ayuda img {
+        width: 22mm;
+        height: 22mm;
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      /* ---------- «Me toca» y «He terminado»: tarjetas de doble cara ---------- */
+      .dobles {
+        display: grid;
+        grid-auto-rows: 54mm;
+        gap: 6mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .doble {
+        position: relative;
+        display: grid;
+        grid-template-columns: 90mm 90mm;
+        width: 180mm;
+        height: 54mm;
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      /* La línea por la que se dobla: gris, para que no se confunda con la de cortar. */
+      .doble::after {
+        content: '';
+        position: absolute;
+        left: 90mm;
+        top: 0;
+        bottom: 0;
+        border-left: 0.5mm dashed #9aa3bd;
+      }
+
+      .cara {
+        position: relative;
+        display: grid;
+        grid-template-columns: 34mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3.4mm;
+        padding: 5mm 4.4mm 3mm;
+        background: var(--t);
+      }
+
+      .cara::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto;
+        height: 3mm;
+        background: var(--c);
+      }
+
+      .cara > img {
+        width: 34mm;
+        height: 34mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .cara h2 {
+        margin: 0 0 2mm;
+        font-size: 27pt;
+        line-height: 0.98;
+      }
+
+      .cara svg {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .dobla {
+        position: absolute;
+        z-index: 2;
+        left: 90mm;
+        bottom: 1mm;
+        transform: translateX(-50%);
+        padding: 0 1.2mm;
+        background: #fff;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      /* ---------- Ruleta de turnos ---------- */
+      .ruleta {
+        display: grid;
+        grid-template-columns: 120mm minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .ruleta__piezas {
+        display: grid;
+        justify-items: center;
+        gap: 4mm;
+      }
+
+      .ruleta h2 {
+        margin: 0 0 2mm;
+        font-size: 15pt;
+      }
+
+      .jugamos {
+        display: grid;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .jugamos li {
+        display: grid;
+        grid-template-columns: 16mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+      }
+
+      .jugamos img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .jugamos p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.06;
+      }
+
+      .ruleta-hoja .caja {
+        margin: 4mm 0 0;
+        padding: 2.8mm 4mm;
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .ruleta-hoja .caja h2 {
+        margin: 0 0 1mm;
+        font-size: 12.5pt;
+      }
+
+      /* ---------- Patio ---------- */
+      .pieza-patio {
+        position: relative;
+        margin: 0 0 5mm;
+        padding: 4mm 5mm 4mm 15mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 5mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .agujero {
+        position: absolute;
+        left: 4mm;
+        top: 4mm;
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .pieza-patio h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 3mm;
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .pieza-patio h2 img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .tira {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 8mm minmax(0, 1fr) 8mm minmax(0, 1fr);
+        align-items: center;
+      }
+
+      .tira__casilla {
+        display: grid;
+        grid-template-rows: auto 22mm;
+        gap: 1.6mm;
+        padding: 2.2mm 2.6mm 2.6mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 3.4mm;
+        background: var(--t);
+      }
+
+      .tira__casilla p {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 19pt;
+        line-height: 1;
+      }
+
+      .tira__casilla .pos {
+        width: 13mm;
+        height: 4.2mm;
+      }
+
+      .tira__casilla span {
+        border-radius: 2mm;
+        background: #fff;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .tira > svg {
+        width: 7mm;
+        height: 7mm;
+        justify-self: center;
+      }
+
+      .cuenta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 46mm;
+        gap: 4mm;
+        align-items: center;
+      }
+
+      .cuenta ol {
+        display: grid;
+        grid-template-columns: repeat(5, 19mm);
+        gap: 3mm 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cuenta li {
+        display: grid;
+        place-items: center;
+        width: 19mm;
+        height: 19mm;
+        margin: 0;
+        border: 0.8mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1;
+      }
+
+      .cambio {
+        display: grid;
+        justify-items: center;
+        gap: 1.4mm;
+        padding: 2.4mm;
+        border: 0.8mm solid var(--coral);
+        border-radius: 4mm;
+        background: var(--coral-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 21pt;
+        line-height: 1;
+      }
+
+      .cambio img {
+        width: 27mm;
+        height: 27mm;
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      .patio-hoja .caja {
+        margin: 0;
+        padding: 3mm 4mm;
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .patio-hoja .caja h2 {
+        margin: 0 0 1.2mm;
+        font-size: 12.5pt;
+      }
+
+      .patio-hoja .caja ul {
+        margin: 0;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.6em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.8mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+        break-inside: auto;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .familias ol {
+        margin-bottom: 0.4em;
+      }
+
+      .momentos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 5mm;
+        margin: 1mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .momentos li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 1.4mm 2.4mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.25;
+      }
+
+      .momentos img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: tarjetas;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.5em 0 0.15em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.6mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -66mm; top: 118mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 78mm; height: 78mm; left: -32mm; top: 168mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 100mm; top: 120mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Apoyo visual · Para toda la clase</p>
+        <h1 class="portada__titulo">Turnos<br />visibles</h1>
+        <p class="portada__subtitulo">
+          Para esperar sabiendo cuándo me toca. Pensado para el alumnado con trastorno del espectro del autismo (TEA) o con
+          trastorno por déficit de atención e hiperactividad (TDAH), y para toda la clase.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" id="escena" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>En el aula,<b>la mesa</b>y el patio</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Esperar cuesta menos cuando se ve cuándo llega el turno. Aquí, los turnos salen de un bote y se colocan en un tablero
+        con tres casillas: «Ahora», «Después» y «Luego». Cada peque ve a quién le toca y cuántos turnos le faltan. Sirve para
+        toda la clase y ayuda sobre todo a quien necesita saber qué va a pasar o a quien le cuesta mucho esperar.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+      <div class="vistazo__fila">
+        <div class="caja caja--azul">
+          <h2>Tres niveles de espera</h2>
+          <ul class="lista-niveles" id="lista-niveles"></ul>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Un turno, en cuatro pasos</h2>
+          <ol class="cuatro">
+            <li>Saca tres tarjetas del bote y ponlas en el tablero.</li>
+            <li>Dilo en voz alta: «Ahora, Lucía. Después, Omar. Luego, Vera».</li>
+            <li>Al acabar, «He terminado»: su tarjeta va al bote «Ya me ha tocado».</li>
+            <li>Las otras dos avanzan y sale una nueva del bote.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Empieza en un momento tranquilo,</strong> con algo que guste y turnos cortos. Las fotos, solo con permiso de
+          cada familia. La guía de la página <span data-pagina="guia"></span> explica cómo enseñarlo y cómo alargar la espera
+          poco a poco.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TABLERO «¿A QUIÉN LE TOCA?» (apaisado). Lo pinta el guion del final, también reducido en la portada.
+         ====================================================================== -->
+    <section class="apaisada" id="hoja-tablero"></section>
+
+    <!-- ======================================================================
+         TARJETAS DE TURNO (dos hojas, 16 por hoja)
+         ====================================================================== -->
+    <div id="hojas-turnos"></div>
+
+    <!-- ======================================================================
+         BOTE DE TURNOS Y TARJETAS DE ACTIVIDAD
+         ====================================================================== -->
+    <section class="hoja-tarjetas bote-hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para los botes y el tablero · Para recortar</p>
+          <h1>Bote de turnos y actividades</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Pega cada etiqueta en su bote con celo. Las tarjetas de actividad van en «Turnos para» del tablero, con un círculo de
+        velcro suave detrás. Las dos en blanco son para lo vuestro: dibuja o pega un pictograma antes de plastificar.
+      </p>
+      <ul class="etiquetas" id="etiquetas"></ul>
+      <ul class="rejilla-actividades" id="actividades"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. El
+        bote y las tarjetas son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CARTEL «ESPERO MI TURNO»
+         ====================================================================== -->
+    <section class="cartel">
+      <div class="rayos"></div>
+      <div class="cartel__cabeza">
+        <img src="pictogramas/39062.png" alt="" />
+        <div>
+          <p class="antetitulo" style="margin: 0 0 1.4mm">Cartel para la clase</p>
+          <h1>Espero mi turno</h1>
+          <p class="cartel__sub">Mientras espero, puedo…</p>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ul class="ideas" id="ideas"></ul>
+      <p class="bocadillo">«Ahora le toca a otro. Pronto me toca a mí».</p>
+      <p class="pide-ayuda"><img src="pictogramas/7171.png" alt="" /><span>Si me cuesta mucho, pido ayuda.</span></p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. El
+        dibujo del tablero es de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         «ME TOCA» Y «HE TERMINADO»
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <h1 class="solo-lector">Tarjetas de doble cara: Me toca y He terminado</h1>
+      <p class="aviso">
+        <span><strong>Me toca · He terminado</strong> · Tarjetas de doble cara</span>
+        <span>Corta por la línea de puntos y dobla por la gris</span>
+      </p>
+      <p class="pista">
+        Dobla cada tarjeta por la línea gris, con lo impreso por fuera, y pega las dos caras antes de plastificar. Quien juega o
+        habla tiene la tarjeta por «Me toca». Al acabar, la gira, «He terminado», y se la pasa a quien sigue.
+      </p>
+      <ul class="dobles" id="dobles"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         EN LA MESA: RULETA DE TURNOS
+         ====================================================================== -->
+    <section class="hoja-tarjetas ruleta-hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Juegos de mesa · Para recortar</p>
+          <h1>Ruleta de turnos</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Cada jugador o jugadora escribe su nombre en un sector, con rotulador de pizarra. La flecha señala a quién le toca y
+        gira siempre hacia la derecha, como las agujas del reloj.
+      </p>
+      <div class="ruleta">
+        <div class="ruleta__piezas" id="ruleta-piezas"></div>
+        <div>
+          <h2>Así jugamos por turnos</h2>
+          <ol class="jugamos" id="jugamos"></ol>
+        </div>
+      </div>
+      <div class="caja caja--amarilla">
+        <h2>Con dos o tres jugadores</h2>
+        <p>
+          Con dos, escribid cada nombre en dos sectores, uno sí y otro no. Con tres, el cuarto sector puede ser del adulto, que
+          también juega y espera su turno. Para montarla: recorta la ruleta y la flecha, plastifícalas y únelas por las dos
+          cruces con un encuadernador.
+        </p>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La
+        ruleta y la flecha son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         EN EL PATIO: TIRA DE TURNOS Y CUENTA ATRÁS
+         ====================================================================== -->
+    <section class="hoja-tarjetas patio-hoja">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Patio · Para recortar</p>
+          <h1>Turnos en el patio</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        Dos piezas para el adulto del patio: perfóralas por el círculo y únelas con la anilla. En la tira, los nombres se
+        escriben con rotulador de pizarra y se borran con el dedo.
+      </p>
+      <div class="pieza-patio">
+        <span data-icono="agujero"></span>
+        <h2><img src="pictogramas/4608.png" alt="" /><img src="pictogramas/4759.png" alt="" />¿A quién le toca?</h2>
+        <div class="tira" id="tira"></div>
+      </div>
+      <div class="pieza-patio">
+        <span data-icono="agujero"></span>
+        <h2><img src="pictogramas/2714.png" alt="" />Contamos juntos</h2>
+        <div class="cuenta">
+          <ol id="cuenta"></ol>
+          <p class="cambio"><img src="pictogramas/34713.png" alt="" />¡Cambio!</p>
+        </div>
+      </div>
+      <div class="caja caja--verde">
+        <h2>Ideas para el patio</h2>
+        <ul>
+          <li>
+            <strong>En el columpio,</strong> contad los vaivenes en voz alta, de 10 a 1. Quien espera también cuenta: así sabe
+            cuándo le toca. Al llegar a «¡Cambio!», baja y sube quien sigue.
+          </li>
+          <li>
+            <strong>En el tobogán o en la fila,</strong> escribe en la tira los tres siguientes y dilo en voz alta: «Ahora,
+            Leo. Después, Ana. Luego, Iker».
+          </li>
+          <li>
+            <strong>Con un compañero o una compañera de turnos,</strong> que lleva la cuenta y anima a quien espera. Cambiad
+            de compañero cada semana.
+          </li>
+        </ul>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Turnos visibles: cómo enseñarlos y cómo alargar la espera</h1>
+      <p>
+        Esperar el turno cuesta a cualquier edad, y más si no sabes cuándo te va a tocar. Este material hace visibles los
+        turnos: salen de un bote y se colocan en un tablero con tres casillas, «Ahora», «Después» y «Luego». Así, cada peque ve a
+        quién le toca y cuánto le falta. Es para toda la clase y ayuda sobre todo al alumnado con trastorno del espectro del
+        autismo (TEA) o con trastorno por déficit de atención e hiperactividad (TDAH).
+      </p>
+
+      <h2>Por qué ayuda</h2>
+      <ul>
+        <li>
+          <strong>Lo que se ve, se entiende mejor.</strong> Los apoyos visuales están entre las 28 prácticas con respaldo para
+          el alumnado con TEA de 0 a 22 años (Hume y otros, 2021). El equipo AFIRM, de la Universidad de Carolina del Norte,
+          los define como señales concretas que acompañan a la palabra o la sustituyen (Sam y AFIRM Team, 2024). El Instituto
+          Nacional para la Excelencia en la Salud y la Atención del Reino Unido (NICE) recomienda usar palabras, dibujos o
+          símbolos con sentido para cada peque. Entre lo que hace más probables las conductas que desafían, cita la falta de
+          previsibilidad y de estructura (NICE, CG170, recomendaciones 1.1.9 y 1.4.1).
+        </li>
+        <li>
+          <strong>Esperar cuesta.</strong> Los Centros para el Control y la Prevención de Enfermedades de Estados Unidos (CDC)
+          citan la dificultad para esperar el turno entre las señales del TDAH (CDC, 2026a). En el aula, aconsejan avisar más de
+          una vez antes de cada cambio (CDC, 2026b).
+        </li>
+        <li>
+          <strong>La espera se aprende poco a poco.</strong> En un estudio con un niño con dificultades del desarrollo, una
+          tarjeta de «espera» y un reloj visual ayudaron a alargar la espera, paso a paso, de un segundo a diez minutos. Los
+          autores comentan la utilidad de tener algo que hacer mientras se espera (Grey y otros, 2009).
+        </li>
+        <li>
+          <strong>Lo que pide la Región de Murcia.</strong> Con el alumnado con TDAH, permitir materiales que se puedan
+          manipular, recoger los acuerdos en materiales visuales con pictogramas y trabajar la «voz interna» (Resolución de 30 de
+          julio de 2019, anexo IV). Con el alumnado con trastorno del lenguaje, aprovechar los juegos de clase para practicar la
+          intervención por turnos (anexo V).
+        </li>
+        <li>
+          <strong>Lo que no sabemos.</strong> El tablero, como conjunto, no se ha estudiado: junta apoyos con respaldo. Lo que no
+          lleva fuente en esta guía es propuesta de IdEducando.
+        </li>
+      </ul>
+
+      <h2>Cómo enseñarlo</h2>
+      <ol>
+        <li>
+          Preséntalo en un momento tranquilo, con algo que guste y turnos cortos: el ordenador, el tobogán o elegir el cuento.
+          Pon su tarjeta en «Turnos para».
+        </li>
+        <li>
+          Saca tres tarjetas delante del grupo y dilo siempre con las mismas palabras: «Ahora, Lucía. Después, Omar. Luego,
+          Vera». Señala cada casilla mientras lo dices.
+        </li>
+        <li>Quien está en «Ahora» coge la tarjeta «Me toca». Al acabar, la gira: «He terminado».</li>
+        <li>Su tarjeta va al bote «Ya me ha tocado». Las otras dos avanzan y sale una nueva para «Luego».</li>
+        <li>
+          Dile a quien ha esperado qué ha hecho bien: «Has esperado mirando el tablero». El elogio que nombra la conducta
+          aumentó el tiempo dedicado a la tarea en los seis estudios que revisaron Royer y otros (2019).
+        </li>
+      </ol>
+
+      <h2>Tres niveles para toda la clase</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone anticipar los retos y ajustar el apoyo (CAST, 2024,
+        consideraciones 6.2 y 8.2). El tablero sirve a todo el grupo y no señala a nadie (consideración 8.4).
+      </p>
+      <ul>
+        <li><strong>Nivel 1, círculo:</strong> solo «Ahora» y «Después». Espera un turno. Para empezar, en Infantil o con quien espera muy poco.</li>
+        <li><strong>Nivel 2, cuadrado:</strong> las tres casillas. Espera dos turnos.</li>
+        <li><strong>Nivel 3, rombo:</strong> la ronda entera, sin tablero: la ruleta o la tarjeta «Me toca», que pasa de mano en mano.</li>
+      </ul>
+
+      <h2>Alargar la espera poco a poco</h2>
+      <ul>
+        <li>
+          Empieza con esperas que salgan casi siempre bien. Sube de nivel cuando espere con calma la mayoría de los días. Este
+          criterio es propuesta nuestra: ajústalo a cada peque.
+        </li>
+        <li>
+          Mientras espera, que tenga algo que hacer. El cartel «Espero mi turno» propone seis ideas, y Murcia pide permitir
+          materiales «anti-estrés» que se puedan manipular (anexo IV).
+        </li>
+        <li>Si un día no puede, baja un nivel sin darle importancia. Ningún turno se quita como castigo.</li>
+        <li>
+          Cuando el grupo ya conoce la rutina, un jefe o una jefa de turnos saca las tarjetas y las mueve. La función rota cada
+          día.
+        </li>
+      </ul>
+
+      <h2>Un bote justo</h2>
+      <ul>
+        <li>
+          Las tarjetas pasan del «Bote de turnos» a «Ya me ha tocado». Cuando el primero se vacía, vuelven todas: nadie repite
+          hasta que hayan pasado todos.
+        </li>
+        <li>
+          Si alguien necesita ir antes, por ejemplo porque esperar le pone muy nervioso, sácalo el primero sin que sea un premio:
+          «Hoy empieza Omar». Todos tienen su turno igual.
+        </li>
+      </ul>
+
+      <h2>En la mesa y en el patio</h2>
+      <ul>
+        <li>
+          <strong>Juegos de mesa.</strong> La flecha de la ruleta señala a quién le toca. Al terminar, el jugador o la jugadora la
+          gira hacia el siguiente sector.
+        </li>
+        <li>
+          <strong>Patio.</strong> La tira y la cuenta atrás van con el adulto, en la anilla. En un estudio con dos alumnos con TEA
+          de Primaria, enseñar a sus compañeros a jugar con ellos en el recreo aumentó sus turnos y sus iniciativas para jugar
+          (Harper y otros, 2008). Por eso proponemos un compañero o una compañera de turnos.
+        </li>
+      </ul>
+
+      <div class="dos-columnas">
+        <div class="caja caja--coral">
+          <h2>Seguridad y privacidad</h2>
+          <ul>
+            <li>Las fotos, solo con permiso de cada familia, y nunca en internet ni en grupos de mensajería.</li>
+            <li>El tablero no habla del diagnóstico de nadie. Los turnos son de toda la clase.</li>
+          </ul>
+        </div>
+        <div class="caja caja--azul">
+          <h2>Con otros materiales de IdEducando</h2>
+          <p style="margin: 0">
+            Para premiar la espera, la tarjeta «Espero mi turno» del
+            <a href="https://www.ideducando.es/material-gratuito/panel-conducta-recreo/">panel «¡Lo consigo!»</a>. Para quien
+            acaba antes,
+            <a href="https://www.ideducando.es/material-gratuito/ya-he-terminado/">Ya he terminado</a>. Para casa,
+            <a href="https://www.ideducando.es/material-gratuito/apoyos-visuales-familias/">Apoyos visuales en casa</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Turnos visibles, también en casa</h1>
+      <p>
+        En clase usamos un tablero para los turnos, con tres casillas: «Ahora», «Después» y «Luego». Cada peque ve a quién le
+        toca y cuánto le falta. Así, esperar cuesta menos.
+      </p>
+      <p>
+        Esperar es difícil para muchos niños y niñas. También para quienes tienen trastorno del espectro del autismo (TEA) o
+        trastorno por déficit de atención e hiperactividad (TDAH). Se aprende poco a poco y con ayuda.
+      </p>
+
+      <h2><img src="pictogramas/7158.png" alt="" />Turnos en casa</h2>
+      <ol>
+        <li>Decid los turnos en voz alta y contad con los dedos: «Primero, tu hermana. Después, tú».</li>
+        <li>Usad algo que pase de mano en mano: una tarjeta, un muñeco o el mando del juego.</li>
+        <li>Al principio, esperas muy cortas. Poco a poco, un poco más largas.</li>
+        <li>Cuando espere, decidle qué ha hecho bien: «Has esperado tu turno».</li>
+      </ol>
+
+      <h2><img src="pictogramas/9810.png" alt="" />Momentos para practicar</h2>
+      <ul class="momentos" id="momentos"></ul>
+
+      <h2><img src="pictogramas/8109.png" alt="" />Mientras espera</h2>
+      <p>
+        Puede respirar despacio, contar hasta diez, mirar cómo juegan los demás o tener algo blando en las manos. En el cole lo
+        practicamos con el cartel «Espero mi turno».
+      </p>
+
+      <div class="caja caja--azul" style="margin-top: 3mm">
+        <p>
+          <strong>¿Queréis empezar con apoyos visuales en casa?</strong> La guía «Apoyos visuales en casa» trae plantillas y
+          tarjetas con rutinas de casa. Es gratis, en
+          <span class="url">ideducando.es/material-gratuito/apoyos-visuales-familias</span>.
+        </p>
+      </div>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Turnos visibles.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos pictográficos
+          utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org),
+          que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Turnos visibles.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/turnos-visibles</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+
+      <h2>Apoyos visuales y autismo</h2>
+      <ul class="referencias">
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation
+          review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI: 10.1007/s10803-020-04844-2
+        </li>
+        <li>
+          Sam, A. y AFIRM Team (2024). <em>Visual Supports</em> (actualización de 2024). Universidad de Carolina del Norte en
+          Chapel Hill, Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu
+        </li>
+        <li>
+          National Institute for Health and Care Excellence (2013, actualizada en 2021). <em>Autism spectrum disorder in under
+          19s: support and management</em> (CG170), recomendaciones 1.1.9 y 1.4.1. nice.org.uk
+        </li>
+      </ul>
+
+      <h2>Esperar y jugar por turnos</h2>
+      <ul class="referencias">
+        <li>
+          Centers for Disease Control and Prevention (2026a). <em>Symptoms of ADHD</em>. Revisada el 30 de julio de 2026.
+          cdc.gov/adhd
+        </li>
+        <li>
+          Centers for Disease Control and Prevention (2026b). <em>ADHD in the Classroom</em>. Actualizada el 21 de octubre de
+          2026. cdc.gov/adhd
+        </li>
+        <li>
+          Resolución de 30 de julio de 2019 de la Dirección General de Atención a la Diversidad y Calidad Educativa, por la que
+          se dictan instrucciones para la identificación y la respuesta educativa a las necesidades del alumnado que presenta
+          dificultades de aprendizaje. Boletín Oficial de la Región de Murcia (BORM) n.º 184, de 10 de agosto de 2019, anexo IV,
+          págs. 25060 y 25061, y anexo V, pág. 25063.
+        </li>
+        <li>
+          Grey, I., Healy, O., Leader, G. y Hayes, D. (2009). Using a Time Timer to increase appropriate waiting behavior in a
+          child with developmental disabilities. <em>Research in Developmental Disabilities</em>, 30(2), 359-366. DOI:
+          10.1016/j.ridd.2008.07.001
+        </li>
+        <li>
+          Harper, C. B., Symon, J. B. y Frea, W. D. (2008). Recess is time-in: Using peers to improve social skills of children
+          with autism. <em>Journal of Autism and Developmental Disorders</em>, 38(5), 815-826. DOI: 10.1007/s10803-007-0449-2
+        </li>
+        <li>
+          Royer, D. J., Lane, K. L., Dunlap, K. D. y Ennis, R. P. (2019). A systematic review of teacher-delivered
+          behavior-specific praise on K-12 student performance. <em>Remedial and Special Education</em>, 40(2), 112-128. DOI:
+          10.1177/0741932517751054
+        </li>
+      </ul>
+
+      <h2>Diseño Universal para el Aprendizaje</h2>
+      <ul class="referencias">
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>, consideraciones 6.2, 8.2 y 8.4.
+          udlguidelines.cast.org
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
+        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. El tablero, las tarjetas, los
+        botes, la ruleta, las caras de la portada y el diseño son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y
+        adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        tablero: 4,
+        turnos1: 5,
+        turnos2: 6,
+        bote: 7,
+        cartel: 8,
+        metoca: 9,
+        ruleta: 10,
+        patio: 11,
+        guia: 12,
+        familias: 14,
+        fuentes: 15,
+      };
+
+      // ---------------------------------------------------------------------
+      // Datos
+      // ---------------------------------------------------------------------
+      // Casillas del tablero: [clave, palabra, color, posición (1, 2 o 3), estado]
+      const CASILLAS = [
+        ['ahora', 'Ahora', 'verde', 1, '¡Me toca!'],
+        ['despues', 'Después', 'amarillo', 2, 'Falta 1 turno'],
+        ['luego', 'Luego', 'azul', 3, 'Faltan 2 turnos'],
+      ];
+
+      // Tarjetas de actividad: [pictograma de ARASAAC, texto]. null: tarjeta en blanco.
+      const ACTIVIDADES = [
+        [3345, 'Hablar'],
+        [7190, 'Ordenador'],
+        [9162, 'Pizarra digital'],
+        [32580, 'Juego de mesa'],
+        [6483, 'Elijo el cuento'],
+        [3241, 'Pelota'],
+        [4608, 'Columpio'],
+        [4759, 'Tobogán'],
+        [6929, 'Baño'],
+        [2276, 'Beber agua'],
+        null,
+        null,
+      ];
+
+      // Cartel «Espero mi turno»: [color, pictograma o dibujo, texto]
+      const IDEAS = [
+        ['azul', 34409, 'Respiro despacio'],
+        ['verde', 'd:miniTablero', 'Miro el tablero'],
+        ['morado', 37858, 'Hago algo con las manos'],
+        ['naranja', 2714, 'Cuento hasta diez'],
+        ['coral', 2474, 'Miro cómo juegan'],
+        ['amarillo', 31847, 'Pienso qué voy a hacer'],
+      ];
+
+      // Ruleta: «Así jugamos por turnos»
+      const JUGAMOS = [
+        [7158, 'Miro la flecha: ¿a quién le toca?'],
+        [31071, 'Me toca: tiro el dado.'],
+        [21397, 'Muevo mi ficha.'],
+        [34713, 'He terminado: giro la flecha.'],
+        [8109, 'Mientras, espero y miro.'],
+      ];
+
+      // Familias: momentos para practicar los turnos en casa
+      const MOMENTOS = [
+        [32580, 'Un juego de mesa: cada uno tira cuando le toca.'],
+        [4608, 'En el parque: el columpio, de 10 a 1.'],
+        [29151, 'La tablet: un rato cada hermano, con la tarjeta «Me toca».'],
+        [3345, 'En la mesa: cada uno cuenta algo de su día.'],
+      ];
+
+      // De un vistazo: [color, pictograma o dibujo, título, para qué, páginas]
+      const MAPA = [
+        ['verde', 7158, 'Tablero «¿A quién le toca?»', 'Ahora, después y luego, y un hueco para decir de qué es el turno.', 'tablero'],
+        ['azul', 'd:tarjetita', '32 tarjetas de turno', 'Con el número de lista, sitio para una foto de carné y el nombre.', 'turnos1', 'turnos2'],
+        ['morado', 'd:bote', 'Bote de turnos y 12 actividades', 'Dos botes, para que nadie repita hasta que hayan pasado todos.', 'bote'],
+        ['amarillo', 39062, 'Cartel «Espero mi turno»', 'Seis ideas para esperar, a la vista de toda la clase.', 'cartel'],
+        ['coral', 28429, 'Tarjetas «Me toca» y «He terminado»', 'De doble cara, para pasar el turno de mano en mano.', 'metoca'],
+        ['naranja', 32580, 'Ruleta de turnos', 'Para los juegos de mesa: la flecha señala a quién le toca.', 'ruleta'],
+        ['verde', 4608, 'Turnos en el patio', 'Una tira para el adulto y una cuenta atrás para el columpio.', 'patio'],
+        ['azul', 3345, 'Guía, nota para las familias y fuentes', 'Cómo enseñarlo, cómo alargar la espera y de dónde sale cada idea.', 'guia', 'fuentes'],
+      ];
+
+      // Portada: tres tarjetas de ejemplo, con caras dibujadas (no son fotos de nadie).
+      const EJEMPLOS = [
+        { numero: 3, nombre: 'Lucía', color: 'verde', cara: { piel: '#f2c9a5', pelo: '#3b2a20', peinado: 'coletas', fondo: '#dcf3ea' } },
+        { numero: 17, nombre: 'Omar', color: 'amarillo', cara: { piel: '#a86b45', pelo: '#1d1612', peinado: 'rizos', fondo: '#fdf0c7' } },
+        { numero: 8, nombre: 'Vera', color: 'azul', cara: { piel: '#f6d9c3', pelo: '#c9772f', peinado: 'melena', fondo: '#e4edfb' } },
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const COLOR = {
+        verde: '#1fa67a',
+        azul: '#2f6fd6',
+        amarillo: '#f6c12e',
+        coral: '#e8553e',
+        morado: '#8c4fb8',
+        naranja: '#f5961f',
+      };
+      const TINTE = {
+        verde: '#dcf3ea',
+        azul: '#e4edfb',
+        amarillo: '#fdf0c7',
+        coral: '#fde5e0',
+        morado: '#efe5f7',
+        naranja: '#fde8cf',
+      };
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+
+      // Bote: un tarro de boca ancha con tarjetas asomando.
+      const bote = (etiqueta = '') => `
+        <rect x="27" y="10" width="46" height="9" rx="3" fill="${COLOR.azul}" stroke="${M}" stroke-width="3"/>
+        <rect x="31" y="24" width="15" height="20" rx="2" fill="#fff" stroke="${M}" stroke-width="2.4" transform="rotate(-12 38 34)"/>
+        <rect x="44" y="20" width="15" height="20" rx="2" fill="${TINTE.amarillo}" stroke="${M}" stroke-width="2.4"/>
+        <rect x="55" y="25" width="15" height="20" rx="2" fill="${TINTE.verde}" stroke="${M}" stroke-width="2.4" transform="rotate(10 62 35)"/>
+        <path d="M24 30 Q24 22 32 22 H68 Q76 22 76 30 V84 Q76 92 68 92 H32 Q24 92 24 84 Z" fill="rgb(228 237 251 / .55)" stroke="${M}" stroke-width="3.4"/>
+        <rect x="31" y="52" width="38" height="22" rx="3" fill="#fff" stroke="${M}" stroke-width="2"/>
+        ${etiqueta ? `<text x="50" y="67" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="11" fill="${M}">${etiqueta}</text>` : `<path d="M37 60H63M37 66H56" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/>`}
+        <path d="M30 34 V46" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>`;
+
+      // Tarjeta de turno en pequeño: banda, una cara y el número.
+      const tarjetita = `
+        <rect x="22" y="8" width="56" height="84" rx="8" fill="#fff" stroke="${M}" stroke-width="5"/>
+        <rect x="22" y="8" width="56" height="10" rx="5" fill="${COLOR.azul}"/>
+        <rect x="32" y="24" width="36" height="40" rx="4" fill="${TINTE.azul}" stroke="${M}" stroke-width="2.6"/>
+        <circle cx="50" cy="40" r="9" fill="#fff" stroke="${M}" stroke-width="2.6"/>
+        <path d="M36 64 Q50 46 64 64" fill="#fff" stroke="${M}" stroke-width="2.6"/>
+        <circle cx="36" cy="79" r="7.5" fill="${TINTE.azul}" stroke="${M}" stroke-width="2.6"/>
+        <path d="M48 83H67" stroke="${M}" stroke-width="3" stroke-linecap="round"/>`;
+
+      // Tres puntos en fila: el que está lleno dice la posición (1: ahora, 2: después, 3: luego).
+      const posicion = (n, color, clase = 'pos') =>
+        `<svg class="${clase}" viewBox="0 0 66 20" aria-hidden="true" focusable="false">${[1, 2, 3]
+          .map(
+            (i) =>
+              `<circle cx="${11 + (i - 1) * 22}" cy="10" r="${i === n ? 8.6 : 6.4}" fill="${i === n ? color : '#fff'}" stroke="${M}" stroke-width="${i === n ? 2.6 : 2.2}"/>`,
+          )
+          .join('')}</svg>`;
+
+      // Mini tablero (para el cartel y el mapa): tres casillas con flechas, la primera resaltada.
+      const miniTablero = `
+        <rect x="4" y="28" width="30" height="40" rx="5" fill="${TINTE.verde}" stroke="${COLOR.verde}" stroke-width="4"/>
+        <rect x="40" y="32" width="25" height="32" rx="4" fill="#fff" stroke="${COLOR.amarillo}" stroke-width="3.4"/>
+        <rect x="71" y="32" width="25" height="32" rx="4" fill="#fff" stroke="${COLOR.azul}" stroke-width="3.4"/>
+        <rect x="11" y="36" width="16" height="24" rx="2" fill="#fff" stroke="${M}" stroke-width="2"/>
+        <circle cx="19" cy="44" r="3.6" fill="${TINTE.verde}" stroke="${M}" stroke-width="1.6"/>
+        <path d="M14 56 Q19 49 24 56" fill="none" stroke="${M}" stroke-width="1.6"/>
+        <rect x="45.5" y="38" width="14" height="20" rx="2" fill="#fff" stroke="${M}" stroke-width="1.8"/>
+        <rect x="76.5" y="38" width="14" height="20" rx="2" fill="#fff" stroke="${M}" stroke-width="1.8"/>
+        <path d="M35 48h3M66 48h3" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M14 86 L19 76 L24 86" fill="none" stroke="${M}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="19" cy="18" r="5" fill="${COLOR.verde}" stroke="${M}" stroke-width="2"/>
+        <circle cx="52" cy="20" r="3.6" fill="#fff" stroke="${M}" stroke-width="1.8"/>
+        <circle cx="83" cy="20" r="3.6" fill="#fff" stroke="${M}" stroke-width="1.8"/>`;
+
+      // Silueta para el hueco de la foto (se ve muy suave: la tapa la foto).
+      const silueta = `<circle cx="50" cy="40" r="17" fill="#e6e9f1"/><path d="M18 100 Q18 64 50 64 Q82 64 82 100 Z" fill="#e6e9f1"/>`;
+
+      // Cara dibujada para las tarjetas de ejemplo de la portada.
+      function cara({ piel, pelo, peinado, fondo }) {
+        const pelos = {
+          coletas: `<circle cx="22" cy="40" r="11" fill="${pelo}"/><circle cx="78" cy="40" r="11" fill="${pelo}"/><path d="M27 46 Q27 18 50 18 Q73 18 73 46 Q66 30 50 30 Q34 30 27 46 Z" fill="${pelo}"/>`,
+          rizos: `${[24, 34, 44, 56, 66, 76].map((x, i) => `<circle cx="${x}" cy="${i % 2 ? 24 : 28}" r="9" fill="${pelo}"/>`).join('')}<circle cx="26" cy="38" r="7" fill="${pelo}"/><circle cx="74" cy="38" r="7" fill="${pelo}"/>`,
+          melena: `<path d="M22 70 Q18 18 50 17 Q82 18 78 70 Q72 60 72 46 Q60 34 40 36 Q30 40 28 50 Q28 62 22 70 Z" fill="${pelo}"/>`,
+        }[peinado];
+        return `<svg viewBox="0 0 100 124" aria-hidden="true" focusable="false" style="position:absolute;inset:0;width:100%;height:100%">
+          <rect width="100" height="124" fill="${fondo}"/>
+          <path d="M14 124 Q14 92 50 92 Q86 92 86 124 Z" fill="${M}" opacity=".85"/>
+          <rect x="43" y="74" width="14" height="20" rx="6" fill="${piel}"/>
+          ${peinado === 'melena' ? pelos : ''}
+          <ellipse cx="50" cy="50" rx="25" ry="27" fill="${piel}"/>
+          ${peinado === 'melena' ? `<path d="M26 46 Q30 26 50 25 Q70 26 74 46 Q62 34 44 38 Q34 40 26 46 Z" fill="${pelo}"/>` : pelos}
+          <circle cx="41" cy="51" r="3.2" fill="${M}"/><circle cx="59" cy="51" r="3.2" fill="${M}"/>
+          <circle cx="35" cy="60" r="4" fill="#e8553e" opacity=".25"/><circle cx="65" cy="60" r="4" fill="#e8553e" opacity=".25"/>
+          <path d="M42 63 Q50 70 58 63" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>`;
+      }
+
+      const DIBUJOS = {
+        bote: bote(),
+        tarjetita,
+        miniTablero,
+        // Flecha del tablero
+        flecha: `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        // Círculo de velcro, para la leyenda
+        velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
+          <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
+        // Círculo para perforar, con su cruz
+        agujero: `<circle cx="50" cy="50" r="40" fill="#fff" stroke="${SUAVE}" stroke-width="5" stroke-dasharray="9 7"/><path d="M50 32V68M32 50H68" stroke="${SUAVE}" stroke-width="5" stroke-linecap="round"/>`,
+        // «Me toca»: estrella dentro de un círculo
+        estrellaCirculo: `<circle cx="50" cy="50" r="44" fill="#fff" stroke="${M}" stroke-width="6"/><path d="${ESTRELLA}" transform="translate(13 13) scale(.74)" fill="${COLOR.amarillo}" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`,
+        // «He terminado»: casilla marcada
+        marcada: `<rect x="8" y="8" width="84" height="84" rx="13" fill="#fff" stroke="${M}" stroke-width="7"/>
+          <path d="M26 52L43 68L75 32" fill="none" stroke="${M}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
+      };
+      const dibujo = (nombre, clase = '', vista) => svg(DIBUJOS[nombre], clase, vista);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const imagen = (p) => (typeof p === 'string' && p.startsWith('d:') ? dibujo(p.slice(2)) : picto(p));
+      const logo = (clase = '') =>
+        `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+      const marcaNivel = (nivel, clase = '') => `<span class="nv n${nivel} ${clase}" aria-hidden="true">${nivel}</span>`;
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // ---------------------------------------------------------------------
+      // Piezas
+      // ---------------------------------------------------------------------
+      const COLORES_TURNO = ['azul', 'verde', 'morado', 'coral', 'naranja', 'amarillo'];
+
+      function tarjetaTurno(numero, { color, nombre = '', retrato = null, etiqueta = 'li' } = {}) {
+        const c = color ?? COLORES_TURNO[((numero ?? 1) - 1) % COLORES_TURNO.length];
+        const foto = retrato ? cara(retrato) : `${svg(silueta)}<span>Foto</span>`;
+        return `<${etiqueta} class="tt c-${c}">
+            <span class="tt__banda"></span>
+            <span class="tt__foto">${foto}</span>
+            <span class="tt__pie"><span class="tt__num${numero ? '' : ' tt__num--blanco'}">${numero ?? ''}</span><span class="tt__nombre">${nombre}</span></span>
+          </${etiqueta}>`;
+      }
+
+      function tarjetaActividad(a, etiqueta = 'li') {
+        if (!a)
+          return `<${etiqueta} class="ta c-morado"><span class="ta__banda"></span><span class="hueco-picto"></span><span class="renglon"></span></${etiqueta}>`;
+        return `<${etiqueta} class="ta c-morado"><span class="ta__banda"></span>${picto(a[0])}<p>${a[1]}</p></${etiqueta}>`;
+      }
+
+      // El tablero. Con «ejemplo», lleva una actividad y tres tarjetas puestas (para la portada).
+      function tablero(ejemplo = false) {
+        const casillas = CASILLAS.map(([clave, palabra, color, pos, estado], i) => {
+          const columna = 3 + i * 2;
+          const tarjeta = ejemplo ? tarjetaTurno(EJEMPLOS[i].numero, { ...EJEMPLOS[i], retrato: EJEMPLOS[i].cara, etiqueta: 'div' }) : '';
+          const estadoHtml =
+            clave === 'ahora'
+              ? `${picto(7158)}<span>${estado}</span>`
+              : `<span>${estado}</span>`;
+          return `
+            <p class="tab__etiqueta c-${color}" style="grid-column:${columna}">${palabra}${posicion(pos, COLOR[color])}</p>
+            <div class="tab__hueco tab__hueco--${clave} c-${color}" style="grid-column:${columna}"><span class="velcro"></span>${tarjeta}</div>
+            <p class="tab__estado" style="grid-column:${columna}">${estadoHtml}</p>
+            ${i < 2 ? dibujo('flecha', 'tab__flecha', undefined).replace('class="tab__flecha"', `class="tab__flecha" style="grid-column:${columna + 1}"`) : ''}`;
+        }).join('');
+        const actividad = ejemplo ? tarjetaActividad(ACTIVIDADES[1], 'div') : '';
+        return `
+          <div class="tab__cabeza">
+            <div>
+              <p class="antetitulo">Tablero · Con velcro</p>
+              ${ejemplo ? '<p class="tab-titulo" style="margin:0;font-family:Outfit;font-weight:700;font-size:32pt;line-height:1">¿A quién le toca?</p>' : '<h1>¿A quién le toca?</h1>'}
+            </div>
+            ${logo()}
+          </div>
+          <div class="tab">
+            <p class="tab__etiqueta tab__etiqueta--act" style="grid-column:1">Turnos para</p>
+            <div class="tab__hueco tab__hueco--act" style="grid-column:1"><span class="velcro"></span>${actividad}</div>
+            <p class="tab__estado tab__estado--act" style="grid-column:1">¿Para qué es el turno?</p>
+            <span class="tab__separa" aria-hidden="true"></span>
+            ${casillas}
+          </div>`;
+      }
+
+      // Pie del tablero: qué pasa cuando termina un turno, con tres dibujos pequeños.
+      const PASOS_PIE = [
+        [
+          `<rect x="4" y="10" width="20" height="26" rx="3" fill="#fff" stroke="${M}" stroke-width="2.2"/><circle cx="14" cy="20" r="4" fill="${TINTE.verde}" stroke="${M}" stroke-width="1.6"/><path d="M27 22 Q40 8 52 18" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/><path d="M47 13L53 18L46 22" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(52 2) scale(.42)">${bote()}</g>`,
+          'La tarjeta de «Ahora» va al bote «Ya me ha tocado».',
+        ],
+        [
+          `<rect x="4" y="12" width="20" height="26" rx="3" fill="${TINTE.verde}" stroke="${COLOR.verde}" stroke-width="2.2" stroke-dasharray="3 2"/><rect x="34" y="12" width="20" height="26" rx="3" fill="#fff" stroke="${M}" stroke-width="2.2"/><rect x="64" y="12" width="20" height="26" rx="3" fill="#fff" stroke="${M}" stroke-width="2.2"/><path d="M30 46H8M26 42L30 46L26 50" fill="none" stroke="${M}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" transform="matrix(-1 0 0 1 38 0)"/><path d="M60 46H38M56 42L60 46L56 50" fill="none" stroke="${M}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" transform="matrix(-1 0 0 1 98 0)"/>`,
+          'Las otras dos avanzan una casilla.',
+        ],
+        [
+          `<g transform="translate(-2 2) scale(.42)">${bote()}</g><path d="M42 18 Q54 6 66 16" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/><path d="M61 11L67 16L60 20" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="68" y="14" width="20" height="26" rx="3" fill="#fff" stroke="${COLOR.azul}" stroke-width="2.4"/><circle cx="78" cy="24" r="4" fill="${TINTE.azul}" stroke="${M}" stroke-width="1.6"/>`,
+          'Sale una tarjeta nueva del «Bote de turnos» para «Luego».',
+        ],
+      ];
+
+      document.getElementById('hoja-tablero').outerHTML = `<section class="apaisada tab-hoja">
+          ${tablero()}
+          <div class="tab__pie">
+            <h2>Cuando termina un turno</h2>
+            ${PASOS_PIE.map(([d, t]) => `<p>${svg(d, '', '0 0 92 50')}<span>${t}</span></p>`).join('')}
+          </div>
+          <p class="leyenda">${dibujo('velcro')}<span>Un círculo de velcro <strong>rugoso</strong> en cada círculo gris. El <strong>suave</strong> va detrás de cada tarjeta de turno y de actividad. ${ATRIBUCION} El tablero es de IdEducando.</span></p>
+        </section>`;
+
+      // Tarjetas de turno: 1 a 30 y dos con el número en blanco, 16 por hoja.
+      const NUMEROS = [...Array.from({ length: 30 }, (_, i) => i + 1), null, null];
+      document.getElementById('hojas-turnos').outerHTML = [0, 1]
+        .map((h) => {
+          const lote = NUMEROS.slice(h * 16, h * 16 + 16);
+          const desde = lote[0];
+          const hasta = lote.filter(Boolean).at(-1);
+          return `<section class="hoja-tarjetas">
+            <h1 class="solo-lector">Tarjetas de turno, del ${desde} al ${hasta}${h ? ', y dos en blanco' : ''}</h1>
+            <p class="aviso"><span><strong>Tarjetas de turno · ${desde} a ${hasta}${h ? ' y 2 en blanco' : ''}</strong></span><span>Corta por la línea de puntos</span></p>
+            <p class="pista">Antes de plastificar, pega una foto de carné (26 × 32 mm) o escribe el nombre con rotulador permanente. Detrás, un círculo de velcro suave. ${h ? 'Las dos últimas son para un número o una persona más: escribe el número a mano.' : 'El número es el de la lista de clase.'}</p>
+            <ul class="rejilla-turnos">${lote.map((n) => tarjetaTurno(n)).join('')}</ul>
+          </section>`;
+        })
+        .join('');
+
+      // Bote de turnos: dos etiquetas y las tarjetas de actividad.
+      document.getElementById('etiquetas').innerHTML = `
+        <li class="etiqueta c-verde">${svg(bote())}<div><h2>Bote de turnos</h2><p>Aquí empiezan todas las tarjetas. Saca tres para el tablero.</p></div></li>
+        <li class="etiqueta c-coral">${picto(28429)}<div><h2>Ya me ha tocado</h2><p>Aquí van los turnos terminados. Cuando el otro bote se vacía, vuelven todas.</p></div></li>`;
+      document.getElementById('actividades').innerHTML = ACTIVIDADES.map((a) => tarjetaActividad(a)).join('');
+
+      // Cartel
+      document.getElementById('ideas').innerHTML = IDEAS.map(
+        ([color, p, texto]) => `<li class="c-${color}">${imagen(p)}<p>${texto}</p></li>`,
+      ).join('');
+
+      // «Me toca» y «He terminado»: cuatro tarjetas de doble cara.
+      const caraMeToca = () =>
+        `<div class="cara c-verde">${picto(7158)}<div><h2>Me toca</h2>${dibujo('estrellaCirculo')}</div></div>`;
+      const caraTerminado = () =>
+        `<div class="cara c-coral">${picto(28429)}<div><h2>He terminado</h2>${dibujo('marcada')}</div></div>`;
+      const doble = (etiqueta = 'li') =>
+        `<${etiqueta} class="doble">${caraMeToca()}${caraTerminado()}<span class="dobla" aria-hidden="true">Dobla</span></${etiqueta}>`;
+      document.getElementById('dobles').innerHTML = Array.from({ length: 4 }, () => doble()).join('');
+
+      // ---------------------------------------------------------------------
+      // Ruleta: cuatro sectores (color, forma y número) y la flecha que gira.
+      // ---------------------------------------------------------------------
+      function ruleta() {
+        const R = 96;
+        const sectores = [
+          { color: 'verde', forma: 'circulo' },
+          { color: 'azul', forma: 'cuadrado' },
+          { color: 'amarillo', forma: 'triangulo' },
+          { color: 'coral', forma: 'estrella' },
+        ];
+        const punto = (r, grados) => {
+          const a = ((grados - 90) * Math.PI) / 180;
+          return [100 + r * Math.cos(a), 100 + r * Math.sin(a)].map((v) => Number(v.toFixed(2)));
+        };
+        let s = `<circle cx="100" cy="100" r="${R + 2.4}" fill="none" stroke="${SUAVE}" stroke-width=".8" stroke-dasharray="3.4 2.6"/>`;
+        sectores.forEach((sec, i) => {
+          const a0 = -45 + i * 90;
+          const [x0, y0] = punto(R, a0);
+          const [x1, y1] = punto(R, a0 + 90);
+          s += `<path d="M100 100L${x0} ${y0}A${R} ${R} 0 0 1 ${x1} ${y1}Z" fill="${TINTE[sec.color]}" stroke="${M}" stroke-width="1.6"/>`;
+          // Número dentro de su forma, cerca del borde
+          const [fx, fy] = punto(74, a0 + 45);
+          const forma = {
+            circulo: `<circle cx="${fx}" cy="${fy}" r="12.5" fill="${COLOR[sec.color]}" stroke="${M}" stroke-width="1.8"/>`,
+            cuadrado: `<rect x="${fx - 12}" y="${fy - 12}" width="24" height="24" rx="3" fill="${COLOR[sec.color]}" stroke="${M}" stroke-width="1.8"/>`,
+            triangulo: `<path d="M${fx} ${fy - 15}L${fx + 15} ${fy + 11}H${fx - 15}Z" fill="${COLOR[sec.color]}" stroke="${M}" stroke-width="1.8" stroke-linejoin="round"/>`,
+            estrella: `<path d="${ESTRELLA}" transform="translate(${fx - 15.5} ${fy - 15.5}) scale(.31)" fill="${COLOR[sec.color]}" stroke="${M}" stroke-width="5.8" stroke-linejoin="round"/>`,
+          }[sec.forma];
+          const claro = sec.color === 'amarillo';
+          s += forma + `<text x="${fx}" y="${fy + (sec.forma === 'triangulo' ? 8.5 : 5.6)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${sec.forma === 'triangulo' ? 13 : 16}" fill="${claro ? M : '#fff'}">${i + 1}</text>`;
+          // Renglón para el nombre, entre la forma y el centro
+          const [lx, ly] = punto(50, a0 + 45);
+          s += `<rect x="${lx - 22}" y="${ly - 7.5}" width="44" height="15" rx="3" fill="#fff" stroke="${SUAVE}" stroke-width=".7"/>`;
+          s += `<path d="M${lx - 18} ${ly + 4.2}H${lx + 18}" stroke="${M}" stroke-width=".9"/>`;
+        });
+        // Flechas pequeñas en el borde: la ruleta gira como las agujas del reloj
+        for (let i = 0; i < 4; i++) {
+          const a = i * 90;
+          s += `<g transform="rotate(${a} 100 100)"><path d="M86 8.6A92 92 0 0 1 114 8.6" fill="none" stroke="${M}" stroke-width="1.6" stroke-linecap="round"/><path d="M109.6 5L114.4 8.7L109.4 12.2" fill="none" stroke="${M}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>`;
+        }
+        // Centro: la cruz del encuadernador
+        s += `<circle cx="100" cy="100" r="11" fill="#fff" stroke="${M}" stroke-width="1.4"/><path d="M100 94V106M94 100H106" stroke="${M}" stroke-width="1.6" stroke-linecap="round"/>`;
+        return `<svg viewBox="0 0 200 200" width="118mm" height="118mm" role="img" aria-label="Ruleta de turnos para recortar: cuatro sectores con su color, su forma y su número del 1 al 4, un renglón para el nombre en cada uno y una cruz en el centro para el encuadernador">${s}</svg>`;
+      }
+
+      function flechaRuleta() {
+        // Del centro de su círculo a la punta: 40 mm. Así no tapa los nombres.
+        const s = `<path d="M8 5.5H36V1.5L50 11L36 20.5V16.5H8Z" fill="${COLOR.amarillo}" stroke="${M}" stroke-width="1" stroke-linejoin="round"/>
+          <circle cx="8" cy="11" r="7" fill="#fff" stroke="${M}" stroke-width="1"/>
+          <path d="M8 7.6V14.4M4.6 11H11.4" stroke="${M}" stroke-width="1" stroke-linecap="round"/>
+          <path d="M0.6 11A7.4 7.4 0 0 1 8 3.6" fill="none" stroke="${SUAVE}" stroke-width=".4" stroke-dasharray="1.4 1"/>`;
+        return `<div style="display:grid;grid-template-columns:auto auto;align-items:center;gap:4mm">
+            <svg viewBox="0 0 51 22" width="46mm" height="19.8mm" role="img" aria-label="Flecha amarilla para recortar, con una cruz en su círculo para el encuadernador">${s}</svg>
+            <p style="margin:0;font-size:11pt;line-height:1.3;max-width:58mm;color:var(--suave)">Recorta la flecha por su borde. Su cruz va encima de la cruz del centro.</p>
+          </div>`;
+      }
+      document.getElementById('ruleta-piezas').innerHTML = ruleta() + flechaRuleta();
+      document.getElementById('jugamos').innerHTML = JUGAMOS.map(([n, t]) => `<li>${picto(n)}<p>${t}</p></li>`).join('');
+
+      // Patio: la tira (ahora, después, luego) y la cuenta atrás de 10 a 1.
+      document.getElementById('tira').innerHTML = CASILLAS.map(
+        ([, palabra, color, pos], i) =>
+          `<div class="tira__casilla c-${color}"><p>${palabra}${posicion(pos, COLOR[color])}</p><span></span></div>${i < 2 ? dibujo('flecha') : ''}`,
+      ).join('');
+      document.getElementById('cuenta').innerHTML = Array.from(
+        { length: 10 },
+        (_, i) => `<li class="c-${i < 5 ? 'amarillo' : 'naranja'}">${10 - i}</li>`,
+      ).join('');
+
+      // Familias
+      document.getElementById('momentos').innerHTML = MOMENTOS.map(([n, t]) => `<li>${picto(n)}<span>${t}</span></li>`).join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('lista-niveles').innerHTML = [
+        [1, 'Ahora y después.', 'Espera un solo turno. Para empezar, en Infantil o con quien espera muy poco.'],
+        [2, 'Las tres casillas.', 'Espera dos turnos: sabe que le toca después del siguiente.'],
+        [3, 'La ronda entera.', 'Sin tablero: con la ruleta o con la tarjeta «Me toca», que pasa de mano en mano.'],
+      ]
+        .map(([n, t, d]) => `<li>${marcaNivel(n)}<span><strong>${t}</strong> ${d}</span></li>`)
+        .join('');
+
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, p, titulo, donde, ...claves]) => {
+        const pags = claves.map((c) => PAGINAS[c]);
+        const ultima = pags[pags.length - 1];
+        const texto =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        return `<li class="c-${color}">${imagen(p)}<div><h2>${titulo}</h2><p>${donde}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: el tablero de verdad, reducido y con tarjetas; el bote y «Me toca».
+      // ---------------------------------------------------------------------
+      document.getElementById('escena').innerHTML = `
+        <div class="tab-hoja" style="left:13mm;top:158mm;transform:rotate(-3deg) scale(.6)">${tablero(true)}</div>
+        <div style="left:150mm;top:186mm;width:46mm;height:46mm;transform:rotate(6deg)">${svg(bote())}</div>
+        <div style="left:124mm;top:118mm;transform:rotate(7deg)"><div class="doble" style="transform:scale(.62);grid-template-columns:90mm;width:90mm">${caraMeToca()}</div></div>`;
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = dibujo(el.dataset.icono, 'agujero');
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>
