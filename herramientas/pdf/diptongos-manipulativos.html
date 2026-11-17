@@ -451,7 +451,9 @@
         color: var(--suave);
       }
 
+      /* position: relative para que el título oculto (.solo-lector) quede en su propia hoja y su marcador apunte a ella. */
       .hoja-tarjetas {
+        position: relative;
         page: tarjetas;
         break-after: page;
       }
@@ -663,11 +665,24 @@
         font-size: 18pt;
       }
 
-      .regla h2 small {
+      .regla__cabeza {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+      }
+
+      .regla__cabeza h2 {
+        margin: 0;
+      }
+
+      .etiqueta {
         padding: 0.6mm 2.4mm;
         border-radius: 99mm;
         background: var(--marino);
         color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
         font-size: 11pt;
         letter-spacing: 0.04em;
         text-transform: uppercase;
@@ -909,6 +924,10 @@
         align-items: center;
         gap: 2.4mm;
         margin: 3.2mm 0 1.8mm;
+      }
+
+      .grupo-piezas h2 {
+        margin: 0;
         font-size: 13pt;
       }
 
@@ -1105,14 +1124,6 @@
         font-weight: 700;
         font-size: 22pt;
         line-height: 1;
-      }
-
-      .escribir .palabra small {
-        display: block;
-        margin-top: 1mm;
-        font-size: 11pt;
-        font-weight: 400;
-        color: var(--suave);
       }
 
       .escribir .calle {
@@ -1393,7 +1404,10 @@
       }
 
       .registro thead th .nv {
-        margin-right: 1mm;
+        display: grid;
+        margin: 0 0 0.8mm;
+        background: #fff;
+        color: var(--marino);
       }
 
       .observar {
@@ -1494,15 +1508,12 @@
         align-items: start;
         gap: 1.6mm;
         margin: 0;
+        break-inside: avoid;
       }
 
       .niveles-guia .nv {
         justify-self: center;
         vertical-align: 0;
-      }
-
-      .niveles-guia .nv.f3 {
-        margin-top: -0.8mm;
       }
 
       .niveles-guia p {
@@ -1700,7 +1711,7 @@
         <ul id="regla-juntas"></ul>
       </div>
       <div class="regla separadas">
-        <h2>Se separan: es un hiato <small>Reto</small></h2>
+        <div class="regla__cabeza"><h2>Se separan: es un hiato</h2><span class="etiqueta">Reto</span></div>
         <ul id="regla-separadas"></ul>
       </div>
       <div class="truco">
@@ -1758,9 +1769,9 @@
         formas juntas. Hay dos juegos: si se mezclan, mira la marca de la esquina. Escribe tus sílabas en las piezas en blanco
         antes de plastificar.
       </p>
-      <h2 class="grupo-piezas n1"><span class="nv f1">1</span>Para el nivel 1 · Las sílabas con diptongo</h2>
+      <div class="grupo-piezas"><span class="nv f1" aria-hidden="true">1</span><h2>Para el nivel 1 · Las sílabas con diptongo</h2></div>
       <ul class="rejilla-piezas" id="piezas-n1"></ul>
-      <h2 class="grupo-piezas n2"><span class="nv f2">2</span>Para el nivel 2 · Todas las sílabas de las palabras</h2>
+      <div class="grupo-piezas"><span class="nv f2" aria-hidden="true">2</span><h2>Para el nivel 2 · Todas las sílabas de las palabras</h2></div>
       <ul class="rejilla-piezas" id="piezas-n2"></ul>
     </section>
 
@@ -1802,7 +1813,8 @@
         <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
       </div>
       <p class="lema" style="font-size: 18pt; margin-bottom: 2.6mm">
-        Lee la palabra y mira sus dos vocales. ¿Van juntas en una casa o separadas? Rodea la respuesta.
+        Lee la palabra y mira sus dos vocales. ¿Van juntas en una casa o separadas? Rodea la respuesta. Puedes comprobarlo con
+        las vocales del taller.
       </p>
       <div class="claves" id="claves-reto"></div>
       <ul class="rejilla-reto" id="reto"></ul>
@@ -1902,9 +1914,9 @@
         <h2>Lo que dice la Ortografía de la Real Academia Española (RAE)</h2>
         <ul>
           <li>
-            <strong>Diptongo:</strong> son «secuencias de dos vocales que se pronuncian en la misma sílaba» (RAE y ASALE, 2010,
-            § 2.2.2.1). Lo forman una vocal abierta y una cerrada átona, en cualquier orden (ai-re, pien-so, cuan-to), o dos
-            cerradas distintas (ciu-dad, rui-do). ASALE es la Asociación de Academias de la Lengua Española.
+            <strong>Diptongo:</strong> son «secuencias de dos vocales que se pronuncian en la misma sílaba» (RAE y Asociación de
+            Academias de la Lengua Española [ASALE], 2010, § 2.2.2.1). Lo forman una vocal abierta y una cerrada átona, en
+            cualquier orden (ai-re, pien-so, cuan-to), o dos cerradas distintas (ciu-dad, rui-do).
           </li>
           <li>
             <strong>Hiato:</strong> dos vocales en sílabas distintas. Lo forman dos vocales abiertas (te-a-tro), dos vocales
@@ -1956,7 +1968,7 @@
       </ol>
       <p>
         Después, ratos de 10 a 15 minutos, tres o cuatro días por semana. En la revisión de Ehri y otros (2001), enseñar en
-        grupo pequeño o a la clase entera funcionó igual de bien que de uno en uno.
+        grupo pequeño o a la clase entera no fue menos eficaz que hacerlo de uno en uno.
       </p>
 
       <h2>Los tres niveles</h2>
@@ -1979,7 +1991,7 @@
           <span class="nv f3" aria-hidden="true">3</span>
           <p>
             <strong>Nivel 3, separa, escribe y rodea.</strong> Con la palabra escrita, la separa en las casas que necesite y rodea
-            el diptongo. El reto compara diptongos con hiatos.
+            el diptongo. En «Ahora tú», dibuja y escribe una palabra suya. El reto compara diptongos con hiatos.
           </p>
         </li>
       </ul>
@@ -2036,15 +2048,22 @@
         </li>
         <li>
           <strong>Con discapacidad intelectual:</strong> las mismas ocho palabras durante varias semanas y dos piezas para elegir.
-          Con este alumnado, lo que más respaldo tiene es enseñar con ayudas que se van retirando (Browder y otros, 2006).
+          Con discapacidad intelectual significativa, lo que más respaldo tuvo fue enseñar palabras con ayudas que se van
+          retirando (Browder y otros, 2006).
         </li>
         <li>
           <strong>Con más reto:</strong> palabras con dos diptongos (di-no-sau-rio, a-cua-rio) o con tres vocales en una sílaba,
           como miau o buey: son triptongos.
         </li>
+        <li>
+          <strong>Con otros materiales de IdEducando:</strong> antes,
+          <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>, para contar
+          sílabas a palmadas. Si también cuestan las trabadas, como dro en cuadro, la
+          <a href="https://www.ideducando.es/material-gratuito/cartilla-trabadas/">Cartilla de sílabas trabadas</a>.
+        </li>
       </ul>
       <p>
-        La dislexia y el TDL van juntos a menudo. Ayuda más mirar qué le cuesta a cada peque que su etiqueta (Adlof y Hogan,
+        La dislexia y el TDL pueden ir juntos. Ayuda más mirar qué le cuesta a cada peque que su etiqueta (Adlof y Hogan,
         2018).
       </p>
 
@@ -2069,14 +2088,6 @@
       <p>
         <strong>Juntas, con diptongo:</strong> <span id="solucion-juntas"></span> <strong>Separadas, con hiato:</strong>
         <span id="solucion-separadas"></span>
-      </p>
-
-      <h2>Con otros materiales de IdEducando</h2>
-      <p>
-        Antes, para contar sílabas a palmadas:
-        <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>. Si también
-        cuestan las trabadas, como dro en cuadro:
-        <a href="https://www.ideducando.es/material-gratuito/cartilla-trabadas/">Cartilla de sílabas trabadas</a>.
       </p>
     </section>
 
@@ -2544,7 +2555,7 @@
         ESCRIBIR.map(
           ([palabra, n]) => `<li>${filaEscribir(`${picto(n)}<p class="palabra">${palabra}</p>`)}</li>`,
         ).join('') +
-        `<li>${filaEscribir('<span class="dibujo"></span><p class="palabra">Ahora tú<small>Dibuja y escribe una palabra con diptongo.</small></p>')}</li>`;
+        `<li>${filaEscribir('<span class="dibujo"></span><p class="palabra">Ahora tú</p>')}</li>`;
 
       // ---------------------------------------------------------------------
       // Reto: ¿juntas o separadas?

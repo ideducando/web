@@ -11,7 +11,7 @@ paginas: 17
 archivo: /descargas/diptongos-manipulativos.pdf
 portada: /portadas/diptongos-manipulativos.webp
 portada_alt: "Portada del material: una calle con tres casas que forman la palabra a-bue-la, con la u y la e juntas en la casa del medio y un bocadillo que dice «¡Dos vocales en la misma casa!». Al lado, la tarjeta de la abuela, y desde arriba caen piezas de vocales: círculos para a, e y o, y óvalos estrechos para i y u"
-vistas: [1, 3, 4, 6, 8, 11]
+vistas: [1, 3, 4, 6, 10, 11]
 tiempo: "1 hora y media para imprimir, plastificar y recortar; después, sesiones de 10 a 15 minutos"
 necesitas:
   - "8 hojas de cartulina blanca A4 de 160 g"

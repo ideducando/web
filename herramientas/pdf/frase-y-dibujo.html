@@ -358,18 +358,15 @@
         margin: 0;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 11pt;
+        font-size: 12.5pt;
         line-height: 1.2;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
         color: var(--marino);
       }
 
       .aviso h1 span {
         font-family: var(--texto);
         font-weight: 400;
-        letter-spacing: 0;
-        text-transform: none;
+        font-size: 11pt;
         color: var(--suave);
       }
 
@@ -456,7 +453,7 @@
         height: 7.2mm;
       }
 
-      /* La frase: cada palabra con un circulito debajo, para tocarlo al leerla. El punto final, del color del nivel. */
+      /* La frase: cada palabra con una rayita debajo, para seguirla con el dedo al leerla. El punto final, del color del nivel. */
       .texto {
         margin: 0;
         font-weight: 700;
@@ -478,14 +475,12 @@
       .texto .p::after {
         content: '';
         position: absolute;
-        left: 50%;
-        bottom: -0.02em;
-        width: 1.9mm;
-        height: 1.9mm;
-        margin-left: -0.95mm;
-        border: 0.42mm solid var(--tx);
-        border-radius: 50%;
-        background: #fff;
+        left: 0.08em;
+        right: 0.08em;
+        bottom: 0.1em;
+        height: 0.6mm;
+        border-radius: 0.3mm;
+        background: var(--tx);
       }
 
       .texto .fin {
@@ -666,50 +661,37 @@
         z-index: 2;
       }
 
-      .seccion-blancas {
-        display: flex;
-        align-items: center;
-        gap: 2.4mm;
-        margin: 0 0 2mm;
-        font-family: var(--titulos);
-        font-weight: 700;
-        font-size: 12.5pt;
-      }
-
-      .seccion-blancas + .rejilla-frases {
-        grid-auto-rows: 38mm;
+      .rejilla-blancas {
         margin-bottom: 4mm;
       }
 
-      /* ---------- Tablero para emparejar ---------- */
+      /* ---------- Tablero para emparejar ----------
+         Cada fila mide lo que una tarjeta de dibujo ya plastificada (66 × 54 mm): así las tarjetas no se pisan.
+         Los huecos son algo más pequeños que las tarjetas, que los tapan. */
+      @page tablero {
+        margin: 8mm 12mm 15mm 12mm;
+      }
+
+      .tablero {
+        page: tablero;
+        break-after: page;
+      }
+
       .tablero__cabeza {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-columns: auto minmax(0, 1fr) auto;
         align-items: end;
         gap: 6mm;
-        margin: 0 0 2mm;
+        margin: 0 0 2.4mm;
       }
 
       .tablero__cabeza h1 {
         margin: 0;
-        font-size: 30pt;
+        font-size: 26pt;
         line-height: 1;
       }
 
-      .tablero__cabeza > img {
-        width: 34mm;
-        height: auto;
-      }
-
-      .tablero__datos {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: end;
-        gap: 6mm;
-        margin: 0 0 2.6mm;
-      }
-
-      .tablero__datos p {
+      .tablero__cabeza p {
         display: flex;
         align-items: flex-end;
         gap: 2mm;
@@ -719,72 +701,63 @@
         line-height: 1;
       }
 
-      .tablero__datos p > span.raya {
+      .tablero__cabeza .raya {
         flex: 1;
         height: 7mm;
         border-bottom: 0.45mm solid var(--marino);
       }
 
-      .tablero__datos .formas {
+      .tablero__cabeza .formas {
         display: flex;
         gap: 1.6mm;
         align-items: center;
       }
 
-      .tablero__datos .forma-vacia {
-        width: 8mm;
-        height: 8mm;
-      }
-
-      .tablero__titulos,
-      .tablero__fila {
-        display: grid;
-        grid-template-columns: 92mm 12mm 62mm;
-        justify-content: center;
-        align-items: center;
-        column-gap: 3mm;
-      }
-
-      .tablero__titulos {
-        margin: 0 0 1.2mm;
-        font-family: var(--titulos);
-        font-weight: 700;
-        font-size: 18pt;
-        line-height: 1;
-        text-align: center;
+      .tablero__cabeza .forma-vacia {
+        width: 7.4mm;
+        height: 7.4mm;
       }
 
       .tablero__filas {
         display: grid;
-        gap: 2.2mm;
-        margin: 0 0 3mm;
+        grid-auto-rows: 54.5mm;
+        margin: 0 0 2.2mm;
         padding: 0;
         list-style: none;
       }
 
       .tablero__fila {
-        height: 50mm;
+        display: grid;
+        grid-template-columns: 96mm 12mm 66mm;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        column-gap: 3mm;
         margin: 0;
       }
 
       .hueco {
         position: relative;
+        display: grid;
+        place-items: center;
         border: 0.6mm dashed var(--suave);
         border-radius: 3.5mm;
         background: #fff;
       }
 
       .hueco--frase {
-        width: 92mm;
-        height: 40mm;
-        background:
-          radial-gradient(circle at 6mm 6mm, var(--t) 0 2.6mm, transparent 2.7mm),
-          #fff;
+        width: 90mm;
+        height: 38mm;
       }
 
       .hueco--dibujo {
-        width: 62mm;
-        height: 50mm;
+        width: 60mm;
+        height: 48mm;
+      }
+
+      .hueco svg {
+        width: 16mm;
+        height: 16mm;
       }
 
       .tablero__fila svg.flecha {
@@ -793,32 +766,25 @@
       }
 
       .rutina {
-        padding: 2.4mm 3.5mm 3mm;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 2.2mm 3mm;
         border: 0.6mm solid var(--azul);
         border-radius: 4mm;
         background: var(--azul-tinte);
-        break-inside: avoid;
-      }
-
-      .rutina h2 {
-        margin: 0 0 1.8mm;
-        font-size: 14pt;
-      }
-
-      .rutina ol {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.8mm 5mm;
-        margin: 0;
-        padding: 0;
         list-style: none;
+        break-inside: avoid;
       }
 
       .rutina li {
         display: grid;
-        grid-template-columns: 5.4mm 13mm minmax(0, 1fr);
+        grid-template-columns: 5.4mm 11mm minmax(0, 1fr);
+        grid-template-rows: 11mm auto;
+        column-gap: 1.6mm;
+        row-gap: 1mm;
         align-items: center;
-        gap: 1.8mm;
         margin: 0;
       }
 
@@ -834,22 +800,26 @@
         font-weight: 700;
         font-size: 11pt;
         line-height: 1;
-        text-align: center;
       }
 
       .rutina img,
       .rutina svg {
-        width: 13mm;
-        height: 13mm;
+        width: 11mm;
+        height: 11mm;
         border-radius: 2mm;
         background: #fff;
       }
 
       .rutina p {
+        grid-column: 1 / -1;
         margin: 0;
         font-weight: 700;
         font-size: 18pt;
         line-height: 1.04;
+      }
+
+      .tablero .atribucion {
+        margin-top: 1.6mm;
       }
 
       /* ---------- De un vistazo ---------- */
@@ -978,6 +948,45 @@
         font-size: 11pt;
         line-height: 1.2;
         color: var(--tx);
+      }
+
+      .grupos__titulo {
+        margin: 0 0 0.8mm;
+        font-size: 13pt;
+      }
+
+      .grupos__intro {
+        margin: 0 0 1.6mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .grupos {
+        margin: 0 0 3.5mm;
+        line-height: 1.25;
+      }
+
+      .grupos th,
+      .grupos td {
+        padding: 1.1mm 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .grupos tbody th {
+        white-space: nowrap;
+      }
+
+      .grupos tbody th .nv {
+        margin-right: 1.2mm;
+      }
+
+      .solo-lector {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
       }
 
       /* ---------- Registro ---------- */
@@ -1375,12 +1384,27 @@
         </div>
       </div>
       <ol class="mapa" id="mapa"></ol>
+      <h2 class="grupos__titulo">Tres grupos de cuatro parejas en cada nivel</h2>
+      <p class="grupos__intro">
+        Las frases de un grupo se parecen a propósito: así hay que leerlas enteras. Empieza por uno. En las hojas van en este
+        orden.
+      </p>
+      <table class="grupos">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 21mm"><span class="solo-lector">Nivel</span></th>
+            <th scope="col">Grupo A</th>
+            <th scope="col">Grupo B</th>
+            <th scope="col">Grupo C</th>
+          </tr>
+        </thead>
+        <tbody id="grupos"></tbody>
+      </table>
       <div class="caja caja--amarilla">
         <p>
           <strong>Primero la frase, después el dibujo.</strong> Que lea la frase entera antes de mirar los dibujos, sin
-          adivinar por la primera letra ni por el dibujo. Cada nivel trae tres grupos de cuatro parejas que se parecen a
-          propósito: empieza por uno. La guía de la página <span data-pagina="guia"></span> explica cómo enseñarlo y cómo
-          retirar la ayuda.
+          adivinar por la primera letra ni por el dibujo. La guía de la página <span data-pagina="guia"></span> explica cómo
+          enseñarlo y cómo retirar la ayuda.
         </p>
       </div>
     </section>
@@ -1388,28 +1412,15 @@
     <!-- ======================================================================
          TABLERO PARA EMPAREJAR
          ====================================================================== -->
-    <section class="hoja-tarjetas tablero">
+    <section class="tablero">
       <div class="tablero__cabeza">
-        <div>
-          <p class="antetitulo" style="margin: 0 0 1mm">Tablero · Para cuatro parejas</p>
-          <h1>Leo y empareja</h1>
-        </div>
-        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
-      </div>
-      <div class="tablero__datos">
+        <h1>Leo y empareja</h1>
         <p>Me llamo:<span class="raya"></span></p>
         <p>Nivel:<span class="formas" id="formas-tablero"></span></p>
       </div>
-      <p class="tablero__titulos" aria-hidden="true"><span>Frase</span><span></span><span>Dibujo</span></p>
       <ol class="tablero__filas" id="filas-tablero"></ol>
-      <div class="rutina">
-        <h2>Así se juega</h2>
-        <ol id="rutina"></ol>
-      </div>
-      <p class="atribucion">
-        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La
-        flecha y la tarjeta que se da la vuelta son de IdEducando.
-      </p>
+      <ol class="rutina" id="rutina"></ol>
+      <p class="atribucion">Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA. La flecha y los iconos, de IdEducando.</p>
     </section>
 
     <!-- Las hojas de frases y de dibujos de los tres niveles se generan con el guion del final, a partir de la lista FRASES -->
@@ -1420,17 +1431,14 @@
          ====================================================================== -->
     <section class="hoja-tarjetas">
       <div class="aviso">
-        <h1>Tarjetas en blanco <span>· Para vuestras frases</span></h1>
+        <h1>Tarjetas en blanco <span>· Seis frases y seis dibujos</span></h1>
         <span><i class="muestra-linea muestra-linea--corta"></i>Corta <i class="muestra-linea muestra-linea--dobla"></i>Dobla hacia atrás</span>
       </div>
-      <p class="seccion-blancas">Seis frases</p>
-      <ul class="rejilla-frases" id="frases-blancas"></ul>
-      <p class="seccion-blancas">Seis dibujos</p>
+      <ul class="rejilla-frases rejilla-blancas" id="frases-blancas"></ul>
       <ul class="rejilla-dibujos" id="dibujos-blancos"></ul>
       <p class="atribucion">
-        Antes de plastificar: rodea la forma del nivel, escribe la frase, haz el dibujo o pega pictogramas, y dibuja el mismo
-        símbolo en el hueco de la frase y en la pestaña de su dibujo. Por ejemplo, un triángulo, una gota o una nube. Si pegas
-        pictogramas de ARASAAC, cítalos igual.
+        Antes de plastificar, rodea la forma del nivel, escribe la frase y haz su dibujo. Dibuja el mismo símbolo en la frase
+        y en la pestaña: un triángulo, una gota o una nube. Si pegas pictogramas de ARASAAC, cítalos igual.
       </p>
     </section>
 
@@ -1527,8 +1535,8 @@
           Que lea la frase entera y después busque.
         </li>
         <li>
-          <strong>Un dedo para cada palabra.</strong> Debajo de cada palabra hay un circulito. Que lo toque al leerla, hasta el
-          punto de color: ahí acaba la frase. Hacer coincidir cada palabra que dice con cada palabra escrita es un paso clave al
+          <strong>Un dedo para cada palabra.</strong> Debajo de cada palabra hay una rayita. Que pase el dedo por ella al leerla,
+          hasta el punto de color: ahí acaba la frase. Hacer coincidir cada palabra que dice con cada palabra escrita es un paso clave al
           empezar a leer (Flanigan, 2007).
         </li>
         <li>
@@ -1864,7 +1872,7 @@
       // Las 36 frases. Cada una: el texto (| marca el salto de línea), el símbolo de su pareja de dibujo,
       // el dibujo (una lista de piezas) y su descripción para el lector de pantalla.
       // ---------------------------------------------------------------------
-      const GATO_CAMA = { cx: 31, b: 44, w: 52 }; // la cama de los dos dibujos del gato
+      const GATO_CAMA = { cx: 32, b: 44, w: 50 }; // la cama de los dos dibujos del gato
       const NINA_PARAGUAS = { cx: 22, b: 46, h: 24 };
       const manoParaguas = punto(27509, NINA_PARAGUAS, 356, 340);
       const NINA_GLOBO = { cx: 22, b: 45.5, h: 34 };
@@ -1933,9 +1941,9 @@
         3: [
           // Parejas que solo cambian en un detalle. Grupo A: dónde y quién.
           { t: 'El gato duerme|en la cama.', s: 'seta', alt: 'Un gato tumbado encima de una cama, con zetas de sueño',
-            d: () => pic(25900, GATO_CAMA) + pic(2406, { cx: 37, b: 24.3, w: 16 }) + zetas(45.5, 14.5, 2) },
+            d: () => pic(25900, GATO_CAMA) + pic(2406, { cx: 38, b: 24.9, w: 16 }) + zetas(46.5, 15.2, 2) },
           { t: 'El gato duerme|debajo de la cama.', s: 'llave', alt: 'Un gato tumbado debajo de una cama, con zetas de sueño',
-            d: () => suelo(44.2, 3, 57) + pic(25900, GATO_CAMA) + pic(2406, { cx: 26, b: 44, w: 16 }) + zetas(35.6, 41.6, 1.5) },
+            d: () => suelo(44.2, 3, 57) + pic(25900, GATO_CAMA) + pic(2406, { cx: 27, b: 44, w: 16 }) + zetas(36.6, 41.8, 1.5) },
           { t: 'El perro corre|detrás del gato.', s: 'corazon', alt: 'Un gato corre delante y un perro corre detrás de él',
             d: () => suelo(41.4, 3, 57) + rayas(2.6, 26, 5) + pic(2517, { cx: 18, b: 41, w: 25 }) + rayas(33.4, 30, 4.4) + pic(7114, { cx: 47, b: 41, w: 21 }) },
           { t: 'El gato corre|detrás del perro.', s: 'casa', alt: 'Un perro corre delante y un gato corre detrás de él',
@@ -2016,7 +2024,7 @@
       const ATRIBUCION =
         'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
 
-      // La frase, palabra a palabra: cada una con su circulito y el punto final del color del nivel.
+      // La frase, palabra a palabra: cada una con su rayita y el punto final del color del nivel.
       function textoFrase(texto, clase) {
         const lineas = texto.split('|').map((linea) => {
           const palabras = linea.trim().split(' ');
@@ -2058,7 +2066,7 @@
           const hojaFrases = (mayusculas) => `<section class="hoja-tarjetas">
               <div class="aviso"><h1>Nivel ${nivel} · Frases${mayusculas ? ' en mayúsculas' : ''} <span>· ${n.palabras} · Forma de ${n.forma}</span></h1>${leyenda(false)}</div>
               <ul class="rejilla-frases">${frases.map((f) => tarjetaFrase(f, nivel, { mayusculas })).join('')}</ul>
-              <p class="atribucion">Cada frase tiene un circulito debajo de cada palabra para tocarlo al leer, y un símbolo abajo a la derecha: es el mismo que lleva su dibujo detrás.${mayusculas ? ' Imprime esta hoja en lugar de la anterior, o las dos.' : ''}</p>
+              <p class="atribucion">Cada palabra tiene una rayita debajo para seguirla con el dedo al leer. El símbolo de abajo a la derecha es el mismo que lleva su dibujo detrás.${mayusculas ? ' Imprime esta hoja en lugar de la anterior, o las dos.' : ''}</p>
             </section>`;
           const hojaDibujos = `<section class="hoja-tarjetas">
               <div class="aviso"><h1>Nivel ${nivel} · Dibujos <span>· Forma de ${n.forma}</span></h1>${leyenda(true)}</div>
@@ -2090,9 +2098,12 @@
       // ---------------------------------------------------------------------
       const FLECHA = `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`;
       document.getElementById('formas-tablero').innerHTML = formaVacia(1) + formaVacia(2) + formaVacia(3);
+      // Iconos de IdEducando dentro de los huecos: líneas de texto para la frase y un paisaje para el dibujo.
+      const ICONO_FRASE = `<path d="M14 34h72M14 56h56M14 78h64" stroke="#c9cfe0" stroke-width="8" stroke-linecap="round"/>`;
+      const ICONO_DIBUJO = `<rect x="10" y="16" width="80" height="68" rx="10" fill="none" stroke="#c9cfe0" stroke-width="7"/><circle cx="34" cy="38" r="8" fill="#c9cfe0"/><path d="M14 78l24-24 16 14 14-12 20 20" fill="none" stroke="#c9cfe0" stroke-width="7" stroke-linejoin="round"/>`;
       document.getElementById('filas-tablero').innerHTML = Array.from(
         { length: 4 },
-        () => `<li class="tablero__fila c-amarillo"><span class="hueco hueco--frase"></span>${svg(FLECHA, 'flecha')}<span class="hueco hueco--dibujo"></span></li>`,
+        () => `<li class="tablero__fila"><span class="hueco hueco--frase">${svg(ICONO_FRASE)}</span>${svg(FLECHA, 'flecha')}<span class="hueco hueco--dibujo">${svg(ICONO_DIBUJO)}</span></li>`,
       ).join('');
 
       // Dibujo de IdEducando: una tarjeta que se da la vuelta y enseña su símbolo.
@@ -2106,7 +2117,7 @@
         [7141, 'Leo la frase entera.'],
         [32156, 'Busco su dibujo.'],
         [6989, 'Lo pongo al lado.'],
-        ['vuelta', 'Doy la vuelta al dibujo: ¿mismo símbolo?'],
+        ['vuelta', 'Le doy la vuelta.'],
       ];
       document.getElementById('rutina').innerHTML = RUTINA.map(
         ([p, texto], i) => `<li><span class="num" aria-hidden="true">${i + 1}</span>${p === 'vuelta' ? svg(DARVUELTA) : picto(p)}<p>${texto}</p></li>`,
@@ -2116,9 +2127,9 @@
       // De un vistazo
       // ---------------------------------------------------------------------
       const EJEMPLOS = {
-        1: ['Frases de 2 o 3 palabras.', '«Hoy llueve.»'],
-        2: ['Un detalle al final: hay que leer hasta el punto.', '«La niña bebe agua fría.»'],
-        3: ['Parejas que cambian en un detalle: hay que leer la frase entera.', '«El gato duerme en la cama.» y «debajo de la cama.»'],
+        1: ['2 o 3 palabras.', '«Hoy llueve.»'],
+        2: ['4 o 5 palabras, con un detalle al final.', '«La niña bebe agua fría.»'],
+        3: ['6 a 8 palabras, en parejas que cambian en un detalle.', '«en la cama» o «debajo de la cama»'],
       };
       document.getElementById('lista-niveles').innerHTML = [1, 2, 3]
         .map(
@@ -2150,16 +2161,29 @@
         .map(([dibujo, texto]) => `<li>${svg(dibujo, '', '0 0 100 72')}<span>${texto}</span></li>`)
         .join('');
 
+      // Los grupos de cada nivel, en el orden de las hojas
+      const GRUPOS = {
+        1: ['El tiempo: sol, lluvia, nieve y viento', 'Animales: el pez, el pájaro, el gato y el perro', 'El niño y la niña leen y saltan'],
+        2: ['Cómo están: contenta, triste, contento y enfadado', 'Qué beben o comen', 'En casa: pasear al perro, hacer la cama y barrer'],
+        3: ['Dónde duerme el gato y quién corre detrás', 'Con o sin gorro, y el vaso lleno o vacío', 'Uno o dos globos, y el paraguas abierto o cerrado'],
+      };
+      document.getElementById('grupos').innerHTML = [1, 2, 3]
+        .map(
+          (nivel) =>
+            `<tr class="c-${NIVELES[nivel].color}"><th scope="row">${marcaNivel(nivel)}Nivel ${nivel}</th>${GRUPOS[nivel].map((g) => `<td>${g}</td>`).join('')}</tr>`,
+        )
+        .join('');
+
       // Mapa de páginas: [color, pictograma, título, para qué, páginas]
       const MAPA = [
-        ['amarillo', 32324, 'Tablero para emparejar', 'Cuatro parejas y los pasos del juego.', 'tablero'],
-        ['verde', 3123, 'Nivel 1: frases y dibujos', 'Con las frases también en mayúsculas.', 'frases1', 'dibujos1'],
-        ['azul', 29716, 'Nivel 2: frases y dibujos', 'Con un detalle al final.', 'frases2', 'dibujos2'],
-        ['morado', 2406, 'Nivel 3: frases y dibujos', 'Parejas que cambian en un detalle.', 'frases3', 'dibujos3'],
-        ['coral', 2380, 'Tarjetas en blanco', 'Seis frases y seis dibujos para inventar.', 'blancas'],
-        ['naranja', 6998, 'Registro y escalera de ayudas', 'Qué ayuda necesita y dónde se equivoca.', 'registro'],
-        ['verde', 7141, 'Guía para el docente', 'Cómo enseñar a leer la frase entera.', 'guia', 'guia2'],
-        ['coral', 32324, 'Nota para las familias y fuentes', 'Cuatro juegos para casa.', 'familias', 'fuentes'],
+        ['amarillo', 32324, 'Tablero', 'Para cuatro parejas.', 'tablero'],
+        ['verde', 3123, 'Nivel 1', 'Frases, en minúsculas y en mayúsculas, y dibujos.', 'frases1', 'dibujos1'],
+        ['azul', 29716, 'Nivel 2', 'Frases y dibujos.', 'frases2', 'dibujos2'],
+        ['morado', 2406, 'Nivel 3', 'Frases y dibujos.', 'frases3', 'dibujos3'],
+        ['coral', 2380, 'Tarjetas en blanco', 'Para inventar frases.', 'blancas'],
+        ['naranja', 6998, 'Registro', 'Ayudas y errores.', 'registro'],
+        ['verde', 7141, 'Guía para el docente', 'Cómo enseñarlo.', 'guia', 'guia2'],
+        ['coral', 38351, 'Familias y fuentes', 'Juegos para casa.', 'familias', 'fuentes'],
       ];
       PAGINAS.guia2 = PAGINAS.guia + 1;
       document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, para, ...claves]) => {

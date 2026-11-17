@@ -20,7 +20,7 @@ necesitas:
   - "1 punzón y 1 rollo de cinta adhesiva"
   - "2 rotuladores de pizarra blanca y 1 paño"
   - "3 sobres o bolsas con cierre de 10 × 15 cm"
-  - "1 dado y 3 botones, para jugar sin encuadernador"
+  - "1 dado grande y 3 botones: otra forma de jugar"
   - "1 folio A4 de 80 g por alumno o alumna y sesión"
   - "Tijeras e impresora, mejor a color"
 imprimir:

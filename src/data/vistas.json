@@ -1085,6 +1085,59 @@
       }
     ]
   },
+  "mercadillo-de-clase": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Monedas"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "MONEDAS DE JUEGO · Imprime esta hoja dos veces"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "ETIQUETAS DE PRECIO · Frutería y panadería"
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para quien compra · niveles 1 y 2 · uno por puesto"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para quien vende · con rotulador de pizarra · una por puesto"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "TARJETAS DE PAPELES · Una de cada en cada puesto"
+      }
+    ]
+  },
   "misiones-invierno": {
     "total": 16,
     "fotos": [

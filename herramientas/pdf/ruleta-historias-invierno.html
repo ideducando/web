@@ -339,9 +339,9 @@
 
       .portada__subtitulo {
         font-family: var(--texto);
-        font-size: 16pt;
+        font-size: 15pt;
         line-height: 1.35;
-        max-width: 104mm;
+        max-width: 112mm;
       }
 
       .portada__pie {
@@ -755,8 +755,8 @@
       .cartas {
         display: grid;
         grid-template-columns: repeat(4, 45mm);
-        grid-auto-rows: 60mm;
-        gap: 3mm 2mm;
+        grid-auto-rows: 55mm;
+        gap: 2.4mm 2mm;
         justify-content: space-between;
         margin: 0;
         padding: 0;
@@ -766,7 +766,7 @@
       .carta {
         position: relative;
         display: grid;
-        grid-template-rows: 9.5mm 32mm minmax(0, 1fr);
+        grid-template-rows: 9.5mm 29mm minmax(0, 1fr);
         justify-items: center;
         align-items: center;
         margin: 0;
@@ -807,13 +807,13 @@
 
       .carta__dibujo {
         position: relative;
-        width: 29mm;
-        height: 29mm;
+        width: 26mm;
+        height: 26mm;
       }
 
       .carta__dibujo img {
-        width: 29mm;
-        height: 29mm;
+        width: 26mm;
+        height: 26mm;
       }
 
       .carta__dibujo .marca-extra {
@@ -868,7 +868,7 @@
       /* ---------- Tira para contar (apaisada) ---------- */
       .tira {
         display: grid;
-        grid-template-columns: minmax(0, 2.02fr) minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: 118mm minmax(0, 1fr) minmax(0, 1fr);
         gap: 9mm;
         margin: 0 0 4mm;
         padding: 0;
@@ -922,7 +922,7 @@
         justify-items: center;
         align-items: center;
         width: 53mm;
-        height: 68mm;
+        height: 65mm;
         padding: 3mm 2mm 4mm;
         border: 0.6mm dashed var(--fm);
         border-radius: 3.6mm;
@@ -977,18 +977,12 @@
       }
 
       .tira-hoja .pasos-tira {
-        margin: 4mm 0 0;
+        margin: 3mm 0 0;
       }
 
-      .tira-hoja .pasos-tira li {
-        grid-template-columns: 16mm minmax(0, 1fr);
-        padding: 1.4mm 2.4mm 1.4mm 1.4mm;
-      }
-
-      .tira-hoja .pasos-tira img,
       .tira-hoja .pasos-tira svg {
-        width: 16mm;
-        height: 16mm;
+        width: 13mm;
+        height: 13mm;
       }
 
       .ideas__lista {
@@ -1002,7 +996,7 @@
 
       .ideas__lista li {
         display: grid;
-        grid-template-columns: 16mm minmax(0, 1fr);
+        grid-template-columns: 14mm minmax(0, 1fr);
         align-items: center;
         gap: 2mm;
         margin: 0;
@@ -1015,8 +1009,8 @@
       }
 
       .ideas__lista img {
-        width: 16mm;
-        height: 16mm;
+        width: 14mm;
+        height: 14mm;
       }
 
       /* ---------- Plan de la historia (apaisado) ---------- */
@@ -1032,7 +1026,7 @@
       .plan__parte {
         position: relative;
         display: grid;
-        grid-template-rows: 12mm 41mm 30mm 80mm;
+        grid-template-rows: 12mm 38mm 28mm 64mm;
         margin: 0;
         border: 0.6mm solid var(--c);
         border-radius: 4mm;
@@ -1044,7 +1038,7 @@
         content: '';
         position: absolute;
         right: -7.6mm;
-        top: 60mm;
+        top: 56mm;
         width: 7mm;
         height: 9mm;
         background: var(--marino);
@@ -1132,7 +1126,7 @@
 
       .plan__notas {
         display: grid;
-        grid-template-rows: auto repeat(5, minmax(0, 1fr));
+        grid-template-rows: auto repeat(4, minmax(0, 1fr));
         margin: 0 3mm 3mm;
         padding: 2mm 2.6mm 1mm;
         border-radius: 2.6mm;
@@ -1166,8 +1160,8 @@
 
       /* ---------- Palabras para unir (tiras de conectores) ---------- */
       .conectores {
-        margin: 0 0 4mm;
-        padding: 2.4mm 3mm 3mm;
+        margin: 0 0 3mm;
+        padding: 2mm 3mm 2.4mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 4mm;
         background: #fff;
@@ -1234,7 +1228,7 @@
 
       .grupo__lista {
         display: grid;
-        gap: 1.2mm;
+        gap: 0.9mm;
         margin: 0;
         padding: 0 1.6mm;
         list-style: none;
@@ -1242,7 +1236,7 @@
 
       .grupo__lista li {
         margin: 0;
-        padding: 1mm 1.8mm;
+        padding: 0.7mm 1.8mm;
         border-radius: 2mm;
         background: #fff;
         font-weight: 700;
@@ -1288,7 +1282,7 @@
 
       .frases {
         display: grid;
-        gap: 4mm;
+        gap: 3mm;
         margin: 0 0 3.4mm;
         padding: 0;
         list-style: none;
@@ -1326,7 +1320,7 @@
       .frase__dibujo {
         display: grid;
         place-items: end center;
-        height: 37mm;
+        height: 34mm;
         padding: 1.2mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 2.6mm;
@@ -1336,7 +1330,7 @@
 
       .frase__renglones {
         display: grid;
-        grid-template-rows: repeat(4, 13.6mm);
+        grid-template-rows: repeat(4, 12.2mm);
       }
 
       .frase__renglones span {
@@ -1414,7 +1408,7 @@
 
       .texto-renglones {
         display: grid;
-        grid-template-rows: repeat(11, 10.8mm);
+        grid-template-rows: repeat(10, 10.2mm);
         margin: 0 0 3.4mm;
       }
 
@@ -1473,7 +1467,7 @@
 
       /* ---------- Autoevaluación (dos por hoja) ---------- */
       .auto {
-        height: 127mm;
+        height: 123mm;
         padding: 3mm 4mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 4mm;
@@ -1481,7 +1475,7 @@
       }
 
       .auto + .auto {
-        margin-top: 5mm;
+        margin-top: 4mm;
       }
 
       .auto__cab {
@@ -1655,7 +1649,7 @@
       /* ---------- Guía ---------- */
       .guia {
         font-size: 11pt;
-        line-height: 1.34;
+        line-height: 1.3;
       }
 
       .guia h1 {
@@ -1664,8 +1658,8 @@
 
       .guia h2 {
         font-size: 13.5pt;
-        margin-top: 0.6em;
-        margin-bottom: 0.25em;
+        margin-top: 0.5em;
+        margin-bottom: 0.2em;
       }
 
       .guia p {
@@ -1703,22 +1697,18 @@
       }
 
       .modelo {
-        margin: 0;
+        margin: 0 0 0.5em;
         padding: 0;
         list-style: none;
       }
 
       .modelo li {
-        display: grid;
-        grid-template-columns: 30mm minmax(0, 1fr);
-        gap: 3mm;
         margin: 0 0 1mm;
       }
 
-      .modelo li > span:first-child {
+      .modelo strong {
         font-family: var(--titulos);
-        font-weight: 600;
-        color: var(--suave);
+        font-weight: 700;
       }
 
       .reformular {
@@ -1844,7 +1834,7 @@
       .fuentes {
         page: recorte;
         font-size: 11pt;
-        line-height: 1.25;
+        line-height: 1.22;
       }
 
       .fuentes h1 {
@@ -1854,11 +1844,11 @@
 
       .fuentes h2 {
         font-size: 13pt;
-        margin: 0.5em 0 0.15em;
+        margin: 0.4em 0 0.1em;
       }
 
       .fuentes p {
-        margin-bottom: 0.45em;
+        margin-bottom: 0.35em;
       }
 
       .referencias {
@@ -1867,7 +1857,7 @@
       }
 
       .referencias li {
-        margin-bottom: 0.6mm;
+        margin-bottom: 0.4mm;
       }
     </style>
   </head>
@@ -1879,15 +1869,14 @@
       <div class="rayos portada__rayos"></div>
       <div class="circulo" style="width: 170mm; height: 170mm; right: -58mm; top: 132mm; background: var(--azul-tinte)"></div>
       <div class="circulo" style="width: 80mm; height: 80mm; left: -34mm; top: 196mm; background: var(--verde-tinte)"></div>
-      <div class="circulo" style="width: 26mm; height: 26mm; left: 128mm; top: 112mm; background: var(--coral-tinte)"></div>
+      <div class="circulo" style="width: 18mm; height: 18mm; left: 146mm; top: 92mm; background: var(--coral-tinte)"></div>
       <div id="copos-portada" aria-hidden="true"></div>
       <div class="portada__cuerpo">
         <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
         <p class="antetitulo portada__antetitulo">Juego de lenguaje · Para toda la clase</p>
         <h1 class="portada__titulo">Ruleta para contar<br />historias de invierno</h1>
         <p class="portada__subtitulo">
-          Personaje, lugar y problema al azar para contar, decir y escribir historias en tres niveles. Para 5 años y de 1.º a
-          4.º de Primaria.
+          Personaje, lugar y problema al azar para contar y escribir historias en tres niveles. De 5 años a 4.º de Primaria.
         </p>
         <div class="portada__pie">
           <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
@@ -2077,69 +2066,54 @@
       <p class="antetitulo">Guía para el docente</p>
       <h1>Ruleta para contar historias de invierno: cómo modelar, preguntar y ayudar</h1>
       <p>
-        Las ruletas sortean el personaje, el lugar y el problema. El alumnado inventa lo demás: qué hace y cómo acaba. Así
-        practica las partes de una historia, que son el inicio, el problema, la solución y el final. Sirve para toda la clase.
-        Está pensado, además, para el alumnado con trastorno del desarrollo del lenguaje (TDL), con trastorno del espectro del
-        autismo (TEA) y con discapacidad intelectual.
+        Las ruletas sortean el personaje, el lugar y el problema, y el alumnado inventa qué hace y cómo acaba. Así practica las
+        cuatro partes de una historia: inicio, problema, solución y final. Sirve para toda la clase y está pensado, además, para
+        el alumnado con trastorno del desarrollo del lenguaje (TDL), con trastorno del espectro del autismo (TEA) y con
+        discapacidad intelectual. Una revisión de 40 estudios encontró que las intervenciones para contar historias mejoran
+        cómo las cuenta y las entiende el alumnado de Infantil y Primaria; muchas usan apoyos visuales y enseñan las partes de
+        la historia (Pico y otros, 2021). Cada sesión, de 15 a 20 minutos, sigue los pasos de la página
+        <span data-pagina="vistazo"></span>.
       </p>
 
-      <h2>Una sesión, de 15 a 20 minutos</h2>
-      <ol>
-        <li>Cuenta tú una historia delante de la clase, con las ruletas y la tira.</li>
-        <li>Por turnos, alguien gira cada ruleta. Poned las tres cartas en la tira o en el plan.</li>
-        <li>Pensad juntos qué hace el personaje. Las ideas para el final ayudan a quien se atasca.</li>
-        <li>Cada peque cuenta, dice o escribe la historia en su nivel. En pareja, uno cuenta y el otro escucha.</li>
-        <li>Al acabar, alguien dice qué le ha gustado de otra historia. Cada peque rellena su autoevaluación.</li>
-      </ol>
-
-      <h2>Cómo modelar una historia</h2>
-      <p>
-        Modelar es contar en voz alta y decir a la vez lo que piensas. Hazlo con las mismas piezas que van a usar, señalando
-        cada carta en la tira:
-      </p>
-      <div class="caja caja--azul">
-        <ol class="modelo">
-          <li><span>Giro y pienso</span><span>«Ha salido un pingüino, una cabaña y "pierde su gorro". Pongo las cartas en la tira».</span></li>
-          <li><span>1 · Inicio</span><span>«Había una vez un pingüino que vivía en una cabaña».</span></li>
-          <li><span>2 · Problema</span><span>«De repente, perdió su gorro. ¡Qué frío tenía en la cabeza! Estaba muy triste».</span></li>
-          <li><span>3 · Solución</span><span>«Lo buscó debajo de la cama y en la nieve. Entonces, tuvo una idea: pedir ayuda a su amiga la foca».</span></li>
-          <li><span>4 · Final</span><span>«Al final, lo encontraron en la cabeza del muñeco de nieve. Y el pingüino se rio mucho».</span></li>
-        </ol>
+      <div class="dos-columnas">
+        <div class="caja caja--azul">
+          <h2>Cómo modelar una historia</h2>
+          <p>Cuenta en voz alta y di a la vez lo que piensas, señalando cada carta en la tira:</p>
+          <ul class="modelo">
+            <li><strong>Giro y pienso.</strong> «Ha salido un pingüino, una cabaña y “pierde su gorro”. Pongo las cartas».</li>
+            <li><strong>1 · Inicio.</strong> «Había una vez un pingüino que vivía en una cabaña».</li>
+            <li><strong>2 · Problema.</strong> «De repente, perdió su gorro. ¡Qué frío! Estaba muy triste».</li>
+            <li><strong>3 · Solución.</strong> «Lo buscó en la nieve. Entonces, tuvo una idea: pedir ayuda a la foca».</li>
+            <li><strong>4 · Final.</strong> «Al final, lo encontraron en la cabeza del muñeco de nieve. ¡Qué risa!».</li>
+          </ul>
+          <p>
+            Usa siempre las mismas palabras para unir. Después, cuéntala con un error a propósito, como «Había una vez una
+            cueva…», y deja que te corrijan.
+          </p>
+        </div>
+        <div class="caja caja--amarilla">
+          <h2>Preguntas guía</h2>
+          <ul class="modelo">
+            <li><strong>1 · Inicio.</strong> ¿Quién es? ¿Cómo es? ¿Dónde está? ¿Cuándo pasa?</li>
+            <li><strong>2 · Problema.</strong> ¿Qué le pasa? ¿Cómo se siente? ¿Por qué?</li>
+            <li><strong>3 · Solución.</strong> ¿Qué hace? ¿Quién le ayuda? ¿Qué pasa después?</li>
+            <li><strong>4 · Final.</strong> ¿Cómo acaba? ¿Cómo se siente ahora?</li>
+          </ul>
+          <p>
+            Si no responde, dale dos opciones: «¿Lo buscó en la cueva o en la playa?». Y espera: cuenta hasta cinco en
+            silencio antes de ayudar.
+          </p>
+        </div>
       </div>
-      <p>
-        Usa siempre las mismas palabras para unir. Después, cuéntala otra vez con un error a propósito, como «Había una vez
-        una cueva…», y deja que te corrijan. Con el tiempo, el modelo lo dan ellos.
-      </p>
-
-      <h2>Preguntas guía</h2>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col" style="width: 31mm">Parte</th>
-            <th scope="col">Preguntas</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">1 · Inicio</th><td>¿Quién es? ¿Cómo es? ¿Dónde está? ¿Cuándo pasa?</td></tr>
-          <tr><th scope="row">2 · Problema</th><td>¿Qué le pasa? ¿Cómo se siente? ¿Por qué?</td></tr>
-          <tr><th scope="row">3 · Solución</th><td>¿Qué hace? ¿Quién le ayuda? ¿Qué pasa después?</td></tr>
-          <tr><th scope="row">4 · Final</th><td>¿Cómo acaba? ¿Cómo se siente ahora?</td></tr>
-        </tbody>
-      </table>
-      <p>
-        Si no responde, dale dos opciones: «¿Lo buscó en la cueva o en la playa?». Y espera: cuenta hasta cinco en silencio
-        antes de ayudar.
-      </p>
 
       <h2>TDL: repite bien lo que dice</h2>
       <p>
         El trastorno del desarrollo del lenguaje (TDL) es el nombre que recomienda un consenso internacional para las
-        dificultades del lenguaje que afectan al día a día y no se asocian a otra causa conocida (Bishop y otros, 2017).
-        Cuando una frase le sale con errores, no le corrijas de forma directa. Repítela bien justo después, con su misma idea,
-        y sigue con la historia. A esta ayuda se le llama reformulación. Una revisión de estudios con niños y niñas con
-        dificultades del lenguaje la encontró útil para su gramática, aunque las pruebas aún son limitadas. Sus autores
-        explican que ayuda que la frase bien dicha llegue justo después de la suya y que no tenga que repetirla (Cleave y
-        otros, 2015).
+        dificultades del lenguaje que afectan al día a día y no se asocian a otra causa conocida (Bishop y otros, 2017). Si
+        una frase le sale con errores, no le corrijas de forma directa: repítela bien justo después, con su misma idea, y
+        sigue con la historia. A esto se le llama reformular. Una revisión de estudios con niños y niñas con dificultades del
+        lenguaje lo encontró útil para su gramática, aunque las pruebas aún son limitadas. Ayuda que la frase bien dicha llegue
+        justo después de la suya y que no tenga que repetirla (Cleave y otros, 2015).
       </p>
       <table class="reformular">
         <thead>
@@ -2150,9 +2124,7 @@
         </thead>
         <tbody>
           <tr><td>«Se ha rompido el trineo».</td><td>«¡Oh, no! Se ha roto el trineo. ¿Y ahora qué hacen?»</td></tr>
-          <tr><td>«La ardilla tene miedo».</td><td>«Sí, la ardilla tiene miedo. ¿Por qué tiene miedo?»</td></tr>
           <tr><td>«Oso cueva».</td><td>«El oso está en la cueva. ¿Y qué le pasa?»</td></tr>
-          <tr><td>«El pingüino perdió el gorro y busca y no está».</td><td>«¡Vaya! El pingüino perdió su gorro. Lo buscó y no lo encontró».</td></tr>
         </tbody>
       </table>
       <p>
@@ -2165,16 +2137,16 @@
           <h2>Con alumnado con TEA</h2>
           <ul>
             <li>
-              Cuenta tú primero, con la misma estructura y las mismas palabras. El modelado y los apoyos visuales están entre
-              las prácticas con más respaldo para el alumnado con autismo (Hume y otros, 2021).
+              Cuenta tú primero, siempre con la misma estructura. El modelado y los apoyos visuales están entre las prácticas
+              con más respaldo con alumnado con autismo (Hume y otros, 2021).
             </li>
             <li>
               Pregunta qué siente y qué piensa el personaje, y por qué. Enseñar ese lenguaje mejoró las historias de cinco
               niños y niñas con autismo de 8 a 12 años (Gillam y otros, 2015).
             </li>
             <li>
-              Retira las ayudas poco a poco: primero la tira, después las cartas. Así lo hicieron con tres niños con autismo de
-              6 a 8 años, que mejoraron sus historias (Petersen y otros, 2014).
+              Retira las ayudas poco a poco: primero la tira, después las cartas. Así mejoraron sus historias tres niños con
+              autismo de 6 a 8 años (Petersen y otros, 2014).
             </li>
             <li>Si el azar le inquieta, que elija las cartas boca arriba. Un problema que le asusta se quita del montón.</li>
           </ul>
@@ -2183,70 +2155,53 @@
           <h2>Con alumnado con discapacidad intelectual</h2>
           <ul>
             <li>Empieza con dos ruletas, quién y dónde, y una frase: «Había una vez un oso en una cueva».</li>
-            <li>Usa las cartas boca arriba y dale dos para elegir.</li>
+            <li>Cartas boca arriba y dos para elegir. Puede señalar o usar su sistema de comunicación.</li>
             <li>Contad la misma historia varios días y representadla con muñecos o con objetos.</li>
             <li>
               Hay pocos estudios. Con cuatro chicas con síndrome de Down de 10 a 15 años, contar con apoyos visuales fue
               viable y los avances fueron pequeños (Finestack y otros, 2017).
             </li>
-            <li>Puede responder señalando o con su sistema de comunicación.</li>
           </ul>
         </div>
       </div>
 
-      <h2>Tres niveles para toda la clase</h2>
+      <h2>Tres niveles y la escritura</h2>
       <p>
-        El Diseño Universal para el Aprendizaje (DUA) propone dar varias formas de expresarse, ayudar a planificar y a revisar
-        y ajustar el reto y el apoyo (CAST, 2024, consideraciones 5.1, 6.3, 6.4 y 8.2). Todo el grupo juega a lo mismo y cambia
-        la ayuda. Nivel 1, círculo: lo cuenta con la tira. Nivel 2, cuadrado: tres frases con palabras para unir, dichas,
-        escritas o dictadas. Nivel 3, rombo: escribe con el plan y revisa con la lista. Proponemos subir de nivel cuando le
-        salga sin ayuda dos o tres veces seguidas: ajústalo a cada peque.
-      </p>
-
-      <h2>Escribir: planificar y revisar</h2>
-      <p>
-        En un metaanálisis de estudios de Primaria, enseñar la estructura de los textos, preparar las ideas antes de escribir y
-        escribir con ayuda de un compañero mejoraron la calidad de los textos (Graham y otros, 2012). Con alumnado con
-        dificultades de aprendizaje también ayudaron dictar a un adulto y ponerse metas (Gillespie y Graham, 2014). Y en
-        Primaria, revisar con la opinión del docente, de un compañero o la propia mejoró los textos (Graham, Hebert y Harris,
-        2015). Por eso la hoja del nivel 3 lleva una lista para revisar y la autoevaluación termina con un reto.
+        El Diseño Universal para el Aprendizaje (DUA) propone varias formas de expresarse, ayudar a planificar y a revisar, y
+        ajustar el reto y el apoyo (CAST, 2024, consideraciones 5.1, 6.3, 6.4 y 8.2). Todo el grupo juega a lo mismo y cambia
+        la ayuda. Proponemos subir de nivel cuando le salga sin ayuda dos o tres veces seguidas. En Primaria, los textos
+        mejoraron al enseñar su estructura, preparar las ideas antes y escribir con un compañero (Graham y otros, 2012), y al
+        revisarlos con la opinión del docente, de un compañero o la propia (Graham, Hebert y Harris, 2015). Con alumnado con
+        dificultades de aprendizaje también ayudaron dictar a un adulto y ponerse metas (Gillespie y Graham, 2014).
       </p>
 
       <h2>Qué dice el currículo de la Región de Murcia</h2>
       <ul>
         <li>
-          <strong>Infantil.</strong> Un criterio de evaluación del segundo ciclo es «Evocar y expresar espontáneamente ideas a
-          través del relato oral» (Decreto 196/2022, pág. 33107). El decreto recuerda que «la adquisición del código escrito no
-          es un objetivo que se deba alcanzar en esta etapa» (pág. 33099). A los 5 años, la historia se cuenta, se dibuja o se
-          dicta.
+          <strong>Infantil.</strong> «Evocar y expresar espontáneamente ideas a través del relato oral» es un criterio de
+          evaluación del segundo ciclo (Decreto 196/2022, pág. 33107). Y «la adquisición del código escrito no es un objetivo
+          que se deba alcanzar en esta etapa» (pág. 33099): a los 5 años, la historia se cuenta, se dibuja o se dicta.
         </li>
         <li>
-          <strong>Primaria, primer ciclo.</strong> Producir textos orales «con planificación acompañada» (criterio 3.1) y
-          escribir «ajustándose a modelos dados», con estrategias de «planificación, textualización y revisión» (criterio
-          5.1; Decreto 209/2022, pág. 40015). Entre los saberes están la narración y el plan de escritura (pág. 40017), y los
-          conectores temporales (pág. 40018).
+          <strong>Primaria, primer ciclo.</strong> Textos orales «con planificación acompañada» (criterio 3.1) y escritos
+          «ajustándose a modelos dados», con estrategias de «planificación, textualización y revisión» (criterio 5.1;
+          Decreto 209/2022, pág. 40015). Entre los saberes, la narración y el plan de escritura (pág. 40017) y los conectores
+          temporales (pág. 40018).
         </li>
         <li>
           <strong>Segundo ciclo.</strong> Los mismos criterios, con más autonomía (pág. 40019), y «Revisar y mejorar los
-          textos propios y ajenos» (criterio 9.2, pág. 40020). Para el decreto, escribir implica planificar a partir de
-          modelos o pautas, revisar y editar: «Todo ello debe trabajarse en clase» (pág. 40011).
+          textos propios y ajenos» (criterio 9.2, pág. 40020). Escribir implica planificar, revisar y editar: «Todo ello debe
+          trabajarse en clase» (pág. 40011).
         </li>
       </ul>
 
-      <h2>Seguridad</h2>
+      <h2>Seguridad, lo que no sabemos y otros materiales</h2>
       <p>
-        El encuadernador es una pieza pequeña y el punzón pincha. Monta tú las ruletas. Con quien todavía se lleva cosas a la
-        boca, jugad con las cartas o con un dado grande.
-      </p>
-
-      <h2>Lo que no sabemos y otros materiales</h2>
-      <p>
-        Estas ruletas, como conjunto, no se han estudiado: juntan apoyos con respaldo. Una revisión de 40 estudios encontró que
-        las intervenciones para contar historias mejoran cómo las cuenta y cómo las entiende el alumnado de Infantil y
-        Primaria, y que muchas usan apoyos visuales y enseñan las partes de la historia (Pico y otros, 2021). Lo que no lleva
-        fuente en esta guía es propuesta de IdEducando. En Infantil de 3 y 4 años, la bandeja 7 del
+        El encuadernador es una pieza pequeña y el punzón pincha: monta tú las ruletas y, con quien todavía se lleva cosas a la
+        boca, jugad con las cartas o con un dado grande. Las ruletas, como conjunto, no se han estudiado: lo que no lleva
+        fuente en esta guía es propuesta de IdEducando. En Infantil de 3 y 4 años, el
         <a href="https://www.ideducando.es/material-gratuito/rincon-lenguaje-invierno/">Rincón de lenguaje de invierno</a>
-        tiene una ruleta más sencilla. Los
+        tiene una ruleta más sencilla, y los
         <a href="https://www.ideducando.es/material-gratuito/dialogos-para-completar/">Diálogos para completar</a> trabajan
         la conversación con el mismo vocabulario.
       </p>
@@ -2271,6 +2226,7 @@
         <li>Contad la historia con estas palabras: «Había una vez…», «De repente…» y «Al final…».</li>
         <li>Haced preguntas: ¿Cómo se siente? ¿Qué hace? ¿Quién le ayuda?</li>
         <li>Si os apetece, dibujadla o escribidla juntos: él o ella lo dice y vosotros lo escribís.</li>
+        <li>Si trae a casa su hoja «Mis tres frases» o «Mi historia», pedidle que os la lea y decidle qué os ha gustado.</li>
       </ol>
 
       <h2><img src="pictogramas/9692.png" alt="" />Si se equivoca al hablar</h2>
@@ -2345,8 +2301,7 @@
         <li>
           Decreto n.º 209/2022, de 17 de noviembre, por el que se establece la ordenación y el currículo de la Educación
           Primaria en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 267, de 18
-          de noviembre de 2022. Lengua Castellana y Literatura: págs. 40007, 40008, 40010, 40011, 40015, 40017, 40018, 40019 y
-          40020.
+          de noviembre de 2022. Lengua Castellana y Literatura, págs. 40006 a 40027.
         </li>
         <li>
           Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la
@@ -2358,23 +2313,23 @@
       <h2>Contar historias</h2>
       <ul class="referencias">
         <li>
-          Pico, D. L., Hessling Prahl, A., Biel, C. H., Peterson, A. K., Biel, E. J., Woods, C. y Contesse, V. A. (2021).
+          Pico, D. L. y otros (2021).
           Interventions designed to improve narrative language in school-age children: A systematic review with
           meta-analyses. <em>Language, Speech, and Hearing Services in Schools</em>, 52(4), 1109-1126. DOI:
           10.1044/2021_LSHSS-20-00160
         </li>
         <li>
-          Petersen, D. B., Brown, C. L., Ukrainetz, T. A., Wise, C., Spencer, T. D. y Zebre, J. (2014). Systematic
+          Petersen, D. B. y otros (2014). Systematic
           individualized narrative language intervention on the personal narratives of children with autism. <em>Language,
           Speech, and Hearing Services in Schools</em>, 45(1), 67-86. DOI: 10.1044/2013_LSHSS-12-0099
         </li>
         <li>
-          Gillam, S. L., Hartzheim, D., Studenka, B., Simonsmeier, V. y Gillam, R. (2015). Narrative intervention for children
+          Gillam, S. L. y otros (2015). Narrative intervention for children
           with autism spectrum disorder (ASD). <em>Journal of Speech, Language, and Hearing Research</em>, 58(3), 920-933. DOI:
           10.1044/2015_JSLHR-L-14-0295
         </li>
         <li>
-          Finestack, L., O'Brien, K. H., Hyppa-Martin, J. y Lyrek, K. A. (2017). The evaluation of a personal narrative
+          Finestack, L. y otros (2017). The evaluation of a personal narrative
           language intervention for school-age children with Down syndrome. <em>American Journal on Intellectual and
           Developmental Disabilities</em>, 122(4), 310-332. DOI: 10.1352/1944-7558-122.4.310
         </li>
@@ -2388,12 +2343,12 @@
       <h2>Lenguaje y TDL</h2>
       <ul class="referencias">
         <li>
-          Bishop, D. V. M., Snowling, M. J., Thompson, P. A., Greenhalgh, T. y CATALISE-2 consortium (2017). Phase 2 of
+          Bishop, D. V. M. y otros (2017). Phase 2 of
           CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development:
           Terminology. <em>Journal of Child Psychology and Psychiatry</em>, 58(10), 1068-1080. DOI: 10.1111/jcpp.12721
         </li>
         <li>
-          Cleave, P. L., Becker, S. D., Curran, M. K., Owen Van Horne, A. J. y Fey, M. E. (2015). The efficacy of recasts in
+          Cleave, P. L. y otros (2015). The efficacy of recasts in
           language intervention: a systematic review and meta-analysis. <em>American Journal of Speech-Language
           Pathology</em>, 24(2), 237-255. DOI: 10.1044/2015_AJSLP-14-0105
         </li>
@@ -2402,7 +2357,7 @@
       <h2>Escribir y revisar</h2>
       <ul class="referencias">
         <li>
-          Graham, S., McKeown, D., Kiuhara, S. y Harris, K. R. (2012). A meta-analysis of writing instruction for students in
+          Graham, S. y otros (2012). A meta-analysis of writing instruction for students in
           the elementary grades. <em>Journal of Educational Psychology</em>, 104(4), 879-896. DOI: 10.1037/a0029185
         </li>
         <li>
@@ -2421,12 +2376,12 @@
 
       <h2>Pictogramas, dibujos y licencia</h2>
       <p>
-        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
-        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
-        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
-        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las ruletas, las flechas, los
-        copos y el diseño de las cartas, las tiras y las hojas son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y
-        adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia.
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa, que pide citar este
+        texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao
+        para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con pictogramas de
+        ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las ruletas, las flechas, los copos y el diseño
+        de las hojas son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines
+        comerciales y con la misma licencia.
       </p>
     </section>
 
@@ -2436,6 +2391,7 @@
       // actualizarlos aquí y en «Qué imprimir» de la ficha.
       // ---------------------------------------------------------------------
       const PAGINAS = {
+        vistazo: 3,
         quien: 4,
         donde: 5,
         que: 6,
@@ -2651,7 +2607,7 @@
       }
 
       // e: tamaño (1 en la hoja de recortar). La de la portada es decorativa y no lleva la línea de corte.
-      function ruleta(r, e = 1) {
+      function ruleta(r, e = 1, hoja = true) {
         const colores = COLORES[r.color];
         const casillas = r.opciones
           .map(
@@ -2659,8 +2615,8 @@
               `<li style="transform:rotate(${i * 45}deg)">${picto(p)}${marca(extra)}<p class="ruleta__texto">${texto}</p><span class="ruleta__num" aria-hidden="true">${i + 1}</span></li>`,
           )
           .join('');
-        const etiqueta = e === 1 ? ` aria-label="Ruleta ${r.pregunta} ${r.nombre.toLowerCase()}, con ocho casillas"` : '';
-        return `<div class="ruleta c-${r.color}" style="--e:${e}">${svgRuleta(colores, e === 1)}<ol class="ruleta__opciones"${etiqueta}>${casillas}</ol></div>`;
+        const etiqueta = hoja ? ` aria-label="Ruleta ${r.pregunta} ${r.nombre.toLowerCase()}, con ocho casillas"` : '';
+        return `<div class="ruleta c-${r.color}" style="--e:${e}">${svgRuleta(colores, hoja)}<ol class="ruleta__opciones"${etiqueta}>${casillas}</ol></div>`;
       }
 
       // La flecha: un círculo con un copo y una punta. Gira sobre el encuadernador y señala una casilla.
@@ -2683,15 +2639,15 @@
               <div><p class="antetitulo">Ruleta ${r.numero} de 3 · Para recortar</p><h1>${r.pregunta} ${r.nombre}</h1></div>
               <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">
             </div>
-            ${ruleta(r)}
+            ${ruleta(r, 0.97)}
             <div class="ruleta-pie">
-              <div class="flecha-pieza">${flecha()}<p>Flecha de la ruleta ${r.numero}</p></div>
+              <div class="flecha-pieza">${flecha()}<p>Flecha ${r.numero}</p></div>
               <div>
                 <h2>Cómo se monta</h2>
                 <ol class="montar">
-                  <li>Recorta la ruleta y su flecha por la línea de puntos. Plastifícalas y recórtalas otra vez, con 3 mm de plástico.</li>
-                  <li>Con un punzón, haz un agujero en la cruz del centro de la ruleta y en la de la flecha. Agranda un poco el de la flecha.</li>
-                  <li>Pasa un encuadernador por la flecha y por la ruleta. Abre las patas por detrás sin apretar y tápalas con cinta.</li>
+                  <li>Recorta la ruleta y la flecha, plastifícalas y recórtalas con 3 mm de plástico.</li>
+                  <li>Agujerea con un punzón las dos cruces. Agranda un poco el agujero de la flecha.</li>
+                  <li>Une la flecha a la ruleta con un encuadernador. Abre sus patas por detrás sin apretar y tápalas con cinta.</li>
                 </ol>
                 <p class="sin-encuadernador"><strong>Sin encuadernador:</strong> una carta boca abajo del montón de ${r.montones} (página ${r.numero === 3 ? PAGINAS.cartas2 : PAGINAS.cartas1}), o un dado: avanza un botón tantas casillas como puntos.</p>
               </div>
@@ -2766,7 +2722,7 @@
             <h2 class="plan__cab"><b>${p.n}</b>${p.nombre}</h2>
             <div class="plan__principal"><div>${p.principal[0].map((n) => picto(n)).join('')}</div><p>${p.principal[1]}</p></div>
             <ul class="plan__preguntas">${p.preguntas.map(([n, t]) => `<li>${picto(n)}<span>${t}</span></li>`).join('')}</ul>
-            <div class="plan__notas"><p>Palabras clave o dibujo</p><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="plan__notas"><p>Palabras clave o dibujo</p><span></span><span></span><span></span><span></span></div>
           </li>`,
       ).join('');
 
@@ -2794,7 +2750,7 @@
       document.getElementById('miniplan').innerHTML = PARTES.map(
         (p) => `<li class="c-${p.color}"><p><span class="marca-parte">${p.n}</span>${p.nombre}</p><span class="r"></span><span class="r"></span></li>`,
       ).join('');
-      document.getElementById('renglones-historia').innerHTML = '<span></span>'.repeat(11);
+      document.getElementById('renglones-historia').innerHTML = '<span></span>'.repeat(10);
       document.getElementById('revisar').innerHTML = REVISAR.map(
         ([p, t]) => `<li><span class="casilla"></span>${imagen(p)}<span>${t}</span></li>`,
       ).join('');
@@ -2863,19 +2819,18 @@
           // El eje de la flecha (15,5 mm desde arriba y desde la izquierda de su dibujo) va en el centro de la ruleta.
           const sitio = f1(d / 2 - 15.5 * e);
           return `<div style="left:${x}mm;top:${y}mm;width:${d}mm;height:${d}mm;transform:rotate(${giro}deg)">
-              ${ruleta(RULETAS[i], f1(e))}${flecha(false).replace('<svg ', `<svg style="left:${sitio}mm;top:${sitio}mm;width:${fl}mm;height:${alto}mm" `)}
+              ${ruleta(RULETAS[i], f1(e), false)}${flecha(false).replace('<svg ', `<svg style="left:${sitio}mm;top:${sitio}mm;width:${fl}mm;height:${alto}mm" `)}
             </div>`;
         }).join('') +
-        `<div class="bocadillo" style="left:38mm;top:127mm"><p>«Había una vez un pingüino en una cabaña. De repente, pierde su gorro…»</p>${svg(`<path d="M2 0L14 0L4 20Z" fill="#fff" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/><path d="M1 0H15" stroke="#fff" stroke-width="4"/>`, '', '0 0 16 21')}</div>`;
+        `<div class="bocadillo" style="left:38mm;top:128mm"><p>«Había una vez un pingüino en una cabaña. De repente, pierde su gorro…»</p>${svg(`<path d="M2 0L14 0L4 20Z" fill="#fff" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/><path d="M1 0H15" stroke="#fff" stroke-width="4"/>`, '', '0 0 16 21')}</div>`;
 
       const COPOS = [
-        [112, 104, 9, '#2f6fd6'],
+        [100, 172, 8, '#2f6fd6'],
         [186, 200, 10, '#8c4fb8'],
         [14, 242, 9, '#8c4fb8'],
         [64, 250, 12, '#2f6fd6'],
         [182, 238, 8, M],
         [96, 166, 7, M],
-        [32, 112, 7, '#8c4fb8'],
       ];
       document.getElementById('copos-portada').innerHTML = COPOS.map(
         ([x, y, t, color]) =>

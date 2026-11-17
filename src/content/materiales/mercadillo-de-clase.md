@@ -10,7 +10,7 @@ formato: "PDF imprimible (A4)"
 paginas: 17
 archivo: /descargas/mercadillo-de-clase.pdf
 portada: /portadas/mercadillo-de-clase.webp
-portada_alt: "Portada del material: un puesto de mercadillo con toldo de rayas de colores, del que cuelgan tres etiquetas de precio con pictogramas, la manzana a 1 €, la magdalena a 0,50 € y la pelota a 2 €, y en el mostrador monedas y un billete de juego con la palabra «JUEGO»"
+portada_alt: "Portada del material: el título «El mercadillo de clase» y un puesto con toldo de rayas de colores del que cuelgan tres etiquetas de precio con pictogramas, la manzana a 1 €, la magdalena a 0,50 € y la pelota a 2 €; en el mostrador, monedas y billetes de juego con la palabra «JUEGO»"
 vistas: [1, 4, 7, 9, 10, 12]
 tiempo: "2 horas para imprimir, recortar y plastificar, y 10 minutos para montar los puestos"
 necesitas:
@@ -41,7 +41,7 @@ cuidados:
   - "En la caja, usa solo rotulador de pizarra blanca y bórrala con el paño al terminar."
   - "Al recoger, cada tipo de pieza en su sobre: así se cuentan rápido y no se pierden."
 fuentes:
-  - "Xin, Y. P., Grasso, E., Dipipi-Hoy, C. M. y Jitendra, A. (2005). The effects of purchasing skill instruction for individuals with developmental disabilities: A meta-analysis. Exceptional Children, 71(4), 379-400. Registro ERIC EJ697249"
+  - "Xin, Y. P., Grasso, E., Dipipi-Hoy, C. M. y Jitendra, A. (2005). The effects of purchasing skill instruction for individuals with developmental disabilities: A meta-analysis. Exceptional Children, 71(4), 379-400. eric.ed.gov, registro EJ697249"
   - "Browder, D. M., Spooner, F., Ahlgrim-Delzell, L., Harris, A. A. y Wakeman, S. (2008). A meta-analysis on teaching mathematics to students with significant cognitive disabilities. Exceptional Children, 74(4), 407-432. DOI: 10.1177/001440290807400401"
   - "Spooner, F., Root, J. R., Saunders, A. F. y Browder, D. M. (2019). An updated evidence-based practice review on teaching mathematics to students with moderate and severe developmental disabilities. Remedial and Special Education, 40(3), 150-165. DOI: 10.1177/0741932517751055"
   - "Bates, P. E., Cuvo, T., Miner, C. A. y Korabek, C. A. (2001). Simulated and community-based instruction involving persons with mild and moderate mental retardation. Research in Developmental Disabilities, 22(2), 95-115. DOI: 10.1016/S0891-4222(01)00060-9"
@@ -103,7 +103,7 @@ El mercadillo, como conjunto, no se ha estudiado: junta apoyos con respaldo, y l
 
 ## El dinero de juego
 
-Las monedas y los billetes son de diseño propio y de una sola cara, con la palabra «JUEGO» y sin símbolos de la Unión Europea. Las monedas miden más de una vez y media las de verdad, y los billetes, menos de tres cuartos. Así lo piden la Comisión Europea para las fichas de material blando y el Banco Central Europeo para las reproducciones de billetes, para que nadie los confunda con euros.
+Las monedas y los billetes son de diseño propio y de una sola cara, con la palabra «JUEGO» y sin símbolos de la Unión Europea. Las monedas miden más de una vez y media las de verdad, y los billetes, menos de tres cuartos: son los tamaños con los que la Comisión Europea y el Banco Central Europeo permiten reproducir monedas y billetes en euros, porque así nadie los confunde con los de verdad.
 
 ## Ideas para adaptarlo
 

@@ -82,7 +82,7 @@ Cada nivel tiene tres grupos de cuatro parejas. Dentro de cada grupo, las frases
 ## Cómo usarlo
 
 1. Empieza con un grupo de cuatro parejas de su nivel en el tablero.
-2. Primero lee la frase entera, tocando el circulito de cada palabra. Después busca su dibujo.
+2. Primero lee la frase entera, con el dedo en la rayita de cada palabra. Después busca su dibujo.
 3. Lo pone al lado, da la vuelta al dibujo y mira el símbolo. Si no es el mismo, vuelve a leer la frase.
 4. Pregúntale qué palabra le ha dicho cuál era el dibujo: «¿Cómo lo sabes?».
 5. Apunta en el registro qué ayuda ha necesitado. Cuando acierte el grupo solo, prueba con el siguiente.

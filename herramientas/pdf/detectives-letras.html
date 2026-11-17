@@ -495,7 +495,7 @@
         align-items: center;
         gap: 2.4mm;
         margin: 0;
-        padding: 1mm 2.4mm;
+        padding: 0.8mm 2.4mm;
         border: 0.4mm solid var(--linea);
         border-left: 1.8mm solid var(--c);
         border-radius: 2.6mm;
@@ -529,7 +529,7 @@
         --gs: 5mm;
         --gw: 8mm;
         display: grid;
-        row-gap: 2.6mm;
+        row-gap: 2.2mm;
         justify-content: start;
       }
 
@@ -656,7 +656,7 @@
 
       .casos {
         display: grid;
-        gap: 3.6mm;
+        gap: 3mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -665,7 +665,7 @@
       .caso {
         position: relative;
         margin: 0;
-        padding: 11.5mm 4mm 3.4mm;
+        padding: 11mm 4mm 2.8mm;
         border: 0.5mm solid var(--c);
         border-radius: 3.4mm;
         background: #fff;
@@ -726,16 +726,16 @@
       /* Nivel 1: la pista, como una foto sujeta con un clip */
       .caso--pista .caso__cuerpo {
         display: grid;
-        grid-template-columns: 38mm minmax(0, 1fr);
+        grid-template-columns: 34mm minmax(0, 1fr);
         align-items: center;
-        gap: 9mm;
+        gap: 10mm;
       }
 
       .polaroid {
         position: relative;
         margin: 0 0 0 1mm;
-        width: 35mm;
-        padding: 2mm 2mm 0;
+        width: 32mm;
+        padding: 1.8mm 1.8mm 0;
         border: 0.35mm solid #c9cfe0;
         background: #fff;
         box-shadow: 0 0.8mm 1.8mm rgb(30 43 85 / 0.22);
@@ -745,8 +745,8 @@
 
       .polaroid img {
         display: block;
-        width: 31mm;
-        height: 29mm;
+        width: 28.4mm;
+        height: 25mm;
         object-fit: contain;
       }
 
@@ -1284,9 +1284,9 @@
       /* ---------- Mis casos resueltos ---------- */
       .registro__nivel {
         display: grid;
-        grid-template-columns: 22mm minmax(0, 1fr);
+        grid-template-columns: 18mm minmax(0, 1fr) 17mm;
         align-items: center;
-        gap: 4mm;
+        gap: 3mm;
         margin: 0 0 3mm;
         padding: 2.4mm 3mm;
         border: 0.45mm solid var(--c);
@@ -1294,20 +1294,24 @@
         background: var(--t);
       }
 
-      .registro__nivel h2 {
-        margin: 0;
+      .registro__marca {
         display: grid;
         justify-items: center;
-        gap: 1.6mm;
-        font-size: 14pt;
+        gap: 1.4mm;
+      }
+
+      .registro__marca h2 {
+        margin: 0;
+        font-size: 13pt;
         line-height: 1;
         text-align: center;
+        white-space: nowrap;
       }
 
       .carpetas {
         display: grid;
-        grid-template-columns: repeat(8, 17.5mm);
-        gap: 2.2mm;
+        grid-template-columns: repeat(8, 15mm);
+        gap: 1.6mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1315,36 +1319,26 @@
 
       .carpetas li {
         position: relative;
-        width: 17.5mm;
-        height: 16mm;
+        width: 15mm;
+        height: 14mm;
         margin: 0;
       }
 
       .carpetas svg {
-        width: 17.5mm;
-        height: 16mm;
+        width: 15mm;
+        height: 14mm;
       }
 
       .carpetas span {
         position: absolute;
         left: 0;
         right: 0;
-        top: 5.4mm;
+        top: 4.4mm;
         text-align: center;
         font-family: var(--titulos);
         font-weight: 700;
         font-size: 18pt;
         line-height: 1;
-      }
-
-      .placa {
-        display: grid;
-        grid-template-columns: 17mm minmax(0, 1fr);
-        align-items: center;
-        gap: 2.4mm;
-        font-weight: 700;
-        font-size: 18pt;
-        line-height: 1.05;
       }
 
       .placa svg {
@@ -1354,9 +1348,62 @@
 
       .final-registro {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
         gap: 4mm;
         margin: 0 0 3mm;
+      }
+
+      .caja-final {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        padding: 2.4mm 3mm;
+        border: 0.45mm solid var(--c);
+        border-radius: 3.4mm;
+        background: var(--t);
+      }
+
+      .caja-final svg {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .caja-final h2 {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .caja-final--linea {
+        grid-template-columns: minmax(0, 1fr);
+        align-content: space-between;
+      }
+
+      .caja-final--linea p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .caja-final--linea span {
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .memoria {
+        padding: 2.4mm 3mm 3mm;
+        border: 0.45mm solid var(--c);
+        border-radius: 3.4mm;
+        background: var(--t);
+      }
+
+      .memoria p {
+        margin: 0 0 2mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
       }
 
       .se-de-memoria {
@@ -1503,10 +1550,10 @@
         grid-template-rows: auto auto minmax(0, 1fr);
         justify-items: center;
         align-items: center;
-        gap: 1.4mm;
-        height: 40mm;
+        gap: 1.2mm;
+        height: 35mm;
         margin: 0;
-        padding: 2.6mm 2mm 2mm;
+        padding: 2.2mm 1.6mm 1.8mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 3mm;
         background: #fff;
@@ -1517,7 +1564,9 @@
       }
 
       .etiqueta .sello {
-        font-size: 12pt;
+        font-size: 11pt;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
       }
 
       /* ---------- Diploma (dos por hoja) ---------- */
@@ -1649,30 +1698,6 @@
 
       .guia .dos-columnas .caja {
         margin: 0;
-      }
-
-      .nombres {
-        display: grid;
-        grid-template-columns: repeat(9, minmax(0, 1fr));
-        gap: 1mm 1.4mm;
-        margin: 1mm 0 2mm;
-        padding: 0;
-        list-style: none;
-      }
-
-      .nombres li {
-        display: grid;
-        grid-template-columns: 6.5mm minmax(0, 1fr);
-        align-items: center;
-        gap: 0.8mm;
-        margin: 0;
-        font-size: 11pt;
-        line-height: 1.05;
-      }
-
-      .nombres svg {
-        width: 6.5mm;
-        height: 6.5mm;
       }
 
       .nombres b {
@@ -1822,7 +1847,7 @@
         </div>
       </div>
       <div class="escena" id="escena" aria-hidden="true"></div>
-      <div class="pegatina" aria-hidden="true"><div>Tres niveles<b>con</b>solución</div></div>
+      <div class="pegatina" aria-hidden="true"><div>Tres niveles<b>20 casos</b>con solución</div></div>
     </section>
 
     <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
@@ -1836,19 +1861,15 @@
       <h1>De un vistazo</h1>
       <p class="vistazo__intro">
         Detectives de letras es un juego para descifrar mensajes secretos. En la clave, cada letra tiene su dibujo. El peque
-        busca la letra de cada dibujo, la escribe y junta los sonidos para leer el mensaje. Al terminar cada hoja, comprueba
-        la solución por su cuenta. Está pensado para toda la clase de 1.º a 3.º de Primaria, y en especial para el alumnado
-        con dislexia o con trastorno del desarrollo del lenguaje (TDL).
+        busca la letra de cada dibujo, la escribe y junta los sonidos para leer el mensaje. Está pensado para toda la clase de
+        1.º a 3.º de Primaria, y en especial para el alumnado con dislexia o con trastorno del desarrollo del lenguaje (TDL).
       </p>
       <div class="vistazo__fila">
         <div class="caja caja--azul">
           <h2>El truco de la clave</h2>
           <p>Cada dibujo empieza por el sonido de su letra: S de sol, M de mano, P de pez.</p>
           <div class="truco" id="truco"></div>
-          <p>
-            Quien descubre el truco dice el nombre del dibujo, se queda con su primer sonido y escribe la letra. Si nombrar le
-            cuesta, busca el dibujo en la clave y copia su letra. Las dos formas valen.
-          </p>
+          <p>Quien descubre el truco ya no necesita buscar. Si nombrar le cuesta, busca el dibujo en la clave: también vale.</p>
         </div>
         <div class="caja caja--verde">
           <h2>Un caso, en cinco pasos</h2>
@@ -1905,12 +1926,12 @@
          ====================================================================== -->
     <section class="hoja-fichas c-morado">
       <div class="cabeza-hoja">
-        <span class="nv n3 enorme" aria-hidden="true" style="background: var(--morado)">✎</span>
+        <span data-icono="sobreMini" style="width: 15mm; height: 15mm"></span>
         <div>
           <p class="antetitulo">Al revés · Para alguien de la clase</p>
           <h1>Escribe un mensaje secreto</h1>
         </div>
-        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" style="width: 40mm; justify-self: end" />
+        <p class="detective">Detective:<span></span></p>
       </div>
       <ol class="pasos-nino" id="pasos-nino"></ol>
       <ul class="ideas" id="ideas"></ul>
@@ -1951,20 +1972,20 @@
         </div>
         <p class="detective">Detective:<span></span></p>
       </div>
-      <p class="consigna"><img src="pictogramas/6998.png" alt="" /><span data-icono="carpetaMini"></span><span>Cuando compruebes un caso, colorea su carpeta.</span></p>
+      <p class="consigna"><img src="pictogramas/6998.png" alt="" /><span data-icono="carpetaMini"></span><span>Cuando compruebes un caso, colorea su carpeta. Al acabar un nivel, colorea su placa.</span></p>
       <div id="registro-niveles"></div>
       <div class="final-registro">
-        <div class="registro__nivel c-coral" style="margin: 0">
-          <h2><span data-icono="estrellaGrande"></span>Misión final</h2>
-          <p class="placa" style="margin: 0">¡La he resuelto!</p>
+        <div class="caja-final c-coral">
+          <span data-icono="estrellaVacia"></span>
+          <h2>Misión final</h2>
         </div>
-        <div class="registro__nivel c-verde" style="margin: 0; grid-template-columns: minmax(0, 1fr)">
-          <p class="placa" style="grid-template-columns: minmax(0, 1fr); margin: 0">Lo que más me ha gustado:</p>
-          <span style="display: block; height: 9mm; border-bottom: 0.45mm solid var(--marino)"></span>
+        <div class="caja-final caja-final--linea c-verde">
+          <p>Lo que más me ha gustado:</p>
+          <span></span>
         </div>
       </div>
-      <div class="registro__nivel c-azul" style="grid-template-columns: minmax(0, 1fr); margin: 0">
-        <p class="placa" style="grid-template-columns: minmax(0, 1fr); margin: 0">Colorea los dibujos que ya sabes sin mirar la clave.</p>
+      <div class="memoria c-azul">
+        <p>Colorea los dibujos que ya sabes sin mirar la clave.</p>
         <ul class="se-de-memoria" id="se-de-memoria"></ul>
       </div>
       <p class="atribucion">Pictograma: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
@@ -2004,78 +2025,72 @@
       <p class="antetitulo">Guía para el docente</p>
       <h1>Detectives de letras: cómo jugar y cómo ajustarlo</h1>
       <p>
-        En la clave, cada letra tiene un dibujo y cada dibujo empieza por el sonido de su letra. Al descifrar, el peque pasa
-        de los dibujos a las letras y de las letras a los sonidos, y junta los sonidos para leer. Al escribir en clave hace el
-        camino al revés: separa los sonidos de una palabra y busca la letra de cada uno.
+        En la clave, cada letra tiene un dibujo que empieza por su sonido. Al descifrar, el peque pasa de los dibujos a las
+        letras y junta los sonidos para leer. Al escribir en clave hace el camino al revés: separa los sonidos de una palabra y
+        busca la letra de cada uno.
       </p>
 
       <h2>Por qué ayuda</h2>
       <ul>
         <li>
-          <strong>Letras y sonidos, de forma explícita.</strong> El Panel Nacional de Lectura de Estados Unidos (NRP) revisó
-          los estudios sobre la enseñanza sistemática de las relaciones entre letras y sonidos. Ayudó a leer más que otros
-          enfoques, sobre todo si empezaba en los primeros cursos, y también al alumnado con dificultades (NRP, 2000, págs. 2-92
-          a 2-94). La guía del What Works Clearinghouse para los cursos de Infantil a 3.º da evidencia fuerte a unir los
-          sonidos del habla con sus letras y a enseñar a descifrar juntando los sonidos de izquierda a derecha (Foorman y
-          otros, 2016, recomendaciones 2 y 3).
+          <strong>Letras y sonidos, de forma explícita.</strong> Enseñar de forma sistemática las relaciones entre letras y
+          sonidos ayudó a leer más que otros enfoques, sobre todo en los primeros cursos y también con dificultades (National
+          Reading Panel o NRP, 2000, págs. 2-92 a 2-94). Una guía de prácticas para los cursos de Infantil a 3.º da evidencia
+          fuerte a unir los sonidos con sus letras y a descifrar juntando sonidos de izquierda a derecha (Foorman y otros,
+          2016, recomendaciones 2 y 3).
         </li>
         <li>
-          <strong>Conciencia fonológica, con letras.</strong> Trabajar los sonidos dio mejores resultados cuando se hacía con
-          letras: juntar sonidos con letras ayuda a leer, y separarlos ayuda a escribir (NRP, 2000, págs. 2-4 y 2-6). Aquí,
-          descifrar es juntar sonidos y escribir en clave es separarlos.
+          <strong>Conciencia fonológica, con letras.</strong> Trabajar los sonidos funcionó mejor con letras: juntarlos ayuda a
+          leer y separarlos ayuda a escribir (NRP, 2000, págs. 2-4 y 2-6). La misma guía propone presentar cada letra con el
+          dibujo de una palabra conocida que tenga su sonido (Foorman y otros, 2016, pág. 19). La clave lleva esa idea al juego.
         </li>
         <li>
-          <strong>Un dibujo que se recuerda.</strong> La misma guía propone presentar cada letra con el dibujo de una palabra
-          conocida que tenga su sonido (Foorman y otros, 2016, pág. 19). La clave lleva esa idea al juego.
+          <strong>En castellano.</strong> En un estudio europeo, los 40 niños y niñas de 1.º de España leían sin error casi el
+          95 % de las palabras conocidas al acabar el curso (Seymour y otros, 2003). Por eso el juego sirve para afianzar y
+          para quien va a otro ritmo. El currículo espera que en Primaria se adquiera y se consolide el código escrito (Real
+          Decreto 157/2022, anexo II).
         </li>
         <li>
-          <strong>En castellano.</strong> En un estudio con alumnado de trece países europeos, los 40 niños y niñas de 1.º de
-          España leían sin error casi el 95 % de las palabras conocidas al final del curso (Seymour y otros, 2003). Por eso el
-          juego sirve sobre todo para afianzar y para quien va a otro ritmo. El currículo de Primaria espera que en esta etapa
-          se adquiera y se consolide el código escrito (Real Decreto 157/2022, anexo II).
-        </li>
-        <li>
-          <strong>Dislexia.</strong> En castellano, la dislexia se nota sobre todo en la velocidad, más que en los errores
-          (Serrano y Defior, 2008): por eso el juego no lleva reloj. En un metaanálisis de ensayos aleatorizados, la enseñanza
-          de las relaciones entre letras y sonidos fue el único enfoque con efecto probado en la lectura y la escritura del
-          alumnado con dificultades lectoras (Galuschka y otros, 2014).
+          <strong>Dislexia.</strong> En castellano se nota sobre todo en la velocidad lectora (Serrano y Defior, 2008): por
+          eso el juego no lleva reloj. En un metaanálisis de ensayos aleatorizados, enseñar las relaciones entre letras y
+          sonidos fue el único enfoque con efecto probado en el alumnado con dificultades lectoras (Galuschka y otros, 2014).
         </li>
         <li>
           <strong>TDL.</strong> Con 61 niños y niñas de 5 a 7 años con dificultades del lenguaje oral, un programa integrado de
-          conciencia fonológica mejoró su conciencia fonológica y su lectura más que otros apoyos (Gillon, 2000).
+          conciencia fonológica mejoró esa conciencia y su lectura más que otros apoyos (Gillon, 2000).
         </li>
         <li>
-          <strong>Lo que no sabemos.</strong> Este juego, como conjunto, no se ha estudiado: junta apoyos con respaldo. Lo que
-          no lleva fuente en esta guía es propuesta de IdEducando.
+          <strong>Lo que no sabemos.</strong> El juego, como conjunto, no se ha estudiado: junta apoyos con respaldo. Lo que no
+          lleva fuente en esta guía es propuesta de IdEducando.
         </li>
       </ul>
 
       <h2>Cómo se juega</h2>
       <ol>
         <li>
-          <strong>Presenta la clave.</strong> Nombrad juntos cada dibujo y que repitan su primer sonido: /sss/ de sol. No
-          cuentes el truco: deja que lo descubran.
+          <strong>Presenta la clave.</strong> Nombrad juntos cada dibujo y repetid su primer sonido: /sss/ de sol. No cuentes el
+          truco: deja que lo descubran.
         </li>
         <li>
-          <strong>Resuelve un caso en voz alta.</strong> «Un sol: /s/. Busco la ese en la clave y la escribo». Al final, junta
-          los sonidos sin cortarlos: /sssooolll/, sol.
+          <strong>Resuelve un caso en voz alta.</strong> «Un sol: /s/. Busco la ese y la escribo». Después, junta los sonidos
+          sin cortarlos: /sssooolll/, sol.
         </li>
-        <li><strong>Primero, en parejas.</strong> Uno busca en la clave y el otro escribe. Después, cada cual con su hoja y en su nivel.</li>
+        <li><strong>Primero, en parejas:</strong> uno busca en la clave y el otro escribe. Después, cada cual con su hoja y en su nivel.</li>
         <li>
-          <strong>Comprueba solo o sola.</strong> Al terminar la hoja, saca su tarjeta del sobre de soluciones, compara y
-          colorea la carpeta del caso en «Mis casos resueltos».
+          <strong>Comprueba.</strong> Al terminar la hoja, saca su tarjeta del sobre de soluciones, compara y colorea sus
+          carpetas en «Mis casos resueltos».
         </li>
         <li>
-          <strong>Al revés y misión final.</strong> Cuando domine un nivel, que escriba un mensaje secreto para alguien de la
-          clase. Al acabar el nivel 3, la misión final le lleva al sobre de los diplomas.
+          <strong>Al revés y misión final.</strong> Cuando domine un nivel, que escriba un mensaje para alguien de la clase. Al
+          acabar el nivel 3, la misión final le lleva a los diplomas.
         </li>
       </ol>
 
       <h2>La clave, dibujo a dibujo</h2>
-      <ul class="nombres" id="nombres"></ul>
+      <p class="nombres" id="nombres"></p>
       <p>
-        Ojo con algunas letras. La h no suena: en hueso, lo primero que se oye es /ue/. La b y la v suenan igual. La c de casa
-        y la g de gato cambian de sonido delante de e o de i (cena, gente). La k, la w y la x salen poco en castellano.
+        Ojo: la h no suena (en hueso se oye /ue/), la b y la v suenan igual, y la c de casa y la g de gato cambian delante de e
+        o de i (cena, gente). En el nivel 1, la foto es una pista para anticipar la palabra y los arcos marcan las sílabas.
       </p>
     </section>
 
@@ -2083,56 +2098,51 @@
       <h2 style="margin-top: 0">Tres niveles para toda la clase</h2>
       <p>
         El Diseño Universal para el Aprendizaje (DUA) propone apoyar la decodificación, optimizar los desafíos y el apoyo, y
-        fomentar la alegría y el juego (CAST, 2024, consideraciones 2.2, 8.2 y 7.3). Cada nivel tiene su forma, su número y su
-        color:
+        fomentar la alegría y el juego (CAST, 2024, consideraciones 2.2, 8.2 y 7.3).
       </p>
       <ul>
         <li>
-          <strong>Nivel 1, círculo.</strong> Palabras de dos sílabas directas, como lupa o pino, con letras de un solo sonido,
-          un dibujo de pista y un arco bajo cada sílaba.
+          <strong>Nivel 1, círculo:</strong> palabras de dos sílabas directas con letras de un solo sonido, un dibujo de pista y
+          un arco bajo cada sílaba.
         </li>
         <li>
-          <strong>Nivel 2, cuadrado.</strong> Palabras de tres sílabas con ñ, ll, j o sílaba cerrada, como bufanda, para
-          rodear su dibujo entre tres que empiezan igual. Y órdenes cortas con h, gu, rr y z para hacerlas en silencio.
+          <strong>Nivel 2, cuadrado:</strong> palabras de tres sílabas con ñ, ll o j, para rodear su dibujo entre tres que
+          empiezan igual, y órdenes cortas con h, gu, rr y z.
         </li>
-        <li><strong>Nivel 3, rombo.</strong> Cuatro adivinanzas de cinco o seis palabras y la misión final.</li>
+        <li><strong>Nivel 3, rombo:</strong> adivinanzas de cinco o seis palabras y la misión final.</li>
       </ul>
       <p>
-        <strong>Más apoyo:</strong> en pareja, con el nivel 1 más tiempo, tapando en la clave las letras que no hacen falta o
-        leyendo tú el primer dibujo. <strong>Más reto:</strong> sin mirar la clave, inventar casos para la clase o escribir la
-        misión final de otro grupo. Las parejas también ayudan: el DUA propone fomentar la colaboración (consideración 8.3).
+        <strong>Más apoyo:</strong> en pareja, tapando en la clave las letras que sobran o leyendo tú el primer dibujo.
+        <strong>Más reto:</strong> sin mirar la clave, inventar casos para la clase o escribir la misión final de otro grupo.
+        Las parejas fomentan además la colaboración (consideración 8.3).
       </p>
 
       <h2>Ajustes para la dislexia</h2>
       <ul>
-        <li><strong>Letra grande.</strong> Lo que lee el peque va a 18 puntos o más. Si necesita más, imprime en A3 al 141 %.</li>
+        <li><strong>Letra grande:</strong> lo que lee el peque va a 18 puntos o más. Para ampliarlo, imprime en A3 al 141 %.</li>
         <li>
-          <strong>Espacio.</strong> Un caso cada vez: tapa los demás con un folio. Con 74 niños y niñas con dislexia de 8 a 14
-          años, separar más las letras redujo los errores al leer un texto (Zorzi y otros, 2012). Por eso cada dibujo va en
+          <strong>Espacio:</strong> un caso cada vez, con los demás tapados por un folio. Con 74 niños y niñas con dislexia de 8
+          a 14 años, separar más las letras redujo los errores al leer un texto (Zorzi y otros, 2012). Por eso cada dibujo va en
           su casilla.
         </li>
         <li>
-          <strong>Sin prisa.</strong> Sin reloj, sin carreras y sin leer delante de la clase si no quiere. La Región de Murcia
+          <strong>Sin prisa:</strong> sin reloj, sin carreras y sin leer delante de la clase si no quiere. La Región de Murcia
           pide darle más tiempo para hacer y revisar sus tareas y no exigirle que lea como sus compañeros (Resolución de 30 de
           julio de 2019, anexo I).
         </li>
-        <li><strong>El sonido, no el nombre.</strong> Decid /m/ y no «eme»: así se juntan mejor.</li>
-        <li>
-          <strong>Si escribe una letra al revés,</strong> como la b por la d, que la compare con la clave. Aquí cuenta lo que ha
-          descifrado.
-        </li>
-        <li><strong>En pareja.</strong> Murcia propone la enseñanza entre compañeros en las tareas con mucha lectura (anexo I).</li>
+        <li><strong>En pareja:</strong> Murcia propone la enseñanza entre compañeros en las tareas con mucha lectura (anexo I).</li>
+        <li><strong>El sonido, no el nombre:</strong> decid /m/ y no «eme», que así se juntan mejor.</li>
+        <li><strong>Si escribe una letra al revés,</strong> como la b por la d, que la compare con la clave: aquí cuenta lo que descifra.</li>
       </ul>
 
       <h2>Ajustes para el TDL</h2>
       <ul>
         <li>
-          <strong>Primero, las palabras.</strong> Nombra antes los dibujos de la clave y las pistas, y comprueba que los conoce.
-          Murcia propone escribir las palabras nuevas en la pizarra y apoyarse en dibujos (Resolución de 30 de julio de 2019,
-          anexo V).
+          <strong>Primero, las palabras:</strong> nombra antes los dibujos de la clave y las pistas, y comprueba que los conoce.
+          Murcia propone escribir las palabras nuevas en la pizarra y apoyarse en dibujos (anexo V).
         </li>
         <li>
-          <strong>Una indicación cada vez,</strong> corta y con su dibujo. Antes de repetirla, espera: Murcia habla de una pausa
+          <strong>Una indicación cada vez,</strong> corta y con su dibujo. Espera antes de repetirla: Murcia habla de una pausa
           de al menos 10 segundos (anexo V).
         </li>
         <li><strong>Comprueba que entiende,</strong> además de que descifra: que señale el dibujo o haga la orden.</li>
@@ -2140,9 +2150,9 @@
 
       <h2>Qué observar</h2>
       <p>
-        Si nombra los dibujos o los busca en la clave, qué letras le cuestan, si junta los sonidos de corrido o los dice sueltos
-        y si entiende lo que lee. En las adivinanzas vale cualquier respuesta con sentido: un pino también tiene agujas. Apunta
-        lo que veas con iniciales y sin el diagnóstico.
+        Si nombra los dibujos o los busca, qué letras le cuestan, si junta los sonidos de corrido y si entiende lo que lee. En
+        las adivinanzas vale cualquier respuesta con sentido: un pino también tiene agujas. Apúntalo con iniciales y sin el
+        diagnóstico.
       </p>
 
       <div class="dos-columnas">
@@ -2164,7 +2174,7 @@
 
       <h2>Con otros materiales de IdEducando</h2>
       <p>
-        Antes de las letras, los sonidos y las sílabas se pueden trabajar con
+        Antes de las letras, los sonidos y las sílabas se trabajan con
         <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>. Si cuestan las
         sílabas como bla o tre, la
         <a href="https://www.ideducando.es/material-gratuito/cartilla-trabadas/">Cartilla de sílabas trabadas</a>.
@@ -2518,6 +2528,7 @@
           <path d="M28 30 Q32 22 40 21" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
           <path d="M60 60 L88 88" stroke="${M}" stroke-width="12" stroke-linecap="round"/>`,
         estrellaGrande: `<path d="${ESTRELLA}" fill="${AMARILLO}" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>`,
+        estrellaVacia: `<path d="${ESTRELLA}" fill="#fff" stroke="${M}" stroke-width="4.5" stroke-linejoin="round"/>`,
         flechita: `<path d="M10 50 H80 M58 28 L82 50 L58 72" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
         clip: `<path d="M30 92 V22 A14 14 0 0 1 58 22 V78 A8 8 0 0 1 42 78 V30" fill="none" stroke="#8a93ad" stroke-width="7" stroke-linecap="round"/>`,
       };
@@ -2607,7 +2618,7 @@
       const HOJAS = [
         {
           clave: 'n1a', nivel: 1, hoja: 'A', titulo: 'La maleta del detective', tipo: 'pista',
-          consigna: [2474, 2380, 'Escribe la letra de cada dibujo. Después, lee la palabra.'],
+          consigna: [2474, 2380, 'Escribe cada letra y lee la palabra.'],
           casos: [
             { n: 1, mensaje: 'lu-pa', picto: 9927, alt: 'una lupa', solucion: 'lupa' },
             { n: 2, mensaje: 'ma-pa', picto: 24161, alt: 'un mapa', solucion: 'mapa' },
@@ -2617,7 +2628,7 @@
         },
         {
           clave: 'n1b', nivel: 1, hoja: 'B', titulo: 'Pistas en el bosque', tipo: 'pista',
-          consigna: [2474, 2380, 'Escribe la letra de cada dibujo. Después, lee la palabra.'],
+          consigna: [2474, 2380, 'Escribe cada letra y lee la palabra.'],
           casos: [
             { n: 5, mensaje: 'pi-no', picto: 3216, alt: 'un pino', solucion: 'pino' },
             { n: 6, mensaje: 'se-ta', picto: 8328, alt: 'una seta', solucion: 'seta' },
@@ -2627,7 +2638,7 @@
         },
         {
           clave: 'n2a', nivel: 2, hoja: 'A', titulo: '¿Qué es? Rodea su dibujo', tipo: 'elegir',
-          consigna: [31680, 2547, 'Descifra la palabra. Después, rodea su dibujo.'],
+          consigna: [31680, 2547, 'Descifra la palabra y rodea su dibujo.'],
           casos: [
             { n: 9, mensaje: 'bu-fan-da', opciones: [2291, 2290, 2287], picto: 2290, solucion: 'bufanda' },
             { n: 10, mensaje: 'mu-ñe-co', opciones: [26238, 2475, 3131], picto: 3131, solucion: 'muñeco' },
@@ -2637,7 +2648,7 @@
         },
         {
           clave: 'n2b', nivel: 2, hoja: 'B', titulo: 'Órdenes secretas', tipo: 'orden',
-          consigna: [31680, 39842, 'Descifra la orden y hazla sin hacer ruido.'],
+          consigna: [31680, 39842, 'Descifra la orden y hazla sin ruido.'],
           casos: [
             { n: 13, mensaje: 'di hola', picto: 6009, solucion: 'Di hola.' },
             { n: 14, mensaje: 'toca tu nariz', picto: 2887, solucion: 'Toca tu nariz.' },
@@ -2647,7 +2658,7 @@
         },
         {
           clave: 'n3a', nivel: 3, hoja: 'A', titulo: 'Adivinanzas en clave', tipo: 'adivinanza',
-          consigna: [31680, 31847, 'Descifra la adivinanza. ¿Qué es? Escríbelo o dibújalo.'],
+          consigna: [31680, 31847, 'Descifra y escribe o dibuja qué es.'],
           casos: [
             { n: 17, mensaje: 'tengo agujas pero no puedo coser', solucion: 'Tengo agujas pero no puedo coser.', respuesta: 'el reloj', picto: 7229 },
             { n: 18, mensaje: 'soy blanca y caigo en invierno', solucion: 'Soy blanca y caigo en invierno.', respuesta: 'la nieve', picto: 3135 },
@@ -2655,7 +2666,7 @@
         },
         {
           clave: 'n3b', nivel: 3, hoja: 'B', titulo: 'Más adivinanzas', tipo: 'adivinanza',
-          consigna: [31680, 31847, 'Descifra la adivinanza. ¿Qué es? Escríbelo o dibújalo.'],
+          consigna: [31680, 31847, 'Descifra y escribe o dibuja qué es.'],
           casos: [
             { n: 19, mensaje: 'tengo dientes pero no puedo comer', solucion: 'Tengo dientes pero no puedo comer.', respuesta: 'el peine', picto: 2852 },
             { n: 20, mensaje: 'tengo hojas y cuento historias', solucion: 'Tengo hojas y cuento historias.', respuesta: 'el libro', picto: 2450 },
@@ -2691,7 +2702,7 @@
           return `<li class="caso caso--pista">${cabeza()}
               <div class="caso__cuerpo">
                 <figure class="polaroid">${dibujo('clip', 'clip')}${picto(c.picto, `Pista: ${c.alt}`)}<figcaption>Pista</figcaption></figure>
-                ${mensaje(c.mensaje, { t: 20, g: 1.4, gs: 7, ancho: 120, arcos: true })}
+                ${mensaje(c.mensaje, { t: 16.5, g: 1.3, gs: 6.5, ancho: 120, arcos: true })}
               </div>
             </li>`;
         }
@@ -2711,7 +2722,7 @@
         // Adivinanza: la respuesta va al final de la última fila.
         const hueco = `<div class="respuesta"><p>¿Qué es?</p></div>`;
         return `<li class="caso">${cabeza()}
-            ${mensaje(c.mensaje, { t: 13, g: 1, gw: 7.5, ancho: ANCHO_CASOS, final: hueco })}
+            ${mensaje(c.mensaje, { t: 12.4, g: 1, gw: 7.5, ancho: ANCHO_CASOS, final: hueco })}
           </li>`;
       }
 
@@ -2719,17 +2730,11 @@
         const n = NIVELES[h.nivel];
         const numeros = h.casos.map((c) => c.n);
         const ante = `Nivel ${h.nivel} · Hoja ${h.hoja} · Casos ${numeros[0]} ${numeros.length === 2 ? 'y' : 'a'} ${numeros[numeros.length - 1]}`;
-        const nota =
-          h.tipo === 'pista'
-            ? 'La foto es una pista. Los arcos marcan las sílabas.'
-            : h.tipo === 'elegir'
-              ? 'Los tres dibujos empiezan igual: lee la palabra entera.'
-              : '';
         return `<section class="hoja-fichas c-${n.color}">
             ${cabezaHoja(h, h.titulo, ante)}
             ${consigna(h.consigna)}
             <ol class="casos">${h.casos.map((c) => caso(h, c)).join('')}</ol>
-            <p class="atribucion">${nota ? nota + ' ' : ''}${ATRIBUCION} Los dibujos de la clave son de IdEducando.</p>
+            <p class="atribucion">${ATRIBUCION}</p>
           </section>`;
       }
 
@@ -2738,17 +2743,17 @@
         const mensajes = MISION.map(
           (m) => `<li class="caso">
               <div class="caso__cabeza"><p class="caso__num">Mensaje ${m.n}</p><span></span><p class="resuelto"><i></i>¡Descifrado!</p></div>
-              ${mensaje(m.mensaje, { t: 12.6, g: 1, gw: 7.5, ancho: ANCHO_CASOS })}
+              ${mensaje(m.mensaje, { t: 12.4, g: 1, gw: 7.5, ancho: ANCHO_CASOS })}
             </li>`,
         ).join('');
         return `<section class="hoja-fichas c-coral">
             ${cabezaHoja(h, 'Misión final', 'Nivel 3 · Después de los casos 1 a 20')}
             <div class="mision-intro">
-              ${consigna([31680, 26845, 'Descifra los tres mensajes, en orden. Después, ¡a por el premio!'])}
+              ${consigna([31680, 26845, 'Descifra los tres mensajes, en orden.'])}
               <span class="sello">Alto secreto</span>
             </div>
             <ol class="casos">${mensajes}</ol>
-            <p class="atribucion">${ATRIBUCION} Los dibujos de la clave son de IdEducando.</p>
+            <p class="atribucion">${ATRIBUCION}</p>
           </section>`;
       }
 
@@ -2826,11 +2831,9 @@
       ];
       document.getElementById('registro-niveles').innerHTML = REGISTRO.map(
         ([nivel, nombre, casos]) => `<div class="registro__nivel c-${NIVELES[nivel].color}">
-            <h2>${marcaNivel(nivel, 'grande')}${nombre}</h2>
-            <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 3mm">
-              <ul class="carpetas">${casos.map((n) => `<li>${svg(carpeta)}<span>${n}</span></li>`).join('')}</ul>
-              ${nivel === 3 ? `<p class="placa" style="margin: 0">${placa(3)}<span>Mi placa</span></p>` : `<p class="placa" style="margin: 0">${placa(nivel)}</p>`}
-            </div>
+            <div class="registro__marca">${marcaNivel(nivel, 'grande')}<h2>${nombre}</h2></div>
+            <ul class="carpetas">${casos.map((n) => `<li>${svg(carpeta)}<span>${n}</span></li>`).join('')}</ul>
+            <span class="placa">${placa(nivel)}</span>
           </div>`,
       ).join('');
       document.getElementById('se-de-memoria').innerHTML = ALFABETO.map(
@@ -2848,7 +2851,7 @@
           lista = `<ul class="solucion__lista una sin-dibujo">${h.casos
             .map((c) => `<li><b>${c.n}</b><span class="adivinanza">${c.solucion}<span>${c.respuesta.charAt(0).toUpperCase() + c.respuesta.slice(1)}.${picto(c.picto)}</span></span></li>`)
             .join('')}</ul>`;
-        } else if (h.tipo === 'orden') {
+        } else if (h.tipo === 'orden' || h.tipo === 'elegir') {
           lista = `<ul class="solucion__lista una">${h.casos.map((c) => `<li><b>${c.n}</b><span>${c.solucion}</span>${picto(c.picto)}</li>`).join('')}</ul>`;
         } else {
           lista = `<ul class="solucion__lista">${h.casos.map((c) => `<li><b>${c.n}</b><span>${c.solucion}</span>${picto(c.picto)}</li>`).join('')}</ul>`;
@@ -2916,9 +2919,9 @@
         ([p, texto], i) => `<li><b>${i + 1}</b>${picto(p)}<span>${texto}</span></li>`,
       ).join('');
       const TEXTOS_NIVEL = {
-        1: 'Ocho palabras de dos sílabas, como lupa o pino, con un dibujo de pista y un arco bajo cada sílaba.',
-        2: 'Cuatro palabras de tres sílabas, como bufanda, para rodear su dibujo, y cuatro órdenes cortas para hacerlas en silencio.',
-        3: 'Cuatro adivinanzas de cinco o seis palabras y la misión final, que lleva a un premio escondido en clase.',
+        1: 'Ocho palabras de dos sílabas, como lupa, con un dibujo de pista.',
+        2: 'Cuatro palabras de tres sílabas y cuatro órdenes cortas para hacer en silencio.',
+        3: 'Cuatro adivinanzas y la misión final, que lleva a un premio escondido en clase.',
       };
       document.getElementById('lista-niveles').innerHTML = [1, 2, 3]
         .map((nivel) => `<li>${marcaNivel(nivel, 'grande')}<span><strong>Nivel ${nivel}, ${NIVELES[nivel].forma}.</strong> ${TEXTOS_NIVEL[nivel]}</span></li>`)
@@ -2926,16 +2929,16 @@
 
       // De un vistazo: [color, icono, título, qué es, claves de página]
       const MAPA = [
-        ['amarillo', 'd:lupa', 'La clave secreta', 'Dos por hoja, plastificadas.', 'claves'],
-        ['azul', 8604, 'Carnet de detective', 'Seis por hoja, con huella.', 'carnets'],
-        ['verde', 'd:carpetaMini', 'Veinte casos en tres niveles', 'En fundas, con rotulador.', 'n1a', 'n3b'],
-        ['coral', 26845, 'Misión final', 'Tres mensajes y un premio.', 'mision'],
-        ['morado', 8088, 'Escribe un mensaje secreto', 'Al revés, para alguien de la clase.', 'alreves'],
-        ['amarillo', 6998, 'Mis casos resueltos', 'Una hoja para cada detective.', 'registro'],
-        ['naranja', 'd:sobreMini', 'Soluciones y sobres', 'Para comprobar sin ayuda.', 'soluciones'],
-        ['amarillo', 'd:estrellaGrande', 'Diploma de detective', 'Va en el sobre de la misión.', 'diplomas'],
-        ['verde', 31680, 'Guía para el docente', 'Por qué ayuda y ajustes.', 'guia'],
-        ['coral', 2392, 'Nota para las familias', 'Con la clave para recortar.', 'familias'],
+        ['amarillo', 'd:lupa', 'La clave secreta', 'Dos por hoja.', 'claves'],
+        ['azul', 8604, 'Carnet de detective', 'Seis por hoja.', 'carnets'],
+        ['verde', 'd:carpetaMini', 'Veinte casos', 'En fundas.', 'n1a', 'n3b'],
+        ['coral', 26845, 'Misión final', 'Con premio.', 'mision'],
+        ['morado', 8088, 'Mensaje secreto', 'Al revés.', 'alreves'],
+        ['amarillo', 6998, 'Mis casos resueltos', 'Registro.', 'registro'],
+        ['naranja', 'd:sobreMini', 'Soluciones', 'Y etiquetas.', 'soluciones'],
+        ['amarillo', 'd:estrellaGrande', 'Diploma', 'Dos por hoja.', 'diplomas'],
+        ['verde', 31680, 'Guía para el docente', 'Y ajustes.', 'guia'],
+        ['coral', 2392, 'Familias y fuentes', 'Con la clave.', 'familias', 'fuentes'],
       ];
       document.getElementById('mapa').innerHTML = MAPA.map(([color, icono, titulo, texto, ...claves]) => {
         const pags = claves.map((c) => PAGINAS[c]);
@@ -2949,8 +2952,8 @@
       // Guía: la clave, dibujo a dibujo
       // ---------------------------------------------------------------------
       document.getElementById('nombres').innerHTML = ALFABETO.map(
-        (l) => `<li>${simbolo(l)}<span><b>${l}</b> ${SIMBOLOS[l].nombre}</span></li>`,
-      ).join('');
+        (l) => `<span><b>${l}</b>&nbsp;${SIMBOLOS[l].nombre}</span>`,
+      ).join(' · ');
 
       // ---------------------------------------------------------------------
       // Familias: mensajes secretos en casa
@@ -2968,10 +2971,10 @@
       // ---------------------------------------------------------------------
       (function portada() {
         const palabra = ['l', 'e', 't', 'r', 'a', 's'];
-        const lado = 23; // mm de cada casilla
+        const lado = 20; // mm de cada casilla
         const hueco = 3;
-        const x0 = 18;
-        const y0 = 8;
+        const x0 = 36;
+        const y0 = 12;
         const ancho = palabra.length * lado + (palabra.length - 1) * hueco;
         const casilla = (l, i) => {
           const x = x0 + i * (lado + hueco);
@@ -2981,12 +2984,12 @@
         const letra = (l, i) => {
           const x = x0 + i * (lado + hueco);
           return `<rect x="${x}" y="${y0}" width="${lado}" height="${lado}" rx="3" fill="#fff" stroke="${M}" stroke-width="0.7"/>
-            <text x="${x + lado / 2}" y="${y0 + lado * 0.7}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="17" fill="${M}">${l}</text>`;
+            <text x="${x + lado / 2}" y="${y0 + lado * 0.72}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="16" fill="${M}">${l}</text>`;
         };
-        // La lente: centrada entre la tercera y la cuarta casilla
-        const cx = x0 + 2.5 * lado + 2 * hueco + hueco / 2;
+        // La lente: enseña enteras la tercera y la cuarta casilla
+        const cx = x0 + 3 * lado + 2.5 * hueco;
         const cy = y0 + lado / 2;
-        const r = 27;
+        const r = 26.5;
         const tira = `<g transform="rotate(-5 105 40)">
             <rect x="${x0 - 7}" y="${y0 - 7}" width="${ancho + 14}" height="${lado + 14}" rx="4" fill="#fff" stroke="#c9cfe0" stroke-width="0.5" filter="url(#sombra)"/>
             ${palabra.map(casilla).join('')}
@@ -3001,7 +3004,7 @@
             <path d="M${f2(cx + r * 0.78)} ${f2(cy + r * 0.78)} L${f2(cx + r * 0.98)} ${f2(cy + r * 0.98)}" stroke="${AMARILLO}" stroke-width="9" stroke-linecap="butt"/>
           </g>`;
         // Un sobre de alto secreto y unas huellas
-        const sobre = `<g transform="translate(16 92) rotate(-8)">
+        const sobre = `<g transform="translate(20 72) rotate(-8)">
             <rect x="0" y="0" width="56" height="38" rx="2.5" fill="${T_AMARILLO}" stroke="${M}" stroke-width="1"/>
             <path d="M1 1.5 L28 22 L55 1.5" fill="none" stroke="${M}" stroke-width="1"/>
             <g transform="translate(9 25) rotate(-6)"><rect x="0" y="0" width="38" height="9" rx="1.6" fill="none" stroke="#b63a26" stroke-width="0.9"/>
@@ -3011,12 +3014,12 @@
             ${[2, 3.6, 5.2, 6.8].map((k) => `<ellipse cx="0" cy="0" rx="${k * 0.72}" ry="${k}"/>`).join('')}</g>`;
         const escena = `<svg viewBox="0 0 210 150" width="210mm" height="150mm" style="left: 0; top: 140mm" aria-hidden="true">
             <defs><filter id="sombra" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.4" flood-color="#1e2b55" flood-opacity=".25"/></filter></defs>
-            ${sobre}${huella(92, 118, -20)}${huella(104, 128, 10)}${tira}
+            ${sobre}${huella(90, 96, -20)}${huella(101, 105, 10)}${tira}
           </svg>`;
         document.getElementById('escena').innerHTML =
           escena +
-          `<img src="pictogramas/9191.png" alt="" style="left: 128mm; top: 210mm; width: 40mm">` +
-          `<img src="pictogramas/38762.png" alt="" style="left: 158mm; top: 204mm; width: 40mm">`;
+          `<img src="pictogramas/9191.png" alt="" style="left: 124mm; top: 206mm; width: 42mm">` +
+          `<img src="pictogramas/38762.png" alt="" style="left: 156mm; top: 200mm; width: 42mm">`;
       })();
 
       // Iconos sueltos

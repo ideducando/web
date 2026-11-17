@@ -305,8 +305,8 @@ const DOCUMENTOS = [
   },
   {
     id: 'mercadillo-de-clase',
-    asunto: 'El mercadillo de clase: comprar, pagar y calcular la vuelta con dinero de juego, en tres niveles, con pictogramas de ARASAAC',
-    palabras: 'matemáticas funcionales, dinero, euro, cálculo, autonomía, discapacidad intelectual, juego simbólico, pictogramas, ARASAAC, Primaria',
+    asunto: 'El mercadillo de clase: comprar, pagar y recibir la vuelta con dinero de juego, en tres niveles, con pictogramas de ARASAAC',
+    palabras: 'matemáticas funcionales, dinero, euro, monedas, compra, vuelta, discapacidad intelectual, TEA, DUA, pictogramas, ARASAAC, Primaria',
   },
   {
     id: 'alto-contraste-aula',
