@@ -1473,7 +1473,7 @@
 
       /* ---------- Autoevaluación (dos por hoja) ---------- */
       .auto {
-        height: 126mm;
+        height: 127mm;
         padding: 3mm 4mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 4mm;
@@ -1481,7 +1481,7 @@
       }
 
       .auto + .auto {
-        margin-top: 6mm;
+        margin-top: 5mm;
       }
 
       .auto__cab {
@@ -1489,7 +1489,7 @@
         grid-template-columns: 15mm minmax(0, 1fr) auto;
         align-items: center;
         gap: 3mm;
-        margin: 0 0 2.4mm;
+        margin: 0 0 1.6mm;
       }
 
       .auto__cab > img {
@@ -1498,7 +1498,7 @@
       }
 
       .auto__titulo {
-        margin: 0 0 1.6mm;
+        margin: 0 0 1.4mm;
         font-family: var(--titulos);
         font-weight: 700;
         font-size: 20pt;
@@ -1536,45 +1536,41 @@
       }
 
       .auto__tabla {
-        margin: 0 0 2.4mm;
+        margin: 0 0 2mm;
         font-size: 18pt;
-        line-height: 1.02;
+        line-height: 1;
       }
 
       .auto__tabla th,
       .auto__tabla td {
-        padding: 0.8mm 1.6mm;
+        padding: 0.9mm 1.4mm;
         border-bottom: 0.35mm solid var(--linea);
         vertical-align: middle;
       }
 
       .auto__tabla thead th {
-        padding: 1mm 1mm 1.2mm;
+        padding: 0.6mm 1mm 1.2mm;
         background: none;
         color: var(--marino);
-        font-family: var(--titulos);
-        font-size: 13pt;
+        font-family: var(--texto);
+        font-size: 18pt;
         font-weight: 700;
         text-align: center;
-        line-height: 1.05;
+        vertical-align: bottom;
+        line-height: 1;
       }
 
       .auto__tabla thead th:first-child {
         text-align: left;
-        font-size: 13pt;
+        font-family: var(--titulos);
       }
 
-      .auto__tabla thead svg {
-        width: 8mm;
-        height: 8mm;
-        margin: 0 auto 0.6mm;
-      }
-
+      .auto__tabla thead svg,
       .auto__tabla thead img {
         display: block;
-        width: 8mm;
-        height: 8mm;
-        margin: 0 auto 0.6mm;
+        width: 9mm;
+        height: 9mm;
+        margin: 0 auto 0.8mm;
       }
 
       .auto__tabla tbody th {
@@ -1586,7 +1582,7 @@
         display: grid;
         grid-template-columns: 9.4mm minmax(0, 1fr);
         align-items: center;
-        gap: 2mm;
+        gap: 2.4mm;
       }
 
       .auto__tabla tbody img,
@@ -1596,7 +1592,7 @@
       }
 
       .auto__tabla td {
-        width: 23mm;
+        width: 27mm;
         text-align: center;
       }
 
@@ -1623,8 +1619,8 @@
         margin: 0;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 15pt;
-        line-height: 1.05;
+        font-size: 18pt;
+        line-height: 1;
       }
 
       .auto__reto ul {
@@ -2546,17 +2542,16 @@
 
       // Autoevaluación
       const AUTO = [
-        [10276, 'Digo quién es y dónde está.'],
+        [10276, 'Digo quién y dónde.'],
         [22620, 'Cuento el problema.'],
-        [37711, 'Cuento qué hace.'],
-        [5358, 'Mi historia tiene final.'],
+        [5358, 'Cuento cómo acaba.'],
         ['d:unir', 'Uso palabras para unir.'],
         [2381, 'Escucho a los demás.'],
       ];
       const RETOS = [
         [11476, 'Contar qué siente'],
-        ['d:unir', 'Otra palabra para unir'],
-        [37406, 'Poner un título'],
+        ['d:unir', 'Un conector nuevo'],
+        [37406, 'Poner título'],
       ];
 
       // ---------------------------------------------------------------------
@@ -2825,7 +2820,7 @@
             <thead><tr><th scope="col">Mi historia</th><th scope="col">${dibujo('si')}Sí</th><th scope="col">${picto(4570)}Con ayuda</th><th scope="col">${dibujo('brote')}Todavía no</th></tr></thead>
             <tbody>${AUTO.map(([p, t]) => `<tr><th scope="row"><span>${imagen(p)}<span>${t}</span></span></th><td><span class="redondel"></span></td><td><span class="redondel"></span></td><td><span class="redondel"></span></td></tr>`).join('')}</tbody>
           </table>
-          <div class="auto__reto"><p>Mi reto para<br>la próxima:</p><ul>${RETOS.map(([p, t]) => `<li>${imagen(p)}<span>${t}</span></li>`).join('')}</ul></div>
+          <div class="auto__reto"><p>Mi reto:</p><ul>${RETOS.map(([p, t]) => `<li>${imagen(p)}<span>${t}</span></li>`).join('')}</ul></div>
         </div>`;
       document.getElementById('autoevaluacion').innerHTML = auto(true) + auto(false);
 
