@@ -72,7 +72,9 @@
         break-after: page;
       }
 
+      /* position: relative, para que el título solo para lectores de pantalla quede dentro de su hoja. */
       .hoja-tarjetas {
+        position: relative;
         page: tarjetas;
         break-after: page;
       }
@@ -722,6 +724,7 @@
         font-size: 11pt;
       }
 
+      /* Las flechas van dibujadas: las letras de la marca no traen «←» ni «→». */
       .escalera__ejes {
         display: flex;
         justify-content: space-between;
@@ -730,6 +733,17 @@
         font-weight: 600;
         font-size: 11pt;
         color: var(--suave);
+      }
+
+      .escalera__ejes > span {
+        display: flex;
+        align-items: center;
+        gap: 1.4mm;
+      }
+
+      .escalera__ejes svg {
+        width: 4.4mm;
+        height: 4.4mm;
       }
 
       .regla {
@@ -805,14 +819,16 @@
         color: var(--suave);
       }
 
+      /* Interlineado holgado: si la tilde de «DESPUÉS», en mayúsculas, sobresale por arriba de la primera línea
+         de la hoja, Chromium la pinta al pie de la hoja anterior. */
       .aviso {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
         gap: 6mm;
-        margin: 0 0 2mm;
+        margin: 0 0 1.4mm;
         font-size: 11pt;
-        line-height: 1.2;
+        line-height: 1.6;
         color: var(--suave);
       }
 
@@ -1181,7 +1197,7 @@
       .tira-cuenta ol {
         display: flex;
         flex-wrap: wrap;
-        gap: 3mm 4mm;
+        gap: 3mm 2mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1190,8 +1206,8 @@
       .tira-cuenta li {
         display: grid;
         place-items: center;
-        width: 25mm;
-        height: 25mm;
+        width: 23mm;
+        height: 23mm;
         margin: 0;
         border: 0.7mm solid var(--marino);
         border-radius: 50%;
@@ -1243,7 +1259,7 @@
 
       .fichas-cuenta {
         display: grid;
-        grid-template-columns: repeat(8, 19mm);
+        grid-template-columns: repeat(8, 22mm);
         justify-content: space-between;
         margin: 0;
         padding: 0;
@@ -1253,8 +1269,8 @@
       .ficha-estrella {
         display: grid;
         place-items: center;
-        width: 19mm;
-        height: 19mm;
+        width: 22mm;
+        height: 22mm;
         margin: 0;
         border: 0.45mm dashed var(--suave);
         border-radius: 50%;
@@ -1262,8 +1278,8 @@
       }
 
       .ficha-estrella svg {
-        width: 15mm;
-        height: 15mm;
+        width: 17mm;
+        height: 17mm;
       }
 
       /* ---------- Tarjetas de casa (42 × 42 mm) ---------- */
@@ -1464,7 +1480,7 @@
       <div class="ejemplo">
         <div class="ejemplo__pieza" id="ejemplo"></div>
         <div>
-          <p><strong>Un ejemplo.</strong> Antes de salir, le enseñáis este tablero y decís: «Primero, me visto. Después, al parque».</p>
+          <p><strong>Un ejemplo.</strong> Antes de salir, le enseñáis este tablero y decís: «Primero, vestirse. Después, parque».</p>
           <p style="margin: 0">Cuando se ha vestido, queda a la vista lo que viene: el parque.</p>
         </div>
       </div>
@@ -1481,11 +1497,11 @@
       </p>
       <p>Cada peque es distinto: lo que a uno le sirve, a otro no. Probad y mirad qué le ayuda.</p>
       <p class="de-donde">
-        <strong>De dónde sale.</strong> Los apoyos visuales están entre las prácticas con más respaldo para la infancia con TEA
-        (Hume y otros, 2021), y el Instituto Nacional para la Excelencia en la Salud y la Atención del Reino Unido (NICE)
+        <strong>De dónde sale.</strong> Los apoyos visuales están entre las prácticas con respaldo de la investigación para la
+        infancia con TEA (Hume y otros, 2021), y el Instituto Nacional para la Excelencia en la Salud y la Atención del Reino Unido (NICE)
         recomienda usar palabras, dibujos o símbolos que tengan sentido para cada peque. En el cole, la Región de Murcia pide
-        dar las instrucciones también con dibujos al alumnado con trastorno del lenguaje (anexo V). La idea de las palabras que
-        se van es de la Confederación Autismo España (2025).
+        dar las instrucciones también con dibujos al alumnado con trastorno del lenguaje (Resolución de 30 de julio de 2019,
+        anexo V). La idea de las palabras que se van es de la Confederación Autismo España (2025).
       </p>
     </section>
 
@@ -1510,7 +1526,8 @@
 
       <p class="de-donde">
         <strong>De dónde sale.</strong> Pocas imágenes, a la altura de sus ojos y de acuerdo con el cole: Autismo Sevilla, que
-        propone también contar hacia atrás. Esperar con un reloj visual: Grey y otros (2009). Elegir: CAST (2024, 7.1).
+        propone también contar hacia atrás. Esperar con un reloj visual: Grey y otros (2009). Dejar elegir: CAST (2024,
+        consideración 7.1).
       </p>
     </section>
 
@@ -1565,7 +1582,7 @@
       <h2>¿Cómo?</h2>
       <p>Cambiad una sola cosa cada vez. Antes de dar el paso siguiente, esperad a que el anterior vaya bien.</p>
       <ol class="escalera" id="escalera"></ol>
-      <p class="escalera__ejes" aria-hidden="true"><span>← Más apoyo</span><span>Más autonomía →</span></p>
+      <p class="escalera__ejes" aria-hidden="true"><span><span data-icono="izquierda"></span>Más apoyo</span><span>Más autonomía<span data-icono="flecha"></span></span></p>
       <div class="regla">
         <span data-icono="dos"></span>
         <div>
@@ -1819,7 +1836,7 @@
           ],
         },
         {
-          nombre: 'Para esperar, para acabar y en blanco',
+          nombre: 'Esperar, acabar y en blanco',
           color: 'morado',
           tarjetas: [[8109, 'Espero'], [28429, '¡Se acabó!'], null, null, null, null],
         },
@@ -1842,11 +1859,12 @@
       const DIBUJOS = {
         flecha: `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
         abajo: `<path d="M50 12V82M26 60L50 84L74 60" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        izquierda: `<path d="M88 50H18M40 26L16 50L40 74" fill="none" stroke="${SUAVE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
         velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
           <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
         marcada: `<rect x="10" y="10" width="80" height="80" rx="13" fill="#fff" stroke="${M}" stroke-width="7"/>
           <path d="M27 52L43 67L74 33" fill="none" stroke="${M}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
-        // ✓ y ✗ de los errores frecuentes (también se distinguen por la forma, no solo por el color)
+        // ✓ y ✗ de los errores frecuentes: se distinguen por la forma (círculo y cuadrado) y por el color
         si: `<circle cx="50" cy="50" r="44" fill="${COLOR.verde}"/><path d="M28 52L43 66L72 35" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
         no: `<rect x="8" y="8" width="84" height="84" rx="14" fill="${COLOR.coral}"/><path d="M33 33L67 67M67 33L33 67" stroke="#fff" stroke-width="11" stroke-linecap="round"/>`,
         casilla: `<rect x="10" y="10" width="80" height="80" rx="13" fill="#fff" stroke="${M}" stroke-width="7"/><path d="M27 52L43 67L74 33" fill="none" stroke="${COLOR.verde}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
@@ -1971,7 +1989,7 @@
       // Página 5: cómo enseñarlo
       // ---------------------------------------------------------------------
       document.getElementById('pasos-guia').innerHTML = [
-        [6564, 'Justo antes.', 'Enseñadlo justo antes del momento, no media hora antes.'],
+        [32747, 'Justo antes.', 'Enseñadlo justo antes del momento, no media hora antes.'],
         [3345, 'Pocas palabras.', 'Señalad la tarjeta y decid solo lo importante: «Primero, pijama. Después, cuento».'],
         [2474, 'Que mire el dibujo.', 'Poneos a su lado o detrás y señalad la tarjeta. Así mira el dibujo, no a vosotros.'],
         ['d:marcada', 'Que lo mueva.', 'Al terminar, su tarjeta pasa a «¡Hecho!» o a un sobre de «Se acabó».'],
@@ -2058,10 +2076,10 @@
           const grupos = GRUPOS.filter((g) => lote.some(([c]) => c === g.color));
           return `<section class="hoja-tarjetas">
             <h1 class="solo-lector">Tarjetas de casa, hoja ${h + 1} de 2</h1>
-            <p class="aviso"><span><strong>Tarjetas de casa · ${h + 1} de 2</strong> · 42 × 42 mm</span><span>Corta por la línea de puntos</span></p>
-            <ul class="grupos">${grupos.map((g) => `<li class="c-${g.color}"><span></span>${g.nombre}</li>`).join('')}<li>· Velcro suave detrás de cada una</li></ul>
+            <p class="aviso"><span><strong>Tarjetas de casa · ${h + 1} de 2</strong> · 42 × 42 mm, con velcro suave detrás</span><span>Corta por la línea de puntos</span></p>
+            <ul class="grupos">${grupos.map((g) => `<li class="c-${g.color}"><span></span>${g.nombre}</li>`).join('')}</ul>
             <ul class="rejilla-casa">${lote.map(([c, t]) => tarjeta(c, t)).join('')}</ul>
-            <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.${h ? ' En las tarjetas en blanco, dibuja o pega una foto antes de plastificar.' : ''}</p>
+            <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
           </section>`;
         })
         .join('');

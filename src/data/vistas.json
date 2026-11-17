@@ -142,6 +142,59 @@
       }
     ]
   },
+  "apoyos-visuales-familias": {
+    "total": 14,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía,"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué es un apoyo visual"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla: Primero y después, dos tableros"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Agenda de la mañana · con velcro"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Temporizador de papel · para recortar"
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas de casa, hoja 1 de 2"
+      }
+    ]
+  },
   "carta-de-deseos": {
     "total": 18,
     "fotos": [
@@ -388,6 +441,59 @@
         "mini_ancho": 160,
         "mini_alto": 113,
         "titulo": "Todos tenemos los mismos derechos"
+      }
+    ]
+  },
+  "detectives-letras": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tres nive"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "LA CLAVE SECRETA · Una para cada pareja · Cartulina y plastificado"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "CARNET DE DETECTIVE · Dibujo, nombre y huella antes de plastificar"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 12,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · después de los casos 1 a 20"
       }
     ]
   },
@@ -690,6 +796,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Cartel para la entrada de la fiesta"
+      }
+    ]
+  },
+  "frase-y-dibujo": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tres nive"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Leo y empareja Me llamo"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 1 · Frases · 2 o 3 palabras · Forma de círculo"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 1 · Dibujos · Forma de círculo"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · Frases · 6 a 8 palabras · Forma de rombo"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · Dibujos · Forma de rombo"
       }
     ]
   },
@@ -2075,6 +2234,59 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Palabras de 2 sílabas"
+      }
+    ]
+  },
+  "turnos-visibles": {
+    "total": 15,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "En el aula"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Tablero · con velcro"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tarjetas de turno · 1 a 16"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartel para la clase"
+      },
+      {
+        "pagina": 9,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "ME TOCA · HE TERMINADO · Tarjetas de doble cara"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Juegos de mesa · para recortar"
       }
     ]
   },

@@ -509,7 +509,8 @@
         display: grid;
         grid-template-columns: repeat(3, 60mm);
         grid-auto-rows: 59mm;
-        gap: 3mm;
+        /* 2,4 mm entre filas: a tamaño real, con 3 mm, la última línea de la hoja pasaba a la siguiente. */
+        gap: 2.4mm 3mm;
         justify-content: space-between;
         margin: 0;
         padding: 0;
@@ -876,7 +877,9 @@
 
       .comprobar {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        /* minmax(0, 1fr): con «auto», la tercera columna pasaba 1 mm del ancho de la hoja y Chromium
+           encogía todo el PDF al 99,4 % (17/11/2026). */
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         justify-content: space-between;
         align-items: start;
         gap: 2mm;
@@ -1588,8 +1591,8 @@
           propone resaltar lo que es clave (CAST, 2024, consideración 3.2).
         </li>
         <li>
-          <strong>Con el cuerpo y con objetos.</strong> Antes del nivel 3, haced las frases: un peluche en la cama y debajo de
-          la cama, un vaso lleno y uno vacío. Así se ven y se tocan las palabras que lo deciden, como «en», «debajo» o «sin».
+          <strong>Con el cuerpo y con objetos.</strong> Antes del nivel 3, representad las frases: un peluche en la cama y
+          debajo, un vaso lleno y otro vacío. Así se ven las palabras que deciden («en», «debajo», «sin»).
         </li>
       </ol>
     </section>
@@ -2109,7 +2112,7 @@
           const hojaDibujos = `<section class="hoja-tarjetas">
               <div class="aviso"><h1>Nivel ${nivel} · Dibujos <span>· Forma de ${n.forma}</span></h1>${leyenda(true)}</div>
               <ul class="rejilla-dibujos">${frases.map((f) => tarjetaDibujo(f, nivel)).join('')}</ul>
-              <p class="atribucion">${ATRIBUCION} Los dibujos juntan pictogramas, con cambios de IdEducando. Las zetas, las olas, las rayas y los símbolos son de IdEducando.</p>
+              <p class="atribucion">${ATRIBUCION} Dibujos compuestos con pictogramas, con cambios de IdEducando, que pone también las zetas, las olas, las rayas y los símbolos.</p>
             </section>`;
           return hojaFrases(false) + (nivel === 1 ? hojaFrases(true) : '') + hojaDibujos;
         })

@@ -11,7 +11,7 @@ paginas: 14
 archivo: /descargas/apoyos-visuales-familias.pdf
 portada: /portadas/apoyos-visuales-familias.webp
 portada_alt: "Portada de la guía: una casa dibujada con el tablero «Primero y después» dentro, con las tarjetas «Me visto» y «Parque», y alrededor tres tarjetas sueltas: desayuno, lavarse los dientes y cuento"
-vistas: [1, 3, 6, 8, 9, 11]
+vistas: [1, 3, 8, 9, 11, 12]
 tiempo: "1 hora para imprimir, recortar, plastificar y pegar el velcro de todo. Una sola plantilla, unos 20 minutos"
 necesitas:
   - "6 hojas de cartulina blanca A4 de 160 g"
@@ -83,7 +83,7 @@ Esta guía es para las familias, sobre todo de peques con trastorno del espectro
 
 ## Lo que dicen las fuentes
 
-Los apoyos visuales están entre las prácticas con más respaldo para la infancia con TEA (Hume y otros, 2021), y las agendas visuales funcionan mejor cuando se enseñan paso a paso (Knight y otros, 2015). El Instituto Nacional para la Excelencia en la Salud y la Atención del Reino Unido (NICE) recomienda usar palabras, dibujos o símbolos que tengan sentido para cada peque. La Confederación Autismo España recuerda que cada persona es distinta: a algunos peques les sirven más los objetos o las fotos.
+Los apoyos visuales están entre las prácticas con respaldo de la investigación para la infancia con TEA (Hume y otros, 2021), y las agendas visuales funcionan mejor cuando se enseñan paso a paso (Knight y otros, 2015). El Instituto Nacional para la Excelencia en la Salud y la Atención del Reino Unido (NICE) recomienda usar palabras, dibujos o símbolos que tengan sentido para cada peque. La Confederación Autismo España recuerda que los pictogramas no le sirven igual a todo el mundo, y la guía de Autismo Sevilla propone empezar con objetos o fotos si hace falta.
 
 Los consejos para enseñarlos siguen la guía de AFIRM, de la Universidad de Carolina del Norte, y la de Autismo Sevilla, publicada por la Junta de Castilla y León. Lo que no lleva fuente es propuesta de IdEducando.
 

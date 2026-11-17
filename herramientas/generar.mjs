@@ -290,13 +290,13 @@ const DOCUMENTOS = [
   },
   {
     id: 'detectives-letras',
-    asunto: 'Detectives de letras: mensajes secretos para descifrar con una clave, en tres niveles y con autocorrección, para la conciencia fonológica y la lectura',
-    palabras: 'conciencia fonológica, lectura, dislexia, código secreto, sílabas, palabras, frases, autocorrección, pictogramas, ARASAAC, Primaria',
+    asunto: 'Detectives de letras: veinte mensajes secretos en tres niveles para descifrar con una clave de dibujos que empiezan por el sonido de su letra, con autocorrección, carnet y misión final',
+    palabras: 'correspondencia entre letras y sonidos, conciencia fonológica, lectura, dislexia, TDL, código secreto, autocorrección, DUA, pictogramas, ARASAAC, Primaria',
   },
   {
     id: 'frase-y-dibujo',
-    asunto: 'Frase y dibujo: tarjetas para leer frases cortas y emparejarlas con su dibujo, en tres niveles y con autocorrección, con pictogramas de ARASAAC',
-    palabras: 'lectura comprensiva, frases, emparejar, autocorrección, TDL, discapacidad intelectual, pictogramas, ARASAAC, Infantil, Primaria',
+    asunto: 'Frase y dibujo: 36 frases de 2 a 8 palabras para leer y emparejar con su dibujo, en tres niveles, con el símbolo para comprobar escondido detrás del dibujo, tablero y registro, con pictogramas de ARASAAC',
+    palabras: 'comprensión lectora, lectura de frases, emparejar, autocorrección, TDL, TEA, dislexia, discapacidad intelectual, pictogramas, ARASAAC, Infantil, Primaria',
   },
   {
     id: 'diptongos-manipulativos',
@@ -316,12 +316,12 @@ const DOCUMENTOS = [
   {
     id: 'turnos-visibles',
     asunto: 'Turnos visibles: bote de turnos y tablero «ahora, después, luego» con pictogramas de ARASAAC, para esperar y saber cuándo toca',
-    palabras: 'turnos, esperar, apoyos visuales, TEA, TDAH, conducta, toda la clase, pictogramas, ARASAAC, Infantil, Primaria',
+    palabras: 'turnos, esperar, apoyos visuales, juegos de mesa, patio, TEA, TDAH, conducta, toda la clase, pictogramas, ARASAAC, Infantil, Primaria',
   },
   {
     id: 'apoyos-visuales-familias',
     asunto: 'Apoyos visuales en casa: guía para familias para empezar una agenda, un «primero y después» o un temporizador, y cuándo retirarlos, con plantillas y pictogramas de ARASAAC',
-    palabras: 'familias, apoyos visuales, agenda visual, primero y después, rutinas, TEA, TDAH, TDL, pictogramas, ARASAAC',
+    palabras: 'familias, apoyos visuales, agenda visual, primero y después, rutinas, tablero para elegir, cuenta atrás, TEA, TDAH, TDL, discapacidad intelectual, pictogramas, ARASAAC',
   },
 ];
 

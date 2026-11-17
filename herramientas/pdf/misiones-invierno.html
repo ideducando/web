@@ -297,6 +297,13 @@
         position: absolute;
       }
 
+      /* Las tarjetas del abanico van giradas y reducidas con transform. Sin esta contención,
+         Chromium cuenta su tamaño sin reducir, cree que la portada no cabe y encoge todo el PDF
+         al 97,4 %: las piezas de recortar salían más pequeñas que sus medidas (17/11/2026). */
+      .abanico {
+        contain: strict;
+      }
+
       .abanico .tm {
         transform-origin: 0 0;
         box-shadow: 0 2mm 5mm -1mm rgb(30 43 85 / 0.28);
