@@ -1,0 +1,2115 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Apoyos visuales en casa: guía para familias · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css.
+         Las tarjetas miden 42 × 42 mm; con 3 mm de plástico alrededor, 48 × 48 mm. Por eso los huecos de las
+         plantillas miden 50 mm o más. En las hojas apaisadas, los anchos van en fracciones (fr): Chromium maqueta
+         primero todo el documento al ancho de la portada y, si algo se sale, encoge las hojas. */
+
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .apaisada {
+        page: apaisada;
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 15pt;
+        line-height: 1.35;
+        max-width: 128mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 6;
+        right: 17mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 17pt;
+        margin: 0.6mm 0;
+      }
+
+      /* La escena de la portada: una casa con piezas de verdad, reducidas con zoom (no con transform: scale,
+         que dejaría su caja a tamaño real y haría que Chromium encogiese la portada). */
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        overflow: clip;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .escena .tc {
+        border-style: solid;
+        border-color: var(--marino);
+        box-shadow: 0 1.4mm 3mm -0.6mm rgb(30 43 85 / 0.3);
+      }
+
+      .escena .pyd,
+      .escena .tira-cuenta {
+        border-style: solid;
+        border-color: var(--marino);
+        box-shadow: 0 2mm 5mm -1mm rgb(30 43 85 / 0.3);
+      }
+
+      /* ---------- Guía para familias (casi en lectura fácil: frases cortas, 13 puntos) ---------- */
+      .lf {
+        font-size: 13pt;
+        line-height: 1.45;
+      }
+
+      .lf h1 {
+        font-size: 27pt;
+        margin: 0 0 2.4mm;
+      }
+
+      .lf h2 {
+        font-size: 16pt;
+        margin: 5mm 0 2mm;
+      }
+
+      .lf p {
+        margin: 0 0 2.4mm;
+      }
+
+      .lf .entrada {
+        font-size: 15pt;
+        line-height: 1.4;
+        margin-bottom: 4mm;
+      }
+
+      .lf strong {
+        font-weight: 700;
+      }
+
+      .numero-guia {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .numero-guia b {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--morado-texto);
+        color: #fff;
+        letter-spacing: 0;
+      }
+
+      .de-donde {
+        margin: 4mm 0 0;
+        padding-top: 2mm;
+        border-top: 0.4mm solid var(--linea);
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .frase-grande {
+        margin: 4mm 0;
+        padding: 3.6mm 5mm;
+        border-left: 1.6mm solid var(--morado);
+        border-radius: 0 3mm 3mm 0;
+        background: var(--morado-tinte);
+        font-family: var(--lema);
+        font-size: 17pt;
+        line-height: 1.3;
+      }
+
+      /* Página 3: el ejemplo y los usos */
+      .ejemplo {
+        display: grid;
+        grid-template-columns: 92mm minmax(0, 1fr);
+        gap: 6mm;
+        align-items: center;
+        margin: 0 0 3mm;
+      }
+
+      .ejemplo__pieza {
+        height: 52mm;
+        overflow: clip;
+      }
+
+      .ejemplo p {
+        margin: 0 0 2mm;
+      }
+
+      .usos {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .usos li {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 2.4mm 3mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        line-height: 1.3;
+      }
+
+      .usos svg,
+      .usos img {
+        width: 22mm;
+        height: 18mm;
+      }
+
+      .usos strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 14pt;
+        line-height: 1.1;
+      }
+
+      .formatos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 6mm minmax(0, 1fr) 6mm minmax(0, 1fr) 6mm minmax(0, 1fr);
+        align-items: center;
+        margin: 2mm 0 2mm;
+      }
+
+      .formatos > div {
+        display: grid;
+        justify-items: center;
+        gap: 1.4mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .formatos .marco {
+        display: grid;
+        place-items: center;
+        width: 26mm;
+        height: 26mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .formatos .marco svg,
+      .formatos .marco img {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .formatos .palabra {
+        font-family: var(--texto);
+        font-size: 18pt;
+      }
+
+      .formatos > svg {
+        width: 6mm;
+        height: 6mm;
+      }
+
+      /* Página 4: qué cuesta más */
+      .elige {
+        display: grid;
+        gap: 2.4mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .elige li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 9mm 30mm 46mm;
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 2.4mm 3.4mm;
+        border: 0.5mm solid var(--linea);
+        border-left: 2mm solid var(--c);
+        border-radius: 3.5mm;
+        line-height: 1.3;
+      }
+
+      .elige li > svg:nth-child(2) {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .elige li > svg:nth-child(3) {
+        width: 30mm;
+        height: 18mm;
+      }
+
+      .elige b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 14pt;
+        line-height: 1.1;
+      }
+
+      .elige small {
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .lista-check {
+        display: grid;
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-check li {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2.6mm;
+        margin: 0;
+      }
+
+      .lista-check svg {
+        width: 7.4mm;
+        height: 7.4mm;
+        margin-top: 0.4mm;
+      }
+
+      /* Página 5: cómo enseñarlo */
+      .pasos-guia {
+        display: grid;
+        gap: 2.2mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .pasos-guia li {
+        display: grid;
+        grid-template-columns: 9mm 15mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 2mm 3mm;
+        border-radius: 3.5mm;
+        background: var(--crema);
+        line-height: 1.32;
+        break-inside: avoid;
+      }
+
+      .pasos-guia li::before {
+        counter-increment: paso;
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+      }
+
+      .pasos-guia svg,
+      .pasos-guia img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .pasos-guia strong {
+        font-family: var(--titulos);
+        font-size: 14pt;
+      }
+
+      .lf .caja {
+        padding: 3mm 4.4mm;
+        margin: 0 0 3mm;
+      }
+
+      .lf .caja h2 {
+        margin: 0 0 1.4mm;
+        font-size: 14pt;
+      }
+
+      /* Página 6: errores frecuentes */
+      .errores {
+        display: grid;
+        gap: 2.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .errores li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+        gap: 0;
+        margin: 0;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+
+      .errores li > div {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2.4mm;
+        padding: 2.2mm 3mm;
+        line-height: 1.3;
+      }
+
+      .errores li > div:first-child {
+        background: var(--coral-tinte);
+      }
+
+      .errores li > div:last-child {
+        background: var(--verde-tinte);
+      }
+
+      .errores svg {
+        width: 7.4mm;
+        height: 7.4mm;
+      }
+
+      .errores small {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .errores li > div:first-child small {
+        color: var(--coral-texto);
+      }
+
+      .errores li > div:last-child small {
+        color: var(--verde-texto);
+      }
+
+      /* Página 7: retirarlo poco a poco */
+      .escalera {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: end;
+        gap: 2.4mm;
+        margin: 2mm 0 1.6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .escalera li {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        margin: 0;
+        padding: 2.4mm 2.6mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        font-size: 12pt;
+        line-height: 1.28;
+      }
+
+      .escalera li:nth-child(1) {
+        height: 40mm;
+      }
+      .escalera li:nth-child(2) {
+        height: 45mm;
+      }
+      .escalera li:nth-child(3) {
+        height: 50mm;
+      }
+      .escalera li:nth-child(4) {
+        height: 55mm;
+      }
+      .escalera li:nth-child(5) {
+        height: 60mm;
+      }
+
+      .escalera strong {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.6mm;
+        margin: 0 0 1.2mm;
+        font-family: var(--titulos);
+        font-size: 13pt;
+        line-height: 1.1;
+      }
+
+      .escalera b {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-size: 11pt;
+      }
+
+      .escalera__ejes {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 3mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .regla {
+        display: grid;
+        grid-template-columns: 20mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 3mm 0 3mm;
+        padding: 3.6mm 5mm;
+        border: 0.8mm solid var(--coral);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .regla svg {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .regla p {
+        margin: 0 0 1mm;
+      }
+
+      .regla p:first-child {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 17pt;
+        line-height: 1.15;
+      }
+
+      /* ---------- Plantillas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      .cabeza h1 img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      .velcro {
+        position: relative;
+        width: 20mm;
+        height: 20mm;
+        border: 0.4mm solid #9aa3bd;
+        border-radius: 50%;
+        background: #d9dde8;
+      }
+
+      .leyenda {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .leyenda svg {
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+      }
+
+      /* Primero y después: dos tableros por hoja */
+      .pyd-hoja .pyd + .pyd {
+        margin-top: 7mm;
+      }
+
+      .pyd {
+        position: relative;
+        margin: 0;
+        padding: 4mm 5mm 3mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 5mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .pyd__titulo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 0 3mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1;
+      }
+
+      .pyd__titulo img {
+        width: 28mm;
+        height: auto;
+      }
+
+      .pyd__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 16mm minmax(0, 1fr);
+        align-items: center;
+      }
+
+      .pyd__caja {
+        display: grid;
+        justify-items: center;
+        gap: 2.4mm;
+        padding: 3mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      .pyd__cabeza {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1;
+      }
+
+      .pyd__cabeza img {
+        width: 13mm;
+        height: 13mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .pyd__hueco {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 58mm;
+        height: 58mm;
+        border-radius: 3.4mm;
+        background: #fff;
+      }
+
+      .pyd__hueco > .tc {
+        position: absolute;
+      }
+
+      .pyd > svg.flecha-pyd,
+      .pyd__fila > svg {
+        width: 12mm;
+        height: 12mm;
+        justify-self: center;
+      }
+
+      .pyd__pie {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* Mi mañana (apaisada) */
+      .fila-dia {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .fila-dia li {
+        position: relative;
+        margin: 0;
+      }
+
+      .hueco-dia {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 100%;
+        aspect-ratio: 1;
+        border: 0.8mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 1.4mm var(--t);
+      }
+
+      .hueco-dia--hecho {
+        border-color: var(--amarillo);
+        background: var(--amarillo-tinte);
+        box-shadow: none;
+      }
+
+      .hueco-dia svg.estrella-fondo {
+        position: absolute;
+        inset: 8%;
+        width: 84%;
+        height: 84%;
+      }
+
+      .num-dia {
+        position: absolute;
+        z-index: 2;
+        left: -2mm;
+        top: -2mm;
+        display: grid;
+        place-items: center;
+        width: 10mm;
+        height: 10mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .rotulo-fila {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 2.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .rotulo-fila svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .bajan {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 5mm;
+        margin: 1.6mm 0 1.6mm;
+      }
+
+      .bajan svg {
+        justify-self: center;
+        width: 8mm;
+        height: 8mm;
+      }
+
+      /* Elijo (apaisada) */
+      .opciones {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 9mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .opciones li {
+        margin: 0;
+      }
+
+      .hueco-elijo {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 88%;
+        margin: 0 auto;
+        aspect-ratio: 1;
+        border: 0.8mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 1.4mm var(--t);
+      }
+
+      .para-empezar {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 9mm;
+        margin: 0 0 1.4mm;
+      }
+
+      .para-empezar p {
+        grid-column: 2 / span 2;
+        margin: 0;
+        padding: 0 0 1.4mm;
+        border-bottom: 0.7mm solid var(--marino);
+        text-align: center;
+        font-size: 12pt;
+        line-height: 1.2;
+        font-weight: 700;
+      }
+
+      .quiero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        margin: 2mm 0 0;
+      }
+
+      .quiero__flecha {
+        justify-self: center;
+        grid-column: 2;
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .quiero__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 6mm;
+      }
+
+      .quiero__rotulo {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 30pt;
+        line-height: 1;
+      }
+
+      .quiero__rotulo img {
+        width: 20mm;
+        height: 20mm;
+        border-radius: 3mm;
+        background: #fff;
+        border: 0.5mm solid var(--linea);
+      }
+
+      .quiero__pista {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* Cuenta atrás */
+      .nivel-cuenta {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 7.4mm;
+        height: 7.4mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1.2mm;
+      }
+
+      .nv.n3 {
+        width: 9mm;
+        height: 9mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      }
+
+      .tira-cuenta {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 9mm 36mm;
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 4mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tira-cuenta ol {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3mm 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tira-cuenta li {
+        display: grid;
+        place-items: center;
+        width: 25mm;
+        height: 25mm;
+        margin: 0;
+        border: 0.7mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--t);
+      }
+
+      .tira-cuenta li .velcro {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .tira-cuenta--diez li {
+        width: 20mm;
+        height: 20mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 22pt;
+        background: #fff;
+      }
+
+      .tira-cuenta > svg {
+        width: 8mm;
+        height: 8mm;
+        justify-self: center;
+      }
+
+      .fin {
+        display: grid;
+        justify-items: center;
+        gap: 1.2mm;
+        margin: 0;
+        padding: 2mm;
+        border: 0.8mm solid var(--coral);
+        border-radius: 3.4mm;
+        background: var(--coral-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .fin img {
+        width: 20mm;
+        height: 20mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .fichas-cuenta {
+        display: grid;
+        grid-template-columns: repeat(8, 19mm);
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ficha-estrella {
+        display: grid;
+        place-items: center;
+        width: 19mm;
+        height: 19mm;
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .ficha-estrella svg {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      /* ---------- Tarjetas de casa (42 × 42 mm) ---------- */
+      .rejilla-casa {
+        display: grid;
+        grid-template-columns: repeat(4, 42mm);
+        grid-auto-rows: 42mm;
+        gap: 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tc {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.4mm 22.5mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        width: 42mm;
+        height: 42mm;
+        margin: 0;
+        padding: 0 1.2mm 1.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tc__banda {
+        justify-self: stretch;
+        align-self: stretch;
+        margin: 0 -1.2mm;
+        background: var(--c);
+      }
+
+      .tc img,
+      .tc .hueco-picto {
+        width: 22mm;
+        height: 22mm;
+        align-self: end;
+      }
+
+      .tc p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 0.98;
+        text-wrap: balance;
+      }
+
+      .tc .renglon {
+        justify-self: stretch;
+        margin: 0 2mm;
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .hueco-picto {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .grupos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.4mm 5mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+        font-size: 11pt;
+      }
+
+      .grupos li {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+      }
+
+      .grupos span {
+        width: 8mm;
+        height: 2.6mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      /* ---------- Para seguir y fuentes ---------- */
+      .final {
+        page: tarjetas;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .final h1 {
+        font-size: 22pt;
+        margin-bottom: 1.6mm;
+      }
+
+      .final h2 {
+        font-size: 13pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .final p {
+        margin: 0 0 1.6mm;
+      }
+
+      .seguir {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4mm 4mm;
+        margin: 0 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .seguir li {
+        display: grid;
+        grid-template-columns: 30mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 2mm 2.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.28;
+        break-inside: avoid;
+      }
+
+      .seguir img {
+        width: 30mm;
+        height: 22.5mm;
+        object-fit: cover;
+        border-radius: 1.6mm;
+      }
+
+      .seguir strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+
+      .referencias {
+        margin: 0 0 1mm;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.5mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 164mm; height: 164mm; right: -62mm; top: 122mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 76mm; height: 76mm; left: -30mm; top: 178mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 24mm; height: 24mm; left: 104mm; top: 112mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Guía para familias · Con plantillas</p>
+        <h1 class="portada__titulo">Apoyos visuales<br />en casa</h1>
+        <p class="portada__subtitulo">
+          Para empezar con un solo apoyo, usarlo siempre igual y retirarlo poco a poco. Con plantillas y tarjetas de rutinas de
+          casa.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" id="escena" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>Guía,<b>4 plantillas</b>y 40 tarjetas</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         1. QUÉ ES UN APOYO VISUAL
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>1</b>Guía para familias</p>
+      <h1>Qué es un apoyo visual</h1>
+      <p class="entrada">
+        Un apoyo visual es algo que se ve y que ayuda a entender. Puede ser un objeto, una foto, un dibujo o una palabra
+        escrita.
+      </p>
+      <div class="ejemplo">
+        <div class="ejemplo__pieza" id="ejemplo"></div>
+        <div>
+          <p><strong>Un ejemplo.</strong> Antes de salir, enseñáis este tablero y decís: «Primero, me visto. Después, al parque».</p>
+          <p>Los adultos también usamos apoyos visuales: la agenda, la lista de la compra o el reloj de la cocina.</p>
+        </div>
+      </div>
+
+      <h2>Para qué sirve</h2>
+      <ul class="usos" id="usos"></ul>
+
+      <p class="frase-grande">Las palabras se van enseguida. El dibujo se queda: se puede mirar las veces que haga falta.</p>
+
+      <h2>A quién ayuda</h2>
+      <p>
+        A muchos peques. Sobre todo, a quienes tienen trastorno del espectro del autismo (TEA), trastorno del desarrollo del
+        lenguaje (TDL), trastorno por déficit de atención e hiperactividad (TDAH) o discapacidad intelectual.
+      </p>
+      <p>Cada peque es distinto. Si los dibujos todavía no le dicen nada, empezad con objetos o con fotos:</p>
+      <div class="formatos" id="formatos"></div>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Los apoyos visuales están entre las prácticas con más respaldo para la infancia con TEA
+        (Hume y otros, 2021). La idea de las palabras que se van es de la Confederación Autismo España (2025), y la de empezar
+        con objetos o fotos, de la guía de Autismo Sevilla.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         2. PARA EMPEZAR, UNO SOLO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>2</b>Guía para familias</p>
+      <h1>Para empezar, uno solo</h1>
+      <p class="entrada">Elegid un solo apoyo. Empezad por el momento del día que más cuesta en casa.</p>
+
+      <h2>¿Qué es lo que más os cuesta?</h2>
+      <ul class="elige" id="elige"></ul>
+
+      <h2>Antes de empezar</h2>
+      <ul class="lista-check" id="antes"></ul>
+
+      <div class="caja caja--amarilla" style="margin-top: 5mm">
+        <p style="margin: 0">
+          <strong>Probadlo unas semanas.</strong> Cuando lo use bien, podéis añadir otro apoyo. Uno nuevo cada vez.
+        </p>
+      </div>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Empezar con pocas imágenes, ponerlas a la altura de sus ojos y hablar con el cole lo
+        recomienda la guía de Autismo Sevilla. Lo de probar unas semanas es propuesta de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         3. CÓMO ENSEÑARLO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>3</b>Guía para familias</p>
+      <h1>Cómo enseñarlo</h1>
+      <p class="entrada">Usadlo siempre igual y siempre a la vista.</p>
+      <ol class="pasos-guia" id="pasos-guia"></ol>
+      <div class="caja caja--azul">
+        <h2>Si algo cambia</h2>
+        <p style="margin: 0">
+          Avisad con calma, con el apoyo delante. Cambiad la tarjeta mientras lo contáis: «Hoy no hay parque. Llueve. Hoy,
+          puzle».
+        </p>
+      </div>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Los pasos siguen la guía para familias de AFIRM (Sam y AFIRM Team, 2024), la de
+        Autismo Sevilla y los consejos de los Centros para el Control y la Prevención de Enfermedades de Estados Unidos (CDC,
+        2026) sobre rutinas: cumplir lo que se dice y contar los cambios con calma.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         4. ERRORES FRECUENTES
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>4</b>Guía para familias</p>
+      <h1>Errores frecuentes</h1>
+      <p class="entrada">Son normales y casi todos tienen un arreglo fácil.</p>
+      <ul class="errores" id="errores"></ul>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Usar siempre el mismo dibujo, pocas imágenes y pocas palabras: guía de Autismo Sevilla.
+        Cumplir lo que se promete: CDC (2026). Lo demás es propuesta de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         5. RETIRARLO POCO A POCO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>5</b>Guía para familias</p>
+      <h1>Retirarlo poco a poco</h1>
+      <h2 style="margin-top: 2mm">¿Cuándo?</h2>
+      <p>Cuando lo usa bien casi todos los días, durante varias semanas, y casi sin vuestra ayuda.</p>
+      <h2>¿Cómo?</h2>
+      <p>Cambiad una sola cosa cada vez. Antes de dar el paso siguiente, esperad a que el anterior vaya bien.</p>
+      <ol class="escalera" id="escalera"></ol>
+      <p class="escalera__ejes" aria-hidden="true"><span>← Más apoyo</span><span>Más autonomía →</span></p>
+      <div class="regla">
+        <span data-icono="dos"></span>
+        <div>
+          <p>No quitéis el apoyo de antes hasta que domine el nuevo.</p>
+          <p style="margin: 0">
+            Durante un tiempo, usad los dos juntos. Por ejemplo, la foto junto al dibujo, hasta que entienda el dibujo solo.
+          </p>
+        </div>
+      </div>
+      <h2>Si aparecen nervios</h2>
+      <p>
+        Volved al paso anterior, sin darle importancia. Después de unas vacaciones o de una temporada difícil, es normal
+        necesitar otra vez más apoyo.
+      </p>
+      <p>Algunos apoyos se quedan siempre, y no pasa nada: los adultos también usamos agendas, listas y alarmas.</p>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Retirar la ayuda del adulto en cuanto se pueda: AFIRM (Sam y AFIRM Team, 2024). Dar
+        el apoyo justo e ir quitándolo: pautas del Diseño Universal para el Aprendizaje (CAST, 2024, consideración 5.3). Juntar
+        la foto con el dibujo antes de quitar la foto: guía de Autismo Sevilla.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PLANTILLA: PRIMERO Y DESPUÉS (dos tableros)
+         ====================================================================== -->
+    <section class="hoja-tarjetas pyd-hoja">
+      <h1 class="solo-lector">Plantilla: Primero y después, dos tableros</h1>
+      <p class="aviso">
+        <span><strong>Primero y después</strong> · Uno para casa y otro para llevar</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <p class="pista">
+        En «Primero», lo que toca; en «Después», algo que le guste. Un círculo de velcro rugoso en cada círculo gris. Cumplid
+        siempre lo que pone en «Después».
+      </p>
+      <div id="tableros-pyd"></div>
+    </section>
+
+    <!-- ======================================================================
+         PLANTILLA: MI MAÑANA (apaisada)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Agenda de la mañana · Con velcro</p>
+          <h1><img src="pictogramas/25704.png" alt="" />Mi mañana</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="rotulo-fila"><span data-icono="flecha"></span>Toca</p>
+      <ol class="fila-dia" id="fila-toca"></ol>
+      <div class="bajan" id="bajan" aria-hidden="true"></div>
+      <p class="rotulo-fila"><span data-icono="marcada"></span>¡Hecho!</p>
+      <ol class="fila-dia" id="fila-hecho"></ol>
+      <p class="leyenda">
+        <span data-icono="velcro"></span><span>Hasta 5 pasos, en orden. Al terminar cada paso, su tarjeta baja a «¡Hecho!».
+          Velcro rugoso en cada círculo gris. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA.
+          Propiedad: Gobierno de Aragón.</span>
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PLANTILLA: ELIJO (apaisada)
+         ====================================================================== -->
+    <section class="apaisada">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Tablero para elegir · Con velcro</p>
+          <h1><img src="pictogramas/30510.png" alt="" />Elijo</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="para-empezar" aria-hidden="true"><p>Para empezar, solo estas dos</p></div>
+      <ol class="opciones" id="opciones"></ol>
+      <div class="quiero">
+        <span class="quiero__flecha" data-icono="abajo"></span>
+      </div>
+      <div class="quiero__fila">
+        <p class="quiero__rotulo"><img src="pictogramas/5441.png" alt="" />Quiero</p>
+        <div class="hueco-elijo c-verde" style="width: min(60mm, 100%)"><span class="velcro"></span></div>
+        <p class="quiero__pista">
+          Pon arriba lo que puede elegir. Su tarjeta baja a «Quiero». Dale enseguida lo que ha elegido.
+        </p>
+      </div>
+      <p class="leyenda">
+        <span data-icono="velcro"></span><span>Velcro rugoso en cada círculo gris; el suave, detrás de cada tarjeta. Pictogramas:
+          Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</span>
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PLANTILLA: CUENTA ATRÁS
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Temporizador de papel · Para recortar</p>
+          <h1>Cuenta atrás</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="pista">
+        No avanza solo: quitad una ficha cada minuto, o tachad un número. Para medir el tiempo, usad un reloj o el temporizador
+        del móvil. Cuando no quedan fichas: «¡Se acabó!».
+      </p>
+      <div id="cuentas"></div>
+      <p class="nivel-cuenta">Fichas para las tiras de 3 y de 5 · Velcro suave detrás</p>
+      <ul class="fichas-cuenta" id="fichas"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las
+        tiras y las fichas son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE CASA (dos hojas, 20 por hoja)
+         ====================================================================== -->
+    <div id="hojas-casa"></div>
+
+    <!-- ======================================================================
+         PARA SEGUIR, FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="final">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para seguir · Fuentes y créditos</p>
+      <h1>Cuando un apoyo ya funciona</h1>
+      <p>Estos materiales de IdEducando son gratis y ayudan a dar el siguiente paso. Están en ideducando.es, con el mismo título.</p>
+      <ul class="seguir" id="seguir"></ul>
+
+      <h2>De dónde sale esta guía</h2>
+      <p>
+        <strong>Apoyos visuales en casa: guía para familias.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/apoyos-visuales-familias</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+      <ul class="referencias">
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation
+          review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI: 10.1007/s10803-020-04844-2
+        </li>
+        <li>
+          Knight, V., Sartini, E. y Spriggs, A. D. (2015). Evaluating visual activity schedules as evidence-based practice for
+          individuals with autism spectrum disorders. <em>Journal of Autism and Developmental Disorders</em>, 45(1), 157-178.
+          DOI: 10.1007/s10803-014-2201-z
+        </li>
+        <li>
+          Sam, A. y AFIRM Team (2024). <em>Visual Supports</em> (actualización de 2024), con su guía para familias. Universidad
+          de Carolina del Norte en Chapel Hill, Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu
+        </li>
+        <li>
+          National Institute for Health and Care Excellence (2013, actualizada en 2021). <em>Autism spectrum disorder in under
+          19s: support and management</em> (CG170), recomendaciones 1.1.9 y 1.4.1. nice.org.uk
+        </li>
+        <li>
+          Gortázar Díaz, M. (s. f.). <em>Guía Apoyos Visuales</em>. Asociación Autismo Sevilla. Publicada en el Centro de
+          Recursos Online (CROL) de la Junta de Castilla y León. educa.jcyl.es/crol
+        </li>
+        <li>
+          Erena-Guardia, G. y otros (2025). <em>Guía de buenas prácticas en el uso de pictogramas: orientaciones para una
+          señalización accesible</em>. Confederación Autismo España. autismo.org.es
+        </li>
+        <li>
+          Centers for Disease Control and Prevention (2026). <em>Tips for Relying on Routines and Rules</em>. Essentials for
+          Parenting Toddlers and Preschoolers. Actualizada el 30 de abril de 2026. cdc.gov/parenting-toddlers
+        </li>
+        <li>
+          Grey, I., Healy, O., Leader, G. y Hayes, D. (2009). Using a Time Timer to increase appropriate waiting behavior in a
+          child with developmental disabilities. <em>Research in Developmental Disabilities</em>, 30(2), 359-366. DOI:
+          10.1016/j.ridd.2008.07.001
+        </li>
+        <li>
+          Resolución de 30 de julio de 2019 de la Dirección General de Atención a la Diversidad y Calidad Educativa (Región de
+          Murcia), sobre la respuesta educativa al alumnado con dificultades de aprendizaje. BORM n.º 184, de 10 de agosto de
+          2019, anexo V, pág. 25062.
+        </li>
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>, consideraciones 2.5, 5.3 y 7.1.
+          udlguidelines.cast.org
+        </li>
+      </ul>
+      <p>
+        Las agendas visuales funcionan mejor cuando se enseñan paso a paso (Knight y otros, 2015). En el cole, la Región de
+        Murcia pide dar las instrucciones también con dibujos al alumnado con trastorno del lenguaje (anexo V). Esperar se
+        puede alargar poco a poco con un reloj visual (Grey y otros, 2009).
+      </p>
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
+        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las plantillas, la casa de la
+        portada y el diseño son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin
+        fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas, hay que actualizarlos aquí y en la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = { pyd: 8, manana: 9, elijo: 10, cuenta: 11, tarjetas: 12, seguir: 14, retirar: 7 };
+
+      // ---------------------------------------------------------------------
+      // Tarjetas de casa: [pictograma de ARASAAC, texto]. null: tarjeta en blanco.
+      // ---------------------------------------------------------------------
+      const GRUPOS = [
+        {
+          nombre: 'Por la mañana',
+          color: 'naranja',
+          tarjetas: [
+            [31857, 'Me despierto'],
+            [37458, 'Hago pis'],
+            [34611, 'Me lavo la cara'],
+            [2781, 'Me visto'],
+            [28667, 'Desayuno'],
+            [31880, 'Me lavo los dientes'],
+            [2512, 'Me peino'],
+            [2621, 'Zapatillas'],
+            [27052, 'Abrigo'],
+            [2475, 'Mochila'],
+            [3082, 'Al cole'],
+          ],
+        },
+        {
+          nombre: 'Por la tarde y la noche',
+          color: 'azul',
+          tarjetas: [
+            [2349, 'Como'],
+            [28835, 'Merienda'],
+            [8975, 'Me lavo las manos'],
+            [8680, 'Recojo'],
+            [2271, 'Baño'],
+            [2370, 'Ducha'],
+            [28675, 'Ceno'],
+            [2522, 'Pijama'],
+            [6469, 'Cuento'],
+            [2369, 'A dormir'],
+          ],
+        },
+        {
+          nombre: 'Para jugar',
+          color: 'verde',
+          tarjetas: [
+            [2439, 'Jugar'],
+            [2859, 'Parque'],
+            [3241, 'Pelota'],
+            [2540, 'Puzle'],
+            [7207, 'Pintar'],
+            [2529, 'Plastilina'],
+            [4935, 'Bloques'],
+            [2746, 'Música'],
+            [2782, 'Tele'],
+            [29151, 'Tablet'],
+            [5517, 'Bici'],
+            [6945, 'Pompas'],
+            [32015, 'Cantar'],
+          ],
+        },
+        {
+          nombre: 'Para esperar, para acabar y en blanco',
+          color: 'morado',
+          tarjetas: [[8109, 'Espero'], [28429, '¡Se acabó!'], null, null, null, null],
+        },
+      ];
+      const TODAS = GRUPOS.flatMap((g) => g.tarjetas.map((t) => [g.color, t]));
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const COLOR = { verde: '#1fa67a', azul: '#2f6fd6', amarillo: '#f6c12e', coral: '#e8553e', morado: '#8c4fb8', naranja: '#f5961f' };
+      const TINTE = { verde: '#dcf3ea', azul: '#e4edfb', amarillo: '#fdf0c7', coral: '#fde5e0', morado: '#efe5f7', naranja: '#fde8cf' };
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const miniCarta = (x, y, w, h, color) =>
+        `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2.4" fill="#fff" stroke="${M}" stroke-width="1.8"/><rect x="${x}" y="${y}" width="${w}" height="3" rx="1.4" fill="${color}"/><circle cx="${x + w / 2}" cy="${y + h * 0.5}" r="${Math.min(w, h) * 0.2}" fill="${TINTE.azul}" stroke="${M}" stroke-width="1.2"/>`;
+
+      const DIBUJOS = {
+        flecha: `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        abajo: `<path d="M50 12V82M26 60L50 84L74 60" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
+          <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
+        marcada: `<rect x="10" y="10" width="80" height="80" rx="13" fill="#fff" stroke="${M}" stroke-width="7"/>
+          <path d="M27 52L43 67L74 33" fill="none" stroke="${M}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
+        // ✓ y ✗ de los errores frecuentes (también se distinguen por la forma, no solo por el color)
+        si: `<circle cx="50" cy="50" r="44" fill="${COLOR.verde}"/><path d="M28 52L43 66L72 35" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
+        no: `<rect x="8" y="8" width="84" height="84" rx="14" fill="${COLOR.coral}"/><path d="M33 33L67 67M67 33L33 67" stroke="#fff" stroke-width="11" stroke-linecap="round"/>`,
+        casilla: `<rect x="10" y="10" width="80" height="80" rx="13" fill="#fff" stroke="${M}" stroke-width="7"/><path d="M27 52L43 67L74 33" fill="none" stroke="${COLOR.verde}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`,
+        // Dos apoyos juntos: la foto y el dibujo
+        dos: `<rect x="6" y="18" width="46" height="60" rx="6" fill="${TINTE.azul}" stroke="${M}" stroke-width="4" transform="rotate(-8 29 48)"/>
+          <circle cx="29" cy="40" r="9" fill="#fff" stroke="${M}" stroke-width="3" transform="rotate(-8 29 48)"/>
+          <path d="M14 70 Q29 50 44 70" fill="#fff" stroke="${M}" stroke-width="3" transform="rotate(-8 29 48)"/>
+          <rect x="46" y="22" width="46" height="60" rx="6" fill="#fff" stroke="${M}" stroke-width="4" transform="rotate(7 69 52)"/>
+          <circle cx="69" cy="44" r="8" fill="none" stroke="${M}" stroke-width="3.4" transform="rotate(7 69 52)"/>
+          <path d="M69 52V66M60 58H78M69 66L62 76M69 66L76 76" fill="none" stroke="${M}" stroke-width="3.4" stroke-linecap="round" transform="rotate(7 69 52)"/>`,
+        // Miniaturas de las cuatro plantillas
+        miniPyd: `<rect x="4" y="18" width="38" height="44" rx="5" fill="${TINTE.verde}" stroke="${COLOR.verde}" stroke-width="3.4"/>
+          <rect x="58" y="18" width="38" height="44" rx="5" fill="${TINTE.azul}" stroke="${COLOR.azul}" stroke-width="3.4"/>
+          ${miniCarta(11, 26, 24, 28, COLOR.naranja)}${miniCarta(65, 26, 24, 28, COLOR.verde)}
+          <path d="M45 40H55M51 35L56 40L51 45" fill="none" stroke="${M}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`,
+        miniAgenda: `${[0, 1, 2, 3, 4].map((i) => `<rect x="${4 + i * 19}" y="14" width="16" height="22" rx="3" fill="#fff" stroke="${COLOR.naranja}" stroke-width="2.6"/>${i < 3 ? '' : miniCarta(6 + i * 19, 17, 12, 16, COLOR.naranja)}`).join('')}
+          ${[0, 1, 2, 3, 4].map((i) => `<rect x="${4 + i * 19}" y="48" width="16" height="22" rx="3" fill="${TINTE.amarillo}" stroke="${COLOR.amarillo}" stroke-width="2.6"/>${i < 3 ? miniCarta(6 + i * 19, 51, 12, 16, COLOR.naranja) : ''}`).join('')}
+          <path d="M50 38V46M46 42L50 46L54 42" fill="none" stroke="${M}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+        miniElijo: `${[0, 1, 2, 3].map((i) => `<rect x="${5 + i * 23}" y="8" width="20" height="24" rx="3" fill="#fff" stroke="${COLOR.verde}" stroke-width="2.6"/>${i === 1 ? '' : miniCarta(7 + i * 23, 11, 16, 18, COLOR.verde)}`).join('')}
+          <path d="M50 36V48M45 43L50 48L55 43" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="37" y="52" width="26" height="30" rx="4" fill="${TINTE.verde}" stroke="${COLOR.verde}" stroke-width="3"/>${miniCarta(40, 55, 20, 24, COLOR.verde)}`,
+        miniCuenta: `<rect x="3" y="26" width="94" height="36" rx="6" fill="#fff" stroke="${SUAVE}" stroke-width="2" stroke-dasharray="4 3"/>
+          ${[0, 1, 2].map((i) => `<circle cx="${16 + i * 20}" cy="44" r="8.5" fill="${TINTE.morado}" stroke="${M}" stroke-width="2.2"/>${i > 0 ? `<path d="${ESTRELLA}" transform="translate(${16 + i * 20 - 7} 37) scale(.14)" fill="${COLOR.amarillo}" stroke="${M}" stroke-width="8"/>` : ''}`).join('')}
+          <path d="M68 44H74M71 41L74 44L71 47" fill="none" stroke="${M}" stroke-width="2.2" stroke-linecap="round"/>
+          <rect x="77" y="33" width="17" height="22" rx="3" fill="${TINTE.coral}" stroke="${COLOR.coral}" stroke-width="2.4"/>
+          <path d="M81 40L90 48M90 40L81 48" stroke="${M}" stroke-width="2.4" stroke-linecap="round"/>`,
+        // Objeto real: una cuchara
+        cuchara: `<ellipse cx="50" cy="28" rx="15" ry="20" fill="#d9dde8" stroke="${M}" stroke-width="4"/><path d="M50 48V90" stroke="${M}" stroke-width="9" stroke-linecap="round"/><path d="M44 22 Q46 16 52 14" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>`,
+        // Foto: la cuchara dentro de un marco de foto
+        foto: `<rect x="8" y="12" width="84" height="76" rx="6" fill="${TINTE.amarillo}" stroke="${M}" stroke-width="4"/><rect x="16" y="20" width="68" height="60" rx="3" fill="#fff"/>
+          <g transform="translate(29 22) scale(.42)"><ellipse cx="50" cy="28" rx="15" ry="20" fill="#d9dde8" stroke="${M}" stroke-width="7"/><path d="M50 48V90" stroke="${M}" stroke-width="13" stroke-linecap="round"/></g>
+          <path d="M16 80 L38 60 L52 72 L64 62 L84 80Z" fill="${TINTE.verde}"/>`,
+      };
+      const dibujo = (nombre, clase = '', vista) => svg(DIBUJOS[nombre], clase, vista);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const logo = (clase = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+
+      // ---------------------------------------------------------------------
+      // Piezas
+      // ---------------------------------------------------------------------
+      function tarjeta(color, t, etiqueta = 'li') {
+        if (!t)
+          return `<${etiqueta} class="tc c-${color}"><span class="tc__banda"></span><span class="hueco-picto"></span><span class="renglon"></span></${etiqueta}>`;
+        return `<${etiqueta} class="tc c-${color}"><span class="tc__banda"></span>${picto(t[0])}<p>${t[1]}</p></${etiqueta}>`;
+      }
+      const buscar = (texto) => TODAS.find(([, t]) => t && t[1] === texto);
+
+      // Tablero «Primero y después». Con «ejemplo», lleva dos tarjetas puestas.
+      function tableroPyd(ejemplo = null) {
+        const caja = (color, n, palabra, t) =>
+          `<div class="pyd__caja c-${color}"><p class="pyd__cabeza">${picto(n)}${palabra}</p><div class="pyd__hueco"><span class="velcro"></span>${t ? tarjeta(t[0], t[1], 'div') : ''}</div></div>`;
+        return `<div class="pyd">
+            <p class="pyd__titulo"><span>Primero y después</span>${logo()}</p>
+            <div class="pyd__fila">
+              ${caja('verde', 37753, 'Primero', ejemplo?.[0])}
+              ${dibujo('flecha')}
+              ${caja('azul', 32749, 'Después', ejemplo?.[1])}
+            </div>
+            ${ejemplo ? '' : '<p class="pyd__pie">Pictogramas: Sergio Palao. ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Gobierno de Aragón. Plantilla de IdEducando, ideducando.es.</p>'}
+          </div>`;
+      }
+
+      // Tira de cuenta atrás: 3 o 5 círculos con velcro, o 10 números para tachar.
+      function tiraCuenta(n, { tachar = false, puestas = n } = {}) {
+        const circulos = Array.from({ length: n }, (_, i) =>
+          tachar
+            ? `<li>${n - i}</li>`
+            : `<li class="c-morado"><span class="velcro"></span>${i >= n - puestas ? `<span class="ficha-estrella" style="position:absolute;border-style:solid">${svg(`<path d="${ESTRELLA}" fill="${COLOR.amarillo}" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>`)}</span>` : ''}</li>`,
+        ).join('');
+        return `<div class="tira-cuenta${tachar ? ' tira-cuenta--diez' : ''}"><ol>${circulos}</ol>${dibujo('flecha')}<p class="fin">${picto(28429)}¡Se acabó!</p></div>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Página 3: ejemplo, usos y formatos
+      // ---------------------------------------------------------------------
+      document.getElementById('ejemplo').innerHTML = `<div style="zoom:.5;width:184mm">${tableroPyd([buscar('Me visto'), buscar('Parque')])}</div>`;
+
+      document.getElementById('usos').innerHTML = [
+        ['naranja', 'miniAgenda', 'Saber qué va a pasar', '«Primero, cena. Después, baño».'],
+        ['azul', 'miniPyd', 'Saber qué hay que hacer', 'Los pasos de vestirse, uno a uno.'],
+        ['verde', 'miniElijo', 'Elegir y pedir', '«¿Puzle o pelota?».'],
+        ['morado', 'miniCuenta', 'Saber cuánto falta', '«Quedan dos fichas».'],
+      ]
+        .map(([c, d, t, e]) => `<li class="c-${c}">${dibujo(d)}<span><strong>${t}</strong>${e}</span></li>`)
+        .join('');
+
+      document.getElementById('formatos').innerHTML = [
+        ['Objeto', `<span class="marco">${dibujo('cuchara')}</span>`],
+        ['Foto', `<span class="marco">${dibujo('foto')}</span>`],
+        ['Dibujo', `<span class="marco">${picto(2349)}</span>`],
+        ['Palabra', `<span class="marco palabra">comer</span>`],
+      ]
+        .map(([t, m], i) => `<div>${m}<span>${t}</span></div>${i < 3 ? dibujo('flecha') : ''}`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Página 4: qué cuesta más y antes de empezar
+      // ---------------------------------------------------------------------
+      document.getElementById('elige').innerHTML = [
+        ['verde', 'Dejar algo que le gusta o pasar a otra cosa.', 'miniPyd', 'Primero y después', 'pyd'],
+        ['naranja', 'Las mañanas: vestirse, desayunar y salir a tiempo.', 'miniAgenda', 'Mi mañana', 'manana'],
+        ['azul', 'Pedir lo que quiere o decidir qué hacer.', 'miniElijo', 'Elijo', 'elijo'],
+        ['morado', 'Esperar, o terminar algo que le gusta.', 'miniCuenta', 'Cuenta atrás', 'cuenta'],
+      ]
+        .map(
+          ([c, situacion, d, nombre, pag]) =>
+            `<li class="c-${c}"><span>${situacion}</span>${dibujo('flecha')}${dibujo(d)}<span><b>${nombre}</b><small>Página ${PAGINAS[pag]}</small></span></li>`,
+        )
+        .join('');
+
+      document.getElementById('antes').innerHTML = [
+        ['El momento.', 'Siempre el mismo: el que más cuesta.'],
+        ['Las tarjetas.', 'Solo 2 o 3: las que vais a usar.'],
+        ['El sitio.', 'A la altura de sus ojos y siempre en el mismo lugar.'],
+        ['El cole.', 'Contadle qué usáis en casa. Mejor si usáis los mismos dibujos.'],
+      ]
+        .map(([t, d]) => `<li>${dibujo('casilla')}<span><strong>${t}</strong> ${d}</span></li>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Página 5: cómo enseñarlo
+      // ---------------------------------------------------------------------
+      document.getElementById('pasos-guia').innerHTML = [
+        [6564, 'Justo antes.', 'Enseñadlo justo antes del momento, no media hora antes.'],
+        [3345, 'Pocas palabras.', 'Señalad la tarjeta y decid solo lo importante: «Primero, pijama. Después, cuento».'],
+        [2474, 'Que mire el dibujo.', 'Poneos a su lado o detrás y señalad la tarjeta. Así mira el dibujo, no a vosotros.'],
+        ['d:marcada', 'Que lo mueva.', 'Al terminar, su tarjeta pasa a «¡Hecho!» o a un sobre de «Se acabó».'],
+        [2392, 'Siempre igual.', 'La misma tarjeta para lo mismo, cada día. Y todas las personas de casa, igual.'],
+        ['d:si', 'Cumplid lo que pone.', 'Si pone «Después, parque», después vais al parque.'],
+        [4570, 'Ayuda, la justa.', 'Al principio, guiad su mano. Después, solo señalad. Al final, lo mira sin ayuda.'],
+      ]
+        .map(
+          ([p, t, d]) =>
+            `<li>${typeof p === 'string' ? dibujo(p.slice(2)) : picto(p)}<span><strong>${t}</strong> ${d}</span></li>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Página 6: errores frecuentes
+      // ---------------------------------------------------------------------
+      document.getElementById('errores').innerHTML = [
+        ['Muchas tarjetas a la vez.', 'Empezad con 2 o 3. Añadid más poco a poco.'],
+        ['Sacarlo solo cuando hay un problema.', 'Usadlo cada día, también cuando todo va bien.'],
+        ['Un dibujo distinto cada vez para lo mismo.', 'Una tarjeta para cada cosa, siempre la misma.'],
+        ['Ponerlo lejos, o cada día en un sitio.', 'A la altura de sus ojos y siempre en el mismo lugar.'],
+        ['Prometer algo que luego no pasa.', 'En «Después», solo lo que vais a cumplir.'],
+        ['Hablar mucho mientras se señala.', 'Pocas palabras: «Primero, dientes. Después, cuento».'],
+        ['Usarlo para castigar o para amenazar.', 'Es una ayuda para entender. Nunca se quita como castigo.'],
+        ['Quitarlo de golpe porque ya va bien.', `Retiradlo poco a poco, como explica la página ${PAGINAS.retirar}.`],
+      ]
+        .map(
+          ([mal, bien]) =>
+            `<li><div>${dibujo('no')}<span><small>En lugar de…</small>${mal}</span></div><div>${dibujo('si')}<span><small>Mejor</small>${bien}</span></div></li>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Página 7: la escalera para retirar el apoyo
+      // ---------------------------------------------------------------------
+      document.getElementById('escalera').innerHTML = [
+        ['coral', 'Menos ayuda vuestra', 'De guiar su mano a solo señalar.'],
+        ['naranja', 'Menos tarjetas', 'Solo lo que viene ahora.'],
+        ['amarillo', 'Más pequeño', 'De la pared a una tira en la mesa o en el bolsillo.'],
+        ['verde', 'Del dibujo a la palabra', 'Si ya lee, la palabra escrita.'],
+        ['azul', 'A mano, por si acaso', 'Guardado cerca, para los días difíciles.'],
+      ]
+        .map(([c, t, d], i) => `<li class="c-${c}"><strong><b>${i + 1}</b>${t}</strong><span>${d}</span></li>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Plantillas
+      // ---------------------------------------------------------------------
+      document.getElementById('tableros-pyd').innerHTML = tableroPyd() + tableroPyd();
+
+      document.getElementById('fila-toca').innerHTML = Array.from(
+        { length: 5 },
+        (_, i) => `<li><span class="num-dia">${i + 1}</span><div class="hueco-dia c-naranja"><span class="velcro"></span></div></li>`,
+      ).join('');
+      document.getElementById('bajan').innerHTML = Array.from({ length: 5 }, () => dibujo('abajo')).join('');
+      document.getElementById('fila-hecho').innerHTML = Array.from(
+        { length: 5 },
+        () =>
+          `<li><div class="hueco-dia hueco-dia--hecho">${svg(`<path d="${ESTRELLA}" fill="#fff" stroke="${COLOR.amarillo}" stroke-width="3" stroke-linejoin="round"/>`, 'estrella-fondo')}<span class="velcro"></span></div></li>`,
+      ).join('');
+
+      document.getElementById('opciones').innerHTML = Array.from(
+        { length: 4 },
+        () => `<li><div class="hueco-elijo c-azul"><span class="velcro"></span></div></li>`,
+      ).join('');
+
+      document.getElementById('cuentas').innerHTML = `
+        <p class="nivel-cuenta"><span class="nv n1" aria-hidden="true">1</span>Nivel 1 · Quedan 3 fichas</p>
+        ${tiraCuenta(3, { puestas: 0 })}
+        <p class="nivel-cuenta"><span class="nv n2" aria-hidden="true">2</span>Nivel 2 · Quedan 5 fichas</p>
+        ${tiraCuenta(5, { puestas: 0 })}
+        <p class="nivel-cuenta"><span class="nv n3" aria-hidden="true">3</span>Nivel 3 · Tacha un número cada vez, con rotulador de pizarra</p>
+        ${tiraCuenta(10, { tachar: true })}`;
+      document.getElementById('fichas').innerHTML = Array.from(
+        { length: 8 },
+        () =>
+          `<li class="ficha-estrella">${svg(`<path d="${ESTRELLA}" fill="${COLOR.amarillo}" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>`)}</li>`,
+      ).join('');
+
+      // Tarjetas: 20 por hoja
+      document.getElementById('hojas-casa').outerHTML = [0, 1]
+        .map((h) => {
+          const lote = TODAS.slice(h * 20, h * 20 + 20);
+          const grupos = GRUPOS.filter((g) => lote.some(([c]) => c === g.color));
+          return `<section class="hoja-tarjetas">
+            <h1 class="solo-lector">Tarjetas de casa, hoja ${h + 1} de 2</h1>
+            <p class="aviso"><span><strong>Tarjetas de casa · ${h + 1} de 2</strong> · 42 × 42 mm</span><span>Corta por la línea de puntos</span></p>
+            <ul class="grupos">${grupos.map((g) => `<li class="c-${g.color}"><span></span>${g.nombre}</li>`).join('')}<li>· Velcro suave detrás de cada una</li></ul>
+            <ul class="rejilla-casa">${lote.map(([c, t]) => tarjeta(c, t)).join('')}</ul>
+            <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.${h ? ' En las tarjetas en blanco, dibuja o pega una foto antes de plastificar.' : ''}</p>
+          </section>`;
+        })
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Para seguir: los cuatro materiales que ya hay (y su portada)
+      // ---------------------------------------------------------------------
+      document.getElementById('seguir').innerHTML = [
+        ['agenda-visual-pictogramas', 'Agenda visual con pictogramas', 'Cuando la mañana ya va bien: la semana, el día y «Si hay un cambio», con 60 pictogramas.'],
+        ['agenda-visual-semanal', 'Agenda visual en blanco', 'La misma idea, para usar con vuestras fotos o pictogramas.'],
+        ['secuencias-rutinas-paso-a-paso', 'Paso a paso', 'Cuando una rutina tiene muchos pasos: lavarse las manos, ir al baño o desayunar.'],
+        ['tablero-comunicacion-basico', 'Comunicación en el bolsillo', 'Cuando quiere decir más que «quiero»: un tablero de 45 palabras y un llavero.'],
+      ]
+        .map(
+          ([id, t, d]) =>
+            `<li><img src="../../public/portadas/${id}.webp" alt="" /><span><strong><a href="https://www.ideducando.es/material-gratuito/${id}/">${t}</a></strong>${d}</span></li>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: una casa con el tablero, la cuenta atrás y tarjetas sueltas
+      // ---------------------------------------------------------------------
+      const casa = `<svg viewBox="0 0 200 170" width="186mm" height="158mm" aria-hidden="true" focusable="false">
+          <path d="M16 74 L100 12 L184 74" fill="none" stroke="${M}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="140" y="22" width="16" height="30" fill="#fff" stroke="${M}" stroke-width="2.6"/>
+          <path d="M30 66 V160 H170 V66" fill="#fff" stroke="${M}" stroke-width="3.4" stroke-linejoin="round"/>
+          <path d="M30 160 H170" stroke="${M}" stroke-width="3.4" stroke-linecap="round"/>
+          <circle cx="100" cy="46" r="9" fill="${TINTE.amarillo}" stroke="${M}" stroke-width="2.4"/>
+          <path d="M100 40V52M94 46H106" stroke="${M}" stroke-width="2" />
+        </svg>`;
+      const cartaSuelta = (texto, x, y, giro, escala = 0.7) => {
+        const [c, t] = buscar(texto);
+        return `<div style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg)"><div style="zoom:${escala}">${tarjeta(c, t, 'div')}</div></div>`;
+      };
+      document.getElementById('escena').innerHTML = `
+        <div style="left:12mm;top:118mm">${casa}</div>
+        <div style="left:36mm;top:174mm;transform:rotate(-2deg)"><div style="zoom:.6;width:186mm">${tableroPyd([buscar('Me visto'), buscar('Parque')])}</div></div>
+        <div style="left:52mm;top:250mm;transform:rotate(1.5deg)"><div style="zoom:.52;width:186mm">${tiraCuenta(3, { puestas: 2 })}</div></div>
+        ${cartaSuelta('Desayuno', 150, 136, 9)}
+        ${cartaSuelta('Me lavo los dientes', 22, 150, -10)}
+        ${cartaSuelta('Cuento', 160, 232, -7)}`;
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = dibujo(el.dataset.icono, el.className);
+    </script>
+  </body>
+</html>

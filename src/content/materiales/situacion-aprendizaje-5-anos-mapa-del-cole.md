@@ -37,7 +37,7 @@ cuidados:
   - "El velcro, los gomets y la masilla son piezas pequeñas: lejos de quien se lleva cosas a la boca. Quita la cinta del suelo al terminar."
   - "Las señales, con permiso del equipo directivo, a la altura de los ojos de los pequeños y sin tapar las de evacuación."
 fuentes:
-  - "Decreto 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022"
+  - "Decreto 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022"
   - "CAST (2024). Pautas para el Diseño Universal para el Aprendizaje, versión 3.0. udlguidelines.cast.org/es"
   - "Collicott, J. (1991). Implementing multi-level instruction: Strategies for classroom teachers. En G. L. Porter y D. Richler (Eds.), Changing Canadian Schools: Perspectives on disability and inclusion (pp. 191-218). Roeher Institute"
   - "Inclusive Schools Network (2011). Using multi-level instruction for a classroom of diverse learners. inclusiveschools.org"

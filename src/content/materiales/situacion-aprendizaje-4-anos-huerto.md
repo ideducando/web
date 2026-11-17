@@ -38,7 +38,7 @@ cuidados:
   - "Si alguien se traga una semilla o una pieza, llama al Servicio de Información Toxicológica (91 562 04 20). Si le cuesta respirar, al 112."
   - "Redondea las esquinas plastificadas para que no pinchen. Se limpian con un paño con agua y jabón."
 fuentes:
-  - "Decreto 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022"
+  - "Decreto 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. BORM n.º 255, de 4 de noviembre de 2022"
   - "BORM n.º 18, de 23 de enero de 2026, anexo XVII: Cuerpo de Maestros, Educación Infantil (págs. 1720 a 1724)"
   - "CAST (2024). Pautas para el Diseño Universal para el Aprendizaje, versión 3.0. udlguidelines.cast.org/es"
   - "Collicott, J. (1991). Implementing multi-level instruction: Strategies for classroom teachers. En G. L. Porter y D. Richler (Eds.), Changing Canadian Schools: Perspectives on disability and inclusion (pp. 191-218). Roeher Institute"

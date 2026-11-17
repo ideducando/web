@@ -532,17 +532,17 @@
       }
 
       .lema {
-        margin: 0 0 3mm;
+        margin: 0 0 2.6mm;
         font-weight: 700;
-        font-size: 20pt;
-        line-height: 1.25;
+        font-size: 18pt;
+        line-height: 1.22;
       }
 
       .ejemplos {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 4mm;
-        margin: 0 0 3.6mm;
+        margin: 0 0 3mm;
         padding: 0;
         list-style: none;
       }
@@ -551,21 +551,21 @@
         display: grid;
         justify-items: center;
         align-content: start;
-        gap: 1.2mm;
+        gap: 1mm;
         margin: 0;
-        padding: 2.4mm 2mm 2.6mm;
+        padding: 1.8mm 2mm 2mm;
         border: 0.4mm solid var(--linea);
         border-radius: 3.5mm;
         background: var(--crema);
       }
 
       .ejemplos img {
-        width: 20mm;
-        height: 20mm;
+        width: 17mm;
+        height: 17mm;
       }
 
       .ejemplos .calle {
-        font-size: 24pt;
+        font-size: 22pt;
       }
 
       .ejemplos p {
@@ -586,15 +586,15 @@
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 4mm;
-        margin: 0 0 3.6mm;
+        margin: 0 0 3mm;
       }
 
       .familia-vocal {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 22mm;
+        grid-template-columns: minmax(0, 1fr) 18mm;
         align-items: center;
-        gap: 2mm;
-        padding: 2.6mm 3.4mm 3mm;
+        gap: 1.6mm;
+        padding: 2mm 3mm 2.4mm;
         border-radius: 4mm;
         border: 0.6mm solid var(--borde);
         background: var(--fondo);
@@ -617,8 +617,8 @@
       }
 
       .familia-vocal .letras {
-        margin: 0 0 1.4mm;
-        font-size: 34pt;
+        margin: 0 0 1mm;
+        font-size: 30pt;
         line-height: 1.1;
       }
 
@@ -634,13 +634,13 @@
       }
 
       .familia-vocal svg {
-        width: 22mm;
-        height: 16mm;
+        width: 18mm;
+        height: 13mm;
       }
 
       .regla {
-        margin: 0 0 3mm;
-        padding: 2.4mm 3.6mm 2.8mm;
+        margin: 0 0 2.6mm;
+        padding: 2mm 3.2mm 2.4mm;
         border-radius: 4mm;
         border: 0.6mm solid var(--c);
         background: var(--t);
@@ -690,7 +690,7 @@
 
       .regla ul {
         display: grid;
-        gap: 1.6mm;
+        gap: 1.4mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -702,7 +702,7 @@
         align-items: center;
         gap: 3mm;
         margin: 0;
-        padding: 1.4mm 2.4mm;
+        padding: 1mm 2.4mm;
         border-radius: 3mm;
         background: #fff;
       }
@@ -711,11 +711,11 @@
         margin: 0;
         font-weight: 700;
         font-size: 18pt;
-        line-height: 1.12;
+        line-height: 1.1;
       }
 
       .regla li .palabras {
-        font-size: 22pt;
+        font-size: 21pt;
         white-space: nowrap;
       }
 
@@ -726,18 +726,18 @@
 
       .truco {
         display: grid;
-        grid-template-columns: 16mm 16mm minmax(0, 1fr);
+        grid-template-columns: 14mm 14mm minmax(0, 1fr);
         align-items: center;
         gap: 3mm;
-        padding: 2.4mm 3.6mm;
+        padding: 2mm 3.4mm;
         border-radius: 4mm;
         background: var(--amarillo-tinte);
         border: 0.6mm solid var(--amarillo);
       }
 
       .truco img {
-        width: 16mm;
-        height: 16mm;
+        width: 14mm;
+        height: 14mm;
         border-radius: 2mm;
         background: #fff;
       }
@@ -838,12 +838,13 @@
         line-height: 1.34;
       }
 
+      /* Nada se sale del ancho útil de la hoja: si algo se sale, Chromium encoge todo el PDF y las piezas
+         dejan de medir lo que deben. */
       .corte {
         display: flex;
         align-items: center;
         gap: 2.4mm;
-        margin: 3.4mm -12mm 3.4mm;
-        padding: 0 12mm;
+        margin: 3.4mm 0;
         font-size: 11pt;
         color: var(--suave);
       }
@@ -998,7 +999,7 @@
         grid-template-rows: 2.4mm minmax(0, 1fr) auto;
         justify-items: center;
         margin: 0;
-        padding: 0 2mm 2.2mm;
+        padding: 0 0 2.2mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 3.5mm;
         overflow: hidden;
@@ -1008,7 +1009,6 @@
 
       .tj__banda {
         justify-self: stretch;
-        margin: 0 -2mm;
         background: var(--c);
       }
 
@@ -1061,20 +1061,22 @@
         list-style: none;
       }
 
+      /* Pictograma arriba y texto debajo: así cada orden tiene casi todo el ancho de su casilla. */
       .pasos-fila li {
         display: grid;
-        grid-template-columns: 12mm minmax(0, 1fr);
-        align-items: center;
-        gap: 1.8mm;
+        justify-items: center;
+        align-content: start;
+        gap: 1mm;
         margin: 0;
-        padding: 1.4mm 1.8mm;
+        padding: 1.6mm 1.4mm 1.8mm;
         border-radius: 3mm;
         background: var(--t, var(--crema));
+        text-align: center;
       }
 
       .pasos-fila img {
-        width: 12mm;
-        height: 12mm;
+        width: 11mm;
+        height: 11mm;
         border-radius: 1.6mm;
         background: #fff;
       }
@@ -1088,19 +1090,20 @@
 
       .escribir {
         display: grid;
-        gap: 2mm;
+        gap: 1.6mm;
         margin: 0;
         padding: 0;
         list-style: none;
       }
 
+      /* 16 + 41 + 2 × 2,6 + 116 (cuatro casas de 27,5 mm) = 178,2 mm, dentro de los 180,4 mm de la fila. */
       .escribir li {
         display: grid;
-        grid-template-columns: 19mm 38mm minmax(0, 1fr);
+        grid-template-columns: 16mm 41mm minmax(0, 1fr);
         align-items: end;
-        gap: 3mm;
+        gap: 2.6mm;
         margin: 0;
-        padding: 1.2mm 2.4mm 1.6mm;
+        padding: 0.9mm 2.4mm 1.2mm;
         border: 0.4mm solid var(--linea);
         border-radius: 3mm;
         break-inside: avoid;
@@ -1109,8 +1112,8 @@
       .escribir img,
       .escribir .dibujo {
         align-self: center;
-        width: 19mm;
-        height: 19mm;
+        width: 16mm;
+        height: 16mm;
       }
 
       .escribir .dibujo {
@@ -1122,13 +1125,13 @@
         align-self: center;
         margin: 0;
         font-weight: 700;
-        font-size: 22pt;
+        font-size: 20pt;
         line-height: 1;
       }
 
       .escribir .calle {
         justify-content: flex-start;
-        gap: 2.4mm;
+        gap: 2mm;
       }
 
       .renglon-casa {
@@ -1253,7 +1256,16 @@
         grid-template-columns: 11mm minmax(0, 1fr);
         align-items: center;
         gap: 2mm;
-        margin: 0 0 2mm;
+        margin: 0 0 1.4mm;
+      }
+
+      .pasos-nivel .pasos-fila li {
+        padding: 1.2mm 1.4mm 1.4mm;
+      }
+
+      .pasos-nivel .pasos-fila img {
+        width: 10mm;
+        height: 10mm;
       }
 
       .pasos-nivel .nv {
@@ -1268,8 +1280,8 @@
         display: flex;
         align-items: center;
         gap: 2.4mm;
-        margin: 2.4mm 0 0;
-        padding: 1.6mm 2.6mm;
+        margin: 1.6mm 0 0;
+        padding: 1.2mm 2.6mm;
         border-radius: 3mm;
         background: var(--amarillo-tinte);
         font-weight: 700;
@@ -1278,8 +1290,8 @@
       }
 
       .comprueba img {
-        width: 12mm;
-        height: 12mm;
+        width: 10mm;
+        height: 10mm;
         border-radius: 1.6mm;
         background: #fff;
       }
@@ -1287,7 +1299,7 @@
       .soluciones {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1.6mm 5mm;
+        gap: 1mm 5mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1295,24 +1307,24 @@
 
       .soluciones li {
         display: grid;
-        grid-template-columns: 14mm minmax(0, 1fr);
+        grid-template-columns: 11mm minmax(0, 1fr);
         align-items: center;
         gap: 2.6mm;
         margin: 0;
-        padding: 0.8mm 2mm;
+        padding: 0.3mm 2mm;
         border-bottom: 0.35mm solid var(--linea);
       }
 
       .soluciones img {
-        width: 14mm;
-        height: 14mm;
+        width: 11mm;
+        height: 11mm;
       }
 
       .soluciones p {
         margin: 0;
         font-weight: 700;
-        font-size: 22pt;
-        line-height: 1.2;
+        font-size: 19pt;
+        line-height: 1.15;
         white-space: nowrap;
       }
 
@@ -1717,7 +1729,7 @@
       <div class="truco">
         <img src="pictogramas/4563.png" alt="" />
         <img src="pictogramas/2991.png" alt="" />
-        <p>Para contar las sílabas, doy una palmada en cada una. O pongo la mano bajo la barbilla: baja una vez en cada sílaba.</p>
+        <p>Para contar sílabas: una palmada en cada una. O la mano bajo la barbilla: baja en cada sílaba.</p>
       </div>
       <p class="atribucion">
         Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las
@@ -1837,7 +1849,7 @@
       </div>
       <div id="pasos-niveles"></div>
       <p class="comprueba"><img src="pictogramas/6998.png" alt="" />Al terminar, compruébalo en las soluciones.</p>
-      <h2 style="margin: 3.4mm 0 1.6mm; font-size: 18pt">Soluciones</h2>
+      <h2 style="margin: 2.6mm 0 1.2mm; font-size: 18pt">Soluciones</h2>
       <ul class="soluciones" id="soluciones"></ul>
       <p class="atribucion">
         Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
@@ -1899,15 +1911,14 @@
          GUÍA PARA EL DOCENTE
          ====================================================================== -->
     <section class="guia">
-      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <div class="rayos" style="margin-bottom: 4mm"></div>
       <p class="antetitulo">Guía para el docente</p>
-      <h1>Diptongos manipulativos: cómo enseñarlos paso a paso</h1>
+      <h1>Cómo enseñar los diptongos paso a paso</h1>
       <p>
-        Un diptongo son dos vocales seguidas que se pronuncian en la misma sílaba, como en hue-vo o pei-ne. Este material lo
-        enseña con piezas que se mueven: las vocales abiertas (a, e, o) son círculos anchos y las cerradas (i, u), óvalos
-        estrechos. En la casa de una sílaba caben una abierta y una cerrada; dos abiertas no caben. Está pensado para toda la
-        clase de 1.º a 3.º de Primaria, y en especial para el alumnado con dislexia, con trastorno del desarrollo del lenguaje
-        (TDL) o con discapacidad intelectual.
+        Un diptongo son dos vocales seguidas que se pronuncian en la misma sílaba, como en hue-vo o pei-ne. Aquí se enseña con
+        piezas: las vocales abiertas (a, e, o) son círculos anchos y las cerradas (i, u), óvalos estrechos. En la casa de una
+        sílaba caben una abierta y una cerrada; dos abiertas, no. Es para toda la clase de 1.º a 3.º de Primaria, y en especial
+        para el alumnado con dislexia, con trastorno del desarrollo del lenguaje (TDL) o con discapacidad intelectual.
       </p>
 
       <div class="caja caja--azul">
@@ -1919,17 +1930,14 @@
             cualquier orden (ai-re, pien-so, cuan-to), o dos cerradas distintas (ciu-dad, rui-do).
           </li>
           <li>
-            <strong>Hiato:</strong> dos vocales en sílabas distintas. Lo forman dos vocales abiertas (te-a-tro), dos vocales
-            iguales (le-er) y una cerrada tónica junto a una abierta (rí-o, ra-íz). Esta última siempre lleva tilde (RAE, 2016,
-            § 3.2.3).
+            <strong>Hiato:</strong> dos vocales en sílabas distintas. Lo forman dos abiertas (te-a-tro), dos iguales (le-er) o una
+            cerrada tónica junto a una abierta (rí-o, ra-íz), que siempre lleva tilde (RAE, 2016, § 3.2.3). La h no cambia nada:
+            prohi-bir, bú-ho.
           </li>
           <li>
-            <strong>La h no cambia nada:</strong> hay diptongo en prohi-bir y hiato en bú-ho. Al hablar deprisa a veces juntamos
-            dos abiertas («tea-tro»), pero para escribir y separar sílabas siempre son hiato (RAE y ASALE, 2010, § 2.2.2.3).
-          </li>
-          <li>
-            <strong>Por qué no hay piano:</strong> en España, palabras como piano se pueden decir con hiato, pi-a-no, y está
-            bien dicho (§ 2.2.2.1). La Ortografía la cuenta como diptongo al escribir. Para no confundir, no está en las tarjetas.
+            <strong>Al hablar no siempre suena igual.</strong> Deprisa se dice a veces «tea-tro», pero al escribir dos abiertas
+            son hiato (RAE y ASALE, 2010, § 2.2.2.3). En España, piano se puede decir pi-a-no, y está bien dicho (§ 2.2.2.1); al
+            escribir cuenta como diptongo. Por eso no está en las tarjetas.
           </li>
         </ul>
       </div>
@@ -1943,7 +1951,7 @@
       <ol>
         <li>
           <strong>Yo lo hago.</strong> Coge hue-vo y piensa en voz alta: «Hue. Oigo la u y la e de un golpe. La u es cerrada y la
-          e, abierta. Caben en una casa: es un diptongo».
+          e, abierta: caben en una casa. Es un diptongo».
         </li>
         <li><strong>Lo hacemos juntos.</strong> Otra palabra: cada peque coloca una pieza mientras la dice.</li>
         <li>
@@ -1954,16 +1962,13 @@
 
       <h2>Cinco sesiones para empezar, de 15 minutos</h2>
       <ol>
+        <li><strong>Las vocales:</strong> decidlas con la mano bajo la barbilla y separad las piezas del taller por su forma.</li>
         <li>
-          <strong>Las vocales.</strong> Decid a, e, o, i, u con la mano bajo la barbilla: con las abiertas, la boca se abre más.
-          Separad las piezas del taller por su forma.
-        </li>
-        <li>
-          <strong>El taller «¿Caben en una casa?»</strong> (página <span data-pagina="taller"></span>). Probad parejas de vocales
-          hasta descubrir la regla. Después, leed el cartel (página <span data-pagina="cartel"></span>).
+          <strong>El taller</strong> (página <span data-pagina="taller"></span>): probad parejas hasta descubrir la regla.
+          Después, el cartel (página <span data-pagina="cartel"></span>).
         </li>
         <li><strong>Nivel 1, hoja A:</strong> completar la sílaba que falta.</li>
-        <li><strong>Nivel 2, hoja A:</strong> formar la palabra entera. Quien lo necesite sigue con el nivel 1.</li>
+        <li><strong>Nivel 2, hoja A:</strong> formar la palabra entera. Quien lo necesite sigue en el nivel 1.</li>
         <li><strong>Nivel 3:</strong> separar, escribir y rodear. Quien quiera, el reto.</li>
       </ol>
       <p>
@@ -1977,21 +1982,18 @@
           <span class="nv f1" aria-hidden="true">1</span>
           <p>
             <strong>Nivel 1, ¿qué sílaba falta?</strong> Las otras sílabas ya están escritas. Dale 2 o 3 piezas para elegir; con
-            más soltura, todas las de su bolsa.
+            soltura, todas las de su bolsa.
           </p>
         </li>
         <li>
           <span class="nv f2" aria-hidden="true">2</span>
-          <p>
-            <strong>Nivel 2, forma la palabra.</strong> Solo hay casas vacías, una por sílaba. Busca todas sus piezas y lee la
-            palabra entera.
-          </p>
+          <p><strong>Nivel 2, forma la palabra.</strong> Solo hay casas vacías, una por sílaba: busca sus piezas y lee la palabra.</p>
         </li>
         <li>
           <span class="nv f3" aria-hidden="true">3</span>
           <p>
-            <strong>Nivel 3, separa, escribe y rodea.</strong> Con la palabra escrita, la separa en las casas que necesite y rodea
-            el diptongo. En «Ahora tú», dibuja y escribe una palabra suya. El reto compara diptongos con hiatos.
+            <strong>Nivel 3, separa, escribe y rodea.</strong> Separa la palabra en las casas que necesite y rodea el diptongo. En
+            «Ahora tú», dibuja y escribe una palabra suya. El reto compara diptongos con hiatos.
           </p>
         </li>
       </ul>
@@ -2011,11 +2013,11 @@
         <tbody>
           <tr>
             <th scope="row">Trocea el diptongo: pi-e.</th>
-            <td>«Dila de un golpe, como al hablar. Con la mano en la barbilla: ¿cuántas veces baja?».</td>
+            <td>«Dila de un golpe, como al hablar. ¿Cuántas veces baja la barbilla?».</td>
           </tr>
           <tr>
-            <th scope="row">Junta dos abiertas: «leon», en una sílaba.</th>
-            <td>«La e y la o son abiertas: no caben en una casa. Le-ón».</td>
+            <th scope="row">Junta dos abiertas: «leon».</th>
+            <td>«La e y la o son abiertas: no caben juntas. Le-ón».</td>
           </tr>
           <tr>
             <th scope="row">Ve un diptongo en queso o en guitarra.</th>
@@ -2023,11 +2025,11 @@
           </tr>
           <tr>
             <th scope="row">Duda con rey, hoy o muy.</th>
-            <td>«Al final de la palabra, la y suena como una i y forma diptongo».</td>
+            <td>«Al final, la y suena como una i y forma diptongo».</td>
           </tr>
           <tr>
             <th scope="row">Duda con búho.</th>
-            <td>«La h no suena. Mira las dos vocales: la ú lleva tilde, así que se separan. Bú-ho».</td>
+            <td>«La h no suena y la ú lleva tilde: bú-ho».</td>
           </tr>
         </tbody>
       </table>
@@ -2038,42 +2040,39 @@
         forma de cada vocal. También pide apoyos que se retiran poco a poco (5.3) y un reto a la medida de cada peque (8.2).
       </p>
       <ul>
+        <li><strong>Con dislexia:</strong> pocas piezas a la vista y más tiempo. Que diga cada sílaba en voz alta al colocarla.</li>
         <li>
-          <strong>Con dislexia:</strong> pocas piezas a la vista y más tiempo. Que diga cada sílaba en voz alta al colocarla.
-          Nada de copiar de la pizarra.
+          <strong>Con TDL:</strong> modela despacio, sin trocear el diptongo. Usa «juntas» y «separadas» antes que diptongo e
+          hiato.
         </li>
         <li>
-          <strong>Con TDL:</strong> modela despacio, sin trocear el diptongo. Empieza por «juntas» y «separadas», y deja las
-          palabras diptongo e hiato para más adelante.
+          <strong>Con discapacidad intelectual:</strong> las mismas ocho palabras varias semanas y dos piezas para elegir. Con
+          discapacidad intelectual significativa, lo que más respaldo tuvo fue enseñar palabras con ayudas que se retiran poco a
+          poco (Browder y otros, 2006).
         </li>
         <li>
-          <strong>Con discapacidad intelectual:</strong> las mismas ocho palabras durante varias semanas y dos piezas para elegir.
-          Con discapacidad intelectual significativa, lo que más respaldo tuvo fue enseñar palabras con ayudas que se van
-          retirando (Browder y otros, 2006).
+          <strong>Con más reto:</strong> palabras con dos diptongos (di-no-sau-rio) o con tres vocales en una sílaba, como miau o
+          buey: son triptongos.
         </li>
         <li>
-          <strong>Con más reto:</strong> palabras con dos diptongos (di-no-sau-rio, a-cua-rio) o con tres vocales en una sílaba,
-          como miau o buey: son triptongos.
-        </li>
-        <li>
-          <strong>Con otros materiales de IdEducando:</strong> antes,
+          <strong>Con otros materiales:</strong> antes,
           <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>, para contar
-          sílabas a palmadas. Si también cuestan las trabadas, como dro en cuadro, la
+          sílabas a palmadas. Si cuestan las trabadas, como dro en cuadro, la
           <a href="https://www.ideducando.es/material-gratuito/cartilla-trabadas/">Cartilla de sílabas trabadas</a>.
         </li>
       </ul>
       <p>
-        La dislexia y el TDL pueden ir juntos. Ayuda más mirar qué le cuesta a cada peque que su etiqueta (Adlof y Hogan,
+        La dislexia y el TDL pueden ir juntos: ayuda más mirar qué le cuesta a cada peque que su etiqueta (Adlof y Hogan,
         2018).
       </p>
 
       <h2>Lo que no sabemos</h2>
       <p>
-        Este material junta apoyos con respaldo, pero no se ha estudiado como conjunto. Tocar, moverse y dar palmadas ayuda a
+        El material junta apoyos con respaldo, pero no se ha estudiado como conjunto. Tocar, moverse y dar palmadas ayuda a
         practicar, pero el efecto propio de lo multisensorial no está claro: en un metaanálisis, los programas Orton-Gillingham,
         que son multisensoriales, no mejoraron la lectura de forma significativa (Stevens y otros, 2021). En la revisión de Ehri
         y otros (2001), la enseñanza sistemática no ayudó al grupo de lectores con bajo rendimiento que incluía alumnado con
-        limitaciones cognitivas. El tamaño de las piezas es una propuesta de IdEducando para ver la regla con las manos.
+        limitaciones cognitivas. El tamaño de las piezas es una propuesta de IdEducando.
       </p>
 
       <h2>En el currículo</h2>
@@ -2434,7 +2433,7 @@
       document.getElementById('ejemplos-cartel').innerHTML = EJEMPLOS.map(
         ([n, palabra, casas]) =>
           `<li>${picto(n)}<div class="calle">${casas
-            .map(([s, ancho]) => casa(vocales(s), { ancho, cuerpo: 15, tejado: 6, techo: 'morado' }))
+            .map(([s, ancho]) => casa(vocales(s), { ancho, cuerpo: 13, tejado: 5, techo: 'morado' }))
             .join('')}</div><p>${casas.length === 1 ? 'Una casa' : 'Dos casas'}</p></li>`,
       ).join('');
       document.getElementById('letras-abiertas').innerHTML = vocales('a e o');
@@ -2548,7 +2547,7 @@
         pasos.map(([n, texto]) => `<li>${picto(n)}<p>${texto}</p></li>`).join('');
       document.getElementById('pasos-n3').innerHTML = pasosFila(PASOS[3]);
       const casaEscribir = () =>
-        casa('<span class="renglon-casa"></span>', { ancho: 30, cuerpo: 17, tejado: 5, techo: 'morado', envolver: false });
+        casa('<span class="renglon-casa"></span>', { ancho: 27.5, cuerpo: 14.5, tejado: 4.5, techo: 'morado', envolver: false });
       const filaEscribir = (contenido) =>
         `${contenido}<div class="calle">${Array.from({ length: 4 }, casaEscribir).join('')}</div>`;
       document.getElementById('escribir').innerHTML =

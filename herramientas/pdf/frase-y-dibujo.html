@@ -681,13 +681,13 @@
         display: grid;
         grid-template-columns: auto minmax(0, 1fr) auto;
         align-items: end;
-        gap: 6mm;
+        gap: 4.5mm;
         margin: 0 0 2.4mm;
       }
 
       .tablero__cabeza h1 {
         margin: 0;
-        font-size: 26pt;
+        font-size: 22pt;
         line-height: 1;
       }
 
@@ -780,8 +780,8 @@
 
       .rutina li {
         display: grid;
-        grid-template-columns: 5.4mm 11mm minmax(0, 1fr);
-        grid-template-rows: 11mm auto;
+        grid-template-columns: 5.4mm 12mm minmax(0, 1fr);
+        grid-template-rows: 12mm auto;
         column-gap: 1.6mm;
         row-gap: 1mm;
         align-items: center;
@@ -804,8 +804,8 @@
 
       .rutina img,
       .rutina svg {
-        width: 11mm;
-        height: 11mm;
+        width: 12mm;
+        height: 12mm;
         border-radius: 2mm;
         background: #fff;
       }
@@ -927,8 +927,10 @@
         height: 10mm;
       }
 
-      .mapa h2 {
+      .mapa .mapa__titulo {
         margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
         font-size: 12pt;
         line-height: 1.15;
       }
@@ -1235,7 +1237,7 @@
         align-items: center;
         gap: 2.4mm;
         font-size: 14pt;
-        margin: 3mm 0 1mm;
+        margin: 2.6mm 0 1mm;
       }
 
       .familias h2 img {
@@ -1279,9 +1281,45 @@
         font-size: 12.5pt;
       }
 
+      .probar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        align-items: center;
+        gap: 4mm;
+        padding: 2.6mm 4mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .probar__instruccion {
+        margin: 0 0 1.6mm;
+        font-size: 12pt;
+        line-height: 1.3;
+      }
+
+      .probar .texto {
+        font-size: 20pt;
+        line-height: 1.55;
+      }
+
+      .probar__dibujo {
+        width: 45mm;
+        height: 36mm;
+        border: 0.45mm solid var(--suave);
+        border-radius: 3mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .probar__dibujo svg {
+        width: 45mm;
+        height: 36mm;
+      }
+
       .recuadro {
-        margin-top: 3mm;
-        padding: 3mm 4mm;
+        margin-top: 2.6mm;
+        padding: 2.4mm 4mm;
         border: 0.45mm dashed var(--suave);
         border-radius: 3mm;
         break-inside: avoid;
@@ -1508,15 +1546,15 @@
           comprensión; si no llega a leerla, trabaja la lectura de palabras.
         </li>
         <li>
-          <strong>El TDL.</strong> Así se llama hoy la dificultad del lenguaje que no se explica por otra causa conocida, antes
-          llamada TEL (Bishop y otros, 2017). Este alumnado suele comprender peor que sus compañeros las frases que oye, y la
-          memoria parece influir en esa dificultad (Montgomery, Gillam y Evans, 2016). Por eso las frases empiezan cortas y
-          crecen poco a poco.
+          <strong>El TDL.</strong> Así se llama hoy el trastorno del lenguaje que no se explica por otra causa conocida (Bishop y
+          otros, 2017). Antes se llamaba trastorno específico del lenguaje (TEL). Este alumnado suele comprender peor que sus
+          compañeros las frases que oye, y la memoria parece influir en esa dificultad (Montgomery, Gillam y Evans, 2016). Por
+          eso las frases empiezan cortas y crecen poco a poco.
         </li>
         <li>
-          <strong>Leer sin errores no es entender.</strong> En un estudio con 41 niños y niñas con TEA, la lectura de palabras
-          estaba en la media del grupo y la comprensión, por debajo, aunque había perfiles muy distintos (Nation y otros, 2006).
-          El dibujo comprueba lo que ha entendido, aunque lea la frase en voz alta sin un fallo.
+          <strong>Leer bien no asegura entender.</strong> En un estudio con 41 niños y niñas con TEA, en conjunto leían las
+          palabras como se espera para su edad y comprendían peor el texto, aunque había perfiles muy distintos (Nation y otros,
+          2006). El dibujo comprueba lo que ha entendido, aunque lea la frase en voz alta sin un fallo.
         </li>
         <li>
           <strong>Lo que pide el currículo.</strong> En el primer ciclo de Primaria, la comprensión se trabaja «mediante la
@@ -1593,7 +1631,7 @@
           <ul>
             <li>Siempre el mismo tablero y los mismos pasos. Dile cuántas parejas hay y cuándo acaba.</li>
             <li>
-              Si le cuesta que las tarjetas no se muevan, pon velcro: rugoso en los huecos del tablero y suave detrás de las
+              Si las tarjetas se le mueven y eso le altera, pon velcro: rugoso en los huecos del tablero y suave detrás de las
               tarjetas, como en el resto de materiales de IdEducando.
             </li>
           </ul>
@@ -1644,12 +1682,9 @@
       <p class="antetitulo">Para las familias</p>
       <h1>Frase y dibujo, también en casa</h1>
       <p>
-        En clase leemos frases cortas y buscamos su dibujo. Por ejemplo, «El gato duerme debajo de la cama». Así aprendemos a
-        leer la frase entera, hasta el punto, y a entender lo que dice.
-      </p>
-      <p>
-        Leer bien las palabras no basta: hay que entender la frase. El dibujo nos ayuda a comprobarlo. Puede ayudar a todos los
-        niños y niñas, también a quienes tienen más dificultades con el lenguaje o con la lectura.
+        En clase leemos frases cortas y buscamos su dibujo, como «El gato duerme debajo de la cama». Así aprendemos a leer la
+        frase entera, hasta el punto, y a entender lo que dice: el dibujo ayuda a comprobarlo. Sirve a todos los niños y niñas,
+        también a quienes tienen más dificultades con el lenguaje o con la lectura.
       </p>
 
       <h2><img src="pictogramas/7141.png" alt="" />Cuando lee en casa</h2>
@@ -1662,9 +1697,11 @@
       <h2><img src="pictogramas/32324.png" alt="" />Cuatro juegos para casa</h2>
       <ul class="juegos-casa" id="juegos-casa"></ul>
 
+      <h2><img src="pictogramas/6612.png" alt="" />Para probar juntos</h2>
+      <div class="probar c-morado" id="probar"></div>
+
       <div class="recuadro">
         <h2>Mensaje del cole</h2>
-        <div class="renglon"></div>
         <div class="renglon"></div>
       </div>
 
@@ -1739,8 +1776,9 @@
       <ul class="referencias">
         <li>
           Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación
-          Primaria. BOE n.º 52, de 2 de marzo de 2022, anexo II, Lengua Castellana y Literatura: competencia específica 4 (pág.
-          24460), criterios del primer ciclo 4.1 y 9.1 (págs. 24464 y 24465) y saberes básicos (págs. 24465 y 24466).
+          Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022, anexo II, Lengua Castellana y Literatura:
+          competencia específica 4 (pág. 24460), criterios del primer ciclo 4.1 y 9.1 (págs. 24464 y 24465) y saberes básicos
+          (págs. 24465 y 24466).
         </li>
         <li>
           Real Decreto 95/2022, de 1 de febrero, por el que se establece la ordenación y las enseñanzas mínimas de la Educación
@@ -1954,9 +1992,9 @@
           { t: 'El niño sale al patio|sin gorro.', s: 'campana', alt: 'Un niño de pie sin gorro',
             d: () => suelo(45.8) + pic(7176, NINO) },
           { t: 'Hay un vaso lleno|encima de la mesa.', s: 'flor', alt: 'Un vaso lleno de agua encima de una mesa',
-            d: () => pic(3129, { cx: 31, b: 46, w: 40 }) + pic(4768, { cx: 31, b: 17, h: 13 }) },
+            d: () => pic(3129, { cx: 31, b: 46, w: 36 }) + pic(4768, { cx: 31, b: 19.9, h: 15.5 }) },
           { t: 'Hay un vaso vacío|encima de la mesa.', s: 'estrella', alt: 'Un vaso vacío encima de una mesa',
-            d: () => pic(3129, { cx: 31, b: 46, w: 40 }) + pic(2610, { cx: 31, b: 17, h: 13 }) },
+            d: () => pic(3129, { cx: 31, b: 46, w: 36 }) + pic(2610, { cx: 31, b: 19.9, h: 15.5 }) },
           // Grupo C: cuántos y cómo
           { t: 'La niña lleva|un globo en la mano.', s: 'cereza', alt: 'Una niña con un globo atado en la mano',
             d: () => suelo(45.8) + pic(27509, NINA_GLOBO) + cuerda(punto(8313, { cx: 42, b: 21, w: 11 }, 244, 449), manoGlobo) + pic(8313, { cx: 42, b: 21, w: 11 }) },
@@ -2191,7 +2229,7 @@
         const ultima = pags[pags.length - 1];
         const texto =
           pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
-        return `<li class="c-${color}">${picto(n)}<div><h2>${titulo}</h2><p>${para}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+        return `<li class="c-${color}">${picto(n)}<div><p class="mapa__titulo">${titulo}</p><p>${para}</p></div><p class="mapa__pagina">${texto}</p></li>`;
       }).join('');
 
       // ---------------------------------------------------------------------
@@ -2211,7 +2249,7 @@
       ).join('');
       document.getElementById('escalera-guia').innerHTML = ESCALERA.map(
         ([letra, nombre, texto], i) =>
-          `<li class="c-${COLORES_ESCALERA[i]}"><b class="letra" aria-hidden="true">${letra}</b><span><strong>${letra}. ${nombre}.</strong> ${texto}</span></li>`,
+          `<li class="c-${COLORES_ESCALERA[i]}"><b class="letra">${letra}</b><span><strong>${nombre}.</strong> ${texto}</span></li>`,
       ).join('');
       const CLAVES = [
         ['P', 'Lee solo el principio'],
@@ -2230,14 +2268,25 @@
       // Familias: cuatro juegos para casa
       // ---------------------------------------------------------------------
       const JUEGOS = [
-        [9692, 'Frases que se hacen', 'Escribid una frase: «El oso está debajo de la silla». Que la lea y lo haga con sus juguetes.'],
-        [32324, '¿Qué ha cambiado?', 'Leed «La pelota está dentro de la caja» y movedla. Después cambiad una palabra: «fuera». ¿Qué cambia?'],
+        [4945, 'Frases que se hacen', 'Escribid una frase: «El oso está debajo de la silla». Que la lea y lo haga con sus juguetes.'],
+        [5439, '¿Qué ha cambiado?', 'Leed «La pelota está dentro de la caja» y hacedlo. Después cambiad una palabra: «fuera». ¿Qué cambia?'],
         [38796, '¿Tiene sentido?', 'Decid una frase loca: «El gato lee un cuento». ¿Puede ser? ¿Cómo la arreglamos?'],
         [2380, 'Su frase del día', 'Que os dicte una frase sobre su día. Escribidla, que la lea y hacedle juntos su dibujo.'],
       ];
       document.getElementById('juegos-casa').innerHTML = JUEGOS.map(
         ([n, titulo, texto]) => `<li>${picto(n)}<span><strong>${titulo}</strong>${texto}</span></li>`,
       ).join('');
+
+      // Para probar juntos: una frase del nivel 3 y los dos dibujos de su pareja, para rodear el bueno.
+      {
+        const [perroDetras, gatoDetras] = [FRASES[3][2], FRASES[3][3]];
+        const dibujoProbar = (f) =>
+          `<div class="probar__dibujo"><svg viewBox="0 0 60 48" role="img" aria-label="Dibujo: ${f.alt}">${f.d()}</svg></div>`;
+        document.getElementById('probar').innerHTML =
+          `<div><p class="probar__instruccion">Leed la frase y rodead su dibujo.</p>${textoFrase(gatoDetras.t, '')}</div>` +
+          dibujoProbar(perroDetras) +
+          dibujoProbar(gatoDetras);
+      }
 
       // ---------------------------------------------------------------------
       // Portada: dos frases del nivel 3 con sus dibujos, unidas con un lazo

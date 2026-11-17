@@ -29,7 +29,7 @@ imprimir:
   - "Páginas 17 a 20: en pantalla. Imprime la 19 para cada familia."
 pasos:
   - "Recorta las claves, los carnets, las tarjetas de solución y las etiquetas por la línea de puntos."
-  - "Antes de plastificar, que cada peque se dibuje en su carnet, escriba su nombre y ponga su huella."
+  - "Antes de plastificar, cada peque se dibuja en su carnet, escribe su nombre y pone su huella."
   - "Plastifica las claves, los carnets y las tarjetas de solución con 5 mm entre pieza y pieza. Recorta con 3 mm de plástico alrededor y redondea las esquinas."
   - "Mete cada hoja de casos en su funda de plástico."
   - "Pega las etiquetas en los 4 sobres y guarda en cada uno las tarjetas de solución de su nivel. La de la misión, con las del nivel 3."

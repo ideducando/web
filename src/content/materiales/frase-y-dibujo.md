@@ -11,7 +11,7 @@ paginas: 17
 archivo: /descargas/frase-y-dibujo.pdf
 portada: /portadas/frase-y-dibujo.webp
 portada_alt: "Portada del material: el título «Frase y dibujo» y, debajo, dos tarjetas de frase emparejadas con sus dibujos. «El gato duerme en la cama.» va con un gato tumbado encima de la cama, y «El gato duerme debajo de la cama.», con el gato tumbado debajo"
-vistas: [1, 4, 5, 7, 11, 14]
+vistas: [1, 4, 5, 7, 10, 11]
 tiempo: "2 horas para imprimir, recortar, doblar las pestañas y plastificar; mejor en dos ratos"
 necesitas:
   - "8 hojas de cartulina blanca A4 de 160 g, o 9 si haces también las frases en mayúsculas"
@@ -32,7 +32,7 @@ pasos:
   - "Plastifica las tarjetas con 5 mm entre una y otra: 12 frases o 15 dibujos por funda. El tablero va entero, en su funda."
   - "Recorta cada tarjeta con 3 mm de plástico alrededor y redondea las esquinas."
   - "Guarda cada nivel en su bolsa: la forma de la esquina dice cuál es. Círculo, nivel 1; cuadrado, nivel 2; rombo, nivel 3."
-resultado: "36 parejas de frase y dibujo en tres niveles, 6 frases y 6 dibujos en blanco y un tablero para emparejar, en 4 bolsas"
+resultado: "36 parejas de frase y dibujo en tres niveles y 6 frases y 6 dibujos en blanco, en 4 bolsas, y un tablero para emparejar"
 cuidados:
   - "Pega bien cada pestaña antes de plastificar: si se abre dentro de la funda, el símbolo queda delante."
   - "Escribe en el tablero y en las tarjetas en blanco solo con rotulador de pizarra blanca, y bórralo con un paño."
@@ -48,7 +48,7 @@ fuentes:
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032. DOI: 10.1007/s10803-020-04844-2"
   - "Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022, anexo II, Lengua Castellana y Literatura: competencia específica 4 (pág. 24460), criterios de evaluación del primer ciclo 4.1 y 9.1 (págs. 24464 y 24465) y saberes básicos del primer ciclo (págs. 24465 y 24466)"
   - "Real Decreto 95/2022, de 1 de febrero, por el que se establece la ordenación y las enseñanzas mínimas de la Educación Infantil. Boletín Oficial del Estado (BOE) n.º 28, de 2 de febrero de 2022, anexo II, área Comunicación y Representación de la Realidad (págs. 14587 y 14593)"
-  - "CAST (2024). Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0: consideraciones 3.2, 5.3, 8.2 y 8.5. udlguidelines.cast.org/es"
+  - "CAST (2024). Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0: consideraciones 3.2, 5.3, 8.2, 8.3 y 8.5. udlguidelines.cast.org/es"
   - "ARASAAC. Condiciones de uso y forma de citar los pictogramas. arasaac.org/terms-of-use (consultado el 17 de noviembre de 2026)"
 autoria: "Equipo IdEducando"
 licencia: "CC BY-NC-SA 4.0"

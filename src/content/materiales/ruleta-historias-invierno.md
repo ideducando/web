@@ -80,7 +80,7 @@ Sirve para toda la clase, en Infantil de 5 años y de 1.º a 4.º de Primaria. E
 ## Cómo usarlo
 
 1. Cuenta tú una historia delante de la clase, con las ruletas y la tira.
-2. Por turnos, girad las tres ruletas y poned sus cartas en la tira o en el plan.
+2. Por turnos, girad las tres ruletas y poned sus cartas en la tira.
 3. Pensad juntos cómo se arregla el problema. Las ideas para el final ayudan a quien se atasca.
 4. Cada peque cuenta, dice o escribe su historia en su nivel. Después, alguien dice qué le ha gustado.
 5. Terminad con la autoevaluación y un reto para la próxima historia.

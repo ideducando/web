@@ -621,7 +621,7 @@
         margin: 0;
         text-align: center;
         font-weight: 700;
-        font-size: calc(18pt * var(--e));
+        font-size: calc(18.6pt * var(--e));
         line-height: 1;
         text-wrap: balance;
       }
@@ -635,7 +635,7 @@
         text-align: center;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: calc(15pt * var(--e));
+        font-size: calc(18.6pt * var(--e));
         line-height: calc(6.2mm * var(--e));
         color: #fff;
       }
@@ -780,29 +780,34 @@
 
       .carta__banda {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 6.6mm;
         align-items: center;
         justify-self: stretch;
         align-self: stretch;
         margin: 0 -2mm;
-        padding: 0 1.6mm 0 2.4mm;
+        padding: 0 2mm;
         background: var(--fm);
         color: var(--tm);
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 15pt;
+        font-size: 18pt;
         line-height: 1;
       }
 
-      .carta__banda b {
+      .carta__num {
+        position: absolute;
+        right: 1.6mm;
+        top: 11mm;
         display: grid;
         place-items: center;
-        width: 6.6mm;
-        height: 6.6mm;
+        width: 7.6mm;
+        height: 7.6mm;
         border-radius: 50%;
-        background: #fff;
-        color: var(--tx);
-        font-size: 13pt;
+        background: var(--fm);
+        color: var(--tm);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
       }
 
       .carta__dibujo {
@@ -1211,7 +1216,7 @@
         color: var(--tm);
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 16pt;
+        font-size: 18pt;
         line-height: 1;
       }
 
@@ -1388,11 +1393,11 @@
       .miniplan p {
         display: flex;
         align-items: center;
-        gap: 1.6mm;
+        gap: 1.4mm;
         margin: 0;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 16pt;
+        font-size: 18pt;
         line-height: 1;
       }
 
@@ -1537,7 +1542,7 @@
 
       .auto__tabla th,
       .auto__tabla td {
-        padding: 0.9mm 1.4mm;
+        padding: 0.5mm 1.4mm;
         border-bottom: 0.35mm solid var(--linea);
         vertical-align: middle;
       }
@@ -1562,9 +1567,9 @@
       .auto__tabla thead svg,
       .auto__tabla thead img {
         display: block;
-        width: 9mm;
-        height: 9mm;
-        margin: 0 auto 0.8mm;
+        width: 7.4mm;
+        height: 7.4mm;
+        margin: 0 auto 0.6mm;
       }
 
       .auto__tabla tbody th {
@@ -1911,7 +1916,7 @@
           <h2>Una historia, en cinco pasos</h2>
           <ol class="cinco">
             <li>Cuenta tú una historia, como modelo.</li>
-            <li>Girad las tres ruletas y poned sus cartas en la tira o en el plan.</li>
+            <li>Girad las tres ruletas y poned sus cartas en la tira.</li>
             <li>Pensad juntos cómo se arregla el problema.</li>
             <li>Cada peque la cuenta, la dice o la escribe en su nivel.</li>
             <li>Alguien dice qué le ha gustado. Después, la autoevaluación.</li>
@@ -2064,7 +2069,7 @@
     <section class="guia">
       <div class="rayos" style="margin-bottom: 5mm"></div>
       <p class="antetitulo">Guía para el docente</p>
-      <h1>Ruleta para contar historias de invierno: cómo modelar, preguntar y ayudar</h1>
+      <h1>Guía: cómo modelar, preguntar y ayudar</h1>
       <p>
         Las ruletas sortean el personaje, el lugar y el problema, y el alumnado inventa qué hace y cómo acaba. Así practica las
         cuatro partes de una historia: inicio, problema, solución y final. Sirve para toda la clase y está pensado, además, para
@@ -2112,8 +2117,8 @@
         dificultades del lenguaje que afectan al día a día y no se asocian a otra causa conocida (Bishop y otros, 2017). Si
         una frase le sale con errores, no le corrijas de forma directa: repítela bien justo después, con su misma idea, y
         sigue con la historia. A esto se le llama reformular. Una revisión de estudios con niños y niñas con dificultades del
-        lenguaje lo encontró útil para su gramática, aunque las pruebas aún son limitadas. Ayuda que la frase bien dicha llegue
-        justo después de la suya y que no tenga que repetirla (Cleave y otros, 2015).
+        lenguaje lo encontró útil para su gramática, aunque las pruebas aún son limitadas. Sus autores lo explican así: tu
+        frase llega justo después de la suya y no tiene que repetirla, y puede fijarse en lo que cambia (Cleave y otros, 2015).
       </p>
       <table class="reformular">
         <thead>
@@ -2137,16 +2142,16 @@
           <h2>Con alumnado con TEA</h2>
           <ul>
             <li>
-              Cuenta tú primero, siempre con la misma estructura. El modelado y los apoyos visuales están entre las prácticas
-              con más respaldo con alumnado con autismo (Hume y otros, 2021).
+              Cuenta tú primero, siempre con la misma estructura. El modelado y los apoyos visuales son prácticas basadas en la
+              evidencia con alumnado con autismo (Hume y otros, 2021).
             </li>
             <li>
               Pregunta qué siente y qué piensa el personaje, y por qué. Enseñar ese lenguaje mejoró las historias de cinco
               niños y niñas con autismo de 8 a 12 años (Gillam y otros, 2015).
             </li>
             <li>
-              Retira las ayudas poco a poco: primero la tira, después las cartas. Así mejoraron sus historias tres niños con
-              autismo de 6 a 8 años (Petersen y otros, 2014).
+              Retira las ayudas poco a poco: primero la tira, después las cartas. Con tres niños con autismo de 6 a 8 años, las
+              historias mejoraron al retirar así los apoyos (Petersen y otros, 2014).
             </li>
             <li>Si el azar le inquieta, que elija las cartas boca arriba. Un problema que le asusta se quita del montón.</li>
           </ul>
@@ -2158,8 +2163,8 @@
             <li>Cartas boca arriba y dos para elegir. Puede señalar o usar su sistema de comunicación.</li>
             <li>Contad la misma historia varios días y representadla con muñecos o con objetos.</li>
             <li>
-              Hay pocos estudios. Con cuatro chicas con síndrome de Down de 10 a 15 años, contar con apoyos visuales fue
-              viable y los avances fueron pequeños (Finestack y otros, 2017).
+              Hemos encontrado pocos estudios. Con cuatro chicas con síndrome de Down de 10 a 15 años, contar sus vivencias con
+              apoyos visuales fue viable, con avances pequeños (Finestack y otros, 2017).
             </li>
           </ul>
         </div>
@@ -2170,9 +2175,10 @@
         El Diseño Universal para el Aprendizaje (DUA) propone varias formas de expresarse, ayudar a planificar y a revisar, y
         ajustar el reto y el apoyo (CAST, 2024, consideraciones 5.1, 6.3, 6.4 y 8.2). Todo el grupo juega a lo mismo y cambia
         la ayuda. Proponemos subir de nivel cuando le salga sin ayuda dos o tres veces seguidas. En Primaria, los textos
-        mejoraron al enseñar su estructura, preparar las ideas antes y escribir con un compañero (Graham y otros, 2012), y al
-        revisarlos con la opinión del docente, de un compañero o la propia (Graham, Hebert y Harris, 2015). Con alumnado con
-        dificultades de aprendizaje también ayudaron dictar a un adulto y ponerse metas (Gillespie y Graham, 2014).
+        mejoraron al enseñar su estructura, preparar las ideas antes y escribir con un compañero (Graham y otros, 2012). De
+        1.º a 8.º curso, también con la opinión del docente, de un compañero o la propia (Graham, Hebert y Harris, 2015). Con
+        alumnado con dificultades de aprendizaje ayudaron, además, dictar a un adulto y ponerse metas (Gillespie y Graham,
+        2014).
       </p>
 
       <h2>Qué dice el currículo de la Región de Murcia</h2>
@@ -2189,7 +2195,7 @@
           temporales (pág. 40018).
         </li>
         <li>
-          <strong>Segundo ciclo.</strong> Los mismos criterios, con más autonomía (pág. 40019), y «Revisar y mejorar los
+          <strong>Segundo ciclo.</strong> Los criterios 3.1 y 5.1, un paso más allá (pág. 40019), y «Revisar y mejorar los
           textos propios y ajenos» (criterio 9.2, pág. 40020). Escribir implica planificar, revisar y editar: «Todo ello debe
           trabajarse en clase» (pág. 40011).
         </li>
@@ -2354,7 +2360,7 @@
         </li>
       </ul>
 
-      <h2>Escribir y revisar</h2>
+      <h2>Escribir, revisar y DUA</h2>
       <ul class="referencias">
         <li>
           Graham, S. y otros (2012). A meta-analysis of writing instruction for students in
@@ -2434,7 +2440,7 @@
         [6910, 'lo arregla'],
         [7171, 'pide ayuda'],
         [6023, 'le da un abrazo'],
-        [6138, 'enciende una linterna'],
+        [6138, 'usa una linterna'],
         [2867, 'quita la nieve'],
         [36914, 'espera'],
       ];
@@ -2506,7 +2512,7 @@
       ];
       const RETOS = [
         [11476, 'Contar qué siente'],
-        ['d:unir', 'Un conector nuevo'],
+        ['d:unir', 'Otro conector'],
         [37406, 'Poner título'],
       ];
 
@@ -2660,7 +2666,7 @@
       // Cartas: las 24 de las ruletas y 8 en blanco (3 de personaje, 3 de lugar y 2 de problema)
       // ---------------------------------------------------------------------
       const carta = (r, [p, texto, extra], i) =>
-        `<li class="carta c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span><b aria-hidden="true">${i + 1}</b></p><div class="carta__dibujo">${picto(p)}${marca(extra)}</div><p class="carta__texto">${texto}</p></li>`;
+        `<li class="carta c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span></p><span class="carta__num" aria-hidden="true">${i + 1}</span><div class="carta__dibujo">${picto(p)}${marca(extra)}</div><p class="carta__texto">${texto}</p></li>`;
       const cartaBlanca = (r) =>
         `<li class="carta carta--blanca c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span></p><div class="carta__dibujo"></div><p class="carta__lineas"><span></span><span></span></p></li>`;
       const blancas = (r, n) => Array.from({ length: n }, () => cartaBlanca(r)).join('');

@@ -286,7 +286,7 @@ const DOCUMENTOS = [
   {
     id: 'ruleta-historias-invierno',
     asunto: 'Ruleta para contar historias de invierno: personaje, lugar y problema, en tres niveles, con plan de la historia y pictogramas de ARASAAC',
-    palabras: 'expresión oral, escritura, narración, invierno, ruleta, TDL, DUA, pictogramas, ARASAAC, Infantil, Primaria',
+    palabras: 'expresión oral, escritura, narración, conectores, invierno, ruleta, TDL, TEA, discapacidad intelectual, DUA, pictogramas, ARASAAC, Infantil, Primaria',
   },
   {
     id: 'detectives-letras',

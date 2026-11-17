@@ -50,7 +50,7 @@ fuentes:
   - "Ministerio de Sanidad (2021). Medidas de prevención, higiene y promoción de la salud frente a COVID-19 para centros educativos en el curso 2021-2022. Medidas de prevención personal, punto 4"
   - "Ministerio de Sanidad (2025). Documento marco para el control de las infecciones respiratorias agudas. Diciembre de 2025"
   - "Asociación Española de Pediatría (AEP). En Familia: Lavado de manos. aeped.es/enfamilia"
-  - "Decreto 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022, págs. 33083, 33084 y 33096"
+  - "Decreto 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022, págs. 33083, 33084 y 33096"
   - "Sam, A. y AFIRM Team (2024). Task Analysis (actualización). Universidad de Carolina del Norte en Chapel Hill, Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu"
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032"
   - "Ben-Sasson, A. y otros (2009). A meta-analysis of sensory modulation symptoms in individuals with autism spectrum disorders. Journal of Autism and Developmental Disorders, 39(1), 1-11"

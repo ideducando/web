@@ -1551,6 +1551,59 @@
       }
     ]
   },
+  "ruleta-historias-invierno": {
+    "total": 18,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ruleta 1 de 3 · para recortar"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartas del personaje y del lugar"
+      },
+      {
+        "pagina": 9,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "1 nivel 1 · se plastifica entera · para contar en voz alta"
+      },
+      {
+        "pagina": 10,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Nivel 3, y nivel 2 con más reto · se plastifica entero"
+      },
+      {
+        "pagina": 13,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · una hoja por historia · en folio"
+      }
+    ]
+  },
   "rutinas-invierno-cole": {
     "total": 21,
     "fotos": [

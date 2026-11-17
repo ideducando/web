@@ -38,7 +38,7 @@ cuidados:
   - "Castañas y bellotas no se comen: consulta antes las alergias con las familias. Con alumnado celíaco, versión segura."
   - "Si una ficha se despega o se rompe, retírala. Todo se limpia con un paño con agua y jabón."
 fuentes:
-  - "Decreto n.º 196/2022, de 3 de noviembre, por el que se establece la ordenación y el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056), art. 14.1 (pág. 33060), art. 17.3 (pág. 33061), Crecimiento en Armonía (págs. 33083 a 33086) y Descubrimiento y Exploración del Entorno (págs. 33094 a 33097)"
+  - "Decreto n.º 196/2022, de 3 de noviembre, por el que se establece el currículo de la etapa de Educación Infantil en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 255, de 4 de noviembre de 2022: art. 4.6 (pág. 33056), art. 14.1 (pág. 33060), art. 17.3 (pág. 33061), Crecimiento en Armonía (págs. 33083 a 33086) y Descubrimiento y Exploración del Entorno (págs. 33094 a 33097)"
   - "CAST (2024). Pautas para el Diseño Universal para el Aprendizaje, versión 3.0. udlguidelines.cast.org/es"
   - "Collicott, J. (1991). Implementing multi-level instruction: Strategies for classroom teachers. En G. L. Porter y D. Richler (Eds.), Changing Canadian Schools: Perspectives on disability and inclusion (pp. 191-218). Roeher Institute"
   - "Inclusive Schools Network (2011). Using multi-level instruction for a classroom of diverse learners. inclusiveschools.org"
