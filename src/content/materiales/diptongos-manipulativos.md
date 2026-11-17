@@ -68,7 +68,7 @@ Está pensado para toda la clase de 1.º a 3.º de Primaria, y en especial para 
 2. **Taller «¿Caben en una casa?»**: un tablero y diez vocales que miden lo justo. Una abierta y una cerrada caben en la casa grande; dos abiertas se salen. Así se descubre la regla con las manos.
 3. **Dos juegos de piezas de sílabas**: las 16 sílabas con diptongo para el nivel 1, y todas las sílabas de las palabras para el nivel 2, con piezas en blanco.
 4. **32 tarjetas con pictograma** de 16 palabras, como nieve, puerta, agua o ciudad, en dos niveles y dos hojas cada uno.
-5. **Nivel 3** para separar en sílabas, escribir y rodear el diptongo, y un **reto** con cinco parejas para distinguir el diptongo del hiato, como a-gua y grú-a.
+5. **Nivel 3** para separar en sílabas, escribir y rodear el diptongo, y un **reto** con cuatro parejas para distinguir el diptongo del hiato, como a-gua y grú-a.
 6. **Hoja de pasos y soluciones** para la mesa, con los pasos de cada nivel en pictogramas.
 7. **Registro** para el grupo, **guía para el docente** con errores frecuentes y qué decir, **nota para las familias** y **fuentes**.
 

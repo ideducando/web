@@ -10,7 +10,7 @@ formato: "PDF imprimible (A4)"
 paginas: 20
 archivo: /descargas/detectives-letras.pdf
 portada: /portadas/detectives-letras.webp
-portada_alt: "Portada del material: el título «Detectives de letras» sobre fondo crema, una tira con un mensaje en clave hecho de dibujos, una lupa que deja ver sus letras, un sobre de alto secreto, unas huellas y dos detectives con su lupa"
+portada_alt: "Portada del material: el título «Detectives de letras» sobre fondo crema, un mensaje en clave hecho de dibujos con una lupa que deja ver dos de sus letras, un sobre de alto secreto, unas huellas, dos detectives con su lupa y una pegatina con «Tres niveles, 20 casos, con solución»"
 vistas: [1, 4, 5, 6, 8, 12]
 tiempo: "1 hora y media para imprimir, plastificar y recortar, y un rato de clase para los carnets"
 necesitas:
@@ -67,7 +67,7 @@ Así practica la correspondencia entre letras y sonidos con un reto de detective
 
 ## Qué incluye
 
-1. **La clave secreta**, dos por hoja, con sus 27 dibujos: formas sencillas que se distinguen sin color y que no son el espejo de otra, para que la b y la d no se confundan.
+1. **La clave secreta**, dos por hoja, con sus 27 dibujos: formas sencillas que se distinguen sin color y que no son el espejo de ningún otro. Así no se confunden entre sí, como les pasa a la b y la d.
 2. **Carnet de detective**, seis por hoja, con su dibujo, su nombre y su huella.
 3. **Veinte casos en tres niveles**: palabras de dos sílabas con un dibujo de pista, palabras de tres sílabas para rodear su dibujo, órdenes cortas para hacerlas en silencio y adivinanzas.
 4. **Misión final**: tres mensajes que llevan a un sobre escondido en la puerta de clase, con un diploma.
@@ -95,7 +95,7 @@ En castellano, la dislexia se nota sobre todo en la velocidad lectora (Serrano y
 El Diseño Universal para el Aprendizaje (DUA) propone apoyar la decodificación y ajustar el reto y el apoyo. Algunas ideas:
 
 - **Con más apoyo**: en pareja, tapando en la clave las letras que no hacen falta o leyendo tú el primer dibujo.
-- **Para la dislexia**: un caso cada vez, sin prisa y diciendo el sonido de cada letra, no su nombre.
+- **Para la dislexia**: un caso cada vez, sin prisa y diciendo el sonido de cada letra en vez de su nombre.
 - **Para el TDL**: nombra antes los dibujos de la clave y las pistas, y comprueba que entiende lo que descifra.
 - **Con más reto**: sin mirar la clave, inventar casos para la clase o escribir la misión final de otro grupo.
 - **Junto con otros materiales**: antes de las letras, [El tren de las sílabas](/material-gratuito/tren-de-las-silabas/) para los sonidos y las sílabas. Si cuestan las sílabas como bla o tre, la [Cartilla de sílabas trabadas](/material-gratuito/cartilla-trabadas/).

@@ -1178,10 +1178,10 @@
       }
 
       .guia .dos-columnas {
-        gap: 4mm;
+        gap: 3.4mm 4mm;
         align-items: start;
         break-inside: auto;
-        margin-bottom: 4mm;
+        margin-bottom: 2.6mm;
       }
 
       .guia .dos-columnas .caja {
@@ -1559,8 +1559,8 @@
         <li>
           <strong>Lo que pide el currículo.</strong> En el primer ciclo de Primaria, la comprensión se trabaja «mediante la
           lectura silenciosa y en voz alta, acompañada de imágenes», y se comparan y transforman «palabras y enunciados» (Real
-          Decreto 157/2022). En Infantil, a la lectura se acerca jugando y disfrutando, y la adquisición del código escrito «no
-          es un objetivo que se deba alcanzar en esta etapa» (Real Decreto 95/2022). Con 5 años, el nivel 1 es un reto para quien ya
+          Decreto 157/2022). En Infantil, los peques se acercan a la lectura jugando y disfrutando, y la adquisición del código
+          escrito «no es un objetivo que se deba alcanzar en esta etapa» (Real Decreto 95/2022). Con 5 años, el nivel 1 es un reto para quien ya
           lee, y nunca una obligación.
         </li>
       </ul>
@@ -1589,7 +1589,7 @@
         </li>
         <li>
           <strong>Con el cuerpo y con objetos.</strong> Antes del nivel 3, haced las frases: un peluche en la cama y debajo de
-          la cama, un vaso lleno y uno vacío. Así la palabra pequeña («en», «debajo», «con», «sin») se ve y se toca.
+          la cama, un vaso lleno y uno vacío. Así se ven y se tocan las palabras que lo deciden, como «en», «debajo» o «sin».
         </li>
       </ol>
     </section>
@@ -1614,7 +1614,7 @@
           <h3>TDL</h3>
           <ul>
             <li>Antes de leer, dile tú la frase y que la repita. Después, que la lea.</li>
-            <li>Acompaña las palabras pequeñas con un gesto: «debajo», «dentro», «con», «sin».</li>
+            <li>Acompaña con un gesto «en», «debajo», «con» y «sin».</li>
             <li>Empieza por el nivel 1 aunque lea bien: primero se entiende la frase corta.</li>
           </ul>
         </div>
@@ -1664,9 +1664,9 @@
 
       <h2>Con otros materiales de IdEducando</h2>
       <p>
-        Los dibujos del tiempo del nivel 1 son los mismos del panel de
-        <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">Rutinas de invierno en el cole</a>: el
-        peque ya los conoce. Para trabajar antes los sonidos y las sílabas, usa
+        Los dibujos del tiempo del nivel 1 son los del panel de
+        <a href="https://www.ideducando.es/material-gratuito/rutinas-invierno-cole/">Rutinas de invierno en el cole</a>, que
+        el peque ya conoce. Para trabajar antes los sonidos y las sílabas, usa
         <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>. Si quiere leer
         algo más largo,
         <a href="https://www.ideducando.es/material-gratuito/cuento-lectura-facil-cole-nuevo/">Mi primer día en el cole nuevo</a>
@@ -2165,14 +2165,14 @@
       // De un vistazo
       // ---------------------------------------------------------------------
       const EJEMPLOS = {
-        1: ['2 o 3 palabras.', '«Hoy llueve.»'],
-        2: ['4 o 5 palabras, con un detalle al final.', '«La niña bebe agua fría.»'],
-        3: ['6 a 8 palabras, en parejas que cambian en un detalle.', '«en la cama» o «debajo de la cama»'],
+        1: '2 o 3 palabras, como «Hoy llueve».',
+        2: '4 o 5 palabras, con un detalle al final: «La niña bebe agua fría».',
+        3: '6 a 8 palabras, en parejas que cambian en un detalle: «en la cama» o «debajo de la cama».',
       };
       document.getElementById('lista-niveles').innerHTML = [1, 2, 3]
         .map(
           (nivel) =>
-            `<li>${marcaNivel(nivel, 'grande')}<span><strong>Nivel ${nivel}, ${NIVELES[nivel].forma}.</strong> ${EJEMPLOS[nivel][0]} ${EJEMPLOS[nivel][1]}</span></li>`,
+            `<li>${marcaNivel(nivel, 'grande')}<span><strong>Nivel ${nivel}, ${NIVELES[nivel].forma}.</strong> ${EJEMPLOS[nivel]}</span></li>`,
         )
         .join('');
 

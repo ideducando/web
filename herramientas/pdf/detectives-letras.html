@@ -1245,7 +1245,9 @@
         align-items: center;
         gap: 2.4mm;
         margin: 4mm 0;
-        font-size: 11pt;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
         color: var(--suave);
       }
 
@@ -1292,7 +1294,7 @@
       /* ---------- Mis casos resueltos ---------- */
       .registro__nivel {
         display: grid;
-        grid-template-columns: 18mm minmax(0, 1fr) 17mm;
+        grid-template-columns: 25mm minmax(0, 1fr) 17mm;
         align-items: center;
         gap: 3mm;
         margin: 0 0 3mm;
@@ -1310,7 +1312,7 @@
 
       .registro__marca h2 {
         margin: 0;
-        font-size: 13pt;
+        font-size: 18pt;
         line-height: 1;
         text-align: center;
         white-space: nowrap;
@@ -1318,8 +1320,8 @@
 
       .carpetas {
         display: grid;
-        grid-template-columns: repeat(8, 15mm);
-        gap: 1.6mm;
+        grid-template-columns: repeat(8, 14mm);
+        gap: 1.4mm;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1327,13 +1329,13 @@
 
       .carpetas li {
         position: relative;
-        width: 15mm;
+        width: 14mm;
         height: 14mm;
         margin: 0;
       }
 
       .carpetas svg {
-        width: 15mm;
+        width: 14mm;
         height: 14mm;
       }
 
@@ -1957,7 +1959,7 @@
           <div class="huecos" data-huecos="12"></div>
         </div>
       </div>
-      <p class="corte"><span data-icono="tijeras"></span><i></i><span>Corta por aquí y guarda tu copia</span></p>
+      <p class="corte"><span data-icono="tijeras"></span><i></i><span>Corta y guarda tu copia</span></p>
       <div class="envio">
         <h2><span data-icono="sobreMini"></span>Mensaje secreto</h2>
         <div class="envio__datos">
@@ -2146,12 +2148,12 @@
           su casilla.
         </li>
         <li>
-          <strong>Sin prisa:</strong> sin reloj, sin carreras y sin leer delante de la clase si no quiere. La Región de Murcia
+          <strong>Sin prisa:</strong> sin reloj ni carreras, y que no lea delante de la clase si no quiere. La Región de Murcia
           pide darle más tiempo para hacer y revisar sus tareas y no exigirle que lea como sus compañeros (Resolución de 30 de
           julio de 2019, anexo I).
         </li>
         <li><strong>En pareja:</strong> Murcia propone la enseñanza entre compañeros en las tareas con mucha lectura (anexo I).</li>
-        <li><strong>El sonido, no el nombre:</strong> decid /m/ y no «eme», que así se juntan mejor.</li>
+        <li><strong>Decid el sonido de la letra:</strong> /m/ mejor que «eme». Así los sonidos se juntan sin esfuerzo.</li>
         <li><strong>Si escribe una letra al revés,</strong> como la b por la d, que la compare con la clave: aquí cuenta lo que descifra.</li>
       </ul>
 
@@ -2712,7 +2714,8 @@
       }
 
       function consigna([p1, p2, texto]) {
-        return `<p class="consigna">${picto(p1)}${picto(p2)}<span>${texto}</span></p>`;
+        const segundo = p2 ? picto(p2) : '';
+        return `<p class="consigna"${p2 ? '' : ' style="grid-template-columns: auto minmax(0, 1fr)"'}>${picto(p1)}${segundo}<span>${texto}</span></p>`;
       }
 
       function caso(h, c) {
@@ -2769,7 +2772,7 @@
         return `<section class="hoja-fichas c-coral">
             ${cabezaHoja(h, 'Misión final', 'Nivel 3 · Después de los casos 1 a 20')}
             <div class="mision-intro">
-              ${consigna([31680, 26845, 'Descifra los mensajes en orden.'])}
+              ${consigna([31680, null, 'Descifra los mensajes en orden.'])}
               <span class="sello">Alto secreto</span>
             </div>
             <ol class="casos">${mensajes}</ol>
@@ -2911,7 +2914,6 @@
           <div class="diploma__marco"></div>
           <div class="diploma__cuerpo">
             <div>
-              <p class="antetitulo">Agencia de detectives de letras</p>
               <p class="diploma__titulo">Diploma de detective</p>
               <p class="dato">Para:<span></span></p>
               <p class="diploma__texto">Por resolver la misión final. Descifra tu mensaje:</p>

@@ -300,8 +300,8 @@ const DOCUMENTOS = [
   },
   {
     id: 'diptongos-manipulativos',
-    asunto: 'Diptongos manipulativos: piezas para formar palabras con diptongo, en tres niveles, con tarjetas de palabras y pictogramas de ARASAAC',
-    palabras: 'diptongos, sílabas, lectura, escritura, conciencia fonológica, manipulativo, dislexia, pictogramas, ARASAAC, Primaria',
+    asunto: 'Diptongos manipulativos: vocales abiertas y cerradas con su forma, el taller «¿Caben en una casa?», sílabas para mover y tarjetas con pictogramas de ARASAAC en tres niveles, con un reto de hiatos',
+    palabras: 'diptongos, hiatos, sílabas, vocales abiertas y cerradas, lectura, escritura, ortografía, manipulativo, dislexia, TDL, discapacidad intelectual, DUA, pictogramas, ARASAAC, Primaria',
   },
   {
     id: 'mercadillo-de-clase',

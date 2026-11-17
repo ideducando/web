@@ -65,7 +65,7 @@ Está pensado para 5 años de Infantil y para 1.º y 2.º de Primaria, con toda 
 
 ## Qué incluye
 
-1. **Tablero para emparejar** cuatro parejas, con los pasos en pictogramas.
+1. **Tablero** para emparejar cuatro parejas, con los pasos en pictogramas.
 2. **36 parejas de frase y dibujo** en tres niveles, con su forma en la esquina: círculo, cuadrado y rombo. Las frases del nivel 1 vienen también en mayúsculas, para las clases que empiezan a leer así.
 3. **6 frases y 6 dibujos en blanco**, para escribir y dibujar frases propias.
 4. **Registro** para el adulto, con la escalera de las ayudas y dónde se equivoca.
@@ -73,9 +73,9 @@ Está pensado para 5 años de Infantil y para 1.º y 2.º de Primaria, con toda 
 
 ## Los tres niveles
 
-- **Nivel 1, círculo:** frases de 2 o 3 palabras, como «Hoy llueve.» o «La niña salta.».
-- **Nivel 2, cuadrado:** frases de 4 o 5 palabras con un detalle al final, como «La niña bebe agua fría.». Hay que leer hasta el punto.
-- **Nivel 3, rombo:** frases de 6 a 8 palabras en parejas que solo cambian en un detalle, como «El gato duerme en la cama.» y «El gato duerme debajo de la cama.». Hay que leer la frase entera.
+- **Nivel 1, círculo:** frases de 2 o 3 palabras, como «Hoy llueve» o «La niña salta».
+- **Nivel 2, cuadrado:** frases de 4 o 5 palabras con un detalle al final, como «La niña bebe agua fría». Hay que leer hasta el punto.
+- **Nivel 3, rombo:** frases de 6 a 8 palabras en parejas que solo cambian en un detalle, como «El gato duerme en la cama» y «El gato duerme debajo de la cama». Hay que leer la frase entera.
 
 Cada nivel tiene tres grupos de cuatro parejas. Dentro de cada grupo, las frases se parecen a propósito: así no basta con leer la primera palabra.
 

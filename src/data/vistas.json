@@ -489,6 +489,59 @@
       }
     ]
   },
+  "diptongos-manipulativos": {
+    "total": 17,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cartel para la clase · también en a3"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Taller de vocales · tablero y piezas"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "NIVEL 1 · ¿QUÉ SÍLABA FALTA? · Hoja A · Forma de círculo"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Nivel 3 · para escribir"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Reto · diptongo o hiato"
+      }
+    ]
+  },
   "estaciones-matematicas-invierno": {
     "total": 32,
     "fotos": [

@@ -10,7 +10,7 @@ formato: "PDF imprimible (A4; dos plantillas van en horizontal)"
 paginas: 14
 archivo: /descargas/apoyos-visuales-familias.pdf
 portada: /portadas/apoyos-visuales-familias.webp
-portada_alt: "Portada de la guía: una casa dibujada con el tablero «Primero y después» dentro, con las tarjetas «Me visto» y «Parque», una cuenta atrás de tres fichas y tarjetas sueltas de desayuno, dientes y cuento"
+portada_alt: "Portada de la guía: una casa dibujada con el tablero «Primero y después» dentro, con las tarjetas «Me visto» y «Parque», y alrededor tres tarjetas sueltas: desayuno, lavarse los dientes y cuento"
 vistas: [1, 3, 6, 8, 9, 11]
 tiempo: "1 hora para imprimir, recortar, plastificar y pegar el velcro de todo. Una sola plantilla, unos 20 minutos"
 necesitas:

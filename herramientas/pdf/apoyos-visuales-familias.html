@@ -372,8 +372,8 @@
       }
 
       .frase-grande {
-        margin: 4mm 0;
-        padding: 3.6mm 5mm;
+        margin: 3.6mm 0 0;
+        padding: 3mm 5mm;
         border-left: 1.6mm solid var(--morado);
         border-radius: 0 3mm 3mm 0;
         background: var(--morado-tinte);
@@ -414,7 +414,7 @@
         align-items: center;
         gap: 3mm;
         margin: 0;
-        padding: 2.4mm 3mm;
+        padding: 1.8mm 3mm;
         border: 0.5mm solid var(--c);
         border-radius: 3.5mm;
         background: var(--t);
@@ -454,8 +454,8 @@
       .formatos .marco {
         display: grid;
         place-items: center;
-        width: 26mm;
-        height: 26mm;
+        width: 22mm;
+        height: 22mm;
         border: 0.5mm solid var(--linea);
         border-radius: 3mm;
         background: #fff;
@@ -463,8 +463,8 @@
 
       .formatos .marco svg,
       .formatos .marco img {
-        width: 21mm;
-        height: 21mm;
+        width: 18mm;
+        height: 18mm;
       }
 
       .formatos .palabra {
@@ -480,7 +480,7 @@
       /* Página 4: qué cuesta más */
       .elige {
         display: grid;
-        gap: 2.4mm;
+        gap: 1.8mm;
         margin: 0 0 2mm;
         padding: 0;
         list-style: none;
@@ -488,11 +488,11 @@
 
       .elige li {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 9mm 30mm 46mm;
+        grid-template-columns: minmax(0, 1fr) 9mm 28mm 44mm;
         align-items: center;
         gap: 3mm;
         margin: 0;
-        padding: 2.4mm 3.4mm;
+        padding: 1.4mm 3.4mm;
         border: 0.5mm solid var(--linea);
         border-left: 2mm solid var(--c);
         border-radius: 3.5mm;
@@ -505,8 +505,8 @@
       }
 
       .elige li > svg:nth-child(3) {
-        width: 30mm;
-        height: 18mm;
+        width: 28mm;
+        height: 15mm;
       }
 
       .elige b {
@@ -1358,7 +1358,7 @@
       .final {
         page: tarjetas;
         font-size: 11pt;
-        line-height: 1.28;
+        line-height: 1.24;
       }
 
       .final h1 {
@@ -1368,7 +1368,7 @@
 
       .final h2 {
         font-size: 13pt;
-        margin: 3mm 0 1mm;
+        margin: 2.4mm 0 1mm;
       }
 
       .final p {
@@ -1386,11 +1386,11 @@
 
       .seguir li {
         display: grid;
-        grid-template-columns: 30mm minmax(0, 1fr);
+        grid-template-columns: 26mm minmax(0, 1fr);
         align-items: center;
         gap: 3mm;
         margin: 0;
-        padding: 2mm 2.6mm;
+        padding: 1.6mm 2.4mm;
         border: 0.4mm solid var(--linea);
         border-radius: 3mm;
         line-height: 1.28;
@@ -1398,8 +1398,8 @@
       }
 
       .seguir img {
-        width: 30mm;
-        height: 22.5mm;
+        width: 26mm;
+        height: 19.5mm;
         object-fit: cover;
         border-radius: 1.6mm;
       }
@@ -1417,7 +1417,7 @@
       }
 
       .referencias li {
-        margin-bottom: 0.5mm;
+        margin-bottom: 0.3mm;
       }
     </style>
   </head>
@@ -1465,14 +1465,14 @@
         <div class="ejemplo__pieza" id="ejemplo"></div>
         <div>
           <p><strong>Un ejemplo.</strong> Antes de salir, le enseñáis este tablero y decís: «Primero, me visto. Después, al parque».</p>
-          <p style="margin: 0">Al vestirse, la tarjeta «Me visto» se quita. Queda a la vista lo que viene: el parque.</p>
+          <p style="margin: 0">Cuando se ha vestido, queda a la vista lo que viene: el parque.</p>
         </div>
       </div>
 
       <h2>Para qué sirve</h2>
       <ul class="usos" id="usos"></ul>
 
-      <p class="frase-grande">Las palabras se van enseguida. El dibujo se queda: se puede mirar las veces que haga falta.</p>
+      <p class="frase-grande">Las palabras se van. El dibujo se queda.</p>
 
       <h2>A quién ayuda</h2>
       <p>
@@ -1496,28 +1496,21 @@
       <div class="rayos" style="margin-bottom: 5mm"></div>
       <p class="antetitulo numero-guia"><b>2</b>Guía para familias</p>
       <h1>Para empezar, uno solo</h1>
-      <p class="entrada">Elegid un solo apoyo. Empezad por el momento del día que más cuesta en casa.</p>
+      <p class="entrada">Elegid uno solo, para el momento del día que más cuesta.</p>
 
       <h2>¿Qué es lo que más os cuesta?</h2>
       <ul class="elige" id="elige"></ul>
 
       <h2>¿Con qué empezar?</h2>
-      <p>Con lo que ya entiende. Si los dibujos todavía no le dicen nada, empezad con objetos o con fotos.</p>
+      <p>Si los dibujos aún no le dicen nada, empezad con objetos o fotos.</p>
       <div class="formatos" id="formatos"></div>
 
       <h2>Antes de empezar</h2>
       <ul class="lista-check" id="antes"></ul>
 
-      <div class="caja caja--amarilla" style="margin-top: 4mm">
-        <p style="margin: 0">
-          <strong>Probadlo unas semanas.</strong> Cuando lo use bien, podéis añadir otro apoyo. Uno nuevo cada vez.
-        </p>
-      </div>
       <p class="de-donde">
-        <strong>De dónde sale.</strong> Empezar con pocas imágenes, con objetos o fotos si hace falta, a la altura de sus ojos
-        y de acuerdo con el cole: guía de Autismo Sevilla. Dejar elegir: CAST (2024, consideración 7.1). Contar hacia atrás o
-        tachar círculos lo propone Autismo Sevilla, y en un estudio con un niño la espera se alargó poco a poco con un reloj
-        visual (Grey y otros, 2009). Probar unas semanas es propuesta de IdEducando.
+        <strong>De dónde sale.</strong> Pocas imágenes, a la altura de sus ojos y de acuerdo con el cole: Autismo Sevilla, que
+        propone también contar hacia atrás. Esperar con un reloj visual: Grey y otros (2009). Elegir: CAST (2024, 7.1).
       </p>
     </section>
 
@@ -1699,13 +1692,13 @@
       <div class="rayos" style="margin-bottom: 4mm"></div>
       <p class="antetitulo">Para seguir · Fuentes y créditos</p>
       <h1>Cuando un apoyo ya funciona</h1>
-      <p>Estos materiales de IdEducando son gratis y ayudan a dar el siguiente paso. Están en ideducando.es, con el mismo título.</p>
+      <p>Gratis en ideducando.es, con el mismo título:</p>
       <ul class="seguir" id="seguir"></ul>
 
       <h2>De dónde sale esta guía</h2>
       <p>
-        <strong>Apoyos visuales en casa: guía para familias.</strong> Equipo IdEducando, noviembre de 2026.
-        <span class="url">ideducando.es/material-gratuito/apoyos-visuales-familias</span>. Fuentes consultadas el 17/11/2026.
+        <strong>Apoyos visuales en casa: guía para familias.</strong> Equipo IdEducando, noviembre de 2026. Fuentes
+        consultadas el 17/11/2026. Lo que no lleva fuente en la guía es propuesta de IdEducando.
       </p>
       <ul class="referencias">
         <li>
@@ -1757,9 +1750,9 @@
         Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
         citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
         Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
-        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las plantillas, la casa de la
-        portada y el diseño son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin
-        fines comerciales y con la misma licencia.
+        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Lo demás es de IdEducando.
+        Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines comerciales y con la misma
+        licencia.
       </p>
     </section>
 
@@ -1953,10 +1946,10 @@
       // Página 4: qué cuesta más y antes de empezar
       // ---------------------------------------------------------------------
       document.getElementById('elige').innerHTML = [
-        ['verde', 'Dejar algo que le gusta o pasar a otra cosa.', 'miniPyd', 'Primero y después', 'pyd'],
-        ['naranja', 'Las mañanas: vestirse, desayunar y salir a tiempo.', 'miniAgenda', 'Mi mañana', 'manana'],
-        ['azul', 'Pedir lo que quiere o decidir qué hacer.', 'miniElijo', 'Elijo', 'elijo'],
-        ['morado', 'Esperar, o terminar algo que le gusta.', 'miniCuenta', 'Cuenta atrás', 'cuenta'],
+        ['verde', 'Dejar algo que le gusta.', 'miniPyd', 'Primero y después', 'pyd'],
+        ['naranja', 'Las mañanas: vestirse y salir a tiempo.', 'miniAgenda', 'Mi mañana', 'manana'],
+        ['azul', 'Pedir algo o decidir qué hacer.', 'miniElijo', 'Elijo', 'elijo'],
+        ['morado', 'Esperar o terminar algo.', 'miniCuenta', 'Cuenta atrás', 'cuenta'],
       ]
         .map(
           ([c, situacion, d, nombre, pag]) =>
@@ -1969,6 +1962,7 @@
         ['Las tarjetas.', 'Solo 2 o 3: las que vais a usar.'],
         ['El sitio.', 'A la altura de sus ojos y siempre en el mismo lugar.'],
         ['El cole.', 'Contadle qué usáis en casa. Mejor si usáis los mismos dibujos.'],
+        ['Unas semanas.', 'Probadlo antes de añadir otro apoyo. Uno nuevo cada vez.'],
       ]
         .map(([t, d]) => `<li>${dibujo('casilla')}<span><strong>${t}</strong> ${d}</span></li>`)
         .join('');
@@ -2076,10 +2070,10 @@
       // Para seguir: los cuatro materiales que ya hay (y su portada)
       // ---------------------------------------------------------------------
       document.getElementById('seguir').innerHTML = [
-        ['agenda-visual-pictogramas', 'Agenda visual con pictogramas', 'Cuando la mañana ya va bien: la semana, el día y «Si hay un cambio», con 60 pictogramas.'],
-        ['agenda-visual-semanal', 'Agenda visual en blanco', 'La misma idea, para usar con vuestras fotos o pictogramas.'],
-        ['secuencias-rutinas-paso-a-paso', 'Paso a paso', 'Cuando una rutina tiene muchos pasos: lavarse las manos, ir al baño o desayunar.'],
-        ['tablero-comunicacion-basico', 'Comunicación en el bolsillo', 'Cuando quiere decir más que «quiero»: un tablero de 45 palabras y un llavero.'],
+        ['agenda-visual-pictogramas', 'Agenda visual con pictogramas', 'Cuando la mañana ya va bien: el día, la semana y «Si hay un cambio».'],
+        ['agenda-visual-semanal', 'Agenda visual en blanco', 'La misma idea, con vuestras fotos o pictogramas.'],
+        ['secuencias-rutinas-paso-a-paso', 'Paso a paso', 'Si una rutina tiene muchos pasos: lavarse las manos o ir al baño.'],
+        ['tablero-comunicacion-basico', 'Comunicación en el bolsillo', 'Para decir más que «quiero»: 45 palabras y un llavero.'],
       ]
         .map(
           ([id, t, d]) =>
@@ -2090,25 +2084,24 @@
       // ---------------------------------------------------------------------
       // Portada: una casa con el tablero, la cuenta atrás y tarjetas sueltas
       // ---------------------------------------------------------------------
-      const casa = `<svg viewBox="0 0 200 170" width="186mm" height="158mm" aria-hidden="true" focusable="false">
+      const casa = `<svg viewBox="0 0 200 170" width="160mm" height="136mm" aria-hidden="true" focusable="false">
+          <path d="M30 66 V160 H170 V66 L100 16 Z" fill="#fff"/>
           <path d="M16 74 L100 12 L184 74" fill="none" stroke="${M}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="140" y="22" width="16" height="30" fill="#fff" stroke="${M}" stroke-width="2.6"/>
-          <path d="M30 66 V160 H170 V66" fill="#fff" stroke="${M}" stroke-width="3.4" stroke-linejoin="round"/>
-          <path d="M30 160 H170" stroke="${M}" stroke-width="3.4" stroke-linecap="round"/>
-          <circle cx="100" cy="46" r="9" fill="${TINTE.amarillo}" stroke="${M}" stroke-width="2.4"/>
-          <path d="M100 40V52M94 46H106" stroke="${M}" stroke-width="2" />
+          <path d="M140 42 V24 H156 V54" fill="#fff" stroke="${M}" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M30 66 V160 H170 V66" fill="none" stroke="${M}" stroke-width="3.4" stroke-linejoin="round"/>
+          <rect x="88" y="34" width="24" height="20" rx="2" fill="${TINTE.amarillo}" stroke="${M}" stroke-width="2.4"/>
+          <path d="M100 34V54M88 44H112" stroke="${M}" stroke-width="2"/>
         </svg>`;
       const cartaSuelta = (texto, x, y, giro, escala = 0.7) => {
         const [c, t] = buscar(texto);
         return `<div style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg)"><div style="zoom:${escala}">${tarjeta(c, t, 'div')}</div></div>`;
       };
       document.getElementById('escena').innerHTML = `
-        <div style="left:12mm;top:118mm">${casa}</div>
-        <div style="left:36mm;top:174mm;transform:rotate(-2deg)"><div style="zoom:.6;width:186mm">${tableroPyd([buscar('Me visto'), buscar('Parque')])}</div></div>
-        <div style="left:52mm;top:250mm;transform:rotate(1.5deg)"><div style="zoom:.52;width:186mm">${tiraCuenta(3, { puestas: 2 })}</div></div>
-        ${cartaSuelta('Desayuno', 150, 136, 9)}
-        ${cartaSuelta('Me lavo los dientes', 22, 150, -10)}
-        ${cartaSuelta('Cuento', 160, 232, -7)}`;
+        <div style="left:25mm;top:126mm">${casa}</div>
+        <div style="left:47mm;top:186mm;transform:rotate(-2deg)"><div style="zoom:.6;width:186mm">${tableroPyd([buscar('Me visto'), buscar('Parque')])}</div></div>
+        ${cartaSuelta('Desayuno', 154, 150, 9)}
+        ${cartaSuelta('Me lavo los dientes', 20, 166, -10)}
+        ${cartaSuelta('Cuento', 162, 214, -6)}`;
 
       // Iconos sueltos
       for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = dibujo(el.dataset.icono, el.className);
