@@ -47,7 +47,7 @@ fuentes:
   - "Nation, K., Clarke, P., Wright, B. y Williams, C. (2006). Patterns of reading ability in children with autism spectrum disorder. Journal of Autism and Developmental Disorders, 36(7), 911-919. DOI: 10.1007/s10803-006-0130-1"
   - "Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation review. Journal of Autism and Developmental Disorders, 51(11), 4013-4032. DOI: 10.1007/s10803-020-04844-2"
   - "Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022, anexo II, Lengua Castellana y Literatura: competencia específica 4 (pág. 24460), criterios de evaluación del primer ciclo 4.1 y 9.1 (págs. 24464 y 24465) y saberes básicos del primer ciclo (págs. 24465 y 24466)"
-  - "Real Decreto 95/2022, de 1 de febrero, por el que se establece la ordenación y las enseñanzas mínimas de la Educación Infantil. Boletín Oficial del Estado (BOE) n.º 28, de 2 de febrero de 2022, anexo II, área Comunicación y Representación de la Realidad (págs. 14587 y 14593)"
+  - "Real Decreto 95/2022, de 1 de febrero, por el que se establece la ordenación y las enseñanzas mínimas de la Educación Infantil. Boletín Oficial del Estado (BOE) n.º 28, de 2 de febrero de 2022, anexo II, área Comunicación y Representación de la Realidad (págs. 14587, 14589 y 14593)"
   - "CAST (2024). Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0: consideraciones 3.2, 5.3, 8.2, 8.3 y 8.5. udlguidelines.cast.org/es"
   - "ARASAAC. Condiciones de uso y forma de citar los pictogramas. arasaac.org/terms-of-use (consultado el 17 de noviembre de 2026)"
 autoria: "Equipo IdEducando"
