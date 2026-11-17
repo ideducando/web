@@ -241,7 +241,7 @@
         font-family: var(--texto);
         font-size: 15pt;
         line-height: 1.35;
-        max-width: 122mm;
+        max-width: 110mm;
       }
 
       .portada__pie {
@@ -292,6 +292,8 @@
       }
 
       /* La escena de la portada: el tablero de verdad, reducido, con tres tarjetas; el bote y «Me toca». */
+      /* overflow: clip: el tablero mide 273 mm antes de reducirlo y, si sobresale de la hoja,
+         Chromium encoge toda la portada para que quepa. */
       .escena {
         position: absolute;
         z-index: 2;
@@ -299,12 +301,15 @@
         top: 0;
         width: 210mm;
         height: 297mm;
+        overflow: clip;
       }
 
       .escena > * {
         position: absolute;
       }
 
+      /* El tablero y la tarjeta de la portada se reducen con zoom (y no con transform: scale) para que su
+         caja también mida menos: si no, Chromium encoge toda la portada al imprimir. */
       .escena .tab-hoja {
         width: 273mm;
         padding: 6mm 6mm 5mm;
@@ -315,7 +320,6 @@
       }
 
       .escena .doble {
-        transform-origin: 0 0;
         border-style: solid;
         border-color: var(--marino);
         box-shadow: 0 2mm 5mm -1mm rgb(30 43 85 / 0.3);
@@ -550,11 +554,14 @@
         height: auto;
       }
 
+      /* Columnas en fracciones y no en milímetros: Chromium maqueta primero todo el documento al ancho
+         de la portada (210 mm) y, si algo se sale, encoge la portada. En la hoja apaisada (273 mm de ancho),
+         las fracciones dan 56,4 mm para «Turnos para», «Después» y «Luego», y 64,5 mm para «Ahora»:
+         caben las tarjetas de 48 × 60 mm, ya plastificadas. */
       .tab {
         display: grid;
-        grid-template-columns: 56mm 9mm 64mm 15mm 56mm 15mm 56mm;
-        grid-template-rows: 17mm 80mm 15mm;
-        justify-content: center;
+        grid-template-columns: minmax(0, 56fr) minmax(0, 9fr) minmax(0, 64fr) minmax(0, 15fr) minmax(0, 56fr) minmax(0, 15fr) minmax(0, 56fr);
+        grid-template-rows: 17mm auto 15mm;
         align-items: center;
       }
 
@@ -587,8 +594,8 @@
         position: relative;
         display: grid;
         place-items: center;
-        width: 56mm;
-        height: 68mm;
+        width: 100%;
+        aspect-ratio: 56 / 68;
         border: 0.9mm solid var(--c);
         border-radius: 4.5mm;
         background: #fff;
@@ -603,8 +610,7 @@
       }
 
       .tab__hueco--ahora {
-        width: 64mm;
-        height: 78mm;
+        aspect-ratio: 64 / 78;
         border-width: 1.5mm;
         background: var(--t);
         box-shadow: 0 0 0 1.2mm #fff, 0 0 0 2mm var(--c);
@@ -1146,8 +1152,10 @@
         background: #fff;
       }
 
-      .cara h2 {
+      .cara__texto {
         margin: 0 0 2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
         font-size: 27pt;
         line-height: 0.98;
       }
@@ -2353,9 +2361,9 @@
 
       // «Me toca» y «He terminado»: cuatro tarjetas de doble cara.
       const caraMeToca = () =>
-        `<div class="cara c-verde">${picto(7158)}<div><h2>Me toca</h2>${dibujo('estrellaCirculo')}</div></div>`;
+        `<div class="cara c-verde">${picto(7158)}<div><p class="cara__texto">Me toca</p>${dibujo('estrellaCirculo')}</div></div>`;
       const caraTerminado = () =>
-        `<div class="cara c-coral">${picto(28429)}<div><h2>He terminado</h2>${dibujo('marcada')}</div></div>`;
+        `<div class="cara c-coral">${picto(28429)}<div><p class="cara__texto">He terminado</p>${dibujo('marcada')}</div></div>`;
       const doble = (etiqueta = 'li') =>
         `<${etiqueta} class="doble">${caraMeToca()}${caraTerminado()}<span class="dobla" aria-hidden="true">Dobla</span></${etiqueta}>`;
       document.getElementById('dobles').innerHTML = Array.from({ length: 4 }, () => doble()).join('');
@@ -2456,9 +2464,9 @@
       // Portada: el tablero de verdad, reducido y con tarjetas; el bote y «Me toca».
       // ---------------------------------------------------------------------
       document.getElementById('escena').innerHTML = `
-        <div class="tab-hoja" style="left:13mm;top:158mm;transform:rotate(-3deg) scale(.6)">${tablero(true)}</div>
-        <div style="left:150mm;top:186mm;width:46mm;height:46mm;transform:rotate(6deg)">${svg(bote())}</div>
-        <div style="left:124mm;top:118mm;transform:rotate(7deg)"><div class="doble" style="transform:scale(.62);grid-template-columns:90mm;width:90mm">${caraMeToca()}</div></div>`;
+        <div style="left:12mm;top:158mm;transform:rotate(-3deg)"><div class="tab-hoja" style="zoom:.57">${tablero(true)}</div></div>
+        <div style="left:157mm;top:196mm;width:44mm;height:44mm;transform:rotate(7deg)">${svg(bote())}</div>
+        <div style="left:136mm;top:116mm;transform:rotate(7deg)"><div class="doble" style="zoom:.6;grid-template-columns:90mm;width:90mm">${caraMeToca()}</div></div>`;
 
       // Iconos sueltos
       for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = dibujo(el.dataset.icono, 'agujero');

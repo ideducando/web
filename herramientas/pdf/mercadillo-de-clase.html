@@ -1,0 +1,2513 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>El mercadillo de clase: comprar, pagar y recibir la vuelta con dinero de juego · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar y tableros: márgenes de 11 y 12 mm (186 × 270 mm útiles). */
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Un color para cada puesto (siempre con su nombre y sus productos) ---------- */
+      .p-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .p-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .p-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .p-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 12mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 116mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.4mm 0 0.8mm;
+      }
+
+      /* El puesto de la portada: toldo, etiquetas de verdad colgadas y dinero de juego en el mostrador. */
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .escena .cuerda {
+        width: 0.5mm;
+        background: var(--marino);
+      }
+
+      .escena .etiqueta {
+        transform-origin: 50% 0;
+        filter: drop-shadow(0 1.6mm 1.6mm rgb(30 43 85 / 0.22));
+      }
+
+      .escena .pieza-dinero {
+        filter: drop-shadow(0 1mm 1.2mm rgb(30 43 85 / 0.25));
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .cabeza > img.picto-cabeza {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8.4mm;
+        height: 8.4mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .mapa {
+        display: grid;
+        gap: 1.2mm;
+        margin: 0 0 3.5mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) 27mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 0.9mm 3mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mapa li > img,
+      .mapa li > svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .mapa h2 {
+        margin: 0;
+        font-size: 12.5pt;
+        line-height: 1.15;
+      }
+
+      .mapa p {
+        margin: 0.3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .mapa .mapa__pagina {
+        margin: 0;
+        white-space: nowrap;
+        text-align: right;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.2;
+      }
+
+      .vistazo__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: stretch;
+        margin: 0 0 3.5mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.8mm;
+        font-size: 13pt;
+      }
+
+      .lista-niveles {
+        display: grid;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 10.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .lista-niveles .nv {
+        justify-self: center;
+      }
+
+      .una-compra {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .una-compra li {
+        position: relative;
+        display: grid;
+        grid-template-rows: 18mm auto;
+        justify-items: center;
+        align-items: start;
+        gap: 1mm;
+        margin: 0;
+        text-align: center;
+      }
+
+      .una-compra img {
+        width: 18mm;
+        height: 18mm;
+        border-radius: 2.5mm;
+        background: #fff;
+      }
+
+      .una-compra li::before {
+        counter-increment: paso;
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: -1mm;
+        display: grid;
+        place-items: center;
+        width: 6mm;
+        height: 6mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      .una-compra p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+
+      .una-compra .quien {
+        display: block;
+        margin-top: 0.8mm;
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Hojas de recortar ---------- */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        height: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      /* Monedas: 4 por fila. Cada fila mide lo que su moneda más 2 mm. */
+      .rejilla-monedas {
+        display: grid;
+        grid-template-columns: repeat(4, 46.5mm);
+        row-gap: 1.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .rejilla-monedas li {
+        display: grid;
+        place-items: center;
+        margin: 0;
+      }
+
+      .rejilla-monedas li.m2 {
+        height: 43mm;
+      }
+
+      .rejilla-monedas li.m1 {
+        height: 39mm;
+      }
+
+      .rejilla-monedas li.m50 {
+        height: 41mm;
+      }
+
+      .rejilla-billetes {
+        display: grid;
+        grid-template-columns: repeat(2, 91mm);
+        justify-content: space-between;
+        row-gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .rejilla-billetes li {
+        display: grid;
+        place-items: center;
+        margin: 0;
+      }
+
+      .billete-recorte {
+        border: 0.45mm dashed var(--suave);
+      }
+
+      .nota-dinero {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 3mm 0 0;
+        padding: 2.4mm 4mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        font-size: 11pt;
+        line-height: 1.34;
+        break-inside: avoid;
+      }
+
+      .nota-dinero p {
+        margin: 0;
+      }
+
+      /* ---------- Carteles de los puestos ---------- */
+      .carteles {
+        display: grid;
+        grid-auto-rows: 57mm;
+        row-gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cartel {
+        position: relative;
+        display: grid;
+        grid-template-rows: 14mm minmax(0, 1fr);
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .cartel__cuerpo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 4mm;
+        padding: 0 5mm 1mm 7mm;
+      }
+
+      .cartel__nombre {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 40pt;
+        line-height: 1;
+      }
+
+      .cartel__productos {
+        display: grid;
+        grid-template-columns: repeat(4, 21mm);
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .cartel__productos li {
+        display: grid;
+        place-items: center;
+        width: 21mm;
+        height: 21mm;
+        margin: 0;
+        border: 0.45mm solid var(--c);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .cartel__productos img {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      /* ---------- Etiquetas de precio (88 × 57 mm) ---------- */
+      .etiquetas {
+        display: grid;
+        grid-template-columns: repeat(2, 88mm);
+        grid-auto-rows: 57mm;
+        justify-content: space-between;
+        row-gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .etiqueta {
+        position: relative;
+        width: 88mm;
+        height: 57mm;
+        margin: 0;
+      }
+
+      .etiqueta > svg.etiqueta__fondo {
+        position: absolute;
+        inset: 0;
+        width: 88mm;
+        height: 57mm;
+      }
+
+      .etiqueta__picto {
+        position: absolute;
+        left: 17.5mm;
+        top: 5.5mm;
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .etiqueta__nombre {
+        position: absolute;
+        left: 44mm;
+        right: 11mm;
+        top: 5mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .etiqueta__precio {
+        position: absolute;
+        left: 44mm;
+        top: 14.5mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 30pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .etiqueta .nv {
+        position: absolute;
+        right: 3.6mm;
+        top: 3.6mm;
+      }
+
+      .etiqueta__paga {
+        position: absolute;
+        left: 17.5mm;
+        right: 3mm;
+        bottom: 3.4mm;
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 1mm 2mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .etiqueta__paga .monedas-mini {
+        display: flex;
+        align-items: center;
+        gap: 1.2mm;
+      }
+
+      /* ---------- Tablero de pago ---------- */
+      .pasos-pago {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-pago li {
+        display: grid;
+        grid-template-columns: 12mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0.8mm 2mm;
+        border-radius: 3mm;
+        background: var(--azul-tinte);
+      }
+
+      .pasos-pago img,
+      .pasos-pago svg {
+        width: 12mm;
+        height: 12mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .pasos-pago p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .filas-pago {
+        display: grid;
+        gap: 1.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .fila-pago {
+        display: grid;
+        grid-template-columns: 50mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0;
+        padding: 0.6mm 3mm 0.6mm 0.6mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 4mm;
+      }
+
+      .fila-pago__precio {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        column-gap: 2mm;
+        height: 100%;
+        padding: 2mm 3mm;
+        border-radius: 3mm;
+        background: var(--crema);
+      }
+
+      .fila-pago__precio b {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 30pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .fila-pago__precio span.palabras {
+        grid-column: 1 / -1;
+        margin-top: 1.2mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .fila-pago__monedas {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .fila-pago__o {
+        margin: 0 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Caja registradora ---------- */
+      .pantalla {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 3mm;
+        padding: 3mm 4mm;
+        border: 2.4mm solid var(--marino);
+        border-radius: 5mm;
+        background: var(--verde-tinte);
+      }
+
+      .pantalla p {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        column-gap: 1.6mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .pantalla p > span:first-child {
+        grid-column: 1 / -1;
+        margin-bottom: 1.6mm;
+      }
+
+      .pantalla .casilla {
+        height: 12mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .caja-reg h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+        font-size: 18pt;
+      }
+
+      .caja-reg h2 small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .recta {
+        margin: 0 0 3mm;
+      }
+
+      .recta svg {
+        width: 186mm;
+        height: auto;
+      }
+
+      .bandeja {
+        margin: 0 0 3mm;
+        padding: 2mm 3mm 3mm;
+        border: 0.6mm solid var(--morado);
+        border-radius: 4mm;
+        background: var(--morado-tinte);
+      }
+
+      .bandeja__huecos {
+        display: grid;
+        grid-template-columns: 40mm 7mm 40mm 7mm 40mm 7mm 40mm;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .bandeja__huecos svg {
+        width: 40mm;
+        height: 40mm;
+      }
+
+      .bandeja__huecos svg.flechita {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .cajon {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2.4mm;
+        padding: 2.4mm;
+        border-radius: 4mm;
+        background: var(--marino);
+      }
+
+      .cajon > div {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        justify-items: center;
+        height: 33mm;
+        padding: 1.6mm 2mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .cajon > div.c-moneda {
+        grid-column: span 2;
+      }
+
+      .cajon > div.c-billete {
+        grid-column: span 3;
+      }
+
+      .cajon__etiqueta {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      /* ---------- Listas de la compra ---------- */
+      .listas {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 78mm;
+        justify-content: space-between;
+        row-gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista {
+        position: relative;
+        display: grid;
+        grid-template-rows: 14mm minmax(0, 1fr) 15mm;
+        margin: 0;
+        padding: 0 3mm 2mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .lista__cabeza {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) 12mm;
+        align-items: center;
+        gap: 2.4mm;
+        border-bottom: 0.4mm solid var(--linea);
+      }
+
+      .lista__cabeza p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .lista__cabeza img {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .lista__cosas {
+        display: grid;
+        grid-auto-rows: minmax(0, 1fr);
+        margin: 0;
+        padding: 1mm 0;
+        list-style: none;
+      }
+
+      .lista__cosas li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        border-bottom: 0.3mm dashed var(--linea);
+      }
+
+      .lista__cosas li:last-child {
+        border-bottom: 0;
+      }
+
+      .lista__cosas img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .lista__cosas p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      .lista__cosas .casilla {
+        width: 9mm;
+        height: 9mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 1.6mm;
+      }
+
+      .lista__cosas .con-billete {
+        display: grid;
+        justify-items: end;
+        gap: 1mm;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--suave);
+      }
+
+      .lista__cosas .vuelta {
+        display: flex;
+        align-items: end;
+        gap: 1mm;
+        font-weight: 700;
+        color: var(--marino);
+      }
+
+      .lista__cosas .vuelta span {
+        width: 13mm;
+        height: 6mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .lista__llevo {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0 2mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .lista__llevo .monedas-mini {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1mm;
+      }
+
+      /* ---------- Tarjetas «Hoy compro» y «Hoy vendo» (90 × 125 mm) ---------- */
+      .papeles {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 121mm;
+        justify-content: space-between;
+        row-gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .papel {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.6mm 25mm minmax(0, 1fr);
+        margin: 0;
+        padding: 0 3mm 2.6mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .papel.compro {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+
+      .papel.vendo {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+      }
+
+      .papel__banda {
+        margin: 0 -3mm;
+        background: var(--c);
+      }
+
+      .papel__cabeza {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        border-bottom: 0.4mm solid var(--linea);
+      }
+
+      .papel__cabeza img {
+        width: 21mm;
+        height: 21mm;
+        border-radius: 3mm;
+        background: var(--t);
+      }
+
+      .papel__cabeza p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 26pt;
+        line-height: 1;
+      }
+
+      .frases {
+        display: grid;
+        grid-auto-rows: minmax(0, 1fr);
+        gap: 1.1mm;
+        margin: 1.6mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .frases li {
+        position: relative;
+        display: grid;
+        grid-template-columns: 6.5mm 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 0 1.4mm 0 1mm;
+        border: 0.35mm solid var(--linea);
+        border-radius: 2.6mm;
+      }
+
+      .frases li.solo-n3 {
+        border-style: dashed;
+        border-color: var(--morado);
+        padding-right: 9.5mm;
+      }
+
+      .frases li.solo-n3 .nv {
+        position: absolute;
+        right: 1mm;
+        top: 50%;
+        margin-top: -3.9mm;
+      }
+
+      .frases .numero {
+        display: grid;
+        place-items: center;
+        width: 6.5mm;
+        height: 6.5mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      .frases img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .frases p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.02;
+      }
+
+      /* ---------- Registro ---------- */
+      .registro {
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .registro__datos {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.2fr);
+        gap: 6mm;
+        align-items: end;
+        margin: 0 0 3mm;
+      }
+
+      .registro__datos p {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .registro__datos p.niveles {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .registro__datos span.raya {
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .registro__datos .fechas {
+        grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+      }
+
+      .ayudas {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ayudas li {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 1.4mm 2mm;
+        border-radius: 2.6mm;
+        background: var(--azul-tinte);
+        line-height: 1.2;
+      }
+
+      .ayudas b {
+        display: grid;
+        place-items: center;
+        width: 8mm;
+        height: 8mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 13pt;
+      }
+
+      .registro table th,
+      .registro table td {
+        padding: 1.1mm 1.8mm;
+        border: 0.3mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .registro tbody td {
+        height: 9mm;
+      }
+
+      .registro thead th {
+        font-size: 11pt;
+        line-height: 1.15;
+        text-align: center;
+      }
+
+      .registro thead th:first-child {
+        text-align: left;
+      }
+
+      .registro tbody th {
+        font-family: var(--texto);
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      .registro tbody tr.grupo th {
+        padding-top: 1.4mm;
+        background: var(--crema);
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .registro .fecha td {
+        height: 7mm;
+        background: #fafbfd;
+      }
+
+      .regla {
+        margin: 3mm 0 0;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.6em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.8mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+        break-inside: auto;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      .ejemplo-vuelta {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 1.6mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ejemplo-vuelta li {
+        display: grid;
+        justify-items: center;
+        gap: 0.8mm;
+        margin: 0;
+        padding: 1.6mm 1mm;
+        border-radius: 2.4mm;
+        background: #fff;
+        text-align: center;
+        line-height: 1.15;
+      }
+
+      .ejemplo-vuelta b {
+        font-family: var(--titulos);
+        font-size: 15pt;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .familias ul,
+      .familias ol {
+        margin-bottom: 0.4em;
+      }
+
+      .niveles-casa {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 1.5mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .niveles-casa li {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        gap: 1mm;
+        margin: 0;
+        padding: 2mm 2.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.28;
+      }
+
+      .niveles-casa strong {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        font-family: var(--titulos);
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .recuadro .su-nivel {
+        display: flex;
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 1mm;
+      }
+
+      .recuadro .su-nivel > span {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.4mm;
+      }
+
+      .recuadro .su-nivel i {
+        display: inline-block;
+        width: 5mm;
+        height: 5mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: tarjetas;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.45em 0 0.15em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -66mm; top: 118mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -34mm; top: 196mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 128mm; top: 100mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Matemáticas para la vida diaria · Primaria</p>
+        <h1 class="portada__titulo">El mercadillo<br />de clase</h1>
+        <p class="portada__subtitulo">
+          Comprar, pagar y recibir la vuelta con dinero de juego, en tres niveles. Para Primaria y el aula de apoyo.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" id="escena" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>Tres<b>niveles</b>para toda<br />la clase</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        El mercadillo convierte la clase en cuatro puestos: frutería, panadería, papelería y juguetería. Con dinero de
+        juego, el alumnado pide, paga y recibe la vuelta. Está pensado sobre todo para el alumnado con discapacidad
+        intelectual y con trastorno del espectro del autismo (TEA), y sirve para toda la clase a la vez: cada cual compra
+        con la lista de su nivel.
+      </p>
+      <ol class="mapa" id="mapa"></ol>
+      <div class="vistazo__fila">
+        <div class="caja caja--azul">
+          <h2>Tres niveles</h2>
+          <ul class="lista-niveles" id="lista-niveles"></ul>
+        </div>
+        <div class="caja caja--amarilla">
+          <h2>Dinero de juego</h2>
+          <p>
+            Diseño propio, de una sola cara, con la palabra «JUEGO» y de otro tamaño que el de verdad. Las normas, en la
+            guía (página <span data-pagina="guia"></span>).
+          </p>
+        </div>
+      </div>
+      <div class="caja caja--verde">
+        <h2>Una compra, paso a paso</h2>
+        <ol class="una-compra" id="una-compra"></ol>
+      </div>
+    </section>
+
+    <!-- Monedas, billetes, carteles y etiquetas: se generan con el guion del final -->
+    <div id="hojas-dinero"></div>
+    <div id="hojas-puestos"></div>
+
+    <!-- ======================================================================
+         TABLERO DE PAGO (niveles 1 y 2)
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para quien compra · Niveles 1 y 2 · Uno por puesto</p>
+          <h1>Tablero de pago</h1>
+        </div>
+        <img class="picto-cabeza" src="pictogramas/29070.png" alt="" />
+      </div>
+      <ol class="pasos-pago" id="pasos-pago"></ol>
+      <ol class="filas-pago" id="filas-pago"></ol>
+      <p class="atribucion">
+        Las monedas dibujadas miden lo mismo que las de juego. Pictogramas: Sergio Palao. ARASAAC (arasaac.org). CC
+        BY-NC-SA. Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CAJA REGISTRADORA (para quien vende)
+         ====================================================================== -->
+    <section class="hoja-tarjetas caja-reg">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para quien vende · Con rotulador de pizarra · Una por puesto</p>
+          <h1>Caja registradora</h1>
+        </div>
+        <img class="picto-cabeza" src="pictogramas/2677.png" alt="" />
+      </div>
+      <div class="pantalla">
+        <p><span>Cuesta</span><span class="casilla"></span><span>€</span></p>
+        <p><span>Me da</span><span class="casilla"></span><span>€</span></p>
+        <p><span>Vuelta</span><span class="casilla"></span><span>€</span></p>
+      </div>
+      <div class="recta">
+        <h2><span class="nv n3" aria-hidden="true">3</span>Cuento hacia arriba <small>Del precio al billete, moneda a moneda</small></h2>
+        <div id="recta"></div>
+      </div>
+      <div class="bandeja">
+        <h2><img src="pictogramas/28833.png" alt="" style="width: 11mm; height: 11mm" />Tu vuelta <small>Pon cada moneda en su sitio mientras cuentas</small></h2>
+        <div class="bandeja__huecos" id="huecos-vuelta"></div>
+      </div>
+      <div class="cajon" id="cajon"></div>
+      <p class="atribucion">
+        La caja y el dinero son dibujos de IdEducando. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC
+        BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         LISTAS DE LA COMPRA
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <h1 class="solo-lector">Listas de la compra: dos de cada nivel</h1>
+      <p class="aviso">
+        <span><strong>Listas de la compra</strong> · Dos por nivel · En folio, una por sesión</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <ul class="listas" id="listas"></ul>
+      <p class="atribucion">
+        «Llevo» dice qué poner en su sobre. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA.
+        Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS «HOY COMPRO» Y «HOY VENDO»
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <h1 class="solo-lector">Tarjetas para la conversación: «Hoy compro» y «Hoy vendo»</h1>
+      <p class="aviso">
+        <span><strong>Tarjetas de papeles</strong> · Una de cada en cada puesto</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <ul class="papeles" id="papeles"></ul>
+      <p class="atribucion">
+        Las frases con borde morado y rombo son del nivel 3. Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org).
+        Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE LA COMPRA (para el adulto)
+         ====================================================================== -->
+    <section class="hoja registro">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el adulto · Una hoja cada 8 sesiones</p>
+          <h1>Registro de la compra</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="registro__datos">
+        <p>Iniciales:<span class="raya"></span></p>
+        <p class="niveles">
+          Nivel:<span class="nv n1" aria-hidden="true">1</span><span class="nv n2" aria-hidden="true">2</span
+          ><span class="nv n3" aria-hidden="true">3</span><span class="solo-lector">uno, dos o tres; rodea el suyo</span>
+        </p>
+        <p class="fechas">Del<span class="raya"></span>al<span class="raya"></span></p>
+      </div>
+      <p style="margin: 0 0 1.6mm">
+        <strong>En cada casilla, la letra de la ayuda que ha necesitado.</strong> Si ese día no le toca el paso, raya la
+        casilla.
+      </p>
+      <ul class="ayudas" id="ayudas"></ul>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" style="width: 66mm">Paso</th>
+            <th scope="col">1</th>
+            <th scope="col">2</th>
+            <th scope="col">3</th>
+            <th scope="col">4</th>
+            <th scope="col">5</th>
+            <th scope="col">6</th>
+            <th scope="col">7</th>
+            <th scope="col">8</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <div class="caja caja--verde regla">
+        <p>
+          <strong>Cuándo cambiar de nivel.</strong> Cuando haga todos los pasos de su papel sin ayuda en 3 sesiones
+          seguidas, prueba el nivel siguiente. Si deja de salir, vuelve al anterior sin darle importancia. Es una propuesta
+          de IdEducando: ajústala a cada peque.
+        </p>
+      </div>
+      <p class="atribucion">Solo iniciales, sin el diagnóstico. Guarda el registro en el centro y no le hagas fotos con tu móvil.</p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>El mercadillo de clase: cómo prepararlo y cómo enseñar a comprar</h1>
+      <p>
+        El mercadillo convierte la clase en una calle con cuatro puestos donde se pide, se paga y se recibe la vuelta con
+        dinero de juego. Está pensado sobre todo para el alumnado con discapacidad intelectual y con trastorno del espectro
+        del autismo (TEA), y sirve para toda la clase a la vez: cada cual compra con la lista de su nivel.
+      </p>
+
+      <h2>Por qué ayuda</h2>
+      <ul>
+        <li>
+          <strong>Enseñar a comprar da resultado.</strong> En una revisión de 28 estudios con personas con discapacidades
+          del desarrollo, el efecto fue moderado al aprender, grande al mantenerlo y moderado al generalizarlo. Influían,
+          entre otras cosas, lo que ya sabían, las adaptaciones para manejar el dinero y el lugar de la enseñanza (Xin y
+          otros, 2005).
+        </li>
+        <li>
+          <strong>Enseñanza sistemática y lugares reales.</strong> En 68 experimentos de matemáticas con alumnado con
+          discapacidad cognitiva significativa, casi todos los de medida trataban del dinero, y las pruebas más sólidas eran
+          para la enseñanza sistemática y para enseñar en el lugar real (Browder y otros, 2008). La revisión posterior suma,
+          entre otras prácticas, los materiales manipulativos y la instrucción explícita (Spooner y otros, 2019).
+        </li>
+        <li>
+          <strong>Del aula a la tienda.</strong> Con 40 adolescentes y jóvenes con discapacidad intelectual, lo practicado
+          en simulación pasó a la comunidad mejor con discapacidad leve que moderada, y los autores proponen combinar las dos
+          cosas (Bates y otros, 2001). Para eso está la nota de la página <span data-pagina="familias"></span>.
+        </li>
+        <li>
+          <strong>Contar hacia arriba.</strong> Cuatro estudiantes con autismo y discapacidad intelectual aprendieron a
+          contar hacia arriba, junto con la estrategia del dólar siguiente (en euros, pagar un euro más de los que marca el
+          precio), y lo usaron en tiendas reales. Lo mantenían hasta seis semanas después (Cihak y Grim, 2008).
+        </li>
+        <li>
+          <strong>Apartar cada moneda.</strong> Con 14 adolescentes con discapacidad intelectual, apartar cada moneda al
+          contarla mejoró la suma de monedas (Borakove y Cuvo, 1977). Por eso cada moneda va a su círculo del tablero y la
+          vuelta se pone en fila.
+        </li>
+        <li>
+          <strong>Apoyos visuales, modelado y ayudas</strong> están entre las 28 prácticas con evidencia para el alumnado
+          autista, y los guiones de conversación, como las tarjetas «Hoy compro» y «Hoy vendo», forman parte de los apoyos
+          visuales (Hume y otros, 2021).
+        </li>
+        <li>
+          <strong>Lo que no sabemos.</strong> El mercadillo, como conjunto, no se ha estudiado: junta apoyos con respaldo.
+          Lo que no lleva fuente en esta guía es propuesta de IdEducando.
+        </li>
+      </ul>
+
+      <h2>En el currículo</h2>
+      <p>
+        En Matemáticas, el primer ciclo trabaja el «Sistema monetario europeo: monedas (1, 2 euros) y billetes de euro (5,
+        10, 20, 50 y 100), valor y equivalencia», y el segundo, el «Cálculo y estimación de cantidades y cambios (euros y
+        céntimos de euro) en problemas de la vida cotidiana». Lo recogen el Real Decreto 157/2022 y, en la Región de
+        Murcia, el Decreto 209/2022 (saber A.5 de cada ciclo).
+      </p>
+
+      <h2>Cómo se prepara</h2>
+      <p>
+        Sigue la página 2: para empezar, bastan dos puestos. Una o dos personas venden en cada puesto y las demás compran;
+        a mitad de sesión, se cambian. Una sesión dura de 30 a 40 minutos: 5 para tu compra de modelo, 20 de mercadillo y
+        5 para recoger y contar la caja. Monedas y billetes son piezas pequeñas: lejos de quien todavía se lleva cosas a la
+        boca.
+      </p>
+
+      <h2>Cómo enseñar una compra</h2>
+      <ol>
+        <li>Haz tú una compra delante, en voz alta, con la tarjeta «Hoy compro». Después, que la haga con tu ayuda.</li>
+        <li>Enseña los pasos del registro siempre en el mismo orden.</li>
+        <li>
+          Ayuda de más a menos: guías su mano, lo haces tú antes, señalas o se lo dices. Antes de ayudar, espera unos
+          segundos.
+        </li>
+        <li>Que aparte cada moneda al contarla: en su círculo del tablero o en la fila de la vuelta.</li>
+        <li>Dile qué ha hecho bien: «Has pagado justo», «Has dicho el precio».</li>
+      </ol>
+
+      <h2>Tres niveles para toda la clase</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone ajustar el reto y el apoyo, practicar con apoyos que se
+        retiran poco a poco y aprender juntos (CAST, 2024, consideraciones 8.2, 5.3 y 8.3). En el nivel 1 se paga justo con
+        precios de 1 y 2 €; en el 2 se juntan monedas para los precios con 50 céntimos, y en el 3 se paga con un billete y
+        la vuelta se cuenta hacia arriba, del precio al billete.
+      </p>
+      <div class="caja caja--morada">
+        <h2>Así se cuenta hacia arriba</h2>
+        <p style="margin: 0">Cuesta 1,50 € y me da 5 €. Digo «1,50» y voy poniendo monedas hasta llegar a 5:</p>
+        <ol class="ejemplo-vuelta" id="ejemplo-vuelta"></ol>
+      </div>
+
+      <h2>Para el alumnado con TEA o con discapacidad intelectual</h2>
+      <ul>
+        <li>Antes de abrir, enséñale el puesto, la tarjeta de su papel y el orden de la compra.</li>
+        <li>
+          Puede señalar las frases de su tarjeta o usar su sistema de comunicación aumentativa y alternativa (CAA), como un
+          tablero o un comunicador.
+        </li>
+        <li>Empieza con un puesto y un producto. Añade más cuando lo haga sin ayuda.</li>
+        <li>Pon su puesto en una zona tranquila y marca en el suelo dónde se espera el turno.</li>
+        <li>Cuando se maneje con el dinero de juego, pasad a monedas de verdad: son más pequeñas y pesan más.</li>
+      </ul>
+
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>El dinero de juego</strong> es de diseño propio, de una sola cara, con la palabra «JUEGO», sin símbolos de
+          la Unión Europea y de otro tamaño que el de verdad (las monedas, más de una vez y media; los billetes, menos de tres
+          cuartos), como piden la Comisión Europea y el Banco Central Europeo para que nadie lo confunda con euros.
+        </p>
+      </div>
+
+      <h2>Con otros materiales de IdEducando</h2>
+      <p>
+        La unidad «La tienda del puerto» del
+        <a href="https://www.ideducando.es/material-gratuito/programa-intervencion-pt-ejemplo/">Programa de intervención de
+          Pedagogía Terapéutica (PT) de ejemplo</a>
+        trabaja las monedas de 1 y 2 € con este mismo enfoque. Para pedir con pictogramas, el tablero de
+        <a href="https://www.ideducando.es/material-gratuito/tablero-comunicacion-basico/">Comunicación en el bolsillo</a>.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PARA LAS FAMILIAS: A LA TIENDA DE VERDAD
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Del mercadillo a una tienda de verdad</h1>
+      <p>
+        En clase hemos montado un mercadillo con dinero de juego. Practicamos cómo pedir, cómo pagar y cómo recibir la
+        vuelta. Ahora toca probarlo en una tienda de verdad, con vosotros.
+      </p>
+
+      <h2><img src="pictogramas/7144.png" alt="" />Antes de salir</h2>
+      <ul>
+        <li>Elegid una tienda tranquila que conozca: la panadería, la frutería o el quiosco. Mejor a una hora con poca gente.</li>
+        <li>Haced juntos una lista corta, con dibujos: una o dos cosas.</li>
+        <li>Poned en su monedero el dinero justo, como en clase.</li>
+        <li>Repasad las frases: «Hola», «¿Cuánto cuesta?», «Aquí tienes» y «Gracias, adiós».</li>
+      </ul>
+
+      <h2><img src="pictogramas/3389.png" alt="" />En la tienda</h2>
+      <ul>
+        <li>Dejad que pida y que pague. Quedaos a su lado y esperad unos segundos antes de ayudar.</li>
+        <li>Si se bloquea, decid vosotros la frase para que la repita, o que la señale en su tarjeta.</li>
+        <li>En las tiendas, 1 € se escribe a veces «1,00 €». Es lo mismo.</li>
+        <li>Si hay mucha gente o mucho ruido, volved otro día. No pasa nada.</li>
+      </ul>
+
+      <h2><img src="pictogramas/31408.png" alt="" />Después</h2>
+      <p>Contad juntos la vuelta y decidle qué ha hecho bien: «Has pedido tú solo el pan». Según su nivel en clase:</p>
+      <ul class="niveles-casa" id="niveles-casa"></ul>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <p class="su-nivel">
+          Su nivel en clase:<span><i></i><span class="nv n1" aria-hidden="true">1</span></span
+          ><span><i></i><span class="nv n2" aria-hidden="true">2</span></span
+          ><span><i></i><span class="nv n3" aria-hidden="true">3</span></span>
+        </p>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>El mercadillo de clase.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>El mercadillo de clase.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/mercadillo-de-clase</span>. Fuentes consultadas el 17/11/2026.
+        Los títulos se citan como se publicaron; hoy se dice «discapacidad intelectual».
+      </p>
+
+      <h2>Enseñar el dinero y la compra</h2>
+      <ul class="referencias">
+        <li>
+          Xin, Y. P. y otros (2005). The effects of purchasing skill instruction for individuals with developmental
+          disabilities: A meta-analysis. <em>Exceptional Children</em>, 71(4), 379-400. Registro ERIC EJ697249.
+        </li>
+        <li>
+          Browder, D. M. y otros (2008). A meta-analysis on teaching mathematics to students with significant cognitive
+          disabilities. <em>Exceptional Children</em>, 74(4), 407-432. DOI: 10.1177/001440290807400401
+        </li>
+        <li>
+          Spooner, F. y otros (2019). An updated evidence-based practice review on teaching mathematics to students with
+          moderate and severe developmental disabilities. <em>Remedial and Special Education</em>, 40(3), 150-165. DOI:
+          10.1177/0741932517751055
+        </li>
+        <li>
+          Bates, P. E. y otros (2001). Simulated and community-based instruction involving persons with mild and moderate
+          mental retardation. <em>Research in Developmental Disabilities</em>, 22(2), 95-115. DOI:
+          10.1016/S0891-4222(01)00060-9
+        </li>
+        <li>
+          Cihak, D. F. y Grim, J. (2008). Teaching students with autism spectrum disorder and moderate intellectual
+          disabilities to use counting-on strategies to enhance independent purchasing skills. <em>Research in Autism
+          Spectrum Disorders</em>, 2(4), 716-727. DOI: 10.1016/j.rasd.2008.02.006
+        </li>
+        <li>
+          Borakove, L. S. y Cuvo, A. J. (1977). Facilitative effects of coin displacement on teaching coin summation to
+          mentally retarded adolescents. <em>American Journal of Mental Deficiency</em>, 81(4), 350-356. PubMed: 836634.
+        </li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
+          generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI:
+          10.1007/s10803-020-04844-2
+        </li>
+      </ul>
+
+      <h2>Currículo</h2>
+      <ul class="referencias">
+        <li>
+          Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la
+          Educación Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022, anexo II, Matemáticas, saber
+          A.5 del primer y del segundo ciclo (págs. 24492 y 24496).
+        </li>
+        <li>
+          Decreto n.º 209/2022, de 17 de noviembre, por el que se establece la ordenación y el currículo de la Educación
+          Primaria en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 267, de
+          18 de noviembre de 2022, anexo III, Matemáticas, saber A.5 del primer y del segundo ciclo (págs. 40068 y 40072).
+        </li>
+      </ul>
+
+      <h2>Normas para el dinero de juego</h2>
+      <ul class="referencias">
+        <li>
+          Decisión del Banco Central Europeo, de 19 de abril de 2013, sobre las denominaciones, especificaciones,
+          reproducción, canje y retirada de los billetes en euros (BCE/2013/10). Diario Oficial de la Unión Europea (DO) L
+          118 de 30.4.2013, p. 37. Artículo 2 en la redacción de la Decisión (UE) 2020/2090 (BCE/2020/60), DO L 423 de
+          15.12.2020, p. 62: de una sola cara, lícitas al 125 % o más, o al 75 % o menos, de largo y de ancho.
+        </li>
+        <li>
+          Reglamento (CE) n.º 2182/2004 del Consejo, de 6 de diciembre de 2004, sobre medallas y fichas similares a monedas
+          de euro. DO L 373 de 21.12.2004, p. 1, modificado por el Reglamento (CE) n.º 46/2009, DO L 17 de 22.1.2009, p. 5:
+          objetos metálicos de 19 a 28 mm.
+        </li>
+        <li>
+          Comunicación de la Comisión relativa a la protección de los derechos de autor sobre el diseño de la cara común de
+          las monedas en euros (2011/C 41/03). DO C 41 de 10.2.2011, p. 4: fichas de materiales blandos, al menos un 50 %
+          mayores o menores que las monedas reales.
+        </li>
+        <li>
+          Reglamento (CE) n.º 975/98 del Consejo, de 3 de mayo de 1998, sobre los valores nominales y las especificaciones
+          técnicas de las monedas en euros. DO L 139 de 11.5.1998, p. 6, artículo 1: 23,25 mm (1 €), 25,75 mm (2 €) y
+          24,25 mm (50 céntimos).
+        </li>
+      </ul>
+
+      <h2>DUA, pictogramas, dibujos y licencia</h2>
+      <p>
+        CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>, consideraciones 3.4, 5.3, 8.2 y 8.3.
+        udlguidelines.cast.org. Los pictogramas son de ARASAAC, y su licencia pide citar este texto: «Los símbolos
+        pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+        (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con pictogramas de ARASAAC, este
+        material no se puede vender: es gratis y lo será siempre. El dinero de juego, los toldos, la caja registradora y el
+        diseño son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a IdEducando, sin fines
+        comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        vistazo: 3,
+        monedas: 4,
+        billetes: 5,
+        carteles: 6,
+        etiquetas1: 7,
+        etiquetas2: 8,
+        tablero: 9,
+        caja: 10,
+        listas: 11,
+        papeles: 12,
+        registro: 13,
+        guia: 14,
+        familias: 16,
+        fuentes: 17,
+      };
+
+      // ---------------------------------------------------------------------
+      // Los cuatro puestos y sus productos: [nombre, pictograma de ARASAAC, precio en euros].
+      // Precio redondo (1 o 2 €): nivel 1. Con 50 céntimos: nivel 2. El nivel 3 paga cualquiera con billete.
+      // ---------------------------------------------------------------------
+      const PUESTOS = [
+        { nombre: 'Frutería', color: 'verde', productos: [['Manzana', 2462, 1], ['Uvas', 3247, 2], ['Plátano', 2530, 0.5], ['Sandía', 2557, 2.5]] },
+        { nombre: 'Panadería', color: 'naranja', productos: [['Pan', 2494, 1], ['Bizcocho', 8042, 2], ['Magdalena', 8623, 0.5], ['Cruasán', 2358, 1.5]] },
+        { nombre: 'Papelería', color: 'azul', productos: [['Lápiz', 2440, 1], ['Cuaderno', 2359, 2], ['Goma', 2409, 0.5], ['Ceras', 4951, 2.5]] },
+        { nombre: 'Juguetería', color: 'coral', productos: [['Globo', 8313, 1], ['Pelota', 3241, 2], ['Cuento', 2364, 1.5], ['Coche', 2340, 2.5]] },
+      ];
+      const PRODUCTO = Object.fromEntries(PUESTOS.flatMap((p) => p.productos.map(([nombre, picto, precio]) => [nombre, { nombre, picto, precio }])));
+
+      // Monedas para pagar justo cada precio. '50' es la moneda de 50 céntimos.
+      const PAGO = { 0.5: ['50'], 1: ['1'], 1.5: ['1', '50'], 2: ['2'], 2.5: ['2', '50'] };
+      // Otra forma de pagar, para el tablero.
+      const OTRA = { 1: ['50', '50'], 2: ['1', '1'] };
+      const PALABRAS = { 0.5: '50 céntimos', 1: '1 euro', 1.5: '1 euro y 50 céntimos', 2: '2 euros', 2.5: '2 euros y 50 céntimos' };
+      const nivelDe = (precio) => (Number.isInteger(precio) ? 1 : 2);
+      const precioTexto = (p) => (Number.isInteger(p) ? `${p} €` : `${p.toFixed(2).replace('.', ',')} €`);
+
+      // Listas de la compra: [nivel, productos, lo que lleva en el sobre]. En el nivel 3, cada producto con su billete.
+      const LISTAS = [
+        { nivel: 1, cosas: ['Manzana', 'Pelota'], llevo: ['1', '2'] },
+        { nivel: 1, cosas: ['Pan', 'Cuaderno', 'Globo'], llevo: ['1', '1', '2'] },
+        { nivel: 2, cosas: ['Plátano', 'Cuento', 'Ceras'], llevo: ['2', '1', '50', '50', '50'] },
+        { nivel: 2, cosas: ['Magdalena', 'Sandía', 'Uvas'], llevo: ['2', '2', '50', '50'] },
+        { nivel: 3, cosas: [['Cruasán', 'b5'], ['Coche', 'b5']], llevo: ['b5', 'b5'] },
+        { nivel: 3, cosas: [['Lápiz', 'b5'], ['Bizcocho', 'b10']], llevo: ['b5', 'b10'] },
+      ];
+
+      // Tarjetas de papeles: [pictograma, frase, solo del nivel 3]
+      const COMPRO = [
+        [6009, '¡Hola!'],
+        [5441, 'Quiero…'],
+        [7071, '¿Cuánto cuesta?'],
+        [29070, 'Aquí tienes'],
+        [2714, 'Cuento mi vuelta', true],
+        [5896, '¡Gracias! ¡Adiós!'],
+      ];
+      const VENDO = [
+        [6009, '¡Hola! ¿Qué quieres?'],
+        [9874, 'Cuesta… euros'],
+        [2714, 'Cuento el dinero'],
+        [28431, 'Aquí tienes'],
+        [28833, 'Tu vuelta', true],
+        [8128, '¡Gracias! ¡Adiós!'],
+      ];
+
+      // De un vistazo: [color, pictograma o dibujo, título, para qué, páginas]
+      const MAPA = [
+        ['amarillo', 'd:monedas', 'Monedas y billetes de juego', '50 céntimos, 1 y 2 €; billetes de 5 y 10 €.', 'monedas', 'billetes'],
+        ['verde', 9874, 'Carteles y etiquetas de precio', 'Cuatro puestos con cuatro productos cada uno.', 'carteles', 'etiquetas2'],
+        ['azul', 29070, 'Tablero de pago', 'Niveles 1 y 2: cada precio con sus monedas a tamaño real.', 'tablero'],
+        ['morado', 2677, 'Caja registradora', 'Para quien vende. Nivel 3: la vuelta, contando hacia arriba.', 'caja'],
+        ['coral', 7144, 'Listas y tarjetas de papeles', 'Dos listas por nivel y las frases para comprar y vender.', 'listas', 'papeles'],
+        ['naranja', 6998, 'Registro de la compra', 'Para el adulto: cada paso y la ayuda que ha necesitado.', 'registro'],
+        ['verde', 28003, 'Guía para el docente y fuentes', 'Cómo prepararlo, cómo enseñar y de dónde sale cada idea.', 'guia', 'fuentes'],
+        ['coral', 2392, 'A una tienda de verdad', 'Nota para la familia: practicar la compra fuera del cole.', 'familias'],
+      ];
+
+      const UNA_COMPRA = [
+        [6009, '¡Hola!', 'Los dos'],
+        [5441, 'Quiero…', 'Compra'],
+        [7071, '¿Cuánto cuesta?', 'Compra'],
+        [29070, 'Aquí tienes', 'Compra y paga'],
+        [28833, 'Tu vuelta', 'Vende, nivel 3'],
+        [8128, '¡Gracias!', 'Los dos'],
+      ];
+
+      // Registro: pasos de cada papel
+      const PASOS_COMPRO = [
+        'Saluda y pide lo que quiere.',
+        'Pregunta «¿Cuánto cuesta?».',
+        'Busca el precio en el tablero o elige el billete.',
+        'Pone las monedas y paga: «Aquí tienes».',
+        'Cuenta su vuelta (nivel 3).',
+        'Da las gracias y se despide.',
+      ];
+      const PASOS_VENDO = [
+        'Saluda y pregunta qué quiere.',
+        'Dice el precio.',
+        'Comprueba las monedas en el tablero.',
+        'Da el producto: «Aquí tienes».',
+        'Cuenta la vuelta hacia arriba (nivel 3).',
+        'Da las gracias y se despide.',
+      ];
+      const AYUDAS = [
+        ['F', 'Física: guías su mano'],
+        ['M', 'Modelo: lo haces tú antes'],
+        ['G', 'Gesto: señalas'],
+        ['V', 'Verbal: se lo dices'],
+        ['✓', 'Sin ayuda'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC): monedas, billetes, toldos y flechas.
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const ORO = '#f6c12e';
+      const PLATA = '#d9dde8';
+      const COLOR = { verde: '#1fa67a', naranja: '#f5961f', azul: '#2f6fd6', coral: '#e8553e', morado: '#8c4fb8', amarillo: '#f6c12e' };
+      const f2 = (n) => Number(n.toFixed(2));
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const marcaNivel = (nivel, clase = '') => `<span class="nv n${nivel} ${clase}" aria-hidden="true">${nivel}</span>`;
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // Monedas de juego. Diámetro en mm, más de una vez y media el de la moneda real
+      // (Reglamento 975/98: 2 € = 25,75 mm; 1 € = 23,25 mm; 50 céntimos = 24,25 mm).
+      const MONEDA = {
+        2: { d: 41, anillo: PLATA, centro: ORO, numero: '2', simbolo: '€', palabra: 'euros', nombre: 'Moneda de juego de 2 euros' },
+        1: { d: 37, anillo: ORO, centro: PLATA, numero: '1', simbolo: '€', palabra: 'euro', nombre: 'Moneda de juego de 1 euro' },
+        50: { d: 39, anillo: ORO, centro: null, numero: '50', simbolo: '', palabra: 'céntimos', nombre: 'Moneda de juego de 50 céntimos' },
+      };
+      // Puntos tipográficos → unidades del dibujo (100 unidades = el diámetro de la moneda).
+      const enUnidades = (puntos, d) => f2((puntos * 0.3528 * 100) / d);
+
+      let idArco = 0;
+      function moneda(clave, { escala = 1, fantasma = false, clase = '', conNombre = true } = {}) {
+        const m = MONEDA[clave];
+        const lado = f2(m.d * escala);
+        const trazo = f2(((escala < 0.6 ? 0.22 / escala : 0.35) * 100) / m.d);
+        const arco = `arco-${clave}-${++idArco}`;
+        const tNum = enUnidades(clave === '50' ? 36 : 40, m.d);
+        const tSim = enUnidades(26, m.d);
+        const tPal = enUnidades(18, m.d);
+        const tJuego = enUnidades(11, m.d);
+        const yNum = clave === '50' ? 55 : 58;
+        const yPal = clave === '50' ? 74 : 77;
+        const rArco = 45.6;
+        let s = `<circle cx="50" cy="50" r="49.2" fill="${m.anillo}" stroke="${M}" stroke-width="${trazo}"/>`;
+        if (m.centro) s += `<circle cx="50" cy="50" r="35.5" fill="${m.centro}" stroke="${M}" stroke-width="${f2(trazo * 0.7)}"/>`;
+        s += `<text x="50" y="${yNum}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${tNum}" fill="${M}">${m.numero}${m.simbolo ? `<tspan font-size="${tSim}" dx="${f2(tSim * 0.12)}">${m.simbolo}</tspan>` : ''}</text>`;
+        s += `<text x="50" y="${yPal}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="${tPal}" fill="${M}">${m.palabra}</text>`;
+        s += `<path id="${arco}" d="M${f2(50 - rArco)} 50A${rArco} ${rArco} 0 0 0 ${f2(50 + rArco)} 50" fill="none"/>`;
+        s += `<text font-family="Outfit" font-weight="700" font-size="${tJuego}" letter-spacing="${f2(tJuego * 0.16)}" fill="${M}"><textPath href="#${arco}" startOffset="50%" text-anchor="middle">JUEGO</textPath></text>`;
+        if (fantasma) {
+          s = `<g opacity="0.3">${s}</g><circle cx="50" cy="50" r="49.2" fill="none" stroke="${M}" stroke-width="${trazo * 1.6}" stroke-dasharray="3.4 2.4"/>`;
+        }
+        const etiqueta = conNombre ? `role="img" aria-label="${m.nombre}"` : 'aria-hidden="true"';
+        return `<svg class="${clase}" viewBox="0 0 100 100" width="${lado}mm" height="${lado}mm" ${etiqueta} focusable="false">${s}</svg>`;
+      }
+
+      // Billetes de juego: de una sola cara y al 72 % de los reales (5 € = 120 × 62 mm; 10 € = 127 × 67 mm).
+      const BILLETE = {
+        5: { an: 86, al: 44, fondo: '#e7ebf3', ondas: '#b6c1d6', palabra: 'cinco euros', nombre: 'Billete de juego de 5 euros' },
+        10: { an: 91, al: 48, fondo: '#fde3dd', ondas: '#f1b0a2', palabra: 'diez euros', nombre: 'Billete de juego de 10 euros' },
+      };
+      function billete(valor, { escala = 1, clase = '', conNombre = true } = {}) {
+        const b = BILLETE[valor];
+        const { an, al } = b;
+        let s = `<rect width="${an}" height="${al}" fill="${b.fondo}"/>`;
+        // Ondas de fondo: un dibujo propio, sin nada del billete de verdad.
+        for (let k = 0; k < 6; k++) {
+          const y0 = 6 + k * ((al - 12) / 5);
+          let d = `M0 ${f2(y0)}`;
+          for (let x = 0; x <= an; x += 2) d += ` L${x} ${f2(y0 + 1.6 * Math.sin(x / 5 + k))}`;
+          s += `<path d="${d}" fill="none" stroke="${b.ondas}" stroke-width="0.35"/>`;
+        }
+        s += `<rect x="2.2" y="2.2" width="${an - 4.4}" height="${al - 4.4}" rx="2.6" fill="none" stroke="${M}" stroke-width="0.4"/>`;
+        const cx = an - 24;
+        const cy = al / 2;
+        s += `<circle cx="${cx}" cy="${cy}" r="${f2(al / 2 - 7)}" fill="#fff" stroke="${M}" stroke-width="0.45"/>`;
+        const lado = f2((al / 2 - 7) * 1.55);
+        s += `<image href="../../marca/simbolo.svg" x="${f2(cx - lado / 2)}" y="${f2(cy - lado / 2 - 0.6)}" width="${lado}" height="${lado}"/>`;
+        s += `<text x="6" y="${f2(al * 0.43)}" font-family="Outfit" font-weight="700" font-size="14.1" fill="${M}">${valor}<tspan font-size="9.2" dx="0.8">€</tspan></text>`;
+        s += `<text x="6.2" y="${f2(al * 0.43 + 8.4)}" font-family="Atkinson Hyperlegible" font-weight="700" font-size="6.35" fill="${M}">${b.palabra}</text>`;
+        // Sello «JUEGO»
+        s += `<g transform="translate(6 ${f2(al - 13.2)})"><rect width="25" height="8" rx="1.8" fill="${ORO}" stroke="${M}" stroke-width="0.45"/><text x="12.5" y="5.85" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="4.94" letter-spacing="0.5" fill="${M}">JUEGO</text></g>`;
+        // El valor en las esquinas, para contarlos en abanico
+        s += `<text x="${an - 5}" y="8.6" text-anchor="end" font-family="Outfit" font-weight="700" font-size="3.9" fill="${M}">${valor}</text>`;
+        s += `<text x="${an - 5}" y="${al - 4.6}" text-anchor="end" font-family="Outfit" font-weight="700" font-size="3.9" fill="${M}">${valor}</text>`;
+        const etiqueta = conNombre ? `role="img" aria-label="${b.nombre}"` : 'aria-hidden="true"';
+        return `<svg class="${clase}" viewBox="0 0 ${an} ${al}" width="${f2(an * escala)}mm" height="${f2(al * escala)}mm" ${etiqueta} focusable="false">${s}</svg>`;
+      }
+
+      // Una pieza de dinero cualquiera: '2', '1', '50', 'b5' o 'b10'.
+      const dinero = (clave, opciones = {}) =>
+        clave.startsWith('b') ? billete(Number(clave.slice(1)), opciones) : moneda(clave, opciones);
+
+      // Toldo de rayas con el borde de ondas
+      function toldo(ancho, alto, colores, franja = 11) {
+        const n = Math.round(ancho / franja);
+        const w = ancho / n;
+        const r = w / 2;
+        const banda = alto - r;
+        let s = `<rect x="0" y="0" width="${ancho}" height="2.4" fill="${M}"/>`;
+        for (let i = 0; i < n; i++) {
+          const color = colores[i % colores.length];
+          const x = f2(i * w);
+          s += `<path d="M${x} 2.4H${f2(x + w)}V${f2(banda)}A${f2(r)} ${f2(r)} 0 0 1 ${x} ${f2(banda)}Z" fill="${color}" stroke="${M}" stroke-width="0.35" stroke-linejoin="round"/>`;
+        }
+        return `<svg viewBox="0 0 ${ancho} ${alto}" width="${ancho}mm" height="${alto}mm" aria-hidden="true" focusable="false" preserveAspectRatio="none">${s}</svg>`;
+      }
+
+      const flecha = (clase = 'flechita') =>
+        `<svg class="${clase}" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M10 50H84M60 24L86 50L60 76" fill="none" stroke="${M}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+      // ---------------------------------------------------------------------
+      // Monedas y billetes
+      // ---------------------------------------------------------------------
+      const FILAS_MONEDAS = ['2', '2', '1', '1', '50', '50'];
+      const hojaMonedas = `<section class="hoja-tarjetas">
+          <h1 class="solo-lector">Monedas de juego: 8 de 2 euros, 8 de 1 euro y 8 de 50 céntimos</h1>
+          <p class="aviso"><span><strong>Monedas de juego</strong> · Imprime esta hoja dos veces</span><span>Corta por el borde</span></p>
+          <ul class="rejilla-monedas">${FILAS_MONEDAS.map((c) => Array.from({ length: 4 }, () => `<li class="m${c}">${moneda(c)}</li>`).join('')).join('')}</ul>
+        </section>`;
+
+      const FILAS_BILLETES = [5, 5, 5, 10, 10];
+      const hojaBilletes = `<section class="hoja-tarjetas">
+          <h1 class="solo-lector">Billetes de juego: 6 de 5 euros y 4 de 10 euros</h1>
+          <p class="aviso"><span><strong>Billetes de juego</strong> · 6 de 5 € y 4 de 10 €</span><span>Corta por la línea de puntos</span></p>
+          <ul class="rejilla-billetes">${FILAS_BILLETES.map((v) => Array.from({ length: 2 }, () => `<li>${billete(v, { clase: 'billete-recorte' })}</li>`).join('')).join('')}</ul>
+          <div class="nota-dinero">${moneda('1', { escala: 0.38, conNombre: false })}<p><strong>Dinero de juego, sin valor.</strong> Diseño propio de IdEducando, de una sola cara y con la palabra «JUEGO». Las monedas miden más de una vez y media las de verdad y los billetes, menos de tres cuartos. La guía explica por qué.</p></div>
+        </section>`;
+      document.getElementById('hojas-dinero').outerHTML = hojaMonedas + hojaBilletes;
+
+      // ---------------------------------------------------------------------
+      // Carteles y etiquetas
+      // ---------------------------------------------------------------------
+      const cartel = (p) => `<li class="cartel p-${p.color}">
+          ${toldo(186, 14, [COLOR[p.color], '#ffffff'], 12.4)}
+          <div class="cartel__cuerpo"><p class="cartel__nombre">${p.nombre}</p>
+          <ul class="cartel__productos">${p.productos.map(([, n]) => `<li>${picto(n)}</li>`).join('')}</ul></div>
+        </li>`;
+
+      // Etiqueta con forma de etiqueta de precio: esquinas cortadas a la izquierda y un agujero.
+      function fondoEtiqueta(color) {
+        const forma = 'M9.5 0.4H84.6Q87.6 0.4 87.6 3.4V53.6Q87.6 56.6 84.6 56.6H9.5L0.4 47.5V9.5Z';
+        return `<svg class="etiqueta__fondo" viewBox="0 0 88 57" aria-hidden="true" focusable="false">
+            <clipPath id="clip-${color}"><path d="${forma}"/></clipPath>
+            <path d="${forma}" fill="#fff"/>
+            <rect x="0" y="0" width="14.5" height="57" fill="${COLOR[color]}" clip-path="url(#clip-${color})"/>
+            <circle cx="7.2" cy="28.5" r="2.6" fill="#fff" stroke="${M}" stroke-width="0.35"/>
+            <path d="${forma}" fill="none" stroke="${SUAVE}" stroke-width="0.45" stroke-dasharray="1.6 1.2"/>
+          </svg>`;
+      }
+      function etiqueta([nombre, n, precio], color, etiquetaHtml = 'li') {
+        const nivel = nivelDe(precio);
+        const monedas = PAGO[precio].map((c) => moneda(c, { escala: 0.31, conNombre: false })).join('');
+        return `<${etiquetaHtml} class="etiqueta p-${color}">${fondoEtiqueta(color)}
+            ${picto(n, 'etiqueta__picto')}
+            <p class="etiqueta__nombre">${nombre}</p>
+            <p class="etiqueta__precio">${precioTexto(precio)}</p>
+            ${marcaNivel(nivel)}
+            <p class="etiqueta__paga"><span>Pagas con:</span><span class="monedas-mini">${monedas}</span><span class="solo-lector">${PALABRAS[precio]}</span></p>
+          </${etiquetaHtml}>`;
+      }
+
+      const hojaEtiquetas = (a, b) => `<section class="hoja-tarjetas">
+          <h1 class="solo-lector">Etiquetas de precio de la ${a.nombre.toLowerCase()} y la ${b.nombre.toLowerCase()}</h1>
+          <p class="aviso"><span><strong>Etiquetas de precio</strong> · ${a.nombre} y ${b.nombre.toLowerCase()}</span><span>Corta por la línea de puntos</span></p>
+          <ul class="etiquetas">${[a, b].map((p) => p.productos.map((pr) => etiqueta(pr, p.color)).join('')).join('')}</ul>
+          <p class="atribucion">La forma de la esquina dice el nivel: ${marcaNivel(1)} precio redondo, ${marcaNivel(2)} con 50 céntimos. ${ATRIBUCION}</p>
+        </section>`;
+
+      document.getElementById('hojas-puestos').outerHTML =
+        `<section class="hoja-tarjetas">
+          <h1 class="solo-lector">Carteles de los cuatro puestos</h1>
+          <p class="aviso"><span><strong>Carteles de los puestos</strong> · Pega cada uno en el frente de su mesa</span><span>Corta por la línea de puntos</span></p>
+          <ul class="carteles">${PUESTOS.map(cartel).join('')}</ul>
+          <p class="atribucion">Los toldos son dibujos de IdEducando. ${ATRIBUCION}</p>
+        </section>` +
+        hojaEtiquetas(PUESTOS[0], PUESTOS[1]) +
+        hojaEtiquetas(PUESTOS[2], PUESTOS[3]);
+
+      // ---------------------------------------------------------------------
+      // Tablero de pago
+      // ---------------------------------------------------------------------
+      document.getElementById('pasos-pago').innerHTML = [
+        [picto(9874), 'Miro el precio'],
+        [moneda('1', { escala: 12 / 37, conNombre: false }), 'Pongo las monedas'],
+        [picto(29070), 'Pago'],
+      ]
+        .map(([img, texto]) => `<li>${img}<p>${texto}</p></li>`)
+        .join('');
+
+      document.getElementById('filas-pago').innerHTML = [0.5, 1, 1.5, 2, 2.5]
+        .map((precio) => {
+          const fantasmas = (claves) => claves.map((c) => moneda(c, { fantasma: true, conNombre: false })).join('');
+          const otra = OTRA[precio] ? `<span class="fila-pago__o">o</span>${fantasmas(OTRA[precio])}` : '';
+          return `<li class="fila-pago">
+              <div class="fila-pago__precio"><b>${precioTexto(precio)}</b>${marcaNivel(nivelDe(precio), 'grande')}<span class="palabras">${PALABRAS[precio]}</span></div>
+              <div class="fila-pago__monedas">${fantasmas(PAGO[precio])}${otra}</div>
+            </li>`;
+        })
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Caja registradora: recta para contar hacia arriba, huecos de la vuelta y cajón
+      // ---------------------------------------------------------------------
+      function recta() {
+        const x0 = 9;
+        const paso = 33.6; // mm por euro
+        const ancho = 186;
+        const linea = (y, desde, hasta, conMedios) => {
+          let s = `<path d="M${x0 - 4} ${y}H${f2(x0 + (hasta - desde) * paso + 4)}" stroke="${M}" stroke-width="0.7" stroke-linecap="round"/>`;
+          for (let v = desde; v <= hasta; v += 0.5) {
+            const x = f2(x0 + (v - desde) * paso);
+            if (Number.isInteger(v)) {
+              s += `<circle cx="${x}" cy="${y}" r="4.6" fill="#fff" stroke="${M}" stroke-width="0.6"/>`;
+              s += `<text x="${x}" y="${f2(y + 2.6)}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="7.4" fill="${M}">${v}</text>`;
+            } else if (conMedios) {
+              s += `<path d="M${x} ${f2(y - 2.4)}V${f2(y + 2.4)}" stroke="${M}" stroke-width="0.6"/>`;
+              s += `<text x="${x}" y="${f2(y + 9.6)}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-size="6.35" fill="${SUAVE}">${String(v.toFixed(2)).replace('.', ',')}</text>`;
+            }
+          }
+          return s;
+        };
+        let s = linea(6.5, 0, 5, true);
+        s += `<text x="${ancho - 1}" y="29" text-anchor="end" font-family="Atkinson Hyperlegible" font-weight="700" font-size="4.6" fill="${SUAVE}">Con billete de 10 €, sigue:</text>`;
+        s += linea(36, 5, 10, false);
+        return `<svg viewBox="0 0 ${ancho} 43" width="${ancho}mm" height="43mm" role="img" aria-label="Recta para contar hacia arriba: del 0 al 5 de 50 en 50 céntimos y del 5 al 10 de euro en euro" focusable="false">${s}</svg>`;
+      }
+      document.getElementById('recta').innerHTML = recta();
+
+      const hueco = (i) =>
+        `<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="48" fill="#fff" stroke="${M}" stroke-width="1" stroke-dasharray="4 3"/><text x="50" y="58" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="24" fill="#c9bfe0">${i}</text></svg>`;
+      document.getElementById('huecos-vuelta').innerHTML = [1, 2, 3, 4].map((i) => hueco(i)).join(flecha());
+
+      document.getElementById('cajon').innerHTML =
+        [
+          ['50', '50 céntimos'],
+          ['1', '1 €'],
+          ['2', '2 €'],
+        ]
+          .map(([c, texto]) => `<div class="c-moneda"><p class="cajon__etiqueta">${moneda(c, { escala: 0.3, conNombre: false })}${texto}</p></div>`)
+          .join('') +
+        [
+          ['b5', '5 €'],
+          ['b10', '10 €'],
+        ]
+          .map(([c, texto]) => `<div class="c-billete"><p class="cajon__etiqueta">${dinero(c, { escala: 0.27, conNombre: false })}${texto}</p></div>`)
+          .join('');
+
+      // ---------------------------------------------------------------------
+      // Listas de la compra
+      // ---------------------------------------------------------------------
+      document.getElementById('listas').innerHTML = LISTAS.map((l) => {
+        const filas = l.cosas
+          .map((c) => {
+            if (l.nivel === 3) {
+              const [nombre, billeteCon] = c;
+              return `<li>${picto(PRODUCTO[nombre].picto)}<p>${nombre}</p><span class="con-billete"><span>Pago con ${dinero(billeteCon, { escala: 0.25, conNombre: false })}</span><span class="vuelta">Vuelta:<span></span>€</span></span></li>`;
+            }
+            return `<li>${picto(PRODUCTO[c].picto)}<p>${c}</p><span class="casilla" aria-hidden="true"></span></li>`;
+          })
+          .join('');
+        const llevo = l.llevo.map((c) => dinero(c, { escala: c.startsWith('b') ? 0.2 : 0.27, conNombre: false })).join('');
+        return `<li class="lista">
+            <div class="lista__cabeza">${marcaNivel(l.nivel, 'grande')}<p>Mi lista</p>${picto(7144)}</div>
+            <ol class="lista__cosas" style="grid-template-rows: repeat(${l.cosas.length}, minmax(0, 1fr))">${filas}</ol>
+            <p class="lista__llevo">Llevo:<span class="monedas-mini">${llevo}</span></p>
+          </li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Tarjetas «Hoy compro» y «Hoy vendo»
+      // ---------------------------------------------------------------------
+      const papel = (tipo, imagen, titulo, frases) => `<li class="papel ${tipo}">
+          <div class="papel__banda"></div>
+          <div class="papel__cabeza">${picto(imagen)}<p>${titulo}</p></div>
+          <ol class="frases">${frases
+            .map(
+              ([n, texto, n3], i) =>
+                `<li class="${n3 ? 'solo-n3' : ''}"><span class="numero" aria-hidden="true">${i + 1}</span>${picto(n)}<p>${texto}</p>${n3 ? marcaNivel(3) : ''}</li>`,
+            )
+            .join('')}</ol>
+        </li>`;
+      document.getElementById('papeles').innerHTML =
+        papel('compro', 8985, 'Hoy compro', COMPRO) +
+        papel('vendo', 37809, 'Hoy vendo', VENDO) +
+        papel('compro', 28665, 'Hoy compro', COMPRO) +
+        papel('vendo', 37808, 'Hoy vendo', VENDO);
+
+      // ---------------------------------------------------------------------
+      // Registro
+      // ---------------------------------------------------------------------
+      document.getElementById('ayudas').innerHTML = AYUDAS.map(([letra, texto]) => `<li><b>${letra}</b><span>${texto}</span></li>`).join('');
+      const vacias = '<td></td>'.repeat(8);
+      const grupo = (titulo, pasos) =>
+        `<tr class="grupo"><th scope="rowgroup" colspan="9">${titulo}</th></tr>` +
+        pasos.map((p, i) => `<tr><th scope="row">${i + 1}. ${p}</th>${vacias}</tr>`).join('');
+      document.getElementById('filas-registro').innerHTML =
+        `<tr class="fecha"><th scope="row">Fecha</th>${vacias}</tr>` +
+        grupo('Si compra', PASOS_COMPRO) +
+        grupo('Si vende', PASOS_VENDO);
+
+      // ---------------------------------------------------------------------
+      // Guía: ejemplo de la vuelta contando hacia arriba (cuesta 1,50 € y paga con 5 €)
+      // ---------------------------------------------------------------------
+      document.getElementById('ejemplo-vuelta').innerHTML = [
+        [null, '«1,50»', 'el precio'],
+        ['50', '«2»', '+ 50 céntimos'],
+        ['1', '«3»', '+ 1 euro'],
+        ['2', '«5»', '+ 2 euros'],
+      ]
+        .map(([c, dice, texto]) => `<li>${c ? moneda(c, { escala: 0.32, conNombre: false }) : picto(9874, '').replace('class=""', 'style="width:12mm;height:12mm"')}<b>${dice}</b><span>${texto}</span></li>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Familias: los tres niveles en casa
+      // ---------------------------------------------------------------------
+      document.getElementById('niveles-casa').innerHTML = [
+        [1, 'Una cosa de 1 o 2 €, con una moneda justa.'],
+        [2, 'Un precio con céntimos: junta las monedas.'],
+        [3, 'Paga con un billete y comprobad la vuelta contando hacia arriba.'],
+      ]
+        .map(([n, texto]) => `<li><strong>${marcaNivel(n)}Nivel ${n}</strong><span>${texto}</span></li>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('lista-niveles').innerHTML = [
+        [1, 'Nivel 1, círculo.', 'Precios redondos de 1 y 2 €. Paga justo con el tablero de pago.'],
+        [2, 'Nivel 2, cuadrado.', 'Precios con 50 céntimos. Junta dos monedas.'],
+        [3, 'Nivel 3, rombo.', 'Paga con un billete y la vuelta se cuenta hacia arriba.'],
+      ]
+        .map(([n, titulo, texto]) => `<li>${marcaNivel(n, 'grande')}<span><strong>${titulo}</strong> ${texto}</span></li>`)
+        .join('');
+
+      document.getElementById('una-compra').innerHTML = UNA_COMPRA.map(
+        ([n, texto, quien]) => `<li>${picto(n)}<p>${texto}<span class="quien">${quien}</span></p></li>`,
+      ).join('');
+
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, n, titulo, donde, ...claves]) => {
+        const pags = claves.map((c) => PAGINAS[c]);
+        const ultima = pags[pags.length - 1];
+        const texto =
+          pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${ultima - pags[0] === 1 ? 'y' : 'a'} ${ultima}`;
+        const icono = n === 'd:monedas' ? moneda('2', { escala: 11 / 41, conNombre: false }) : picto(n);
+        return `<li style="--c: var(--${color})">${icono}<div><h2>${titulo}</h2><p>${donde}</p></div><p class="mapa__pagina">${texto}</p></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: el puesto con su toldo, tres etiquetas de verdad colgadas y dinero de juego
+      // ---------------------------------------------------------------------
+      const RAYAS = [COLOR.azul, '#ffffff', COLOR.verde, '#ffffff', COLOR.amarillo, '#ffffff', COLOR.coral, '#ffffff', COLOR.morado, '#ffffff'];
+      const escena = [];
+      escena.push(`<div style="left:16mm;top:134mm">${toldo(178, 24, RAYAS, 11.1)}</div>`);
+      escena.push(`<div style="left:21mm;top:156mm;width:3.4mm;height:106mm;background:${M};border-radius:1mm"></div>`);
+      escena.push(`<div style="left:185.6mm;top:156mm;width:3.4mm;height:106mm;background:${M};border-radius:1mm"></div>`);
+      const COLGADAS = [
+        [['Manzana', 2462, 1], 'verde', 29, 172, -5, 0.62],
+        [['Magdalena', 8623, 0.5], 'naranja', 79, 168, 3, 0.62],
+        [['Pelota', 3241, 2], 'coral', 129, 174, 7, 0.62],
+      ];
+      for (const [prod, color, x, y, giro, esc] of COLGADAS) {
+        const ancho = 88 * esc;
+        escena.push(`<div class="cuerda" style="left:${f2(x + ancho * 0.3)}mm;top:156mm;height:${y - 156 + 2}mm"></div>`);
+        escena.push(`<div class="cuerda" style="left:${f2(x + ancho * 0.78)}mm;top:156mm;height:${y - 156 + 2}mm"></div>`);
+        escena.push(
+          `<div style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg);transform-origin:50% 0">${etiqueta(prod, color, 'div').replace('class="etiqueta ', `style="transform:scale(${esc});transform-origin:0 0" class="etiqueta `)}</div>`,
+        );
+      }
+      // Mostrador
+      escena.push(
+        `<div style="left:12mm;top:226mm;width:186mm;height:36mm;border-radius:3mm;background:repeating-linear-gradient(90deg, #fde8cf 0 15mm, #fbdcb5 15mm 30mm);border:0.8mm solid ${M}"></div>`,
+      );
+      escena.push(`<div style="left:9mm;top:222mm;width:192mm;height:6mm;border-radius:2mm;background:${M}"></div>`);
+      // Dinero de juego sobre el mostrador
+      const DINERO_PORTADA = [
+        ['b10', 20, 207, -8, 0.82],
+        ['b5', 114, 205, 6, 0.82],
+        ['2', 77, 213, 0, 0.82],
+        ['1', 60, 229, 0, 0.82],
+        ['50', 166, 224, 0, 0.82],
+        ['1', 146, 229, 0, 0.82],
+      ];
+      for (const [c, x, y, giro, esc] of DINERO_PORTADA) {
+        escena.push(`<div class="pieza-dinero" style="left:${x}mm;top:${y}mm;transform:rotate(${giro}deg)">${dinero(c, { escala: esc, conNombre: false })}</div>`);
+      }
+      document.getElementById('escena').innerHTML = escena.join('');
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

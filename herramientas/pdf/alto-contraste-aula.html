@@ -299,9 +299,11 @@
       /* ==========================================================================
          HOJAS DE RECORTAR
          ========================================================================== */
+      /* El milímetro de arriba evita que el acento de «VERSIÓN» se pinte al pie de la hoja anterior. */
       .hoja-recorte {
         page: recorte;
         position: relative;
+        padding-top: 1mm;
         break-after: page;
       }
 
@@ -790,6 +792,54 @@
         font-style: italic;
       }
 
+      /* Revisión del aula: casillas para marcar con lápiz. */
+      .revision {
+        margin: 4mm 0 0;
+        padding: 3mm 4mm 2mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .revision h2 {
+        margin-top: 0;
+      }
+
+      .casillas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.6mm 6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .casillas li {
+        position: relative;
+        margin: 0;
+        padding-left: 7.5mm;
+      }
+
+      .casillas li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.3mm;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1mm;
+      }
+
+      .linea-corta {
+        display: inline-block;
+        width: 14mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .linea-corta--larga {
+        width: 26mm;
+      }
+
       /* ---------- Fuentes y créditos ---------- */
       .fuentes {
         position: relative;
@@ -909,30 +959,30 @@
           <tr>
             <td><span class="par" style="background: #f6c12e; color: #000" aria-hidden="true">Aa</span>Negro sobre amarillo</td>
             <td>Versión amarilla: palabra y marco</td>
-            <td>12,6 : 1</td>
+            <td>12,6&nbsp;:&nbsp;1</td>
           </tr>
           <tr>
             <td><span class="par" style="background: #000; color: #fff" aria-hidden="true">Aa</span>Blanco sobre negro</td>
             <td>Versión negra: palabra y marco</td>
-            <td>21 : 1</td>
+            <td>21&nbsp;:&nbsp;1</td>
           </tr>
           <tr>
             <td><span class="par" style="background: #fff; color: #000" aria-hidden="true">Aa</span>Negro sobre blanco</td>
             <td>Borde del pictograma y lo que escribes a mano</td>
-            <td>21 : 1</td>
+            <td>21&nbsp;:&nbsp;1</td>
           </tr>
           <tr>
             <td><span class="par" style="background: #f6c12e; color: #fff" aria-hidden="true">Aa</span>Blanco sobre amarillo</td>
             <td>Nunca solo: el recuadro blanco lleva borde negro</td>
-            <td>1,7 : 1</td>
+            <td>1,7&nbsp;:&nbsp;1</td>
           </tr>
         </tbody>
       </table>
       <p>
-        El contraste va de 1 : 1 (dos colores iguales) a 21 : 1 (negro y blanco). Lo hemos calculado con la fórmula de las
-        Pautas de Accesibilidad para el Contenido Web (WCAG 2.2), que piden al menos 4,5 : 1 para el texto y 7 : 1 en su
-        nivel más alto (AAA); para los bordes y los gráficos, 3 : 1 (W3C, 2024). Son pautas para pantallas y aquí sirven de
-        referencia: todas las palabras de los carteles pasan de 7 : 1. Cada impresora cambia un poco los colores: probadlos en
+        El contraste va de 1&nbsp;:&nbsp;1 (dos colores iguales) a 21&nbsp;:&nbsp;1 (negro y blanco). Lo hemos calculado con la fórmula de las
+        Pautas de Accesibilidad para el Contenido Web (WCAG 2.2), que piden al menos 4,5&nbsp;:&nbsp;1 para el texto y 7&nbsp;:&nbsp;1 en su
+        nivel más alto (AAA); para los bordes y los gráficos, 3&nbsp;:&nbsp;1 (W3C, 2024). Son pautas para pantallas y aquí sirven de
+        referencia: todas las palabras de los carteles pasan de 7&nbsp;:&nbsp;1. Cada impresora cambia un poco los colores: probadlos en
         su sitio.
       </p>
       <p>
@@ -959,8 +1009,9 @@
           pierden sobre el amarillo: por eso van en un recuadro blanco con borde negro.
         </li>
         <li>
-          <strong>Todos iguales.</strong> La misma letra, el mismo tamaño y el mismo orden en todos los carteles. La ONCE pone
-          como buen ejemplo la cartelería homogénea, con la misma tipografía (ONCE, 2026, pág. 32).
+          <strong>Todos iguales.</strong> La misma letra, el mismo tamaño y el mismo orden en todos los carteles. La ONCE advierte
+          de que mezclar tipografías y colores en los rótulos dificulta leerlos, y pone como ejemplo la cartelería homogénea
+          (ONCE, 2026, págs. 31 y 32).
         </li>
       </ul>
 
@@ -983,8 +1034,8 @@
       <h2>Dónde y a qué altura</h2>
       <ul>
         <li>
-          <strong>A la altura de sus ojos.</strong> La ONCE pide poner la información a la altura de los ojos (ONCE, 2021, pág.
-          35) y pone como mal ejemplo el cartel colocado a excesiva altura (ONCE, 2026, pág. 34). Mide la altura de sus ojos
+          <strong>A la altura de sus ojos.</strong> La ONCE aconseja poner la información a la altura de los ojos (ONCE, 2021,
+          pág. 35) y pone como mal ejemplo el cartel colocado a excesiva altura (ONCE, 2026, pág. 34). Mide la altura de sus ojos
           cuando está de pie y pon ahí el centro de cada cartel.
         </li>
         <li>
@@ -998,7 +1049,7 @@
         <li>
           <strong>El cartel «Salida»</strong> marca la puerta de la clase. No sustituye a las señales de evacuación del centro.
         </li>
-        <li><strong>Más grandes, si hace falta.</strong> Si le cuesta leerlos, imprime los carteles en A3, al 141 %.</li>
+        <li><strong>Más grandes, si hace falta.</strong> Si le cuesta leerlos, imprime los carteles en A3, al 141&nbsp;%.</li>
       </ul>
 
       <h2>Siempre en el mismo sitio</h2>
@@ -1049,14 +1100,27 @@
           </p>
         </div>
       </div>
+
+      <div class="revision">
+        <h2>Revisión del aula, desde su sitio</h2>
+        <p>Al empezar el curso y cada vez que algo cambie, recorred el aula con él o ella y marcad lo que ya está:</p>
+        <ul class="casillas">
+          <li>Desde su sitio y desde la puerta se ve cada cartel.</li>
+          <li>Ningún cartel brilla, ni por la mañana ni a última hora.</li>
+          <li>El centro de cada cartel está a la altura de sus ojos, a <span class="linea-corta"></span> cm del suelo.</li>
+          <li>Cada caja tiene su etiqueta delante y está en su estante de siempre.</li>
+          <li>Las tiras o las esquinas de su mesa siguen bien pegadas.</li>
+          <li>Lo hemos revisado con su equipo de la ONCE el día <span class="linea-corta linea-corta--larga"></span>.</li>
+        </ul>
+      </div>
       <p class="lo-que-no">Lo que no lleva fuente en esta guía es propuesta de IdEducando.</p>
     </section>
 
     <!-- ======================================================================
          FUENTES Y CRÉDITOS
          ====================================================================== -->
-    <section class="fuentes salto">
-      <div class="rayos" style="margin-bottom: 4mm"></div>
+    <section class="fuentes">
+      <div class="rayos" style="margin: 7mm 0 4mm"></div>
       <p class="antetitulo">Fuentes y créditos</p>
       <h1>De dónde sale este material</h1>
       <p>
@@ -1074,7 +1138,7 @@
         <li>ONCE (2021). <em>¡MIRA!</em> Consejo General de la ONCE. ISBN 978-84-484-0303-4. Págs. 15, 17 y 35.</li>
         <li>
           ONCE, Dirección de Autonomía Personal, Tecnología y Accesibilidad (2026). <em>Accesibilidad a los mercados
-          tradicionales de abastos</em>. Madrid: ONCE. Págs. 7, 23, 32 y 34.
+          tradicionales de abastos</em>. Madrid: ONCE. Págs. 7, 23, 31, 32 y 34.
         </li>
       </ul>
 
@@ -1152,8 +1216,8 @@
       ];
 
       const VERSIONES = {
-        amarilla: { nombre: 'Versión amarilla', corto: 'amarilla', par: 'Negro sobre amarillo', contraste: '12,6 : 1' },
-        negra: { nombre: 'Versión negra', corto: 'negra', par: 'Blanco sobre negro', contraste: '21 : 1' },
+        amarilla: { nombre: 'Versión amarilla', par: 'Negro sobre amarillo', contraste: '12,6\u00a0:\u00a01' },
+        negra: { nombre: 'Versión negra', par: 'Blanco sobre negro', contraste: '21\u00a0:\u00a01' },
       };
 
       const ATRIBUCION =
@@ -1268,7 +1332,7 @@
         .map((version) => {
           const v = VERSIONES[version];
           const muestra = version === 'amarilla' ? CARTELES[3] : CARTELES[4];
-          return `<div class="version"><div class="mini">${cartel(muestra, version, 'div')}</div><div class="version__texto"><h3>${v.nombre}</h3><p>${v.par}: <strong>${v.contraste}</strong> · Págs. ${PAGINAS[version]} a ${PAGINAS[version] + 4} y ${version === 'amarilla' ? PAGINAS.etiquetasAmarilla : PAGINAS.etiquetasNegra}</p></div></div>`;
+          return `<div class="version"><div class="mini" aria-hidden="true">${cartel(muestra, version, 'div')}</div><div class="version__texto"><h3>${v.nombre}</h3><p>${v.par}: <strong>${v.contraste}</strong><br />Págs. ${PAGINAS[version]} a ${PAGINAS[version] + 4} y ${version === 'amarilla' ? PAGINAS.etiquetasAmarilla : PAGINAS.etiquetasNegra}</p></div></div>`;
         })
         .join('');
 

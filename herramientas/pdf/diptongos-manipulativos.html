@@ -1,0 +1,2647 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Diptongos manipulativos: vocales, sílabas y tarjetas en tres niveles · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de recortar y hojas para el alumnado: márgenes de 11 y 12 mm. */
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- El código de las vocales ----------
+         Abiertas (a, e, o): círculo coral. Cerradas (i, u): óvalo estrecho azul.
+         Í y ú con tilde: círculo azul. El color nunca va solo: la forma también cambia. */
+      :root {
+        --ab: var(--coral);
+        --ab-t: var(--coral-tinte);
+        --ce: var(--azul);
+        --ce-t: var(--azul-tinte);
+      }
+
+      .v {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        height: 1.04em;
+        margin: 0 0.03em;
+        padding-bottom: 0.06em;
+        border: 0.055em solid;
+        font-weight: 700;
+        line-height: 1;
+        vertical-align: 0.02em;
+      }
+
+      .v.ab {
+        width: 1.04em;
+        border-radius: 50%;
+        border-color: var(--ab);
+        background: var(--ab-t);
+      }
+
+      .v.ce {
+        width: 0.64em;
+        border-radius: 0.32em;
+        border-color: var(--ce);
+        background: var(--ce-t);
+      }
+
+      .v.ti {
+        width: 1.04em;
+        border-radius: 50%;
+        border-color: var(--ce);
+        background: var(--ce-t);
+      }
+
+      .guion {
+        margin: 0 0.06em;
+        color: var(--suave);
+        font-weight: 400;
+      }
+
+      /* ---------- Colores de los niveles (siempre con su forma y su número) ---------- */
+      .n1 {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .n2 {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .n3 {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.26;
+      }
+
+      .montaje__pasos {
+        gap: 1.4mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.6mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 118mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.6mm 0;
+      }
+
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .acera {
+        left: 0;
+        right: 0;
+        top: 249mm;
+        height: 9mm;
+        background: var(--linea);
+      }
+
+      .portada .casa {
+        filter: drop-shadow(0 1.2mm 1.4mm rgb(30 43 85 / 0.22));
+      }
+
+      .portada .casa__cuerpo {
+        border-width: 0.8mm;
+      }
+
+      .ficha-portada {
+        display: grid;
+        place-items: center;
+        width: 40mm;
+        height: 46mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 4mm;
+        background: #fff;
+        box-shadow: 0 1.6mm 3mm -0.6mm rgb(30 43 85 / 0.35);
+      }
+
+      .ficha-portada img {
+        width: 32mm;
+        height: 32mm;
+      }
+
+      .vocal-suelta {
+        display: grid;
+        place-items: center;
+        height: 30mm;
+        border: 0.5mm solid var(--suave);
+        border-radius: 2.5mm;
+        background: #fff;
+        box-shadow: 0 1.4mm 2.4mm -0.4mm rgb(30 43 85 / 0.35);
+      }
+
+      .vocal-suelta .forma {
+        display: grid;
+        place-items: center;
+        padding-bottom: 1.2mm;
+        border: 0.7mm solid;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 34pt;
+        line-height: 1;
+      }
+
+      .vocal-suelta.ab .forma {
+        width: 23mm;
+        height: 23mm;
+        border-radius: 50%;
+        border-color: var(--ab);
+        background: var(--ab-t);
+      }
+
+      .vocal-suelta.ce .forma {
+        width: 9.5mm;
+        height: 25mm;
+        border-radius: 4.75mm;
+        border-color: var(--ce);
+        background: var(--ce-t);
+      }
+
+      .bocadillo {
+        padding: 2mm 3.6mm 2.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 4mm;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .bocadillo::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -3.2mm;
+        width: 5mm;
+        height: 5mm;
+        margin-left: -2.5mm;
+        border-right: 0.6mm solid var(--marino);
+        border-bottom: 0.6mm solid var(--marino);
+        background: #fff;
+        transform: rotate(45deg);
+      }
+
+      /* ---------- La casa de la sílaba ----------
+         Un tejado (SVG con medidas en milímetros) y un cuerpo donde va la sílaba. */
+      .casa {
+        display: grid;
+        grid-template-rows: var(--tejado) var(--cuerpo);
+        width: var(--ancho);
+        flex: none;
+      }
+
+      .casa__tejado {
+        width: 100%;
+        height: 100%;
+      }
+
+      .casa__cuerpo {
+        display: grid;
+        place-items: center;
+        border: var(--grosor, 0.5mm) solid var(--marino);
+        border-top-width: 0;
+        background: #fff;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .casa--vacia .casa__cuerpo {
+        border-style: dashed;
+        background: var(--amarillo-tinte);
+      }
+
+      .sil {
+        display: inline-block;
+        white-space: nowrap;
+        line-height: 1;
+      }
+
+      /* ---------- Cabecera de las hojas ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      .pista {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .atribucion {
+        margin: 2.2mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        height: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      /* Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.f1 {
+        border-radius: 50%;
+      }
+
+      .nv.f2 {
+        border-radius: 1mm;
+      }
+
+      .nv.f3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8.4mm;
+        height: 8.4mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.f3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      /* ---------- Cartel: ¿Qué es un diptongo? ---------- */
+      .cartel .cabeza h1 {
+        font-size: 30pt;
+      }
+
+      .lema {
+        margin: 0 0 3mm;
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1.25;
+      }
+
+      .ejemplos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 3.6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ejemplos li {
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 1.2mm;
+        margin: 0;
+        padding: 2.4mm 2mm 2.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3.5mm;
+        background: var(--crema);
+      }
+
+      .ejemplos img {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .ejemplos .calle {
+        font-size: 24pt;
+      }
+
+      .ejemplos p {
+        margin: 0;
+        font-size: 18pt;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .calle {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 1.2mm;
+      }
+
+      .dos-familias {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 3.6mm;
+      }
+
+      .familia-vocal {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 22mm;
+        align-items: center;
+        gap: 2mm;
+        padding: 2.6mm 3.4mm 3mm;
+        border-radius: 4mm;
+        border: 0.6mm solid var(--borde);
+        background: var(--fondo);
+      }
+
+      .familia-vocal.ab {
+        --borde: var(--ab);
+        --fondo: var(--ab-t);
+      }
+
+      .familia-vocal.ce {
+        --borde: var(--ce);
+        --fondo: var(--ce-t);
+      }
+
+      .familia-vocal h2 {
+        grid-column: 1 / -1;
+        margin: 0;
+        font-size: 18pt;
+      }
+
+      .familia-vocal .letras {
+        margin: 0 0 1.4mm;
+        font-size: 34pt;
+        line-height: 1.1;
+      }
+
+      .familia-vocal .letras .v {
+        background: #fff;
+      }
+
+      .familia-vocal p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .familia-vocal svg {
+        width: 22mm;
+        height: 16mm;
+      }
+
+      .regla {
+        margin: 0 0 3mm;
+        padding: 2.4mm 3.6mm 2.8mm;
+        border-radius: 4mm;
+        border: 0.6mm solid var(--c);
+        background: var(--t);
+        break-inside: avoid;
+      }
+
+      .regla.juntas {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+
+      .regla.separadas {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      .regla h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+        font-size: 18pt;
+      }
+
+      .regla h2 small {
+        padding: 0.6mm 2.4mm;
+        border-radius: 99mm;
+        background: var(--marino);
+        color: #fff;
+        font-size: 11pt;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .regla ul {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .regla li {
+        display: grid;
+        grid-template-columns: 30mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 1.4mm 2.4mm;
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .regla li p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.12;
+      }
+
+      .regla li .palabras {
+        font-size: 22pt;
+        white-space: nowrap;
+      }
+
+      .regla .calle {
+        justify-content: flex-start;
+        font-size: 15pt;
+      }
+
+      .truco {
+        display: grid;
+        grid-template-columns: 16mm 16mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        padding: 2.4mm 3.6mm;
+        border-radius: 4mm;
+        background: var(--amarillo-tinte);
+        border: 0.6mm solid var(--amarillo);
+      }
+
+      .truco img {
+        width: 16mm;
+        height: 16mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .truco p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.18;
+      }
+
+      /* ---------- Taller de vocales ---------- */
+      .pasos4 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 6mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .pasos4 li {
+        display: grid;
+        grid-template-columns: 6.5mm 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .pasos4 li::before {
+        counter-increment: paso;
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 6.5mm;
+        height: 6.5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .pasos4 img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .pasos4 p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.12;
+      }
+
+      .tablero {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-around;
+        align-items: end;
+        padding: 3mm 4mm 2.4mm;
+        border: 0.6mm solid var(--linea);
+        border-radius: 4mm;
+        background: var(--crema);
+      }
+
+      .tablero__zona {
+        display: grid;
+        justify-items: center;
+        gap: 2mm;
+      }
+
+      .tablero__zona .calle {
+        gap: 3mm;
+      }
+
+      .tablero__rotulo {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .tablero__rotulo svg {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .nota-adulto {
+        margin: 2.6mm 0 0;
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .corte {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 3.4mm -12mm 3.4mm;
+        padding: 0 12mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .corte::before,
+      .corte::after {
+        content: '';
+        flex: 1;
+        border-top: 0.5mm dashed var(--marino);
+      }
+
+      .corte svg {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .corte span {
+        flex: none;
+      }
+
+      .fila-vocales {
+        display: flex;
+        width: max-content;
+        margin: 0 auto;
+        border-left: 0.35mm dashed var(--suave);
+      }
+
+      .fila-vocales:first-of-type {
+        border-top: 0.35mm dashed var(--suave);
+      }
+
+      .pv {
+        display: grid;
+        place-items: center;
+        width: var(--w);
+        height: 38mm;
+        border-right: 0.35mm dashed var(--suave);
+        border-bottom: 0.35mm dashed var(--suave);
+      }
+
+      .pv__forma {
+        display: grid;
+        place-items: center;
+        padding-bottom: 1.6mm;
+        border: 0.8mm solid;
+        font-weight: 700;
+        font-size: 44pt;
+        line-height: 1;
+      }
+
+      .pv.ab .pv__forma {
+        width: 26mm;
+        height: 26mm;
+        border-radius: 50%;
+        border-color: var(--ab);
+        background: var(--ab-t);
+      }
+
+      .pv.ce .pv__forma {
+        width: 11.5mm;
+        height: 32mm;
+        border-radius: 5.75mm;
+        border-color: var(--ce);
+        background: var(--ce-t);
+      }
+
+      .pv.ti .pv__forma {
+        width: 34mm;
+        height: 34mm;
+        border-radius: 50%;
+        border-color: var(--ce);
+        background: var(--ce-t);
+      }
+
+      /* ---------- Piezas de sílabas ---------- */
+      .grupo-piezas {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 3.2mm 0 1.8mm;
+        font-size: 13pt;
+      }
+
+      .rejilla-piezas {
+        display: grid;
+        grid-template-columns: repeat(7, 26mm);
+        grid-auto-rows: 20mm;
+        width: max-content;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        border-top: 0.35mm dashed var(--suave);
+        border-left: 0.35mm dashed var(--suave);
+      }
+
+      .pz {
+        position: relative;
+        display: grid;
+        place-items: center;
+        margin: 0;
+        border-right: 0.35mm dashed var(--suave);
+        border-bottom: 0.35mm dashed var(--suave);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .pz__marca {
+        position: absolute;
+        right: 1.3mm;
+        bottom: 1.3mm;
+        width: 2.8mm;
+        height: 2.8mm;
+        background: var(--c);
+      }
+
+      .pz__marca.f1 {
+        border-radius: 50%;
+      }
+
+      .pz__marca.f2 {
+        border-radius: 0.5mm;
+      }
+
+      .pz--blanca::after {
+        content: '';
+        width: 16mm;
+        border-bottom: 0.35mm solid var(--linea);
+        transform: translateY(3mm);
+      }
+
+      /* ---------- Tarjetas de los niveles 1 y 2 ---------- */
+      .rejilla-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 60mm;
+        gap: 3mm 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tj {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.4mm minmax(0, 1fr) auto;
+        justify-items: center;
+        margin: 0;
+        padding: 0 2mm 2.2mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tj__banda {
+        justify-self: stretch;
+        margin: 0 -2mm;
+        background: var(--c);
+      }
+
+      .tj__picto {
+        align-self: center;
+        width: 25mm;
+        height: 25mm;
+      }
+
+      .tj .nv {
+        position: absolute;
+        top: 4.4mm;
+        right: 3.4mm;
+      }
+
+      .tj .calle {
+        font-size: 22pt;
+      }
+
+      /* ---------- Nivel 3 ---------- */
+      .datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .datos p {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .datos span {
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .pasos-fila {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-fila li {
+        display: grid;
+        grid-template-columns: 12mm minmax(0, 1fr);
+        align-items: center;
+        gap: 1.8mm;
+        margin: 0;
+        padding: 1.4mm 1.8mm;
+        border-radius: 3mm;
+        background: var(--t, var(--crema));
+      }
+
+      .pasos-fila img {
+        width: 12mm;
+        height: 12mm;
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .pasos-fila p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+      }
+
+      .escribir {
+        display: grid;
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .escribir li {
+        display: grid;
+        grid-template-columns: 19mm 38mm minmax(0, 1fr);
+        align-items: end;
+        gap: 3mm;
+        margin: 0;
+        padding: 1.2mm 2.4mm 1.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .escribir img,
+      .escribir .dibujo {
+        align-self: center;
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .escribir .dibujo {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .escribir .palabra {
+        align-self: center;
+        margin: 0;
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .escribir .palabra small {
+        display: block;
+        margin-top: 1mm;
+        font-size: 11pt;
+        font-weight: 400;
+        color: var(--suave);
+      }
+
+      .escribir .calle {
+        justify-content: flex-start;
+        gap: 2.4mm;
+      }
+
+      .renglon-casa {
+        align-self: end;
+        width: 82%;
+        height: 0;
+        margin-bottom: 3.2mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      /* ---------- Reto ---------- */
+      .claves {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+        margin: 0 0 3mm;
+      }
+
+      .clave {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        padding: 2mm 3mm;
+        border-radius: 3.5mm;
+        border: 0.6mm solid var(--c);
+        background: var(--t);
+      }
+
+      .clave.juntas {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+
+      .clave.separadas {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+
+      .clave h2 {
+        margin: 0 0 0.6mm;
+        font-size: 18pt;
+      }
+
+      .clave p {
+        margin: 0;
+        font-size: 18pt;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+
+      .clave .calle {
+        font-size: 13pt;
+      }
+
+      .rejilla-reto {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.6mm 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .item-reto {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        column-gap: 3mm;
+        row-gap: 1.6mm;
+        margin: 0;
+        padding: 2mm 2.6mm 2.2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3.5mm;
+        break-inside: avoid;
+      }
+
+      .item-reto img {
+        grid-row: 1 / span 2;
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .item-reto .palabra {
+        margin: 0;
+        font-weight: 700;
+        font-size: 24pt;
+        line-height: 1.1;
+      }
+
+      .opciones {
+        display: grid;
+        justify-items: start;
+        gap: 1.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .opciones li {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        padding: 0.9mm 3mm 0.9mm 1.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 99mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .opciones .calle {
+        gap: 0.6mm;
+        font-size: 9pt;
+      }
+
+      /* ---------- Pasos y soluciones ---------- */
+      .pasos-nivel {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 2mm;
+      }
+
+      .pasos-nivel .nv {
+        justify-self: center;
+      }
+
+      .pasos-nivel .pasos-fila {
+        margin: 0;
+      }
+
+      .comprueba {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 2.4mm 0 0;
+        padding: 1.6mm 2.6mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.1;
+      }
+
+      .comprueba img {
+        width: 12mm;
+        height: 12mm;
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .soluciones {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.6mm 5mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .soluciones li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 0.8mm 2mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .soluciones img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .soluciones p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+
+      /* ---------- Registro ---------- */
+      .registro {
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .registro .cabeza h1 {
+        font-size: 23pt;
+      }
+
+      .registro__datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .registro__datos p {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .registro__datos span {
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .registro__datos .fechas {
+        grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+      }
+
+      .leyenda-registro {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm 6mm;
+        margin: 0 0 2.6mm;
+      }
+
+      .leyenda-registro span {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.6mm;
+      }
+
+      .marca-registro {
+        width: 4.6mm;
+        height: 4.6mm;
+      }
+
+      .criterios {
+        margin: 0 0 3mm;
+        padding: 2.4mm 3.6mm;
+      }
+
+      .criterios h2 {
+        margin: 0 0 1.2mm;
+        font-size: 12.5pt;
+      }
+
+      .criterios ul {
+        margin: 0;
+        padding-left: 4.4mm;
+      }
+
+      .criterios li {
+        margin-bottom: 0.6mm;
+      }
+
+      .registro table th,
+      .registro table td {
+        padding: 1.2mm 2mm;
+        border: 0.3mm solid var(--linea);
+      }
+
+      .registro tbody td {
+        height: 9.2mm;
+      }
+
+      .registro thead th {
+        font-size: 11pt;
+        line-height: 1.15;
+        vertical-align: bottom;
+      }
+
+      .registro thead th .nv {
+        margin-right: 1mm;
+      }
+
+      .observar {
+        margin: 3mm 0 0;
+      }
+
+      .observar h2 {
+        margin: 0 0 1mm;
+        font-size: 12.5pt;
+      }
+
+      .observar ul {
+        columns: 2;
+        column-gap: 6mm;
+        margin: 0;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.33;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.62em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.48em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.48em;
+      }
+
+      .guia li {
+        margin-bottom: 0.5mm;
+      }
+
+      .guia .caja {
+        padding: 2.6mm 4mm;
+        line-height: 1.32;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .caja ul {
+        margin-bottom: 0;
+      }
+
+      .guia table {
+        margin: 0.4em 0 0.6em;
+      }
+
+      .guia table th,
+      .guia table td {
+        padding: 1.1mm 2mm;
+        line-height: 1.28;
+      }
+
+      .guia tbody th {
+        font-family: var(--texto);
+        font-weight: 400;
+        width: 44%;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+        break-inside: auto;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      .niveles-guia {
+        display: grid;
+        gap: 1.2mm;
+        margin: 0 0 0.48em;
+        padding: 0;
+        list-style: none;
+      }
+
+      .niveles-guia li {
+        display: grid;
+        grid-template-columns: 8mm minmax(0, 1fr);
+        align-items: start;
+        gap: 1.6mm;
+        margin: 0;
+      }
+
+      .niveles-guia .nv {
+        justify-self: center;
+        vertical-align: 0;
+      }
+
+      .niveles-guia .nv.f3 {
+        margin-top: -0.8mm;
+      }
+
+      .niveles-guia p {
+        margin: 0;
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 23pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .familias ol {
+        margin-bottom: 0.4em;
+      }
+
+      .familias .ejemplo {
+        font-weight: 700;
+        font-size: 14pt;
+        white-space: nowrap;
+      }
+
+      .palabras-casa {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2mm 3mm;
+        margin: 1mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .palabras-casa li {
+        display: grid;
+        justify-items: center;
+        gap: 0.8mm;
+        margin: 0;
+        padding: 1.6mm 1mm 1.8mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        text-align: center;
+      }
+
+      .palabras-casa img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .palabras-casa p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 16pt;
+        line-height: 1.15;
+        white-space: nowrap;
+      }
+
+      .recuadro {
+        margin-top: 3mm;
+        padding: 3mm 4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin-top: 0;
+      }
+
+      .recuadro .renglon {
+        height: 8mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: tarjetas;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.5em 0 0.15em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.6mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -66mm; top: 112mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -34mm; top: 150mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 100mm; top: 140mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego manipulativo · Lectura y escritura</p>
+        <h1 class="portada__titulo">Diptongos<br />manipulativos</h1>
+        <p class="portada__subtitulo">
+          Dos vocales en la misma sílaba. Piezas para verlo y moverlo con las manos, de 1.º a 3.º de Primaria.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" id="escena" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>Tres<b>niveles</b>y un reto</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         CARTEL: ¿QUÉ ES UN DIPTONGO?
+         ====================================================================== -->
+    <section class="hoja-tarjetas cartel">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Cartel para la clase · También en A3</p>
+          <h1>¿Qué es un diptongo?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="lema">
+        Son dos vocales juntas en la misma sílaba. Las digo de un solo golpe de voz. Cada sílaba es una casa.
+      </p>
+      <ul class="ejemplos" id="ejemplos-cartel"></ul>
+      <div class="dos-familias">
+        <div class="familia-vocal ab">
+          <h2>Vocales abiertas</h2>
+          <div>
+            <p class="letras" id="letras-abiertas"></p>
+            <p>Abro mucho la boca.</p>
+          </div>
+          <span data-dibujo="bocaAbierta"></span>
+        </div>
+        <div class="familia-vocal ce">
+          <h2>Vocales cerradas</h2>
+          <div>
+            <p class="letras" id="letras-cerradas"></p>
+            <p>Casi cierro la boca.</p>
+          </div>
+          <span data-dibujo="bocaCerrada"></span>
+        </div>
+      </div>
+      <div class="regla juntas">
+        <h2>Van juntas: es un diptongo</h2>
+        <ul id="regla-juntas"></ul>
+      </div>
+      <div class="regla separadas">
+        <h2>Se separan: es un hiato <small>Reto</small></h2>
+        <ul id="regla-separadas"></ul>
+      </div>
+      <div class="truco">
+        <img src="pictogramas/4563.png" alt="" />
+        <img src="pictogramas/2991.png" alt="" />
+        <p>Para contar las sílabas, doy una palmada en cada una. O pongo la mano bajo la barbilla: baja una vez en cada sílaba.</p>
+      </div>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las
+        casas, las bocas y las formas de las vocales son de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         TALLER DE VOCALES: ¿CABEN EN UNA CASA?
+         ====================================================================== -->
+    <section class="hoja-tarjetas taller">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Taller de vocales · Tablero y piezas</p>
+          <h1>¿Caben en una casa?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <ol class="pasos4">
+        <li><img src="pictogramas/10148.png" alt="" /><p>Coge dos vocales.</p></li>
+        <li><img src="pictogramas/9692.png" alt="" /><p>Dilas seguidas, de un golpe de voz.</p></li>
+        <li><img src="pictogramas/6989.png" alt="" /><p>Ponlas juntas en la casa grande.</p></li>
+        <li><img src="pictogramas/2474.png" alt="" /><p>¿Caben? Diptongo. ¿Se salen? Hiato.</p></li>
+      </ol>
+      <div class="tablero" id="tablero"></div>
+      <p class="nota-adulto">
+        <strong>Para el adulto.</strong> Las piezas miden lo justo. En la casa grande caben una abierta y una cerrada, o la i y la
+        u. Dos abiertas no caben. La í y la ú con tilde son las más grandes: llevan la fuerza de la voz y siempre van en su
+        propia casa. Hay una sola i y una sola u, porque dos iguales también se separan (chi-i-ta).
+      </p>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+      <p class="corte"><span data-dibujo="tijeras"></span><span>Corta por aquí: arriba queda el tablero; abajo, las vocales</span></p>
+      <div id="vocales-sueltas"></div>
+    </section>
+
+    <!-- ======================================================================
+         PIEZAS DE SÍLABAS
+         ====================================================================== -->
+    <section class="hoja-tarjetas piezas">
+      <h1 class="solo-lector">Piezas de sílabas para recortar, para los niveles 1 y 2</h1>
+      <p class="aviso">
+        <span><strong>Piezas de sílabas</strong> · Plastifica la hoja entera y recorta</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <p class="pista">
+        Las vocales llevan su forma: círculo las abiertas y óvalo estrecho las cerradas. Las sílabas con diptongo tienen dos
+        formas juntas. Hay dos juegos: si se mezclan, mira la marca de la esquina. Escribe tus sílabas en las piezas en blanco
+        antes de plastificar.
+      </p>
+      <h2 class="grupo-piezas n1"><span class="nv f1">1</span>Para el nivel 1 · Las sílabas con diptongo</h2>
+      <ul class="rejilla-piezas" id="piezas-n1"></ul>
+      <h2 class="grupo-piezas n2"><span class="nv f2">2</span>Para el nivel 2 · Todas las sílabas de las palabras</h2>
+      <ul class="rejilla-piezas" id="piezas-n2"></ul>
+    </section>
+
+    <!-- Las cuatro hojas de tarjetas (niveles 1 y 2, hojas A y B) se generan con el guion del final -->
+    <div id="hojas-tarjetas"></div>
+
+    <!-- ======================================================================
+         NIVEL 3: SEPARO, ESCRIBO Y RODEO
+         ====================================================================== -->
+    <section class="hoja-tarjetas nivel3 n3">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo"><span class="nv f3">3</span> Nivel 3 · Para escribir</p>
+          <h1>Separo, escribo y rodeo</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos">
+        <p>Me llamo:<span></span></p>
+        <p>Fecha:<span></span></p>
+      </div>
+      <ol class="pasos-fila" id="pasos-n3"></ol>
+      <ul class="escribir" id="escribir"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+        Plastificada, sirve muchas veces con rotulador de pizarra.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         RETO: ¿JUNTAS O SEPARADAS?
+         ====================================================================== -->
+    <section class="hoja-tarjetas reto n3">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Reto · Diptongo o hiato</p>
+          <h1>¿Juntas o separadas?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <p class="lema" style="font-size: 18pt; margin-bottom: 2.6mm">
+        Lee la palabra y mira sus dos vocales. ¿Van juntas en una casa o separadas? Rodea la respuesta.
+      </p>
+      <div class="claves" id="claves-reto"></div>
+      <ul class="rejilla-reto" id="reto"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. Las
+        soluciones están en la guía, página <span data-pagina="guia2"></span>.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PASOS Y SOLUCIONES (HOJA DE MESA)
+         ====================================================================== -->
+    <section class="hoja-tarjetas mesa">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para la mesa · Plastifícala y déjala a mano</p>
+          <h1>Pasos y soluciones</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div id="pasos-niveles"></div>
+      <p class="comprueba"><img src="pictogramas/6998.png" alt="" />Al terminar, compruébalo en las soluciones.</p>
+      <h2 style="margin: 3.4mm 0 1.6mm; font-size: 18pt">Soluciones</h2>
+      <ul class="soluciones" id="soluciones"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO
+         ====================================================================== -->
+    <section class="hoja registro">
+      <div class="cabeza">
+        <div>
+          <p class="antetitulo">Para el adulto · Una hoja por grupo</p>
+          <h1>Registro de los diptongos</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="registro__datos">
+        <p>Grupo:<span></span></p>
+        <p class="fechas">Del<span></span>al<span></span></p>
+      </div>
+      <div class="caja caja--verde criterios">
+        <h2>Cuándo pasar de nivel</h2>
+        <ul>
+          <li><strong>Taller:</strong> explica con las piezas por qué dos vocales caben o no en una casa.</li>
+          <li><strong>Niveles 1 y 2:</strong> resuelve sin ayuda 7 de las 8 tarjetas de una hoja, en dos días distintos.</li>
+          <li><strong>Nivel 3:</strong> separa bien 6 de las 7 palabras y rodea su diptongo. <strong>Reto:</strong> acierta 7 de 8.</li>
+        </ul>
+        <p style="margin: 1mm 0 0">Es una propuesta de IdEducando: ajústala a cada peque.</p>
+      </div>
+      <p class="leyenda-registro" id="leyenda-registro"></p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" style="width: 20mm">Iniciales</th>
+            <th scope="col" style="width: 17mm">Taller</th>
+            <th scope="col" style="width: 17mm"><span class="nv f1 n1">1</span>Nivel</th>
+            <th scope="col" style="width: 17mm"><span class="nv f2 n2">2</span>Nivel</th>
+            <th scope="col" style="width: 17mm"><span class="nv f3 n3">3</span>Nivel</th>
+            <th scope="col" style="width: 15mm">Reto</th>
+            <th scope="col">Palabras que le cuestan y ayuda que necesita</th>
+          </tr>
+        </thead>
+        <tbody id="filas-registro"></tbody>
+      </table>
+      <div class="observar">
+        <h2>Qué observar</h2>
+        <ul>
+          <li>Dice la palabra entera antes de trocearla.</li>
+          <li>Separa las sílabas con palmadas o con la barbilla.</li>
+          <li>Encuentra las dos vocales que van juntas.</li>
+          <li>Explica con sus palabras por qué caben o no.</li>
+        </ul>
+      </div>
+      <p class="atribucion">Solo iniciales, sin diagnósticos. Guarda el registro en el centro y no le hagas fotos con tu móvil.</p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Diptongos manipulativos: cómo enseñarlos paso a paso</h1>
+      <p>
+        Un diptongo son dos vocales seguidas que se pronuncian en la misma sílaba, como en hue-vo o pei-ne. Este material lo
+        enseña con piezas que se mueven: las vocales abiertas (a, e, o) son círculos anchos y las cerradas (i, u), óvalos
+        estrechos. En la casa de una sílaba caben una abierta y una cerrada; dos abiertas no caben. Está pensado para toda la
+        clase de 1.º a 3.º de Primaria, y en especial para el alumnado con dislexia, con trastorno del desarrollo del lenguaje
+        (TDL) o con discapacidad intelectual.
+      </p>
+
+      <div class="caja caja--azul">
+        <h2>Lo que dice la Ortografía de la Real Academia Española (RAE)</h2>
+        <ul>
+          <li>
+            <strong>Diptongo:</strong> son «secuencias de dos vocales que se pronuncian en la misma sílaba» (RAE y ASALE, 2010,
+            § 2.2.2.1). Lo forman una vocal abierta y una cerrada átona, en cualquier orden (ai-re, pien-so, cuan-to), o dos
+            cerradas distintas (ciu-dad, rui-do). ASALE es la Asociación de Academias de la Lengua Española.
+          </li>
+          <li>
+            <strong>Hiato:</strong> dos vocales en sílabas distintas. Lo forman dos vocales abiertas (te-a-tro), dos vocales
+            iguales (le-er) y una cerrada tónica junto a una abierta (rí-o, ra-íz). Esta última siempre lleva tilde (RAE, 2016,
+            § 3.2.3).
+          </li>
+          <li>
+            <strong>La h no cambia nada:</strong> hay diptongo en prohi-bir y hiato en bú-ho. Al hablar deprisa a veces juntamos
+            dos abiertas («tea-tro»), pero para escribir y separar sílabas siempre son hiato (RAE y ASALE, 2010, § 2.2.2.3).
+          </li>
+          <li>
+            <strong>Por qué no hay piano:</strong> en España, palabras como piano se pueden decir con hiato, pi-a-no, y está
+            bien dicho (§ 2.2.2.1). La Ortografía la cuenta como diptongo al escribir. Para no confundir, no está en las tarjetas.
+          </li>
+        </ul>
+      </div>
+
+      <h2>Cómo enseñarlo: primero tú, luego juntos, luego solos</h2>
+      <p>
+        Lo que más respaldo tiene para aprender a leer y a escribir palabras es la enseñanza explícita y sistemática: decir qué
+        se aprende, enseñarlo con un modelo y practicar con ayudas que se retiran poco a poco (Ehri y otros, 2001; Foorman y
+        otros, 2016).
+      </p>
+      <ol>
+        <li>
+          <strong>Yo lo hago.</strong> Coge hue-vo y piensa en voz alta: «Hue. Oigo la u y la e de un golpe. La u es cerrada y la
+          e, abierta. Caben en una casa: es un diptongo».
+        </li>
+        <li><strong>Lo hacemos juntos.</strong> Otra palabra: cada peque coloca una pieza mientras la dice.</li>
+        <li>
+          <strong>Lo haces tú.</strong> Por parejas: uno coloca y el otro lo comprueba en la hoja de soluciones (página
+          <span data-pagina="mesa"></span>).
+        </li>
+      </ol>
+
+      <h2>Cinco sesiones para empezar, de 15 minutos</h2>
+      <ol>
+        <li>
+          <strong>Las vocales.</strong> Decid a, e, o, i, u con la mano bajo la barbilla: con las abiertas, la boca se abre más.
+          Separad las piezas del taller por su forma.
+        </li>
+        <li>
+          <strong>El taller «¿Caben en una casa?»</strong> (página <span data-pagina="taller"></span>). Probad parejas de vocales
+          hasta descubrir la regla. Después, leed el cartel (página <span data-pagina="cartel"></span>).
+        </li>
+        <li><strong>Nivel 1, hoja A:</strong> completar la sílaba que falta.</li>
+        <li><strong>Nivel 2, hoja A:</strong> formar la palabra entera. Quien lo necesite sigue con el nivel 1.</li>
+        <li><strong>Nivel 3:</strong> separar, escribir y rodear. Quien quiera, el reto.</li>
+      </ol>
+      <p>
+        Después, ratos de 10 a 15 minutos, tres o cuatro días por semana. En la revisión de Ehri y otros (2001), enseñar en
+        grupo pequeño o a la clase entera funcionó igual de bien que de uno en uno.
+      </p>
+
+      <h2>Los tres niveles</h2>
+      <ul class="niveles-guia">
+        <li>
+          <span class="nv f1" aria-hidden="true">1</span>
+          <p>
+            <strong>Nivel 1, ¿qué sílaba falta?</strong> Las otras sílabas ya están escritas. Dale 2 o 3 piezas para elegir; con
+            más soltura, todas las de su bolsa.
+          </p>
+        </li>
+        <li>
+          <span class="nv f2" aria-hidden="true">2</span>
+          <p>
+            <strong>Nivel 2, forma la palabra.</strong> Solo hay casas vacías, una por sílaba. Busca todas sus piezas y lee la
+            palabra entera.
+          </p>
+        </li>
+        <li>
+          <span class="nv f3" aria-hidden="true">3</span>
+          <p>
+            <strong>Nivel 3, separa, escribe y rodea.</strong> Con la palabra escrita, la separa en las casas que necesite y rodea
+            el diptongo. El reto compara diptongos con hiatos.
+          </p>
+        </li>
+      </ul>
+      <p>
+        La hoja A es más sencilla: casi siempre el diptongo va delante. La hoja B trae palabras de tres sílabas y la iu de
+        ciudad. Cuándo pasar de nivel: en el registro (página <span data-pagina="registro"></span>).
+      </p>
+
+      <h2>Errores frecuentes y qué decir</h2>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Si…</th>
+            <th scope="col">Prueba a decir…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Trocea el diptongo: pi-e.</th>
+            <td>«Dila de un golpe, como al hablar. Con la mano en la barbilla: ¿cuántas veces baja?».</td>
+          </tr>
+          <tr>
+            <th scope="row">Junta dos abiertas: «leon», en una sílaba.</th>
+            <td>«La e y la o son abiertas: no caben en una casa. Le-ón».</td>
+          </tr>
+          <tr>
+            <th scope="row">Ve un diptongo en queso o en guitarra.</th>
+            <td>«En que, qui, gue y gui, la u no suena».</td>
+          </tr>
+          <tr>
+            <th scope="row">Duda con rey, hoy o muy.</th>
+            <td>«Al final de la palabra, la y suena como una i y forma diptongo».</td>
+          </tr>
+          <tr>
+            <th scope="row">Duda con búho.</th>
+            <td>«La h no suena. Mira las dos vocales: la ú lleva tilde, así que se separan. Bú-ho».</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Ideas para cada peque</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone resaltar los patrones (CAST, 2024, consideración 3.2): aquí, la
+        forma de cada vocal. También pide apoyos que se retiran poco a poco (5.3) y un reto a la medida de cada peque (8.2).
+      </p>
+      <ul>
+        <li>
+          <strong>Con dislexia:</strong> pocas piezas a la vista y más tiempo. Que diga cada sílaba en voz alta al colocarla.
+          Nada de copiar de la pizarra.
+        </li>
+        <li>
+          <strong>Con TDL:</strong> modela despacio, sin trocear el diptongo. Empieza por «juntas» y «separadas», y deja las
+          palabras diptongo e hiato para más adelante.
+        </li>
+        <li>
+          <strong>Con discapacidad intelectual:</strong> las mismas ocho palabras durante varias semanas y dos piezas para elegir.
+          Con este alumnado, lo que más respaldo tiene es enseñar con ayudas que se van retirando (Browder y otros, 2006).
+        </li>
+        <li>
+          <strong>Con más reto:</strong> palabras con dos diptongos (di-no-sau-rio, a-cua-rio) o con tres vocales en una sílaba,
+          como miau o buey: son triptongos.
+        </li>
+      </ul>
+      <p>
+        La dislexia y el TDL van juntos a menudo. Ayuda más mirar qué le cuesta a cada peque que su etiqueta (Adlof y Hogan,
+        2018).
+      </p>
+
+      <h2>Lo que no sabemos</h2>
+      <p>
+        Este material junta apoyos con respaldo, pero no se ha estudiado como conjunto. Tocar, moverse y dar palmadas ayuda a
+        practicar, pero el efecto propio de lo multisensorial no está claro: en un metaanálisis, los programas Orton-Gillingham,
+        que son multisensoriales, no mejoraron la lectura de forma significativa (Stevens y otros, 2021). En la revisión de Ehri
+        y otros (2001), la enseñanza sistemática no ayudó al grupo de lectores con bajo rendimiento que incluía alumnado con
+        limitaciones cognitivas. El tamaño de las piezas es una propuesta de IdEducando para ver la regla con las manos.
+      </p>
+
+      <h2>En el currículo</h2>
+      <p>
+        El Real Decreto 157/2022 y el Decreto 209/2022 de la Región de Murcia piden en el primer ciclo «establecimiento de
+        generalizaciones sobre aspectos lingüísticos elementales a partir de la observación, comparación y transformación de
+        palabras y enunciados». El decreto de Murcia nombra «La sílaba. Diptongos e hiatos» en el tercer ciclo. De 1.º a 3.º,
+        este material es un primer contacto.
+      </p>
+
+      <h2>Soluciones del reto</h2>
+      <p>
+        <strong>Juntas, con diptongo:</strong> <span id="solucion-juntas"></span> <strong>Separadas, con hiato:</strong>
+        <span id="solucion-separadas"></span>
+      </p>
+
+      <h2>Con otros materiales de IdEducando</h2>
+      <p>
+        Antes, para contar sílabas a palmadas:
+        <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>. Si también
+        cuestan las trabadas, como dro en cuadro:
+        <a href="https://www.ideducando.es/material-gratuito/cartilla-trabadas/">Cartilla de sílabas trabadas</a>.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Diptongos: dos vocales en la misma casa</h1>
+      <p>
+        En clase jugamos con los diptongos. Un diptongo son dos vocales juntas en la misma sílaba, como en
+        <span class="ejemplo" data-codigo="a-gua"></span> o <span class="ejemplo" data-codigo="pei-ne"></span>. Las movemos con
+        piezas: las vocales abiertas (a, e, o) son círculos y las cerradas (i, u), óvalos estrechos. En cada sílaba, como en una
+        casa, caben una abierta y una cerrada.
+      </p>
+
+      <h2><img src="pictogramas/4563.png" alt="" />Tres juegos para casa, sin material</h2>
+      <ol>
+        <li>
+          <strong>Palmadas.</strong> Decid juntos palabras de casa con una palmada en cada sílaba: a-gua, pei-ne, a-cei-te.
+          Dos vocales que suenan de un golpe van en la misma palmada.
+        </li>
+        <li>
+          <strong>Cazadiptongos.</strong> En la compra o en un cuento, buscad palabras con dos vocales juntas. ¡Ojo con queso! En
+          que y en qui, la u no suena.
+        </li>
+        <li>
+          <strong>¿Juntas o separadas?</strong> Decid una palabra y pensad si sus dos vocales van en la misma sílaba, como a-gua,
+          o en dos, como dí-a.
+        </li>
+      </ol>
+
+      <h2><img src="pictogramas/2317.png" alt="" />Palabras de casa con diptongo</h2>
+      <ul class="palabras-casa" id="palabras-casa"></ul>
+
+      <h2><img src="pictogramas/31847.png" alt="" />Si se equivoca</h2>
+      <p>
+        Dile la palabra bien, sin decir «no»: «Sí, a-gua, con dos palmadas». Mejor un rato corto, de 5 minutos, en el que casi
+        todo salga bien. Si os preocupa cómo habla o cómo lee, comentadlo con su tutor o tutora.
+      </p>
+
+      <div class="recuadro">
+        <h2>Mensaje del cole</h2>
+        <div class="renglon"></div>
+        <div class="renglon"></div>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Diptongos manipulativos.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los símbolos
+          pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+          (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Diptongos manipulativos.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/diptongos-manipulativos</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+
+      <h2>Qué es un diptongo</h2>
+      <ul class="referencias">
+        <li>
+          Real Academia Española y Asociación de Academias de la Lengua Española (2010). <em>Ortografía de la lengua
+          española</em>. Madrid: Espasa. Capítulo II, apartado 2.2.2, «Secuencias vocálicas: diptongos, triptongos, hiatos».
+          Comprobado en la prepublicación de la RAE de noviembre de 2010, en rae.es.
+        </li>
+        <li>
+          Real Academia Española (2016). <em>Diccionario del estudiante</em>. Apéndice «Ortografía», apartados 3.2.1.1
+          «Diptongos ortográficos» y 3.2.3 «Palabras con hiato», págs. 1526 y 1527. rae.es
+        </li>
+      </ul>
+
+      <h2>Currículo</h2>
+      <ul class="referencias">
+        <li>
+          Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación
+          Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022. Anexo II, Lengua Castellana y Literatura,
+          saberes básicos del primer ciclo, págs. 24465 y 24466.
+        </li>
+        <li>
+          Decreto n.º 209/2022, de 17 de noviembre, por el que se establece la ordenación y el currículo de la Educación Primaria
+          en la Comunidad Autónoma de la Región de Murcia. Boletín Oficial de la Región de Murcia (BORM) n.º 267, de 18 de
+          noviembre de 2022. Lengua Castellana y Literatura, saberes básicos: primer ciclo, págs. 40016 y 40017; tercer ciclo,
+          pág. 40025.
+        </li>
+      </ul>
+
+      <h2>Cómo enseñar a leer y a escribir palabras</h2>
+      <ul class="referencias">
+        <li>
+          Ehri, L. C., Nunes, S. R., Stahl, S. A. y Willows, D. M. (2001). Systematic phonics instruction helps students learn
+          to read: Evidence from the National Reading Panel's meta-analysis. <em>Review of Educational Research</em>, 71(3),
+          393-447. DOI: 10.3102/00346543071003393
+        </li>
+        <li>
+          Foorman, B. y otros (2016). <em>Foundational skills to support reading for understanding in kindergarten through 3rd
+          grade</em> (NCEE 2016-4008). Institute of Education Sciences, What Works Clearinghouse. Recomendaciones 2 y 3, con
+          evidencia fuerte. ies.ed.gov
+        </li>
+        <li>
+          Stevens, E. A., Austin, C., Moore, C., Scammacca, N., Boucher, A. N. y Vaughn, S. (2021). Current state of the
+          evidence: Examining the effects of Orton-Gillingham reading interventions for students with or at risk for word-level
+          reading disabilities. <em>Exceptional Children</em>, 87(4), 397-417. DOI: 10.1177/0014402921993406
+        </li>
+        <li>
+          Browder, D. M., Wakeman, S. Y., Spooner, F., Ahlgrim-Delzell, L. y Algozzine, B. (2006). Research on reading
+          instruction for individuals with significant cognitive disabilities. <em>Exceptional Children</em>, 72(4), 392-408.
+          DOI: 10.1177/001440290607200401
+        </li>
+        <li>
+          Adlof, S. M. y Hogan, T. P. (2018). Understanding dyslexia in the context of developmental language disorders.
+          <em>Language, Speech, and Hearing Services in Schools</em>, 49(4), 762-773. DOI: 10.1044/2018_LSHSS-DYSLC-18-0049
+        </li>
+        <li>
+          CAST (2024). <em>Directrices del Diseño Universal para el Aprendizaje, versión 3.0</em>: consideraciones 3.2, 5.3 y
+          8.2. udlguidelines.cast.org/es
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con
+        pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las casas, las piezas, las bocas,
+        las formas de las vocales y el diseño son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo citando a
+        IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        cartel: 3,
+        taller: 4,
+        piezas: 5,
+        n1a: 6,
+        n1b: 7,
+        n2a: 8,
+        n2b: 9,
+        n3: 10,
+        reto: 11,
+        mesa: 12,
+        registro: 13,
+        guia: 14,
+        guia2: 15,
+        familias: 16,
+        fuentes: 17,
+      };
+
+      // ---------------------------------------------------------------------
+      // Las dieciséis palabras de las tarjetas: [pictograma de ARASAAC, sílabas, sílaba con diptongo].
+      // Se dejan fuera palabras como piano, que en España se pueden decir con hiato (Ortografía, § 2.2.2.1).
+      // ---------------------------------------------------------------------
+      const PALABRAS = {
+        pie: [25327, ['pie'], 0],
+        nieve: [3135, ['nie', 've'], 0],
+        huevo: [38868, ['hue', 'vo'], 0],
+        puerta: [3244, ['puer', 'ta'], 0],
+        peine: [2852, ['pei', 'ne'], 0],
+        reina: [5559, ['rei', 'na'], 0],
+        agua: [2248, ['a', 'gua'], 1],
+        radio: [11354, ['ra', 'dio'], 1],
+        diente: [10267, ['dien', 'te'], 0],
+        cuadro: [2360, ['cua', 'dro'], 0],
+        bailar: [31435, ['bai', 'lar'], 0],
+        lluvia: [3123, ['llu', 'via'], 1],
+        ciudad: [2704, ['ciu', 'dad'], 0],
+        abuela: [23709, ['a', 'bue', 'la'], 1],
+        autobús: [2262, ['au', 'to', 'bús'], 0],
+        farmacia: [3313, ['far', 'ma', 'cia'], 2],
+      };
+      const HOJAS = {
+        A: ['pie', 'nieve', 'huevo', 'puerta', 'peine', 'reina', 'agua', 'radio'],
+        B: ['diente', 'cuadro', 'bailar', 'lluvia', 'ciudad', 'abuela', 'autobús', 'farmacia'],
+      };
+      const NIVELES = {
+        1: { nombre: 'Nivel 1', tarea: '¿Qué sílaba falta?', forma: 'círculo' },
+        2: { nombre: 'Nivel 2', tarea: 'Forma la palabra', forma: 'cuadrado' },
+        3: { nombre: 'Nivel 3', tarea: 'Separo, escribo y rodeo', forma: 'rombo' },
+      };
+
+      // Nivel 3: cinco palabras de las tarjetas y dos nuevas, para ver si lo aplica a otras.
+      const ESCRIBIR = [
+        ['nieve', 3135],
+        ['puerta', 3244],
+        ['ciudad', 2704],
+        ['abuela', 23709],
+        ['autobús', 2262],
+        ['paraguas', 2500, 'pa-ra-guas'],
+        ['dinosaurio', 2738, 'di-no-sau-rio'],
+      ];
+
+      // Reto: cuatro parejas, dos con í o ú con tilde y dos con dos abiertas. [palabra separada, pictograma, ¿juntas?]
+      const RETO = [
+        ['a-gua', 2248, true],
+        ['grú-a', 3341, false],
+        ['rí-o', 2811, false],
+        ['ra-dio', 11354, true],
+        ['pa-e-lla', 5532, false],
+        ['bai-lar', 31435, true],
+        ['cua-dro', 2360, true],
+        ['to-a-lla', 2593, false],
+      ];
+
+      // Pasos de cada nivel para la hoja de mesa: [pictograma, texto]. Órdenes cortas, de dos líneas como mucho.
+      const PASOS = {
+        1: [
+          [2474, 'Mira y di.'],
+          [4563, 'Da palmadas.'],
+          [27391, '¿Cuál falta?'],
+          [6989, 'Ponla y lee.'],
+        ],
+        2: [
+          [2474, 'Mira y di.'],
+          [4563, 'Da palmadas.'],
+          [27391, 'Busca sílabas.'],
+          [6989, 'Ponlas y lee.'],
+        ],
+        3: [
+          [28643, 'Lee la palabra.'],
+          [4563, 'Da palmadas.'],
+          [2380, 'Escribe sílabas.'],
+          [6285, 'Rodea el diptongo.'],
+        ],
+      };
+
+      // Familias: palabras de casa con diptongo
+      const CASA = [
+        [2248, 'a-gua'],
+        [38868, 'hue-vo'],
+        [2246, 'a-cei-te'],
+        [2852, 'pei-ne'],
+        [3244, 'puer-ta'],
+        [23709, 'a-bue-la'],
+        [23718, 'a-bue-lo'],
+        [2364, 'cuen-to'],
+      ];
+
+      // ---------------------------------------------------------------------
+      // El código de las vocales: abiertas, cerradas y con tilde. En que, qui, gue y gui la u no suena.
+      // ---------------------------------------------------------------------
+      const ABIERTAS = 'aeoáéó';
+      function vocales(texto) {
+        const letras = [...texto];
+        return letras
+          .map((c, i) => {
+            const antes = letras[i - 1];
+            const despues = letras[i + 1];
+            const uMuda = c === 'u' && (antes === 'q' || (antes === 'g' && (despues === 'e' || despues === 'i')));
+            if (ABIERTAS.includes(c)) return `<span class="v ab">${c}</span>`;
+            if (c === 'í' || c === 'ú') return `<span class="v ti">${c}</span>`;
+            if ((c === 'i' || c === 'u') && !uMuda) return `<span class="v ce">${c}</span>`;
+            if (c === '-') return '<span class="guion">-</span>';
+            return c;
+          })
+          .join('');
+      }
+      const quitarTilde = (t) => t.normalize('NFD').replace(/[́]/g, '').normalize('NFC');
+
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const picto = (n, alt = '', clase = '') => `<img src="pictogramas/${n}.png" alt="${alt}" class="${clase}">`;
+      const marcaNivel = (nivel, clase = '') =>
+        `<span class="nv f${nivel} n${nivel} ${clase}" aria-hidden="true">${nivel}</span>`;
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // ---------------------------------------------------------------------
+      // La casa de una sílaba: medidas en milímetros. El tejado es un SVG con sus medidas reales.
+      // ---------------------------------------------------------------------
+      const TECHOS = {
+        crema: '#fff6e6',
+        amarillo: '#fdf0c7',
+        verde: '#dcf3ea',
+        naranja: '#fde8cf',
+        morado: '#efe5f7',
+        azul: '#e4edfb',
+        coral: '#fde5e0',
+      };
+      // El contenido va dentro de un solo <span class="sil">: así las letras y las formas de las vocales
+      // quedan en una línea (sueltas, cada una sería una fila de la rejilla del cuerpo).
+      function casa(contenido, { ancho = 28, cuerpo = 21.5, tejado = 6.5, grosor = 0.5, techo = 'amarillo', vacia = false, envolver = true } = {}) {
+        const g = grosor;
+        const tejadoSvg = `<svg class="casa__tejado" viewBox="0 0 ${ancho} ${tejado}" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M${g / 2} ${tejado - g / 2}L${ancho / 2} ${g / 2}L${ancho - g / 2} ${tejado - g / 2}Z" fill="${TECHOS[techo] ?? techo}" stroke="${M}" stroke-width="${g}" stroke-linejoin="round"/></svg>`;
+        const dentro = contenido && envolver ? `<span class="sil">${contenido}</span>` : contenido;
+        return `<div class="casa${vacia ? ' casa--vacia' : ''}" style="--ancho:${ancho}mm;--cuerpo:${cuerpo}mm;--tejado:${tejado}mm;--grosor:${g}mm">${tejadoSvg}<div class="casa__cuerpo">${dentro}</div></div>`;
+      }
+      // Una fila de casas, una por sílaba
+      const calle = (silabas, opciones = {}, clase = '') =>
+        `<div class="calle ${clase}">${silabas.map((s) => casa(s === null ? '' : vocales(s), opciones)).join('')}</div>`;
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const DIBUJOS = {
+        // Boca abierta, como al decir a
+        bocaAbierta: svg(
+          `<ellipse cx="50" cy="36" rx="38" ry="27" fill="#e8553e" stroke="${M}" stroke-width="3.5"/>
+           <ellipse cx="50" cy="37" rx="28" ry="18" fill="${M}"/>
+           <path d="M30 46 Q50 36 70 46 Q50 56 30 46Z" fill="#f4a3b5"/>
+           <rect x="34" y="20" width="32" height="6" rx="2" fill="#fff"/>`,
+          '',
+          '0 0 100 72',
+        ),
+        // Boca casi cerrada, como al decir i
+        bocaCerrada: svg(
+          `<path d="M8 36 Q30 22 50 28 Q70 22 92 36 Q70 52 50 48 Q30 52 8 36Z" fill="#e8553e" stroke="${M}" stroke-width="3.5" stroke-linejoin="round"/>
+           <path d="M20 36 Q50 31 80 36 Q50 41 20 36Z" fill="${M}"/>`,
+          '',
+          '0 0 100 72',
+        ),
+        tijeras: svg(
+          `<g fill="none" stroke="${M}" stroke-width="6" stroke-linecap="round"><circle cx="22" cy="28" r="12"/><circle cx="22" cy="72" r="12"/><path d="M32 36L90 72M32 64L90 28"/></g>`,
+        ),
+        bien: svg(`<circle cx="50" cy="50" r="44" fill="#dcf3ea" stroke="#127055" stroke-width="7"/><path d="M28 52L44 67L73 33" fill="none" stroke="#127055" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`),
+        separa: svg(`<circle cx="50" cy="50" r="44" fill="#efe5f7" stroke="#7a3fa5" stroke-width="7"/><path d="M50 22V78M30 50H14M70 50H86M22 42L14 50L22 58M78 42L86 50L78 58" fill="none" stroke="#7a3fa5" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`),
+      };
+      for (const el of document.querySelectorAll('[data-dibujo]')) el.innerHTML = DIBUJOS[el.dataset.dibujo];
+
+      // ---------------------------------------------------------------------
+      // Cartel
+      // ---------------------------------------------------------------------
+      const EJEMPLOS = [
+        [25327, 'pie', [['pie', 30]]],
+        [2248, 'a-gua', [['a', 17], ['gua', 31]]],
+        [2852, 'pei-ne', [['pei', 30], ['ne', 23]]],
+      ];
+      document.getElementById('ejemplos-cartel').innerHTML = EJEMPLOS.map(
+        ([n, palabra, casas]) =>
+          `<li>${picto(n)}<div class="calle">${casas
+            .map(([s, ancho]) => casa(vocales(s), { ancho, cuerpo: 15, tejado: 6, techo: 'morado' }))
+            .join('')}</div><p>${casas.length === 1 ? 'Una casa' : 'Dos casas'}</p></li>`,
+      ).join('');
+      document.getElementById('letras-abiertas').innerHTML = vocales('a e o');
+      document.getElementById('letras-cerradas').innerHTML = vocales('i u');
+
+      // Iconos de la regla: una casa con dos formas dentro, o dos casas con una forma cada una
+      const forma = (tipo) => `<span class="v ${tipo}">&nbsp;</span>`;
+      const casitaFormas = (formas, ancho) => casa(formas, { ancho, cuerpo: 9, tejado: 4.5, grosor: 0.45, techo: 'crema' });
+      const ICONOS_REGLA = {
+        abCe: casitaFormas(forma('ab') + forma('ce'), 22),
+        ceCe: casitaFormas(forma('ce') + forma('ce'), 22),
+        abAb: `<div class="calle">${casitaFormas(forma('ab'), 13)}${casitaFormas(forma('ab'), 13)}</div>`,
+        tiAb: `<div class="calle">${casitaFormas(forma('ti'), 13)}${casitaFormas(forma('ab'), 13)}</div>`,
+      };
+      document.getElementById('regla-juntas').innerHTML = [
+        ['abCe', 'Una abierta y una cerrada.', 'pie · hue-vo · jau-la'],
+        ['ceCe', 'Dos cerradas distintas.', 'ciu-dad'],
+      ]
+        .map(
+          ([icono, texto, ejemplos]) =>
+            `<li><div class="calle">${ICONOS_REGLA[icono]}</div><p>${texto}</p><p class="palabras">${ejemplos
+              .split(' · ')
+              .map(vocales)
+              .join('<span class="guion"> · </span>')}</p></li>`,
+        )
+        .join('');
+      document.getElementById('regla-separadas').innerHTML = [
+        ['abAb', 'Dos abiertas.', 'le-ón · pa-e-lla'],
+        ['tiAb', 'La í o la ú con tilde.', 'rí-o · grú-a'],
+      ]
+        .map(
+          ([icono, texto, ejemplos]) =>
+            `<li>${ICONOS_REGLA[icono]}<p>${texto}</p><p class="palabras">${ejemplos
+              .split(' · ')
+              .map(vocales)
+              .join('<span class="guion"> · </span>')}</p></li>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Taller: el tablero con la casa grande y las dos casas, y las vocales sueltas
+      // Medidas: abiertas 30 mm, cerradas 16 mm, con tilde 40 mm. Casa grande: 50 mm por dentro.
+      //   abierta + cerrada = 46 (cabe) · cerrada + cerrada = 32 (cabe) · abierta + abierta = 60 (no cabe)
+      //   con tilde + abierta = 70 · con tilde + cerrada = 56 (no caben)
+      // ---------------------------------------------------------------------
+      const G_TABLERO = 0.8;
+      const casaTablero = (interior, techo) =>
+        casa('', { ancho: interior + 2 * G_TABLERO, cuerpo: 44 + G_TABLERO, tejado: 15, grosor: G_TABLERO, techo });
+      document.getElementById('tablero').innerHTML = `
+        <div class="tablero__zona">
+          ${casaTablero(50, 'verde')}
+          <p class="tablero__rotulo">${DIBUJOS.bien}Juntas: diptongo</p>
+        </div>
+        <div class="tablero__zona">
+          <div class="calle">${casaTablero(44, 'morado')}${casaTablero(44, 'morado')}</div>
+          <p class="tablero__rotulo">${DIBUJOS.separa}Separadas: hiato</p>
+        </div>`;
+
+      const pieza = (letra, tipo, ancho) =>
+        `<div class="pv ${tipo}" style="--w:${ancho}mm"><span class="pv__forma">${letra}</span></div>`;
+      document.getElementById('vocales-sueltas').innerHTML =
+        `<div class="fila-vocales">${['a', 'a', 'e', 'e', 'o', 'o'].map((l) => pieza(l, 'ab', 30)).join('')}</div>` +
+        `<div class="fila-vocales">${pieza('i', 'ce', 16)}${pieza('u', 'ce', 16)}${pieza('í', 'ti', 40)}${pieza('ú', 'ti', 40)}</div>`;
+
+      // ---------------------------------------------------------------------
+      // Piezas de sílabas: juego del nivel 1 (las de diptongo) y juego del nivel 2 (todas)
+      // ---------------------------------------------------------------------
+      const ORDEN = [...HOJAS.A, ...HOJAS.B];
+      const conDiptongo = ORDEN.map((p) => PALABRAS[p][1][PALABRAS[p][2]]);
+      const otras = ORDEN.flatMap((p) => PALABRAS[p][1].filter((_, i) => i !== PALABRAS[p][2]));
+      const piezaSilaba = (s, nivel) =>
+        `<li class="pz n${nivel}"><span class="sil">${vocales(s)}</span><span class="pz__marca f${nivel}" aria-hidden="true"></span></li>`;
+      const blanca = (nivel) => `<li class="pz pz--blanca n${nivel}"><span class="pz__marca f${nivel}" aria-hidden="true"></span></li>`;
+      document.getElementById('piezas-n1').innerHTML =
+        conDiptongo.map((s) => piezaSilaba(s, 1)).join('') + Array.from({ length: 21 - conDiptongo.length }, () => blanca(1)).join('');
+      const todas = [...conDiptongo, ...otras];
+      document.getElementById('piezas-n2').innerHTML =
+        todas.map((s) => piezaSilaba(s, 2)).join('') + Array.from({ length: 42 - todas.length }, () => blanca(2)).join('');
+
+      // ---------------------------------------------------------------------
+      // Tarjetas de los niveles 1 y 2
+      // ---------------------------------------------------------------------
+      const COLOR_TECHO = { 1: 'verde', 2: 'naranja' };
+      function tarjeta(id, nivel) {
+        const [n, silabas, dip] = PALABRAS[id];
+        const casas = silabas
+          .map((s, i) => {
+            if (nivel === 1 && i !== dip) return casa(vocales(s), { techo: COLOR_TECHO[nivel] });
+            return casa('', { techo: COLOR_TECHO[nivel], vacia: nivel === 1 });
+          })
+          .join('');
+        return `<li class="tj n${nivel}"><span class="tj__banda"></span>${marcaNivel(nivel)}${picto(n, id, 'tj__picto')}<div class="calle">${casas}</div></li>`;
+      }
+      document.getElementById('hojas-tarjetas').outerHTML = [1, 2]
+        .flatMap((nivel) =>
+          ['A', 'B'].map(
+            (hoja) => `<section class="hoja-tarjetas n${nivel}">
+              <h1 class="solo-lector">${NIVELES[nivel].nombre}: ${NIVELES[nivel].tarea}, hoja ${hoja}</h1>
+              <p class="aviso"><span><strong>${NIVELES[nivel].nombre} · ${NIVELES[nivel].tarea}</strong> · Hoja ${hoja} · Forma de ${NIVELES[nivel].forma}</span><span>Corta por la línea de puntos</span></p>
+              <ul class="rejilla-tarjetas">${HOJAS[hoja].map((id) => tarjeta(id, nivel)).join('')}</ul>
+              <p class="atribucion">${ATRIBUCION} Las casas y el diseño de las tarjetas son de IdEducando.</p>
+            </section>`,
+          ),
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Nivel 3: separo, escribo y rodeo
+      // ---------------------------------------------------------------------
+      const pasosFila = (pasos) =>
+        pasos.map(([n, texto]) => `<li>${picto(n)}<p>${texto}</p></li>`).join('');
+      document.getElementById('pasos-n3').innerHTML = pasosFila(PASOS[3]);
+      const casaEscribir = () =>
+        casa('<span class="renglon-casa"></span>', { ancho: 30, cuerpo: 17, tejado: 5, techo: 'morado', envolver: false });
+      const filaEscribir = (contenido) =>
+        `${contenido}<div class="calle">${Array.from({ length: 4 }, casaEscribir).join('')}</div>`;
+      document.getElementById('escribir').innerHTML =
+        ESCRIBIR.map(
+          ([palabra, n]) => `<li>${filaEscribir(`${picto(n)}<p class="palabra">${palabra}</p>`)}</li>`,
+        ).join('') +
+        `<li>${filaEscribir('<span class="dibujo"></span><p class="palabra">Ahora tú<small>Dibuja y escribe una palabra con diptongo.</small></p>')}</li>`;
+
+      // ---------------------------------------------------------------------
+      // Reto: ¿juntas o separadas?
+      // ---------------------------------------------------------------------
+      const OPCION_JUNTAS = casa(forma('ab') + forma('ce'), { ancho: 13, cuerpo: 6.4, tejado: 3.4, grosor: 0.4, techo: 'verde' });
+      const OPCION_SEPARADAS = `<div class="calle">${casa(forma('ab'), { ancho: 8.6, cuerpo: 6.4, tejado: 3.4, grosor: 0.4, techo: 'morado' })}${casa(forma('ab'), { ancho: 8.6, cuerpo: 6.4, tejado: 3.4, grosor: 0.4, techo: 'morado' })}</div>`;
+      document.getElementById('claves-reto').innerHTML = `
+        <div class="clave juntas">${ICONOS_REGLA.abCe}<div><h2>Juntas: diptongo</h2><p>Una abierta y una cerrada, o dos cerradas.</p></div></div>
+        <div class="clave separadas">${ICONOS_REGLA.abAb}<div><h2>Separadas: hiato</h2><p>Dos abiertas, o la í o la ú con tilde.</p></div></div>`;
+      document.getElementById('reto').innerHTML = RETO.map(
+        ([separada, n]) => `<li class="item-reto">${picto(n, separada.replace(/-/g, ''))}
+          <p class="palabra">${vocales(separada.replace(/-/g, ''))}</p>
+          <ul class="opciones">
+            <li><span class="calle">${OPCION_JUNTAS}</span>Juntas</li>
+            <li>${OPCION_SEPARADAS}Separadas</li>
+          </ul></li>`,
+      ).join('');
+      document.getElementById('solucion-juntas').innerHTML = RETO.filter((r) => r[2]).map((r) => r[0]).join(', ') + '.';
+      document.getElementById('solucion-separadas').innerHTML = RETO.filter((r) => !r[2]).map((r) => r[0]).join(', ') + '.';
+
+      // ---------------------------------------------------------------------
+      // Pasos y soluciones
+      // ---------------------------------------------------------------------
+      document.getElementById('pasos-niveles').innerHTML = [1, 2, 3]
+        .map(
+          (nivel) =>
+            `<div class="pasos-nivel n${nivel}">${marcaNivel(nivel, 'grande')}<ol class="pasos-fila">${pasosFila(PASOS[nivel])}</ol></div>`,
+        )
+        .join('');
+      const SOLUCIONES = [
+        ...ORDEN.map((p) => [PALABRAS[p][0], PALABRAS[p][1].join('-')]),
+        [2500, 'pa-ra-guas'],
+        [2738, 'di-no-sau-rio'],
+      ];
+      document.getElementById('soluciones').innerHTML = SOLUCIONES.map(
+        ([n, separada]) => `<li>${picto(n)}<p>${vocales(separada)}</p></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Registro
+      // ---------------------------------------------------------------------
+      const MARCAS = {
+        ayuda: svg(`<circle cx="50" cy="50" r="40" fill="#fff" stroke="${M}" stroke-width="10"/>`, 'marca-registro'),
+        poca: svg(`<circle cx="50" cy="50" r="40" fill="#fff" stroke="${M}" stroke-width="10"/><path d="M50 10A40 40 0 0 1 50 90Z" fill="${M}"/>`, 'marca-registro'),
+        solo: svg(`<circle cx="50" cy="50" r="45" fill="${M}"/>`, 'marca-registro'),
+      };
+      document.getElementById('leyenda-registro').innerHTML =
+        `<strong>Marca en cada casilla:</strong>` +
+        `<span>${MARCAS.ayuda}Con ayuda</span><span>${MARCAS.poca}Con poca ayuda</span><span>${MARCAS.solo}Sin ayuda</span>`;
+      document.getElementById('filas-registro').innerHTML = Array.from(
+        { length: 14 },
+        () => '<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>',
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Familias
+      // ---------------------------------------------------------------------
+      document.getElementById('palabras-casa').innerHTML = CASA.map(
+        ([n, separada]) => `<li>${picto(n)}<p>${vocales(separada)}</p></li>`,
+      ).join('');
+      for (const el of document.querySelectorAll('[data-codigo]')) el.innerHTML = vocales(el.dataset.codigo);
+
+      // ---------------------------------------------------------------------
+      // Portada: una calle con las casas de a-bue-la, su tarjeta y vocales que caen
+      // ---------------------------------------------------------------------
+      const escena = document.getElementById('escena');
+      // Las tres casas, de x = 70 a x = 198 mm, apoyadas en la acera (y = 249 mm).
+      const casasPortada = [
+        ['a', 32, 'amarillo'],
+        ['bue', 52, 'verde'],
+        ['la', 36, 'coral'],
+      ];
+      let x = 70;
+      let html = '<div class="acera"></div>';
+      for (const [s, ancho, techo] of casasPortada) {
+        html += `<div style="left:${x}mm;top:${249 - 52}mm;font-size:40pt">${casa(vocales(s), { ancho, cuerpo: 34, tejado: 18, grosor: 0.8, techo })}</div>`;
+        x += ancho + 4;
+      }
+      html += `<div style="left:18mm;top:194mm;transform:rotate(-6deg)"><div class="ficha-portada">${picto(23709)}</div></div>`;
+      // El bocadillo, sobre la casa de «bue» (su centro está en x = 132 mm)
+      html += `<div class="bocadillo" style="left:104mm;top:163mm;width:56mm;transform:rotate(-2deg)">¡Dos vocales en la misma casa!</div>`;
+      // Vocales que caen, a la derecha del título: [letra, tipo, ancho, centro x, centro y, giro]
+      const CAEN = [
+        ['a', 'ab', 28, 168, 90, -12],
+        ['i', 'ce', 16, 196, 102, 12],
+        ['u', 'ce', 16, 186, 133, -14],
+        ['e', 'ab', 28, 156, 134, 9],
+        ['o', 'ab', 28, 186, 164, -5],
+      ];
+      html += CAEN.map(
+        ([l, tipo, ancho, cx, cy, giro]) =>
+          `<div class="vocal-suelta ${tipo}" style="left:${cx - ancho / 2}mm;top:${cy - 15}mm;width:${ancho}mm;transform:rotate(${giro}deg)"><span class="forma">${l}</span></div>`,
+      ).join('');
+      escena.innerHTML = html;
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>

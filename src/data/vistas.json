@@ -89,6 +89,59 @@
       }
     ]
   },
+  "alto-contraste-aula": {
+    "total": 20,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Antes de empezar"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Carteles, versión amarilla, hoja 1 de 5: clase y baño"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Carteles, versión negra, hoja 3 de 5: calma y asamblea"
+      },
+      {
+        "pagina": 14,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Etiquetas para cajas y bandejas, versión amarilla"
+      },
+      {
+        "pagina": 18,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente"
+      }
+    ]
+  },
   "carta-de-deseos": {
     "total": 18,
     "fotos": [
@@ -633,7 +686,7 @@
     ]
   },
   "historias-sociales-calma-y-palabras": {
-    "total": 17,
+    "total": 13,
     "fotos": [
       {
         "pagina": 1,
@@ -660,20 +713,28 @@
         "titulo": "Historia 1 de 4 · con mis emociones"
       },
       {
-        "pagina": 5,
-        "ancho": 707,
-        "alto": 1000,
-        "mini_ancho": 113,
-        "mini_alto": 160,
-        "titulo": "Historia 2 de 4 · con mis emociones"
-      },
-      {
         "pagina": 6,
         "ancho": 707,
         "alto": 1000,
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Historia 3 de 4 · con mis compañeros"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla para escribir tu propia historia"
+      },
+      {
+        "pagina": 10,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para el adulto"
       }
     ]
   },

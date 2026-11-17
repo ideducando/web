@@ -341,7 +341,7 @@
         font-family: var(--texto);
         font-size: 16pt;
         line-height: 1.35;
-        max-width: 118mm;
+        max-width: 104mm;
       }
 
       .portada__pie {
@@ -377,12 +377,13 @@
         position: absolute;
       }
 
-      .escena .ruleta-escala {
-        transform-origin: 0 0;
+      .escena .ruleta {
+        border-radius: 50%;
+        box-shadow: 0 1.6mm 3.2mm rgb(30 43 85 / 0.28);
       }
 
-      .escena .ruleta {
-        filter: drop-shadow(0 1.6mm 2.4mm rgb(30 43 85 / 0.25));
+      .escena .ruleta + svg {
+        position: absolute;
       }
 
       .copo {
@@ -560,25 +561,29 @@
         margin-bottom: 0.8mm;
       }
 
-      /* ---------- Ruletas ---------- */
+      /* ---------- Ruletas ----------
+         Medidas en milímetros multiplicadas por --e: 1 en la hoja de recortar y menos en la portada.
+         Así la portada usa la ruleta de verdad, más pequeña, sin escalarla con transform (al imprimir,
+         Chromium descoloca el texto de lo que se escala así). */
       .ruleta {
+        --e: 1;
         position: relative;
-        width: 180mm;
-        height: 180mm;
+        width: calc(180mm * var(--e));
+        height: calc(180mm * var(--e));
         margin: 0 auto;
       }
 
       .ruleta > svg {
         position: absolute;
         inset: 0;
-        width: 180mm;
-        height: 180mm;
+        width: 100%;
+        height: 100%;
       }
 
       .ruleta__opciones {
         position: absolute;
-        left: 90mm;
-        top: 90mm;
+        left: 50%;
+        top: 50%;
         width: 0;
         height: 0;
         margin: 0;
@@ -599,48 +604,48 @@
 
       .ruleta__opciones img {
         position: absolute;
-        left: -12mm;
-        top: 33.5mm;
-        width: 24mm;
-        height: 24mm;
+        left: calc(-12mm * var(--e));
+        top: calc(33.5mm * var(--e));
+        width: calc(24mm * var(--e));
+        height: calc(24mm * var(--e));
       }
 
       .ruleta__texto {
         position: absolute;
-        left: -23mm;
-        top: 59mm;
+        left: calc(-23mm * var(--e));
+        top: calc(59mm * var(--e));
         display: grid;
         place-items: center;
-        width: 46mm;
-        height: 16mm;
+        width: calc(46mm * var(--e));
+        height: calc(16mm * var(--e));
         margin: 0;
         text-align: center;
         font-weight: 700;
-        font-size: 18pt;
+        font-size: calc(18pt * var(--e));
         line-height: 1;
         text-wrap: balance;
       }
 
       .ruleta__num {
         position: absolute;
-        left: -4mm;
-        top: 81.4mm;
-        width: 8mm;
-        height: 6.2mm;
+        left: calc(-4mm * var(--e));
+        top: calc(81.4mm * var(--e));
+        width: calc(8mm * var(--e));
+        height: calc(6.2mm * var(--e));
         text-align: center;
         font-family: var(--titulos);
         font-weight: 700;
-        font-size: 15pt;
-        line-height: 6.2mm;
+        font-size: calc(15pt * var(--e));
+        line-height: calc(6.2mm * var(--e));
         color: #fff;
       }
 
       .ruleta__opciones .marca-extra {
         position: absolute;
-        left: 6mm;
-        top: 49.5mm;
-        width: 8.5mm;
-        height: 8.5mm;
+        left: calc(6mm * var(--e));
+        top: calc(49.5mm * var(--e));
+        width: calc(8.5mm * var(--e));
+        height: calc(8.5mm * var(--e));
       }
 
       .ruleta-hoja .ruleta {
@@ -649,7 +654,7 @@
 
       .ruleta-pie {
         display: grid;
-        grid-template-columns: 34mm minmax(0, 1fr);
+        grid-template-columns: 40mm minmax(0, 1fr);
         gap: 5mm;
         align-items: start;
         margin: 3mm 0 0;
@@ -965,13 +970,25 @@
         line-height: 1.1;
       }
 
-      .ideas h2 small {
-        display: block;
-        margin-top: 1.4mm;
-        font-family: var(--texto);
-        font-weight: 400;
+      .ideas__nota {
+        margin: 1.4mm 0 0;
         font-size: 11pt;
         line-height: 1.25;
+      }
+
+      .tira-hoja .pasos-tira {
+        margin: 4mm 0 0;
+      }
+
+      .tira-hoja .pasos-tira li {
+        grid-template-columns: 16mm minmax(0, 1fr);
+        padding: 1.4mm 2.4mm 1.4mm 1.4mm;
+      }
+
+      .tira-hoja .pasos-tira img,
+      .tira-hoja .pasos-tira svg {
+        width: 16mm;
+        height: 16mm;
       }
 
       .ideas__lista {
@@ -1015,7 +1032,7 @@
       .plan__parte {
         position: relative;
         display: grid;
-        grid-template-rows: 12mm 41mm 30mm 63mm;
+        grid-template-rows: 12mm 41mm 30mm 80mm;
         margin: 0;
         border: 0.6mm solid var(--c);
         border-radius: 4mm;
@@ -1115,7 +1132,7 @@
 
       .plan__notas {
         display: grid;
-        grid-template-rows: auto repeat(4, minmax(0, 1fr));
+        grid-template-rows: auto repeat(5, minmax(0, 1fr));
         margin: 0 3mm 3mm;
         padding: 2mm 2.6mm 1mm;
         border-radius: 2.6mm;
@@ -1319,7 +1336,7 @@
 
       .frase__renglones {
         display: grid;
-        grid-template-rows: repeat(4, 12.4mm);
+        grid-template-rows: repeat(4, 13.6mm);
       }
 
       .frase__renglones span {
@@ -1397,7 +1414,7 @@
 
       .texto-renglones {
         display: grid;
-        grid-template-rows: repeat(10, 10.6mm);
+        grid-template-rows: repeat(11, 10.8mm);
         margin: 0 0 3.4mm;
       }
 
@@ -1895,10 +1912,9 @@
       <p class="antetitulo">Antes de empezar</p>
       <h1>De un vistazo</h1>
       <p class="vistazo__intro">
-        Tres ruletas sortean el personaje, el lugar y el problema de una historia de invierno. Lo demás lo inventa cada peque:
-        cómo lo arregla y cómo acaba. Después lo cuenta, lo dice en tres frases o lo escribe, según su nivel. Con ocho casillas
-        en cada ruleta salen 512 historias distintas. Cada parte de la historia tiene siempre su color, su número y su
-        pictograma.
+        Tres ruletas sortean el personaje, el lugar y el problema de una historia de invierno. Cada peque inventa cómo lo
+        arregla y cómo acaba, y lo cuenta, lo dice en tres frases o lo escribe, según su nivel. Cada parte de la historia tiene
+        siempre su color, su número y su pictograma.
       </p>
       <ol class="mapa" id="mapa"></ol>
       <div class="vistazo__fila">
@@ -1946,9 +1962,13 @@
       </div>
       <ol class="tira" id="tira"></ol>
       <div class="ideas">
-        <h2>Ideas para el final <small>Si se atasca, que señale una. También vale inventar otra.</small></h2>
+        <div>
+          <h2>Ideas para el final</h2>
+          <p class="ideas__nota">Si se atasca, que señale una. También vale inventar otra.</p>
+        </div>
         <ul class="ideas__lista" id="ideas"></ul>
       </div>
+      <ol class="pasos-picto pasos-tira" id="pasos-tira" aria-label="Cómo se cuenta"></ol>
       <p class="atribucion" data-atribucion></p>
     </section>
 
@@ -1966,9 +1986,8 @@
       <ol class="plan" id="plan"></ol>
       <div class="plan-pie">
         <p>
-          Se escribe con rotulador de pizarra: palabras clave o un dibujo, nunca frases enteras. Las ideas para la solución
-          están en la página <span data-pagina="tira"></span>. Después, el texto va en la hoja «Mi historia» (página
-          <span data-pagina="historia"></span>).
+          Con rotulador de pizarra, palabras clave o un dibujo en cada parte. Las frases, después, en la hoja «Mi historia»
+          (página <span data-pagina="historia"></span>). Ideas para la solución: página <span data-pagina="tira"></span>.
         </p>
         <p class="atribucion" style="margin: 0; max-width: 112mm" data-atribucion></p>
       </div>
@@ -2476,11 +2495,11 @@
         },
         {
           n: 2, nombre: 'Problema', color: 'coral', principal: [[22620], '¿Qué pasa?'],
-          preguntas: [[11476, '¿Cómo se siente?'], [24763, '¿Por qué?']], conectores: ['De repente…', 'Pero…', 'porque…'],
+          preguntas: [[11476, '¿Cómo se siente?'], [24763, '¿Por qué?']], conectores: ['De repente…', 'De pronto…', 'Pero…', 'porque…'],
         },
         {
           n: 3, nombre: 'Solución', color: 'amarillo', principal: [[37711], '¿Qué hace?'],
-          preguntas: [[32648, '¿Quién le ayuda?']], conectores: ['Entonces…', 'Después…', 'Por eso…'],
+          preguntas: [[32648, '¿Quién le ayuda?']], conectores: ['Entonces…', 'Después…', 'Luego…', 'Por eso…'],
         },
         {
           n: 4, nombre: 'Final', color: 'morado', principal: [[5358], '¿Cómo acaba?'],
@@ -2490,21 +2509,21 @@
 
       // De un vistazo: [color, pictograma o dibujo, título, para qué, claves de página].
       const MAPA = [
-        ['azul', 6006, 'Tres ruletas: personaje, lugar y problema', 'Ocho casillas cada una, con pictograma, palabra y número. Se montan con un encuadernador.', 'quien', 'que'],
-        ['verde', 'd:cartas', '32 cartas', 'Las 24 de las ruletas, para jugar sin encuadernador y para la tira, y 8 en blanco para inventar.', 'cartas1', 'cartas2'],
-        ['coral', 6461, 'Tira para contar e ideas para el final', 'Nivel 1: «Había una vez…», «De repente…» y «Al final…», con las cartas en su sitio.', 'tira'],
-        ['amarillo', 38796, 'El plan de mi historia', 'Nivel 3: inicio, problema, solución y final, con preguntas y pictogramas.', 'plan'],
-        ['morado', 'd:unir', 'Palabras para unir', 'Tres tiras de conectores, con el color de cada parte de la historia.', 'conectores'],
-        ['azul', 2380, 'Mis tres frases y Mi historia', 'Hojas para escribir de los niveles 2 y 3. Mi historia lleva su lista para revisar.', 'frases', 'historia'],
-        ['verde', 6998, '¿Qué tal ha ido mi historia?', 'Autoevaluación con un reto para la próxima historia. Dos por hoja.', 'autoevaluacion'],
-        ['coral', 28643, 'Guía, nota para las familias y fuentes', 'Cómo modelar, preguntas guía, cómo ayudar con TDL, TEA o discapacidad intelectual, y juegos para casa.', 'guia', 'fuentes'],
+        ['azul', 6006, 'Tres ruletas: personaje, lugar y problema', 'Ocho casillas cada una: 512 historias. Se montan con un encuadernador.', 'quien', 'que'],
+        ['verde', 'd:cartas', '32 cartas', 'Las de las ruletas, para jugar sin encuadernador, y 8 en blanco.', 'cartas1', 'cartas2'],
+        ['coral', 6461, 'Tira para contar e ideas para el final', 'Nivel 1: «Había una vez…», «De repente…» y «Al final…».', 'tira'],
+        ['amarillo', 38796, 'El plan de mi historia', 'Nivel 3: inicio, problema, solución y final, con preguntas.', 'plan'],
+        ['morado', 'd:unir', 'Palabras para unir', 'Tres tiras de conectores, con el color de cada parte.', 'conectores'],
+        ['azul', 2380, 'Mis tres frases y Mi historia', 'Hojas para escribir de los niveles 2 y 3, con lista para revisar.', 'frases', 'historia'],
+        ['verde', 6998, '¿Qué tal ha ido mi historia?', 'Autoevaluación con un reto para la próxima. Dos por hoja.', 'autoevaluacion'],
+        ['coral', 28643, 'Guía, nota para las familias y fuentes', 'Cómo modelar, qué preguntar y cómo ayudar a cada peque.', 'guia', 'fuentes'],
       ];
 
       // Hoja «Mis tres frases»
       const PASOS_FRASES = [
         [6006, 'Giro'],
         [9692, 'Lo digo'],
-        [2380, 'Lo escribo'],
+        [2380, 'Escribo'],
         [28643, 'Lo leo'],
       ];
       const FRASES = [
@@ -2610,11 +2629,14 @@
         return [f1(C - r * Math.sin(a)), f1(C + r * Math.cos(a))];
       };
 
-      function svgRuleta(colores) {
+      function svgRuleta(colores, recortar = true) {
         const { c, t, fm } = colores;
         const BORDE = 88;
         const CASILLAS = 81;
-        let s = `<circle cx="${C}" cy="${C}" r="89.6" fill="none" stroke="${SUAVE}" stroke-width="0.4" stroke-dasharray="2 1.6"/>`;
+        // En la hoja, la línea de corte; en la portada, el canto blanco de la ruleta ya recortada.
+        let s = recortar
+          ? `<circle cx="${C}" cy="${C}" r="89.6" fill="none" stroke="${SUAVE}" stroke-width="0.4" stroke-dasharray="2 1.6"/>`
+          : `<circle cx="${C}" cy="${C}" r="90" fill="#fff"/>`;
         s += `<circle cx="${C}" cy="${C}" r="${BORDE}" fill="${fm}"/>`;
         for (let i = 0; i < 8; i++) {
           const [x1, y1] = enRuleta(CASILLAS, i * 45 - 22.5);
@@ -2633,7 +2655,8 @@
         return `<svg viewBox="0 0 180 180" aria-hidden="true" focusable="false">${s}</svg>`;
       }
 
-      function ruleta(r) {
+      // e: tamaño (1 en la hoja de recortar). La de la portada es decorativa y no lleva la línea de corte.
+      function ruleta(r, e = 1) {
         const colores = COLORES[r.color];
         const casillas = r.opciones
           .map(
@@ -2641,7 +2664,8 @@
               `<li style="transform:rotate(${i * 45}deg)">${picto(p)}${marca(extra)}<p class="ruleta__texto">${texto}</p><span class="ruleta__num" aria-hidden="true">${i + 1}</span></li>`,
           )
           .join('');
-        return `<div class="ruleta c-${r.color}">${svgRuleta(colores)}<ol class="ruleta__opciones" aria-label="Ruleta ${r.pregunta} ${r.nombre.toLowerCase()}, con ocho casillas">${casillas}</ol></div>`;
+        const etiqueta = e === 1 ? ` aria-label="Ruleta ${r.pregunta} ${r.nombre.toLowerCase()}, con ocho casillas"` : '';
+        return `<div class="ruleta c-${r.color}" style="--e:${e}">${svgRuleta(colores, e === 1)}<ol class="ruleta__opciones"${etiqueta}>${casillas}</ol></div>`;
       }
 
       // La flecha: un círculo con un copo y una punta. Gira sobre el encuadernador y señala una casilla.
@@ -2677,7 +2701,7 @@
                 <p class="sin-encuadernador"><strong>Sin encuadernador:</strong> una carta boca abajo del montón de ${r.montones} (página ${r.numero === 3 ? PAGINAS.cartas2 : PAGINAS.cartas1}), o un dado: avanza un botón tantas casillas como puntos.</p>
               </div>
             </div>
-            <p class="atribucion">${ATRIBUCION} La ruleta, la flecha y los copos son de IdEducando.</p>
+            <p class="atribucion">${ATRIBUCION} ${r.id === 'que' ? 'La ruleta, la flecha, los copos y las marcas «?» (perdido) y «roto» son de IdEducando.' : 'La ruleta, la flecha y los copos son de IdEducando.'}</p>
           </section>`,
       ).join('');
 
@@ -2687,7 +2711,7 @@
       const carta = (r, [p, texto, extra], i) =>
         `<li class="carta c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span><b aria-hidden="true">${i + 1}</b></p><div class="carta__dibujo">${picto(p)}${marca(extra)}</div><p class="carta__texto">${texto}</p></li>`;
       const cartaBlanca = (r) =>
-        `<li class="carta carta--blanca c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span><b aria-hidden="true"></b></p><div class="carta__dibujo"></div><p class="carta__lineas"><span></span><span></span></p></li>`;
+        `<li class="carta carta--blanca c-${r.color}"><p class="carta__banda"><span>${r.pregunta}</span></p><div class="carta__dibujo"></div><p class="carta__lineas"><span></span><span></span></p></li>`;
       const blancas = (r, n) => Array.from({ length: n }, () => cartaBlanca(r)).join('');
 
       document.getElementById('hojas-cartas').outerHTML = [
@@ -2696,8 +2720,9 @@
           lista: RULETAS[0].opciones.map((o, i) => carta(RULETAS[0], o, i)).join('') + RULETAS[1].opciones.map((o, i) => carta(RULETAS[1], o, i)).join(''),
           pie: [
             '<strong>Para jugar sin encuadernador:</strong> un montón boca abajo por pregunta. Se saca una carta de cada montón.',
-            '<strong>Para la tira y el plan:</strong> después de girar las ruletas, busca las cartas que han salido y ponlas en su sitio.',
+            '<strong>Para la tira:</strong> después de girar las ruletas, busca las cartas que han salido y ponlas en su sitio.',
           ],
+          dibujos: 'El diseño de las cartas es de IdEducando.',
         },
         {
           titulo: 'Cartas del problema y cartas en blanco',
@@ -2706,6 +2731,7 @@
             '<strong>Cartas en blanco:</strong> para inventar personajes, lugares y problemas. Que dibuje y escriba antes de plastificar, o después con rotulador de pizarra.',
             'Si pegas pictogramas de ARASAAC en las cartas en blanco, cítalos igual. Lo mejor: su propio dibujo.',
           ],
+          dibujos: 'El diseño de las cartas y las marcas «?» (perdido) y «roto» son de IdEducando.',
         },
       ]
         .map(
@@ -2713,7 +2739,7 @@
             <div class="aviso"><h1>${h.titulo}</h1><span>Corta por la línea de puntos</span></div>
             <ul class="cartas">${h.lista}</ul>
             <div class="cartas-pie"><p>${h.pie[0]}</p><p>${h.pie[1]}</p></div>
-            <p class="atribucion">${ATRIBUCION} El diseño de las cartas y las marcas «?» y «roto» son de IdEducando.</p>
+            <p class="atribucion">${ATRIBUCION} ${h.dibujos}</p>
           </section>`,
         )
         .join('');
@@ -2728,16 +2754,24 @@
         `<li class="tira__parte c-coral"><p class="tira__arranque"><span class="marca-parte">2</span>De repente…</p><div class="tira__huecos">${hueco('coral', 22620, '¿Qué pasa?')}</div></li>` +
         `<li class="tira__parte c-morado"><p class="tira__arranque"><span class="marca-parte">3</span>Al final…</p><div class="tira__huecos">${hueco('morado', 5358, '¿Qué hace? ¿Cómo acaba? Dibújalo o dilo.', 'hueco--dibujo')}</div></li>`;
       document.getElementById('ideas').innerHTML = IDEAS.map(([p, texto]) => `<li>${picto(p)}<span>${texto}</span></li>`).join('');
+      document.getElementById('pasos-tira').innerHTML = [
+        [6006, 'Giro las ruletas'],
+        ['d:cartas', 'Pongo las cartas'],
+        [6461, 'Cuento la historia'],
+        [2381, 'Escucho a los demás'],
+      ]
+        .map(([p, t]) => `<li>${imagen(p)}<span>${t}</span></li>`)
+        .join('');
 
       // ---------------------------------------------------------------------
       // Plan de la historia
       // ---------------------------------------------------------------------
       document.getElementById('plan').innerHTML = PARTES.map(
         (p) => `<li class="plan__parte c-${p.color}">
-            <h2 class="plan__cab"><b aria-hidden="true">${p.n}</b>${p.nombre}</h2>
+            <h2 class="plan__cab"><b>${p.n}</b>${p.nombre}</h2>
             <div class="plan__principal"><div>${p.principal[0].map((n) => picto(n)).join('')}</div><p>${p.principal[1]}</p></div>
             <ul class="plan__preguntas">${p.preguntas.map(([n, t]) => `<li>${picto(n)}<span>${t}</span></li>`).join('')}</ul>
-            <div class="plan__notas"><p>Palabras clave o dibujo</p><span></span><span></span><span></span><span></span></div>
+            <div class="plan__notas"><p>Palabras clave o dibujo</p><span></span><span></span><span></span><span></span><span></span></div>
           </li>`,
       ).join('');
 
@@ -2758,14 +2792,14 @@
       document.getElementById('pasos-frases').innerHTML = PASOS_FRASES.map(([p, t]) => `<li>${picto(p)}<span>${t}</span></li>`).join('');
       document.getElementById('frases').innerHTML = FRASES.map(
         ([color, n, arranque]) => `<li class="frase c-${color}">
-            <div class="frase__izq"><p class="frase__arranque"><span class="marca-parte">${n}</span>${arranque}</p><div class="frase__dibujo">Dibujo o carta</div></div>
+            <div class="frase__izq"><p class="frase__arranque"><span class="marca-parte">${n}</span>${arranque}</p><div class="frase__dibujo">Dibujo</div></div>
             <div class="frase__renglones"><span></span><span></span><span></span><span></span></div>
           </li>`,
       ).join('');
       document.getElementById('miniplan').innerHTML = PARTES.map(
         (p) => `<li class="c-${p.color}"><p><span class="marca-parte">${p.n}</span>${p.nombre}</p><span class="r"></span><span class="r"></span></li>`,
       ).join('');
-      document.getElementById('renglones-historia').innerHTML = '<span></span>'.repeat(10);
+      document.getElementById('renglones-historia').innerHTML = '<span></span>'.repeat(11);
       document.getElementById('revisar').innerHTML = REVISAR.map(
         ([p, t]) => `<li><span class="casilla"></span>${imagen(p)}<span>${t}</span></li>`,
       ).join('');
@@ -2799,9 +2833,9 @@
       // De un vistazo
       // ---------------------------------------------------------------------
       document.getElementById('lista-niveles').innerHTML = [
-        [1, 'Lo cuento.', 'En voz alta, con las tres cartas en la tira y los arranques «Había una vez…», «De repente…» y «Al final…».'],
-        [2, 'Tres frases.', 'Lo dice o lo escribe en tres frases unidas con palabras para unir. También puede dictarlo.'],
-        [3, 'Lo escribo con un plan.', 'Planea el inicio, el problema, la solución y el final, escribe un texto corto y lo revisa con la lista.'],
+        [1, 'Lo cuento.', 'En voz alta, con las tres cartas en la tira y sus arranques.'],
+        [2, 'Tres frases.', 'Dichas, escritas o dictadas, unidas con palabras para unir.'],
+        [3, 'Lo escribo con un plan.', 'Planea las cuatro partes, escribe un texto corto y lo revisa con la lista.'],
       ]
         .map(
           ([n, titulo, texto]) =>
@@ -2819,31 +2853,34 @@
       // ---------------------------------------------------------------------
       // Portada: las tres ruletas de verdad, reducidas, con su flecha, un bocadillo y copos
       // ---------------------------------------------------------------------
-      // [ruleta, izquierda, arriba (mm), giro de la ruleta, escala, giro de la flecha]
+      // [ruleta, izquierda, arriba (mm), diámetro (mm), giro]. Cada flecha señala la casilla 1:
+      // un pingüino, en una cabaña y pierde su gorro, la historia del bocadillo.
       const ESCENA = [
-        [0, 6, 168, -8, 0.5, 0],
-        [1, 104, 128, 10, 0.44, 0],
-        [2, 96, 204, -4, 0.44, 0],
+        [1, 128, 116, 76, 6],
+        [0, 8, 150, 86, -7],
+        [2, 100, 192, 72, -4],
       ];
       document.getElementById('escena').innerHTML =
-        ESCENA.map(([i, x, y, giro, escala, flechaGiro]) => {
-          const tam = f1(180 * escala);
-          const fl = f1(31 * escala);
-          return `<div style="left:${x}mm;top:${y}mm;width:${tam}mm;height:${tam}mm;transform:rotate(${giro}deg)">
-              <div class="ruleta-escala" style="transform:scale(${escala})">${ruleta(RULETAS[i])}</div>
-              <div style="position:absolute;left:${f1(tam / 2 - fl / 2)}mm;top:${f1(tam / 2 - fl / 2)}mm;width:${fl}mm;height:${f1(49 * escala)}mm;transform-origin:50% ${f1((15.5 / 49) * 100)}%;transform:rotate(${flechaGiro}deg)">${flecha(false).replace('<svg ', `<svg style="width:${fl}mm;height:${f1(49 * escala)}mm" `)}</div>
+        ESCENA.map(([i, x, y, d, giro]) => {
+          const e = d / 180;
+          const fl = f1(31 * e);
+          const alto = f1(49 * e);
+          // El eje de la flecha (15,5 mm desde arriba y desde la izquierda de su dibujo) va en el centro de la ruleta.
+          const sitio = f1(d / 2 - 15.5 * e);
+          return `<div style="left:${x}mm;top:${y}mm;width:${d}mm;height:${d}mm;transform:rotate(${giro}deg)">
+              ${ruleta(RULETAS[i], f1(e))}${flecha(false).replace('<svg ', `<svg style="left:${sitio}mm;top:${sitio}mm;width:${fl}mm;height:${alto}mm" `)}
             </div>`;
         }).join('') +
-        `<div class="bocadillo" style="left:110mm;top:96mm"><p>«Había una vez un pingüino en una cabaña. De repente, pierde su gorro…»</p>${svg(`<path d="M2 0L14 0L4 20Z" fill="#fff" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/><path d="M1 0H15" stroke="#fff" stroke-width="4"/>`, '', '0 0 16 21')}</div>`;
+        `<div class="bocadillo" style="left:38mm;top:127mm"><p>«Había una vez un pingüino en una cabaña. De repente, pierde su gorro…»</p>${svg(`<path d="M2 0L14 0L4 20Z" fill="#fff" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/><path d="M1 0H15" stroke="#fff" stroke-width="4"/>`, '', '0 0 16 21')}</div>`;
 
       const COPOS = [
-        [152, 84, 12, '#2f6fd6'],
-        [186, 104, 8, M],
-        [14, 150, 9, '#8c4fb8'],
-        [92, 120, 7, '#2f6fd6'],
-        [190, 196, 10, '#8c4fb8'],
-        [64, 158, 8, M],
-        [184, 252, 9, '#2f6fd6'],
+        [112, 104, 9, '#2f6fd6'],
+        [186, 200, 10, '#8c4fb8'],
+        [14, 242, 9, '#8c4fb8'],
+        [64, 250, 12, '#2f6fd6'],
+        [182, 238, 8, M],
+        [96, 166, 7, M],
+        [32, 112, 7, '#8c4fb8'],
       ];
       document.getElementById('copos-portada').innerHTML = COPOS.map(
         ([x, y, t, color]) =>

@@ -310,8 +310,8 @@ const DOCUMENTOS = [
   },
   {
     id: 'alto-contraste-aula',
-    asunto: 'Carteles y bordes de alto contraste para el aula: rincones, materiales y rutinas para el alumnado con baja visión y para toda la clase, con pictogramas de ARASAAC',
-    palabras: 'baja visión, alto contraste, accesibilidad, señalización, aula, carteles, pictogramas, ARASAAC, Infantil, Primaria',
+    asunto: 'Carteles y bordes de alto contraste para el aula: carteles de espacios y rincones, etiquetas para cajas y tiras para la mesa, en negro sobre amarillo o blanco sobre negro, para el alumnado con baja visión y para toda la clase, con pictogramas de ARASAAC',
+    palabras: 'baja visión, discapacidad visual, alto contraste, accesibilidad, señalización, carteles, etiquetas, ONCE, pictogramas, ARASAAC, Infantil, Primaria',
   },
   {
     id: 'turnos-visibles',

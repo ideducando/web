@@ -1,0 +1,3029 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Detectives de letras: mensajes secretos para descifrar letra a letra · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de casos: un poco más de sitio para las casillas. */
+      @page fichas {
+        margin: 12mm 14mm 17mm 14mm;
+      }
+
+      /* Hojas de recortar: claves, carnets, soluciones y diplomas. */
+      @page recortes {
+        margin: 10mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Un color para cada nivel (siempre con su forma, su número y su texto) ----------
+         --c: color · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja-fichas {
+        page: fichas;
+        break-after: page;
+      }
+
+      .hoja-recortes {
+        page: recortes;
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      /* Lo que lee el adulto, nunca por debajo de 11 puntos. */
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      .atribucion {
+        margin: 2.4mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos (como en Misiones de invierno) ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Marcas de nivel: número dentro de un círculo, un cuadrado o un rombo ---------- */
+      .nv {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 6mm;
+        height: 6mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        vertical-align: -1.3mm;
+      }
+
+      .nv.n1 {
+        border-radius: 50%;
+      }
+
+      .nv.n2 {
+        border-radius: 1mm;
+      }
+
+      .nv.n3 {
+        width: 7.8mm;
+        height: 7.8mm;
+        clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+        vertical-align: -2.2mm;
+      }
+
+      .nv.grande {
+        width: 8.4mm;
+        height: 8.4mm;
+        font-size: 14pt;
+        vertical-align: middle;
+      }
+
+      .nv.n3.grande {
+        width: 10.4mm;
+        height: 10.4mm;
+      }
+
+      .nv.enorme {
+        width: 13mm;
+        height: 13mm;
+        font-size: 22pt;
+      }
+
+      .nv.n3.enorme {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 12mm;
+      }
+
+      .portada__titulo {
+        font-size: 54pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 16pt;
+        line-height: 1.35;
+        max-width: 116mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 24mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.6mm 0;
+      }
+
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+      }
+
+      .escena > * {
+        position: absolute;
+      }
+
+      .escena img {
+        height: auto;
+      }
+
+      /* ---------- Cabeceras ---------- */
+      .cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 2.5mm;
+      }
+
+      .cabeza .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabeza h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+      }
+
+      .cabeza > img {
+        width: 34mm;
+        height: auto;
+      }
+
+      /* ---------- De un vistazo ---------- */
+      .vistazo h1 {
+        font-size: 25pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .vistazo__fila {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: stretch;
+        margin: 0 0 3mm;
+      }
+
+      .vistazo .caja {
+        padding: 3mm 4mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.36;
+      }
+
+      .vistazo .caja h2 {
+        margin: 0 0 1.6mm;
+        font-size: 13pt;
+      }
+
+      .truco {
+        display: grid;
+        grid-template-columns: 15mm 5mm auto 5mm auto 5mm 11mm;
+        align-items: center;
+        justify-content: start;
+        gap: 1.4mm;
+        margin: 2mm 0 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+      }
+
+      .truco svg.simbolo {
+        width: 15mm;
+        height: 15mm;
+        padding: 1mm;
+        border: 0.35mm solid var(--linea);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .truco svg.flechita {
+        width: 5mm;
+        height: 5mm;
+      }
+
+      .truco .letra-truco {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+        font-family: var(--texto);
+        font-size: 18pt;
+      }
+
+      .pasos-caso {
+        display: grid;
+        gap: 1.3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-caso li {
+        display: grid;
+        grid-template-columns: 5mm 10mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .pasos-caso b {
+        display: grid;
+        place-items: center;
+        width: 5mm;
+        height: 5mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 10pt;
+      }
+
+      .pasos-caso img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .lista-niveles {
+        display: grid;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .lista-niveles li {
+        display: grid;
+        grid-template-columns: 10.4mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+      }
+
+      .lista-niveles .nv {
+        justify-self: center;
+      }
+
+      .mapa {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.3mm 4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mapa li {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0;
+        padding: 1mm 2.4mm;
+        border: 0.4mm solid var(--linea);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 2.6mm;
+        break-inside: avoid;
+        font-size: 11pt;
+        line-height: 1.22;
+      }
+
+      .mapa img,
+      .mapa svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .mapa strong {
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+      }
+
+      .mapa .mapa__pagina {
+        white-space: nowrap;
+        font-family: var(--titulos);
+        font-weight: 700;
+        color: var(--tx);
+      }
+
+      /* ---------- Casillas de los mensajes: el dibujo arriba y el hueco para la letra debajo ---------- */
+      .mensaje {
+        --t: 18mm;
+        --g: 1.2mm;
+        --gs: 5mm;
+        --gw: 8mm;
+        display: grid;
+        row-gap: 2.6mm;
+        justify-content: start;
+      }
+
+      .fila {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: start;
+        column-gap: var(--gw);
+      }
+
+      .palabra {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: start;
+        column-gap: var(--gs);
+      }
+
+      .grupo {
+        display: grid;
+        grid-template-rows: var(--t) var(--t);
+        column-gap: var(--g);
+        row-gap: 1.2mm;
+      }
+
+      .grupo.con-arco {
+        grid-template-rows: var(--t) var(--t) 3.4mm;
+      }
+
+      .simb {
+        display: grid;
+        place-items: center;
+        width: var(--t);
+        height: var(--t);
+        border: 0.35mm solid var(--linea);
+        border-radius: 1.8mm;
+        background: #fffdf8;
+      }
+
+      .simb svg {
+        width: calc(var(--t) * 0.84);
+        height: calc(var(--t) * 0.84);
+      }
+
+      .caja-letra {
+        width: var(--t);
+        height: var(--t);
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.8mm;
+        background: #fff;
+      }
+
+      .arco {
+        grid-column: 1 / -1;
+        margin: 0 2mm;
+        border: 0.6mm solid var(--tx, var(--marino));
+        border-top: 0;
+        border-radius: 0 0 50% 50% / 0 0 100% 100%;
+      }
+
+      /* ---------- Hojas de casos ---------- */
+      .cabeza-hoja {
+        display: grid;
+        grid-template-columns: 16mm minmax(0, 1fr) 64mm;
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 2.6mm;
+      }
+
+      .cabeza-hoja .nv {
+        justify-self: center;
+      }
+
+      .cabeza-hoja .antetitulo {
+        margin: 0 0 0.8mm;
+        color: var(--tx);
+      }
+
+      .cabeza-hoja h1 {
+        margin: 0;
+        font-size: 24pt;
+        line-height: 1.04;
+      }
+
+      .detective,
+      .dato {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .detective span,
+      .dato span {
+        height: 8mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .consigna {
+        display: grid;
+        grid-template-columns: auto auto minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 3.4mm;
+        padding: 1.6mm 3mm;
+        border-radius: 3mm;
+        background: var(--t);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .consigna img {
+        width: 11mm;
+        height: 11mm;
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .casos {
+        display: grid;
+        gap: 3.6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .caso {
+        position: relative;
+        margin: 0;
+        padding: 11.5mm 4mm 3.4mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.4mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .caso__cabeza {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 9mm;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 3mm;
+        padding: 0 3.4mm;
+        border-bottom: 0.35mm solid var(--c);
+        border-radius: 3mm 3mm 0 0;
+        background: var(--t);
+      }
+
+      .caso__num {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .caso__nota {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.1;
+        color: var(--suave);
+      }
+
+      .resuelto {
+        display: grid;
+        grid-template-columns: 6.4mm auto;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .resuelto i {
+        width: 6.4mm;
+        height: 6.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 1.2mm;
+        background: #fff;
+      }
+
+      /* Nivel 1: la pista, como una foto sujeta con un clip */
+      .caso--pista .caso__cuerpo {
+        display: grid;
+        grid-template-columns: 38mm minmax(0, 1fr);
+        align-items: center;
+        gap: 9mm;
+      }
+
+      .polaroid {
+        position: relative;
+        margin: 0 0 0 1mm;
+        width: 35mm;
+        padding: 2mm 2mm 0;
+        border: 0.35mm solid #c9cfe0;
+        background: #fff;
+        box-shadow: 0 0.8mm 1.8mm rgb(30 43 85 / 0.22);
+        transform: rotate(-3deg);
+        text-align: center;
+      }
+
+      .polaroid img {
+        display: block;
+        width: 31mm;
+        height: 29mm;
+        object-fit: contain;
+      }
+
+      .polaroid figcaption {
+        padding: 0.8mm 0 1.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .polaroid svg.clip {
+        position: absolute;
+        top: -4.2mm;
+        left: 3mm;
+        width: 6mm;
+        height: 12mm;
+      }
+
+      /* Nivel 2, hoja A: rodear el dibujo */
+      .caso--elegir .caso__cuerpo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 4mm;
+      }
+
+      .opciones {
+        display: grid;
+        grid-template-columns: repeat(3, 19mm);
+        gap: 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .opciones li {
+        display: grid;
+        place-items: center;
+        width: 19mm;
+        height: 19mm;
+        margin: 0;
+        border: 0.4mm dashed var(--suave);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .opciones img {
+        width: 14.5mm;
+        height: 14.5mm;
+      }
+
+      /* Nivel 3: adivinanzas, con su hueco para la respuesta */
+      .respuesta {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        align-self: stretch;
+        min-width: 0;
+        padding: 1.4mm 2.4mm;
+        border: 0.5mm dashed var(--marino);
+        border-radius: 2.4mm;
+        background: var(--t);
+      }
+
+      .respuesta p {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .fila--respuesta {
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-auto-flow: row;
+      }
+
+      .sello {
+        display: inline-block;
+        padding: 0.6mm 2.2mm;
+        border: 0.7mm solid var(--coral-texto);
+        border-radius: 1.6mm;
+        color: var(--coral-texto);
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transform: rotate(-6deg);
+      }
+
+      .mision-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 5mm;
+        margin: 0 0 3mm;
+      }
+
+      .mision-intro .sello {
+        font-size: 15pt;
+      }
+
+      /* ---------- La clave secreta (dos por hoja) ---------- */
+      .claves {
+        display: grid;
+        grid-template-rows: 127mm 127mm;
+        gap: 7mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .clave {
+        position: relative;
+        display: grid;
+        grid-template-rows: 12mm minmax(0, 1fr) 9mm;
+        margin: 0;
+        padding: 3.4mm 4.4mm 2.6mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .clave__cabeza {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2.6mm;
+      }
+
+      .clave__cabeza svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .clave__titulo {
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 25pt;
+        line-height: 1;
+      }
+
+      .clave__cabeza img {
+        width: 30mm;
+        height: auto;
+      }
+
+      .clave__rejilla {
+        display: grid;
+        grid-template-columns: repeat(9, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        gap: 1.6mm;
+        margin: 1.6mm 0 1.8mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .letra-clave {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 1.2mm 0.4mm 1.4mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 2.2mm;
+        background: #fff;
+      }
+
+      .letra-clave svg {
+        width: 15.5mm;
+        height: 15.5mm;
+      }
+
+      .letra-clave b {
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .letra-clave.vocal {
+        border: 0.8mm solid var(--marino);
+        background: var(--amarillo-tinte);
+      }
+
+      .clave__pista {
+        display: grid;
+        grid-template-columns: 8mm auto;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .clave__pista svg {
+        width: 8mm;
+        height: 8mm;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        height: 6mm;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      /* ---------- Carnet de detective (seis por hoja) ---------- */
+      .carnets {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-template-rows: repeat(3, 81mm);
+        gap: 5mm 6mm;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .carnet {
+        position: relative;
+        display: grid;
+        grid-template-rows: 12mm minmax(0, 1fr) 2.6mm;
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .carnet__banda {
+        display: grid;
+        grid-template-columns: 8.5mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.2mm;
+        padding: 0 3.4mm;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .carnet__banda svg {
+        width: 8.5mm;
+        height: 8.5mm;
+      }
+
+      .carnet__cuerpo {
+        display: grid;
+        grid-template-columns: 29mm minmax(0, 1fr);
+        gap: 3mm;
+        padding: 2.6mm 3.2mm 2.4mm;
+      }
+
+      .carnet__yo {
+        display: grid;
+        align-content: end;
+        justify-items: center;
+        padding-bottom: 1.2mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2.6mm;
+        background: var(--crema);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .carnet__datos {
+        display: grid;
+        grid-template-rows: auto auto auto minmax(0, 1fr);
+        row-gap: 1.6mm;
+        min-width: 0;
+      }
+
+      .carnet__datos p {
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .carnet__linea {
+        height: 7.4mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .carnet__abajo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: end;
+        gap: 2mm;
+      }
+
+      .carnet__abajo p {
+        margin: 0 0 1mm;
+      }
+
+      .huella {
+        display: grid;
+        place-items: center;
+        width: 19mm;
+        height: 19mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      .huella img {
+        width: 13mm;
+        height: 13mm;
+        opacity: 0.18;
+      }
+
+      .mi-letra {
+        display: grid;
+        grid-template-columns: 11mm 11mm;
+        gap: 1.2mm;
+      }
+
+      .mi-letra span {
+        height: 13mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .mi-letra span:last-child {
+        border-style: dashed;
+        background: #fffdf8;
+      }
+
+      .carnet__rayos {
+        height: 2.6mm;
+      }
+
+      /* ---------- Al revés: escribe un mensaje secreto ---------- */
+      .pasos-nino {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pasos-nino li {
+        position: relative;
+        display: grid;
+        grid-template-rows: 14mm auto;
+        justify-items: center;
+        align-content: start;
+        gap: 1.4mm;
+        margin: 0;
+        padding: 2mm 1.2mm 2.2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        background: #fff;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.04;
+      }
+
+      .pasos-nino img {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .pasos-nino b {
+        position: absolute;
+        top: 1.4mm;
+        left: 1.4mm;
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 12pt;
+      }
+
+      .ideas {
+        display: grid;
+        grid-template-columns: auto repeat(4, auto);
+        justify-content: start;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 3.4mm;
+        padding: 0;
+        list-style: none;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .ideas li {
+        display: grid;
+        grid-template-columns: 9mm auto;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 1mm 2.6mm 1mm 1mm;
+        border-radius: 99mm;
+        background: var(--amarillo-tinte);
+      }
+
+      .ideas li:first-child {
+        padding: 0;
+        background: none;
+        grid-template-columns: auto;
+      }
+
+      .ideas img {
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .copia {
+        padding: 2.6mm 3.4mm 3.4mm;
+        border: 0.5mm solid var(--morado);
+        border-radius: 3.4mm;
+        background: var(--morado-tinte);
+      }
+
+      .copia h2,
+      .envio h2 {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 2.4mm;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .copia h2 img {
+        width: 10mm;
+        height: 10mm;
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .huecos {
+        display: grid;
+        grid-template-columns: repeat(12, 13mm);
+        gap: 1.6mm 1.2mm;
+      }
+
+      .huecos span {
+        height: 13mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.6mm;
+        background: #fff;
+      }
+
+      .corte {
+        display: grid;
+        grid-template-columns: 9mm minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 4mm 0;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .corte svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .corte i {
+        height: 0;
+        border-top: 0.6mm dashed var(--suave);
+      }
+
+      .envio {
+        padding: 2.6mm 3.4mm 3.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 3.4mm;
+        background: #fff;
+      }
+
+      .envio__datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .huecos--clave {
+        grid-template-rows: 13mm 13mm;
+        grid-auto-flow: column;
+        row-gap: 1.2mm;
+      }
+
+      .huecos--clave span:nth-child(odd) {
+        border-style: dashed;
+        background: #fffdf8;
+      }
+
+      .huecos-grupo {
+        display: grid;
+        gap: 3.4mm;
+      }
+
+      /* ---------- Mis casos resueltos ---------- */
+      .registro__nivel {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        align-items: center;
+        gap: 4mm;
+        margin: 0 0 3mm;
+        padding: 2.4mm 3mm;
+        border: 0.45mm solid var(--c);
+        border-radius: 3.4mm;
+        background: var(--t);
+      }
+
+      .registro__nivel h2 {
+        margin: 0;
+        display: grid;
+        justify-items: center;
+        gap: 1.6mm;
+        font-size: 14pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .carpetas {
+        display: grid;
+        grid-template-columns: repeat(8, 17.5mm);
+        gap: 2.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .carpetas li {
+        position: relative;
+        width: 17.5mm;
+        height: 16mm;
+        margin: 0;
+      }
+
+      .carpetas svg {
+        width: 17.5mm;
+        height: 16mm;
+      }
+
+      .carpetas span {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 5.4mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .placa {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.4mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .placa svg {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .final-registro {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4mm;
+        margin: 0 0 3mm;
+      }
+
+      .se-de-memoria {
+        display: grid;
+        grid-template-columns: repeat(14, 11.6mm);
+        gap: 1.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .se-de-memoria li {
+        display: grid;
+        grid-template-rows: 9mm auto;
+        justify-items: center;
+        margin: 0;
+        padding: 0.8mm 0 0.6mm;
+        border: 0.35mm solid var(--linea);
+        border-radius: 1.6mm;
+        background: #fff;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .se-de-memoria svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      /* ---------- Tarjetas de solución y etiquetas de los sobres ---------- */
+      .soluciones {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        justify-content: space-between;
+        align-items: start;
+      }
+
+      .soluciones__columna {
+        display: grid;
+        gap: 4mm;
+      }
+
+      .solucion {
+        margin: 0;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.4mm;
+        background: #fff;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+
+      .solucion__cabeza {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 2mm;
+        padding: 1.6mm 3mm;
+        border-bottom: 0.4mm solid var(--c);
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .solucion__cabeza small {
+        font-size: 11pt;
+        font-family: var(--texto);
+        font-weight: 400;
+        color: var(--suave);
+      }
+
+      .solucion__lista {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.4mm 2.6mm;
+        margin: 0;
+        padding: 2.2mm 3mm 2.6mm;
+        list-style: none;
+      }
+
+      .solucion__lista.una {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .solucion__lista li {
+        display: grid;
+        grid-template-columns: 6.4mm minmax(0, 1fr) 10mm;
+        align-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.08;
+      }
+
+      .solucion__lista.sin-dibujo li {
+        grid-template-columns: 6.4mm minmax(0, 1fr);
+      }
+
+      .solucion__lista img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .solucion__lista b {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-size: 11pt;
+      }
+
+      .solucion__lista .adivinanza {
+        display: grid;
+        gap: 1mm;
+      }
+
+      .solucion__lista .adivinanza span {
+        display: grid;
+        grid-template-columns: auto 10mm;
+        justify-content: start;
+        align-items: center;
+        gap: 2mm;
+        color: var(--tx);
+      }
+
+      .etiquetas {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 4.4mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .etiqueta {
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        gap: 1.4mm;
+        height: 40mm;
+        margin: 0;
+        padding: 2.6mm 2mm 2mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        background: #fff;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.05;
+      }
+
+      .etiqueta .sello {
+        font-size: 12pt;
+      }
+
+      /* ---------- Diploma (dos por hoja) ---------- */
+      .diplomas {
+        display: grid;
+        grid-template-rows: 127mm 127mm;
+        gap: 7mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .diploma {
+        position: relative;
+        margin: 0;
+        padding: 9mm 11mm 7mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 4mm;
+        background: #fffdf8;
+        overflow: hidden;
+      }
+
+      .diploma__marco {
+        position: absolute;
+        inset: 3.4mm;
+        border: 1.4mm solid var(--amarillo);
+        border-radius: 3mm;
+        box-shadow: inset 0 0 0 0.9mm #fff, inset 0 0 0 1.3mm var(--marino);
+      }
+
+      .diploma__cuerpo {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 36mm;
+        column-gap: 5mm;
+      }
+
+      .diploma .antetitulo {
+        margin: 0 0 1mm;
+      }
+
+      .diploma__titulo {
+        margin: 0 0 3mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 25pt;
+        line-height: 1.02;
+      }
+
+      .diploma .dato {
+        margin: 0 0 2.6mm;
+      }
+
+      .diploma__texto {
+        margin: 0 0 2.8mm;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 1.15;
+      }
+
+      .diploma__sello svg {
+        width: 34mm;
+        height: 34mm;
+      }
+
+      .diploma__pie {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8mm;
+        margin-top: 3.4mm;
+      }
+
+      .diploma .mensaje {
+        --t: 10.6mm;
+        --g: 0.9mm;
+        --gw: 5mm;
+        row-gap: 1.8mm;
+      }
+
+      .diploma .grupo {
+        row-gap: 0.8mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.34;
+      }
+
+      .guia h1 {
+        font-size: 21pt;
+      }
+
+      .guia h2 {
+        font-size: 13.5pt;
+        margin-top: 0.6em;
+        margin-bottom: 0.25em;
+      }
+
+      .guia p {
+        margin-bottom: 0.5em;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 0.5em;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .guia .caja {
+        padding: 2.8mm 4mm;
+        line-height: 1.34;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+      }
+
+      .guia .dos-columnas {
+        gap: 5mm;
+        align-items: start;
+        break-inside: auto;
+      }
+
+      .guia .dos-columnas .caja {
+        margin: 0;
+      }
+
+      .nombres {
+        display: grid;
+        grid-template-columns: repeat(9, minmax(0, 1fr));
+        gap: 1mm 1.4mm;
+        margin: 1mm 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nombres li {
+        display: grid;
+        grid-template-columns: 6.5mm minmax(0, 1fr);
+        align-items: center;
+        gap: 0.8mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.05;
+      }
+
+      .nombres svg {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .nombres b {
+        font-family: var(--titulos);
+      }
+
+      /* ---------- Familias ---------- */
+      .familias {
+        font-size: 12pt;
+        line-height: 1.38;
+      }
+
+      .familias h1 {
+        font-size: 24pt;
+        margin-bottom: 2mm;
+      }
+
+      .familias h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        font-size: 14pt;
+        margin: 3mm 0 1mm;
+      }
+
+      .familias h2 img {
+        width: 10mm;
+        height: 10mm;
+      }
+
+      .familias p {
+        margin-bottom: 0.45em;
+      }
+
+      .familias ul {
+        margin-bottom: 0.4em;
+      }
+
+      .en-casa {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 5mm;
+        margin: 1mm 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .en-casa li {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2.6mm;
+        margin: 0;
+        padding: 1.4mm 2.4mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.25;
+      }
+
+      .en-casa img {
+        width: 13mm;
+        height: 13mm;
+      }
+
+      .mini-clave {
+        margin-top: 3mm;
+        padding: 2.6mm 3mm 3mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3mm;
+        break-inside: avoid;
+      }
+
+      .mini-clave h2 {
+        margin: 0 0 2mm;
+      }
+
+      .mini-clave .clave__rejilla {
+        grid-template-rows: repeat(3, 22.5mm);
+        margin: 0;
+      }
+
+      .mini-clave .letra-clave svg {
+        width: 12mm;
+        height: 12mm;
+      }
+
+      .mini-clave .letra-clave b {
+        font-size: 18pt;
+      }
+
+      .familias .creditos {
+        margin-top: 3mm;
+        padding-top: 2mm;
+        font-size: 11pt;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        page: fichas;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .fuentes h1 {
+        font-size: 20pt;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 0.45em 0 0.15em;
+      }
+
+      .fuentes p {
+        margin-bottom: 0.45em;
+      }
+
+      .referencias {
+        margin: 0 0 0.4em;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.4mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 176mm; height: 176mm; right: -70mm; top: 118mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -34mm; top: 200mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 128mm; top: 112mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Juego de lectura · De 1.º a 3.º de Primaria</p>
+        <h1 class="portada__titulo">Detectives&nbsp;<br />de letras</h1>
+        <p class="portada__subtitulo">
+          Mensajes secretos para descifrar letra a letra. Cada dibujo de la clave empieza por el sonido de su letra.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" id="escena" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>Tres niveles<b>con</b>solución</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         DE UN VISTAZO
+         ====================================================================== -->
+    <section class="hoja vistazo">
+      <p class="antetitulo">Antes de empezar</p>
+      <h1>De un vistazo</h1>
+      <p class="vistazo__intro">
+        Detectives de letras es un juego para descifrar mensajes secretos. En la clave, cada letra tiene su dibujo. El peque
+        busca la letra de cada dibujo, la escribe y junta los sonidos para leer el mensaje. Al terminar cada hoja, comprueba
+        la solución por su cuenta. Está pensado para toda la clase de 1.º a 3.º de Primaria, y en especial para el alumnado
+        con dislexia o con trastorno del desarrollo del lenguaje (TDL).
+      </p>
+      <div class="vistazo__fila">
+        <div class="caja caja--azul">
+          <h2>El truco de la clave</h2>
+          <p>Cada dibujo empieza por el sonido de su letra: S de sol, M de mano, P de pez.</p>
+          <div class="truco" id="truco"></div>
+          <p>
+            Quien descubre el truco dice el nombre del dibujo, se queda con su primer sonido y escribe la letra. Si nombrar le
+            cuesta, busca el dibujo en la clave y copia su letra. Las dos formas valen.
+          </p>
+        </div>
+        <div class="caja caja--verde">
+          <h2>Un caso, en cinco pasos</h2>
+          <ol class="pasos-caso" id="pasos-caso"></ol>
+        </div>
+      </div>
+      <div class="caja caja--morada" style="margin: 0 0 3mm">
+        <h2 style="margin: 0 0 1.6mm; font-size: 13pt">Tres niveles, veinte casos y una misión final</h2>
+        <ul class="lista-niveles" id="lista-niveles"></ul>
+      </div>
+      <ul class="mapa" id="mapa"></ul>
+      <div class="caja caja--amarilla">
+        <p>
+          <strong>Antes de jugar,</strong> presenta la clave en voz alta: nombra cada dibujo y que la clase repita su primer
+          sonido. No cuentes el truco: deja que lo descubran. La guía de la página <span data-pagina="guia"></span> explica cómo
+          graduarlo y los ajustes para la dislexia y el TDL.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         LA CLAVE SECRETA (dos por hoja)
+         ====================================================================== -->
+    <section class="hoja-recortes">
+      <h1 class="solo-lector">La clave secreta, dos copias para recortar y plastificar</h1>
+      <p class="aviso">
+        <span><strong>La clave secreta</strong> · Una para cada pareja · Cartulina y plastificado</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <ul class="claves" id="claves"></ul>
+    </section>
+
+    <!-- ======================================================================
+         CARNET DE DETECTIVE (seis por hoja)
+         ====================================================================== -->
+    <section class="hoja-recortes">
+      <h1 class="solo-lector">Carnet de detective, seis por hoja</h1>
+      <p class="aviso">
+        <span><strong>Carnet de detective</strong> · Que se dibuje, escriba su nombre y ponga su huella antes de plastificar</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <ul class="carnets" id="carnets"></ul>
+      <p class="atribucion">
+        Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón. La
+        lupa y el diseño del carnet son de IdEducando.
+      </p>
+    </section>
+
+    <!-- Las hojas de casos (niveles 1 a 3 y la misión final) se generan con el guion del final, a partir de la lista HOJAS -->
+    <div id="hojas-casos"></div>
+
+    <!-- ======================================================================
+         AL REVÉS: ESCRIBE UN MENSAJE SECRETO
+         ====================================================================== -->
+    <section class="hoja-fichas c-morado">
+      <div class="cabeza-hoja">
+        <span class="nv n3 enorme" aria-hidden="true" style="background: var(--morado)">✎</span>
+        <div>
+          <p class="antetitulo">Al revés · Para alguien de la clase</p>
+          <h1>Escribe un mensaje secreto</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" style="width: 40mm; justify-self: end" />
+      </div>
+      <ol class="pasos-nino" id="pasos-nino"></ol>
+      <ul class="ideas" id="ideas"></ul>
+      <div class="copia">
+        <h2><img src="pictogramas/39842.png" alt="" />Mi copia secreta: escribo aquí las letras</h2>
+        <div class="huecos-grupo">
+          <div class="huecos" data-huecos="12"></div>
+          <div class="huecos" data-huecos="12"></div>
+        </div>
+      </div>
+      <p class="corte"><span data-icono="tijeras"></span><i></i><span>Corta por aquí y guarda tu copia</span></p>
+      <div class="envio">
+        <h2><span data-icono="sobreMini"></span>Mensaje secreto</h2>
+        <div class="envio__datos">
+          <p class="dato">Para:<span></span></p>
+          <p class="dato">De:<span></span></p>
+        </div>
+        <div class="huecos-grupo">
+          <div class="huecos huecos--clave" data-huecos="24"></div>
+          <div class="huecos huecos--clave" data-huecos="24"></div>
+        </div>
+      </div>
+      <p class="atribucion">
+        Arriba, en cada hueco de puntos, va el dibujo de la clave. Debajo, quien lo descifra escribe la letra. Pictogramas:
+        Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         MIS CASOS RESUELTOS
+         ====================================================================== -->
+    <section class="hoja-fichas c-amarillo">
+      <div class="cabeza-hoja">
+        <span data-icono="lupaGrande" style="width: 15mm; height: 15mm"></span>
+        <div>
+          <p class="antetitulo">Registro · Una hoja para cada detective</p>
+          <h1>Mis casos resueltos</h1>
+        </div>
+        <p class="detective">Detective:<span></span></p>
+      </div>
+      <p class="consigna"><img src="pictogramas/6998.png" alt="" /><span data-icono="carpetaMini"></span><span>Cuando compruebes un caso, colorea su carpeta.</span></p>
+      <div id="registro-niveles"></div>
+      <div class="final-registro">
+        <div class="registro__nivel c-coral" style="margin: 0">
+          <h2><span data-icono="estrellaGrande"></span>Misión final</h2>
+          <p class="placa" style="margin: 0">¡La he resuelto!</p>
+        </div>
+        <div class="registro__nivel c-verde" style="margin: 0; grid-template-columns: minmax(0, 1fr)">
+          <p class="placa" style="grid-template-columns: minmax(0, 1fr); margin: 0">Lo que más me ha gustado:</p>
+          <span style="display: block; height: 9mm; border-bottom: 0.45mm solid var(--marino)"></span>
+        </div>
+      </div>
+      <div class="registro__nivel c-azul" style="grid-template-columns: minmax(0, 1fr); margin: 0">
+        <p class="placa" style="grid-template-columns: minmax(0, 1fr); margin: 0">Colorea los dibujos que ya sabes sin mirar la clave.</p>
+        <ul class="se-de-memoria" id="se-de-memoria"></ul>
+      </div>
+      <p class="atribucion">Pictograma: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS DE SOLUCIÓN Y ETIQUETAS DE LOS SOBRES
+         ====================================================================== -->
+    <section class="hoja-recortes">
+      <h1 class="solo-lector">Tarjetas de solución y etiquetas de los sobres</h1>
+      <p class="aviso">
+        <span><strong>Soluciones</strong> · Cada tarjeta, en el sobre de su nivel · Cartulina y plastificado</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <div class="soluciones" id="soluciones"></div>
+      <ul class="etiquetas" id="etiquetas"></ul>
+      <p class="atribucion">Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</p>
+    </section>
+
+    <!-- ======================================================================
+         DIPLOMA (dos por hoja)
+         ====================================================================== -->
+    <section class="hoja-recortes">
+      <h1 class="solo-lector">Diploma de detective de letras, dos por hoja</h1>
+      <p class="aviso">
+        <span><strong>Diplomas</strong> · Van en el sobre de la misión final</span>
+        <span>Corta por la línea de puntos</span>
+      </p>
+      <ul class="diplomas" id="diplomas"></ul>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA PARA EL DOCENTE
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente</p>
+      <h1>Detectives de letras: cómo jugar y cómo ajustarlo</h1>
+      <p>
+        En la clave, cada letra tiene un dibujo y cada dibujo empieza por el sonido de su letra. Al descifrar, el peque pasa
+        de los dibujos a las letras y de las letras a los sonidos, y junta los sonidos para leer. Al escribir en clave hace el
+        camino al revés: separa los sonidos de una palabra y busca la letra de cada uno.
+      </p>
+
+      <h2>Por qué ayuda</h2>
+      <ul>
+        <li>
+          <strong>Letras y sonidos, de forma explícita.</strong> El Panel Nacional de Lectura de Estados Unidos (NRP) revisó
+          los estudios sobre la enseñanza sistemática de las relaciones entre letras y sonidos. Ayudó a leer más que otros
+          enfoques, sobre todo si empezaba en los primeros cursos, y también al alumnado con dificultades (NRP, 2000, págs. 2-92
+          a 2-94). La guía del What Works Clearinghouse para los cursos de Infantil a 3.º da evidencia fuerte a unir los
+          sonidos del habla con sus letras y a enseñar a descifrar juntando los sonidos de izquierda a derecha (Foorman y
+          otros, 2016, recomendaciones 2 y 3).
+        </li>
+        <li>
+          <strong>Conciencia fonológica, con letras.</strong> Trabajar los sonidos dio mejores resultados cuando se hacía con
+          letras: juntar sonidos con letras ayuda a leer, y separarlos ayuda a escribir (NRP, 2000, págs. 2-4 y 2-6). Aquí,
+          descifrar es juntar sonidos y escribir en clave es separarlos.
+        </li>
+        <li>
+          <strong>Un dibujo que se recuerda.</strong> La misma guía propone presentar cada letra con el dibujo de una palabra
+          conocida que tenga su sonido (Foorman y otros, 2016, pág. 19). La clave lleva esa idea al juego.
+        </li>
+        <li>
+          <strong>En castellano.</strong> En un estudio con alumnado de trece países europeos, los 40 niños y niñas de 1.º de
+          España leían sin error casi el 95 % de las palabras conocidas al final del curso (Seymour y otros, 2003). Por eso el
+          juego sirve sobre todo para afianzar y para quien va a otro ritmo. El currículo de Primaria espera que en esta etapa
+          se adquiera y se consolide el código escrito (Real Decreto 157/2022, anexo II).
+        </li>
+        <li>
+          <strong>Dislexia.</strong> En castellano, la dislexia se nota sobre todo en la velocidad, más que en los errores
+          (Serrano y Defior, 2008): por eso el juego no lleva reloj. En un metaanálisis de ensayos aleatorizados, la enseñanza
+          de las relaciones entre letras y sonidos fue el único enfoque con efecto probado en la lectura y la escritura del
+          alumnado con dificultades lectoras (Galuschka y otros, 2014).
+        </li>
+        <li>
+          <strong>TDL.</strong> Con 61 niños y niñas de 5 a 7 años con dificultades del lenguaje oral, un programa integrado de
+          conciencia fonológica mejoró su conciencia fonológica y su lectura más que otros apoyos (Gillon, 2000).
+        </li>
+        <li>
+          <strong>Lo que no sabemos.</strong> Este juego, como conjunto, no se ha estudiado: junta apoyos con respaldo. Lo que
+          no lleva fuente en esta guía es propuesta de IdEducando.
+        </li>
+      </ul>
+
+      <h2>Cómo se juega</h2>
+      <ol>
+        <li>
+          <strong>Presenta la clave.</strong> Nombrad juntos cada dibujo y que repitan su primer sonido: /sss/ de sol. No
+          cuentes el truco: deja que lo descubran.
+        </li>
+        <li>
+          <strong>Resuelve un caso en voz alta.</strong> «Un sol: /s/. Busco la ese en la clave y la escribo». Al final, junta
+          los sonidos sin cortarlos: /sssooolll/, sol.
+        </li>
+        <li><strong>Primero, en parejas.</strong> Uno busca en la clave y el otro escribe. Después, cada cual con su hoja y en su nivel.</li>
+        <li>
+          <strong>Comprueba solo o sola.</strong> Al terminar la hoja, saca su tarjeta del sobre de soluciones, compara y
+          colorea la carpeta del caso en «Mis casos resueltos».
+        </li>
+        <li>
+          <strong>Al revés y misión final.</strong> Cuando domine un nivel, que escriba un mensaje secreto para alguien de la
+          clase. Al acabar el nivel 3, la misión final le lleva al sobre de los diplomas.
+        </li>
+      </ol>
+
+      <h2>La clave, dibujo a dibujo</h2>
+      <ul class="nombres" id="nombres"></ul>
+      <p>
+        Ojo con algunas letras. La h no suena: en hueso, lo primero que se oye es /ue/. La b y la v suenan igual. La c de casa
+        y la g de gato cambian de sonido delante de e o de i (cena, gente). La k, la w y la x salen poco en castellano.
+      </p>
+    </section>
+
+    <section class="guia salto">
+      <h2 style="margin-top: 0">Tres niveles para toda la clase</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone apoyar la decodificación, optimizar los desafíos y el apoyo, y
+        fomentar la alegría y el juego (CAST, 2024, consideraciones 2.2, 8.2 y 7.3). Cada nivel tiene su forma, su número y su
+        color:
+      </p>
+      <ul>
+        <li>
+          <strong>Nivel 1, círculo.</strong> Palabras de dos sílabas directas, como lupa o pino, con letras de un solo sonido,
+          un dibujo de pista y un arco bajo cada sílaba.
+        </li>
+        <li>
+          <strong>Nivel 2, cuadrado.</strong> Palabras de tres sílabas con ñ, ll, j o sílaba cerrada, como bufanda, para
+          rodear su dibujo entre tres que empiezan igual. Y órdenes cortas con h, gu, rr y z para hacerlas en silencio.
+        </li>
+        <li><strong>Nivel 3, rombo.</strong> Cuatro adivinanzas de cinco o seis palabras y la misión final.</li>
+      </ul>
+      <p>
+        <strong>Más apoyo:</strong> en pareja, con el nivel 1 más tiempo, tapando en la clave las letras que no hacen falta o
+        leyendo tú el primer dibujo. <strong>Más reto:</strong> sin mirar la clave, inventar casos para la clase o escribir la
+        misión final de otro grupo. Las parejas también ayudan: el DUA propone fomentar la colaboración (consideración 8.3).
+      </p>
+
+      <h2>Ajustes para la dislexia</h2>
+      <ul>
+        <li><strong>Letra grande.</strong> Lo que lee el peque va a 18 puntos o más. Si necesita más, imprime en A3 al 141 %.</li>
+        <li>
+          <strong>Espacio.</strong> Un caso cada vez: tapa los demás con un folio. Con 74 niños y niñas con dislexia de 8 a 14
+          años, separar más las letras redujo los errores al leer un texto (Zorzi y otros, 2012). Por eso cada dibujo va en
+          su casilla.
+        </li>
+        <li>
+          <strong>Sin prisa.</strong> Sin reloj, sin carreras y sin leer delante de la clase si no quiere. La Región de Murcia
+          pide darle más tiempo para hacer y revisar sus tareas y no exigirle que lea como sus compañeros (Resolución de 30 de
+          julio de 2019, anexo I).
+        </li>
+        <li><strong>El sonido, no el nombre.</strong> Decid /m/ y no «eme»: así se juntan mejor.</li>
+        <li>
+          <strong>Si escribe una letra al revés,</strong> como la b por la d, que la compare con la clave. Aquí cuenta lo que ha
+          descifrado.
+        </li>
+        <li><strong>En pareja.</strong> Murcia propone la enseñanza entre compañeros en las tareas con mucha lectura (anexo I).</li>
+      </ul>
+
+      <h2>Ajustes para el TDL</h2>
+      <ul>
+        <li>
+          <strong>Primero, las palabras.</strong> Nombra antes los dibujos de la clave y las pistas, y comprueba que los conoce.
+          Murcia propone escribir las palabras nuevas en la pizarra y apoyarse en dibujos (Resolución de 30 de julio de 2019,
+          anexo V).
+        </li>
+        <li>
+          <strong>Una indicación cada vez,</strong> corta y con su dibujo. Antes de repetirla, espera: Murcia habla de una pausa
+          de al menos 10 segundos (anexo V).
+        </li>
+        <li><strong>Comprueba que entiende,</strong> además de que descifra: que señale el dibujo o haga la orden.</li>
+      </ul>
+
+      <h2>Qué observar</h2>
+      <p>
+        Si nombra los dibujos o los busca en la clave, qué letras le cuestan, si junta los sonidos de corrido o los dice sueltos
+        y si entiende lo que lee. En las adivinanzas vale cualquier respuesta con sentido: un pino también tiene agujas. Apunta
+        lo que veas con iniciales y sin el diagnóstico.
+      </p>
+
+      <div class="dos-columnas">
+        <div class="caja caja--coral">
+          <h2>Seguridad</h2>
+          <ul>
+            <li>Para llevar el carnet puesto, mejor una pinza en el jersey que un cordón al cuello.</li>
+            <li>Huellas con tinta lavable o lápiz blando, y manos limpias después.</li>
+          </ul>
+        </div>
+        <div class="caja caja--azul">
+          <h2>Convivencia y privacidad</h2>
+          <ul>
+            <li>Cada cual va a su ritmo: sin tablas de puntos ni carreras.</li>
+            <li>En el carnet, un dibujo: no hace falta foto. El registro es personal.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Con otros materiales de IdEducando</h2>
+      <p>
+        Antes de las letras, los sonidos y las sílabas se pueden trabajar con
+        <a href="https://www.ideducando.es/material-gratuito/tren-de-las-silabas/">El tren de las sílabas</a>. Si cuestan las
+        sílabas como bla o tre, la
+        <a href="https://www.ideducando.es/material-gratuito/cartilla-trabadas/">Cartilla de sílabas trabadas</a>.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS
+         ====================================================================== -->
+    <section class="hoja familias salto">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para las familias</p>
+      <h1>Detectives de letras, también en casa</h1>
+      <p>
+        En clase jugamos a descifrar mensajes secretos. Cada letra tiene un dibujo en una clave, y cada dibujo empieza por el
+        sonido de su letra: S de sol, M de mano. Para leer el mensaje, el peque busca la letra de cada dibujo y junta los
+        sonidos. Es un juego, y también practica algo muy importante para leer: unir cada letra con su sonido.
+      </p>
+
+      <h2><img src="pictogramas/31680.png" alt="" />Cómo ayudar</h2>
+      <ul>
+        <li>Decid el sonido de cada letra, /m/, mejor que su nombre, «eme».</li>
+        <li>Sin prisa. Si se atasca, buscad juntos el dibujo en la clave.</li>
+        <li>Celebrad el esfuerzo: «¡Lo has descifrado!». Si se equivoca, comparad con la clave y probad otra vez.</li>
+      </ul>
+
+      <h2><img src="pictogramas/2439.png" alt="" />Mensajes secretos en casa</h2>
+      <ul class="en-casa" id="en-casa"></ul>
+
+      <div class="mini-clave">
+        <h2>La clave, para recortar</h2>
+        <ul class="clave__rejilla" id="mini-clave"></ul>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Detectives de letras.</strong> IdEducando, noviembre de 2026. Licencia CC BY-NC-SA 4.0. Los dibujos de la
+          clave son de IdEducando. Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido
+          creados por Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons
+          BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Detectives de letras.</strong> Equipo IdEducando, noviembre de 2026.
+        <span class="url">ideducando.es/material-gratuito/detectives-letras</span>. Fuentes consultadas el 17/11/2026.
+      </p>
+
+      <h2>Letras, sonidos y conciencia fonológica</h2>
+      <ul class="referencias">
+        <li>
+          National Reading Panel (2000). <em>Teaching children to read: An evidence-based assessment of the scientific research
+          literature on reading and its implications for reading instruction. Reports of the subgroups</em> (NIH Publication
+          n.º 00-4754). National Institute of Child Health and Human Development, págs. 2-4, 2-6 y 2-92 a 2-94. nichd.nih.gov
+        </li>
+        <li>
+          Foorman, B. y otros (2016). <em>Foundational skills to support reading for understanding in kindergarten through 3rd
+          grade</em> (NCEE 2016-4008). National Center for Education Evaluation and Regional Assistance, Institute of Education
+          Sciences, U.S. Department of Education. Recomendaciones 2 y 3, págs. 14 a 31. whatworks.ed.gov
+        </li>
+        <li>
+          Seymour, P. H. K., Aro, M. y Erskine, J. M. (2003). Foundation literacy acquisition in European orthographies.
+          <em>British Journal of Psychology</em>, 94(2), 143-174. DOI: 10.1348/000712603321661859
+        </li>
+      </ul>
+
+      <h2>Dislexia y trastorno del desarrollo del lenguaje</h2>
+      <ul class="referencias">
+        <li>
+          Galuschka, K., Ise, E., Krick, K. y Schulte-Körne, G. (2014). Effectiveness of treatment approaches for children and
+          adolescents with reading disabilities: A meta-analysis of randomized controlled trials. <em>PLoS ONE</em>, 9(2),
+          e89900. DOI: 10.1371/journal.pone.0089900
+        </li>
+        <li>
+          Serrano, F. y Defior, S. (2008). Dyslexia speed problems in a transparent orthography. <em>Annals of Dyslexia</em>,
+          58(1), 81-95. DOI: 10.1007/s11881-008-0013-6
+        </li>
+        <li>
+          Zorzi, M. y otros (2012). Extra-large letter spacing improves reading in dyslexia. <em>Proceedings of the National
+          Academy of Sciences</em>, 109(28), 11455-11459. DOI: 10.1073/pnas.1205566109
+        </li>
+        <li>
+          Gillon, G. T. (2000). The efficacy of phonological awareness intervention for children with spoken language
+          impairment. <em>Language, Speech, and Hearing Services in Schools</em>, 31(2), 126-141. DOI:
+          10.1044/0161-1461.3102.126
+        </li>
+        <li>
+          Bishop, D. V. M., Snowling, M. J., Thompson, P. A., Greenhalgh, T. y CATALISE-2 consortium (2017). Phase 2 of
+          CATALISE: a multinational and multidisciplinary Delphi consensus study of problems with language development:
+          Terminology. <em>Journal of Child Psychology and Psychiatry</em>, 58(10), 1068-1080. DOI: 10.1111/jcpp.12721
+        </li>
+      </ul>
+
+      <h2>Normativa y DUA</h2>
+      <ul class="referencias">
+        <li>
+          Real Decreto 157/2022, de 1 de marzo, por el que se establecen la ordenación y las enseñanzas mínimas de la Educación
+          Primaria. Boletín Oficial del Estado (BOE) n.º 52, de 2 de marzo de 2022, anexo II, Lengua Castellana y Literatura,
+          págs. 24457, 24465 y 24469.
+        </li>
+        <li>
+          Resolución de 30 de julio de 2019 de la Dirección General de Atención a la Diversidad y Calidad Educativa, por la que
+          se dictan instrucciones para la identificación y la respuesta educativa a las necesidades del alumnado que presenta
+          dificultades de aprendizaje. Boletín Oficial de la Región de Murcia (BORM) n.º 184, de 10 de agosto de 2019, anexo I,
+          págs. 25054 a 25056, y anexo V, págs. 25062 y 25063.
+        </li>
+        <li>
+          CAST (2024). <em>Las Directrices del Diseño Universal para el Aprendizaje, versión 3.0</em>, consideraciones 2.2, 7.3,
+          8.2 y 8.3. udlguidelines.cast.org/es
+        </li>
+      </ul>
+
+      <h2>Dibujos, pictogramas y licencia</h2>
+      <p>
+        Los 27 dibujos de la clave, los sellos, las carpetas y el diseño son de IdEducando. Los pictogramas son de ARASAAC, el
+        Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide citar este texto: «Los símbolos
+        pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC
+        (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Con pictogramas de ARASAAC, este
+        material no se puede vender: es gratis y lo será siempre. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo
+        citando a IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Números de página. Si cambia el orden de las hojas o la guía ocupa más o menos, hay que
+      // actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // ---------------------------------------------------------------------
+      const PAGINAS = {
+        claves: 4,
+        carnets: 5,
+        n1a: 6,
+        n1b: 7,
+        n2a: 8,
+        n2b: 9,
+        n3a: 10,
+        n3b: 11,
+        mision: 12,
+        alreves: 13,
+        registro: 14,
+        soluciones: 15,
+        diplomas: 16,
+        guia: 17,
+        familias: 19,
+        fuentes: 20,
+      };
+
+      // ---------------------------------------------------------------------
+      // Colores y ayudas para los dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const AMARILLO = '#f6c12e';
+      const VERDE = '#1fa67a';
+      const CORAL = '#e8553e';
+      const AZUL = '#2f6fd6';
+      const MORADO = '#8c4fb8';
+      const NARANJA = '#f5961f';
+      const T_AZUL = '#e4edfb';
+      const T_VERDE = '#dcf3ea';
+      const T_CORAL = '#fde5e0';
+      const T_AMARILLO = '#fdf0c7';
+      const T_NARANJA = '#fde8cf';
+      const GRIS = '#d9dde8';
+      const W = 5; // grosor del trazo de los dibujos de la clave, sobre 100
+
+      // Une varias formas con un solo contorno: primero el contorno grueso y después el relleno encima.
+      const union = (formas, relleno, grosor = W) =>
+        `<g fill="${M}" stroke="${M}" stroke-width="${grosor * 2}" stroke-linejoin="round">${formas}</g><g fill="${relleno}" stroke="none">${formas}</g>`;
+      const f2 = (n) => Number(n.toFixed(2));
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+
+      // ---------------------------------------------------------------------
+      // LA CLAVE: un dibujo para cada letra. Cada dibujo empieza por el sonido de su letra.
+      // Formas sencillas, que se distinguen sin color y que no son el espejo ni el giro de otra.
+      // ---------------------------------------------------------------------
+      const SIMBOLOS = {
+        a: { nombre: 'árbol', svg: `
+          <path d="M44 58 L42 92 Q50 95 58 92 L56 58 Z" fill="${NARANJA}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M50 74 L62 64 M50 80 L40 70" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>
+          ${union('<circle cx="30" cy="44" r="18"/><circle cx="50" cy="28" r="21"/><circle cx="70" cy="44" r="18"/><circle cx="50" cy="52" r="17"/>', VERDE)}
+          <path d="M38 24 Q42 16 50 14" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".7"/>` },
+        b: { nombre: 'bigote', svg: `
+          <path d="M50 42 C43 33 30 32 21 41 C15 47 8 47 4 40 C3 55 15 65 30 62 C40 60 46 55 50 50 C54 55 60 60 70 62 C85 65 97 55 96 40 C92 47 85 47 79 41 C70 32 57 33 50 42 Z" fill="${M}" stroke="${M}" stroke-width="3" stroke-linejoin="round"/>` },
+        c: { nombre: 'casa', svg: `
+          <rect x="20" y="46" width="60" height="44" fill="${T_AMARILLO}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M10 50 L50 14 L90 50 Z" fill="${CORAL}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <rect x="42" y="64" width="16" height="26" fill="${AZUL}" stroke="${M}" stroke-width="4"/>` },
+        d: { nombre: 'dado', svg: `
+          <rect x="13" y="13" width="74" height="74" rx="15" fill="${T_AZUL}" stroke="${M}" stroke-width="${W}"/>
+          ${[[32, 32], [68, 32], [50, 50], [32, 68], [68, 68]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="7.5" fill="${M}"/>`).join('')}` },
+        e: { nombre: 'estrella', svg: `
+          <path d="M50 7 L61.5 36 L92.5 38 L68.5 58 L76.5 88.5 L50 71.5 L23.5 88.5 L31.5 58 L7.5 38 L38.5 36 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>` },
+        f: { nombre: 'flor', svg: `
+          <path d="M50 52 V95" stroke="${M}" stroke-width="5" stroke-linecap="round"/>
+          <path d="M50 82 C56 70 70 68 78 72 C72 82 60 86 50 82 Z" fill="${VERDE}" stroke="${M}" stroke-width="4" stroke-linejoin="round"/>
+          ${[0, 72, 144, 216, 288].map((a) => `<circle cx="${f2(50 + 18 * Math.sin((a * Math.PI) / 180))}" cy="${f2(34 - 18 * Math.cos((a * Math.PI) / 180))}" r="13" fill="${CORAL}" stroke="${M}" stroke-width="4"/>`).join('')}
+          <circle cx="50" cy="34" r="11" fill="${AMARILLO}" stroke="${M}" stroke-width="4"/>` },
+        g: { nombre: 'gato', svg: `
+          <path d="M16 44 L19 9 L42 27 Q50 25 58 27 L81 9 L84 44 Q92 64 76 78 Q63 89 50 89 Q37 89 24 78 Q8 64 16 44 Z" fill="${NARANJA}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <ellipse cx="37" cy="52" rx="4.5" ry="6.5" fill="${M}"/><ellipse cx="63" cy="52" rx="4.5" ry="6.5" fill="${M}"/>
+          <path d="M45 63 H55 L50 69 Z" fill="${M}" stroke="${M}" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M38 67 L12 63 M38 72 L13 77 M62 67 L88 63 M62 72 L87 77" stroke="${M}" stroke-width="3" stroke-linecap="round"/>` },
+        h: { nombre: 'hueso', svg: union('<rect x="22" y="42" width="56" height="16" rx="3"/><circle cx="20" cy="40" r="11"/><circle cx="20" cy="60" r="11"/><circle cx="80" cy="40" r="11"/><circle cx="80" cy="60" r="11"/>', '#fffdf8') },
+        i: { nombre: 'iglú', svg: `
+          <path d="M8 84 A42 42 0 0 1 92 84 Z" fill="${T_AZUL}"/>
+          <path d="M13 70 H87 M21 56 H79 M37 45 H63 M24 84 V70 M76 84 V70 M30 70 V56 M70 70 V56 M50 56 V45" stroke="${M}" stroke-width="3" stroke-linecap="round"/>
+          <path d="M8 84 A42 42 0 0 1 92 84" fill="none" stroke="${M}" stroke-width="${W}"/>
+          <path d="M37 84 V72 A13 13 0 0 1 63 72 V84 Z" fill="${M}"/>
+          <path d="M4 85 H96" stroke="${M}" stroke-width="${W}" stroke-linecap="round"/>` },
+        j: { nombre: 'jirafa', svg: `
+          <path d="M41 48 L39 96 H61 L59 48 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <circle cx="45" cy="62" r="4" fill="${NARANJA}"/><circle cx="55" cy="74" r="4.5" fill="${NARANJA}"/><circle cx="45" cy="86" r="4" fill="${NARANJA}"/>
+          <path d="M43 18 L40 7 M57 18 L60 7" stroke="${M}" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="40" cy="6.5" r="4" fill="${NARANJA}" stroke="${M}" stroke-width="3"/><circle cx="60" cy="6.5" r="4" fill="${NARANJA}" stroke="${M}" stroke-width="3"/>
+          <ellipse cx="27" cy="25" rx="9" ry="4.5" transform="rotate(-20 27 25)" fill="${AMARILLO}" stroke="${M}" stroke-width="3.5"/>
+          <ellipse cx="73" cy="25" rx="9" ry="4.5" transform="rotate(20 73 25)" fill="${AMARILLO}" stroke="${M}" stroke-width="3.5"/>
+          <path d="M34 26 Q34 13 50 13 Q66 13 66 26 L62 46 Q50 54 38 46 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <circle cx="43" cy="28" r="3" fill="${M}"/><circle cx="57" cy="28" r="3" fill="${M}"/>
+          <ellipse cx="50" cy="42" rx="9" ry="6" fill="${T_NARANJA}" stroke="${M}" stroke-width="3"/>
+          <circle cx="46.5" cy="42" r="1.6" fill="${M}"/><circle cx="53.5" cy="42" r="1.6" fill="${M}"/>` },
+        k: { nombre: 'koala', svg: `
+          <circle cx="20" cy="36" r="16" fill="${GRIS}" stroke="${M}" stroke-width="${W}"/><circle cx="80" cy="36" r="16" fill="${GRIS}" stroke="${M}" stroke-width="${W}"/>
+          <circle cx="20" cy="36" r="8" fill="#fff"/><circle cx="80" cy="36" r="8" fill="#fff"/>
+          <ellipse cx="50" cy="56" rx="31" ry="29" fill="${GRIS}" stroke="${M}" stroke-width="${W}"/>
+          <circle cx="37" cy="50" r="3.6" fill="${M}"/><circle cx="63" cy="50" r="3.6" fill="${M}"/>
+          <ellipse cx="50" cy="62" rx="8.5" ry="11" fill="${M}"/>` },
+        l: { nombre: 'libro', svg: `
+          <path d="M5 24 V84 C22 80 40 81 50 88 C60 81 78 80 95 84 V24" fill="${AZUL}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M50 26 C40 18 24 17 10 21 V78 C24 75 40 76 50 82 Z" fill="#fff" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M50 26 C60 18 76 17 90 21 V78 C76 75 60 76 50 82 Z" fill="#fff" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M18 34 Q30 31 42 34 M18 45 Q30 42 42 45 M18 56 Q30 53 42 56 M58 34 Q70 31 82 34 M58 45 Q70 42 82 45 M58 56 Q70 53 82 56" fill="none" stroke="${M}" stroke-width="2.6" stroke-linecap="round"/>` },
+        m: { nombre: 'mano', svg: `
+          <path d="M36 95 L33 70 C27 64 20 57 13 49 A5.5 5.5 0 0 1 21 42 L31 52 V24 A5 5 0 0 1 41 24 V47 L43 47 V17 A5 5 0 0 1 53 17 V47 L55 47 V21 A5 5 0 0 1 65 21 V50 L67 50 V31 A4.5 4.5 0 0 1 76 31 V62 C76 76 72 85 70 95 Z" fill="${T_NARANJA}" stroke="${M}" stroke-width="4.5" stroke-linejoin="round"/>` },
+        n: { nombre: 'nube', svg: union('<circle cx="30" cy="58" r="17"/><circle cx="52" cy="44" r="23"/><circle cx="73" cy="57" r="16"/><rect x="22" y="56" width="58" height="20" rx="10"/>', T_AZUL) },
+        ñ: { nombre: 'ñu', svg: `
+          <path d="M38 30 C24 34 12 32 10 22 C9 16 13 12 18 13" fill="none" stroke="${M}" stroke-width="7" stroke-linecap="round"/>
+          <path d="M62 30 C76 34 88 32 90 22 C91 16 87 12 82 13" fill="none" stroke="${M}" stroke-width="7" stroke-linecap="round"/>
+          <ellipse cx="27" cy="44" rx="10" ry="5" transform="rotate(25 27 44)" fill="${GRIS}" stroke="${M}" stroke-width="3.5"/>
+          <ellipse cx="73" cy="44" rx="10" ry="5" transform="rotate(-25 73 44)" fill="${GRIS}" stroke="${M}" stroke-width="3.5"/>
+          <path d="M36 32 Q50 24 64 32 L60 76 Q50 86 40 76 Z" fill="${GRIS}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M40 31 L44 18 L48 28 L52 17 L56 28 L60 18 L62 31 Z" fill="${M}" stroke="${M}" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle cx="43" cy="46" r="3" fill="${M}"/><circle cx="57" cy="46" r="3" fill="${M}"/>
+          <path d="M42 58 Q50 54 58 58 L56 74 Q50 80 44 74 Z" fill="#8a93ad"/>
+          <circle cx="46.5" cy="72" r="2" fill="${M}"/><circle cx="53.5" cy="72" r="2" fill="${M}"/>
+          <path d="M42 80 L44 96 L48 86 L50 97 L52 86 L56 96 L58 80 Q50 88 42 80 Z" fill="${M}" stroke="${M}" stroke-width="2" stroke-linejoin="round"/>` },
+        o: { nombre: 'ojo', svg: `
+          <path d="M7 52 Q50 12 93 52 Q50 92 7 52 Z" fill="#fff" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <circle cx="50" cy="52" r="17" fill="${AZUL}" stroke="${M}" stroke-width="4"/>
+          <circle cx="50" cy="52" r="7.5" fill="${M}"/><circle cx="55" cy="47" r="3" fill="#fff"/>
+          <path d="M29 32 L24 22 M50 27 V15 M71 32 L76 22" stroke="${M}" stroke-width="4" stroke-linecap="round"/>` },
+        p: { nombre: 'pez', svg: `${union('<ellipse cx="54" cy="50" rx="34" ry="22"/><path d="M26 50 L6 30 L6 70 Z"/>', CORAL)}
+          <circle cx="72" cy="45" r="4.5" fill="${M}"/>
+          <path d="M58 36 Q50 50 58 64" fill="none" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M84 56 Q80 58 76 57" fill="none" stroke="${M}" stroke-width="3" stroke-linecap="round"/>` },
+        q: { nombre: 'queso', svg: `
+          <path d="M10 48 L74 24 L92 48 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M10 48 H92 V80 H10 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <circle cx="28" cy="63" r="7" fill="${NARANJA}" stroke="${M}" stroke-width="3"/>
+          <circle cx="54" cy="67" r="5" fill="${NARANJA}" stroke="${M}" stroke-width="3"/>
+          <circle cx="76" cy="61" r="7.5" fill="${NARANJA}" stroke="${M}" stroke-width="3"/>
+          <ellipse cx="62" cy="38" rx="6" ry="3.5" fill="${NARANJA}" stroke="${M}" stroke-width="2.6"/>` },
+        r: { nombre: 'robot', svg: `
+          <path d="M50 27 V14" stroke="${M}" stroke-width="${W}" stroke-linecap="round"/>
+          <circle cx="50" cy="10" r="6" fill="${CORAL}" stroke="${M}" stroke-width="4"/>
+          <rect x="8" y="46" width="10" height="20" rx="3" fill="${AZUL}" stroke="${M}" stroke-width="4"/>
+          <rect x="82" y="46" width="10" height="20" rx="3" fill="${AZUL}" stroke="${M}" stroke-width="4"/>
+          <rect x="17" y="27" width="66" height="60" rx="11" fill="${T_AZUL}" stroke="${M}" stroke-width="${W}"/>
+          <circle cx="36" cy="49" r="9" fill="#fff" stroke="${M}" stroke-width="4"/><circle cx="64" cy="49" r="9" fill="#fff" stroke="${M}" stroke-width="4"/>
+          <circle cx="36" cy="49" r="3.8" fill="${M}"/><circle cx="64" cy="49" r="3.8" fill="${M}"/>
+          <rect x="32" y="66" width="36" height="10" rx="2.5" fill="#fff" stroke="${M}" stroke-width="3.5"/>
+          <path d="M41 66 V76 M50 66 V76 M59 66 V76" stroke="${M}" stroke-width="2.6"/>` },
+        s: { nombre: 'sol', svg: `
+          ${[0, 45, 90, 135, 180, 225, 270, 315].map((a) => `<path transform="rotate(${a} 50 50)" d="M50 6 V18" stroke="${M}" stroke-width="${W + 0.5}" stroke-linecap="round"/>`).join('')}
+          <circle cx="50" cy="50" r="23" fill="${AMARILLO}" stroke="${M}" stroke-width="${W}"/>` },
+        t: { nombre: 'tortuga', svg: `
+          ${[[25, 32, -35], [75, 32, 35], [25, 72, 35], [75, 72, -35]].map(([x, y, g]) => `<ellipse cx="${x}" cy="${y}" rx="11" ry="7" transform="rotate(${g} ${x} ${y})" fill="${VERDE}" stroke="${M}" stroke-width="4"/>`).join('')}
+          <path d="M46 86 L50 96 L54 86 Z" fill="${VERDE}" stroke="${M}" stroke-width="3.5" stroke-linejoin="round"/>
+          <circle cx="50" cy="14" r="9.5" fill="${VERDE}" stroke="${M}" stroke-width="4"/>
+          <circle cx="46.5" cy="12" r="1.8" fill="${M}"/><circle cx="53.5" cy="12" r="1.8" fill="${M}"/>
+          <ellipse cx="50" cy="54" rx="28" ry="32" fill="${T_VERDE}" stroke="${M}" stroke-width="${W}"/>
+          <path d="M42 42 L58 42 L64 54 L58 66 L42 66 L36 54 Z" fill="${VERDE}" stroke="${M}" stroke-width="3"/>
+          <path d="M42 42 L34 28 M58 42 L66 28 M64 54 H78 M58 66 L66 80 M42 66 L34 80 M36 54 H22" stroke="${M}" stroke-width="3" stroke-linecap="round"/>` },
+        u: { nombre: 'uvas', svg: `
+          <path d="M50 24 V8" stroke="${M}" stroke-width="${W}" stroke-linecap="round"/>
+          <path d="M51 12 C58 4 72 4 78 10 C70 18 58 18 51 12 Z" fill="${VERDE}" stroke="${M}" stroke-width="3.5" stroke-linejoin="round"/>
+          ${[[30, 34], [50, 32], [70, 34], [40, 52], [60, 52], [50, 70]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="11.5" fill="${MORADO}" stroke="${M}" stroke-width="4"/>`).join('')}
+          <circle cx="50" cy="86" r="11" fill="${MORADO}" stroke="${M}" stroke-width="4"/>` },
+        v: { nombre: 'vela', svg: `
+          <ellipse cx="50" cy="88" rx="32" ry="7" fill="${T_AMARILLO}" stroke="${M}" stroke-width="${W}"/>
+          <rect x="35" y="42" width="30" height="45" rx="3" fill="${CORAL}" stroke="${M}" stroke-width="${W}"/>
+          <path d="M35 50 Q40 55 44 50 Q48 46 52 52" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+          <path d="M50 42 V33" stroke="${M}" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50 6 C61 18 63 28 50 33 C37 28 39 18 50 6 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="4" stroke-linejoin="round"/>
+          <path d="M50 18 C54 23 54 27 50 29 C46 27 46 23 50 18 Z" fill="${NARANJA}"/>` },
+        w: { nombre: 'wifi', svg: `
+          ${[16, 31, 46].map((r) => `<path d="M${f2(50 - r * 0.766)} ${f2(80 - r * 0.643)} A${r} ${r} 0 0 1 ${f2(50 + r * 0.766)} ${f2(80 - r * 0.643)}" fill="none" stroke="${M}" stroke-width="8" stroke-linecap="round"/>`).join('')}
+          <circle cx="50" cy="80" r="7" fill="${M}"/>` },
+        x: { nombre: 'xilófono', svg: `
+          ${[[16, 22, CORAL], [31, 25, NARANJA], [46, 28, AMARILLO], [61, 31, VERDE], [76, 34, AZUL]].map(([x, t, c]) => `<rect x="${x - 6}" y="${t}" width="13" height="${f2(76 - 2 * (t - 22) - (t - 22) * 0.4)}" rx="3" fill="${c}" stroke="${M}" stroke-width="3.5"/>`).join('')}
+          <path d="M8 40 L92 50 M8 82 L92 74" stroke="${M}" stroke-width="4" stroke-linecap="round"/>
+          <path d="M40 96 L74 86" stroke="${M}" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="80" cy="84" r="7" fill="${MORADO}" stroke="${M}" stroke-width="3.5"/>` },
+        y: { nombre: 'yoyó', svg: `
+          <circle cx="50" cy="61" r="30" fill="${CORAL}" stroke="${M}" stroke-width="${W}"/>
+          <path d="M30 50 A22 22 0 0 1 46 39" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".75"/>
+          <circle cx="50" cy="61" r="7" fill="${T_CORAL}" stroke="${M}" stroke-width="3.5"/>
+          <path d="M50 13 C44 24 56 30 50 40 C46 47 50 54 50 58" fill="none" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="50" cy="8" r="5" fill="none" stroke="${M}" stroke-width="3.5"/>` },
+        z: { nombre: 'zapato', svg: `
+          <path d="M8 74 L10 44 Q11 37 19 37 H38 Q44 37 47 44 L55 56 Q64 61 80 63 Q94 66 93 76 Z" fill="${AZUL}" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M5 74 H95 V82 Q95 88 89 88 H11 Q5 88 5 82 Z" fill="#fff" stroke="${M}" stroke-width="${W}" stroke-linejoin="round"/>
+          <path d="M33 44 L43 50 M37 39 L47 45 M42 52 L50 57" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M72 63 Q66 70 70 74" fill="none" stroke="${M}" stroke-width="3" stroke-linecap="round"/>` },
+      };
+      const ALFABETO = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+      const VOCALES = ['a', 'e', 'i', 'o', 'u'];
+      const simbolo = (letra, clase = '') => {
+        if (!SIMBOLOS[letra]) throw new Error(`No hay dibujo para la letra «${letra}»`);
+        return svg(SIMBOLOS[letra].svg, clase);
+      };
+
+      // ---------------------------------------------------------------------
+      // Otros dibujos de IdEducando
+      // ---------------------------------------------------------------------
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const DIBUJOS = {
+        lupa: `<circle cx="40" cy="40" r="27" fill="${T_AZUL}" stroke="${M}" stroke-width="9"/>
+          <path d="M28 30 Q32 22 40 21" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+          <path d="M60 60 L88 88" stroke="${M}" stroke-width="13" stroke-linecap="round"/>`,
+        lupaBlanca: `<circle cx="40" cy="40" r="27" fill="none" stroke="#fff" stroke-width="9"/>
+          <path d="M60 60 L88 88" stroke="${AMARILLO}" stroke-width="13" stroke-linecap="round"/>`,
+        bombilla: `<path d="M50 8 C30 8 18 24 22 42 C25 54 34 58 36 68 H64 C66 58 75 54 78 42 C82 24 70 8 50 8 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M37 76 H63 M39 85 H61" stroke="${M}" stroke-width="6" stroke-linecap="round"/>
+          <path d="M42 68 L46 46 L50 54 L54 46 L58 68" fill="none" stroke="${M}" stroke-width="4" stroke-linejoin="round"/>`,
+        tijeras: `<circle cx="22" cy="32" r="12" fill="none" stroke="${SUAVE}" stroke-width="6"/><circle cx="22" cy="68" r="12" fill="none" stroke="${SUAVE}" stroke-width="6"/>
+          <path d="M32 38 L90 72 M32 62 L90 28" stroke="${SUAVE}" stroke-width="6" stroke-linecap="round"/>`,
+        sobreMini: `<rect x="8" y="22" width="84" height="58" rx="6" fill="${T_AMARILLO}" stroke="${M}" stroke-width="6"/>
+          <path d="M10 26 L50 56 L90 26" fill="none" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`,
+        carpetaMini: `<path d="M6 24 Q6 18 12 18 H38 L46 26 H88 Q94 26 94 32 V80 Q94 86 88 86 H12 Q6 86 6 80 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`,
+        lupaGrande: `<circle cx="40" cy="40" r="27" fill="${T_AMARILLO}" stroke="${M}" stroke-width="8"/>
+          <path d="M28 30 Q32 22 40 21" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+          <path d="M60 60 L88 88" stroke="${M}" stroke-width="12" stroke-linecap="round"/>`,
+        estrellaGrande: `<path d="${ESTRELLA}" fill="${AMARILLO}" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>`,
+        flechita: `<path d="M10 50 H80 M58 28 L82 50 L58 72" fill="none" stroke="${M}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        clip: `<path d="M30 92 V22 A14 14 0 0 1 58 22 V78 A8 8 0 0 1 42 78 V30" fill="none" stroke="#8a93ad" stroke-width="7" stroke-linecap="round"/>`,
+      };
+      const dibujo = (nombre, clase = '', vista) => svg(DIBUJOS[nombre], clase, vista);
+      const picto = (n, alt = '', clase = '') => `<img src="pictogramas/${n}.png" alt="${alt}" class="${clase}">`;
+      const logo = (estilo = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" style="${estilo}">`;
+      const marcaNivel = (nivel, clase = '') => `<span class="nv n${nivel} ${clase}" aria-hidden="true">${nivel}</span>`;
+      const ATRIBUCION =
+        'Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+
+      // Carpeta para colorear (registro): una pestaña y el cuerpo, con el número encima.
+      const carpeta = `<path d="M6 22 Q6 16 12 16 H36 L44 24 H88 Q94 24 94 30 V82 Q94 88 88 88 H12 Q6 88 6 82 Z" fill="#fff" stroke="${M}" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M6 34 H94" stroke="${M}" stroke-width="3"/>`;
+      // Placa de nivel para colorear: una estrella de sheriff con su número.
+      const placa = (nivel) =>
+        svg(`<circle cx="50" cy="50" r="46" fill="#fff" stroke="${M}" stroke-width="4"/>
+          <path d="${ESTRELLA}" transform="translate(50 52) scale(0.78) translate(-50 -50)" fill="#fff" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <text x="50" y="64" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="30" fill="${M}">${nivel}</text>`);
+
+      // ---------------------------------------------------------------------
+      // Mensajes en clave. Las sílabas se separan con «-» y las palabras con espacios.
+      //   arcos: dibuja un arco bajo cada sílaba (nivel 1 y nivel 2, hoja A)
+      //   ancho: milímetros disponibles para repartir las palabras en filas
+      // ---------------------------------------------------------------------
+      function grupo(letras, conArco) {
+        const n = letras.length;
+        const simbolos = letras.map((l) => `<span class="simb">${simbolo(l)}</span>`).join('');
+        const cajas = letras.map(() => '<span class="caja-letra"></span>').join('');
+        return `<span class="grupo${conArco ? ' con-arco' : ''}" style="grid-template-columns: repeat(${n}, var(--t))">${simbolos}${cajas}${conArco ? '<span class="arco"></span>' : ''}</span>`;
+      }
+
+      function palabraHTML(palabra, conArco) {
+        const silabas = conArco ? palabra.split('-') : [palabra.replace(/-/g, '')];
+        return `<span class="palabra">${silabas.map((s) => grupo([...s], conArco)).join('')}</span>`;
+      }
+
+      // Reparte las palabras en filas según el ancho (en mm) y el tamaño de casilla.
+      function filas(texto, { t, g = 1.2, gs = 5, gw = 8, ancho, arcos = false }) {
+        const palabras = texto.split(' ');
+        const medida = (p) => {
+          const silabas = arcos ? p.split('-') : [p.replace(/-/g, '')];
+          const letras = silabas.join('').length;
+          return letras * t + (letras - silabas.length) * g + (silabas.length - 1) * gs;
+        };
+        const resultado = [];
+        let actual = [];
+        let usado = 0;
+        for (const p of palabras) {
+          const m = medida(p);
+          const extra = actual.length ? gw : 0;
+          if (actual.length && usado + extra + m > ancho) {
+            resultado.push(actual);
+            actual = [];
+            usado = 0;
+          }
+          usado += (actual.length ? gw : 0) + m;
+          actual.push(p);
+        }
+        if (actual.length) resultado.push(actual);
+        return resultado;
+      }
+
+      function mensaje(texto, opciones) {
+        const { t, g = 1.2, gs = 5, gw = 8, arcos = false, final = '' } = opciones;
+        const lista = filas(texto, opciones);
+        const html = lista
+          .map((fila, i) => {
+            const contenido = fila.map((p) => palabraHTML(p, arcos)).join('');
+            if (final && i === lista.length - 1)
+              return `<div class="fila fila--respuesta" style="column-gap: 6mm"><div class="fila">${contenido}</div>${final}</div>`;
+            return `<div class="fila">${contenido}</div>`;
+          })
+          .join('');
+        const letras = texto.replace(/[ -]/g, '').length;
+        return `<div class="mensaje" style="--t: ${t}mm; --g: ${g}mm; --gs: ${gs}mm; --gw: ${gw}mm"><p class="solo-lector">Mensaje en clave de ${letras} dibujos</p>${html}</div>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // LOS CASOS. Veinte casos en seis hojas y la misión final.
+      // ---------------------------------------------------------------------
+      const NIVELES = {
+        1: { color: 'verde', forma: 'círculo' },
+        2: { color: 'azul', forma: 'cuadrado' },
+        3: { color: 'morado', forma: 'rombo' },
+      };
+
+      const HOJAS = [
+        {
+          clave: 'n1a', nivel: 1, hoja: 'A', titulo: 'La maleta del detective', tipo: 'pista',
+          consigna: [2474, 2380, 'Escribe la letra de cada dibujo. Después, lee la palabra.'],
+          casos: [
+            { n: 1, mensaje: 'lu-pa', picto: 9927, alt: 'una lupa', solucion: 'lupa' },
+            { n: 2, mensaje: 'ma-pa', picto: 24161, alt: 'un mapa', solucion: 'mapa' },
+            { n: 3, mensaje: 'fo-to', picto: 7107, alt: 'una foto', solucion: 'foto' },
+            { n: 4, mensaje: 'mo-to', picto: 2480, alt: 'una moto', solucion: 'moto' },
+          ],
+        },
+        {
+          clave: 'n1b', nivel: 1, hoja: 'B', titulo: 'Pistas en el bosque', tipo: 'pista',
+          consigna: [2474, 2380, 'Escribe la letra de cada dibujo. Después, lee la palabra.'],
+          casos: [
+            { n: 5, mensaje: 'pi-no', picto: 3216, alt: 'un pino', solucion: 'pino' },
+            { n: 6, mensaje: 'se-ta', picto: 8328, alt: 'una seta', solucion: 'seta' },
+            { n: 7, mensaje: 'ni-do', picto: 7173, alt: 'un nido', solucion: 'nido' },
+            { n: 8, mensaje: 'lo-bo', picto: 5892, alt: 'un lobo', solucion: 'lobo' },
+          ],
+        },
+        {
+          clave: 'n2a', nivel: 2, hoja: 'A', titulo: '¿Qué es? Rodea su dibujo', tipo: 'elegir',
+          consigna: [31680, 2547, 'Descifra la palabra. Después, rodea su dibujo.'],
+          casos: [
+            { n: 9, mensaje: 'bu-fan-da', opciones: [2291, 2290, 2287], picto: 2290, solucion: 'bufanda' },
+            { n: 10, mensaje: 'mu-ñe-co', opciones: [26238, 2475, 3131], picto: 3131, solucion: 'muñeco' },
+            { n: 11, mensaje: 'ga-lle-ta', opciones: [8312, 2403, 3334], picto: 8312, solucion: 'galleta' },
+            { n: 12, mensaje: 'pi-ja-ma', opciones: [2525, 2522, 6180], picto: 2522, solucion: 'pijama' },
+          ],
+        },
+        {
+          clave: 'n2b', nivel: 2, hoja: 'B', titulo: 'Órdenes secretas', tipo: 'orden',
+          consigna: [31680, 39842, 'Descifra la orden y hazla sin hacer ruido.'],
+          casos: [
+            { n: 13, mensaje: 'di hola', picto: 6009, solucion: 'Di hola.' },
+            { n: 14, mensaje: 'toca tu nariz', picto: 2887, solucion: 'Toca tu nariz.' },
+            { n: 15, mensaje: 'guiña un ojo', picto: 8597, solucion: 'Guiña un ojo.' },
+            { n: 16, mensaje: 'mira arriba', picto: 5388, solucion: 'Mira arriba.' },
+          ],
+        },
+        {
+          clave: 'n3a', nivel: 3, hoja: 'A', titulo: 'Adivinanzas en clave', tipo: 'adivinanza',
+          consigna: [31680, 31847, 'Descifra la adivinanza. ¿Qué es? Escríbelo o dibújalo.'],
+          casos: [
+            { n: 17, mensaje: 'tengo agujas pero no puedo coser', solucion: 'Tengo agujas pero no puedo coser.', respuesta: 'el reloj', picto: 7229 },
+            { n: 18, mensaje: 'soy blanca y caigo en invierno', solucion: 'Soy blanca y caigo en invierno.', respuesta: 'la nieve', picto: 3135 },
+          ],
+        },
+        {
+          clave: 'n3b', nivel: 3, hoja: 'B', titulo: 'Más adivinanzas', tipo: 'adivinanza',
+          consigna: [31680, 31847, 'Descifra la adivinanza. ¿Qué es? Escríbelo o dibújalo.'],
+          casos: [
+            { n: 19, mensaje: 'tengo dientes pero no puedo comer', solucion: 'Tengo dientes pero no puedo comer.', respuesta: 'el peine', picto: 2852 },
+            { n: 20, mensaje: 'tengo hojas y cuento historias', solucion: 'Tengo hojas y cuento historias.', respuesta: 'el libro', picto: 2450 },
+          ],
+        },
+      ];
+
+      const MISION = [
+        { n: 1, mensaje: 'busca un sobre secreto', solucion: 'Busca un sobre secreto.' },
+        { n: 2, mensaje: 'mira en la puerta', solucion: 'Mira en la puerta.' },
+        { n: 3, mensaje: 'dentro hay un premio', solucion: 'Dentro hay un premio.' },
+      ];
+
+      const ANCHO_CASOS = 182 - 8 - 1; // ancho útil de la hoja de casos menos el relleno de la caja
+
+      function cabezaHoja(h, titulo = h.titulo, ante) {
+        const n = NIVELES[h.nivel];
+        return `<div class="cabeza-hoja">
+            ${marcaNivel(h.nivel, 'enorme')}
+            <div><p class="antetitulo">${ante}</p><h1>${titulo}</h1></div>
+            <p class="detective">Detective:<span></span></p>
+          </div>`;
+      }
+
+      function consigna([p1, p2, texto]) {
+        return `<p class="consigna">${picto(p1)}${picto(p2)}<span>${texto}</span></p>`;
+      }
+
+      function caso(h, c) {
+        const cabeza = (derecha = '¡Resuelto!') =>
+          `<div class="caso__cabeza"><p class="caso__num">Caso ${c.n}</p><span></span><p class="resuelto"><i></i>${derecha}</p></div>`;
+        if (h.tipo === 'pista') {
+          return `<li class="caso caso--pista">${cabeza()}
+              <div class="caso__cuerpo">
+                <figure class="polaroid">${dibujo('clip', 'clip')}${picto(c.picto, `Pista: ${c.alt}`)}<figcaption>Pista</figcaption></figure>
+                ${mensaje(c.mensaje, { t: 20, g: 1.4, gs: 7, ancho: 120, arcos: true })}
+              </div>
+            </li>`;
+        }
+        if (h.tipo === 'elegir') {
+          return `<li class="caso caso--elegir">${cabeza()}
+              <div class="caso__cuerpo">
+                ${mensaje(c.mensaje, { t: 14.6, g: 1.1, gs: 4.4, ancho: 120, arcos: true })}
+                <ul class="opciones">${c.opciones.map((p) => `<li>${picto(p)}</li>`).join('')}</ul>
+              </div>
+            </li>`;
+        }
+        if (h.tipo === 'orden') {
+          return `<li class="caso">${cabeza('¡Hecho!')}
+              ${mensaje(c.mensaje, { t: 14, g: 1, gw: 8, ancho: ANCHO_CASOS })}
+            </li>`;
+        }
+        // Adivinanza: la respuesta va al final de la última fila.
+        const hueco = `<div class="respuesta"><p>¿Qué es?</p></div>`;
+        return `<li class="caso">${cabeza()}
+            ${mensaje(c.mensaje, { t: 13, g: 1, gw: 7.5, ancho: ANCHO_CASOS, final: hueco })}
+          </li>`;
+      }
+
+      function hojaCasos(h) {
+        const n = NIVELES[h.nivel];
+        const numeros = h.casos.map((c) => c.n);
+        const ante = `Nivel ${h.nivel} · Hoja ${h.hoja} · Casos ${numeros[0]} ${numeros.length === 2 ? 'y' : 'a'} ${numeros[numeros.length - 1]}`;
+        const nota =
+          h.tipo === 'pista'
+            ? 'La foto es una pista. Los arcos marcan las sílabas.'
+            : h.tipo === 'elegir'
+              ? 'Los tres dibujos empiezan igual: lee la palabra entera.'
+              : '';
+        return `<section class="hoja-fichas c-${n.color}">
+            ${cabezaHoja(h, h.titulo, ante)}
+            ${consigna(h.consigna)}
+            <ol class="casos">${h.casos.map((c) => caso(h, c)).join('')}</ol>
+            <p class="atribucion">${nota ? nota + ' ' : ''}${ATRIBUCION} Los dibujos de la clave son de IdEducando.</p>
+          </section>`;
+      }
+
+      function hojaMision() {
+        const h = { nivel: 3 };
+        const mensajes = MISION.map(
+          (m) => `<li class="caso">
+              <div class="caso__cabeza"><p class="caso__num">Mensaje ${m.n}</p><span></span><p class="resuelto"><i></i>¡Descifrado!</p></div>
+              ${mensaje(m.mensaje, { t: 12.6, g: 1, gw: 7.5, ancho: ANCHO_CASOS })}
+            </li>`,
+        ).join('');
+        return `<section class="hoja-fichas c-coral">
+            ${cabezaHoja(h, 'Misión final', 'Nivel 3 · Después de los casos 1 a 20')}
+            <div class="mision-intro">
+              ${consigna([31680, 26845, 'Descifra los tres mensajes, en orden. Después, ¡a por el premio!'])}
+              <span class="sello">Alto secreto</span>
+            </div>
+            <ol class="casos">${mensajes}</ol>
+            <p class="atribucion">${ATRIBUCION} Los dibujos de la clave son de IdEducando.</p>
+          </section>`;
+      }
+
+      document.getElementById('hojas-casos').outerHTML = HOJAS.map(hojaCasos).join('') + hojaMision();
+
+      // ---------------------------------------------------------------------
+      // La clave (dos por hoja) y la mini clave de las familias
+      // ---------------------------------------------------------------------
+      const celdas = (clase = '') =>
+        ALFABETO.map(
+          (l) =>
+            `<li class="letra-clave${VOCALES.includes(l) ? ' vocal' : ''}">${simbolo(l)}<b>${l} ${l.toLocaleUpperCase('es')}</b></li>`,
+        ).join('');
+
+      const tarjetaClave = () => `<li class="clave">
+          <div class="clave__cabeza">${dibujo('lupa')}<p class="clave__titulo">Clave secreta</p>${logo()}</div>
+          <ul class="clave__rejilla">${celdas()}</ul>
+          <p class="clave__pista">${dibujo('bombilla')}<span>Pista: di en voz alta el nombre de cada dibujo.</span></p>
+        </li>`;
+      document.getElementById('claves').innerHTML = tarjetaClave() + tarjetaClave();
+      document.getElementById('mini-clave').innerHTML = celdas();
+
+      // ---------------------------------------------------------------------
+      // Carnets
+      // ---------------------------------------------------------------------
+      const carnet = () => `<li class="carnet">
+          <div class="carnet__banda">${dibujo('lupaBlanca')}<span>Carnet de detective</span></div>
+          <div class="carnet__cuerpo">
+            <div class="carnet__yo">Yo</div>
+            <div class="carnet__datos">
+              <p>Me llamo:</p>
+              <span class="carnet__linea"></span>
+              <span class="carnet__linea"></span>
+              <div class="carnet__abajo">
+                <div><p>Huella</p><span class="huella">${picto(8604)}</span></div>
+                <div><p>Mi letra</p><span class="mi-letra"><span></span><span></span></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="rayos carnet__rayos"></div>
+        </li>`;
+      document.getElementById('carnets').innerHTML = Array.from({ length: 6 }, carnet).join('');
+
+      // ---------------------------------------------------------------------
+      // Al revés
+      // ---------------------------------------------------------------------
+      const PASOS_NINO = [
+        [31847, 'Pienso mi mensaje'],
+        [2380, 'Escribo las letras'],
+        [8088, 'Dibujo su clave'],
+        [2547, 'Corto y lo doy'],
+        [6998, 'Compruebo'],
+      ];
+      document.getElementById('pasos-nino').innerHTML = PASOS_NINO.map(
+        ([p, texto], i) => `<li><b>${i + 1}</b>${picto(p)}<span>${texto}</span></li>`,
+      ).join('');
+      const IDEAS = [
+        [6009, 'hola'],
+        [2439, 'jugamos'],
+        [33064, 'en el recreo'],
+        [8088, 'me gusta tu dibujo'],
+      ];
+      document.getElementById('ideas').innerHTML =
+        '<li>Ideas:</li>' + IDEAS.map(([p, texto]) => `<li>${picto(p)}<span>${texto}</span></li>`).join('');
+      for (const el of document.querySelectorAll('[data-huecos]'))
+        el.innerHTML = Array.from({ length: Number(el.dataset.huecos) }, () => '<span></span>').join('');
+
+      // ---------------------------------------------------------------------
+      // Mis casos resueltos
+      // ---------------------------------------------------------------------
+      const REGISTRO = [
+        [1, 'Nivel 1', [1, 2, 3, 4, 5, 6, 7, 8]],
+        [2, 'Nivel 2', [9, 10, 11, 12, 13, 14, 15, 16]],
+        [3, 'Nivel 3', [17, 18, 19, 20]],
+      ];
+      document.getElementById('registro-niveles').innerHTML = REGISTRO.map(
+        ([nivel, nombre, casos]) => `<div class="registro__nivel c-${NIVELES[nivel].color}">
+            <h2>${marcaNivel(nivel, 'grande')}${nombre}</h2>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 3mm">
+              <ul class="carpetas">${casos.map((n) => `<li>${svg(carpeta)}<span>${n}</span></li>`).join('')}</ul>
+              ${nivel === 3 ? `<p class="placa" style="margin: 0">${placa(3)}<span>Mi placa</span></p>` : `<p class="placa" style="margin: 0">${placa(nivel)}</p>`}
+            </div>
+          </div>`,
+      ).join('');
+      document.getElementById('se-de-memoria').innerHTML = ALFABETO.map(
+        (l) => `<li>${simbolo(l)}<span>${l}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Tarjetas de solución y etiquetas de los sobres
+      // ---------------------------------------------------------------------
+      function tarjetaSolucion(h) {
+        const n = NIVELES[h.nivel];
+        const cabeza = `<div class="solucion__cabeza">${marcaNivel(h.nivel)}<span>Solución · Hoja ${h.hoja}</span><small>Casos ${h.casos[0].n}-${h.casos[h.casos.length - 1].n}</small></div>`;
+        let lista;
+        if (h.tipo === 'adivinanza') {
+          lista = `<ul class="solucion__lista una sin-dibujo">${h.casos
+            .map((c) => `<li><b>${c.n}</b><span class="adivinanza">${c.solucion}<span>${c.respuesta.charAt(0).toUpperCase() + c.respuesta.slice(1)}.${picto(c.picto)}</span></span></li>`)
+            .join('')}</ul>`;
+        } else if (h.tipo === 'orden') {
+          lista = `<ul class="solucion__lista una">${h.casos.map((c) => `<li><b>${c.n}</b><span>${c.solucion}</span>${picto(c.picto)}</li>`).join('')}</ul>`;
+        } else {
+          lista = `<ul class="solucion__lista">${h.casos.map((c) => `<li><b>${c.n}</b><span>${c.solucion}</span>${picto(c.picto)}</li>`).join('')}</ul>`;
+        }
+        return `<div class="solucion c-${n.color}">${cabeza}${lista}</div>`;
+      }
+      const solucionMision = `<div class="solucion c-coral">
+          <div class="solucion__cabeza">${marcaNivel(3)}<span>Solución · Misión</span><small>Mensajes 1-3</small></div>
+          <ul class="solucion__lista una sin-dibujo">${MISION.map((m) => `<li><b>${m.n}</b><span>${m.solucion}</span></li>`).join('')}</ul>
+        </div>`;
+      const [s1a, s1b, s2a, s2b, s3a, s3b] = HOJAS.map(tarjetaSolucion);
+      document.getElementById('soluciones').innerHTML =
+        `<div class="soluciones__columna">${s1a}${s2a}${s3a}</div>` +
+        `<div class="soluciones__columna">${s1b}${s2b}${s3b}${solucionMision}</div>`;
+
+      const ETIQUETAS = [
+        ['verde', 1, 'Soluciones del nivel 1'],
+        ['azul', 2, 'Soluciones del nivel 2'],
+        ['morado', 3, 'Soluciones del nivel 3'],
+        ['coral', 3, 'Premio de la misión final'],
+      ];
+      document.getElementById('etiquetas').innerHTML = ETIQUETAS.map(
+        ([color, nivel, texto], i) =>
+          `<li class="etiqueta c-${color}" style="border-top: 2.4mm solid var(--c)"><span class="sello">Alto secreto</span><span>${i === 3 ? dibujo('estrellaGrande', '', '0 0 100 100').replace('<svg', '<svg style="width: 10mm; height: 10mm"') : marcaNivel(nivel, 'grande')}</span><span>${texto}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Diplomas
+      // ---------------------------------------------------------------------
+      const rosetaDiploma = svg(`
+          ${Array.from({ length: 16 }, (_, i) => `<path transform="rotate(${i * 22.5} 50 50)" d="M50 2 L56 14 L44 14 Z" fill="${AMARILLO}" stroke="${M}" stroke-width="2" stroke-linejoin="round"/>`).join('')}
+          <circle cx="50" cy="50" r="36" fill="${AMARILLO}" stroke="${M}" stroke-width="3"/>
+          <circle cx="50" cy="50" r="28" fill="#fff" stroke="${M}" stroke-width="2.4"/>
+          <g transform="translate(31 30) scale(0.38)">${DIBUJOS.lupa}</g>
+          <path d="${ESTRELLA}" transform="translate(64 64) scale(0.18) translate(-50 -50)" fill="${CORAL}" stroke="${M}" stroke-width="6"/>`);
+      const diploma = () => `<li class="diploma">
+          <div class="diploma__marco"></div>
+          <div class="diploma__cuerpo">
+            <div>
+              <p class="antetitulo">Agencia de detectives de letras</p>
+              <p class="diploma__titulo">Diploma de detective</p>
+              <p class="dato">Para:<span></span></p>
+              <p class="diploma__texto">Por descifrar la misión final. Tu mensaje secreto:</p>
+            </div>
+            <div class="diploma__sello">${rosetaDiploma}</div>
+          </div>
+          ${mensaje('eres detective de letras', { t: 10.6, g: 0.9, gw: 5, ancho: 158 })}
+          <div class="diploma__pie"><p class="dato">Fecha:<span></span></p><p class="dato">Firma:<span></span></p></div>
+        </li>`;
+      document.getElementById('diplomas').innerHTML = diploma() + diploma();
+
+      // ---------------------------------------------------------------------
+      // De un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('truco').innerHTML =
+        `${simbolo('s', 'simbolo')}${dibujo('flechita', 'flechita')}<span>«sol»</span>${dibujo('flechita', 'flechita')}<span>/s/</span>${dibujo('flechita', 'flechita')}<span class="letra-truco">s</span>`;
+      const PASOS_CASO = [
+        [2474, 'Miro el dibujo.'],
+        [27391, 'Lo busco en la clave o digo su primer sonido.'],
+        [2380, 'Escribo su letra.'],
+        [31680, 'Junto los sonidos y leo.'],
+        [6998, 'Compruebo con la tarjeta de solución.'],
+      ];
+      document.getElementById('pasos-caso').innerHTML = PASOS_CASO.map(
+        ([p, texto], i) => `<li><b>${i + 1}</b>${picto(p)}<span>${texto}</span></li>`,
+      ).join('');
+      const TEXTOS_NIVEL = {
+        1: 'Ocho palabras de dos sílabas, como lupa o pino, con un dibujo de pista y un arco bajo cada sílaba.',
+        2: 'Cuatro palabras de tres sílabas, como bufanda, para rodear su dibujo, y cuatro órdenes cortas para hacerlas en silencio.',
+        3: 'Cuatro adivinanzas de cinco o seis palabras y la misión final, que lleva a un premio escondido en clase.',
+      };
+      document.getElementById('lista-niveles').innerHTML = [1, 2, 3]
+        .map((nivel) => `<li>${marcaNivel(nivel, 'grande')}<span><strong>Nivel ${nivel}, ${NIVELES[nivel].forma}.</strong> ${TEXTOS_NIVEL[nivel]}</span></li>`)
+        .join('');
+
+      // De un vistazo: [color, icono, título, qué es, claves de página]
+      const MAPA = [
+        ['amarillo', 'd:lupa', 'La clave secreta', 'Dos por hoja, plastificadas.', 'claves'],
+        ['azul', 8604, 'Carnet de detective', 'Seis por hoja, con huella.', 'carnets'],
+        ['verde', 'd:carpetaMini', 'Veinte casos en tres niveles', 'En fundas, con rotulador.', 'n1a', 'n3b'],
+        ['coral', 26845, 'Misión final', 'Tres mensajes y un premio.', 'mision'],
+        ['morado', 8088, 'Escribe un mensaje secreto', 'Al revés, para alguien de la clase.', 'alreves'],
+        ['amarillo', 6998, 'Mis casos resueltos', 'Una hoja para cada detective.', 'registro'],
+        ['naranja', 'd:sobreMini', 'Soluciones y sobres', 'Para comprobar sin ayuda.', 'soluciones'],
+        ['amarillo', 'd:estrellaGrande', 'Diploma de detective', 'Va en el sobre de la misión.', 'diplomas'],
+        ['verde', 31680, 'Guía para el docente', 'Por qué ayuda y ajustes.', 'guia'],
+        ['coral', 2392, 'Nota para las familias', 'Con la clave para recortar.', 'familias'],
+      ];
+      document.getElementById('mapa').innerHTML = MAPA.map(([color, icono, titulo, texto, ...claves]) => {
+        const pags = claves.map((c) => PAGINAS[c]);
+        const final = pags[pags.length - 1];
+        const pagina = pags.length === 1 ? `Pág. ${pags[0]}` : `Págs. ${pags[0]} ${final - pags[0] === 1 ? 'y' : 'a'} ${final}`;
+        const imagen = String(icono).startsWith('d:') ? dibujo(String(icono).slice(2)) : picto(icono);
+        return `<li class="c-${color}">${imagen}<span><strong>${titulo}.</strong> ${texto}</span><span class="mapa__pagina">${pagina}</span></li>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Guía: la clave, dibujo a dibujo
+      // ---------------------------------------------------------------------
+      document.getElementById('nombres').innerHTML = ALFABETO.map(
+        (l) => `<li>${simbolo(l)}<span><b>${l}</b> ${SIMBOLOS[l].nombre}</span></li>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Familias: mensajes secretos en casa
+      // ---------------------------------------------------------------------
+      const CASA = [
+        [39457, 'Una nota secreta en la fiambrera: «hola» o «te quiero».'],
+        [3272, 'Un mensaje en la nevera para descifrar antes de cenar.'],
+        [27391, 'Una búsqueda del tesoro por casa, con pistas en clave.'],
+        [2380, 'Que escriba en clave la lista de la compra o una carta.'],
+      ];
+      document.getElementById('en-casa').innerHTML = CASA.map(([p, texto]) => `<li>${picto(p)}<span>${texto}</span></li>`).join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: un mensaje en clave con una lupa que enseña las letras, y dos detectives
+      // ---------------------------------------------------------------------
+      (function portada() {
+        const palabra = ['l', 'e', 't', 'r', 'a', 's'];
+        const lado = 23; // mm de cada casilla
+        const hueco = 3;
+        const x0 = 18;
+        const y0 = 8;
+        const ancho = palabra.length * lado + (palabra.length - 1) * hueco;
+        const casilla = (l, i) => {
+          const x = x0 + i * (lado + hueco);
+          return `<rect x="${x}" y="${y0}" width="${lado}" height="${lado}" rx="3" fill="#fffdf8" stroke="${'#ead9bb'}" stroke-width="0.5"/>
+            <svg x="${x + 2}" y="${y0 + 2}" width="${lado - 4}" height="${lado - 4}" viewBox="0 0 100 100">${SIMBOLOS[l].svg}</svg>`;
+        };
+        const letra = (l, i) => {
+          const x = x0 + i * (lado + hueco);
+          return `<rect x="${x}" y="${y0}" width="${lado}" height="${lado}" rx="3" fill="#fff" stroke="${M}" stroke-width="0.7"/>
+            <text x="${x + lado / 2}" y="${y0 + lado * 0.7}" text-anchor="middle" font-family="Atkinson Hyperlegible" font-weight="700" font-size="17" fill="${M}">${l}</text>`;
+        };
+        // La lente: centrada entre la tercera y la cuarta casilla
+        const cx = x0 + 2.5 * lado + 2 * hueco + hueco / 2;
+        const cy = y0 + lado / 2;
+        const r = 27;
+        const tira = `<g transform="rotate(-5 105 40)">
+            <rect x="${x0 - 7}" y="${y0 - 7}" width="${ancho + 14}" height="${lado + 14}" rx="4" fill="#fff" stroke="#c9cfe0" stroke-width="0.5" filter="url(#sombra)"/>
+            ${palabra.map(casilla).join('')}
+            <clipPath id="lente"><circle cx="${cx}" cy="${cy}" r="${r - 1.5}"/></clipPath>
+            <g clip-path="url(#lente)">
+              <rect x="${x0 - 8}" y="${y0 - 8}" width="${ancho + 16}" height="${lado + 16}" fill="${T_AZUL}"/>
+              ${palabra.map(letra).join('')}
+            </g>
+            <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${M}" stroke-width="4"/>
+            <circle cx="${cx}" cy="${cy}" r="${r - 2.6}" fill="none" stroke="#fff" stroke-width="1.2" opacity=".8"/>
+            <path d="M${f2(cx + r * 0.72)} ${f2(cy + r * 0.72)} L${f2(cx + r * 1.62)} ${f2(cy + r * 1.62)}" stroke="${M}" stroke-width="9" stroke-linecap="round"/>
+            <path d="M${f2(cx + r * 0.78)} ${f2(cy + r * 0.78)} L${f2(cx + r * 0.98)} ${f2(cy + r * 0.98)}" stroke="${AMARILLO}" stroke-width="9" stroke-linecap="butt"/>
+          </g>`;
+        // Un sobre de alto secreto y unas huellas
+        const sobre = `<g transform="translate(16 92) rotate(-8)">
+            <rect x="0" y="0" width="56" height="38" rx="2.5" fill="${T_AMARILLO}" stroke="${M}" stroke-width="1"/>
+            <path d="M1 1.5 L28 22 L55 1.5" fill="none" stroke="${M}" stroke-width="1"/>
+            <g transform="translate(9 25) rotate(-6)"><rect x="0" y="0" width="38" height="9" rx="1.6" fill="none" stroke="#b63a26" stroke-width="0.9"/>
+            <text x="19" y="6.6" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="5.6" letter-spacing=".5" fill="#b63a26">ALTO SECRETO</text></g>
+          </g>`;
+        const huella = (x, y, giro) => `<g transform="translate(${x} ${y}) rotate(${giro})" fill="none" stroke="${MORADO}" stroke-width="0.7" opacity=".55">
+            ${[2, 3.6, 5.2, 6.8].map((k) => `<ellipse cx="0" cy="0" rx="${k * 0.72}" ry="${k}"/>`).join('')}</g>`;
+        const escena = `<svg viewBox="0 0 210 150" width="210mm" height="150mm" style="left: 0; top: 140mm" aria-hidden="true">
+            <defs><filter id="sombra" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.4" flood-color="#1e2b55" flood-opacity=".25"/></filter></defs>
+            ${sobre}${huella(92, 118, -20)}${huella(104, 128, 10)}${tira}
+          </svg>`;
+        document.getElementById('escena').innerHTML =
+          escena +
+          `<img src="pictogramas/9191.png" alt="" style="left: 128mm; top: 210mm; width: 40mm">` +
+          `<img src="pictogramas/38762.png" alt="" style="left: 158mm; top: 204mm; width: 40mm">`;
+      })();
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>
