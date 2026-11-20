@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Horario semanal con recreo: una hoja de lunes a viernes · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* La hoja de la semana tal como la pidió el equipo docente (20/11/2026): de lunes a viernes, sin fechas
+         impresas, 4 huecos antes del recreo, el recreo aparte y 3 huecos después. Una sola hoja apaisada. */
+      @font-face {
+        font-family: 'Outfit';
+        font-weight: 800;
+        src: url('../../node_modules/@fontsource/outfit/files/outfit-latin-800-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Outfit';
+        font-weight: 900;
+        src: url('../../node_modules/@fontsource/outfit/files/outfit-latin-900-normal.woff2') format('woff2');
+      }
+
+      /* Márgenes pequeños para que los huecos sean altos. El pie con la licencia cabe en los 12 mm de abajo. */
+      @page hoja {
+        size: A4 landscape;
+        margin: 7mm 8mm 12mm 8mm;
+      }
+
+      .hoja {
+        page: hoja;
+        break-after: page;
+        height: 190.5mm;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* El título va primero para los lectores de pantalla y los marcadores, y se ve abajo, en pequeño. */
+      .hoja .linea-final {
+        order: 3;
+      }
+
+      .cabecera {
+        height: 21mm;
+        margin-bottom: 2.4mm;
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr) auto;
+        gap: 5mm;
+        align-items: center;
+      }
+
+      .semana-picto {
+        width: 21mm;
+        height: 21mm;
+        background: #fff;
+        border: 1mm solid var(--azul);
+        border-radius: 3.6mm;
+        padding: 1mm;
+        transform: rotate(-3deg);
+        box-shadow: 0.8mm 0.8mm 0 rgba(30, 43, 85, 0.12);
+      }
+
+      .semana-picto img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .titulos {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2mm;
+      }
+
+      .fila {
+        margin: 0;
+        display: flex;
+        align-items: flex-end;
+        gap: 2.2mm;
+        white-space: nowrap;
+        line-height: 1;
+      }
+
+      .fila .etiqueta {
+        flex: none;
+        padding-bottom: 0.5mm;
+      }
+
+      .rellenar-nombre {
+        height: 7mm;
+        font-family: var(--titulos);
+        font-weight: 800;
+        font-size: 11pt;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-texto);
+      }
+
+      .rellenar-fechas {
+        height: 10mm;
+        font-family: var(--titulos);
+        font-weight: 900;
+        font-size: 19pt;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+      }
+
+      .rellenar-fechas .etiqueta {
+        padding-bottom: 1mm;
+      }
+
+      .linea {
+        border-bottom: 0.4mm solid var(--suave);
+      }
+
+      .rellenar-nombre .linea {
+        height: 7mm;
+      }
+
+      .rellenar-nombre .nombre {
+        flex: 1;
+        min-width: 30mm;
+      }
+
+      .rellenar-nombre .clase {
+        flex: 0 0 34mm;
+      }
+
+      .rellenar-fechas .linea {
+        height: 10mm;
+        border-bottom-width: 0.5mm;
+      }
+
+      .rellenar-fechas .dia {
+        flex: 0 0 17mm;
+      }
+
+      .rellenar-fechas .mes {
+        flex: 0 0 50mm;
+      }
+
+      .rellenar-fechas .anio {
+        flex: 0 0 22mm;
+      }
+
+      .logo {
+        height: 17mm;
+        width: auto;
+        display: block;
+      }
+
+      /* ---------- El horario ---------- */
+      .horario {
+        width: calc(100% + 2.8mm);
+        margin: -1.4mm;
+        border-collapse: separate;
+        border-spacing: 1.4mm;
+        table-layout: fixed;
+      }
+
+      .horario col.hora {
+        width: 21mm;
+      }
+
+      .horario thead th {
+        height: 8.4mm;
+        border-radius: 2.4mm;
+        font-family: var(--titulos);
+        font-weight: 800;
+        font-size: 13.5pt;
+        line-height: 1;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #fff;
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
+        border: 0;
+      }
+
+      .horario thead .lunes {
+        background: var(--azul);
+      }
+
+      .horario thead .martes {
+        background: var(--verde);
+      }
+
+      .horario thead .miercoles {
+        background: var(--coral);
+      }
+
+      .horario thead .jueves {
+        background: var(--morado);
+      }
+
+      .horario thead .viernes {
+        background: var(--naranja);
+        color: var(--marino);
+      }
+
+      .horario thead .esquina {
+        background: var(--marino);
+        font-size: 10pt;
+        letter-spacing: 0.08em;
+      }
+
+      .horario tbody tr {
+        height: 18.4mm;
+      }
+
+      .horario tbody tr.recreo {
+        height: 13mm;
+      }
+
+      /* Huecos para escribir: blancos y con borde discontinuo */
+      .horario td.hueco {
+        background: #fff;
+        border: 0.35mm dashed #cdb98f;
+        border-radius: 2mm;
+        padding: 0;
+      }
+
+      .horario tbody th {
+        background: #fff;
+        border: 0.35mm solid var(--linea);
+        border-radius: 2mm;
+        padding: 1mm 1.6mm;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: 400;
+      }
+
+      .numero {
+        display: inline-grid;
+        place-items: center;
+        width: 6.6mm;
+        height: 6.6mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 800;
+        font-size: 10.5pt;
+        line-height: 1;
+      }
+
+      .linea-hora {
+        display: block;
+        height: 5.5mm;
+        margin: 1mm 0.6mm 0;
+        border-bottom: 0.35mm solid var(--suave);
+      }
+
+      /* El recreo: su propio hueco, en amarillo y con su pictograma */
+      .horario tr.recreo td,
+      .horario tr.recreo th {
+        background: var(--amarillo-tinte);
+        border: 0.6mm solid var(--amarillo);
+        border-radius: 2.4mm;
+      }
+
+      .horario tr.recreo th {
+        padding: 0.6mm 1.4mm;
+      }
+
+      .horario tr.recreo th img {
+        display: block;
+        width: 9mm;
+        height: 9mm;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 1.4mm;
+      }
+
+      .horario tr.recreo th .linea-hora {
+        height: 2.6mm;
+        margin-top: 0.3mm;
+      }
+
+      .horario tr.recreo td {
+        padding: 0 2mm;
+        vertical-align: middle;
+      }
+
+      .recreo-etiqueta {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.8mm;
+        font-family: var(--titulos);
+        font-weight: 800;
+        font-size: 11pt;
+        line-height: 1;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .recreo-etiqueta img {
+        width: 8.5mm;
+        height: 8.5mm;
+        background: #fff;
+        border-radius: 1.4mm;
+      }
+
+      .linea-final {
+        margin-top: auto;
+        padding-top: 1.6mm;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 4mm;
+        font-size: 7pt;
+        line-height: 1.2;
+        color: var(--suave);
+        white-space: nowrap;
+      }
+
+      .linea-final h1 {
+        display: inline;
+        margin: 0;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 7pt;
+        line-height: 1.2;
+        color: var(--marino);
+      }
+
+      .oculto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia .creditos p {
+        margin-bottom: 1mm;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hoja" data-miniatura>
+      <div class="linea-final">
+        <div><h1>Horario semanal con recreo</h1> · Escribe las horas una vez y fotocopia la hoja para cada semana</div>
+        <div>Pictogramas: Sergio Palao. Origen: ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.</div>
+      </div>
+
+      <div class="cabecera">
+        <div class="semana-picto"><img src="pictogramas/7244.png" alt="" /></div>
+        <div class="titulos">
+          <p class="fila rellenar-nombre">
+            <span class="etiqueta">La semana de</span><span class="linea nombre"></span><span class="etiqueta">Clase</span><span class="linea clase"></span>
+          </p>
+          <p class="fila rellenar-fechas">
+            <span class="etiqueta">Del</span><span class="linea dia"></span><span class="etiqueta">al</span><span class="linea dia"></span><span class="etiqueta">de</span><span class="linea mes"></span><span class="etiqueta">de</span><span class="linea anio"></span>
+          </p>
+        </div>
+        <img class="logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+
+      <table class="horario">
+        <colgroup>
+          <col class="hora" />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" class="esquina">Hora</th>
+            <th scope="col" class="lunes">Lunes</th>
+            <th scope="col" class="martes">Martes</th>
+            <th scope="col" class="miercoles">Miércoles</th>
+            <th scope="col" class="jueves">Jueves</th>
+            <th scope="col" class="viernes">Viernes</th>
+          </tr>
+        </thead>
+        <tbody id="filas"></tbody>
+      </table>
+    </section>
+
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el docente y la familia</p>
+      <h1>Cómo usar la hoja de la semana</h1>
+      <p>
+        Una sola hoja para organizar la semana de lunes a viernes. Tiene siete huecos cada día: cuatro antes del recreo
+        y tres después. El recreo va aparte, en amarillo, porque también se organiza. Las fechas no van impresas: sirve
+        para cualquier semana del curso.
+      </p>
+
+      <h2>Antes de empezar</h2>
+      <ol>
+        <li>Imprime la página 1 al 100 % («Tamaño real»). La impresora la gira sola, porque es apaisada.</li>
+        <li>
+          Escribe en la columna «Hora» el horario de tu centro, por ejemplo «9:00» en el hueco 1. Hazlo una sola vez y
+          guarda esa hoja como modelo.
+        </li>
+        <li>Haz una fotocopia del modelo para cada semana o para cada alumno o alumna.</li>
+      </ol>
+
+      <h2>Cada semana</h2>
+      <ol>
+        <li>Escribe el nombre, la clase y las fechas: «Del 23 al 27 de noviembre de 2026».</li>
+        <li>
+          Rellena cada hueco con lo que toca: el área, la sesión de apoyo o la actividad. Si un día es fiesta, tacha la
+          columna o escribe «Fiesta».
+        </li>
+        <li>En el recreo, apunta lo que haga falta: el turno de patio, un juego o un apoyo para jugar con otros.</li>
+        <li>Repasad la hoja el lunes y señalad cada día lo que viene después.</li>
+      </ol>
+
+      <h2>Ideas</h2>
+      <ul>
+        <li>
+          <strong>Una hoja para cada peque con apoyos:</strong> con sus sesiones de PT (Pedagogía Terapéutica), de AL
+          (Audición y Lenguaje) y lo que tenga fuera del cole.
+        </li>
+        <li><strong>Una copia para casa:</strong> así la familia también sabe qué toca cada día.</li>
+        <li>
+          <strong>Con pictogramas:</strong> pega pictogramas de hasta 1,5 cm o haz un dibujo en cada hueco, para quien
+          todavía no lee.
+        </li>
+        <li><strong>Con colores:</strong> elige un color para cada tipo de sesión y úsalo siempre igual.</li>
+      </ul>
+
+      <div class="dos-columnas" style="align-items: start">
+        <div class="caja caja--azul">
+          <h3>Pictogramas de ARASAAC</h3>
+          <p>
+            «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio
+            Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA».
+          </p>
+        </div>
+
+        <div class="creditos">
+          <p>
+            <strong>Horario semanal con recreo.</strong> Equipo IdEducando, noviembre de 2026. Ficha y novedades:
+            <span class="url">ideducando.es/material-gratuito/horario-semanal-recreo</span>
+          </p>
+          <p>
+            Fuentes: Hume y otros (2021), <em>Evidence-based practices for children, youth, and young adults with
+            autism</em>; CAST (2024), <em>Universal Design for Learning Guidelines 3.0</em>.
+          </p>
+          <p>
+            Licencia CC BY-NC-SA 4.0: puedes imprimirla, copiarla y adaptarla sin fines comerciales, citando a
+            IdEducando y compartiendo lo que hagas con la misma licencia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Siete sesiones: cuatro antes del recreo y tres después. Para cambiarlo, cambia estos dos números.
+      const ANTES = 4;
+      const DESPUES = 3;
+      const DIAS = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes'];
+      const hora = (n) =>
+        `<th scope="row"><span class="numero">${n}</span><span class="linea-hora" aria-hidden="true"></span><span class="oculto">Sesión ${n}</span></th>`;
+      const sesion = (n) =>
+        `<tr>${hora(n)}${DIAS.map((d) => `<td class="hueco"><span class="oculto">${d}, sesión ${n}</span></td>`).join('')}</tr>`;
+      const recreo = `<tr class="recreo"><th scope="row"><img src="pictogramas/33064.png" alt="" /><span class="linea-hora" aria-hidden="true"></span><span class="oculto">Recreo</span></th>${DIAS.map(
+        (d) =>
+          `<td><span class="recreo-etiqueta"><img src="pictogramas/33064.png" alt="" />Recreo</span><span class="oculto">, ${d}</span></td>`,
+      ).join('')}</tr>`;
+      document.getElementById('filas').innerHTML = [
+        ...Array.from({ length: ANTES }, (_, i) => sesion(i + 1)),
+        recreo,
+        ...Array.from({ length: DESPUES }, (_, i) => sesion(ANTES + i + 1)),
+      ].join('');
+    </script>
+  </body>
+</html>
