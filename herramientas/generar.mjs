@@ -328,6 +328,36 @@ const DOCUMENTOS = [
     asunto: 'Horario semanal con recreo: una hoja de lunes a viernes con siete huecos cada día, cuatro antes del recreo y tres después, y una columna para la hora',
     palabras: 'horario semanal, plantilla, organización, recreo, Pedagogía Terapéutica, Audición y Lenguaje, anticipación, TEA, TDAH, Infantil, Primaria',
   },
+  {
+    id: 'escalera-habilidades-pt-al',
+    asunto: 'Escalera de habilidades específicas de Pedagogía Terapéutica y Audición y Lenguaje: 149 habilidades en 13 áreas, cada una en tres peldaños, con mapa, hoja de seguimiento y fuentes',
+    palabras: 'habilidades específicas, Pedagogía Terapéutica, Audición y Lenguaje, PT, AL, programación, seguimiento, evaluación, atención, funciones ejecutivas, autonomía, lenguaje, comunicación, Infantil, Primaria',
+    antes: () => import('./pdf/escalera-habilidades.mjs').then((m) => m.generarEscalera(raiz, carpetaPdf)),
+  },
+  {
+    id: 'calendario-cole-2026-2027',
+    asunto: 'Calendario del cole del curso 2026-2027 en Cartagena, de septiembre a junio, una página por mes, con los días de cole, los festivos y las vacaciones con pictogramas de ARASAAC',
+    palabras: 'calendario escolar, curso 2026-2027, Cartagena, Región de Murcia, festivos, vacaciones, anticipación, TEA, pictogramas, ARASAAC, Infantil, Primaria',
+    antes: () => import('./pdf/calendarios-cole.mjs').then((m) => m.generarCalendario(raiz, carpetaPdf, 'calendario-cole-2026-2027')),
+  },
+  {
+    id: 'calendario-semanal-cole-2026-2027',
+    asunto: 'Calendario semanal del cole del curso 2026-2027 en Cartagena: una página por semana, de lunes a domingo, con los días de cole, los festivos y las vacaciones con pictogramas de ARASAAC',
+    palabras: 'calendario escolar, semana, curso 2026-2027, Cartagena, Región de Murcia, festivos, anticipación, rutinas, TEA, pictogramas, ARASAAC, Infantil, Primaria',
+    antes: () => import('./pdf/calendarios-cole.mjs').then((m) => m.generarCalendario(raiz, carpetaPdf, 'calendario-semanal-cole-2026-2027')),
+  },
+  {
+    id: 'semana-de-apoyos-2026-2027',
+    asunto: 'Semana de apoyos del curso 2026-2027 en Cartagena: una página por semana de cole para organizar las sesiones de PT, AL, asociación y terapias de cada peque, con tarjetas y pictogramas de ARASAAC',
+    palabras: 'apoyos, Pedagogía Terapéutica, Audición y Lenguaje, asociación, terapias, horario semanal, organización, curso 2026-2027, Cartagena, TEA, pictogramas, ARASAAC, Infantil, Primaria',
+    antes: () => import('./pdf/calendarios-cole.mjs').then((m) => m.generarCalendario(raiz, carpetaPdf, 'semana-de-apoyos-2026-2027')),
+  },
+  {
+    id: 'semana-del-aula-2026-2027',
+    asunto: 'Semana del aula del curso 2026-2027 en Cartagena: una página por semana de cole, de lunes a viernes, con huecos grandes para la clase y tarjetas con pictogramas de ARASAAC',
+    palabras: 'horario del aula, semana, organización, anticipación, curso 2026-2027, Cartagena, TEA, TDAH, pictogramas, ARASAAC, Infantil, Primaria',
+    antes: () => import('./pdf/calendarios-cole.mjs').then((m) => m.generarCalendario(raiz, carpetaPdf, 'semana-del-aula-2026-2027')),
+  },
 ];
 
 const elegidos = process.argv.slice(2);
