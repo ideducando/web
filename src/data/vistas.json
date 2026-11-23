@@ -195,6 +195,80 @@
       }
     ]
   },
+  "calendario-cole-2026-2027": {
+    "total": 11,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Septiembre 2026"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Diciembre 2026"
+      },
+      {
+        "pagina": 7,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
+      }
+    ]
+  },
+  "calendario-semanal-cole-2026-2027": {
+    "total": 45,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Agosto · septiembre 2026"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Septiembre 2026"
+      },
+      {
+        "pagina": 17,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Diciembre 2026"
+      },
+      {
+        "pagina": 45,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
+      }
+    ]
+  },
   "carta-de-deseos": {
     "total": 18,
     "fotos": [
@@ -645,6 +719,43 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Reto · diptongo o hiato"
+      }
+    ]
+  },
+  "escalera-habilidades-pt-al": {
+    "total": 18,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Pedagogía Terapéutica y Audición y Lenguaje"
+      },
+      {
+        "pagina": 3,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "De un vistazo"
+      },
+      {
+        "pagina": 4,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Pedagogía Terapéutica · área 1 de 6"
+      },
+      {
+        "pagina": 17,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Una por alumno o alumna y especialista"
       }
     ]
   },
@@ -1932,6 +2043,80 @@
         "mini_ancho": 160,
         "mini_alto": 113,
         "titulo": ""
+      }
+    ]
+  },
+  "semana-de-apoyos-2026-2027": {
+    "total": 46,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Septiembre 2026"
+      },
+      {
+        "pagina": 45,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Tarjetas para la semana"
+      },
+      {
+        "pagina": 46,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
+      }
+    ]
+  },
+  "semana-del-aula-2026-2027": {
+    "total": 46,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Septiembre 2026"
+      },
+      {
+        "pagina": 45,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Tarjetas para la semana"
+      },
+      {
+        "pagina": 46,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
       }
     ]
   },
