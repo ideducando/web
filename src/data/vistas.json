@@ -995,6 +995,27 @@
       }
     ]
   },
+  "horario-semanal-recreo": {
+    "total": 2,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "La semana de"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para el docente y la familia"
+      }
+    ]
+  },
   "kit-bienvenida-alumnado-recien-llegado": {
     "total": 20,
     "fotos": [

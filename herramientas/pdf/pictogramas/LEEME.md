@@ -4,7 +4,7 @@ Esta carpeta guarda los pictogramas que usan los PDF del material gratuito. Cada
 
 ## De dónde salen
 
-Se descargaron entre el 15 y el 20 de octubre de 2026 de la web de ARASAAC, en tamaño de 500 píxeles. Los 38 de «Ya he terminado» se añadieron el 4 de noviembre de 2026, y los de la oleada del 4 y 5 de noviembre (rincón del invierno, matemáticas de invierno, agenda visual, cartilla de trabadas, diálogos, «Mis derechos» y los tres «Me llamo…» con pictogramas), también de la misma forma:
+Se descargaron entre el 15 y el 20 de octubre de 2026 de la web de ARASAAC, en tamaño de 500 píxeles. Los 38 de «Ya he terminado» se añadieron el 4 de noviembre de 2026, y los de la oleada del 4 y 5 de noviembre (rincón del invierno, matemáticas de invierno, agenda visual, cartilla de trabadas, diálogos, «Mis derechos» y los tres «Me llamo…» con pictogramas), también de la misma forma. El 7244 («semana»), para el horario semanal con recreo, se añadió el 20 de noviembre de 2026:
 
 ```
 https://static.arasaac.org/pictograms/NÚMERO/NÚMERO_500.png

@@ -323,6 +323,11 @@ const DOCUMENTOS = [
     asunto: 'Apoyos visuales en casa: guía para familias para empezar una agenda, un «primero y después» o un temporizador, y cuándo retirarlos, con plantillas y pictogramas de ARASAAC',
     palabras: 'familias, apoyos visuales, agenda visual, primero y después, rutinas, tablero para elegir, cuenta atrás, TEA, TDAH, TDL, discapacidad intelectual, pictogramas, ARASAAC',
   },
+  {
+    id: 'horario-semanal-recreo',
+    asunto: 'Horario semanal con recreo: una hoja de lunes a viernes con siete huecos cada día, cuatro antes del recreo y tres después, y una columna para la hora',
+    palabras: 'horario semanal, plantilla, organización, recreo, Pedagogía Terapéutica, Audición y Lenguaje, anticipación, TEA, TDAH, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
