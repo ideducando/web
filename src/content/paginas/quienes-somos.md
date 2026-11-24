@@ -31,7 +31,7 @@ Las guías para opositar son de la Región de Murcia, y el material sirve en cua
 
 ## Cómo trabajamos
 
-**Gratis y sin anuncios.** Hoy todo el material cuesta 0 €, y lo que lleva pictogramas de ARASAAC lo será siempre. Para descargar solo pedimos un correo, no ponemos anuncios y no vendemos ni cedemos tus datos.
+**Gratis y sin anuncios.** Hoy todo el material cuesta 0 €, y lo que lleva pictogramas de ARASAAC lo será siempre. Para descargar no hace falta crear una cuenta: solo pedimos un correo para mandarte el material. No ponemos anuncios y no vendemos ni cedemos tus datos.
 
 **Con fuentes.** Cada material tiene una ficha técnica con la edad, las necesidades a las que responde, en qué se apoya y cuándo lo revisamos por última vez.
 
