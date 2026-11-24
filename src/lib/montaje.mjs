@@ -57,7 +57,7 @@ const PALABRAS = [
   ['iman', /iman/],
   ['cinta', /cinta|celo|doble cara/],
   ['pegamento', /pegamento|cola blanca|\bpega\b/],
-  ['rotulador', /rotulador|lapiz|lapices|boli|ceras|colores|rellena|escribe/],
+  ['rotulador', /rotulador|lapiz|lapices|\bbolis?\b|boligraf|ceras|colores|rellena|escribe/],
   ['reloj', /reloj|temporizador|cronometro/],
   ['foto', /foto/],
   ['doblar', /dobla|pliega/],
