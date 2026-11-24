@@ -48,3 +48,5 @@ Somos un equipo de la Región de Murcia: maestras especialistas en Pedagogía Te
 ## Escríbenos
 
 Si echas en falta un material, encuentras un error o quieres contarnos cómo lo has usado en tu aula o en casa, escríbenos a [hola@ideducando.es](mailto:hola@ideducando.es).
+
+También estamos en [Instagram](https://www.instagram.com/ideducando/) y en [Pinterest](https://www.pinterest.com/ideducando/), como @ideducando.

@@ -63,6 +63,20 @@ const necesidadesPie = (['tea', 'tdah', 'tdl', 'toda-la-clase'] as const).map((c
         <li><a href={ruta('/como-hacemos-los-materiales/')}>Cómo hacemos los materiales</a></li>
         <li><a href={ruta('/contacto/')}>Contacto</a></li>
         <li><a href={`mailto:${sitio.correo}`}>{sitio.correo}</a></li>
+        {
+          sitio.instagram && (
+            <li>
+              <a href={sitio.instagram}>Instagram</a>
+            </li>
+          )
+        }
+        {
+          sitio.pinterest && (
+            <li>
+              <a href={sitio.pinterest}>Pinterest</a>
+            </li>
+          )
+        }
       </ul>
     </nav>
   </div>
