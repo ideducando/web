@@ -1,0 +1,91 @@
+---
+// «Propón un material» (propuesta B-019 del Buscador, aprobada por José el 24/11/2026).
+// Abre el programa de correo de quien lo pulsa con un mensaje a hola@ y una plantilla ya escrita.
+// Sin formularios: la web no guarda ningún dato. En una ficha, el mensaje dice desde qué material se escribe.
+import sitio from '../data/sitio.json';
+import Icono from './Icono.astro';
+
+interface Props {
+  /** Título del material desde el que se propone, si se pulsa dentro de una ficha. */
+  material?: string;
+}
+
+const { material } = Astro.props;
+
+const lineas = [
+  'Hola, equipo de IdEducando:',
+  '',
+  'Me gustaría proponeros un material.',
+  '',
+  'Para qué necesidad (por ejemplo, TEA, TDAH o dislexia): ',
+  'Para qué edad o curso: ',
+  'Qué te falta o qué te gustaría que hiciera: ',
+  'Es para el aula, para casa o para las dos cosas: ',
+  ...(material ? ['', `Lo he pensado viendo «${material.split(/:\s/)[0]}».`] : []),
+  '',
+  'Gracias.',
+];
+// Saltos de línea \r\n, como pide la norma de los enlaces mailto (RFC 6068).
+const enlace =
+  `mailto:${sitio.correo}?subject=${encodeURIComponent('Propongo un material')}` +
+  `&body=${encodeURIComponent(lineas.join('\r\n'))}`;
+---
+
+<div class="propon" data-pagefind-ignore>
+  <span class="propon__icono" aria-hidden="true"><Icono nombre="bombilla" /></span>
+  <div class="propon__texto">
+    <h2 class="propon__titulo">¿Echas en falta un material?</h2>
+    <p>
+      Cuéntanos qué te haría falta en el aula o en casa. Se abre tu correo con un mensaje para nosotros y cuatro
+      preguntas ya escritas: la web no guarda nada.
+    </p>
+  </div>
+  <a class="boton boton--secundario propon__boton" href={enlace}>
+    <Icono nombre="correo" />Propón un material
+  </a>
+</div>
+
+<style>
+  .propon {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.9rem;
+    justify-items: start;
+    padding: 1.4rem 1.3rem;
+    border: 2px dashed var(--amarillo);
+    border-radius: 1.25rem;
+    background: var(--blanco);
+  }
+
+  .propon__icono {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--amarillo-tinte);
+    color: var(--marino);
+  }
+
+  .propon__icono :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .propon__titulo {
+    margin: 0 0 0.35rem;
+    font-size: 1.3rem;
+  }
+
+  .propon__texto p {
+    margin: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .propon {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 1.25rem;
+    }
+  }
+</style>
