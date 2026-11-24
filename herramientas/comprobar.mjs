@@ -3,6 +3,8 @@
 //   2. Que cada página pasa la revisión automática de accesibilidad de axe-core
 //      con las pautas WCAG 2.2 de nivel A y AA.
 //   3. Que nada se sale de la pantalla en el móvil, ni en Chromium (Chrome) ni en WebKit (Safari).
+//   4. Que cada PDF de un material con pictogramas de ARASAAC lleva la cita completa que pide su licencia.
+//      Lee el texto del PDF con pdftotext (Poppler), que GitHub Actions instala antes de la revisión.
 //
 // Uso (desde la carpeta herramientas, después de «npm run build» en la raíz):
 //   npm run comprobar
@@ -11,6 +13,7 @@
 
 import { chromium, devices, webkit } from 'playwright';
 import { AxeBuilder } from '@axe-core/playwright';
+import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { dirname, extname, join, resolve } from 'node:path';
@@ -81,6 +84,56 @@ for (const archivo of paginas) {
 if (pegadas.length) {
   console.error(`\n${pegadas.length} palabras pegadas a un enlace o a una negrita (falta un espacio):`);
   for (const p of pegadas) console.error(`  ${p}`);
+}
+
+// Crédito de ARASAAC. Lo que lleva sus pictogramas tiene licencia CC BY-NC-SA 4.0 en su ficha (y es la
+// licencia por defecto), y su PDF debe llevar la cita completa: «Los símbolos pictográficos utilizados son
+// propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para ARASAAC (https://arasaac.org),
+// que los distribuye bajo Licencia Creative Commons BY-NC-SA». Se buscan sus piezas en el texto del PDF.
+const PIEZAS_CITA = ['propiedad del Gobierno de Aragón', 'Sergio Palao', 'ARASAAC', 'Creative Commons BY-NC-SA'];
+const sinCredito = [];
+const carpetaFichas = join(raiz, 'src', 'content', 'materiales');
+const conArasaac = readdirSync(carpetaFichas)
+  .filter((nombre) => nombre.endsWith('.md'))
+  .map((nombre) => {
+    const cabecera = readFileSync(join(carpetaFichas, nombre), 'utf8').split(/^---$/m)[1] ?? '';
+    const campo = (clave) => cabecera.match(new RegExp(`^${clave}:\\s*"?([^"\\n]*?)"?\\s*$`, 'm'))?.[1] ?? '';
+    return { archivo: campo('archivo'), licencia: campo('licencia') || 'CC BY-NC-SA 4.0', borrador: campo('borrador') };
+  })
+  .filter((f) => f.archivo.endsWith('.pdf') && f.licencia === 'CC BY-NC-SA 4.0' && f.borrador !== 'true');
+let pdftotext = true;
+for (const ficha of conArasaac) {
+  const pdf = join(dist, ficha.archivo);
+  if (!existsSync(pdf)) continue; // si falta, ya sale entre los enlaces rotos
+  let texto = '';
+  try {
+    texto = execFileSync('pdftotext', ['-raw', '-enc', 'UTF-8', pdf, '-'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      pdftotext = false;
+      break;
+    }
+    throw error;
+  }
+  // -raw lee el texto en el orden en que se escribió: así no mezcla dos columnas puestas lado a lado.
+  // Une las palabras partidas con guion al final de la línea y deja un solo espacio entre palabras.
+  const limpio = texto.replace(/-\n(?=\p{Ll})/gu, '').replace(/\s+/g, ' ').toLocaleLowerCase('es');
+  const faltan = PIEZAS_CITA.filter((pieza) => !limpio.includes(pieza.toLocaleLowerCase('es')));
+  if (faltan.length) sinCredito.push(`${ficha.archivo}: falta «${faltan.join('», «')}»`);
+}
+if (!pdftotext) {
+  const aviso = 'No está instalado pdftotext (Poppler): no se ha podido revisar el crédito de ARASAAC en los PDF.';
+  if (process.env.CI) {
+    sinCredito.push(aviso);
+  } else {
+    console.warn(`\nAviso: ${aviso} En GitHub Actions sí se revisa.`);
+  }
+} else {
+  console.log(`Crédito de ARASAAC revisado en ${conArasaac.length} PDF.`);
+}
+if (sinCredito.length) {
+  console.error(`\n${sinCredito.length} PDF con pictogramas de ARASAAC sin la cita completa:`);
+  for (const c of sinCredito) console.error(`  ${c}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -218,9 +271,10 @@ console.log(
   `\nRevisadas ${urls.length} páginas: accesibilidad en móvil (390 px) y en escritorio (1280 px), ` +
     'y que nada se salga de la pantalla también a 320 px y con WebKit, el motor de Safari.',
 );
-if (rotos.length || pegadas.length || problemas) {
+if (rotos.length || pegadas.length || sinCredito.length || problemas) {
   console.error(
-    `\nResultado: ${rotos.length} enlaces rotos, ${pegadas.length} palabras pegadas y ${problemas} problemas de accesibilidad o de ancho.`,
+    `\nResultado: ${rotos.length} enlaces rotos, ${pegadas.length} palabras pegadas, ${sinCredito.length} PDF sin el crédito de ARASAAC ` +
+      `y ${problemas} problemas de accesibilidad o de ancho.`,
   );
   process.exit(1);
 }

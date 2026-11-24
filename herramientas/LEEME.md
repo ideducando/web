@@ -10,7 +10,7 @@ npm install
 npx playwright install chromium webkit   # los navegadores que imprimen los PDF y revisan la web
 ```
 
-También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF y dejar bien sus marcadores, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa.
+También hace falta Python 3 con `pypdf` (`pip install pypdf`) para completar los metadatos de los PDF y dejar bien sus marcadores, y Poppler (`pdftoppm`) para las miniaturas. Si faltan, los PDF se generan igual y el programa avisa. Poppler trae también `pdftotext`, que usa la revisión para comprobar la cita de ARASAAC.
 
 ## Generar los PDF y las portadas
 
@@ -69,6 +69,8 @@ npm run comprobar
 ```
 
 Revisa que no haya enlaces internos rotos ni palabras pegadas a un enlace o a una negrita, y pasa axe-core (una herramienta de revisión automática de accesibilidad) por todas las páginas, en móvil y en escritorio, con las pautas WCAG 2.2 de nivel A y AA. También comprueba que nada se salga de la pantalla: imitando un iPhone a 390 px, en un móvil pequeño de 320 px y con WebKit, el motor de Safari. Lo mismo se ejecuta solo en cada PR.
+
+Además lee cada PDF con pictogramas de ARASAAC (los de licencia CC BY-NC-SA 4.0) y comprueba que lleva la cita completa: el autor (Sergio Palao), el origen (ARASAAC), la propiedad (Gobierno de Aragón) y la licencia (Creative Commons BY-NC-SA). Para leer los PDF usa `pdftotext`, de Poppler. Si en tu equipo no está, esa parte se omite con un aviso; en GitHub Actions se instala y siempre se hace.
 
 Si en tu equipo no está instalado WebKit, esa pasada se omite con un aviso; en GitHub Actions siempre se hace.
 
