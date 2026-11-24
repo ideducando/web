@@ -2480,6 +2480,51 @@
       }
     ]
   },
+  "tartamudez-que-hacer-en-casa": {
+    "total": 9,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para familias · lectura fácil"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué es la tartamudez"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué ayuda en casa"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Mejor evitarlo"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para la tutora o el tutor"
+      }
+    ]
+  },
   "tren-de-las-silabas": {
     "total": 17,
     "fotos": [

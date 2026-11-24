@@ -184,6 +184,12 @@ const DOCUMENTOS = [
     palabras: 'registro de sesiones, Pedagogía Terapéutica, Audición y Lenguaje, seguimiento, objetivos, plan de trabajo individual, evaluación, coordinación, Infantil, Primaria',
   },
   {
+    id: 'tartamudez-que-hacer-en-casa',
+    asunto:
+      'Tartamudez (disfemia): guía para familias en lectura fácil con qué es, qué ayuda en casa, qué es mejor evitar, cuándo pedir ayuda, qué hace el logopeda y una hoja para el colegio, con las fuentes enlazadas',
+    palabras: 'tartamudez, disfemia, fluidez, logopeda, Programa Lidcombe, familias, lectura fácil, Audición y Lenguaje, atención temprana, Infantil, Primaria',
+  },
+  {
     id: 'registro-observacion-neae',
     asunto:
       'Observar y seguir al alumnado con necesidad específica de apoyo educativo (NEAE): observación por siete áreas con escala de tres puntos, diario de momentos, registro trimestral con cuatro niveles de logro y guía con protección de datos',

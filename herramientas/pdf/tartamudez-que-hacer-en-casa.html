@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tartamudez: qué hacer en casa · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Sin pictogramas de ARASAAC: todos los derechos reservados (decisión del 28/10/2026). */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      /* ---------- Lectura fácil: letra grande, frases cortas y mucho aire ---------- */
+      .lf {
+        font-size: 13pt;
+        line-height: 1.45;
+      }
+
+      .lf h1 {
+        font-size: 27pt;
+        margin: 0 0 2.4mm;
+      }
+
+      .lf h2 {
+        font-size: 16pt;
+        margin: 4.4mm 0 2mm;
+      }
+
+      .lf p {
+        margin: 0 0 2.4mm;
+      }
+
+      .lf .entrada {
+        font-size: 15pt;
+        line-height: 1.4;
+        margin-bottom: 4mm;
+      }
+
+      .numero-guia {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .numero-guia b {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--morado-texto);
+        color: #fff;
+        letter-spacing: 0;
+      }
+
+      .de-donde {
+        margin: 4mm 0 0;
+        padding-top: 2mm;
+        border-top: 0.4mm solid var(--linea);
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .frase-grande {
+        margin: 3.6mm 0 0;
+        padding: 3mm 5mm;
+        border-left: 1.6mm solid var(--morado);
+        border-radius: 0 3mm 3mm 0;
+        background: var(--morado-tinte);
+        font-family: var(--lema);
+        font-size: 17pt;
+        line-height: 1.3;
+      }
+
+      /* Listas con un punto de color */
+      .puntos {
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .puntos li {
+        position: relative;
+        margin: 0 0 1.8mm;
+        padding-left: 6mm;
+      }
+
+      .puntos li::before {
+        content: '';
+        position: absolute;
+        left: 0.6mm;
+        top: 2.3mm;
+        width: 2.6mm;
+        height: 2.6mm;
+        border-radius: 50%;
+        background: var(--morado);
+      }
+
+      .ejemplos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 2mm;
+      }
+
+      .ejemplo-habla {
+        padding: 2.4mm 3mm;
+        border-radius: 3mm;
+        background: var(--azul-tinte);
+        line-height: 1.3;
+      }
+
+      .ejemplo-habla b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 13pt;
+      }
+
+      .ejemplo-habla span {
+        display: block;
+        margin-top: 1mm;
+        font-family: var(--lema);
+        font-size: 15pt;
+      }
+
+      /* Tarjetas numeradas de «Qué ayuda» */
+      .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: tarjeta;
+      }
+
+      .tarjetas li {
+        counter-increment: tarjeta;
+        position: relative;
+        margin: 0;
+        padding: 2.4mm 3mm 2.4mm 13mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        line-height: 1.32;
+        break-inside: avoid;
+      }
+
+      .tarjetas li::before {
+        content: counter(tarjeta);
+        position: absolute;
+        left: 3mm;
+        top: 2.4mm;
+        display: grid;
+        place-items: center;
+        width: 7.4mm;
+        height: 7.4mm;
+        border-radius: 50%;
+        background: var(--c);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .tarjetas strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 13.5pt;
+        line-height: 1.15;
+        margin-bottom: 0.8mm;
+      }
+
+      .c-verde {
+        --c: var(--verde-texto);
+        --t: var(--verde-tinte);
+      }
+
+      .c-azul {
+        --c: var(--enlace);
+        --t: var(--azul-tinte);
+      }
+
+      .c-morado {
+        --c: var(--morado-texto);
+        --t: var(--morado-tinte);
+      }
+
+      /* «Mejor no» y «Mejor así», en dos columnas */
+      table.cambia {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 2mm;
+        margin: 0;
+      }
+
+      table.cambia th {
+        font-family: var(--titulos);
+        font-size: 14pt;
+        text-align: left;
+        padding: 0 3mm 0.5mm;
+        background: none !important;
+        color: var(--marino) !important;
+      }
+
+      table.cambia td {
+        padding: 2mm 3mm;
+        font-size: 13pt;
+        line-height: 1.32;
+        vertical-align: top;
+      }
+
+      table.cambia td.no {
+        background: var(--coral-tinte);
+        border-radius: 3mm 0 0 3mm;
+      }
+
+      table.cambia td.si {
+        background: var(--verde-tinte);
+        border-radius: 0 3mm 3mm 0;
+      }
+
+      .marca-no,
+      .marca-si {
+        font-family: var(--titulos);
+        font-weight: 700;
+        margin-right: 1.2mm;
+      }
+
+      .marca-no {
+        color: var(--coral-texto);
+      }
+
+      .marca-si {
+        color: var(--verde-texto);
+      }
+
+      /* Señales para pedir ayuda */
+      .senales {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.4mm 4mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .senales li {
+        display: grid;
+        grid-template-columns: 6mm minmax(0, 1fr);
+        gap: 2mm;
+        align-items: start;
+        margin: 0;
+        padding: 2mm 3mm;
+        border: 0.45mm solid var(--linea);
+        border-radius: 3mm;
+        background: #fff;
+        line-height: 1.3;
+      }
+
+      .senales svg {
+        width: 6mm;
+        height: 6mm;
+        margin-top: 0.4mm;
+        color: var(--morado-texto);
+      }
+
+      .quien {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 2mm;
+      }
+
+      .quien div {
+        padding: 2.4mm 3mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        line-height: 1.32;
+      }
+
+      .quien b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 13.5pt;
+        margin-bottom: 0.8mm;
+      }
+
+      /* Hoja para el colegio */
+      .para-cole .entrada {
+        margin-bottom: 3mm;
+      }
+
+      .casillas {
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .casillas li {
+        display: grid;
+        grid-template-columns: 7mm minmax(0, 1fr);
+        gap: 2.4mm;
+        align-items: start;
+        margin: 0 0 2mm;
+        line-height: 1.32;
+      }
+
+      .casillas li::before {
+        content: '';
+        width: 5.4mm;
+        height: 5.4mm;
+        margin-top: 0.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 1.2mm;
+        background: #fff;
+      }
+
+      .escribe {
+        margin: 0 0 3mm;
+      }
+
+      .escribe p {
+        margin: 0 0 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .escribe .linea {
+        height: 8.5mm;
+        border-bottom: 0.35mm solid #8790b3;
+      }
+
+      /* Fuentes */
+      .fuentes h1 {
+        font-size: 22pt;
+        margin: 0 0 2mm;
+      }
+
+      .fuentes h2 {
+        font-size: 13.5pt;
+        margin: 3mm 0 1.2mm;
+      }
+
+      .fuentes ol {
+        margin: 0;
+        padding-left: 8mm;
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .fuentes li {
+        margin-bottom: 1mm;
+        break-inside: avoid;
+      }
+
+      /* Las guías y las normas empiezan hoja: así cada lista queda entera en su página. */
+      .fuentes h2.nueva-hoja {
+        break-before: page;
+        margin-top: 0;
+      }
+
+      .fuentes a {
+        color: var(--enlace);
+        text-decoration: none;
+        overflow-wrap: anywhere;
+      }
+
+      .creditos {
+        font-size: 11pt;
+        line-height: 1.4;
+        margin-top: 3mm;
+        padding-top: 2.5mm;
+      }
+
+      .creditos p {
+        margin-bottom: 1.2mm;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 16mm;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-family: var(--texto);
+        font-size: 15pt;
+        line-height: 1.35;
+        max-width: 132mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .bocadillos {
+        position: absolute;
+        z-index: 2;
+        left: 26mm;
+        top: 150mm;
+        width: 160mm;
+        height: 110mm;
+      }
+
+      .bocadillo {
+        position: absolute;
+        padding: 6mm 8mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 9mm;
+        background: #fff;
+        font-family: var(--lema);
+        font-size: 24pt;
+        line-height: 1.1;
+        color: var(--marino);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .bocadillo::after {
+        content: '';
+        position: absolute;
+        bottom: -5.6mm;
+        width: 9mm;
+        height: 9mm;
+        background: #fff;
+        border-right: 0.9mm solid var(--marino);
+        border-bottom: 0.9mm solid var(--marino);
+      }
+
+      .bocadillo--nino {
+        left: 0;
+        top: 8mm;
+        transform: rotate(-3deg);
+      }
+
+      .bocadillo--nino::after {
+        left: 14mm;
+        transform: rotate(45deg);
+      }
+
+      .bocadillo--adulto {
+        right: 0;
+        top: 52mm;
+        background: var(--amarillo-tinte);
+        transform: rotate(2deg);
+      }
+
+      .bocadillo--adulto::after {
+        right: 16mm;
+        background: var(--amarillo-tinte);
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-ojo" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.4" />
+          <path d="M12 6.5v7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+          <circle cx="12" cy="17.4" r="1.6" fill="currentColor" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -58mm; top: 120mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -28mm; top: 214mm; background: var(--verde-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Guía para familias · Lectura fácil</p>
+        <h1 class="portada__titulo">Tartamudez:<br />qué hacer en casa</h1>
+        <p class="portada__subtitulo">
+          Qué es, qué ayuda, qué es mejor evitar y cuándo pedir ayuda. Con una hoja para darle al colegio.
+        </p>
+        <div class="portada__pie">
+          <p>© IdEducando. Todos los derechos reservados<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="bocadillos" aria-hidden="true">
+        <div class="bocadillo bocadillo--nino">Ma-ma-mamá, ¿sabes qué?</div>
+        <div class="bocadillo bocadillo--adulto">Te escucho. Cuéntame.</div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         1. QUÉ ES
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>1</b>Guía para familias</p>
+      <h1>Qué es la tartamudez</h1>
+      <p class="entrada">
+        Tartamudear es atascarse al hablar. El niño o la niña sabe lo que quiere decir, pero las palabras no salen con
+        fluidez. También se llama disfemia.
+      </p>
+
+      <h2>Cómo se nota</h2>
+      <div class="ejemplos">
+        <div class="ejemplo-habla"><b>Repite</b>sonidos, sílabas o palabras cortas<span>«ca-ca-casa»</span></div>
+        <div class="ejemplo-habla"><b>Alarga</b>un sonido<span>«ssssol»</span></div>
+        <div class="ejemplo-habla"><b>Se bloquea</b>la boca está lista y la palabra no sale<span>«…¡perro!»</span></div>
+      </div>
+      <p>A veces hace fuerza con la cara o con el cuerpo para que la palabra salga.</p>
+
+      <h2>Lo que conviene saber</h2>
+      <ul class="puntos">
+        <li><strong>Suele empezar entre los 2 y los 5 años.</strong> A veces empieza de golpe, en pocos días.</li>
+        <li><strong>Va por rachas.</strong> Hay días y épocas mejores y peores. Al cantar, suele trabarse menos.</li>
+        <li><strong>No es culpa vuestra.</strong> No la causan los nervios, la forma de educar ni hablar dos idiomas. Influyen la herencia y el modo en que funciona el cerebro al hablar.</li>
+        <li><strong>No tiene que ver con la inteligencia</strong> ni con ser tímido.</li>
+        <li><strong>La mayoría la supera:</strong> unos 7 u 8 de cada 10. A menudo tarda más de un año. Nadie puede saber de antemano quién la superará.</li>
+      </ul>
+
+      <p class="frase-grande">Escuchad lo que dice, no cómo lo dice.</p>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Qué es y cómo se nota: Instituto Nacional de la Sordera y Otros Trastornos de la
+        Comunicación de EE. UU. (NIDCD, 2017) y la asociación británica STAMMA. Edad de inicio, herencia y cuántos la
+        superan: revisión de Yairi y Ambrose (2013). Inicio de golpe y relación con la inteligencia y la timidez: estudio de
+        1.619 niños de Melbourne (Reilly y otros, 2009 y 2013). Las referencias completas, con su enlace, están al final.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         2. QUÉ AYUDA EN CASA
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>2</b>Guía para familias</p>
+      <h1>Qué ayuda en casa</h1>
+      <p class="entrada">Lo que más ayuda es que hablar en casa sea tranquilo y sin prisas.</p>
+
+      <ul class="tarjetas">
+        <li class="c-verde"><strong>Hablad despacio</strong>Vosotros, con pausas y sin que suene raro. Vale más el ejemplo que pedirle que vaya despacio.</li>
+        <li class="c-verde"><strong>Esperad antes de contestar</strong>Un momento de silencio quita prisa a la conversación.</li>
+        <li class="c-azul"><strong>Menos preguntas</strong>Comentad lo que dice. Si preguntáis, una cada vez y con tiempo para responder.</li>
+        <li class="c-azul"><strong>Frases cortas</strong>Y palabras sencillas.</li>
+        <li class="c-morado"><strong>Mirad con calma</strong>Miradle con naturalidad, también cuando se atasca.</li>
+        <li class="c-morado"><strong>Turnos en casa</strong>Habla una persona cada vez y nadie interrumpe.</li>
+        <li class="c-verde"><strong>Un rato a solas cada día</strong>De 5 a 15 minutos, sin pantallas. Elige el juego él o ella.</li>
+        <li class="c-verde"><strong>Leed cuentos juntos</strong>Es un rato de hablar sin prisa.</li>
+        <li class="c-azul"><strong>Si se frustra</strong>Tranquilizadle: a todo el mundo le cuesta hablar a veces. Si saca el tema, podéis decir «esa palabra ha costado».</li>
+        <li class="c-azul"><strong>Elogiad otras cosas</strong>Lo que hace y lo que cuenta. Y las mismas normas que a sus hermanos.</li>
+      </ul>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Stuttering Foundation («7 consejos para hablar con su niño»), STAMMA («Talking with a
+        child who stammers»), Fundación Española de la Tartamudez («La tartamudez. Guía para padres», 2008) y Consejería de
+        Educación de la Región de Murcia («Disfemia: guía de apoyo», 2018). Estas pautas forman parte de lo que el logopeda
+        enseña a las familias en tratamientos con evidencia (de Sonneville-Koedoot y otros, 2015), pero no sustituyen la
+        valoración de un profesional.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         3. MEJOR NO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>3</b>Guía para familias</p>
+      <h1>Mejor evitarlo</h1>
+      <p class="entrada">Con buena intención, a veces hacemos cosas que le ponen más tenso. Mejor cambiarlas así:</p>
+
+      <table class="cambia">
+        <colgroup>
+          <col style="width: 50%" />
+          <col style="width: 50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Mejor no</th>
+            <th scope="col">Mejor así</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Decirle «habla despacio», «respira» o «tranquilo».</td>
+            <td class="si"><span class="marca-si">✓</span>Hablad vosotros despacio y dadle tiempo.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Terminarle las palabras o hablar por él.</td>
+            <td class="si"><span class="marca-si">✓</span>Esperad a que termine, aunque tarde.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Pedirle «repite» o «empieza otra vez».</td>
+            <td class="si"><span class="marca-si">✓</span>Responded a lo que ha querido decir.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Meterle prisa o interrumpirle.</td>
+            <td class="si"><span class="marca-si">✓</span>Dejad tiempo y turnos claros.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Poner cara de apuro o de enfado, o mirar a otro lado.</td>
+            <td class="si"><span class="marca-si">✓</span>Una mirada tranquila y natural.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Llamarle «tartamudo» o decirle «hoy has tartamudeado mucho».</td>
+            <td class="si"><span class="marca-si">✓</span>Hablar de ello solo si quiere, con palabras neutras.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Felicitarle solo cuando habla sin trabarse.</td>
+            <td class="si"><span class="marca-si">✓</span>No comentar si ha hablado bien o mal.</td>
+          </tr>
+          <tr>
+            <td class="no"><span class="marca-no">✗</span>Enseñarle trucos: dar un golpe con el pie, chasquear los dedos o coger aire hondo.</td>
+            <td class="si"><span class="marca-si">✓</span>Dejar las técnicas al logopeda.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Si estáis en tratamiento,</strong> seguid lo que os diga el logopeda. En el Programa Lidcombe, por ejemplo,
+        sí os enseñará a comentar su habla, siempre con muchos más elogios que correcciones.
+      </p>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> STAMMA, Michael Palin Centre for Stammering (de la sanidad pública británica),
+        Stuttering Foundation y Fundación Española de la Tartamudez (guías para padres y para docentes). Es la recomendación
+        de los expertos: no hay ensayos que lo comprueben uno por uno. Programa Lidcombe: guía de tratamiento de Onslow y
+        otros (2024).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         4. CUÁNDO PEDIR AYUDA
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>4</b>Guía para familias</p>
+      <h1>Cuándo pedir ayuda</h1>
+      <p class="entrada">Pedid que lo valore un profesional si veis alguna de estas señales. Cuantas más haya, más motivo.</p>
+
+      <ul class="senales">
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Lleva 6 meses o más tartamudeando.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Va a peor, se bloquea o hace fuerza con la cara o el cuerpo al hablar.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Evita hablar, cambia palabras o tiene miedo o vergüenza al hablar.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Alguien de la familia sigue tartamudeando.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Empezó a tartamudear después de los 3 años y medio.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Es un niño: los niños la superan menos que las niñas.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Se le entiende mal o habla menos de lo esperado para su edad.</li>
+        <li><svg aria-hidden="true"><use href="#i-ojo" /></svg>Estáis preocupados, o lo está él o ella.</li>
+      </ul>
+      <p>
+        <strong>Pedir la valoración pronto no obliga a empezar un tratamiento.</strong> El logopeda decide si hace falta ya
+        o si basta con vigilar.
+      </p>
+
+      <h2>A quién</h2>
+      <div class="quien">
+        <div><b>Al pediatra</b>Del centro de salud. Si tiene menos de 6 años, preguntadle por la Atención Temprana, que en la Región de Murcia es gratuita.</div>
+        <div><b>A un logopeda</b>Mejor con experiencia en tartamudez. El Colegio de Logopedas de la Región de Murcia está en logopedasmurcia.es.</div>
+        <div><b>En el colegio</b>A la tutora o el tutor y a la maestra de Audición y Lenguaje (AL). El equipo de orientación puede valorarlo.</div>
+      </div>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Señales: Stuttering Foundation («If you think your child stutters» y «Risk factors»)
+        y el metaanálisis de Singer y otros (2020). Los 6 meses: criterio de los ensayos de tratamiento (Jones y otros, 2005;
+        de Sonneville-Koedoot y otros, 2015). Esperar vigilando no empeora la respuesta al tratamiento en preescolares
+        (Kingston y otros, 2003). Atención Temprana: Ley 6/2021 de la Región de Murcia. Papel de la maestra de AL: «Disfemia:
+        guía de apoyo» (Región de Murcia, 2018).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         5. QUÉ HACE EL LOGOPEDA
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>5</b>Guía para familias</p>
+      <h1>Qué hace el logopeda</h1>
+      <p class="entrada">
+        Valora cómo habla y decide si hace falta tratamiento. Si hace falta, os enseña a ayudar en casa: la familia es parte
+        del tratamiento.
+      </p>
+
+      <ul class="tarjetas" style="grid-template-columns: minmax(0, 1fr)">
+        <li class="c-verde"><strong>Programa Lidcombe (de 2 a 6 años)</strong>La familia lo hace en casa cada día y va al logopeda una vez por semana. Es el tratamiento con más estudios a estas edades.</li>
+        <li class="c-azul"><strong>RESTART-DCM (de 3 a 6 años)</strong>El logopeda os enseña a quitar presión al habla, y jugáis con vuestro hijo o hija 15 minutos al día, 5 días a la semana.</li>
+        <li class="c-morado"><strong>A partir de los 6 años</strong>También hay tratamientos, con menos estudios. Además de hablar con más fluidez, buscan que gane confianza y pierda el miedo a hablar.</li>
+      </ul>
+
+      <h2>Lo que dicen los estudios</h2>
+      <p>
+        En un ensayo con 199 niños y niñas de 3 a 6 años, a los 18 meses ya no tartamudeaban unos 3 de cada 4, con
+        cualquiera de los dos tratamientos.
+      </p>
+
+      <p class="frase-grande">Los tratamientos con más estudios son para antes de los 6 años. No esperéis sin consultar.</p>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Programa Lidcombe: guía de Onslow y otros (2024), ensayo de Jones y otros (2005) y
+        revisión Cochrane de Sjøstrand y otros (2021), que valora su certeza como muy baja. RESTART-DCM y el ensayo de 199
+        niños: de Sonneville-Koedoot y otros (2015). Mayores de 6 años: revisión de Brignell y otros (2021) y ensayo de
+        Johnson y otros (2024). Objetivos de la terapia a esa edad: STAMMA.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         6. HOJA PARA EL COLEGIO
+         ====================================================================== -->
+    <section class="hoja lf para-cole">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>6</b>Para darla en el colegio</p>
+      <h1>Para la tutora o el tutor</h1>
+      <p class="entrada">Nuestro hijo o nuestra hija tartamudea. Marcamos lo que más le ayuda en clase:</p>
+
+      <ul class="casillas">
+        <li>Darle tiempo, sin terminar sus palabras ni decirle «despacio» o «respira».</li>
+        <li>Al principio, preguntas de respuesta corta. Si van a contestar todos, que le toque pronto.</li>
+        <li>Leer en voz alta a coro o en pareja. Ni saltarle ni obligarle.</li>
+        <li>En las exposiciones, más tiempo, con un compañero o con notas. Valorar lo que dice, no cómo lo dice.</li>
+        <li>Al pasar lista, que pueda levantar la mano.</li>
+        <li>Actuar enseguida si hay burlas.</li>
+        <li>Hablar a solas con él o ella y preguntarle qué le ayuda.</li>
+      </ul>
+
+      <div class="escribe">
+        <p>Lo que más le ayuda, según nosotros</p>
+        <div class="linea"></div>
+        <div class="linea"></div>
+      </div>
+      <div class="escribe">
+        <p>Quién le atiende fuera del colegio (logopeda u otro profesional)</p>
+        <div class="linea"></div>
+      </div>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Stuttering Foundation («8 Tips for Teachers» y «El niño que tartamudea en la escuela»),
+        STAMMA (guía para docentes y ajustes razonables en el colegio), Michael Palin Centre for Stammering y Fundación
+        Española de la Tartamudez («La tartamudez. Guía para docentes»). El alumnado que tartamudea sufre más rechazo y acoso
+        (Davis, Howell y Cooke, 2002).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Para saber más</p>
+      <h1>Las fuentes, con su enlace</h1>
+
+      <h2>Estudios</h2>
+      <ol>
+        <li>Yairi, E. y Ambrose, N. (2013). Epidemiology of stuttering: 21st century advances. <em>Journal of Fluency Disorders, 38</em>(2), 66-87. <a href="https://doi.org/10.1016/j.jfludis.2012.11.002">doi.org/10.1016/j.jfludis.2012.11.002</a></li>
+        <li>Reilly, S. y otros (2009). Predicting stuttering onset by the age of 3 years. <em>Pediatrics, 123</em>(1), 270-277. <a href="https://doi.org/10.1542/peds.2007-3219">doi.org/10.1542/peds.2007-3219</a></li>
+        <li>Reilly, S. y otros (2013). Natural history of stuttering to 4 years of age. <em>Pediatrics, 132</em>(3), 460-467. <a href="https://doi.org/10.1542/peds.2012-3067">doi.org/10.1542/peds.2012-3067</a></li>
+        <li>Singer, C. M. y otros (2020). Clinical characteristics associated with stuttering persistence: a meta-analysis. <em>Journal of Speech, Language, and Hearing Research, 63</em>(9), 2995-3018. <a href="https://doi.org/10.1044/2020_JSLHR-20-00096">doi.org/10.1044/2020_JSLHR-20-00096</a></li>
+        <li>Kingston, M. y otros (2003). Predicting treatment time with the Lidcombe Program. <em>International Journal of Language &amp; Communication Disorders, 38</em>(2), 165-177. <a href="https://doi.org/10.1080/1368282031000062882">doi.org/10.1080/1368282031000062882</a></li>
+        <li>Jones, M. y otros (2005). Randomised controlled trial of the Lidcombe programme of early stuttering intervention. <em>BMJ, 331</em>, 659. <a href="https://doi.org/10.1136/bmj.38520.451840.E0">doi.org/10.1136/bmj.38520.451840.E0</a></li>
+        <li>Sjøstrand, Å. y otros (2021). Non-pharmacological interventions for stuttering in children six years and younger. <em>Cochrane Database of Systematic Reviews</em>, CD013489. <a href="https://doi.org/10.1002/14651858.CD013489.pub2">doi.org/10.1002/14651858.CD013489.pub2</a></li>
+        <li>de Sonneville-Koedoot, C. y otros (2015). Direct versus indirect treatment for preschool children who stutter: the RESTART randomized trial. <em>PLoS One, 10</em>(7), e0133758. <a href="https://doi.org/10.1371/journal.pone.0133758">doi.org/10.1371/journal.pone.0133758</a></li>
+        <li>Brignell, A. y otros (2021). Interventions for children and adolescents who stutter: a systematic review. <em>Journal of Fluency Disorders, 70</em>, 105843. <a href="https://doi.org/10.1016/j.jfludis.2021.105843">doi.org/10.1016/j.jfludis.2021.105843</a></li>
+        <li>Johnson, G. y otros (2024). Lidcombe Program telehealth treatment for children 6-12 years of age: a phase II trial. <em>Journal of Fluency Disorders, 80</em>, 106057. <a href="https://doi.org/10.1016/j.jfludis.2024.106057">doi.org/10.1016/j.jfludis.2024.106057</a></li>
+        <li>Davis, S., Howell, P. y Cooke, F. (2002). Sociodynamic relationships between children who stutter and their non-stuttering classmates. <em>Journal of Child Psychology and Psychiatry, 43</em>(7), 939-947. <a href="https://doi.org/10.1111/1469-7610.00093">doi.org/10.1111/1469-7610.00093</a></li>
+      </ol>
+
+      <h2 class="nueva-hoja">Guías y normas</h2>
+      <ol start="12">
+        <li>NIDCD (2017). La tartamudez. <a href="https://www.nidcd.nih.gov/es/espanol/el-tartamudeo">nidcd.nih.gov/es/espanol/el-tartamudeo</a></li>
+        <li>STAMMA. If your child is stammering y Talking with a child who stammers. <a href="https://stamma.org/get-help/parents/help-if-child-stammers">stamma.org/get-help/parents</a></li>
+        <li>Stuttering Foundation. 7 consejos para hablar con su niño. <a href="https://www.stutteringhelp.org/sites/default/files/7Tips-spanish.pdf">stutteringhelp.org</a></li>
+        <li>Michael Palin Centre for Stammering. Primary school, para docentes. <a href="https://michaelpalincentreforstammering.org/about-stammering/teachers/primary-school-children/">michaelpalincentreforstammering.org</a></li>
+        <li>Fernández-Zúñiga, A. y Fundación Española de la Tartamudez (2008). La tartamudez. Guía para padres. <a href="https://www.familiaysalud.es/sites/default/files/guia_padres_tartamudez.pdf">familiaysalud.es</a></li>
+        <li>Onslow, M. y otros (2024). The Lidcombe Program Treatment Guide, versión 1.6. <a href="https://drupal.uts.edu.au/sites/default/files/2024-02/Lidcombe%20Program%20Treatment%20Guide%20v1.6%202024-02-28.pdf">uts.edu.au</a></li>
+        <li>Millán Carrasco, A. M. (2018). Disfemia: guía de apoyo. Consejería de Educación de la Región de Murcia. <a href="http://hdl.handle.net/20.500.11914/2007">hdl.handle.net/20.500.11914/2007</a></li>
+        <li>Ley 6/2021, de 23 de diciembre, de atención temprana de la Región de Murcia. <a href="https://www.boe.es/eli/es-mc/l/2021/12/23/6/con">boe.es</a></li>
+        <li>MurciaSalud. Colegios y asociaciones profesionales. <a href="https://www.murciasalud.es/es/colegios-y-asociaciones-profesionales">murciasalud.es</a></li>
+      </ol>
+
+      <div class="creditos">
+        <p>
+          <strong>Tartamudez: qué hacer en casa.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/tartamudez-que-hacer-en-casa</span>. Fuentes consultadas el 24
+          de noviembre de 2026. Esta guía no sustituye la valoración de un profesional.
+        </p>
+        <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirla y darle la hoja 6 al colegio. No se puede compartir el archivo, subirlo a otra web ni venderlo: para recomendarla, comparte el enlace de su ficha.</p>
+      </div>
+    </section>
+  </body>
+</html>
