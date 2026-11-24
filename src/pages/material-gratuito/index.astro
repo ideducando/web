@@ -46,7 +46,9 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
     {
       atajos.map((a) => (
         <div class="atajos__fila">
-          <h3 class="atajos__titulo">{a.nombre}</h3>
+          <h3 class="atajos__titulo">
+            <a href={ruta(`/material-gratuito/${a.dimension}/`)}>{a.nombre}</a>
+          </h3>
           <ul class="etiquetas">
             {a.opciones.map((op) => (
               <li>

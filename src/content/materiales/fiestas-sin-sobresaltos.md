@@ -2,7 +2,7 @@
 titulo: "Fiestas sin sobresaltos: anticipar las fiestas del cole"
 resumen: "Historia social con huecos para vuestra fiesta, agenda con velcro, plan de descanso con tarjetas para pedirlo, carteles para aplaudir sin ruido, tarjetas de aviso y guías para el docente y la familia."
 seccion: aula
-tipo: apoyo-visual
+tipo: historia-social
 etapas: [infantil, primaria]
 necesidades: [tea, toda-la-clase, conducta, discapacidad-auditiva, discapacidad-intelectual]
 edades: "De 3 a 12 años"

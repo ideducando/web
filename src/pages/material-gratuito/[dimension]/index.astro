@@ -1,0 +1,156 @@
+---
+// Índice de cada categoría: /material-gratuito/tipo/, /material-gratuito/etapa/ y /material-gratuito/necesidad/.
+// Antes daban error 404 (B-028, 24/11/2026). Solo salen las opciones que ya tienen algún material.
+import Base from '../../../layouts/Base.astro';
+import Intro from '../../../components/Intro.astro';
+import { DIMENSIONES, type Dimension } from '../../../data/taxonomias';
+import { encajaEn, materialesOrdenados, type Material } from '../../../lib/materiales';
+import { ruta } from '../../../lib/rutas';
+
+export async function getStaticPaths() {
+  const materiales = await materialesOrdenados();
+  return (Object.keys(DIMENSIONES) as Dimension[]).map((dimension) => ({
+    params: { dimension },
+    props: { dimension, materiales },
+  }));
+}
+
+interface Props {
+  dimension: Dimension;
+  materiales: Material[];
+}
+
+const { dimension, materiales } = Astro.props;
+const grupo = DIMENSIONES[dimension];
+const opciones = Object.entries(grupo.opciones as Record<string, { nombre: string; descripcion: string; color: string }>)
+  .map(([clave, op]) => ({ clave, ...op, n: materiales.filter((m) => encajaEn(m, dimension, clave)).length }))
+  .filter((o) => o.n > 0);
+const titulo = `Material gratuito: ${grupo.plural.toLowerCase()}`;
+---
+
+<Base
+  titulo={titulo}
+  descripcion={`El material gratuito de IdEducando ordenado por ${grupo.nombre.toLowerCase()}: elige una opción y mira sus materiales.`}
+  indexable={false}
+>
+  <Intro
+    titulo={grupo.plural}
+    entradilla="Elige una opción para ver sus materiales. En el catálogo puedes combinar varias a la vez."
+    camino={[{ texto: 'Material gratuito', enlace: '/material-gratuito/' }, { texto: grupo.plural }]}
+  />
+
+  <section class="contenedor indice" aria-label={grupo.plural}>
+    <ul class="indice__lista">
+      {
+        opciones.map((o) => (
+          <li class={`indice__opcion indice__opcion--${o.color}`}>
+            <h2 class="indice__nombre">
+              <a href={ruta(`/material-gratuito/${dimension}/${o.clave}/`)}>{o.nombre}</a>
+            </h2>
+            <p class="indice__descripcion">{o.descripcion}</p>
+            <p class="indice__n">{o.n === 1 ? '1 material' : `${o.n} materiales`}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="indice__volver">
+      <a href={ruta('/material-gratuito/')}>Ver todo el catálogo y filtrar por varias categorías</a>
+    </p>
+  </section>
+</Base>
+
+<style>
+  .indice {
+    padding-block: 1.75rem 4rem;
+  }
+
+  .indice__lista {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 40em) {
+    .indice__lista {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 64em) {
+    .indice__lista {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .indice__opcion {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: 1.1rem 1.2rem 1.1rem 1.5rem;
+    border-radius: var(--radio);
+    background: var(--papel);
+    box-shadow: var(--sombra-suave);
+    border-left: 0.45rem solid var(--color);
+  }
+
+  .indice__opcion--azul {
+    --color: var(--azul);
+  }
+  .indice__opcion--verde {
+    --color: var(--verde);
+  }
+  .indice__opcion--coral {
+    --color: var(--coral);
+  }
+  .indice__opcion--morado {
+    --color: var(--morado);
+  }
+  .indice__opcion--amarillo {
+    --color: var(--amarillo);
+  }
+  .indice__opcion--naranja {
+    --color: var(--naranja);
+  }
+
+  .indice__nombre {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  /* Toda la tarjeta se puede pulsar, pero el enlace sigue siendo solo el nombre. */
+  .indice__nombre a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radio);
+  }
+
+  .indice__opcion:focus-within {
+    outline: 3px solid var(--marino);
+    outline-offset: 2px;
+  }
+
+  .indice__nombre a:focus-visible {
+    outline: none;
+  }
+
+  .indice__descripcion {
+    margin: 0;
+  }
+
+  .indice__n {
+    margin: 0;
+    font: 700 0.9rem/1.3 var(--letra-titulos);
+    color: var(--texto-suave);
+  }
+
+  .indice__volver {
+    margin-top: 2rem;
+    font-weight: 700;
+  }
+</style>

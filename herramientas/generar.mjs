@@ -617,8 +617,11 @@ function portadaProducto(miniatura, color) {
 
 function portadaProximamente(titulo, tipo, color) {
   const tipos = {
-    plantilla: 'Plantilla', 'apoyo-visual': 'Apoyo visual', fichas: 'Fichas de trabajo', juego: 'Juego',
-    cuento: 'Cuento adaptado', guia: 'Guía', lista: 'Lista de comprobación', programacion: 'Programación',
+    // Los mismos nombres que TIPOS en src/data/taxonomias.ts.
+    tablero: 'Tableros y agendas', secuencia: 'Secuencias y rutinas', 'historia-social': 'Historias sociales',
+    cuento: 'Cuentos', juego: 'Juegos', fichas: 'Fichas de trabajo', cartel: 'Carteles y tarjetas',
+    plantilla: 'Plantillas y calendarios', registro: 'Registros', guia: 'Guías', situacion: 'Situaciones de aprendizaje',
+    programacion: 'Programaciones', lista: 'Listas de comprobación',
   };
   const simbolo = readFileSync(join(raiz, 'marca', 'simbolo.svg'), 'utf8');
   return `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>

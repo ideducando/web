@@ -87,15 +87,19 @@ content:
         required: true
         options:
           values:
-            - { name: plantilla, label: Plantilla }
-            - { name: apoyo-visual, label: Apoyo visual }
+            - { name: tablero, label: Tableros y agendas }
+            - { name: secuencia, label: Secuencias y rutinas }
+            - { name: historia-social, label: Historias sociales }
+            - { name: cuento, label: Cuentos }
+            - { name: juego, label: Juegos }
             - { name: fichas, label: Fichas de trabajo }
-            - { name: juego, label: Juego }
-            - { name: cuento, label: Cuento adaptado }
-            - { name: guia, label: Guía }
-            - { name: lista, label: Lista de comprobación }
-            - { name: programacion, label: Programación }
-            - { name: situacion, label: Situación de aprendizaje }
+            - { name: cartel, label: Carteles y tarjetas }
+            - { name: plantilla, label: Plantillas y calendarios }
+            - { name: registro, label: Registros }
+            - { name: guia, label: Guías }
+            - { name: situacion, label: Situaciones de aprendizaje }
+            - { name: programacion, label: Programaciones }
+            - { name: lista, label: Listas de comprobación }
       - name: etapas
         label: Etapas
         type: select

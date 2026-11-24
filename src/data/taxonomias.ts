@@ -107,50 +107,73 @@ export const NECESIDADES = {
 
 /** Qué tipo de material es. */
 export const TIPOS = {
-  plantilla: {
-    nombre: 'Plantilla',
-    descripcion: 'Documentos para rellenar, recortar o adaptar a cada alumno o alumna.',
+  // Lista afinada el 24/11/2026 (B-028, aprobada por José): «Apoyo visual» se repartió entre
+  // tableros, secuencias y carteles, y las historias sociales dejaron de ir con los cuentos.
+  // La dirección vieja /material-gratuito/tipo/apoyo-visual/ lleva al índice de tipos (netlify.toml).
+  tablero: {
+    nombre: 'Tableros y agendas',
+    descripcion: 'Agendas visuales, tableros de comunicación, turnos y paneles para anticipar el día y comunicarse.',
+    color: 'verde',
+  },
+  secuencia: {
+    nombre: 'Secuencias y rutinas',
+    descripcion: 'Los pasos de una tarea o de una rutina, uno detrás de otro y con imágenes.',
     color: 'azul',
   },
-  'apoyo-visual': {
-    nombre: 'Apoyo visual',
-    descripcion: 'Agendas, tableros y secuencias con imágenes.',
-    color: 'verde',
+  'historia-social': {
+    nombre: 'Historias sociales',
+    descripcion: 'Historias cortas que cuentan una situación antes de vivirla: qué va a pasar y qué se puede hacer.',
+    color: 'morado',
+  },
+  cuento: {
+    nombre: 'Cuentos',
+    descripcion: 'Cuentos en lectura fácil y con pictogramas para leer juntos.',
+    color: 'amarillo',
+  },
+  juego: {
+    nombre: 'Juegos',
+    descripcion: 'Juegos de mesa y dinámicas para aprender jugando.',
+    color: 'coral',
   },
   fichas: {
     nombre: 'Fichas de trabajo',
     descripcion: 'Actividades imprimibles con distintos niveles.',
     color: 'naranja',
   },
-  juego: {
-    nombre: 'Juego',
-    descripcion: 'Juegos de mesa y dinámicas para aprender jugando.',
-    color: 'coral',
+  cartel: {
+    nombre: 'Carteles y tarjetas',
+    descripcion: 'Carteles, bordes y tarjetas para el aula, también para baja visión y para dar la bienvenida.',
+    color: 'azul',
   },
-  cuento: {
-    nombre: 'Cuento adaptado',
-    descripcion: 'Lecturas en lectura fácil y con apoyos visuales.',
-    color: 'amarillo',
+  plantilla: {
+    nombre: 'Plantillas y calendarios',
+    descripcion: 'Calendarios, horarios y documentos para rellenar o adaptar a cada alumno o alumna.',
+    color: 'azul',
+  },
+  registro: {
+    nombre: 'Registros',
+    descripcion: 'Hojas para observar, anotar y seguir el progreso con datos.',
+    color: 'naranja',
   },
   guia: {
-    nombre: 'Guía',
+    nombre: 'Guías',
     descripcion: 'Documentos largos para entender un tema de principio a fin.',
     color: 'morado',
   },
-  lista: {
-    nombre: 'Lista de comprobación',
-    descripcion: 'Listas para repasar punto por punto que no falta nada.',
-    color: 'verde',
+  situacion: {
+    nombre: 'Situaciones de aprendizaje',
+    descripcion: 'Un reto con producto final, sesión a sesión, con el DUA y actividades en varios niveles.',
+    color: 'coral',
   },
   programacion: {
-    nombre: 'Programación',
+    nombre: 'Programaciones',
     descripcion: 'Programaciones didácticas y programas de intervención de ejemplo.',
     color: 'azul',
   },
-  situacion: {
-    nombre: 'Situación de aprendizaje',
-    descripcion: 'Un reto con producto final, sesión a sesión, con el DUA y actividades en varios niveles.',
-    color: 'coral',
+  lista: {
+    nombre: 'Listas de comprobación',
+    descripcion: 'Listas para repasar punto por punto que no falta nada.',
+    color: 'verde',
   },
 } as const satisfies Record<string, Opcion>;
 

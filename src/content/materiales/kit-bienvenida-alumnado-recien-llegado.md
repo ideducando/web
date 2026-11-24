@@ -2,7 +2,7 @@
 titulo: "¡Hola! Kit de bienvenida para el alumnado que llega de otro país"
 resumen: "22 tarjetas con pictogramas en castellano, árabe, rumano, ucraniano, inglés y francés, frases para el docente, pasaporte del cole, palabra del día y carta para la familia en seis lenguas."
 seccion: aula
-tipo: apoyo-visual
+tipo: cartel
 etapas: [infantil, primaria]
 necesidades: [incorporacion-tardia, toda-la-clase]
 edades: "De 3 a 12 años"

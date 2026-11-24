@@ -2,7 +2,7 @@
 titulo: "Observar y seguir al alumnado con NEAE: observación por áreas y registro trimestral"
 resumen: "Una hoja para observar por siete áreas, un diario de momentos para apuntar hechos y un registro para cerrar cada trimestre con datos. Con guía y protección de datos."
 seccion: aula
-tipo: plantilla
+tipo: registro
 etapas: [infantil, primaria]
 necesidades: [tea, tdah, tdl, dificultades-aprendizaje, discapacidad-intelectual, conducta]
 edades: "Para el docente, con alumnado de 3 a 12 años"

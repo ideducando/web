@@ -46,7 +46,11 @@ const titulo = `Material gratuito: ${opcion.nombre}`;
   <Intro
     titulo={titulo}
     entradilla={opcion.descripcion}
-    camino={[{ texto: 'Material gratuito', enlace: '/material-gratuito/' }, { texto: opcion.nombre }]}
+    camino={[
+      { texto: 'Material gratuito', enlace: '/material-gratuito/' },
+      { texto: grupo.plural, enlace: `/material-gratuito/${dimension}/` },
+      { texto: opcion.nombre },
+    ]}
   />
 
   <section class="contenedor categoria" aria-labelledby="titulo-lista">

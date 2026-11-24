@@ -2,7 +2,7 @@
 titulo: "Carteles y bordes de alto contraste para el aula: baja visión y toda la clase"
 resumen: "Diez carteles de espacios y rincones y ocho etiquetas con pictogramas grandes, en negro sobre amarillo o en blanco sobre negro. Con tiras para marcar su mesa y una guía para el docente."
 seccion: aula
-tipo: apoyo-visual
+tipo: cartel
 etapas: [infantil, primaria]
 necesidades: [discapacidad-visual, toda-la-clase]
 edades: "De 3 a 12 años"

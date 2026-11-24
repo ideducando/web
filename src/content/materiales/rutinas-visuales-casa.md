@@ -2,7 +2,7 @@
 titulo: "Rutinas visuales para casa: tres longitudes para cada rutina del día"
 resumen: "Seis rutinas de casa con pictogramas, cada una en tres tiras con velcro: corta, media y larga. Con 60 tarjetas, «¡Terminado!» al final y una guía para elegir la longitud y pasar a la siguiente."
 seccion: aula
-tipo: apoyo-visual
+tipo: secuencia
 etapas: [infantil, primaria]
 necesidades: [tea, tdah, discapacidad-intelectual]
 edades: "De 2 a 10 años"

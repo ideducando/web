@@ -2,7 +2,7 @@
 titulo: "Paso a paso: cinco secuencias con pictogramas para las rutinas de clase"
 resumen: "Tiras con pictogramas para llegar a clase, el desayuno, lavarse las manos, ir al baño y coger y recoger el material. Dos tiras iguales por hoja, plantilla, registro de pasos y guía para enseñarlas."
 seccion: aula
-tipo: apoyo-visual
+tipo: secuencia
 etapas: [infantil, primaria]
 necesidades: [tea, discapacidad-intelectual, tdl, conducta, toda-la-clase]
 edades: "De 3 a 8 años"

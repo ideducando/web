@@ -2,7 +2,7 @@
 titulo: "Registro de sesiones de PT y AL"
 resumen: "Una hoja para anotar en dos minutos cada sesión de Pedagogía Terapéutica (PT) o de Audición y Lenguaje (AL) y otra para seguir cada objetivo semana a semana. Con hoja de coordinación y guía."
 seccion: aula
-tipo: plantilla
+tipo: registro
 etapas: [infantil, primaria]
 necesidades: [tdl, tea, dificultades-aprendizaje, discapacidad-intelectual]
 edades: "Para docentes de PT y AL, con alumnado de 3 a 12 años"

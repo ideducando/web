@@ -2,7 +2,7 @@
 titulo: "Comunicación en el bolsillo: tablero y llavero de comunicación"
 resumen: "Un tablero de 45 palabras núcleo para la clase, otro de 12 casillas grandes para empezar y un llavero con tarjetas para el patio, el comedor y casa. Con guía de modelado."
 seccion: aula
-tipo: apoyo-visual
+tipo: tablero
 etapas: [infantil, primaria]
 necesidades: [tea, tdl, discapacidad-motora, discapacidad-intelectual, toda-la-clase]
 edades: "De 3 a 12 años"

@@ -2,7 +2,7 @@
 titulo: "Rincón de la calma: termómetro de emociones y tarjetas de estrategias"
 resumen: "Un termómetro de cinco niveles con caras propias, un cartel con las normas, 12 tarjetas de estrategias y un plan de calma personal. Con guía para el docente y nota para familias."
 seccion: aula
-tipo: apoyo-visual
+tipo: tablero
 etapas: [infantil, primaria]
 necesidades: [conducta, tea, tdah, toda-la-clase]
 edades: "De 4 a 10 años"
