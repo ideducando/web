@@ -1,13 +1,15 @@
 ---
 titulo: "Licencias y créditos"
 entradilla: "Todos nuestros materiales gratuitos se pueden descargar y usar en el aula y en casa. Aquí tienes lo que permite cada licencia y cómo citarlos."
-actualizado: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 
 ## Los materiales
 
 Cada ficha dice cuál es su licencia, en el apartado «Licencia». Hay dos.
+
+Si tienes una duda concreta, como subir un material al aula virtual o usarlo en clases particulares, la respuesta está en [¿Puedo adaptar y compartir este material?](/consejos/puedo-adaptar-y-compartir-este-material/).
 
 ### Con pictogramas de ARASAAC: CC BY-NC-SA 4.0
 
@@ -21,7 +23,7 @@ Los materiales que llevan pictogramas de ARASAAC se publican con la licencia **C
 Siempre que:
 
 - **Cites la autoría** y enlaces a la ficha original.
-- **No lo uses con fines comerciales**: no puedes venderlo ni incluirlo en un producto de pago.
+- **No lo uses con fines comerciales**: no puedes venderlo ni incluirlo en un producto o un curso de pago. Sí puedes trabajar con él con tu alumnado aunque la clase sea de pago.
 - **Compartas tus adaptaciones con la misma licencia.**
 
 Es la misma licencia de los pictogramas de ARASAAC, como pide ARASAAC para lo que se hace con ellos.
@@ -32,10 +34,11 @@ Los materiales que no llevan pictogramas de ARASAAC, como la agenda visual, que 
 
 - **Descargarlos** e imprimirlos tantas veces como quieras.
 - **Usarlos** en tu aula, con tu alumnado o para preparar tu oposición, y adaptarlos para tu propio uso.
+- **Subirlos al aula virtual de tu clase o de tu centro**, si es un espacio cerrado para tu alumnado, sus familias y el profesorado. Sin publicarlos en abierto en otra web.
 
 Sin nuestro permiso no puedes:
 
-- Compartir el archivo, subirlo a otra web o publicar una versión cambiada.
+- Compartir el archivo fuera del aula virtual de tu clase o de tu centro, subirlo a una web abierta o publicar una versión cambiada.
 - Venderlo o incluirlo en un producto de pago.
 
 Si quieres recomendar uno, comparte el enlace de su ficha: así siempre llega la última versión. Para cualquier otro uso, escríbenos a hola@ideducando.es.
