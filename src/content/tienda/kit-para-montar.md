@@ -5,6 +5,7 @@ tipo: montaje
 para: [docentes, familias]
 formatos:
   - "Kit para montar, enviado a casa o al cole"
+medidas_exactas: true
 estado: en-estudio
 portada: /tienda/kit-para-montar/portada.svg
 portada_alt: "Ilustración: una caja de cartón abierta con láminas impresas, una tira de círculos de velcro, fundas de plastificar y dos anillas."

@@ -321,6 +321,11 @@ content:
         type: boolean
         default: false
         description: "Márcalo si el PDF de la carpeta privada tiene unas pocas hojas de muestra y no el producto entero. La galería dirá «Hoja 3 de la muestra»."
+      - name: medidas_exactas
+        label: Con medidas exactas para montarlo
+        type: boolean
+        default: false
+        description: "Márcalo si el producto trae lo que hace falta para montarlo con cantidad y medida exactas, como los kits y los suministros. Su tarjeta lleva el sello."
       - name: muestra
         label: Páginas de la muestra
         type: object

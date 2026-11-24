@@ -6,6 +6,7 @@ import type { CollectionEntry } from 'astro:content';
 import Icono from './Icono.astro';
 import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../data/taxonomias';
 import { existeArchivo } from '../lib/formatos';
+import { tieneMontaje } from '../lib/montaje.mjs';
 import { ruta } from '../lib/rutas';
 
 interface Props {
@@ -25,6 +26,8 @@ const etiquetas = [
   ...d.necesidades.map((n) => ({ texto: NECESIDADES[n].nombre, color: NECESIDADES[n].color })),
 ];
 const visibles = etiquetas.slice(0, 3);
+// Lo que hay que montar trae lo que hace falta con cantidad y medida exactas (propuesta B-009, 24/11/2026).
+const conMedidas = tieneMontaje(d);
 const resto = etiquetas.length - visibles.length;
 ---
 
@@ -71,6 +74,14 @@ const resto = etiquetas.length - visibles.length;
         <a class="enlace-tarjeta" href={enlace}>{d.titulo}</a>
       </Titulo>
       <p class="material__resumen">{d.resumen}</p>
+      {
+        conMedidas && (
+          <p class="material__medidas">
+            <Icono nombre="regla" />
+            Con medidas exactas para montarlo
+          </p>
+        )
+      }
       <ul class="etiquetas" aria-label="Para quién">
         {visibles.map((e) => <li class={`etiqueta etiqueta--${e.color}`}>{e.texto}</li>)}
         {resto > 0 && <li class="etiqueta etiqueta--amarillo">+{resto}</li>}
@@ -206,6 +217,26 @@ const resto = etiquetas.length - visibles.length;
   .material__resumen {
     font-size: 0.98rem;
     line-height: 1.5;
+  }
+
+  .material__medidas {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.4rem;
+    max-width: 100%;
+    padding: 0.25rem 0.7rem 0.25rem 0.5rem;
+    border: 1px solid var(--amarillo);
+    border-radius: 999px;
+    background: var(--amarillo-tinte);
+    color: var(--marino);
+    font: 700 0.85rem/1.25 var(--letra-titulos);
+  }
+
+  .material__medidas :global(svg) {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
   }
 
   .material .etiquetas {

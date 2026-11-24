@@ -32,6 +32,14 @@ const estado = ESTADOS_TIENDA[d.estado];
         <a class="enlace-tarjeta" href={ruta(`/tienda/${producto.id}/`)}>{d.titulo}</a>
       </Titulo>
       <p class="producto__resumen">{d.resumen}</p>
+      {
+        d.medidas_exactas && (
+          <p class="producto__medidas">
+            <Icono nombre="regla" />
+            Con medidas exactas para montarlo
+          </p>
+        )
+      }
       <p class={`producto__estado producto__estado--${estado.color}`}>{estado.nombre}</p>
       <span class="producto__ver" aria-hidden="true">
         Ver por dentro
@@ -152,6 +160,27 @@ const estado = ESTADOS_TIENDA[d.estado];
   .producto__resumen {
     font-size: 0.98rem;
     line-height: 1.5;
+  }
+
+  .producto__medidas {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.4rem;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.25rem 0.7rem 0.25rem 0.5rem;
+    border: 1px solid var(--amarillo);
+    border-radius: 999px;
+    background: var(--amarillo-tinte);
+    color: var(--marino);
+    font: 700 0.85rem/1.25 var(--letra-titulos);
+  }
+
+  .producto__medidas :global(svg) {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
   }
 
   .producto__estado {

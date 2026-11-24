@@ -5,6 +5,7 @@ tipo: montaje
 para: [docentes, familias]
 formatos:
   - "Bolsas de suministros, enviadas a casa o al cole"
+medidas_exactas: true
 estado: en-estudio
 portada: /tienda/suministros-para-montar/portada.svg
 portada_alt: "Ilustración: una lámina de círculos de velcro, un rollo de velcro, un paquete de fundas de plastificar, anillas metálicas y pinzas de colores."

@@ -7,6 +7,7 @@ edades: "Infantil y Primaria"
 formatos:
   - "Kit para montar, enviado a casa o al cole"
   - "Ya montada, desde Cartagena"
+medidas_exactas: true
 estado: en-estudio
 portada: /tienda/kit-agenda-visual/portada.webp
 portada_alt: "Portada del kit: la agenda semanal con los cinco días de lunes a viernes en columnas de colores y huecos para pictogramas."

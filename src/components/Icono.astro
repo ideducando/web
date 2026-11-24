@@ -24,7 +24,8 @@ interface Props {
     | 'mochila'
     | 'papelera'
     | 'candado'
-    | 'tienda';
+    | 'tienda'
+    | 'regla';
   clase?: string;
 }
 
@@ -49,6 +50,7 @@ const trazos: Record<Props['nombre'], string> = {
   imprimir:
     '<path d="M7 9V3.5h10V9"/><rect x="3.5" y="9" width="17" height="8" rx="2"/><path d="M7 14.5h10v6H7z"/>',
   reloj: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.5 2"/>',
+  regla: '<rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M6.5 8v3M10 8v4.5M13.5 8v3M17 8v4.5"/>',
   documento:
     '<path d="M6.5 3h7.5l4.5 4.5V21h-12z"/><path d="M14 3v4.5h4.5M9 12.5h6M9 16h6"/>',
   corazon:

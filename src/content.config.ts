@@ -116,6 +116,9 @@ const tienda = defineCollection({
     // Si la fuente es una muestra de pocas hojas y no el producto entero, la galería dice «Hoja 3 de la muestra»
     // y «paginas» son las previstas para el producto completo.
     solo_muestra: z.boolean().default(false),
+    // Si el producto trae lo que hace falta para montarlo con cantidad y medida exactas (kits y suministros),
+    // su tarjeta lleva el sello «Con medidas exactas para montarlo» (propuesta B-009, 24/11/2026).
+    medidas_exactas: z.boolean().default(false),
     paginas: opcional(z.number().int().positive().optional()),
     incluye: z.array(z.string()).min(1),
     // Si hay o habrá una versión gratis (por ejemplo, la de pictogramas), se cuenta aquí.
