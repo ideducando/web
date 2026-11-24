@@ -1699,6 +1699,51 @@
       }
     ]
   },
+  "registro-observacion-neae": {
+    "total": 6,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla · alumnado con necesidad específica de apoyo educativo"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Observación por áreas · 1 de 2"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Observación por áreas · 2 de 2"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diario de momentos"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro trimestral"
+      }
+    ]
+  },
   "registro-sesiones-pt-al": {
     "total": 5,
     "fotos": [

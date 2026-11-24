@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Observación y seguimiento del alumnado con NEAE · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Sin pictogramas de ARASAAC: todos los derechos reservados (decisión del 28/10/2026). */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+        }
+      }
+
+      /* En este material ningún texto baja de 11 pt, tampoco el pie de página. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      :root {
+        /* Borde de las casillas para escribir: 3,15:1 sobre blanco, se ve bien en blanco y negro. */
+        --borde: #8790b3;
+        /* Lo que «escribe a mano» la maestra en el ejemplo: 4,99:1 sobre blanco. */
+        --boli: #2b6cd5;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 18mm;
+      }
+
+      .portada__titulo {
+        font-size: 38pt;
+        line-height: 1.05;
+        margin-bottom: 6mm;
+        max-width: 160mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 130mm;
+      }
+
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      /* Hoja de observación dibujada con HTML: filas con tres círculos */
+      .maqueta {
+        position: absolute;
+        z-index: 2;
+        background: #fff;
+        border-radius: 2mm;
+        box-shadow:
+          0 1mm 0 rgb(30 43 85 / 0.08),
+          0 14mm 24mm -10mm rgb(30 43 85 / 0.45);
+      }
+
+      .maqueta--areas {
+        left: 90mm;
+        top: 132mm;
+        width: 102mm;
+        height: 104mm;
+        padding: 10mm 9mm;
+        transform: rotate(4deg);
+      }
+
+      .maqueta--trimestre {
+        left: 22mm;
+        top: 158mm;
+        width: 104mm;
+        height: 100mm;
+        padding: 10mm 9mm;
+        transform: rotate(-4deg);
+        z-index: 3;
+      }
+
+      .maqueta .barra {
+        height: 4.6mm;
+        width: 58%;
+        border-radius: 2mm;
+        background: var(--marino);
+        margin-bottom: 6mm;
+      }
+
+      .maqueta .fila {
+        display: grid;
+        grid-template-columns: 1.7fr repeat(3, 7mm);
+        align-items: center;
+        gap: 3mm;
+        padding: 3.2mm 0;
+        border-bottom: 0.4mm solid #e3e6ef;
+      }
+
+      .maqueta .fila span {
+        height: 2.6mm;
+        border-radius: 2mm;
+        background: #d9dce6;
+      }
+
+      .maqueta .fila svg {
+        width: 6.4mm;
+        height: 6.4mm;
+      }
+
+      .maqueta .logro {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        align-items: center;
+        gap: 4mm;
+        padding: 3.4mm 0;
+        border-bottom: 0.4mm solid #e3e6ef;
+      }
+
+      .maqueta .logro span {
+        height: 2.6mm;
+        border-radius: 2mm;
+        background: #d9dce6;
+      }
+
+      .maqueta .logro b {
+        justify-self: start;
+        padding: 0.6mm 2.4mm;
+        border-radius: 999px;
+        font-family: var(--titulos);
+        font-size: 10pt;
+        line-height: 1.2;
+        color: var(--marino);
+      }
+
+      .posit {
+        position: absolute;
+        z-index: 4;
+        right: 14mm;
+        top: 240mm;
+        width: 54mm;
+        margin: 0;
+        padding: 5mm 5mm;
+        background: var(--amarillo);
+        transform: rotate(5deg);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.15;
+        color: var(--marino);
+        box-shadow: 0 6mm 10mm -6mm rgb(30 43 85 / 0.5);
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .encabezado {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 6mm;
+        margin-bottom: 3mm;
+      }
+
+      .encabezado .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .encabezado h1 {
+        font-size: 21pt;
+        margin: 0;
+      }
+
+      .encabezado img {
+        width: 38mm;
+        height: auto;
+      }
+
+      /* Datos de la cabecera: etiqueta y raya para escribir */
+      .datos {
+        display: grid;
+        gap: 2mm 6mm;
+        margin: 0 0 3mm;
+        font-size: 11pt;
+      }
+
+      .datos--tres {
+        grid-template-columns: 0.9fr 0.8fr 1fr;
+      }
+
+      .datos--quien {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .dato {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .dato .hueco {
+        flex: 1;
+        min-width: 10mm;
+        border-bottom: 0.35mm solid var(--marino);
+        height: 6mm;
+      }
+
+      .rodea {
+        display: inline-block;
+        padding: 0 1.2mm;
+        margin-left: 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* Círculos de la escala: vacío, a medias y lleno */
+      .ico {
+        display: inline-block;
+        width: 3.8mm;
+        height: 3.8mm;
+        vertical-align: -0.6mm;
+        margin-right: 1.2mm;
+        color: var(--marino);
+        flex: none;
+      }
+
+      .clave {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1mm 5mm;
+        margin: 0 0 2.5mm;
+        font-size: 11pt;
+      }
+
+      .clave span {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      .clave .ico {
+        width: 4.6mm;
+        height: 4.6mm;
+        vertical-align: 0;
+        margin-right: 1.4mm;
+      }
+
+      /* ---------- Observación por áreas ---------- */
+      table.areas {
+        table-layout: fixed;
+        font-size: 11pt;
+        margin-bottom: 2.5mm;
+        border: 0.4mm solid var(--borde);
+      }
+
+      table.areas th,
+      table.areas td {
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.areas thead th {
+        font-size: 11pt;
+        line-height: 1.2;
+        padding: 1.6mm 1.6mm;
+        vertical-align: bottom;
+      }
+
+      table.areas thead th.escala {
+        text-align: center;
+        padding: 1.4mm 0.6mm;
+        background: var(--azul-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.areas thead th.escala .ico {
+        display: block;
+        margin: 0 auto 0.8mm;
+        width: 4.6mm;
+        height: 4.6mm;
+      }
+
+      table.areas thead th.col-ayuda {
+        background: var(--amarillo-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.areas tbody th.area {
+        background: var(--morado-tinte) !important;
+        color: var(--marino) !important;
+        text-align: left;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        padding: 1.1mm 2mm;
+      }
+
+      table.areas td {
+        padding: 1.4mm 1.8mm;
+        line-height: 1.3;
+        vertical-align: middle;
+      }
+
+      table.areas td.marca {
+        text-align: center;
+      }
+
+      table.areas td.marca .ico {
+        width: 5.4mm;
+        height: 5.4mm;
+        margin: 0;
+        color: var(--borde);
+      }
+
+      table.areas td.ayuda {
+        height: 11mm;
+      }
+
+      .recuadros {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        margin-top: 3mm;
+      }
+
+      .recuadro {
+        border: 0.35mm solid var(--borde);
+        border-radius: 2.5mm;
+        overflow: hidden;
+        break-inside: avoid;
+      }
+
+      .recuadro h2 {
+        margin: 0;
+        padding: 2mm 3mm 0.6mm;
+        font-size: 12.5pt;
+      }
+
+      .recuadro p {
+        margin: 0;
+        padding: 0 3mm 1.6mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .recuadro .lineas {
+        padding: 0 3mm 3mm;
+        background: #fff;
+      }
+
+      .recuadro--verde {
+        background: var(--verde-tinte);
+      }
+
+      .recuadro--amarillo {
+        background: var(--amarillo-tinte);
+      }
+
+      .recuadro--azul {
+        background: var(--azul-tinte);
+      }
+
+      .recuadro--coral {
+        background: var(--coral-tinte);
+      }
+
+      .lineas div {
+        height: 7.5mm;
+        border-bottom: 0.3mm solid var(--borde);
+      }
+
+      .nota {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.4;
+      }
+
+      .nota b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* ---------- Diario de momentos ---------- */
+      table.diario {
+        table-layout: fixed;
+        font-size: 11pt;
+        margin-bottom: 2.5mm;
+        border: 0.4mm solid var(--borde);
+      }
+
+      table.diario th,
+      table.diario td {
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.diario thead th {
+        font-size: 11pt;
+        line-height: 1.2;
+        padding: 1.6mm 1.6mm;
+        vertical-align: bottom;
+      }
+
+      table.diario thead th.col-hechos {
+        background: var(--azul-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.diario thead th.col-ayuda {
+        background: var(--amarillo-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.diario thead th.col-respuesta {
+        background: var(--verde-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.diario td {
+        height: 25mm;
+        padding: 1.2mm 1.6mm;
+      }
+
+      .momentos {
+        color: var(--suave);
+        line-height: 1.3;
+        vertical-align: middle !important;
+      }
+
+      .momentos span {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .comparar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0 6mm;
+        padding: 2mm 4mm;
+        margin-top: 1mm;
+        font-size: 11pt;
+      }
+
+      .comparar p {
+        margin: 0;
+        line-height: 1.35;
+      }
+
+      .comparar b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* ---------- Registro trimestral ---------- */
+      table.trimestral {
+        table-layout: fixed;
+        font-size: 11pt;
+        margin-bottom: 3mm;
+        border: 0.4mm solid var(--borde);
+      }
+
+      table.trimestral th,
+      table.trimestral td {
+        border: 0.3mm solid var(--borde);
+      }
+
+      table.trimestral thead th {
+        font-size: 11pt;
+        line-height: 1.2;
+        padding: 1.6mm 1.6mm;
+        vertical-align: bottom;
+      }
+
+      table.trimestral thead th.col-medida {
+        background: var(--amarillo-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.trimestral thead th.col-logro {
+        background: var(--verde-tinte) !important;
+        color: var(--marino) !important;
+      }
+
+      table.trimestral tbody th {
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      table.trimestral td {
+        height: 22mm;
+        padding: 1.2mm 1.6mm;
+      }
+
+      .opciones {
+        color: var(--suave);
+        line-height: 1.32;
+        vertical-align: middle !important;
+      }
+
+      .opciones > span {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+      }
+
+      .opciones .estrella {
+        display: inline-block;
+        width: 3.8mm;
+        margin-right: 1.2mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        color: var(--marino);
+      }
+
+      .reuniones {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2.5mm;
+        margin: 0 0 3mm;
+        font-size: 11pt;
+      }
+
+      .reunion {
+        border: 0.35mm solid var(--borde);
+        border-radius: 2mm;
+        padding: 1.6mm 2mm 2mm;
+      }
+
+      .reunion b {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.2mm;
+      }
+
+      .reunion .hueco {
+        display: block;
+        height: 6mm;
+        border-bottom: 0.3mm solid var(--borde);
+      }
+
+      .hoja h2.subtitulo {
+        font-size: 14pt;
+        margin: 3mm 0 2mm;
+      }
+
+      /* ---------- Guía ---------- */
+      .guia h1 {
+        font-size: 22pt;
+        margin-bottom: 2mm;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin: 3mm 0 1.6mm;
+      }
+
+      .guia p,
+      .guia li {
+        line-height: 1.4;
+      }
+
+      .guia ol,
+      .guia ul {
+        margin-bottom: 1.5mm;
+      }
+
+      .guia li {
+        margin-bottom: 0.6mm;
+      }
+
+      .ejemplo {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0 6mm;
+        padding: 2.5mm 4mm;
+        border: 0.35mm solid var(--borde);
+        border-radius: 2.5mm;
+        margin: 0 0 3mm;
+        break-inside: avoid;
+      }
+
+      .ejemplo p {
+        margin: 0;
+        padding: 0.5mm 0;
+        border-bottom: 0.3mm dashed var(--linea);
+      }
+
+      .ejemplo b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .ejemplo .boli {
+        color: var(--boli);
+      }
+
+      .datos-protegidos p {
+        line-height: 1.4;
+        margin-bottom: 1.6mm;
+      }
+
+      .datos-protegidos h2 {
+        font-size: 13pt;
+        margin: 0 0 1.5mm;
+      }
+
+      .creditos {
+        font-size: 11pt;
+        line-height: 1.4;
+        margin-top: 2mm;
+        padding-top: 2.5mm;
+      }
+
+      .creditos p {
+        margin-bottom: 1.2mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Círculos de la escala: se dibujan una vez y se reutilizan -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="i-casi-nunca" viewBox="0 0 12 12">
+          <circle cx="6" cy="6" r="4.9" fill="#fff" stroke="currentColor" stroke-width="1.3" />
+        </symbol>
+        <symbol id="i-a-veces" viewBox="0 0 12 12">
+          <circle cx="6" cy="6" r="4.9" fill="#fff" stroke="currentColor" stroke-width="1.3" />
+          <path d="M6 1.1a4.9 4.9 0 0 1 0 9.8z" fill="currentColor" />
+        </symbol>
+        <symbol id="i-casi-siempre" viewBox="0 0 12 12">
+          <circle cx="6" cy="6" r="4.9" fill="currentColor" stroke="currentColor" stroke-width="1.3" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -56mm; top: 116mm; background: var(--morado-tinte)"></div>
+      <div class="circulo" style="width: 66mm; height: 66mm; left: -26mm; top: 206mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 152mm; top: 96mm; background: var(--amarillo-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Plantilla · Alumnado con necesidad específica de apoyo educativo (NEAE)</p>
+        <h1 class="portada__titulo">Observar y seguir&nbsp;<br />al alumnado con NEAE</h1>
+        <p class="portada__subtitulo">Una hoja para observar por áreas, un diario de momentos y un registro para cerrar cada trimestre.</p>
+        <div class="portada__pie">
+          <p>© IdEducando. Todos los derechos reservados<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="maqueta maqueta--areas" aria-hidden="true">
+        <div class="barra" style="width: 46%; background: var(--morado)"></div>
+        <div class="fila"><span></span><svg style="color: var(--azul)"><use href="#i-casi-nunca" /></svg><svg style="color: var(--naranja)"><use href="#i-a-veces" /></svg><svg style="color: #d9dce6"><use href="#i-casi-siempre" /></svg></div>
+        <div class="fila"><span style="width: 80%"></span><svg style="color: #d9dce6"><use href="#i-casi-nunca" /></svg><svg style="color: #d9dce6"><use href="#i-a-veces" /></svg><svg style="color: var(--verde)"><use href="#i-casi-siempre" /></svg></div>
+        <div class="fila"><span style="width: 90%"></span><svg style="color: #d9dce6"><use href="#i-casi-nunca" /></svg><svg style="color: var(--naranja)"><use href="#i-a-veces" /></svg><svg style="color: #d9dce6"><use href="#i-casi-siempre" /></svg></div>
+        <div class="fila"><span style="width: 70%"></span><svg style="color: #d9dce6"><use href="#i-casi-nunca" /></svg><svg style="color: #d9dce6"><use href="#i-a-veces" /></svg><svg style="color: var(--verde)"><use href="#i-casi-siempre" /></svg></div>
+      </div>
+      <div class="maqueta maqueta--trimestre" aria-hidden="true">
+        <div class="barra"></div>
+        <div class="logro"><span></span><b style="background: var(--verde-tinte)">Conseguido</b></div>
+        <div class="logro"><span style="width: 85%"></span><b style="background: var(--amarillo-tinte)">En proceso</b></div>
+        <div class="logro"><span style="width: 75%"></span><b style="background: var(--morado-tinte)">★ Lo generaliza</b></div>
+        <div class="logro"><span style="width: 90%"></span><b style="background: var(--amarillo-tinte)">En proceso</b></div>
+      </div>
+      <p class="posit">Hechos, no&nbsp;etiquetas</p>
+    </section>
+
+    <!-- ======================================================================
+         OBSERVACIÓN POR ÁREAS (1 de 2)
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Observación por áreas · 1 de 2</p>
+          <h1>¿Qué veo en clase?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos datos--tres">
+        <p class="dato">Iniciales<span class="hueco"></span></p>
+        <p class="dato">Curso<span class="hueco"></span></p>
+        <p class="dato">Del<span class="hueco"></span>al<span class="hueco"></span></p>
+      </div>
+      <div class="datos datos--quien">
+        <p class="dato">Observa (rodea):<span class="rodea">Tutor o tutora</span><span class="rodea">PT</span><span class="rodea">AL</span><span class="rodea">Otra persona</span><span class="hueco"></span></p>
+      </div>
+      <p class="clave">
+        <span><b style="font-family: var(--titulos)">En cada fila, rellena el círculo de la columna que mejor lo describe.</b></span>
+        <span>Si no lo has podido ver, deja la fila en blanco.</span>
+      </p>
+      <table class="areas">
+        <colgroup>
+          <col style="width: 84mm" />
+          <col style="width: 15mm" />
+          <col style="width: 15mm" />
+          <col style="width: 15mm" />
+          <col style="width: 53mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Lo que observo</th>
+            <th scope="col" class="escala"><svg class="ico" aria-hidden="true"><use href="#i-casi-nunca" /></svg>Casi nunca</th>
+            <th scope="col" class="escala"><svg class="ico" aria-hidden="true"><use href="#i-a-veces" /></svg>A veces</th>
+            <th scope="col" class="escala"><svg class="ico" aria-hidden="true"><use href="#i-casi-siempre" /></svg>Casi siempre</th>
+            <th scope="col" class="col-ayuda">Cuándo pasa y qué le ayuda</th>
+          </tr>
+        </thead>
+        <tbody data-areas="0-3"></tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         OBSERVACIÓN POR ÁREAS (2 de 2)
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Observación por áreas · 2 de 2</p>
+          <h1>¿Qué veo en clase?</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <table class="areas">
+        <colgroup>
+          <col style="width: 84mm" />
+          <col style="width: 15mm" />
+          <col style="width: 15mm" />
+          <col style="width: 15mm" />
+          <col style="width: 53mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Lo que observo</th>
+            <th scope="col" class="escala"><svg class="ico" aria-hidden="true"><use href="#i-casi-nunca" /></svg>Casi nunca</th>
+            <th scope="col" class="escala"><svg class="ico" aria-hidden="true"><use href="#i-a-veces" /></svg>A veces</th>
+            <th scope="col" class="escala"><svg class="ico" aria-hidden="true"><use href="#i-casi-siempre" /></svg>Casi siempre</th>
+            <th scope="col" class="col-ayuda">Cuándo pasa y qué le ayuda</th>
+          </tr>
+        </thead>
+        <tbody data-areas="4-6"></tbody>
+      </table>
+      <div class="recuadros">
+        <div class="recuadro recuadro--verde">
+          <h2>Sus puntos fuertes</h2>
+          <p>Lo que se le da bien y lo que le gusta</p>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+        <div class="recuadro recuadro--amarillo">
+          <h2>Qué apoyos vamos a probar</h2>
+          <p>Uno o dos, para empezar mañana</p>
+          <div class="lineas"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         DIARIO DE MOMENTOS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Diario de momentos</p>
+          <h1>Lo que ha pasado, tal cual</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos datos--tres">
+        <p class="dato">Iniciales<span class="hueco"></span></p>
+        <p class="dato">Curso<span class="hueco"></span></p>
+        <p class="dato">Semana del<span class="hueco"></span></p>
+      </div>
+      <table class="diario">
+        <colgroup>
+          <col style="width: 20mm" />
+          <col style="width: 32mm" />
+          <col style="width: 52mm" />
+          <col style="width: 40mm" />
+          <col style="width: 38mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Día y hora</th>
+            <th scope="col">Momento (rodea)</th>
+            <th scope="col" class="col-hechos">Qué ha pasado: lo que se ve y se oye</th>
+            <th scope="col" class="col-ayuda">Qué ayuda le hemos dado</th>
+            <th scope="col" class="col-respuesta">Cómo ha respondido</th>
+          </tr>
+        </thead>
+        <tbody id="filas-diario"></tbody>
+      </table>
+      <div class="caja caja--azul comparar">
+        <p><b>Mejor así:</b> «Se levantó tres veces durante la ficha de sumas y volvió a sentarse cuando le enseñé el reloj».</p>
+        <p><b>Que así:</b> «Hoy estaba muy nervioso». Un hecho se puede contar y comparar; una etiqueta, no.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO TRIMESTRAL
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <div class="encabezado">
+        <div>
+          <p class="antetitulo">Registro trimestral</p>
+          <h1>Así ha ido el trimestre</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </div>
+      <div class="datos datos--tres">
+        <p class="dato">Iniciales<span class="hueco"></span></p>
+        <p class="dato">Curso<span class="hueco"></span></p>
+        <p class="dato">Trimestre (rodea):<span class="rodea">1.º</span><span class="rodea">2.º</span><span class="rodea">3.º</span></p>
+      </div>
+      <table class="trimestral">
+        <colgroup>
+          <col style="width: 9mm" />
+          <col style="width: 52mm" />
+          <col style="width: 44mm" />
+          <col style="width: 33mm" />
+          <col style="width: 44mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">N.º</th>
+            <th scope="col">Objetivo del plan de apoyo</th>
+            <th scope="col" class="col-medida">Medida o apoyo que hemos usado</th>
+            <th scope="col" class="col-logro">Cómo acaba (rodea)</th>
+            <th scope="col">Qué lo demuestra</th>
+          </tr>
+        </thead>
+        <tbody id="filas-trimestral"></tbody>
+      </table>
+      <h2 class="subtitulo">Coordinación del trimestre: fecha de cada reunión</h2>
+      <div class="reuniones">
+        <div class="reunion"><b>Tutor o tutora</b><span class="hueco"></span></div>
+        <div class="reunion"><b>PT</b><span class="hueco"></span></div>
+        <div class="reunion"><b>AL</b><span class="hueco"></span></div>
+        <div class="reunion"><b>Orientación</b><span class="hueco"></span></div>
+        <div class="reunion"><b>Familia</b><span class="hueco"></span></div>
+      </div>
+      <div class="recuadros">
+        <div class="recuadro recuadro--azul">
+          <h2>Lo que ha funcionado</h2>
+          <div class="lineas"><div></div><div></div></div>
+        </div>
+        <div class="recuadro recuadro--coral">
+          <h2>Lo que cambiamos el próximo trimestre</h2>
+          <div class="lineas"><div></div><div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA DE UNA PÁGINA
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 3mm"></div>
+      <p class="antetitulo">Guía de uso</p>
+      <h1>Cómo usar estas hojas</h1>
+      <p>
+        Sirven para mirar con calma antes de decidir apoyos y para cerrar cada trimestre con datos. No diagnostican: eso es
+        cosa de los servicios de orientación.
+      </p>
+
+      <h2>Para observar</h2>
+      <ol>
+        <li>Observa dos o tres semanas, en momentos distintos, antes de rellenar las áreas. Mejor si otra persona las rellena también y comparáis.</li>
+        <li>En el diario, apunta lo que se ve y se oye, no lo que crees que piensa.</li>
+        <li>Empieza por sus puntos fuertes y elige uno o dos apoyos para probar.</li>
+        <li>Para una conducta concreta, sigue con el registro de observación ABC de IdEducando.</li>
+      </ol>
+
+      <h2>Al acabar el trimestre</h2>
+      <ol>
+        <li>Copia los objetivos del plan de apoyo (en Murcia, el plan de actuación personalizado o PAP) y la medida de cada uno.</li>
+        <li>Rodea cómo acaba cada objetivo y escribe qué lo demuestra: un trabajo, una prueba o lo que habéis visto.</li>
+        <li>«Lo generaliza»: lo hace en otros sitios y con otras personas, sin la ayuda del principio.</li>
+      </ol>
+
+      <h2>Un ejemplo, con un caso inventado</h2>
+      <div class="ejemplo">
+        <div>
+          <p><b>Objetivo:</b> <span class="boli">pedir ayuda cuando se atasca.</span></p>
+          <p><b>Medida:</b> <span class="boli">tarjeta «Necesito ayuda» en la mesa.</span></p>
+        </div>
+        <div>
+          <p><b>Cómo acaba:</b> <span class="boli">en proceso.</span></p>
+          <p><b>Qué lo demuestra:</b> <span class="boli">la usó 6 de 10 veces en la última semana.</span></p>
+        </div>
+      </div>
+
+      <div class="caja caja--coral datos-protegidos">
+        <h2>Protección de datos</h2>
+        <p>
+          Escribe solo las iniciales y lo necesario para ayudar, como pide el Reglamento General de Protección de Datos (RGPD,
+          artículo 5). Los datos de salud, como un diagnóstico, tienen más protección (artículo 9) y aquí no hacen falta.
+        </p>
+        <p>
+          Las iniciales no hacen anónima la hoja (RGPD, considerando 26): guárdala en el centro, bajo llave, y no le hagas fotos
+          con el móvil. El profesorado tiene deber de sigilo (Ley Orgánica de Educación, disposición adicional vigesimotercera).
+        </p>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Observar y seguir al alumnado con NEAE.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/registro-observacion-neae</span>
+        </p>
+        <p>
+          Fuentes: Stecker, P. M., Fuchs, L. S. y Fuchs, D. (2005). Using curriculum-based measurement to improve student
+          achievement: Review of research. <em>Psychology in the Schools, 42</em>(8), 795-819. Jung, P.-G. y otros (2018).
+          Effects of data-based individualization for students with intensive learning needs: A meta-analysis.
+          <em>Learning Disabilities Research &amp; Practice, 33</em>(3), 144-155. Normativa de la Región de Murcia: Decreto
+          n.º 359/2009, artículos 6 y 7, y Decreto n.º 209/2022, artículo 23.10. RGPD y Ley Orgánica 2/2006, de Educación.
+        </p>
+        <p>© IdEducando, 2026. Todos los derechos reservados. Puedes imprimirlo, rellenarlo y adaptarlo para tu alumnado, sin compartir el archivo ni venderlo: para recomendarlo, comparte el enlace de su ficha.</p>
+      </div>
+    </section>
+
+    <script>
+      // Áreas e indicadores: cada uno describe algo que se puede ver, dicho en positivo.
+      const AREAS = [
+        ['Comunicación y lenguaje', [
+          'Pide lo que necesita o ayuda, con palabras, gestos, pictogramas o un comunicador.',
+          'Entiende una instrucción de dos pasos dicha al grupo.',
+          'Cuenta algo que le ha pasado de forma que se entiende.',
+        ]],
+        ['Atención y trabajo', [
+          'Empieza la tarea sin que haya que repetírsela.',
+          'Sigue en una tarea de su nivel el tiempo que se espera para su edad.',
+          'Termina la tarea o pide ayuda cuando se atasca.',
+        ]],
+        ['Relación con los demás', [
+          'Juega o trabaja con otros compañeros y compañeras.',
+          'Respeta el turno en los juegos y en las conversaciones.',
+          'Busca a un adulto o a un compañero cuando tiene un problema.',
+        ]],
+        ['Autonomía', [
+          'Sigue las rutinas de clase: entrar, colgar sus cosas y sentarse.',
+          'Encuentra, usa y recoge su material.',
+          'Se ocupa de su aseo y de comer como se espera para su edad.',
+        ]],
+        ['Emociones y conducta', [
+          'Dice o muestra cómo se siente.',
+          'Se calma con una ayuda que ya conoce: el rincón de la calma, respirar o pedir una pausa.',
+          'Acepta un cambio de plan cuando se le avisa antes.',
+        ]],
+        ['Aprendizajes', [
+          'Lectura: lee y entiende textos de su nivel.',
+          'Escritura: escribe palabras o frases con sentido para su nivel.',
+          'Cálculo: resuelve operaciones y problemas sencillos de su nivel.',
+        ]],
+        ['Movimiento y sentidos', [
+          'Maneja el lápiz, las tijeras y el pegamento.',
+          'Se mueve con seguridad en clase, en el patio y en las escaleras.',
+          'Lleva bien los ruidos, las luces y el contacto del día a día.',
+        ]],
+      ];
+      const usar = (id) => `<svg class="ico" aria-hidden="true"><use href="#${id}" /></svg>`;
+      for (const cuerpo of document.querySelectorAll('[data-areas]')) {
+        const [desde, hasta] = cuerpo.dataset.areas.split('-').map(Number);
+        cuerpo.innerHTML = AREAS.slice(desde, hasta + 1)
+          .map(([area, indicadores]) =>
+            `<tr><th scope="rowgroup" colspan="5" class="area">${area}</th></tr>` +
+            indicadores
+              .map(
+                (texto) =>
+                  `<tr><td>${texto}</td><td class="marca">${usar('i-casi-nunca')}</td><td class="marca">${usar('i-casi-nunca')}</td><td class="marca">${usar('i-casi-nunca')}</td><td class="ayuda"></td></tr>`,
+              )
+              .join(''),
+          )
+          .join('');
+      }
+
+      document.getElementById('filas-diario').innerHTML = Array.from(
+        { length: 7 },
+        () => `<tr><td></td><td class="momentos">
+          <span>Entrada</span><span>Asamblea</span><span>Trabajo</span><span>Recreo</span><span>Comedor o salida</span>
+        </td><td></td><td></td><td></td></tr>`,
+      ).join('');
+
+      document.getElementById('filas-trimestral').innerHTML = Array.from(
+        { length: 6 },
+        (_, i) => `<tr><th scope="row">${i + 1}</th><td></td><td></td><td class="opciones">
+          <span>${usar('i-casi-nunca')}Aún no</span>
+          <span>${usar('i-a-veces')}En proceso</span>
+          <span>${usar('i-casi-siempre')}Conseguido</span>
+          <span><span class="estrella">★</span>Lo generaliza</span>
+        </td><td></td></tr>`,
+      ).join('');
+    </script>
+  </body>
+</html>

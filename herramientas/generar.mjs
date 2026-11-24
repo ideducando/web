@@ -184,6 +184,12 @@ const DOCUMENTOS = [
     palabras: 'registro de sesiones, Pedagogía Terapéutica, Audición y Lenguaje, seguimiento, objetivos, plan de trabajo individual, evaluación, coordinación, Infantil, Primaria',
   },
   {
+    id: 'registro-observacion-neae',
+    asunto:
+      'Observar y seguir al alumnado con necesidad específica de apoyo educativo (NEAE): observación por siete áreas con escala de tres puntos, diario de momentos, registro trimestral con cuatro niveles de logro y guía con protección de datos',
+    palabras: 'registro de observación, NEAE, NEE, observación por áreas, diario de observación, registro trimestral, seguimiento, plan de actuación personalizado, PAP, atención a la diversidad, coordinación, Infantil, Primaria',
+  },
+  {
     id: 'ya-he-terminado',
     asunto:
       'Ya he terminado: rincón de juegos tranquilos para cuando el alumnado acaba antes, con tablero de elección con pictogramas de ARASAAC, siete juegos en tres niveles, tarjetas de pasos, temporizador visual, guía y nota para las familias',
