@@ -1,4 +1,41 @@
 {
+  "agenda-que-no-acaba-en-un-cajon": {
+    "total": 11,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Un plan"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Semana 1"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para colgar junto a la agenda"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
   "agenda-visual-pictogramas": {
     "total": 17,
     "fotos": [

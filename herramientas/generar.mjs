@@ -375,6 +375,11 @@ const DOCUMENTOS = [
     asunto: 'Rutinas visuales para casa con pictogramas de ARASAAC: seis rutinas del día en tres longitudes, de 4, 6 y 8 pasos, con tiras para montar y una guía para familias',
     palabras: 'rutinas, apoyos visuales, secuencias, autonomía, familias, casa, TEA, TDAH, discapacidad intelectual, pictogramas, ARASAAC, Infantil, Primaria',
   },
+  {
+    id: 'agenda-que-no-acaba-en-un-cajon',
+    asunto: 'La agenda que no acaba en un cajón: plan de 4 semanas para que la agenda visual se use cada día y dure, en lectura fácil, con hoja de seguimiento, tarjetas «¿y si…?» y lista de repuestos',
+    palabras: 'agenda visual, apoyos visuales, rutinas, familias, casa, lectura fácil, TEA, TDAH, discapacidad intelectual, pictogramas, ARASAAC, seguimiento',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
