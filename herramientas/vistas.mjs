@@ -79,10 +79,12 @@ function tituloDe(pdf, pagina) {
   } catch {
     return '';
   }
+  // Se salta también una etiqueta que acaba en «de» o «del» y espera algo escrito a mano después,
+  // como «El calendario de ____» en la cabecera de los calendarios.
   const primera = texto
     .split('\n')
     .map((l) => l.trim().split(/\s{2,}/)[0].trim())
-    .find((l) => l && !/ideducando\.es|^\d+( de \d+)?$/i.test(l));
+    .find((l) => l && !/ideducando\.es|^\d+( de \d+)?$/i.test(l) && !/\s(de|del)$/i.test(l));
   if (!primera) return '';
   const titulo = suavizar(primera).replace(/[.:·\s]+$/, '');
   const letras = titulo.replace(/[^\p{L}]/gu, '').length;
