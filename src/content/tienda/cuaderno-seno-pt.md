@@ -7,6 +7,12 @@ edades: "Para docentes de PT, con alumnado de Infantil y Primaria"
 formatos:
   - "Descarga en PDF, para imprimir a doble cara y encuadernar con anillas o espiral"
   - "Impreso y encuadernado, desde Cartagena: lo estudiaremos si nos lo pedís"
+tabla:
+  tipo: papel
+  formato: "Cuaderno A4 vertical en PDF, para imprimir a doble cara"
+  medidas: "A4 (21 × 29,7 cm)"
+  papel: "El que elijas al imprimir, a doble cara"
+  encuadernacion: "Con anillas o espiral"
 estado: en-preparacion
 portada: /tienda/cuaderno-seno-pt/portada.webp
 portada_alt: "Portada del «Cuaderno de la seño de PT»: «Tu curso de apoyos, en un solo cuaderno», con el hueco «Curso 20__-20__», seis iconos de colores y pestañas de color en el borde."
@@ -43,6 +49,7 @@ gratis: "Mientras tanto, el registro de sesiones de PT y AL es gratis, en Materi
 relacionado: registro-sesiones-pt-al
 orden: 40
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

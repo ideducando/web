@@ -8,6 +8,13 @@ formatos:
   - "Kit para montar, enviado a casa o al cole"
   - "Ya montada, desde Cartagena"
 medidas_exactas: true
+tabla:
+  tipo: piezas
+  medidas: "Hojas A4 (29,7 × 21 cm) y círculos de velcro de 1,5 y 2 cm"
+  piezas: "3 hojas impresas, 2 cartulinas para tus pictogramas, 5 fundas de plastificar, 78 círculos de velcro (74 de 1,5 cm, mitad rugosos y mitad suaves, y 4 de 2 cm) y la hoja de montaje"
+  materiales: "Cartulina blanca de 160 g impresa a color, fundas de plastificar de 125 micras y velcro adhesivo"
+  montaje: "Con la hoja de montaje del kit, la misma de la agenda gratuita."
+  montaje_material: agenda-visual-semanal
 estado: en-estudio
 portada: /tienda/kit-agenda-visual/portada.webp
 portada_alt: "Portada del kit: la agenda semanal con los cinco días de lunes a viernes en columnas de colores y huecos para pictogramas."
@@ -34,6 +41,7 @@ gratis: "El PDF de la agenda es gratis: si prefieres imprimirla y montarla tú, 
 relacionado: agenda-visual-semanal
 orden: 58
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

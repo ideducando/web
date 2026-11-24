@@ -6,6 +6,12 @@ para: [docentes, familias]
 formatos:
   - "Kit para montar, enviado a casa o al cole"
 medidas_exactas: true
+tabla:
+  tipo: piezas
+  medidas: "Las del material que elijas: van en su «Cómo montarlo»"
+  piezas: "Las del material que elijas, contadas una a una: hojas, velcro, fundas y, si las lleva, anillas o pinzas"
+  materiales: "Cartulina impresa a color, fundas de plastificar, velcro adhesivo y, según el material, anillas o pinzas"
+  montaje: "Con la hoja de montaje que va en el kit: el tiempo, los pasos y los cuidados."
 estado: en-estudio
 portada: /tienda/kit-para-montar/portada.svg
 portada_alt: "Ilustración: una caja de cartón abierta con láminas impresas, una tira de círculos de velcro, fundas de plastificar y dos anillas."
@@ -18,6 +24,7 @@ incluye:
   - "La hoja de montaje, con el tiempo, los pasos y los cuidados"
 orden: 60
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

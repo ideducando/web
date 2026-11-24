@@ -7,6 +7,12 @@ edades: "De 2 a 4 años"
 formatos:
   - "Descarga en PDF, para leerlo en pantalla o imprimirlo"
   - "Libro en papel, también en Amazon"
+tabla:
+  tipo: papel
+  formato: "Cuento ilustrado apaisado: en PDF y, más adelante, en papel"
+  medidas: "En PDF, A4 apaisado (29,7 × 21 cm). En papel, por confirmar"
+  papel: "Por confirmar"
+  encuadernacion: "Por confirmar"
 estado: en-revision
 portada: /tienda/cola-con-cola/portada.webp
 portada_alt: "Portada de «Cola con cola»: debajo del mar, Rizo, un caballito de mar naranja con mochila roja, y su papá juntan la nariz y enganchan las colas, formando un corazón."
@@ -39,6 +45,7 @@ incluye:
 gratis: "La versión con pictogramas será gratis siempre, en Material gratuito."
 orden: 13
 fecha: 2026-11-05
+actualizado: 2026-11-24
 borrador: false
 ---
 

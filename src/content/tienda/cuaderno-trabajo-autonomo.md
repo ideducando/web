@@ -8,6 +8,12 @@ formatos:
   - "Descarga en PDF (A4 apaisado), para plastificar y montar con anillas"
   - "Kit para montar en casa, con el material contado"
   - "Ya montado, enviado desde Cartagena"
+tabla:
+  tipo: piezas
+  medidas: "Hojas A4 apaisadas (29,7 × 21 cm)"
+  piezas: "82 piezas con velcro, 2 tiras de tareas (de 5 y de 2 huecos), 18 tarjetas de tarea, 3 tarjetas «Después», la tarjeta «Terminado» y 3 tapas"
+  materiales: "Cartulina, fundas de plastificar, velcro adhesivo y anillas: la cantidad exacta va en su hoja «Cómo montarlo»"
+  montaje: "Con la hoja «Cómo montarlo» del cuaderno, con la lista exacta de material y los pasos."
 estado: en-preparacion
 portada: /tienda/cuaderno-trabajo-autonomo/portada.webp
 portada_alt: "Portada del «Cuaderno de trabajo autónomo», para Infantil y primeros cursos de Primaria: una mesa vista desde arriba con la tira de tareas, el cuaderno abierto por una tarea de emparejar y la caja de terminado, y los 6 tipos de tarea."
@@ -42,6 +48,7 @@ incluye:
   - "Hoja de registro para anotar cada sesión"
 orden: 32
 fecha: 2026-11-05
+actualizado: 2026-11-24
 borrador: false
 ---
 

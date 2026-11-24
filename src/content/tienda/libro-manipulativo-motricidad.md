@@ -8,6 +8,12 @@ formatos:
   - "Descarga en PDF, para plastificar y montar con anillas"
   - "Kit con el material para montarlo en casa"
   - "Ya montado, desde Cartagena"
+tabla:
+  tipo: piezas
+  medidas: "Hojas A4 (21 × 29,7 cm)"
+  piezas: "18 páginas de actividades, 26 piezas para emparejar (13 formas y 13 peces), 3 hojas de tijeras, tapa y contratapa"
+  materiales: "Cartulina, fundas de plastificar, velcro adhesivo y anillas: la cantidad exacta va en su hoja «Cómo montarlo»"
+  montaje: "Con la hoja «Cómo montarlo» del libro, con la lista exacta de material y los pasos."
 estado: en-preparacion
 portada: /tienda/libro-manipulativo-motricidad/portada.webp
 portada_alt: "Portada del libro manipulativo de motricidad fina, para Infantil de 3 a 5 años: un libro de anillas abierto con piezas de velcro, una pinza y un camino para repasar, y las seis secciones del libro."
@@ -39,6 +45,7 @@ incluye:
   - "Guía para el adulto: cómo elegir el nivel, ideas para adaptarlo y seguridad"
 orden: 30
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

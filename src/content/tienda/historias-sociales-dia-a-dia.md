@@ -7,6 +7,12 @@ edades: "De 3 a 10 años"
 formatos:
   - "Descarga en PDF, para imprimir"
   - "Kit para montar o ya montado, si nos lo pedís"
+tabla:
+  tipo: papel
+  formato: "Pack de historias en PDF (A4 vertical), para imprimir; en kit o montado, si nos lo pedís"
+  medidas: "A4 (21 × 29,7 cm)"
+  papel: "En PDF, el que elijas al imprimir. En kit o montado, por confirmar"
+  encuadernacion: "Por confirmar"
 estado: en-preparacion
 portada: /tienda/historias-sociales-dia-a-dia/portada.svg
 portada_alt: "Ilustración: cuatro tarjetas con los lugares del pack, una pizarra de clase, una pelota del patio, un plato con cubiertos y una casa."
@@ -30,6 +36,7 @@ gratis: "Mientras tanto, tienes gratis historias sociales con pictogramas en Mat
 relacionado: historias-sociales-cole-y-casa
 orden: 20
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

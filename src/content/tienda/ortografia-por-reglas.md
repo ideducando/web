@@ -7,6 +7,12 @@ edades: "De 7 a 9 años (2.º y 3.º de Primaria)"
 formatos:
   - "Descarga en PDF (A4 vertical), para imprimir y escribir en él"
   - "Impreso y encuadernado, enviado desde Cartagena"
+tabla:
+  tipo: papel
+  formato: "Cuaderno A4 vertical: en PDF para imprimir y escribir en él, o impreso desde Cartagena"
+  medidas: "A4 (21 × 29,7 cm)"
+  papel: "En PDF, el que elijas al imprimir. Impreso, por confirmar"
+  encuadernacion: "Impreso, por confirmar"
 estado: en-revision
 portada: /tienda/ortografia-por-reglas/portada.webp
 portada_alt: "Portada de «Ortografía por reglas», cuadernillo para 2.º y 3.º de Primaria: un cuadernillo abierto con renglones escritos y marcas de bien hecho, un lápiz y una bombilla, y los tres bloques de reglas."
@@ -49,6 +55,7 @@ incluye:
   - "Dibujos y símbolos propios de IdEducando"
 orden: 45
 fecha: 2026-11-08
+actualizado: 2026-11-24
 borrador: false
 ---
 
