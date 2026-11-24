@@ -1491,7 +1491,7 @@
         "alto": 1000,
         "mini_ancho": 113,
         "mini_alto": 160,
-        "titulo": "Misiones de"
+        "titulo": "Plantillas ennivel"
       },
       {
         "pagina": 4,
@@ -1998,6 +1998,43 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Historia social · para leer antes del recreo"
+      }
+    ]
+  },
+  "rutinas-visuales-casa": {
+    "total": 25,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "6 rutinas"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo funcionan las tiras"
+      },
+      {
+        "pagina": 6,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Antes de imprimir"
+      },
+      {
+        "pagina": 7,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me levanto y me visto: tira corta y tarjetas"
       }
     ]
   },

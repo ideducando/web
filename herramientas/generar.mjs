@@ -358,6 +358,11 @@ const DOCUMENTOS = [
     palabras: 'horario del aula, semana, organización, anticipación, curso 2026-2027, Cartagena, TEA, TDAH, pictogramas, ARASAAC, Infantil, Primaria',
     antes: () => import('./pdf/calendarios-cole.mjs').then((m) => m.generarCalendario(raiz, carpetaPdf, 'semana-del-aula-2026-2027')),
   },
+  {
+    id: 'rutinas-visuales-casa',
+    asunto: 'Rutinas visuales para casa con pictogramas de ARASAAC: seis rutinas del día en tres longitudes, de 4, 6 y 8 pasos, con tiras para montar y una guía para familias',
+    palabras: 'rutinas, apoyos visuales, secuencias, autonomía, familias, casa, TEA, TDAH, discapacidad intelectual, pictogramas, ARASAAC, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);
