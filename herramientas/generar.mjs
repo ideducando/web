@@ -387,7 +387,7 @@ const DOCUMENTOS = [
   },
   {
     id: 'historias-sociales-vida-diaria',
-    asunto: 'Historias sociales de la vida diaria con pictogramas de ARASAAC: ir al médico, al dentista, a la peluquería, al supermercado y a un análisis de sangre, con guía para la familia',
+    asunto: 'Historias sociales de la vida diaria con pictogramas de ARASAAC: ir al médico, al dentista, a la peluquería, al supermercado y a un análisis de sangre, con guía para el adulto',
     palabras: 'historias sociales, anticipación, médico, dentista, peluquería, supermercado, análisis de sangre, TEA, ansiedad, familias, pictogramas, ARASAAC, Infantil, Primaria',
   },
   {
