@@ -1,0 +1,1566 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Plan hacia 2028: la oposición de Maestros en Murcia, trimestre a trimestre (PT e Infantil) · IdEducando</title>
+    <meta name="author" content="IdEducando" />
+    <meta
+      name="description"
+      content="Plan de 18 meses, de enero de 2027 a junio de 2028, para preparar la oposición de Maestros de Pedagogía Terapéutica y de Educación Infantil en la Región de Murcia: temas, supuesto práctico, programación, oral y méritos, con una hoja para apuntar las fechas de la convocatoria."
+    />
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Sin pictogramas de ARASAAC: todos los derechos reservados (José, 28/10/2026).
+         En este material ningún texto baja de 11 pt, tampoco el pie de página. */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja--ultima {
+        break-after: auto;
+      }
+
+      /* ---------- Colores de cada hilo del plan ---------- */
+      .h-fechas {
+        --c: var(--marino);
+        --t: var(--crema);
+      }
+      .h-temas {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+      }
+      .h-practico {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+      }
+      .h-programacion {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+      }
+      .h-oral {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+      }
+      .h-meritos {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+      }
+      .h-balance {
+        --c: var(--suave);
+        --t: #fff;
+      }
+
+      /* ---------- Marcas: dato de 2026 y previsión ---------- */
+      .ref {
+        font-family: var(--titulos);
+        font-weight: 600;
+        color: var(--verde-texto);
+        white-space: nowrap;
+      }
+
+      .prevision {
+        display: inline-block;
+        padding: 0 2mm;
+        border: 0.45mm dashed var(--coral-texto);
+        border-radius: 99px;
+        background: var(--coral-tinte);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--marino);
+        white-space: nowrap;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 15mm;
+      }
+
+      .portada__titulo {
+        font-size: 56pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+        letter-spacing: -0.01em;
+      }
+
+      .portada__subtitulo {
+        max-width: 150mm;
+        margin-bottom: 6mm;
+      }
+
+      .portada__aviso {
+        align-self: flex-start;
+        margin: 0;
+        padding: 2mm 5mm;
+        border: 0.6mm dashed var(--coral-texto);
+        border-radius: 99px;
+        background: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1.25;
+        color: var(--marino);
+        transform: rotate(-1.5deg);
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .ilustracion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        z-index: 0;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .cabecera {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 6mm;
+        margin: 0 0 3.5mm;
+      }
+
+      .cabecera .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabecera h1 {
+        font-size: 22pt;
+        margin: 0;
+      }
+
+      .cabecera img {
+        width: 36mm;
+        height: auto;
+        flex: none;
+        margin-top: 1mm;
+      }
+
+      .entrada {
+        margin: 0 0 3.5mm;
+        font-size: 11.5pt;
+        line-height: 1.4;
+      }
+
+      /* ---------- Aviso grande: 2028 es una previsión ---------- */
+      .aviso-grande {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        gap: 4mm;
+        align-items: start;
+        margin: 0 0 4mm;
+        padding: 4mm 5mm;
+        border: 0.6mm dashed var(--coral-texto);
+        border-left: 2.2mm solid var(--coral);
+        border-radius: 3mm;
+        background: var(--coral-tinte);
+        break-inside: avoid;
+      }
+
+      .aviso-grande::before {
+        content: '!';
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 11mm;
+        border-radius: 50%;
+        background: var(--coral-texto);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+      }
+
+      .aviso-grande h2 {
+        margin: 0.5mm 0 1.5mm;
+        font-size: 15pt;
+      }
+
+      .aviso-grande p {
+        margin: 0 0 1.8mm;
+        line-height: 1.4;
+      }
+
+      .aviso-grande p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ---------- El plan de un vistazo ---------- */
+      .hoja h2.seccion {
+        font-size: 15pt;
+        margin: 0 0 2mm;
+      }
+
+      /* Sin márgenes negativos: si algo asoma por el borde de la hoja, Chromium encoge todo el PDF
+         y la letra de 11 pt sale más pequeña. */
+      table.vistazo {
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 1mm;
+        margin: 0 0 3mm;
+        width: 100%;
+        line-height: 1.22;
+      }
+
+      table.vistazo th,
+      table.vistazo td {
+        border: 0;
+        padding: 1mm 1.2mm;
+        border-radius: 1.6mm;
+        vertical-align: middle;
+      }
+
+      table.vistazo thead th {
+        background: var(--marino);
+        color: #fff;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.15;
+      }
+
+      table.vistazo thead th b {
+        display: block;
+        font-size: 15pt;
+        line-height: 1;
+        margin-bottom: 0.6mm;
+      }
+
+      table.vistazo thead th.prevista {
+        background: #fff;
+        color: var(--marino);
+        border: 0.5mm dashed var(--coral-texto);
+      }
+
+      table.vistazo thead td {
+        background: none;
+      }
+
+      table.vistazo tbody th {
+        hyphens: manual;
+        background: var(--t);
+        border-left: 1.8mm solid var(--c);
+        border-radius: 0 1.6mm 1.6mm 0;
+        font-weight: 600;
+        line-height: 1.15;
+      }
+
+      table.vistazo tbody td {
+        background: var(--t);
+        text-align: center;
+      }
+
+      table.vistazo tbody td.prevista {
+        background: #fff;
+        border: 0.5mm dashed var(--coral-texto);
+      }
+
+      .nota {
+        margin: 0 0 3mm;
+        line-height: 1.4;
+      }
+
+      /* ---------- Cómo se lee y cómo usarlo ---------- */
+      .dos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: start;
+      }
+
+      .dos h2 {
+        font-size: 14pt;
+        margin: 0 0 2mm;
+      }
+
+      .leyenda {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .leyenda li {
+        margin: 0 0 2mm;
+        line-height: 1.4;
+      }
+
+      .leyenda li > :first-child {
+        margin-right: 1.2mm;
+      }
+
+      .pasos {
+        margin: 0;
+        padding-left: 6mm;
+        line-height: 1.4;
+      }
+
+      .pasos li {
+        margin-bottom: 1.6mm;
+      }
+
+      /* ---------- Hojas de cada semestre ---------- */
+      table.plan {
+        table-layout: fixed;
+        border-collapse: separate;
+        border-spacing: 0;
+        line-height: 1.26;
+        margin: 0;
+      }
+
+      table.plan th,
+      table.plan td {
+        border: 0;
+        vertical-align: top;
+      }
+
+      table.plan thead th {
+        background: none;
+        color: var(--marino);
+        padding: 0 0 1.6mm 2mm;
+      }
+
+      .trimestre {
+        display: block;
+        padding: 1.5mm 3mm 1.7mm;
+        border-radius: 2.5mm;
+        background: var(--crema);
+        border-top: 2.2mm solid var(--c);
+        font-weight: 400;
+      }
+
+      .trimestre__cuando {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .trimestre__lema {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1.15;
+      }
+
+      .trimestre--previsto {
+        background: #fff;
+        border: 0.5mm dashed var(--coral-texto);
+        border-top: 2.2mm dashed var(--coral-texto);
+      }
+
+      .trimestre--previsto .prevision {
+        margin-left: 2mm;
+        vertical-align: 0.4mm;
+      }
+
+      table.plan tbody th {
+        padding: 1.6mm 1mm 1.6mm 2mm;
+        hyphens: manual;
+        border-left: 2mm solid var(--c);
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        line-height: 1.2;
+        border-bottom: 0.4mm solid #fff;
+      }
+
+      table.plan tbody td {
+        padding: 1.6mm 1.6mm 1.3mm 2.4mm;
+        border-bottom: 0.35mm solid var(--linea);
+      }
+
+      table.plan tbody tr.h-fechas td {
+        background: var(--crema);
+        border-bottom-color: #fff;
+      }
+
+      .tareas,
+      .avisos {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .tareas li,
+      .avisos li {
+        display: grid;
+        grid-template-columns: 4.2mm minmax(0, 1fr);
+        gap: 1.6mm;
+        align-items: start;
+        margin: 0 0 1.1mm;
+      }
+
+      .tareas li:last-child,
+      .avisos li:last-child {
+        margin-bottom: 0;
+      }
+
+      .tareas li::before {
+        content: '';
+        width: 3.8mm;
+        height: 3.8mm;
+        margin-top: 0.45mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 0.8mm;
+        background: #fff;
+      }
+
+      .avisos li::before {
+        content: '';
+        width: 2.6mm;
+        height: 2.6mm;
+        margin: 1.1mm 0 0 0.6mm;
+        border-radius: 0.5mm;
+        background: var(--marino);
+        transform: rotate(45deg);
+      }
+
+      table.plan tbody tr.h-balance th {
+        background: #fff;
+        border-left-color: var(--linea);
+      }
+
+      .renglones {
+        padding-top: 1mm;
+      }
+
+      .renglones span {
+        display: block;
+        height: 6.5mm;
+        border-bottom: 0.35mm solid #8790b3;
+      }
+
+      .aviso-tira {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 3.5mm;
+        padding: 2mm 4mm;
+        border: 0.5mm dashed var(--coral-texto);
+        border-radius: 3mm;
+        background: var(--coral-tinte);
+        line-height: 1.35;
+      }
+
+      .aviso-tira b {
+        font-family: var(--titulos);
+      }
+
+      /* ---------- Mis fechas ---------- */
+      .datos {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2mm 6mm;
+        margin: 0 0 4mm;
+      }
+
+      .dato {
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .dato .hueco {
+        flex: 1;
+        min-width: 8mm;
+        height: 6mm;
+        border-bottom: 0.35mm solid var(--marino);
+      }
+
+      .rodea {
+        display: inline-block;
+        padding: 0 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      table.fechas,
+      table.metas {
+        table-layout: fixed;
+        border: 0.4mm solid #8790b3;
+        line-height: 1.3;
+        margin: 0 0 4mm;
+      }
+
+      table.fechas th,
+      table.fechas td,
+      table.metas th,
+      table.metas td {
+        border: 0.3mm solid #8790b3;
+        padding: 1.6mm 2mm;
+        vertical-align: middle;
+      }
+
+      table.fechas thead th,
+      table.metas thead th {
+        font-weight: 600;
+      }
+
+      table.fechas thead th.col-2028,
+      table.metas thead th.col-mia {
+        background: var(--coral-tinte);
+        color: var(--marino);
+      }
+
+      table.fechas tbody th,
+      table.metas tbody th {
+        font-family: var(--titulos);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      table.fechas td.en-2026 {
+        background: var(--verde-tinte);
+      }
+
+      table.fechas td.escribe {
+        height: 12mm;
+      }
+
+      table.metas td {
+        height: 8.5mm;
+      }
+
+      .hoja h2.sub {
+        font-size: 14pt;
+        margin: 0 0 1.5mm;
+      }
+
+      .sub-nota {
+        margin: 0 0 2mm;
+        line-height: 1.35;
+      }
+
+      /* ---------- Méritos ---------- */
+      .bloques {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3.5mm;
+        margin: 0 0 4mm;
+      }
+
+      .bloque {
+        display: flex;
+        flex-direction: column;
+        padding: 2.6mm 3.2mm 3mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border-top: 2mm solid var(--amarillo);
+        line-height: 1.35;
+        break-inside: avoid;
+      }
+
+      .bloque p {
+        flex: 1;
+      }
+
+      .bloque__mio {
+        display: block;
+        margin-top: 2mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        color: var(--suave);
+      }
+
+      .bloque__mio + span,
+      .bloque__mio + span + span {
+        display: block;
+        height: 6.5mm;
+        border-bottom: 0.3mm solid #8790b3;
+      }
+
+      .bloque h3 {
+        margin: 0 0 1.2mm;
+        font-size: 12.5pt;
+      }
+
+      .bloque p {
+        margin: 0;
+      }
+
+      .reglas-2026 {
+        margin: 0 0 3.5mm;
+        padding-left: 5.5mm;
+        line-height: 1.3;
+      }
+
+      .reglas-2026 li {
+        margin-bottom: 0.8mm;
+      }
+
+      .fuentes {
+        margin: 0 0 2mm;
+        padding-left: 6mm;
+        line-height: 1.3;
+      }
+
+      .fuentes li {
+        margin-bottom: 1mm;
+        break-inside: avoid;
+      }
+
+      .creditos {
+        font-size: 11pt;
+        line-height: 1.32;
+        margin-top: 2.5mm;
+        padding-top: 2mm;
+      }
+
+      .creditos p {
+        margin-bottom: 1.2mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <svg class="ilustracion" viewBox="0 0 210 297" aria-hidden="true" id="ilustracion"></svg>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Oposiciones de Maestros · Región de Murcia</p>
+        <h1 class="portada__titulo">Plan hacia 2028</h1>
+        <p class="portada__subtitulo">
+          Qué hacer cada trimestre, de enero de 2027 a junio de 2028, si preparas Pedagogía Terapéutica (PT) o Educación
+          Infantil.
+        </p>
+        <p class="portada__aviso">La convocatoria de 2028 está prevista, sin confirmar</p>
+        <div class="portada__pie">
+          <p>© IdEducando. Todos los derechos reservados<br />ideducando.es</p>
+          <p>Edición de noviembre de 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ANTES DE EMPEZAR
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Plan hacia 2028 · Antes de empezar</p>
+          <h1>Cómo usar el plan</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+
+      <div class="aviso-grande">
+        <div>
+          <h2>La convocatoria de 2028 está prevista, sin confirmar</h2>
+          <p>
+            Hubo oposiciones de Maestros en la Región de Murcia en 2019, 2022, 2024 y 2026. Si se repite la alternancia,
+            tocarían en 2028, pero aún no hay anuncio oficial. Las fechas de 2028 de este plan son una previsión nuestra y
+            cambiarán cuando la convocatoria salga en el Boletín Oficial de la Región de Murcia (BORM). Ese día, apunta las
+            reales en la página 6.
+          </p>
+          <p>
+            Además, el Ministerio de Educación negocia una reforma del Reglamento de ingreso (Real Decreto 276/2007) que
+            podría cambiar las pruebas y el baremo. A 24/11/2026 no había nada publicado en el Boletín Oficial del Estado
+            (BOE).
+          </p>
+        </div>
+      </div>
+
+      <h2 class="seccion">El plan de un vistazo</h2>
+      <table class="vistazo">
+        <colgroup>
+          <col style="width: 27mm" />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col"><b>1</b>ene.-mar. 2027</th>
+            <th scope="col"><b>2</b>abr.-jun. 2027</th>
+            <th scope="col"><b>3</b>jul.-sept. 2027</th>
+            <th scope="col"><b>4</b>oct.-dic. 2027</th>
+            <th scope="col" class="prevista"><b>5</b>ene.-mar. 2028</th>
+            <th scope="col" class="prevista"><b>6</b>abr.-jun. 2028</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="h-temas">
+            <th scope="row">Temas</th>
+            <td>6 temas</td>
+            <td>6 más: 12</td>
+            <td>6 más: 18</td>
+            <td>7 más: los 25</td>
+            <td>Segunda vuelta</td>
+            <td>Repaso final</td>
+          </tr>
+          <tr class="h-practico">
+            <th scope="row">Supuesto práctico</th>
+            <td>Leer los criterios</td>
+            <td>Uno cada 15 días</td>
+            <td>Uno cada 15 días</td>
+            <td>En tiempo real</td>
+            <td>Uno por semana</td>
+            <td>Simulacro entero</td>
+          </tr>
+          <tr class="h-programacion">
+            <th scope="row">Progra&shy;mación</th>
+            <td>Curso o caso</td>
+            <td>Índice de 12 unidades</td>
+            <td>Las 12 unidades</td>
+            <td>Versión completa</td>
+            <td>Ajuste a las bases</td>
+            <td>Impresa</td>
+          </tr>
+          <tr class="h-oral">
+            <th scope="row">Oral</th>
+            <td>El reloj del oral</td>
+            <td>5 minutos en voz alta</td>
+            <td>Una unidad</td>
+            <td>La defensa</td>
+            <td>Grabaciones 1 y 2</td>
+            <td>Grabación 3</td>
+          </tr>
+          <tr class="h-meritos">
+            <th scope="row">Méritos</th>
+            <td>Inventario</td>
+            <td>Elegir formación</td>
+            <td>Guardar certificados</td>
+            <td>Repasar la carpeta</td>
+            <td>Fecha límite</td>
+            <td>El sobre</td>
+          </tr>
+          <tr class="h-fechas">
+            <th scope="row">Fechas</th>
+            <td>Oferta de empleo de 2026</td>
+            <td>Año de Secundaria</td>
+            <td>Normas nuevas</td>
+            <td>Oferta de empleo de 2027</td>
+            <td class="prevista">Convocatoria</td>
+            <td class="prevista">Primera prueba</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dos">
+        <div>
+          <h2>Cómo se lee</h2>
+          <ul class="leyenda">
+            <li>
+              <span class="ref">art. 13.1, p. 1639</span> Lo que dijo la convocatoria de 2026, la Orden de 21 de enero de
+              2026 (BORM n.º&nbsp;18). La página es la del BORM.
+            </li>
+            <li>
+              <span class="prevision">Previsión</span> Lo que esperamos para 2028 a partir de los años anteriores. En la
+              tabla, el borde discontinuo. Puede cambiar.
+            </li>
+            <li>Las tareas son nuestra propuesta: adáptalas a tu tiempo.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Cómo usarlo</h2>
+          <ol class="pasos">
+            <li>Escribe en la página 6 tu especialidad y el día en que empiezas.</li>
+            <li>Marca cada tarea al acabarla y escribe tu balance al cerrar el trimestre.</li>
+            <li>Si empiezas más tarde, junta dos trimestres y da prioridad a los temas y a la programación.</li>
+            <li>Cuando salga la convocatoria, comprueba en el BORM cada regla y cada fecha.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         ENERO A JUNIO DE 2027
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Plan hacia 2028 · Trimestres 1 y 2</p>
+          <h1>Enero a junio de 2027</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <table class="plan">
+        <colgroup>
+          <col style="width: 25mm" />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col" class="h-temas">
+              <span class="trimestre"><span class="trimestre__cuando">Trimestre 1 · enero a marzo</span><span class="trimestre__lema">Arranque</span></span>
+            </th>
+            <th scope="col" class="h-practico">
+              <span class="trimestre"><span class="trimestre__cuando">Trimestre 2 · abril a junio</span><span class="trimestre__lema">Primera vuelta</span></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="h-fechas">
+            <th scope="row">Fechas</th>
+            <td>
+              <ul class="avisos">
+                <li>
+                  <span>¿Salió la oferta de empleo público docente de 2026? Mira qué plazas trae para Maestros.
+                    <span class="prevision">Previsión</span> Las de 2023 a 2025 salieron en diciembre.</span>
+                </li>
+                <li>
+                  <span>En 2027 habrá oposiciones de Secundaria, Formación Profesional y otros cuerpos. La nota de la
+                    Consejería del 23/11/2026 no anuncia plazas de Maestros.</span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="avisos">
+                <li>
+                  <span>Si ya se celebran las de Secundaria y sus defensas son públicas, como las de Maestros en 2026
+                    <span class="ref">art. 51.19, p. 1658</span>, ve a ver alguna.</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-temas">
+            <th scope="row">Temas</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Ordena los 25 temas y prepara los 6 primeros, unos 2 al mes.</span></li>
+                <li>
+                  <span>Escribe uno a mano y con reloj: en 2026, la parte B duró 2 horas
+                    <span class="ref">art. 48.3, p. 1654</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Prepara 6 temas más: 12 en total.</span></li>
+                <li><span>Cada semana, repasa en 10 minutos el esquema de un tema ya hecho.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-practico">
+            <th scope="row">Supuesto práctico</th>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Lee cómo se corrigió la parte A en 2026. Infantil:
+                    <span class="ref">anexo XVII, pp. 1720-1721</span>. PT:
+                    <span class="ref">anexo XXII, pp. 1750-1752</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Haz un supuesto cada 15 días y corrígelo con esos criterios.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-programacion">
+            <th scope="row">Progra&shy;mación</th>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Infantil: elige el curso; abarca un año académico completo
+                    <span class="ref">art. 51.2, p. 1656</span></span>
+                </li>
+                <li>
+                  <span>PT: elige la modalidad <span class="ref">art. 51.4, p. 1656</span>, el centro y el alumno o el
+                    grupo. Empieza por su evaluación psicopedagógica.</span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Cierra el índice: 12 unidades o más, numeradas
+                    <span class="ref">art. 51.6 y 51.11, pp. 1656-1657</span></span>
+                </li>
+                <li>
+                  <span>Escribe la parte general con lo que pide el <span class="ref">art. 51.2, p. 1656</span>: objetivos,
+                    contenidos, criterios de evaluación, metodología y atención al alumnado con necesidades específicas de apoyo
+                    educativo.</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-oral">
+            <th scope="row">Oral</th>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Mira en el reloj del oral del kit para el examen de IdEducando cuánto dura cada parte.</span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Cuenta en voz alta, en 5 minutos, de qué trata tu programación.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-meritos">
+            <th scope="row">Méritos</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Haz el inventario de tus méritos en la página 7.</span></li>
+                <li>
+                  <span>Revisa tu experiencia y tu formación en tu zona privada de Educarm
+                    <span class="ref">art. 57.7, p. 1661</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Antes de apuntarte a un curso, mira si encaja en el baremo de 2026: quién lo organiza o lo
+                    reconoce y de qué trata <span class="ref">anexo II, apartado 3.3, p. 1689</span></span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-balance">
+            <th scope="row">Mi balance</th>
+            <td><div class="renglones"><span></span><span></span></div></td>
+            <td><div class="renglones"><span></span><span></span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         JULIO A DICIEMBRE DE 2027
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Plan hacia 2028 · Trimestres 3 y 4</p>
+          <h1>Julio a diciembre de 2027</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <table class="plan">
+        <colgroup>
+          <col style="width: 25mm" />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col" class="h-programacion">
+              <span class="trimestre"><span class="trimestre__cuando">Trimestre 3 · julio a septiembre</span><span class="trimestre__lema">Escribir</span></span>
+            </th>
+            <th scope="col" class="h-oral">
+              <span class="trimestre"><span class="trimestre__cuando">Trimestre 4 · octubre a diciembre</span><span class="trimestre__lema">Programación entera</span></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="h-fechas">
+            <th scope="row">Fechas</th>
+            <td>
+              <ul class="avisos">
+                <li>
+                  <span>Mira si ya se aprobaron dos normas que tocan tu programación: un decreto nuevo de atención a la
+                    diversidad y una orden de ordenación académica y evaluación de Infantil y Primaria. A 24/11/2026 no lo
+                    estaban.</span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="avisos">
+                <li>
+                  <span>Oferta de empleo público docente de 2027 <span class="prevision">Previsión</span> en diciembre.
+                    Mira qué plazas trae para Maestros.</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-temas">
+            <th scope="row">Temas</th>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Prepara 6 temas más: 18 en total. Con 18, la probabilidad de que no salga ninguno de los tuyos es
+                    del 7 % (cálculo nuestro con las reglas de 2026: se eligen entre dos temas sacados de 25).</span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Prepara los 7 que faltan: primera vuelta completa.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-practico">
+            <th scope="row">Supuesto práctico</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Sigue con uno cada 15 días.</span></li>
+                <li>
+                  <span>Haz uno en tiempo real: 2 horas y 30 minutos
+                    <span class="ref">anexos XVII y XXII, pp. 1720 y 1750</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Hazlos todos en tiempo real, con la letra y la limpieza del examen.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-programacion">
+            <th scope="row">Progra&shy;mación</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Redacta las 12 unidades.</span></li>
+                <li>
+                  <span>Escribe ya con los requisitos formales de 2026: 70 páginas como máximo, Arial 11 sin comprimir,
+                    interlineado sencillo y folio UNE-A4. Si falla uno, la programación vale 0
+                    <span class="ref">anexo VI, pp. 1696-1697</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Termina la versión completa.</span></li>
+                <li><span>Repásala con la lista de comprobación de la programación de IdEducando.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-oral">
+            <th scope="row">Oral</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Expón una unidad entera en voz alta, con el reloj del oral: 50 minutos.</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Defiende la programación en 25 minutos sin leerla. En 2026 el tope era 30 y la defensa no podía
+                    ser «una mera lectura» <span class="ref">art. 51.14 y 51.17, p. 1657</span></span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-meritos">
+            <th scope="row">Méritos</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Guarda cada certificado el día que te lo den, en la carpeta de su bloque.</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Repasa la carpeta: cada curso con sus horas o créditos y cada servicio con su certificado.</span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-balance">
+            <th scope="row">Mi balance</th>
+            <td><div class="renglones"><span></span><span></span></div></td>
+            <td><div class="renglones"><span></span><span></span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         ENERO A JUNIO DE 2028 (PREVISIÓN)
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Plan hacia 2028 · Trimestres 5 y 6</p>
+          <h1>Enero a junio de 2028</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="aviso-tira">
+        <span class="prevision">Previsión</span>
+        <span>Estas fechas dependen de una convocatoria que aún no existe. Cuando salga en el BORM, apúntalas en la página
+          6 y cambia lo que haga falta.</span>
+      </p>
+      <table class="plan">
+        <colgroup>
+          <col style="width: 25mm" />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <td></td>
+            <th scope="col">
+              <span class="trimestre trimestre--previsto"><span class="trimestre__cuando">Trimestre 5 · enero a marzo</span><span class="trimestre__lema">La convocatoria<span class="prevision">Previsión</span></span></span>
+            </th>
+            <th scope="col">
+              <span class="trimestre trimestre--previsto"><span class="trimestre__cuando">Trimestre 6 · abril a junio</span><span class="trimestre__lema">Recta final<span class="prevision">Previsión</span></span></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="h-fechas">
+            <th scope="row">Fechas</th>
+            <td>
+              <ul class="avisos">
+                <li>
+                  <span>Convocatoria <span class="prevision">Previsión</span> en enero o febrero. En 2019, 2022 y 2026
+                    salió en esos meses.</span>
+                </li>
+                <li><span>El día que salga, léela entera y apunta sus fechas en la página 6.</span></li>
+                <li>
+                  <span>Solicitud y tasa: en 2026 hubo 15 días hábiles de plazo
+                    <span class="ref">art. 13.1, p. 1639</span></span>
+                </li>
+                <li>
+                  <span>Admitidos: en 2026 hubo 10 días hábiles para subsanar errores
+                    <span class="ref">art. 17.1, p. 1641</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="avisos">
+                <li>
+                  <span>Primera prueba <span class="prevision">Previsión</span> en junio. Fue el 13/06/2022, el 10/06/2024
+                    y el 20/06/2026.</span>
+                </li>
+                <li>
+                  <span>En 2026, quien aprobaba entregaba la programación y los méritos hasta el día hábil siguiente a
+                    las notas definitivas <span class="ref">art. 50.1, p. 1655</span> y
+                    <span class="ref">art. 57.3, p. 1660</span></span>
+                </li>
+                <li>
+                  <span>Segunda prueba: en 2026, todo el proceso tenía que acabar antes del 31 de julio
+                    <span class="ref">art. 44.3, p. 1653</span></span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-temas">
+            <th scope="row">Temas</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Segunda vuelta: un tema por escrito cada semana, en 2 horas, y el esquema de los demás.</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Repaso final: esquemas de los 25 y, por escrito, los que menos domines.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-practico">
+            <th scope="row">Supuesto práctico</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Uno completo cada semana, en tiempo real.</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Un simulacro de la primera prueba entera: la parte A y la parte B el mismo día.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-programacion">
+            <th scope="row">Progra&shy;mación</th>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Ajústala a las bases nuevas. En 2026 se pedían los currículos vigentes a 1 de septiembre de 2025
+                    <span class="ref">art. 50.1, p. 1655</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Imprime tres ejemplares idénticos: dos para entregar y uno para ti
+                    <span class="ref">art. 50.1, p. 1655</span> y <span class="ref">art. 51.17, p. 1657</span></span>
+                </li>
+                <li><span>Prepara la caja de material de cada unidad.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-oral">
+            <th scope="row">Oral</th>
+            <td>
+              <ul class="tareas">
+                <li><span>Grabaciones 1 y 2 del simulacro oral guiado de IdEducando.</span></li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li><span>Grabación 3, como el día del examen.</span></li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-meritos">
+            <th scope="row">Méritos</th>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Busca la fecha límite de los méritos. En 2026 contaron los conseguidos hasta el 30 de junio
+                    <span class="ref">art. 57.4, p. 1661</span></span>
+                </li>
+              </ul>
+            </td>
+            <td>
+              <ul class="tareas">
+                <li>
+                  <span>Prepara el sobre: la ficha y las copias, por los tres bloques del baremo
+                    <span class="ref">art. 57.3 y 57.4, pp. 1660-1661</span></span>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr class="h-balance">
+            <th scope="row">Mi balance</th>
+            <td><div class="renglones"><span></span><span></span></div></td>
+            <td><div class="renglones"><span></span><span></span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         MIS FECHAS
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Plan hacia 2028 · Para rellenar</p>
+          <h1>Mis fechas</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <div class="datos">
+        <p class="dato">Especialidad (rodea): <span class="rodea">Infantil</span><span class="rodea">PT</span></p>
+        <p class="dato">Empiezo el<span class="hueco"></span></p>
+        <p class="dato">Horas a la semana<span class="hueco"></span></p>
+      </div>
+
+      <h2 class="sub">Las fechas de la convocatoria de 2028</h2>
+      <p class="sub-nota">Apúntalas el día que salga en el BORM. La columna de 2026 te dice qué buscar.</p>
+      <table class="fechas">
+        <colgroup>
+          <col style="width: 46mm" />
+          <col />
+          <col style="width: 52mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Qué</th>
+            <th scope="col">Cómo fue en 2026</th>
+            <th scope="col" class="col-2028">En 2028</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Publicación en el BORM</th>
+            <td class="en-2026">23/01/2026, BORM n.º&nbsp;18.</td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Solicitud y pago de la tasa</th>
+            <td class="en-2026">15 días hábiles desde el día siguiente a la publicación <span class="ref">art. 13.1, p. 1639</span></td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Listas de admitidos</th>
+            <td class="en-2026">Al acabar el plazo; 10 días hábiles para subsanar <span class="ref">art. 16 y 17.1, p. 1641</span></td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Mi tribunal</th>
+            <td class="en-2026">Con las listas definitivas de admitidos <span class="ref">art. 18.2, p. 1642</span></td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Primera prueba</th>
+            <td class="en-2026">A partir del 10/06/2026 <span class="ref">art. 44.2, p. 1653</span>; fue el 20/06/2026.</td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Notas de la primera prueba</th>
+            <td class="en-2026">Reclamación hasta el día hábil siguiente a su publicación <span class="ref">art. 49.4, p. 1655</span></td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Fecha límite de los méritos</th>
+            <td class="en-2026">Contaron los conseguidos hasta el 30/06/2026 <span class="ref">art. 57.4, p. 1661</span></td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Entrega de la programación y de los méritos</th>
+            <td class="en-2026">Hasta el día hábil siguiente a las notas definitivas <span class="ref">art. 50.1, p. 1655</span> y <span class="ref">art. 57.3, p. 1660</span></td>
+            <td class="escribe"></td>
+          </tr>
+          <tr>
+            <th scope="row">Segunda prueba</th>
+            <td class="en-2026">El proceso debía acabar antes del 31/07/2026 <span class="ref">art. 44.3, p. 1653</span></td>
+            <td class="escribe"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="sub">Mis metas</h2>
+      <table class="metas">
+        <colgroup>
+          <col />
+          <col style="width: 40mm" />
+          <col style="width: 40mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Meta</th>
+            <th scope="col" class="col-mia">La quiero para</th>
+            <th scope="col" class="col-mia">Hecha el</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Primera vuelta de los 25 temas</th><td></td><td></td></tr>
+          <tr><th scope="row">Programación completa y revisada</th><td></td><td></td></tr>
+          <tr><th scope="row">Las tres grabaciones del oral</th><td></td><td></td></tr>
+          <tr><th scope="row">Simulacro entero de la primera prueba</th><td></td><td></td></tr>
+          <tr><th scope="row">Carpeta de méritos ordenada</th><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ======================================================================
+         LOS MÉRITOS · FUENTES · CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja hoja--ultima">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Plan hacia 2028 · El baremo</p>
+          <h1>Los méritos, sin números</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        En 2026, la nota final sumó dos tercios de la oposición y un tercio de los méritos
+        <span class="ref">art. 59.1, p. 1662</span>. Lo que valdrá cada mérito en 2028 lo dirá la convocatoria, así que
+        aquí no damos cifras. El baremo de 2026 tenía tres bloques <span class="ref">anexo II, pp. 1684-1691</span>
+      </p>
+      <div class="bloques">
+        <div class="bloque">
+          <h3>Experiencia docente previa</h3>
+          <p>El tiempo dando clase. Contaba más en el cuerpo de Maestros y en centros públicos.</p>
+          <span class="bloque__mio">Lo que tengo</span><span></span><span></span>
+        </div>
+        <div class="bloque">
+          <h3>Formación académica</h3>
+          <p>La nota media de tu título, los posgrados, el doctorado, otras titulaciones e idiomas.</p>
+          <span class="bloque__mio">Lo que tengo</span><span></span><span></span>
+        </div>
+        <div class="bloque">
+          <h3>Otros méritos</h3>
+          <p>Fases de oposición aprobadas antes en tu especialidad, publicaciones y formación permanente, entre otros.</p>
+          <span class="bloque__mio">Lo que tengo</span><span></span><span></span>
+        </div>
+      </div>
+
+      <h2 class="sub">Lo que pedía la convocatoria de 2026</h2>
+      <ul class="reglas-2026">
+        <li>
+          Solo contaron los méritos conseguidos hasta el 30/06/2026 y justificados con documentos
+          <span class="ref">art. 57.4, p. 1661</span>
+        </li>
+        <li>
+          Cada curso necesitaba un certificado con sus horas o sus créditos
+          <span class="ref">anexo II, nota 5 al apartado 3.3, p. 1690</span>
+        </li>
+        <li>
+          Tu experiencia en centros públicos de la Región y tu formación registrada las aportaba la Consejería
+          <span class="ref">art. 57.6, p. 1661</span>
+        </li>
+        <li>
+          Los servicios en otros centros, con certificado del director y conformidad de la Inspección
+          <span class="ref">anexo II, p. 1684</span>
+        </li>
+        <li>
+          Todo iba en un sobre cerrado, por los tres bloques, en el plazo de la programación
+          <span class="ref">art. 57.1, 57.3 y 57.4, pp. 1660-1661</span>
+        </li>
+      </ul>
+
+      <h2 class="sub">Fuentes</h2>
+      <ol class="fuentes">
+        <li>
+          Orden de 21 de enero de 2026, convocatoria del Cuerpo de Maestros (BORM n.º&nbsp;18, de 23/01/2026):
+          <span class="url">borm.es/services/boletin/ano/2026/numero/18/pdf</span>
+        </li>
+        <li>
+          Fechas de 2019 a 2026 y previsiones: calendario de oposiciones de IdEducando,
+          <span class="url">ideducando.es/oposiciones/calendario</span>
+        </li>
+        <li>Oposiciones de 2027: nota de la Consejería de Educación del 23/11/2026, en carm.es.</li>
+        <li>
+          Normas en trámite y reforma estatal, a 24/11/2026:
+          <span class="url">ideducando.es/consejos/mapa-normativo-murcia</span>
+        </li>
+      </ol>
+
+      <div class="creditos">
+        <p>
+          <strong>Plan hacia 2028.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/plan-hacia-2028</span>
+        </p>
+        <p>
+          © IdEducando, 2026. Todos los derechos reservados. Puedes descargarlo gratis, imprimirlo y usarlo en tu
+          preparación. No se puede compartir el archivo, subirlo a otra web, venderlo ni publicar versiones cambiadas:
+          para recomendarlo, comparte el enlace de su ficha. Es orientativo: manda lo que publique el BORM. Si ves un
+          error, escríbenos a hola@ideducando.es.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------
+      // Ilustración de la portada: un camino de seis trimestres hasta 2028
+      // ------------------------------------------------------------------
+      const COLOR = {
+        azul: '#2f6fd6',
+        verde: '#1fa67a',
+        coral: '#e8553e',
+        coralTexto: '#b63a26',
+        morado: '#8c4fb8',
+        amarillo: '#f6c12e',
+        naranja: '#f5961f',
+        marino: '#1e2b55',
+        suave: '#46578c',
+        crema: '#fff6e6',
+        linea: '#ead9bb',
+        amarilloTinte: '#fdf0c7',
+        azulTinte: '#e4edfb',
+        moradoTinte: '#efe5f7',
+        coralTinte: '#fde5e0',
+      };
+
+      // Paradas del camino: los seis trimestres. Las dos de 2028, discontinuas: son previsión.
+      // «etiqueta» dice dónde va la fecha para que no pise el camino: debajo, encima o a la derecha.
+      const PARADAS = [
+        { x: 32, y: 236, color: COLOR.azul, texto: 'enero 2027', etiqueta: 'debajo' },
+        { x: 64, y: 212, color: COLOR.verde, texto: 'abril 2027', etiqueta: 'encima' },
+        { x: 96, y: 230, color: COLOR.morado, texto: 'julio 2027', etiqueta: 'debajo' },
+        { x: 126, y: 202, color: COLOR.naranja, texto: 'octubre 2027', etiqueta: 'encima' },
+        { x: 150, y: 224, prevista: true, texto: 'enero 2028', etiqueta: 'debajo' },
+        { x: 168, y: 194, prevista: true, texto: 'abril 2028', etiqueta: 'derecha' },
+      ];
+      const META = { x: 186, y: 170 };
+
+      // Curva suave que pasa por todos los puntos (Catmull-Rom convertida en curvas de Bézier).
+      function curva(puntos) {
+        let d = `M${puntos[0].x} ${puntos[0].y}`;
+        for (let i = 0; i < puntos.length - 1; i++) {
+          const p0 = puntos[i - 1] ?? puntos[i];
+          const p1 = puntos[i];
+          const p2 = puntos[i + 1];
+          const p3 = puntos[i + 2] ?? p2;
+          const c1 = { x: p1.x + (p2.x - p0.x) / 6, y: p1.y + (p2.y - p0.y) / 6 };
+          const c2 = { x: p2.x - (p3.x - p1.x) / 6, y: p2.y - (p3.y - p1.y) / 6 };
+          d += ` C${c1.x} ${c1.y} ${c2.x} ${c2.y} ${p2.x} ${p2.y}`;
+        }
+        return d;
+      }
+
+      const puntos = [...PARADAS, META];
+      let s = '';
+      // Fondo
+      s += `<circle cx="196" cy="236" r="62" fill="${COLOR.amarilloTinte}"/>`;
+      s += `<circle cx="10" cy="206" r="26" fill="${COLOR.azulTinte}"/>`;
+      s += `<circle cx="108" cy="290" r="14" fill="${COLOR.moradoTinte}"/>`;
+      // Camino: sombra, base y raya central
+      s += `<path d="${curva(puntos)}" fill="none" stroke="${COLOR.marino}" stroke-opacity="0.14" stroke-width="12" stroke-linecap="round" transform="translate(0 1.6)"/>`;
+      s += `<path d="${curva(puntos)}" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/>`;
+      s += `<path d="${curva(puntos.slice(0, 5))}" fill="none" stroke="${COLOR.linea}" stroke-width="1.2" stroke-dasharray="3 3"/>`;
+      s += `<path d="${curva(puntos.slice(4))}" fill="none" stroke="${COLOR.coral}" stroke-width="1.2" stroke-dasharray="1.6 2.4"/>`;
+      // Paradas con su número y su fecha
+      PARADAS.forEach((p, i) => {
+        if (p.prevista) {
+          s += `<circle cx="${p.x}" cy="${p.y}" r="8" fill="#fff" stroke="${COLOR.coralTexto}" stroke-width="1" stroke-dasharray="2 1.4"/>`;
+          s += `<text x="${p.x}" y="${p.y + 2.6}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="7.4" fill="${COLOR.coralTexto}">${i + 1}</text>`;
+        } else {
+          s += `<circle cx="${p.x}" cy="${p.y + 0.9}" r="8" fill="${COLOR.marino}" opacity="0.16"/>`;
+          s += `<circle cx="${p.x}" cy="${p.y}" r="8" fill="${p.color}"/>`;
+          s += `<text x="${p.x}" y="${p.y + 2.6}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="7.4" fill="#fff">${i + 1}</text>`;
+        }
+        const sitio = {
+          debajo: [p.x, p.y + 14, 'middle'],
+          encima: [p.x, p.y - 11.5, 'middle'],
+          derecha: [p.x + 11, p.y + 1.6, 'start'],
+        }[p.etiqueta];
+        s += `<text x="${sitio[0]}" y="${sitio[1]}" text-anchor="${sitio[2]}" font-family="Outfit" font-weight="600" font-size="4.4" fill="${COLOR.marino}">${p.texto}</text>`;
+      });
+      // Meta: bandera de junio de 2028, con la tela discontinua porque la fecha no es segura
+      s += `<line x1="${META.x}" y1="${META.y}" x2="${META.x}" y2="${META.y - 30}" stroke="${COLOR.marino}" stroke-width="1.2" stroke-linecap="round"/>`;
+      s += `<path d="M${META.x} ${META.y - 30} h-32 l4 7 l-4 7 h32 z" fill="#fff" stroke="${COLOR.coralTexto}" stroke-width="0.9" stroke-dasharray="2 1.4"/>`;
+      s += `<text x="${META.x - 14}" y="${META.y - 21.4}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="4.8" fill="${COLOR.marino}">junio 2028</text>`;
+      s += `<circle cx="${META.x}" cy="${META.y}" r="2" fill="${COLOR.marino}"/>`;
+      document.getElementById('ilustracion').innerHTML = s;
+    </script>
+  </body>
+</html>

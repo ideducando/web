@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Simulacro oral guiado: rúbrica del tribunal para grabarte tres veces (PT e Infantil) · IdEducando</title>
+    <meta name="author" content="IdEducando" />
+    <meta
+      name="description"
+      content="Rúbrica de autoevaluación con todos los indicadores con los que el tribunal puntuó la segunda prueba de Maestros en la Región de Murcia en 2026, para Educación Infantil y para Pedagogía Terapéutica, y guía para grabar tres simulacros con el reloj del oral."
+    />
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Sin pictogramas de ARASAAC: todos los derechos reservados (José, 28/10/2026).
+         En este material ningún texto baja de 11 pt, tampoco el pie de página. */
+      @page {
+        @bottom-left {
+          content: 'IdEducando · Todos los derechos reservados · ideducando.es';
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Chromium no siempre aplica a la primera hoja el margen cero de la portada cuando lleva
+         imágenes, y la portada sale corrida hacia abajo y a la derecha. Esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      table {
+        font-size: 11pt;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .hoja--ultima {
+        break-after: auto;
+      }
+
+      /* ---------- Colores de los tramos del oral (los mismos que el reloj del kit) ---------- */
+      .t-prog {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --x: var(--morado-texto);
+      }
+      .t-unidad {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --x: var(--enlace);
+      }
+      .t-debate {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --x: var(--marino);
+      }
+
+      .ref {
+        font-family: var(--titulos);
+        font-weight: 600;
+        color: var(--verde-texto);
+        white-space: nowrap;
+      }
+
+      .marca {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada__logo {
+        margin-bottom: 15mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 1;
+        margin-bottom: 6mm;
+        letter-spacing: -0.01em;
+      }
+
+      .portada__subtitulo {
+        max-width: 150mm;
+        margin-bottom: 0;
+      }
+
+      .portada .chips {
+        list-style: none;
+        margin: 6mm 0 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm 2.4mm;
+        max-width: 160mm;
+      }
+
+      .portada .chips li {
+        margin: 0;
+        padding: 0.8mm 3.4mm;
+        border-radius: 99px;
+        background: #fff;
+        border: 0.6mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11.5pt;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada .ilustracion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        z-index: 0;
+      }
+
+      /* ---------- Encabezado de las hojas ---------- */
+      .cabecera {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .cabecera .antetitulo {
+        margin-bottom: 0.6mm;
+      }
+
+      .cabecera h1 {
+        font-size: 22pt;
+        margin: 0;
+      }
+
+      .cabecera img {
+        width: 36mm;
+        height: auto;
+        flex: none;
+        margin-top: 1mm;
+      }
+
+      .entrada {
+        margin: 0 0 3mm;
+        font-size: 11.5pt;
+        line-height: 1.4;
+      }
+
+      /* ---------- Guía: el reloj de las marcas del vídeo ---------- */
+      .reloj {
+        margin: 0 0 3mm;
+        padding: 2.2mm 4mm 2.6mm;
+        border-radius: 3mm;
+        border: 0.4mm solid var(--linea);
+        break-inside: avoid;
+      }
+
+      .reloj h2 {
+        font-size: 13pt;
+        margin: 0 0 1.6mm;
+      }
+
+      .barra {
+        display: flex;
+        gap: 0.8mm;
+        height: 8.5mm;
+      }
+
+      .barra > span {
+        display: grid;
+        place-items: center;
+        min-width: 0;
+        border-radius: 1.6mm;
+        background: var(--c);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        white-space: nowrap;
+      }
+
+      .barra > span.t-debate {
+        color: var(--marino);
+      }
+
+      .marcas {
+        position: relative;
+        height: 5.6mm;
+        margin: 0.6mm 0 1.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .marcas span {
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+      }
+
+      .marcas span:first-child {
+        transform: none;
+      }
+
+      .marcas span:last-child {
+        transform: translateX(-100%);
+      }
+
+      .reloj p {
+        margin: 0;
+        line-height: 1.38;
+      }
+
+      /* ---------- Guía: las tres grabaciones ---------- */
+      .grabaciones {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3.5mm;
+        margin: 0 0 3mm;
+      }
+
+      .grabacion {
+        padding: 2mm 3.2mm 2.6mm;
+        border-radius: 3mm;
+        background: var(--crema);
+        border-top: 2.2mm solid var(--c);
+        line-height: 1.32;
+        break-inside: avoid;
+      }
+
+      .grabacion h2 {
+        margin: 0 0 1.6mm;
+        font-size: 14pt;
+        line-height: 1.12;
+      }
+
+      .grabacion h2 small {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .grabacion p {
+        margin: 0 0 1.4mm;
+      }
+
+      .grabacion p:last-child {
+        margin-bottom: 0;
+      }
+
+      .grabacion b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .dos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 5mm;
+        align-items: start;
+        margin: 0 0 3mm;
+      }
+
+      .dos h2 {
+        font-size: 13pt;
+        margin: 0 0 1.4mm;
+      }
+
+      .dos ul,
+      .dos ol {
+        margin: 0;
+        line-height: 1.34;
+      }
+
+      .dos li {
+        margin-bottom: 1mm;
+      }
+
+      .dos .caja {
+        margin: 0;
+        padding: 3mm 4mm;
+        line-height: 1.36;
+      }
+
+      .dos .caja h2 {
+        margin-bottom: 1mm;
+      }
+
+      .dos .caja p {
+        margin: 0;
+      }
+
+      .nota-fuente {
+        margin: 0;
+        line-height: 1.36;
+        color: var(--suave);
+      }
+
+      /* ---------- Rúbricas ---------- */
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 1mm 5mm;
+        margin: 0 0 2.4mm;
+        line-height: 1.3;
+      }
+
+      .leyenda .marca {
+        display: inline-block;
+        min-width: 4.6mm;
+        text-align: center;
+      }
+
+      table.rubrica {
+        table-layout: fixed;
+        border-collapse: collapse;
+        line-height: 1.18;
+        margin: 0 0 3mm;
+        border: 0.4mm solid #8790b3;
+      }
+
+      table.rubrica th,
+      table.rubrica td {
+        padding: 0.75mm 1.8mm;
+        border: 0.3mm solid #8790b3;
+        vertical-align: middle;
+      }
+
+      table.rubrica thead th {
+        padding: 1.2mm 1.8mm;
+        font-weight: 600;
+      }
+
+      table.rubrica thead th.g,
+      table.rubrica thead th.num {
+        text-align: center;
+      }
+
+      table.rubrica td.num {
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 600;
+      }
+
+      /* Fila de cada parte del oral: su color, su minuto en el reloj y su página del BORM */
+      table.rubrica tr.parte th {
+        padding: 1.3mm 2.4mm;
+        background: var(--t);
+        border-left: 2.4mm solid var(--c);
+        color: var(--marino);
+      }
+
+      .parte__dentro {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 4mm;
+      }
+
+      .parte__nombre {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .parte__datos {
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--marino);
+        white-space: nowrap;
+      }
+
+      /* Dimensión: el bloque de indicadores y su puntuación máxima */
+      table.rubrica tr.dim th,
+      table.rubrica tr.dim td {
+        background: #f3f5fa;
+      }
+
+      table.rubrica tr.dim th {
+        font-family: var(--titulos);
+        font-weight: 600;
+      }
+
+      table.rubrica tr.dim td.num {
+        font-weight: 700;
+      }
+
+      /* Las casillas de la dimensión no se rellenan: se ven rayadas */
+      table.rubrica tr.dim td.g {
+        background: repeating-linear-gradient(135deg, #f3f5fa 0 1.2mm, #dfe3ee 1.2mm 1.6mm);
+      }
+
+      table.rubrica td.g {
+        background: #fff;
+      }
+
+      table.rubrica tr.suma th,
+      table.rubrica tr.suma td,
+      table.rubrica tr.total th,
+      table.rubrica tr.total td {
+        border-top: 0.6mm solid var(--marino);
+      }
+
+      table.rubrica tr.suma th,
+      table.rubrica tr.total th {
+        font-family: var(--titulos);
+        font-weight: 700;
+        text-align: right;
+      }
+
+      table.rubrica tr.suma td,
+      table.rubrica tr.total td {
+        height: 8mm;
+      }
+
+      table.rubrica tr.total th,
+      table.rubrica tr.total td.num {
+        background: var(--crema);
+      }
+
+      .pie-rubrica {
+        margin: 0 0 2mm;
+        line-height: 1.34;
+        color: var(--suave);
+      }
+
+      .caja-nota {
+        margin: 0 0 3mm;
+        line-height: 1.36;
+      }
+
+      .caja-nota p {
+        margin: 0 0 1.4mm;
+      }
+
+      .fuentes h2 {
+        font-size: 13pt;
+        margin: 2mm 0 1.2mm;
+      }
+
+      .fuentes ol {
+        margin: 0;
+        padding-left: 6mm;
+        line-height: 1.32;
+      }
+
+      .fuentes li {
+        margin-bottom: 0.8mm;
+      }
+
+      .creditos {
+        font-size: 11pt;
+        line-height: 1.32;
+        margin-top: 2.5mm;
+        padding-top: 2mm;
+      }
+
+      .creditos p {
+        margin-bottom: 1.2mm;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <svg class="ilustracion" viewBox="0 0 210 297" aria-hidden="true" id="ilustracion"></svg>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Oposiciones de Maestros · Región de Murcia</p>
+        <h1 class="portada__titulo">Simulacro&nbsp;<br />oral guiado</h1>
+        <p class="portada__subtitulo">
+          Grábate tres veces y puntúate con los indicadores del tribunal, en Infantil y en Pedagogía Terapéutica (PT).
+        </p>
+        <ul class="chips">
+          <li class="t-prog">Rúbrica de Infantil</li>
+          <li class="t-unidad">Rúbrica de PT</li>
+          <li class="t-debate">Tres grabaciones</li>
+          <li class="t-prog">Con el reloj del oral</li>
+        </ul>
+        <div class="portada__pie">
+          <p>© IdEducando. Todos los derechos reservados<br />ideducando.es</p>
+          <p>Edición de noviembre de 2026</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA: GRÁBATE TRES VECES
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Simulacro oral guiado · Cómo se usa</p>
+          <h1>Grábate tres veces</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="entrada">
+        Grabarte te deja ver tu oral desde la silla del tribunal y comprobar qué indicadores salen de verdad. Haz tres
+        grabaciones completas y puntúa cada una con tu rúbrica: Infantil en las páginas 3 y 4, Pedagogía Terapéutica (PT)
+        en las 5 y 6.
+      </p>
+
+      <div class="reloj">
+        <h2>Las marcas de tu vídeo</h2>
+        <div class="barra" aria-hidden="true">
+          <span class="t-prog" style="flex: 25">Programación · 25</span>
+          <span class="t-unidad" style="flex: 50">Unidad · 50</span>
+          <span class="t-debate" style="flex: 15">Debate · 15</span>
+        </div>
+        <div class="marcas" aria-hidden="true">
+          <span style="left: 0">0</span><span style="left: 27.9%">25</span><span style="left: 83.5%">75</span
+          ><span style="left: 100%">90</span>
+        </div>
+        <p>
+          Máximo 90 minutos: la programación primero, hasta 30, y 15 de debate <span class="ref">art. 51.14</span>; la
+          unidad, el resto <span class="ref">anexo XVI</span>. El reparto 25, 50 y 15 es el del reloj del oral del kit
+          (página 3).
+        </p>
+      </div>
+
+      <div class="grabaciones">
+        <div class="grabacion t-prog">
+          <h2>Grabación 1<small>La de partida</small></h2>
+          <p>Con la programación y una unidad listas, eliges tú la unidad y haces los 90 minutos.</p>
+          <p><b>Fíjate en</b> los tiempos y en lo que no sale.</p>
+        </div>
+        <div class="grabacion t-unidad">
+          <h2>Grabación 2<small>La de corregir</small></h2>
+          <p>
+            Dos o tres semanas después. Sacas tres unidades al azar, eliges una <span class="ref">art. 51.7 y 51.11</span> y
+            la preparas una hora, solo con papel <span class="ref">art. 51.13</span>
+          </p>
+          <p><b>Fíjate en</b> los <span class="marca">✗</span> y los <span class="marca">½</span> de la primera.</p>
+        </div>
+        <div class="grabacion t-debate">
+          <h2>Grabación 3<small>La del examen</small></h2>
+          <p>Antes de la primera prueba: en 2026, el proceso debía acabar antes del 31 de julio <span class="ref">art. 44.3</span></p>
+          <p>Como ese día: de pie, con 15 minutos de preguntas y con público, porque las sesiones son públicas <span class="ref">art. 51.19</span></p>
+        </div>
+      </div>
+
+      <div class="dos">
+        <div>
+          <h2>Antes de grabar</h2>
+          <ul>
+            <li>El móvil, quieto, donde estaría el tribunal, y un reloj a la vista.</li>
+            <li>
+              Tu programación sin notas <span class="ref">art. 51.17</span>, el guion (kit, página 4) y la caja de la
+              unidad.
+            </li>
+            <li>Alguien que pregunte. A solas, saca tres de seis preguntas escritas en el minuto 75.</li>
+            <li>Graba de una vez, sin parar.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Al ver cada grabación</h2>
+          <ol>
+            <li>Con la rúbrica: marca cada indicador.</li>
+            <li>Con el reloj: apunta en la hoja de simulacro del kit (página 8) el minuto en que acaba cada tramo.</li>
+            <li>
+              Sin sonido: ¿miras al tribunal o al papel? La defensa «no podrá ser una mera lectura»
+              <span class="ref">art. 51.17</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="dos">
+        <div class="caja caja--amarilla">
+          <h2>Cómo puntuarte</h2>
+          <p>
+            <span class="marca">✓</span> salió completo, <span class="marca">½</span> a medias y
+            <span class="marca">✗</span> no salió. La suma orientativa cuenta los puntos de cada
+            <span class="marca">✓</span> y la mitad de los de cada <span class="marca">½</span>. Es un cálculo nuestro: el
+            tribunal califica de 0 a 10 y se aprueba con un 5 <span class="ref">art. 52.1</span>
+          </p>
+        </div>
+        <div class="caja caja--coral">
+          <h2>Ojo</h2>
+          <p>
+            Graba solo en casa: en el examen no se pueden usar aparatos electrónicos
+            <span class="ref">art. 51.13 y 51.18</span>. Pide permiso a quien grabes y no grabes a tu alumnado.
+          </p>
+        </div>
+      </div>
+
+      <p class="nota-fuente">
+        Los artículos son de la convocatoria de 2026, publicada en el Boletín Oficial de la Región de Murcia (BORM)
+        n.º&nbsp;18. Sus páginas: art. 44.3, p. 1653; art. 51.7, p. 1656; art. 51.11 a 51.17, p. 1657; art. 51.18, pp.
+        1657-1658; art. 51.19 y 52.1, p. 1658; anexo XVI, p. 1718. Lo demás es consejo nuestro.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         INFANTIL: PROGRAMACIÓN Y DEBATE
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Rúbrica de Educación Infantil · 1 de 2</p>
+          <h1>La programación y el debate</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="leyenda" data-leyenda></p>
+      <div data-rubrica="infantil-a"></div>
+    </section>
+
+    <!-- ======================================================================
+         INFANTIL: UNIDAD DIDÁCTICA
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Rúbrica de Educación Infantil · 2 de 2</p>
+          <h1>La unidad didáctica</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <div data-rubrica="infantil-b"></div>
+      <p class="pie-rubrica">
+        Los indicadores están resumidos. El texto completo de Infantil está en el anexo XVII de la convocatoria de 2026,
+        pp. 1722-1724 del BORM n.º&nbsp;18.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         PT: PROGRAMA DE INTERVENCIÓN Y DEBATE
+         ====================================================================== -->
+    <section class="hoja">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Rúbrica de Pedagogía Terapéutica · 1 de 2</p>
+          <h1>El programa y el debate</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <p class="leyenda" data-leyenda></p>
+      <div data-rubrica="pt-a"></div>
+      <div class="caja caja--azul caja-nota">
+        <p>
+          <strong>Si presentas una programación didáctica</strong> en lugar de un programa de intervención, la convocatoria
+          de 2026 usa estos mismos indicadores con pequeños cambios. Por ejemplo, en el de 1 punto relacionas competencias,
+          objetivos de etapa, saberes básicos y criterios de evaluación, y contextualizas al grupo
+          <span class="ref">anexo XXII, pp. 1752-1754</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         PT: UNIDAD DE ACTUACIÓN · FUENTES · CRÉDITOS
+         ====================================================================== -->
+    <section class="hoja hoja--ultima">
+      <header class="cabecera">
+        <div>
+          <p class="antetitulo">Rúbrica de Pedagogía Terapéutica · 2 de 2</p>
+          <h1>La unidad de actuación</h1>
+        </div>
+        <img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+      </header>
+      <div data-rubrica="pt-b"></div>
+      <div class="fuentes">
+        <h2>Fuentes</h2>
+        <ol>
+          <li>
+            Orden de 21 de enero de 2026, convocatoria del Cuerpo de Maestros (BORM n.º&nbsp;18, de 23/01/2026), artículos
+            44, 51 y 52 y anexos XVI, XVII y XXII. Los indicadores de PT, resumidos aquí, están completos en las pp.
+            1752-1754: <span class="url">borm.es/services/boletin/ano/2026/numero/18/pdf</span>
+          </li>
+          <li>
+            Kit para el examen de IdEducando, con el reloj del oral y la hoja de simulacro:
+            <span class="url">ideducando.es/material-gratuito/kit-examen-oposiciones-murcia</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="creditos">
+        <p>
+          <strong>Simulacro oral guiado.</strong> IdEducando, noviembre de 2026. Ficha:
+          <span class="url">ideducando.es/material-gratuito/simulacro-oral-guiado</span>
+        </p>
+        <p>
+          © IdEducando, 2026. Todos los derechos reservados. Puedes descargarlo gratis, imprimirlo y usarlo en tu
+          preparación. No se puede compartir el archivo, subirlo a otra web, venderlo ni publicar versiones cambiadas:
+          para recomendarlo, comparte el enlace de su ficha. Es orientativo: la próxima convocatoria puede cambiar los
+          indicadores y manda lo que publique el BORM. Si ves un error, escríbenos a hola@ideducando.es.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ------------------------------------------------------------------
+      // Indicadores de la segunda prueba en la convocatoria de 2026 (BORM n.º 18, de 23/01/2026).
+      // Infantil: anexo XVII, pp. 1722-1724. PT: anexo XXII, pp. 1752-1754.
+      // Cada parte: [dimensión, puntos de la dimensión, [[indicador resumido, puntos], ...]].
+      // Las sumas se comprueban abajo: si no cuadran con el total de la parte, el PDF no se genera bien.
+      // ------------------------------------------------------------------
+      const PARTES = {
+        'infantil-programacion': {
+          nombre: 'Programación',
+          tramo: 't-prog',
+          datos: 'Del 0 al 25, tope 30 · anexo XVII, pp. 1722-1723',
+          total: 4,
+          suma: 'Suma orientativa de la programación',
+          dimensiones: [
+            ['Presentación, originalidad e innovación', 0.2, [
+              ['Ordenas la exposición en apartados bien relacionados.', 0.1],
+              ['Muestras creatividad e innovación.', 0.1],
+            ]],
+            ['Justificación y contextualización', 0.3, [
+              ['Vinculas la programación con la normativa vigente.', 0.1],
+              ['La sitúas en los documentos institucionales del centro.', 0.1],
+              ['La ajustas al entorno y a las características del alumnado.', 0.1],
+            ]],
+            ['Elementos del currículo según la normativa de Murcia', 2.5, [
+              ['La relacionas con los objetivos generales de la etapa.', 0.3],
+              ['Relacionas competencias específicas, criterios y saberes.', 0.2],
+              ['Secuencias en unidades los saberes del curso y sus criterios.', 0.2],
+              ['Temporalizas las unidades según el currículo y el alumnado.', 0.2],
+              ['Contribuyes a los planes y programas del centro.', 0.1],
+              ['Concretas los principios pedagógicos y la metodología de la etapa.', 0.3],
+              ['Incorporas las tecnologías de la información y la comunicación.', 0.2],
+              ['Materiales y recursos variados, agrupamientos y espacios distintos.', 0.2],
+              ['Criterios de evaluación coherentes y adaptados al nivel.', 0.2],
+              ['Dices qué aprendizajes llevan a una evaluación positiva.', 0.2],
+              ['Instrumentos variados para evaluar aprendizaje, enseñanza y práctica.', 0.2],
+              ['Procedimientos para informar a las familias.', 0.1],
+              ['Actividades complementarias unidas a saberes y criterios.', 0.1],
+            ]],
+            ['Alumnado con necesidades específicas de apoyo educativo (NEAE)', 1, [
+              ['Describes al alumnado con NEAE de tu grupo.', 0.5],
+              ['Medidas adecuadas y suficientes para la diversidad del aula.', 0.5],
+            ]],
+          ],
+        },
+        'infantil-debate': {
+          nombre: 'Debate',
+          tramo: 't-debate',
+          datos: 'Del 75 al 90 · anexo XVII, p. 1724',
+          total: 1,
+          suma: 'Suma orientativa del debate',
+          dimensiones: [
+            ['Concreción y corrección en las respuestas', 0.5, [
+              ['Te expresas con fluidez y claridad.', 0.2],
+              ['Respondes con coherencia y precisión.', 0.3],
+            ]],
+            ['Argumentos y datos que amplían la exposición', 0.5, [
+              ['Argumentas tus respuestas de forma coherente y realista.', 0.3],
+              ['Amplías aspectos que ya trataste en la exposición.', 0.2],
+            ]],
+          ],
+        },
+        'infantil-unidad': {
+          nombre: 'Unidad didáctica',
+          tramo: 't-unidad',
+          datos: 'Del 25 al 75 · anexo XVII, pp. 1723-1724',
+          total: 5,
+          suma: 'Suma orientativa de la unidad',
+          dimensiones: [
+            ['Contextualización', 0.3, [
+              ['La sitúas en la realidad del centro y en su nivel.', 0.1],
+              ['Es coherente con la programación y con el currículo.', 0.1],
+              ['Sus elementos son coherentes entre sí.', 0.1],
+            ]],
+            ['Objetivos', 0.5, [
+              ['Contribuye a los objetivos de etapa y los unes a las competencias.', 0.3],
+              ['Defines los objetivos de aprendizaje de la unidad.', 0.2],
+            ]],
+            ['Competencias', 0.3, [
+              ['Justificas cómo ayuda a adquirir las competencias específicas.', 0.3],
+            ]],
+            ['Saberes básicos', 0.6, [
+              ['Secuencias bien los saberes básicos.', 0.2],
+              ['Los saberes están equilibrados y llevan a las competencias.', 0.2],
+              ['Encajan con la unidad y con sus situaciones de aprendizaje.', 0.2],
+            ]],
+            ['Metodología y actividades', 1.7, [
+              ['Metodología variada, adecuada a edad, necesidades e intereses.', 0.3],
+              ['La secuencia temporal de actividades es coherente y realista.', 0.3],
+              ['Agrupamientos distintos según la actividad.', 0.2],
+              ['Actividades creativas para motivar, explorar y transferir.', 0.2],
+              ['Medidas para detectar dificultades.', 0.3],
+              ['Pautas del Diseño Universal para el Aprendizaje (DUA) y atención a la diversidad.', 0.4],
+            ]],
+            ['Recursos', 0.2, [
+              ['Recursos variados: personales, materiales y tecnológicos.', 0.1],
+              ['Organizas bien los espacios y los tiempos.', 0.1],
+            ]],
+            ['Evaluación', 0.9, [
+              ['Enumeras los criterios y los unes a competencias y saberes.', 0.3],
+              ['Concretas cuándo evalúas y con qué técnicas e instrumentos.', 0.3],
+              ['Evalúas también la enseñanza y tu práctica docente.', 0.3],
+            ]],
+            ['Exposición', 0.5, [
+              ['Te expresas con corrección y vocabulario técnico.', 0.3],
+              ['Hablas con fluidez y transmites de forma motivadora.', 0.2],
+            ]],
+          ],
+        },
+        'pt-programa': {
+          nombre: 'Programa de intervención',
+          tramo: 't-prog',
+          datos: 'Del 0 al 25, tope 30 · anexo XXII, pp. 1752-1753',
+          total: 4,
+          suma: 'Suma orientativa del programa',
+          dimensiones: [
+            ['Presentación, justificación, contextualización y estructura', 1.2, [
+              ['Lo justificas con fundamentos psicopedagógicos, normativa y bibliografía.', 0.3],
+              ['Referencias al centro, el aula, las familias y las necesidades.', 0.3],
+              ['Sitúas al alumno o grupo desde su evaluación psicopedagógica.', 0.5],
+              ['Incluyes todos los apartados, bien relacionados entre sí.', 0.1],
+            ]],
+            ['Elementos del programa', 1, [
+              ['Objetivos y contenidos coherentes con el análisis de necesidades.', 1],
+            ]],
+            ['Metodología', 1, [
+              ['Principios metodológicos adecuados a la etapa y al alumnado.', 0.4],
+              ['Métodos, actividades y recursos según cómo es el alumno o grupo.', 0.6],
+            ]],
+            ['Evaluación', 0.8, [
+              ['Cuándo y con qué técnicas e instrumentos evalúas el aprendizaje.', 0.3],
+              ['Cómo evalúas el propio programa y lo usas para mejorarlo.', 0.3],
+              ['Cómo trasladas los resultados de la evaluación a los implicados.', 0.2],
+            ]],
+          ],
+        },
+        'pt-debate': {
+          nombre: 'Debate',
+          tramo: 't-debate',
+          datos: 'Del 75 al 90 · anexo XXII, p. 1754',
+          total: 0.5,
+          suma: 'Suma orientativa del debate',
+          dimensiones: [
+            ['Concreción y corrección en las respuestas', 0.25, [
+              ['Respondes de forma ajustada a lo que te preguntan.', 0.25],
+            ]],
+            ['Argumentos y datos que amplían la exposición', 0.25, [
+              ['Argumentas y amplías la información según las preguntas.', 0.25],
+            ]],
+          ],
+        },
+        'pt-unidad': {
+          nombre: 'Unidad de actuación',
+          tramo: 't-unidad',
+          datos: 'Del 25 al 75 · anexo XXII, pp. 1753-1754',
+          total: 5.5,
+          suma: 'Suma orientativa de la unidad',
+          dimensiones: [
+            ['Contextualización', 0.5, [
+              ['La sitúas en el centro y en las necesidades del alumno o grupo.', 0.5],
+            ]],
+            ['Habilidades específicas u objetivos', 0.75, [
+              ['Habilidades u objetivos ajustados a sus necesidades.', 0.75],
+            ]],
+            ['Competencias', 0.25, [
+              ['Justificas cómo contribuye a adquirir las competencias.', 0.25],
+            ]],
+            ['Contenidos o saberes básicos', 0.5, [
+              ['Contenidos de intervención o saberes ligados a sus necesidades.', 0.5],
+            ]],
+            ['Metodología', 2, [
+              ['Detallas y justificas estrategias y técnicas metodológicas.', 0.4],
+              ['Actividades realistas para el alumno o grupo según el Diseño Universal para el Aprendizaje (DUA).', 0.8],
+              ['Recursos personales, materiales, de espacio y de tiempo ajustados.', 0.4],
+              ['Usas con coherencia las tecnologías aplicadas a la educación.', 0.4],
+            ]],
+            ['Evaluación', 1, [
+              ['Criterios de evaluación ligados a las habilidades o saberes.', 0.4],
+              ['Cuándo y cómo evalúas el aprendizaje, la enseñanza y tu práctica.', 0.4],
+              ['Cómo trasladas la información de la evaluación a los implicados.', 0.2],
+            ]],
+            ['Exposición', 0.5, [
+              ['Vocabulario técnico y conceptos propios de la especialidad.', 0.25],
+              ['Expones con fluidez, de forma motivadora y didáctica.', 0.25],
+            ]],
+          ],
+        },
+      };
+
+      // Qué partes van en cada hoja y si la hoja cierra con la nota orientativa total.
+      const HOJAS = {
+        'infantil-a': { partes: ['infantil-programacion', 'infantil-debate'] },
+        'infantil-b': { partes: ['infantil-unidad'], total: 'Nota orientativa: programación + unidad + debate' },
+        'pt-a': { partes: ['pt-programa', 'pt-debate'] },
+        'pt-b': { partes: ['pt-unidad'], total: 'Nota orientativa: programa + unidad + debate' },
+      };
+
+      const coma = (n) => String(n).replace('.', ',');
+      const redondo = (n) => Math.round(n * 100) / 100;
+
+      // Comprobación: cada dimensión suma lo que dice y cada parte suma su total.
+      for (const [id, parte] of Object.entries(PARTES)) {
+        let sumaParte = 0;
+        for (const [dimension, puntos, indicadores] of parte.dimensiones) {
+          const suma = redondo(indicadores.reduce((s, [, p]) => s + p, 0));
+          if (suma !== puntos) throw new Error(`${id} · ${dimension}: los indicadores suman ${suma} y no ${puntos}`);
+          sumaParte += puntos;
+        }
+        if (redondo(sumaParte) !== parte.total) throw new Error(`${id}: las dimensiones suman ${sumaParte} y no ${parte.total}`);
+      }
+      const totalInfantil = redondo(PARTES['infantil-programacion'].total + PARTES['infantil-unidad'].total + PARTES['infantil-debate'].total);
+      const totalPT = redondo(PARTES['pt-programa'].total + PARTES['pt-unidad'].total + PARTES['pt-debate'].total);
+      if (totalInfantil !== 10 || totalPT !== 10) throw new Error('La segunda prueba no suma 10 puntos');
+
+      const casillas = (n = 3) => '<td class="g"></td>'.repeat(n);
+
+      function cuerpo(id) {
+        const p = PARTES[id];
+        let filas = `<tr class="parte ${p.tramo}"><th scope="colgroup" colspan="5"><span class="parte__dentro"><span class="parte__nombre">${p.nombre} · ${coma(p.total)} ${p.total === 1 ? 'punto' : 'puntos'}</span><span class="parte__datos">${p.datos}</span></span></th></tr>`;
+        for (const [dimension, puntos, indicadores] of p.dimensiones) {
+          filas += `<tr class="dim"><th scope="rowgroup">${dimension}</th><td class="num">${coma(puntos)}</td>${casillas()}</tr>`;
+          for (const [texto, pts] of indicadores) filas += `<tr><td>${texto}</td><td class="num">${coma(pts)}</td>${casillas()}</tr>`;
+        }
+        filas += `<tr class="suma"><th scope="row">${p.suma}</th><td class="num">${coma(p.total)}</td>${casillas()}</tr>`;
+        return `<tbody class="${p.tramo}">${filas}</tbody>`;
+      }
+
+      for (const hueco of document.querySelectorAll('[data-rubrica]')) {
+        const hoja = HOJAS[hueco.dataset.rubrica];
+        const total = hoja.total
+          ? `<tbody><tr class="total"><th scope="row">${hoja.total}</th><td class="num">10</td>${casillas()}</tr></tbody>`
+          : '';
+        hueco.outerHTML = `<table class="rubrica">
+          <colgroup><col /><col style="width: 15mm" /><col style="width: 11.5mm" /><col style="width: 11.5mm" /><col style="width: 11.5mm" /></colgroup>
+          <thead><tr><th scope="col">Indicador</th><th scope="col" class="num">Puntos</th><th scope="col" class="g">1.ª</th><th scope="col" class="g">2.ª</th><th scope="col" class="g">3.ª</th></tr></thead>
+          ${hoja.partes.map(cuerpo).join('')}${total}
+        </table>`;
+      }
+
+      for (const leyenda of document.querySelectorAll('[data-leyenda]')) {
+        leyenda.innerHTML = `<span><b class="marca">1.ª, 2.ª y 3.ª</b>: tus grabaciones.</span>
+          <span><span class="marca">✓</span> salió completo</span>
+          <span><span class="marca">½</span> a medias</span>
+          <span><span class="marca">✗</span> no salió</span>
+`;
+      }
+
+      // ------------------------------------------------------------------
+      // Ilustración de la portada: móvil grabando, reloj de 90 minutos y rúbrica con marcas
+      // ------------------------------------------------------------------
+      const COLOR = {
+        azul: '#2f6fd6',
+        verde: '#1fa67a',
+        verdeTexto: '#127055',
+        coral: '#e8553e',
+        coralTexto: '#b63a26',
+        morado: '#8c4fb8',
+        amarillo: '#f6c12e',
+        naranja: '#f5961f',
+        marino: '#1e2b55',
+        suave: '#46578c',
+        crema: '#fff6e6',
+        linea: '#ead9bb',
+        moradoTinte: '#efe5f7',
+        azulTinte: '#e4edfb',
+        amarilloTinte: '#fdf0c7',
+      };
+
+      // Tramos del reloj del oral que propone el kit: 25, 50 y 15 minutos.
+      const TRAMOS = [
+        { desde: 0, min: 25, color: COLOR.morado },
+        { desde: 25, min: 50, color: COLOR.azul },
+        { desde: 75, min: 15, color: COLOR.amarillo },
+      ];
+
+      function reloj(cx, cy, R) {
+        let s = `<circle cx="${cx}" cy="${cy + 1.6}" r="${R}" fill="${COLOR.marino}" opacity="0.16"/>`;
+        s += `<rect x="${cx - 5}" y="${cy - R - 6}" width="10" height="4" rx="1.2" fill="${COLOR.marino}"/>`;
+        s += `<rect x="${cx - 2}" y="${cy - R - 3}" width="4" height="4" fill="${COLOR.marino}"/>`;
+        s += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#fff" stroke="${COLOR.marino}" stroke-width="1.6"/>`;
+        const r = R * 0.7;
+        const C = 2 * Math.PI * r;
+        for (const t of TRAMOS) {
+          const largo = (C * t.min) / 90 - 1;
+          const giro = -90 + (360 * t.desde) / 90 + (360 * 0.5) / C;
+          s += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${t.color}" stroke-width="${R * 0.3}" stroke-dasharray="${largo} ${C}" transform="rotate(${giro} ${cx} ${cy})"/>`;
+        }
+        s += `<text x="${cx}" y="${cy + 3}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="${R * 0.42}" fill="${COLOR.marino}">90</text>`;
+        return s;
+      }
+
+      function movil(x, y) {
+        // Trípode, móvil en horizontal y, en la pantalla, una persona exponiendo y el punto de grabar
+        let s = '';
+        s += `<g stroke="${COLOR.marino}" stroke-width="1.6" stroke-linecap="round">
+          <line x1="${x + 25}" y1="${y + 32}" x2="${x + 12}" y2="${y + 66}"/>
+          <line x1="${x + 25}" y1="${y + 32}" x2="${x + 25}" y2="${y + 68}"/>
+          <line x1="${x + 25}" y1="${y + 32}" x2="${x + 38}" y2="${y + 66}"/></g>`;
+        s += `<rect x="${x + 20}" y="${y + 28}" width="10" height="5" rx="1" fill="${COLOR.marino}"/>`;
+        s += `<rect x="${x + 1.4}" y="${y + 1.8}" width="50" height="29" rx="4" fill="${COLOR.marino}" opacity="0.16"/>`;
+        s += `<rect x="${x}" y="${y}" width="50" height="29" rx="4" fill="${COLOR.marino}"/>`;
+        s += `<rect x="${x + 4}" y="${y + 3}" width="42" height="23" rx="1.6" fill="${COLOR.crema}"/>`;
+        s += `<circle cx="${x + 25}" cy="${y + 11}" r="3.4" fill="${COLOR.naranja}"/>`;
+        s += `<path d="M${x + 18} ${y + 25.6} q0 -9 7 -9 q7 0 7 9 z" fill="${COLOR.azul}"/>`;
+        s += `<rect x="${x + 33}" y="${y + 16}" width="9" height="6" rx="0.8" fill="#fff" stroke="${COLOR.suave}" stroke-width="0.5"/>`;
+        s += `<circle cx="${x + 8.4}" cy="${y + 7.2}" r="1.8" fill="${COLOR.coral}"/>`;
+        s += `<text x="${x + 11.4}" y="${y + 8.9}" font-family="Outfit" font-weight="700" font-size="4.4" fill="${COLOR.coralTexto}">REC</text>`;
+        return s;
+      }
+
+      function rubrica() {
+        // Hoja con filas y las marcas de tres grabaciones: cada vez hay más ✓
+        const marcas = [
+          ['no', 'medias', 'si'],
+          ['medias', 'si', 'si'],
+          ['no', 'no', 'medias'],
+          ['si', 'si', 'si'],
+          ['medias', 'medias', 'si'],
+          ['no', 'medias', 'si'],
+        ];
+        let s = `<rect x="2" y="2.6" width="84" height="96" rx="2.4" fill="${COLOR.marino}" opacity="0.16"/>`;
+        s += `<rect x="0" y="0" width="84" height="96" rx="2.4" fill="#fff"/>`;
+        s += `<text x="7" y="11" font-family="Outfit" font-weight="700" font-size="5.6" fill="${COLOR.marino}">Rúbrica</text>`;
+        ['1.ª', '2.ª', '3.ª'].forEach((g, i) => {
+          s += `<text x="${53 + i * 10}" y="11" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="4.2" fill="${COLOR.suave}">${g}</text>`;
+        });
+        marcas.forEach((fila, f) => {
+          const y = 18 + f * 12.4;
+          s += `<rect x="7" y="${y + 3}" width="${[34, 28, 37, 30, 25, 33][f]}" height="2" rx="1" fill="${COLOR.suave}" opacity="0.35"/>`;
+          s += `<line x1="5" y1="${y + 10}" x2="79" y2="${y + 10}" stroke="${COLOR.linea}" stroke-width="0.4"/>`;
+          fila.forEach((m, i) => {
+            const cx = 53 + i * 10;
+            const cy = y + 4;
+            s += `<rect x="${cx - 4}" y="${cy - 4}" width="8" height="8" rx="1" fill="none" stroke="#8790b3" stroke-width="0.4"/>`;
+            if (m === 'si') s += `<path d="M${cx - 2.4} ${cy + 0.2} l1.8 2 l3.4 -4.2" fill="none" stroke="${COLOR.verdeTexto}" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>`;
+            if (m === 'no') s += `<path d="M${cx - 2} ${cy - 2} l4 4 m0 -4 l-4 4" fill="none" stroke="${COLOR.coralTexto}" stroke-width="1.1" stroke-linecap="round"/>`;
+            if (m === 'medias') s += `<text x="${cx}" y="${cy + 2}" text-anchor="middle" font-family="Outfit" font-weight="700" font-size="5.6" fill="${COLOR.marino}">½</text>`;
+          });
+        });
+        return s;
+      }
+
+      document.getElementById('ilustracion').innerHTML = `
+        <circle cx="190" cy="232" r="62" fill="${COLOR.moradoTinte}"/>
+        <circle cx="14" cy="262" r="30" fill="${COLOR.amarilloTinte}"/>
+        <circle cx="118" cy="292" r="12" fill="${COLOR.azulTinte}"/>
+        <g transform="translate(26 166) rotate(-5 42 48)">${rubrica()}</g>
+        <g transform="translate(128 196)">${movil(0, 0)}</g>
+        <g>${reloj(170, 172, 17)}</g>`;
+    </script>
+  </body>
+</html>
