@@ -1,0 +1,268 @@
+---
+// Puerta de entrada de cada necesidad (B-008, paso 1, aprobado por José el 24/11/2026): por dónde empezar
+// en casa y en clase, una ruta de materiales en orden, apps gratis comprobadas y a quién acudir en la
+// Región de Murcia. Los datos están en src/data/puertas-necesidad.json y los revisan Lilia y Marta.
+// Si un paso o la ruta nombran un material que no existe, la web no se construye.
+import type { Material } from '../lib/materiales';
+import { ruta } from '../lib/rutas';
+import { fecha } from '../lib/formatos';
+
+interface Paso {
+  texto: string;
+  material?: string;
+}
+interface Entrada {
+  titulo: string;
+  pasos: Paso[];
+}
+interface App {
+  nombre: string;
+  quien: string;
+  para: string;
+  precio: string;
+  datos: string;
+  url: string;
+  comprobado: string;
+}
+interface Lugar {
+  nombre: string;
+  que: string;
+  url?: string | null;
+  nota?: string;
+  comprobado: string;
+}
+export interface Puerta {
+  familia: Entrada;
+  seno: Entrada;
+  ruta: string[];
+  pocos?: string;
+  apps: App[];
+  murcia: Lugar[];
+}
+
+interface Props {
+  puerta: Puerta;
+  materiales: Material[];
+  comprobado: string;
+}
+
+const { puerta, materiales, comprobado } = Astro.props;
+const porId = new Map(materiales.map((m) => [m.id, m]));
+const titulo = (id: string) => {
+  const m = porId.get(id);
+  if (!m) throw new Error(`Puerta de necesidad: no existe el material «${id}» (src/data/puertas-necesidad.json).`);
+  return m.data.titulo;
+};
+const entradas = [
+  { clase: 'familia', ...puerta.familia },
+  { clase: 'seno', ...puerta.seno },
+];
+---
+
+<section class="puerta" aria-labelledby="titulo-puerta" data-pagefind-ignore>
+  <h2 id="titulo-puerta" class="solo-lectores">Por dónde empezar</h2>
+
+  <div class="puerta__entradas">
+    {
+      entradas.map((e) => (
+        <div class={`entrada entrada--${e.clase}`}>
+          <h3 class="entrada__titulo">{e.titulo}</h3>
+          <ol class="entrada__pasos">
+            {e.pasos.map((p) => (
+              <li>
+                {p.texto}
+                {p.material && (
+                  <span class="entrada__material">
+                    Material:{' '}
+                    <a href={ruta(`/material-gratuito/${p.material}/`)}>{titulo(p.material)}</a>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="puerta__ruta">
+    <h3>Una ruta de materiales, en orden</h3>
+    <ol class="ruta">
+      {
+        puerta.ruta.map((id) => (
+          <li>
+            <a href={ruta(`/material-gratuito/${id}/`)}>{titulo(id)}</a>
+          </li>
+        ))
+      }
+    </ol>
+    {puerta.pocos && <p class="puerta__pocos">{puerta.pocos}</p>}
+  </div>
+
+  <div class="puerta__recursos">
+    {
+      puerta.apps.length > 0 && (
+        <div class="recursos">
+          <h3>Apps y recursos gratis</h3>
+          <ul>
+            {puerta.apps.map((a) => (
+              <li>
+                <a href={a.url} rel="noopener">
+                  {a.nombre}
+                </a>
+                , de {a.quien}. {a.para}
+                <span class="recursos__detalle">
+                  {a.precio}. {a.datos}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    {
+      puerta.murcia.length > 0 && (
+        <div class="recursos">
+          <h3>A quién acudir en la Región de Murcia</h3>
+          <ul>
+            {puerta.murcia.map((l) => (
+              <li>
+                {l.url ? (
+                  <a href={l.url} rel="noopener">
+                    {l.nombre}
+                  </a>
+                ) : (
+                  <strong>{l.nombre}</strong>
+                )}
+                . {l.que}
+                {l.nota && <span class="recursos__detalle">{l.nota}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+  <p class="puerta__fecha">
+    Enlaces comprobados el <time datetime={comprobado}>{fecha(new Date(comprobado))}</time>. No ganamos nada por
+    recomendar estas apps ni estos servicios. Si alguno cambia, escríbenos.
+  </p>
+</section>
+
+<style>
+  .puerta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .puerta h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.15rem;
+  }
+
+  .puerta__entradas,
+  .puerta__recursos {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 48em) {
+    .puerta__entradas,
+    .puerta__recursos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .entrada {
+    padding: 1.2rem 1.3rem;
+    border-radius: var(--radio);
+    border-top: 0.4rem solid var(--color);
+    background: var(--tinte);
+  }
+
+  .entrada--familia {
+    --color: var(--coral);
+    --tinte: var(--coral-tinte);
+  }
+
+  .entrada--seno {
+    --color: var(--verde);
+    --tinte: var(--verde-tinte);
+  }
+
+  .entrada__pasos {
+    margin: 0;
+    padding-left: 1.3rem;
+  }
+
+  .entrada__pasos li {
+    margin-bottom: 0.5rem;
+  }
+
+  .entrada__material {
+    display: block;
+    margin-top: 0.15rem;
+    font-weight: 700;
+  }
+
+  .entrada a {
+    color: var(--marino);
+  }
+
+  .puerta__ruta {
+    padding: 1.2rem 1.3rem;
+    border-radius: var(--radio);
+    background: var(--papel);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .ruta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+    margin: 0;
+    padding-left: 1.6rem;
+  }
+
+  @media (min-width: 48em) {
+    .ruta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+  }
+
+  .ruta li::marker {
+    font-family: var(--letra-titulos);
+    font-weight: 700;
+    color: var(--morado-texto);
+  }
+
+  .puerta__pocos {
+    margin: 0.8rem 0 0;
+    font-style: italic;
+  }
+
+  .recursos ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .recursos li {
+    margin-bottom: 0.6rem;
+  }
+
+  .recursos__detalle {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .puerta__fecha {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+</style>
