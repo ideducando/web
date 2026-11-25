@@ -1,0 +1,1095 @@
+{
+  "comprobado": "2026-11-25",
+  "necesidades": {
+    "toda-la-clase": {
+      "familia": {
+        "titulo": "Soy familia: quiero acompañar a mi peque, con diagnóstico o sin él",
+        "pasos": [
+          {
+            "texto": "Contadle cada mañana qué va a pasar en el día. Con dibujos se entiende mejor y se recuerda.",
+            "material": "agenda-visual-pictogramas"
+          },
+          {
+            "texto": "Jugad un rato con las palabras: dad una palmada en cada sílaba o buscad palabras que rimen.",
+            "material": "tren-de-las-silabas"
+          },
+          {
+            "texto": "Cuando haya mucha energía, haced juntos una pausa de movimiento de 1 a 3 minutos.",
+            "material": "pausas-activas-de-pie-y-sentados"
+          },
+          {
+            "texto": "Contad a su tutora o a su tutor lo que veis en casa. Así el cole y la casa van a una."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: quiero empezar con el Diseño Universal para el Aprendizaje (DUA)",
+        "pasos": [
+          {
+            "texto": "Con el DUA se planifica desde el principio para todo el grupo. Empieza por anticipar el día a la vista de todos.",
+            "material": "agenda-visual-semanal"
+          },
+          {
+            "texto": "Haz visibles las esperas y los turnos. Así todo el grupo sabe qué viene después.",
+            "material": "turnos-visibles"
+          },
+          {
+            "texto": "Ofrece la misma actividad en tres niveles. Deja que cada cual elija el suyo y cómo responder.",
+            "material": "retos-diciembre"
+          },
+          {
+            "texto": "Cuando tengas soltura, prueba una situación de aprendizaje entera, con sus ajustes y su evaluación.",
+            "material": "situacion-aprendizaje-3-anos-emociones"
+          }
+        ]
+      },
+      "ruta": [
+        "agenda-visual-semanal",
+        "turnos-visibles",
+        "pausas-activas-de-pie-y-sentados",
+        "rincon-de-la-calma",
+        "retos-diciembre",
+        "ya-he-terminado",
+        "situacion-aprendizaje-3-anos-emociones"
+      ],
+      "apps": [
+        {
+          "nombre": "Directrices del DUA 3.0",
+          "quien": "CAST",
+          "para": "Las directrices del Diseño Universal para el Aprendizaje en castellano, con sugerencias concretas para aplicarlas.",
+          "precio": "Gratis",
+          "datos": "Se consultan sin cuenta y sin dar datos.",
+          "url": "https://udlguidelines.cast.org/es/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Buscador de pictogramas",
+          "quien": "ARASAAC",
+          "para": "Pictogramas del Gobierno de Aragón para hacer carteles, agendas o avisos de clase.",
+          "precio": "Gratis",
+          "datos": "Se descargan sin cuenta. La cuenta solo hace falta para guardar favoritos.",
+          "url": "https://arasaac.org/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "ARActivities",
+          "quien": "ARASAAC",
+          "para": "Hacer con pictogramas tableros, horarios, calendarios, bingos o dominós listos para imprimir.",
+          "precio": "Gratis",
+          "datos": "Se usa sin cuenta. Para guardar las actividades en la web hay que iniciar sesión. Su web usa Google Analytics para contar las visitas.",
+          "url": "https://aractivities.arasaac.org/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Educación Inclusiva Región de Murcia",
+          "que": "Web de la Consejería de Educación sobre inclusión, con sus programas y un mapa de recursos.",
+          "url": "https://inclusivarm.com/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Equipos de orientación educativa y psicopedagógica (EOEP)",
+          "que": "Asesoran a los coles de Infantil y Primaria de cada zona. Si un peque necesita una valoración, la pide el cole.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "tea": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene TEA",
+        "pasos": [
+          {
+            "texto": "Con el trastorno del espectro del autismo (TEA), saber qué va a pasar da calma. Empezad por un solo apoyo visual.",
+            "material": "apoyos-visuales-familias"
+          },
+          {
+            "texto": "Elegid la rutina que más cuesta en casa y ponedla en una tira con dibujos, paso a paso.",
+            "material": "rutinas-visuales-casa"
+          },
+          {
+            "texto": "Antes de algo nuevo, como ir al médico, leed juntos una historia corta que lo cuente.",
+            "material": "historias-sociales-cole-y-casa"
+          },
+          {
+            "texto": "Usad en casa los mismos pictogramas que en el cole. Preguntad a su seño cuáles usa."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con TEA",
+        "pasos": [
+          {
+            "texto": "Lee con orientación su informe y elige pocos ajustes para empezar.",
+            "material": "manana-en-clase"
+          },
+          {
+            "texto": "Pon a la vista la agenda del día y avisa antes de cada cambio.",
+            "material": "agenda-visual-pictogramas"
+          },
+          {
+            "texto": "Dale otra forma de comunicarse: señala tú las palabras del tablero mientras hablas.",
+            "material": "tablero-comunicacion-basico"
+          },
+          {
+            "texto": "Habla con la familia para usar los mismos apoyos en casa y en clase."
+          }
+        ]
+      },
+      "ruta": [
+        "agenda-visual-pictogramas",
+        "secuencias-rutinas-paso-a-paso",
+        "tablero-comunicacion-basico",
+        "historias-sociales-cole-y-casa",
+        "turnos-visibles",
+        "dias-distintos-historias-sociales",
+        "rincon-de-la-calma",
+        "fiestas-sin-sobresaltos"
+      ],
+      "apps": [
+        {
+          "nombre": "PictogramAgenda",
+          "quien": "Lorenzo Moreno",
+          "para": "Una agenda visual en el móvil o la tableta, con pictogramas de ARASAAC o con vuestras fotos.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.lorenzomoreno.pictogramagenda",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "José Aprende",
+          "quien": "la Fundación Orange",
+          "para": "Cuentos interactivos con pictogramas sobre el aseo, las rutinas y las emociones, con narrador.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.orange.joseaprende",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "SequenciAAC",
+          "quien": "Ramón Trepat y el equipo de ARASAAC",
+          "para": "Hacer e imprimir secuencias con pictogramas para los pasos de una rutina o una tarea.",
+          "precio": "Gratis",
+          "datos": "Se usa en el navegador y sin cuenta. Solo el vocabulario propio pide iniciar sesión. Su web usa Google Analytics para contar las visitas.",
+          "url": "https://sequenciaac.arasaac.org/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Asterics AAC",
+          "quien": "la AsTeRICS Foundation",
+          "para": "Un comunicador con pictogramas para el móvil, la tableta o el ordenador, que se usa en el navegador.",
+          "precio": "Gratis",
+          "datos": "Se puede usar sin registrarse y lo guarda todo en el dispositivo. La cuenta, opcional, pide usuario y contraseña.",
+          "url": "https://grid.asterics.eu/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipo específico de autismo de la Consejería de Educación",
+          "que": "Servicio público que apoya a coles y familias. Su web explica qué hacer ante las primeras sospechas, antes y después de los 6 años.",
+          "url": "https://equipoautismomurcia.com/familias/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Atención temprana (de 0 a 6 años)",
+          "que": "Apoyos gratuitos para peques con dificultades en su desarrollo y para su familia. La pide la familia, con el informe de pediatría.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Servicio Murciano de Salud",
+          "que": "El primer paso es la consulta de pediatría, que puede derivar a neuropediatría o a salud mental infanto-juvenil. En esta página se busca el centro que corresponde.",
+          "url": "https://www.murciasalud.es/web/red-de-salud-mental/centros-de-salud-mental",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Federación de Autismo de la Región de Murcia (FAUM)",
+          "que": "Agrupa a las asociaciones de familias de personas con autismo de la Región.",
+          "url": null,
+          "nota": "De momento no la enlazamos.",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "tdah": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene TDAH",
+        "pasos": [
+          {
+            "texto": "Con el trastorno por déficit de atención e hiperactividad (TDAH) ayudan las metas pequeñas y saber pronto cómo va.",
+            "material": "tarjeta-cole-casa-tdah"
+          },
+          {
+            "texto": "Poned las rutinas de casa en una tira con dibujos. Al acabar cada paso, se quita su tarjeta.",
+            "material": "rutinas-visuales-casa"
+          },
+          {
+            "texto": "Entre tarea y tarea, haced una pausa corta de movimiento.",
+            "material": "pausas-activas-de-pie-y-sentados"
+          },
+          {
+            "texto": "Decidle qué ha hecho bien en cuanto lo hace, con palabras concretas."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con TDAH",
+        "pasos": [
+          {
+            "texto": "Lee su ficha y elige dos o tres ajustes para empezar.",
+            "material": "manana-en-clase"
+          },
+          {
+            "texto": "Pacta con la familia una tarjeta diaria con tres objetivos escritos en positivo.",
+            "material": "tarjeta-cole-casa-tdah"
+          },
+          {
+            "texto": "Dale encargos cortos y útiles: así se mueve con permiso y la tarea tiene un final claro.",
+            "material": "misiones-invierno"
+          },
+          {
+            "texto": "Haz visibles los turnos y alarga la espera poco a poco.",
+            "material": "turnos-visibles"
+          }
+        ]
+      },
+      "ruta": [
+        "tarjeta-cole-casa-tdah",
+        "rutinas-visuales-casa",
+        "pausas-activas-de-pie-y-sentados",
+        "misiones-invierno",
+        "turnos-visibles",
+        "horario-semanal-recreo",
+        "panel-conducta-recreo",
+        "registro-observacion-abc"
+      ],
+      "apps": [
+        {
+          "nombre": "PictogramAgenda",
+          "quien": "Lorenzo Moreno",
+          "para": "Una agenda visual en el móvil que puede pasar sola a la tarea siguiente a la hora que marquéis.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.lorenzomoreno.pictogramagenda",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "SequenciAAC",
+          "quien": "Ramón Trepat y el equipo de ARASAAC",
+          "para": "Hacer e imprimir los pasos de una rutina con pictogramas, como prepararse para ir al cole.",
+          "precio": "Gratis",
+          "datos": "Se usa en el navegador y sin cuenta. Solo el vocabulario propio pide iniciar sesión. Su web usa Google Analytics para contar las visitas.",
+          "url": "https://sequenciaac.arasaac.org/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipo específico de dificultades de aprendizaje y TDAH",
+          "que": "Equipo de la Consejería de Educación. Si hace falta, el equipo de orientación del cole pide que intervenga.",
+          "url": "https://inclusivarm.com/necesidades-especificas-de-apoyo-educativo/#taa",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Servicio Murciano de Salud",
+          "que": "La valoración clínica del TDAH empieza en la consulta de pediatría, que puede derivar a salud mental infanto-juvenil.",
+          "url": "https://www.murciasalud.es/web/red-de-salud-mental/centros-de-salud-mental",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "ADAHI",
+          "que": "Asociación de ayuda al déficit de atención, con o sin hiperactividad. Apoya a las familias y tiene sedes en Cartagena, Murcia y otros municipios.",
+          "url": "https://www.adahi.es/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Protocolos de derivación de la Consejería (para docentes)",
+          "que": "Página con el informe para que salud valore un posible TDAH y el formulario del equipo específico.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=45189&IDTIPO=100&RASTRO=c148$m22298",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "tdl": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene TDL",
+        "pasos": [
+          {
+            "texto": "Con el trastorno del desarrollo del lenguaje (TDL), ayuda jugar con las palabras un rato corto, varios días por semana.",
+            "material": "tren-de-las-silabas"
+          },
+          {
+            "texto": "Hablad despacio y con frases cortas. Si dice «agua», responded con una frase un poco más larga: «¿Quieres agua?»."
+          },
+          {
+            "texto": "Inventad juntos historias cortas: quién es, dónde está y qué le pasa.",
+            "material": "ruleta-historias-invierno"
+          },
+          {
+            "texto": "Preguntad en el cole qué sonido o qué palabras trabajan esa semana y practicadlos en casa.",
+            "material": "pack-audicion-lenguaje"
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con TDL",
+        "pasos": [
+          {
+            "texto": "Lee su ficha y acompaña lo que dices con imágenes y gestos.",
+            "material": "manana-en-clase"
+          },
+          {
+            "texto": "Da las instrucciones de una en una y comprueba que las ha entendido."
+          },
+          {
+            "texto": "Trabaja la conciencia fonológica en grupos pequeños, de 10 a 15 minutos, varios días por semana.",
+            "material": "tren-de-las-silabas"
+          },
+          {
+            "texto": "Coordínate con quien le da Audición y Lenguaje (AL) para usar las mismas palabras y los mismos apoyos.",
+            "material": "registro-sesiones-pt-al"
+          }
+        ]
+      },
+      "ruta": [
+        "tren-de-las-silabas",
+        "pack-audicion-lenguaje",
+        "rincon-lenguaje-invierno",
+        "dialogos-para-completar",
+        "ruleta-historias-invierno",
+        "frase-y-dibujo",
+        "cartilla-trabadas",
+        "me-llamo-bocadillo-pictogramas"
+      ],
+      "apps": [
+        {
+          "nombre": "#Soyvisual",
+          "quien": "la Fundación Orange",
+          "para": "Fotos, láminas y materiales para trabajar el lenguaje y construir frases con apoyo visual.",
+          "precio": "Gratis",
+          "datos": "Los materiales se descargan sin cuenta y sin dar datos.",
+          "url": "https://www.soyvisual.org/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Pictotraductor",
+          "quien": "la Fundación Pictoaplicaciones",
+          "para": "Escribes una frase y la ves en pictogramas, para imprimirla o compartirla.",
+          "precio": "Gratis",
+          "datos": "Se usa sin registrarse. Con usuario y contraseña, opcionales, se pueden subir fotos propias y guardar frases.",
+          "url": "https://www.pictotraductor.com/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipos de orientación educativa y psicopedagógica (EOEP)",
+          "que": "El cole pide la valoración al equipo de orientación de su zona. Con ella se decide el apoyo, por ejemplo de Audición y Lenguaje.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Atención temprana (de 0 a 6 años)",
+          "que": "Apoyos gratuitos para peques con dificultades en su desarrollo y para su familia. La pide la familia, con el informe de pediatría.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "dificultades-aprendizaje": {
+      "familia": {
+        "titulo": "Soy familia: a mi peque le cuesta leer, escribir o calcular",
+        "pasos": [
+          {
+            "texto": "Hablad con su tutora o su tutor. Si la dificultad sigue, el cole puede pedir una valoración."
+          },
+          {
+            "texto": "Jugad con los sonidos antes que con las letras: palmadas por sílabas y palabras que riman.",
+            "material": "tren-de-las-silabas"
+          },
+          {
+            "texto": "Leed poco rato y sin prisa. Si se atasca, decid el sonido de cada letra en vez de su nombre.",
+            "material": "detectives-letras"
+          },
+          {
+            "texto": "Valorad su esfuerzo y evitad las comparaciones con hermanos o compañeros."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con dificultades de aprendizaje",
+        "pasos": [
+          {
+            "texto": "Observa dos o tres semanas y apunta hechos concretos. Con esos datos, habla con orientación.",
+            "material": "registro-observacion-neae"
+          },
+          {
+            "texto": "Refuerza la conciencia fonológica en grupos pequeños, de 10 a 15 minutos, varios días por semana.",
+            "material": "tren-de-las-silabas"
+          },
+          {
+            "texto": "Comprueba que entiende lo que lee: que empareje cada frase con su dibujo y vea si acierta.",
+            "material": "frase-y-dibujo"
+          },
+          {
+            "texto": "Cuando lea sílabas sencillas, pasa a las trabadas, un grupo cada vez.",
+            "material": "cartilla-trabadas"
+          }
+        ]
+      },
+      "ruta": [
+        "tren-de-las-silabas",
+        "tarjetas-trazo",
+        "detectives-letras",
+        "cartilla-trabadas",
+        "diptongos-manipulativos",
+        "frase-y-dibujo",
+        "registro-observacion-neae"
+      ],
+      "apps": [
+        {
+          "nombre": "Dytective",
+          "quien": "Change Dyslexia",
+          "para": "Juegos para la lectura y la escritura que los coles de España pueden usar gratis gracias a EduCaixa.",
+          "precio": "Gratis, con compras dentro",
+          "datos": "Pide una cuenta con usuario y contraseña. Según Google Play, recoge el correo y un identificador de usuario, y puede compartirlos con otras empresas.",
+          "url": "https://play.google.com/store/apps/details?id=org.changedyslexia.newdytective",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipos de orientación educativa y psicopedagógica (EOEP)",
+          "que": "Si la dificultad sigue a pesar de los apoyos, el cole pide una valoración al equipo de orientación de su zona.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Equipo específico de dificultades de aprendizaje",
+          "que": "Equipo de la Consejería de Educación para la dislexia y otras dificultades de aprendizaje. Interviene si lo pide el equipo de orientación.",
+          "url": "https://inclusivarm.com/necesidades-especificas-de-apoyo-educativo/#taa",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Protocolos de derivación de la Consejería (para docentes)",
+          "que": "Página con el formulario para pedir la intervención del equipo específico.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=45189&IDTIPO=100&RASTRO=c148$m22298",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "discapacidad-intelectual": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene discapacidad intelectual",
+        "pasos": [
+          {
+            "texto": "Empezad por un solo apoyo visual, para el momento del día que más cuesta.",
+            "material": "apoyos-visuales-familias"
+          },
+          {
+            "texto": "Partid cada rutina en pasos con dibujos. Cuando la haga casi sin ayuda, añadid dos pasos más.",
+            "material": "rutinas-visuales-casa"
+          },
+          {
+            "texto": "Esperad su respuesta con calma y aceptad cualquier forma: hablar, señalar o hacer un gesto.",
+            "material": "tablero-comunicacion-basico"
+          },
+          {
+            "texto": "Practicad en la vida real lo que aprende en el cole, como pagar en una tienda.",
+            "material": "mercadillo-de-clase"
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con discapacidad intelectual",
+        "pasos": [
+          {
+            "texto": "Lee su ficha y su plan de apoyo. Elige pocos objetivos, que le sirvan en su vida diaria.",
+            "material": "manana-en-clase"
+          },
+          {
+            "texto": "Enseña cada rutina paso a paso, con pictogramas y haciéndola tú delante las primeras veces.",
+            "material": "secuencias-rutinas-paso-a-paso"
+          },
+          {
+            "texto": "Usa actividades en tres niveles: hace lo mismo que su grupo, con más apoyo.",
+            "material": "frase-y-dibujo"
+          },
+          {
+            "texto": "Cada trimestre, anota cuánta ayuda necesita en cada habilidad. Así se ve lo que avanza.",
+            "material": "escalera-habilidades-pt-al"
+          }
+        ]
+      },
+      "ruta": [
+        "agenda-visual-pictogramas",
+        "secuencias-rutinas-paso-a-paso",
+        "tablero-comunicacion-basico",
+        "frase-y-dibujo",
+        "estaciones-matematicas-otono",
+        "mercadillo-de-clase",
+        "derechos-infancia-lectura-facil",
+        "me-llamo-error-pictogramas"
+      ],
+      "apps": [
+        {
+          "nombre": "José Aprende",
+          "quien": "la Fundación Orange",
+          "para": "Cuentos interactivos con pictogramas sobre el aseo, las rutinas y las emociones, con narrador.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.orange.joseaprende",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "SequenciAAC",
+          "quien": "Ramón Trepat y el equipo de ARASAAC",
+          "para": "Hacer e imprimir secuencias con pictogramas para aprender una tarea paso a paso.",
+          "precio": "Gratis",
+          "datos": "Se usa en el navegador y sin cuenta. Solo el vocabulario propio pide iniciar sesión. Su web usa Google Analytics para contar las visitas.",
+          "url": "https://sequenciaac.arasaac.org/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "AraWrite",
+          "quien": "ARASAAC",
+          "para": "Pasar a pictogramas un texto, una nota o un cuento, escribiéndolo o dictándolo.",
+          "precio": "Gratis",
+          "datos": "Se usa sin cuenta, salvo para subir tus imágenes. Funciona con inteligencia artificial: no escribas nombres ni datos del peque. Su web usa Google Analytics para contar las visitas.",
+          "url": "https://arawrite.arasaac.org/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Guía de recursos para el alumnado con necesidades educativas especiales (NEE)",
+          "que": "La Consejería de Educación explica en una página cómo se reconocen las NEE, la escolarización y las becas.",
+          "url": "https://inclusivarm.com/guianee/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Atención temprana (de 0 a 6 años)",
+          "que": "Apoyos gratuitos para peques con dificultades en su desarrollo y para su familia. La pide la familia, con el informe de pediatría.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Plena inclusión Región de Murcia",
+          "que": "Federación de asociaciones de familias de personas con discapacidad intelectual y del desarrollo. En su web se busca la asociación más cercana.",
+          "url": "https://plenainclusionmurcia.org/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Asociación para Personas con Síndrome de Down (ASSIDO)",
+          "que": "Trabaja por las personas con síndrome de Down y con otras discapacidades intelectuales, y por sus familias.",
+          "url": null,
+          "nota": "De momento no la enlazamos.",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "discapacidad-motora": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene discapacidad motora",
+        "pasos": [
+          {
+            "texto": "Preguntad en el cole qué apoyos usa para comunicarse y para escribir, y usadlos igual en casa."
+          },
+          {
+            "texto": "Dejad que elija y responda a su manera: señalando, mirando o con un gesto.",
+            "material": "tablero-comunicacion-basico"
+          },
+          {
+            "texto": "Moveos juntos con pausas cortas. Cada pausa tiene una versión de pie y otra sentada.",
+            "material": "pausas-activas-de-pie-y-sentados"
+          },
+          {
+            "texto": "Para los trazos, usad tarjetas plastificadas que se repasan con rotulador y se borran.",
+            "material": "tarjetas-trazo"
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con discapacidad motora",
+        "pasos": [
+          {
+            "texto": "Pregunta a orientación y al equipo específico de discapacidad motora cómo accede mejor al aula y al material."
+          },
+          {
+            "texto": "Haz las pausas activas con toda la clase. Cada cual elige la versión de pie o la sentada.",
+            "material": "pausas-activas-de-pie-y-sentados"
+          },
+          {
+            "texto": "Ofrece retos en tres niveles: en el primero vale responder señalando o con un gesto.",
+            "material": "retos-diciembre"
+          },
+          {
+            "texto": "Ten el tablero de comunicación siempre a mano y modela tú, señalando mientras hablas.",
+            "material": "tablero-comunicacion-basico"
+          }
+        ]
+      },
+      "ruta": [
+        "tablero-comunicacion-basico",
+        "pausas-activas-de-pie-y-sentados",
+        "tarjetas-trazo",
+        "retos-diciembre",
+        "estaciones-matematicas-otono",
+        "estaciones-matematicas-invierno",
+        "rutinas-invierno-cole",
+        "carta-de-deseos"
+      ],
+      "apps": [
+        {
+          "nombre": "Asterics AAC",
+          "quien": "la AsTeRICS Foundation",
+          "para": "Un comunicador con pictogramas en el navegador que admite el barrido, para quien no puede tocar la pantalla con precisión.",
+          "precio": "Gratis",
+          "datos": "Se puede usar sin registrarse y lo guarda todo en el dispositivo. La cuenta, opcional, pide usuario y contraseña.",
+          "url": "https://grid.asterics.eu/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipo específico de discapacidad motora",
+          "que": "Equipo de la Consejería de Educación que presta apoyo especializado al cole y al equipo de orientación de la zona.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Atención temprana (de 0 a 6 años)",
+          "que": "Apoyos gratuitos para peques con dificultades en su desarrollo y para su familia. La pide la familia, con el informe de pediatría.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Guía de recursos para el alumnado con necesidades educativas especiales (NEE)",
+          "que": "La Consejería de Educación explica en una página cómo se reconocen las NEE, la escolarización y las becas.",
+          "url": "https://inclusivarm.com/guianee/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "FAMDIF/COCEMFE-Murcia",
+          "que": "Federación de asociaciones murcianas de personas con discapacidad física y orgánica. Agrupa a dieciséis asociaciones.",
+          "url": "https://famdif.org/",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "discapacidad-auditiva": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene discapacidad auditiva",
+        "pasos": [
+          {
+            "texto": "Habladle de frente, a su altura y con luz en la cara. Llamad su atención antes de empezar."
+          },
+          {
+            "texto": "Anticipad el día con dibujos, para que no dependa solo de lo que oye.",
+            "material": "agenda-visual-pictogramas"
+          },
+          {
+            "texto": "Si usáis la lengua de signos española (LSE), aprended juntos signos nuevos cada semana."
+          },
+          {
+            "texto": "Antes de una fiesta con ruido, contadle qué va a pasar y preparad un plan de descanso.",
+            "material": "fiestas-sin-sobresaltos"
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con discapacidad auditiva",
+        "pasos": [
+          {
+            "texto": "Busca un sitio desde el que vea bien tu cara, lejos del ruido. Habla de frente y sin taparte la boca."
+          },
+          {
+            "texto": "Pon por escrito o en imágenes lo importante, como el horario y los cambios.",
+            "material": "agenda-visual-semanal"
+          },
+          {
+            "texto": "Haz visibles los turnos, también en las conversaciones de la asamblea.",
+            "material": "turnos-visibles"
+          },
+          {
+            "texto": "Coordínate con el equipo específico de discapacidad auditiva y con quien le da Audición y Lenguaje (AL)."
+          }
+        ]
+      },
+      "ruta": [
+        "agenda-visual-pictogramas",
+        "secuencias-rutinas-paso-a-paso",
+        "turnos-visibles",
+        "historias-sociales-cole-y-casa",
+        "fiestas-sin-sobresaltos"
+      ],
+      "pocos": "Por ahora solo un material está pensado para la discapacidad auditiva; los demás son apoyos visuales que no dependen del oído.",
+      "apps": [
+        {
+          "nombre": "DILSE",
+          "quien": "la Fundación CNSE",
+          "para": "Diccionario de la lengua de signos española con más de 10.000 signos en foto y en vídeo.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.tresandroides.dilse",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Mi baúl de lengua de signos",
+          "quien": "la Fundación CNSE",
+          "para": "Cuentos y canciones en lengua de signos española para niños y niñas sordos, en una app para Android.",
+          "precio": "Gratis",
+          "datos": "Se puede usar sin registrarse. Según su ficha de Google Play, no recoge datos.",
+          "url": "https://play.google.com/store/apps/details?id=com.cnse.mibaul",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Banco de imágenes y signos",
+          "quien": "la Fundación CNSE",
+          "para": "Signos de la lengua de signos española y dibujos por temas, como la familia o el cole, para descargar.",
+          "precio": "Gratis",
+          "datos": "Se descargan sin cuenta.",
+          "url": "https://www.fundacioncnse.org/educa/bancolse/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipo específico de discapacidad auditiva",
+          "que": "Equipo de la Consejería de Educación que presta apoyo especializado al cole y al equipo de orientación. Tiene sede en Murcia y en Cartagena.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Atención temprana (de 0 a 6 años)",
+          "que": "Apoyos gratuitos para peques con dificultades en su desarrollo y para su familia. La pide la familia, con el informe de pediatría.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "APANDA",
+          "que": "Asociación de familias de niños y niñas con discapacidad auditiva, en Cartagena. Tiene atención temprana, logopedia y apoyo a las familias.",
+          "url": "https://www.apanda.org/",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "ASPANPAL",
+          "que": "Asociación de familias de niños y niñas con problemas de audición y lenguaje, en Murcia.",
+          "url": "https://aspanpal.org/",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "discapacidad-visual": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene discapacidad visual",
+        "pasos": [
+          {
+            "texto": "Preguntad en el cole por el equipo específico de discapacidad visual, que trabaja con la ONCE."
+          },
+          {
+            "texto": "Probad juntos qué ve mejor: negro sobre amarillo o blanco sobre negro, y con qué luz.",
+            "material": "alto-contraste-aula"
+          },
+          {
+            "texto": "Dejad cada cosa siempre en el mismo sitio. Si algo cambia, avisadle y enseñádselo."
+          },
+          {
+            "texto": "Si tiene menos de 6 años, pedid la atención temprana. Es gratuita."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con discapacidad visual",
+        "pasos": [
+          {
+            "texto": "Coordínate desde el primer día con su equipo específico, que trabaja con la ONCE."
+          },
+          {
+            "texto": "Prueba con él o con ella dos versiones de los carteles, en su sitio y con la luz de la clase.",
+            "material": "alto-contraste-aula"
+          },
+          {
+            "texto": "Pon la información a la altura de sus ojos y deja cada cosa siempre en su sitio."
+          },
+          {
+            "texto": "Di en voz alta lo que escribes o señalas en la pizarra."
+          }
+        ]
+      },
+      "ruta": [
+        "alto-contraste-aula"
+      ],
+      "pocos": "Por ahora solo tenemos un material pensado para la discapacidad visual: los carteles de alto contraste.",
+      "apps": [
+        {
+          "nombre": "Educación inclusiva ONCE",
+          "quien": "la ONCE",
+          "para": "Web con orientaciones y materiales para docentes, familias y alumnado con discapacidad visual.",
+          "precio": "Gratis",
+          "datos": "Se consulta sin cuenta y sin dar datos.",
+          "url": "https://educacion.once.es/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipo específico de discapacidad visual",
+          "que": "Equipo de la Consejería de Educación que trabaja con la ONCE. Tiene sede en Murcia y en Cartagena.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "ONCE: atención a la educación inclusiva",
+          "que": "Apoya al alumnado con ceguera o deficiencia visual grave, a su familia y a su cole. Enseña, por ejemplo, braille y tecnología.",
+          "url": "https://www.once.es/servicios-sociales/educacion-inclusiva",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Atención temprana (de 0 a 6 años)",
+          "que": "Apoyos gratuitos para peques con dificultades en su desarrollo y para su familia. La pide la familia, con el informe de pediatría.",
+          "url": "https://www.carm.es/web/pagina?IDCONTENIDO=71061&IDTIPO=100&RASTRO=c174$m",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "conducta": {
+      "familia": {
+        "titulo": "Soy familia: a mi peque le cuesta calmarse o seguir las normas",
+        "pasos": [
+          {
+            "texto": "Fijaos en qué pasa justo antes de que se enfade. Muchas veces se puede preparar ese momento."
+          },
+          {
+            "texto": "Leed una historia corta en un rato tranquilo y otra vez justo antes del momento que cuesta. Nunca en plena rabieta.",
+            "material": "historias-sociales-calma-y-palabras"
+          },
+          {
+            "texto": "Preparad con él o con ella ideas para calmarse, y practicadlas antes de necesitarlas.",
+            "material": "rincon-de-la-calma"
+          },
+          {
+            "texto": "Decidle lo que hace bien en cuanto lo hace, con palabras concretas."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con dificultades de regulación o de conducta",
+        "pasos": [
+          {
+            "texto": "Antes de cambiar nada, observa: anota qué pasa antes y después de la conducta durante una o dos semanas.",
+            "material": "registro-observacion-abc"
+          },
+          {
+            "texto": "Anticipa los días distintos con una historia leída varios días antes.",
+            "material": "dias-distintos-historias-sociales"
+          },
+          {
+            "texto": "Enseña a calmarse en momentos tranquilos, con un rincón para toda la clase que nunca se usa como castigo.",
+            "material": "rincon-de-la-calma"
+          },
+          {
+            "texto": "Refuerza pocas conductas, dichas en positivo, justo después de que ocurran.",
+            "material": "panel-conducta-recreo"
+          }
+        ]
+      },
+      "ruta": [
+        "dias-distintos-historias-sociales",
+        "historias-sociales-calma-y-palabras",
+        "rincon-de-la-calma",
+        "turnos-visibles",
+        "panel-conducta-recreo",
+        "tarjeta-cole-casa-tdah",
+        "pausas-activas-de-pie-y-sentados",
+        "registro-observacion-abc"
+      ],
+      "apps": [
+        {
+          "nombre": "José Aprende",
+          "quien": "la Fundación Orange",
+          "para": "Cuentos con pictogramas en los que José cuenta qué le hace sentirse contento, triste o asustado.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.orange.joseaprende",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "PictogramAgenda",
+          "quien": "Lorenzo Moreno",
+          "para": "Una agenda visual en el móvil para saber qué viene después, con pictogramas o con vuestras fotos.",
+          "precio": "Gratis",
+          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
+          "url": "https://play.google.com/store/apps/details?id=com.lorenzomoreno.pictogramagenda",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipo específico de convivencia escolar",
+          "que": "Equipo de la Consejería de Educación que apoya a los coles en la convivencia. Su intervención la pide el cole.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Servicio Murciano de Salud",
+          "que": "Si la conducta preocupa mucho, el primer paso es la consulta de pediatría, que puede derivar a salud mental infanto-juvenil.",
+          "url": "https://www.murciasalud.es/web/red-de-salud-mental/centros-de-salud-mental",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Programa de bienestar emocional de la Consejería",
+          "que": "Los coles pueden presentar cada curso proyectos de bienestar emocional y de prevención del acoso escolar.",
+          "url": "https://inclusivarm.com/programas/bienestar/",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "altas-capacidades": {
+      "familia": {
+        "titulo": "Soy familia: mi peque tiene altas capacidades",
+        "pasos": [
+          {
+            "texto": "Si creéis que tiene altas capacidades, hablad con su tutora o su tutor. La evaluación la hace el equipo de orientación."
+          },
+          {
+            "texto": "Dadle retos abiertos, como inventar historias o mensajes secretos para la familia.",
+            "material": "detectives-letras"
+          },
+          {
+            "texto": "Recordadle que equivocarse es parte de aprender, también para quien aprende deprisa.",
+            "material": "me-llamo-error-pictogramas"
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: tengo en clase alumnado con altas capacidades",
+        "pasos": [
+          {
+            "texto": "Si ves indicios, pide a orientación la evaluación psicopedagógica. Desde ahí se proponen las medidas."
+          },
+          {
+            "texto": "Planifica en tres niveles, con uno «con más reto» que cualquiera pueda elegir.",
+            "material": "situacion-aprendizaje-4-anos-huerto"
+          },
+          {
+            "texto": "Amplía en profundidad: que planifique, escriba y revise su propia historia.",
+            "material": "ruleta-historias-invierno"
+          },
+          {
+            "texto": "Pregunta a orientación qué medidas encajan: enriquecimiento, ampliación o flexibilización del curso."
+          }
+        ]
+      },
+      "ruta": [
+        "situacion-aprendizaje-4-anos-huerto",
+        "situacion-aprendizaje-5-anos-mapa-del-cole",
+        "ruleta-historias-invierno",
+        "detectives-letras",
+        "diptongos-manipulativos"
+      ],
+      "pocos": "Solo un material está pensado de entrada para altas capacidades; los demás tienen un nivel «con más reto» que sirve para ampliar.",
+      "apps": [
+        {
+          "nombre": "ScratchJr",
+          "quien": "la Scratch Foundation",
+          "para": "Programar historias y juegos encajando bloques, pensado para peques de 5 a 7 años.",
+          "precio": "Gratis",
+          "datos": "No hace falta cuenta. Según Google Play, recoge para estadísticas datos de uso, un identificador del dispositivo y la ubicación aproximada, y puede compartirlos.",
+          "url": "https://play.google.com/store/apps/details?id=org.scratchjr.android",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Equipos de orientación educativa y psicopedagógica (EOEP)",
+          "que": "En Infantil y Primaria, el equipo de orientación de la zona hace la evaluación psicopedagógica. La pide el cole.",
+          "url": "https://www.carm.es/web/descarga?ARCHIVO=dirEOEP_20251.pdf&ALIAS=ARCH&IDCONTENIDO=22041&IDTIPO=60&RASTRO=c950$m22298",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Equipo específico de altas capacidades",
+          "que": "Equipo de la Consejería de Educación. En esta página se explican medidas como la ampliación, el enriquecimiento o la flexibilización del curso.",
+          "url": "https://inclusivarm.com/necesidades-especificas-de-apoyo-educativo/#aci",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    },
+    "incorporacion-tardia": {
+      "familia": {
+        "titulo": "Soy familia: acabamos de llegar y mi peque empieza el cole",
+        "pasos": [
+          {
+            "texto": "Seguid hablando en casa vuestra lengua. Aprender castellano no pide dejarla.",
+            "material": "kit-bienvenida-alumnado-recien-llegado"
+          },
+          {
+            "texto": "Leed juntos un cuento sobre el primer día en el cole nuevo, con fotos del cole de verdad.",
+            "material": "cuento-lectura-facil-cole-nuevo"
+          },
+          {
+            "texto": "Pedid una reunión con su tutora o su tutor. Si hace falta, id con alguien que os ayude a traducir."
+          },
+          {
+            "texto": "Es normal que al principio hable poco en castellano. Mientras, se comunica con gestos y aprende escuchando."
+          }
+        ]
+      },
+      "seno": {
+        "titulo": "Soy seño: llega a mi clase alumnado con el curso empezado",
+        "pasos": [
+          {
+            "texto": "Antes de que llegue, pregunta qué lengua se habla en su casa y aprende a decir bien su nombre."
+          },
+          {
+            "texto": "Ten a mano tarjetas para lo básico, como baño o agua, y busca un compañero o una compañera guía.",
+            "material": "kit-bienvenida-alumnado-recien-llegado"
+          },
+          {
+            "texto": "Anticipa la jornada con una agenda visual: así entiende el día aunque aún no entienda las palabras.",
+            "material": "agenda-visual-semanal"
+          },
+          {
+            "texto": "Pregunta en tu centro por los programas de español como segunda lengua y por las aulas de acogida."
+          }
+        ]
+      },
+      "ruta": [
+        "kit-bienvenida-alumnado-recien-llegado",
+        "cuento-lectura-facil-cole-nuevo",
+        "agenda-visual-semanal",
+        "tablero-comunicacion-basico",
+        "rincon-lenguaje-invierno",
+        "situacion-aprendizaje-5-anos-mapa-del-cole",
+        "carta-de-deseos"
+      ],
+      "apps": [
+        {
+          "nombre": "Buscador de pictogramas",
+          "quien": "ARASAAC",
+          "para": "Pictogramas que se pueden buscar también en árabe, rumano, ucraniano, inglés o francés, para hacer tarjetas en dos lenguas.",
+          "precio": "Gratis",
+          "datos": "Se descargan sin cuenta. La cuenta solo hace falta para guardar favoritos.",
+          "url": "https://arasaac.org/",
+          "comprobado": "2026-11-25"
+        }
+      ],
+      "murcia": [
+        {
+          "nombre": "Consejería de Educación: alumnado de incorporación tardía",
+          "que": "Hay programas de español como segunda lengua. Si hace falta, apoyo en aulas específicas, siempre a la vez que con su grupo.",
+          "url": "https://inclusivarm.com/necesidades-especificas-de-apoyo-educativo/#itsee",
+          "comprobado": "2026-11-25"
+        },
+        {
+          "nombre": "Murcia Acoge",
+          "que": "Asociación que acompaña a personas migrantes, con un área de educación. Tiene delegaciones en Cartagena, Murcia y otros cuatro municipios.",
+          "url": "https://murcia-acoge.com/",
+          "comprobado": "2026-11-25"
+        }
+      ]
+    }
+  }
+}
