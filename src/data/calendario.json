@@ -1,5 +1,5 @@
 {
-  "revisado": "2026-10-20",
+  "revisado": "2026-11-25",
   "eventos": [
     {
       "orden": "2026-01-23",
@@ -47,10 +47,19 @@
       "fuente_url": "https://anpeceutaymelilla.es/notices/205114/CEUTA---INFORME-Grupo-de-trabajo-4.-MESA-NEGOCIACI%C3%93N-MINISTERIO-EDUCACI%C3%93N,-FP-Y-DEPORTE-(30-07-2026)"
     },
     {
+      "orden": "2026-11-23",
+      "cuando": "23 de noviembre de 2026",
+      "titulo": "2.158 plazas para Secundaria, FP y otros cuerpos en 2027",
+      "detalle": "La Mesa Sectorial de Educación respalda convocar 2.158 plazas, con plazas de la oferta de empleo de 2026 y de ofertas anteriores sin convocar. Falta la aprobación de la Mesa General de la Función Pública, y la convocatoria saldría en el BORM antes de que acabe 2026. La nota no nombra Maestros.",
+      "estado": "confirmado",
+      "fuente_nombre": "Comunidad Autónoma de la Región de Murcia (CARM)",
+      "fuente_url": "https://www.carm.es/web/pagina?IDCONTENIDO=126697&IDTIPO=10&RASTRO=c%24m122%2C70"
+    },
+    {
       "orden": "2026-12-15",
       "cuando": "Diciembre de 2026",
       "titulo": "Oferta de empleo público docente de 2026",
-      "detalle": "Las ofertas de 2023, 2024 y 2025 se aprobaron en diciembre. Esta oferta y la de 2027 alimentarían la próxima convocatoria de Maestros.",
+      "detalle": "Las ofertas de 2023, 2024 y 2025 se aprobaron en diciembre. La convocatoria de Secundaria, FP y otros cuerpos de 2027 ya incluye plazas de la oferta de 2026 (nota de la CARM del 23/11/2026). Aún no se sabe qué ofertas llevarán las plazas de la próxima convocatoria de Maestros.",
       "estado": "previsto",
       "fuente_nombre": "Patrón de años anteriores (BORM nº 18/2026, artículo 3)",
       "fuente_url": "https://www.borm.es/services/boletin/ano/2026/numero/18/pdf"
