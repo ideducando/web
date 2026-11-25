@@ -380,6 +380,11 @@ const DOCUMENTOS = [
     asunto: 'La agenda que no acaba en un cajón: plan de 4 semanas para que la agenda visual se use cada día y dure, en lectura fácil, con hoja de seguimiento, tarjetas «¿y si…?» y lista de repuestos',
     palabras: 'agenda visual, apoyos visuales, rutinas, familias, casa, lectura fácil, TEA, TDAH, discapacidad intelectual, pictogramas, ARASAAC, seguimiento',
   },
+  {
+    id: 'pack-audicion-lenguaje',
+    asunto: 'Pack de Audición y Lenguaje con pictogramas de ARASAAC: tabla orientativa de adquisición de los sonidos, registro de articulación, conciencia fonológica por niveles, y lotos y ruletas de s, z, r suave, rr y grupos',
+    palabras: 'Audición y Lenguaje, AL, logopedia, articulación, fonemas, conciencia fonológica, lotos, ruletas, TDL, pictogramas, ARASAAC, Infantil, Primaria',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

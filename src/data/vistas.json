@@ -1572,6 +1572,51 @@
       }
     ]
   },
+  "pack-audicion-lenguaje": {
+    "total": 21,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "6 lotos"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tabla orientativa"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro de articulación · 1 de 2"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Loto para recortar · 1 de 6"
+      },
+      {
+        "pagina": 17,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ruletas para recortar · 1 de 3"
+      }
+    ]
+  },
   "panel-conducta-recreo": {
     "total": 14,
     "fotos": [
