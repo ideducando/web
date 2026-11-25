@@ -1,0 +1,78 @@
+---
+// A quién acudir en la Región de Murcia, de cada necesidad (B-008, paso 1): servicios públicos y
+// asociaciones. En espera desde el 25/11/2026: José decide si sale. Mientras, no se enseña; para
+// enseñarlo, se pone "mostrar_murcia": true en src/data/puertas-necesidad.json. Va debajo del material
+// para que este salga casi arriba. Las apps no salen: la web no hace publicidad a nadie (José, 25/11/2026).
+import { fecha } from '../lib/formatos';
+import type { Puerta } from './PuertaNecesidad.astro';
+
+interface Props {
+  puerta: Puerta;
+  comprobado: string;
+}
+
+const { puerta, comprobado } = Astro.props;
+---
+
+{
+  puerta.murcia.length > 0 && (
+    <section class="recursos-puerta" aria-labelledby="titulo-recursos" data-pagefind-ignore>
+      <h2 id="titulo-recursos">A quién acudir en la Región de Murcia</h2>
+      <ul>
+        {puerta.murcia.map((l) => (
+          <li>
+            {l.url ? (
+              <a href={l.url} rel="noopener">
+                {l.nombre}
+              </a>
+            ) : (
+              <strong>{l.nombre}</strong>
+            )}
+            . {l.que}
+            {l.nota && <span class="recursos-puerta__detalle">{l.nota}</span>}
+          </li>
+        ))}
+      </ul>
+      <p class="recursos-puerta__fecha">
+        Enlaces comprobados el <time datetime={comprobado}>{fecha(new Date(comprobado))}</time>. No ganamos nada
+        por recomendar estos servicios. Si alguno cambia, escríbenos.
+      </p>
+    </section>
+  )
+}
+
+<style>
+  .recursos-puerta {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.4rem 1.1rem;
+    border-radius: var(--radio);
+    background: var(--papel);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .recursos-puerta h2 {
+    margin: 0 0 1rem;
+    font-size: 1.3rem;
+  }
+
+  .recursos-puerta ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .recursos-puerta li {
+    margin-bottom: 0.6rem;
+  }
+
+  .recursos-puerta__detalle {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .recursos-puerta__fecha {
+    margin: 0.75rem 0 0;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+</style>

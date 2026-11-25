@@ -385,6 +385,21 @@ const DOCUMENTOS = [
     asunto: 'Pack de Audición y Lenguaje con pictogramas de ARASAAC: tabla orientativa de adquisición de los sonidos, registro de articulación, conciencia fonológica por niveles, y lotos y ruletas de s, z, r suave, rr y grupos',
     palabras: 'Audición y Lenguaje, AL, logopedia, articulación, fonemas, conciencia fonológica, lotos, ruletas, TDL, pictogramas, ARASAAC, Infantil, Primaria',
   },
+  {
+    id: 'historias-sociales-vida-diaria',
+    asunto: 'Historias sociales de la vida diaria con pictogramas de ARASAAC: ir al médico, al dentista, a la peluquería, al supermercado y a un análisis de sangre, con guía para el adulto',
+    palabras: 'historias sociales, anticipación, médico, dentista, peluquería, supermercado, análisis de sangre, TEA, ansiedad, familias, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'plan-hacia-2028',
+    asunto: 'Plan hacia 2028: calendario de 18 meses para preparar la oposición de Maestros de PT e Infantil en la Región de Murcia, trimestre a trimestre',
+    palabras: 'oposiciones, Maestros, Región de Murcia, 2028, PT, Infantil, planificación, calendario, programación, baremo, simulacros',
+  },
+  {
+    id: 'simulacro-oral-guiado',
+    asunto: 'Simulacro oral guiado: rúbrica de autoevaluación con los indicadores del tribunal y guion para grabarse en la segunda prueba de la oposición de Maestros en Murcia',
+    palabras: 'oposiciones, Maestros, Región de Murcia, segunda prueba, defensa oral, programación, unidad didáctica, rúbrica, simulacro, PT, Infantil',
+  },
 ];
 
 const elegidos = process.argv.slice(2);

@@ -7,7 +7,7 @@ etapas: [infantil, primaria]
 necesidades: []
 edades: "Para opositoras y opositores de Infantil y PT"
 formato: "PDF imprimible (A4)"
-paginas: 12
+paginas: 13
 archivo: /descargas/kit-examen-oposiciones-murcia.pdf
 portada: /portadas/kit-examen-oposiciones-murcia.webp
 portada_alt: "Portada del kit: un folio de guion con su franja de minutos, un cronómetro de 90 minutos en tres colores, una caja de material y una nota con la lista de la mochila"

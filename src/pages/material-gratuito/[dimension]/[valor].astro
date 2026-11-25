@@ -4,6 +4,9 @@
 import Base from '../../../layouts/Base.astro';
 import Intro from '../../../components/Intro.astro';
 import TarjetaMaterial from '../../../components/TarjetaMaterial.astro';
+import PuertaNecesidad, { type Puerta } from '../../../components/PuertaNecesidad.astro';
+import PuertaRecursos from '../../../components/PuertaRecursos.astro';
+import ProponMaterial from '../../../components/ProponMaterial.astro';
 import { DIMENSIONES, type Dimension } from '../../../data/taxonomias';
 import { encajaEn, materialesOrdenados, type Material } from '../../../lib/materiales';
 import { ruta } from '../../../lib/rutas';
@@ -36,6 +39,20 @@ const hermanas = Object.entries(opciones)
   .filter(([clave]) => materiales.some((m) => encajaEn(m, dimension, clave)))
   .map(([clave, op]) => ({ clave, nombre: op.nombre, color: op.color }));
 const titulo = `Material gratuito: ${opcion.nombre}`;
+
+// Puerta de entrada de cada necesidad (B-008, paso 1). Si el archivo de datos aún no existe, la página sale como antes.
+const datosPuertas = Object.values(
+  import.meta.glob<{ default: { comprobado: string; mostrar_murcia: boolean; necesidades: Record<string, Puerta> } }>(
+    '../../../data/puertas-necesidad.json',
+    { eager: true },
+  ),
+)[0]?.default;
+const puerta = dimension === 'necesidad' ? datosPuertas?.necesidades[valor] : undefined;
+// Con puerta de entrada, los materiales de su ruta salen primero, en su orden; los demás, como siempre.
+const enRuta = (m: Material) => (puerta ? puerta.ruta.indexOf(m.id) : -1);
+const listaOrdenada = puerta
+  ? [...lista.filter((m) => enRuta(m) >= 0).sort((a, b) => enRuta(a) - enRuta(b)), ...lista.filter((m) => enRuta(m) < 0)]
+  : lista;
 ---
 
 <Base
@@ -54,6 +71,19 @@ const titulo = `Material gratuito: ${opcion.nombre}`;
   />
 
   <section class="contenedor categoria" aria-labelledby="titulo-lista">
+    {puerta && <PuertaNecesidad puerta={puerta} materiales={materiales} />}
+
+    <h2 id="titulo-lista" class="categoria__cuenta">
+      {lista.length === 1 ? '1 material' : `${lista.length} materiales`}
+    </h2>
+    <ul class="rejilla">
+      {listaOrdenada.map((m) => <TarjetaMaterial material={m} />)}
+    </ul>
+
+    {/* «A quién acudir en Murcia», en espera hasta que José decida si sale (25/11/2026). */}
+    {puerta && datosPuertas?.mostrar_murcia && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
+
+    {/* Las demás opciones van debajo del material para que este salga casi arriba en el móvil (José, 25/11/2026). */}
     <nav class="categoria__otras" aria-label={`Otras opciones de ${grupo.nombre.toLowerCase()}`} data-pagefind-ignore>
       <p class="categoria__etiqueta">{grupo.plural}</p>
       <ul class="etiquetas">
@@ -73,16 +103,17 @@ const titulo = `Material gratuito: ${opcion.nombre}`;
       </ul>
     </nav>
 
-    <h2 id="titulo-lista" class="categoria__cuenta">
-      {lista.length === 1 ? '1 material' : `${lista.length} materiales`}
-    </h2>
-    <ul class="rejilla">
-      {lista.map((m) => <TarjetaMaterial material={m} />)}
-    </ul>
-
     <p class="categoria__volver">
       <a href={ruta('/material-gratuito/')}>Ver todo el catálogo y filtrar por varias categorías</a>
     </p>
+
+    {
+      dimension === 'necesidad' && (
+        <div class="categoria__propon">
+          <ProponMaterial />
+        </div>
+      )
+    }
   </section>
 </Base>
 
@@ -92,7 +123,7 @@ const titulo = `Material gratuito: ${opcion.nombre}`;
   }
 
   .categoria__otras {
-    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
   }
 
   .categoria__etiqueta {
@@ -116,5 +147,9 @@ const titulo = `Material gratuito: ${opcion.nombre}`;
   .categoria__volver {
     margin-top: 2rem;
     font-weight: 700;
+  }
+
+  .categoria__propon {
+    margin-top: 2.5rem;
   }
 </style>

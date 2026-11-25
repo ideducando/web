@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Del médico al súper: cinco historias sociales para la vida diaria · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css (propuesta B-032).
+         Amplía «En el cole y en casa» con cinco historias para salidas de la vida diaria y sigue su formato:
+         una historia por hoja, un pictograma por frase y la fórmula de Carol Gray al pie.
+         Ningún texto baja de 11 puntos, tampoco el pie de página ni «Cómo montarlo».
+         Las historias, sus frases y sus pictogramas están en la lista HISTORIAS, al final. */
+
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos, como todo el material. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Las historias se perforan para montarlas con anillas. Chromium no pinta nada en el margen de la
+         página, así que estas hojas tienen 8 mm de margen izquierdo y 8 mm de relleno: el texto empieza
+         donde en las demás y las marcas de la perforadora quedan dentro de la zona impresa. */
+      @page historia {
+        margin: 17mm 16mm 20mm 8mm;
+
+        @bottom-left {
+          padding-left: 8mm;
+        }
+      }
+
+      /* ---------- Un color para cada historia ----------
+         --c: color de la historia · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos (como en el pack de Audición y Lenguaje) ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        grid-template-columns: 6.5mm 7mm minmax(0, 1fr);
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 14mm;
+      }
+
+      .portada__titulo {
+        font-size: 56pt;
+        line-height: 0.96;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        max-width: 122mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 112mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .etiqueta-kit {
+        position: absolute;
+        z-index: 4;
+        right: 18mm;
+        top: 46mm;
+        display: grid;
+        place-items: center;
+        width: 44mm;
+        height: 44mm;
+        padding: 5mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12.5pt;
+        line-height: 1.12;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .etiqueta-kit svg {
+        width: 8mm;
+        height: 8mm;
+        margin: 0 auto 1.2mm;
+      }
+
+      /* La escena: una calle con cinco tiendas. Cada escaparate es una de las cinco historias. */
+      .calle {
+        position: absolute;
+        z-index: 2;
+        left: 20mm;
+        right: 20mm;
+        bottom: 34mm;
+        height: 112mm;
+      }
+
+      /* La acera es también el camino de puntos que va de una puerta a otra */
+      .acera {
+        position: absolute;
+        left: -6mm;
+        right: -6mm;
+        bottom: 0;
+        height: 7mm;
+        border-radius: 3.5mm;
+        background: var(--linea);
+        border: 0.6mm solid var(--marino);
+      }
+
+      .acera::after {
+        content: '';
+        position: absolute;
+        left: 30mm;
+        right: 9mm;
+        top: 2.4mm;
+        border-top: 1mm dotted var(--marino);
+      }
+
+      .tiendas {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 6.4mm;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: end;
+      }
+
+      .tienda {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: var(--alto);
+        border: 0.9mm solid var(--marino);
+        border-bottom: 0;
+        background: var(--t);
+      }
+
+      /* Las tiendas están pegadas, como en una calle: comparten la pared */
+      .tienda + .tienda {
+        margin-left: -0.9mm;
+      }
+
+      .tienda__pisos {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 7mm);
+        justify-content: center;
+        align-content: space-evenly;
+        gap: 3.6mm 5mm;
+        padding: 4mm 0 2mm;
+        overflow: hidden;
+      }
+
+      .tienda__pisos span {
+        height: 8.5mm;
+        border: 0.6mm solid var(--marino);
+        border-bottom: 1.4mm solid var(--c);
+        border-radius: 1mm 1mm 0 0;
+        background: #fff;
+      }
+
+      .tienda__rotulo {
+        margin: 0 2mm;
+        padding: 0.8mm 0.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 1.2mm;
+        background: #fff;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .tienda__toldo {
+        width: 100%;
+        height: auto;
+        margin-top: 1.6mm;
+      }
+
+      .tienda__bajo {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1.4mm;
+        padding: 1.6mm 2mm 0;
+      }
+
+      .tienda__escaparate {
+        display: grid;
+        place-items: center;
+        width: 18.5mm;
+        height: 18.5mm;
+        margin-bottom: 3mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 2mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.9mm var(--t);
+      }
+
+      .tienda__escaparate img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .tienda__puerta {
+        flex: none;
+        width: 8mm;
+        height: 15mm;
+        border: 0.8mm solid var(--marino);
+        border-bottom: 0;
+        border-radius: 1.6mm 1.6mm 0 0;
+        background: var(--c);
+      }
+
+      /* ---------- Cabecera de las historias ---------- */
+      .cabecera {
+        display: grid;
+        grid-template-columns: 23mm minmax(0, 1fr) 34mm;
+        align-items: center;
+        gap: 5mm;
+      }
+
+      .icono-titulo {
+        display: grid;
+        place-items: center;
+        width: 23mm;
+        height: 23mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 1.2mm var(--t);
+      }
+
+      .icono-titulo img {
+        width: 16mm;
+        height: 16mm;
+      }
+
+      .cabecera .antetitulo {
+        margin: 0 0 1.2mm;
+        color: var(--tx);
+      }
+
+      .cabecera h1 {
+        margin: 0;
+        font-size: 25pt;
+        line-height: 1.05;
+        text-wrap: balance;
+      }
+
+      .cabecera > img {
+        justify-self: end;
+        width: 34mm;
+        height: auto;
+      }
+
+      .franja {
+        height: 1.6mm;
+        margin: 3mm 0 2.4mm;
+        border-radius: 1mm;
+        background: var(--c);
+      }
+
+      .barra {
+        display: flex;
+        align-items: center;
+        gap: 2.5mm;
+        margin: 0 0 1.6mm;
+        font-size: 11pt;
+      }
+
+      .barra .linea {
+        width: 62mm;
+        height: 6mm;
+        border-bottom: 0.4mm solid var(--marino);
+      }
+
+      .leido {
+        display: flex;
+        align-items: center;
+        gap: 1.3mm;
+        margin-left: auto;
+        white-space: nowrap;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .leido svg {
+        width: 6.2mm;
+        height: 6.2mm;
+      }
+
+      /* ---------- Historia ---------- */
+      .historia {
+        page: historia;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        height: 258mm;
+        padding-left: 8mm;
+      }
+
+      /* Marcas para la perforadora: a 11 mm del borde y a 80 mm una de otra, centradas en la hoja */
+      .agujero {
+        position: absolute;
+        left: 1mm;
+        width: 4mm;
+        height: 4mm;
+        border: 0.3mm dashed var(--suave);
+        border-radius: 50%;
+      }
+
+      .agujero--arriba {
+        top: 89.5mm;
+      }
+
+      .agujero--abajo {
+        top: 169.5mm;
+      }
+
+      .camino {
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0.6mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* Camino de puntos que une las frases */
+      .camino::before {
+        content: '';
+        position: absolute;
+        left: 8.5mm;
+        top: 9mm;
+        bottom: 9mm;
+        border-left: 1mm dotted var(--c);
+      }
+
+      .frase {
+        display: grid;
+        grid-template-columns: 18mm minmax(0, 1fr);
+        align-items: center;
+        gap: 5mm;
+        min-height: 18mm;
+        margin: 0;
+      }
+
+      /* Un poco más de aire entre la introducción, el cuerpo y la conclusión */
+      .frase--parte {
+        margin-top: 2mm;
+      }
+
+      .marco-picto {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 18mm;
+        height: 18mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .marco-picto img {
+        width: 14.6mm;
+        height: 14.6mm;
+      }
+
+      .frase p {
+        margin: 0;
+        font-size: 18pt;
+        line-height: 1.17;
+        text-wrap: pretty;
+      }
+
+      .hueco {
+        display: inline-block;
+        min-width: 62mm;
+        border-bottom: 0.45mm solid var(--marino);
+        transform: translateY(-0.8mm);
+      }
+
+      .para-adulto {
+        display: grid;
+        grid-template-columns: 6mm minmax(0, 1fr);
+        gap: 2.4mm;
+        align-items: start;
+        margin: 2.6mm 0 0;
+        padding: 1.8mm 3mm;
+        border-radius: 2.5mm;
+        background: var(--crema);
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .para-adulto svg {
+        width: 6mm;
+        height: 6mm;
+        color: var(--marino);
+      }
+
+      .para-adulto p {
+        margin: 0;
+      }
+
+      .aviso-formula {
+        margin: 2mm 0 0;
+        padding: 2mm 3mm;
+        border: 0.8mm solid var(--coral-texto);
+        color: var(--coral-texto);
+        font-weight: 700;
+      }
+
+      .atribucion {
+        margin: 1.2mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* ---------- Guía ---------- */
+      .guia {
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .guia h1 {
+        font-size: 22pt;
+      }
+
+      .guia h2 {
+        font-size: 14pt;
+        margin-top: 0.7em;
+        margin-bottom: 0.4em;
+      }
+
+      .guia p,
+      .guia ul,
+      .guia ol {
+        margin-bottom: 0.55em;
+      }
+
+      .guia .caja {
+        padding: 3mm 4mm;
+      }
+
+      .guia .caja h2 {
+        margin-top: 0;
+        font-size: 12.5pt;
+        margin-bottom: 1.5mm;
+      }
+
+      .guia ol li,
+      .guia ul li {
+        margin-bottom: 0.8mm;
+      }
+
+      .guia table,
+      .fuentes table {
+        font-size: 11pt;
+      }
+
+      .guia td,
+      .guia th,
+      .fuentes td,
+      .fuentes th {
+        font-size: 11pt;
+        line-height: 1.3;
+        padding: 1.3mm 2mm;
+      }
+
+      .tabla-cuando {
+        table-layout: fixed;
+      }
+
+      .tabla-cuando tbody th {
+        border-left: 1.4mm solid var(--c);
+      }
+
+      .dos-columnas-lista {
+        columns: 2;
+        column-gap: 7mm;
+      }
+
+      .dos-columnas-lista li {
+        break-inside: avoid;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .fuentes {
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .fuentes h1 {
+        font-size: 22pt;
+      }
+
+      .fuentes h2 {
+        font-size: 14pt;
+        margin-top: 0.75em;
+        margin-bottom: 0.4em;
+      }
+
+      .fuentes p,
+      .fuentes ul {
+        margin-bottom: 0.5em;
+      }
+
+      .fuentes .referencias {
+        line-height: 1.3;
+      }
+
+      .fuentes .referencias li {
+        margin-bottom: 1.2mm;
+      }
+
+      .tabla-formula {
+        table-layout: fixed;
+      }
+
+      .tabla-formula thead th {
+        padding-left: 1.5mm;
+        padding-right: 1.5mm;
+      }
+
+      .tabla-cuando .pagina {
+        white-space: nowrap;
+      }
+
+      .tabla-formula td.num,
+      .tabla-formula th.num {
+        text-align: center;
+        white-space: normal;
+      }
+
+      .tabla-formula tbody th {
+        border-left: 1.4mm solid var(--c);
+      }
+
+      .cita-arasaac {
+        margin-top: 3mm;
+        padding: 2.6mm 4mm;
+        border-left: 1.6mm solid var(--morado);
+        border-radius: 2mm;
+        background: var(--morado-tinte);
+        break-inside: avoid;
+      }
+
+      .cita-arasaac p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 150mm; height: 150mm; right: -64mm; top: 14mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 80mm; height: 80mm; left: -40mm; top: 112mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 46mm; height: 46mm; right: -14mm; top: 136mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Historias sociales · Vida diaria</p>
+        <h1 class="portada__titulo">Del médico&nbsp;<br />al súper</h1>
+        <p class="portada__subtitulo">Cinco historias con pictogramas para leer unos días antes y el mismo día.</p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC&nbsp;BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="calle" aria-hidden="true" id="calle"></div>
+      <div class="etiqueta-kit" aria-hidden="true"><div><span data-icono="estrella"></span>Con huecos para hacerlas vuestras</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- Las cinco historias se generan con el guion del final, a partir de la lista HISTORIAS -->
+    <div id="historias"></div>
+
+    <!-- ======================================================================
+         GUÍA PARA EL ADULTO (dos páginas)
+         ====================================================================== -->
+    <section class="guia">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Guía para el adulto</p>
+      <h1>Cómo usar estas historias</h1>
+      <p>
+        Este libro tiene cinco historias sociales para salidas de la vida diaria que a muchos niños y niñas les cuestan. Cada
+        una cuenta qué va a pasar, quién estará allí y qué puede hacer el niño o la niña si siente nervios. Están pensadas
+        sobre todo para alumnado con trastorno del espectro del autismo (TEA), y sirven para cualquier peque que necesite
+        saber antes qué va a pasar. Completan
+        <a href="https://www.ideducando.es/material-gratuito/historias-sociales-cole-y-casa/">«En el cole y en casa»</a>,
+        que trae otra historia sobre el médico y una plantilla para escribir historias propias. Qué es una historia social,
+        cómo están escritas estas y qué dice la evidencia: páginas <span data-pagina="origen"></span>.
+      </p>
+
+      <h2>Cuándo leer cada historia</h2>
+      <p>
+        La primera vez, léela en un momento tranquilo, nunca como castigo ni en plena crisis. Después, vuelve a leerla
+        <strong>justo antes</strong> del momento: en el metaanálisis de Kokina y Kern (2010), las historias funcionaron mejor
+        así.
+      </p>
+      <table class="tabla-cuando" id="tabla-cuando"></table>
+      <p>
+        <strong>Cuántas veces:</strong> una o dos al día en los días de antes, y otra justo antes. Si la pide más veces,
+        léela: está bien. En ese metaanálisis, las intervenciones breves, de 1 a 10 sesiones, se asociaron con mejores
+        resultados que las más largas.
+      </p>
+
+      <h2>Cómo leerla</h2>
+      <ol>
+        <li>Siéntate a su lado en un sitio tranquilo y lee despacio, señalando cada pictograma.</li>
+        <li>
+          Si ya lee, que la lea él o ella: en ese metaanálisis, los resultados fueron mejores cuando el propio niño o niña
+          llevaba la intervención.
+        </li>
+        <li>
+          Comprueba que la entiende con una pregunta, por ejemplo: «¿Qué haces si sientes nervios?». Si no habla, que señale
+          el pictograma.
+        </li>
+        <li>Colorea con él o con ella una estrella de «Lo he leído».</li>
+      </ol>
+
+      <h2 class="salto">Hazlas vuestras</h2>
+      <p>
+        El Diseño Universal para el Aprendizaje (DUA) propone ofrecer varias formas de presentar la información y de
+        participar (CAST, 2024). Con estas historias, por ejemplo:
+      </p>
+      <ul>
+        <li>
+          <strong>Escribe los huecos</strong> con rotulador de pizarra sobre el plástico: su nombre, el nombre de su pediatra
+          o de su dentista, quién le corta el pelo, qué busca en el supermercado y el plan para después del análisis. Escribe
+          solo un plan que podáis cumplir.
+        </li>
+        <li>
+          <strong>Pon fotos del sitio real:</strong> la entrada, la sala de espera, el sillón del dentista o la silla de la
+          peluquería. Pide permiso en el sitio y haz las fotos sin otras personas, sobre todo sin otros niños o niñas.
+          Recórtalas a 1,5&nbsp;×&nbsp;1,5&nbsp;cm y pega cada una encima del pictograma de su frase antes de plastificar.
+        </li>
+        <li>
+          <strong>Si algo no es verdad, cámbialo.</strong> Por ejemplo, si el análisis es en el hospital o si en vuestra
+          peluquería no usan máquina. Pega encima una tira de papel con la frase que sí es verdad: una historia tiene que
+          contar lo que va a pasar.
+        </li>
+        <li>
+          <strong>Si aún no lee,</strong> lee el adulto y el niño o la niña señala cada pictograma. También puedes grabarla con
+          tu voz para escucharla en la sala de espera.
+        </li>
+      </ul>
+
+      <h2>Después de la salida</h2>
+      <ol>
+        <li>Dile en una frase lo que salió bien: «Has abierto mucho la boca para que te miren los dientes».</li>
+        <li>Cumplid el plan que escribisteis en la historia.</li>
+        <li>Si algo pasó de otra manera, corrige la historia para la próxima vez.</li>
+        <li>
+          Escribe con la plantilla de «En el cole y en casa» una historia que celebre lo que salió bien. Carol Gray propone
+          que al menos la mitad de las historias de cada niño o niña celebren lo que ya hace bien (Gray y otros, 2023).
+        </li>
+      </ol>
+
+      <h2>Cómo retirarlas poco a poco</h2>
+      <p>Cuando una salida vaya bien, por ejemplo dos o tres veces seguidas, no quites la historia de golpe:</p>
+      <ol>
+        <li>Léela solo el mismo día, justo antes.</li>
+        <li>Después, llévala en la mochila y léela solo si la pide.</li>
+        <li>Más tarde, guárdala en su carpeta. Si la pide, se la das.</li>
+      </ol>
+      <p>
+        Si vuelve a costar, por ejemplo con otra dentista o después de mucho tiempo sin ir, vuelve a leerla unos días antes.
+      </p>
+
+      <div class="caja caja--coral">
+        <h2>Una historia nunca sustituye la supervisión</h2>
+        <p>
+          El primer criterio de Carol Gray lo deja claro: una historia social nunca sustituye el buen juicio ni la
+          supervisión de un adulto. La historia explica el momento. La seguridad depende de las personas adultas:
+        </p>
+        <ul>
+          <li>En todas estas salidas, el niño o la niña va siempre con un adulto.</li>
+          <li>
+            Cuenta en la consulta o en la peluquería lo que le ayuda, como saber antes cada paso o esperar en un sitio
+            tranquilo.
+          </li>
+          <li>Si una salida le angustia mucho, habla con su pediatra o con el equipo de orientación del cole.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         DE DÓNDE SALE ESTE MATERIAL: cómo están escritas, fuentes y créditos (dos páginas)
+         ====================================================================== -->
+    <section class="fuentes salto">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Del médico al súper: cinco historias sociales para la vida diaria.</strong> Equipo IdEducando, noviembre de
+        2026. Ficha y novedades:
+        <span class="url">ideducando.es/material-gratuito/historias-sociales-vida-diaria</span>
+      </p>
+
+      <h2>Qué es una historia social</h2>
+      <p>
+        Es un texto corto que describe un momento concreto y, a veces, sugiere con suavidad qué hacer. Carol Gray las creó a
+        principios de los años noventa para alumnado con TEA (Gray y Garand, 1993). Su nombre en inglés,
+        <em>Social Stories</em>, es una marca suya, y ella no ha revisado estas historias.
+      </p>
+
+      <h2>Cómo están escritas</h2>
+      <p>
+        Siguen los criterios de Carol Gray en su versión 10.4 (Gray y otros, 2023). Cada historia tiene un título que dice de
+        qué trata y tres partes: introducción, cuerpo y conclusión. Están en primera persona y en presente, con un tono
+        positivo, y siguen las pautas de lectura fácil de la norma UNE 153101:2018 EX, de la Asociación Española de
+        Normalización (UNE). Aún no las hemos validado con personas lectoras.
+      </p>
+      <p>
+        Solo hay dos tipos de frases. Las descriptivas cuentan qué pasa, dónde, quién está y por qué, y lo que sienten otras
+        personas. Las de orientación sugieren con suavidad una respuesta, al niño o la niña («puedo…») o al adulto que le
+        acompaña. <strong>La fórmula (criterio 8):</strong> las descriptivas, con el título, son al menos cuatro veces más que
+        las de orientación, y como mucho una orienta al niño o la niña.
+      </p>
+      <table class="tabla-formula" id="tabla-formula"></table>
+
+      <div class="caja caja--azul salto">
+        <h2>Qué dice la evidencia</h2>
+        <p>
+          Las narrativas sociales, el nombre general de estas historias, figuran entre las prácticas basadas en la evidencia
+          para el alumnado con TEA, aunque casi todos sus estudios son de un solo caso (Hume y otros, 2021). Un metaanálisis
+          concluyó que su eficacia global es de baja a dudosa, y que funcionan mejor para reducir una conducta que para
+          enseñar habilidades sociales (Kokina y Kern, 2010). En el dentista, una revisión de 23 estudios con niños y niñas
+          con TEA vio una tendencia a favor de los apoyos visuales, aunque son estudios tan distintos que no permiten
+          conclusiones firmes (Balian y otros, 2021). Úsalas como un apoyo más y observa si ayudan.
+        </p>
+      </div>
+
+      <h2>Fuentes</h2>
+      <ul class="referencias">
+        <li>
+          Balian, A., Cirio, S., Salerno, C., Wolf, T. G., Campus, G. y Cagetti, M. G. (2021). Is visual pedagogy effective
+          in improving cooperation towards oral hygiene and dental care in children with autism spectrum disorder? A
+          systematic review and meta-analysis. <em>International Journal of Environmental Research and Public Health</em>,
+          18(2), 789. <span class="url">doi.org/10.3390/ijerph18020789</span>
+        </li>
+        <li>CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. udlguidelines.cast.org</li>
+        <li>
+          Gray, C., Faherty, C., Timmins, S. y Lanou, A. (2023). <em>Social Stories 10.4 Criteria</em>.
+          carolgraysocialstories.com
+        </li>
+        <li>
+          Gray, C. A. y Garand, J. D. (1993). Social Stories: Improving responses of students with autism with accurate
+          social information. <em>Focus on Autistic Behavior</em>, 8(1), 1-10.
+        </li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third
+          generation review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032.
+          <span class="url">doi.org/10.1007/s10803-020-04844-2</span>
+        </li>
+        <li>
+          Kokina, A. y Kern, L. (2010). Social Story interventions for students with autism spectrum disorders: A
+          meta-analysis. <em>Journal of Autism and Developmental Disorders</em>, 40(7), 812-826.
+          <span class="url">doi.org/10.1007/s10803-009-0931-0</span>
+        </li>
+        <li>
+          UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Asociación
+          Española de Normalización.
+        </li>
+      </ul>
+
+      <h2>Pictogramas, dibujos y fotos</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citarlos con el texto del recuadro de abajo. Si adaptas el material, mantén la cita. Con pictogramas de ARASAAC, este
+        material no se puede vender: es gratis siempre. La calle de la portada, la estrella y el icono del adulto son de
+        IdEducando.
+      </p>
+      <p>
+        Las fotos y el nombre del niño o la niña se quedan en su historia. Pide permiso a la familia, no las subas a internet
+        y no hagas fotos en las que salgan otros niños o niñas.
+      </p>
+      <p>
+        <strong>Licencia CC BY-NC-SA 4.0:</strong> puedes copiar y adaptar este material citando a IdEducando, sin fines
+        comerciales y con la misma licencia.
+      </p>
+
+      <div class="cita-arasaac">
+        <p>
+          Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+          ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.
+        </p>
+      </div>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Las cinco historias. Cada frase: [pictograma de ARASAAC, texto, tipo].
+      // Sin tipo, la frase es descriptiva. 'n' = orientación al niño o la niña; 'e' = orientación al adulto que acompaña.
+      // partes = cuántas frases tienen la introducción, el cuerpo y la conclusión (sin el título).
+      // La fórmula se calcula sola: descriptivas (con el título) ≥ 4 × orientación, y como mucho una 'n'.
+      // {hueco} es una línea para escribir con rotulador de pizarra.
+      // ---------------------------------------------------------------------
+      const HISTORIAS = [
+        {
+          color: 'azul',
+          rotulo: 'Pediatra',
+          titulo: 'Voy al pediatra',
+          picto: 5536,
+          alto: 88,
+          antes: 'unos días antes de la cita y otra vez en la sala de espera',
+          diasAntes: 'Unos días antes de la cita, una vez al día.',
+          mismoDia: 'En casa, antes de salir, y otra vez en la sala de espera.',
+          conducta: 'respirar despacio si siente nervios',
+          partes: [2, 7, 1],
+          frases: [
+            [32246, 'A veces, voy a la consulta de mi pediatra con alguien de mi familia.'],
+            [2467, 'Mi pediatra se llama {hueco}.'],
+            [24633, 'Primero, esperamos en la sala de espera hasta que dicen mi nombre.'],
+            [39950, 'En la consulta, mi pediatra me mira los oídos con una linterna pequeña.'],
+            [27719, 'Después, abro mucho la boca para que me mire la garganta.'],
+            [28801, 'Me escucha el pecho con el fonendoscopio, que a veces está frío.'],
+            [38909, 'A veces, también me pesan y me miden para ver cuánto he crecido.'],
+            [30391, 'A veces, siento nervios en la consulta, y está bien.'],
+            [34409, 'Entonces, puedo respirar despacio.', 'n'],
+            [12293, 'Ir al pediatra es una forma de cuidar mi salud.'],
+          ],
+        },
+        {
+          color: 'verde',
+          rotulo: 'Dentista',
+          titulo: 'Voy al dentista',
+          picto: 11229,
+          alto: 100,
+          antes: 'unos días antes de la cita y otra vez en la sala de espera',
+          diasAntes: 'Unos días antes de la cita, una vez al día.',
+          mismoDia: 'En casa, antes de salir, y otra vez en la sala de espera.',
+          conducta: 'levantar la mano para avisar si siente nervios',
+          partes: [2, 6, 2],
+          frases: [
+            [39392, 'A veces, voy al dentista para que me revise los dientes.'],
+            [11229, 'Mi dentista se llama {hueco}.'],
+            [35173, 'En la consulta, me siento en un sillón grande que se mueve y se echa hacia atrás.'],
+            [35225, 'Encima del sillón hay una luz fuerte para ver bien mi boca.'],
+            [35221, 'Abro mucho la boca y mi dentista me mira los dientes con un espejo pequeño.'],
+            [35217, 'A veces, usa herramientas pequeñas que echan aire o agua y hacen ruido.'],
+            [11312, 'A mucha gente le dan nervios en el dentista, y está bien.'],
+            [28420, 'Si siento nervios, puedo levantar la mano para avisar.', 'n'],
+            [30032, 'Al terminar, a veces me enjuago la boca con agua.'],
+            [2737, 'Mi dentista me ayuda a tener los dientes sanos.'],
+          ],
+        },
+        {
+          color: 'morado',
+          rotulo: 'Peluquería',
+          titulo: 'Me corto el pelo en la peluquería',
+          picto: 6587,
+          alto: 80,
+          antes: 'el día antes y otra vez justo antes de entrar',
+          diasAntes: 'El día antes.',
+          mismoDia: 'Justo antes de entrar en la peluquería.',
+          conducta: 'estar sin moverse mientras le cortan el pelo',
+          partes: [2, 7, 1],
+          frases: [
+            [2850, 'A veces, voy a la peluquería para cortarme el pelo.'],
+            [11333, 'Allí me corta el pelo {hueco}.'],
+            [34701, 'Me siento en una silla alta y me ponen una capa para proteger mi ropa.'],
+            [8204, 'Normalmente, me echan un poco de agua en el pelo.'],
+            [27695, 'Cerca de mis orejas, oigo el ruido de las tijeras.'],
+            [36558, 'A veces, usan una máquina que hace un zumbido y cosquillas.'],
+            [7157, 'Si el ruido o los pelitos me molestan, es normal.'],
+            [25082, 'Mientras me cortan el pelo, intento estar sin moverme.', 'n'],
+            [2560, 'Al final, a veces me secan el pelo con un secador que hace ruido.'],
+            [2385, 'Después, me miro en el espejo y veo mi pelo nuevo.'],
+          ],
+        },
+        {
+          color: 'naranja',
+          rotulo: 'Súper',
+          titulo: 'Voy al supermercado',
+          picto: 6618,
+          alto: 94,
+          antes: 'justo antes de salir de casa, cada vez que vayáis',
+          diasAntes: 'Las primeras veces, también el día antes.',
+          mismoDia: 'Justo antes de salir de casa, cada vez que vayáis.',
+          conducta: 'pedir una pausa si es demasiado',
+          partes: [2, 6, 2],
+          frases: [
+            [3389, 'A veces, voy al supermercado con alguien de mi familia.'],
+            [7144, 'Llevamos una lista con lo que necesitamos en casa.'],
+            [5948, 'Allí cogemos un carro o una cesta.'],
+            [6946, 'Yo ayudo a buscar {hueco}.'],
+            [7116, 'En el supermercado suele haber mucha gente y mucho ruido.'],
+            [7157, 'A veces, el ruido y la gente me agobian, y es normal.'],
+            [39269, 'Si es demasiado, puedo pedir una pausa en un sitio más tranquilo.', 'n'],
+            [38596, 'Para pagar, esperamos en la fila de la caja.'],
+            [27616, 'Después de pagar, metemos la compra en bolsas y volvemos a casa.'],
+            [39747, 'Hacer la compra juntos es una forma de ayudar en casa.'],
+          ],
+        },
+        {
+          color: 'coral',
+          rotulo: 'Análisis',
+          titulo: 'Me hacen un análisis de sangre',
+          picto: 5901,
+          alto: 86,
+          antes: 'unos días antes y otra vez en la sala de espera',
+          diasAntes: 'Unos días antes, una vez al día. Si tiene que ir sin desayunar, cuéntaselo el día antes.',
+          mismoDia: 'Por la mañana y otra vez en la sala de espera.',
+          conducta: 'respirar despacio y mirar hacia otro lado',
+          partes: [2, 6, 2],
+          frases: [
+            [32246, 'A veces, me hacen un análisis de sangre en el centro de salud.'],
+            [2728, 'Con un poco de mi sangre, saben cómo está mi cuerpo por dentro.'],
+            [30144, 'Una enfermera o un enfermero me pone en el brazo una goma que aprieta un poco.'],
+            [2985, 'Después, me limpia la piel con un algodón frío.'],
+            [11312, 'Sentir nervios antes del pinchazo es normal.'],
+            [13024, 'Quien me acompaña me da la mano.', 'e'],
+            [2474, 'Mientras tanto, puedo respirar despacio y mirar hacia otro lado.', 'n'],
+            [5601, 'Entonces, noto un pinchazo pequeño, que se pasa pronto.'],
+            [38452, 'Al final, me pone una tirita en el brazo.'],
+            [38889, 'Cuando terminamos, hacemos algo que me gusta: {hueco}.'],
+          ],
+        },
+      ];
+
+      // Colores de la marca, para los toldos de la portada (el SVG no lee las variables de CSS en sus atributos)
+      const COLORES = { azul: '#2f6fd6', verde: '#1fa67a', morado: '#8c4fb8', naranja: '#f5961f', coral: '#e8553e' };
+
+      // Números de página: portada = 1, montaje = 2. Si cambia el orden de las hojas o la guía ocupa más o menos,
+      // hay que actualizarlos aquí y en «Qué imprimir» y «Qué incluye» de la ficha.
+      const PRIMERA_HISTORIA = 3;
+      const PAGINAS = { origen: '10 y 11' };
+
+      // ---------------------------------------------------------------------
+      // La fórmula de Carol Gray (criterio 8 de la versión 10.4)
+      // ---------------------------------------------------------------------
+      function formula(h) {
+        const alNino = h.frases.filter((f) => f[2] === 'n').length;
+        const alAdulto = h.frases.filter((f) => f[2] === 'e').length;
+        const orientacion = alNino + alAdulto;
+        const descriptivas = h.frases.length - orientacion + 1; // + 1: el título
+        const partesBien =
+          h.partes.length === 3 && h.partes.every((n) => n > 0) && h.partes.reduce((a, b) => a + b, 0) === h.frases.length;
+        const cumple = alNino <= 1 && descriptivas >= 4 * orientacion && partesBien;
+        return { alNino, alAdulto, orientacion, descriptivas, partesBien, cumple };
+      }
+
+      const numero = (n) => String(Math.round(n * 100) / 100).replace('.', ',');
+
+      function textoOrientacion(f) {
+        if (!f.orientacion) return 'ninguna de orientación';
+        if (!f.alAdulto) return `${f.alNino} de orientación al niño o la niña`;
+        if (!f.alNino) return `${f.alAdulto} de orientación al adulto`;
+        return `${f.orientacion} de orientación (${f.alNino} al niño o la niña y ${f.alAdulto} al adulto)`;
+      }
+
+      function textoCuenta(f) {
+        if (!f.orientacion) return 'Sin frases de orientación, cumple';
+        return `${f.descriptivas} ÷ ${f.orientacion} = ${numero(f.descriptivas / f.orientacion)}: es 4 o más, cumple`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+
+      const DIBUJOS = {
+        estrella: `<path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M40 40 l4 -9" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`,
+        // Para la caja «Para el adulto»: una persona adulta y una pequeña
+        adulto: `
+          <circle cx="36" cy="22" r="11" fill="none" stroke="currentColor" stroke-width="6"/>
+          <path d="M18 90 V58 a18 18 0 0 1 36 0 V90" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="72" cy="46" r="8" fill="none" stroke="currentColor" stroke-width="6"/>
+          <path d="M60 90 V72 a12 12 0 0 1 24 0 V90" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>`,
+      };
+      const dibujo = (nombre, clase = '') => svg(DIBUJOS[nombre], clase);
+      const estrellaVacia = svg(`<path d="${ESTRELLA}" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>`);
+      const picto = (n, clase = '') => `<img src="pictogramas/${n}.png" alt="" class="${clase}">`;
+      const logo = '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />';
+      const conHueco = (texto) => texto.replace('{hueco}', '<span class="hueco"></span>');
+      const sinHueco = (texto) => texto.replace('{hueco}', '…');
+      const leido = `Lo he leído: ${estrellaVacia.repeat(5)}`;
+
+      // Toldo de rayas con el borde ondulado, en el color de cada historia
+      function toldo(color) {
+        const n = 6;
+        const w = 100 / n;
+        let franjas = '';
+        for (let k = 0; k < n; k++) {
+          const x = k * w;
+          const relleno = k % 2 ? '#fff' : color;
+          franjas += `<path d="M${x} 0 H${x + w} V13 A${w / 2} 5 0 0 1 ${x} 13 Z" fill="${relleno}" stroke="${M}" stroke-width="1.3" stroke-linejoin="round"/>`;
+        }
+        return svg(franjas, 'tienda__toldo', '0 -1 100 20');
+      }
+
+      // ---------------------------------------------------------------------
+      // Hojas de las historias
+      // ---------------------------------------------------------------------
+      const contenedor = document.getElementById('historias');
+      HISTORIAS.forEach((h, i) => {
+        const f = formula(h);
+        const inicioCuerpo = h.partes[0];
+        const inicioConclusion = h.partes[0] + h.partes[1];
+        const frases = h.frases
+          .map(([n, texto], j) => {
+            const parte = j === inicioCuerpo || j === inicioConclusion ? ' frase--parte' : '';
+            return `<li class="frase${parte}"><div class="marco-picto">${picto(n)}</div><p>${conHueco(texto)}</p></li>`;
+          })
+          .join('');
+        const aviso = f.cumple
+          ? ''
+          : '<p class="aviso-formula">REVISAR: esta historia no cumple la fórmula de Carol Gray o sus partes no suman bien.</p>';
+        contenedor.insertAdjacentHTML(
+          'beforeend',
+          `<section class="hoja historia c-${h.color}">
+            <span class="agujero agujero--arriba"></span><span class="agujero agujero--abajo"></span>
+            <div class="cabecera">
+              <div class="icono-titulo">${picto(h.picto)}</div>
+              <div>
+                <p class="antetitulo">Historia ${i + 1} de ${HISTORIAS.length} · ${h.rotulo}</p>
+                <h1>${h.titulo}</h1>
+              </div>
+              ${logo}
+            </div>
+            <div class="franja"></div>
+            <div class="barra"><span>Esta historia es de:</span><span class="linea"></span><span class="leido">${leido}</span></div>
+            <ol class="camino">${frases}</ol>
+            <div class="para-adulto">${dibujo('adulto')}<p><strong>Para el adulto.</strong> Léela ${h.antes}. Una conducta: ${h.conducta}. <strong>Fórmula de Carol Gray:</strong> ${f.descriptivas} frases descriptivas (con el título) y ${textoOrientacion(f)}. ${textoCuenta(f)}.</p></div>
+            ${aviso}
+            <p class="atribucion">Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          </section>`,
+        );
+      });
+
+      // ---------------------------------------------------------------------
+      // Guía: cuándo leer cada historia
+      // ---------------------------------------------------------------------
+      const filasCuando = HISTORIAS.map(
+        (h, i) =>
+          `<tr class="c-${h.color}"><th scope="row">${i + 1}. ${h.titulo} <span class="pagina">(página&nbsp;${PRIMERA_HISTORIA + i})</span></th><td>${h.diasAntes}</td><td>${h.mismoDia}</td></tr>`,
+      ).join('');
+      document.getElementById('tabla-cuando').innerHTML = `<colgroup><col style="width: 34%"><col style="width: 33%"><col style="width: 33%"></colgroup>
+        <thead><tr><th scope="col">Historia</th><th scope="col">Antes</th><th scope="col">El mismo día</th></tr></thead>
+        <tbody>${filasCuando}</tbody>`;
+
+      // ---------------------------------------------------------------------
+      // Fuentes: tabla de la fórmula, con las frases de orientación
+      // ---------------------------------------------------------------------
+      const filasFormula = HISTORIAS.map((h, i) => {
+        const f = formula(h);
+        const cuenta = f.orientacion ? `${f.descriptivas} ÷ ${f.orientacion} = ${numero(f.descriptivas / f.orientacion)}` : 'Sin orientación';
+        const frasesOrientacion = h.frases
+          .filter((fr) => fr[2])
+          .map((fr) => `«${sinHueco(fr[1])}»${fr[2] === 'e' ? ' (al adulto)' : ''}`)
+          .join('<br />');
+        return `<tr class="c-${h.color}"><th scope="row">${i + 1}. ${h.titulo}</th><td class="num">${h.partes.join('&nbsp;+&nbsp;')}</td>
+          <td class="num">${f.descriptivas}</td><td>${frasesOrientacion}</td><td class="num">${cuenta}: ${f.cumple ? 'cumple' : 'NO CUMPLE'}</td></tr>`;
+      }).join('');
+      document.getElementById('tabla-formula').innerHTML = `<colgroup><col style="width: 22%"><col style="width: 11%"><col style="width: 15%">
+        <col style="width: 37%"><col style="width: 15%"></colgroup>
+        <thead><tr><th scope="col">Historia</th><th scope="col" class="num">Partes</th>
+        <th scope="col" class="num">Descriptivas</th><th scope="col">Frases de orientación</th>
+        <th scope="col" class="num">Cuenta</th></tr></thead>
+        <tbody>${filasFormula}</tbody>`;
+
+      // ---------------------------------------------------------------------
+      // Portada: una calle con cinco tiendas; cada escaparate es una historia
+      // ---------------------------------------------------------------------
+      const tienda = (h) => {
+        const filas = h.alto >= 94 ? 3 : 2;
+        return `<div class="tienda c-${h.color}" style="--alto: ${h.alto}mm">
+          <div class="tienda__pisos">${'<span></span>'.repeat(2 * filas)}</div>
+          <div class="tienda__rotulo">${h.rotulo}</div>
+          ${toldo(COLORES[h.color])}
+          <div class="tienda__bajo"><div class="tienda__escaparate">${picto(h.picto)}</div><div class="tienda__puerta"></div></div>
+        </div>`;
+      };
+      document.getElementById('calle').innerHTML = `
+        <div class="acera"></div>
+        <div class="tiendas">${HISTORIAS.map(tienda).join('')}</div>`;
+
+      // Icono de la pegatina de la portada
+      for (const el of document.querySelectorAll('[data-icono]')) el.innerHTML = dibujo(el.dataset.icono);
+
+      // Referencias a otras páginas («página X»)
+      for (const el of document.querySelectorAll('[data-pagina]')) el.textContent = PAGINAS[el.dataset.pagina] ?? '?';
+    </script>
+  </body>
+</html>
