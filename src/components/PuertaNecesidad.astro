@@ -1,9 +1,11 @@
 ---
 // Puerta de entrada de cada necesidad (B-008, paso 1, aprobado por José el 24/11/2026): por dónde empezar
 // en casa y en clase, y una ruta de materiales en orden. Va encima del material en tres barras plegadas,
-// para que el material siga saliendo casi arriba (José, 25/11/2026). Las apps y a quién acudir en Murcia
-// van debajo del material, en PuertaRecursos. Los datos están en src/data/puertas-necesidad.json y los
-// revisan Lilia y Marta. Si un paso o la ruta nombran un material que no existe, la web no se construye.
+// para que el material siga saliendo casi arriba (José, 25/11/2026). Solo se enlaza material de IdEducando:
+// la web no hace publicidad a nadie, así que no salen apps ni materiales de otros (José, 25/11/2026).
+// «A quién acudir en Murcia» está en espera, en PuertaRecursos. Los datos están en
+// src/data/puertas-necesidad.json y los revisan Lilia y Marta. Si un paso o la ruta nombran un material
+// que no existe, la web no se construye.
 import type { Material } from '../lib/materiales';
 import { ruta } from '../lib/rutas';
 
@@ -14,15 +16,6 @@ interface Paso {
 interface Entrada {
   titulo: string;
   pasos: Paso[];
-}
-export interface App {
-  nombre: string;
-  quien: string;
-  para: string;
-  precio: string;
-  datos: string;
-  url: string;
-  comprobado: string;
 }
 export interface Lugar {
   nombre: string;
@@ -36,7 +29,6 @@ export interface Puerta {
   seno: Entrada;
   ruta: string[];
   pocos?: string;
-  apps: App[];
   murcia: Lugar[];
 }
 

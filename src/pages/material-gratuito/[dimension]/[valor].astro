@@ -42,7 +42,7 @@ const titulo = `Material gratuito: ${opcion.nombre}`;
 
 // Puerta de entrada de cada necesidad (B-008, paso 1). Si el archivo de datos aún no existe, la página sale como antes.
 const datosPuertas = Object.values(
-  import.meta.glob<{ default: { comprobado: string; necesidades: Record<string, Puerta> } }>(
+  import.meta.glob<{ default: { comprobado: string; mostrar_murcia: boolean; necesidades: Record<string, Puerta> } }>(
     '../../../data/puertas-necesidad.json',
     { eager: true },
   ),
@@ -80,7 +80,8 @@ const listaOrdenada = puerta
       {listaOrdenada.map((m) => <TarjetaMaterial material={m} />)}
     </ul>
 
-    {puerta && datosPuertas && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
+    {/* «A quién acudir en Murcia», en espera hasta que José decida si sale (25/11/2026). */}
+    {puerta && datosPuertas?.mostrar_murcia && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
 
     {/* Las demás opciones van debajo del material para que este salga casi arriba en el móvil (José, 25/11/2026). */}
     <nav class="categoria__otras" aria-label={`Otras opciones de ${grupo.nombre.toLowerCase()}`} data-pagefind-ignore>

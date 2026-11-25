@@ -1,5 +1,6 @@
 {
   "comprobado": "2026-11-25",
+  "mostrar_murcia": false,
   "necesidades": {
     "toda-la-clase": {
       "familia": {
@@ -51,35 +52,6 @@
         "retos-diciembre",
         "ya-he-terminado",
         "situacion-aprendizaje-3-anos-emociones"
-      ],
-      "apps": [
-        {
-          "nombre": "Directrices del DUA 3.0",
-          "quien": "CAST",
-          "para": "Las directrices del Diseño Universal para el Aprendizaje en castellano, con sugerencias concretas para aplicarlas.",
-          "precio": "Gratis",
-          "datos": "Se consultan sin cuenta y sin dar datos.",
-          "url": "https://udlguidelines.cast.org/es/",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "Buscador de pictogramas",
-          "quien": "ARASAAC",
-          "para": "Pictogramas del Gobierno de Aragón para hacer carteles, agendas o avisos de clase.",
-          "precio": "Gratis",
-          "datos": "Se descargan sin cuenta. La cuenta solo hace falta para guardar favoritos.",
-          "url": "https://arasaac.org/",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "ARActivities",
-          "quien": "ARASAAC",
-          "para": "Hacer con pictogramas tableros, horarios, calendarios, bingos o dominós listos para imprimir.",
-          "precio": "Gratis",
-          "datos": "Se usa sin cuenta. Para guardar las actividades en la web hay que iniciar sesión. Su web usa Google Analytics para contar las visitas.",
-          "url": "https://aractivities.arasaac.org/",
-          "comprobado": "2026-11-25"
-        }
       ],
       "murcia": [
         {
@@ -146,44 +118,6 @@
         "dias-distintos-historias-sociales",
         "rincon-de-la-calma",
         "fiestas-sin-sobresaltos"
-      ],
-      "apps": [
-        {
-          "nombre": "PictogramAgenda",
-          "quien": "Lorenzo Moreno",
-          "para": "Una agenda visual en el móvil o la tableta, con pictogramas de ARASAAC o con vuestras fotos.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.lorenzomoreno.pictogramagenda",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "José Aprende",
-          "quien": "la Fundación Orange",
-          "para": "Cuentos interactivos con pictogramas sobre el aseo, las rutinas y las emociones, con narrador.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.orange.joseaprende",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "SequenciAAC",
-          "quien": "Ramón Trepat y el equipo de ARASAAC",
-          "para": "Hacer e imprimir secuencias con pictogramas para los pasos de una rutina o una tarea.",
-          "precio": "Gratis",
-          "datos": "Se usa en el navegador y sin cuenta. Solo el vocabulario propio pide iniciar sesión. Su web usa Google Analytics para contar las visitas.",
-          "url": "https://sequenciaac.arasaac.org/",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "Asterics AAC",
-          "quien": "la AsTeRICS Foundation",
-          "para": "Un comunicador con pictogramas para el móvil, la tableta o el ordenador, que se usa en el navegador.",
-          "precio": "Gratis",
-          "datos": "Se puede usar sin registrarse y lo guarda todo en el dispositivo. La cuenta, opcional, pide usuario y contraseña.",
-          "url": "https://grid.asterics.eu/",
-          "comprobado": "2026-11-25"
-        }
       ],
       "murcia": [
         {
@@ -265,26 +199,6 @@
         "panel-conducta-recreo",
         "registro-observacion-abc"
       ],
-      "apps": [
-        {
-          "nombre": "PictogramAgenda",
-          "quien": "Lorenzo Moreno",
-          "para": "Una agenda visual en el móvil que puede pasar sola a la tarea siguiente a la hora que marquéis.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.lorenzomoreno.pictogramagenda",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "SequenciAAC",
-          "quien": "Ramón Trepat y el equipo de ARASAAC",
-          "para": "Hacer e imprimir los pasos de una rutina con pictogramas, como prepararse para ir al cole.",
-          "precio": "Gratis",
-          "datos": "Se usa en el navegador y sin cuenta. Solo el vocabulario propio pide iniciar sesión. Su web usa Google Analytics para contar las visitas.",
-          "url": "https://sequenciaac.arasaac.org/",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipo específico de dificultades de aprendizaje y TDAH",
@@ -363,26 +277,6 @@
         "cartilla-trabadas",
         "me-llamo-bocadillo-pictogramas"
       ],
-      "apps": [
-        {
-          "nombre": "#Soyvisual",
-          "quien": "la Fundación Orange",
-          "para": "Fotos, láminas y materiales para trabajar el lenguaje y construir frases con apoyo visual.",
-          "precio": "Gratis",
-          "datos": "Los materiales se descargan sin cuenta y sin dar datos.",
-          "url": "https://www.soyvisual.org/",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "Pictotraductor",
-          "quien": "la Fundación Pictoaplicaciones",
-          "para": "Escribes una frase y la ves en pictogramas, para imprimirla o compartirla.",
-          "precio": "Gratis",
-          "datos": "Se usa sin registrarse. Con usuario y contraseña, opcionales, se pueden subir fotos propias y guardar frases.",
-          "url": "https://www.pictotraductor.com/",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipos de orientación educativa y psicopedagógica (EOEP)",
@@ -447,17 +341,6 @@
         "diptongos-manipulativos",
         "frase-y-dibujo",
         "registro-observacion-neae"
-      ],
-      "apps": [
-        {
-          "nombre": "Dytective",
-          "quien": "Change Dyslexia",
-          "para": "Juegos para la lectura y la escritura que los coles de España pueden usar gratis gracias a EduCaixa.",
-          "precio": "Gratis, con compras dentro",
-          "datos": "Pide una cuenta con usuario y contraseña. Según Google Play, recoge el correo y un identificador de usuario, y puede compartirlos con otras empresas.",
-          "url": "https://play.google.com/store/apps/details?id=org.changedyslexia.newdytective",
-          "comprobado": "2026-11-25"
-        }
       ],
       "murcia": [
         {
@@ -532,35 +415,6 @@
         "mercadillo-de-clase",
         "derechos-infancia-lectura-facil",
         "me-llamo-error-pictogramas"
-      ],
-      "apps": [
-        {
-          "nombre": "José Aprende",
-          "quien": "la Fundación Orange",
-          "para": "Cuentos interactivos con pictogramas sobre el aseo, las rutinas y las emociones, con narrador.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.orange.joseaprende",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "SequenciAAC",
-          "quien": "Ramón Trepat y el equipo de ARASAAC",
-          "para": "Hacer e imprimir secuencias con pictogramas para aprender una tarea paso a paso.",
-          "precio": "Gratis",
-          "datos": "Se usa en el navegador y sin cuenta. Solo el vocabulario propio pide iniciar sesión. Su web usa Google Analytics para contar las visitas.",
-          "url": "https://sequenciaac.arasaac.org/",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "AraWrite",
-          "quien": "ARASAAC",
-          "para": "Pasar a pictogramas un texto, una nota o un cuento, escribiéndolo o dictándolo.",
-          "precio": "Gratis",
-          "datos": "Se usa sin cuenta, salvo para subir tus imágenes. Funciona con inteligencia artificial: no escribas nombres ni datos del peque. Su web usa Google Analytics para contar las visitas.",
-          "url": "https://arawrite.arasaac.org/",
-          "comprobado": "2026-11-25"
-        }
       ],
       "murcia": [
         {
@@ -641,17 +495,6 @@
         "rutinas-invierno-cole",
         "carta-de-deseos"
       ],
-      "apps": [
-        {
-          "nombre": "Asterics AAC",
-          "quien": "la AsTeRICS Foundation",
-          "para": "Un comunicador con pictogramas en el navegador que admite el barrido, para quien no puede tocar la pantalla con precisión.",
-          "precio": "Gratis",
-          "datos": "Se puede usar sin registrarse y lo guarda todo en el dispositivo. La cuenta, opcional, pide usuario y contraseña.",
-          "url": "https://grid.asterics.eu/",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipo específico de discapacidad motora",
@@ -726,35 +569,6 @@
         "fiestas-sin-sobresaltos"
       ],
       "pocos": "Por ahora solo un material está pensado para la discapacidad auditiva; los demás son apoyos visuales que no dependen del oído.",
-      "apps": [
-        {
-          "nombre": "DILSE",
-          "quien": "la Fundación CNSE",
-          "para": "Diccionario de la lengua de signos española con más de 10.000 signos en foto y en vídeo.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.tresandroides.dilse",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "Mi baúl de lengua de signos",
-          "quien": "la Fundación CNSE",
-          "para": "Cuentos y canciones en lengua de signos española para niños y niñas sordos, en una app para Android.",
-          "precio": "Gratis",
-          "datos": "Se puede usar sin registrarse. Según su ficha de Google Play, no recoge datos.",
-          "url": "https://play.google.com/store/apps/details?id=com.cnse.mibaul",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "Banco de imágenes y signos",
-          "quien": "la Fundación CNSE",
-          "para": "Signos de la lengua de signos española y dibujos por temas, como la familia o el cole, para descargar.",
-          "precio": "Gratis",
-          "datos": "Se descargan sin cuenta.",
-          "url": "https://www.fundacioncnse.org/educa/bancolse/",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipo específico de discapacidad auditiva",
@@ -823,17 +637,6 @@
         "alto-contraste-aula"
       ],
       "pocos": "Por ahora solo tenemos un material pensado para la discapacidad visual: los carteles de alto contraste.",
-      "apps": [
-        {
-          "nombre": "Educación inclusiva ONCE",
-          "quien": "la ONCE",
-          "para": "Web con orientaciones y materiales para docentes, familias y alumnado con discapacidad visual.",
-          "precio": "Gratis",
-          "datos": "Se consulta sin cuenta y sin dar datos.",
-          "url": "https://educacion.once.es/",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipo específico de discapacidad visual",
@@ -906,26 +709,6 @@
         "pausas-activas-de-pie-y-sentados",
         "registro-observacion-abc"
       ],
-      "apps": [
-        {
-          "nombre": "José Aprende",
-          "quien": "la Fundación Orange",
-          "para": "Cuentos con pictogramas en los que José cuenta qué le hace sentirse contento, triste o asustado.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.orange.joseaprende",
-          "comprobado": "2026-11-25"
-        },
-        {
-          "nombre": "PictogramAgenda",
-          "quien": "Lorenzo Moreno",
-          "para": "Una agenda visual en el móvil para saber qué viene después, con pictogramas o con vuestras fotos.",
-          "precio": "Gratis",
-          "datos": "Según sus fichas de Google Play y del App Store, no recoge ningún dato.",
-          "url": "https://play.google.com/store/apps/details?id=com.lorenzomoreno.pictogramagenda",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipo específico de convivencia escolar",
@@ -991,17 +774,6 @@
         "diptongos-manipulativos"
       ],
       "pocos": "Solo un material está pensado de entrada para altas capacidades; los demás tienen un nivel «con más reto» que sirve para ampliar.",
-      "apps": [
-        {
-          "nombre": "ScratchJr",
-          "quien": "la Scratch Foundation",
-          "para": "Programar historias y juegos encajando bloques, pensado para peques de 5 a 7 años.",
-          "precio": "Gratis",
-          "datos": "No hace falta cuenta. Según Google Play, recoge para estadísticas datos de uso, un identificador del dispositivo y la ubicación aproximada, y puede compartirlos.",
-          "url": "https://play.google.com/store/apps/details?id=org.scratchjr.android",
-          "comprobado": "2026-11-25"
-        }
-      ],
       "murcia": [
         {
           "nombre": "Equipos de orientación educativa y psicopedagógica (EOEP)",
@@ -1064,17 +836,6 @@
         "rincon-lenguaje-invierno",
         "situacion-aprendizaje-5-anos-mapa-del-cole",
         "carta-de-deseos"
-      ],
-      "apps": [
-        {
-          "nombre": "Buscador de pictogramas",
-          "quien": "ARASAAC",
-          "para": "Pictogramas que se pueden buscar también en árabe, rumano, ucraniano, inglés o francés, para hacer tarjetas en dos lenguas.",
-          "precio": "Gratis",
-          "datos": "Se descargan sin cuenta. La cuenta solo hace falta para guardar favoritos.",
-          "url": "https://arasaac.org/",
-          "comprobado": "2026-11-25"
-        }
       ],
       "murcia": [
         {
