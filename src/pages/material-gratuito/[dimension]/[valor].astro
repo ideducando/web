@@ -5,6 +5,7 @@ import Base from '../../../layouts/Base.astro';
 import Intro from '../../../components/Intro.astro';
 import TarjetaMaterial from '../../../components/TarjetaMaterial.astro';
 import PuertaNecesidad, { type Puerta } from '../../../components/PuertaNecesidad.astro';
+import PuertaRecursos from '../../../components/PuertaRecursos.astro';
 import ProponMaterial from '../../../components/ProponMaterial.astro';
 import { DIMENSIONES, type Dimension } from '../../../data/taxonomias';
 import { encajaEn, materialesOrdenados, type Material } from '../../../lib/materiales';
@@ -47,6 +48,11 @@ const datosPuertas = Object.values(
   ),
 )[0]?.default;
 const puerta = dimension === 'necesidad' ? datosPuertas?.necesidades[valor] : undefined;
+// Con puerta de entrada, los materiales de su ruta salen primero, en su orden; los demás, como siempre.
+const enRuta = (m: Material) => (puerta ? puerta.ruta.indexOf(m.id) : -1);
+const listaOrdenada = puerta
+  ? [...lista.filter((m) => enRuta(m) >= 0).sort((a, b) => enRuta(a) - enRuta(b)), ...lista.filter((m) => enRuta(m) < 0)]
+  : lista;
 ---
 
 <Base
@@ -84,14 +90,16 @@ const puerta = dimension === 'necesidad' ? datosPuertas?.necesidades[valor] : un
       </ul>
     </nav>
 
-    {puerta && datosPuertas && <PuertaNecesidad puerta={puerta} materiales={materiales} comprobado={datosPuertas.comprobado} />}
+    {puerta && <PuertaNecesidad puerta={puerta} materiales={materiales} />}
 
     <h2 id="titulo-lista" class="categoria__cuenta">
       {lista.length === 1 ? '1 material' : `${lista.length} materiales`}
     </h2>
     <ul class="rejilla">
-      {lista.map((m) => <TarjetaMaterial material={m} />)}
+      {listaOrdenada.map((m) => <TarjetaMaterial material={m} />)}
     </ul>
+
+    {puerta && datosPuertas && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
 
     <p class="categoria__volver">
       <a href={ruta('/material-gratuito/')}>Ver todo el catálogo y filtrar por varias categorías</a>

@@ -1,0 +1,119 @@
+---
+// Apps y recursos gratis y a quién acudir en la Región de Murcia, de cada necesidad (B-008, paso 1).
+// Van debajo del material para que este salga casi arriba (José, 25/11/2026). Datos en
+// src/data/puertas-necesidad.json, comprobados en la fecha que dice «comprobado».
+import { fecha } from '../lib/formatos';
+import type { Puerta } from './PuertaNecesidad.astro';
+
+interface Props {
+  puerta: Puerta;
+  comprobado: string;
+}
+
+const { puerta, comprobado } = Astro.props;
+---
+
+<section class="recursos-puerta" aria-labelledby="titulo-recursos" data-pagefind-ignore>
+  <h2 id="titulo-recursos">Más ayuda: apps gratis y a quién acudir</h2>
+  <div class="recursos-puerta__columnas">
+    {
+      puerta.apps.length > 0 && (
+        <div>
+          <h3>Apps y recursos gratis</h3>
+          <ul>
+            {puerta.apps.map((a) => (
+              <li>
+                <a href={a.url} rel="noopener">
+                  {a.nombre}
+                </a>
+                , de {a.quien}. {a.para}
+                <span class="recursos-puerta__detalle">
+                  {a.precio}. {a.datos}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    {
+      puerta.murcia.length > 0 && (
+        <div>
+          <h3>A quién acudir en la Región de Murcia</h3>
+          <ul>
+            {puerta.murcia.map((l) => (
+              <li>
+                {l.url ? (
+                  <a href={l.url} rel="noopener">
+                    {l.nombre}
+                  </a>
+                ) : (
+                  <strong>{l.nombre}</strong>
+                )}
+                . {l.que}
+                {l.nota && <span class="recursos-puerta__detalle">{l.nota}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+  <p class="recursos-puerta__fecha">
+    Enlaces comprobados el <time datetime={comprobado}>{fecha(new Date(comprobado))}</time>. No ganamos nada por
+    recomendar estas apps ni estos servicios. Si alguno cambia, escríbenos.
+  </p>
+</section>
+
+<style>
+  .recursos-puerta {
+    margin-top: 2.5rem;
+    padding: 1.4rem 1.4rem 1.1rem;
+    border-radius: var(--radio);
+    background: var(--papel);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .recursos-puerta h2 {
+    margin: 0 0 1rem;
+    font-size: 1.3rem;
+  }
+
+  .recursos-puerta h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.1rem;
+  }
+
+  .recursos-puerta__columnas {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 48em) {
+    .recursos-puerta__columnas {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .recursos-puerta ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .recursos-puerta li {
+    margin-bottom: 0.6rem;
+  }
+
+  .recursos-puerta__detalle {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .recursos-puerta__fecha {
+    margin: 0.75rem 0 0;
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+</style>
