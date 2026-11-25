@@ -1752,6 +1752,51 @@
       }
     ]
   },
+  "plan-hacia-2028": {
+    "total": 7,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Oposiciones de Maestros · Región de Murcia"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plan hacia 2028 · antes de empezar"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plan hacia 2028 · para rellenar"
+      }
+    ]
+  },
   "programa-intervencion-pt-ejemplo": {
     "total": 22,
     "fotos": [
@@ -2326,6 +2371,43 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Guía para el docente y la familia"
+      }
+    ]
+  },
+  "simulacro-oral-guiado": {
+    "total": 6,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Oposiciones de Maestros · Región de Murcia"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Simulacro oral guiado · cómo se usa"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Rúbrica de Infantil · convocatoria de 2026 · 1 de 2"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Rúbrica de PT · convocatoria de 2026 · 1 de 2"
       }
     ]
   },
