@@ -184,6 +184,18 @@ const DOCUMENTOS = [
     palabras: 'registro de sesiones, Pedagogía Terapéutica, Audición y Lenguaje, seguimiento, objetivos, plan de trabajo individual, evaluación, coordinación, Infantil, Primaria',
   },
   {
+    id: 'tartamudez-que-hacer-en-casa',
+    asunto:
+      'Tartamudez (disfemia): guía para familias en lectura fácil con qué es, qué ayuda en casa, qué es mejor evitar, cuándo pedir ayuda, qué hace el logopeda y una hoja para el colegio, con las fuentes enlazadas',
+    palabras: 'tartamudez, disfemia, fluidez, logopeda, Programa Lidcombe, familias, lectura fácil, Audición y Lenguaje, atención temprana, Infantil, Primaria',
+  },
+  {
+    id: 'registro-observacion-neae',
+    asunto:
+      'Observar y seguir al alumnado con necesidad específica de apoyo educativo (NEAE): observación por siete áreas con escala de tres puntos, diario de momentos, registro trimestral con cuatro niveles de logro y guía con protección de datos',
+    palabras: 'registro de observación, NEAE, NEE, observación por áreas, diario de observación, registro trimestral, seguimiento, plan de actuación personalizado, PAP, atención a la diversidad, coordinación, Infantil, Primaria',
+  },
+  {
     id: 'ya-he-terminado',
     asunto:
       'Ya he terminado: rincón de juegos tranquilos para cuando el alumnado acaba antes, con tablero de elección con pictogramas de ARASAAC, siete juegos en tres niveles, tarjetas de pasos, temporizador visual, guía y nota para las familias',
@@ -357,6 +369,21 @@ const DOCUMENTOS = [
     asunto: 'Semana del aula del curso 2026-2027 en Cartagena: una página por semana de cole, de lunes a viernes, con huecos grandes para la clase y tarjetas con pictogramas de ARASAAC',
     palabras: 'horario del aula, semana, organización, anticipación, curso 2026-2027, Cartagena, TEA, TDAH, pictogramas, ARASAAC, Infantil, Primaria',
     antes: () => import('./pdf/calendarios-cole.mjs').then((m) => m.generarCalendario(raiz, carpetaPdf, 'semana-del-aula-2026-2027')),
+  },
+  {
+    id: 'rutinas-visuales-casa',
+    asunto: 'Rutinas visuales para casa con pictogramas de ARASAAC: seis rutinas del día en tres longitudes, de 4, 6 y 8 pasos, con tiras para montar y una guía para familias',
+    palabras: 'rutinas, apoyos visuales, secuencias, autonomía, familias, casa, TEA, TDAH, discapacidad intelectual, pictogramas, ARASAAC, Infantil, Primaria',
+  },
+  {
+    id: 'agenda-que-no-acaba-en-un-cajon',
+    asunto: 'La agenda que no acaba en un cajón: plan de 4 semanas para que la agenda visual se use cada día y dure, en lectura fácil, con hoja de seguimiento, tarjetas «¿y si…?» y lista de repuestos',
+    palabras: 'agenda visual, apoyos visuales, rutinas, familias, casa, lectura fácil, TEA, TDAH, discapacidad intelectual, pictogramas, ARASAAC, seguimiento',
+  },
+  {
+    id: 'pack-audicion-lenguaje',
+    asunto: 'Pack de Audición y Lenguaje con pictogramas de ARASAAC: tabla orientativa de adquisición de los sonidos, registro de articulación, conciencia fonológica por niveles, y lotos y ruletas de s, z, r suave, rr y grupos',
+    palabras: 'Audición y Lenguaje, AL, logopedia, articulación, fonemas, conciencia fonológica, lotos, ruletas, TDL, pictogramas, ARASAAC, Infantil, Primaria',
   },
 ];
 
@@ -600,8 +627,11 @@ function portadaProducto(miniatura, color) {
 
 function portadaProximamente(titulo, tipo, color) {
   const tipos = {
-    plantilla: 'Plantilla', 'apoyo-visual': 'Apoyo visual', fichas: 'Fichas de trabajo', juego: 'Juego',
-    cuento: 'Cuento adaptado', guia: 'Guía', lista: 'Lista de comprobación', programacion: 'Programación',
+    // Los mismos nombres que TIPOS en src/data/taxonomias.ts.
+    tablero: 'Tableros y agendas', secuencia: 'Secuencias y rutinas', 'historia-social': 'Historias sociales',
+    cuento: 'Cuentos', juego: 'Juegos', fichas: 'Fichas de trabajo', cartel: 'Carteles y tarjetas',
+    plantilla: 'Plantillas y calendarios', registro: 'Registros', guia: 'Guías', situacion: 'Situaciones de aprendizaje',
+    programacion: 'Programaciones', lista: 'Listas de comprobación',
   };
   const simbolo = readFileSync(join(raiz, 'marca', 'simbolo.svg'), 'utf8');
   return `<!doctype html><html lang="es"><head><meta charset="utf-8"><style>

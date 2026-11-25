@@ -6,8 +6,8 @@
   "correo": "hola@ideducando.es",
   "borrador": false,
   "aviso_borrador": "Web en construcción. Los textos marcados con [BORRADOR] son de prueba y todavía no los ha revisado el equipo.",
-  "instagram": "",
-  "pinterest": "",
+  "instagram": "https://www.instagram.com/ideducando/",
+  "pinterest": "https://www.pinterest.com/ideducando/",
   "bienvenida": {
     "titulo": "Aquí cabemos todos",
     "texto": "Ideas y materiales gratis para que cada peque aprenda a su manera, y para la seño y la familia que lo acompañan cada día."

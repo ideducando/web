@@ -116,6 +116,34 @@ const tienda = defineCollection({
     // Si la fuente es una muestra de pocas hojas y no el producto entero, la galería dice «Hoja 3 de la muestra»
     // y «paginas» son las previstas para el producto completo.
     solo_muestra: z.boolean().default(false),
+    // Si el producto trae lo que hace falta para montarlo con cantidad y medida exactas (kits y suministros),
+    // su tarjeta lleva el sello «Con medidas exactas para montarlo» (propuesta B-009, 24/11/2026).
+    medidas_exactas: z.boolean().default(false),
+    // Tabla fija de la ficha técnica (B-026, José, 24/11/2026): completa en lo que lleva piezas, corta en lo que
+    // es de papel y ninguna en lo solo digital. La edad mínima, los avisos de seguridad y el fabricante dicen
+    // «Por confirmar antes de vender» hasta hablarlo con Carlos: un kit puede contar como juguete
+    // (Real Decreto 1205/2011). Lo que todavía no está decidido se escribe «Por confirmar».
+    tabla: opcional(
+      z
+        .object({
+          tipo: z.enum(['piezas', 'papel']),
+          medidas: z.string().min(3),
+          piezas: opcional(z.string().optional()),
+          materiales: opcional(z.string().optional()),
+          fabricante: opcional(z.string().optional()),
+          montaje: opcional(z.string().optional()),
+          // Id de un material gratuito con «Cómo montarlo» que sirve para este producto.
+          montaje_material: opcional(z.string().optional()),
+          formato: opcional(z.string().optional()),
+          papel: opcional(z.string().optional()),
+          encuadernacion: opcional(z.string().optional()),
+        })
+        .refine(
+          (t) => (t.tipo === 'piezas' ? Boolean(t.piezas && t.materiales && t.montaje) : Boolean(t.formato && t.papel && t.encuadernacion)),
+          { message: 'Con piezas: piezas, materiales y montaje. De papel: formato, papel y encuadernación.' },
+        )
+        .optional(),
+    ),
     paginas: opcional(z.number().int().positive().optional()),
     incluye: z.array(z.string()).min(1),
     // Si hay o habrá una versión gratis (por ejemplo, la de pictogramas), se cuenta aquí.

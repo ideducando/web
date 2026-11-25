@@ -2,7 +2,7 @@
 titulo: "Mi tarjeta de ida y vuelta: tarjeta diaria cole-casa para el TDAH"
 resumen: "Una tarjeta diaria que viaja del cole a casa, visual para Infantil y con franjas para Primaria. Con 24 objetivos, menú de recompensas, gráfica de progreso y apoyos para organizarse."
 seccion: aula
-tipo: plantilla
+tipo: registro
 etapas: [infantil, primaria]
 necesidades: [tdah, conducta, toda-la-clase]
 edades: "De 5 a 12 años"

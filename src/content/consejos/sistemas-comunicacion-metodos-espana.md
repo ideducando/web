@@ -92,7 +92,7 @@ De pago y muy usadas: Proloquo2Go, para iPad, y Grid 3, para Windows, las dos en
 
 Pictogramas, licencias y aplicaciones:
 
-- Condiciones de uso de [ARASAAC](https://arasaac.org/terms-of-use), [SPC de Tobii Dynavox](https://us.tobiidynavox.com/products/picture-communication-symbols-pcs), [Widgit](https://www.widgit.com/symbol-services/copyright.htm), [Mulberry](https://mulberrysymbols.org), [Soy Visual](https://www.soyvisual.org/politica-de-uso), [Sclera](https://www.sclera.be/en/picto/copyright) y [Bliss](https://blissymbolics.org/index.php/licensing).
+- Condiciones de uso de [ARASAAC](https://arasaac.org/terms-of-use), [SPC de Tobii Dynavox](https://us.tobiidynavox.com/pages/pcs-picture-communication-symbols), [Widgit](https://www.widgit.com/symbol-services/copyright.htm), [Mulberry](https://mulberrysymbols.org), [Soy Visual](https://www.soyvisual.org/politica-de-uso), [Sclera](https://www.sclera.be/en/picto/copyright) y [Bliss](https://blissymbolics.org/index.php/licensing).
 - Creative Commons, [preguntas frecuentes](https://creativecommons.org/faq/) sobre combinar obras con licencias distintas.
 - [Makaton fuera del Reino Unido](https://makaton.org/TMC/TMC/About_Makaton/Using_Makaton_overseas.aspx).
 - Aplicaciones: [AsTeRICS Grid](https://github.com/asterics/AsTeRICS-Grid), [Cboard](https://github.com/cboard-org/cboard), [PictoTraductor](https://www.pictotraductor.com), [AraWord](https://sourceforge.net/projects/arasuite/), [Proloquo2Go](https://www.assistiveware.com/products/proloquo2go) y [Grid 3](https://smartboxaac.com/ukie/try-grid/).

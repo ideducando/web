@@ -2,7 +2,7 @@
 titulo: "Agenda visual con pictogramas"
 resumen: "La agenda visual con 60 pictogramas de ARASAAC listos para recortar y cinco tableros nuevos: si hay un cambio, qué necesito, la mochila, cómo ha ido el día y ayer, hoy y mañana."
 seccion: aula
-tipo: apoyo-visual
+tipo: tablero
 etapas: [infantil, primaria]
 necesidades: [tea, tdl, discapacidad-intelectual, toda-la-clase]
 edades: "De 3 a 10 años"

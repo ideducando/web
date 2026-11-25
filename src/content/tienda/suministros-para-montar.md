@@ -5,6 +5,13 @@ tipo: montaje
 para: [docentes, familias]
 formatos:
   - "Bolsas de suministros, enviadas a casa o al cole"
+medidas_exactas: true
+tabla:
+  tipo: piezas
+  medidas: "Círculos de velcro de 1,5 y 2 cm, fundas de plastificar A4 y anillas de 25 mm"
+  piezas: "Por confirmar: cada bolsa dirá su cantidad exacta"
+  materiales: "Velcro adhesivo rugoso y suave, fundas de plastificar de 125 micras, anillas metálicas y pinzas de madera o de colores"
+  montaje: "Cada material gratuito dice en su «Cómo montarlo» cuánto necesitas de cada cosa."
 estado: en-estudio
 portada: /tienda/suministros-para-montar/portada.svg
 portada_alt: "Ilustración: una lámina de círculos de velcro, un rollo de velcro, un paquete de fundas de plastificar, anillas metálicas y pinzas de colores."
@@ -16,6 +23,7 @@ incluye:
   - "Pinzas de madera o de colores"
 orden: 62
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

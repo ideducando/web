@@ -2,7 +2,7 @@
 titulo: "Agenda visual: semana, día y «primero y después»"
 resumen: "Cuatro páginas para anticipar lo que va a pasar: agenda semanal, agenda del día, tablero de «primero y después» y guía para el docente, más una hoja para montarla. Solo falta añadir tus pictogramas."
 seccion: aula
-tipo: apoyo-visual
+tipo: tablero
 etapas: [infantil, primaria]
 necesidades: [tea, tdl, discapacidad-intelectual, toda-la-clase]
 edades: "De 3 a 10 años"

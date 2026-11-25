@@ -98,6 +98,7 @@ La norma también recomienda validar el texto con personas lectoras. Mientras no
 - **Atención:** un material con pictogramas de ARASAAC **no se puede vender nunca**, aunque el resto sea nuestro. Si algún día hay material de pago, necesitará pictogramas propios.
 - **Muchas plantillas van en blanco** para que cada docente use los pictogramas que su alumnado ya conoce.
 - **Fotos de alumnos: nunca.** Tampoco nombres, voces ni nada que permita reconocer a un niño o una niña.
+- **Personajes con marca: nunca.** Ni en lo gratuito ni en lo de pago: nada de personajes de dibujos, juguetes o videojuegos con marca registrada o derechos de autor (Peppa Pig, Mario, Barbie y parecidos), ni sus nombres, dibujos o logotipos. Los personajes de IdEducando son propios. Lo decidió José el 24/11/2026 (propuesta B-013 del Buscador); ese día el catálogo no tenía ninguno.
 - **Texto alternativo:** toda imagen que transmite información lleva una descripción en una frase. Las decorativas se marcan como decorativas.
 
 ---
@@ -165,6 +166,7 @@ Desde el 26/10/2026 la web y los PDF no llevan la marca [BORRADOR] (decisión de
 - [ ] La letra no baja de los tamaños mínimos y el contraste es AA.
 - [ ] Se entiende en blanco y negro.
 - [ ] Los pictogramas llevan su cita y no hay fotos ni datos de alumnos.
+- [ ] No sale ningún personaje con marca registrada.
 - [ ] El PDF está etiquetado, con título e idioma.
 - [ ] La portada tiene descripción.
 - [ ] Si hay que montarlo, trae su hoja de montaje y alguien lo ha montado siguiendo solo esas instrucciones.

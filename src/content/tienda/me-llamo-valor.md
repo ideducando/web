@@ -7,6 +7,12 @@ edades: "De 4 a 8 años"
 formatos:
   - "Descarga en PDF, para leerlo en pantalla o imprimirlo"
   - "Libro en papel, también en Amazon"
+tabla:
+  tipo: papel
+  formato: "Cuento ilustrado apaisado: en PDF y, más adelante, en papel"
+  medidas: "En PDF, A4 apaisado (29,7 × 21 cm). En papel, por confirmar"
+  papel: "Por confirmar"
+  encuadernacion: "Por confirmar"
 estado: aprobado
 portada: /tienda/me-llamo-valor/portada.webp
 portada_alt: "Portada de «Me llamo Valor»: una estrella amarilla sonriente brilla sobre un coche de juguete de madera."
@@ -40,6 +46,7 @@ gratis: "La versión con pictogramas es gratis siempre, con el mismo texto y los
 relacionado: me-llamo-valor-pictogramas
 orden: 11
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

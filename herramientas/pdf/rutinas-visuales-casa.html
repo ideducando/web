@@ -1,0 +1,1863 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rutinas visuales para casa: tres longitudes para cada rutina del día · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css.
+         Las tarjetas miden 42 × 42 mm, como las de «Apoyos visuales en casa»; con 3 mm de plástico alrededor,
+         48 × 48 mm. Por eso cada casilla de las tiras mide 50 mm de alto y algo más de ancho.
+         Las seis rutinas, sus pasos y en qué longitud sale cada uno están en la lista RUTINAS, al final. */
+
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos: es texto que lee el adulto. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas apaisadas de las tiras y de «De un vistazo»: márgenes de 10 mm para que la tira quepa entera. */
+      @page tiras {
+        size: A4 landscape;
+        margin: 10mm 10mm 16mm 10mm;
+      }
+
+      @page final {
+        margin: 12mm 14mm 18mm 14mm;
+      }
+
+      /* ---------- Un color para cada rutina ----------
+         --c: color de la rutina · --t: tinte para fondos · --tx: texto pequeño sobre blanco (contraste AA) */
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: var(--marino);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: var(--marino);
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      /* Título de la hoja para los lectores de pantalla y los marcadores; en la hoja ya lo dice la tira. */
+      .solo-lector {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        font-size: 1pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos (como en «Apoyos visuales en casa») ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__columnas > div {
+        display: contents;
+      }
+
+      .montaje__columnas > div:first-child > h2:first-child {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .montaje__piezas {
+        grid-column: 1;
+        grid-row: 2;
+        gap: 1mm;
+      }
+
+      .montaje__columnas > div:first-child > h2:not(:first-child) {
+        grid-column: 1;
+        grid-row: 3;
+      }
+
+      .montaje__imprimir {
+        grid-column: 1;
+        grid-row: 4 / span 2;
+      }
+
+      .montaje__columnas > div:last-child > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .montaje__pasos {
+        grid-column: 2;
+        grid-row: 2 / span 3;
+      }
+
+      .montaje__resultado {
+        grid-column: 2;
+        grid-row: 5;
+      }
+
+      .montaje__velcro {
+        grid-column: 1 / -1;
+        grid-row: 6;
+        margin-top: 2.4mm;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 12mm;
+      }
+
+      .portada__titulo {
+        font-size: 50pt;
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-size: 15pt;
+        line-height: 1.38;
+        max-width: 132mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 6;
+        right: 17mm;
+        top: 22mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.4mm 0;
+      }
+
+      /* Las tres tiras de la portada: la misma rutina, cada vez más larga */
+      .crecen {
+        position: absolute;
+        z-index: 2;
+        left: 20mm;
+        top: 152mm;
+        display: grid;
+        justify-items: start;
+        gap: 2.6mm;
+      }
+
+      .crecen__rotulo {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        margin: 1.6mm 0 -0.8mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1;
+      }
+
+      .crecen__rotulo svg {
+        width: 6mm;
+        height: 6mm;
+      }
+
+      .mini-tira {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        padding: 2.4mm 3mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 3.6mm;
+        background: #fff;
+        box-shadow: 0 1.2mm 2.6mm -0.6mm rgb(30 43 85 / 0.25);
+      }
+
+      .mini-tira > span {
+        display: grid;
+        place-items: center;
+        width: 16mm;
+        height: 16mm;
+        border: 0.45mm solid var(--c);
+        border-radius: 2.2mm;
+        background: #fff;
+      }
+
+      .mini-tira img {
+        width: 13.5mm;
+        height: 13.5mm;
+      }
+
+      .mini-tira svg {
+        width: 12mm;
+        height: 12mm;
+        margin-left: 0.6mm;
+      }
+
+      /* ---------- Guía para familias (frases cortas, 13 puntos) ---------- */
+      .lf {
+        font-size: 13pt;
+        line-height: 1.42;
+      }
+
+      .lf h1 {
+        font-size: 27pt;
+        margin: 0 0 2.4mm;
+      }
+
+      .lf h2 {
+        font-size: 16pt;
+        margin: 4mm 0 1.8mm;
+      }
+
+      .lf p {
+        margin: 0 0 2.4mm;
+      }
+
+      .lf .entrada {
+        font-size: 15pt;
+        line-height: 1.38;
+        margin-bottom: 4mm;
+      }
+
+      .numero-guia {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .numero-guia b {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--morado-texto);
+        color: #fff;
+        letter-spacing: 0;
+      }
+
+      .de-donde {
+        margin: 4mm 0 0;
+        padding-top: 2mm;
+        border-top: 0.4mm solid var(--linea);
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .lf .de-donde {
+        margin-bottom: 0;
+      }
+
+      .lf .caja {
+        padding: 3mm 4.4mm;
+        margin: 0 0 3mm;
+      }
+
+      /* Página 1: la tira explicada */
+      .explicada {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 24mm;
+        align-items: center;
+        gap: 3mm;
+        margin: 0 0 2.4mm;
+      }
+
+      .explicada__tira {
+        width: 277mm;
+        zoom: 0.535;
+      }
+
+      .sobre {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .sobre svg {
+        width: 22mm;
+        height: 22mm;
+      }
+
+      /* Las llamadas numeradas sobre la tira explicada y en su leyenda */
+      .llamada {
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .explicada .llamada {
+        position: absolute;
+        z-index: 3;
+        box-shadow: 0 0 0 0.7mm #fff;
+      }
+
+      .leyenda-tira {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.6mm 6mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .leyenda-tira li {
+        display: grid;
+        grid-template-columns: 6.4mm minmax(0, 1fr);
+        align-items: start;
+        gap: 2.4mm;
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .leyenda-tira .llamada {
+        margin-top: 0.5mm;
+      }
+
+      /* Las tres longitudes */
+      .longitudes {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .longitudes li {
+        margin: 0;
+        padding: 2.8mm 3.4mm 3mm;
+        border: 0.5mm solid var(--linea);
+        border-top: 2mm solid var(--marino);
+        border-radius: 3mm;
+        background: #fff;
+        line-height: 1.32;
+      }
+
+      .longitudes strong {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0 0 1.6mm;
+        font-family: var(--titulos);
+        font-size: 15pt;
+        line-height: 1;
+      }
+
+      .longitudes strong svg {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .longitudes small {
+        display: block;
+        margin: 0 0 1.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        color: var(--morado-texto);
+      }
+
+      /* Página 2: los primeros días */
+      .pasos-guia {
+        display: grid;
+        gap: 1.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .pasos-guia li {
+        display: grid;
+        grid-template-columns: 9mm 15mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+        margin: 0;
+        padding: 1.5mm 3mm;
+        border-radius: 3.5mm;
+        background: var(--crema);
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+
+      .pasos-guia li::before {
+        counter-increment: paso;
+        content: counter(paso);
+        display: grid;
+        place-items: center;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+      }
+
+      .pasos-guia svg,
+      .pasos-guia img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .pasos-guia strong {
+        font-family: var(--titulos);
+        font-size: 14pt;
+      }
+
+      .ayudas {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: ayuda;
+      }
+
+      .ayudas li {
+        display: grid;
+        align-content: start;
+        gap: 1mm;
+        margin: 0;
+        padding: 2mm 2.2mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        font-size: 12pt;
+        line-height: 1.22;
+      }
+
+      .ayudas li::before {
+        counter-increment: ayuda;
+        content: counter(ayuda);
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--morado-texto);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .ayudas__ejes {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 2.4mm;
+        font-family: var(--titulos);
+        font-weight: 600;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .ayudas__ejes > span {
+        display: flex;
+        align-items: center;
+        gap: 1.4mm;
+      }
+
+      .ayudas__ejes svg {
+        width: 4.4mm;
+        height: 4.4mm;
+      }
+
+      /* Página 3: subir de longitud, retirar el apoyo, ideas */
+      .subir {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4mm;
+        margin: 0 0 1mm;
+      }
+
+      .subir > div {
+        padding: 3mm 4mm;
+        border-radius: 3.5mm;
+        line-height: 1.34;
+      }
+
+      .subir h2 {
+        margin: 0 0 1.4mm;
+        font-size: 14.5pt;
+      }
+
+      .subir ul {
+        margin: 0;
+        padding-left: 5mm;
+      }
+
+      .subir li {
+        margin-bottom: 1mm;
+      }
+
+      .ideas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2mm 5mm;
+        margin: 0 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ideas li {
+        margin: 0;
+        padding: 0 0 0 3.4mm;
+        border-left: 1.2mm solid var(--verde);
+        font-size: 12pt;
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+
+      .seguro {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        align-items: center;
+        gap: 3mm;
+      }
+
+      .seguro svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .seguro p {
+        margin: 0;
+      }
+
+      /* ---------- Hojas apaisadas ---------- */
+      .hoja-tira {
+        position: relative;
+        page: tiras;
+        break-after: page;
+      }
+
+      .aviso {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 1.6mm;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: var(--suave);
+      }
+
+      .aviso strong {
+        font-family: var(--titulos);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--marino);
+      }
+
+      .aviso span:last-child {
+        flex: none;
+        white-space: nowrap;
+      }
+
+      .nota-tira {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 3mm 0 0;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .nota-tira svg {
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+      }
+
+      /* ---------- La tira ----------
+         Cuatro pasos por fila. La corta tiene una fila; la media y la larga, dos: al final de la primera, una
+         flecha dice «Sigue abajo». Las alturas van en milímetros: así la hoja de la tira corta y sus tarjetas
+         cabe entera (79 + 7 + 6 + 89 mm de los 184 que deja la hoja). */
+      .tira {
+        border: 0.8mm solid var(--c);
+        border-radius: 4.5mm;
+        padding: 2.6mm 3.4mm 3mm;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tira__cabecera {
+        display: grid;
+        grid-template-columns: 12.5mm auto minmax(0, 1fr) 25mm;
+        align-items: center;
+        column-gap: 3mm;
+        height: 12.5mm;
+        margin: 0 0 1.6mm;
+      }
+
+      .tira__icono {
+        display: grid;
+        place-items: center;
+        width: 12.5mm;
+        height: 12.5mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.9mm var(--t);
+      }
+
+      .tira__icono img {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .tira__nombre {
+        display: grid;
+        gap: 1.2mm;
+        margin: 0;
+      }
+
+      .tira__titulo {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .tira__longitud {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1;
+        color: var(--tx);
+      }
+
+      .tira__longitud svg {
+        width: 4.6mm;
+        height: 4.6mm;
+      }
+
+      .tira__credito {
+        justify-self: end;
+        margin: 0;
+        text-align: right;
+        font-size: 11pt;
+        line-height: 1.18;
+        color: var(--suave);
+      }
+
+      .tira__logo {
+        width: 25mm;
+        height: auto;
+      }
+
+      .pasos {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) 38mm;
+        column-gap: 6mm;
+        row-gap: 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .paso {
+        position: relative;
+        display: grid;
+        grid-template-rows: 7mm 50mm;
+        row-gap: 1mm;
+        margin: 0;
+      }
+
+      .paso__numero {
+        justify-self: center;
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1;
+      }
+
+      .casilla {
+        position: relative;
+        display: grid;
+        place-items: center;
+        border: 0.6mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 1.4mm var(--t);
+      }
+
+      .velcro {
+        width: 20mm;
+        height: 20mm;
+        border: 0.4mm solid #9aa3bd;
+        border-radius: 50%;
+        background: #d9dde8;
+      }
+
+      /* El nombre del paso queda debajo de la tarjeta: sirve para volver a ponerla en su sitio. */
+      .casilla__nombre {
+        position: absolute;
+        left: 2.6mm;
+        right: 2.6mm;
+        bottom: 2.4mm;
+        margin: 0;
+        text-align: center;
+        font-size: 11pt;
+        line-height: 1.08;
+        color: var(--suave);
+        text-wrap: balance;
+      }
+
+      /* Flecha hacia lo que viene detrás de cada paso: otro paso, «Sigue abajo» o «¡Terminado!» */
+      .paso::after {
+        content: '';
+        position: absolute;
+        top: 31.7mm;
+        right: -4.4mm;
+        width: 2.6mm;
+        height: 2.6mm;
+        border-top: 0.8mm solid var(--c);
+        border-right: 0.8mm solid var(--c);
+        transform: rotate(45deg);
+      }
+
+      /* La tarjeta puesta en su casilla (solo en los dibujos de la guía y de «De un vistazo») */
+      .casilla > .tc {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-style: solid;
+        border-color: #b9c0d4;
+        box-shadow: 0 0 0 3mm rgb(255 255 255 / 0.65), 0 0.8mm 2mm 2.6mm rgb(30 43 85 / 0.18);
+      }
+
+      .fin {
+        align-self: end;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 2mm;
+        width: 38mm;
+        height: 50mm;
+        margin: 0;
+        border: 0.7mm solid var(--amarillo);
+        border-radius: 3.5mm;
+        background: var(--amarillo-tinte);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+        line-height: 1;
+        color: var(--marino);
+      }
+
+      .fin svg {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .sigue {
+        align-self: end;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 1.6mm;
+        height: 50mm;
+        margin: 0;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+        text-align: center;
+        color: var(--marino);
+      }
+
+      .sigue svg {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      /* Línea para cortar */
+      .corte {
+        position: relative;
+        height: 7mm;
+        color: var(--suave);
+      }
+
+      .corte::before {
+        content: '';
+        position: absolute;
+        left: 8mm;
+        right: 0;
+        top: 50%;
+        border-top: 0.4mm dashed var(--suave);
+      }
+
+      .corte svg {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 6mm;
+        height: 6mm;
+        transform: translateY(-50%);
+      }
+
+      /* ---------- Tarjetas (42 × 42 mm). La línea discontinua es la de corte. ---------- */
+      .rejilla-tarjetas {
+        display: grid;
+        grid-template-columns: repeat(5, 42mm);
+        grid-auto-rows: 42mm;
+        gap: 5mm 6mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tc {
+        position: relative;
+        display: grid;
+        grid-template-rows: 2.4mm 22.5mm minmax(0, 1fr);
+        justify-items: center;
+        align-items: center;
+        width: 42mm;
+        height: 42mm;
+        margin: 0;
+        padding: 0 1.2mm 1.4mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tc__banda {
+        justify-self: stretch;
+        align-self: stretch;
+        margin: 0 -1.2mm;
+        background: var(--c);
+      }
+
+      .tc img,
+      .tc .hueco-picto {
+        width: 22mm;
+        height: 22mm;
+        align-self: end;
+      }
+
+      .tc p {
+        margin: 0;
+        text-align: center;
+        font-weight: 700;
+        font-size: 18pt;
+        line-height: 0.98;
+        text-wrap: balance;
+      }
+
+      .tc .renglon {
+        justify-self: stretch;
+        margin: 0 2mm;
+        height: 7mm;
+        border-bottom: 0.45mm solid var(--marino);
+      }
+
+      .hueco-picto {
+        border: 0.45mm dashed var(--suave);
+        border-radius: 2mm;
+      }
+
+      .tarjetas-aviso {
+        margin: 0 0 1.4mm;
+      }
+
+      /* ---------- Las rutinas de un vistazo ---------- */
+      .vistazo__cabeza {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 6mm;
+        margin: 0 0 3mm;
+      }
+
+      .vistazo h1 {
+        font-size: 24pt;
+        margin: 0;
+      }
+
+      .vistazo .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .vistazo__intro {
+        margin: 0 0 3mm;
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .vistazo__clave {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        white-space: nowrap;
+      }
+
+      .rejilla-rutinas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3.6mm 5mm;
+      }
+
+      .bloque {
+        padding: 2.4mm 3mm 2.6mm;
+        border: 0.45mm solid var(--linea);
+        border-left: 2mm solid var(--c);
+        border-radius: 3.5mm;
+        break-inside: avoid;
+      }
+
+      .bloque h2 {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+        margin: 0 0 1.6mm;
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      .bloque h2 img {
+        width: 8.5mm;
+        height: 8.5mm;
+      }
+
+      .filas {
+        display: grid;
+        gap: 1.2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .filas > li {
+        display: grid;
+        grid-template-columns: 25mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+      }
+
+      .filas__longitud {
+        display: grid;
+        grid-template-columns: 4.6mm minmax(0, 1fr);
+        align-items: center;
+        column-gap: 1.4mm;
+        font-size: 11pt;
+        line-height: 1.12;
+      }
+
+      .filas__longitud svg {
+        grid-row: span 2;
+        width: 4.6mm;
+        height: 4.6mm;
+      }
+
+      .filas__longitud b {
+        font-family: var(--titulos);
+        font-weight: 700;
+      }
+
+      .filas__longitud span {
+        color: var(--suave);
+      }
+
+      .minis {
+        display: flex;
+        align-items: center;
+        gap: 1mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .mini {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 9.6mm;
+        height: 9.6mm;
+        margin: 0;
+        border: 0.35mm solid #c3cadb;
+        border-radius: 1.5mm;
+        background: #fff;
+      }
+
+      .mini img {
+        width: 8.2mm;
+        height: 8.2mm;
+      }
+
+      .mini--nuevo {
+        border: 0.6mm solid var(--c);
+        background: var(--t);
+      }
+
+      /* «+»: paso nuevo en esa longitud. Se distingue también sin color. */
+      .mas {
+        position: absolute;
+        top: -1.6mm;
+        right: -1.6mm;
+        width: 3.8mm;
+        height: 3.8mm;
+        border-radius: 50%;
+        background:
+          linear-gradient(#fff, #fff) center / 2.2mm 0.6mm no-repeat,
+          linear-gradient(#fff, #fff) center / 0.6mm 2.2mm no-repeat,
+          var(--marino);
+      }
+
+      .vistazo__clave .mas {
+        position: relative;
+        top: 0;
+        right: 0;
+        flex: none;
+      }
+
+      .minis-fila {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+      }
+
+      .minis-fila > svg {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .final {
+        page: final;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .final h1 {
+        font-size: 22pt;
+        margin-bottom: 1.6mm;
+      }
+
+      .final h2 {
+        font-size: 13pt;
+        margin: 3mm 0 1.2mm;
+      }
+
+      .final p {
+        margin: 0 0 1.8mm;
+      }
+
+      .referencias {
+        margin: 0 0 1mm;
+        padding-left: 4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 0.8mm;
+      }
+
+      .seguir {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 1mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .seguir li {
+        display: grid;
+        align-content: start;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 2mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.28;
+        break-inside: avoid;
+      }
+
+      .seguir img {
+        width: 100%;
+        height: 26mm;
+        object-fit: cover;
+        border-radius: 1.6mm;
+      }
+
+      .seguir strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -70mm; top: 118mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -32mm; top: 212mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 118mm; top: 120mm; background: var(--azul-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Para familias · Con pictogramas y velcro</p>
+        <h1 class="portada__titulo">Rutinas visuales<br />para casa</h1>
+        <p class="portada__subtitulo">
+          Seis rutinas del día, cada una en tres tiras: corta, media y larga. Elegid la que va con vuestro peque y pasad a la
+          siguiente cuando la domine.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="crecen" id="crecen" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>6 rutinas<b>3 tiras</b>por rutina</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         GUÍA 1. CÓMO FUNCIONAN LAS TIRAS
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>1</b>Guía para familias</p>
+      <h1>Cómo funcionan las tiras</h1>
+      <p class="entrada">
+        Una rutina visual enseña con dibujos los pasos de un momento del día, en orden. Así vuestro peque sabe qué toca y
+        cuándo ha terminado.
+      </p>
+      <div class="explicada" aria-hidden="true">
+        <div><div class="explicada__tira" id="explicada"></div></div>
+        <div class="sobre"><span data-icono="sobre"></span>El sobre</div>
+        <span class="llamada" style="left: 56mm; top: 10mm">1</span>
+        <span class="llamada" style="left: 3mm; top: 23mm">2</span>
+        <span class="llamada" style="right: 0; top: 2mm">3</span>
+        <span class="llamada" style="left: 140.5mm; top: 10mm">4</span>
+      </div>
+      <ol class="leyenda-tira">
+        <li><span class="llamada">1</span><span>Cada paso tiene su número y su tarjeta, pegada con velcro.</span></li>
+        <li><span class="llamada">2</span><span>Al acabar un paso, su tarjeta se quita. Debajo queda su nombre.</span></li>
+        <li><span class="llamada">3</span><span>Las tarjetas que se quitan van a un sobre, junto a la tira.</span></li>
+        <li><span class="llamada">4</span><span>Cuando solo queda «¡Terminado!», la rutina ha acabado.</span></li>
+      </ol>
+
+      <h2>Tres longitudes para cada rutina</h2>
+      <p>
+        Cada rutina viene en tres tiras. Elegid la que va con vuestro peque y, cuando la domine, pasad a la siguiente. Las
+        tarjetas que ya conoce no cambian. <strong>¿Dudáis? Empezad por la corta.</strong>
+      </p>
+      <ul class="longitudes" id="longitudes"></ul>
+
+      <h2>A quién ayudan</h2>
+      <p>
+        A muchos peques. Sobre todo, a quienes tienen trastorno del espectro del autismo (TEA), trastorno por déficit de
+        atención e hiperactividad (TDAH) o discapacidad intelectual. Cada peque es distinto: probad y mirad qué le ayuda.
+      </p>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Dividir una tarea en pasos (análisis de tareas) y mostrarla con imágenes (apoyos
+        visuales) son prácticas con respaldo de la investigación para la infancia con TEA (Hume y otros, 2021). Las tres
+        longitudes son una propuesta de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA 2. LOS PRIMEROS DÍAS
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>2</b>Guía para familias</p>
+      <h1>Los primeros días</h1>
+      <p class="entrada">Al principio, la tira se usa en compañía. Con calma y siempre igual.</p>
+      <ol class="pasos-guia" id="pasos-guia"></ol>
+
+      <h2>La ayuda, la justa</h2>
+      <p>En cada paso, empezad por la ayuda más pequeña. Subid a la siguiente solo si hace falta:</p>
+      <ol class="ayudas" id="ayudas"></ol>
+      <p class="ayudas__ejes" aria-hidden="true">
+        <span><span data-icono="izquierda"></span>Menos ayuda</span><span>Más ayuda<span data-icono="flecha"></span></span>
+      </p>
+      <p>
+        En cuanto pueda hacer un paso sin esa ayuda, retiradla. La meta: que mire la tira cuando no sepa qué toca.
+      </p>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Hacer la tarea delante (modelado) y dar primero la ayuda más pequeña: módulo de
+        análisis de tareas de AFIRM, de la Universidad de Carolina del Norte (Sam y AFIRM Team, 2024). Las agendas visuales
+        de actividades tienen respaldo de la investigación (Knight y otros, 2015).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA 3. SUBIR DE LONGITUD Y RETIRAR EL APOYO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="rayos" style="margin-bottom: 5mm"></div>
+      <p class="antetitulo numero-guia"><b>3</b>Guía para familias</p>
+      <h1>Subir de longitud y retirar el apoyo</h1>
+      <div class="subir">
+        <div class="caja--verde">
+          <h2>¿Cuándo pasar a la siguiente?</h2>
+          <p style="margin: 0 0 1.6mm">
+            Cuando hace los pasos de su tira casi sin ayuda, la mayoría de los días, durante unas dos semanas.
+          </p>
+          <p style="margin: 0">Cuando ya domina la larga, lo siguiente es retirar el apoyo poco a poco.</p>
+        </div>
+        <div class="caja--azul">
+          <h2>¿Cómo?</h2>
+          <ul>
+            <li>Las tarjetas que ya conoce siguen igual y en el mismo orden.</li>
+            <li>La tira nueva añade 2 pasos. Enseñadlos como los primeros días.</li>
+            <li>Si se agobia o se pierde, volved unos días a la anterior.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Cuándo retirar el apoyo</h2>
+      <p>
+        Cuando hace la rutina entera sin mirar la tira durante unas semanas, dejad de señalarla. Después, quitad poco a poco
+        las tarjetas de los pasos que hace sin pensar y, al final, la tira.
+      </p>
+      <p>
+        Guardadla a mano: tras unas vacaciones o una temporada difícil, puede volver a hacer falta. Hay peques que la usan
+        siempre, y está bien.
+      </p>
+
+      <h2>Ideas para adaptarlas</h2>
+      <ul class="ideas">
+        <li><strong>No va con vuestra casa:</strong> cambiad esa tarjeta por una en blanco, con un dibujo o una foto.</li>
+        <li><strong>Un paso cuesta mucho:</strong> divididlo en dos. «Me visto» puede ser «Camiseta» y «Pantalón».</li>
+        <li><strong>Aún no entiende los dibujos:</strong> usad fotos de sus cosas o el objeto de verdad.</li>
+        <li><strong>Tarjetas que viajan:</strong> «Me pongo el pijama» sirve en el baño y al irse a dormir.</li>
+        <li><strong>En dos casas:</strong> mejor que tenga la misma tira en las dos.</li>
+        <li><strong>Con el cole:</strong> contadles qué rutinas usáis y con qué palabras.</li>
+      </ul>
+
+      <h2>Para que sea seguro</h2>
+      <div class="caja caja--coral seguro">
+        <span data-icono="aviso"></span>
+        <p>
+          En la bañera o en la ducha, un adulto siempre al lado, también con la tira larga. Probad antes la temperatura del
+          agua. Las tarjetas y el velcro, lejos de quien aún se lleva cosas a la boca.
+        </p>
+      </div>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Retirar la ayuda poco a poco: AFIRM (Sam y AFIRM Team, 2024). Varias formas de
+        presentar la información: pautas del Diseño Universal para el Aprendizaje (DUA) (CAST, 2024). Lo demás es propuesta
+        de IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         LAS RUTINAS DE UN VISTAZO (apaisada)
+         ====================================================================== -->
+    <section class="hoja-tira vistazo">
+      <div class="vistazo__cabeza">
+        <div>
+          <p class="antetitulo">Antes de imprimir</p>
+          <h1>Las rutinas de un vistazo</h1>
+        </div>
+        <p class="vistazo__clave"><span class="mas"></span>Paso nuevo: lo que añade esa longitud</p>
+      </div>
+      <p class="vistazo__intro">
+        Cada rutina tiene tres hojas: la de la tira corta con todas las tarjetas, y las de las tiras media y larga. Imprimid la
+        primera y la de la longitud que vais a usar. Cada tira añade 2 pasos a la anterior; los demás no cambian.
+      </p>
+      <div class="rejilla-rutinas" id="vistazo"></div>
+    </section>
+
+    <!-- Las 18 hojas de las tiras se hacen con el guion del final, a partir de la lista RUTINAS -->
+    <div id="tiras"></div>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="final">
+      <div class="rayos" style="margin-bottom: 4mm"></div>
+      <p class="antetitulo">Fuentes y créditos</p>
+      <h1>De dónde sale este material</h1>
+      <p>
+        <strong>Rutinas visuales para casa: tres longitudes para cada rutina del día.</strong> Equipo IdEducando, noviembre
+        de 2026. Ficha y novedades:
+        <span class="url">ideducando.es/material-gratuito/rutinas-visuales-casa</span>
+      </p>
+
+      <h2>Fuentes</h2>
+      <ul class="referencias">
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation
+          review. <em>Journal of Autism and Developmental Disorders</em>, 51(11), 4013-4032. DOI: 10.1007/s10803-020-04844-2
+        </li>
+        <li>
+          Knight, V., Sartini, E. y Spriggs, A. D. (2015). Evaluating visual activity schedules as evidence-based practice for
+          individuals with autism spectrum disorders. <em>Journal of Autism and Developmental Disorders</em>, 45(1), 157-178.
+          DOI: 10.1007/s10803-014-2201-z
+        </li>
+        <li>
+          Sam, A. y AFIRM Team (2024). <em>Task Analysis</em> (actualización). Universidad de Carolina del Norte en Chapel Hill,
+          Frank Porter Graham Child Development Institute. afirm.fpg.unc.edu
+        </li>
+        <li>
+          CAST (2024). <em>Universal Design for Learning Guidelines version 3.0</em>. udlguidelines.cast.org
+        </li>
+        <li>
+          UNE 153101:2018 EX. <em>Lectura Fácil. Pautas y recomendaciones para la elaboración de documentos</em>. Asociación
+          Española de Normalización.
+        </li>
+        <li>ARASAAC. Condiciones de uso. arasaac.org/terms-of-use</li>
+      </ul>
+
+      <h2>Cómo están escritos los pasos</h2>
+      <p>
+        En primera persona y en presente, con una sola acción por paso y palabras de uso diario, siguiendo las pautas de
+        lectura fácil de la norma UNE 153101:2018 EX. Aún no los hemos validado con personas lectoras.
+      </p>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA». Si
+        adaptas el material, mantén la cita.
+      </p>
+      <p>
+        Con pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las tiras, la estrella
+        «¡Terminado!», las flechas, el sobre y las tijeras son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y
+        adaptarlo citando a IdEducando, sin fines comerciales y con la misma licencia. Si usáis fotos en las tarjetas en
+        blanco, no las subáis a internet.
+      </p>
+
+      <h2>Para seguir</h2>
+      <p>Gratis en ideducando.es, con el mismo título:</p>
+      <ul class="seguir" id="seguir"></ul>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Las seis rutinas. Cada tarjeta: [pictograma de ARASAAC, texto, longitudes en que sale].
+      // c = corta (4 pasos), m = media (6), l = larga (8). La lista va en el orden de la tira larga:
+      // la corta y la media toman sus pasos en ese mismo orden, así las tarjetas nunca cambian de orden.
+      // «etiqueta»: lo que pone en la casilla, si no es el texto de la tarjeta.
+      // «otra»: una tarjeta para elegir en ese paso (bañera o ducha).
+      // ---------------------------------------------------------------------
+      const RUTINAS = [
+        {
+          color: 'naranja',
+          titulo: 'Me levanto y me visto',
+          picto: 25704,
+          tarjetas: [
+            [31857, 'Me despierto', 'cml'],
+            [37458, 'Hago pis', 'cml'],
+            [34611, 'Me lavo la cara', 'ml'],
+            [11232, 'Me quito el pijama', 'cml'],
+            [2781, 'Me visto', 'cml'],
+            [36573, 'Me pongo calcetines', 'l'],
+            [14534, 'Me calzo', 'l'],
+            [2512, 'Me peino', 'ml'],
+          ],
+        },
+        {
+          color: 'verde',
+          titulo: 'Me lavo los dientes',
+          picto: 31880,
+          tarjetas: [
+            [2694, 'Cojo el cepillo', 'cml'],
+            [30087, 'Pongo pasta', 'cml'],
+            [31880, 'Me cepillo los dientes', 'cml'],
+            [30032, 'Escupo la pasta', 'cml'],
+            [11963, 'Lavo el cepillo', 'ml'],
+            [11739, 'Cierro el grifo', 'l'],
+            [37946, 'Guardo el cepillo', 'ml'],
+            [17271, 'Me limpio la boca', 'l'],
+          ],
+        },
+        {
+          color: 'coral',
+          titulo: 'Voy al baño',
+          picto: 2430,
+          tarjetas: [
+            [10143, 'Me bajo la ropa', 'ml'],
+            [10177, 'Me siento en el váter', 'cml'],
+            [37458, 'Hago pis o caca', 'cml'],
+            [10170, 'Me limpio con papel', 'l'],
+            [10184, 'Tiro de la cadena', 'cml'],
+            [10180, 'Me subo la ropa', 'ml'],
+            [8975, 'Me lavo las manos', 'cml'],
+            [37049, 'Me seco las manos', 'l'],
+          ],
+        },
+        {
+          color: 'azul',
+          titulo: 'Me ducho o me baño',
+          picto: 2271,
+          tarjetas: [
+            [11232, 'Me quito la ropa', 'cml'],
+            [2271, 'Me meto en la bañera', 'cml', { etiqueta: 'Me meto en la bañera o en la ducha', otra: [2370, 'Me meto en la ducha'] }],
+            [21822, 'Me enjabono', 'cml'],
+            [35037, 'Me lavo el pelo', 'l'],
+            [21343, 'Me aclaro con agua', 'ml'],
+            [29052, 'Cojo la toalla', 'l'],
+            [22104, 'Me seco', 'cml'],
+            [2522, 'Me pongo el pijama', 'ml'],
+          ],
+        },
+        {
+          color: 'morado',
+          titulo: 'Me voy a dormir',
+          picto: 2369,
+          tarjetas: [
+            [8680, 'Recojo los juguetes', 'ml'],
+            [2522, 'Me pongo el pijama', 'cml'],
+            [37458, 'Hago pis', 'ml'],
+            [31880, 'Me lavo los dientes', 'cml'],
+            [6469, 'Leemos un cuento', 'cml'],
+            [6942, '¡Buenas noches!', 'l'],
+            [8027, 'Apago la luz', 'l'],
+            [2369, 'A dormir', 'cml'],
+          ],
+        },
+        {
+          color: 'amarillo',
+          titulo: 'Salimos de casa',
+          picto: 28689,
+          tarjetas: [
+            [37458, 'Hago pis', 'ml'],
+            [8975, 'Me lavo las manos', 'l'],
+            [14534, 'Me calzo', 'cml'],
+            [27052, 'Me pongo el abrigo', 'cml'],
+            [2475, 'Cojo la mochila', 'cml'],
+            [4606, 'Cojo la botella', 'l'],
+            [24021, 'Cerramos la puerta', 'ml'],
+            [13024, 'Voy de la mano', 'cml'],
+          ],
+        },
+      ];
+
+      const LONGITUDES = [
+        { clave: 'c', nombre: 'Corta', pasos: 4, nivel: 1 },
+        { clave: 'm', nombre: 'Media', pasos: 6, nivel: 2 },
+        { clave: 'l', nombre: 'Larga', pasos: 8, nivel: 3 },
+      ];
+
+      // Números de página. Si cambia el orden de las hojas, hay que actualizarlos aquí y en «Qué imprimir» de la ficha.
+      // portada = 1, montaje = 2, guía = 3 a 5, de un vistazo = 6; cada rutina, tres hojas seguidas.
+      const PAGINAS = { vistazo: 6, primeraTira: 7 };
+      const paginaDe = (i, k) => PAGINAS.primeraTira + i * 3 + k; // k: 0 corta y tarjetas, 1 media, 2 larga
+
+      // Comprobación: cada longitud tiene sus pasos y cada una contiene a la anterior.
+      for (const r of RUTINAS) {
+        for (const l of LONGITUDES) {
+          const n = r.tarjetas.filter((t) => t[2].includes(l.clave)).length;
+          if (n !== l.pasos) throw new Error(`${r.titulo}: la tira ${l.nombre} tiene ${n} pasos`);
+        }
+        for (const t of r.tarjetas) {
+          if ((t[2].includes('c') && !t[2].includes('m')) || (t[2].includes('m') && !t[2].includes('l')))
+            throw new Error(`${r.titulo}: «${t[1]}» no sigue en la tira siguiente`);
+        }
+      }
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const ESTRELLA = 'M50 8 L61.2 36.6 L91.8 38.4 L68.1 57.9 L75.9 87.6 L50 71 L24.1 87.6 L31.9 57.9 L8.2 38.4 L38.8 36.6 Z';
+      const DIBUJOS = {
+        estrella: `<path d="${ESTRELLA}" fill="#f6c12e" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M40 40 l4 -9" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`,
+        tijeras: `
+          <circle cx="24" cy="30" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <circle cx="24" cy="70" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <path d="M35 38 L92 72 M35 62 L92 28" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>`,
+        // Al final de la primera fila: la flecha baja y vuelve a la izquierda, a la fila de abajo
+        sigue: `<path d="M8 22 H58 Q86 22 86 50 Q86 78 58 78 H24" fill="none" stroke="${M}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M38 63 L22 78 L38 93" fill="none" stroke="${M}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`,
+        flecha: `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${SUAVE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        izquierda: `<path d="M88 50H18M40 26L16 50L40 74" fill="none" stroke="${SUAVE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+        velcro: `<circle cx="50" cy="50" r="38" fill="#d9dde8" stroke="${M}" stroke-width="5"/>
+          <path d="M30 40 Q37.5 32 45 40 T60 40 T75 40 M30 55 Q37.5 47 45 55 T60 55 T75 55 M35 69 Q42.5 61 50 69 T65 69" fill="none" stroke="${M}" stroke-width="3.4" opacity=".65"/>`,
+        // El sobre de las tarjetas que se quitan, con una tarjeta entrando
+        sobre: `<rect x="10" y="44" width="80" height="48" rx="5" fill="#fff" stroke="${M}" stroke-width="4.5"/>
+          <rect x="30" y="8" width="40" height="44" rx="4" fill="#fff" stroke="${M}" stroke-width="4" transform="rotate(-8 50 30)"/>
+          <rect x="30" y="8" width="40" height="5" rx="2" fill="#1fa67a" transform="rotate(-8 50 30)"/>
+          <path d="M10 48 L50 74 L90 48" fill="#fff6e6" stroke="${M}" stroke-width="4.5" stroke-linejoin="round"/>`,
+        // La tira en la pared, a la altura de los ojos
+        colgar: `<rect x="8" y="30" width="84" height="30" rx="5" fill="#fff" stroke="${M}" stroke-width="4.5"/>
+          ${[0, 1, 2].map((i) => `<rect x="${15 + i * 19}" y="37" width="15" height="16" rx="2.5" fill="#dcf3ea" stroke="${M}" stroke-width="2.6"/>`).join('')}
+          <path d="${ESTRELLA}" transform="translate(71 36) scale(.18)" fill="#f6c12e" stroke="${M}" stroke-width="12"/>
+          <path d="M50 30 V18 M43 18 H57" stroke="${M}" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M8 84 H92" stroke="${SUAVE}" stroke-width="3" stroke-dasharray="6 5"/>`,
+        // Quitar la tarjeta al acabar el paso
+        quitar: `<rect x="6" y="34" width="60" height="40" rx="5" fill="#fff" stroke="${M}" stroke-width="4"/>
+          <rect x="13" y="41" width="20" height="26" rx="3" fill="#fff" stroke="${SUAVE}" stroke-width="2.6" stroke-dasharray="5 4"/>
+          <circle cx="23" cy="54" r="5" fill="#d9dde8"/>
+          <rect x="39" y="41" width="20" height="26" rx="3" fill="#dcf3ea" stroke="${M}" stroke-width="2.6"/>
+          <rect x="62" y="10" width="26" height="32" rx="3.5" fill="#fff" stroke="${M}" stroke-width="3.4" transform="rotate(14 75 26)"/>
+          <rect x="62" y="10" width="26" height="5" rx="2" fill="#1fa67a" transform="rotate(14 75 26)"/>
+          <path d="M40 22 Q50 8 60 16" fill="none" stroke="${M}" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M53 10 L61 16 L52 21" fill="none" stroke="${M}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+        // Aviso de seguridad: un triángulo con exclamación
+        aviso: `<path d="M50 8 L94 88 H6 Z" fill="#fde5e0" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M50 36 V60" stroke="${M}" stroke-width="9" stroke-linecap="round"/><circle cx="50" cy="73" r="5.5" fill="${M}"/>`,
+      };
+      const dibujo = (nombre, clase = '') => svg(DIBUJOS[nombre], clase);
+
+      // Barras de la longitud: 1 llena en la corta, 2 en la media y 3 en la larga (se distingue sin color)
+      const barras = (nivel, clase = '') =>
+        svg(
+          [34, 60, 86]
+            .map(
+              (alto, i) =>
+                `<rect x="${7 + i * 31}" y="${93 - alto}" width="24" height="${alto}" rx="5" fill="${i < nivel ? M : '#fff'}" stroke="${M}" stroke-width="7"/>`,
+            )
+            .join(''),
+          clase,
+        );
+
+      const picto = (n, alt = '') => `<img src="pictogramas/${n}.png" alt="${alt}">`;
+      const logo = (clase = '') => `<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" class="${clase}">`;
+      const CREDITO = 'Pictogramas: Sergio Palao. ARASAAC (arasaac.org).<br>Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const corte = `<div class="corte" aria-hidden="true">${dibujo('tijeras')}</div>`;
+
+      // ---------------------------------------------------------------------
+      // Piezas
+      // ---------------------------------------------------------------------
+      function tarjeta(color, t, etiqueta = 'li') {
+        if (!t)
+          return `<${etiqueta} class="tc c-${color}"><span class="tc__banda"></span><span class="hueco-picto"></span><span class="renglon"></span></${etiqueta}>`;
+        return `<${etiqueta} class="tc c-${color}"><span class="tc__banda"></span>${picto(t[0])}<p>${t[1]}</p></${etiqueta}>`;
+      }
+
+      const pasosDe = (r, clave) => r.tarjetas.filter((t) => t[2].includes(clave));
+
+      // Una tira. «puestas»: las tarjetas se ven en sus casillas (dibujos de la guía); «quitadas»: pasos ya hechos.
+      function tira(r, l, { puestas = false, quitadas = [] } = {}) {
+        const pasos = pasosDe(r, l.clave);
+        const celdas = [];
+        pasos.forEach((t, j) => {
+          const ultimoDeFila = j % 4 === 3;
+          const nombre = t[3]?.etiqueta ?? t[1];
+          const carta = puestas && !quitadas.includes(j) ? tarjeta(r.color, t, 'div') : '';
+          celdas.push(
+            `<li class="paso">
+              <span class="paso__numero" aria-hidden="true">${j + 1}</span>
+              <div class="casilla"><span class="velcro"></span><p class="casilla__nombre">${nombre}</p>${carta}</div>
+            </li>`,
+          );
+          if (ultimoDeFila && j < pasos.length - 1) celdas.push(`<li class="sigue">${dibujo('sigue')}Sigue abajo</li>`);
+        });
+        celdas.push(`<li class="fin">${dibujo('estrella')}¡Terminado!</li>`);
+        return `<div class="tira c-${r.color}">
+            <div class="tira__cabecera">
+              <div class="tira__icono">${picto(r.picto)}</div>
+              <p class="tira__nombre"><span class="tira__titulo">${r.titulo}</span><span class="tira__longitud">${barras(l.nivel)}${l.nombre} · ${l.pasos} pasos</span></p>
+              <p class="tira__credito">${CREDITO}</p>
+              ${logo('tira__logo')}
+            </div>
+            <ol class="pasos">${celdas.join('')}</ol>
+          </div>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Las 18 hojas: por rutina, la tira corta con todas las tarjetas, la media y la larga
+      // ---------------------------------------------------------------------
+      document.getElementById('tiras').outerHTML = RUTINAS.map((r, i) => {
+        const [corta, media, larga] = LONGITUDES;
+        const cartas = r.tarjetas.flatMap((t) => (t[3]?.otra ? [t, t[3].otra] : [t]));
+        while (cartas.length < 10) cartas.push(null);
+        const notaVelcro = `<p class="nota-tira">${dibujo('velcro')}<span>Velcro rugoso en cada círculo gris. Las tarjetas, con el suave detrás, están en la página ${paginaDe(i, 0)}: cada una va en la casilla que lleva su nombre.</span></p>`;
+        const hojaLarga = (l, k) => `<section class="hoja-tira">
+            <h1 class="solo-lector">${r.titulo}: tira ${l.nombre.toLowerCase()}</h1>
+            <p class="aviso"><span><strong>${r.titulo} · Tira ${l.nombre.toLowerCase()}</strong> · ${l.pasos} pasos, en dos filas: se lee de izquierda a derecha y sigue abajo</span><span>Corta por fuera del borde de color</span></p>
+            ${tira(r, l)}
+            ${notaVelcro}
+          </section>`;
+        return `<section class="hoja-tira">
+            <h1 class="solo-lector">${r.titulo}: tira corta y tarjetas</h1>
+            ${tira(r, corta)}
+            ${corte}
+            <p class="aviso tarjetas-aviso"><span><strong>Tarjetas de «${r.titulo}»</strong> · 42 × 42 mm, con velcro suave detrás · Sirven para las tres tiras</span><span>Corta por la línea de puntos</span></p>
+            <ul class="rejilla-tarjetas">${cartas.map((t) => tarjeta(r.color, t)).join('')}</ul>
+          </section>
+          ${hojaLarga(media, 1)}
+          ${hojaLarga(larga, 2)}`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Las rutinas de un vistazo
+      // ---------------------------------------------------------------------
+      document.getElementById('vistazo').innerHTML = RUTINAS.map(
+        (r, i) => `<article class="bloque c-${r.color}">
+          <h2>${picto(r.picto)}${r.titulo}</h2>
+          <ol class="filas">${LONGITUDES.map((l, k) => {
+            const anterior = LONGITUDES[k - 1];
+            const minis = pasosDe(r, l.clave)
+              .map((t) => {
+                const nuevo = anterior && !t[2].includes(anterior.clave);
+                return `<li class="mini${nuevo ? ' mini--nuevo' : ''}">${picto(t[0], t[1])}${nuevo ? '<span class="mas"></span>' : ''}</li>`;
+              })
+              .join('');
+            return `<li><span class="filas__longitud">${barras(l.nivel)}<b>${l.nombre} · ${l.pasos}</b><span>Página ${paginaDe(i, k)}</span></span><div class="minis-fila"><ul class="minis">${minis}</ul>${dibujo('estrella')}</div></li>`;
+          }).join('')}</ol>
+        </article>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Guía 1: la tira explicada y las tres longitudes
+      // ---------------------------------------------------------------------
+      const dientes = RUTINAS[1];
+      document.getElementById('explicada').innerHTML = tira(dientes, LONGITUDES[0], { puestas: true, quitadas: [0] });
+
+      document.getElementById('longitudes').innerHTML = [
+        ['Para empezar, o si muchos dibujos le agobian.', 'Los pasos que faltan, los hacéis juntos.'],
+        ['Cuando sigue la corta casi sin ayuda,', 'o si ya hace parte de la rutina por su cuenta.'],
+        ['Cuando hace casi toda la rutina,', 'pero se salta pasos o se le olvidan.'],
+      ]
+        .map(
+          ([a, b], k) =>
+            `<li><strong>${barras(LONGITUDES[k].nivel)}${LONGITUDES[k].nombre}</strong><small>${LONGITUDES[k].pasos} pasos</small>${a} ${b}</li>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Guía 2: los primeros días y la ayuda justa
+      // ---------------------------------------------------------------------
+      document.getElementById('pasos-guia').innerHTML = [
+        ['d:colgar', 'Colgadla donde pasa la rutina.', 'Por ejemplo, junto al lavabo o en la puerta de casa. A la altura de sus ojos.'],
+        [2474, 'Hacedlo vosotros primero.', 'Las primeras veces, enseñadle cómo se hace: haced cada paso delante, o juntos, y señalad su tarjeta.'],
+        [6612, 'Señalad la tarjeta que toca.', 'Antes de cada paso, señaladla y esperad unos segundos. Hablad poco: «Pasta».'],
+        ['d:quitar', 'Paso hecho, tarjeta fuera.', 'Al acabar cada paso, que quite su tarjeta y la meta en el sobre. Así ve lo que falta.'],
+        [4563, 'Celebrad el final.', 'Cuando solo quede «¡Terminado!», decídselo con alegría: «¡Terminado! Dientes limpios».'],
+        [2392, 'Siempre igual.', 'El mismo orden y las mismas palabras, cada día. Y todas las personas de casa, igual.'],
+      ]
+        .map(([p, t, d]) => `<li>${typeof p === 'string' ? dibujo(p.slice(2)) : picto(p)}<span><strong>${t}</strong> ${d}</span></li>`)
+        .join('');
+
+      document.getElementById('ayudas').innerHTML = [
+        'Esperad unos segundos.',
+        'Señalad la tarjeta.',
+        'Decídselo con pocas palabras.',
+        'Hacedlo delante.',
+        'Guiad sus manos.',
+      ]
+        .map((t) => `<li>${t}</li>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: la misma rutina en tres tiras, cada vez más larga
+      // ---------------------------------------------------------------------
+      document.getElementById('crecen').innerHTML = LONGITUDES.map(
+        (l) => `<p class="crecen__rotulo">${barras(l.nivel)}${l.nombre} · ${l.pasos} pasos</p>
+          <div class="mini-tira c-verde">${pasosDe(dientes, l.clave).map((t) => `<span>${picto(t[0])}</span>`).join('')}${dibujo('estrella')}</div>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Para seguir: tres materiales con tarjetas del mismo tamaño o rutinas parecidas
+      // ---------------------------------------------------------------------
+      document.getElementById('seguir').innerHTML = [
+        ['apoyos-visuales-familias', 'Apoyos visuales en casa', 'Sus 40 tarjetas miden lo mismo: caben en estas tiras. Y estas, en su «Mi mañana».'],
+        ['secuencias-rutinas-paso-a-paso', 'Paso a paso', 'Las rutinas del cole: llegar a clase, el desayuno, lavarse las manos o ir al baño.'],
+        ['agenda-visual-pictogramas', 'Agenda visual con pictogramas', 'Cuando las rutinas ya van bien: el día y la semana, con sus cambios.'],
+      ]
+        .map(
+          ([id, t, d]) =>
+            `<li><img src="../../public/portadas/${id}.webp" alt="" /><span><strong><a href="https://www.ideducando.es/material-gratuito/${id}/">${t}</a></strong>${d}</span></li>`,
+        )
+        .join('');
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = dibujo(el.dataset.icono, el.className);
+    </script>
+  </body>
+</html>

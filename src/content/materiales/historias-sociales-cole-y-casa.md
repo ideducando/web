@@ -2,7 +2,7 @@
 titulo: "En el cole y en casa: ocho historias sociales para leer justo antes"
 resumen: "Ocho historias con pictogramas para pedir ayuda, esperar el turno, el timbre del recreo, el patio, lavarse las manos, el comedor, el médico y ayudar en casa. Cuatro celebran. Con plantilla y guía."
 seccion: aula
-tipo: cuento
+tipo: historia-social
 etapas: [infantil, primaria]
 necesidades: [tea, conducta, discapacidad-intelectual, tdl, toda-la-clase]
 edades: "De 3 a 10 años"

@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>La agenda que no acaba en un cajón · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css (B-030, 24/11/2026).
+         Las tarjetas «¿y si…?» miden 90 × 125 mm: caben cuatro en una hoja, con la nota de corte, con los márgenes de @page tarjetas. */
+
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      @page tarjetas {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: #9a5200;
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: #7a5a00;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      /* ---------- Lectura fácil: letra grande, frases cortas y mucho aire ---------- */
+      .lf {
+        font-size: 13pt;
+        line-height: 1.45;
+      }
+
+      .lf h1 {
+        font-size: 27pt;
+        margin: 0 0 2.4mm;
+      }
+
+      .lf h2 {
+        font-size: 16pt;
+        margin: 4.4mm 0 2mm;
+      }
+
+      .lf p {
+        margin: 0 0 2.4mm;
+      }
+
+      .lf .entrada {
+        font-size: 15pt;
+        line-height: 1.4;
+        margin-bottom: 4mm;
+      }
+
+      .cabecera {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        gap: 5mm;
+        align-items: center;
+        margin-bottom: 4mm;
+      }
+
+      .cabecera .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabecera h1 {
+        margin: 0;
+      }
+
+      .marco {
+        display: grid;
+        place-items: center;
+        width: 24mm;
+        height: 24mm;
+        padding: 1.6mm;
+        border: 0.6mm solid var(--c, var(--morado));
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .marco img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .de-donde {
+        margin: 4mm 0 0;
+        padding-top: 2mm;
+        border-top: 0.4mm solid var(--linea);
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      .frase-grande {
+        margin: 3.6mm 0 0;
+        padding: 3mm 5mm;
+        border-left: 1.6mm solid var(--morado);
+        border-radius: 0 3mm 3mm 0;
+        background: var(--morado-tinte);
+        font-family: var(--lema);
+        font-size: 17pt;
+        line-height: 1.3;
+      }
+
+      .puntos {
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .puntos li {
+        position: relative;
+        margin: 0 0 1.8mm;
+        padding-left: 6mm;
+      }
+
+      .puntos li::before {
+        content: '';
+        position: absolute;
+        left: 0.6mm;
+        top: 2.3mm;
+        width: 2.6mm;
+        height: 2.6mm;
+        border-radius: 50%;
+        background: var(--c, var(--morado));
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 12mm;
+      }
+
+      .portada__titulo {
+        font-size: 46pt;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+        max-width: 150mm;
+      }
+
+      .portada__subtitulo {
+        font-size: 15pt;
+        line-height: 1.38;
+        max-width: 136mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 6;
+        right: 17mm;
+        top: 22mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 24pt;
+        margin: 0.4mm 0;
+      }
+
+      /* La agenda de la portada: tres tarjetas por hacer y la primera, ya en «¡Terminado!» */
+      .escena {
+        position: absolute;
+        z-index: 2;
+        left: 20mm;
+        right: 20mm;
+        top: 156mm;
+      }
+
+      .tira {
+        display: flex;
+        align-items: center;
+        gap: 3mm;
+        width: max-content;
+        padding: 3.4mm 4mm;
+        border: 0.8mm solid var(--verde);
+        border-radius: 4.5mm;
+        background: #fff;
+        box-shadow: 0 1.4mm 3mm -0.6mm rgb(30 43 85 / 0.25);
+      }
+
+      .tira figure,
+      .sobre__dentro {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        width: 27mm;
+        margin: 0;
+        padding: 2mm 1.4mm 1.6mm;
+        border: 0.5mm solid var(--linea);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      .tira img,
+      .sobre__dentro img {
+        width: 20mm;
+        height: 20mm;
+        object-fit: contain;
+      }
+
+      .tira figcaption,
+      .sobre__dentro span {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        line-height: 1.1;
+        text-align: center;
+      }
+
+      .tira .vacia {
+        width: 27mm;
+        height: 31mm;
+        border: 0.5mm dashed var(--verde);
+        border-radius: 3mm;
+        background: var(--verde-tinte);
+      }
+
+      .escena__fila {
+        display: flex;
+        align-items: flex-end;
+        gap: 8mm;
+      }
+
+      .sobre {
+        position: relative;
+        width: 40mm;
+        height: 44mm;
+      }
+
+      .sobre__dentro {
+        position: absolute;
+        left: 6.5mm;
+        top: 0;
+        transform: rotate(-7deg);
+        box-shadow: 0 1mm 2mm rgb(30 43 85 / 0.2);
+      }
+
+      .sobre__boca {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 24mm;
+        display: grid;
+        place-items: center;
+        border: 0.8mm solid var(--marino);
+        border-radius: 2mm 2mm 3mm 3mm;
+        background: var(--amarillo);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13pt;
+      }
+
+      .semanas {
+        display: flex;
+        gap: 3mm;
+        margin-top: 9mm;
+      }
+
+      .semanas span {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        padding: 1.6mm 3.6mm 1.6mm 2mm;
+        border-radius: 99mm;
+        background: var(--t);
+        border: 0.5mm solid var(--c);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .semanas svg {
+        width: 5.4mm;
+        height: 5.4mm;
+      }
+
+      /* ---------- Por qué acaba en un cajón ---------- */
+      .motivos {
+        display: grid;
+        gap: 2.4mm;
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .motivos li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 7mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        line-height: 1.3;
+      }
+
+      .motivos .malo,
+      .motivos .bueno {
+        padding: 2mm 3mm;
+        border-radius: 3mm;
+      }
+
+      .motivos .malo {
+        background: var(--coral-tinte);
+      }
+
+      .motivos .bueno {
+        background: var(--verde-tinte);
+        font-weight: 700;
+      }
+
+      .motivos svg {
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .rotulos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 7mm minmax(0, 1fr);
+        gap: 2mm;
+        margin-bottom: 1.6mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .rotulos span:first-child {
+        color: var(--coral-texto);
+      }
+
+      .rotulos span:last-child {
+        color: var(--verde-texto);
+      }
+
+      .plan {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 2mm 0 0;
+      }
+
+      .plan > div {
+        display: grid;
+        justify-items: center;
+        gap: 1.4mm;
+        padding: 3mm 2mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .plan img {
+        width: 19mm;
+        height: 19mm;
+        padding: 1mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .plan b {
+        font-family: var(--titulos);
+        font-size: 11pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--tx);
+      }
+
+      .plan span {
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 13.5pt;
+      }
+
+      /* ---------- Antes de empezar ---------- */
+      .casillas {
+        margin: 0 0 3mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .casillas li {
+        position: relative;
+        margin: 0 0 2.2mm;
+        padding-left: 10mm;
+      }
+
+      .casillas li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.6mm;
+        width: 6mm;
+        height: 6mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 1.4mm;
+        background: #fff;
+      }
+
+      .pasos-uso {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: uso;
+      }
+
+      .pasos-uso li {
+        counter-increment: uso;
+        position: relative;
+        display: grid;
+        justify-items: center;
+        align-content: start;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 4mm 2.4mm 3mm;
+        border: 0.6mm solid var(--azul);
+        border-radius: 3.5mm;
+        background: var(--azul-tinte);
+        text-align: center;
+        line-height: 1.25;
+      }
+
+      .pasos-uso li::before {
+        content: counter(uso);
+        position: absolute;
+        top: -3.4mm;
+        left: 50%;
+        transform: translateX(-50%);
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: var(--azul);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .pasos-uso img {
+        width: 20mm;
+        height: 20mm;
+        padding: 1mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .truco {
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        gap: 3.4mm;
+        align-items: center;
+        margin: 3mm 0 0;
+        padding: 3mm 4mm;
+        border-radius: 3.5mm;
+        background: var(--amarillo-tinte);
+        border-left: 1.6mm solid var(--amarillo);
+        line-height: 1.35;
+        break-inside: avoid;
+      }
+
+      .truco img {
+        width: 15mm;
+        height: 15mm;
+        padding: 0.8mm;
+        border-radius: 2mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .truco b {
+        font-family: var(--titulos);
+      }
+
+      /* ---------- Las semanas ---------- */
+      .semana {
+        margin: 0 0 5mm;
+        break-inside: avoid;
+      }
+
+      .semana__cabeza {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr) 20mm;
+        gap: 4mm;
+        align-items: center;
+        padding: 2.4mm 3.4mm;
+        border-radius: 4mm;
+        background: var(--t);
+        border: 0.6mm solid var(--c);
+      }
+
+      .semana__numero {
+        display: grid;
+        place-items: center;
+        width: 17mm;
+        height: 17mm;
+        border-radius: 50%;
+        background: var(--c);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 28pt;
+        line-height: 1;
+      }
+
+      .semana__cabeza .semana__etiqueta {
+        margin: 0 0 0.4mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--tx);
+      }
+
+      .semana__cabeza h2 {
+        margin: 0;
+        font-size: 19pt;
+      }
+
+      .semana__cabeza p {
+        margin: 0.6mm 0 0;
+        font-size: 13pt;
+        line-height: 1.3;
+      }
+
+      .semana__cabeza img {
+        width: 20mm;
+        height: 20mm;
+        padding: 1mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .semana__cuerpo {
+        padding: 3mm 2mm 0;
+      }
+
+      .pasos {
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .pasos li {
+        counter-increment: paso;
+        position: relative;
+        margin: 0 0 1.8mm;
+        padding-left: 9mm;
+      }
+
+      .pasos li::before {
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: 0.3mm;
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--tx);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .siguiente {
+        display: inline-flex;
+        align-items: center;
+        gap: 2mm;
+        margin: 1mm 0 0;
+        padding: 1.6mm 3.4mm;
+        border-radius: 99mm;
+        border: 0.5mm solid var(--c);
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .siguiente svg {
+        flex: none;
+        width: 5.4mm;
+        height: 5.4mm;
+      }
+
+      /* La escalera de ayudas: de más ayuda a menos */
+      .escalera {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: end;
+        gap: 2.4mm;
+        margin: 2.6mm 0 2mm;
+      }
+
+      .escalera div {
+        display: grid;
+        align-content: start;
+        gap: 0.6mm;
+        padding: 2.4mm 2.6mm;
+        border-radius: 3mm 3mm 0 0;
+        background: var(--morado-tinte);
+        border: 0.5mm solid var(--morado);
+        border-bottom-width: 1.4mm;
+        line-height: 1.22;
+        font-size: 12.5pt;
+      }
+
+      .escalera div:nth-child(1) {
+        height: 22mm;
+      }
+      .escalera div:nth-child(2) {
+        height: 28mm;
+      }
+      .escalera div:nth-child(3) {
+        height: 34mm;
+      }
+      .escalera div:nth-child(4) {
+        height: 40mm;
+        background: var(--morado);
+        color: #fff;
+      }
+
+      .escalera b {
+        font-family: var(--titulos);
+        font-size: 11pt;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .escalera__rotulos {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .opciones {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2mm 4mm;
+        margin: 1mm 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .opciones li {
+        position: relative;
+        margin: 0;
+        padding: 2mm 3mm 2mm 11mm;
+        border-radius: 3mm;
+        background: var(--naranja-tinte);
+        line-height: 1.25;
+      }
+
+      .opciones li::before {
+        content: '';
+        position: absolute;
+        left: 3mm;
+        top: 2.4mm;
+        width: 5.4mm;
+        height: 5.4mm;
+        border: 0.6mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      /* ---------- Hoja de seguimiento ---------- */
+      .leyenda {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm 6mm;
+        margin: 0 0 3.4mm;
+        padding: 2.6mm 4mm;
+        border-radius: 3mm;
+        background: var(--azul-tinte);
+        line-height: 1.3;
+      }
+
+      .leyenda span {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+      }
+
+      .leyenda svg {
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+      }
+
+      .registro {
+        display: grid;
+        gap: 3.2mm;
+      }
+
+      .registro__semana {
+        display: grid;
+        grid-template-columns: 31mm repeat(7, minmax(0, 1fr));
+        gap: 1.6mm;
+        padding: 2.4mm;
+        border: 0.6mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        break-inside: avoid;
+      }
+
+      .registro__nombre {
+        display: grid;
+        align-content: center;
+        gap: 0.4mm;
+        line-height: 1.15;
+      }
+
+      .registro__nombre b {
+        font-family: var(--titulos);
+        font-size: 14pt;
+        color: var(--tx);
+      }
+
+      .registro__nombre span {
+        font-size: 11pt;
+      }
+
+      .dia {
+        display: grid;
+        justify-items: center;
+        gap: 1.2mm;
+        padding: 1.4mm 0 1.8mm;
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      .dia b {
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1;
+      }
+
+      .dia svg {
+        width: 8.4mm;
+        height: 8.4mm;
+      }
+
+      .registro__nota {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: flex-end;
+        gap: 2mm;
+        margin-top: 0.6mm;
+        font-size: 11pt;
+        line-height: 1;
+      }
+
+      .registro__nota i {
+        flex: 1;
+        height: 6mm;
+        border-bottom: 0.4mm dotted var(--marino);
+      }
+
+      /* ---------- Tarjetas «¿y si…?» (para recortar) ---------- */
+      .hoja-tarjetas {
+        page: tarjetas;
+        break-after: page;
+      }
+
+      .rejilla {
+        display: grid;
+        grid-template-columns: repeat(2, 90mm);
+        grid-auto-rows: 125mm;
+        gap: 5mm;
+        justify-content: center;
+      }
+
+      .corte {
+        position: relative;
+        border: 0.35mm dashed #8a94b8;
+        border-radius: 1mm;
+        padding: 2.4mm;
+      }
+
+      .tarjeta {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 0.7mm solid var(--c);
+        border-radius: 4mm;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .tarjeta__cabeza {
+        display: grid;
+        grid-template-columns: 21mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        padding: 3mm 3.4mm 3mm 9mm;
+        background: var(--t);
+      }
+
+      .tarjeta__cabeza img {
+        width: 21mm;
+        height: 21mm;
+        padding: 1mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .tarjeta__cabeza small {
+        display: block;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--tx);
+      }
+
+      .tarjeta__cabeza h2 {
+        margin: 0.4mm 0 0;
+        font-size: 16pt;
+        line-height: 1.12;
+      }
+
+      /* El círculo para la perforadora */
+      .agujero {
+        position: absolute;
+        left: 2.6mm;
+        top: 2.6mm;
+        width: 4.6mm;
+        height: 4.6mm;
+        border: 0.4mm dashed var(--marino);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .tarjeta ul {
+        flex: 1;
+        margin: 0;
+        padding: 3mm 4mm 2mm 4mm;
+        list-style: none;
+        font-size: 13.5pt;
+        line-height: 1.32;
+      }
+
+      .tarjeta li {
+        position: relative;
+        margin: 0 0 2mm;
+        padding-left: 5mm;
+      }
+
+      .tarjeta li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2.2mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        border-radius: 50%;
+        background: var(--c);
+      }
+
+      .tarjeta__pie {
+        padding: 0 4mm 2.4mm;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .lineas {
+        flex: 1;
+        display: grid;
+        align-content: start;
+        gap: 8.4mm;
+        padding: 8mm 5mm 4mm;
+      }
+
+      .lineas i {
+        display: block;
+        border-bottom: 0.4mm dotted var(--marino);
+      }
+
+      .etiquetas {
+        display: grid;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        gap: 4mm;
+      }
+
+      .etiquetas .corte {
+        padding: 2mm;
+      }
+
+      .etiqueta {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 26mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        padding: 3mm 4mm;
+        border: 0.7mm solid var(--c);
+        border-radius: 4mm;
+        background: var(--t);
+      }
+
+      .etiqueta img {
+        width: 26mm;
+        height: 26mm;
+        padding: 1mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .etiqueta b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 20pt;
+        line-height: 1.05;
+      }
+
+      .etiqueta span {
+        display: block;
+        margin-top: 1mm;
+        font-size: 11pt;
+        line-height: 1.25;
+      }
+
+      .nota-corte {
+        margin: 2.4mm 0 0;
+        text-align: center;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      /* ---------- Repuestos ---------- */
+      .repuestos {
+        width: 100%;
+        margin: 0 0 4mm;
+        border-collapse: separate;
+        border-spacing: 0 2mm;
+        font-size: 12.5pt;
+        line-height: 1.3;
+      }
+
+      .repuestos th {
+        padding: 1.4mm 2.6mm;
+        background: none;
+        color: var(--suave);
+        font-size: 11pt;
+        font-weight: 700;
+        border: 0;
+      }
+
+      .repuestos td {
+        padding: 2.4mm 2.6mm;
+        border: 0;
+        background: var(--crema);
+        vertical-align: middle;
+      }
+
+      .repuestos td:first-child {
+        width: 52mm;
+        border-radius: 3mm 0 0 3mm;
+        font-weight: 700;
+      }
+
+      .repuestos td:last-child {
+        border-radius: 0 3mm 3mm 0;
+      }
+
+      .repuestos .con-picto {
+        display: flex;
+        align-items: center;
+        gap: 2.4mm;
+      }
+
+      .repuestos img {
+        flex: none;
+        width: 13mm;
+        height: 13mm;
+        padding: 0.6mm;
+        border-radius: 2mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .kit {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        gap: 4mm;
+        align-items: start;
+        padding: 3.4mm 4mm;
+        border: 0.6mm solid var(--verde);
+        border-radius: 3.5mm;
+        background: var(--verde-tinte);
+        break-inside: avoid;
+      }
+
+      .kit img {
+        width: 22mm;
+        height: 22mm;
+        padding: 1mm;
+        border-radius: 2.5mm;
+        background: #fff;
+        object-fit: contain;
+      }
+
+      .kit h2 {
+        margin: 0 0 1.4mm;
+        font-size: 15pt;
+      }
+
+      .kit ul {
+        margin: 0;
+      }
+
+      /* ---------- Fuentes ---------- */
+      .fuentes {
+        font-size: 11pt;
+        line-height: 1.38;
+      }
+
+      .fuentes h2 {
+        font-size: 14pt;
+        margin: 4mm 0 1.6mm;
+      }
+
+      .fuentes ol {
+        margin: 0 0 2mm;
+        padding-left: 8mm;
+      }
+
+      .fuentes li {
+        margin: 0 0 1.4mm;
+      }
+
+      .fuentes .para {
+        color: var(--suave);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -70mm; top: 122mm; background: var(--verde-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -32mm; top: 222mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 26mm; height: 26mm; left: 124mm; top: 128mm; background: var(--azul-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Para familias · En lectura fácil · Con pictogramas</p>
+        <h1 class="portada__titulo">La agenda que no acaba en un cajón</h1>
+        <p class="portada__subtitulo">
+          Un plan de 4 semanas para que la agenda visual se use cada día y dure. Con hoja de seguimiento, tarjetas «¿y si…?»
+          y lista de repuestos.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena" aria-hidden="true">
+        <div class="escena__fila">
+          <div class="tira">
+            <div class="vacia"></div>
+            <figure><img src="pictogramas/28667.png" alt="" /><figcaption>Desayuno</figcaption></figure>
+            <figure><img src="pictogramas/32446.png" alt="" /><figcaption>Al cole</figcaption></figure>
+            <figure><img src="pictogramas/6942.png" alt="" /><figcaption>A dormir</figcaption></figure>
+          </div>
+          <div class="sobre">
+            <div class="sobre__dentro"><img src="pictogramas/31857.png" alt="" /><span>Me despierto</span></div>
+            <div class="sobre__boca">¡Terminado!</div>
+          </div>
+        </div>
+        <div class="semanas">
+          <span class="c-verde"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="#127055" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5" /></svg
+            >Semana 1</span
+          >
+          <span class="c-azul"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="#2b6cd5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5" /></svg
+            >Semana 2</span
+          >
+          <span class="c-morado"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="#7a3fa5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5" /></svg
+            >Semana 3</span
+          >
+          <span class="c-naranja"
+            ><svg viewBox="0 0 24 24" fill="none" stroke="#9a5200" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12.5l5 5L20 6.5" /></svg
+            >Semana 4</span
+          >
+        </div>
+      </div>
+      <div class="pegatina" aria-hidden="true"><div>Un plan de<b>4</b>semanas</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         POR QUÉ ACABA EN UN CAJÓN
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="cabecera c-coral">
+        <div class="marco"><img src="pictogramas/6070.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Empezamos</p>
+          <h1>¿Por qué acaba en un cajón?</h1>
+        </div>
+      </div>
+      <p class="entrada">
+        Muchas familias preparan una agenda visual con ilusión. A las pocas semanas, la agenda acaba en un cajón. No es culpa
+        vuestra: pasa por cosas que tienen arreglo.
+      </p>
+
+      <div class="rotulos" aria-hidden="true"><span>Lo que pasa</span><span></span><span>Lo que funciona</span></div>
+      <ul class="motivos">
+        <li>
+          <span class="malo">Es muy larga desde el primer día.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+          <span class="bueno">Empezar con 3 momentos del día.</span>
+        </li>
+        <li>
+          <span class="malo">Solo la mira la persona adulta.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+          <span class="bueno">El peque mueve las tarjetas.</span>
+        </li>
+        <li>
+          <span class="malo">Está lejos, donde nadie pasa.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+          <span class="bueno">Colgarla a la altura de sus ojos, donde pasan las cosas.</span>
+        </li>
+        <li>
+          <span class="malo">Se rompe una pieza y no hay otra.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+          <span class="bueno">Tener un sobre de repuestos.</span>
+        </li>
+        <li>
+          <span class="malo">Cada persona la usa a su manera.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+          <span class="bueno">Toda la familia la usa igual.</span>
+        </li>
+        <li>
+          <span class="malo">Solo se usa cuando hay problemas.</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1e2b55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+          <span class="bueno">Usarla cada día, también en los ratos tranquilos.</span>
+        </li>
+      </ul>
+
+      <h2>El plan, de un vistazo</h2>
+      <div class="plan">
+        <div class="c-verde"><img src="pictogramas/31857.png" alt="" /><b>Semana 1</b><span>Tres momentos</span></div>
+        <div class="c-azul"><img src="pictogramas/5898.png" alt="" /><b>Semana 2</b><span>La rutina entera</span></div>
+        <div class="c-morado"><img src="pictogramas/36914.png" alt="" /><b>Semana 3</b><span>Menos ayuda</span></div>
+        <div class="c-naranja"><img src="pictogramas/6998.png" alt="" /><b>Semana 4</b><span>Revisar y decidir</span></div>
+      </div>
+      <p class="frase-grande">El secreto está en empezar pequeño y en usarla cada día.</p>
+
+      <p class="de-donde">
+        De dónde sale: las agendas visuales funcionan con peques con autismo (Knight, Sartini y Spriggs, 2015). Las familias
+        que dejan los apoyos con pictogramas cuentan que eran trabajo de más y que el peque no los usaba. Ayuda meterlos en las
+        rutinas del día (Moorcroft, Scarinci y Meyer, 2021).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         ANTES DE EMPEZAR
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="cabecera c-verde">
+        <div class="marco"><img src="pictogramas/5898.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Preparamos</p>
+          <h1>Antes de empezar</h1>
+        </div>
+      </div>
+      <p class="entrada">Marcad cada casilla cuando lo tengáis listo.</p>
+      <ul class="casillas">
+        <li>
+          <b>La agenda.</b> Sirven las «Rutinas visuales para casa» o la «Agenda visual con pictogramas». Las dos son gratis en
+          <span class="url">ideducando.es</span>.
+        </li>
+        <li><b>Tres momentos del día</b> que pasen siempre. Por ejemplo: levantarse, comer y dormir.</li>
+        <li><b>El sitio.</b> A la altura de sus ojos y cerca de donde pasa la rutina. Siempre en el mismo sitio.</li>
+        <li><b>Dos sobres:</b> «¡Terminado!» y «Repuestos». Las etiquetas están en la página 9.</li>
+        <li><b>Toda la familia, de acuerdo.</b> Contad el plan a quien cuida al peque: abuelos, canguro y hermanos mayores.</li>
+        <li><b>La hoja de seguimiento</b> de la página 7, colgada cerca y con un lápiz al lado.</li>
+      </ul>
+
+      <h2>Cada vez que uséis la agenda</h2>
+      <ol class="pasos-uso">
+        <li><img src="pictogramas/6612.png" alt="" />Señala la tarjeta y di una frase corta: «Ahora, desayunar».</li>
+        <li><img src="pictogramas/28667.png" alt="" />Haced la actividad.</li>
+        <li><img src="pictogramas/28429.png" alt="" />Al acabar, el peque pasa la tarjeta a «¡Terminado!».</li>
+        <li><img src="pictogramas/4563.png" alt="" />Felicítale: «¡Lo has hecho tú!».</li>
+      </ol>
+
+      <div class="truco">
+        <img src="pictogramas/2474.png" alt="" />
+        <p style="margin: 0">
+          <b>Truco:</b> mientras la usáis, hablad poco. Así el peque aprende a mirar la agenda para saber qué toca.
+        </p>
+      </div>
+
+      <p class="de-donde">
+        De dónde sale: los pasos siguen la guía de apoyos visuales de AFIRM, de la Universidad de Carolina del Norte (2024), y el
+        método de McClannahan y Krantz (2010), que pide pocas palabras para que el peque no dependa de ellas.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         SEMANAS 1 Y 2
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="semana c-verde">
+        <div class="semana__cabeza">
+          <div class="semana__numero" aria-hidden="true">1</div>
+          <div>
+            <p class="semana__etiqueta">Semana 1</p>
+            <h2>Tres momentos</h2>
+            <p>Usamos la agenda 3 veces al día, todos los días.</p>
+          </div>
+          <img src="pictogramas/31857.png" alt="" />
+        </div>
+        <div class="semana__cuerpo">
+          <ol class="pasos">
+            <li>Poned solo las tarjetas de esos 3 momentos. Las demás, en el sobre.</li>
+            <li>Antes de cada momento, id juntos a la agenda.</li>
+            <li>Si no sabe qué hacer, ponte detrás y guía su mano hasta la tarjeta, sin hablar.</li>
+            <li>Al terminar, que pase la tarjeta a «¡Terminado!».</li>
+            <li>Cada noche, marcad la hoja de seguimiento.</li>
+          </ol>
+          <div class="truco">
+            <img src="pictogramas/23392.png" alt="" />
+            <p style="margin: 0"><b>Truco:</b> que uno de los 3 momentos sea algo que le guste. Así la agenda anuncia cosas buenas.</p>
+          </div>
+          <p class="siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#127055" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+            Pasad a la semana 2 si la habéis usado 5 días o más.
+          </p>
+        </div>
+      </div>
+
+      <div class="semana c-azul">
+        <div class="semana__cabeza">
+          <div class="semana__numero" aria-hidden="true">2</div>
+          <div>
+            <p class="semana__etiqueta">Semana 2</p>
+            <h2>La rutina entera</h2>
+            <p>Seguimos una rutina completa con la agenda.</p>
+          </div>
+          <img src="pictogramas/5898.png" alt="" />
+        </div>
+        <div class="semana__cuerpo">
+          <ol class="pasos">
+            <li>Elegid una rutina. Por ejemplo, la de la mañana.</li>
+            <li>Empezad con 4 tarjetas. Si va bien, pasad a 6.</li>
+            <li>Al empezar, mirad la agenda juntos: «Primero esto y después esto».</li>
+            <li>Usad siempre las mismas tarjetas, en el mismo orden.</li>
+            <li>Seguid también con los 3 momentos de la semana 1.</li>
+          </ol>
+          <div class="truco">
+            <img src="pictogramas/6946.png" alt="" />
+            <p style="margin: 0">
+              <b>Truco:</b> si no entiende una tarjeta, cambiadla por una foto de vuestra casa. Por ejemplo, de su cepillo de
+              dientes.
+            </p>
+          </div>
+          <p class="siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2b6cd5" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 5.5l6.5 6.5-6.5 6.5" /></svg>
+            Pasad a la semana 3 si sigue la rutina casi todos los días, aunque necesite ayuda.
+          </p>
+        </div>
+      </div>
+      <p class="de-donde">
+        Si una semana no sale, repetidla. Cada peque tiene su ritmo. De dónde sale: las agendas que funcionan empiezan por pocas
+        tarjetas y crecen poco a poco (McClannahan y Krantz, 2010; Knight, Sartini y Spriggs, 2015).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         SEMANAS 3 Y 4
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="semana c-morado">
+        <div class="semana__cabeza">
+          <div class="semana__numero" aria-hidden="true">3</div>
+          <div>
+            <p class="semana__etiqueta">Semana 3</p>
+            <h2>Menos ayuda</h2>
+            <p>Ayudamos un poco menos cada día.</p>
+          </div>
+          <img src="pictogramas/36914.png" alt="" />
+        </div>
+        <div class="semana__cuerpo">
+          <ol class="pasos">
+            <li>Antes de ayudar, espera 5 segundos. Cuenta en silencio.</li>
+            <li>
+              Sube por la escalera de ayudas: cada escalón es un poco menos de ayuda. Cuando le salga bien 3 días seguidos, sube al siguiente.
+            </li>
+          </ol>
+          <div class="escalera" aria-label="Escalera de ayudas, de más ayuda a menos">
+            <div><b>Escalón 1</b>Guío su mano.</div>
+            <div><b>Escalón 2</b>Le toco el brazo.</div>
+            <div><b>Escalón 3</b>Señalo la agenda.</div>
+            <div><b>Escalón 4</b>Solo espero. ¡Lo hace solo!</div>
+          </div>
+          <div class="escalera__rotulos" aria-hidden="true"><span>Más ayuda</span><span>Menos ayuda</span></div>
+          <ol class="pasos" start="3" style="counter-reset: paso 2">
+            <li>Si se atasca, vuelve al escalón de antes. Es normal.</li>
+            <li>Cuando lo haga sin ayuda, celébralo y pinta la estrella en la hoja.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="semana c-naranja">
+        <div class="semana__cabeza">
+          <div class="semana__numero" aria-hidden="true">4</div>
+          <div>
+            <p class="semana__etiqueta">Semana 4</p>
+            <h2>Revisar y decidir</h2>
+            <p>Miramos cómo ha ido y elegimos el siguiente paso.</p>
+          </div>
+          <img src="pictogramas/6998.png" alt="" />
+        </div>
+        <div class="semana__cuerpo">
+          <ol class="pasos">
+            <li>Mirad juntos la hoja de seguimiento. Contad los círculos y las estrellas.</li>
+            <li>Hablad de 2 cosas: qué ha funcionado y qué cambiáis.</li>
+            <li>Elegid el siguiente paso:</li>
+          </ol>
+          <ul class="opciones">
+            <li>Seguimos igual otro mes.</li>
+            <li>Añadimos otra rutina.</li>
+            <li>Ponemos más tarjetas.</li>
+            <li>Pedimos ayuda al cole.</li>
+          </ul>
+          <div class="truco">
+            <img src="pictogramas/32446.png" alt="" />
+            <p style="margin: 0">
+              <b>Truco:</b> contad al cole lo que hacéis en casa. Si en casa y en clase usáis las mismas tarjetas, mejor.
+            </p>
+          </div>
+        </div>
+      </div>
+      <p class="de-donde">
+        De dónde sale: esperar unos segundos antes de ayudar y retirar la ayuda poco a poco son prácticas con evidencia para
+        peques con autismo (Hume y otros, 2021).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         HOJA DE SEGUIMIENTO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="cabecera c-azul">
+        <div class="marco"><img src="pictogramas/10312.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Para colgar junto a la agenda</p>
+          <h1>Hoja de seguimiento</h1>
+        </div>
+      </div>
+      <div class="leyenda">
+        <span
+          ><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1fa67a" stroke="#1e2b55" stroke-width="1.6" /></svg>Pinta
+          el círculo si hoy habéis usado la agenda.</span
+        >
+        <span
+          ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.3 6.8.7-5.1 4.6 1.4 6.8L12 17.2l-6 3.4 1.4-6.8-5.1-4.6 6.8-.7z" fill="#f6c12e" stroke="#1e2b55" stroke-width="1.4" stroke-linejoin="round" /></svg>Pinta
+          la estrella si ha pasado una tarjeta sin ayuda.</span
+        >
+      </div>
+      <div class="registro" id="registro"></div>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS «¿Y SI…?» (1 A 4)
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="rejilla">
+        <div class="corte">
+          <article class="tarjeta c-coral">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/6156.png" alt="" />
+              <div><small>¿Y si…?</small><h2>¿Y si no la quiere usar?</h2></div>
+            </div>
+            <ul>
+              <li>Que la última tarjeta sea algo que le guste.</li>
+              <li>Que sea él o ella quien pase las tarjetas a «¡Terminado!».</li>
+              <li>Usadla vosotros también, delante del peque.</li>
+              <li>Si no entiende un pictograma, poned una foto.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="corte">
+          <article class="tarjeta c-azul">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/6946.png" alt="" />
+              <div><small>¿Y si…?</small><h2>¿Y si se pierden piezas?</h2></div>
+            </div>
+            <ul>
+              <li>Guardad las tarjetas que no uséis en el sobre «Repuestos».</li>
+              <li>Imprimid 2 veces las tarjetas que más usáis.</li>
+              <li>Si falta una, dibujadla en una tarjeta en blanco mientras imprimís otra.</li>
+              <li>Por la noche, contad juntos las tarjetas.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="corte">
+          <article class="tarjeta c-morado">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/8053.png" alt="" />
+              <div><small>¿Y si…?</small><h2>¿Y si hay un día distinto?</h2></div>
+            </div>
+            <ul>
+              <li>Avisad antes, con la agenda delante.</li>
+              <li>Quitad la tarjeta que ya no toca y poned la nueva en su sitio.</li>
+              <li>Mantened igual todo lo que podáis, como la hora de dormir.</li>
+              <li>Para el médico o un cumpleaños, ayuda una historia social.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="corte">
+          <article class="tarjeta c-naranja">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/2245.png" alt="" />
+              <div><small>¿Y si…?</small><h2>¿Y si ya no la mira?</h2></div>
+            </div>
+            <ul>
+              <li>Puede ser buena señal: quizá ya se sabe la rutina.</li>
+              <li>Dejadla colgada igual, unas semanas más.</li>
+              <li>Probad con una rutina nueva o con más tarjetas.</li>
+              <li>Dadle un papel: que prepare la agenda de mañana con vosotros.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+      <p class="nota-corte">Recorta por la línea de puntos. Haz el agujero en el círculo de cada tarjeta y únelas con la anilla.</p>
+    </section>
+
+    <!-- ======================================================================
+         TARJETAS «¿Y SI…?» (5 Y 6), TARJETA EN BLANCO Y ETIQUETAS
+         ====================================================================== -->
+    <section class="hoja-tarjetas">
+      <div class="rejilla">
+        <div class="corte">
+          <article class="tarjeta c-coral">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/35539.png" alt="" />
+              <div><small>¿Y si…?</small><h2>¿Y si se enfada cuando toca algo que no le gusta?</h2></div>
+            </div>
+            <ul>
+              <li>Poned justo después algo que le guste: primero baño, después cuento.</li>
+              <li>Avisad 5 minutos antes de que acabe lo que le gusta. Un reloj de arena ayuda.</li>
+              <li>No quitéis tarjetas como castigo.</li>
+              <li>Esperad a que esté tranquilo o tranquila y volved a la agenda.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="corte">
+          <article class="tarjeta c-verde">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/6876.png" alt="" />
+              <div><small>¿Y si…?</small><h2>¿Y si estamos fuera de casa?</h2></div>
+            </div>
+            <ul>
+              <li>Haced una tira pequeña con 3 tarjetas y llevadla en la mochila.</li>
+              <li>Dejad una copia en casa de los abuelos.</li>
+              <li>Explicad cómo se usa: con 2 minutos basta.</li>
+              <li>Usad las mismas tarjetas en todas las casas.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="corte">
+          <article class="tarjeta c-amarillo">
+            <span class="agujero" aria-hidden="true"></span>
+            <div class="tarjeta__cabeza">
+              <img src="pictogramas/38796.png" alt="" />
+              <div><small>Nuestro truco</small><h2>¿Y si…</h2></div>
+            </div>
+            <div class="lineas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </article>
+        </div>
+        <div class="etiquetas">
+          <div class="corte">
+            <div class="etiqueta c-verde">
+              <img src="pictogramas/28429.png" alt="" />
+              <div><b>¡Terminado!</b><span>Aquí van las tarjetas de lo que ya hemos hecho.</span></div>
+            </div>
+          </div>
+          <div class="corte">
+            <div class="etiqueta c-azul">
+              <img src="pictogramas/10325.png" alt="" />
+              <div><b>Repuestos</b><span>Tarjetas de más, velcro y masilla.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="nota-corte">Las etiquetas se pegan en los sobres con pegamento de barra. No hace falta plastificarlas.</p>
+    </section>
+
+    <!-- ======================================================================
+         LO QUE MÁS SE ROMPE Y SU REPUESTO
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="cabecera c-verde">
+        <div class="marco"><img src="pictogramas/6910.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Para que dure</p>
+          <h1>Lo que más se rompe y su arreglo</h1>
+        </div>
+      </div>
+      <table class="repuestos">
+        <thead>
+          <tr>
+            <th>Lo que pasa</th>
+            <th>Qué hacer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="con-picto"><img src="pictogramas/39739.png" alt="" />El velcro se despega.</span></td>
+            <td>Limpia la zona con un paño seco. Pega velcro nuevo y apriétalo un rato con el dedo. Rugoso en la agenda y suave en la tarjeta.</td>
+          </tr>
+          <tr>
+            <td><span class="con-picto"><img src="pictogramas/8672.png" alt="" />La tarjeta se dobla o se pela.</span></td>
+            <td>Plastifícala con funda de 125 micras y deja 3 mm de plástico alrededor. Redondea las esquinas.</td>
+          </tr>
+          <tr>
+            <td><span class="con-picto"><img src="pictogramas/6946.png" alt="" />Se pierde una tarjeta.</span></td>
+            <td>Saca su copia del sobre «Repuestos». Si no hay, dibújala en una tarjeta en blanco.</td>
+          </tr>
+          <tr>
+            <td><span class="con-picto"><img src="pictogramas/5898.png" alt="" />La agenda se cae.</span></td>
+            <td>Pon masilla nueva: 4 bolitas, en una pared lisa y limpia.</td>
+          </tr>
+          <tr>
+            <td><span class="con-picto"><img src="pictogramas/8053.png" alt="" />Cambia la rutina.</span></td>
+            <td>Haz la tarjeta nueva con una foto o un dibujo. Guarda la vieja en el sobre, por si vuelve.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="kit">
+        <img src="pictogramas/10325.png" alt="" />
+        <div>
+          <h2>Qué guardar en el sobre «Repuestos»</h2>
+          <ul class="puntos c-verde">
+            <li>10 círculos de velcro suave y 10 rugosos, de 2 cm.</li>
+            <li>Una copia de las 6 tarjetas que más usáis.</li>
+            <li>2 tarjetas en blanco y un rotulador.</li>
+            <li>4 bolitas de masilla.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="caja caja--coral" style="margin-top: 4mm">
+        <p style="margin: 0">
+          <b>Cuidado:</b> las tarjetas y el velcro son piezas pequeñas. Guardadlos lejos de quien todavía se lleva cosas a la
+          boca.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         DE DÓNDE SALE
+         ====================================================================== -->
+    <section class="fuentes">
+      <div class="cabecera c-morado">
+        <div class="marco"><img src="pictogramas/38796.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Para quien quiera saber más</p>
+          <h1>De dónde sale</h1>
+        </div>
+      </div>
+      <p>
+        Esta guía no sustituye a los profesionales que acompañan a vuestro peque. Si tenéis dudas, preguntad en el cole o en
+        vuestro centro de atención temprana.
+      </p>
+      <h2>Las agendas visuales y cómo enseñarlas</h2>
+      <ol>
+        <li>
+          Knight, V., Sartini, E. y Spriggs, A. D. (2015). Evaluating visual activity schedules as evidence-based practice for
+          individuals with autism spectrum disorders. <i>Journal of Autism and Developmental Disorders</i>, 45(1), 157-178.
+          <span class="url">doi.org/10.1007/s10803-014-2201-z</span>. <span class="para">Las agendas visuales, práctica con evidencia.</span>
+        </li>
+        <li>
+          Hume, K. y otros (2021). Evidence-based practices for children, youth, and young adults with autism: Third generation
+          review. <i>Journal of Autism and Developmental Disorders</i>, 51(11), 4013-4032.
+          <span class="url">doi.org/10.1007/s10803-020-04844-2</span>. <span class="para">Apoyos visuales, ayudas y espera antes de ayudar.</span>
+        </li>
+        <li>
+          Sam, A. y AFIRM Team (2024). <i>Visual Supports</i>, con su guía para familias. Universidad de Carolina del Norte en
+          Chapel Hill. <span class="url">afirm.fpg.unc.edu</span>. <span class="para">Cómo preparar, enseñar y revisar un apoyo visual.</span>
+        </li>
+        <li>
+          McClannahan, L. E. y Krantz, P. J. (2010). <i>Activity Schedules for Children with Autism: Teaching Independent
+          Behavior</i> (2.ª ed.). Woodbine House. <span class="para">Empezar con pocas tarjetas, guiar desde detrás y retirar la ayuda.</span>
+        </li>
+        <li>
+          Grey, I., Healy, O., Leader, G. y Hayes, D. (2009). Using a Time Timer to increase appropriate waiting behavior in a
+          child with developmental disabilities. <i>Research in Developmental Disabilities</i>, 30(2), 359-366.
+          <span class="url">doi.org/10.1016/j.ridd.2008.07.001</span>. <span class="para">Un reloj visible ayuda a esperar.</span>
+        </li>
+      </ol>
+      <h2>Por qué las familias dejan los apoyos</h2>
+      <ol start="6">
+        <li>
+          Moorcroft, A., Scarinci, N. y Meyer, C. (2021). «I've had a love-hate, I mean mostly hate relationship with these PODD
+          books»: parent perceptions of how they and their child contributed to AAC rejection and abandonment.
+          <i>Disability and Rehabilitation: Assistive Technology</i>, 16(1), 72-82.
+          <span class="url">doi.org/10.1080/17483107.2019.1632944</span>.
+        </li>
+        <li>
+          Moorcroft, A., Scarinci, N. y Meyer, C. (2020). How do external stakeholders contribute to parent rejection and the
+          abandonment of AAC systems? <i>International Journal of Language &amp; Communication Disorders</i>, 55(1), 59-69.
+          <span class="url">doi.org/10.1111/1460-6984.12502</span>. <span class="para">La familia necesita compañía al empezar.</span>
+        </li>
+      </ol>
+      <h2>Cómo está escrita</h2>
+      <ol start="8">
+        <li>UNE 153101:2018 EX. Lectura fácil. Pautas y recomendaciones para la elaboración de documentos.</li>
+        <li>
+          Gortázar Díaz, M. (s. f.). <i>Guía Apoyos Visuales</i>. Asociación Autismo Sevilla. Centro de Recursos Online de la
+          Junta de Castilla y León: <span class="url">educa.jcyl.es/crol</span>.
+        </li>
+      </ol>
+      <p class="creditos">
+        Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por Sergio Palao para
+        ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA. Esta guía es de IdEducando y
+        tiene la misma licencia, CC BY-NC-SA 4.0: puedes compartirla y adaptarla citándonos, sin venderla y con la misma
+        licencia. Es gratis y lo será siempre.
+      </p>
+    </section>
+
+    <script>
+      // Hoja de seguimiento: 4 semanas × 7 días, cada día con su círculo y su estrella.
+      const SEMANAS = [
+        ['verde', 'Semana 1', 'Tres momentos'],
+        ['azul', 'Semana 2', 'La rutina entera'],
+        ['morado', 'Semana 3', 'Menos ayuda'],
+        ['naranja', 'Semana 4', 'Revisar y decidir'],
+      ];
+      const DIAS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+      const circulo =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#1e2b55" stroke-width="1.6" /></svg>';
+      const estrella =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2l2.9 6.3 6.8.7-5.1 4.6 1.4 6.8L12 17.2l-6 3.4 1.4-6.8-5.1-4.6 6.8-.7z" fill="#fff" stroke="#1e2b55" stroke-width="1.4" stroke-linejoin="round" /></svg>';
+      document.getElementById('registro').innerHTML = SEMANAS.map(
+        ([color, nombre, meta]) => `
+        <div class="registro__semana c-${color}">
+          <div class="registro__nombre"><b>${nombre}</b><span>${meta}</span></div>
+          ${DIAS.map((d) => `<div class="dia"><b>${d}</b>${circulo}${estrella}</div>`).join('')}
+          <p class="registro__nota">La semana que viene cambiamos:<i></i></p>
+        </div>`,
+      ).join('');
+    </script>
+  </body>
+</html>

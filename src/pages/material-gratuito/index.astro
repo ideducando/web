@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Intro from '../../components/Intro.astro';
 import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
 import FiltrosCatalogo from '../../components/FiltrosCatalogo.astro';
+import ProponMaterial from '../../components/ProponMaterial.astro';
 import { DIMENSIONES } from '../../data/taxonomias';
 import { materialesOrdenados, recuento } from '../../lib/materiales';
 import { ruta } from '../../lib/rutas';
@@ -45,7 +46,9 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
     {
       atajos.map((a) => (
         <div class="atajos__fila">
-          <h3 class="atajos__titulo">{a.nombre}</h3>
+          <h3 class="atajos__titulo">
+            <a href={ruta(`/material-gratuito/${a.dimension}/`)}>{a.nombre}</a>
+          </h3>
           <ul class="etiquetas">
             {a.opciones.map((op) => (
               <li>
@@ -77,6 +80,10 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
       </div>
     </div>
   </section>
+
+  <div class="contenedor catalogo__propon">
+    <ProponMaterial />
+  </div>
 </Base>
 
 <style>
@@ -106,6 +113,10 @@ const atajos = (Object.keys(DIMENSIONES) as (keyof typeof DIMENSIONES)[]).map((d
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--texto-suave);
+  }
+
+  .catalogo__propon {
+    margin-block: 2.5rem 3rem;
   }
 
   .catalogo {

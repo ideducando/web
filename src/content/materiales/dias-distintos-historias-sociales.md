@@ -2,7 +2,7 @@
 titulo: "Días distintos: historias sociales para anticipar los cambios en el cole"
 resumen: "Seis historias con pictogramas para preparar un simulacro, una sustitución, una excursión, una fiesta, un recreo en clase o un cambio de horario. Con plantilla, tarjetas para la agenda y guía."
 seccion: aula
-tipo: cuento
+tipo: historia-social
 etapas: [infantil, primaria]
 necesidades: [tea, conducta, discapacidad-intelectual, tdl, toda-la-clase]
 edades: "De 3 a 10 años"

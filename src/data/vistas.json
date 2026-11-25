@@ -1,4 +1,41 @@
 {
+  "agenda-que-no-acaba-en-un-cajon": {
+    "total": 11,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Un plan"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Semana 1"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para colgar junto a la agenda"
+      },
+      {
+        "pagina": 8,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": ""
+      }
+    ]
+  },
   "agenda-visual-pictogramas": {
     "total": 17,
     "fotos": [
@@ -1491,7 +1528,7 @@
         "alto": 1000,
         "mini_ancho": 113,
         "mini_alto": 160,
-        "titulo": "Misiones de"
+        "titulo": "Plantillas ennivel"
       },
       {
         "pagina": 4,
@@ -1532,6 +1569,51 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Registro semanal · una hoja por semana"
+      }
+    ]
+  },
+  "pack-audicion-lenguaje": {
+    "total": 21,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "6 lotos"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Tabla orientativa"
+      },
+      {
+        "pagina": 6,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro de articulación · 1 de 2"
+      },
+      {
+        "pagina": 11,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Loto para recortar · 1 de 6"
+      },
+      {
+        "pagina": 17,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Ruletas para recortar · 1 de 3"
       }
     ]
   },
@@ -1696,6 +1778,51 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Guía de uso"
+      }
+    ]
+  },
+  "registro-observacion-neae": {
+    "total": 6,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Plantilla · alumnado con necesidad específica de apoyo educativo"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Observación por áreas · 1 de 2"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Observación por áreas · 2 de 2"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Diario de momentos"
+      },
+      {
+        "pagina": 5,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Registro trimestral"
       }
     ]
   },
@@ -1998,6 +2125,43 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "Historia social · para leer antes del recreo"
+      }
+    ]
+  },
+  "rutinas-visuales-casa": {
+    "total": 25,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "6 rutinas"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Cómo funcionan las tiras"
+      },
+      {
+        "pagina": 6,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Antes de imprimir"
+      },
+      {
+        "pagina": 7,
+        "ancho": 1000,
+        "alto": 707,
+        "mini_ancho": 160,
+        "mini_alto": 113,
+        "titulo": "Me levanto y me visto: tira corta y tarjetas"
       }
     ]
   },
@@ -2395,6 +2559,51 @@
         "mini_ancho": 113,
         "mini_alto": 160,
         "titulo": "abc Letras"
+      }
+    ]
+  },
+  "tartamudez-que-hacer-en-casa": {
+    "total": 9,
+    "fotos": [
+      {
+        "pagina": 1,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Guía para familias · lectura fácil"
+      },
+      {
+        "pagina": 2,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué es la tartamudez"
+      },
+      {
+        "pagina": 3,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Qué ayuda en casa"
+      },
+      {
+        "pagina": 4,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Mejor evitarlo"
+      },
+      {
+        "pagina": 7,
+        "ancho": 707,
+        "alto": 1000,
+        "mini_ancho": 113,
+        "mini_alto": 160,
+        "titulo": "Para la tutora o el tutor"
       }
     ]
   },

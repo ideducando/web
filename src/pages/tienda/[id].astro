@@ -28,6 +28,33 @@ const { producto, productos } = Astro.props;
 const d = producto.data;
 const { Content } = await render(producto);
 const fotos = fotosDe(producto);
+
+// Filas de la tabla fija (B-026): completa en lo que lleva piezas y corta en lo que es de papel.
+// Las páginas y los derechos ya tienen su fila en la ficha técnica.
+const PENDIENTE = 'Por confirmar antes de vender';
+const t = d.tabla;
+const filasTabla: { etiqueta: string; texto: string; enlace?: string }[] = !t
+  ? []
+  : t.tipo === 'piezas'
+    ? [
+        { etiqueta: 'Medidas', texto: t.medidas },
+        { etiqueta: 'Piezas', texto: t.piezas ?? '' },
+        { etiqueta: 'Materiales', texto: t.materiales ?? '' },
+        { etiqueta: 'Edad mínima por seguridad', texto: PENDIENTE },
+        { etiqueta: 'Avisos de seguridad', texto: PENDIENTE },
+        { etiqueta: 'Fabricante', texto: t.fabricante ?? PENDIENTE },
+        {
+          etiqueta: 'Cómo montarlo',
+          texto: t.montaje ?? '',
+          enlace: t.montaje_material ? ruta(`/material-gratuito/${t.montaje_material}/#como-montarlo`) : undefined,
+        },
+      ]
+    : [
+        { etiqueta: 'Formato', texto: t.formato ?? '' },
+        { etiqueta: 'Medidas', texto: t.medidas },
+        { etiqueta: 'Papel', texto: t.papel ?? '' },
+        { etiqueta: 'Encuadernación', texto: t.encuadernacion ?? '' },
+      ];
 const estado = ESTADOS_TIENDA[d.estado];
 const bloqueadas = fotos.filter((f) => f.bloqueada).length;
 const nitidas = fotos.length - bloqueadas;
@@ -166,6 +193,22 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
               <dd>{d.paginas}</dd>
             </div>
           )
+        }
+        {
+          filasTabla.map((f) => (
+            <div>
+              <dt>{f.etiqueta}</dt>
+              <dd>
+                {f.texto}
+                {f.enlace && (
+                  <>
+                    {' '}
+                    <a href={f.enlace}>Míralo paso a paso</a>
+                  </>
+                )}
+              </dd>
+            </div>
+          ))
         }
         <div>
           <dt>Estado</dt>

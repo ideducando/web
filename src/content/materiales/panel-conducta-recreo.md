@@ -2,7 +2,7 @@
 titulo: "¡Lo consigo!: panel de conducta para antes, durante y después del recreo"
 resumen: "Un panel para trabajar de dos a cuatro conductas antes, durante y después del recreo, con hueco para la recompensa. Con tarjetas de conductas, recompensas fáciles de dar en Infantil, fichas y guía."
 seccion: aula
-tipo: apoyo-visual
+tipo: tablero
 etapas: [infantil]
 necesidades: [conducta, tdah, tea]
 edades: "De 3 a 6 años"

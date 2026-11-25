@@ -2,7 +2,7 @@
 titulo: "Rutinas de invierno en el cole"
 resumen: "Etiquetas para el perchero, cuatro secuencias con pictogramas (con el truco del abrigo), un panel del tiempo con velcro, una historia para el recreo con lluvia, el cartel de objetos perdidos y guía."
 seccion: aula
-tipo: apoyo-visual
+tipo: secuencia
 etapas: [infantil, primaria]
 necesidades: [toda-la-clase, tea, discapacidad-intelectual, discapacidad-motora]
 edades: "De 3 a 8 años"

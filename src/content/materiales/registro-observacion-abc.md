@@ -2,7 +2,7 @@
 titulo: "Registro de observación ABC: antes, conducta y después"
 resumen: "Una hoja para anotar qué pasa antes y después de una conducta que preocupa, y una tabla para encontrar patrones. Pensada para no recoger más datos de los necesarios."
 seccion: aula
-tipo: plantilla
+tipo: registro
 etapas: [infantil, primaria]
 necesidades: [conducta, tea, tdah]
 edades: "Para el docente, con alumnado de 3 a 12 años"

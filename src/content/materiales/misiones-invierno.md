@@ -2,7 +2,7 @@
 titulo: "Misiones de invierno: tarjetas de encargos para el TDAH y para toda la clase"
 resumen: "Doce misiones cortas y útiles para el aula, en tres niveles de 2, 3 o 4 pasos con pictogramas. Con tablero del día, reloj de misión, registro semanal y guía para el docente y la familia."
 seccion: aula
-tipo: apoyo-visual
+tipo: secuencia
 etapas: [infantil, primaria]
 necesidades: [tdah, toda-la-clase, conducta]
 edades: "De 4 a 10 años"

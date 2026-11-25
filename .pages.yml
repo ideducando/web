@@ -87,15 +87,19 @@ content:
         required: true
         options:
           values:
-            - { name: plantilla, label: Plantilla }
-            - { name: apoyo-visual, label: Apoyo visual }
+            - { name: tablero, label: Tableros y agendas }
+            - { name: secuencia, label: Secuencias y rutinas }
+            - { name: historia-social, label: Historias sociales }
+            - { name: cuento, label: Cuentos }
+            - { name: juego, label: Juegos }
             - { name: fichas, label: Fichas de trabajo }
-            - { name: juego, label: Juego }
-            - { name: cuento, label: Cuento adaptado }
-            - { name: guia, label: Guía }
-            - { name: lista, label: Lista de comprobación }
-            - { name: programacion, label: Programación }
-            - { name: situacion, label: Situación de aprendizaje }
+            - { name: cartel, label: Carteles y tarjetas }
+            - { name: plantilla, label: Plantillas y calendarios }
+            - { name: registro, label: Registros }
+            - { name: guia, label: Guías }
+            - { name: situacion, label: Situaciones de aprendizaje }
+            - { name: programacion, label: Programaciones }
+            - { name: lista, label: Listas de comprobación }
       - name: etapas
         label: Etapas
         type: select
@@ -321,6 +325,50 @@ content:
         type: boolean
         default: false
         description: "Márcalo si el PDF de la carpeta privada tiene unas pocas hojas de muestra y no el producto entero. La galería dirá «Hoja 3 de la muestra»."
+      - name: medidas_exactas
+        label: Con medidas exactas para montarlo
+        type: boolean
+        default: false
+        description: "Márcalo si el producto trae lo que hace falta para montarlo con cantidad y medida exactas, como los kits y los suministros. Su tarjeta lleva el sello."
+      - name: tabla
+        label: Tabla de la ficha técnica
+        type: object
+        description: "Completa en lo que lleva piezas (kits, suministros, montados y manipulativos) y corta en lo que es de papel (libros, cuadernos e historias). Nada en lo solo digital. Lo que no esté decidido: «Por confirmar». La edad mínima y los avisos de seguridad salen solos como «Por confirmar antes de vender»."
+        fields:
+          - name: tipo
+            label: Tipo de tabla
+            type: select
+            options:
+              values:
+                - { name: piezas, label: Con piezas (tabla completa) }
+                - { name: papel, label: De papel (tabla corta) }
+          - name: medidas
+            label: Medidas
+            type: string
+          - name: piezas
+            label: Piezas, con su número exacto (solo con piezas)
+            type: string
+          - name: materiales
+            label: Materiales (solo con piezas)
+            type: string
+          - name: fabricante
+            label: Fabricante (solo con piezas; si se deja vacío, «Por confirmar antes de vender»)
+            type: string
+          - name: montaje
+            label: Cómo se monta (solo con piezas)
+            type: string
+          - name: montaje_material
+            label: Material gratuito con «Cómo montarlo» (su nombre en la dirección, por ejemplo agenda-visual-semanal)
+            type: string
+          - name: formato
+            label: Formato (solo de papel)
+            type: string
+          - name: papel
+            label: Papel (solo de papel)
+            type: string
+          - name: encuadernacion
+            label: Encuadernación (solo de papel)
+            type: string
       - name: muestra
         label: Páginas de la muestra
         type: object

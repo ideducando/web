@@ -5,6 +5,13 @@ tipo: montaje
 para: [docentes, familias]
 formatos:
   - "Ya montado y enviado desde Cartagena"
+tabla:
+  tipo: piezas
+  medidas: "Las del material que elijas: van en su «Cómo montarlo»"
+  piezas: "Las del material que elijas, ya recortadas, plastificadas y con el velcro puesto"
+  materiales: "Cartulina plastificada con las esquinas redondeadas, velcro y, según el material, anillas o pinzas"
+  fabricante: "IdEducando, que lo monta en Cartagena (Región de Murcia)"
+  montaje: "Llega montado, con una tarjeta de cuidados."
 estado: en-estudio
 portada: /tienda/ya-montado/portada.svg
 portada_alt: "Ilustración: una agenda visual plastificada y cerrada con anillas, con tarjetas pegadas con velcro, junto a una caja de envío con un corazón."
@@ -16,6 +23,7 @@ incluye:
   - "Envío a casa o al cole"
 orden: 61
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

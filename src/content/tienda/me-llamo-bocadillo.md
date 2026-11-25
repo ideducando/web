@@ -7,6 +7,12 @@ edades: "De 4 a 8 años"
 formatos:
   - "Descarga en PDF, para leerlo en pantalla o imprimirlo"
   - "Libro en papel, también en Amazon"
+tabla:
+  tipo: papel
+  formato: "Cuento ilustrado apaisado: en PDF y, más adelante, en papel"
+  medidas: "En PDF, A4 apaisado (29,7 × 21 cm). En papel, por confirmar"
+  papel: "Por confirmar"
+  encuadernacion: "Por confirmar"
 estado: aprobado
 portada: /tienda/me-llamo-bocadillo/portada.webp
 portada_alt: "Portada de «Me llamo Bocadillo»: un globo de cómic sonriente, con una interrogación al lado, junto a un bocadillo de pan."
@@ -40,6 +46,7 @@ gratis: "La versión con pictogramas es gratis siempre, con el mismo texto y los
 relacionado: me-llamo-bocadillo-pictogramas
 orden: 12
 fecha: 2026-11-04
+actualizado: 2026-11-24
 borrador: false
 ---
 

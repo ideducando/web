@@ -62,6 +62,13 @@
   to = "/sitemap-index.xml"
   status = 200
 
+# El tipo «Apoyo visual» se repartió el 24/11/2026 entre «Tableros y agendas», «Secuencias y
+# rutinas» y «Carteles y tarjetas» (B-028). Quien tenga la dirección antigua llega al índice de tipos.
+[[redirects]]
+  from = "/material-gratuito/tipo/apoyo-visual/"
+  to = "/material-gratuito/tipo/"
+  status = 301
+
 # «Mi bolsa» pasó a llamarse «Mi mochila» el 20/10/2026. Quien tenga guardada la dirección
 # antigua llega a la nueva.
 [[redirects]]

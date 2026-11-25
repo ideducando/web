@@ -2,7 +2,7 @@
 titulo: "Turnos visibles: bote de turnos y tablero «ahora, después, luego»"
 resumen: "Un bote de turnos y un tablero de velcro para ver quién va ahora, después y luego. Con cartel «Espero mi turno», tarjetas «Me toca» y «He terminado», ruleta para juegos de mesa y tira para el patio."
 seccion: aula
-tipo: apoyo-visual
+tipo: tablero
 etapas: [infantil, primaria]
 necesidades: [tea, tdah, conducta, toda-la-clase]
 edades: "De 3 a 10 años"

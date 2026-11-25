@@ -7,6 +7,12 @@ edades: "De 3 a 6 años"
 formatos:
   - "Descarga en PDF, para leerlo en pantalla o imprimirlo"
   - "Libro en papel, también en Amazon"
+tabla:
+  tipo: papel
+  formato: "Cuento ilustrado apaisado: en PDF y, más adelante, en papel"
+  medidas: "En PDF, A4 apaisado (29,7 × 21 cm). En papel, por confirmar"
+  papel: "Por confirmar"
+  encuadernacion: "Por confirmar"
 estado: en-revision
 portada: /tienda/caracola-de-la-calma/portada.webp
 portada_alt: "Portada de «La caracola de la calma»: debajo del mar, Casero, un cangrejo ermitaño con caracola verde, sonríe con los ojos cerrados y una flor delante de una caracola enorme con luz dentro, donde descansa Tinta, la pulpita."
@@ -39,6 +45,7 @@ incluye:
 gratis: "La versión con pictogramas será gratis siempre, en Material gratuito."
 orden: 14
 fecha: 2026-11-08
+actualizado: 2026-11-24
 borrador: false
 ---
 

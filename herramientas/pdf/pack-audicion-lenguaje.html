@@ -1,0 +1,2954 @@
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pack de Audición y Lenguaje: sonidos, conciencia fonológica, lotos y ruletas · IdEducando</title>
+    <link rel="stylesheet" href="comun.css" />
+    <style>
+      /* Lleva pictogramas de ARASAAC: licencia CC BY-NC-SA 4.0, la del pie de comun.css (propuesta B-021).
+         Las casillas del loto miden 50 × 50 mm y sus tarjetas, 46 × 46: cada tarjeta tapa su dibujo.
+         Las ruletas miden 108 mm de lado a lado y su flecha, 66 mm: la punta sale 4 mm por el borde.
+         Las palabras de los lotos y de las ruletas están en la lista JUEGOS, al final; las del registro, en REGISTRO. */
+
+      /* La portada va sin margen y sin pie. Chromium no siempre lo aplica a la primera hoja
+         cuando lleva imágenes, y esta regla lo asegura. */
+      @page :first {
+        margin: 0;
+
+        @bottom-left {
+          content: none;
+        }
+
+        @bottom-right {
+          content: none;
+        }
+      }
+
+      /* Pie a 11 puntos, como en todo el material. */
+      @page {
+        @bottom-left {
+          font-size: 11pt;
+        }
+
+        @bottom-right {
+          font-size: 11pt;
+        }
+      }
+
+      /* Hojas de los lotos y de las ruletas: márgenes más estrechos para que quepan el tablero y sus tarjetas. */
+      @page juego {
+        margin: 11mm 12mm 16mm 12mm;
+      }
+
+      /* ---------- Un color para cada sonido ----------
+         --c: color del sonido · --t: tinte para fondos · --tx: texto sobre blanco (contraste AA) */
+      .c-azul {
+        --c: var(--azul);
+        --t: var(--azul-tinte);
+        --tx: var(--enlace);
+      }
+      .c-verde {
+        --c: var(--verde);
+        --t: var(--verde-tinte);
+        --tx: var(--verde-texto);
+      }
+      .c-naranja {
+        --c: var(--naranja);
+        --t: var(--naranja-tinte);
+        --tx: #9a5200;
+      }
+      .c-coral {
+        --c: var(--coral);
+        --t: var(--coral-tinte);
+        --tx: var(--coral-texto);
+      }
+      .c-morado {
+        --c: var(--morado);
+        --t: var(--morado-tinte);
+        --tx: var(--morado-texto);
+      }
+      .c-amarillo {
+        --c: var(--amarillo);
+        --t: var(--amarillo-tinte);
+        --tx: #7a5a00;
+      }
+
+      .hoja {
+        break-after: page;
+      }
+
+      svg {
+        display: block;
+      }
+
+      .antetitulo {
+        font-size: 11pt;
+      }
+
+      /* Las letras que se trabajan, marcadas en las palabras: color, negrita y subrayado (se ve también sin color). */
+      .diana {
+        color: var(--tx, var(--morado-texto));
+        font-weight: 700;
+        text-decoration: underline;
+        text-decoration-thickness: 0.45mm;
+        text-underline-offset: 0.6mm;
+      }
+
+      /* ---------- Cómo montarlo, a 11 puntos (como en «Rutinas visuales para casa») ---------- */
+      .montaje h1 {
+        font-size: 19pt;
+        margin-bottom: 1mm;
+      }
+
+      .montaje h2 {
+        font-size: 12.5pt;
+        margin: 2.4mm 0 1.3mm;
+      }
+
+      .montaje__intro,
+      .montaje__velcro {
+        font-size: 11pt;
+        line-height: 1.28;
+      }
+
+      .montaje__columnas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 6mm;
+        align-items: start;
+      }
+
+      .montaje__imprimir li {
+        break-inside: avoid;
+      }
+
+      .montaje__piezas {
+        gap: 1mm;
+      }
+
+      .montaje__piezas .montaje__icono {
+        width: 6.5mm;
+        height: 6.5mm;
+      }
+
+      .montaje__piezas li {
+        grid-template-columns: 6.5mm auto minmax(0, 1fr);
+        padding: 0.9mm 2mm;
+      }
+
+      .montaje__piezas li,
+      .montaje__imprimir li,
+      .montaje__pasos p,
+      .montaje__resultado,
+      .montaje__cuidados.caja {
+        font-size: 11pt;
+        line-height: 1.24;
+      }
+
+      .montaje__pasos {
+        gap: 1.1mm;
+      }
+
+      .montaje__pasos li {
+        padding: 1.2mm 2mm;
+      }
+
+      .montaje__cantidad {
+        font-size: 13pt;
+      }
+
+      .montaje__numero {
+        font-size: 11pt;
+      }
+
+      .montaje__cuidados h3 {
+        font-size: 12pt;
+      }
+
+      /* ---------- Portada ---------- */
+      .portada .circulo {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .portada__logo {
+        margin-bottom: 12mm;
+      }
+
+      .portada__titulo {
+        font-size: 48pt;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        margin-bottom: 6mm;
+      }
+
+      .portada__subtitulo {
+        font-size: 15pt;
+        line-height: 1.38;
+        max-width: 136mm;
+      }
+
+      .portada__pie {
+        position: relative;
+        z-index: 5;
+        font-size: 11pt;
+        line-height: 1.35;
+      }
+
+      .portada__pie p {
+        margin: 0;
+      }
+
+      .portada__pie p:first-child {
+        max-width: 118mm;
+      }
+
+      .portada__pie p:last-child {
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .pegatina {
+        position: absolute;
+        z-index: 6;
+        right: 17mm;
+        top: 22mm;
+        display: grid;
+        place-items: center;
+        width: 42mm;
+        height: 42mm;
+        border: 0.9mm solid var(--marino);
+        border-radius: 50%;
+        background: var(--amarillo);
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        line-height: 1.1;
+        transform: rotate(8deg);
+        box-shadow: 0 1.4mm 0 rgb(30 43 85 / 0.18);
+      }
+
+      .pegatina b {
+        display: block;
+        font-size: 19pt;
+        margin: 0.4mm 0;
+      }
+
+      /* La escena de la portada: una ruleta con su flecha y tres tarjetas de loto */
+      .escena-ruleta {
+        position: absolute;
+        z-index: 2;
+        left: 110mm;
+        top: 148mm;
+        width: 86.4mm;
+        height: 86.4mm;
+      }
+
+      .escena-ruleta__dentro {
+        position: relative;
+        width: 108mm;
+        height: 108mm;
+        zoom: 0.8;
+      }
+
+      .escena-tarjetas {
+        position: absolute;
+        z-index: 3;
+        left: 13mm;
+        top: 146mm;
+        width: 94mm;
+        height: 106mm;
+      }
+
+      .escena-tarjetas .tarjeta-loto {
+        position: absolute;
+        border-style: solid;
+        border-color: #c3cadb;
+        box-shadow: 0 1.2mm 2.6mm -0.6mm rgb(30 43 85 / 0.3);
+      }
+
+      /* ---------- Cabecera de las hojas de texto ---------- */
+      .cabecera {
+        display: grid;
+        grid-template-columns: 22mm minmax(0, 1fr);
+        gap: 5mm;
+        align-items: center;
+        margin-bottom: 3.4mm;
+      }
+
+      .cabecera .antetitulo {
+        margin-bottom: 1mm;
+      }
+
+      .cabecera h1 {
+        margin: 0;
+        font-size: 24pt;
+      }
+
+      .marco {
+        display: grid;
+        place-items: center;
+        width: 22mm;
+        height: 22mm;
+        padding: 1.4mm;
+        border: 0.6mm solid var(--c, var(--morado));
+        border-radius: 4mm;
+        background: #fff;
+      }
+
+      .marco img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .de-donde {
+        margin: 3mm 0 0;
+        padding-top: 2mm;
+        border-top: 0.4mm solid var(--linea);
+        font-size: 11pt;
+        line-height: 1.35;
+        color: var(--suave);
+      }
+
+      /* ---------- Guía para AL ---------- */
+      .guia {
+        font-size: 11.5pt;
+        line-height: 1.36;
+      }
+
+      .guia h2 {
+        font-size: 15pt;
+        margin: 3.6mm 0 1.6mm;
+      }
+
+      .guia p {
+        margin: 0 0 1.8mm;
+      }
+
+      .entrada {
+        font-size: 13pt;
+        line-height: 1.38;
+        margin: 0 0 3mm;
+      }
+
+      .orden {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 1mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: orden;
+      }
+
+      .orden li {
+        counter-increment: orden;
+        position: relative;
+        display: grid;
+        grid-template-columns: 15mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: start;
+        margin: 0;
+        padding: 3mm 3.4mm 3mm 3mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: var(--t);
+        line-height: 1.3;
+      }
+
+      .orden li::before {
+        content: counter(orden);
+        position: absolute;
+        left: -2mm;
+        top: -2mm;
+        display: grid;
+        place-items: center;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .orden img {
+        width: 15mm;
+        height: 15mm;
+        padding: 0.8mm;
+        border-radius: 2.4mm;
+        background: #fff;
+      }
+
+      .orden b {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 13.5pt;
+        line-height: 1.15;
+      }
+
+      .orden small {
+        display: block;
+        margin: 0.4mm 0 1mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        color: var(--tx);
+      }
+
+      .lista-numerada {
+        margin: 0 0 1.6mm;
+        padding: 0;
+        list-style: none;
+        counter-reset: paso;
+      }
+
+      .lista-numerada li {
+        counter-increment: paso;
+        position: relative;
+        margin: 0 0 1.4mm;
+        padding-left: 9mm;
+      }
+
+      .lista-numerada li::before {
+        content: counter(paso);
+        position: absolute;
+        left: 0;
+        top: 0.2mm;
+        display: grid;
+        place-items: center;
+        width: 6.4mm;
+        height: 6.4mm;
+        border-radius: 50%;
+        background: var(--marino);
+        color: #fff;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+      }
+
+      .dos-cajas {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 4mm;
+        margin: 0 0 1mm;
+      }
+
+      .dos-cajas > div {
+        padding: 2.8mm 3.6mm;
+        border-radius: 3.5mm;
+        line-height: 1.32;
+      }
+
+      .dos-cajas h2 {
+        margin: 0 0 1.2mm;
+        font-size: 14pt;
+      }
+
+      .dos-cajas p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Del sonido a la conversación: seis peldaños, de menos a más */
+      .peldanos {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        align-items: end;
+        gap: 1.6mm;
+        margin: 1mm 0 1.6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .peldanos li {
+        display: grid;
+        align-content: start;
+        gap: 0.6mm;
+        margin: 0;
+        padding: 1.6mm 1.8mm;
+        border: 0.5mm solid var(--morado);
+        border-bottom-width: 1.2mm;
+        border-radius: 2.6mm 2.6mm 0 0;
+        background: var(--morado-tinte);
+        font-size: 11pt;
+        line-height: 1.18;
+      }
+
+      .peldanos li:nth-child(1) {
+        height: 17mm;
+      }
+      .peldanos li:nth-child(2) {
+        height: 20mm;
+      }
+      .peldanos li:nth-child(3) {
+        height: 23mm;
+      }
+      .peldanos li:nth-child(4) {
+        height: 26mm;
+      }
+      .peldanos li:nth-child(5) {
+        height: 29mm;
+      }
+      .peldanos li:nth-child(6) {
+        height: 32mm;
+      }
+
+      .peldanos b {
+        font-family: var(--titulos);
+        font-size: 11.5pt;
+        color: var(--morado-texto);
+      }
+
+      .aviso-caja {
+        display: grid;
+        grid-template-columns: 11mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+      }
+
+      .aviso-caja svg {
+        width: 11mm;
+        height: 11mm;
+      }
+
+      .aviso-caja p {
+        margin: 0;
+      }
+
+      /* ---------- Tabla orientativa ---------- */
+      .aviso-grande {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        gap: 3.4mm;
+        align-items: center;
+        margin: 0 0 2.6mm;
+        padding: 2.4mm 4mm;
+        border: 0.6mm solid var(--coral);
+        border-radius: 3.5mm;
+        background: var(--coral-tinte);
+        font-size: 12pt;
+        line-height: 1.3;
+      }
+
+      .aviso-grande svg {
+        width: 14mm;
+        height: 14mm;
+      }
+
+      .aviso-grande p {
+        margin: 0;
+      }
+
+      .aviso-grande strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 15pt;
+        line-height: 1.15;
+      }
+
+      .explica {
+        margin: 0 0 2.4mm;
+        font-size: 11.5pt;
+        line-height: 1.36;
+      }
+
+      .edades {
+        width: 100%;
+        margin: 0 0 1.6mm;
+        border-collapse: separate;
+        border-spacing: 0 1.2mm;
+        font-size: 11.5pt;
+        line-height: 1.26;
+      }
+
+      .edades thead th {
+        padding: 0.6mm 2.4mm;
+        border: 0;
+        background: none;
+        color: var(--suave);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        vertical-align: bottom;
+      }
+
+      .edades td {
+        padding: 1.4mm 2.4mm;
+        border: 0;
+        background: var(--crema);
+        vertical-align: middle;
+      }
+
+      .edades td:first-child {
+        border-radius: 3mm 0 0 3mm;
+      }
+
+      .edades td:last-child {
+        border-radius: 0 3mm 3mm 0;
+      }
+
+      .edades .edad {
+        width: 21mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 11pt;
+        white-space: nowrap;
+      }
+
+      .edades td.edad b {
+        font-size: 18pt;
+        line-height: 1;
+      }
+
+      .edades .margen {
+        width: 17mm;
+        text-align: center;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+        white-space: nowrap;
+      }
+
+      .edades .sonidos b {
+        font-family: var(--titulos);
+      }
+
+      .edades th.linea-cabeza,
+      .edades td.linea {
+        width: 50mm;
+        padding-left: 1mm;
+        padding-right: 1mm;
+      }
+
+      /* La línea de 3 a 7 años: una raya fina en cada edad; el punto marca la edad de Bosch y la flecha sigue hacia
+         las edades mayores; la banda morada es el margen de otras fuentes. */
+      .linea__pista {
+        position: relative;
+        height: 9mm;
+        background-image: linear-gradient(#d4c3a1, #d4c3a1), linear-gradient(#d4c3a1, #d4c3a1),
+          linear-gradient(#d4c3a1, #d4c3a1), linear-gradient(#d4c3a1, #d4c3a1), linear-gradient(#d4c3a1, #d4c3a1);
+        background-size: 0.3mm 100%;
+        background-repeat: no-repeat;
+        background-position: 10% 0, 30% 0, 50% 0, 70% 0, 90% 0;
+      }
+
+      .linea__pista > * {
+        position: absolute;
+        top: 50%;
+      }
+
+      .linea__banda {
+        height: 6mm;
+        transform: translateY(-50%);
+        border: 0.4mm dashed var(--morado);
+        border-radius: 3mm;
+        background: var(--morado-tinte);
+      }
+
+      .linea__flecha {
+        right: 0;
+        height: 0;
+        border-top: 0.6mm solid var(--marino);
+      }
+
+      .linea__flecha::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: -1.55mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        border-top: 0.6mm solid var(--marino);
+        border-right: 0.6mm solid var(--marino);
+        transform: rotate(45deg);
+      }
+
+      .linea__punto {
+        width: 5mm;
+        height: 5mm;
+        margin-left: -2.5mm;
+        transform: translateY(-50%);
+        border: 0.6mm solid #fff;
+        border-radius: 50%;
+        background: var(--marino);
+        box-shadow: 0 0 0 0.4mm var(--marino);
+      }
+
+      .linea__edades {
+        display: block;
+        position: relative;
+        height: 5mm;
+      }
+
+      .linea__edades span {
+        position: absolute;
+        top: 0;
+        width: 6mm;
+        margin-left: -3mm;
+        text-align: center;
+      }
+
+      /* Leyenda de la línea, con los mismos dibujos en pequeño */
+      .leyenda-linea {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1mm 6mm;
+        margin: 0 0 2.6mm;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      .leyenda-linea > span {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+      }
+
+      .leyenda-linea .linea__punto,
+      .leyenda-linea .linea__banda {
+        position: static;
+        flex: none;
+        margin: 0;
+        transform: none;
+      }
+
+      .leyenda-linea .linea__banda {
+        width: 10mm;
+        height: 4.4mm;
+      }
+
+      .leyenda-linea .flechita {
+        position: relative;
+        flex: none;
+        width: 9mm;
+        height: 0;
+        border-top: 0.6mm solid var(--marino);
+      }
+
+      .leyenda-linea .flechita::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: -1.55mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        border-top: 0.6mm solid var(--marino);
+        border-right: 0.6mm solid var(--marino);
+        transform: rotate(45deg);
+      }
+
+      .avisos {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .avisos li {
+        position: relative;
+        margin: 0 0 1.4mm;
+        padding-left: 5.4mm;
+        font-size: 11.5pt;
+        line-height: 1.34;
+      }
+
+      .avisos li::before {
+        content: '';
+        position: absolute;
+        left: 0.4mm;
+        top: 1.9mm;
+        width: 2.4mm;
+        height: 2.4mm;
+        border-radius: 50%;
+        background: var(--amarillo);
+        box-shadow: 0 0 0 0.35mm var(--marino);
+      }
+
+      /* ---------- Registro de articulación ---------- */
+      .datos {
+        display: grid;
+        grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2.4mm 5mm;
+        margin: 0 0 2.6mm;
+      }
+
+      .dato {
+        display: flex;
+        align-items: flex-end;
+        gap: 1.6mm;
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .dato i {
+        flex: 1;
+        height: 6mm;
+        border-bottom: 0.4mm dotted var(--marino);
+      }
+
+      .dato--marcas {
+        grid-column: 1 / -1;
+        gap: 4mm;
+      }
+
+      .casilla-marca {
+        display: inline-block;
+        width: 4.4mm;
+        height: 4.4mm;
+        margin-right: 1.2mm;
+        vertical-align: -0.8mm;
+        border: 0.45mm solid var(--marino);
+        border-radius: 0.8mm;
+        background: #fff;
+      }
+
+      .codigo {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 1.6mm;
+        margin: 0 0 2.6mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .codigo li {
+        display: grid;
+        grid-template-columns: 7.4mm minmax(0, 1fr);
+        gap: 1.6mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.4mm 1.8mm;
+        border-radius: 2.6mm;
+        background: var(--crema);
+        font-size: 11pt;
+        line-height: 1.14;
+      }
+
+      .codigo b {
+        display: grid;
+        place-items: center;
+        width: 7.4mm;
+        height: 7.4mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.6mm;
+        background: #fff;
+        font-family: var(--titulos);
+        font-size: 13pt;
+      }
+
+      .registro {
+        width: 100%;
+        margin: 0;
+        border-collapse: collapse;
+        font-size: 11.5pt;
+        line-height: 1.15;
+        table-layout: fixed;
+      }
+
+      .registro th,
+      .registro td {
+        padding: 0.9mm 2mm;
+        border-bottom: 0.3mm solid var(--linea);
+        vertical-align: middle;
+      }
+
+      .registro thead th {
+        padding: 1.4mm 2mm;
+        font-size: 11pt;
+      }
+
+      .registro tbody tr:nth-child(odd) {
+        background: var(--crema);
+      }
+
+      .registro tbody th {
+        font-size: 12.5pt;
+        line-height: 1.05;
+      }
+
+      .registro tbody th small {
+        margin-left: 1.2mm;
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .celda {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2mm;
+      }
+
+      .celda > i {
+        flex: none;
+        width: 10mm;
+        height: 6.6mm;
+        border: 0.45mm solid var(--suave);
+        border-radius: 1.2mm;
+        background: #fff;
+      }
+
+      .registro td.no-hay {
+        background: repeating-linear-gradient(135deg, #eef0f5 0 1.4mm, #fff 1.4mm 2.8mm);
+        color: var(--suave);
+        font-style: italic;
+        font-size: 11pt;
+      }
+
+      .registro .notas {
+        border-left: 0.3mm solid var(--linea);
+      }
+
+      .leyenda-registro {
+        margin: 1.6mm 0 0;
+        font-size: 11pt;
+        line-height: 1.3;
+        color: var(--suave);
+      }
+
+      /* Registro, hoja 2: los grupos, los diptongos y el resumen */
+      .bloque-registro {
+        margin: 0 0 3mm;
+        padding: 2.4mm 3mm 3mm;
+        border: 0.45mm solid var(--linea);
+        border-left: 2mm solid var(--c);
+        border-radius: 3.5mm;
+        break-inside: avoid;
+      }
+
+      .bloque-registro h2 {
+        display: flex;
+        align-items: baseline;
+        gap: 2.4mm;
+        margin: 0 0 1.8mm;
+        font-size: 14pt;
+      }
+
+      .bloque-registro h2 small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .celdas {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.6mm 2.4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .celdas li {
+        display: grid;
+        grid-template-columns: 6.6mm minmax(0, 1fr) 9mm;
+        gap: 1.3mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.2mm 1.4mm;
+        border-radius: 2.4mm;
+        background: var(--crema);
+        font-size: 11pt;
+        line-height: 1.1;
+      }
+
+      .celdas li b {
+        font-family: var(--titulos);
+        font-size: 12pt;
+        color: var(--tx);
+      }
+
+      .celdas li > i {
+        width: 9mm;
+        height: 6.6mm;
+        border: 0.45mm solid var(--suave);
+        border-radius: 1.2mm;
+        background: #fff;
+      }
+
+      .subtitulo-celdas {
+        margin: 2mm 0 1.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 12pt;
+      }
+
+      .subtitulo-celdas span {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .resumen {
+        display: grid;
+        gap: 2.4mm;
+        margin: 0;
+        font-size: 11.5pt;
+      }
+
+      .resumen .dato {
+        white-space: normal;
+      }
+
+      .resumen .dato > span {
+        flex: none;
+      }
+
+      .marcas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.6mm 5mm;
+        align-items: center;
+        margin: 0;
+        font-size: 11.5pt;
+      }
+
+      /* ---------- Conciencia fonológica ---------- */
+      .consigna {
+        display: grid;
+        grid-template-columns: 13mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        margin: 0 0 3mm;
+        padding: 2.4mm 3.4mm;
+        border-radius: 3.5mm;
+        background: var(--azul-tinte);
+        border-left: 1.6mm solid var(--azul);
+        font-size: 11.5pt;
+        line-height: 1.34;
+      }
+
+      .consigna img {
+        width: 13mm;
+        height: 13mm;
+        padding: 0.6mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .consigna p {
+        margin: 0;
+      }
+
+      .actividad {
+        display: flex;
+        align-items: baseline;
+        gap: 2.4mm;
+        margin: 2.8mm 0 1.6mm;
+        font-size: 15pt;
+      }
+
+      .actividad span {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        background: var(--c);
+        color: #fff;
+        font-size: 12pt;
+        transform: translateY(-0.6mm);
+      }
+
+      .actividad small {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11.5pt;
+        color: var(--suave);
+      }
+
+      .caja-picto {
+        display: grid;
+        place-items: center;
+        border: 0.5mm solid var(--c);
+        border-radius: 3mm;
+        background: #fff;
+      }
+
+      /* Nivel 1: contar palmadas */
+      .contar {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .contar li {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        margin: 0;
+        padding: 1.8mm 1.6mm 2.2mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .contar img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .contar b {
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      .circulos {
+        display: flex;
+        gap: 1.6mm;
+      }
+
+      .circulos i {
+        width: 6.4mm;
+        height: 6.4mm;
+        border: 0.5mm solid var(--marino);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      /* Nivel 1: unir sílabas; nivel 2: busca la pareja */
+      .filas-juego {
+        display: grid;
+        gap: 2mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .filas-juego li {
+        display: grid;
+        grid-template-columns: 50mm repeat(3, 24mm);
+        gap: 3mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.6mm 2.4mm;
+        border-radius: 3.5mm;
+        background: var(--t);
+      }
+
+      .filas-juego .caja-picto {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .filas-juego .caja-picto img {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .tu-dices {
+        margin: 0;
+        font-size: 11pt;
+        line-height: 1.2;
+        color: var(--suave);
+      }
+
+      .tu-dices b {
+        display: block;
+        margin-top: 0.6mm;
+        font-family: var(--titulos);
+        font-size: 17pt;
+        letter-spacing: 0.02em;
+        color: var(--marino);
+      }
+
+      .solucion {
+        margin: 1.6mm 0 0;
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      /* Nivel 1: unir sílabas, en dos columnas: lo que dice el adulto arriba y tres dibujos debajo */
+      .unir-silabas {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm 4mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .unir-silabas li {
+        display: grid;
+        grid-template-columns: repeat(3, 21mm);
+        justify-content: center;
+        gap: 1.6mm 3mm;
+        margin: 0;
+        padding: 2mm 2.4mm 2.6mm;
+        border-radius: 3.5mm;
+        background: var(--t);
+      }
+
+      .unir-silabas .tu-dices {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: baseline;
+        gap: 2.4mm;
+      }
+
+      .unir-silabas .tu-dices b {
+        margin: 0;
+      }
+
+      .unir-silabas .caja-picto {
+        width: 21mm;
+        height: 21mm;
+      }
+
+      .unir-silabas .caja-picto img {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      /* Nivel 2: alargar el primer sonido */
+      .alargar {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .alargar li {
+        display: grid;
+        justify-items: center;
+        gap: 1mm;
+        margin: 0;
+        padding: 2mm 1mm 2.2mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .alargar img {
+        width: 19mm;
+        height: 19mm;
+      }
+
+      .alargar b {
+        font-size: 14pt;
+        line-height: 1;
+      }
+
+      /* Nivel 2: la pareja (un dibujo de color y tres para elegir) */
+      .pareja li {
+        grid-template-columns: 24mm 9mm repeat(3, 24mm);
+        justify-content: start;
+        gap: 4mm;
+      }
+
+      .pareja .caja-picto--modelo {
+        border-width: 0.9mm;
+        background: var(--t);
+        box-shadow: inset 0 0 0 1mm #fff;
+      }
+
+      .pareja svg {
+        width: 9mm;
+        height: 9mm;
+      }
+
+      .pareja .caja-picto {
+        width: 24mm;
+        height: 24mm;
+      }
+
+      .pareja .caja-picto img {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .dos-col {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2mm 4mm;
+      }
+
+      .dos-col li {
+        grid-template-columns: 18mm 5mm repeat(3, 18mm);
+        gap: 1.4mm;
+        padding: 1.8mm 2mm;
+      }
+
+      .dos-col .caja-picto {
+        width: 18mm;
+        height: 18mm;
+      }
+
+      .dos-col .caja-picto img {
+        width: 15mm;
+        height: 15mm;
+      }
+
+      .dos-col svg {
+        width: 5mm;
+        height: 5mm;
+      }
+
+      /* Nivel 3: letras para unir y cajas para separar */
+      .unir-sonidos {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0 0 2.4mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .unir-sonidos li {
+        display: grid;
+        justify-items: center;
+        gap: 1.6mm;
+        margin: 0;
+        padding: 2.6mm 2mm;
+        border-radius: 3.5mm;
+        background: var(--t);
+      }
+
+      .letras {
+        display: flex;
+        gap: 1.6mm;
+      }
+
+      .letras span {
+        display: grid;
+        place-items: center;
+        width: 11mm;
+        height: 12mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 2mm;
+        background: #fff;
+        font-family: var(--texto);
+        font-weight: 700;
+        font-size: 22pt;
+        line-height: 1;
+      }
+
+      .unir-sonidos small {
+        font-size: 11pt;
+        color: var(--suave);
+      }
+
+      .banco {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2.4mm;
+        margin: 0;
+        padding: 2.4mm;
+        list-style: none;
+        border: 0.45mm dashed var(--c);
+        border-radius: 3.5mm;
+      }
+
+      .banco li {
+        display: grid;
+        place-items: center;
+        margin: 0;
+        aspect-ratio: 1;
+        border-radius: 2.6mm;
+        background: #fff;
+        box-shadow: inset 0 0 0 0.45mm var(--linea);
+      }
+
+      .banco img {
+        width: 80%;
+        height: 80%;
+      }
+
+      .separar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .separar li {
+        display: grid;
+        grid-template-columns: 24mm minmax(0, 1fr);
+        gap: 3mm;
+        align-items: center;
+        margin: 0;
+        padding: 2.4mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .separar .caja-picto {
+        width: 24mm;
+        height: 24mm;
+        border-color: var(--linea);
+      }
+
+      .separar .caja-picto img {
+        width: 20mm;
+        height: 20mm;
+      }
+
+      .cajas-sonido {
+        display: flex;
+        gap: 1.6mm;
+      }
+
+      .cajas-sonido span {
+        display: grid;
+        grid-template-rows: 14mm 9mm;
+        width: 14mm;
+      }
+
+      .cajas-sonido span::before {
+        content: '';
+        border: 0.5mm solid var(--marino);
+        border-radius: 1.6mm;
+        background: var(--t);
+      }
+
+      .cajas-sonido span::after {
+        content: '';
+        border-bottom: 0.45mm solid var(--marino);
+        margin: 0 1mm;
+      }
+
+      /* ---------- Hojas de juego: lotos y ruletas ---------- */
+      .hoja-juego {
+        page: juego;
+        position: relative;
+        break-after: page;
+      }
+
+      .cabecera-juego {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr) 68mm;
+        gap: 4mm;
+        align-items: center;
+        margin: 0 0 2.6mm;
+      }
+
+      /* A la derecha, el logo y el crédito de los pictogramas: así quedan en el tablero cuando se recortan las tarjetas. */
+      .cabecera-juego__credito {
+        display: grid;
+        justify-items: end;
+        gap: 1mm;
+        margin: 0;
+        text-align: right;
+        font-size: 11pt;
+        line-height: 1.18;
+        color: var(--suave);
+      }
+
+      .sonido {
+        display: grid;
+        place-items: center;
+        width: 17mm;
+        height: 17mm;
+        border: 0.9mm solid var(--c);
+        border-radius: 50%;
+        background: var(--t);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 20pt;
+        line-height: 1;
+        letter-spacing: -0.01em;
+      }
+
+      .sonido--largo {
+        font-size: 14pt;
+      }
+
+      .cabecera-juego .antetitulo {
+        margin: 0 0 0.6mm;
+        color: var(--tx);
+      }
+
+      .cabecera-juego h1 {
+        margin: 0;
+        font-size: 22pt;
+        line-height: 1.05;
+      }
+
+      .cabecera-juego p.sub {
+        margin: 0.8mm 0 0;
+        font-size: 11.5pt;
+        line-height: 1.25;
+      }
+
+      .cabecera-juego img {
+        width: 30mm;
+        height: auto;
+      }
+
+      .tablero {
+        padding: 3mm 4mm 4mm;
+        border: 0.8mm solid var(--c);
+        border-radius: 5mm;
+        background: var(--t);
+      }
+
+      .tablero__titulo {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin: 0 0 2.2mm;
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 14pt;
+      }
+
+      .tablero__titulo span {
+        font-family: var(--texto);
+        font-weight: 400;
+        font-size: 11pt;
+      }
+
+      .tablero__casillas {
+        display: grid;
+        grid-template-columns: repeat(3, 50mm);
+        grid-auto-rows: 50mm;
+        gap: 3mm 7mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .casilla-loto {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        margin: 0;
+        padding: 2.4mm 2mm 3mm;
+        border: 0.5mm solid var(--c);
+        border-radius: 3.5mm;
+        background: #fff;
+      }
+
+      .casilla-loto img {
+        width: 31mm;
+        height: 31mm;
+      }
+
+      .casilla-loto span,
+      .tarjeta-loto span {
+        font-weight: 700;
+        font-size: 16pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      /* Línea para cortar, con las tijeras */
+      .corte {
+        position: relative;
+        height: 8mm;
+        margin: 1mm 0 0.6mm;
+        color: var(--suave);
+      }
+
+      .corte::before {
+        content: '';
+        position: absolute;
+        left: 8mm;
+        right: 0;
+        top: 50%;
+        border-top: 0.4mm dashed var(--suave);
+      }
+
+      .corte svg {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 6mm;
+        height: 6mm;
+        transform: translateY(-50%);
+      }
+
+      .aviso-tarjetas {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 6mm;
+        margin: 0 0 2.4mm;
+        font-size: 11pt;
+        line-height: 1.4;
+        color: var(--suave);
+      }
+
+      .aviso-tarjetas strong {
+        font-family: var(--titulos);
+        color: var(--marino);
+      }
+
+      .tarjetas-loto {
+        display: grid;
+        grid-template-columns: repeat(3, 46mm);
+        grid-auto-rows: 46mm;
+        gap: 4mm 11mm;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      /* Tarjeta: banda de color arriba (dice de qué loto es), dibujo y palabra. La línea discontinua es la de corte. */
+      .tarjeta-loto {
+        display: grid;
+        grid-template-rows: 2.4mm minmax(0, 1fr) auto;
+        justify-items: center;
+        align-items: center;
+        width: 46mm;
+        height: 46mm;
+        margin: 0;
+        padding: 0 1.4mm 2.6mm;
+        border: 0.45mm dashed var(--suave);
+        border-radius: 3.5mm;
+        overflow: hidden;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .tarjeta-loto::before {
+        content: '';
+        justify-self: stretch;
+        align-self: stretch;
+        margin: 0 -1.4mm;
+        background: var(--c);
+      }
+
+      .tarjeta-loto img {
+        width: 28mm;
+        height: 28mm;
+      }
+
+      /* Ruletas */
+      .ruleta-fila {
+        position: relative;
+        height: 110mm;
+        margin: 0 0 4mm;
+      }
+
+      .ruleta {
+        position: absolute;
+        left: 0;
+        top: 1mm;
+        width: 108mm;
+        height: 108mm;
+      }
+
+      .ruleta > * {
+        position: absolute;
+      }
+
+      .ruleta > svg {
+        inset: 0;
+        width: 108mm;
+        height: 108mm;
+      }
+
+      .sector {
+        left: 50%;
+        top: 50%;
+        width: 0;
+        height: 0;
+      }
+
+      .sector > img {
+        position: absolute;
+        left: -11mm;
+        top: 14mm;
+        width: 22mm;
+        height: 22mm;
+      }
+
+      .sector > span {
+        position: absolute;
+        left: -21mm;
+        top: 37mm;
+        width: 42mm;
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+        text-align: center;
+      }
+
+      .flecha-pieza {
+        position: absolute;
+        width: 66mm;
+        height: 18mm;
+      }
+
+      .flecha-pieza svg {
+        position: absolute;
+        inset: 0;
+        width: 66mm;
+        height: 18mm;
+      }
+
+      .flecha-pieza span {
+        position: absolute;
+        left: 16mm;
+        right: 18mm;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--titulos);
+        font-weight: 700;
+        font-size: 15pt;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      .ruleta-lado {
+        position: absolute;
+        left: 116mm;
+        right: 0;
+        top: 1mm;
+      }
+
+      .ruleta-lado .flecha-pieza {
+        position: relative;
+        margin: 0 0 3mm;
+      }
+
+      .ruleta-lado h2 {
+        margin: 0 0 1mm;
+        font-size: 13pt;
+      }
+
+      .ruleta-lado p {
+        margin: 0 0 2mm;
+        font-size: 11pt;
+        line-height: 1.3;
+      }
+
+      .ruleta-lado .para-jugar {
+        padding: 2mm 2.6mm;
+        border-radius: 3mm;
+        background: var(--t);
+        border-left: 1.4mm solid var(--c);
+      }
+
+      .ruleta-lado .seseo {
+        padding: 2mm 2.6mm;
+        border-radius: 3mm;
+        background: var(--amarillo-tinte);
+        border-left: 1.4mm solid var(--amarillo);
+      }
+
+      /* ---------- Nota para las familias (frases cortas, 13 puntos) ---------- */
+      .lf {
+        font-size: 13pt;
+        line-height: 1.42;
+      }
+
+      .lf h1 {
+        font-size: 26pt;
+      }
+
+      .lf h2 {
+        font-size: 16pt;
+        margin: 3.6mm 0 1.8mm;
+      }
+
+      .lf p {
+        margin: 0 0 2.2mm;
+      }
+
+      .lf .entrada {
+        font-size: 15pt;
+        line-height: 1.38;
+        margin-bottom: 3.4mm;
+      }
+
+      .ayudas-casa {
+        display: grid;
+        gap: 1.8mm;
+        margin: 0 0 2mm;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ayudas-casa li {
+        display: grid;
+        grid-template-columns: 14mm minmax(0, 1fr);
+        gap: 3.4mm;
+        align-items: center;
+        margin: 0;
+        padding: 1.6mm 3mm;
+        border-radius: 3.5mm;
+        background: var(--crema);
+        line-height: 1.34;
+      }
+
+      .ayudas-casa img {
+        width: 14mm;
+        height: 14mm;
+        padding: 0.6mm;
+        border-radius: 2mm;
+        background: #fff;
+      }
+
+      .ayudas-casa p {
+        margin: 0;
+      }
+
+      .esta-semana {
+        margin: 3mm 0 0;
+        padding: 3mm 4mm;
+        border: 0.6mm solid var(--verde);
+        border-radius: 3.5mm;
+        background: var(--verde-tinte);
+      }
+
+      .esta-semana h2 {
+        margin: 0 0 1.6mm;
+      }
+
+      .esta-semana .dato {
+        margin: 0 0 2.4mm;
+        font-size: 13pt;
+      }
+
+      .esta-semana .dato:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ---------- Fuentes y créditos ---------- */
+      .final {
+        font-size: 11pt;
+        line-height: 1.32;
+      }
+
+      .final h2 {
+        font-size: 13.5pt;
+        margin: 3mm 0 1.2mm;
+      }
+
+      .final p {
+        margin: 0 0 1.8mm;
+      }
+
+      .referencias {
+        margin: 0 0 1mm;
+        padding-left: 4.4mm;
+      }
+
+      .referencias li {
+        margin-bottom: 1mm;
+      }
+
+      .referencias .para {
+        color: var(--suave);
+      }
+
+      .seguir {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3mm;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .seguir li {
+        display: grid;
+        grid-template-columns: 17mm minmax(0, 1fr);
+        align-items: center;
+        gap: 2mm;
+        margin: 0;
+        padding: 1.6mm;
+        border: 0.4mm solid var(--linea);
+        border-radius: 3mm;
+        line-height: 1.26;
+        break-inside: avoid;
+      }
+
+      .seguir img {
+        width: 17mm;
+        height: 13mm;
+        object-fit: cover;
+        border-radius: 1.4mm;
+      }
+
+      .seguir strong {
+        display: block;
+        font-family: var(--titulos);
+        font-size: 12pt;
+        line-height: 1.15;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======================================================================
+         PORTADA
+         ====================================================================== -->
+    <section class="portada" data-miniatura>
+      <div class="rayos portada__rayos"></div>
+      <div class="circulo" style="width: 170mm; height: 170mm; right: -66mm; top: 136mm; background: var(--azul-tinte)"></div>
+      <div class="circulo" style="width: 70mm; height: 70mm; left: -32mm; top: 222mm; background: var(--amarillo-tinte)"></div>
+      <div class="circulo" style="width: 24mm; height: 24mm; left: 92mm; top: 150mm; background: var(--coral-tinte)"></div>
+      <div class="portada__cuerpo">
+        <img class="portada__logo" src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando" />
+        <p class="antetitulo portada__antetitulo">Para Audición y Lenguaje · Con pictogramas</p>
+        <h1 class="portada__titulo">Pack de Audición<br />y Lenguaje</h1>
+        <p class="portada__subtitulo">
+          La tabla de los sonidos por edades, un registro de articulación, conciencia fonológica por niveles, y lotos y
+          ruletas para la s, la z, la r, la rr y los grupos.
+        </p>
+        <div class="portada__pie">
+          <p>Pictogramas: Sergio Palao. ARASAAC (Gobierno de Aragón). CC BY-NC-SA.</p>
+          <p>Licencia CC BY-NC-SA 4.0<br />ideducando.es</p>
+        </div>
+      </div>
+      <div class="escena-tarjetas" id="escena-tarjetas" aria-hidden="true"></div>
+      <div class="escena-ruleta" id="escena-ruleta" aria-hidden="true"></div>
+      <div class="pegatina" aria-hidden="true"><div>6 lotos<b>6 ruletas</b>con pictogramas</div></div>
+    </section>
+
+    <!-- Cómo montarlo: la rellena herramientas/generar.mjs con los datos de la ficha -->
+    <section class="montaje" data-montaje></section>
+
+    <!-- ======================================================================
+         GUÍA 1. QUÉ HAY Y EN QUÉ ORDEN
+         ====================================================================== -->
+    <section class="hoja guia">
+      <div class="cabecera c-morado">
+        <div class="marco"><img src="pictogramas/36267.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Guía para el maestro o la maestra · 1 de 2</p>
+          <h1>Cómo usar el pack</h1>
+        </div>
+      </div>
+      <p class="entrada">
+        Este pack es para las sesiones de Audición y Lenguaje (AL) con alumnado de 3 a 8 años. Con él puedes ver cómo dice
+        cada sonido y practicar los que le cuestan. También trae juegos de conciencia fonológica para preparar la lectura.
+      </p>
+
+      <h2>Qué hay, en el orden de las páginas</h2>
+      <ol class="orden">
+        <li class="c-coral">
+          <img src="pictogramas/2474.png" alt="" />
+          <span><b>La tabla de los sonidos</b><small>Página 5</small>A qué edad suelen salir los sonidos. Sirve para situarse y
+            no sirve para diagnosticar.</span>
+        </li>
+        <li class="c-azul">
+          <img src="pictogramas/6998.png" alt="" />
+          <span><b>El registro de articulación</b><small>Páginas 6 y 7</small>Cada sonido al principio, en medio y al final de
+            la palabra, los grupos y los diptongos. Con él eliges qué trabajar.</span>
+        </li>
+        <li class="c-verde">
+          <img src="pictogramas/4563.png" alt="" />
+          <span><b>La conciencia fonológica</b><small>Páginas 8 a 10</small>Tres niveles: las sílabas, el primer sonido y, al
+            final, los sonidos con letras. Va a la vez que lo demás.</span>
+        </li>
+        <li class="c-amarillo">
+          <img src="pictogramas/6006.png" alt="" />
+          <span><b>Los lotos y las ruletas</b><small>Páginas 11 a 19</small>Para practicar la s, la z, la r suave, la rr y los
+            grupos con l y con r: primero en palabras y después en frases.</span>
+        </li>
+      </ol>
+
+      <h2>El registro, paso a paso</h2>
+      <ol class="lista-numerada">
+        <li>Pásalo en un rato tranquilo, en 10 o 15 minutos. Si se cansa, sigue otro día.</li>
+        <li>
+          Primero, que nombre un dibujo o un objeto de cada palabra: así habla como siempre. Si no sale, di tú la palabra y
+          que la repita. En la cabecera, marca si ha nombrado o ha repetido.
+        </li>
+        <li>
+          Fíjate solo en el sonido de la fila y anótalo con el código: ✓ si lo dice bien, O si lo omite, S si lo cambia por
+          otro (escribe cuál), D si lo distorsiona y A si añade un sonido.
+        </li>
+        <li>
+          Muchas palabras del registro salen en los lotos, las ruletas y las fichas de conciencia fonológica: sus dibujos te
+          sirven para preguntarlas. Para las demás, usa objetos o dibujos.
+        </li>
+      </ol>
+
+      <div class="dos-cajas">
+        <div class="caja--verde">
+          <h2>Para elegir qué trabajar</h2>
+          <p>
+            Te proponemos empezar por uno o dos sonidos: los que ya deberían salir por su edad y los que más dificultan que se
+            le entienda. Vuelve a pasar el registro cada trimestre.
+          </p>
+        </div>
+        <div class="caja--amarilla">
+          <h2>Si nombra o si repite</h2>
+          <p>
+            Al nombrar un dibujo se ve mejor cómo habla de verdad, sobre todo en las primeras edades. Con los años, nombrar y
+            repetir dan casi lo mismo (Bosch, 1983).
+          </p>
+        </div>
+      </div>
+
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> El orden de los niveles de conciencia fonológica sigue a Anthony y Francis (2005) y a
+        Míguez-Álvarez y otros (2022). Las fuentes completas están en la página 21. Lo que no lleva fuente es propuesta de
+        IdEducando.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         GUÍA 2. CÓMO SE JUEGA Y CUÁNTO
+         ====================================================================== -->
+    <section class="hoja guia">
+      <div class="cabecera c-morado">
+        <div class="marco"><img src="pictogramas/6537.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Guía para el maestro o la maestra · 2 de 2</p>
+          <h1>Cómo se juega y cuánto tiempo</h1>
+        </div>
+      </div>
+
+      <div class="dos-cajas">
+        <div class="caja--azul">
+          <h2>El loto</h2>
+          <p>
+            <strong>Con un peque:</strong> saca una tarjeta, dice su nombre y la pone encima de su dibujo, hasta tapar el
+            tablero.
+          </p>
+          <p>
+            <strong>En grupo de 2 a 4:</strong> cada peque, con el tablero de su sonido. Las tarjetas, mezcladas en una bolsa:
+            quien saca una la nombra y se la da a quien tiene ese dibujo.
+          </p>
+        </div>
+        <div class="caja--morada">
+          <h2>La ruleta</h2>
+          <p>
+            Gira la flecha y di la palabra a la que apunta. Cuando la palabra ya sale bien, dila en una frase: «Tengo un sofá»,
+            «Veo una cebra».
+          </p>
+          <p>En grupo, un punto por cada frase: así repite su sonido muchas veces mientras juega.</p>
+        </div>
+      </div>
+
+      <h2>Del sonido a la conversación</h2>
+      <p>Sube un peldaño cuando lo dice bien casi siempre en el anterior. Si se atasca, baja uno.</p>
+      <ol class="peldanos">
+        <li><b>1. Sonido</b>Solo: «sss».</li>
+        <li><b>2. Sílabas</b>sa, se, si, so, su.</li>
+        <li><b>3. Palabras</b>El loto: «sopa».</li>
+        <li><b>4. Frase con ayuda</b>«Es una sopa».</li>
+        <li><b>5. Frase suya</b>La ruleta: inventa una frase.</li>
+        <li><b>6. Conversación</b>Contar un cuento o qué hizo ayer.</li>
+      </ol>
+      <p>
+        <strong>Si no le sale:</strong> di tú la palabra bien, con calma, sin pedirle que la repita: «¡Sí, un ratón!». Que la
+        oiga muchas veces y que vea tu boca al decirla.
+      </p>
+
+      <h2>Sesiones cortas</h2>
+      <p>
+        Bastan 10 o 15 minutos de juego en cada sesión, con uno o dos sonidos a la vez. En conciencia fonológica, los programas
+        de 5 a 18 horas en total tuvieron más efecto que los más largos (Ehri y otros, 2001): 15 minutos tres veces por semana
+        durante tres meses suman 9 horas.
+      </p>
+
+      <h2>La conciencia fonológica, por niveles</h2>
+      <p>
+        Sigue el orden de las fichas: sílabas, primer sonido y, al final, sonidos con letras. La rima puede esperar: a quienes
+        aún no leían les costó más que contar sílabas (De la Calle y otros, 2016). Mejor una o dos habilidades a la vez y en
+        grupos pequeños (Ehri y otros, 2001).
+      </p>
+
+      <div class="caja caja--coral aviso-caja" style="margin: 3mm 0 2.4mm">
+        <span data-icono="aviso"></span>
+        <p>
+          <strong>Cuándo consultar.</strong> Si un sonido sigue sin salir mucho después de la edad de la tabla, si cuesta
+          entenderle o si dudas de cómo oye, habla con la familia y con el equipo de orientación. La tabla y el registro no
+          sirven para diagnosticar.
+        </p>
+      </div>
+      <div class="caja caja--amarilla aviso-caja" style="margin: 0">
+        <span data-icono="bocadillo"></span>
+        <p>
+          <strong>Seseo, ceceo y otras formas de hablar.</strong> Donde se habla así, el seseo, el ceceo, la s aspirada o los
+          sonidos finales que se pierden no son errores: no los anotes como errores ni los trabajes. Lo que se espera
+          depende de cómo se habla en cada sitio (McLeod y Crowe, 2018).
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TABLA ORIENTATIVA DE ADQUISICIÓN
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabecera c-coral">
+        <div class="marco"><img src="pictogramas/9692.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Tabla orientativa</p>
+          <h1>¿A qué edad suelen salir los sonidos?</h1>
+        </div>
+      </div>
+
+      <div class="aviso-grande">
+        <span data-icono="aviso"></span>
+        <p>
+          <strong>Esta tabla no sirve para diagnosticar.</strong> Es una guía para situarse. Cada peque tiene su ritmo, y que
+          un sonido aún no salga a una edad no basta para decir que hay un trastorno.
+        </p>
+      </div>
+
+      <p class="explica">
+        La edad es la de Bosch (1983), que estudió a 293 niños y niñas de habla castellana de 3 a 7 años: a esa
+        edad, 9 de cada 10 dicen bien el sonido. Entre paréntesis, el margen cuando otras fuentes dan otra edad. Entre barras,
+        el sonido: /θ/ es el de la z de zapato y /x/, el de la j.
+      </p>
+
+      <table class="edades">
+        <thead>
+          <tr>
+            <th scope="col">Sonidos y palabras de ejemplo</th>
+            <th scope="col" class="edad">Edad</th>
+            <th scope="col" class="margen">Margen</th>
+            <th scope="col" class="linea-cabeza">
+              <span class="linea__edades" aria-hidden="true"
+                ><span style="left: 10%">3</span><span style="left: 30%">4</span><span style="left: 50%">5</span
+                ><span style="left: 70%">6</span><span style="left: 90%">7</span></span
+              >
+            </th>
+          </tr>
+        </thead>
+        <tbody id="edades"></tbody>
+      </table>
+      <p class="leyenda-linea" aria-hidden="true">
+        <span><span class="linea__punto"></span>Edad de Bosch</span>
+        <span><span class="flechita"></span>Lo mismo en las edades mayores</span>
+        <span><span class="linea__banda"></span>Margen de otras fuentes</span>
+      </p>
+
+      <div class="caja caja--amarilla" style="margin: 0 0 2.6mm">
+        <ul class="avisos">
+          <li>Los datos de Bosch tienen más de 40 años y salen de un solo estudio.</li>
+          <li>
+            Donde se habla así, el seseo, el ceceo, la s aspirada («loh perroh») o los sonidos finales que se pierden
+            («comé» por «comer») no son errores.
+          </li>
+          <li>
+            Una revisión de estudios en 27 lenguas vio que a los 5 años salen casi todas las consonantes. En castellano, la s
+            y la rr están entre las últimas, de los 5 a los 7 años (McLeod y Crowe, 2018).
+          </li>
+        </ul>
+      </div>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Bosch (1983), figura 4, y McLeod y Crowe (2018). Fuentes completas en la página 21.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE ARTICULACIÓN 1: LOS SONIDOS UNO A UNO
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabecera c-azul">
+        <div class="marco"><img src="pictogramas/6998.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Registro de articulación · 1 de 2</p>
+          <h1>Los sonidos, uno a uno</h1>
+        </div>
+      </div>
+      <div class="datos">
+        <p class="dato">Nombre <i></i></p>
+        <p class="dato">Edad <i></i></p>
+        <p class="dato">Fecha <i></i></p>
+        <p class="dato dato--marcas">
+          <span>Cómo:</span><span><span class="casilla-marca"></span>nombra dibujos</span
+          ><span><span class="casilla-marca"></span>repite</span><span><span class="casilla-marca"></span>las dos</span>
+          <span style="flex: 1; text-align: right">Pasa el registro: <span style="display: inline-block; width: 40mm; border-bottom: 0.4mm dotted var(--marino)"></span></span>
+        </p>
+      </div>
+      <ol class="codigo" id="codigo"></ol>
+      <table class="registro">
+        <colgroup>
+          <col style="width: 40mm" />
+          <col />
+          <col />
+          <col />
+          <col style="width: 22mm" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Sonido</th>
+            <th scope="col">Al principio</th>
+            <th scope="col">En medio</th>
+            <th scope="col">Al final</th>
+            <th scope="col">Notas</th>
+          </tr>
+        </thead>
+        <tbody id="registro"></tbody>
+      </table>
+      <p class="leyenda-registro">
+        <strong>«No hay»:</strong> en castellano no hay palabras de uso diario con ese sonido en esa posición (la j de «reloj»
+        muchas veces no se pronuncia). En casi toda España, la y y la ll suenan igual.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         REGISTRO DE ARTICULACIÓN 2: GRUPOS, DIPTONGOS Y RESUMEN
+         ====================================================================== -->
+    <section class="hoja">
+      <div class="cabecera c-azul">
+        <div class="marco"><img src="pictogramas/6998.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Registro de articulación · 2 de 2</p>
+          <h1>Grupos, diptongos y resumen</h1>
+        </div>
+      </div>
+      <div id="registro-2"></div>
+
+      <div class="bloque-registro c-verde">
+        <h2>Resumen <small>Para el informe y para la familia</small></h2>
+        <div class="resumen">
+          <p class="dato"><span>Lo dice bien:</span><i></i></p>
+          <p class="dato"><span>Para trabajar primero (uno o dos sonidos):</span><i></i></p>
+          <p class="marcas">
+            <strong>¿Se le entiende al hablar?</strong><span><span class="casilla-marca"></span>Casi siempre</span
+            ><span><span class="casilla-marca"></span>A veces</span><span><span class="casilla-marca"></span>Casi nunca</span>
+          </p>
+          <p class="dato"><span>Cómo se habla en su entorno (seseo, ceceo, s aspirada…):</span><i></i></p>
+          <p class="dato"><span>Próxima revisión:</span><i></i></p>
+        </div>
+      </div>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Las palabras son una selección propia de IdEducando: de uso diario y fáciles de
+        dibujar. No copian las listas de ninguna prueba publicada. Los grupos, los diptongos y los sonidos con l o r delante de
+        otra consonante son los de la tabla de la página 5.
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CONCIENCIA FONOLÓGICA, NIVEL 1: LAS SÍLABAS
+         ====================================================================== -->
+    <section class="hoja c-verde">
+      <div class="cabecera c-verde">
+        <div class="marco"><img src="pictogramas/4563.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Conciencia fonológica · Nivel 1</p>
+          <h1>Las sílabas</h1>
+        </div>
+      </div>
+      <div class="consigna">
+        <img src="pictogramas/2474.png" alt="" />
+        <p>
+          <strong>Para el adulto:</strong> jugad en voz alta y sin prisa. Todo va con dibujos: no hace falta saber leer.
+        </p>
+      </div>
+      <h2 class="actividad"><span>1</span>Une las sílabas <small>Unir es más fácil que separar: por eso va primero.</small></h2>
+      <p class="tu-dices" style="margin: 0 0 2mm">
+        Di las sílabas despacio, con un segundo entre una y otra. El peque une la palabra y señala su dibujo.
+      </p>
+      <ul class="unir-silabas" id="unir-silabas"></ul>
+
+      <h2 class="actividad"><span>2</span>¿Cuántas palmadas?</h2>
+      <p class="tu-dices" style="margin: 0 0 2mm">
+        Decid la palabra con una palmada por sílaba. Que pinte un círculo por palmada o que ponga una ficha en cada uno.
+      </p>
+      <ul class="contar" id="contar"></ul>
+      <p class="solucion" id="contar-solucion"></p>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> En castellano, darse cuenta de las sílabas es lo que más se relaciona con la lectura
+        (Míguez-Álvarez y otros, 2022). Unir llega antes que separar (Anthony y Francis, 2005).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CONCIENCIA FONOLÓGICA, NIVEL 2: EL PRIMER SONIDO
+         ====================================================================== -->
+    <section class="hoja c-azul">
+      <div class="cabecera c-azul">
+        <div class="marco"><img src="pictogramas/2381.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Conciencia fonológica · Nivel 2</p>
+          <h1>El primer sonido</h1>
+        </div>
+      </div>
+      <div class="consigna">
+        <img src="pictogramas/2474.png" alt="" />
+        <p>
+          <strong>Para el adulto:</strong> di el sonido, no el nombre de la letra: «mmm», no «eme». Empieza por sonidos que se
+          pueden alargar, como la s, la m, la f, la l o la n.
+        </p>
+      </div>
+      <h2 class="actividad"><span>1</span>Alarga el primer sonido</h2>
+      <ul class="alargar" id="alargar"></ul>
+
+      <h2 class="actividad"><span>2</span>¿Cuál empieza igual?</h2>
+      <p class="tu-dices" style="margin: 0 0 2mm">
+        Di el nombre del dibujo de color. Después, busca en su fila el que empieza con el mismo sonido.
+      </p>
+      <ul class="filas-juego pareja dos-col" id="pareja"></ul>
+      <p class="solucion" id="pareja-solucion"></p>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Primero se notan las partes grandes de la palabra, como la sílaba, y después las
+        pequeñas, como el primer sonido (Anthony y Francis, 2005). En castellano, la rima no tiene por qué ir antes: a quienes
+        aún no leían les costó más que aislar una sílaba o un sonido (De la Calle y otros, 2016).
+      </p>
+    </section>
+
+    <!-- ======================================================================
+         CONCIENCIA FONOLÓGICA, NIVEL 3: SONIDOS Y LETRAS
+         ====================================================================== -->
+    <section class="hoja c-morado">
+      <div class="cabecera c-morado">
+        <div class="marco"><img src="pictogramas/31680.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Conciencia fonológica · Nivel 3</p>
+          <h1>Sonidos y letras</h1>
+        </div>
+      </div>
+      <div class="consigna">
+        <img src="pictogramas/2474.png" alt="" />
+        <p>
+          <strong>Para el adulto:</strong> este nivel va con letras. Señala cada letra y di su sonido. Primero se unen los
+          sonidos y, cuando eso sale, se separan.
+        </p>
+      </div>
+      <h2 class="actividad"><span>1</span>Une los sonidos</h2>
+      <p class="tu-dices" style="margin: 0 0 2mm">
+        Di los sonidos seguidos, cada vez más deprisa: «sss-ooo-lll»… ¡sol! Después, el peque busca su dibujo en el recuadro.
+      </p>
+      <ul class="unir-sonidos" id="unir-sonidos"></ul>
+      <ul class="banco" id="banco" aria-label="Dibujos para buscar"></ul>
+
+      <h2 class="actividad"><span>2</span>Separa los sonidos</h2>
+      <p class="tu-dices" style="margin: 0 0 2mm">
+        Di la palabra despacio. Pon una ficha en una caja por cada sonido. Después, escribe su letra en la raya de debajo.
+      </p>
+      <ul class="separar" id="separar"></ul>
+      <p class="de-donde">
+        <strong>De dónde sale.</strong> Trabajar los sonidos con letras funcionó mejor que sin letras (Ehri y otros, 2001).
+        Estas cajas, una por sonido, se llaman cajas de Elkonin.
+      </p>
+    </section>
+
+    <!-- Los 6 lotos y las 3 hojas de ruletas se hacen con el guion del final, a partir de la lista JUEGOS -->
+    <div id="lotos"></div>
+    <div id="ruletas"></div>
+
+    <!-- ======================================================================
+         NOTA PARA LAS FAMILIAS (lectura fácil)
+         ====================================================================== -->
+    <section class="hoja lf">
+      <div class="cabecera c-verde">
+        <div class="marco"><img src="pictogramas/2392.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Nota para las familias</p>
+          <h1>Jugamos con los sonidos</h1>
+        </div>
+      </div>
+      <p class="entrada">
+        En las clases de Audición y Lenguaje (AL), vuestro peque aprende a decir bien los sonidos. También juega con las
+        palabras. Así se prepara para leer.
+      </p>
+
+      <h2>En casa podéis ayudar</h2>
+      <ul class="ayudas-casa">
+        <li>
+          <img src="pictogramas/6537.png" alt="" />
+          <p>Jugad con las palabras 5 minutos al día. Mejor en un rato tranquilo.</p>
+        </li>
+        <li>
+          <img src="pictogramas/9692.png" alt="" />
+          <p>Si dice mal una palabra, no le pidáis que la repita. Decidla vosotros bien, con calma: «Sí, es un ratón».</p>
+        </li>
+        <li>
+          <img src="pictogramas/2474.png" alt="" />
+          <p>Hablad cara a cara. Así ve cómo movéis la boca.</p>
+        </li>
+        <li>
+          <img src="pictogramas/4563.png" alt="" />
+          <p>Dad una palmada por cada trozo de la palabra: «ma-ri-po-sa». También con su nombre.</p>
+        </li>
+        <li>
+          <img src="pictogramas/6469.png" alt="" />
+          <p>Leed cuentos juntos. Decid el nombre de lo que veis en los dibujos.</p>
+        </li>
+        <li>
+          <img src="pictogramas/38564.png" alt="" />
+          <p>Celebrad que lo intenta, aunque no le salga.</p>
+        </li>
+      </ul>
+
+      <h2>Recordad</h2>
+      <p>Cada peque tiene su ritmo. Es mejor no comparar con hermanos ni con otros peques.</p>
+      <p>Cada sitio habla a su manera. Si en casa decís «lah casah», está bien que vuestro peque lo diga igual.</p>
+      <p>Si tenéis dudas, preguntad al maestro o a la maestra de AL.</p>
+
+      <div class="esta-semana">
+        <h2>Esta semana jugamos con</h2>
+        <p class="dato">El sonido: <i></i></p>
+        <p class="dato">Las palabras: <i></i></p>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FUENTES Y CRÉDITOS
+         ====================================================================== -->
+    <section class="final">
+      <div class="cabecera c-morado">
+        <div class="marco"><img src="pictogramas/38796.png" alt="" /></div>
+        <div>
+          <p class="antetitulo">Fuentes y créditos</p>
+          <h1>De dónde sale este material</h1>
+        </div>
+      </div>
+      <p>
+        <strong>Pack de Audición y Lenguaje: sonidos, conciencia fonológica, lotos y ruletas.</strong> Equipo IdEducando,
+        noviembre de 2026. Ficha y novedades:
+        <span class="url">ideducando.es/material-gratuito/pack-audicion-lenguaje</span>
+      </p>
+
+      <h2>La edad de los sonidos</h2>
+      <ol class="referencias">
+        <li>
+          Bosch, L. (1983). El desarrollo fonológico infantil: una prueba para su evaluación. <em>Anuario de Psicología</em>,
+          28, 85-114. <span class="url">hdl.handle.net/2445/121447</span>. <span class="para">La tabla sale de su figura 4.</span>
+        </li>
+        <li>
+          McLeod, S. y Crowe, K. (2018). Children's consonant acquisition in 27 languages: A cross-linguistic review.
+          <em>American Journal of Speech-Language Pathology</em>, 27(4), 1546-1571. DOI: 10.1044/2018_AJSLP-17-0100.
+          <span class="para">Márgenes de la s y la rr; cada sitio habla a su manera.</span>
+        </li>
+      </ol>
+
+      <h2>La conciencia fonológica</h2>
+      <ol class="referencias" start="3">
+        <li>
+          Anthony, J. L. y Francis, D. J. (2005). Development of phonological awareness. <em>Current Directions in
+          Psychological Science</em>, 14(5), 255-259. DOI: 10.1111/j.0963-7214.2005.00376.x.
+          <span class="para">De las partes grandes a las pequeñas; unir antes que separar.</span>
+        </li>
+        <li>
+          De la Calle, A. M., Aguilar, M. y Navarro, J. I. (2016). Desarrollo evolutivo de la conciencia fonológica: ¿Cómo
+          se relaciona con la competencia lectora posterior? <em>Revista de Investigación en Logopedia</em>, 6(1), 22-41.
+          DOI: 10.5209/rlog.58553. <span class="para">La rima, la tarea más difícil antes de leer.</span>
+        </li>
+        <li>
+          Ehri, L. C., Nunes, S. R., Willows, D. M., Schuster, B. V., Yaghoub-Zadeh, Z. y Shanahan, T. (2001). Phonemic
+          awareness instruction helps children learn to read: Evidence from the National Reading Panel's meta-analysis.
+          <em>Reading Research Quarterly</em>, 36(3), 250-287. DOI: 10.1598/RRQ.36.3.2.
+          <span class="para">Con letras, una o dos habilidades, en grupo pequeño, de 5 a 18 horas.</span>
+        </li>
+        <li>
+          Míguez-Álvarez, C., Cuevas-Alonso, M. y Saavedra, Á. (2022). Relationships between phonological awareness and
+          reading in Spanish: A meta-analysis. <em>Language Learning</em>, 72(1), 113-157. DOI: 10.1111/lang.12471.
+          <span class="para">En castellano, la sílaba es lo que más se relaciona con la lectura.</span>
+        </li>
+      </ol>
+
+      <h2>Cómo está hecho</h2>
+      <p>
+        Las palabras son una selección propia de IdEducando, de uso diario y fáciles de dibujar. La nota para las familias
+        sigue las pautas de lectura fácil de la norma UNE 153101:2018 EX; aún no la hemos validado con personas lectoras.
+      </p>
+
+      <h2>Pictogramas, dibujos y licencia</h2>
+      <p>
+        Los pictogramas son de ARASAAC, el Centro Aragonés para la Comunicación Aumentativa y Alternativa. Su licencia pide
+        citar este texto: «Los símbolos pictográficos utilizados son propiedad del Gobierno de Aragón y han sido creados por
+        Sergio Palao para ARASAAC (https://arasaac.org), que los distribuye bajo Licencia Creative Commons BY-NC-SA.» Si
+        adaptas el material, mantén la cita.
+      </p>
+      <p>
+        Con pictogramas de ARASAAC, este material no se puede vender: es gratis y lo será siempre. Las ruletas, las flechas,
+        los tableros y la línea de las edades son de IdEducando. Licencia CC BY-NC-SA 4.0: puedes copiarlo y adaptarlo
+        citando a IdEducando, sin fines comerciales y con la misma licencia.
+      </p>
+
+      <h2>Para seguir, gratis en ideducando.es</h2>
+      <ul class="seguir" id="seguir"></ul>
+    </section>
+
+    <script>
+      // ---------------------------------------------------------------------
+      // Lotos y ruletas. Cada sonido tiene un loto de 6 palabras y una ruleta de otras 6.
+      // Cada palabra: [pictograma de ARASAAC, palabra]. Entre corchetes, las letras del sonido que se trabaja.
+      // Solo palabras de uso diario que se pueden dibujar, para peques de 3 a 8 años.
+      // La s, solo al principio o entre vocales: al final de sílaba se aspira en muchas zonas.
+      // La r suave, siempre entre vocales: nunca va al principio de la palabra.
+      // ---------------------------------------------------------------------
+      const JUEGOS = [
+        {
+          color: 'azul',
+          signo: 's',
+          nombre: 'la s',
+          flecha: 's',
+          explica: 'Palabras con /s/ al principio o entre vocales.',
+          loto: [[7252, '[s]ol'], [2573, '[s]opa'], [3155, '[s]illa'], [2488, 'o[s]o'], [3129, 'me[s]a'], [2610, 'va[s]o']],
+          ruleta: [[8328, '[s]eta'], [2571, '[s]ofá'], [2557, '[s]andía'], [2317, 'ca[s]a'], [2541, 'que[s]o'], [31426, 'paya[s]o']],
+          frase: '«Veo una seta», «Tengo una casa».',
+        },
+        {
+          color: 'verde',
+          signo: 'z',
+          nombre: 'la z',
+          flecha: 'z',
+          explica: 'Con /θ/: z, ce, ci.',
+          loto: [[32923, '[z]apato'], [2582, 'ta[z]a'], [2324, '[c]ebra'], [35631, '[c]inco'], [2694, '[c]epillo'], [11461, '[z]umo']],
+          ruleta: [[2292, 'bu[z]ón'], [2946, 'la[z]o'], [2679, 'calaba[z]a'], [2323, '[c]ebolla'], [3126, 'ma[c]eta'], [2341, 'co[c]ina']],
+          frase: '«Veo un buzón», «Tengo un lazo».',
+          seseo: true,
+        },
+        {
+          color: 'naranja',
+          signo: 'r',
+          nombre: 'la r suave',
+          flecha: 'r suave',
+          explica: 'Palabras con r suave entre vocales. La r suave nunca va al principio de la palabra.',
+          loto: [[2561, 'pe[r]a'], [2934, 'lo[r]o'], [2595, 'to[r]o'], [2871, 'o[r]eja'], [2437, 'ji[r]afa'], [2490, 'pája[r]o']],
+          ruleta: [[2589, 'tibu[r]ón'], [2686, 'ca[r]amelo'], [2924, 'ma[r]iquita'], [2500, 'pa[r]aguas'], [2313, 'cangu[r]o'], [2718, 'co[r]ona']],
+          frase: '«Veo un tiburón», «Tengo un caramelo».',
+        },
+        {
+          color: 'coral',
+          signo: 'rr',
+          nombre: 'la rr',
+          flecha: 'rr',
+          explica: 'Palabras con r fuerte: la r del principio y la rr entre vocales.',
+          loto: [[2546, '[r]atón'], [2543, '[r]ana'], [3151, '[r]osa'], [2517, 'pe[rr]o'], [2291, 'bu[rr]o'], [2412, 'go[rr]o']],
+          ruleta: [[7229, '[r]eloj'], [3149, '[r]egalo'], [6209, '[r]ueda'], [6232, 'to[rr]e'], [2417, 'guita[rr]a'], [6208, '[r]obot']],
+          frase: '«Veo una torre», «Tengo un regalo».',
+        },
+        {
+          color: 'morado',
+          signo: 'pl fl',
+          nombre: 'los grupos con l',
+          flecha: 'con l',
+          explica: 'Palabras con pl, bl, cl, gl y fl.',
+          // Título de la hoja de ruletas que comparte con el siguiente sonido (el normal sería demasiado largo)
+          tituloRuletas: 'Ruletas de los grupos con l y con r',
+          loto: [[2532, '[pl]ato'], [13642, '[bl]usa'], [8306, '[cl]avo'], [8313, '[gl]obo'], [3102, '[fl]or'], [2530, '[pl]átano']],
+          ruleta: [[38613, '[pl]anta'], [4935, '[bl]oques'], [2277, 'bici[cl]eta'], [8137, 'i[gl]ú'], [5471, '[fl]echa'], [3317, '[fl]an']],
+          frase: '«Veo una flecha», «Tengo una planta».',
+        },
+        {
+          color: 'amarillo',
+          signo: 'tr fr',
+          nombre: 'los grupos con r',
+          flecha: 'con r',
+          explica: 'Palabras con pr, br, tr, dr, cr, gr y fr.',
+          loto: [[5094, '[tr]en'], [2400, '[fr]esa'], [2450, 'li[br]o'], [5572, '[dr]agón'], [2590, 'ti[gr]e'], [5554, '[pr]incesa']],
+          ruleta: [[2912, 'mi[cr]ófono'], [2295, 'ca[br]a'], [2414, '[gr]ifo'], [6594, 'pie[dr]a'], [4653, '[fr]uta'], [2607, '[tr]ompeta']],
+          frase: '«Veo una cabra», «Tengo una trompeta».',
+        },
+      ];
+
+      // Los lotos van en las páginas 11 a 16 y las ruletas, en la 17 a la 19. Si cambia el orden de las hojas,
+      // hay que cambiar esos números en la guía (páginas 3 y 4) y en la ficha.
+
+      // Comprobación: 6 palabras en cada loto y en cada ruleta, sin repetir ninguna en todo el pack.
+      const usadas = new Set();
+      for (const j of JUEGOS) {
+        for (const lista of [j.loto, j.ruleta]) {
+          if (lista.length !== 6) throw new Error(`${j.nombre}: hay ${lista.length} palabras y deben ser 6`);
+          for (const [, p] of lista) {
+            const palabra = p.replace(/[[\]]/g, '');
+            if (usadas.has(palabra)) throw new Error(`«${palabra}» sale dos veces`);
+            usadas.add(palabra);
+          }
+        }
+      }
+
+      // ---------------------------------------------------------------------
+      // Dibujos de IdEducando (no son de ARASAAC)
+      // ---------------------------------------------------------------------
+      const M = '#1e2b55';
+      const SUAVE = '#46578c';
+      const svg = (contenido, clase = '', vista = '0 0 100 100') =>
+        `<svg class="${clase}" viewBox="${vista}" aria-hidden="true" focusable="false">${contenido}</svg>`;
+      const DIBUJOS = {
+        tijeras: `
+          <circle cx="24" cy="30" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <circle cx="24" cy="70" r="13" fill="none" stroke="currentColor" stroke-width="7"/>
+          <path d="M35 38 L92 72 M35 62 L92 28" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>`,
+        // Aviso: un triángulo con exclamación
+        aviso: `<path d="M50 8 L94 88 H6 Z" fill="#fde5e0" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M50 36 V60" stroke="${M}" stroke-width="9" stroke-linecap="round"/><circle cx="50" cy="73" r="5.5" fill="${M}"/>`,
+        // Bocadillo de habla, para las formas de hablar de cada sitio
+        bocadillo: `<path d="M14 18 H86 Q94 18 94 26 V62 Q94 70 86 70 H44 L26 88 L30 70 H14 Q6 70 6 62 V26 Q6 18 14 18 Z" fill="#fff" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="32" cy="44" r="5.5" fill="${M}"/><circle cx="50" cy="44" r="5.5" fill="${M}"/><circle cx="68" cy="44" r="5.5" fill="${M}"/>`,
+        // Flecha hacia la derecha, de un dibujo a sus parejas
+        flecha: `<path d="M12 50H82M60 26L84 50L60 74" fill="none" stroke="${SUAVE}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`,
+      };
+      const dibujo = (nombre, clase = '') => svg(DIBUJOS[nombre], clase);
+
+      const picto = (n, alt = '') => `<img src="pictogramas/${n}.png" alt="${alt}">`;
+      const logo = () => '<img src="../../marca/09-logo-horizontal-transparente.png" alt="IdEducando">';
+      const marcar = (p) => p.replace(/\[([^\]]+)\]/g, '<span class="diana">$1</span>');
+      const limpia = (p) => p.replace(/[[\]]/g, '');
+      const CREDITO = 'Pictogramas: Sergio Palao. ARASAAC (arasaac.org). Licencia CC BY-NC-SA. Propiedad: Gobierno de Aragón.';
+      const corte = `<div class="corte" aria-hidden="true">${dibujo('tijeras')}</div>`;
+
+      function cabeceraJuego(signo, ante, titulo, sub = '') {
+        const largo = signo.length > 2 ? ' sonido--largo' : '';
+        return `<header class="cabecera-juego">
+            <span class="sonido${largo}" aria-hidden="true">${signo}</span>
+            <div><p class="antetitulo">${ante}</p><h1>${titulo}</h1>${sub ? `<p class="sub">${sub}</p>` : ''}</div>
+            <p class="cabecera-juego__credito">${logo()}<span>${CREDITO}</span></p>
+          </header>`;
+      }
+
+      // ---------------------------------------------------------------------
+      // Los 6 lotos: el tablero arriba y sus 6 tarjetas abajo, para recortar
+      // ---------------------------------------------------------------------
+      const tarjetaLoto = ([n, p], estilo = '') =>
+        `<li class="tarjeta-loto"${estilo ? ` style="${estilo}"` : ''}>${picto(n)}<span>${marcar(p)}</span></li>`;
+
+      document.getElementById('lotos').outerHTML = JUEGOS.map((j, i) => {
+        const casillas = j.loto.map(([n, p]) => `<li class="casilla-loto">${picto(n)}<span>${marcar(p)}</span></li>`).join('');
+        const nota = j.seseo ? ' Donde se sesea, se dicen con s y no hace falta trabajar la z.' : '';
+        return `<section class="hoja-juego c-${j.color}">
+            ${cabeceraJuego(j.signo, `Loto para recortar · ${i + 1} de 6`, `Loto de ${j.nombre}`, j.explica + nota)}
+            <div class="tablero">
+              <p class="tablero__titulo">Mi tablero<span>Saca una tarjeta, di su nombre y ponla encima de su dibujo.</span></p>
+              <ul class="tablero__casillas">${casillas}</ul>
+            </div>
+            ${corte}
+            <p class="aviso-tarjetas"><span><strong>Tarjetas</strong> · 46 × 46 mm · Con la banda de color de su loto</span><span>Corta por la línea de puntos</span></p>
+            <ul class="tarjetas-loto">${j.loto.map((t) => tarjetaLoto(t)).join('')}</ul>
+          </section>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Las ruletas: dos por hoja, cada una con su flecha para recortar
+      // ---------------------------------------------------------------------
+      const D = 108; // lado de la ruleta, en mm
+      const C = D / 2;
+      const f = (n) => Number(n.toFixed(2));
+      const COLORES = {
+        azul: ['#2f6fd6', '#e4edfb'],
+        verde: ['#1fa67a', '#dcf3ea'],
+        naranja: ['#f5961f', '#fde8cf'],
+        coral: ['#e8553e', '#fde5e0'],
+        morado: ['#8c4fb8', '#efe5f7'],
+        amarillo: ['#f6c12e', '#fdf0c7'],
+      };
+      // Cada sector se dibuja hacia abajo y se gira: así se lee bien cuando la flecha apunta hacia quien juega.
+      const enRuleta = (r, grados) => {
+        const a = (grados * Math.PI) / 180;
+        return [f(C - r * Math.sin(a)), f(C + r * Math.cos(a))];
+      };
+
+      function discoRuleta(j, palabras) {
+        const [color, tinte] = COLORES[j.color];
+        let dibujoDisco = `<circle cx="${C}" cy="${C}" r="${C - 0.3}" fill="#fff" stroke="${SUAVE}" stroke-width="0.35" stroke-dasharray="1.6 1.2"/>`;
+        palabras.forEach((_, i) => {
+          const [x1, y1] = enRuleta(C - 0.6, i * 60 - 30);
+          const [x2, y2] = enRuleta(C - 0.6, i * 60 + 30);
+          dibujoDisco += `<path d="M${C} ${C} L${x1} ${y1} A${C - 0.6} ${C - 0.6} 0 0 1 ${x2} ${y2} Z" fill="${i % 2 ? '#fff' : tinte}" stroke="${color}" stroke-width="0.5"/>`;
+        });
+        dibujoDisco += `<circle cx="${C}" cy="${C}" r="7" fill="#fff" stroke="${color}" stroke-width="0.8"/>`;
+        dibujoDisco += `<path d="M${C - 2.4} ${C} H${C + 2.4} M${C} ${C - 2.4} V${C + 2.4}" stroke="${M}" stroke-width="0.5"/>`;
+        const sectores = palabras
+          .map(([n, p], i) => `<div class="sector" style="transform:rotate(${i * 60}deg)">${picto(n)}<span>${marcar(p)}</span></div>`)
+          .join('');
+        const lista = palabras.map(([, p]) => limpia(p)).join(', ');
+        return `<div class="ruleta c-${j.color}" role="img" aria-label="Ruleta de ${j.nombre} con seis casillas: ${lista}">
+            <svg viewBox="0 0 ${D} ${D}" aria-hidden="true">${dibujoDisco}</svg>${sectores}
+          </div>`;
+      }
+
+      // La flecha: un círculo con una cruz para el encuadernador, el palo con el sonido y la punta.
+      const flechaRuleta = (texto) => `<div class="flecha-pieza" aria-hidden="true"><svg viewBox="0 0 66 18">
+            <path d="M8 1 A8 8 0 0 0 8 17 H50 V18 L66 9 L50 0 V1 Z" fill="${M}"/>
+            <circle cx="8" cy="9" r="2.4" fill="#fff"/><path d="M6.2 9 H9.8 M8 7.2 V10.8" stroke="${M}" stroke-width="0.5"/>
+          </svg><span>${texto}</span></div>`;
+
+      function filaRuleta(j) {
+        const seseo = j.seseo
+          ? '<p class="seseo"><strong>Zonas de seseo:</strong> allí estas palabras se dicen con s, y no hace falta trabajar la z.</p>'
+          : '';
+        return `<div class="ruleta-fila">
+            ${discoRuleta(j, j.ruleta)}
+            <div class="ruleta-lado c-${j.color}">
+              ${flechaRuleta(j.flecha)}
+              <h2>Ruleta de ${j.nombre}</h2>
+              <p>Recorta la ruleta y la flecha por su borde. Haz un agujero en la cruz de cada una y únelas con un encuadernador, sin apretar: la flecha tiene que girar suelta.</p>
+              <p class="para-jugar"><strong>Para jugar:</strong> gira la flecha y di la palabra. Después, en una frase: ${j.frase}</p>
+              ${seseo}
+            </div>
+          </div>`;
+      }
+
+      const PARES = [
+        [0, 1],
+        [2, 3],
+        [4, 5],
+      ];
+      document.getElementById('ruletas').outerHTML = PARES.map(([a, b], k) => {
+        const [ja, jb] = [JUEGOS[a], JUEGOS[b]];
+        const titulo = ja.tituloRuletas ?? `Ruletas de ${ja.nombre} y de ${jb.nombre}`;
+        return `<section class="hoja-juego c-${ja.color}">
+            ${cabeceraJuego(`${ja.signo.split(' ')[0]} ${jb.signo.split(' ')[0]}`, `Ruletas para recortar · ${k + 1} de 3`, titulo, 'Plastifica la hoja antes de recortar. Las palabras son distintas de las del loto.')}
+            ${filaRuleta(ja)}
+            ${filaRuleta(jb)}
+          </section>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Tabla orientativa (Bosch, 1983). [sonidos y ejemplos, edad, margen o null]
+      // Los datos son los de la propuesta B-021: no se cambian sin hablarlo con el equipo.
+      // ---------------------------------------------------------------------
+      const EDADES = [
+        ['/p/ <b>p</b>ez, /t/ <b>t</b>aza, /k/ <b>c</b>asa, /m/ <b>m</b>esa, /n/ <b>n</b>ariz, ñ (ni<b>ñ</b>o), /l/ <b>l</b>uz, /b/ <b>b</b>oca', 3, null],
+        ['/x/: la j de <b>j</b>irafa', 3, [3, 4]],
+        ['/f/ <b>f</b>uego, ch (<b>ch</b>ocolate), /g/ <b>g</b>ato, /d/ <b>d</b>iente y la r suave entre vocales (ca<b>r</b>a)', 4, null],
+        ['/s/ <b>s</b>illa y /θ/ <b>z</b>apato, donde se distingue de /s/', 6, [5, 7]],
+        ['rr y r al principio: <b>r</b>atón, pe<b>rr</b>o', 7, [5, 7]],
+        ['Grupos con l (<b>pl</b>ancha, <b>gl</b>obo) y con r (<b>tr</b>es, <b>fr</b>uta)', 6, null],
+        ['Diptongos decrecientes (p<b>ei</b>ne, <b>au</b>tobús) y l o r delante de otra consonante (ba<b>rc</b>o, bo<b>ls</b>o)', 7, null],
+      ];
+      const centro = (edad) => 10 + (edad - 3) * 20; // % del ancho de la línea
+      document.getElementById('edades').innerHTML = EDADES.map(([texto, edad, margen]) => {
+        const banda = margen
+          ? `<span class="linea__banda" style="left:calc(${centro(margen[0])}% - 3mm);width:calc(${(margen[1] - margen[0]) * 20}% + 6mm)"></span>`
+          : '';
+        return `<tr>
+            <td class="sonidos">${texto}</td>
+            <td class="edad"><b>${edad}</b> años</td>
+            <td class="margen">${margen ? `(${margen[0]} a ${margen[1]})` : ''}</td>
+            <td class="linea"><div class="linea__pista" aria-hidden="true">${banda}<span class="linea__flecha" style="left:${centro(edad)}%"></span><span class="linea__punto" style="left:${centro(edad)}%"></span></div></td>
+          </tr>`;
+      }).join('');
+
+      // ---------------------------------------------------------------------
+      // Registro de articulación. [sonido, letras, al principio, en medio, al final]; null: no hay palabras de uso diario.
+      // Selección propia: palabras de uso diario que se pueden dibujar o enseñar con un objeto.
+      // ---------------------------------------------------------------------
+      document.getElementById('codigo').innerHTML = [
+        ['✓', 'Lo dice bien'],
+        ['O', 'Omisión: no lo dice («ato» por «gato»)'],
+        ['S', 'Sustitución: escribe por cuál («S: t»)'],
+        ['D', 'Distorsión: suena raro, ni bien ni otro'],
+        ['A', 'Adición: añade un sonido («terén» por «tren»)'],
+      ]
+        .map(([letra, texto]) => `<li><b>${letra}</b><span>${texto}</span></li>`)
+        .join('');
+
+      const REGISTRO = [
+        ['/p/', 'p', 'pato', 'sopa', null],
+        ['/b/', 'b, v', 'vaso', 'lobo', null],
+        ['/m/', 'm', 'mano', 'limón', null],
+        ['/f/', 'f', 'foca', 'sofá', null],
+        ['/t/', 't', 'tomate', 'gato', null],
+        ['/d/', 'd', 'dedo', 'nido', 'pared'],
+        ['/n/', 'n', 'nube', 'luna', 'pan'],
+        ['/l/', 'l', 'leche', 'pelota', 'sol'],
+        ['/s/', 's', 'silla', 'mesa', 'gafas'],
+        ['/θ/', 'z, ce, ci', 'zumo', 'taza', 'pez'],
+        ['y, ll', 'y, ll', 'llave', 'pollo', null],
+        ['ñ', 'ñ', null, 'piña', null],
+        ['ch', 'ch', 'chupete', 'coche', null],
+        ['/k/', 'c, qu', 'casa', 'boca', null],
+        ['/g/', 'g, gu', 'goma', 'mago', null],
+        ['/x/', 'j, ge, gi', 'jabón', 'ojo', null],
+        ['r suave', 'entre vocales', null, 'pera', 'mar'],
+        ['rr', 'y r al principio', 'ratón', 'perro', null],
+      ];
+      const celda = (palabra) =>
+        palabra ? `<td><span class="celda"><span>${palabra}</span><i></i></span></td>` : '<td class="no-hay">No hay</td>';
+      document.getElementById('registro').innerHTML = REGISTRO.map(
+        ([sonido, letras, ini, med, fin]) =>
+          `<tr><th scope="row">${sonido}${letras !== sonido ? ` <small>${letras}</small>` : ''}</th>${celda(ini)}${celda(med)}${celda(fin)}<td class="notas"></td></tr>`,
+      ).join('');
+
+      // Hoja 2: grupos, diptongos y l o r delante de otra consonante. [grupo, palabra]
+      const BLOQUES = [
+        {
+          color: 'morado',
+          titulo: 'Grupos con l',
+          nota: '9 de cada 10, a los 6 años',
+          celdas: [['pl', 'plato'], ['bl', 'blusa'], ['cl', 'clavo'], ['gl', 'globo'], ['fl', 'flor']],
+        },
+        {
+          color: 'amarillo',
+          titulo: 'Grupos con r',
+          nota: '9 de cada 10, a los 6 años',
+          celdas: [['pr', 'princesa'], ['br', 'libro'], ['tr', 'tren'], ['dr', 'dragón'], ['cr', 'micrófono'], ['gr', 'tigre'], ['fr', 'fresa']],
+        },
+        {
+          color: 'naranja',
+          titulo: 'Diptongos',
+          partes: [
+            ['Crecientes', 'salen pronto, hacia los 3 años', [['ie', 'pie'], ['ia', 'piano'], ['ua', 'agua'], ['ue', 'huevo']]],
+            ['Decrecientes', '9 de cada 10, a los 7 años', [['ei', 'peine'], ['ei', 'seis'], ['au', 'jaula'], ['au', 'autobús']]],
+          ],
+        },
+        {
+          color: 'coral',
+          titulo: 'l o r delante de otra consonante',
+          nota: '9 de cada 10, a los 7 años',
+          celdas: [['rc', 'barco'], ['ls', 'bolso'], ['ld', 'falda'], ['rt', 'tarta']],
+        },
+      ];
+      const celdas = (lista) =>
+        `<ul class="celdas">${lista.map(([g, p]) => `<li><b>${g}</b><span>${p}</span><i></i></li>`).join('')}</ul>`;
+      document.getElementById('registro-2').innerHTML = BLOQUES.map(
+        (b) => `<div class="bloque-registro c-${b.color}">
+            <h2>${b.titulo}${b.nota ? ` <small>${b.nota}</small>` : ''}</h2>
+            ${
+              b.partes
+                ? b.partes.map(([t, n, l]) => `<p class="subtitulo-celdas">${t} <span>· ${n}</span></p>${celdas(l)}`).join('')
+                : celdas(b.celdas)
+            }
+          </div>`,
+      ).join('');
+
+      // ---------------------------------------------------------------------
+      // Conciencia fonológica
+      // ---------------------------------------------------------------------
+      // Nivel 1. Contar palmadas: [pictograma, palabra, sílabas]. Sin diptongos ni hiatos: se pueden partir de dos maneras.
+      const CONTAR = [
+        [2933, 'luna', 2],
+        [2494, 'pan', 1],
+        [2465, 'mariposa', 4],
+        [2594, 'tomate', 3],
+        [7252, 'sol', 1],
+        [2343, 'cocodrilo', 4],
+        [3298, 'dedo', 2],
+        [3241, 'pelota', 3],
+      ];
+      document.getElementById('contar').innerHTML = CONTAR.map(
+        ([n, p]) => `<li>${picto(n)}<b>${p}</b><span class="circulos" aria-hidden="true"><i></i><i></i><i></i><i></i></span></li>`,
+      ).join('');
+      document.getElementById('contar-solucion').textContent =
+        'Soluciones: ' + CONTAR.map(([, p, s]) => `${p}, ${s}`).join(' · ') + '.';
+
+      // Nivel 1. Unir sílabas: [lo que dice el adulto, [3 dibujos]]; el bueno es el de esas sílabas.
+      const UNIR = [
+        ['ma · no', [[7114, 'gato'], [2928, 'mano'], [2563, 'pato']]],
+        ['fo · ca', [[7166, 'moto'], [2883, 'nube'], [2397, 'foca']]],
+        ['pe · lo · ta', [[3241, 'pelota'], [2594, 'tomate'], [2465, 'mariposa']]],
+        ['co · co · dri · lo', [[2465, 'mariposa'], [2343, 'cocodrilo'], [3241, 'pelota']]],
+      ];
+      document.getElementById('unir-silabas').innerHTML = UNIR.map(
+        ([dice, dibujos]) =>
+          `<li><p class="tu-dices">Tú dices:<b>${dice}</b></p>${dibujos
+            .map(([n, p]) => `<span class="caja-picto">${picto(n, p)}</span>`)
+            .join('')}</li>`,
+      ).join('');
+
+      // Nivel 2. Alargar el primer sonido: solo sonidos que se pueden alargar
+      document.getElementById('alargar').innerHTML = [
+        [7252, 'sss', 'ol'],
+        [2928, 'mmm', 'ano'],
+        [2397, 'fff', 'oca'],
+        [2933, 'lll', 'una'],
+        [2883, 'nnn', 'ube'],
+      ]
+        .map(([n, a, b]) => `<li>${picto(n)}<b><span class="diana">${a}</span>${b}</b></li>`)
+        .join('');
+
+      // Nivel 2. ¿Cuál empieza igual? [modelo, [3 dibujos]]; el bueno es el que empieza como el modelo.
+      // Solo sonidos que se escriben con una letra y que suenan igual en todas partes.
+      const PAREJAS = [
+        [[7252, 'sol'], [[3129, 'mesa'], [2573, 'sopa'], [2563, 'pato']]],
+        [[2928, 'mano'], [[2883, 'nube'], [2397, 'foca'], [7166, 'moto']]],
+        [[2397, 'foca'], [[2391, 'falda'], [2933, 'luna'], [3298, 'dedo']]],
+        [[2933, 'luna'], [[2561, 'pera'], [3022, 'limón'], [2928, 'mano']]],
+        [[2563, 'pato'], [[7114, 'gato'], [7173, 'nido'], [2561, 'pera']]],
+        [[7173, 'nido'], [[2883, 'nube'], [2573, 'sopa'], [2594, 'tomate']]],
+      ];
+      const primero = (p) => p.normalize('NFD')[0];
+      document.getElementById('pareja').innerHTML = PAREJAS.map(
+        ([[n, p], opciones]) =>
+          `<li><span class="caja-picto caja-picto--modelo">${picto(n, p)}</span>${dibujo('flecha')}${opciones
+            .map(([m, q]) => `<span class="caja-picto">${picto(m, q)}</span>`)
+            .join('')}</li>`,
+      ).join('');
+      document.getElementById('pareja-solucion').textContent =
+        'Soluciones: ' +
+        PAREJAS.map(([[, p], opciones]) => {
+          const buenas = opciones.filter(([, q]) => primero(q) === primero(p));
+          if (buenas.length !== 1) throw new Error(`«${p}»: tiene ${buenas.length} parejas`);
+          return `${p}, ${buenas[0][1]}`;
+        }).join(' · ') +
+        '.';
+
+      // Nivel 3. Unir sonidos con letras, y los dibujos para buscar, desordenados
+      const UNIR_SONIDOS = ['sol', 'pan', 'oso', 'mano', 'pato', 'luna'];
+      document.getElementById('unir-sonidos').innerHTML = UNIR_SONIDOS.map(
+        (p) => `<li><span class="letras" aria-label="${p.split('').join(', ')}">${p
+          .split('')
+          .map((l) => `<span>${l}</span>`)
+          .join('')}</span><small>¿Qué palabra es?</small></li>`,
+      ).join('');
+      document.getElementById('banco').innerHTML = [
+        [2933, 'luna'],
+        [2488, 'oso'],
+        [2494, 'pan'],
+        [2563, 'pato'],
+        [7252, 'sol'],
+        [2928, 'mano'],
+      ]
+        .map(([n, p]) => `<li>${picto(n, p)}</li>`)
+        .join('');
+
+      // Nivel 3. Separar sonidos: una caja por sonido y una raya para su letra. Sin b ni v, ni c ni qu: una letra para cada sonido.
+      document.getElementById('separar').innerHTML = [
+        [4706, 'ola'],
+        [3129, 'mesa'],
+        [7166, 'moto'],
+        [3298, 'dedo'],
+      ]
+        .map(
+          ([n, p]) =>
+            `<li><span class="caja-picto">${picto(n, p)}</span><span class="cajas-sonido" aria-label="${p.length} cajas">${'<span></span>'.repeat(p.length)}</span></li>`,
+        )
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Portada: una ruleta con su flecha y tres tarjetas de loto
+      // ---------------------------------------------------------------------
+      // La flecha apunta al gorro (sector 5): cada sector k mira hacia 90 + 60 · k grados, y 390 es lo mismo que 30.
+      // Con 24 grados, la punta cae dentro del gorro sin taparlo entero.
+      const flechaPortada = flechaRuleta('rr').replace(
+        '<div class="flecha-pieza" aria-hidden="true">',
+        `<div class="flecha-pieza" aria-hidden="true" style="left:${C - 8}mm;top:${C - 9}mm;transform-origin:8mm 9mm;transform:rotate(24deg)">`,
+      );
+      document.getElementById('escena-ruleta').innerHTML =
+        `<div class="escena-ruleta__dentro">${discoRuleta(JUEGOS[3], JUEGOS[3].loto)}${flechaPortada}</div>`;
+      document.getElementById('escena-tarjetas').innerHTML = [
+        [JUEGOS[0], 0, 'left:1mm;top:12mm;transform:rotate(-8deg)'],
+        [JUEGOS[1], 1, 'left:47mm;top:4mm;transform:rotate(6deg)'],
+        [JUEGOS[5], 1, 'left:27mm;top:66mm;transform:rotate(-3deg)'],
+      ]
+        .map(([j, k, estilo]) => `<ul class="c-${j.color}" style="margin:0;padding:0;list-style:none">${tarjetaLoto(j.loto[k], 'position:absolute;' + estilo)}</ul>`)
+        .join('');
+
+      // ---------------------------------------------------------------------
+      // Para seguir: tres materiales de AL
+      // ---------------------------------------------------------------------
+      document.getElementById('seguir').innerHTML = [
+        ['tren-de-las-silabas', 'El tren de las sílabas', 'Sílabas y primer sonido.'],
+        ['cartilla-trabadas', 'Cartilla de sílabas trabadas', 'Doce grupos, de pl a tr.'],
+        ['diptongos-manipulativos', 'Diptongos manipulativos', 'Qué vocales van juntas.'],
+      ]
+        .map(
+          ([id, t, d]) =>
+            `<li><img src="../../public/portadas/${id}.webp" alt="" /><span><strong><a href="https://www.ideducando.es/material-gratuito/${id}/">${t}</a></strong>${d}</span></li>`,
+        )
+        .join('');
+
+      // Iconos sueltos
+      for (const el of document.querySelectorAll('[data-icono]')) el.outerHTML = dibujo(el.dataset.icono, el.className);
+    </script>
+  </body>
+</html>

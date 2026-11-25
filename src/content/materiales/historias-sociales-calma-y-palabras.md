@@ -2,7 +2,7 @@
 titulo: "Con calma y con palabras: cuatro historias sociales para los enfados, morder y compartir"
 resumen: "Cuatro historias muy cortas con pictogramas: cuando me enfado mucho, cuando tengo ganas de morder, digo lo que me pasa y comparto el material. Con versión para 3 años, plantilla y qué hacer en el momento."
 seccion: aula
-tipo: cuento
+tipo: historia-social
 etapas: [infantil, primaria]
 necesidades: [conducta, tea, tdl, discapacidad-intelectual, toda-la-clase]
 edades: "De 3 a 8 años"
