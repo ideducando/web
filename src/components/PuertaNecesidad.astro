@@ -52,10 +52,16 @@ const titulo = (id: string) => {
   if (!m) throw new Error(`Puerta de necesidad: no existe el material «${id}» (src/data/puertas-necesidad.json).`);
   return m.data.titulo;
 };
+// Cerradas, las barras dicen solo «Soy familia» o «Soy seño», para que ocupen una línea en el móvil.
+// La frase entera («Soy familia: mi peque tiene TEA») sale dentro, sin repetir el principio.
+const frase = (titulo: string, quien: string) => {
+  const resto = titulo.startsWith(`${quien}: `) ? titulo.slice(quien.length + 2) : titulo;
+  return resto.charAt(0).toUpperCase() + resto.slice(1);
+};
 const entradas = [
-  { clase: 'familia', ayuda: 'Por dónde empezar en casa', ...puerta.familia },
-  { clase: 'seno', ayuda: 'Por dónde empezar en clase', ...puerta.seno },
-];
+  { clase: 'familia', corto: 'Soy familia', ayuda: 'Por dónde empezar en casa', ...puerta.familia },
+  { clase: 'seno', corto: 'Soy seño', ayuda: 'Por dónde empezar en clase', ...puerta.seno },
+].map((e) => ({ ...e, frase: frase(e.titulo, e.corto) }));
 const pasosRuta = puerta.ruta.length === 1 ? '1 material' : `${puerta.ruta.length} materiales`;
 ---
 
@@ -65,11 +71,12 @@ const pasosRuta = puerta.ruta.length === 1 ? '1 material' : `${puerta.ruta.lengt
       <details class={`panel panel--${e.clase}`}>
         <summary>
           <span class="panel__texto">
-            <span class="panel__titulo">{e.titulo}</span>
+            <span class="panel__titulo">{e.corto}</span>
             <span class="panel__ayuda">{e.ayuda}</span>
           </span>
           <span class="panel__signo" aria-hidden="true" />
         </summary>
+        <p class="panel__frase">{e.frase}</p>
         <ol class="panel__lista">
           {e.pasos.map((p) => (
             <li>
@@ -200,6 +207,12 @@ const pasosRuta = puerta.ruta.length === 1 ? '1 material' : `${puerta.ruta.lengt
     .panel__signo {
       transition: none;
     }
+  }
+
+  .panel__frase {
+    margin: 0;
+    padding: 0.1rem 1rem 0.5rem;
+    font-weight: 700;
   }
 
   .panel__lista {

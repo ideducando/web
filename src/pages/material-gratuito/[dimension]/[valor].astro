@@ -71,6 +71,18 @@ const listaOrdenada = puerta
   />
 
   <section class="contenedor categoria" aria-labelledby="titulo-lista">
+    {puerta && <PuertaNecesidad puerta={puerta} materiales={materiales} />}
+
+    <h2 id="titulo-lista" class="categoria__cuenta">
+      {lista.length === 1 ? '1 material' : `${lista.length} materiales`}
+    </h2>
+    <ul class="rejilla">
+      {listaOrdenada.map((m) => <TarjetaMaterial material={m} />)}
+    </ul>
+
+    {puerta && datosPuertas && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
+
+    {/* Las demás opciones van debajo del material para que este salga casi arriba en el móvil (José, 25/11/2026). */}
     <nav class="categoria__otras" aria-label={`Otras opciones de ${grupo.nombre.toLowerCase()}`} data-pagefind-ignore>
       <p class="categoria__etiqueta">{grupo.plural}</p>
       <ul class="etiquetas">
@@ -89,17 +101,6 @@ const listaOrdenada = puerta
         }
       </ul>
     </nav>
-
-    {puerta && <PuertaNecesidad puerta={puerta} materiales={materiales} />}
-
-    <h2 id="titulo-lista" class="categoria__cuenta">
-      {lista.length === 1 ? '1 material' : `${lista.length} materiales`}
-    </h2>
-    <ul class="rejilla">
-      {listaOrdenada.map((m) => <TarjetaMaterial material={m} />)}
-    </ul>
-
-    {puerta && datosPuertas && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
 
     <p class="categoria__volver">
       <a href={ruta('/material-gratuito/')}>Ver todo el catálogo y filtrar por varias categorías</a>
@@ -121,7 +122,7 @@ const listaOrdenada = puerta
   }
 
   .categoria__otras {
-    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
   }
 
   .categoria__etiqueta {
