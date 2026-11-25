@@ -1,6 +1,6 @@
 {
   "comprobado": "2026-11-25",
-  "mostrar_murcia": false,
+  "mostrar_murcia": true,
   "necesidades": {
     "toda-la-clase": {
       "familia": {
@@ -140,6 +140,7 @@
         },
         {
           "nombre": "Federación de Autismo de la Región de Murcia (FAUM)",
+          "tipo": "asociacion",
           "que": "Agrupa a las asociaciones de familias de personas con autismo de la Región.",
           "url": null,
           "nota": "De momento no la enlazamos.",
@@ -214,6 +215,7 @@
         },
         {
           "nombre": "ADAHI",
+          "tipo": "asociacion",
           "que": "Asociación de ayuda al déficit de atención, con o sin hiperactividad. Apoya a las familias y tiene sedes en Cartagena, Murcia y otros municipios.",
           "url": "https://www.adahi.es/",
           "comprobado": "2026-11-25"
@@ -431,12 +433,14 @@
         },
         {
           "nombre": "Plena inclusión Región de Murcia",
+          "tipo": "asociacion",
           "que": "Federación de asociaciones de familias de personas con discapacidad intelectual y del desarrollo. En su web se busca la asociación más cercana.",
           "url": "https://plenainclusionmurcia.org/",
           "comprobado": "2026-11-25"
         },
         {
           "nombre": "Asociación para Personas con Síndrome de Down (ASSIDO)",
+          "tipo": "asociacion",
           "que": "Trabaja por las personas con síndrome de Down y con otras discapacidades intelectuales, y por sus familias.",
           "url": null,
           "nota": "De momento no la enlazamos.",
@@ -516,6 +520,7 @@
         },
         {
           "nombre": "FAMDIF/COCEMFE-Murcia",
+          "tipo": "asociacion",
           "que": "Federación de asociaciones murcianas de personas con discapacidad física y orgánica. Agrupa a dieciséis asociaciones.",
           "url": "https://famdif.org/",
           "comprobado": "2026-11-25"
@@ -584,12 +589,14 @@
         },
         {
           "nombre": "APANDA",
+          "tipo": "asociacion",
           "que": "Asociación de familias de niños y niñas con discapacidad auditiva, en Cartagena. Tiene atención temprana, logopedia y apoyo a las familias.",
           "url": "https://www.apanda.org/",
           "comprobado": "2026-11-25"
         },
         {
           "nombre": "ASPANPAL",
+          "tipo": "asociacion",
           "que": "Asociación de familias de niños y niñas con problemas de audición y lenguaje, en Murcia.",
           "url": "https://aspanpal.org/",
           "comprobado": "2026-11-25"
@@ -846,6 +853,7 @@
         },
         {
           "nombre": "Murcia Acoge",
+          "tipo": "asociacion",
           "que": "Asociación que acompaña a personas migrantes, con un área de educación. Tiene delegaciones en Cartagena, Murcia y otros cuatro municipios.",
           "url": "https://murcia-acoge.com/",
           "comprobado": "2026-11-25"

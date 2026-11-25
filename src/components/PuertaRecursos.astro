@@ -1,8 +1,8 @@
 ---
-// A quién acudir en la Región de Murcia, de cada necesidad (B-008, paso 1): servicios públicos y
-// asociaciones. En espera desde el 25/11/2026: José decide si sale. Mientras, no se enseña; para
-// enseñarlo, se pone "mostrar_murcia": true en src/data/puertas-necesidad.json. Va debajo del material
-// para que este salga casi arriba. Las apps no salen: la web no hace publicidad a nadie (José, 25/11/2026).
+// A quién acudir en la Región de Murcia, de cada necesidad (B-008, paso 1). Sale desde el 25/11/2026 solo
+// con servicios públicos: la web no hace publicidad de nadie, así que las asociaciones se guardan en
+// src/data/puertas-necesidad.json con "tipo": "asociacion" y no se enseñan, igual que no salen apps.
+// Con "mostrar_murcia": false se esconde entero. Va debajo del material para que este salga casi arriba.
 import { fecha } from '../lib/formatos';
 import type { Puerta } from './PuertaNecesidad.astro';
 
@@ -12,14 +12,16 @@ interface Props {
 }
 
 const { puerta, comprobado } = Astro.props;
+const publicos = puerta.murcia.filter((l) => l.tipo !== 'asociacion');
 ---
 
 {
-  puerta.murcia.length > 0 && (
+  publicos.length > 0 && (
     <section class="recursos-puerta" aria-labelledby="titulo-recursos" data-pagefind-ignore>
       <h2 id="titulo-recursos">A quién acudir en la Región de Murcia</h2>
+      <p class="recursos-puerta__entrada">Servicios públicos de la Región para el alumnado y sus familias.</p>
       <ul>
-        {puerta.murcia.map((l) => (
+        {publicos.map((l) => (
           <li>
             {l.url ? (
               <a href={l.url} rel="noopener">
@@ -51,8 +53,12 @@ const { puerta, comprobado } = Astro.props;
   }
 
   .recursos-puerta h2 {
-    margin: 0 0 1rem;
+    margin: 0 0 0.4rem;
     font-size: 1.3rem;
+  }
+
+  .recursos-puerta__entrada {
+    margin: 0 0 1rem;
   }
 
   .recursos-puerta ul {
