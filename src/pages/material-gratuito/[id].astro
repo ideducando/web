@@ -7,6 +7,7 @@ import Migas from '../../components/Migas.astro';
 import Icono from '../../components/Icono.astro';
 import ComoMontarlo from '../../components/ComoMontarlo.astro';
 import ProponMaterial from '../../components/ProponMaterial.astro';
+import ValorarMaterial from '../../components/ValorarMaterial.astro';
 import Galeria, { type Foto } from '../../components/Galeria.astro';
 import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
 import { ETAPAS, NECESIDADES, SECCIONES, TIPOS } from '../../data/taxonomias';
@@ -103,6 +104,16 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
             {d.borrador && <span class="borrador" data-pagefind-ignore>[BORRADOR]</span>}
             {d.titulo}
           </h1>
+          {
+            disponible && (
+              <p class="ficha__valoracion" data-valoracion-resumen hidden>
+                <a href="#valorar">
+                  <Icono nombre="estrella" />
+                  <span data-valoracion-texto />
+                </a>
+              </p>
+            )
+          }
           <p class="entradilla">{d.resumen}</p>
 
           <div class="ficha__compra" data-ficha-compra>
@@ -356,6 +367,16 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
   }
 
   {
+    disponible && (
+      <div class="seccion">
+        <div class="contenedor">
+          <ValorarMaterial id={material.id} titulo={d.titulo} />
+        </div>
+      </div>
+    )
+  }
+
+  {
     parecidos.length > 0 && (
       <section class="seccion seccion--blanca" aria-labelledby="titulo-parecidos" data-pagefind-ignore>
         <div class="contenedor">
@@ -503,6 +524,26 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
 
   .ficha__info h1 {
     font-size: clamp(1.9rem, 1.4rem + 2.2vw, 2.8rem);
+  }
+
+  /* La media de las valoraciones, junto al título. Sale solo cuando hay 5 o más (ValorarMaterial.astro). */
+  .ficha__valoracion {
+    margin: -0.35rem 0 0.9rem;
+  }
+
+  .ficha__valoracion a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+  }
+
+  .ficha__valoracion :global(svg) {
+    flex: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--marino);
+    fill: var(--amarillo);
   }
 
   .ficha__compra {

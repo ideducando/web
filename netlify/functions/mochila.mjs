@@ -2,9 +2,10 @@
 // del material. Si la persona marca la casilla del boletín, le manda además un correo para confirmarlo.
 // Si Brevo no puede (por ejemplo, porque se han gastado los 300 correos del día), contesta «enviado: false»
 // y la página enseña la descarga en pantalla: nadie se queda sin su material.
-import { brevo, enviosDeHoy, hayClave, json, LISTA_BOLETIN, vieneDeLaWeb } from '../lib/brevo.mjs';
+import { brevo, enviosDeHoy, hayClave, LISTA_BOLETIN } from '../lib/brevo.mjs';
 import { correoConfirmacion, correoMaterial } from '../lib/correos.mjs';
 import { firmar } from '../lib/firma.mjs';
+import { json, leerCatalogo, vieneDeLaWeb } from '../lib/web.mjs';
 
 export const config = {
   path: '/api/mochila',
@@ -19,19 +20,6 @@ const CORREOS_AL_DIA = 3;
 const CORREO = /^[^\s@<>()[\]\\,;:"']{1,64}@[^\s@<>()[\]\\,;:"']+\.[^\s@<>()[\]\\,;:"']{2,}$/;
 // El nombre solo puede llevar letras, espacios, apóstrofos y guiones: así nadie mete enlaces en nuestros correos.
 const NOMBRE = /^[\p{L}\p{M}][\p{L}\p{M} '’-]{0,39}$/u;
-
-// El catálogo se lee de la propia web (/datos/mochila.json, src/pages/datos/mochila.json.ts) y se recuerda
-// 10 minutos. Los enlaces del correo salen siempre de aquí, nunca de lo que mande el formulario.
-let catalogo = { base: '', hora: 0, porId: new Map() };
-
-async function leerCatalogo(base) {
-  if (catalogo.base === base && Date.now() - catalogo.hora < 10 * 60 * 1000) return catalogo.porId;
-  const respuesta = await fetch(`${base}/datos/mochila.json`, { signal: AbortSignal.timeout(4000) });
-  if (!respuesta.ok) throw new Error(`el catálogo ha contestado ${respuesta.status}`);
-  const lista = await respuesta.json();
-  catalogo = { base, hora: Date.now(), porId: new Map(lista.map((m) => [m.id, m])) };
-  return catalogo.porId;
-}
 
 function limpiarNombre(texto) {
   const nombre = String(texto ?? '').normalize('NFC').replace(/\s+/g, ' ').trim();

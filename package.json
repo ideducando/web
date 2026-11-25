@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
+    "test": "node --test \"netlify/pruebas/*.test.mjs\"",
     "astro": "astro"
   },
   "engines": {
@@ -19,6 +20,7 @@
     "@fontsource/atkinson-hyperlegible": "5.3.0",
     "@fontsource/outfit": "5.3.0",
     "@fontsource/young-serif": "5.3.0",
+    "@netlify/blobs": "11.1.11",
     "astro": "7.3.8"
   },
   "devDependencies": {
