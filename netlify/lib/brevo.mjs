@@ -59,22 +59,3 @@ export async function enviosDeHoy(correo) {
   }
   return cuenta;
 }
-
-/** Respuesta JSON que nadie guarda en caché. */
-export function json(estado, datos) {
-  return new Response(JSON.stringify(datos), {
-    status: estado,
-    headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
-  });
-}
-
-/** Las funciones solo atienden peticiones hechas desde la propia web (o desde su vista previa). */
-export function vieneDeLaWeb(peticion) {
-  const origen = peticion.headers.get('origin');
-  if (!origen) return false;
-  try {
-    return new URL(origen).host === new URL(peticion.url).host;
-  } catch {
-    return false;
-  }
-}

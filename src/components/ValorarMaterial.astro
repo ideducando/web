@@ -1,0 +1,348 @@
+---
+// «¿Te ha servido este material?»: valoraciones con estrellas en cada ficha (José, 25/11/2026).
+// Son anónimas y sin cookies: el voto va a netlify/functions/valorar.mjs, que solo suma estrellas, y el
+// navegador recuerda que ya has votado (src/scripts/valoraciones.ts). La media sale con 5 votos o más.
+// Las estrellas necesitan JavaScript; sin él se ve solo el enlace para contarnos por correo cómo ha ido.
+import sitio from '../data/sitio.json';
+import { ruta } from '../lib/rutas';
+import Icono from './Icono.astro';
+
+interface Props {
+  /** Identificador del material: el nombre de su archivo en src/content/materiales. */
+  id: string;
+  titulo: string;
+}
+
+const { id, titulo } = Astro.props;
+const corto = titulo.split(/:\s/)[0];
+const lineas = [
+  'Hola, equipo de IdEducando:',
+  '',
+  `Os escribo sobre «${corto}».`,
+  '',
+  'Dónde lo hemos usado (en el aula, en casa o en los dos sitios): ',
+  'Qué ha funcionado: ',
+  'Qué cambiaríais o qué os ha faltado: ',
+  '',
+  'Gracias.',
+];
+// Saltos de línea \r\n, como pide la norma de los enlaces mailto (RFC 6068).
+const enlace =
+  `mailto:${sitio.correo}?subject=${encodeURIComponent(`Cómo nos ha ido con «${corto}»`)}` +
+  `&body=${encodeURIComponent(lineas.join('\r\n'))}`;
+---
+
+<section
+  class="valorar"
+  id="valorar"
+  aria-labelledby="titulo-valorar"
+  data-valorar={id}
+  data-envio={ruta('/api/valorar')}
+  data-lista={ruta('/api/valoraciones')}
+  data-pagefind-ignore
+>
+  <h2 id="titulo-valorar">¿Te ha servido este material?</h2>
+
+  <div class="valorar__votar" data-valorar-js hidden>
+    <p class="valorar__media" data-valorar-media hidden></p>
+    <form class="valorar__form" data-valorar-form novalidate>
+      <fieldset>
+        <legend>Valóralo de 1 a 5 estrellas</legend>
+        <div class="valorar__estrellas">
+          {
+            [1, 2, 3, 4, 5].map((n) => (
+              <Fragment>
+                <input
+                  class="valorar__radio solo-lectores"
+                  type="radio"
+                  name="estrellas"
+                  value={n}
+                  id={`estrellas-${n}`}
+                />
+                <label class="valorar__estrella" for={`estrellas-${n}`}>
+                  <Icono nombre="estrella" />
+                  <span class="solo-lectores">{n === 1 ? '1 estrella' : `${n} estrellas`}</span>
+                </label>
+              </Fragment>
+            ))
+          }
+          <span class="valorar__eleccion" data-valorar-eleccion aria-hidden="true"></span>
+        </div>
+      </fieldset>
+      <button type="submit" class="boton boton--secundario" data-valorar-boton>Enviar mi valoración</button>
+    </form>
+    <p class="valorar__gracias" data-valorar-gracias tabindex="-1" hidden>
+      <Icono nombre="ok" /><span data-valorar-gracias-texto></span>
+    </p>
+    <p class="valorar__estado" role="status" data-valorar-estado></p>
+    <p class="valorar__nota">
+      Las valoraciones son anónimas: solo guardamos cuántas estrellas recibe cada material y no comprobamos quién
+      vota.
+    </p>
+  </div>
+
+  <p class="valorar__contar">
+    <a href={enlace}><Icono nombre="correo" />Cuéntanos cómo te ha ido</a>
+  </p>
+  <p class="valorar__nota">
+    Lo leemos para mejorar el material y no lo publicamos. Por favor, no escribas nombres ni datos que permitan
+    reconocer a ningún peque.
+  </p>
+</section>
+
+<script>
+  import {
+    enviarVoto,
+    estrellasEnTexto,
+    miVoto,
+    pedirResumenes,
+    textoMedia,
+    type Resumen,
+  } from '../scripts/valoraciones';
+
+  const seccion = document.querySelector<HTMLElement>('[data-valorar]');
+
+  if (seccion) {
+    const id = seccion.dataset.valorar!;
+    const elemento = <T extends HTMLElement = HTMLElement>(selector: string) => seccion.querySelector<T>(selector)!;
+    const votar = elemento('[data-valorar-js]');
+    const media = elemento('[data-valorar-media]');
+    const formulario = elemento<HTMLFormElement>('[data-valorar-form]');
+    const eleccion = elemento('[data-valorar-eleccion]');
+    const gracias = elemento('[data-valorar-gracias]');
+    const graciasTexto = elemento('[data-valorar-gracias-texto]');
+    const estado = elemento('[data-valorar-estado]');
+    // El resumen de arriba, junto al título de la ficha: sale solo cuando ya hay media.
+    const arriba = document.querySelector<HTMLElement>('[data-valoracion-resumen]');
+    const arribaTexto = arriba?.querySelector<HTMLElement>('[data-valoracion-texto]');
+    const elegida = () => formulario.querySelector<HTMLInputElement>('input[name="estrellas"]:checked');
+    let enviando = false;
+
+    const pintarMedia = (resumen: Resumen | undefined) => {
+      const votos = resumen?.votos ?? 0;
+      const texto = resumen ? textoMedia(resumen) : null;
+      if (texto) {
+        media.textContent = `Media: ${texto}.`;
+        if (arriba && arribaTexto) {
+          arribaTexto.textContent = texto;
+          arriba.hidden = false;
+        }
+      } else if (votos > 0) {
+        media.textContent = `Lleva ${votos === 1 ? '1 valoración' : `${votos} valoraciones`}. La media sale a partir de 5.`;
+      } else {
+        media.textContent = 'Todavía nadie lo ha valorado: puedes ser la primera persona.';
+      }
+      media.hidden = false;
+    };
+
+    const darGracias = (estrellas: number, ahora: boolean) => {
+      formulario.hidden = true;
+      graciasTexto.textContent = ahora
+        ? `¡Gracias! Le has dado ${estrellasEnTexto(estrellas)} de 5.`
+        : `Ya le diste ${estrellasEnTexto(estrellas)} de 5. ¡Gracias!`;
+      gracias.hidden = false;
+    };
+
+    votar.hidden = false;
+    const anterior = miVoto(id);
+    if (anterior) darGracias(anterior, false);
+    pedirResumenes(seccion.dataset.lista!).then((todas) => {
+      if (todas) pintarMedia(todas[id]);
+    });
+
+    formulario.addEventListener('change', () => {
+      const marcada = elegida();
+      eleccion.textContent = marcada ? `${marcada.value} de 5` : '';
+      estado.textContent = '';
+    });
+
+    formulario.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      if (enviando) return;
+      const marcada = elegida();
+      if (!marcada) {
+        estado.textContent = 'Elige primero cuántas estrellas le das.';
+        formulario.querySelector<HTMLInputElement>('input[name="estrellas"]')?.focus();
+        return;
+      }
+      const estrellas = Number(marcada.value);
+      enviando = true;
+      estado.textContent = 'Enviando tu valoración…';
+      const resultado = await enviarVoto(seccion.dataset.envio!, id, estrellas);
+      enviando = false;
+      if (resultado.ok) {
+        estado.textContent = '';
+        darGracias(estrellas, true);
+        pintarMedia(resultado.resumen);
+        gracias.focus();
+      } else {
+        estado.textContent =
+          resultado.motivo === 'muchas'
+            ? 'Has valorado muchos materiales seguidos. Espera unos minutos y vuelve a probar.'
+            : 'No se ha podido guardar tu valoración. Prueba otra vez dentro de un rato.';
+      }
+    });
+  }
+</script>
+
+<style>
+  .valorar {
+    display: grid;
+    gap: 0.8rem;
+    justify-items: start;
+    max-width: 42rem;
+    padding: 1.5rem 1.4rem;
+    border: 2px solid var(--amarillo);
+    border-radius: 1.25rem;
+    background: var(--blanco);
+  }
+
+  .valorar h2 {
+    margin: 0;
+    font-size: 1.45rem;
+  }
+
+  .valorar p {
+    margin: 0;
+  }
+
+  .valorar__votar {
+    display: grid;
+    gap: 0.8rem;
+    justify-items: start;
+  }
+
+  .valorar__media {
+    font-weight: 600;
+  }
+
+  .valorar__form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .valorar fieldset {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .valorar legend {
+    padding: 0;
+    margin-bottom: 0.2rem;
+    font-size: 0.95rem;
+    color: var(--texto-suave);
+  }
+
+  .valorar__estrellas {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Cada estrella mide 46 × 46 píxeles: se puede pulsar bien con el dedo. */
+  .valorar__estrella {
+    display: inline-grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: var(--radio-pequeno);
+    color: var(--marino);
+    cursor: pointer;
+  }
+
+  .valorar__estrella :global(svg) {
+    width: 2.25rem;
+    height: 2.25rem;
+    fill: transparent;
+    stroke-width: 1.6;
+    transition: fill 0.12s ease;
+  }
+
+  /* Se rellenan las estrellas hasta la elegida (la elegida y todas las de antes). */
+  .valorar__radio:checked + .valorar__estrella :global(svg),
+  .valorar__estrella:has(~ .valorar__radio:checked) :global(svg) {
+    fill: var(--amarillo);
+  }
+
+  /* Con ratón, al pasar por encima se ve cómo quedaría. */
+  @media (hover: hover) {
+    .valorar__estrellas:hover .valorar__estrella :global(svg) {
+      fill: transparent;
+    }
+
+    .valorar__estrellas:hover .valorar__estrella:hover :global(svg),
+    .valorar__estrellas:hover .valorar__estrella:has(~ .valorar__estrella:hover) :global(svg) {
+      fill: var(--amarillo);
+    }
+  }
+
+  .valorar__radio:focus-visible + .valorar__estrella {
+    outline: 3px solid var(--marino);
+    outline-offset: 1px;
+  }
+
+  /* En el modo de alto contraste de Windows se usan los colores del sistema. */
+  @media (forced-colors: active) {
+    .valorar__estrella :global(svg) {
+      forced-color-adjust: none;
+      color: CanvasText;
+      fill: Canvas;
+    }
+
+    .valorar__radio:checked + .valorar__estrella :global(svg),
+    .valorar__estrella:has(~ .valorar__radio:checked) :global(svg) {
+      fill: Highlight;
+    }
+  }
+
+  .valorar__eleccion {
+    margin-left: 0.5rem;
+    font-family: var(--letra-titulos);
+    font-weight: 600;
+  }
+
+  .valorar__gracias {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+
+  .valorar__gracias :global(svg) {
+    flex: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    color: var(--verde-texto);
+  }
+
+  /* Vacío no ocupa sitio, pero sigue ahí para que los lectores de pantalla lean lo que aparezca. */
+  .valorar__estado:empty {
+    margin-top: -0.8rem;
+  }
+
+  .valorar__nota {
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .valorar .valorar__contar {
+    margin-top: 0.4rem;
+  }
+
+  .valorar__contar a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 600;
+  }
+
+  .valorar__contar :global(svg) {
+    flex: none;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+</style>

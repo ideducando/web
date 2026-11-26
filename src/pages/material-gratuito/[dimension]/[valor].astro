@@ -80,7 +80,7 @@ const listaOrdenada = puerta
       {listaOrdenada.map((m) => <TarjetaMaterial material={m} />)}
     </ul>
 
-    {/* «A quién acudir en Murcia», en espera hasta que José decida si sale (25/11/2026). */}
+    {/* «A quién acudir en Murcia», solo con servicios públicos (25/11/2026). */}
     {puerta && datosPuertas?.mostrar_murcia && <PuertaRecursos puerta={puerta} comprobado={datosPuertas.comprobado} />}
 
     {/* Las demás opciones van debajo del material para que este salga casi arriba en el móvil (José, 25/11/2026). */}

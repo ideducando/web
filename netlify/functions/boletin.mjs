@@ -2,7 +2,8 @@
 // cuando la persona pulsa «Sí, quiero el boletín». Si el código es bueno y tiene menos de 7 días, su correo
 // entra en la lista «Boletín IdEducando» de Brevo. Hace falta pulsar el botón, y no basta con abrir el
 // enlace, porque algunos antivirus de correo abren solos los enlaces y apuntarían a gente sin querer.
-import { brevo, hayClave, json, LISTA_BOLETIN, vieneDeLaWeb } from '../lib/brevo.mjs';
+import { brevo, hayClave, LISTA_BOLETIN } from '../lib/brevo.mjs';
+import { json, vieneDeLaWeb } from '../lib/web.mjs';
 import { comprobar } from '../lib/firma.mjs';
 
 export const config = {

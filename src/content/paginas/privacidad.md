@@ -1,7 +1,7 @@
 ---
 titulo: "Privacidad"
 entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Aquí te contamos qué datos tratamos y para qué."
-actualizado: 2026-11-04
+actualizado: 2026-11-25
 borrador: false
 ---
 
@@ -11,6 +11,7 @@ borrador: false
 - El boletín va aparte: solo te llega si marcas su casilla y después lo confirmas con el botón del correo que te mandamos.
 - Los correos los envía Brevo, por encargo nuestro, desde servidores de la Unión Europea.
 - No hay cuentas ni contraseñas.
+- Las valoraciones con estrellas son anónimas: solo guardamos cuántas estrellas recibe cada material.
 - No hay cookies de seguimiento ni herramientas de analítica.
 - Las letras de la web se sirven desde nuestro propio alojamiento, no desde Google.
 - El buscador funciona dentro de tu navegador.
@@ -41,6 +42,14 @@ Lo mismo vale para el botón «Ponte en contacto con nosotros» de la [tienda](/
 
 **Darte de baja.** Cada boletín lleva al final un enlace para darte de baja. También puedes escribirnos a [hola@ideducando.es](mailto:hola@ideducando.es).
 
+## Las valoraciones con estrellas
+
+En la ficha de cada material gratuito puedes decirnos con estrellas, de 1 a 5, si te ha servido. Es anónimo: no te pedimos ningún dato y no guardamos quién vota. Solo sumamos tu estrella a las del material. La web enseña la media cuando hay 5 valoraciones o más.
+
+Las cuentas se guardan en Netlify Blobs, el almacén de datos de Netlify, en un servidor de Fráncfort (Alemania). Para frenar abusos, Netlify limita cuántas valoraciones pueden llegar en pocos minutos desde la misma conexión, con los datos técnicos que explicamos en el apartado siguiente. Nosotros no guardamos tu dirección IP.
+
+El enlace «Cuéntanos cómo te ha ido» abre tu programa de correo con un mensaje para nosotros, como explicamos en «Si nos escribes». Lo leemos para mejorar el material y no lo publicamos.
+
 ## El alojamiento de la web
 
 La web está alojada en Netlify, un servicio de Netlify, Inc. Como cualquier servidor, registra datos técnicos de cada visita, como la dirección IP, por seguridad. Netlify es una empresa de Estados Unidos que está adherida al Marco de Privacidad de Datos UE-EE. UU., el acuerdo que permite enviar datos de la Unión Europea a empresas de ese país que se comprometen a protegerlos igual. Lo explica en su [política de privacidad](https://www.netlify.com/privacy/).
@@ -48,6 +57,8 @@ La web está alojada en Netlify, un servicio de Netlify, Inc. Como cualquier ser
 ## Lo que se guarda en tu navegador
 
 La mochila de descargas recuerda en tu navegador qué materiales has elegido hasta que los pides, y la web recuerda que ya viste la ventana de bienvenida para no enseñártela otra vez. Esos datos no salen de tu dispositivo.
+
+Cuando valoras un material, tu navegador recuerda cuántas estrellas le diste, para no pedírtelo otra vez y enseñarte tu valoración. Ese dato no sale de tu dispositivo. Es un almacenamiento necesario para el servicio que pides, por lo que no requiere consentimiento según el artículo 22.2 de la LSSI. Puedes borrarlo desde los ajustes de tu navegador.
 
 La [lista para revisar la programación](/oposiciones/programacion/) guarda tus marcas en el almacenamiento local de tu navegador para que no las pierdas al volver. Ese dato no sale de tu dispositivo y no lo vemos. Es un almacenamiento necesario para el servicio que pides, por lo que no requiere consentimiento según el artículo 22.2 de la LSSI. Puedes borrarlo con el botón «Borrar mis marcas» o desde los ajustes de tu navegador.
 
