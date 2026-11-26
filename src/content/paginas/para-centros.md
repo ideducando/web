@@ -1,7 +1,7 @@
 ---
 titulo: "Para centros"
 entradilla: "Material para imprimir, sin cuentas y sin datos del alumnado. Lo que un equipo directivo o un claustro quiere saber antes de usar IdEducando en el cole."
-descripcion: "IdEducando en el cole: material en papel, sin cuentas ni datos del alumnado, sin anuncios ni analítica, y cómo encaja con la estrategia digital LIBRE de la Región de Murcia."
+descripcion: "IdEducando en el cole: material en papel, sin cuentas ni datos del alumnado, sin anuncios ni cookies de seguimiento, y cómo encaja con la estrategia digital LIBRE de la Región de Murcia."
 actualizado: 2026-11-24
 borrador: false
 ---
@@ -18,7 +18,7 @@ IdEducando publica material gratuito de Pedagogía Terapéutica (PT) e Infantil 
 
 ## Sin anuncios ni seguimiento
 
-La web no lleva anuncios, ni cookies de seguimiento, ni analítica de terceros. Se puede abrir en el ordenador del aula o de la sala de profesores sin que ningún servicio de publicidad siga a quien la usa.
+La web no lleva anuncios ni cookies de seguimiento. Solo cuenta las visitas, sin cookies y sin saber quién las hace. Se puede abrir en el ordenador del aula o de la sala de profesores sin que ningún servicio de publicidad siga a quien la usa.
 
 ## Papel y estrategia digital en Murcia
 

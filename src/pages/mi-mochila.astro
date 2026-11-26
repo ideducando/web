@@ -278,6 +278,7 @@ const demostracion = sitio.descargas.modo !== 'correo' || !sitio.descargas.envio
   import { alCambiarMochila, anadirAMochila, leerMochila, quitarDeMochila, vaciarMochila } from '../scripts/mochila';
   import { crearZip } from '../scripts/zip';
   import { formatoPeso } from '../lib/peso';
+  import { contar } from '../lib/visitas';
 
   interface Material {
     id: string;
@@ -507,6 +508,7 @@ const demostracion = sitio.descargas.modo !== 'correo' || !sitio.descargas.envio
     const nombre = String(datos.get('nombre') ?? '').trim();
     pedidos = materiales;
     if (respuesta?.enviado) {
+      contar('Mochila: correo enviado');
       mostrarEnviado(String(datos.get('correo') ?? '').trim(), nombre, respuesta.boletin);
       return;
     }
@@ -516,6 +518,7 @@ const demostracion = sitio.descargas.modo !== 'correo' || !sitio.descargas.envio
       : respuesta.motivo === 'repetido'
         ? 'Hoy ya te hemos mandado este correo varias veces, así que aquí tienes el material para descargarlo.'
         : 'Ahora mismo no podemos mandarte el correo, así que aquí tienes el material para descargarlo.';
+    contar('Mochila: descarga en pantalla');
     mostrarDescargas(materiales, nombre, aviso);
     vaciarMochila();
   });
@@ -558,8 +561,10 @@ const demostracion = sitio.descargas.modo !== 'correo' || !sitio.descargas.envio
     .split(',')
     .map((id) => porId.get(id.trim()))
     .filter((m): m is Material => Boolean(m));
-  if (delCorreo.length) mostrarDescargas(delCorreo, '', '', true);
-  else pintar();
+  if (delCorreo.length) {
+    contar('Mochila: descarga desde el correo');
+    mostrarDescargas(delCorreo, '', '', true);
+  } else pintar();
   alCambiarMochila(pintar);
 </script>
 

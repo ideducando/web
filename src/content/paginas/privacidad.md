@@ -1,6 +1,6 @@
 ---
 titulo: "Privacidad"
-entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Aquí te contamos qué datos tratamos y para qué."
+entradilla: "Esta web no te sigue: no usa cookies de seguimiento y cuenta las visitas sin saber quién eres. Aquí te contamos qué datos tratamos y para qué."
 actualizado: 2026-11-26
 borrador: false
 ---
@@ -13,7 +13,7 @@ borrador: false
 - «¿Lo necesitas montado?» nos manda tu nombre y tu correo o tu teléfono para ponernos en contacto contigo. Solo para eso.
 - No hay cuentas ni contraseñas.
 - Las valoraciones con estrellas son anónimas: solo guardamos cuántas estrellas recibe cada material.
-- No hay cookies de seguimiento ni herramientas de analítica.
+- No hay cookies de seguimiento. Contamos las visitas con Umami, sin cookies y sin saber quién eres.
 - Las letras de la web se sirven desde nuestro propio alojamiento, no desde Google.
 - El buscador funciona dentro de tu navegador.
 
@@ -68,6 +68,22 @@ El enlace «Cuéntanos cómo te ha ido» abre tu programa de correo con un mensa
 ## El alojamiento de la web
 
 La web está alojada en Netlify, un servicio de Netlify, Inc. Como cualquier servidor, registra datos técnicos de cada visita, como la dirección IP, por seguridad. Netlify es una empresa de Estados Unidos que está adherida al Marco de Privacidad de Datos UE-EE. UU., el acuerdo que permite enviar datos de la Unión Europea a empresas de ese país que se comprometen a protegerlos igual. Lo explica en su [política de privacidad](https://www.netlify.com/privacy/).
+
+## Las estadísticas de visitas
+
+Para saber qué materiales se usan más y qué podemos mejorar, contamos las visitas con Umami Cloud.
+
+**Qué datos.** Qué páginas se ven, desde qué web llegas, el tipo de dispositivo, el navegador y su idioma, el sistema, el tamaño de la pantalla y el país o la región, que salen de tu dirección IP. También sumamos unos contadores: cuántos materiales se añaden a la mochila y cuáles, cuántos correos de material se envían, cuántas altas del boletín se confirman y cuántas peticiones de «¿Lo necesitas montado?» llegan, y de qué material. Nunca tu correo, tu nombre ni lo que escribes en los formularios.
+
+**Cómo.** Sin cookies y sin guardar nada en tu dispositivo. Umami usa tu dirección IP solo en el momento, para calcular un código que agrupa las páginas de una misma visita y que cambia cada mes, y no la guarda en las estadísticas. Tampoco te sigue de una web a otra. Las direcciones de las páginas llegan sin lo que va detrás del «?» o del «#», que es donde viajan los códigos de nuestros correos.
+
+**Base legal.** Nuestro interés legítimo en saber cómo se usa la web para mejorarla (artículo 6.1.f del RGPD).
+
+**Quién los trata.** Umami Software, Inc. (San Francisco, Estados Unidos), por encargo nuestro y con su [acuerdo de tratamiento de datos](https://umami.is/dpa). Guarda las estadísticas en su región de la Unión Europea. Algunos de sus proveedores están en Estados Unidos: para esos envíos, el acuerdo usa las cláusulas contractuales tipo de la Comisión Europea. Más detalles en su [política de privacidad](https://umami.is/privacy).
+
+**Cuánto tiempo.** Seis meses. Después se borran.
+
+**Si no quieres que contemos tu visita.** Activa en tu navegador la opción «No rastrear» (en inglés, Do Not Track), si la tiene: la web la respeta y no envía nada. Un bloqueador de rastreo también lo impide.
 
 ## Lo que se guarda en tu navegador
 

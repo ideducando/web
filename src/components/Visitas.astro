@@ -1,0 +1,24 @@
+---
+// Estadísticas de visitas con Umami Cloud (José, 26/11/2026; datos y contadores en src/lib/visitas.ts).
+// - data-domains: solo cuenta en www.ideducando.es.
+// - data-exclude-search y data-exclude-hash: las direcciones llegan sin lo que va detrás de «?» y de «#», porque
+//   ahí viajan códigos de los correos (?t= del boletín, ?descargar= de Mi mochila).
+// - data-do-not-track: respeta la opción «No rastrear» del navegador.
+// Con el id vacío no se pinta nada.
+import { UMAMI } from '../lib/visitas';
+---
+
+{
+  UMAMI.id && (
+    <script
+      is:inline
+      defer
+      src={UMAMI.script}
+      data-website-id={UMAMI.id}
+      data-domains={UMAMI.dominio}
+      data-exclude-search="true"
+      data-exclude-hash="true"
+      data-do-not-track="true"
+    ></script>
+  )
+}

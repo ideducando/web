@@ -142,6 +142,8 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
                     class="boton boton--descarga ficha__boton"
                     data-mochila-anadir={material.id}
                     data-titulo={d.titulo}
+                    data-umami-event="Mochila: añadir"
+                    data-umami-event-material={material.id}
                     hidden
                   >
                     <Icono nombre="mochila" />

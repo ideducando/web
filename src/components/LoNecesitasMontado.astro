@@ -174,6 +174,8 @@ const enlace =
 </div>
 
 <script>
+  import { contar } from '../lib/visitas';
+
   // Lo que contesta la función de Netlify (netlify/functions/montaje.mjs) y lo que se le dice a la persona.
   const ERRORES: Record<string, string> = {
     nombre: 'Escribe tu nombre y apellidos, solo con letras.',
@@ -288,6 +290,8 @@ const enlace =
         return avisar('fallo');
       }
 
+      // Solo qué material es: ni el nombre ni el contacto van a las estadísticas.
+      contar('Montaje: petición enviada', { material: String(datos.get('producto') ?? '') });
       const nombre = String(datos.get('nombre') ?? '').trim().split(/\s+/)[0];
       elemento('[data-montado-gracias-texto]').textContent = nombre ? `¡Recibido, ${nombre}!` : '¡Recibido!';
       formulario.hidden = true;
