@@ -125,13 +125,7 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
               Se abre tu programa de correo con el mensaje empezado. Si no se abre, escríbenos a{' '}
               <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>.
             </p>
-            {
-              pedirMontado && (
-                <p class="bloqueo__nota">
-                  <a href="#lo-necesitas-montado">¿Lo necesitas montado? Déjanos tus datos</a>
-                </p>
-              )
-            }
+            {pedirMontado && <LoNecesitasMontado producto={`tienda:${producto.id}`} titulo={d.titulo} />}
           </div>
 
           <p class={`estado-tienda estado-tienda--${estado.color}`}>
@@ -240,16 +234,6 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
       </dl>
     </aside>
   </div>
-
-  {
-    pedirMontado && (
-      <div class="seccion">
-        <div class="contenedor">
-          <LoNecesitasMontado producto={`tienda:${producto.id}`} titulo={d.titulo} />
-        </div>
-      </div>
-    )
-  }
 
   {
     relacionado && (
@@ -373,7 +357,6 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
     color: var(--texto-suave);
     overflow-wrap: anywhere;
   }
-
   .estado-tienda {
     margin-block: 0 1rem;
     padding: 0.7rem 0.9rem;

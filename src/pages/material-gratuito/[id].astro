@@ -179,6 +179,9 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
                       <a href="mailto:hola@ideducando.es">hola@ideducando.es</a> y te lo enviamos.
                     </p>
                   </noscript>
+                  {/* Las dos salidas, juntas en el recuadro: el PDF gratis o pedirlo montado, con el formulario
+                      de este material ahí mismo (José, 26/11/2026). */}
+                  {pedirMontado && <LoNecesitasMontado producto={`material:${material.id}`} titulo={d.titulo} gratis />}
                 </>
               ) : (
                 <p class="ficha__pronto">
@@ -193,14 +196,6 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
               <p class="ficha__montaje">
                 <Icono nombre="lista" />
                 <a href="#como-montarlo">Mira qué necesitas y cómo montarlo, paso a paso</a>
-              </p>
-            )
-          }
-          {
-            pedirMontado && (
-              <p class="ficha__montaje">
-                <Icono nombre="manos" />
-                <a href="#lo-necesitas-montado">¿Lo necesitas montado? Déjanos tus datos</a>
               </p>
             )
           }
@@ -375,16 +370,6 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
         resultado={d.resultado}
         cuidados={d.cuidados}
       />
-    )
-  }
-
-  {
-    pedirMontado && (
-      <div class="seccion">
-        <div class="contenedor">
-          <LoNecesitasMontado producto={`material:${material.id}`} titulo={d.titulo} gratis />
-        </div>
-      </div>
     )
   }
 
@@ -605,7 +590,6 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
     font-weight: 400;
     white-space: nowrap;
   }
-
   .ficha__pronto {
     margin: 0;
   }
