@@ -12,7 +12,8 @@
 
 # Funciones de Netlify: trocitos de código que solo se encienden cuando alguien los usa.
 # mochila.mjs manda por correo, con Brevo, el material de «Mi mochila» y boletin.mjs confirma el alta
-# en el boletín. Usan la variable secreta BREVO_API_KEY, que está en Netlify y nunca en el repositorio.
+# en el boletín. montaje.mjs avisa a hola@ de cada «¿Lo necesitas montado?» de las fichas y la tienda.
+# Usan la variable secreta BREVO_API_KEY, que está en Netlify y nunca en el repositorio.
 # valorar.mjs suma las valoraciones con estrellas y valoraciones.mjs da las medias: guardan solo
 # cuántas estrellas recibe cada material, en Netlify Blobs, sin ninguna clave.
 # Cada uso gasta una fracción mínima de crédito: del orden de 5 créditos por cada 1.000 peticiones.

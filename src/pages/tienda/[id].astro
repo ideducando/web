@@ -8,10 +8,12 @@ import Icono from '../../components/Icono.astro';
 import Galeria from '../../components/Galeria.astro';
 import TarjetaTienda from '../../components/TarjetaTienda.astro';
 import TarjetaMaterial from '../../components/TarjetaMaterial.astro';
+import LoNecesitasMontado from '../../components/LoNecesitasMontado.astro';
 import sitio from '../../data/sitio.json';
 import { ESTADOS_TIENDA, PUBLICOS, TIPOS_TIENDA } from '../../data/taxonomias';
 import { fecha, fechaISO } from '../../lib/formatos';
 import { enlaceContacto, fotosDe, productosOrdenados, type Producto } from '../../lib/tienda';
+import { productoSeMonta } from '../../lib/montado';
 import { ruta } from '../../lib/rutas';
 
 export async function getStaticPaths() {
@@ -28,6 +30,8 @@ const { producto, productos } = Astro.props;
 const d = producto.data;
 const { Content } = await render(producto);
 const fotos = fotosDe(producto);
+// «¿Lo necesitas montado?» (José, 26/11/2026): en todo menos en la asesoría por videollamada.
+const pedirMontado = productoSeMonta(producto);
 
 // Filas de la tabla fija (B-026): completa en lo que lleva piezas y corta en lo que es de papel.
 // Las páginas y los derechos ya tienen su fila en la ficha técnica.
@@ -121,6 +125,13 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
               Se abre tu programa de correo con el mensaje empezado. Si no se abre, escríbenos a{' '}
               <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>.
             </p>
+            {
+              pedirMontado && (
+                <p class="bloqueo__nota">
+                  <a href="#lo-necesitas-montado">¿Lo necesitas montado? Déjanos tus datos</a>
+                </p>
+              )
+            }
           </div>
 
           <p class={`estado-tienda estado-tienda--${estado.color}`}>
@@ -229,6 +240,16 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
       </dl>
     </aside>
   </div>
+
+  {
+    pedirMontado && (
+      <div class="seccion">
+        <div class="contenedor">
+          <LoNecesitasMontado producto={`tienda:${producto.id}`} titulo={d.titulo} />
+        </div>
+      </div>
+    )
+  }
 
   {
     relacionado && (

@@ -44,16 +44,16 @@ export async function brevo(ruta, { metodo = 'GET', cuerpo } = {}) {
 }
 
 /**
- * Cuántos correos de cada etiqueta («mochila», «boletin») ha pedido hoy la web para esta dirección,
- * según el registro de Brevo. Sirve de freno: así nadie puede usar el formulario para llenar el buzón
- * de otra persona. Si Brevo no contesta, cuenta 0 para no dejar a nadie sin su material; lo frena
- * igualmente el límite por conexión de la función.
+ * Cuántos correos de cada etiqueta («mochila», «boletin», «montaje») ha pedido hoy la web para esta
+ * dirección, según el registro de Brevo. Sirve de freno: así nadie puede usar un formulario para llenar
+ * el buzón de otra persona ni el nuestro. Si Brevo no contesta, cuenta 0 para no dejar a nadie sin su
+ * material; lo frena igualmente el límite por conexión de cada función.
  */
 export async function enviosDeHoy(correo) {
   const consulta = new URLSearchParams({ email: correo, event: 'requests', days: '1', limit: '50' });
   const respuesta = await brevo(`/smtp/statistics/events?${consulta}`);
   if (!respuesta.ok) console.warn(`Brevo no ha dado el registro de envíos (estado ${respuesta.estado}).`);
-  const cuenta = { mochila: 0, boletin: 0 };
+  const cuenta = { mochila: 0, boletin: 0, montaje: 0 };
   for (const evento of respuesta.datos?.events ?? []) {
     if (evento.tag in cuenta) cuenta[evento.tag]++;
   }

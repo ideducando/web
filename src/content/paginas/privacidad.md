@@ -1,7 +1,7 @@
 ---
 titulo: "Privacidad"
 entradilla: "Esta web no te sigue: no usa cookies de seguimiento ni analítica de terceros. Aquí te contamos qué datos tratamos y para qué."
-actualizado: 2026-11-25
+actualizado: 2026-11-26
 borrador: false
 ---
 
@@ -10,6 +10,7 @@ borrador: false
 - Mi mochila te pide un correo para mandarte el material. Solo lo usamos para eso y no te apuntamos a ninguna lista.
 - El boletín va aparte: solo te llega si marcas su casilla y después lo confirmas con el botón del correo que te mandamos.
 - Los correos los envía Brevo, por encargo nuestro, desde servidores de la Unión Europea.
+- «¿Lo necesitas montado?» nos manda tu nombre y tu correo o tu teléfono para ponernos en contacto contigo. Solo para eso.
 - No hay cuentas ni contraseñas.
 - Las valoraciones con estrellas son anónimas: solo guardamos cuántas estrellas recibe cada material.
 - No hay cookies de seguimiento ni herramientas de analítica.
@@ -41,6 +42,20 @@ Lo mismo vale para el botón «Ponte en contacto con nosotros» de la [tienda](/
 **Cuánto tiempo.** El registro de cada envío se borra al mes. La lista del boletín, hasta que te des de baja.
 
 **Darte de baja.** Cada boletín lleva al final un enlace para darte de baja. También puedes escribirnos a [hola@ideducando.es](mailto:hola@ideducando.es).
+
+## «¿Lo necesitas montado?»
+
+En las fichas del material que hay que montar y en la [tienda](/tienda/) puedes pedirnos que te contactemos para tenerlo montado.
+
+**Qué datos.** Tu nombre, tu correo o tu teléfono (al menos uno de los dos) y el material que te interesa.
+
+**Para qué.** Para ponernos en contacto contigo y hablar de tu petición. No te apuntamos a ninguna lista ni te mandamos publicidad.
+
+**Base legal.** Tu consentimiento (artículo 6.1.a del RGPD), que puedes retirar cuando quieras.
+
+**Quién los trata.** La web no los guarda: nos llegan en un correo a hola@ideducando.es. Ese correo lo envía Brevo, por encargo nuestro, como explicamos en el apartado anterior, y lo recibimos en nuestro buzón de Zoho Mail, con servidores en la Unión Europea. No vendemos ni cedemos tus datos.
+
+**Cuánto tiempo.** Mientras atendemos tu petición, y como mucho un año. Después borramos el correo. Brevo borra al mes el registro del envío.
 
 ## Las valoraciones con estrellas
 
