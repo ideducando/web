@@ -3,7 +3,7 @@
 // El script va en src/components/Visitas.astro y lo explica la política de privacidad (src/content/paginas/privacidad.md).
 export const UMAMI = {
   /** El «Website ID» de Umami. No es secreto: sale en el código de cada página. Vacío = sin estadísticas. */
-  id: '',
+  id: '1f2f08b3-8a70-4b6c-bb99-ada282c328cd',
   script: 'https://cloud.umami.is/script.js',
   /** Solo cuenta aquí: las vistas previas, la revisión de cada PR y los ordenadores del equipo no envían nada. */
   dominio: 'www.ideducando.es',
