@@ -12,6 +12,7 @@ import Cabecera from '../components/Cabecera.astro';
 import Pie from '../components/Pie.astro';
 import Bienvenida from '../components/Bienvenida.astro';
 import AvisoFlotante from '../components/AvisoFlotante.astro';
+import Visitas from '../components/Visitas.astro';
 import sitio from '../data/sitio.json';
 import { ruta } from '../lib/rutas';
 
@@ -100,6 +101,7 @@ const imagenAbsoluta = new URL(ruta(imagen), Astro.site);
     <meta property="og:url" content={canonica} />
     <meta property="og:image" content={imagenAbsoluta} />
     <meta name="twitter:card" content="summary_large_image" />
+    <Visitas />
     <slot name="cabeza" />
   </head>
   <body>

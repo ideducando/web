@@ -60,6 +60,8 @@ import { ruta } from '../../lib/rutas';
 </Base>
 
 <script>
+  import { contar } from '../../lib/visitas';
+
   const raiz = document.querySelector<HTMLElement>('[data-boletin]')!;
   const codigo = new URLSearchParams(location.search).get('t') ?? '';
   const boton = raiz.querySelector<HTMLButtonElement>('[data-boletin-confirmar]')!;
@@ -83,7 +85,10 @@ import { ruta } from '../../lib/rutas';
         body: JSON.stringify({ t: codigo }),
       });
       const cuerpo = await respuesta.json().catch(() => ({}));
-      if (respuesta.ok && cuerpo.ok) return mostrar('hecho');
+      if (respuesta.ok && cuerpo.ok) {
+        contar('Boletín: alta confirmada');
+        return mostrar('hecho');
+      }
       if (cuerpo.motivo === 'caducado') return mostrar('caducado');
       throw new Error(`Respuesta ${respuesta.status}`);
     } catch {

@@ -37,7 +37,7 @@ Las guías para opositar son de la Región de Murcia, y el material sirve en cua
 
 **Accesible.** La web cumple el nivel AA de las pautas de accesibilidad para el contenido web (WCAG, en inglés). Los PDF usan una letra diseñada para leerse bien con baja visión y están preparados para lectores de pantalla.
 
-**Sin seguimiento.** Esta web no usa cookies de seguimiento ni analítica de terceros. Lo explicamos en la página de [privacidad](/privacidad/).
+**Sin seguimiento.** Esta web no usa cookies de seguimiento. Cuenta las visitas con Umami, sin cookies y sin saber quién eres, para saber qué materiales se usan más. Lo explicamos en la página de [privacidad](/privacidad/).
 
 **Para compartir.** El material con pictogramas de ARASAAC lo puedes compartir y adaptar. El resto lo puedes usar en tu clase o en tu casa, y para recomendarlo basta con el enlace de su ficha. Las condiciones están en [licencias y créditos](/licencias/).
 

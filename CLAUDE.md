@@ -15,7 +15,7 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 - Estática, rápida y ligera, publicada con Netlify desde la rama main (decisión de José, 15/10/2026: todo en el mismo equipo de Netlify que Viable).
 - Pensada primero para el móvil.
 - Accesible: contraste AA, textos claros, todo usable con teclado e imágenes con texto alternativo.
-- Sin cookies de seguimiento ni analítica de terceros.
+- Sin cookies de seguimiento. Las visitas se cuentan con Umami Cloud, sin cookies ni datos personales (José, 26/11/2026).
 - En castellano de España.
 
 ## Estado (octubre de 2026)
@@ -46,6 +46,7 @@ Logo: marca/simbolo.svg (una bombilla con un niño dentro) y los PNG de la carpe
 - Montaje: si un material hay que montarlo (recortar, plastificar, velcro, anillas…), su ficha lleva necesitas con cantidad y medida exactas, imprimir, pasos, resultado y cuidados. Salen en la web («Cómo montarlo») y en la página 2 del PDF (src/lib/montaje.mjs). Velcro: rugoso en la base y suave en las tarjetas.
 - Maquetación: las columnas de las rejillas van con minmax(0, 1fr) para que nada ensanche la página en el móvil, y html y body recortan en horizontal (overflow-x: clip). Si un enlace o una negrita empiezan en otra línea, se pone {' '} al final de la anterior: Astro quita ese espacio. La revisión lo comprueba todo, también con WebKit (Safari).
 - Funciones de Netlify (netlify/functions, con lo común en netlify/lib): mochila.mjs manda el material por correo, boletin.mjs confirma el alta en el boletín y montaje.mjs avisa a hola@ de cada «¿Lo necesitas montado?» (solo lo del catálogo /datos/montaje.json y como mucho 30 avisos al día). Usan la variable secreta BREVO_API_KEY de Netlify (Production y Deploy Previews), nunca escrita en el repositorio. Los enlaces de los correos salen solo del catálogo /datos/mochila.json, y hay freno contra abusos: 6 peticiones cada 3 minutos por conexión y 3 correos de material al día por dirección. valorar.mjs suma las estrellas y valoraciones.mjs da las medias: guardan solo cuentas, en Netlify Blobs (almacén «valoraciones», en Fráncfort; las vistas previas usan «valoraciones-pruebas»). Lo común está en netlify/lib/web.mjs. Pruebas de las funciones: npm test (netlify/pruebas), también en cada PR.
+- Estadísticas (José, 26/11/2026): Umami Cloud, con la cuenta de hola@ (plan Hobby, gratis; región de la UE), que lleva José. El script está en src/components/Visitas.astro y el ID y los contadores, en src/lib/visitas.ts. Solo cuenta en www.ideducando.es, quita de las direcciones lo que va detrás de «?» y «#» (códigos de los correos) y respeta «No rastrear». Los contadores (eventos) nunca llevan datos personales: como mucho, qué material es. Un contador nuevo se explica también en la política de privacidad.
 - Publicación: Netlify, en cada merge a main, con vista previa de cada PR (netlify.toml). Cada publicación en main gasta 15 créditos del plan de José, compartidos con sus otros proyectos; las vistas previas no gastan. GitHub Actions solo revisa cada PR (comprobar.yml); ya no publica.
 
 ## Reglas
