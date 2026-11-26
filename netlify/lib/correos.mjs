@@ -1,8 +1,10 @@
-// Los dos correos que manda la web con Brevo: el del material de Mi mochila y el que pide confirmar el boletín.
-// Van en HTML sencillo (tablas y estilos dentro de cada etiqueta, que es lo que entienden todos los programas
-// de correo) y en texto plano, con los colores de la marca. Lo que llega del formulario se escapa antes de
-// entrar en el correo, y los enlaces salen siempre del catálogo de la web.
+// Los correos que manda la web con Brevo: el del material de Mi mochila, el que pide confirmar el boletín y
+// el aviso de «¿Lo necesitas montado?», que nos llega a hola@. Van en HTML sencillo (tablas y estilos dentro
+// de cada etiqueta, que es lo que entienden todos los programas de correo) y en texto plano, con los colores
+// de la marca. Lo que llega del formulario se escapa antes de entrar en el correo, y los enlaces salen
+// siempre de los catálogos de la web.
 import { REMITENTE } from './brevo.mjs';
+import { telefonoParaLeer, telefonoParaLlamar } from './montaje.mjs';
 
 const COLOR = {
   crema: '#FFF6E6',
@@ -191,5 +193,78 @@ export function correoConfirmacion({ base, correo, nombre, enlace }) {
     }),
     textContent: texto,
     tags: ['boletin'],
+  };
+}
+
+/**
+ * Aviso para el equipo cuando alguien pide un material montado desde una ficha o desde la tienda
+ * (netlify/functions/montaje.mjs). Llega a hola@; si la persona dejó su correo, al contestar le llega a ella.
+ */
+export function correoMontaje({ base, nombre, correo, telefono, producto }) {
+  const absoluta = (ruta) => new URL(ruta, base).href;
+  const asunto = `¿Lo necesitas montado? ${producto.titulo} · ${nombre}`;
+  const donde = producto.origen === 'tienda' ? 'Tienda' : 'Material gratuito';
+  const enlace = (href, texto) => `<a href="${escapar(href)}" style="color:${COLOR.enlace};">${escapar(texto)}</a>`;
+  const sinDato = 'No lo ha dejado';
+  const filas = [
+    ['Nombre', escapar(nombre)],
+    ['Correo', correo ? enlace(`mailto:${correo}`, correo) : sinDato],
+    ['Teléfono', telefono ? enlace(`tel:${telefonoParaLlamar(telefono)}`, telefonoParaLeer(telefono)) : sinDato],
+    ['Material', `${enlace(absoluta(producto.ficha), producto.titulo)} (${donde})`],
+  ];
+  const celda = `border-top:1px solid ${COLOR.linea};vertical-align:top;`;
+  const tabla =
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">\n' +
+    filas
+      .map(
+        ([clave, valor]) =>
+          `<tr><td style="${celda}padding:8px 14px 8px 0;font-weight:bold;white-space:nowrap;">${clave}</td>` +
+          `<td style="${celda}padding:8px 0;">${valor}</td></tr>`,
+      )
+      .join('\n') +
+    '\n</table>';
+  const entrada = `${nombre} quiere «${producto.titulo}» montado y pide que os pongáis en contacto.`;
+  const contestar = correo
+    ? 'Para contestar por correo, responde a este mensaje: le llega a esa persona.'
+    : 'No ha dejado correo: llámala o escríbele al teléfono.';
+  const arasaac = producto.arasaac
+    ? 'Lleva pictogramas de ARASAAC: el PDF es gratis siempre. Hasta tener por escrito la respuesta de ARASAAC, no se cobra por montarlo.'
+    : '';
+  const borrar = 'Cuando cerréis la petición, borrad este correo: en la política de privacidad decimos que la guardamos como mucho un año.';
+  const { html: pieHtml, texto: pieTexto } = pie(base, 'Te llega porque alguien ha rellenado «¿Lo necesitas montado?» en la web.');
+
+  const contenido = [
+    parrafo(escapar(entrada), '0 0 16px'),
+    tabla,
+    parrafo(escapar(contestar), '18px 0 0'),
+    arasaac ? parrafo(escapar(arasaac), '14px 0 0') : '',
+    parrafo(escapar(borrar), '14px 0 0'),
+  ].join('\n');
+
+  const texto = [
+    entrada,
+    '',
+    `Nombre: ${nombre}`,
+    `Correo: ${correo || sinDato}`,
+    `Teléfono: ${telefono ? telefonoParaLeer(telefono) : sinDato}`,
+    `Material: ${producto.titulo} (${donde}) ${absoluta(producto.ficha)}`,
+    '',
+    contestar,
+    ...(arasaac ? ['', arasaac] : []),
+    '',
+    borrar,
+    '',
+    '--',
+    pieTexto,
+  ].join('\n');
+
+  return {
+    sender: REMITENTE,
+    to: [{ email: REMITENTE.email, name: REMITENTE.name }],
+    replyTo: correo ? { email: correo, name: nombre } : REMITENTE,
+    subject: asunto,
+    htmlContent: plantilla({ base, titulo: asunto, resumen: entrada, contenido, pie: pieHtml }),
+    textContent: texto,
+    tags: ['montaje'],
   };
 }

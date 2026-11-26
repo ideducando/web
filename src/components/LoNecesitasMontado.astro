@@ -1,0 +1,455 @@
+---
+// «¿Lo necesitas montado?» (José, 26/11/2026). Sale en las fichas del material que se monta y en la tienda
+// (src/lib/montado.ts). Pide el nombre y el correo o el teléfono, al menos uno de los dos, y manda la petición a
+// hola@ con la función de Netlify netlify/functions/montaje.mjs para que el equipo se ponga en contacto.
+// La web no guarda nada y no anuncia precios. Sin JavaScript se ve el enlace para escribirnos por correo.
+import sitio from '../data/sitio.json';
+import { ruta } from '../lib/rutas';
+import Icono from './Icono.astro';
+
+interface Props {
+  /** «material:agenda-visual» o «tienda:kit-para-montar», como en /datos/montaje.json. */
+  producto: string;
+  titulo: string;
+  /** En el material gratuito se recuerda que el PDF sigue siendo gratis. */
+  gratis?: boolean;
+}
+
+const { producto, titulo, gratis = false } = Astro.props;
+const corto = titulo.split(/:\s/)[0];
+const lineas = [
+  'Hola, equipo de IdEducando:',
+  '',
+  `Me gustaría tener «${corto}» montado.`,
+  '',
+  'Me llamo: ',
+  'Mi teléfono, si preferís llamarme: ',
+  '',
+  'Gracias.',
+];
+// Saltos de línea \r\n, como pide la norma de los enlaces mailto (RFC 6068).
+const enlace =
+  `mailto:${sitio.correo}?subject=${encodeURIComponent(`Lo necesito montado: ${corto}`)}` +
+  `&body=${encodeURIComponent(lineas.join('\r\n'))}`;
+---
+
+<section
+  class="montado"
+  id="lo-necesitas-montado"
+  aria-labelledby="titulo-montado"
+  data-montado
+  data-envio={ruta('/api/montaje')}
+  data-pagefind-ignore
+>
+  <h2 id="titulo-montado"><Icono nombre="manos" />¿Lo necesitas montado?</h2>
+  <p class="montado__intro">
+    Si no tienes tiempo o te falta material para montarlo, déjanos tus datos y nos ponemos en contacto contigo.
+    {gratis && ' El PDF sigue siendo gratis.'}
+  </p>
+
+  <div class="montado__js" data-montado-js hidden>
+    <form class="montado__form" data-montado-form>
+      <input type="hidden" name="producto" value={producto} />
+      <div class="campo">
+        <label for="montado-nombre">Tu nombre y apellidos</label>
+        <input id="montado-nombre" name="nombre" type="text" autocomplete="name" required maxlength="80" />
+      </div>
+
+      <fieldset class="montado__contacto" aria-describedby="montado-contacto-ayuda">
+        <legend>¿Cómo te contactamos?</legend>
+        <p id="montado-contacto-ayuda" class="campo__ayuda">
+          Déjanos el correo, el teléfono o los dos: al menos uno, para poder contestarte.
+        </p>
+        <div class="montado__dos">
+          <div class="campo">
+            <label for="montado-correo">Correo electrónico</label>
+            <input
+              id="montado-correo"
+              name="correo"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              maxlength="120"
+              aria-describedby="montado-contacto-ayuda"
+            />
+          </div>
+          <div class="campo">
+            <label for="montado-telefono">Teléfono</label>
+            <input
+              id="montado-telefono"
+              name="telefono"
+              type="tel"
+              autocomplete="tel"
+              inputmode="tel"
+              maxlength="25"
+              aria-describedby="montado-contacto-ayuda"
+            />
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="trampa" aria-hidden="true">
+        <label for="montado-web">Deja este campo vacío</label>
+        <input id="montado-web" name="sitio_web" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="casilla">
+        <input id="montado-privacidad" name="privacidad" type="checkbox" value="si" required />
+        <label for="montado-privacidad">
+          He leído y acepto la <a href={ruta('/privacidad/')}>política de privacidad</a>.
+        </label>
+      </div>
+
+      <details class="montado__info">
+        <summary>Información básica sobre tus datos</summary>
+        <dl>
+          <div>
+            <dt>Responsable</dt>
+            <dd>El titular de la web. Sus datos están en el <a href={ruta('/aviso-legal/')}>aviso legal</a>.</dd>
+          </div>
+          <div>
+            <dt>Para qué</dt>
+            <dd>Ponernos en contacto contigo para hablar de tu petición. No te apuntamos a ninguna lista.</dd>
+          </div>
+          <div>
+            <dt>Base legal</dt>
+            <dd>Tu consentimiento, que puedes retirar cuando quieras.</dd>
+          </div>
+          <div>
+            <dt>Con quién</dt>
+            <dd>
+              No vendemos ni cedemos tus datos. Tu petición nos llega por correo: la envía Brevo, por encargo nuestro,
+              con servidores en la Unión Europea.
+            </dd>
+          </div>
+          <div>
+            <dt>Cuánto tiempo</dt>
+            <dd>Mientras atendemos tu petición, y como mucho un año.</dd>
+          </div>
+          <div>
+            <dt>Tus derechos</dt>
+            <dd>
+              Ver, corregir o borrar tus datos, entre otros, escribiendo a{' '}
+              <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>. Más información en la{' '}
+              <a href={ruta('/privacidad/')}>política de privacidad</a>.
+            </dd>
+          </div>
+        </dl>
+      </details>
+
+      <button class="boton boton--principal montado__boton" type="submit">
+        <Icono nombre="correo" />
+        Quiero que me contactéis
+      </button>
+      <p class="montado__error" data-montado-error role="alert" hidden></p>
+    </form>
+
+    <div class="montado__gracias" data-montado-gracias hidden>
+      <p class="montado__gracias-titulo" tabindex="-1" data-montado-gracias-titulo>
+        <Icono nombre="ok" /><span data-montado-gracias-texto>¡Recibido!</span>
+      </p>
+      <p>
+        Te escribiremos o te llamaremos pronto. Si te corre prisa, escríbenos a{' '}
+        <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>.
+      </p>
+    </div>
+  </div>
+
+  <p class="montado__correo" data-montado-correo>
+    <a href={enlace}><Icono nombre="correo" />Escríbenos para pedirlo</a>
+  </p>
+</section>
+
+<script>
+  // Lo que contesta la función de Netlify (netlify/functions/montaje.mjs) y lo que se le dice a la persona.
+  const ERRORES: Record<string, string> = {
+    nombre: 'Escribe tu nombre y apellidos, solo con letras.',
+    correo: 'Revisa tu correo: parece que le falta algo, como la @ o el final (.es, .com…).',
+    telefono: 'Revisa el teléfono: escribe solo los números, 9 cifras o con el prefijo si es de fuera de España.',
+    contacto: 'Déjanos tu correo o tu teléfono para poder contestarte.',
+    privacidad: 'Para contactarte necesitamos que aceptes la política de privacidad.',
+    producto: 'No encontramos este material. Recarga la página y vuelve a probar.',
+    prisa: 'Has hecho varios intentos seguidos. Espera unos minutos y vuelve a probar.',
+    red: 'No hemos podido enviar tu petición. Prueba otra vez en un momento o escríbenos con el enlace de abajo.',
+    fallo: 'Ahora mismo no podemos enviar tu petición. Escríbenos con el enlace de abajo y te contestamos.',
+  };
+  // El teléfono: cifras, con espacios, puntos, guiones o paréntesis si se quiere, y el + del prefijo.
+  const TELEFONO = /^[+\d(][\d\s().-]*$/;
+
+  const seccion = document.querySelector<HTMLElement>('[data-montado]');
+
+  if (seccion) {
+    const elemento = <T extends HTMLElement = HTMLElement>(selector: string) => seccion.querySelector<T>(selector)!;
+    const formulario = elemento<HTMLFormElement>('[data-montado-form]');
+    const error = elemento('[data-montado-error]');
+    const gracias = elemento('[data-montado-gracias]');
+    const correoAlternativo = elemento('[data-montado-correo]');
+    const campos = {
+      nombre: elemento<HTMLInputElement>('#montado-nombre'),
+      correo: elemento<HTMLInputElement>('#montado-correo'),
+      telefono: elemento<HTMLInputElement>('#montado-telefono'),
+    };
+
+    // Con JavaScript, el formulario; el enlace de correo queda para cuando algo falla.
+    elemento('[data-montado-js]').hidden = false;
+    correoAlternativo.hidden = true;
+
+    for (const campo of Object.values(campos)) {
+      campo.addEventListener('input', () => campo.removeAttribute('aria-invalid'));
+    }
+
+    function avisar(clave: string, campo?: HTMLInputElement) {
+      error.textContent = ERRORES[clave] ?? ERRORES.red;
+      error.hidden = false;
+      if (campo) {
+        campo.setAttribute('aria-invalid', 'true');
+        campo.focus();
+      }
+      if (clave === 'red' || clave === 'fallo') correoAlternativo.hidden = false;
+    }
+
+    formulario.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+      error.hidden = true;
+      const datos = new FormData(formulario);
+      if (String(datos.get('sitio_web') ?? '').trim()) return; // Lo rellenó un robot.
+      datos.delete('sitio_web');
+
+      const correo = String(datos.get('correo') ?? '').trim();
+      const telefono = String(datos.get('telefono') ?? '').trim();
+      if (!correo && !telefono) return avisar('contacto', campos.correo);
+      if (telefono && (!TELEFONO.test(telefono) || !/^\+?\d{9,15}$/.test(telefono.replace(/[^\d+]/g, '')))) {
+        return avisar('telefono', campos.telefono);
+      }
+
+      const boton = formulario.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      boton.disabled = true;
+      let respuesta: Response;
+      try {
+        respuesta = await fetch(seccion.dataset.envio!, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams([...datos.entries()].map(([k, v]) => [k, String(v)])).toString(),
+        });
+      } catch {
+        boton.disabled = false;
+        return avisar('red');
+      }
+      if (respuesta.status === 429) {
+        boton.disabled = false;
+        return avisar('prisa');
+      }
+      const cuerpo = await respuesta.json().catch(() => ({}));
+      if (!respuesta.ok) {
+        boton.disabled = false;
+        const clave = cuerpo.error in ERRORES ? cuerpo.error : 'red';
+        return avisar(clave, campos[clave as keyof typeof campos]);
+      }
+      if (!cuerpo.enviado) {
+        boton.disabled = false;
+        return avisar('fallo');
+      }
+
+      const nombre = String(datos.get('nombre') ?? '').trim().split(/\s+/)[0];
+      elemento('[data-montado-gracias-texto]').textContent = nombre ? `¡Recibido, ${nombre}!` : '¡Recibido!';
+      formulario.hidden = true;
+      gracias.hidden = false;
+      elemento('[data-montado-gracias-titulo]').focus();
+    });
+  }
+</script>
+
+<style>
+  .montado {
+    display: grid;
+    gap: 0.9rem;
+    max-width: 42rem;
+    padding: 1.5rem 1.4rem;
+    border: 2px solid var(--coral);
+    border-radius: 1.25rem;
+    background: var(--blanco);
+  }
+
+  .montado h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+    font-size: 1.45rem;
+  }
+
+  .montado h2 :global(svg) {
+    flex: none;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .montado p {
+    margin: 0;
+  }
+
+  .montado__js,
+  .montado__form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .montado__contacto {
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .montado__contacto legend {
+    padding: 0;
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+  }
+
+  .montado__dos {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  @media (min-width: 40em) {
+    .montado__dos {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+
+  .campo {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .campo label {
+    font-weight: 700;
+  }
+
+  .campo input {
+    min-width: 0;
+    min-height: 3rem;
+    padding: 0.55rem 0.8rem;
+    border: 2px solid var(--marino);
+    border-radius: var(--radio-pequeno);
+    background: var(--blanco);
+    color: var(--marino);
+    font: inherit;
+  }
+
+  .campo input[aria-invalid='true'] {
+    border-color: var(--coral-texto);
+    box-shadow: 0 0 0 2px var(--coral-tinte);
+  }
+
+  .campo input:focus-visible,
+  .casilla input:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 2px;
+  }
+
+  .campo__ayuda {
+    font-size: 0.92rem;
+    color: var(--texto-suave);
+  }
+
+  .casilla {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.6rem;
+    align-items: start;
+  }
+
+  .casilla input {
+    width: 1.35rem;
+    height: 1.35rem;
+    margin: 0.15rem 0 0;
+    accent-color: var(--azul);
+  }
+
+  /* Campo trampa para robots: fuera de la vista y del orden del teclado. */
+  .trampa {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .montado__info {
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--papel);
+    border: 1px solid var(--linea);
+    font-size: 0.95rem;
+  }
+
+  .montado__info summary {
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .montado__info dl {
+    margin: 0.6rem 0 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .montado__info dt {
+    font-weight: 700;
+  }
+
+  .montado__info dd {
+    margin: 0;
+  }
+
+  .montado__boton {
+    justify-self: start;
+  }
+
+  .montado__error {
+    padding: 0.7rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    background: var(--coral-tinte);
+    color: var(--coral-texto);
+    font-weight: 700;
+  }
+
+  .montado__gracias {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .montado__gracias-titulo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--letra-titulos);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .montado__gracias-titulo :global(svg) {
+    flex: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--verde-texto);
+  }
+
+  .montado__correo a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 700;
+  }
+
+  .montado__correo :global(svg) {
+    flex: none;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+</style>
