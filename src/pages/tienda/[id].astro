@@ -125,16 +125,7 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
               Se abre tu programa de correo con el mensaje empezado. Si no se abre, escríbenos a{' '}
               <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>.
             </p>
-            {
-              pedirMontado && (
-                <p class="bloqueo__montado">
-                  <a class="boton boton--secundario bloqueo__boton" href="#lo-necesitas-montado">
-                    <Icono nombre="manos" />
-                    ¿Lo necesitas montado? Déjanos tus datos
-                  </a>
-                </p>
-              )
-            }
+            {pedirMontado && <LoNecesitasMontado producto={`tienda:${producto.id}`} titulo={d.titulo} />}
           </div>
 
           <p class={`estado-tienda estado-tienda--${estado.color}`}>
@@ -243,16 +234,6 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
       </dl>
     </aside>
   </div>
-
-  {
-    pedirMontado && (
-      <div class="seccion">
-        <div class="contenedor">
-          <LoNecesitasMontado producto={`tienda:${producto.id}`} titulo={d.titulo} />
-        </div>
-      </div>
-    )
-  }
 
   {
     relacionado && (
@@ -376,12 +357,6 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
     color: var(--texto-suave);
     overflow-wrap: anywhere;
   }
-
-  /* «¿Lo necesitas montado?», dentro del mismo recuadro (José, 26/11/2026). */
-  .bloqueo .bloqueo__montado {
-    margin: 0.9rem 0 0;
-  }
-
   .estado-tienda {
     margin-block: 0 1rem;
     padding: 0.7rem 0.9rem;

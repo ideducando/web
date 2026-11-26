@@ -1,8 +1,9 @@
 ---
-// «¿Lo necesitas montado?» (José, 26/11/2026). Sale en las fichas del material que se monta y en la tienda
-// (src/lib/montado.ts). Pide el nombre y el correo o el teléfono, al menos uno de los dos, y manda la petición a
-// hola@ con la función de Netlify netlify/functions/montaje.mjs para que el equipo se ponga en contacto.
-// La web no guarda nada y no anuncia precios. Sin JavaScript se ve el enlace para escribirnos por correo.
+// «¿Lo necesitas montado?» (José, 26/11/2026). Va dentro del recuadro de descarga de las fichas del material que
+// se monta y del recuadro «Bloqueado» de la tienda (dónde sale: src/lib/montado.ts). El botón abre ahí mismo el
+// formulario de ese material, con su nombre arriba: el nombre y el correo o el teléfono, al menos uno. La petición
+// llega a hola@ con la función de Netlify netlify/functions/montaje.mjs, que añade el material y su enlace.
+// La web no guarda nada y no anuncia precios. Sin JavaScript, el botón abre un correo a hola@ con el mensaje empezado.
 import sitio from '../data/sitio.json';
 import { ruta } from '../lib/rutas';
 import Icono from './Icono.astro';
@@ -33,21 +34,34 @@ const enlace =
   `&body=${encodeURIComponent(lineas.join('\r\n'))}`;
 ---
 
-<section
-  class="montado"
-  id="lo-necesitas-montado"
-  aria-labelledby="titulo-montado"
-  data-montado
-  data-envio={ruta('/api/montaje')}
-  data-pagefind-ignore
->
-  <h2 id="titulo-montado" tabindex="-1"><Icono nombre="manos" />¿Lo necesitas montado?</h2>
-  <p class="montado__intro">
-    Si no tienes tiempo o te falta material para montarlo, déjanos tus datos y nos ponemos en contacto contigo.
-    {gratis && ' El PDF sigue siendo gratis.'}
+<div class="montado" data-montado data-envio={ruta('/api/montaje')} data-pagefind-ignore>
+  <p class="montado__botonera">
+    <button
+      type="button"
+      class="boton boton--secundario montado__abrir"
+      aria-expanded="false"
+      aria-controls="lo-necesitas-montado"
+      data-montado-abrir
+      hidden
+    >
+      <Icono nombre="manos" />
+      <span>¿Lo necesitas montado? Déjanos tus datos</span>
+    </button>
+    <a class="boton boton--secundario montado__abrir" href={enlace} data-montado-correo>
+      <Icono nombre="manos" />
+      <span>¿Lo necesitas montado? Escríbenos</span>
+    </a>
   </p>
 
-  <div class="montado__js" data-montado-js hidden>
+  <section class="montado__panel" id="lo-necesitas-montado" aria-labelledby="titulo-montado" hidden>
+    <h2 id="titulo-montado" tabindex="-1"><Icono nombre="manos" />¿Lo necesitas montado?</h2>
+    <p class="montado__material"><span>Material</span><strong>{corto}</strong></p>
+    <p class="montado__intro">
+      Si no tienes tiempo o te falta material para montarlo, déjanos tus datos y nos ponemos en contacto contigo para
+      hablar de «{corto}».
+      {gratis && ' El PDF sigue siendo gratis.'}
+    </p>
+
     <form class="montado__form" data-montado-form>
       <input type="hidden" name="producto" value={producto} />
       <div class="campo">
@@ -142,6 +156,9 @@ const enlace =
         Quiero que me contactéis
       </button>
       <p class="montado__error" data-montado-error role="alert" hidden></p>
+      <p class="montado__alternativa" data-montado-alternativa hidden>
+        <a href={enlace}><Icono nombre="correo" />Escríbenos por correo</a>
+      </p>
     </form>
 
     <div class="montado__gracias" data-montado-gracias hidden>
@@ -149,16 +166,12 @@ const enlace =
         <Icono nombre="ok" /><span data-montado-gracias-texto>¡Recibido!</span>
       </p>
       <p>
-        Te escribiremos o te llamaremos pronto. Si te corre prisa, escríbenos a{' '}
+        Te escribiremos o te llamaremos pronto para hablar de «{corto}». Si te corre prisa, escríbenos a{' '}
         <a href={`mailto:${sitio.correo}`}>{sitio.correo}</a>.
       </p>
     </div>
-  </div>
-
-  <p class="montado__correo" data-montado-correo>
-    <a href={enlace}><Icono nombre="correo" />Escríbenos para pedirlo</a>
-  </p>
-</section>
+  </section>
+</div>
 
 <script>
   // Lo que contesta la función de Netlify (netlify/functions/montaje.mjs) y lo que se le dice a la persona.
@@ -170,44 +183,56 @@ const enlace =
     privacidad: 'Para contactarte necesitamos que aceptes la política de privacidad.',
     producto: 'No encontramos este material. Recarga la página y vuelve a probar.',
     prisa: 'Has hecho varios intentos seguidos. Espera unos minutos y vuelve a probar.',
-    red: 'No hemos podido enviar tu petición. Prueba otra vez en un momento o escríbenos con el enlace de abajo.',
-    fallo: 'Ahora mismo no podemos enviar tu petición. Escríbenos con el enlace de abajo y te contestamos.',
+    red: 'No hemos podido enviar tu petición. Prueba otra vez en un momento o escríbenos por correo.',
+    fallo: 'Ahora mismo no podemos enviar tu petición. Escríbenos por correo y te contestamos.',
   };
   // El teléfono: cifras, con espacios, puntos, guiones o paréntesis si se quiere, y el + del prefijo.
   const TELEFONO = /^[+\d(][\d\s().-]*$/;
 
-  const seccion = document.querySelector<HTMLElement>('[data-montado]');
+  const raiz = document.querySelector<HTMLElement>('[data-montado]');
 
-  if (seccion) {
-    const elemento = <T extends HTMLElement = HTMLElement>(selector: string) => seccion.querySelector<T>(selector)!;
+  if (raiz) {
+    const elemento = <T extends HTMLElement = HTMLElement>(selector: string) => raiz.querySelector<T>(selector)!;
+    const abrir = elemento<HTMLButtonElement>('[data-montado-abrir]');
+    const panel = elemento('#lo-necesitas-montado');
+    const titulo = elemento('#titulo-montado');
     const formulario = elemento<HTMLFormElement>('[data-montado-form]');
     const error = elemento('[data-montado-error]');
+    const alternativa = elemento('[data-montado-alternativa]');
     const gracias = elemento('[data-montado-gracias]');
-    const correoAlternativo = elemento('[data-montado-correo]');
     const campos = {
       nombre: elemento<HTMLInputElement>('#montado-nombre'),
       correo: elemento<HTMLInputElement>('#montado-correo'),
       telefono: elemento<HTMLInputElement>('#montado-telefono'),
     };
 
-    // Con JavaScript, el formulario; el enlace de correo queda para cuando algo falla.
-    elemento('[data-montado-js]').hidden = false;
-    correoAlternativo.hidden = true;
+    // Con JavaScript, el botón abre el formulario aquí mismo; sin él, queda el enlace que abre un correo.
+    abrir.hidden = false;
+    elemento('[data-montado-correo]').hidden = true;
+
+    function mostrar(abierto: boolean) {
+      panel.hidden = !abierto;
+      abrir.setAttribute('aria-expanded', String(abierto));
+    }
+
+    abrir.addEventListener('click', () => {
+      const abierto = panel.hidden;
+      mostrar(abierto);
+      if (abierto) {
+        titulo.focus({ preventScroll: true });
+        const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        panel.scrollIntoView({ behavior: suave ? 'smooth' : 'auto', block: 'nearest' });
+      }
+    });
+
+    // Quien llega con #lo-necesitas-montado en la dirección lo encuentra ya abierto.
+    if (location.hash === '#lo-necesitas-montado') {
+      mostrar(true);
+      panel.scrollIntoView({ block: 'start' });
+    }
 
     for (const campo of Object.values(campos)) {
       campo.addEventListener('input', () => campo.removeAttribute('aria-invalid'));
-    }
-
-    // El botón del recuadro de arriba baja hasta aquí y pone el foco en el título, sin abrir el teclado del móvil.
-    const titulo = elemento('#titulo-montado');
-    for (const enlace of document.querySelectorAll<HTMLAnchorElement>('a[href="#lo-necesitas-montado"]')) {
-      enlace.addEventListener('click', (evento) => {
-        evento.preventDefault();
-        const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        seccion.scrollIntoView({ behavior: suave ? 'smooth' : 'auto', block: 'start' });
-        history.replaceState(null, '', '#lo-necesitas-montado');
-        titulo.focus({ preventScroll: true });
-      });
     }
 
     function avisar(clave: string, campo?: HTMLInputElement) {
@@ -217,12 +242,13 @@ const enlace =
         campo.setAttribute('aria-invalid', 'true');
         campo.focus();
       }
-      if (clave === 'red' || clave === 'fallo') correoAlternativo.hidden = false;
+      alternativa.hidden = clave !== 'red' && clave !== 'fallo';
     }
 
     formulario.addEventListener('submit', async (evento) => {
       evento.preventDefault();
       error.hidden = true;
+      alternativa.hidden = true;
       const datos = new FormData(formulario);
       if (String(datos.get('sitio_web') ?? '').trim()) return; // Lo rellenó un robot.
       datos.delete('sitio_web');
@@ -238,7 +264,7 @@ const enlace =
       boton.disabled = true;
       let respuesta: Response;
       try {
-        respuesta = await fetch(seccion.dataset.envio!, {
+        respuesta = await fetch(raiz.dataset.envio!, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams([...datos.entries()].map(([k, v]) => [k, String(v)])).toString(),
@@ -273,13 +299,40 @@ const enlace =
 
 <style>
   .montado {
+    margin-top: 0.75rem;
+  }
+
+  .montado p {
+    margin: 0;
+  }
+
+  /* Del mismo tamaño que «Añadir a mi mochila»: a lo ancho en el móvil y a su medida en pantallas mayores. */
+  .montado__abrir {
+    width: 100%;
+    min-height: 3.4rem;
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 30em) {
+    .montado__abrir {
+      width: auto;
+    }
+  }
+
+  .montado__abrir :global(svg) {
+    flex: none;
+  }
+
+  .montado__panel {
     display: grid;
     gap: 0.9rem;
-    max-width: 42rem;
-    padding: 1.5rem 1.4rem;
-    border: 2px solid var(--coral);
-    border-radius: 1.25rem;
-    background: var(--blanco);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px dashed var(--linea);
+  }
+
+  .montado__panel[hidden] {
+    display: none;
   }
 
   .montado h2 {
@@ -287,23 +340,47 @@ const enlace =
     align-items: center;
     gap: 0.6rem;
     margin: 0;
-    font-size: 1.45rem;
+    font-size: 1.35rem;
   }
 
   .montado h2 :global(svg) {
     flex: none;
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.7rem;
+    height: 1.7rem;
   }
 
-  .montado p {
-    margin: 0;
+  /* El material del que se habla, bien a la vista: así queda claro que el formulario es para él. */
+  .montado__material {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.6rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: var(--radio-pequeno);
+    border-left: 6px solid var(--coral);
+    background: var(--coral-tinte);
   }
 
-  .montado__js,
+  .montado__material span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+  }
+
+  .montado__material strong {
+    font-family: var(--letra-titulos);
+    font-size: 1.2rem;
+  }
+
   .montado__form {
     display: grid;
     gap: 1rem;
+  }
+
+  .montado__form[hidden] {
+    display: none;
   }
 
   .montado__contacto {
@@ -431,9 +508,26 @@ const enlace =
     font-weight: 700;
   }
 
+  .montado__alternativa a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 700;
+  }
+
+  .montado__alternativa :global(svg) {
+    flex: none;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
   .montado__gracias {
     display: grid;
     gap: 0.5rem;
+  }
+
+  .montado__gracias[hidden] {
+    display: none;
   }
 
   .montado__gracias-titulo {
@@ -450,18 +544,5 @@ const enlace =
     width: 1.6rem;
     height: 1.6rem;
     color: var(--verde-texto);
-  }
-
-  .montado__correo a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-weight: 700;
-  }
-
-  .montado__correo :global(svg) {
-    flex: none;
-    width: 1.3rem;
-    height: 1.3rem;
   }
 </style>
