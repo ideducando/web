@@ -41,7 +41,7 @@ const enlace =
   data-envio={ruta('/api/montaje')}
   data-pagefind-ignore
 >
-  <h2 id="titulo-montado"><Icono nombre="manos" />¿Lo necesitas montado?</h2>
+  <h2 id="titulo-montado" tabindex="-1"><Icono nombre="manos" />¿Lo necesitas montado?</h2>
   <p class="montado__intro">
     Si no tienes tiempo o te falta material para montarlo, déjanos tus datos y nos ponemos en contacto contigo.
     {gratis && ' El PDF sigue siendo gratis.'}
@@ -196,6 +196,18 @@ const enlace =
 
     for (const campo of Object.values(campos)) {
       campo.addEventListener('input', () => campo.removeAttribute('aria-invalid'));
+    }
+
+    // El botón del recuadro de arriba baja hasta aquí y pone el foco en el título, sin abrir el teclado del móvil.
+    const titulo = elemento('#titulo-montado');
+    for (const enlace of document.querySelectorAll<HTMLAnchorElement>('a[href="#lo-necesitas-montado"]')) {
+      enlace.addEventListener('click', (evento) => {
+        evento.preventDefault();
+        const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        seccion.scrollIntoView({ behavior: suave ? 'smooth' : 'auto', block: 'start' });
+        history.replaceState(null, '', '#lo-necesitas-montado');
+        titulo.focus({ preventScroll: true });
+      });
     }
 
     function avisar(clave: string, campo?: HTMLInputElement) {

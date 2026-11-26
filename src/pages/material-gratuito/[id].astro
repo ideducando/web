@@ -179,6 +179,15 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
                       <a href="mailto:hola@ideducando.es">hola@ideducando.es</a> y te lo enviamos.
                     </p>
                   </noscript>
+                  {/* Las dos salidas, juntas en el recuadro: el PDF gratis o pedirlo montado (José, 26/11/2026). */}
+                  {pedirMontado && (
+                    <p class="ficha__montado">
+                      <a class="boton boton--secundario ficha__boton" href="#lo-necesitas-montado">
+                        <Icono nombre="manos" />
+                        <span>¿Lo necesitas montado? Déjanos tus datos</span>
+                      </a>
+                    </p>
+                  )}
                 </>
               ) : (
                 <p class="ficha__pronto">
@@ -193,14 +202,6 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
               <p class="ficha__montaje">
                 <Icono nombre="lista" />
                 <a href="#como-montarlo">Mira qué necesitas y cómo montarlo, paso a paso</a>
-              </p>
-            )
-          }
-          {
-            pedirMontado && (
-              <p class="ficha__montaje">
-                <Icono nombre="manos" />
-                <a href="#lo-necesitas-montado">¿Lo necesitas montado? Déjanos tus datos</a>
               </p>
             )
           }
@@ -604,6 +605,11 @@ const cita = `«${d.titulo}», ${d.autoria === 'Equipo IdEducando' ? 'IdEducando
   .ficha__peso {
     font-weight: 400;
     white-space: nowrap;
+  }
+
+  /* «¿Lo necesitas montado?», debajo de «Añadir a mi mochila» y dentro del mismo recuadro. */
+  .ficha__montado {
+    margin: 0.75rem 0 0;
   }
 
   .ficha__pronto {

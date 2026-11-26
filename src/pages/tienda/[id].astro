@@ -127,8 +127,11 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
             </p>
             {
               pedirMontado && (
-                <p class="bloqueo__nota">
-                  <a href="#lo-necesitas-montado">¿Lo necesitas montado? Déjanos tus datos</a>
+                <p class="bloqueo__montado">
+                  <a class="boton boton--secundario bloqueo__boton" href="#lo-necesitas-montado">
+                    <Icono nombre="manos" />
+                    ¿Lo necesitas montado? Déjanos tus datos
+                  </a>
                 </p>
               )
             }
@@ -372,6 +375,11 @@ const imagenRedes = d.portada.endsWith('.svg') ? undefined : d.portada;
     font-size: 0.92rem;
     color: var(--texto-suave);
     overflow-wrap: anywhere;
+  }
+
+  /* «¿Lo necesitas montado?», dentro del mismo recuadro (José, 26/11/2026). */
+  .bloqueo .bloqueo__montado {
+    margin: 0.9rem 0 0;
   }
 
   .estado-tienda {
