@@ -241,6 +241,9 @@ for (const pasada of PASADAS) {
   for (const url of urls) {
     const camino = url.replace(origen, '');
     const contexto = await navegador.newContext(pasada.contexto);
+    // Solo se carga la web que se revisa. Lo de fuera (hoy, el script de Umami) se corta: así la revisión no
+    // depende de otros servidores, va más rápida y no manda nada a las estadísticas.
+    await contexto.route((destino) => destino.origin !== origen, (peticion) => peticion.abort());
     const pagina = await contexto.newPage();
     await pagina.goto(url, { waitUntil: 'networkidle' });
 

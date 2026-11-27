@@ -1,14 +1,14 @@
 ---
 titulo: "Privacidad"
 entradilla: "Esta web no te sigue: no usa cookies de seguimiento y cuenta las visitas sin saber quién eres. Aquí te contamos qué datos tratamos y para qué."
-actualizado: 2026-11-26
+actualizado: 2026-11-27
 borrador: false
 ---
 
 ## Resumen
 
-- Mi mochila te pide un correo para mandarte el material. Solo lo usamos para eso y no te apuntamos a ninguna lista.
-- El boletín va aparte: solo te llega si marcas su casilla y después lo confirmas con el botón del correo que te mandamos.
+- Mi mochila te pide un correo para mandarte el material. En ese mismo correo te damos las gracias, te contamos cómo compartirlo y seguirnos, y te invitamos al boletín. No te mandamos ningún otro correo.
+- El boletín solo te llega si lo pides: marcando su casilla o con el botón del correo del material, y confirmándolo siempre en nuestra web.
 - Los correos los envía Brevo, por encargo nuestro, desde servidores de la Unión Europea.
 - «¿Lo necesitas montado?» nos manda tu nombre y tu correo o tu teléfono para ponernos en contacto contigo. Solo para eso.
 - No hay cuentas ni contraseñas.
@@ -31,7 +31,9 @@ Lo mismo vale para el botón «Ponte en contacto con nosotros» de la [tienda](/
 
 **Qué datos.** Tu correo, tu nombre si lo escribes y qué materiales pides.
 
-**Para qué.** Para mandarte un correo con los enlaces de descarga. Te escribimos solo para eso y no guardamos tu correo en ninguna lista. Si marcas la casilla del boletín, te mandamos además otro correo para confirmarlo: si pulsas «Sí, quiero el boletín», tu correo, y tu nombre si lo diste, entran en la lista del boletín. Sin ese paso no te apuntamos.
+**Para qué.** Para mandarte un correo con los enlaces de descarga. En ese mismo correo te damos las gracias, te contamos cómo compartir el material y seguirnos en las redes, te pedimos tu opinión y te invitamos al boletín. No te mandamos ningún otro correo ni guardamos tu correo en ninguna lista. Si marcas la casilla del boletín, o si pulsas el botón del boletín en ese correo, te llevamos a nuestra web para confirmarlo: solo cuando pulsas «Sí, quiero el boletín», tu correo, y tu nombre si lo diste, entran en la lista del boletín.
+
+**Qué recibes en el boletín.** Como mucho un correo a la semana, con material nuevo y cómo montarlo, y novedades de la tienda y de nuestras redes. Cada boletín lleva al final un enlace para darte de baja.
 
 **Base legal.** Tu consentimiento (artículo 6.1.a del RGPD), que puedes retirar cuando quieras. El boletín, además, solo te llega con tu permiso expreso, como pide el artículo 21 de la Ley de Servicios de la Sociedad de la Información (LSSI).
 

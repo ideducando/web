@@ -1,5 +1,5 @@
-// Los correos que manda la web con Brevo: el del material de Mi mochila, el que pide confirmar el boletín y
-// el aviso de «¿Lo necesitas montado?», que nos llega a hola@. Van en HTML sencillo (tablas y estilos dentro
+// Los correos que manda la web con Brevo: el del material de Mi mochila (que lleva también el botón para
+// confirmar el boletín) y el aviso de «¿Lo necesitas montado?», que nos llega a hola@. Van en HTML sencillo (tablas y estilos dentro
 // de cada etiqueta, que es lo que entienden todos los programas de correo) y en texto plano, con los colores
 // de la marca. Lo que llega del formulario se escapa antes de entrar en el correo, y los enlaces salen
 // siempre de los catálogos de la web.
@@ -69,8 +69,33 @@ function pie(base, porque) {
   };
 }
 
-/** Correo con los enlaces del material que alguien ha pedido en Mi mochila. */
-export function correoMaterial({ base, correo, nombre, materiales, boletin }) {
+/** Las redes de IdEducando (las mismas que src/data/sitio.json). */
+const REDES = {
+  instagram: 'https://www.instagram.com/ideducando/',
+  pinterest: 'https://www.pinterest.com/ideducando/',
+};
+
+/** Lo que el boletín promete, igual que la casilla de Mi mochila y la página de confirmar. */
+export const QUE_ES_EL_BOLETIN =
+  'Una vez por semana, material nuevo y cómo montarlo, y novedades de la tienda y de nuestras redes. Te das de baja con un clic cuando quieras.';
+
+/** Enlace para compartir por WhatsApp: lleva a la ficha (o al catálogo, si son varios), nunca al PDF. */
+function enlaceWhatsApp(base, materiales) {
+  const texto =
+    materiales.length === 1
+      ? `Te paso este material gratis de IdEducando: «${materiales[0].titulo}» ${new URL(materiales[0].ficha, base).href}`
+      : `Material gratis para acompañar a peques con necesidades específicas, en el aula y en casa: ${base}/material-gratuito/`;
+  return `https://wa.me/?text=${encodeURIComponent(texto)}`;
+}
+
+/**
+ * Correo con los enlaces del material que alguien ha pedido en Mi mochila (José, 27/11/2026: un solo correo).
+ * Además del material lleva las gracias, cómo compartirlo, las redes, las estrellas y el boletín:
+ * - boletin.estado «pedido»: marcó la casilla; el botón para confirmarlo va aquí, sin un segundo correo.
+ * - «invitar»: no la marcó; se le invita con el mismo botón. Solo entra si lo pulsa y lo confirma en la web.
+ * - «ya»: ya está en el boletín; no se le pide nada.
+ */
+export function correoMaterial({ base, correo, nombre, materiales, boletin = { estado: 'invitar', enlace: '' } }) {
   const absoluta = (ruta) => new URL(ruta, base).href;
   const varios = materiales.length > 1;
   const asunto = varios
@@ -78,14 +103,24 @@ export function correoMaterial({ base, correo, nombre, materiales, boletin }) {
     : `Tu material de IdEducando: ${materiales[0].titulo}`;
   const todoJunto = `${base}/mi-mochila/?descargar=${materiales.map((m) => m.id).join(',')}`;
   const saludo = nombre ? `Hola, ${nombre}:` : 'Hola:';
-  const montaje = ' En la ficha tienes cómo montarlo.';
-  const despedida =
-    'Puedes imprimirlo y compartirlo con otras familias y docentes, siempre sin venderlo. ' +
-    'Si te sirve o echas algo en falta, contesta a este correo: lo lee el equipo.';
-  const avisoBoletin = 'Para el boletín te llega otro correo con un botón para confirmarlo. Sin ese paso no te apuntamos.';
+  const montaje = ' En la ficha tienes cómo montarlo y, si no tienes tiempo, ahí mismo puedes pedirlo montado.';
+  const enlace = (href, texto) => `<a href="${escapar(href)}" style="color:${COLOR.enlace};font-weight:bold;">${escapar(texto)}</a>`;
+  const whatsapp = enlaceWhatsApp(base, materiales);
+  const gracias = '¡Gracias por confiar en IdEducando!';
+  const ayuda =
+    'Lo hace un equipo de profesionales de Pedagogía Terapéutica y Audición y Lenguaje, y nos ayuda muchísimo que lo compartas y que nos cuentes qué te ha parecido.';
+  const compartir = 'Puedes imprimirlo y compartirlo con otras familias y docentes, siempre sin venderlo.';
+  const opinion = '¿Qué te ha parecido? Contesta a este correo: lo lee el equipo.';
+  const { estado, enlace: confirmar } = boletin;
+  const tituloBoletin = estado === 'pedido' ? 'Último paso para el boletín' : '¿Te escribimos cuando haya material nuevo?';
+  const textoBoletin =
+    estado === 'pedido'
+      ? `Has pedido el boletín de IdEducando. ${QUE_ES_EL_BOLETIN} Para apuntarte, pulsa el botón y confírmalo en nuestra web. El enlace vale 7 días.`
+      : `${QUE_ES_EL_BOLETIN} Solo te apuntamos si pulsas el botón y lo confirmas en nuestra web.`;
+  const botonBoletin = estado === 'pedido' ? 'Sí, confirmo el boletín' : 'Quiero el boletín';
   const { html: pieHtml, texto: pieTexto } = pie(
     base,
-    'Te escribimos porque has pedido este material en nuestra web. No te hemos apuntado a ninguna lista.',
+    'Te escribimos porque has pedido este material en nuestra web. Sin tu confirmación no te apuntamos a ninguna lista.',
   );
 
   const filas = materiales
@@ -95,17 +130,37 @@ export function correoMaterial({ base, correo, nombre, materiales, boletin }) {
 <p style="margin:2px 0 4px;font-size:18px;font-weight:bold;line-height:1.3;"><a href="${escapar(absoluta(m.ficha))}" style="color:${COLOR.marino};">${escapar(m.titulo)}</a></p>
 <p style="margin:0 0 10px;font-size:14px;color:${COLOR.suave};">${escapar(m.detalle)}.${m.montaje ? escapar(montaje) : ''}</p>
 ${boton(absoluta(m.archivo), 'Descargar el PDF')}
+<p style="margin:10px 0 0;font-size:14px;">${enlace(`${absoluta(m.ficha)}#valorar`, '¿Te ha servido? Valóralo con estrellas')}</p>
 </td></tr>`,
     )
     .join('\n');
+
+  const cajaBoletin =
+    estado === 'ya'
+      ? ''
+      : `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:22px 0 0;background:${COLOR.crema};border:2px solid #F6C12E;border-radius:14px;">
+<tr><td style="padding:16px 18px;">
+<p style="margin:0 0 6px;font-size:17px;font-weight:bold;">${escapar(tituloBoletin)}</p>
+<p style="margin:0 0 12px;font-size:15px;">${escapar(textoBoletin)}</p>
+${boton(confirmar, botonBoletin)}
+</td></tr></table>`;
 
   const contenido = [
     parrafo(escapar(saludo)),
     parrafo('Aquí tienes el material que has elegido en Mi mochila. Todo es gratis.', '0 0 16px'),
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0">\n${filas}\n</table>`,
     varios ? parrafo('¿Lo quieres todo de una vez, en un ZIP?', '20px 0 8px') + boton(todoJunto, 'Descargarlo todo junto') : '',
-    parrafo(escapar(despedida), '20px 0 0'),
-    boletin === 'enviado' ? parrafo(escapar(avisoBoletin), '14px 0 0') : '',
+    estado === 'pedido' ? cajaBoletin : '',
+    `<p style="margin:24px 0 6px;font-size:18px;font-weight:bold;">${escapar(gracias)}</p>`,
+    parrafo(escapar(ayuda), '0 0 12px'),
+    boton(whatsapp, 'Compártelo por WhatsApp'),
+    parrafo(
+      `Y síguenos para ver lo que preparamos cada semana: ${enlace(REDES.instagram, 'Instagram')} y ${enlace(REDES.pinterest, 'Pinterest')}.`,
+      '14px 0 12px',
+    ),
+    parrafo(`${escapar(compartir)} ${escapar(opinion)}`, '0'),
+    estado === 'invitar' ? cajaBoletin : '',
+    estado === 'ya' ? parrafo('Ya recibes nuestro boletín: gracias por seguirnos.', '14px 0 0') : '',
   ].join('\n');
 
   const texto = [
@@ -116,12 +171,22 @@ ${boton(absoluta(m.archivo), 'Descargar el PDF')}
     ...materiales.flatMap((m) => [
       `* ${m.titulo} (${m.tipo}, ${m.detalle})`,
       `  Descargar el PDF: ${absoluta(m.archivo)}`,
-      `  Ficha${m.montaje ? ' y cómo montarlo' : ''}: ${absoluta(m.ficha)}`,
+      `  Ficha${m.montaje ? ', cómo montarlo y pedirlo montado' : ''}: ${absoluta(m.ficha)}`,
+      `  ¿Te ha servido? Valóralo con estrellas: ${absoluta(m.ficha)}#valorar`,
       '',
     ]),
     ...(varios ? [`Todo junto, en un ZIP: ${todoJunto}`, ''] : []),
-    despedida,
-    ...(boletin === 'enviado' ? ['', avisoBoletin] : []),
+    ...(estado === 'pedido' ? [tituloBoletin, textoBoletin, `${botonBoletin}: ${confirmar}`, ''] : []),
+    gracias,
+    ayuda,
+    `Compártelo por WhatsApp: ${whatsapp}`,
+    `Instagram: ${REDES.instagram}`,
+    `Pinterest: ${REDES.pinterest}`,
+    '',
+    compartir,
+    opinion,
+    ...(estado === 'invitar' ? ['', tituloBoletin, textoBoletin, `${botonBoletin}: ${confirmar}`] : []),
+    ...(estado === 'ya' ? ['', 'Ya recibes nuestro boletín: gracias por seguirnos.'] : []),
     '',
     '--',
     pieTexto,
@@ -141,58 +206,6 @@ ${boton(absoluta(m.archivo), 'Descargar el PDF')}
     }),
     textContent: texto,
     tags: ['mochila'],
-  };
-}
-
-/** Correo que pide confirmar el alta en el boletín. Sin pulsar su botón, nadie entra en la lista. */
-export function correoConfirmacion({ base, correo, nombre, enlace }) {
-  const asunto = 'Confirma tu alta en el boletín de IdEducando';
-  const saludo = nombre ? `Hola, ${nombre}:` : 'Hola:';
-  const explicacion = 'Has pedido recibir el boletín de IdEducando, con material nuevo y novedades de oposiciones.';
-  const caduca = 'El enlace vale 7 días.';
-  const siNo = 'Si no lo has pedido tú, no hagas nada: sin confirmar no te apuntamos y no te volveremos a escribir.';
-  const { html: pieHtml, texto: pieTexto } = pie(
-    base,
-    'Te escribimos porque alguien ha pedido el boletín con esta dirección en nuestra web.',
-  );
-
-  const contenido = [
-    parrafo(escapar(saludo)),
-    parrafo(escapar(explicacion)),
-    parrafo('Para apuntarte, pulsa el botón:', '0 0 10px'),
-    boton(enlace, 'Sí, quiero el boletín'),
-    parrafo(escapar(caduca), '16px 0 14px'),
-    parrafo(escapar(siNo), '0'),
-  ].join('\n');
-
-  const texto = [
-    saludo,
-    '',
-    explicacion,
-    '',
-    `Para apuntarte, abre este enlace y pulsa «Sí, quiero el boletín»: ${enlace}`,
-    caduca,
-    '',
-    siNo,
-    '',
-    '--',
-    pieTexto,
-  ].join('\n');
-
-  return {
-    sender: REMITENTE,
-    to: [{ email: correo, ...(nombre ? { name: nombre } : {}) }],
-    replyTo: REMITENTE,
-    subject: asunto,
-    htmlContent: plantilla({
-      base,
-      titulo: asunto,
-      resumen: 'Un clic y listo. Sin confirmar, no te apuntamos.',
-      contenido,
-      pie: pieHtml,
-    }),
-    textContent: texto,
-    tags: ['boletin'],
   };
 }
 
