@@ -1,5 +1,6 @@
 ---
-// Confirmación del boletín. El correo «Confirma tu alta en el boletín de IdEducando» trae aquí ?t=código.
+// Confirmación del boletín. El botón del correo del material de Mi mochila trae aquí ?t=código (José,
+// 27/11/2026: un solo correo; antes había otro aparte, «Confirma tu alta en el boletín de IdEducando»).
 // Hace falta pulsar el botón: algunos antivirus de correo abren solos los enlaces, y así nadie queda apuntado
 // sin quererlo. El botón manda el código a la función de Netlify netlify/functions/boletin.mjs, que lo comprueba
 // y apunta el correo en la lista «Boletín IdEducando» de Brevo.
@@ -17,7 +18,7 @@ import { ruta } from '../../lib/rutas';
 >
   <Intro
     titulo="Confirma el boletín"
-    entradilla="Material nuevo y novedades de oposiciones en tu correo. Te puedes dar de baja cuando quieras."
+    entradilla="Una vez por semana, material nuevo y cómo montarlo, y novedades de la tienda y de nuestras redes. Te das de baja con un clic cuando quieras."
     camino={[{ texto: 'Boletín' }]}
   />
 
@@ -25,7 +26,7 @@ import { ruta } from '../../lib/rutas';
     <section class="boletin__caja" data-estado="pedir" aria-labelledby="boletin-pedir">
       <Icono nombre="correo" clase="boletin__icono" />
       <h2 id="boletin-pedir" tabindex="-1">Un clic y listo</h2>
-      <p>Pulsa el botón para apuntarte al boletín de IdEducando.</p>
+      <p>Pulsa el botón para apuntarte al boletín de IdEducando. Te escribiremos como mucho una vez por semana.</p>
       <button type="button" class="boton boton--principal" data-boletin-confirmar>
         <Icono nombre="ok" />
         Sí, quiero el boletín
@@ -44,8 +45,8 @@ import { ruta } from '../../lib/rutas';
       <Icono nombre="atencion" clase="boletin__icono" />
       <h2 id="boletin-caducado" tabindex="-1">Este enlace ya no vale</h2>
       <p>
-        Los enlaces para confirmar duran 7 días. Para apuntarte, pide material en Mi mochila y marca la casilla del
-        boletín: te llegará uno nuevo.
+        Los enlaces para confirmar duran 7 días. Para apuntarte, pide material en Mi mochila: en el correo del material
+        tendrás un botón nuevo.
       </p>
       <a class="boton boton--secundario" href={ruta('/mi-mochila/')}>Ir a Mi mochila</a>
     </section>

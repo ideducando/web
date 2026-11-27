@@ -1,9 +1,11 @@
 // Mi mochila: recibe el formulario, comprueba que todo está bien y pide a Brevo el correo con los enlaces
-// del material. Si la persona marca la casilla del boletín, le manda además un correo para confirmarlo.
+// del material. Es un solo correo (José, 27/11/2026): lleva también las gracias, cómo compartirlo, las redes y
+// el boletín. A quien marcó la casilla le pide ahí que lo confirme; a quien no, le invita. Solo entra en la
+// lista quien pulsa el botón y lo confirma en /boletin/confirmar/.
 // Si Brevo no puede (por ejemplo, porque se han gastado los 300 correos del día), contesta «enviado: false»
 // y la página enseña la descarga en pantalla: nadie se queda sin su material.
 import { brevo, enviosDeHoy, hayClave, LISTA_BOLETIN } from '../lib/brevo.mjs';
-import { correoConfirmacion, correoMaterial } from '../lib/correos.mjs';
+import { correoMaterial } from '../lib/correos.mjs';
 import { firmar } from '../lib/firma.mjs';
 import { json, leerCatalogo, vieneDeLaWeb } from '../lib/web.mjs';
 
@@ -26,13 +28,11 @@ function limpiarNombre(texto) {
   return NOMBRE.test(nombre) ? nombre : '';
 }
 
-/** ¿Hay que mandar la confirmación del boletín? «ya» si está en la lista; «pendiente» si se le mandó hoy. */
-async function estadoBoletin(correo, hoy) {
+/** ¿Ya está en la lista del boletín? Así no se le invita otra vez. Si Brevo no contesta, se le invita. */
+async function yaEnElBoletin(correo) {
   const contacto = await brevo(`/contacts/${encodeURIComponent(correo)}`);
   const lista = contacto.ok ? contacto.datos?.listIds ?? [] : [];
-  if (lista.includes(LISTA_BOLETIN) && !contacto.datos?.emailBlacklisted) return 'ya';
-  if (hoy.boletin >= 1) return 'pendiente';
-  return 'enviar';
+  return lista.includes(LISTA_BOLETIN) && !contacto.datos?.emailBlacklisted;
 }
 
 export default async (peticion) => {
@@ -74,35 +74,20 @@ export default async (peticion) => {
   const hoy = await enviosDeHoy(correo);
   if (hoy.mochila >= CORREOS_AL_DIA) return json(200, { enviado: false, motivo: 'repetido' });
 
-  // Lo del boletín se mira antes, para que el correo del material avise si llega otro para confirmarlo.
-  let boletin = campos.get('boletin') === 'si' ? await estadoBoletin(correo, hoy) : 'no';
+  // El boletín va dentro del mismo correo: el botón para confirmarlo (si marcó la casilla) o la invitación.
+  const ya = await yaEnElBoletin(correo);
+  const estado = ya ? 'ya' : campos.get('boletin') === 'si' ? 'pedido' : 'invitar';
+  const enlace = ya ? '' : `${base}/boletin/confirmar/?t=${firmar(correo, nombre)}`;
 
   const envio = await brevo('/smtp/email', {
     metodo: 'POST',
-    cuerpo: correoMaterial({
-      base,
-      correo,
-      nombre,
-      materiales,
-      boletin: boletin === 'enviar' ? 'enviado' : boletin,
-    }),
+    cuerpo: correoMaterial({ base, correo, nombre, materiales, boletin: { estado, enlace } }),
   });
   if (!envio.ok) {
     console.error(`Brevo no ha enviado el material (estado ${envio.estado}, ${envio.datos?.code ?? 'sin código'}).`);
     return json(200, { enviado: false, motivo: 'brevo' });
   }
 
-  if (boletin === 'enviar') {
-    const enlace = `${base}/boletin/confirmar/?t=${firmar(correo, nombre)}`;
-    const confirmacion = await brevo('/smtp/email', {
-      metodo: 'POST',
-      cuerpo: correoConfirmacion({ base, correo, nombre, enlace }),
-    });
-    boletin = confirmacion.ok ? 'enviado' : 'error';
-    if (!confirmacion.ok) {
-      console.error(`Brevo no ha enviado la confirmación del boletín (estado ${confirmacion.estado}).`);
-    }
-  }
-
-  return json(200, { enviado: true, boletin });
+  // Para la página: «enviado» si en el correo va el botón para confirmar, «ya» si ya está, «no» si se le invita.
+  return json(200, { enviado: true, boletin: estado === 'pedido' ? 'enviado' : estado === 'ya' ? 'ya' : 'no' });
 };
